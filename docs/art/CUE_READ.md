@@ -324,3 +324,45 @@ side view's light sit in the earth instead of on it.**
 3. The brow runs slightly past the glow's right end toward the rim.
 4. **NO THRESHOLD IS SET BY THIS PASS EITHER.** 413 is not "enough" and 196
    was not "too few"; the bar still waits for the sweep over all 62.
+
+## A SUBSET RUN IS NOT A DIFFERENT HOUSE - THE RED NOBODY COULD ACT ON
+
+25 Nov 2026, 07:5x CT. `_collier_p8ship.log` shipped
+`"verdict": "RED", "ok": false` with the reason *"the census was taken over 64
+register rows and is being read against 10 - it describes a different house.
+Re-run tools/art/_selfseen_census.py"*, while the committed `_fit_report.json`
+sat GREEN with `errors: []`. The 06:58 plan row told this lane to re-run the
+census.
+
+**I MEASURED BEFORE TOUCHING ANYTHING AND THE CENSUS WAS NOT STALE.**
+`_selfseen_census.json` says `register_pairs: 64`, stamped
+`2026-11-25T04:02:20-0600`; the committed register has 64 pairs. The two AGREE.
+What disagreed was 64 against the rows a `--only` run happens to carry - 1, in
+the run I reproduced it on. That is arithmetic about the RUN and says nothing
+about the census. Re-running it would have changed nothing and the next subset
+run would have cried RED again, so the row's instruction is followed in its
+spirit and not its letter: the row itself said to follow the evidence.
+
+**THE FIX, in `minibossfit.derive_self_seen()`.** The count was only ever a
+PROXY for "does the census know about every row in front of me?", and that
+question is already asked directly, per key, by the `uncensused` arm. So the
+proxy keeps its teeth only where the direct arm cannot see - when the run's
+rows are NOT a subset of what the census covers. When they ARE a strict subset
+the mismatch is EXPECTED and the block says so in its own `census_count_scope`
+string rather than raising an error. That is the same discipline this file
+already applies to a `--slot` run, and for the same stated reason: a file on
+disk saying RED is one read away from somebody chasing a fault that is not
+there. This one cost exactly that.
+
+**RED-PROVED, not merely silenced.** With `collier` struck from every list of a
+COPY of the census, so the run's rows are genuinely not a subset, the arm fires
+on both halves - `census_count_scope: "judged"`, `uncensused: ["collier"]`,
+`verdict: RED`, `ok: false`. With the census restored, the same subset run is
+`GREEN`, `errors: []`, and carries
+`census_count_scope: "NOT A VERDICT: this run carries 1 of the census's 64 rows
+and every one of them is censused - a subset run, not a different house"`.
+The census file was restored byte-for-byte afterwards and re-checked at 64 rows
+with `collier` present.
+
+NO SHIPPED BODY WAS EVER RED FROM THIS. The committed register is unchanged -
+64 pairs, `ok: true`, `verdict: GREEN`, `errors: []`, collier ratio 0.86.

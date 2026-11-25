@@ -210,3 +210,111 @@ shadow on all three views with `shadow_edge` zero.
 - It is **NOT room-locked**: span 2.16 m against an 11.0 m corridor,
   `UNDER-LID`, `fits_frame` true.
 - Nothing else. I did not edit a `.gd` file and I did not tick a plan row.
+
+## PASS 9 - I LOOKED AT IT AT STREAM SCALE AND THE COUNT IS NOT FOUR
+
+25 Nov 2026, 07:3x-08:0x CT. The 06:58 plan row gave this lane one job: the
+pass-8 note said the brow "reads at inspection distance more than at stream
+distance", so render the three hero views DOWN to the size the cue has to
+survive on stream and LOOK at them.
+
+### WHERE THE RUNGS COME FROM - MEASURED OFF THE REPO, NOT PICKED
+
+`scripts/spotlight.gd:22` - "Each pane is a SubViewport at HALF resolution".
+`scripts/spotlight.gd:11` - "the 2x2 grid is the stream's RESTING state, up
+24/7". So a pane owns half the stream's width on screen and is RENDERED into a
+quarter of it. Across Twitch's transcode tiers the 760 px hero frame lands at:
+
+| tier | pane renders at | creature is |
+|---|---|---|
+| source 1080p | 480 px | 167 x 186 |
+| 720p | 320 px | 112 x 124 |
+| 480p | 213 px |  74 x  82 |
+| 360p | 160 px |  56 x  62 |
+
+No `MIN_CUE_PX` was invented and none is wanted - the 05:58 ruling stands. The
+only reading that means anything on its own is ZERO. Everything below is a
+picture I looked at; the numbers beside it are the suspect, not the evidence.
+
+### WHAT THE THREE VIEWS DO AT STREAM SCALE
+
+**THE SIDE IS CLOSED AND MY OWN PASS-8 WORRY WAS WRONG.** Two orange crescents
+read as light coming out from under an earth lip at EVERY rung down to 160 px,
+where they are still 14 px and 11 px and still read as two bright slits in a
+dark mound. The brow works. Measured against a cue-off arm the side holds 3
+marks at every rung, 1080p through 360p, losing none. The side is now the
+STRONGEST survivor of the three views, not the thinnest, and the pass-8 note
+that called it thin was written at inspection distance and is struck.
+
+**THE BACK CARRIES NO CUE AT STREAM SCALE,** and this is honest rather than new:
+two warm specks on the far silhouette edge, the limb of the vent ring seen
+edge-on, 6 px and 2 px at 360p. From behind this is a mound of earth with a man
+on it, which is what `_cueread.py`'s own docstring says the body was built to
+be caught at. The brow is a front-and-side ridge and did not change the back.
+
+**THE FRONT'S GLOW SURVIVES AND ITS COUNT DOES NOT, AND THAT IS THE FINDING.**
+
+### THE REGISTER COUNTED FOUR, I COUNTED FOUR BY EYE, AND BOTH WERE WRONG
+
+The 06:58 tick records "four vents and four only, re-counted" off
+`hero_front.png`. I counted four there too. We were both looking at a 760 px
+render of a whole-body picture, and a whole-body picture reads four when the
+body carries three and a sliver.
+
+The committed `collier_cueB` predated the pass-8 brow by two hours, so it could
+not isolate the glow on the shipped body. Re-rendered fresh (`MB_CUEOFF=glow`),
+labelled the connected marks of the A/B, and printed their centroids:
+
+| | cx 409 | cx 439 | cx 492 | cx 557 |
+|---|---|---|---|---|
+| front band, px | **38** | 460 | 449 | 152 |
+
+The outermost vent is a SIXTEENTH of its neighbours. At the 360p rung it is ONE
+PIXEL. **A viewer at stream scale counts THREE.** The command text says "drive
+its FOUR pale plugs into the vents", so the number the viewer is told and the
+number on the body disagree - and FAULT 10 already says the count IS the
+mechanic. This is not a brightness fault and no wear or emissive change
+addresses it.
+
+### THE OBVIOUS CAUSE, AND THE RENDER THAT DISPROVED MY FIX
+
+-78 degrees is 12 off edge-on: it presents cos(78) = 0.21 of its mouth to the
+front camera, on the same flank as the plug bundle, which takes most of what is
+left. Pass 7's own note already forbids this - "a vent at +80 is edge-on to the
+front camera" - and the body has been breaking that rule on the NEGATIVE side
+since pass 5 swung the arc to clear the shovel. The docstring still claims
+"-72..+72"; the shipped bearings are -78..+24, neither symmetric nor inside the
+spread it documents. The reason the arc was stretched that far - to give the
+SIDE camera an outermost vent in profile - is SPENT, because pass 7 built the
+flank seams for that job and pass 8 made them read.
+
+So I pulled the arc in to -48/-22/+4/+30 and rendered it through the same
+camera. **IT GOT WORSE AND IT IS NOT SHIPPING.**
+
+| | | | | |
+|---|---|---|---|---|
+| pass 8 | cx 409 / 38 px | cx 439 / 460 | cx 492 / 449 | cx 557 / 152 |
+| pass 9 | *gone* | cx 431 / 452 | cx 470 / 367 | cx 569 / 109 |
+
+The vent at +4 - the one pointing MOST DIRECTLY at the camera - vanished
+entirely, because dead centre-front is where the mound's centre stake runs.
+Zero pixels is worse than 38. A wider face is no use behind a post. The shipped
+bearings are back at pass 8's and the render is byte-for-byte identical to
+`collier_cueA` on all three views (md5, checked); `COLLIER_VENTARC=9` renders
+the disproved arc so nobody has to re-derive the disproof.
+
+### THE NEXT SINGLE CHANGE IS NOT A BEARING
+
+The front has three clear windows between the plug bundle on one flank and the
+shovel blade at +51 on the other, and the centre stake splits what is left.
+Pass 5 found that out and answered it by pushing the fourth vent to -78, which
+is the fault measured above; pass 9 answered it by pushing a vent into the
+stake. **Pass 10 should move the OCCLUDER or the ROW, not the arc** - shift the
+centre stake, or drop the vent row below the lashing ring where the flank is
+unobstructed. Whoever takes it: render the glow-only arm and LABEL THE MARKS.
+The whole-body picture reads four when the body carries three and a sliver, and
+that is exactly how this shipped past a green register and two careful readers.
+
+Evidence, committed: `renders/art/minibosses/collier_stream/` - the rung
+ladders, the per-view creature strips, and the labelled vent masks for pass 8
+and pass 9 side by side.

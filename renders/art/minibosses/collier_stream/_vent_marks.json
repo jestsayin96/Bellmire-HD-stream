@@ -1,0 +1,180 @@
+{
+  "hero_front.png": {
+    "full": {
+      "marks": 7,
+      "sizes_px": [
+        460,
+        449,
+        135,
+        38,
+        28,
+        23,
+        17
+      ],
+      "marks_ge_2px": 7,
+      "marks_ge_4px": 7
+    },
+    "1080p": {
+      "marks": 7,
+      "sizes_px": [
+        189,
+        189,
+        59,
+        15,
+        12,
+        11,
+        10
+      ],
+      "marks_ge_2px": 7,
+      "marks_ge_4px": 7
+    },
+    "720p": {
+      "marks": 7,
+      "sizes_px": [
+        87,
+        84,
+        27,
+        10,
+        6,
+        6,
+        6
+      ],
+      "marks_ge_2px": 7,
+      "marks_ge_4px": 7
+    },
+    "480p": {
+      "marks": 7,
+      "sizes_px": [
+        43,
+        42,
+        14,
+        6,
+        4,
+        4,
+        2
+      ],
+      "marks_ge_2px": 7,
+      "marks_ge_4px": 6
+    },
+    "360p": {
+      "marks": 7,
+      "sizes_px": [
+        25,
+        25,
+        8,
+        5,
+        3,
+        1,
+        1
+      ],
+      "marks_ge_2px": 5,
+      "marks_ge_4px": 4
+    }
+  },
+  "hero_side.png": {
+    "full": {
+      "marks": 4,
+      "sizes_px": [
+        199,
+        173,
+        40,
+        1
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    },
+    "1080p": {
+      "marks": 4,
+      "sizes_px": [
+        82,
+        74,
+        19,
+        1
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    },
+    "720p": {
+      "marks": 3,
+      "sizes_px": [
+        42,
+        38,
+        7
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    },
+    "480p": {
+      "marks": 3,
+      "sizes_px": [
+        23,
+        19,
+        5
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    },
+    "360p": {
+      "marks": 3,
+      "sizes_px": [
+        14,
+        11,
+        4
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    }
+  },
+  "hero_back.png": {
+    "full": {
+      "marks": 3,
+      "sizes_px": [
+        77,
+        69,
+        25
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    },
+    "1080p": {
+      "marks": 3,
+      "sizes_px": [
+        35,
+        30,
+        14
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    },
+    "720p": {
+      "marks": 3,
+      "sizes_px": [
+        18,
+        16,
+        6
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    },
+    "480p": {
+      "marks": 3,
+      "sizes_px": [
+        11,
+        8,
+        4
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    },
+    "360p": {
+      "marks": 3,
+      "sizes_px": [
+        6,
+        4,
+        2
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 2
+    }
+  }
+}

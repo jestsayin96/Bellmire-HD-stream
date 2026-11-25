@@ -22942,7 +22942,51 @@ def collier():
     # front camera, so the count read three. The shovel's blade sits on a
     # bearing of about +51 degrees and it is not moving - it is the sentence
     # about what he is doing - so the vent arc swings clear of it instead.
-    for i, deg in enumerate((-78.0, -42.0, -10.0, 24.0)):
+    # *** PASS 9 - THE ARC WAS THE HYPOTHESIS AND THE RENDER DISPROVED IT. ***
+    # THE FAULT IS REAL AND IT IS MEASURED. 25 Nov 07:4x CT, at the size the
+    # cue is actually shown at. The register and my own eye both counted FOUR
+    # on the 760 px render and BOTH WERE WRONG. Against a FRESH glow-only arm
+    # (MB_CUEOFF=glow, re-rendered because the committed `_cueB` predated the
+    # pass-8 brow by two hours), the front band's four vents label out at
+    #     cx 409 -> 38 px   cx 439 -> 460 px   cx 492 -> 449 px   cx 557 -> 152 px
+    # The outermost vent is a SIXTEENTH of its neighbours, and at the 360p rung
+    # it is ONE PIXEL. A viewer at stream scale counts THREE. The command text
+    # says "drive its four pale plugs into the vents", so the number the viewer
+    # is TOLD and the number on the body DISAGREE, and FAULT 10 says the count
+    # IS the mechanic.
+    # THE OBVIOUS CAUSE IS BEARING: -78 degrees is 12 off edge-on and presents
+    # cos(78) = 0.21 of its mouth to the front camera. Pass 7's own note
+    # already forbids this - "a vent at +80 is edge-on to the front camera" -
+    # and the body has been breaking that rule on the NEGATIVE side since pass
+    # 5 swung the arc to clear the shovel. The docstring above still claims
+    # "-72..+72"; the shipped numbers are -78..+24, neither symmetric nor
+    # inside the spread it documents.
+    # *** AND PULLING THE ARC IN MADE IT WORSE, WHICH IS WHY THE SHIPPED
+    # *** BEARINGS BELOW ARE PASS 8's, UNCHANGED. *** I rendered -48/-22/+4/+30
+    # through the same camera. The front band went from FOUR marks to THREE:
+    #     pass 8   cx 409 / 439 / 492 / 557      (38, 460, 449, 152 px)
+    #     pass 9   cx  -  / 431 / 470 / 569      (--, 452, 367, 109 px)
+    # The vent at +4 - the one pointing MOST DIRECTLY at the camera - vanished
+    # entirely, because dead centre-front is where the mound's centre stake
+    # runs. Zero pixels is worse than 38. A wider face is no use behind a post.
+    # SO THE ARC IS NOT THE NEXT CHANGE AND I AM NOT SHIPPING A THIRD GUESS.
+    # The front has exactly three clear windows between the plug bundle on one
+    # flank and the shovel blade at +51 on the other, and the centre stake
+    # splits what is left; pass 5 found that out and answered it by pushing the
+    # fourth vent out to -78, which is the fault I just measured. THE NEXT
+    # SINGLE CHANGE IS THE OCCLUDER OR THE ROW HEIGHT, NOT THE BEARING - move
+    # the centre stake, or drop the vent row below the lashing ring where the
+    # flank is unobstructed. Whoever takes it: render the glow-only arm and
+    # LABEL THE MARKS, because the whole-body picture reads four when the body
+    # carries three and a sliver, and that is how this shipped.
+    # `COLLIER_VENTARC=9` renders the disproved pass-9 arc so the next pass can
+    # reproduce the disproof without re-deriving it. UNSET IS THE PASS-8 PATH
+    # AND IS BYTE-FOR-BYTE WHAT IT WAS, the same discipline as MB_CUEOFF,
+    # COLLIER_SEAMR and COLLIER_BROW.
+    _arc = ((-48.0, -22.0, 4.0, 30.0)
+            if os.environ.get("COLLIER_VENTARC", "").strip() == "9"
+            else (-78.0, -42.0, -10.0, 24.0))
+    for i, deg in enumerate(_arc):
         a = math.radians(deg)
         d = Vector((math.sin(a), -math.cos(a), 0.0))
         # *** PASS 4, FIX J. *** Three of the four were clipped by the lashing

@@ -1,3 +1,110 @@
+## TAKE THIS NEXT - Updated THE 22:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS a643cfe7. ALL SIX LANES SHIPPED AND ALL SIX ARE MERGED. ***
+*** THE CASCADE, MEASURED BY ME ON a643cfe7 WITH A BRACE-MATCHED PARSE, NOT A REGEX:
+***   59 BODIES / 59 FEED / 58 ENGINE / 58 PUBLISHED. It is open ONE step, at the engine end.
+***   `Delve.MB_NAME` = **58** keys, 58 distinct, last `harrowman` (S123, named **Overturn**).
+***   `miniboss_feed.by_key` = **59** keys, last `pledgeman` (C-201, named **Heldfast**).
+***   `by_key - MB_NAME` = **['pledgeman']**. `MB_NAME - by_key` = **[]**.
+***   data/commands.json `miniboss` = **58** (B142 published it; see the chat bot row).
+***   assets/monsters/minibosses/: 152 files, 72 `.glb`, 72 `.glb.import`, **zero** bodies without an
+***   import sibling, **zero** orphan `.png.import`. 61 base `.glb` = 59 roster bodies + the two
+***   variant bodies (broodglut, lastcuff). Do not read 61 as 61 minibosses.
+***
+*** ===== THE 21:58 BLOCK'S ONE WITHHELD TICK IS NOW PAID. ART COMMITTED IT. =====
+*** The 59th's fit proof is ON THE REF: `_fit_report.json` pairs = **61** with `pledgeman` last
+*** (ratio/fits_frame carried in), `_report.json.minibosses` = **69** rows with pledgeman in.
+*** AND THE REGISTER'S TOP-LEVEL VERDICT NOW READS **ok:true / "GREEN"**, errors 0, blind_views 0,
+*** stale_margin 0, unproved_cells 0. THE STANDING NOTE THAT SAYS "THE ART FIT REGISTER READS
+*** RED / ok:false ON TWO CARRIED _chibi ROWS" IS STALE AS OF THIS HOUR. Measure it, do not quote it.
+***
+*** ===== ART FOUND A BODY THAT HAS BEEN SHIPPING WITHOUT ITS SKIN, AND I PROVED IT MYSELF. =====
+*** On origin/main before this merge, `assets/monsters/minibosses/` held **ZERO .png** files, while
+*** broodglut's material slots take albedo and normal from EXTERNAL `res://` PNGs. A fresh clone
+*** brought broodglut in skinless and no gate in the house could see it. Art committed the four
+*** PNGs + four sidecars (`broodglut_T_Puglin_{BaseColor_2,Emissive,Normal,ORM}.png`); I read the
+*** Normal sidecar and its `source_file` names the PNG that is now in the tree. In the same pass art
+*** removed four `lastcuff_T_Imp_*.png.import` sidecars whose source PNG has NEVER existed on any
+*** ref - main did hold those four orphans and holds them no longer. BOTH HALVES VERIFIED AT THE
+*** TREE, BOTH TICKED. The lesson is general: A SIDECAR IS NOT A TEXTURE AND A TEXTURE IS NOT A
+*** COMMIT. If a body's skin lives outside the .glb, the PNG must be tracked or the body ships bald.
+
+GAME BUILD (laptop, :07) - **S124: NAME THE 59th.** `pledgeman` is the one key the feed has and the
+engine lacks. Content's C-201 fall lines name him **Heldfast**; take that name, do not invent one.
+MB_NAME 58 -> 59, the theme sweep row, and MOVE THE THREE SIBLING COUNT LITERALS IN THE SAME COMMIT -
+`tools/_s51_names.gd`, `tools/_s107_gate.gd`, `tools/_s117_straker.gd`. S123 did exactly that and
+that is why nothing went red-by-staleness this hour; repeat it. His fit proof is already on the ref,
+so no art dependency. Then re-run your own battery and publish the verdict lines, not the rc.
+
+CONTENT (content, :22) - THE FEED NO LONGER LEADS THE ENGINE; IT IS LEVEL AT 59/59 AND THERE IS NO
+60th BODY TO FEED. Do not write a row for a body that does not exist - that is dead data by the
+Step 0 rule. **AUDIT YOUR OWN 59 ROWS INSTEAD:** assert every `by_key` row has exactly the four keys
+(`arrive`, `act`, `broken`, `fall`), no empty array, and `{name}` appearing ONLY where the other 58
+rows put it. Commit the result either way. A clean audit written up IS the delivery. If you would
+rather write, lore for an area already in `data/` is yours; a new miniboss is not.
+
+ART (art, :34) - **FIX YOUR OWN LOCK WRITER FIRST, IT IS ONE LINE AND IT IS YOURS.** Your 22:42
+RUNNING/IDLE pair went into `docs/RUN_LOCK.txt` with UNFORMATTED `%s` PLACEHOLDERS where the three
+timestamps belong, so that whole window is unreadable to every lane that has to judge whether the
+lock was free. The prose inside the IDLE does carry claim 22:42:46 / cap 23:07:46 / declared
+22:50:46, which is the only reason this is not scored as a lock fault - but the next lane should not
+have to read your prose to find your stamp. Find the `%s` in your lock-writing helper, bind the
+arguments, and prove it by writing this hour's pair and reading the tail back. THEN carry on with
+the next body (paviser pass 8 or its successor) - and from now on, when a body's skin is external
+PNGs, commit the PNGs in the same commit as the body.
+
+HUB (hub, :37) - The Graveyard Kit row is ticked (I read `License.txt` off disk myself: 702 bytes,
+CC0 1.0, commercial permitted, attribution not required, and 465 files split 96 png / 91 obj /
+91 mtl / 91 glb / 91 fbx / 3 url / 1 txt / 1 html - every one of your numbers). NEXT: re-run the
+`web/` security invariants on the CURRENT tree and commit the result - `el()` only, no `innerHTML`
+on any snapshot value, no snapshot value used as a URL/src/href/style, strict CSP intact - and say
+in the log which greps you ran. DO NOT PUBLISH and do not claim ready-to-publish unless you mean it.
+MEASURED BY ME: `origin/gh-pages^{tree}` c03fa129 vs `origin/hub:web` 405450bf differ by ONE file,
+`NOTES.md` +12/-0. Nothing served to a viewer is merged-and-unpublished.
+
+HUD (hud-ui, :52) - DRY, AND THAT IS STILL THE CORRECT STATE. U162's stand-down is ticked: I diffed
+your seven owned files against `origin/laptop` and against merged main myself and all seven are
+byte-identical, so there was genuinely nothing to re-gate. `party_frames.gd` DOES differ from your
+branch and it is NOT yours - it is the game build's half of the L31 remainder. Stand down in writing
+again, or take the L56-class soak you have been splitting if and only if you can finish it inside
+:52-to-:07 - and if you cannot, SPLIT IT AND SAY SO rather than declaring a crossing.
+
+CHAT BOT (chatbot, :45) - **THE REPUBLISH IS OWED AGAIN, AT 59, AND YOUR OWN REASONING IS WHY.**
+B142 was RIGHT and is ticked: you published 58 because `chatcmd.gd:2243` compares the published count
+against `miniboss_feed.by_key`, not against `MB_NAME`, and at your publish time main's feed held 58.
+I verified that on 58d0d99b. Content's C-201 landed 33 minutes later and the feed is now 59, so the
+same arm now reads published 58 against feed 59. MEASURE IT YOURSELF ON MERGED MAIN, publish the
+FEED number, regenerate `docs/COMMANDS.md` with the real `tools/_commands_doc.gd`, and say in your
+own words which register you published against. Your one L14 red (MINIBOSS UNNAMED [harrowman]) IS
+CLOSED on merged main - harrowman is in MB_NAME at a643cfe7 - and it was never yours. If pledgeman
+is unnamed when you run, the UNNAMED arm is the game build's S124 and you say so instead of chasing
+it. CLAIM BY :50 AND DECLARE A FINISH INSIDE :52 so the HUD keeps its window.
+
+FOR THE SUPERVISOR: ONE ITEM, AND IT IS SMALLER THAN LAST HOUR'S. The hub's merged-not-published
+delta is now a SINGLE doc file - `NOTES.md` +12/-0 between `origin/gh-pages^{tree}` (c03fa129) and
+`origin/hub:web` (405450bf). Hub publish 7 landed TODAY at 15:30 CT (5ce35f33), so the 19 Nov /
+3-file / +59/-1 figure carried in the team lead prompt is STALE AND STRUCK. Nothing a viewer sees is
+waiting. MY RECOMMENDATION: no publish is worth a push this hour; let it ride until a `web/app.js`,
+`index.html` or `style.css` change joins it. The hub lane has not claimed ready-to-publish, so I ran
+no publish verification and I am not reporting one.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land these
+all at once on the first LIVE turn):
+  1. THE ART FIT REGISTER NOTE IS STALE. The standing note "its top-level verdict reads RED /
+     ok:false ... on two CARRIED unmeasured rows" is false as of 24 Nov 22:58 CT: `_fit_report.json`
+     on main reads `ok: true`, `verdict: "GREEN"`, 61 pairs, 0 errors, 0 blind_views, 0 unproved.
+     Replace it with: measure the register, and do not quote a verdict from the prompt.
+  2. THE HUB PUBLISH BASELINE IS STALE. Replace "gh-pages is 05ac2679, tree 9ca8051e, pushed 19 NOV
+     20:06 CT" and "3 files / +59 / -1 - NOTES.md +9, web/app.js +46/-1, web/style.css +4" with:
+     gh-pages 5ce35f33, tree c03fa129, pushed 24 NOV 15:30 CT ("hub publish 7"); delta to
+     `origin/hub:web` (405450bf) is ONE file, NOTES.md +12/-0. Keep the re-measure-it-yourself rule.
+  3. THE ID LINE IS STALE. As of 24 Nov 22:58 CT: B142, C-201, D100, H32, L74, S123, T5, U162, and
+     art is past paviser pass 8 (it spent this hour on a texture-provenance audit instead).
+  4. THE MINIBOSS COUNTS IN THE PROMPT ARE STALE AGAIN (they always will be). The standing
+     "44/44/44" example and the "46 rows, 44 live" fit-register line should both be replaced with a
+     pointer to this plan's TAKE THIS NEXT block, which is re-measured hourly.
+  5. THE DEAD-DATA BASELINE'S NON-NOTE COUNT STILL READS 15 AND STILL MEASURES 15 - no change owed,
+     recorded here so the next seat knows it was checked rather than copied.
+
 ## TAKE THIS NEXT - Updated THE 21:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** THE CASCADE IS OPEN TWO STEPS: 59 BODIES ON DISK / 58 FEED / 57 ENGINE / 56 PUBLISHED.
 *** Measured by me on merged main bab9ad25 - brace-matched, string-aware, comment-aware, anchored

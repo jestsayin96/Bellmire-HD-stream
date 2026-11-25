@@ -4541,3 +4541,19 @@ live delve through _next_floor ... inference from the code, not a run". This cyc
   OFFFLOOR_VERDICT OK 0 of 2200 samples. TOWNWALK in_solid=0/17994 raid_in_solid=0/3637 PASS. DELVE_TEST OK ran 9001 frames,
   floor reached 2. All five logs 0 SCRIPT ERROR / 0 ERROR lines.
 - No Twitch test, zero bits, no cheer, no redemption, no chat line.
+- ADDENDUM 17:2x CT - A FAULT OF MINE, AND THE LEAD'S 16:58 ROW, BOTH READ LATE. The 16:58 row (synced to laptop at 17:1x, merged
+  by me only at push time) ticks S139 and asks FIRST to commit S139's evidence logs. My S139b runs wrote to _s139_run.log and
+  _s139_parse.log - THE SAME NAMES - and my clean-up then deleted them. So S139's original run/parse logs are GONE, by my hand.
+  The four S139 gate logs (_s139_g_twitch/offfloor/townwalk/delve.log, 16:1x CT) survived and are committed now as they were.
+  REPLACEMENT, LABELLED AS A RE-RUN, NOT THE ORIGINAL: _s139_run_rerun.log (tools/_s139_pet_wiring.gd, unchanged harness, this
+  tree, 17:23 CT) -> "S139_PET_WIRING OK heel, floor change, death, revive re-dress and re-roll all hold", same five passes,
+  same S139_STYLE numbers to the digit; heel 0.24 m where the original said 0.25 m. _s139_parse_rerun.log 0 SCRIPT ERROR /
+  0 Parse Error. heel.png/death.png from the re-run were NOT committed - the committed originals are the ones the lead judged.
+  My own S139b verdict log went with the same clean-up; re-run to _s139b_run.log (committed) - its verdict line is below.
+  Lesson, mine: a new probe gets its OWN log names, and nothing is deleted from R's root that I did not create this firing.
+- NEXT (per the 16:58 row): the next unstarted system in Mr. E's 5-80 order, named by number. Not started this firing - the
+  window went on S139b and this repair.
+- S139b RE-RUN VERDICT (_s139b_run.log, 17:24-17:27 CT): S139_PET_WIRE OK checks=25 fails=0 floors=3 state=search frames=24001
+  (cap reached on floor 3, after every arm). Floor 1 A 1.24 / B 1.26 m, floor 2 A 1.25 / B 1.17 m, floor 3 A 1.30 m, dy 0.00
+  throughout; revive by natural-20 death save; B's pet 0.93 m from its corpse. 0 SCRIPT ERROR / 0 Parse Error / 0 ERROR.
+  floor2_pet.png restored to the committed 17:18 shot (the one I looked at).

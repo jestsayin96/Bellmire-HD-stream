@@ -1,0 +1,55 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+FEED The torches lean toward the stair, as they always do.
+FEED They carry 16 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 bog frog, 2 giant rats.
+FEED Fresh flowers on a grave nobody has visited in years.
+S139 floor 1 PetProbeA pet 1.24 m flat, 0.00 m dy, visible=true
+S139 floor 1 PetProbeB pet 1.26 m flat, 0.00 m dy, visible=true
+FEED PetProbeC casts Smite at giant rat.
+FEED PetProbeC casts Bolt at giant rat.
+FEED PetProbeC's smite lands a pace to the left - wild magic (8 vs DC 10).
+FEED PetProbeC casts Bolt at bog frog.
+FEED PetProbeD searches (Investigation 8) and turns up 8 gold on floor 1.
+FEED Mud is scraped from boots on the iron bar by the door.
+FEED PetProbeD searches the chest - ...no loot... (Investigation 7 vs DC 10).
+FEED PetProbeA and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 3 bog frogs, 1 cave spider.
+S139 floor 2 PetProbeA pet 1.25 m flat, 0.00 m dy, visible=true
+S139 floor 2 PetProbeB pet 1.17 m flat, 0.00 m dy, visible=true
+S139 shot rc=0
+FEED PetProbeA rolls a 20 on the death save - and gets up swinging.
+FEED PetProbeB the barbarian falls on floor 2 to the dark below. Level 1, 1 kills. !reroll to rise again.
+FEED PetProbeC breaks off to mend PetProbeA, who is nearly down.
+FEED PetProbeC casts Ward at PetProbeA.
+S139 corpse pet 0.93 m from fallen B, visible=true
+FEED PetProbeC casts Ward at PetProbeA.
+FEED PetProbeD casts Bolt at cave spider.
+FEED PetProbeC's ward sputters, coughs, and dies (10 vs DC 11).
+FEED PetProbeC casts Smite at bog frog.
+FEED PetProbeC casts Bolt at bog frog.
+FEED PetProbeD calls bolt and the scar calls louder (1 vs DC 11).
+FEED PetProbeD casts Chain Bolt at bog frog.
+FEED PetProbeD rolls a 20 searching the floor!
+FEED PetProbeD searches (Investigation 24) and turns up 35 gold on floor 2.
+FEED Floor 2 falls silent.
+FEED PetProbeA and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 hollowed cave bats, 2 bone bowmans.
+S139 floor 3 PetProbeA pet 1.30 m flat, 0.00 m dy, visible=true
+FEED PetProbeC reaches for bolt and finds the shelf bare (9 vs DC 11).
+FEED PetProbeC casts Smite at bone bowman.
+FEED PetProbeD casts Fire at bone bowman.
+FEED PetProbeC casts Smite at hollowed cave bat.
+FEED PetProbeC casts Bolt at hollowed cave bat.
+FEED PetProbeC casts Smite at bone bowman.
+FEED PetProbeD searches (Investigation 9) and turns up 26 gold on floor 3.
+FEED Floor done. Bellmire gets a tale; the scar gets nothing.
+FEED PetProbeD steps on a plate - darts! DEX 11 vs DC 11, 4 damage (halved).
+S139_PET_WIRE OK checks=25 fails=0 floors=3 state=search frames=24001

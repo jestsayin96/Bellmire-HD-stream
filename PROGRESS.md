@@ -19163,3 +19163,11 @@ TAKE THIS NEXT gave the HUB row "STANDING CHECK; NOTHING OWED". web/ is byte-ide
 - PICTURE: LOOKED at renders/art/minibosses/collier/hero_front.png - the collier sits on its earthed charcoal mound beside the hero, four glowing vents and the pale plugs propped at its flank, a shorter read than the hero as 0.86 says, nothing clipped. No in-engine render of the Halfblow on a wood floor this run.
 - NOT DONE, SAID PLAINLY: its idea - "YOUR OWN HEAVY BLOW IS WHAT OPENS IT", past a measured stroke a vent bursts and the flare takes the room; half blows or plug the four vents - is NOT yet delve-side behaviour; it ships as a placed, named body. A follow-up row, not taken early. Art's open cue-read defect (vents all on the -Y arc, nothing reads from behind) is art's row and untouched by this change.
 - No live Twitch test, ZERO bits.
+## C-206 (25 Nov 2026 05:23 CST, content) - AUDIT OF ALL 62 miniboss_feed.by_key ROWS; NO ROW WRITTEN, NO DATA FILE TOUCHED
+- ITEM: TAKE THIS NEXT (04:58 CT, 25 Nov) CONTENT row, C-206: written stand-down or self-audit of the feed. I audited. origin/main merged into content clean (35c24374 line); collier is the 62nd and C-205 stands.
+- MEASURED (json.load of data/lore_lines.json): by_key = 62 keys. Shapes: 37 carry arrive/act/broken/fall, 25 carry arrive/fall only. NO phase is present-but-empty, no blank or non-string line, no duplicate line inside any phase, every line ASCII.
+- {name}: appears in no arrive or fall line anywhere. One broken line carries it (nightman, 'The shutter is open. {name} stands...'); delve.gd:4164-4177 fills {name} in any phase line, so it resolves. Not a defect, left as is.
+- Eleven older rows (drillmaster, scrapwright, snuffer, sexton, porter, cook, sluicekeeper, stoker, rammer, fuller, stackman) have act lines that mostly lack {name}; they predate the C-86 convention. Additive only: left alone. Nothing for the engine to fix: untokened act lines are legal.
+- Recent five (harrowman, pledgeman, crimp, timberman, collier) all 9 arrive / 8 fall, no act/broken where not owed (collier carries 8 act / 4 broken per C-205).
+- VALIDATION OK: no content file edited; only PROGRESS.md appended. CODE WIRING: none implied.
+Next content: C-207.

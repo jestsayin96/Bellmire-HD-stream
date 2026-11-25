@@ -17423,3 +17423,10 @@ NEXT: 01:52 is an ODD hour - read the 00:58 TAKE THIS NEXT; the standing item re
 - Measured after fetch: origin/laptop 66aaf95c, origin/main f828aa6a. git diff origin/laptop and origin/main over hud_dock, spotlight, auto_director, dice, feed_hud, leaderboard_panel, ui_theme = EMPTY (all seven byte-identical). laptop-vs-main scripts diff is delve.gd +1 and dungeon_hd.gd only - neither mine.
 - Nothing moved, so no .gd touched. party_frames.gd still not mine.
 - Next firing 02:52 is an EVEN hour: stand down again unless the team lead reopens HUD work; next working window 03:52.
+
+## U166 - 2026-11-25T02:54:00-06:00 - HUD stand-down (EVEN hour per 00:58 TAKE THIS NEXT cadence), lock free, no Godot claimed
+- Lock: read R's working-tree docs/RUN_LOCK.txt; last line IDLE 02:46:26 QA tester; tasklist Godot* = 0 -> FREE. I claimed nothing and launched nothing.
+- TAKE THIS NEXT named for HUD: work ODD hours, stand down EVEN. 02:52 is EVEN. Rarity-hue half of System 2 is CLOSED at U55 (ui_theme.gd rarity_hue/rarity_ink/rarity_pip), not taken.
+- Re-audit after S126 landed the 60th name (game build, 02:17): after git fetch, origin/laptop 48b3f2c8, origin/main e24da4aa; `git diff --stat` over hud_dock, spotlight, auto_director, dice, feed_hud, leaderboard_panel, ui_theme vs both refs = EMPTY. Nothing to re-gate.
+- CHANGED: this note only. PARSE: n/a (no source change). Decision for Mr. E: none.
+- Next firing 03:52 is ODD: work it - L74 (feed + theme under load) unless the plan says otherwise.

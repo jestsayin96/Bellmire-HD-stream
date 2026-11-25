@@ -8,6 +8,36 @@ extends Node3D
 ## across when the dungeon does.
 
 const ADV := "res://addons/kaykit_character_pack_adventures/Characters/gltf/"
+## S136 (System 12, S110c-3): a `model` of "uacp/<Body>.glb" is a Quaternius UACP body (CC0). They stand on a
+## head-bone scale measured at S134 (Head rest y 2.167 on all 20 vs KayKit 1.241, hat-free) and carry no KayKit
+## hand bones (Fist.L/Fist.R, not handslot.r), so Gear's prop strip / role dress / clothe are SKIPPED for them -
+## a remap needs its own held-rotation measurement per bone and is not guessed here.
+const UACP := "res://assets/characters/uacp/"
+const UACP_K := 0.5728
+## THE ONE SKIN SWITCH. Alpha 0 = pack-native "Skin" as Quaternius shipped it (near-black, S135). Any colour with
+## alpha 1 overrides the "Skin" material on every UACP body. The look is Mr. E's / the supervisor's call.
+const UACP_SKIN := Color(0, 0, 0, 0)
+## Per-role UACP bodies for the ROSTER walkers (town.gd asks body_for at spawn). Roles whose look IS their held
+## gear (guard, fletcher) or their cast (chief, healer - UACP has no Spellcasting clip) stay KayKit until gear is
+## remapped onto Fist.L/Fist.R. UACP_ON false puts every role back on its KayKit row in one line.
+const UACP_ON := true
+const UACP_ROLE := {
+    "farmer": ["Worker_Male", "Worker_Female"],
+    "lumberjack": ["Viking_Male", "Viking_Female"],
+    "miner": ["Worker_Male"],
+    "smith": ["Viking_Male"],
+    "merchant": ["OldClassy_Male", "OldClassy_Female"],
+    "trader": ["OldClassy_Female", "OldClassy_Male"],
+    "miller": ["Chef_Male"],
+    "innkeeper": ["Chef_Male", "Chef_Female"],
+}
+
+static func body_for(role: String, kaykit: String, pick: int) -> String:
+    if not UACP_ON or not UACP_ROLE.has(role):
+        return kaykit
+    var l: Array = UACP_ROLE[role]
+    var m := "uacp/%s.glb" % l[absi(pick) % l.size()]
+    return m if ResourceLoader.exists(UACP + m.substr(5)) else kaykit
 ## the old game's pace multiplier: flat 4-6 m/s read as skating
 ## (D17b: 0.62 put a stroll at 2.6 m/s - a sprint for these short KayKit legs,
 ## whose walk covers 0.8 m/s. 0.40 is a brisk walk the gait can match.)
@@ -240,6 +270,22 @@ func _ease_turn(delta: float, jump: bool) -> void:
 var _face := 0.0
 var _face_ok := false
 
+## S136: override the UACP "Skin" surface only (the single switch is UACP_SKIN above).
+static func uacp_skin(root: Node, col: Color) -> int:
+    var n := 0
+    for mi in root.find_children("*", "MeshInstance3D", true, false):
+        var m := mi as MeshInstance3D
+        if m.mesh == null:
+            continue
+        for i in m.mesh.get_surface_count():
+            var mat := m.mesh.surface_get_material(i)
+            if mat is BaseMaterial3D and String(mat.resource_name) == "Skin":
+                var d := (mat as BaseMaterial3D).duplicate() as BaseMaterial3D
+                d.albedo_color = col
+                m.set_surface_override_material(i, d)
+                n += 1
+    return n
+
 func set_lod(l: int) -> void:
     if l == lod:
         return
@@ -251,13 +297,24 @@ func set_lod(l: int) -> void:
                 else POSE_MODE
 
 func _ready() -> void:
-    var sc: PackedScene = load(ADV + model)
+    var uacp := model.begins_with("uacp/")
+    var mpath := (UACP + model.substr(5)) if uacp else (ADV + model)
+    if uacp and not ResourceLoader.exists(mpath):
+        uacp = false
+        mpath = ADV + "Rogue.glb"
+    var sc: PackedScene = load(mpath)
     if sc:
         _mdl = sc.instantiate()
         add_child(_mdl)
+        if uacp:
+            _mdl.scale = Vector3.ONE * UACP_K
+            if UACP_SKIN.a > 0.0:
+                uacp_skin(_mdl, UACP_SKIN)
         if tint != Color(1, 1, 1):
             Rig.tint(_mdl, tint)
         _anim = Rig.find(_mdl)
+        if uacp:
+            Rig.alias_prefixed(_anim)
         Rig.prep(_anim)
         if _anim:
             _anim.callback_mode_process = POSE_MODE
@@ -265,11 +322,12 @@ func _ready() -> void:
         if _anim:
             _anim.seek(randf() * 2.0, true)
         if size_k != 1.0:
-            _mdl.scale = Vector3.ONE * size_k
+            _mdl.scale = Vector3.ONE * size_k * (UACP_K if uacp else 1.0)
             body_r *= size_k
-        Gear.strip_props(_mdl)
-        Gear.dress_role(_mdl, gear_role if gear_role != "" else role, gear_seed)
-        Gear.clothe(_mdl, gear_role if gear_role != "" else role, livery, rank)
+        if not uacp:
+            Gear.strip_props(_mdl)
+            Gear.dress_role(_mdl, gear_role if gear_role != "" else role, gear_seed)
+            Gear.clothe(_mdl, gear_role if gear_role != "" else role, livery, rank)
     var tag := Label3D.new()
     tag.text = person_name if notable_title == "" else "%s\n%s" % [person_name, notable_title]
     tag.font_size = 64

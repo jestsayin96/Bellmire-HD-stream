@@ -1,0 +1,15 @@
+assets/characters/uacp - licence note (game build S134, 25 Nov 2026, System 12 step S110c-2)
+
+All 20 .glb files in this folder:
+  Quaternius - Ultimate Animated Character Pack (UACP).
+  Licence: CC0 1.0 Universal (public domain dedication).
+  Read off the pack's own page, https://quaternius.com/packs/ultimatedanimatedcharacter.html
+  ("License: CC0", linking https://creativecommons.org/publicdomain/zero/1.0/), at S133,
+  25 Nov 2026 10:1x CT. The pack ships no licence file of its own; this note carries it.
+  Converted to .glb from the pack's source files (staging folder _gb_s110_uacp, off-repo).
+  Commercial use permitted, no attribution required. We never resell the assets as assets.
+
+Bodies: BlueSoldier_Female, BlueSoldier_Male, Chef_Female, Chef_Male, Elf, Goblin_Female,
+Goblin_Male, Knight_Golden_Female, Knight_Golden_Male, Knight_Male, OldClassy_Female,
+OldClassy_Male, Soldier_Female, Soldier_Male, Viking_Female, Viking_Male, Witch, Wizard,
+Worker_Female, Worker_Male.

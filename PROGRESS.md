@@ -1,3 +1,41 @@
+## S136b - 25 Nov 2026, 13:10-13:20 CT (game build) - SYSTEM 12 S110c-3: THE 20 UACP BODIES ARE WIRED AND WALKING IN THE TOWN, PACK-NATIVE SKIN BEHIND ONE SWITCH; GEAR SKIPPED FOR THEM, NOT GUESSED
+
+TOOK: the 12:58 TAKE THIS NEXT game-build row, S110c-3, which landed on origin/laptop (plan sync 59fc8e0c) AFTER my
+13:08 stand-down above was written. The S136 entry's "no 12:58 block has landed" was true at 13:09 and is superseded
+here; I re-claimed the lock as a declared relaunch at 13:10:10.
+
+DONE:
+- assets/characters/uacp/: the 20 glbs + .import + LICENSE.txt from gamebuild-s134-wip (alpha-fixed copies), entering
+  laptop in THIS commit, the one that wires them (S108's rule). --headless --import 0 errors.
+- townsfolk.gd: a model of "uacp/<Body>.glb" loads from UACP and stands at UACP_K 0.5728 (S134's head-bone scale,
+  NOT 0.7249). THE ONE SKIN SWITCH is `const UACP_SKIN := Color(0, 0, 0, 0)`: alpha 0 = pack-native as Quaternius
+  shipped it (the default, per the row); set any colour with alpha 1 and `uacp_skin()` overrides ONLY the "Skin"
+  surface on every UACP body. I did NOT pick a tone. `UACP_ON` false returns every role to its KayKit row.
+- Per-role map UACP_ROLE (town.gd ROSTER walkers and arrive() ask `Townsfolk.body_for`): farmer -> Worker M/F,
+  lumberjack -> Viking M/F, miner -> Worker_Male, smith -> Viking_Male, merchant/trader -> OldClassy, miller -> Chef_Male,
+  innkeeper -> Chef M/F. KEPT ON KAYKIT: guard and fletcher (their look IS held gear) and chief/healer (casters; UACP
+  has no Spellcasting clip). 18 UACP walkers in the live town.
+- GEAR: SKIPPED for UACP bodies, not remapped. Gear.strip_props/dress_role/clothe all key on KayKit bone names
+  (handslot.r); UACP has Fist.L/Fist.R and a remap needs a held-rotation measurement per bone, which I would be
+  guessing. COST, said plainly: UACP farmers/lumberjacks/smiths walk without their role tool for now.
+- rig.gd `alias_prefixed()`: strips "CharacterArmature|CharacterArmature|" and adds each clip under the KayKit name
+  callers already use (Walk->Walking_A, SitDown->Sit_Chair_Down, Victory->Cheer, ...), plus Walking_B/Running_A/B riding
+  Walk (UACP ships no run; the gait driver asked for Running_B and logged "Animation not found" until this). Called
+  ONLY from townsfolk.gd for a uacp body, NEVER from Rig.prep - Quaternius delve monsters share the "|" naming and
+  must not grow KayKit clips. Clips UACP lacks (Idle_B, Spellcast_Raise, Jump_Full_Short) fall back to idle via play().
+GATES (verdict lines): parse --quit-after 300 rc 0, 0 SCRIPT ERROR / 0 Parse Error, 0 ERROR lines after the run alias;
+S136_WIRE OK 6 uacp townsfolk at k 0.5728, KayKit clip names live, 0 gear on uacp, skin default pack-native (alpha 0);
+--redprove (a KayKit Rogue) -> S136_WIRE FAIL ok=0/1 ["Rogue: not a uacp body ... scale 1.0000"];
+OFFFLOOR_VERDICT OK 0 of 1825; TOWNWALK in_solid=0/15194 raid_in_solid=0/7979 PASS (UACP walkers in that town);
+DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR; TWITCH_PARSE OK (8 checks); S136_TOWN uacp walkers=18.
+LOOKED: renders/cycles/s136/wired.png - Rogue+Knight then six UACP townsfolk standing; heads, hands and legs black as
+the pack ships them; the LAST body (Goblin) carries the override path exercised in the test only and reads peach,
+proving the switch touches Skin and nothing else. renders/cycles/s136/in_town.png - a UACP miller (Chef_Male) on the
+ground beside a KayKit mage; the ROSTER tint (0.85/0.90/0.95) washes the whole UACP body pale, clothes included -
+that is the existing per-role tint doing what it does on KayKit, noted for the style call.
+FOR THE SUPERVISOR'S SKIN RULING: it is now one line - townsfolk.gd UACP_SKIN.
+No Twitch test, zero bits.
+
 ## S136 - 25 Nov 2026, 13:08-13:09 CT (game build) - WRITTEN STAND-DOWN: MY ROW (S110c-2b) WAS ALREADY ANSWERED AT S135 AND IS HELD FOR MR. E'S STYLE CALL; NO NEWER GAME-BUILD ROW EXISTS
 
 TOOK: the 11:58 TAKE THIS NEXT game-build row, S110c-2b (fix the UACP Skin colour, then wire). It is the

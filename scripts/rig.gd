@@ -46,6 +46,40 @@ const IDLES := ["Idle", "Unarmed_Idle", "Idle_B", "2H_Melee_Idle", "Skeleton_Idl
 static func loops(nm: String) -> bool:
     return nm in LOOPING or nm.ends_with("_Pose") or nm.ends_with("_Idle")
 
+## S136 (System 12, S110c-3): Quaternius UACP bodies name their clips "CharacterArmature|CharacterArmature|Walk".
+## Strip the armature prefix and add each clip again under the KayKit name the town already asks for, so every
+## Rig.play() caller works unchanged. Called ONLY by townsfolk.gd for a uacp body, never from prep(): Quaternius
+## monsters in the delve share the "|" naming and must not grow KayKit-named clips; a clip with no KayKit twin keeps its bare name and anything the body lacks
+## falls back to its idle through play()'s own fallback. KayKit bodies have no "|" names and are untouched.
+const UACP_CLIPS := {"Idle": "Idle", "Walk": "Walking_A", "Walk_Carry": "Walking_C", "SitDown": "Sit_Chair_Down",
+        "StandUp": "Sit_Chair_StandUp", "Victory": "Cheer", "PickUp": "PickUp", "Punch": "Unarmed_Melee_Attack_Punch_A",
+        "RecieveHit": "Hit_A", "Defeat": "Death_A", "Shoot_OneHanded": "Use_Item"}
+
+static func alias_prefixed(ap: AnimationPlayer) -> int:
+    if ap == null or ap.has_meta("rig_aliased"):
+        return 0
+    ap.set_meta("rig_aliased", true)
+    var lib: AnimationLibrary = ap.get_animation_library("") if ap.has_animation_library("") else null
+    if lib == null:
+        return 0
+    var n := 0
+    for nm in lib.get_animation_list():
+        var s := String(nm)
+        if not s.contains("|"):
+            continue
+        var bare := s.get_slice("|", s.get_slice_count("|") - 1)
+        var to := String(UACP_CLIPS.get(bare, bare))
+        if not lib.has_animation(to):
+            lib.add_animation(to, lib.get_animation(nm))
+            n += 1
+    ## the gait driver asks for run/alt-walk names directly (Rig.drive); UACP ships one Walk, so those ride it
+    if n > 0 and lib.has_animation("Walking_A"):
+        for g in ["Walking_B", "Running_A", "Running_B"]:
+            if not lib.has_animation(g):
+                lib.add_animation(g, lib.get_animation("Walking_A"))
+                n += 1
+    return n
+
 static func prep(ap: AnimationPlayer) -> void:
     if ap == null:
         return

@@ -14647,6 +14647,45 @@
           "Trueweight is down. Your shoulders ache as if you had carried it.",
           "The beam is true. Go on up."
         ]
+      },
+      "dredger": {
+        "arrive": [
+          "A man stood in the middle of the floor with a sieve held low in both hands. It was the size of a cartwheel.",
+          "The sieve is pale as new bread. Black bars cross it both ways.",
+          "Flour on his coat to the elbow. Flour on the flags where he has been standing.",
+          "He is not looking at you. He is looking at what comes through.",
+          "A fine pale dust lies in front of him. Nothing else in the room is dusty.",
+          "He holds it level and does not hurry. Whatever comes to the bars is caught there.",
+          "A hood, a floured coat, long legs gone stooped from years of leaning over the work.",
+          "The bars are black and close. A small hand would fit between them. A big one would not.",
+          "He waits with the sieve down at his belt. He has sifted worse than you."
+        ],
+        "act": [
+          "{name} swings hard and the blow stops dead on the bars. Flour jumps off the sieve.",
+          "The sieve takes it. {name} feels nothing come back, and nothing go through.",
+          "{name} strikes light and the blow goes between the bars.",
+          "A fine dust lifts. {name} cannot tell what was caught and what got by.",
+          "{name} puts everything into it. The bars do not so much as ring.",
+          "He shakes the sieve once, level. {name}'s strength lies spent on the pale face of it.",
+          "{name} steps in close. He does not turn. The sieve was already there.",
+          "The mesh is fine and he is patient. {name} is standing in the dust."
+        ],
+        "broken": [
+          "A light blow went through the bars, and then another. He stops shaking the sieve.",
+          "The last blow goes through clean. The mesh did not catch it.",
+          "He looks down at what came through. It is a small thing, and it is enough.",
+          "Nothing was broken. It passed, and now he is yours."
+        ],
+        "fall": [
+          "Finepass is down. The sieve lies on the flags, pale side up.",
+          "The bars are black and the dust is settling. Nothing is left in the mesh.",
+          "He sifted the floor so that what stayed would be worth keeping.",
+          "A hood, a sieve and a floured coat. That was all he had.",
+          "Nobody could say which blow had done it. They had all gone in quietly.",
+          "Fine as flour, and not a grain of it wasted.",
+          "Finepass is down. Your hands are floured to the wrist.",
+          "The mesh is clear. Go on up."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -14689,7 +14728,8 @@
     "_note_c190": "C-190: nightman feed row (Nightwork, the 53rd, prison). Canon: IT WORKS IN THE DARK AND WAITS IN THE LIGHT. Lamp shutter open: it stands dead still and cannot be hurt. Shut: it can be killed and it works. Lines are mechanic-neutral on the party's choice; 'broken' = shutter open (the trade). Expected zero-hit key.",
     "_note_c193": "C-193: iceman feed row (Hoarback, the 54th, mess). Canon from tools/art/minibosses.py CANON row: IT CARRIES THE COLD AND THE COLD IS ON A COUNT. Four blocks on the rack plus a fifth in the tongs; while a block stands the room is cold and all in it work slow, him included; blocks go one at a time in their own time, nothing the party does takes one off; when the last goes the room thaws and he sets the tongs down and turns round. No choice for the party to make but how to spend the given rounds; the lines name that and favour no tactic. 'broken' = the thaw (last block gone), not a hit landing - there is no weakness to strike. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall. Body iceman.glb is on origin/main (merged 24 Nov). Expected zero-hit key.",
     "_note_c195": "C-195: straker feed row (Everyhand, the 55th, wheel and four strakes). Canon from tools/art/minibosses.py CANON row: IT WILL NOT GO DOWN TO ONE HAND - it is straking a rim and the last blow does nothing until every hand in the party has struck it; a ledger of which hero has struck, only grows. No phase, nothing to out-manoeuvre; the condition is on the party. The four bright iron strakes on the tread are the count. Lines name that and favour no tactic. 'broken' = the last hand has struck and the rim is whole, not a weakness hit. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall. Body straker.glb is on origin/main (merged 24 Nov). Expected zero-hit key.",
-    "_note_c198": "C-198: weigher feed row (Trueweight, the 56th, beam and two pans). Canon from tools/art/minibosses.py CANON row: IT MUST COME DOWN EVEN - a weigh-beam across the shoulders with a pan at each end, already tipped; damage into the heavy pan is paid back out of the light one while the beam is out of true, so a party stacked on one flank moves nothing. No phase, no target choice, nothing to interrupt; the condition is on where the party STANDS. Lines name the tipped beam and the two bright pans and favour no tactic. 'broken' = the beam comes level, not a weakness hit. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Body weigher.glb is on origin/main (merged 24 Nov). Expected zero-hit key."
+    "_note_c198": "C-198: weigher feed row (Trueweight, the 56th, beam and two pans). Canon from tools/art/minibosses.py CANON row: IT MUST COME DOWN EVEN - a weigh-beam across the shoulders with a pan at each end, already tipped; damage into the heavy pan is paid back out of the light one while the beam is out of true, so a party stacked on one flank moves nothing. No phase, no target choice, nothing to interrupt; the condition is on where the party STANDS. Lines name the tipped beam and the two bright pans and favour no tactic. 'broken' = the beam comes level, not a weakness hit. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Body weigher.glb is on origin/main (merged 24 Nov). Expected zero-hit key.",
+    "_note_c199": "C-199: dredger feed row (Finepass, the 57th, a sieve held low in both hands). Canon from tools/art/minibosses.py CANON row: IT ONLY FEELS WHAT GETS THROUGH THE MESH - a heavy blow stops dead on the bars and is spent; only a light hand passes the mesh, so the weakest hero is the one who scores. No phase, no target choice, nothing summons or splits; the condition is on HOW HARD you swing. Lines name the pale sieve, the black bars and the flour and hint the mesh without favouring a tactic. 'broken' = a light blow passes the mesh, not a weakness hit. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Body dredger.glb is on origin/main (merged 24 Nov). Expected zero-hit key."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

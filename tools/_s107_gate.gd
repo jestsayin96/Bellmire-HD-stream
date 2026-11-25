@@ -38,9 +38,9 @@ func _initialize() -> void:
 	_ok(drawn.has("leech"), "red-proof: leech IS drawn by the same sweep")
 	var mbn := Delve.MB_NAME.size()
 	print("S107 MB_NAME size: ", mbn)
-	# S107 asserted 50 (almoner, the 50th). S114: + panner (S111) + stiltman (S112) + nightman (S113) = 53. S116: + iceman (Hoarback, 54th) = 54. S118: + straker (Everyhand, 55th) = 55.
+	# S107 asserted 50 (almoner, the 50th). S114: + panner (S111) + stiltman (S112) + nightman (S113) = 53. S116: + iceman (Hoarback, 54th) = 54. S118: + straker (Everyhand, 55th) = 55. S121: + weigher (Trueweight, 56th) = 56.
 	# This arm went red-by-staleness at the 51st; it is the sibling of _s51_names.gd:64 and moves with it.
-	_ok(mbn == 55, "MB_NAME holds 55 (got %d)" % mbn)
+	_ok(mbn == 56, "MB_NAME holds 56 (got %d)" % mbn)
 	if _fails == 0:
 		print("S107_GATE OK %d" % _checks)
 	else:

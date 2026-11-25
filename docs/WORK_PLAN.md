@@ -1,3 +1,184 @@
+## TAKE THIS NEXT - Updated THE 04:58 CT FIRING, 25 NOV 2026 (team lead; written 05:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS 35c24374. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
+*** ALL SIX LANES SHIPPED. NOBODY WAS STARVED, NOBODY OVERRAN A CAP, NOBODY CLAIMED OVER A LIVE HOLD.
+***
+*** ===== MY OWN FAULT FIRST: THE CASCADE REOPENED ONE STEP ON MY MERGE, AND TWO GUARD ARMS ARE
+*** ===== NOW LIVE ON MAIN. THE 62nd HAS A BODY, A FIT AND A FEED, AND NO NAME.
+***   Measured by ME on 35c24374 with a BRACE-MATCHED parse of `scripts/delve.gd`, never a flat regex:
+***     `Delve.MB_NAME` = **61** keys. `collier` ABSENT.
+***     `Delve.MB_FIT`  = **72** keys = 61 live + 11 retired `_chibi`. `collier` ABSENT.
+***     `miniboss_feed.by_key` (data/lore_lines.json) = **62** keys. `collier` PRESENT.
+***     `by_key - MB_NAME` = **['collier']**  <-- NOT EMPTY.   `MB_NAME - by_key` = **[]**.
+***     `MB_NAME - MB_FIT` = **[]**.
+***     `data/commands.json` `commands.miniboss` short AND what = **61**; `docs/COMMANDS.md:39` = 61.
+***   SO TWO ARMS FIRE, read off the code and not off a comment: UNNAMED (`chatcmd.gd:2248`, a feed
+***   key with no `MB_NAME` row) now has a NON-EMPTY `by_key - MB_NAME`; and COUNT (`:2243`, published
+***   vs `mb_live` = THE FEED) is 61 published against 62 in the feed. GHOST (`:2252`) stays silent.
+***   **THIS IS MINE.** Content's C-205 is correct, in-bounds and was the row I gave it; merging the
+***   feed row before the engine names the body is what made UNNAMED live, exactly as it did at 01:58
+***   on 18 Nov. Content is NOT to be charged with it and neither is the chat bot - an L14 RED on
+***   `by_key - MB_NAME` or on the published count this hour is MY merge, and both lanes may quote
+***   this paragraph as the red-proof. The two rows below close it.
+***
+*** ===== WHAT EACH LANE NEEDS AND WHERE IT IS WRITTEN DOWN, SO NOBODY RE-DERIVES IT =====
+***   `collier` CANON title is **"Halfblow"** - `tools/art/minibosses.py:22643`, read this hour.
+***   `collier` fit ratio is **0.86** - art's `renders/art/minibosses/_fit_report.json` `pairs.collier.ratio`,
+***   with `fits_frame: true`, `margin_x: 0.12`. COPY IT, DO NOT RE-DERIVE IT (that is how S127 did
+***   timberman's 1.24, and `_fit_report.json` carries 64 pairs, verdict ok:true, errors [], blind_views []).
+***   Content's feed row is **9 arrive / 8 act / 4 broken / 8 fall**, key `collier`, landed as C-205.
+***
+*** ===== DEAD-DATA AUDIT, MEASURED THIS HOUR ON 35c24374. THE NON-NOTE COUNT DID NOT MOVE. =====
+***   Corpus `scripts/*.gd` (47) + `web/app.js` = **48 files / 2,399,140 chars**; `data/*.json` = 12
+***   files / **144 distinct** top-level keys. Matcher: literal key substring over the concatenated
+***   corpus, DE-DUPLICATED BY KEY NAME.
+***   UNREFERENCED ASSET DIRECTORIES (off `assets/` only): **ZERO** of 35 directories with files.
+***   UNREAD LIVE DATA KEYS: **ZERO**.
+***   Zero-hit keys **66 = 51 `_note_` + 15 NON-NOTE**, and the 15 are the SAME SET as every honest
+***   baseline since 21 Nov, key for key: `lord_intros_alt` + `unique_intros_alt` (READ at
+***   delve.gd:4022 via `base + "_alt"` - DO NOT WIRE), the four declared-dead `phase2_words`,
+***   `phase2_words_alt`, `phase2_words_alt2`, `town_levels_for_the_desktop`, and the nine prose/spec
+***   strings (`technique`, `boss_floors`, `chronicle_line`, `word_order`, `casing`,
+***   `promotion_line`, `one_roll`, `_gating`, `canon_silences`).
+***   *** AND THE STRUCK 39 IS NOW DIAGNOSED, NOT JUST STRUCK. *** My own first pass this hour read
+***   **92 = 53 notes + 39 NON-NOTE** on these exact bytes - the 07:58 over-count, reproduced. THE
+***   CAUSE IS THE MATCHER, TWO FAULTS TOGETHER: (a) matching the QUOTED forms `"key"`/`'key'` instead
+***   of the bare literal, which hides every key read through a built or unquoted reference and wrongly
+***   lists `townsfolk` (prose hits) among the zero-hit; and (b) counting `(file, key)` PAIRS instead of
+***   distinct key NAMES, which counts `_source` twelve times and `rule` twice. Bare literal +
+***   de-duplicate = 15, every time. The plan already carried the correct matcher wording; what was
+***   missing was WHY the wrong one yields 39. If your non-note is not 15, you have fault (a) or (b).
+***
+*** ===== WHAT I TICKED, AND WHAT I DELIBERATELY DID NOT. =====
+***   TICKED **S128** (game build) - the L56 trap half made deterministic, and this is a test made
+***     HARDER, which I checked in the direction that matters. Both L46 checks lost `excusable`
+***     (now hard), the gate gained real exit codes (OK 0 / FAIL 1 / NO VERDICT 2), and an absent
+***     opportunity is now `L56 NO VERDICT - 0 placed traps met` instead of a pass. I verified the
+***     hook is real and not invented: `Delve.force_trap_spot` EXISTS at `delve.gd:3304` as a static
+***     D83 test hook defaulting to -1, and the script resets it to -1 on ALL THREE exit paths
+***     including the NO VERDICT one. AND IT STILL GOES RED TWO INDEPENDENT WAYS, off the committed
+***     logs and not the summary: normal `CHECKS 4 UNMET 0 FAILS 0 / L56_TEST OK`; `--nospring`
+***     (every trap spotted and stepped round) `FAILS 2 / L56_TEST FAIL`; `--redproof` (observer
+***     blinded) `FAILS 3 / L56_TEST FAIL`. All three arms read `traps placed 4, met 4`, so the
+***     forced opportunity is real in every arm and the ONLY variable is the spring path. That is a
+***     lying-instrument fix, not a quiet test.
+***   TICKED **C-205** (content) - the 62nd's feed row. Parsed myself: key `collier` under
+***     `miniboss_feed.by_key`, 9/8/4/8 across arrive/act/broken/fall, `{name}` used in every `act`
+***     line and in none of the others (the sibling convention), `Halfblow` named in the fall lines
+***     and matching CANON. `data/lore_lines.json` still parses, +41/-1 with the -1 being the brace
+***     line only, and every pre-existing key equal.
+***   TICKED **B148** (chat bot) - the supervisor's section 2, 11 ask topics, landed at the TOP-LEVEL
+***     `/ask` path and not `commands.ask` (B146's trap). CHECKED, NOT TAKEN: `order` 10 -> 21 and
+***     `topics` 10 -> 21, **`set(order) == set(topics)`** by parse, no duplicate in `order`, every
+***     topic carries phrases and exactly one of `cmd`/`reply`, and the 11 keys match content's
+***     `_note_c204` draft. `data/commands.json` numstat is +24/-2 over that file alone.
+***     *** AND A DEFECT I WENT LOOKING FOR AND DID NOT FIND - RECORDED SO NOBODY ELSE CHASES IT. ***
+***     Six `ask` replies are longer than `ask.max_len` (140): `gold` 164, `join` 154, `what` 154,
+***     `bits` 148, `standing` 144 (B148's), `real` 143. I nearly wrote that up as a truncation bug.
+***     IT IS NOT ONE. `max_len` is read at `chatcmd.gd:3242` as
+***     `if a.is_empty() or msg.length() > int(a.get("max_len", 140))` - it caps the VIEWER'S INCOMING
+***     QUESTION, never the reply, exactly as B42's own comment says ("the length a question may
+***     reach"). There is no second consumer: `max_len` appears nowhere else in `scripts/` or
+***     `web/app.js`. Five of the six predate B148 anyway. NO LANE IS TO "FIX" THESE REPLIES.
+***   TICKED **U168** (HUD) - a correct written stand-down on an even hour, with the claim that
+***     matters proved rather than asserted: the seven HUD files are byte-identical to `origin/laptop`
+***     and `origin/main`. Lock was free, it took nothing, and it said so.
+***   TICKED the **ultimate_animated_character_pack catalogue** (pack-catalogue worker, landed on
+***     `hub`) - and the TICK IS FOR THE GATE HOLDING, NOT FOR A CLEARANCE. **NO LICENCE FILE FOUND**
+***     at any depth in the folder or the zip; author NOT attributed because no author line was found;
+***     `Cleared for use: NO`, gated. That is the hard rule working exactly as written - a search
+***     snippet is not a licence and nothing was guessed. NO LANE IS TO IMPORT, CONVERT OR SHIP ANY
+***     FILE FROM THIS PACK until a licence is found ON DISK.
+***   TICKED **the art CUE READ census** (art) - as a self-audit of its own shipped work, which is
+***     explicitly not a new item. What makes it tickable is that it is RED ON EMPTY and that the lane
+***     caught its OWN instrument lying first: the first arm swapped only `glow` and called
+***     pledgeman, blower and stopper RED, and art read their CANON, found all three carry pale
+***     GEOMETRY cues on purpose (the Dyer's pass-3 lesson), and rewrote the switch to take a slot
+***     with `both` as the census. I RED-PROVED THE REGRESSION CLAIM RATHER THAN READING IT:
+***     `_cueread_regress.json` MD5s all three shipped `collier` hero views with `MB_CUEOFF` unset and
+***     with `=0`, and both are IDENTICAL to the shipped renders - so the A/B switch moved no shipped
+***     pixel, and `MB_CUEOFF=0` meaning OFF (it used to KeyError) is proved, not claimed.
+***   DID **NOT** TICK the 62nd as whole. Body + fit + feed are in; the ENGINE NAME IS NOT. Half
+***     delivered, still open, and the open half is the game build's row below.
+***   DID **NOT** TICK the collier's cue read. Art's own census found the defect and has not fixed it
+***     yet - see art's row. A found defect is not a closed one.
+***   DID **NOT** run any publish verification: no lane claimed "ready to publish" this hour, so the
+***     publish gate is not owed and I did not fake one.
+***
+*** ===== THE SIX ROWS. =====
+*** GAME BUILD (:07) - **S129: NAME THE 62nd AND CLOSE THE UNNAMED ARM I OPENED.** Write
+***   `MB_NAME.collier = "Halfblow"` and `MB_FIT.collier = 0.86` in `scripts/delve.gd`, and move the
+***   FIVE sibling literals 61 -> 62. DO NOT trust a regex for those five: S127 found them by
+***   `grep -rn "MB_NAME.size()"` and READING each site, because a flat regex under-counted them
+***   twice. Both values are stated in the block above - copy, do not re-derive. Then prove the three
+***   arms silent: `by_key - MB_NAME` empty, `MB_NAME - by_key` empty, `MB_NAME - MB_FIT` empty.
+*** CONTENT (:22) - **C-206: YOUR CASCADE WORK IS DONE AND I AM NOT INVENTING YOU A SYSTEM.** The
+***   62nd's feed landed this hour and `_note_c204` is spent (the chat bot landed it). Either a
+***   WRITTEN STAND-DOWN, or audit your own shipped feed rows: all 62 `by_key` entries for the phase
+***   convention you have kept since C-86 (`{name}` in `act` only, `Halfblow`-style title in `fall`,
+***   no phase present-but-empty). A stand-down written up IS the delivery. Do not touch
+***   `data/commands.json` - it is the chat bot's file and my earlier rows were wrong about that.
+*** ART (:34) - **FIX THE COLLIER'S CUE READ FROM BEHIND - YOUR OWN FOUND DEFECT, YOUR OWN BODY.**
+***   `docs/art/CUE_READ.md` and your own collier doc say the four vents are all on the -Y arc by
+***   construction, so from behind the party sees a mound of earth and no fire, with every fit number
+***   green. Fix the body, not the instrument. Then re-run the census on collier and show the moved-
+***   pixel count on the BACK view going from ~0 to a countable number, and re-run
+***   `_cueread_regress` so we know the shipped front and side did not move. LOOK AT THE BACK RENDER
+***   YOURSELF before you call it fixed.
+*** HUB (:37) - **STAND DOWN ON PUBLISHING AND SAY SO; IT IS WITH THE SUPERVISOR, NOT WITH YOU.**
+***   Your `web/` delta (3 files: NOTES.md +12, index.html +2/-1, style.css +3) is correct, is the
+***   Suggestion Box itself, and is routed up in the FOR THE SUPERVISOR block below with my
+***   recommendation to publish. You never publish. If you want the cycle: re-verify your own
+***   security claims on `origin/hub` (el() only, no `innerHTML` on a snapshot value, CSP meta
+***   unchanged) and write the result, or stand down in writing.
+*** CHAT BOT (:45) - **B149: PAY THE 61 -> 62 REPUBLISH AT THE FEED AND CLOSE THE COUNT ARM.**
+***   `commands.miniboss` short AND what 61 -> 62, then regenerate `docs/COMMANDS.md` with the REAL
+***   `tools/_commands_doc.gd`, never an emulation. MEASURE THE FEED, NOT `MB_NAME` - the COUNT arm
+***   compares published against `mb_live` = `by_key`, which is 62 NOW, so this row is payable this
+***   hour whether or not the game build has landed S129 yet. Expect UNNAMED to stay RED until it
+***   does; that arm is my merge and this block is your red-proof. **CLAIM BY :50 WITH A DECLARED
+***   FINISH INSIDE :52** - the HUD's window starts at :52 and that rule is mine, not yours to pay for.
+*** HUD (:52) - **U169: THE WINDOW IS YOURS AND NOTHING IS OWED, SO SPEND IT OR STAND DOWN IN
+***   WRITING.** No lane has a claim inside :52-:07 this hour. The L31 status-effect remainder is NOT
+***   yours (it lives in delve.gd, monster.gd, party_frames.gd, boss_bar.gd - the game build's files)
+***   and the System 2 rarity row is DONE as U55 - do not take either. A self-audit of your own
+***   shipped work, or a written stand-down, both count. COMMIT YOUR LOG on your own branch; U124's
+***   evidence was an uncommitted working-tree file and U167 got that right.
+***
+*** ===== FOR THE SUPERVISOR =====
+***   1. **PUBLISH THE HUB. THE ORDERING HAZARD I RAISED LAST HOUR IS NOW LIVE, NOT HYPOTHETICAL.**
+***      B148 landed section 2 this hour, so `bug` and `suggest` now tell viewers "head to the guild
+***      hall and use the Suggestion Box - !hub to get there" - and the PUBLISHED page does not have
+***      that button. The unpublished delta IS the button. Re-measured by me this hour, not copied:
+***      `origin/gh-pages^{tree}` = **c03fa129** (commit 5ce35f33, pushed 24 Nov 15:30 CT);
+***      `origin/hub:web` = **3d910499**; delta **3 files / +17 / -1** = NOTES.md +12, index.html
+***      +2/-1, style.css +3. **RECOMMENDATION: publish.** The call is yours; I have not pushed and
+***      the hub lane has been told again that it never does.
+***   2. The `ultimate_animated_character_pack` is catalogued and **GATED - no licence file on disk**.
+***      No action needed; raised only so the gate is visible at your level. Nothing from it ships.
+***   3. The 62nd (collier/Halfblow) is body + fit + feed in, engine name out, because of MY merge
+***      ordering. Rows are placed with both lanes and it should close inside the hour. No decision
+***      needed from you - reported, not asked.
+***
+*** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot edit a prompt; land these
+*** ===== on the first LIVE turn, all at once) =====
+***   1. THE HUB PUBLISH BASELINE IS STALE. The prompt says gh-pages is `05ac2679` / tree `9ca8051e`
+***      pushed 19 Nov 20:06 CT, and the delta "3 files / +59 / -1 = NOTES.md +9, web/app.js +46/-1,
+***      web/style.css +4". MEASURED 25 Nov 04:5x CT: gh-pages **5ce35f33** / tree **c03fa129**,
+***      pushed **24 Nov 15:30 CT**; delta **NOTES.md +12, index.html +2/-1, style.css +3**. The
+***      app.js figure is gone entirely. STRIKE the old SHAs and the per-file split.
+***   2. EVERY MINIBOSS COUNT IN THE PROMPT IS STALE. It says `Delve.MB_NAME` is "WHOLE AT 44/44/44"
+***      and the fit register "judges 46 rows, of which 44 are live bodies and two are retired
+***      `_chibi`". MEASURED on 35c24374: `MB_NAME` **61**, `by_key` **62**, `MB_FIT` **72** (61 live
+***      + **11** retired `_chibi`), `_fit_report.json` **64 pairs**. Replace the whole 44/44/44
+***      sentence and the "thirty-three"/"46 rows" art line with "RE-MEASURE, these move every hour".
+***   3. ADD THE DEAD-DATA MATCHER DIAGNOSTIC. The prompt strikes the 07:58 non-note 39 but does not
+***      say what causes it. It is reproducible and it is the matcher: quoted-form matching
+***      (`"key"`/`'key'`) plus counting `(file, key)` pairs instead of distinct key names yields
+***      exactly **92 = 53 notes + 39 non-note** on an honest corpus. Bare literal substring,
+***      de-duplicated by key name, yields **15** non-note every time. Worth a line so no fourth seat
+***      spends a run on it.
+***   4. ID HIGHWATER AS OF THIS FIRING, RE-MEASURE IT YOURSELF: B148, C-205, D100, H32, L74, S128,
+***      T5, U168, and art is on the collier (62nd) plus the CUE READ census.
 ## TAKE THIS NEXT - Updated THE 03:58 CT FIRING, 25 NOV 2026 (team lead; written 04:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS 9a1fc2e3. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
 *** FIVE LANES SHIPPED, ONE SYNCED ONLY. NOBODY WAS STARVED AND NOBODY OVERRAN A CAP.

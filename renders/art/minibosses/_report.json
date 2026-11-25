@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "7d290b58dad024ec091778e97e394294ab62704b",
+   "head": "8f2c09d02a0f491ca45ae1294d58b0b4518b9997",
    "ref": "origin/main",
-   "ref_commit": "8b12f41967e6d5e5e52d26fe9205a9ec7475cf47",
+   "ref_commit": "2d0638eda3749fb3af85f955d6e26e12a83802c2",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3232,7 +3232,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.327,
+   "corridor_margin_m": 9.33,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.92,
    "read_from": {
@@ -3258,11 +3258,58 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "weigher": {
+   "title": "Trueweight",
+   "theme": "treasury",
+   "idea": "IT MUST COME DOWN EVEN - it carries a weigh-beam across its shoulders with a pan hanging off either end, and the beam is already tipped. Whatever you put into it goes into the pan on the side you are standing on, and while the beam is tipped the risen side is armoured: the hurt you put into the heavy pan is paid straight back out of the light one. So a party that does what it always does - everybody on one flank, everything into one target - moves this fight nowhere at all, however hard it hits. It has to be brought down LEVEL: both flanks worked at once, both pans loaded together, and the last blow only counts while the beam is even. It does not choose a target, it has no phase and there is nothing to interrupt - the condition is on where the party STANDS. THE THING TO READ IS THE BEAM: two bright pans, one up by his shoulder and one down by his knee, hung off a black bar that is plainly out of true.",
+   "wear": 0.3,
+   "feed_line": "A beam is out of true, and something is under it.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 816,
+   "size": [
+    2.62,
+    2.01,
+    2.55
+   ],
+   "footprint_span": 2.62,
+   "height_m": 2.55,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.379,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 6.95,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.0862197113581167,
+    "ortho": 3.0951240062713623,
+    "clip": [
+     7.925621509552002,
+     20.927661895751953
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 8b12f41967e6d5e5e52d26fe9205a9ec7475cf47 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 2d0638eda3749fb3af85f955d6e26e12a83802c2 sha bc3a603f",
  "blank_check": {
   "files": 177,
   "failures": []

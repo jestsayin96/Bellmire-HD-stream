@@ -1,3 +1,315 @@
+## TAKE THIS NEXT - Updated THE 12:58 CT FIRING, 25 NOV 2026 (team lead; written 13:2x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** ALL SIX LANE BRANCHES MERGED. SIX SHIPPED, NOBODY DRY. main 08bf044c -> 1c71c922.
+*** PROGRESS.md took two conflicts (hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT, state machine
+*** not a blanket delete. Residual markers 0 on all FOUR exact shapes, and 0 across every tracked
+*** text file in the tree. numstat vs old main: PROGRESS.md +125/-0. ZERO LINES REMOVED.
+*** data/lore_lines.json reads 5/-4 and I did NOT take that as dropped keys: whole-file key SET is
+*** 1069 -> 1070, LOST = NONE, gained = exactly `/miniboss_feed/_note_c212`. The sibling trap held.
+***
+*** ===== MY OWN FAULT FIRST: I NEARLY CHARGED MYSELF WITH A SYNC FAILURE THAT NEVER HAPPENED =====
+***   The HUD's U178 says "the 11:58 TAKE-THIS-NEXT block names no new HUD item" and "no HUD lane
+***   row". My 11:58 block HAS a HUD row. My first instinct was that my own sync had missed
+***   `hud-ui`, so I grepped the HUD's own branch for `THE LOCK-WRITER NEWLINE BUG` and got FALSE -
+***   and I was one sentence from writing up a sync failure. **IT WAS MY SEARCH, NOT MY SYNC.** The
+***   row wraps across a line break, so the flat string does not exist in the file. Searching for
+***   `LOCK-WRITER NEWLINE BUG` alone returns TRUE, and `83c05094:docs/WORK_PLAN.md` is blob
+***   `7c6df039` - BYTE-IDENTICAL to main's. THE SYNC LANDED.
+***   A NAME SEARCH THAT FINDS NOTHING IS NOT PROOF THE THING IS MISSING - the prompt's own rule,
+***   earning its place against the seat that wrote it.
+***
+*** ===== SO THE HUD HAD A ROW AND READ PAST IT, AND THE FIX IS MINE TO MAKE, NOT ITS =====
+***   The HUD is not charged. It read the block, found its lane only inside the U177 TICK paragraph,
+***   and concluded there was no row - and then did the right thing with that belief: it wrote up a
+***   stand-down, said WHY it would not claim (no named item, ~10 min to :07, the only candidate
+***   needs a window it could not finish inside the cap), and ASKED to have the banner-ghost
+***   candidate routed explicitly. That is a lane behaving well on bad information.
+***   THE INFORMATION WAS BAD BECAUSE OF HOW I FORMAT THIS BLOCK: lane names appear in the prose of
+***   the tick paragraphs as well as in the rows, so "find my lane" finds the wrong one first.
+***   **FROM THIS BLOCK ON, EVERY LANE ROW BEGINS WITH A `>>>` MARKER ON ITS OWN LINE** and the
+***   HUD row goes FIRST, not last. One cycle lost; the cost is mine.
+***
+*** ===== WHAT I TICKED =====
+***   TICKED **S135** (game build) - and it is ticked for WITHDRAWING ITS OWN FINDING, which is the
+***     hardest thing a lane does. S134 reported the UACP skin coming through near-black as a
+***     conversion defect; S135 read the pack source and found the black IS THE PACK'S OWN DESIGN
+***     (blend Principled baseColor 0.0134 unlinked, MTL 0.0107 on 18/20) and withdrew finding 2.
+***     **I DID NOT TAKE THAT ON THE NUMBERS. I LOOKED AT QUATERNIUS' OWN PACK PREVIEW
+***     (`renders/cycles/s135/uacp_pack_preview_960.jpg`) MYSELF AND IT SETTLES IT**: the promo art
+***     for "Ultimate Animated Character Pack" shows black heads with white eye marks and black
+***     hands and legs on the human-type bodies, exactly what our lineup drew. The lane was also
+***     right not to invent a colour - my own row told it not to, and it obeyed by going to the
+***     source instead of picking a tone. The wiring is correctly HELD, and the call is ROUTED UP
+***     this hour rather than left sitting (see FOR THE SUPERVISOR).
+***   TICKED **ART COLLIER PASS 16** - the ~48 px side nub HAS A CAUSE NOW, and it is the cause my
+***     row asked for by ablation rather than a fourth guess. `surf()` and `tube()` are SYMMETRIC
+***     ABOUT THE GRID, so half the 0.020 face thickness sat OUTSIDE the skull at offset 0 - the nub
+***     was the face furniture poking through the silhouette, not a lighting or taper artefact.
+***     The fix sinks each element by a fraction of its own radius (`COLLIER_FACE_SKIN`, shipped 0.6)
+***     and the lane SWEPT it rather than picking: new silhouette px outside the p14 outline /
+***     front face-change px = 0.0 -> 47/939, 0.40 -> 32/909, 0.60 -> 22/897, 0.80 -> 15/872,
+***     1.00 -> 10/855. **THE SENTENCE THAT EARNS THE TICK IS ITS OWN: "The NUMBERS want 1.0 and the
+***     PICTURE forbids it"** - at 0.8 the brow thins and at 1.0 it reads as two separate dashes at
+***     the 360p rung, so it shipped the value the picture allows and not the value the metric
+***     maximises. It also kept a real control: `COLLIER_FACE_SKIN=0` reproduces pass 15 byte for
+***     byte. **WHAT I CHECKED MYSELF AND WHAT I DID NOT**: I looked at `_nub/side_pick.png` and the
+***     nub IS there as a distinct dark rectangular protrusion in the first crop and is substantially
+***     gone by the later ones - art's direction of travel is real on the picture. I looked at
+***     `_nub/p16_sheet.png` too and **IT DOES NOT RESOLVE THE BROW AT THAT SCALE**, so the
+***     "still one solid bar at 360p" half is ART'S MEASUREMENT AND NOT MINE, and I am saying so
+***     rather than borrowing its confidence.
+***   TICKED **C-212** (content) - the collier text diff shipped, and I verified it cell by cell
+***     instead of reading the entry. Exactly THREE cells differ from old main - `arrive[3]`,
+***     `arrive[4]`, `act[6]` - and the new strings are verbatim what C-211 prepared. `arrive[2]`
+***     "Eight stakes" is UNCHANGED (art source has eight). `by_key` is still 62 keys, arrays still
+***     9/8/4/8, and `[Ff]our` now occurs ZERO times in the whole collier block. The additive-only
+***     rule held: `_note_c205`'s VALUE is byte-identical and `_note_c212` is the single new key -
+***     the second `_note_c205` occurrence in the file is inside c212's own superseded-by text, which
+***     I checked rather than counting string hits and calling it an edit.
+***   TICKED **B156** (chat bot) - a stand-down plus the audit my row named, and it answered the
+***     actual question instead of the comfortable one. It ships exactly ONE regex that walks
+***     GDScript (`tools/_l14_test.gd:30`); the other two gates walk none. It PROVED the one-line
+***     form is safe there (no end anchor, 36 of 39 label-lines read correctly) - i.e. it reported
+***     that the fault it feared WAS NOT PRESENT. It then found the real exposure in the other
+***     direction: an 8-space dict literal with a lowercase string key would read as a command verb
+***     and turn the gate RED on correct code. None exists today. And it named why the gate is sound
+***     anyway - the second arm runs data->code, which a missed label cannot fool, only a false one.
+***   TICKED **U178** (HUD) - a written stand-down IS the delivery, and it was right on the two
+***     things it could check: the rarity-hue half of System 2 is wired, and it refused to claim a
+***     lock it could not release inside the cap. It is not charged for the row it read past; see
+***     above. It gets its row FIRST this hour.
+***   TICKED **THE HUB'S THIRD CDN MEASUREMENT** - outcome (b) exactly as my row scripted it, plus
+***     the honest non-delivery that matters more: **IT DID NOT DO THE COLD-CACHE CHECK AND IT SAID
+***     WHY.** A same-origin fetch of app.js threw "Failed to fetch" on CSP `connect-src`, and a real
+***     submit would have written a row to the LIVE suggestions table. Declining to dirty live data
+***     for a test is correct, and writing down that the pane profile is "not provably cold" rather
+***     than calling it cold is the part I am ticking.
+***
+*** ===== THE HUB: MEASURED BY ME, AND THE DELTA IS STILL DOCUMENTATION ONLY =====
+***   PUBLISHED: gh-pages **8d214d36**, tree **1d8bce63**, pushed **09:55:03 CT today**.
+***   MERGED AND NOT PUBLISHED: `origin/hub:web` = **fa615c02**. Per-file split COUNTED BY ME, not
+***   copied: **web/NOTES.md +30/-0. ONE FILE. DOCUMENTATION ONLY.** No html, no js, no css, no
+***   asset. Unchanged from 11:58 - the hub added nothing to `web/` this cycle. **THERE IS NOTHING
+***   FUNCTIONAL TO PUBLISH AND I AM NOT ASKING FOR ONE.**
+***   The published bytes ARE correct: `origin/gh-pages:index.html` carries
+***   `<script src="app.js?v=8" defer></script>`. I re-read that myself off the ref.
+***   LIVE PAGE LAST LOOKED AT: 12:3x CT today by the hub lane - still serving the pre-cache-bust
+***   HTML, now ~2h40m after the push and not self-healed across THREE measurements (10:4x, 11:39,
+***   12:3x). It is with the supervisor and I am not re-litigating it.
+***
+*** ===== THE DEAD-DATA AUDIT, 12:58 CT - THE UNREAD COUNT DID NOT MOVE =====
+***   MATCHER, SAID OUT LOUD: **bare literal substring, de-duplicated by KEY NAME**, only
+***   `_note`-prefixed keys counted as notes. That is the matcher that sits on the series.
+***   Corpus `scripts/*.gd` + `web/app.js` = **48 FILES / 2,402,175 chars** - byte-identical in size
+***   to 11:58, because no lane touched a script this cycle. `data/*.json` one level = 12 files.
+***     - UNREAD LIVE DATA KEYS: **ZERO**.
+***     - UNREFERENCED ASSET DIRECTORIES: **ZERO** (35 directories with files, off `assets/` only).
+***     - ZERO-HIT: **66 = 51 `_note` + 15 NON-NOTE**, the same accounted-for fifteen, named in full:
+***       `_gating`, `boss_floors`, `canon_silences`, `casing`, `chronicle_line`, `lord_intros_alt`,
+***       `one_roll`, `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`, `promotion_line`,
+***       `technique`, `town_levels_for_the_desktop`, `unique_intros_alt`, `word_order`.
+***   **THE SERIES, NON-NOTE ONLY: 15 / 15 / 15 / 15 / 15 / 15. UNMOVED.**
+***   ONE ENUMERATION DIFFERENCE I AM NAMING RATHER THAN SMOOTHING: my top-level key total is **144
+***   DE-DUPLICATED BY NAME**; 11:58 reported 156, which counts `(file, key)` PAIRS. Same bytes,
+***   different enumeration, and it is exactly the trap owed correction 3 is about. The NON-NOTE
+***   count is the number with signal and it did not move. Content added `_note_c212` this cycle.
+***
+*** ===== LOCK DISCIPLINE: CLEAN. THE COUNT ADVANCES TO 2. =====
+***   Read off R's WORKING `docs/RUN_LOCK.txt` (authoritative, often uncommitted).
+***   Game build S135: claim 12:08:51, **cap claim+25 = 12:33:51 COMPUTED FIRST**, declared 12:30:51,
+***     released 12:12:19 - inside both. The over-declaration pattern stays stopped.
+***   QA tester: claim 12:42:30, released 12:42:54 - 24 seconds, clear before the chat bot's :45.
+***   Chat bot B156: claim 12:47:04, cap 13:12:04, declared 12:51:30, released **12:48:54** - inside
+***     the declared finish AND clear of the HUD's :52 window. **THE "CLAIM BY :50, FINISH INSIDE
+***     :52" ROW HAS NOW HELD FOUR FIRINGS RUNNING.**
+***   HUD U178 took no lock and said why. Art takes the lock only to prove fit; it took none.
+***   No overrun, no lock cleared on age, no future stamp, no two lanes holding at once, NO LANE
+***   CLAIMED OVER A LIVE HOLD. **THE COUNT ADVANCES TO 2.**
+***   NOT FOLDED INTO THAT COUNT, BECAUSE IT IS MINE: the HUD lost a cycle to my block's formatting.
+***   A lane starved by the rules I own is my fault, not a dirty hour on the lanes' record - but it
+***   is written here so it is not invisible either.
+***
+*** ===== WHAT THIS FIRING COST, AND I AM NAMING IT BEFORE ANYONE ASKS =====
+***   **I WAS LATE AND THE GAME BUILD AND CONTENT BOTH FIRED ON THE 11:58 ROWS.** My run opened at
+***   12:58:33 and this block lands ~13:2x. The :07 game build row said "fix the Skin colour and THEN
+***   wire" - S135 had ALREADY disproved that premise at 12:12, so the 13:07 firing read an
+***   instruction whose cause had been withdrawn an hour earlier. Content at :22 likewise read a row
+***   telling it to ship a diff it shipped at 12:23. Neither lane is at fault and neither is charged.
+***   WHY I WAS LATE, HONESTLY: I spent the head of the run on verification I would spend again -
+***   the sync-failure check, the pack preview, the cell-by-cell content diff - but I did it BEFORE
+***   writing any row instead of landing a short correct block first and deepening it after.
+***   **FOR THE NEXT SEAT: WRITE AND SYNC THE GAME BUILD ROW FIRST, THEN VERIFY.** `laptop` first is
+***   already the rule for the SYNC; make it the rule for the WRITING too.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
+***   Land ALL of these on the first LIVE turn, together. 1-5 and 7 are CARRIED (6 withdrawn and
+***   stays withdrawn); 8 and 9 are new this hour.
+***   1. (CARRIED) STRIKE the :58 prompt's standing note that the art fit register reads "RED /
+***      ok:false ... on two CARRIED unmeasured rows (snuffer_chibi, tallyman_chibi)".
+***      ADDED THIS HOUR: there is no tracked `renders/art/minibosses/fit_register.json` at all -
+***      `git ls-files *fit_register*` returns only `renders/art/s7_armour/_fit_register.json` and
+***      `renders/art/system2/_fit_register.json`. The prompt's standing note points at a file that
+***      is not in the index under that path. Correct the PATH as well as the verdict.
+***   2. (CARRIED) EVERY MINIBOSS COUNT IN THE PROMPT IS STALE - "44/44/44", "46 rows / 44 live",
+***      and the :34 prompt's "THIRTY-THREE already exist". Write it as **62 LIVE BASE BODIES + 2
+***      RETIRED `_chibi` = 64 REGISTER ROWS; AN INVENTED MINIBOSS IS THE 63rd**, counted AT RUNTIME
+***      (`len(BUILDERS)` minus `_chibi`/`_tall`), never by regex. CONFIRMED AGAIN: `by_key` = 62.
+***   3. (CARRIED, RE-CONFIRMED) ADD THE DEAD-DATA MATCHER DIAGNOSTIC. Quoted-form matching plus
+***      `(file, key)` pairs yields the struck 39 non-note; bare literal substring de-duplicated by
+***      key name yields **15**, every time. ADDED THIS HOUR: the same split shows up in the KEY
+***      TOTAL too - 144 de-duplicated vs 156 as pairs. Four seats have now spent part of a run here.
+***   4. (CARRIED) ADD to the Blender-bridge paragraph: NEVER pass `-F -` or any stdin-reading flag
+***      to git through the bridge. It blocks forever and the hung git.exe wedges the bridge for
+***      EVERY lane. Write the commit message to a FILE. This cost one lane its whole cycle on 25 Nov.
+***   5. (CARRIED) ADD to ALL SEVEN prompts: **NEVER PUT A LIVE WEB FETCH IN THE HEAD OF A SCHEDULED
+***      SLOT.** It cost the chat bot its 10:45 window. NOTE the supervisor's 00:03 CT 25 Nov ruling
+***      (`sup-nov25-0003`) says the team lead needs no approval to fetch a webpage - that ruling is
+***      about PERMISSION and does not repeal this, which is about the container proxy 403ing and
+***      PROVENANCE_REQUIRED needing an approval an unattended firing cannot give. Both are true.
+***   7. (CARRIED) ADD beside "a ruling in a chat log does not exist" its missing other half: **READ
+***      THE SUPERVISOR'S RULING DOCS AT THE TOP OF YOUR RUN AND CARRY ANY NEW RULING INTO THE PLAN
+***      BEFORE YOU WRITE THE ROWS.** DISCHARGED THIS HOUR: I searched the project's supervisor docs
+***      at the head of the run and the newest is still `sup-nov25-1100` (the collier ruling, already
+***      in the plan). Nothing new is sitting unrouted. The correction is still owed as TEXT.
+***   8. (NEW, MINE) ADD to the :58 prompt's "a name search that finds nothing is not proof"
+***      paragraph: **AND THE PLAN'S OWN ROWS WRAP ACROSS LINE BREAKS.** A flat grep for a row title
+***      you wrote yourself will return FALSE on your own file. I nearly reported a sync failure
+***      against myself on exactly that. Normalise whitespace before asserting a landmark string,
+***      in the plan exactly as in GDScript.
+***   9. (NEW, MINE) ADD to STEP 4: **PUT EVERY LANE ROW BEHIND AN UNMISSABLE MARKER AND PUT THE
+***      DRIEST LANE FIRST.** The HUD lost a cycle this hour because its lane name appeared in a
+***      tick paragraph before it appeared in a row, and "find my lane" found the prose. Rows now
+***      open with a `>>>` marker. This is a format rule, so the PLAN can carry it - but the prompt
+***      should say it too, because the next seat writes the format from the prompt.
+***
+*** === TAKE THIS NEXT, ONE ROW PER LANE - THE 12:58 CT FIRING, 25 NOV 2026 ===
+*** EVERY ROW BELOW OPENS WITH A `>>>` MARKER. IF YOUR LANE NAME APPEARS ANYWHERE ELSE IN THIS
+*** BLOCK IT IS PROSE, NOT YOUR ROW. SEARCH FOR THE `>>>` MARKER.
+
+>>> HUD (:52) <<<
+  **YOU HAD A ROW LAST HOUR AND MY FORMATTING HID IT. HERE IT IS AGAIN, AND IT IS STILL YOURS.**
+  TAKE **THE LOCK-WRITER NEWLINE BUG** - your own shipped writer, so not a new item. UNCHANGED as
+  of my 11:58 re-measure: `)RUNNING` with no newline before it occurs **6 times** in R's working
+  `docs/RUN_LOCK.txt`, and ALL SIX follow an IDLE line ending in the `(HUD)` tag (16 Nov 13:06,
+  20 Nov 15:08, 20 Nov 22:08, 21 Nov 22:07, 24 Nov 15:08, 25 Nov 04:07). WHY IT IS WORTH YOUR
+  WINDOW: the yield rule says read the LAST LINE, and a glued pair is ONE line that BEGINS `IDLE`
+  and ENDS with a live `RUNNING` claim - a lane doing literally what the rule says reads `IDLE` and
+  takes a lock another lane holds. That is two-lanes-at-once with the instrument at the root of it.
+  It has never bitten because every lane reads the text, not the line boundary. It is a
+  one-character fix: append a newline if the file does not already end with one. Then PROVE it -
+  write a lock line yourself and show the next line starts clean. It is small, it fits your cap
+  easily, and it closes a latent fault in the one file the whole fleet's discipline is measured from.
+  **AND YOUR BANNER-GHOST CANDIDATE IS NOW ROUTED TO YOU EXPLICITLY**, as you asked: the NOW
+  FIGHTING banner ghost at 150% (auto_director/spotlight). Take it as the SECOND call if the
+  newline fix lands early, or as a SPLIT JOB next firing - claim <=15 min, finish inside :07, carry
+  the remainder with running totals. You were right that it needs a windowed render; do not try to
+  squeeze it into a short tail.
+
+>>> GAME BUILD (:07) <<<
+  **S135 IS TICKED AND YOUR WITHDRAWAL WAS THE RIGHT CALL - I CONFIRMED IT ON QUATERNIUS' OWN PACK
+  PREVIEW, NOT ON YOUR NUMBERS.** The black skin is the pack's design. So the 11:58 row's "fix the
+  Skin colour and THEN wire" is STRUCK - its premise is gone and you disproved it yourself.
+  **DO NOT WAIT ON THE STYLE CALL. IT IS WITH THE SUPERVISOR AS OF THIS HOUR AND YOU CAN MAKE BOTH
+  ANSWERS CHEAP.** TAKE **S110c-3: wire the 20 UACP bodies per role in `townsfolk.gd` behind a
+  single skin switch.** (1) Wire at **k 0.5728** (head-bone, hat-free - NOT S133's 0.7249) with the
+  clip-prefix strip. (2) Heed your own warning: `Gear.strip_props`/`dress_role` assume KayKit bone
+  names while UACP has `Fist.L`/`Fist.R`, so wiring must skip or remap gear for these bodies - say
+  in your entry which you chose and why. (3) Put the skin behind ONE value - pack-native as shipped
+  by default, with a single material override path ready - so whichever way the supervisor rules, it
+  is a one-line change and not a cycle. DO NOT pick a replacement tone yourself; you were right
+  about that twice. The glbs stay off `laptop` until the commit that wires them (S108's rule,
+  obeyed twice already).
+
+>>> CONTENT (:22) <<<
+  **C-212 IS TICKED AND I VERIFIED IT CELL BY CELL, NOT BY READING YOUR ENTRY** - exactly three
+  cells differ, `arrive[2]` "Eight stakes" untouched, `by_key` still 62, arrays still 9/8/4/8,
+  `[Ff]our` now zero in the whole collier block, `_note_c205` byte-identical, `_note_c212` the only
+  new key in 1,070. That is a clean, honest, reversible text change and it is exactly what the
+  supervisor ruled.
+  TAKE **C-213: the twelve older A-row bodies you explicitly did NOT re-measure at C-211.** Your own
+  words: "Items 12 older bodies in C-209 A were not re-measured this firing; I am not claiming them
+  verified." That is you auditing your own shipped promises against art's source, which is the same
+  item C-209/C-211/C-212 have been walking and NOT a new one. Same method that worked: read the
+  count phrase off `data/lore_lines.json`, read the body off `tools/art/minibosses.py` BY LINE, and
+  report AGREE / DISAGREE / NO CANON per row. **PREPARE a diff for any disagreement; do not ship one
+  without a row** - except that if a row disagrees the way the collier did (text asserts a count the
+  body cannot show at 360p), say so plainly and I will carry it up the same way, which took one
+  hour end to end this time. Keep writing `_note_` keys; nobody is to wire them.
+
+>>> ART (:34) <<<
+  **PASS 16 IS TICKED AND THE NUB HAS A CAUSE** - symmetric `surf()`/`tube()` putting half the face
+  thickness outside the skull. The ablation was the right instrument and the sweep table is the
+  evidence. Your own sentence is the one I quoted in the tick: the numbers wanted 1.0 and the
+  picture forbade it.
+  TAKE **THE OPERATOR, BROWN-ON-BROWN WITH HIS CLAMP** - your own pass-14 finding, carried two
+  passes, named as the second call in my 11:58 row and never reached. It is your own shipped body
+  and no number in your lane reports it, which is precisely why it needs your eye and not another
+  harness. Measure the separation you actually have (operator vs heap, and clamp vs operator) the
+  way you measured the face: at the 360p rung, on the real render, with a control. If the honest fix
+  is value rather than hue, say so - PLAINNESS IS THE VOICE and WEAR IS A VARIABLE, so do not solve
+  it by making him bright. **AND KEEP DOING THE TWO THINGS THAT MADE PASS 16 WORTH TICKING**: say
+  what the harness cannot see, and do not let a tool that cannot see a face decide a face.
+  `_facingread.py` still cannot see a face - do not promote it to a judge.
+
+>>> HUB (:37) <<<
+  **THE CDN ITEM IS CLOSED FOR YOU. STOP MEASURING IT.** Three readings is enough, the finding is
+  with the supervisor, and a re-push is a publish action that is neither yours nor mine. Your
+  refusal to run the cold-cache check was CORRECT and I ticked it: a test that writes a row to the
+  live suggestions table is not a test worth running, and "the pane profile is not provably cold" is
+  the honest sentence. Do not try again.
+  TAKE **THE PACK CATALOGUE** - the supervisor's 20 Nov directive 4, standing and unspent: when the
+  hub has zero publishable delta, inventory the packs. You have zero publishable delta (NOTES.md
+  +30, documentation only). Pick up where the catalogue left off: per pack, file count, licence file
+  present or absent and WHERE its terms would come from if absent, and which upcoming system the
+  models map to. **EVIDENCE, NOT VERDICTS** - do not rule on a licence, record where the ruling would
+  come from. This directly feeds the batch-wiring rows, so it is not filler. You never publish.
+
+>>> CHAT BOT (:45) <<<
+  **B156 IS TICKED** - and the reason is that you reported the fault you feared WAS NOT THERE, then
+  found the real one in the other direction. That is the hardest report to write and the most
+  useful.
+  YOUR LANE IS DRY AND A WRITTEN STAND-DOWN IS THE DELIVERY. **CLAIM BY :50 WITH A FINISH INSIDE
+  :52** - that row has now held four firings running and the HUD has had its window every time.
+  IF YOU WANT A TARGET: you named a latent false positive in `tools/_l14_test.gd:30` and then said,
+  correctly, that it is not your file to change. **IT IS STILL YOURS TO MAKE UNMISSABLE.** Write the
+  one-line guard note INTO YOUR OWN PROGRESS entry and, if the gate has a comment header you own,
+  state the trigger there in one sentence: an 8-space dict literal with a lowercase string key in
+  `chatcmd.gd` turns this gate red for a reason unrelated to the change. Do not edit the gate. The
+  lane that trips it should find your sentence before it finds the mystery.
+  Suggestion Box stays DROPPED - B154 proved it off the published bytes.
+
+*** ===== FOR THE SUPERVISOR =====
+*** **1. THE UACP SKIN IS A STYLE CALL AND IT IS BLOCKING SYSTEM 12's WIRING. I AM ROUTING IT TO YOU
+*** RATHER THAN TO MR. E, AND I SAY OUT LOUD WHY I READ IT THAT WAY**: it is a work-acceptance
+*** decision inside a system he already approved, it is cheap to reverse, and his 07:24 CT 20 Nov
+*** expansion is explicit ("you should be able to decide, that's why you are here"). If you judge it
+*** his, pass it up - I have not asked him and the game build's "held for Mr. E's style call" is the
+*** lane's phrasing, not a routing I endorsed.
+*** THE FACT, MEASURED AND LOOKED AT: the 20 UACP bodies ship with near-black skin (baseColor 0.0134)
+*** and white eye marks. That is the PACK'S OWN DESIGN, not our conversion - Quaternius' promo art
+*** shows the same thing and I looked at it. Our three KayKit bodies carry conventional skin tone, so
+*** wiring as-is puts TWO BODY STYLES on screen together.
+*** THE THREE HONEST OPTIONS: (A) wire as-is and accept two styles; (B) override the skin material to
+*** a tone matching KayKit - ONE material, fully reversible; (C) use UACP only for roles where a dark
+*** silhouette reads as intentional.
+*** **MY RECOMMENDATION IS (B) FOR TOWNSFOLK**, on the grounds that townsfolk are background bodies
+*** and a crowd in two visual languages reads as a bug rather than a style. I have rowed the game
+*** build to wire behind a single skin switch THIS HOUR so (A) and (B) are both one value, and
+*** neither answer costs it a cycle whichever way you rule.
+*** **2. THE CDN IS STILL SERVING PRE-CACHE-BUST HTML** - carried, not re-litigated. gh-pages
+*** 8d214d36 / tree 1d8bce63 pushed 09:55:03 CT; the published bytes ARE correct
+*** (`app.js?v=8`, re-read off the ref by me); the live page has not healed across THREE readings
+*** (10:4x, 11:39, 12:3x), now ~2h40m. The merged-unpublished delta is NOTES.md +30, documentation
+*** only - **I am not asking for a content publish.** The ask is whether a re-push or a CDN purge is
+*** warranted to make the live page serve what the repo already says. I have told the hub to stop
+*** measuring it.
+*** **3. NO NEW RULING WAS SITTING UNROUTED.** I read the supervisor ruling docs at the head of this
+*** run (owed correction 7) and the newest is still `sup-nov25-1100`, which is already in the plan.
+
+*** ===== NEEDS MR. E =====
+*** **Nothing.** The UACP style call is routed to the supervisor above, with my reasoning for reading
+*** it that way stated so it can be overruled.
+
+
 ## TAKE THIS NEXT - Updated THE 11:58 CT FIRING, 25 NOV 2026 (team lead; written 12:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY. SIX LANES SHIPPED - NOBODY WAS DRY.
 *** PROGRESS.md took two conflicts (hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT. Residual

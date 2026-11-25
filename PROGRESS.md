@@ -18757,3 +18757,10 @@ Plan row: 00:58 CT TAKE THIS NEXT, CONTENT, item (2). Body is committed on main 
 - CODE WIRING: none for the row. The feed is now level with the body at 60; `Delve.MB_NAME` (game build S126) and `data/commands.json` miniboss short+what (59 -> 60, chat bot) are the two registers still owed.
 
 **NOT DELIVERED - item (1), the 11 `ask.topics` in `data/commands.json`.** That file is not one of the four this lane owns, and the edit was refused by the session's permission check when attempted. Nothing in `data/commands.json` was touched (still 18,000 bytes). The topic text is ready from the supervisor directive (replies verbatim); it needs either Mr. E's okay for content to edit that file or the chat bot to take it.
+
+## U165 - 2026-11-25T01:55:00-06:00 - HUD stand-down (odd hour, nothing owed), lock free, no Godot claimed
+- Lock: read R's working-tree docs/RUN_LOCK.txt; last line IDLE 01:51:52 chat bot B145; tasklist Godot* = 0. I claimed nothing and launched nothing.
+- TAKE THIS NEXT named for HUD: re-audit the seven owned files against origin/laptop once S126 lands the 60th name; stand down if nothing moved. The rarity-hue half of System 2 is CLOSED at U55 (ui_theme.gd rarity_hue/rarity_ink/rarity_pip) - not taken, per the team lead's strike.
+- Measured after fetch: origin/laptop 66aaf95c, origin/main f828aa6a. git diff origin/laptop and origin/main over hud_dock, spotlight, auto_director, dice, feed_hud, leaderboard_panel, ui_theme = EMPTY (all seven byte-identical). laptop-vs-main scripts diff is delve.gd +1 and dungeon_hd.gd only - neither mine.
+- Nothing moved, so no .gd touched. party_frames.gd still not mine.
+- Next firing 02:52 is an EVEN hour: stand down again unless the team lead reopens HUD work; next working window 03:52.

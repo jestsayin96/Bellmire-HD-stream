@@ -10814,6 +10814,174 @@
    "air_px_eps": 0.02,
    "air_px_min": 136,
    "air_px_tightest_view": "back"
+  },
+  "crimp": {
+   "creature_h": 2.42,
+   "hero_h": 2.45,
+   "ratio": 0.99,
+   "pair_w": 3.53,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.068,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "crimp",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 36424,
+      "vis": 36424,
+      "delta": 42455,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43669,
+      "vis": 43669,
+      "delta": 49929,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 35168,
+      "vis": 35168,
+      "delta": 42666,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37791,
+      "vis": 37791,
+      "delta": 43183,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 36433,
+      "vis": 36433,
+      "delta": 46036,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44033,
+      "vis": 44033,
+      "delta": 49322,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 218120,
+     "shadow_px": 3797,
+     "mean": 0.4393,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3066,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 218120,
+     "shadow_px": 3389,
+     "mean": 0.4069,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3423,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 216600,
+     "shadow_px": 3597,
+     "mean": 0.4433,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2942,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     139,
+     139
+    ],
+    "side": [
+     129,
+     131
+    ],
+    "back": [
+     139,
+     139
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 129,
+   "air_px_tightest_view": "side"
   }
  },
  "errors": [],
@@ -10849,13 +11017,14 @@
    "panner"
   ],
   "no_man_reason": "the builder declares an EMPTY `man` span - a deliberate marker that this body has no operator at all (panner pass 4 removed his, by A/B, and left the empty span to say so). A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED and this is NOT red - the first cut of this rule called panner MEASURABLE and turned the register red on a correct body, which is an unearned FAIL and the same fault as an unearned pass.",
-  "census_measured_at": "2026-11-24T21:48:23-0600",
-  "census_register_mtime": "2026-11-24T21:48:02-0600",
-  "census_register_pairs": 61,
+  "census_measured_at": "2026-11-25T00:48:19-0600",
+  "census_register_mtime": "2026-11-25T00:47:23-0600",
+  "census_register_pairs": 62,
   "census_errors": [],
   "build_failed": [],
   "build_failed_reason": "the builder RAISED, so nothing was measurable and nothing is claimed - that is RED, never an honest absence. This list and the census's own `errors` were both unread until 24 Nov 12:3x.",
   "not_measurable": [
+   "crimp",
    "snuffer_chibi",
    "tallyman_chibi"
   ],
@@ -11057,16 +11226,16 @@
  },
  "unproved_cells": [],
  "measured": [
-  "pledgeman"
+  "crimp"
  ],
  "asked": [
-  "pledgeman"
+  "crimp"
  ],
  "blank_check": {
-  "files": 177,
+  "files": 180,
   "failures": [],
-  "cells": 59,
-  "expected_files": 177,
+  "cells": 60,
+  "expected_files": 180,
   "scope": "whole_house"
  },
  "red_summary": {
@@ -11077,5 +11246,5 @@
  },
  "verdict": "GREEN",
  "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (61), re-derived from stored measurements; 1 of them rendered this run"
+ "verdict_scope": "every row in pairs (62), re-derived from stored measurements; 1 of them rendered this run"
 }

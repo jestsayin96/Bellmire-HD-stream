@@ -21798,3 +21798,430 @@ OVERRIDE.update({
         'bone': ((0.865, 0.795, 0.565), 0.62, 0.00),
     },
 })
+
+
+# =====================================================================
+# 60  THE CRIMP - IT TAKES ONE OF YOU INTO ITS OWN CREW
+# =====================================================================
+# WHAT I CHECKED FOR BEFORE DESIGNING THIS, MEASURED OFF THIS FILE AND NOT
+# REMEMBERED. The art lane's prompt carried "THIRTY-THREE already exist" and
+# that line is stale by twenty-six bodies; the plan's TAKE THIS NEXT block told
+# me to measure instead, so I did. Parsed this file for the initial ORDER
+# literal plus every `ORDER = ORDER + [...]` and every `BUILDERS.update({...})`:
+#   ORDER        59 entries, 59 distinct
+#   BUILDERS     73 entries - 59 bases + 14 chibi/tall variants
+#   assets/monsters/minibosses/  72 .glb and 72 .glb.import on merged main
+# So this is the SIXTIETH BASE and the count came off the tree, not a prompt.
+# I then read every `idea` string in CANON - all 59 - before choosing, and the
+# NOT-THIS list below names each neighbour that could have made this a re-skin.
+#
+# THE FAMILY THAT IS NEW: A HERO CHANGES SIDE. Nothing in the other 59 turns a
+# member of the party into an enemy. Twelve bodies do something to a chosen
+# hero and every one of them SUBTRACTS - hook, cask, yoke, mark, press, deal,
+# swap - and the party fights on one short. This one subtracts AND ADDS: the
+# fight becomes three against two in the same instant, and the hero the party
+# must not kill is their own.
+
+CANON.update({
+    "crimp": ("Oneshort", 2.42, (0.46, 0.50, 0.58), (1.00, 0.84, 0.40),
+              "barracks", "IT TAKES ONE OF YOU INTO ITS OWN CREW - it does "
+              "not wound, it SIGNS. The hook takes a hero by the collar, the "
+              "name goes on the muster board, and from that moment that hero "
+              "is fighting FOR the crimp: the party's own best weapon is in "
+              "the room swinging at them, at full strength, and it cannot be "
+              "talked down. Nobody is removed and nothing is stolen, which is "
+              "what makes this worse than the hook trades - the party is not "
+              "one short, it is two apart, and killing the signed hero ends "
+              "the problem the one way the party can never accept. The answer "
+              "is on the CRIMP and not on the hero: one peg on the board is "
+              "lit, that peg is the signature, and striking the peg off "
+              "strikes the name off. So the fight has a target that is not a "
+              "body, the party has to fight defensively against its own man "
+              "while someone gets to the board, and the board is deliberately "
+              "carried out on his off side in clear air where it can be "
+              "reached - the mechanic is only fair if a viewer can SEE where "
+              "the answer is kept.",
+              0.38, "Someone is signing a name in the dark."),
+})
+ORDER = ORDER + ["crimp"]
+
+
+def crimp():
+    """IT TAKES ONE OF YOU INTO ITS OWN CREW. The 60th body.
+
+    THE ACCEPTANCE TEST IS THE BOARD AND THE ONE LIT PEG, and both have to
+    survive the front ortho, the side ortho and a hero standing beside him. If
+    a viewer sees a big man with a plank, the mechanic is in this docstring and
+    nowhere else - and this mechanic loses more than most by being invisible,
+    because a party that cannot see the peg will go for the signed hero, which
+    is the one outcome the fight is built to punish.
+
+    WHAT THIS IS NOT. Fifty-nine bodies deep the re-skin is the easy failure,
+    so every near neighbour is named with the daylight between it and this.
+      NOT THE GAOLER (3), HOOPER (39), DROVER (28), DYER (24), FERRYMAN (43)
+            or ALMONER (50), the six that act on a chosen hero. Every one of
+            them SUBTRACTS - dragged out, casked, yoked, marked, punted,
+            re-dealt - and the party fights on one short. This one subtracts
+            AND ADDS in the same instant. The arithmetic of the fight changes
+            by two, not by one, and that is the whole idea.
+      NOT THE MOULDER (26), which takes a hero's SHAPE. That is a copy: your
+            hero is still yours and still swinging for you. Here there is no
+            copy and no second body - the original changes side.
+      NOT THE DRILLMASTER (1), which summons the garrison. Those are ITS
+            bodies arriving. Nothing of yours moves.
+      NOT THE QUARTERMASTER (16), which arms the room. The room was already
+            hostile; it gets better weapons. Nobody defects.
+      NOT THE PRESSMAN (22), which consumes heroes that have ALREADY FALLEN -
+            a penalty on losing. This lands on a hero at full strength and is
+            a penalty on standing still.
+      NOT THE BEADLE (34), which takes the party's CHOICE of order. Everyone
+            on that floor is still on the same side.
+      NOT THE RELIEF (41), which takes your POST. That is positional and
+            nobody is turned.
+      NOT THE PLEDGEMAN (59), the other body carrying a board with something of
+            yours lashed to it. The pledge is CARGO, taken before you arrived,
+            and the fault there is hitting the crimp's load by accident. Here
+            the thing on the board is a NAME, taken during the fight, in front
+            of you, and the board is the thing you are meant to hit. The two
+            bodies invert each other: that one punishes damage, this one
+            REQUIRES damage and only aimed somewhere unobvious.
+      NOT THE TALLYMAN (7), SEALER (38), WEIGHER (56) or TITHER (45), the
+            clerks. They take goods, kit, weight or payment. This takes a
+            PERSON, and the paperwork is the mechanism rather than the prize.
+
+    THE READ IS BUILT ON THIS HOUSE'S OWN LOGGED FAULTS AND NOT ON MY
+    CONFIDENCE. Every one of these is somebody's shipped mistake, re-used:
+      THE BOARD IS YAWED *AND* RAKED, so its loaded face is turned at the
+            viewer rather than away from him or edge-on to him. This is the
+            pledgeman PASS 2 fault (a board raked back has its normal pointing
+            +Y, straight away from the front camera, and the body read as a man
+            with a shield on his back), which is itself the straker FIX K /
+            dredger FIX C family. Computed, not tuned:
+              U = ( 0.220, -0.197,  0.955)   along the board, up and out
+              W = (-0.666, -0.746,  0.000)   across its width
+              N = ( 0.712, -0.637, -0.296)   its OUTWARD normal
+            Ny is NEGATIVE, so the loaded face is turned toward the front
+            camera; |Nx| = 0.712, so the side camera gets more of that face
+            than the front one does; Nz = -0.296, so it is not flat either.
+            All three components are real by construction and no view is
+            traded for another.
+      THE BOARD BREAKS HIS OWN SILHOUETTE. Its top rides at z 2.30 against a
+            cap crown at 2.06, and its outer corner stands at x 0.85 against a
+            shoulder half-width of 0.31. The second shape is therefore OUTSIDE
+            the first shape's outline on both cameras that matter. The Beadle's
+            pale knob went flat against his own pale panel on the side view and
+            passed every number in its register; the fix for that class is
+            clear air, and clear air is a thing a viewer can see.
+      THE PEGS LIE ON THE OUTWARD FACE, not the inner one, where they would be
+            sandwiched between board and man and read as rivets.
+      THE ONE LIT PEG IS THE ONLY GLOW ON THE BODY. He has NO glowing eyes -
+            dark sockets instead - which is a deliberate subtraction: if the
+            answer to the fight is a peg, the peg has to be the brightest thing
+            on him, and two glow sources on one body is two things competing to
+            be the cue. That is a choice and it is stated so a later pass can
+            argue with it.
+      IT HAS A FACING BY CONSTRUCTION. The Beadle's pale eye-band wrapped his
+            head so the figure read THE SAME FROM FRONT AND BACK. Here the
+            board is asymmetric along its own length - the lit peg and the
+            filled sockets at the TOP, the three empty berth loops swinging off
+            the BOTTOM rail - so front and back cannot render alike; and the
+            man carries a dark brow, a dark jaw and a dark coat placket on his
+            -Y side only.
+      NO FREE ENDS EXCEPT THE HOOK'S POINT. The dredger shipped a carrying
+            strap that crossed the chest as a dark rod ending IN MID AIR. Here
+            the strap runs board-corner -> over the shoulder -> INTO HIS FIST,
+            and each berth loop runs board-rail -> sag -> board-rail. The
+            hook's tip is the one free end in the body and that is correct: a
+            hook is a terminal shape, and a hook that closes on itself is a
+            ring and takes nobody.
+      WEAR 0.38 IS A SPREAD AND NOT ONE VALUE, carried by SLOT rather than
+            asserted: the coat, harness and board are old working kit, the
+            berth loops are old rope that has held many men, and the PEG IS
+            NEW BRASS because the name went on today. The wear story and the
+            targeting cue are the same decision, which is how wear is meant to
+            work in this house.
+      HE IS NOT ROOM-LOCKED. Authored span is about 1.5 m against a three-cell
+            corridor clear span read out of floorgen.gd each run, so he can
+            walk a corridor and the game build does not have to gate him to a
+            room. The report's own verdict is the number that counts, not this
+            sentence.
+    """
+    P = Parts("crimp")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.095
+    KNEE = 0.520
+    HIP = 0.950
+    WAIST = 1.140
+    CHEST = 1.440
+    SHO = 1.620
+    HEAD = 1.880
+
+    # He is BRACED AND PULLING, not stooped under a load: the trunk shears
+    # FORWARD as it rises, the opposite sign to the pledgeman's carried lean
+    # and a smaller magnitude than the harrowman's 0.150 haul.
+    LEAN = 0.072
+
+    def _s(v):
+        v = Vector(v)
+        return Vector((v.x, v.y - LEAN * (v.z - HIP), v.z))
+
+    # ---------------------------------------------------------- THE BOARD FRAME
+    # Built explicitly so the docstring's claim about the normal is arithmetic.
+    TILT = -0.30                 # tips the board's top back toward +Y
+    YAWB = -2.30                 # PAST 90 deg: turns the loaded face OUTWARD
+    _ct, _st = math.cos(TILT), math.sin(TILT)
+    _cy, _sy = math.cos(YAWB), math.sin(YAWB)
+
+    def _rot(v):
+        v = Vector(v)
+        v = Vector((v.x, v.y * _ct - v.z * _st, v.y * _st + v.z * _ct))
+        return Vector((v.x * _cy - v.y * _sy, v.x * _sy + v.y * _cy, v.z))
+
+    U = _rot((0.0, 0.0, 1.0)).normalized()
+    W = _rot((1.0, 0.0, 0.0)).normalized()
+    N = _rot((0.0, 1.0, 0.0)).normalized()
+    assert N.y < -0.4 and abs(N.x) > 0.6 and abs(N.z) > 0.2, \
+        "crimp: the board's loaded face must point at the camera in all three axes: %r" % (N,)
+
+    # Carried OUT on his off side in clear air - that placement is the fairness
+    # of the mechanic and not a composition choice.
+    # *** PASS 2, ROOT FAULT 1 AND THE WORST OF THE FIVE. ***
+    # PASS 1 PUT IT AT y -0.140 AND THE SIDE ORTHO LOST THE MAN. The side
+    # camera looks along X; the board is on his +X side, so it is the NEAREST
+    # thing to that camera and at BC.y = -0.140 it sat squarely over his torso
+    # and most of his head. The pass-1 side render is a BOARD ON LEGS WITH A
+    # HOOK - no chest, no shoulders, a sliver of cap. That is the Beadle's
+    # fault inverted: there the carried thing went flat against the body, here
+    # the carried thing ATE the body, and both pass every number a register
+    # can hold because occlusion is not a measurement this harness takes.
+    # The fix is carry position and size, not a tuned offset: he holds it OUT
+    # IN FRONT of his off shoulder, which is also what the mechanic claims in
+    # CANON - the answer is kept in clear air where a hero can reach it.
+    #   pass 1  BC.y = -0.140, BL 1.050, BW 0.520
+    #   pass 2  BC.y = -0.520, BL 0.920, BW 0.460
+    BC = Vector((0.560, -0.520, 1.780))
+    BL, BW, BT = 0.920, 0.460, 0.068     # length along U, width along W, thick
+
+    def _B(u, w, nn):
+        return BC + U * u + W * w + N * nn
+
+    _open()
+    P.add(L.box(BW, BT, BL), 'dark', loc=tuple(BC), rot=(TILT, 0.0, YAWB))
+    # two battens across the BACK so it reads as a board and not a slab, and so
+    # the back view has something of its own to show.
+    for _u in (-0.33, 0.33):
+        P.add(L.box(BW * 1.04, BT * 0.62, 0.070), 'bone',
+              loc=tuple(_B(_u, 0.0, -BT * 0.70)), rot=(TILT, 0.0, YAWB))
+    # a raised rim along both long edges - a muster board has a lip so the pegs
+    # do not walk off it, and it gives the outer edge a line in the silhouette.
+    for _w in (-BW * 0.46, BW * 0.46):
+        P.add(L.box(0.034, BT * 0.55, BL * 0.98), 'bone',
+              loc=tuple(_B(0.0, _w, BT * 0.52)), rot=(TILT, 0.0, YAWB))
+    _close("board")
+
+    # ------------------------------------------------------------- THE SOCKETS
+    # Nine berths down the outward face. EIGHT ARE DARK AND EMPTY; the ninth,
+    # second from the top, carries the one lit peg. Asymmetric along U on
+    # purpose - see the facing note in the docstring.
+    _open()
+    PEGW = -0.075                 # a little toward the outer edge, in clear air
+    _sock = []
+    for i in range(9):
+        u = 0.344 - i * 0.086
+        _sock.append(u)
+        P.add(L.sphere(0.038, 0.038, 0.026, 10, 6), 'dark',
+              loc=tuple(_B(u, PEGW, BT * 0.50)))
+    # four of the lower sockets have an OLD peg still in them - names long
+    # since struck, kept as a count of what this one has already taken. Bone,
+    # not glow: they are history, not the answer.
+    for u in (-0.258, -0.086, 0.086, 0.172):
+        P.add(L.cone(0.025, 0.021, 0.090, 9), 'bone',
+              loc=tuple(_B(u, PEGW, BT * 0.50)),
+              rot=(TILT - math.pi * 0.5, 0.0, YAWB))
+    _close("sockets")
+
+    # ------------------------------------------------- THE ONE LIT PEG, NEW BRASS
+    # The only glow on the body. The whole fight points here.
+    _open()
+    # *** PASS 2, ROOT FAULT 3. *** Pass 1 stacked a cone, a squashed sphere
+    # cap and a wide bone collar at one point, and on both orthos the three
+    # merged into A PALE CREAM BEAN. It was the brightest thing on the body,
+    # which was the intent, and it did not read as a PEG, which was the point.
+    # Brightness is not legibility - the same lesson as the head glow at pass
+    # 11 on 17 Nov, arriving as a shape problem instead of a depth one.
+    # The collar is struck (it was most of the blob), the cap is struck, and
+    # what is left is a LONG THIN PEG standing proud of the face with a small
+    # square head - a peg-shaped thing, lit.
+    # *** PASS 4, AND THE HARNESS COULD NOT HAVE FOUND THIS. *** Pass 3 was
+    # green on every number the two reports take - 0 blanks, 0 frame clips, 0
+    # blind views, the peg plainly a peg on the 700x980 ortho. THEN I LOOKED AT
+    # THE HERO-SCALE SHEET, where the crimp is about 230 px tall beside a real
+    # KayKit knight, and THE LIT PEG WAS A TICK I HAD TO HUNT FOR. The answer
+    # to the whole fight was invisible at the only distance a viewer ever sees.
+    # This is the pass-11 lesson of 17 Nov in its other form: there a number
+    # said SEEN where the picture said nothing, here every number said FINE at
+    # a resolution nobody watches. A cue has to be measured at the size it will
+    # be read at, and the sheet that reads it is the hero sheet, not the ortho.
+    # So the peg grows a third again, its head squares up, and it gets THE
+    # SIGNED TAG hanging off it - a pale plate, which is both the biggest
+    # bright area on a dark board and the literal thing the mechanic is about.
+    P.add(L.cone(0.034, 0.027, 0.220, 10), 'glow',
+          loc=tuple(_B(0.258, PEGW, BT * 0.50)),
+          rot=(TILT - math.pi * 0.5, 0.0, YAWB))
+    P.add(L.box(0.108, 0.108, 0.044), 'glow',
+          loc=tuple(_B(0.258, PEGW, BT * 0.50 + 0.220)),
+          rot=(TILT - math.pi * 0.5, 0.0, YAWB))
+    # THE SIGNED TAG. Hung on the peg, hanging DOWN the board's face, so it is
+    # a pale rectangle against the dark board from every camera that sees the
+    # face at all - and it is asymmetric along U, which is the facing argument
+    # the docstring already makes, now carried by the brightest object too.
+    P.add(L.box(0.150, 0.016, 0.190), 'bone',
+          loc=tuple(_B(0.258 - 0.150, PEGW + 0.020, BT * 0.50 + 0.150)),
+          rot=(TILT, 0.0, YAWB))
+    # and the loop of cord that ties the tag to the peg: both ends anchored.
+    _ta = _B(0.258, PEGW, BT * 0.50 + 0.170)
+    _tb = _B(0.258 - 0.072, PEGW + 0.020, BT * 0.50 + 0.168)
+    _tp = arc(tuple(_ta), tuple(_tb), -0.026, 6)
+    P.raw(L.tube([Vector(q) for q in _tp], [0.010] * len(_tp), 6), 'bone')
+    # the socket it stands in, darkened, so the peg has something to sit IN
+    P.add(L.sphere(0.054, 0.054, 0.022, 12, 7), 'dark',
+          loc=tuple(_B(0.258, PEGW, BT * 0.48)))
+    _close("peg")
+
+    # --------------------------------------------------- THE THREE BERTH LOOPS
+    # Old rope, both ends on the bottom rail, hanging in open air clear of the
+    # coat. Three empty berths: the room he still has to fill.
+    _open()
+    # *** PASS 2, ROOT FAULT 2. *** Pass 1 hung three loops 0.120 wide with
+    # 0.215 of sag. A loop deeper than it is wide is not a loop: on the front
+    # ortho the three came out as RAKE TINES (the harrowman's pass-2 fault in a
+    # new place) and on the side ortho as a coil spring. Nothing about the
+    # anchor plane was wrong - the PROPORTION was, and no amount of re-aiming
+    # would have found it. Wider than deep, fewer, and thicker rope.
+    #   pass 1  span 0.120, sag 0.215, r 0.019, three
+    #   pass 2  span 0.205, sag 0.115, r 0.026, three
+    for w0 in (-0.200, -0.070, 0.060):
+        a = _B(-0.442, w0, 0.034)
+        b = _B(-0.442, w0 + 0.205, 0.034)
+        pts = arc(tuple(a), tuple(b), -0.115, 9)
+        P.raw(L.tube([Vector(p) for p in pts], [0.026] * len(pts), 7), 'bone')
+    _close("loops")
+
+    # ------------------------------------------------------------------- LEGS
+    _open()
+    for s, fwd in ((-1.0, -1.0), (1.0, 1.0)):
+        hip = (0.170 * s, -0.035 * fwd, HIP)
+        knee = (0.205 * s, 0.180 * fwd, KNEE)
+        ank = (0.225 * s, 0.270 * fwd, ANK)
+        limb(P, seat([hip, knee, ank], 0.125), 0.150, 0.105, 'body', 9)
+        # boot: sole plus a cuff, so the foot is a foot and not a tube end
+        P.add(L.box(0.200, 0.330, 0.090), 'dark',
+              loc=(0.225 * s, 0.270 * fwd - 0.070 * fwd, 0.052))
+        P.add(L.cone(0.130, 0.112, 0.090, 10), 'dark',
+              loc=(0.225 * s, 0.270 * fwd, 0.130))
+    _close("legs")
+
+    # ------------------------------------------------------------------ TRUNK
+    _open()
+    limb(P, [tuple(_s((0.0, 0.0, HIP - 0.04))), tuple(_s((0.0, -0.01, WAIST))),
+             tuple(_s((0.0, 0.0, CHEST))), tuple(_s((0.0, 0.01, SHO)))],
+         0.215, 0.185, 'body', 11)
+    # the coat. Knee length, flared - a barracks man's working coat, and the
+    # mass that keeps him from reading as a hero body.
+    P.add(L.scone(0.420, 0.270, 0.540, 14), 'body',
+          loc=tuple(_s((0.0, 0.015, 0.600))))
+    # *** PASS 2, ROOT FAULT 5. *** 0.640 wide in the pale 'body' slot read as
+    # a PLANK laid across him - a brighter horizontal than anything else above
+    # his waist, and it pulled the eye off the peg. Narrower and dark: a coat
+    # yoke, which is what it was always meant to be.
+    P.add(L.box(0.520, 0.290, 0.135), 'dark', loc=tuple(_s((0.0, 0.010, SHO))))
+    # THE PLACKET - a dark coat front, collar to hem, anchored at both ends. It
+    # is the -Y side only, which is half of this body's facing.
+    # *** PASS 3. *** 0.090 of dark placket plus the new dark 0.520 yoke made
+    # a solid black T over the whole chest on the front ortho and the torso
+    # stopped reading as a torso. The placket is the facing cue and it only
+    # needs to be a line, so it halves; the yoke keeps its colour because that
+    # was the pass-2 fix and undoing it would re-open the plank.
+    P.add(L.box(0.048, 0.055, 0.470), 'dark',
+          loc=tuple(_s((0.0, -0.215, 1.355))))
+    P.add(L.box(0.330, 0.070, 0.085), 'dark',
+          loc=tuple(_s((0.0, -0.190, SHO - 0.030))))
+    _close("trunk")
+
+    # ------------------------------------------------------------------- HEAD
+    _open()
+    _hd = _s((0.0, -0.030, HEAD))
+    P.add(L.sphere(0.188, 0.196, 0.205, 16, 10), 'body', loc=tuple(_hd))
+    # brow, jaw and two dark sockets - all on -Y. NO GLOW EYES, on purpose.
+    P.add(L.box(0.330, 0.070, 0.062), 'dark',
+          loc=(_hd.x, _hd.y - 0.150, _hd.z + 0.062))
+    P.add(L.box(0.230, 0.110, 0.095), 'dark',
+          loc=(_hd.x, _hd.y - 0.120, _hd.z - 0.135))
+    for s in (-1, 1):
+        P.add(L.sphere(0.046, 0.034, 0.038, 9, 6), 'dark',
+              loc=(_hd.x + s * 0.072, _hd.y - 0.150, _hd.z + 0.008))
+    # flat barracks cap: crown at 2.06, a long way under the board's 2.30
+    P.add(L.scone(0.210, 0.248, 0.062, 14), 'dark',
+          loc=(_hd.x, _hd.y - 0.010, _hd.z + 0.148))
+    _close("head")
+
+    # ------------------------------------------- THE LEFT ARM, ON THE BOARD
+    _open()
+    _fistL = Vector((0.400, -0.145, 1.330))
+    limb(P, [tuple(_s((0.300, -0.015, SHO - 0.02))), (0.395, -0.095, 1.455),
+             tuple(_fistL)], 0.110, 0.082, 'body', 9)
+    P.add(L.sphere(0.098, 0.090, 0.086, 11, 7), 'dark', loc=tuple(_fistL))
+    # THE STRAP: board's top-outer corner -> over the shoulder -> INTO the
+    # fist. Two runs, both ends anchored, no mid-air end anywhere.
+    # *** PASS 3. *** Pass 2 anchored this at the board's TOP-OUTER CORNER.
+    # Once the board came forward at pass 2 that run swept UP AND ACROSS HIS
+    # FACE on the side ortho - a long pale rib over the head, reading as a
+    # carry handle and cutting the one feature the head has. The anchor moves
+    # to the MID-OUTER EDGE (u 0.505 -> 0.0, z about 1.78 against a shoulder
+    # at 1.655), so the strap now runs nearly level and passes well under the
+    # jaw. Both ends are still anchored, so the no-free-ends rule holds.
+    _corner = _B(0.000, -BW * 0.46, BT * 0.30)
+    _shl = Vector(tuple(_s((0.280, 0.030, SHO + 0.035))))
+    for a, b, lf in ((_corner, _shl, 0.055), (_shl, _fistL + Vector((0.02, -0.03, 0.05)), -0.030)):
+        pts = arc(tuple(a), tuple(b), lf, 8)
+        P.raw(L.tube([Vector(p) for p in pts], [0.028] * len(pts), 7), 'bone')
+    _close("arm_board")
+
+    # ----------------------------------------- THE RIGHT ARM AND THE CRIMP-HOOK
+    _open()
+    _fistR = Vector((-0.345, -0.300, 1.160))
+    limb(P, [tuple(_s((-0.300, -0.015, SHO - 0.02))), (-0.385, -0.165, 1.365),
+             tuple(_fistR)], 0.112, 0.082, 'body', 9)
+    P.add(L.sphere(0.100, 0.092, 0.088, 11, 7), 'dark', loc=tuple(_fistR))
+    # the shaft runs OUT OF the fist, forward and down
+    _shaft = [tuple(_fistR + Vector((0.010, 0.085, 0.040))),
+              (-0.395, -0.560, 1.055), (-0.430, -0.820, 0.955),
+              (-0.450, -1.020, 0.885)]
+    P.raw(L.tube([Vector(p) for p in _shaft], [0.046, 0.042, 0.038, 0.034], 8), 'bone')
+    # THE HOOK. A J off the shaft's end, tapering to the one free point this
+    # body is allowed - a hook that closed on itself would be a ring.
+    # *** PASS 2, ROOT FAULT 4. *** Pass 1's J lived entirely in the Y-Z plane
+    # (x held at -0.45 to four places), which the SIDE camera reads perfectly
+    # and the FRONT camera reads as a blunt dark stub. A curve has a plane and
+    # that plane is a question of its own; I answered the shaft's direction and
+    # never asked it. Swung out through about 38 degrees so the curl now has a
+    # real X extent (0.450 -> 0.612, 0.162 m of it) as well as its Y extent,
+    # and neither ortho gets it edge-on. The side view keeps its hook.
+    _hook = [(-0.450, -1.020, 0.885), (-0.506, -1.118, 0.768),
+             (-0.566, -1.140, 0.634), (-0.598, -1.048, 0.548),
+             (-0.612, -0.948, 0.576)]
+    P.raw(L.tube([Vector(p) for p in _hook], [0.036, 0.034, 0.031, 0.026, 0.009], 8), 'dark')
+    _close("hook")
+
+    return P
+
+
+BUILDERS.update({"crimp": crimp})

@@ -776,3 +776,14 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Styl
 - Not share-alike, not non-commercial, not no-derivatives: none of the three forbidden families applies, so the pack is not rejected.
 - Note for later seats: the readme grants a custom permissive licence, not CC0. Any repo copy that is not a file-for-file re-export should still carry its own row, and any redistribution AS an asset is outside what this readme states on its face.
 - Status: **CLEARED for use (custom permissive grant, commercial use permitted, no attribution required; link-back requested).** Licence gate satisfied for `grass_07`. Nothing has been imported, converted or redistributed by this firing.
+
+## PACK CATALOGUE - kaykit_dungeon_pack_CC0 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| KayKit Dungeon Pack 1.0 (folder `_packs\kaykit_dungeon_pack_CC0\`, sibling `kaykit_dungeon_pack_CC0.zip`) | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0 Universal** (text states "License: (Creative Commons Zero, CC0)" with link to creativecommons.org/publicdomain/zero/1.0/) | `License.txt` (630 bytes, CRLF, read in full off disk this run) | 1,079 files on disk in total: 226 .obj, 226 .mtl, 208 .fbx, 202 .dae, 192 .glb, 12 .png, 10 .gltf, 2 .url, 1 .txt. `Models/gltf/` holds 185 `*.gltf.glb` models (as the 20 Nov rows record). | Yes. The licence states verbatim: "This content is free to use in personal, educational and commercial projects." | Not required. The licence states: "Support me by using a brand resource provided in this pack or by crediting Kay Lousberg, www.kaylousberg.com (this is not mandatory)". |
+
+- Checked: read `License.txt` in full off disk this run (quoted in the table). Tallied file types with `find` on the pack tree. The `.url` and `.png` files were not treated as licence sources.
+- Consistency: agrees with the 20 Nov worldfit note (`kaykit_dungeon_pack_CC0`, 185 models, CC0 1.0). Nothing there is changed.
+- Not share-alike, not non-commercial, not no-derivatives: none of the forbidden families applies.
+- Status: **CLEARED for use (CC0 1.0, commercial use permitted, no attribution required).** Licence gate satisfied for `kaykit_dungeon_pack_CC0`. Nothing has been imported, converted or redistributed by this firing.

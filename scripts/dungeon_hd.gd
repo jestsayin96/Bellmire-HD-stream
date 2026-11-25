@@ -246,10 +246,11 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S120: `weigher` (56th, Trueweight, art's tag treasury - field 5) joins treasury with MB_FIT 1.04; content's by_key.weigher has NOT landed (zero hits for weigher/Trueweight in data/*.json at 19:1x CT 24 Nov), so miniboss_for correctly holds it out and NO MB_NAME row is written (tools/_s51_names.gd requires every MB_NAME key in by_key). When the C-lines land the row is one line: "weigher": "Trueweight", and _s51_names.gd / _s107_gate.gd move 55 -> 56 with it.
 ## S122: `dredger` (57th, Finepass, art's tag confection - field 5) joins confection with MB_FIT 0.98; content's C-199 by_key.dredger landed and dredger.glb.import is on main, so the MB_NAME row is written in the same change and _s51_names.gd / _s107_gate.gd / _s117_straker.gd move 56 -> 57 with it.
 ## S123: `harrowman` (58th, Overturn, art's tag grassland - field 5) joins grassland with MB_FIT 1.0; content's C-200 by_key.harrowman landed and harrowman.glb.import is on main, so the MB_NAME row is written in the same change and _s51_names.gd / _s107_gate.gd / _s117_straker.gd move 57 -> 58 with it.
+## S124: `pledgeman` (59th, Heldfast, art's tag treasury - field 5) joins treasury with MB_FIT 1.05; content's C-201 by_key.pledgeman landed and pledgeman.glb.import is on main, so the MB_NAME row is written in the same change and _s51_names.gd / _s107_gate.gd / _s117_straker.gd move 58 -> 59 with it.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman", "tither", "nightman"], "shrine": ["leech", "beadle", "almoner"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper"],
-    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer", "weigher"], "mess": ["loader", "hooper", "iceman"],
+    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer", "weigher", "pledgeman"], "mess": ["loader", "hooper", "iceman"],
     "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman", "roper", "harrowman"], "wood": ["drover", "winder", "straker"],
     "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller", "blower", "stiltman"], "confection": ["comfitmaker", "panner", "dredger"]}
 static func miniboss_for(theme: String, n: int) -> String:

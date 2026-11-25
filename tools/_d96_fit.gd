@@ -69,6 +69,9 @@ func _stage(k: String, theme: String) -> bool:
 		var sps: Array = dh.info.get("set_pieces", [])
 		if not sps.is_empty() and String((sps[0] as Dictionary).get("kind", "")) == "miniboss":
 			sp = sps[0]; fn = f
+			# S124: the floor's own roll may name a sibling from the theme row (the S124 pledgeman shot
+			# came back as changer.glb), so pin the key under test - the shot is of THIS body or it proves nothing.
+			sp["mb_key"] = k
 			break
 		if tries >= 8 or not sps.is_empty():
 			var at: Vector3 = (sps[0] as Dictionary)["pos"] if not sps.is_empty() else dh.info["entry"]

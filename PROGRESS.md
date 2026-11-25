@@ -18607,3 +18607,13 @@ cap claim+25 = %s, declared finish %s; ..." and "IDLE %s - art: ...". The prose 
 work reads as real, but the lock's own timestamps for that window are unreadable, and this lock has
 had a live hold cleared once already over an ambiguous time. Art's lane owns that file's lines; I
 left them exactly as found.
+
+## S124 - game build, 24 Nov 23:08 CT: THE 59th IS NAMED HELDFAST
+TAKE THIS NEXT (22:58 CT) gave game build S124: name the 59th. Merged main 2d0638ed into laptop (fast-forward; eight untracked broodglut PNG/.import files in R blocked it - each byte-identical to main's blob by git hash-object, moved aside to C:\hd adventure\_gb_aside_nov24_2310, not deleted).
+- delve.gd MB_FIT "pledgeman": 1.05 (art's _fit_report.json pairs.pledgeman.ratio, h 2.58 / hero 2.45, fits_frame true, 3/3 proving views, air_px_min 136 - copied, not re-derived); MB_NAME "pledgeman": "Heldfast" (content C-201, 9/8/4/8, fall lines "Heldfast is down"; art CANON minibosses.py:21464). MB_NAME 58 -> 59.
+- dungeon_hd.gd THEME_MINIBOSS_MORE treasury row + pledgeman under art's own tag (field 5 = "treasury", read off minibosses.py:21465).
+- Sibling literals moved in the same commit: tools/_s51_names.gd, _s107_gate.gd, _s117_straker.gd 58 -> 59.
+- NEW tools/_s124_pledgeman.gd: fit, row, model, fed, drawn by a 4000-pick treasury sweep with red-proof that strickler/sealer/changer/weigher are drawn by the same sweep, named Heldfast, MB_NAME 59.
+- tools/_d96_fit.gd FIX (a lying instrument): single-key mode `key=pledgeman:treasury` came back D96_FIT FAIL 2 of 5 with "spawns with its own model (changer.glb)" - the floor's OWN miniboss roll was used as-is and named a sibling, so the shot was of the wrong body. Now pins sp["mb_key"] = k on that path. Re-run: D96_FIT OK 5 checks - pledgeman.glb, 2.57m = 1.05 x hero vs art 1.05, arrive line with the body present, fall line on the kill. LOOKED AT renders/cycles/d96/pledgeman.png: the body stands on the treasury floor beside the knight with the board and crossed lashings on its back, nameplate "Heldfast". The framing is poor (a wall block fills the right third and the hero's own label overprints the top) - harness camera, not the body; noted, not chased.
+VERDICTS (merged tree, R): parse --quit-after 300 rc 0, 0 SCRIPT ERROR in the whole battery log; S51_NAMES OK 176 checks; S107_GATE OK 12; S117_STRAKER OK 11; S124_PLEDGEMAN OK 13; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2051 samples off the floor; TOWNWALK in_solid=0/18307 raid_in_solid=0/5490 PASS; DELVE_TEST OK ran 9001 frames; D96_FIT OK 5 checks (pledgeman).
+CASCADE after this commit on laptop: 59 bodies / 59 feed / 59 engine / 58 published. The chat bot's 59 republish is the one step left. No live Twitch test, 0 bits.

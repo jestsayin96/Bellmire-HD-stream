@@ -425,6 +425,7 @@ const MB_FIT := {
 	"weigher": 1.04,   # S120: art's _fit_report.json pairs.weigher.ratio (56th, Trueweight in CANON minibosses.py:20600, h 2.55 / hero 2.45, tag treasury - field 5, fits_frame true, 3/3 proving views), copied not re-derived. MB_NAME row added at S121 once content's by_key.weigher (C-198) landed
 	"dredger": 0.98,   # S122: art's _fit_report.json pairs.dredger.ratio (57th, Finepass in CANON minibosses.py:20871, h 2.39 / hero 2.45, tag confection - field 5, fits_frame true, 3/3 proving views, air_px_min 160), copied not re-derived; dredger.glb + .import on main, content's C-199 by_key.dredger landed, so MB_NAME row written in the same change
 	"harrowman": 1.0,   # S123: art's _fit_report.json pairs.harrowman.ratio (58th, Overturn in CANON minibosses.py:21156, h 2.45 / hero 2.45, tag grassland - field 5, fits_frame true, 3/3 proving views, air_px_min 67), copied not re-derived; harrowman.glb + .import on main, content's C-200 by_key.harrowman landed, so MB_NAME row written in the same change
+	"pledgeman": 1.05,   # S124: art's _fit_report.json pairs.pledgeman.ratio (59th, Heldfast in CANON minibosses.py:21464, h 2.58 / hero 2.45, tag treasury - field 5, fits_frame true, 3/3 proving views, air_px_min 136), copied not re-derived; pledgeman.glb + .import on main, content's C-201 by_key.pledgeman landed, so MB_NAME row written in the same change
 	"roper": 1.0,   # S101: art's _fit_report.json pairs.roper.ratio (49th, Drawtight in CANON, h 2.46 / hero 2.45, tag grassland - field 5, fits_frame true, 3/3 proving views), copied not re-derived. MB_NAME row added at S102 once content C-177 wrote the feed
 }
 ## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
@@ -466,7 +467,8 @@ const MB_NAME := {
 	"straker": "Everyhand",   # S118: content's C-195 by_key.straker landed (9/7/4/8, fall lines name the Everyhand) and art's CANON title (minibosses.py:19931), both read - the close S117 specified
 	"weigher": "Trueweight",   # S121: content's C-198 by_key.weigher landed (9/8/4/8, _note_c198 "Trueweight") and art's CANON title (minibosses.py:20600), both read - the close S120 specified
 	"dredger": "Finepass",   # S122: content's C-199 by_key.dredger landed (9/8/4/8, _note_c199 "Finepass") and art's CANON title (minibosses.py:20871), both read
-	"harrowman": "Overturn"}   # S123: content's C-200 by_key.harrowman landed (9/8/4/8, _note_c200 "Overturn") and art's CANON title (minibosses.py:21156), both read
+	"harrowman": "Overturn",   # S123: content's C-200 by_key.harrowman landed (9/8/4/8, _note_c200 "Overturn") and art's CANON title (minibosses.py:21156), both read
+	"pledgeman": "Heldfast"}   # S124: content's C-201 by_key.pledgeman landed (9/8/4/8, _note_c201 "Heldfast", fall lines "Heldfast is down") and art's CANON title (minibosses.py:21464), both read
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []

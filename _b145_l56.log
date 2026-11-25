@@ -1,0 +1,144 @@
+RC=0
+--- STDOUT ---
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED The pack is shifted onto the other shoulder.
+FEED They carry 56 flasks of oil between them.
+L56: soak begins - 4 delves, start_floors=[5, 10, 5, 10], 2 floors each
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed bone bowman, 1 hollowed skeleton warrior, 1 skeleton warrior, 1 skeleton mage, 1 bone sentinel.
+FEED Washing on a line, moved to catch a wind that is not here.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED The count carries down the corridor, and it is rising.
+L56 [run 1] floor 5 LORD RISES: The Rattling Host hp=165
+FEED Corvin casts smite and gets only a smell of scorched hair (11 vs DC 12).
+FEED Corvin casts Bolt at skeleton warrior.
+FEED Brel casts Bolt at skeleton warrior.
+FEED Brel casts Chain Bolt at hollowed skeleton warrior.
+FEED Corvin casts Smite at hollowed skeleton warrior.
+FEED Brel casts Fire at skeleton mage.
+FEED Brel shapes bolt and the scar unshapes it (9 vs DC 12).
+FEED Brel casts Bolt at The Rattling Host.
+FEED The Rattling Host shifts, and the fight changes with it.
+FEED Dead men drop out of the harness.
+FEED The Rattling Host is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dead men drop out of the harness.
+FEED The Rattling Host falls to Brel.
+L56 [run 1] floor 5 lord DOWN
+FEED Doria is badly hurt and breaks off, making for the way up.
+FEED Brel searches (Investigation 10) and turns up 44 gold on floor 5.
+FEED Done, and the draught has changed direction.
+L56 [run 1] CAP HIT at floor 5 of 6 (state=search)
+L56 [run 1] ended state=search floors_visited=1 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0 }
+FEED The shaft drinks the lamplight and gives nothing back.
+FEED They carry 56 flasks of oil between them.
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 5; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 veilstruck silk mother, 1 mossbacked silk mother, 1 duskforged silk mother, 1 gorged gravecaller, 2 mossbacked marrow hewers, 1 sporeblown grave-whelp, 1 sporeblown pit wyrm.
+FEED Somebody wrote SORRY at the height of a sitting man.
+FEED Mourncoil rises. Frost comes off it in sheets.
+FEED The puddles go hard underfoot.
+L56 [run 2] floor 10 LORD RISES: Mourncoil hp=384
+FEED Corvin shapes smite and the shape sags (14 vs DC 15).
+FEED Brel casts Bolt at sporeblown grave-whelp.
+FEED Corvin casts Smite at sporeblown grave-whelp.
+FEED Brel loses the shape of chain halfway (8 vs DC 15).
+FEED Aen the knight falls on floor 10 to the dark below. Level 1, 0 kills. !reroll to rise again.
+FEED A gravecaller raises the dead on floor 10.
+FEED Brel casts Bolt at gorged gravecaller.
+FEED Doria is badly hurt and breaks off, making for the way up.
+FEED Spiderlings spill from the silk mother's back.
+FEED Brel casts Bolt at risen dead.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 10.
+FEED Aen and 3 others get out alive, and come home with what they carried.
+FEED Brel and 2 others come home to Bellmire with 0 gold. 2 kills between them.
+L56 [run 2] ended state=home floors_visited=2 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0 }
+FEED Aen and 3 others descend past the chalk marks of the last party.
+FEED They carry 56 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 risen bones, 1 hollowed bone sentinel, 2 bone bowmans, 1 skeleton warrior.
+FEED A doll in a window box. Someone waved from here, once.
+FEED The Grubmother, Clutching rises. Holds a clutch of eggs against her belly - she shields them first, and hatches them when hurt.
+FEED The guild has put down The Grubmother before. Not this one.
+FEED Something ahead is full and still feeding.
+L56 [run 3] floor 5 LORD RISES: The Grubmother, Clutching hp=250
+FEED Corvin casts Smite at bone bowman.
+FEED Brel's bolt folds in on itself - wild magic (10 vs DC 12).
+FEED Corvin's smite lands a pace short and sulks there (1 vs DC 12).
+FEED Brel casts Bolt at bone bowman.
+FEED Corvin casts Bolt at bone bowman.
+FEED Brel casts Chain Bolt at hollowed bone sentinel.
+FEED Brel casts Fire at skeleton warrior.
+FEED Brel casts Bolt at bone bowman.
+FEED Brel casts Bolt at risen bones.
+FEED The Grubmother's brood spills out of her.
+FEED Brel casts Chain Bolt at The Grubmother, Clutching.
+FEED The Grubmother, Clutching shifts, and the fight changes with it.
+FEED Corvin rolls a 20 - The Grubmother, Clutching reels.
+FEED Doria rolls a 20 - The Grubmother, Clutching reels.
+FEED The Grubmother, Clutching is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Grubmother, Clutching falls to Aen.
+L56 [run 3] floor 5 lord DOWN
+FEED The Grubmother, Clutching is slain on floor 5!
+FEED A hoard that size does not come off an ordinary The Grubmother.
+FEED The hoard is split 4 ways - 67 gold each to Aen, Brel, Corvin, Doria.
+L56 [run 3] CAP HIT at floor 5 of 6 (state=search)
+L56 [run 3] ended state=search floors_visited=3 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0 }
+FEED They leave the gate open behind them. Someone should.
+FEED They carry 56 flasks of oil between them.
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 8; lights 74 (shadowed 2)
+L28D_DECALS floor 10 wood: 18 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 emberbound lost delver, 3 wraithtouched blood wasps, 1 gorged pale cutthroat, 1 duskforged skeleton mage, 1 veilstruck bone bowman, 1 veilstruck grave-whelp.
+FEED Manacles hang open on the wall. The wall is not where manacles belong.
+FEED The Gravewyrm rises. The thing the dungeon was built to hold.
+FEED The stone leans in on both sides, hungry.
+L56 [run 4] floor 10 LORD RISES: The Gravewyrm hp=333
+FEED Brel casts Bolt at duskforged skeleton mage.
+FEED Corvin stumbles over smite at the last word (9 vs DC 15).
+FEED Brel calls bolt and the scar calls louder (14 vs DC 15).
+FEED Aen is badly hurt and breaks off, making for the way up.
+FEED Brel casts Chain Bolt at duskforged skeleton mage.
+FEED Corvin casts Smite at duskforged skeleton mage.
+FEED Corvin breaks off to mend Aen, who is nearly down.
+FEED Brel casts Bolt at duskforged skeleton mage.
+FEED Brel casts Chain Bolt at veilstruck grave-whelp.
+FEED Aen the knight falls on floor 10 to the dark below. Level 1, 0 kills. !reroll to rise again.
+FEED Brel turns on the wounded wraithtouched blood wasp to finish it.
+FEED Corvin turns on the wounded wraithtouched blood wasp to finish it.
+FEED Doria turns on the wounded wraithtouched blood wasp to finish it.
+FEED Doria should be dead - and stands back up (19).
+FEED Doria the barbarian falls on floor 10 to the dark below. Level 1, 1 kills. !reroll to rise again.
+FEED Brel rolls a 20 - and the wraithtouched blood wasp is gone.
+FEED Corvin turns on the wounded veilstruck bone bowman to finish it.
+FEED The Gravewyrm draws breath - brace.
+FEED The Gravewyrm shifts, and the fight changes with it.
+FEED Corvin rolls a 20 - The Gravewyrm reels.
+FEED The Gravewyrm draws breath - brace.
+FEED The Gravewyrm is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Gravewyrm is enraged.
+L56 [run 4] CAP HIT at floor 10 of 11 (state=fight)
+L56 [run 4] ended state=fight floors_visited=4 trap_log={ "spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0 }
+
+L56 SOAK SUMMARY
+  trap_log aggregate across 4 delves: { "spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0 }
+  lords seen: 4 kinds, 2 killed
+    The Rattling Host on floors { 5: 165.0 }
+    Mourncoil on floors { 10: 384.0 }
+    The Grubmother, Clutching on floors { 5: 250.0 }
+    The Gravewyrm on floors { 10: 332.8 }
+  UNMET L46: traps actually SPRING in play (0 sprung across the soak)
+  UNMET L46: trap damage LANDS - a hero loses hp to a trap (0.0 total)
+  ok   L45: lords actually RISE on boss floors in play (4 kinds seen, 4 boss floors entered)
+  Bestiary.lord_hp_mult: floor 5 = 1.00, floor 10 = 1.28
+  ceiling reached in 0 of 4 runs; 4 boss floor(s) entered
+  ok   L45: lord_hp_mult(10) > lord_hp_mult(5) - a deeper lord is harder (1.28 vs 1.00)
+
+CHECKS 4 UNMET 2 FAILS 0
+  - L46: traps actually SPRING in play (0 sprung across the soak)
+  - L46: trap damage LANDS - a hero loses hp to a trap (0.0 total)
+L56 CAP HIT - NO VERDICT (3 of 4 runs capped [run, floor]: [[1, 5], [3, 5], [4, 10]]; 2 check(s) unmet and unearnable)
+
+--- STDERR ---
+

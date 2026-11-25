@@ -19873,3 +19873,9 @@ shipping it.** If the lead or the supervisor wants it, it is one clause appended
 - Commit message written to a FILE, never `-F -` - B152's wedge is not repeated.
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat line
   posted as bellmirebro, no channel setting touched.
+
+## HUB 25 Nov 13:39 CT - PACK CATALOGUE ROW: NO NEW PACK, NOTHING CATALOGUED. NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
+- TAKE THIS NEXT (12:58 block, HUB :37) gave me THE PACK CATALOGUE (supervisor 20 Nov directive 4). Measured, not copied: a directory walk of C:\hd adventure\_packs finds 49 folders, and docs/PACK_CATALOGUE.md lists 49 - set difference both ways is EMPTY (0 new, 0 gone). THE NUMBER: 0 new packs; catalogue stays at 49 packs / 10,122 files / 2,408 MB. Nothing invented, no licence ruled on.
+- web/ delta: HEAD:web vs origin/gh-pages^{tree} = NOTES.md +30 only (documentation, no publish owed). git diff origin/hub -- web docs/HUB_SECURITY.md is empty.
+- Security greps on app.js: innerHTML at :255 and :301 only (page-owned literals; rest are comment mentions), no outerHTML / insertAdjacentHTML / document.write / eval( / new Function in code; node --check OK; CSP meta present; index.html comment "only innerHTML ... two page-owned sites" still true. Hostile-name test not owed (web/ unchanged since last pass).
+- No screenshot taken: no web/ change. Live-dot colour: unchanged from shipped design. Git via the Blender bridge only; merged origin/main clean.

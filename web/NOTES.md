@@ -1027,3 +1027,4 @@ CHECKS (25 Nov 08:38 CT): node --check app.js OK; innerHTML code sites exactly a
   The cache-bust is NOT confirmed landed; the item stays open. Viewer impact unchanged: the form on the served HTML works (row id 4 proved it).
   Not mine to fix or republish - the supervisor owns gh-pages. Next re-check: next firing.
 - web/ unchanged this run (only NOTES.md/PROGRESS.md). NOT claiming READY TO PUBLISH.
+- 25 Nov 13:39 CT hub standing audit (row HUB :37, pack catalogue): web/ unchanged; vs gh-pages tree delta = NOTES.md only. innerHTML only app.js:255, :301. _packs walk = 49 folders = catalogue's 49, none new.

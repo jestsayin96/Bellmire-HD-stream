@@ -4357,3 +4357,30 @@ BEFORE TOUCHING ANYTHING, and the shipped carry clears the floor in every pose. 
 - RED-PROOF on a COPY: `THEME_MINIBOSS_MORE.duplicate(true)` with collier erased from wood -> `MB_NAME - theme = ["collier"]`, asserted equal to exactly ["collier"]; a further check proves the live wood row still holds collier.
 - Battery (build/_s131_battery.log): parse --quit-after 300 rc 0, 0 SCRIPT ERROR / 0 Parse Error; S51_NAMES OK 179 checks (176 + 3); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2449 samples off the floor (home); DELVE_TEST OK ran 9001 frames, floor reached 2; TOWNWALK in_solid=0/17969 (0.000%) raid_in_solid=0/5031 (0.000%) PASS.
 - No game code changed. No live Twitch test: no account used, ZERO bits, nothing redeemed or cheered. Not ticked - the team lead ticks. Claim 07:08:16, cap claim+25 = 07:33:16 computed first, declared 07:30:16.
+
+## C-209 (content, 25 Nov 2026 08:2x CST) - AUDIT: NUMBERS IN SHIPPED PROSE THAT A BODY OR MECHANIC MUST HONOUR. NO FILE CHANGED.
+TAKE THIS NEXT (07:58 CT block) gave CONTENT the :22 row: sweep shipped lore and command text for counts asserted in prose, list file and line, change nothing without a row. The collier "four pale plugs" text (lore_lines.json 14852, 14932 note; commands.json `miniboss`) is untouched, as instructed.
+Method: regex sweep of number words/digits within two words of a count noun across lore_lines, bosses, items, potions and (read-only) commands; noise (one hand, one step, idioms) discarded by hand. Line numbers are lore_lines.json unless named. NOT geometry-verified: I never run Godot or Blender, and the art source has no single canon table to grep, so each row is "text asserts N, art/engine must show or enforce N".
+A. BODY-COUNT PROMISES (art owns the geometry; the collier four-vs-three finding says these are gates):
+  - collier: 14850 "Eight stakes" ; 14851 "Four small mouths" ; 14852 "four pale plugs" ; 14865 act "Three dark mouths and one red" (arithmetic of 14852: 4 mouths, plug 3 seated).
+  - crimp: 14771 "nine sockets cut in rows" ; 14772 "Four old pegs" (+ "One peg in it is pale" on the same row: 4 grey + 1 pale of 9).
+  - beadle: 13850 "Four brass pegs on the board" ; act "One peg spent".
+  - stopper: 14313 "Five pale pegs stand on the rim. One drops every notch" ; act "One peg left standing" (five must be countable at stream scale or the DEADLINE reads wrong).
+  - fenman: 13779 "Five small lights" ; arrive.8 "Five lights hang off him" ; fall.4 "Five lights on the floor" (three lines, one count).
+  - leech: 13827 "Five cupping horns hang at his thigh".
+  - ratcatcher: 13711 "Five tails hang in it already" (cage contents).
+  - rammer: 13886 "Three timber legs and a frame" ; fall.4 "leans on one leg".
+  - scraper: 14095 "Five on every face" (cuts on the plinth, each = a round he can wipe).
+  - jointer: 13508 "works with three arms" ; "Two lamps at two heights".
+  - blower: arrive.4 "one band fuller every stroke" (a visible band step, not a count).
+  - straker note c195 "wheel and four strakes" (note key, not shown).
+B. MECHANIC COUNTS (code must honour):
+  - bosses.json lesser_uniques.141 "nine small flames ring it, and they gutter one at a time as it is struck" (nine-step state) ; .19 "three steps, three blows, three paces back" ; .82 "one flame for every blow it has not yet taken" ; .16 "two cold crowns" ; .43 "two fires in one crown".
+  - commands.json `oil` cost "12 gold a flask" and what "one flask lights a floor for two delvers" (must equal the oil price and party-of-two rule in code; price words were audited C-103 for potions only).
+  - e3po.town_talk "Bellmire has two bells" and e3po.tier_up_alt2.City in all but Charter.1 "Seven bells now" (13033-area pools): pick one canon for bell count - these two cannot both be true if the bell is a single object; "Seven bells" in a tier line also names a number tied to town level.
+  - town_life.crier "Eight bells and all well" is a ship's-watch idiom, fine.
+  - propositions.entries.2 "no one in Bellmire owes a copper" - mechanic is a debt wipe; fine if it clears all debts.
+C. ITEM FLAVOUR COUNTS (cosmetic, only wrong if an icon is drawn): items.json archer_gloves "Three fingers stitched, two bare" ; splintwrap_gloves / title_splintwrap "Two fingers of cane" ; fletcher_tabs "Two fingers" ; gaoler_amulet / title_gaoler "Three keys, two locks" ; flask_amulet "Seven little flasks on a cord" ; w_arcane_rune_banded_mace "Three bands on the head" ; toll_ring "Two coins". Art's icons.py draws the glove cuts (GLOVE_CUTS) - a glove icon with the wrong finger count would contradict its flavour.
+D. THE ONE THAT MATTERS MOST: the tallyman/drover-style "five of N" lines in A are written against art canon at the time I wrote them; I did not re-measure bodies this firing. If art changes any of them (collier pass 10 may), the matching feed lines are the ones to touch, and I will do it on a row.
+No new keys, no edits. All four owned files byte-identical to origin/main (git diff clean in W3 apart from this doc).
+Next content: C-210.

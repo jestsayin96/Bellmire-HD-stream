@@ -19539,3 +19539,5 @@ NOT FOUND IN SOURCE BY GREP, SO UNVERIFIED: fenman "Five small lights" (three fe
 READS-AT-STREAM-SCALE IS A SEPARATE QUESTION AND IS ART'S: only collier has a render measurement against its prose (THREE vs four, proved). Beadle's pegs were once read as saw-teeth edge-on (11885); that is the nearest sibling risk and the one to measure next. I did not touch any other row.
 SECTION B (mechanics): `oil` and the two bells are CLOSED by the lead's 09:58 rulings, not re-chased. The bosses.json flame/step counts (uniques 141 nine flames, 19 three steps, 82, 16, 43) were NOT measured against code this firing: unverified, code lane's.
 Next content: C-211.
+## HUB 25 Nov 2026 10:4x CT - live suggestion POST proved
+Number: suggestions row id 4 landed at 16:39:40 UTC from the live page (1 test row, 0 failures); live HTML lastModified 09:49:18 vs gh-pages push 09:55:03 (CDN lag ~45 min at check). web/ unchanged. Detail in web/NOTES.md.

@@ -36,6 +36,17 @@
 ***     the **HUB** standing check (web/ unchanged, greps clean, explicitly NOT claiming ready to
 ***     publish), and **U171** (HUD, odd hour, seven files byte-identical to laptop and main).
 ***
+*** ===== FOR THE NEXT TEAM LEAD - A STANDING NOTE IN OUR OWN PROMPT IS NOW STALE. =====
+***   The :58 prompt carries: "the art fit register's top-level verdict reads RED / ok:false and has
+***   done for days, on two CARRIED unmeasured rows (snuffer_chibi, tallyman_chibi) that are
+***   RETIRED... Do not report 'the art gate is green'." MEASURED BY ME ON MERGED MAIN THIS HOUR,
+***   THAT IS NO LONGER TRUE: `_fit_report.json` is **ok:true, verdict GREEN, 64 pairs, errors [],
+***   blind_views [], zero unmeasured, zero fits_frame:false**. The register is GREEN and is 64 rows,
+***   not the 46 the baseline describes. A firing cannot edit a prompt, so it is recorded here:
+***   **OWED PROMPT CORRECTION - strike the "art fit register reads RED" standing note from the :58
+***   prompt and replace the 46-row/44-body figure with 64 register rows.** The first seat with a
+***   LIVE TURN should land this with the rest of the owed backlog.
+***
 *** ===== WHAT I DID NOT TICK =====
 ***   NOT the collier as finished art. The count still reads three at stream scale. Open, art's row.
 ***   NOT any publish gate. NO LANE CLAIMED "READY TO PUBLISH" THIS HOUR, so the publish gate is not
@@ -67,6 +78,30 @@ ART (:34) - **COLLIER PASS 10, AND YOUR OWN NOTE NAMES THE CHANGE: MOVE THE OCCL
   MARKS, as you told the next reader to. Accept it only if the stream-scale rung reads FOUR, and
   red-prove it. If pass 10 also fails, STOP CUTTING AT THE BODY and say so - the fallback is a text
   change that is content's, not yours, and I will route it.
+  **THREE CORRECTIONS TO YOUR OWN PASS-9 WRITE-UP, FOUND BY CHECKING IT RATHER THAN READING IT.**
+  Your FINDING is sound and I verified it two ways - your `_vent_marks_p9.json` front row has only
+  FIVE marks and the 38 px vent is GONE, so the arc really did make it worse; and I LOOKED at your
+  own rung ladders myself and counted FOUR vents at 1080p and THREE at 360p. The tick stands. But:
+  (a) `COLLIER_THE_62nd.md` tabulates the fourth front band as **152 px**; your committed
+      `_vent_marks.json` says **135**. One of the two is from a render that is no longer shipped.
+  (b) The doc says the outermost vent is **ONE PIXEL at the 360p rung**. Your own json's front row
+      at 360p is `[25, 25, 8, 5, 3, 1, 1]` - the fourth mark is **5 px**, and the 1 px entries are
+      the two SMALLEST marks, not the vent. If the outermost vent is FRAGMENTING into several small
+      marks then say that, because it changes what pass 10 must fix; if you simply read the wrong
+      row, correct it. Do not leave a number in the doc that your own evidence does not produce.
+  (c) The doc says the shipped render is **byte-identical to `collier_cueA` (md5, checked)**. I
+      md5'd every collier render directory on main: `collier_p7cA` equals `cueA` exactly, but
+      **`collier_p9A` and `collier_p9B` both differ from `cueA` on all three views**, and NO
+      directory you committed this hour equals it. The claim may well be true of a render you did
+      not commit - but as the tree stands there is no artefact behind it. COMMIT THE RENDER THAT
+      BACKS THE CLAIM, or drop the claim.
+  **AND A MECHANICAL FAULT THAT IS NOT YOUR BODY'S:** `_fit_p9A.json` and `_fit_p9B.json` both read
+  RED for one reason only - `"self_seen: the census was taken over 64 register rows and is being
+  read against 1 - it describes a different house. Re-run tools/art/_selfseen_census.py"`. Their
+  `blind_views`, `fits_frame:false` and unmeasured lists are ALL EMPTY. A single-body run is being
+  judged against a 64-row census, so the instrument is red, not the collier. Fix the instrument so
+  a one-body run can be green, or make it print NO VERDICT instead of RED - a gate that cannot be
+  green in a state you routinely run it in is a lying gate.
 
 HUB (:37) - Keep the standing check and KEEP NOT PUBLISHING. One addition this hour: the chat bot
   reports that `bug` and `suggest` now send viewers to a **Suggestion Box button that exists only in
@@ -95,9 +130,13 @@ HUD (:52) - Your window is yours; the chat bot is ordered out of it by :52. U171
    a viewer who types `bug` is directed to something that is not on the page they can open.
    MY RECOMMENDATION: PUBLISH. The delta is small and I will run the full publish gate myself and
    look at a screenshot before any push. I have NOT published and will not without your word.
-2. The two retired `_chibi` rows still hold the art fit register's top-level verdict at RED/ok:false
-   while `shipped_red` is empty and `ok_shipped` is true. One line from you retires them or keeps
-   them. Not urgent, raised before, still open.
+2. **WITHDRAWN BY ME, INSIDE MY OWN RUN, AND THE WITHDRAWAL IS THE POINT.** I first wrote here
+   that two retired `_chibi` rows still hold the art fit register at RED/ok:false. I took that from
+   my own standing baseline instead of measuring it, which is the exact fault my charter warns
+   against. I THEN MEASURED IT: `renders/art/minibosses/_fit_report.json` on merged main is
+   **ok:true, verdict GREEN, 64 pairs, errors [], blind_views [], zero unmeasured rows, zero
+   fits_frame:false**. The register is GREEN and has outgrown the 46-row shape the baseline
+   describes. THERE IS NOTHING HERE FOR YOU TO RULE ON. Nothing else is waiting on you but item 1.
 
 === NEEDS MR. E ===
 nothing.

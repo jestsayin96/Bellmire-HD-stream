@@ -17377,3 +17377,17 @@ Lock: R working RUN_LOCK last line = chat bot B139 IDLE 19:49:11 (after its RUNN
 AUDIT (file-only): hud-ui 390bc84d is 255 commits behind origin/laptop, yet `git diff HEAD origin/laptop -- <my 7 files>` is EMPTY and `git log origin/laptop -- <my 7 files>` is empty: all seven HUD files are byte-identical to main, worktree clean. Nothing on main has touched the HUD since my last merge, so no re-gate is owed.
 CHANGED: this note only. PARSE: n/a (no source change).
 NEXT: take whatever the 19:58 TAKE THIS NEXT names; otherwise re-audit the seven files against origin/laptop. Decision for Mr. E: none.
+
+
+## U160 - HUD STAND-DOWN ON THE LOCK + THE 1080p SIZE-GUARD AUDIT CLOSED FILE-ONLY, NO GODOT CLAIMED, NO .gd CHANGED, 2026-11-24T20:53:56-06:00 (20:52 firing)
+ITEM: R WORK_PLAN 19:58 TAKE THIS NEXT, HUD row: "FINISH THE 1080p SIZE-GUARD AUDIT ON YOUR REMAINING OWNED GATES - name every owned gate and say for each whether it reads the screen; red-prove any NEW guard at 1152x648; COMMIT THE LOG."
+Lock: R working RUN_LOCK last line = chat bot B140 RUNNING 20:51:37 (declared finish 21:01:37, cap 21:16:37), no IDLE from B140 after it. tasklist showed 0 Godot at 20:53 but the yield rule says a RUNNING line is live until the same lane's IDLE, so I CLAIMED NOTHING and RUN_LOCK is untouched. No Godot launched, so no new guard was added or red-proved this firing (a guard needs a parse + a 1152x648 red arm, and I will not run Godot over a live hold).
+AUDIT (read-only grep of all 25 tools/_u*.gd in W2, three sorts):
+ - FORCE THEIR OWN SIZE (root.size=1920x1080 + guard line; capture size cannot matter): _u104/_u112/_u113/_u114/_u117 shots, _u121_hostile, _u122_chron_width, _u125/_u126_regress, _u134_chron_sample150.
+ - HAVE A LIVE NO-VERDICT SIZE GUARD (red-proved 1152x648 in U157/U158): _u40_pad_test, _u62_scales (U155), _u88_worn, _u90_feed_load, _u91_long_names.
+ - DO NOT READ THE SCREEN TO DECIDE: _u58_contrast and _u71_rarity_guard (pure colour/table math, zero viewport refs, headless-safe); _u61_stripe (own 1920x1080 holder Control).
+ - READ THE SCREEN, NO FIXED-SIZE GUARD, BUT NOT A PASS-BY-ACCIDENT RISK: _u69_redproof measures every rect against scr=root.size as 20%/35% area ratios (self-scaling; its RED arm must FAIL and prints NO VERDICT on 0 elements). _u55_hue (U56_HUE) uses the viewport image only for the blank-frame check; a small or empty capture fails LOUD ("frame reads blank"), it cannot pass on a wrong size.
+ - SCREENSHOT TOOLS, NO VERDICT TO MIS-GATE: _u3/_u4/_u9/_u25/_u26 write PNGs and print no OK/FAIL; their header says WINDOWED 1920x1080.
+RESULT: every owned verdict-printing gate is either size-forcing, size-guarded, size-independent or fails-loud. No owned gate can pass by accident at the wrong capture size. The one soft spot named for honesty: _u69's ratio thresholds are not tuned for sub-1080p, so a 1152x648 run could FALSE-FAIL (loud, wrong direction safe). If Mr. E/team lead wants it pinned, add the same one-line guard as U62 next time the lock is free and red-prove at 1152x648.
+CHANGED: this note only. PARSE: n/a (no source change).
+NEXT: if B140 has written IDLE by 20:52 next firing, optionally pin _u69 with the U62-style guard (claim <=15 min, release by :07); otherwise take whatever the next TAKE THIS NEXT names. Decision for Mr. E: none.

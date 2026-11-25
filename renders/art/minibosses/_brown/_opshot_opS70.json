@@ -1,0 +1,80 @@
+{
+ "key": "collier",
+ "tag": "_opS70",
+ "errors": [],
+ "views": {
+  "front": {
+   "man_alone_px": 57150,
+   "man_seen_px": 56657,
+   "on_mound_px": 3907,
+   "on_air_px": 52750,
+   "man_seen": 0.9914
+  },
+  "side": {
+   "man_alone_px": 43833,
+   "man_seen_px": 42722,
+   "on_mound_px": 3551,
+   "on_air_px": 39171,
+   "man_seen": 0.9747
+  },
+  "back": {
+   "man_alone_px": 57536,
+   "man_seen_px": 57345,
+   "on_mound_px": 3279,
+   "on_air_px": 54066,
+   "man_seen": 0.9967
+  }
+ },
+ "env": {
+  "COLLIER_SOOT": "0.70"
+ },
+ "outdir": "C:\\hd adventure\\bellmire-art\\renders\\art\\minibosses\\_brown\\collier_opS70",
+ "man_from": "parts",
+ "man_ranges": [
+  [
+   48,
+   52
+  ],
+  [
+   52,
+   59
+  ],
+  [
+   59,
+   61
+  ],
+  [
+   64,
+   66
+  ]
+ ],
+ "bounds_control": [
+  -1.05685,
+  -0.94188,
+  0.0,
+  0.97898,
+  1.21795,
+  2.1
+ ],
+ "bounds_split": [
+  -1.05685,
+  -0.94188,
+  0.0,
+  0.97898,
+  1.21795,
+  2.1
+ ],
+ "objs_control": 4,
+ "objs_split": 6,
+ "item_counts": {
+  "inside": 15,
+  "outside": 51,
+  "total": 66
+ },
+ "man_objs": [
+  "collier_body_man",
+  "collier_dark_man"
+ ],
+ "engine": "BLENDER_EEVEE",
+ "ok": true
+}

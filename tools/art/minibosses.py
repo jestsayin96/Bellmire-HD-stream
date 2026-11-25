@@ -22663,7 +22663,14 @@ OVERRIDE.update({
     "collier": {
         # DAMP DUG EARTH. The clamp was earthed up this week - rule 2, wear is
         # a variable: the earth is new work, the iron on it is old.
-        'body': ((0.165, 0.132, 0.104), 0.88, 0.02),
+        # *** PASS 17 - THE SLOT GOES VERTEX-DRIVEN, AND NOTHING ELSE MOVES.
+        # The fifth element is the Greener's shipped mechanism (18 Nov): the
+        # colour comes off the MESH and the rgb above becomes the FILL for any
+        # geometry in this slot that declares none. The clamp, the spoil tail
+        # and the shovel haft declare none, so they are painted this exact
+        # colour and render as they always have. The only geometry that
+        # declares a colour is THE MAN - see `_collier_soot`.
+        'body': ((0.165, 0.132, 0.104), 0.88, 0.02, None, True),
         # THE FOUR PLUGS, AND NOTHING ELSE IN THIS SLOT. Fresh-split sapwood.
         # ratio against the body is 5.8, not 1.34.
         'bone': ((0.842, 0.790, 0.628), 0.50, 0.00),
@@ -23563,7 +23570,70 @@ def collier():
     # declares a span it does not have is a lie and not an absence.
     P.man_parts = ("trunk", "head", "arms_r", "hand")
 
+    # ------------------------------------------- PASS 17: THE SOOT ON THE MAN
+    # THE FAULT, CARRIED THREE PASSES IN MY OWN WORDS AND NEVER FIXED: "the
+    # operator is brown-on-brown with the clamp he stands on. From the side he
+    # separates from the mound only by silhouette against the background."
+    # It was never a shading problem. His trunk, both arms and his pot head are
+    # authored in the `body` slot and THE CLAMP IS THAT SAME SLOT, so the man
+    # and the hill he grows out of are LITERALLY ONE COLOUR and the only thing
+    # between them is the lambert term. Measured, finally, by `_opshot.py` +
+    # `_brownread.py`: on the SIDE view, of the man's pixels that sit in front
+    # of his own mound, the median luma difference against what is behind them
+    # is 0.034 and 52% of them are under the 8/255 the stream scaler treats as
+    # "did not move". Half of him, where it matters, is the hill.
+    #
+    # VALUE, NOT HUE, AND THE ROW ASKED ME TO SAY WHICH. A hue move - greening
+    # or reddening the man off his own earth - is the theatrical answer and
+    # rule 1 forbids it: a thing looks like what it is FOR. What a charcoal
+    # burner looks like is SOOTY. So this is one multiplier on the earth
+    # colour, hue and saturation untouched, pulling him DOWN and never up:
+    # rule 2 again, because the earth was dug this week and the man has been
+    # stood in the smoke of it since. He gets darker; nothing gets brighter.
+    #
+    # SWEPT, NOT PICKED, and there is a floor the numbers cannot see: his own
+    # face, apron and hat are the `dark` slot at (0.042,0.046,0.054), so a man
+    # taken far enough down stops reading as a man and becomes one black lump
+    # with the cues inside him gone. The sweep is in the pass notes.
+    # COLLIER_SOOT=1.0 reproduces pass 16 exactly - the vcol then equals the
+    # slot fill, which is the control arm and it is checked, not assumed.
+    _collier_soot(P)
     return P
+
+
+def _collier_soot(P):
+    """Paint the man's `body` geometry a darker shade of the clamp's own earth.
+
+    Keyed off `man_ranges(P)` - THE SAME DECLARATION `_backread` and `_opshot`
+    split on - so the geometry that gets the soot and the geometry the
+    instrument calls "the man" cannot drift apart. Painting by a hand-written
+    index list is how that drift starts.
+
+    RED, NOT QUIET, on every way it can miss: an undeclared or empty figure, or
+    a figure with no `body` geometry in it, raises. A soot pass that painted
+    nothing would render as "the fix did nothing", which is the exact silent
+    mis-paint `merge_objs` grew its `vcol_items` counter to catch.
+    """
+    f = float(os.environ.get("COLLIER_SOOT", "0.55") or 0.0)
+    rng, src, errs = man_ranges(P)
+    if errs:
+        raise ValueError("collier soot: %s" % "; ".join(errs))
+    if not src:
+        raise ValueError("collier soot: no figure declared - nothing to paint")
+    base = OVERRIDE["collier"]['body'][0]
+    soot = tuple(c * f for c in base)
+    n = 0
+    for i, it in enumerate(P.items):
+        if not in_ranges(i, rng):
+            continue
+        if it[2] != 'body':
+            continue
+        P.vcols[id(it)] = [soot] * len(it[0])
+        n += 1
+    if not n:
+        raise ValueError("collier soot: the figure holds no `body` geometry - "
+                         "painted nothing, which would read as 'no change'")
+    P.soot = dict(factor=f, rgb=soot, items=n)
 
 
 BUILDERS.update({"collier": collier})

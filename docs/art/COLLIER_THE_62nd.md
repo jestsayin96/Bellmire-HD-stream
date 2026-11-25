@@ -788,9 +788,15 @@ border clean, air_px_min 102 on the side, ratio 0.86, fits_frame true.
 
 Faults I can see, ALL PRE-EXISTING - p13 moved one stake three degrees and
 introduced none of them:
-1. **The operator is brown-on-brown with the clamp he stands on.** From the
+1. ~~**The operator is brown-on-brown with the clamp he stands on.** From the
    side he separates from the mound only by silhouette against the background.
-   Put him on a lit floor and that separation is not guaranteed.
+   Put him on a lit floor and that separation is not guaranteed.~~
+   **CLOSED AT PASS 17, 25 Nov 2026** - he and the clamp were literally one
+   material; he is now sooted to 0.55 of the clamp's own earth colour (value,
+   not hue). Side on-mound pixels under the 8/255 threshold: 0.266 -> 0.022.
+   See `COLLIER_PASS17_THE_MAN_IS_SOOTY.md`, which also lists what that cost.
+   **THE SECOND SENTENCE IS NOT CLOSED**: 93-96% of his boundary is still
+   against the pane and no instrument here shoots him against a lit floor.
 2. **His head has almost no facing.** One small dark notch on one side of a
    round pot head is the only cue; at stream scale he reads the same whichever
    way he is turned. This is the Beadle's pale-band fault in a milder form.

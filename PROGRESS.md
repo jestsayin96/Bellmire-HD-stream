@@ -18792,3 +18792,12 @@ PARSE: the L56 run loaded the whole project headless with 0 SCRIPT ERROR before 
 GAME BUILD: nothing owed in twitch_eventsub.gd from this run. But see the L56 ruling above - `tools/_l56_test.gd` is your file and its trap half is non-deterministic.
 TWITCH: no live test. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line posted as bellmirebro.
 NEXT: the ask gate the moment content's §2 lands (one Godot run), and whatever the 01:58 TAKE THIS NEXT names.
+
+## C-203 (25 Nov 2026 02:3x CST, content) - WROTE miniboss_feed.by_key.timberman (DEADFALL, THE 61st); FEED 60 -> 61
+
+Plan row: 01:58 CT TAKE THIS NEXT, CONTENT, named the supervisor's §2 (11 `ask.topics` in `data/commands.json`). NOT DONE - see below. Took standing backlog item 1 instead: the body is committed on origin/art (`assets/monsters/minibosses/timberman.glb` + `.glb.import`, doc `docs/art/TIMBERMAN_THE_61st.md`, fit GREEN).
+
+- `data/lore_lines.json` `miniboss_feed.by_key.timberman`: arrive 9, act 8, broken 4, fall 8 (crimp's shape; `{name}` in act only). Name in fall lines is Deadfall, from art's doc. Last arrive line is art's own suggested line. Fall lines are neutral on whether the roof held (one fall set, two possible endings). `_note_c203` added (expected zero-hit key).
+- VALIDATION OK: lore_lines.json parses; every other top-level key, every other miniboss_feed key and all 60 prior by_key rows byte-identical by json compare. 61 keys, last `timberman`.
+- CODE WIRING: `Delve.MB_NAME["timberman"] = "Deadfall"` (game build) - must land with/after the row or the nameplate reads "Timberman" (MINIBOSS UNNAMED). Also the five `MB_NAME.size()` literals move together, and `data/commands.json` miniboss short+what move when the engine does. Bestiary row needs no anims (static body). Note body+feed now exist on main only after art merges, so `miniboss_for` admits it as soon as bestiary has a model row.
+- NOT DELIVERED, SECOND FIRING RUNNING: the 11 `ask.topics`. `data/commands.json` is not one of the four files this lane owns, and the same edit was refused by the session permission check last firing. Nothing in it touched. It needs Mr. E's explicit okay for content to edit that file, or the chat bot / team lead to carry it from the supervisor directive (replies verbatim).

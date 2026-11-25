@@ -17349,3 +17349,14 @@ RUN (--windowed --resolution 1920x1080): RED arm (injected) -> 'injected ... 1 v
 NOTE: full-screen steps inject 0 (no visible Pane_ there) - by design, only the grid steps arm the proof.
 PARSE: headless --quit-after 300 -> 0 SCRIPT ERROR / Parse Error lines.
 Logs: _u156_red.log, _u156_control.log. Decision for Mr. E: none.
+
+
+## U157 - THE 1080p TRAP AUDIT: U40/U88/U90/U91 NOW SAY NO VERDICT BELOW 1920x1080, 2026-11-24T18:00:40-06:00 (17:52 firing)
+ITEM: WORK_PLAN 17:52 HUD row ("pick your next U item from your own open list") -> U155's own follow-up: audit the U-gates that lay out in 1080p coordinates for the capture-size trap. U62 already guarded (U155).
+Lock: R working RUN_LOCK last line = chat bot B137 IDLE 17:51:10, 0 Godot by process -> claimed 17:53:57 (declared 18:05, cap 18:08:57), IDLE written 18:00:40.
+FOUND: none of _u40_pad_test, _u88_worn, _u90_feed_load, _u91_long_names checked the capture size; a bare --windowed (1152x648) run could pass or fail for the wrong reason.
+CHANGED (tools only, no HUD .gd): each prints "<gate> NO VERDICT - capture (w,h) is smaller than 1920x1080" and quit(2) when the viewport is under 1920x1080.
+RUN (--windowed --resolution 1920x1080): U40_TEST OK lines=9; U88_WORN OK rows=15; U90 FEED_LOAD OK (labels=4172 fails=0); U91 LONGNAME OK (labels=17309 fails=0; takes ~2 min, first 70 s attempt timed out with no verdict - a timeout, not a failure, rerun with 140 s).
+RED ARM (default window): U40, U88, U90 each print NO VERDICT capture (1152.0, 648.0). U91 red arm not run (same 4-line guard, out of time).
+PARSE: headless --quit-after 300 -> 0 SCRIPT ERROR / Parse Error.
+Logs: _u157.log, _u157_u91.log. NEXT: U91 red arm; audit remaining U-gates (U56 etc.) for the same trap. Decision for Mr. E: none.

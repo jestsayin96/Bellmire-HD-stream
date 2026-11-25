@@ -19486,3 +19486,29 @@ the next seat does not re-derive it and "fix" six lines of good text.
   declared finish, HUD's :52 window clear. Godot exited, `tasklist Godot*` = 0 checked live.
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat
   line posted as bellmirebro, no channel setting touched.
+
+## C-210 (content, 25 Nov 2026 10:3x CST) - COLLIER TEXT CHANGE PREPARED AS A PROPOSAL, NOT SHIPPED; C-209 EXTENDED. NO data/ FILE CHANGED.
+ITEM: TAKE THIS NEXT (09:58 CT block) CONTENT (:22): prepare the exact one-line diff for the collier four-plugs text, commit it as a proposal, and extend C-209 with a measured body-or-mechanic verdict. The choice to alter shipped viewer-facing text is the supervisor's. All four owned files are byte-identical to origin/main. This entry is the only edit.
+LOCATION NOTE: C-209 was committed to docs/PROGRESS.md (89be3673), not this file; C-205 to C-208 are here. I did not move it. C-210 is here.
+
+### 1. WHERE THE "FOUR" PROMISE LIVES (the row named the wrong file for half of it)
+- data/commands.json `miniboss` does NOT carry it. Its text says "The 62 elites that hold a chamber alone"; no plug, vent or collier word anywhere in that file (grepped). C-209 listed `miniboss` in error and I am correcting it here.
+- The sentence "drive its four pale plugs into the vents" is tools/art/minibosses.py:22648, in CANON["collier"] (art-owned). Nothing in scripts/ or data/ reads it (grep "half blows": that one file only), so it is art's source text, not viewer text at runtime.
+- What a viewer is actually told is in MY file: data/lore_lines.json miniboss_feed.by_key.collier.arrive index 3 (line 14851) "Four small mouths ... Each has a dull red eye in it." Index 4 (line 14852) "A rack of four pale plugs ... One for every mouth." Act line 14865 "Three dark mouths and one red" is arithmetic of four and stays true.
+
+### 2. THE PROPOSAL (one keystroke when the ruling comes)
+Art measured: the body reads THREE vents at 360p and four only on inspection (p13 splits one vent into a 204 px mark and still reads three; the -78 deg vent presents cos(78)=0.21 of its mouth). The plugs read FOUR from behind (bone 2393 px, CUE_READ.md:90). So the VENT count is the line at fault; the PLUG count is honest and stays. The mechanic stays four vents, four plugs.
+EDIT 1 (the viewer-facing one; file data/lore_lines.json, line 14851, miniboss_feed.by_key.collier.arrive[3]):
+  OLD: "Four small mouths are cut in the earth on the near side. Each has a dull red eye in it. They are breathing."
+  NEW: "Four small mouths are cut in the earth on the near side. Three show a red eye from the door. The fourth is round the curve. All four breathe."
+EDIT 2 (art's source, for art/supervisor to apply, not mine; tools/art/minibosses.py line 22648-22649, the end of the CANON string):
+  OLD: "...Take it down in half blows, or drive its four pale plugs " / "into the vents first"
+  NEW: "...Take it down in half blows, or drive its four pale plugs " / "into the four vents first - three read from the door, the fourth sits round the curve of the heap"
+NOT CHANGED, ON PURPOSE: line 14852 (plugs, four, true from behind), line 14865 (3+1), _note_c205 (says the plugs answer the four vents, still true). Both edits keep "four", because FAULT 10 stands: the count IS the mechanic. Only what the door shows is corrected. No array length changes (arrive stays 9), no key added, so no code wiring. If supervisor rules to ship, EDIT 1 is the single data change and `_note_c205` needs no edit. If it rules to leave the text, nothing here is owed.
+
+### 3. C-209 EXTENDED - SECTION A, WHAT THE BODY SOURCE DECLARES (read in tools/art/minibosses.py builder comments; NOT rendered, NOT counted at 360p - I do not run Blender)
+HONOURED IN SOURCE (builder states the same number as the prose): crimp 4 old pegs + 1 lit peg (22042, 22051); beadle 4 brass pegs, 2 sockets (12176-12177); stopper 5 pale pegs, PEG_BAYS, 7 spent dark (17586-17603); leech 5 horns (11630-11632); rammer 3 legs seated on one plane (12319-12321); scraper "FIVE cuts on EACH of the four faces" (15172); jointer 3 arms (4674, 4683, 4710); collier 8 stakes (22902-22922).
+NOT FOUND IN SOURCE BY GREP, SO UNVERIFIED: fenman "Five small lights" (three feed lines, one count); ratcatcher "Five tails hang in it already". Art should state the count or say the line is cage-contents prose only.
+READS-AT-STREAM-SCALE IS A SEPARATE QUESTION AND IS ART'S: only collier has a render measurement against its prose (THREE vs four, proved). Beadle's pegs were once read as saw-teeth edge-on (11885); that is the nearest sibling risk and the one to measure next. I did not touch any other row.
+SECTION B (mechanics): `oil` and the two bells are CLOSED by the lead's 09:58 rulings, not re-chased. The bosses.json flame/step counts (uniques 141 nine flames, 19 three steps, 82, 16, 43) were NOT measured against code this firing: unverified, code lane's.
+Next content: C-211.

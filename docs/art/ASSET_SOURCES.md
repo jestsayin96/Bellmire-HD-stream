@@ -856,3 +856,19 @@ Method: directory listed recursively; licence-like names searched in the folder 
 | Cleared for use | **NO.** Unlicensed and gated. Do not import, convert or redistribute any file from this pack until an author licence is found. This entry confirms against the disk the 20 Nov licence-gate listing, which had named the pack without a read. |
 
 Method: directory listed recursively and extension-counted with `find`; the sibling zip read by central directory; a case-insensitive grep of every file's text for licence terms returned nothing. No `.obj` was opened as a licence source; the `.mtl` material values were checked and carry no terms.
+
+
+## PACK CATALOGUE - quaternius_medieval_weapons_2018_CC0 (25 Nov 2026, pack-catalogue firing)
+
+| Field | Value |
+|---|---|
+| Pack directory | `C:\hd adventure\_packs\quaternius_medieval_weapons_2018_CC0\` (inner folder `Medieval Weapons Pack - Sept 2018\`; sibling `quaternius_medieval_weapons_2018_CC0.zip`, 3,741,460 bytes, checked by central-directory read with Python `zipfile`, not extracted: 101 entries = 97 files + 4 folder entries, zip comment empty, identical to the folder) |
+| Author | Quaternius (named in the table above from the source page; the pack's own files do not state it) |
+| Licence | **NO LICENCE FILE FOUND.** No LICENSE / License.txt / readme / credits / terms / copying / html / pdf / url file anywhere in the folder or the zip. A case-insensitive text search of every file in the folder for `licen*`, `CC0`, `creative commons`, `public domain`, `attribution`, `copyright` and `credit` returned no hits. The folder name carries `CC0`, but a folder name is not a licence (see the 20 Nov naming-trap note). The `CC0 1.0` entry in the table above is the supervisor's record from the source page, not a licence read from this pack, so it is not treated as cleared. Nothing guessed. |
+| File count | 97 on disk: 24 x `.blend` (`Blends/`), 24 x `.fbx` (`FBX/`), 24 x `.obj` + 24 x `.mtl` (`OBJ/`), 1 x `Preview.png`. No textures on disk. |
+| Contents | Medieval weapons and shields, 24 models: Arrow, Axe, Axe_Double, Axe_Small, Bow_Evil, Bow_Golden, Bow_Wooden, Bow_Wooden2, Claymore, Dagger, Dagger_2, Hammer_Double, Hammer_Small, Scythe, Shield_Celtic_Golden, Shield_Heater, Shield_Heater_2, Shield_Round, Shield_Round_2, Spear, Sword, Sword_2, Sword_Big, Sword_Golden. |
+| Commercial use | Not determinable from the pack |
+| Attribution | Not determinable from the pack |
+| Cleared for use | **NO.** Unlicensed and gated. Do not import, convert or redistribute any file from this pack until a licence file or an author licence is found on disk. This firing confirms against the disk the 20 Nov licence-gate listing, which had named the pack without a read. |
+
+Method: folder walked recursively with `find` and extension-counted; sibling zip read by central directory; licence-like filenames searched at every depth; case-insensitive grep of every file's text for licence terms returned nothing. No `.obj`, `.mtl` or `.fbx` was opened as a licence source. Only the `.mtl` header was looked at, to confirm it is a Blender export and carries no terms.

@@ -18785,3 +18785,9 @@ PARSE: the L56 run loaded the whole project headless with 0 SCRIPT ERROR before 
 GAME BUILD: nothing owed in twitch_eventsub.gd from this run. But see the L56 ruling above - `tools/_l56_test.gd` is your file and its trap half is non-deterministic.
 TWITCH: no live test. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line posted as bellmirebro.
 NEXT: the ask gate the moment content's §2 lands (one Godot run), and whatever the 01:58 TAKE THIS NEXT names.
+## HUB - 25 Nov 2026 02:4x CT - standing check; the 01:58 block's HUB row owes nothing on web/ (no READY TO PUBLISH claimed)
+ROW TAKEN: 01:58 TAKE THIS NEXT, HUB - "Nothing is owed on web/ this hour... If dry, keep cataloguing packs." Mount note: this firing the folder mounted as $HOME/mnt/bellmire-hub (not "hd adventure/bellmire-hub"); git went through the Windows bridge.
+MEASURED: after merging origin/main (ae3fc420), `git diff origin/hub HEAD -- web` = EMPTY (web/ byte-identical to origin/hub 342c8208). web tree 3d910499 vs gh-pages 5ce35f33 tree c03fa129: 3 files / +17 / -1 (NOTES.md +12, index.html +2/-1, style.css +3) - the same delta the team lead measured; unpublished, supervisor's call.
+SECURITY GREPS on web/app.js (node --check ok): innerHTML at lines 7,93,255,301 - 7 and 93 are comments, 255 and 301 are the two page-owned sites; outerHTML / insertAdjacentHTML / document.write / eval( / new Function: zero code hits (line 11 is the comment denying them). web/ did not change, so the hostile-name test is not re-owed. No browser run, no screenshot this hour (nothing changed to look at); live-dot colour unchanged.
+PACKS: no new pack found in the catalogue sources this hour; nothing catalogued, nothing invented.
+Untracked: web/tools/__pycache__/ (python bytecode from an earlier run) - named, not committed.

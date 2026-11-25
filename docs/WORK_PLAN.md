@@ -128,17 +128,35 @@
 ***   A lane starved by the rules I own is my fault, not a dirty hour on the lanes' record - but it
 ***   is written here so it is not invisible either.
 ***
-*** ===== WHAT THIS FIRING COST, AND I AM NAMING IT BEFORE ANYONE ASKS =====
-***   **I WAS LATE AND THE GAME BUILD AND CONTENT BOTH FIRED ON THE 11:58 ROWS.** My run opened at
-***   12:58:33 and this block lands ~13:2x. The :07 game build row said "fix the Skin colour and THEN
-***   wire" - S135 had ALREADY disproved that premise at 12:12, so the 13:07 firing read an
-***   instruction whose cause had been withdrawn an hour earlier. Content at :22 likewise read a row
-***   telling it to ship a diff it shipped at 12:23. Neither lane is at fault and neither is charged.
-***   WHY I WAS LATE, HONESTLY: I spent the head of the run on verification I would spend again -
-***   the sync-failure check, the pack preview, the cell-by-cell content diff - but I did it BEFORE
-***   writing any row instead of landing a short correct block first and deepening it after.
-***   **FOR THE NEXT SEAT: WRITE AND SYNC THE GAME BUILD ROW FIRST, THEN VERIFY.** `laptop` first is
-***   already the rule for the SYNC; make it the rule for the WRITING too.
+*** ===== WHAT THIS FIRING COST - MEASURED AT 13:10, NOT ESTIMATED. I HAD IT WRONG. =====
+***   **I WROTE A COST PARAGRAPH IN THIS BLOCK AN HOUR-ESTIMATE AGO AND IT WAS FALSE IN BOTH HALVES.
+***   I AM REPLACING IT RATHER THAN LEAVING IT, BECAUSE A WRONG FACT IN THE PLAN IS WORSE THAN NO
+***   FACT.** The struck version said the game build and content had both fired on the stale 11:58
+***   rows. I had estimated the clock from how much work I had done instead of reading it. THE
+***   MACHINE SAYS OTHERWISE AND THE MACHINE IS RIGHT - this is the prompt's own "read the clock off
+***   the machine" rule biting the seat that quotes it.
+***   WHAT ACTUALLY HAPPENED, OFF R's WORKING LOCK FILE AND `origin/laptop`'s COMMIT TIMES:
+***     13:08:14  game build S136 claims and reads the plan - MY SYNC HAD NOT LANDED YET.
+***     13:09:18  I commit the plan on main.  13:09:21  the `laptop` sync lands.
+***     13:09:47  S136 writes its IDLE: a stand-down, "S110c-2b already answered at S135 and held
+***               for Mr. E's skin/style call" - correct under the row it could see.
+***     13:10:10  **THE GAME BUILD RELAUNCHES ITSELF AS S136b**, lock line verbatim: "the 12:58 row
+***               S110c-3 landed after my stand-down - wire UACP bodies."
+***   **SO THE ROW REACHED IT, 67 SECONDS LATE, AND THE LANE RECOVERED THE CYCLE ITSELF WITHOUT
+***   BEING ASKED.** That is the best possible outcome from my lateness and it is the lane's credit,
+***   not mine. It cost roughly 90 seconds, not a cycle. Its two claims (13:08:14 and 13:10:10) are
+***   both inside its own :07-:40 window with the cap computed first; that is clean, not a double
+***   claim, and the 13:58 seat should not charge it.
+***   **AND CONTENT HAS NOT FIRED AT ALL YET** - it fires at :22 and will read the C-213 row below
+***   as its first sight of this block. Nothing was lost there. My struck paragraph had already
+***   charged a cost to a lane that had not yet run.
+***   ONE REAL NOTE FOR THE 13:58 SEAT: S136's stand-down says the skin call is held for MR. E. It
+***   is NOT - I routed it to the SUPERVISOR this hour and said why (see FOR THE SUPERVISOR). The
+***   lane wrote that before my block existed, so it is not an error of its own; just do not let the
+***   phrase propagate.
+***   THE LESSON THAT SURVIVES FROM THE STRUCK VERSION, BECAUSE IT IS STILL TRUE: **WRITE AND SYNC
+***   THE GAME BUILD ROW FIRST, THEN VERIFY.** `laptop` first is already the rule for the SYNC; make
+***   it the rule for the WRITING too. A 67-second miss is a lane's goodwill covering for me.
 ***
 *** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
 ***   Land ALL of these on the first LIVE turn, together. 1-5 and 7 are CARRIED (6 withdrawn and

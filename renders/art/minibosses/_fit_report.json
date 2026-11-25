@@ -10310,6 +10310,174 @@
    "air_px_eps": 0.02,
    "air_px_min": 72,
    "air_px_tightest_view": "front"
+  },
+  "dredger": {
+   "creature_h": 2.39,
+   "hero_h": 2.45,
+   "ratio": 0.98,
+   "pair_w": 2.82,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.778,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "dredger",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 28025,
+      "vis": 28025,
+      "delta": 32920,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43674,
+      "vis": 43674,
+      "delta": 53653,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 24707,
+      "vis": 24707,
+      "delta": 32106,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37780,
+      "vis": 37780,
+      "delta": 42374,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 26916,
+      "vis": 26916,
+      "delta": 34753,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44017,
+      "vis": 44017,
+      "delta": 48118,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 189240,
+     "shadow_px": 3212,
+     "mean": 0.4483,
+     "max": 0.7102,
+     "error": null,
+     "rim_filled_px": 2142,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 186960,
+     "shadow_px": 3013,
+     "mean": 0.4052,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2027,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 189240,
+     "shadow_px": 2648,
+     "mean": 0.4515,
+     "max": 0.7102,
+     "error": null,
+     "rim_filled_px": 2265,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     187,
+     186
+    ],
+    "side": [
+     161,
+     160
+    ],
+    "back": [
+     186,
+     188
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 160,
+   "air_px_tightest_view": "side"
   }
  },
  "errors": [],
@@ -10335,19 +10503,19 @@
   "census": "tools/art/_selfseen_census.py",
   "bar": 0.75,
   "derived": "recomputed this run - this block is RUN-OWNED and is never carried forward",
-  "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds.",
+  "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds. | 24 Nov 2026 19:5x CT for the DREDGER (57th), measured by tools/art/_backread.py --keys dredger and MERGED into this file row-by-row. NOT written with --out, which OVERWRITES and would have destroyed the other 56 rows - the same wholesale-wipe shape this file's own carry rule exists to prevent.",
   "instrument_errors": [
    "panner: the man span merged to no object"
   ],
-  "measured_cells": 165,
-  "measured_bodies": 55,
+  "measured_cells": 168,
+  "measured_bodies": 56,
   "no_man": [
    "panner"
   ],
   "no_man_reason": "the builder declares an EMPTY `man` span - a deliberate marker that this body has no operator at all (panner pass 4 removed his, by A/B, and left the empty span to say so). A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED and this is NOT red - the first cut of this rule called panner MEASURABLE and turned the register red on a correct body, which is an unearned FAIL and the same fault as an unearned pass.",
-  "census_measured_at": "2026-11-24T18:46:41-0600",
-  "census_register_mtime": "2026-11-24T18:43:23-0600",
-  "census_register_pairs": 58,
+  "census_measured_at": "2026-11-24T19:50:38-0600",
+  "census_register_mtime": "2026-11-24T19:49:30-0600",
+  "census_register_pairs": 59,
   "census_errors": [],
   "build_failed": [],
   "build_failed_reason": "the builder RAISED, so nothing was measurable and nothing is claimed - that is RED, never an honest absence. This list and the census's own `errors` were both unread until 24 Nov 12:3x.",
@@ -10547,16 +10715,16 @@
  },
  "unproved_cells": [],
  "measured": [
-  "weigher"
+  "dredger"
  ],
  "asked": [
-  "weigher"
+  "dredger"
  ],
  "blank_check": {
-  "files": 168,
+  "files": 171,
   "failures": [],
-  "cells": 56,
-  "expected_files": 168,
+  "cells": 57,
+  "expected_files": 171,
   "scope": "whole_house"
  },
  "red_summary": {
@@ -10567,5 +10735,5 @@
  },
  "verdict": "GREEN",
  "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (58), re-derived from stored measurements; 1 of them rendered this run"
+ "verdict_scope": "every row in pairs (59), re-derived from stored measurements; 1 of them rendered this run"
 }

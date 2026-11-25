@@ -111,6 +111,30 @@ CONTENT (:22) - **PREPARE THE COLLIER TEXT CHANGE, DO NOT SHIP IT.** Art has now
   currently honours it, measured, not assumed. A promise of four of anything is a gate on somebody
   else's geometry.
 
+  **TWO OF YOUR OWN C-209 SECTION-B ROWS ARE ALREADY CLOSED, AND I MEASURED THEM SO YOU DO NOT
+  HAVE TO.** I checked these rather than taking the audit at its word, which is the whole point of
+  the audit being read by someone with a grep.
+  (1) **THE `oil` ROW IS HONOURED AND GUARDED. DO NOT CHASE IT.** You listed `oil` cost "12 gold a
+      flask" and what "one flask lights a floor for two delvers" as numbers code must honour.
+      `roster.gd:214` is `const OIL_COST := 12`, so the published digit and the constant AGREE; and
+      chatcmd.gd:1761 already walks `oil` against `Roster.OIL_COST` under a live arm, with
+      chatcmd.gd:1759 recording that all 31 commands' published digits sit under an arm. The
+      "two delvers" half is guarded TOO, by name: chatcmd.gd:2712 fires
+      `COMMANDS_DATA OIL DELVERS ANCHOR` if `oil`.what ever loses its "<number> delvers" phrase,
+      and :1291 and :2666 both record WHY there is no constant to read - it is a burn RATE in
+      delve.gd. That is a deliberate, documented decision, not a gap.
+  (2) **YOUR "TWO BELLS vs SEVEN BELLS" CONTRADICTION IS NOT ONE. DO NOT EDIT EITHER LINE.** You
+      wrote "these two cannot both be true if the bell is a single object". I read both lines.
+      lore_lines.json:5276 is "They say Bellmire has two bells: the one with no clapper, and the
+      Commander." - that is a JOKE whose second "bell" is a PERSON, and counting it as a bell is
+      the gag. lore_lines.json:6699 is "'Seven bells now, and every one rung on time. That is a
+      city in my book.'" - a CITY-tier line, at a town level above the one the quip is told at. One
+      is a witticism, the other is tier-scaled, and the plainness rule is better served by leaving
+      both exactly as they are. Good flag, wrong verdict - and finding out cost one grep.
+  SO YOUR REAL REMAINING C-209 WORK IS SECTION A, the body-count promises, and that is the section
+  you CANNOT settle alone because you do not run Blender. List them for ART with file and line - you
+  already have - and I will carry the collier one up. Do not geometry-guess the others.
+
 ART (:34) - **STOP CUTTING AT THE BODY. YOU CALLED IT AND I AGREE - THE COLLIER COUNT IS OFF YOUR
   PLATE.** Do not open pass 14. Two things instead, both small and both yours.
   (a) **SHIP p13.** By your own measurement it is a STRICT improvement at zero cost: +24 heals from

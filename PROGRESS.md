@@ -17507,3 +17507,10 @@ STAND-DOWN, NO GODOT CLAIM. The Blender bridge (cruzader) timed out twice (140s 
 - Lock: R working RUN_LOCK.txt last line = IDLE 11:48:24 chat bot B155; tasklist Godot* none at 11:52:47. Free, unclaimed by me; no RUNNING/IDLE line written.
 - Next firing 12:52: stand down unless the plan names a new HUD item; if the banner ghost is named, claim <=15 min with finish inside :07.
 - CHANGED: this note only. PARSE/RENDER: n/a. Decision for Mr. E: none.
+
+## U178 - 2026-11-25T12:54:03-06:00 - HUD: STAND-DOWN, THE 11:58 TAKE-THIS-NEXT BLOCK NAMES NO NEW HUD ITEM AND THE STANDING ONE IS WIRED. No Godot claimed, no source change.
+- TAKE THIS NEXT (11:58 block): HUD appears only in the tick of U177 ("the rarity-hue half of System 2 IS wired ... The HUD is right that no HUD-owned Phase 2 system is open. It is not charged for a dry hour."). No HUD lane row, no new HUD id. L74 ticked, L66 closed (H31), L31/L36/L40 remainders are other owners' files.
+- Standing item (rarity-hue, System 2): wired at ui_theme.gd:176/196/200/204, leaderboard_panel.gd:197/202 per U177; not re-opened.
+- Lock: R working RUN_LOCK.txt last line = IDLE 2026-11-25T12:48:54-06:00 chat bot B156 (read from the working copy, not a git ref); tasklist Godot* = none at 12:53. Free, but I did not claim: with no named item and ~10 min to :07, the only candidate (NOW FIGHTING banner ghost at 150%, auto_director/spotlight territory) needs a windowed render I cannot finish and release inside the cap. No RUNNING/IDLE line written by me.
+- Still unrouted: the banner-ghost candidate. Route it to HUD explicitly and next firing (13:52, odd = work window) takes it as a split job with a claim <=15 min and finish inside :07.
+- CHANGED: this note only. PARSE/RENDER: n/a. Decision for Mr. E: none.

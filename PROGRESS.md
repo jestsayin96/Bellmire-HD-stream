@@ -18254,3 +18254,11 @@ Nothing for Mr. E to decide.
 TAKE THIS NEXT (18:58 CT block, 24 Nov) CONTENT row (:22): feed the 56th. Body weigher.glb is committed on origin/main (merged). Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Canon from the CANON row in tools/art/minibosses.py: IT MUST COME DOWN EVEN - tipped beam, a bright pan at each end, damage into the heavy pan paid back from the light one; the condition is where the party stands. Lines name the beam and the pans and favour no tactic; broken = the beam comes level. New _note_c198 (expected zero-hit key). MB_NAME (engine) still lacks weigher by my read of the plan block: the feed leads the engine, as it did for straker.
 VALIDATION OK: lore_lines.json parses; by_key 55 -> 56; every pre-existing key and value unchanged; only new keys are by_key.weigher and _note_c198. Edited lore_lines.json only.
 CODE WIRING: game build - add MB_NAME `"weigher": "Trueweight"` in delve.gd (the fall lines say "Trueweight is down"). Then the chat bot republishes 55 -> 56. Nobody should republish before the engine names it.
+## HUB standing audit - 24 Nov 2026 19:4x CT (hub lane)
+TAKE THIS NEXT (18:58 block) gave HUB: stand down / standing audit. No row, no web/ edit.
+Measured: gh-pages 5ce35f33 (tree c03fa129); hub web tree 5c618bba. Blob SHAs app.js 139c143e,
+index.html 107d0ee3, style.css 9e15e75d are IDENTICAL on gh-pages and hub (3 of 3). Only delta:
+NOTES.md +6/-0. node --check app.js OK. innerHTML at exactly app.js:255 and :301 (page-owned);
+outerHTML/insertAdjacentHTML/document.write/eval/new Function appear only inside comments (lines 10-11),
+zero in code. CSP meta present. No screenshot taken: web/ unchanged, so none owed.
+NOT claiming READY TO PUBLISH. Nothing for Mr. E to decide.

@@ -764,3 +764,15 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-roa
 **Vendor header error, recorded so it is not quoted as proof for the wrong pack.** The title line inside that `License.txt` reads "Ultimate Platformer Pack by @Quaternius", not "Ultimate Stylized Nature". This is the same copy-paste already logged in the licence-gate note above (ONE THING WRONG IN A LICENCE FILE). The grant beneath it is unambiguous CC0 1.0 and Quaternius's blanket licence covers the pack either way. If a stricter proof is ever wanted, the authority is quaternius.com's licence page for this pack.
 
 Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Stylized_Nature`. Nothing has been imported, converted or redistributed by this firing. Any file that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - grass_07 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| grass_07 (folder `_packs\grass_07\`, flat, no subfolder; sibling `grass_07.7z` 1,386,811 bytes, not opened this firing) | Nobiax (named in the readme: "Provided by Nobiax") | **Custom permissive grant - NOT CC0.** Do not re-record as CC0. | `_packs\grass_07\readme.txt` (262 bytes, CRLF, read in full off disk this run) | 8 on disk: `grass_07.FBX` (38,896 bytes), `grass_07.obj` (4,314 bytes), `diffus.tga`, `normal.tga`, `opacity.tga`, `specular.tga`, `preview.jpg`, `readme.txt`. Walked the tree with `find`: 8 files, no others. | Yes. The readme states, verbatim: "Absolutely free to use or to modify in any kind of work (personal, commercial or else)." | Not required. The readme says "Give me a link of the result at nobiax.deviantart.com or my other account on OpenGameArt.com or ShareCG.com" - a request, with no "provided that" anywhere, so it is not an attribution condition. |
+
+- Checked: read `readme.txt` in full off disk this run (the whole file is three short paragraphs and is quoted in the table above). A content scan of all 8 files for licence, copyright, CC0 and "free to use" terms hit only `readme.txt`; the binaries and `preview.jpg` were not treated as licence sources.
+- Consistency: agrees with the 20 Nov entry in THE THREE PACKS IN THE 18/21 GAP section, which read the same readme. Nothing there is changed.
+- Not share-alike, not non-commercial, not no-derivatives: none of the three forbidden families applies, so the pack is not rejected.
+- Note for later seats: the readme grants a custom permissive licence, not CC0. Any repo copy that is not a file-for-file re-export should still carry its own row, and any redistribution AS an asset is outside what this readme states on its face.
+- Status: **CLEARED for use (custom permissive grant, commercial use permitted, no attribution required; link-back requested).** Licence gate satisfied for `grass_07`. Nothing has been imported, converted or redistributed by this firing.

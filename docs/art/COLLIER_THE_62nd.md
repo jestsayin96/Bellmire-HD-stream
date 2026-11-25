@@ -265,16 +265,67 @@ The committed `collier_cueB` predated the pass-8 brow by two hours, so it could
 not isolate the glow on the shipped body. Re-rendered fresh (`MB_CUEOFF=glow`),
 labelled the connected marks of the A/B, and printed their centroids:
 
-| | cx 409 | cx 439 | cx 492 | cx 557 |
+| | cx 409 | cx 439 | cx 492 | cx 551 |
 |---|---|---|---|---|
-| front band, px | **38** | 460 | 449 | 152 |
+| front band, px | **38** | 460 | 449 | 135 |
+| bearing | -78 | -42 | -10 | +24 |
 
-The outermost vent is a SIXTEENTH of its neighbours. At the 360p rung it is ONE
-PIXEL. **A viewer at stream scale counts THREE.** The command text says "drive
-its FOUR pale plugs into the vents", so the number the viewer is told and the
+**A viewer at stream scale counts THREE.** The command text says "drive its
+FOUR pale plugs into the vents", so the number the viewer is told and the
 number on the body disagree - and FAULT 10 already says the count IS the
 mechanic. This is not a brightness fault and no wear or emissive change
 addresses it.
+
+#### THREE NUMBERS IN THE PARAGRAPH ABOVE WERE WRONG AND PASS 10 CORRECTED THEM
+
+The team lead checked this write-up against its own evidence at 07:58 instead
+of reading it, and found three. All three are corrected in place above and
+recorded here rather than quietly overwritten.
+
+**(a) The fourth band is 135 px, not 152, and its centroid is cx 551, not 557.**
+152/557 is from a render that is not the shipped one and is not in the tree;
+the committed `collier_stream/_vent_marks.json` says 135 at cx 551.5, and
+pass 10's labelled re-measure through its own locked camera says 139. The
+table now carries the committed figure.
+
+**(b) The outermost vent is FIVE pixels at the 360p rung, not ONE, and the two
+1 px marks are NOT vents - they are the ember seams on the +X flank.** The
+360p front row is `[25, 25, 8, 5, 3, 1, 1]` and pass 9 read it as a
+size-ordered list when the geometry is ordered by x. Ordered by centroid:
+`85.6 -> 5 px (-78)`, `92.0 -> 25 px (-42)`, `103.0 -> 25 px (-10)`,
+`115.5 -> 8 px (+24)`, `118.7 -> 3 px (a FRAGMENT of +24)`, `131.0 -> 1 px`
+and `131.0 -> 1 px` (the two upper seams, 13-16 px right of the vent row at
+this rung and well above it). Pass 10 proved that labelling by construction
+rather than by centroid inference - see THE LABELLED ARMS below.
+
+**THE FINDING STANDS, AND THE CORRECTED NUMBERS SHARPEN IT RATHER THAN
+SOFTENING IT.** The outermost vent is a FIFTH of its neighbours at the rung
+that matters, not a sixteenth-of-a-pixel, and the reason a viewer counts three
+is not that it vanished. It is that at 5 px it sits **6.4 px** from the 25 px
+blob of the -42 vent and reads as that blob's fuzzy edge; and the +24 vent is
+not one mark either but **8 px + 3 px**, split by an occluder. So the right end
+of the row is as unreliable as the left, which pass 9 did not say.
+
+**(c) The directory that backs the md5 claim is `collier_revA`, not
+`collier_p7cA`.** The team lead md5'd every collier render directory on main
+and reported that `p7cA` equals `cueA` and that nothing committed in the pass-9
+hour does. Re-measured here on the worktree, the first half is also wrong:
+
+| directory | hero_front | hero_side | hero_back |
+|---|---|---|---|
+| `collier_cueA` | da709319 | 729884f5 | 39527b79 |
+| `collier_revA` | **da709319** | **729884f5** | **39527b79** |
+| `collier_p7cA` | af73ed1b | b4e2f426 | 1fccdbd6 |
+| `collier_p9A` | f591bde9 | a4a09224 | e94871e7 |
+| `collier_p9B` | 2777eb04 | fb789d30 | 1bc590a8 |
+
+`collier_revA` is byte-identical to `collier_cueA` on all three views, so the
+claim is TRUE and `revA` is the artefact behind it. `p7cA` differs on all
+three. **WHAT IS STILL OPEN:** this run could not reach the main repo to ask
+whether `revA` is committed (see THE MOUNT FAULT at the foot of this file), so
+if the team lead's "nothing you committed equals it" is right, the fault is
+that `revA` is on disk and not in a commit - which is the exact failure the
+lane prompt warns about. Pass 10 commits it.
 
 ### THE OBVIOUS CAUSE, AND THE RENDER THAT DISPROVED MY FIX
 
@@ -297,11 +348,189 @@ camera. **IT GOT WORSE AND IT IS NOT SHIPPING.**
 | pass 9 | *gone* | cx 431 / 452 | cx 470 / 367 | cx 569 / 109 |
 
 The vent at +4 - the one pointing MOST DIRECTLY at the camera - vanished
-entirely, because dead centre-front is where the mound's centre stake runs.
-Zero pixels is worse than 38. A wider face is no use behind a post. The shipped
-bearings are back at pass 8's and the render is byte-for-byte identical to
-`collier_cueA` on all three views (md5, checked); `COLLIER_VENTARC=9` renders
-the disproved arc so nobody has to re-derive the disproof.
+entirely. Zero pixels is worse than 38. A wider face is no use behind a post.
+The shipped bearings are back at pass 8's and the render is byte-for-byte
+identical to `collier_cueA` on all three views (md5, checked - the artefact is
+`collier_revA`, see (c) above); `COLLIER_VENTARC=9` renders the disproved arc
+so nobody has to re-derive the disproof.
+
+**(d) AND THE POST IS NOT A STAKE. THIS IS A FOURTH CORRECTION AND IT IS TO MY
+OWN SENTENCE, FOUND BY CHECKING IT.** Pass 9 wrote "dead centre-front is where
+the mound's centre stake runs" and that is geometrically impossible on this
+body: the eight stakes are at `22.5 + 45i`, so the two nearest centre-front are
+at -22.5 and +22.5 and **there is no stake at 0 at all**. The occluder is a
+SOD. The seven sods are thrown at `(-148, -96, -40, 8, 62, 124, 168)` and the
+one at **bearing 8** sits at z 0.300 with r 0.190, on a flank radius of
+`0.868 - 0.440 * (0.300/0.980) = 0.733`, so it reaches out to r 0.908 where the
+vent mouth only reaches 0.801, and it covers bearings **-6.5 to +22.5** over
+z **0.190 to 0.410**. The pass-9 vent at +4 was inside that span on both axes.
+A guess that names the wrong object still reads like a cause, and the next pass
+would have moved a stake that was never in the way.
+
+## PASS 10 - THE OCCLUDERS ARE NAMED, THE ROW HEIGHT IS DERIVED, AND IT IS
+## STAGED BEHIND A FLAG BECAUSE IT WAS NEVER RENDERED
+
+**THE BLENDER BRIDGE WENT DOWN MID-RUN AND THAT IS WHY THIS IS NOT TICKED.**
+25 Nov, from about 09:02 CT, `execute_blender_code` returned *"Cannot connect
+to Blender at localhost:9876"* - Mr. E's Blender was not running, and that
+bridge is the only way this lane renders, runs Godot, or commits. So pass 10
+delivers the measurement and STAGES the geometry: `COLLIER_VENTZ=10` turns the
+new row on, **unset is pass 8 byte for byte**. A piece that has never been
+rendered on a body is not done, and a raycast is not a render.
+
+### THE TWO OCCLUDERS, NAMED BY A RAYCAST INSTEAD OF BY EYE
+
+`tools/art/_collier_occlude.py` builds the body, **removes the vent span from
+the BVH** so no mouth occludes itself, and casts the front camera's own ray at
+the face centroids of the real mouth solid, attributing every stopped ray back
+to the span that owns the polygon. The answer at the shipped row:
+
+| vent | bearing | row z | visible share | stopped by |
+|---|---|---|---|---|
+| outer left | -78 | 0.250 | **0.00** | `plugs` 11/13, `clamp` 2/13 |
+| inner left | -42 | 0.298 | 0.74 | nothing |
+| inner right | -10 | 0.298 | 0.91 | `clamp` 1/13 |
+| outer right | +24 | 0.250 | **0.00** | `clamp` 13/13 |
+
+The two reading zero are exactly the two the renders show as a 41 px sliver and
+a mark **split in two**. The left one is behind the PLUG BUNDLE, which occludes
+bearings -88 to -74 at this height. The right one is behind the **stake at
++22.5**, 1.5 degrees off its own bearing - a tube of radius ~0.037 across a
+mouth of radius 0.088, which is why that vent is not dim but CUT IN HALF.
+
+### THE STAGGER WAS RUNNING BACKWARDS, AND THAT IS THE FINDING
+
+Visible share by bearing and row height, every row MEASURED, no interpolation:
+
+| bearing | z=0.250 | z=0.298 | z=0.360 |
+|---|---|---|---|
+| -78 | 0.00 | 0.03 | **0.06** |
+| -42 | 0.74 | 0.74 | **0.74** |
+| -10 | 0.76 | 0.91 | **0.98** |
+| +24 | 0.00 | 0.07 | **0.42** |
+
+Pass 8 ships `0.250 + 0.048 * (i in (1,2))`: the INNER two sit at 0.298 and the
+OUTER two at 0.250. The outer two are the most oblique to the front camera and
+the most occluded, and **the stagger handed them the worse height** - it was
+helping the two vents that needed no help. The row under test is therefore FLAT
+at 0.360, the best height measured for all four, which costs none of them
+anything and stays below the lashing ring at z 0.430-0.474 (pass 4's FIX J).
+The mechanism is the flank's own taper: course 1 runs r 0.838 -> 0.730 and
+course 2 0.742 -> 0.600, so a mouth whose outer face reaches r 0.801 is BURIED
+at the bottom of the row and stands proud higher up.
+
+**NOT THE BEARING.** Pass 5 pushed a vent to -78 and pass 9 pushed one to +4
+and lost it entirely. The arc is disproved twice and is frozen.
+
+### WHAT I FOUND BY LOOKING, THAT NO NUMBER IN THIS PASS ASKED FOR
+
+I cropped the vent row out of `collier_vlabel/full_front.png` at 4x and looked
+at it. Three things are visible that the probe cannot report:
+
+1. **The occluders are confirmed by eye.** The -78 vent is a fingernail of
+   orange emerging from behind the pale plug bundle at the left edge. The +24
+   vent is visibly CUT IN TWO by a dark stake running straight down through
+   it. These are not inferences any more.
+2. **The sod at bearing 8 is plainly there** - a smooth grey-brown dome
+   sitting proud on the flank between the -10 and +24 vents, exactly where
+   pass 9 put its +4 vent and lost it. Correction (d) is confirmed by the
+   picture as well as by the arithmetic.
+3. **AND THE RISK THE ROW-HEIGHT FIX CARRIES, WHICH I WOULD NOT HAVE SEEN IN
+   THE PROBE.** The lashing ring is a solid dark horizontal bar directly above
+   the vent row. The ring occupies z 0.430-0.474; a mouth centred at 0.360 has
+   its top at **0.401**, leaving a gap of **0.029 m = 3.9 px** at 135.71 px/m,
+   which is **0.8 px at the 360p rung**. At stream scale the vents would merge
+   into the underside of the ring and read as notches under a bar rather than
+   as four countable mouths - which could make the count WORSE while every
+   occlusion number in the table above got BETTER.
+   The probe cannot see this: it asks "is the ray stopped", and the ring stops
+   nothing at 0.360. **This is why the row height is staged and not shipped.**
+   At z 0.330 the gap is 0.059 m = 8.0 px = 1.7 px at 360p, still tight.
+
+**SO THE NEXT RUN SHOULD NOT SIMPLY TURN THE FLAG ON AND MEASURE THE VENTS.**
+It must look at the RING GAP in the same picture, and it should price the
+other option the team lead named against it: **moving the one stake at +22.5**
+heals the +24 split outright with no ring risk at all, and is a smaller change.
+It does not help -78, which is the binding constraint on the count, and -78's
+occluder is the PLUG BUNDLE - so the honest shortlist for pass 11 is
+*(a)* the staged row height, judged on the ring gap as well as the vents,
+*(b)* the +22.5 stake moved off the +24 bearing, and
+*(c)* the plug bundle lifted or narrowed clear of the -78 sight line, keeping
+it off +X where pass 5's FIX K deliberately put it.
+One of those, rendered, looked at, and red-proved - not all three.
+
+### THE LABELLED ARMS - SEVEN FRONT MARKS ARE NOT FOUR VENTS
+
+`tools/art/_collier_ventlabel.py` renders three arms through ONE locked camera
+and takes two differences, so every mark is labelled by construction:
+
+* `full` - as it ships
+* `glowoff` - `MB_CUEOFF=glow`, every glow swapped for body, no vertex moved
+* `seamoff` - `COLLIER_SEAMOFF=1`, the three ember seams gone, vents untouched
+
+`seamoff - glowoff` is the vents; `full - seamoff` is the seams. Result:
+
+| | px | cx | cy | what it is |
+|---|---|---|---|---|
+| vent -78 | 41 | 282.8 | 351.2 | the sliver |
+| vent -42 | 461 | 312.7 | 357.6 | |
+| vent -10 | 452 | 366.3 | 359.8 | |
+| vent +24 | 139 | 425.2 | 364.2 | split, main part |
+| vent +24 | **17** | 438.8 | 363.5 | **split, second part** |
+| seam mid | 35 | 498.6 | 290.5 | +X flank, above the row |
+| seam top | 26 | 498.9 | 318.2 | +X flank, above the row |
+
+**Every collier reading since pass 7 came off `MB_CUEOFF=glow`, which turns off
+the vents AND the seams at once, and divided the seven front marks into "four
+vents and three somethings" BY EYE.** That is how pass 8 ticked a count of
+four. The seams are 13-16 px right of the row and well above it, so pass 7c's
+goal - no fifth ember at the vent row's height - IS being met; but nothing in
+the tree said so, and the mark-to-bearing mapping was an inference until now.
+It is independently confirmed by arithmetic: at `CELL_X/FRAME_W` = 135.71 px/m
+the four bearings' world-x gaps are 31.9 / 51.1 / 59.9 px and the four marks'
+measured gaps are 29.9 / 53.4 / 59.1 px.
+
+### WHAT MY OWN NEW INSTRUMENT GOT WRONG, BECAUSE IT IS THE SAME FAULT AGAIN
+
+Rev 0 of `_collier_occlude.py` sampled a grid across the mouth's **outer face
+disc** and reported `vis 0.000` for the +24 vent - which the committed render
+shows as a 139 px mark, the fourth-biggest thing on the front. Both were right
+about different things: the end disc at +24 IS buried, and the CONE'S FLANK
+still stands out of the earth and is lit. Measuring one chosen surface of a cue
+and calling it the cue is `head_glow_px: 156` beside "the head has no face at
+all" - the 17 Nov pass-11 fault in a new coat, for the third time on this body.
+Rev 1 samples the real mouth solid's camera-facing faces.
+It now has a **validation arm that runs every time**: it reads the committed
+`_vent_marks.json`, maps marks to bearings by the arithmetic above, and goes
+RED if it cannot agree with the render on which vent is the smallest. It
+agrees. It does NOT reproduce the full ranking - it swaps -42 and -10, which
+render 460 and 449 px, a 2% gap - and that is recorded rather than hidden.
+**A ray probe ranks; it does not predict pixels. Nothing here is a pass until
+the 360p rung has been LOOKED at.**
+
+### THE ONE-BODY FIT GATE WAS LYING, AND THE FIX IS RED-PROVED
+
+`_fit_p9A.json` and `_fit_p9B.json` read RED with empty `blind_views`, empty
+`fits_frame:false` and nothing unmeasured, for one reason: *"the census was
+taken over 64 register rows and is being read against 1 - it describes a
+different house."* A gate that cannot be green in a state the lane runs it in
+routinely is a lying gate. The subset arm in `minibossfit.derive_self_seen`
+answers it, and replayed against the real census
+(`_backread/_selfseen_census.json`, register_pairs 64, 64 keys covered,
+stamped 2026-11-25T04:02:20-0600):
+
+| run | subset? | verdict |
+|---|---|---|
+| `{collier}` | True | NOT A VERDICT, green reachable |
+| `{collier, beadle}` | True | NOT A VERDICT, green reachable |
+| `{collier, notarealbody}` | False | **RED** |
+| `{}` (empty) | False | **RED** |
+
+So it can be green for a one-body run and it **kept its teeth**: a key the
+census does not know is still RED, and a run over zero rows is still RED.
+`_fit_p9A.json` carries `census_count_scope: null`, which is the fingerprint of
+a file written before this arm existed - the two stale jsons are the fault the
+team lead saw, not the live code. They need regenerating on the next bridge.
 
 ### THE NEXT SINGLE CHANGE IS NOT A BEARING
 
@@ -318,3 +547,23 @@ that is exactly how this shipped past a green register and two careful readers.
 Evidence, committed: `renders/art/minibosses/collier_stream/` - the rung
 ladders, the per-view creature strips, and the labelled vent masks for pass 8
 and pass 9 side by side.
+
+
+## THE MOUNT FAULT, 25 Nov 09:xx CT
+
+This firing's device bridge mounted **only `bellmire-art`**, not
+`C:\hd adventure`, so the main repo was not reachable on the Linux side and
+`git` in the worktree fails with
+`not a git repository: .../jests-hd-medieval-adventure/.git/worktrees/bellmire-art`.
+The plan was read through the Blender bridge instead, which worked until that
+bridge went down too. Recorded as a transient session fault, per the lane
+prompt - no folder access was requested, because the lane already has it.
+
+**CONSEQUENCE, STATED PLAINLY:** nothing in this pass is committed or pushed.
+The files changed in the worktree are
+`tools/art/_collier_occlude.py` (new), `tools/art/_collier_ventlabel.py` (new),
+`tools/art/minibosses.py` (two guarded flags, shipped path unchanged),
+`docs/art/COLLIER_THE_62nd.md` (this file), and the renders under
+`renders/art/minibosses/collier_vlabel/` and
+`collier_stream/_collier_occlude.json`. The first run with a working Blender
+bridge must `git merge origin/art` and push them before anything else.

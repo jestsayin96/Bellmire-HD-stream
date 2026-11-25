@@ -18454,3 +18454,77 @@ Canon from the CANON row: an unaimed, uninterruptible harrow on a fixed round; w
 VALIDATION OK: all four owned files parse; by_key 57 -> 58; every pre-existing key and value unchanged (round-trip diff empty); only new keys are by_key.harrowman and _note_c200. Edited lore_lines.json and PROGRESS.md only.
 CODE WIRING: game build - MB_NAME "harrowman": "Overturn" in delve.gd; fall lines say "Overturn is down". The MB_NAME.size() literals in tools/_s51_names.gd, _s107_gate.gd and _s117_straker.gd move together in the same commit (57 once Finepass is named, 58 after). Then the chat bot republishes the miniboss count. Note S122 (Finepass) is still ahead of this in the queue.
 - **U161 (HUD, 24 Nov 21:5x CT) - `_u69_redproof` PINNED WITH THE U62-STYLE SIZE GUARD.** `tools/_u69_redproof.gd` now records any audit pass whose root is under 1920x1080 and ends with `U69_REDPROOF NO VERDICT - capture WxH is smaller than 1920x1080` (distinct from FAIL/OK). RED-PROVED THREE WAYS, windowed: 1920x1080 RED arm -> `FAIL elements=26 inflated_fails=2` (still the injection); 1920x1080 `-- control` -> `OK elements=26`; 1152x648 -> `NO VERDICT - capture 1152x648`. Log `_u161_run.log` committed. Parse 0 SCRIPT ERROR / 0 Parse Error; only import-cache `Failed loading resource` gaps in this worktree (crossbow_common, shield_rare - known, not a HUD file). Rarity-hue half is U55, shipped; not rebuilt. Lock held 21:53:34, released by the IDLE line.
+## B141 - 24 Nov 2026, 21:45 CT (chat bot) - THE HELP-LINE-CUT ARM IS RED-PROVED: IT PRINTS, IT FAULTS, AND THE THROWAWAY LEFT NO TRACE
+
+The team lead did not tick the red-proof at B140 and was right not to. B139 ran the arm and got
+GREEN with 101 characters of headroom; B140 paid the republish instead. A guard that has only ever
+been green is not a proven guard - it is an arm that has never been seen to move. This cycle moved
+it on purpose and then removed the thing that moved it.
+
+THE PROOF. A THROWAWAY copy of data/commands.json, padded 18,000 -> 20,696 bytes with ONE extra
+`order` entry and the matching `commands` row. The row carries BOTH `short` and `what` on purpose,
+so the NO WHAT arm could not fire and the only length-sensitive arm left was the one under test.
+help_line("") is built from `order`, so a 126-character key lands straight in the !help reply.
+  BEFORE (B139, measured):  !help = 352 chars against a 453 budget, 101 spare. GREEN.
+  AFTER  (this cycle):      !help = 480 chars against the same 453 budget, 27 over. RED.
+  push_error: "COMMANDS_DATA HELP LINE CUT: 1 reply(s) this file publishes are longer than the 453
+    characters that survive a worst-case "@<login> " prefix under a 480-char cap, so chat cuts the
+    tail and appends "..." with nothing logged anywhere - the hub URL is what sits at that tail:
+    ["!help is 480 chars, 27 over"]"
+  printerr:   "COMMANDS_DATA HELP LINE CUT - 1 reply(s) over the 453-char budget and silently
+    truncated on stream: ["!help is 480 chars, 27 over"]"
+BOTH limbs fired, which is what the arm was written to do - push_error so a gate sees it, printerr
+so a human reading a log sees it. 453 = 480 cap - ("@" + 25-char login + " "), and the number in
+the message is the arm computing it, not me asserting it. Gate: tools/_twitch_parse.gd, rc 0,
+TWITCH_PARSE OK (8 checks) - the verdict stayed green while the guard went red, which is correct:
+this arm reports, it does not fail the parse.
+
+THE THROWAWAY IS GONE AND I PROVED IT RATHER THAN SAYING IT. Backup, pad, run, restore all sat in
+ONE call with the restore in a `finally`, so a Blender timeout could not strand a padded data file
+in the worktree. sha256 BEFORE c316a5d522698a1e891a78498f2604b1264d8f92b6db33439015522087796a51,
+AFTER the same hash, 18,000 bytes both sides, byte-identical asserted in the same call. The backup
+file and the gate log were deleted. `git status` for my three owned files: CLEAN. Nothing of mine
+was edited this cycle - the proof needed no change to any shipped file, which is the point.
+
+ONE ARM FIRED THAT I DID NOT INTEND, AND I AM NAMING IT RATHER THAN REPORTING A TIDY RUN:
+NEEDS_HERO ROUTE went red on the throwaway key, because a published command with no case in the
+dispatch table is exactly what a fake row is. It is an artefact of the pad, it died with the
+restore, and it is worth noting that it proves a second arm works too.
+
+NO REPUBLISH, AND THE MEASUREMENT CAME BEFORE THE DECISION. My row said 56 is level and not to
+republish; the game build landed S122 at 21:12:59 one hour later, which could have changed that, so
+I measured instead of trusting either. Brace-matched, string-aware, comments stripped BEFORE
+splitting, anchored on the dict after `MB_NAME`:
+  origin/main scripts/delve.gd  MB_NAME = 56  (weigher IN as Trueweight, dredger OUT)
+  origin/laptop                 MB_NAME = 57  (dredger IN)  <- S122 HAS NOT REACHED MAIN
+  data/commands.json publishes 56 at both miniboss leaves.
+So published 56 is LEVEL with main's engine and the DO-NOT-REPUBLISH stands. The engine's own
+guard, run against my merged HEAD, says the same thing from the other side and names the gap for
+me: COMMANDS_DATA MINIBOSS COUNT published 56 / feed rows 57, and MINIBOSS UNNAMED ["dredger"].
+Both are THE FEED LEADING THE ENGINE, the way this house has always run, both pre-existing, neither
+mine. THE 56 -> 57 REPUBLISH BECOMES GENUINELY OWED THE MOMENT S122's delve.gd LANDS ON MAIN - it
+is not owed now, and publishing 57 against a 56-key MB_NAME would publish a count no half carries.
+
+A NOTE ON MY OWN TOOLING, BECAUSE IT FAILED SILENTLY AND I ONLY CAUGHT IT BY CROSS-CHECK: my
+`by_key` parser returned anchor-missing on origin/main:scripts/miniboss_feed.gd and I nearly
+reported "feed count unknown". The engine's own guard printing "feed rows 57" is what gave me the
+number. A parser that returns null is better than one that returns a wrong count, but I did not fix
+it this cycle and the next seat should not trust that anchor.
+
+THE WINDOW. My row tightened it: claim by :48, declare no later than :51:30, because B140's
+21:01:37 declaration cost the HUD its Godot window a third hour running. Claimed 21:47:10, declared
+21:51:30, RELEASED 21:50:40 - inside the declaration and clear of the HUD. Lock was free by the
+yield rule and by process: last line IDLE 21:12:59 (game build), Get-Process Godot* = 0 before the
+claim and 0 after Godot exited. One fault of my own inside the window: my first attempt to write
+the IDLE line went through cmd.exe and the quoting mangled it, so the lock sat at RUNNING with no
+IDLE for about half a minute. I caught it by reading back the tail instead of trusting rc, and
+rewrote the line with direct file I/O. A lock line written through a shell is a lock line that can
+be eaten; the next seat should append it with file I/O.
+
+CHANGED: PROGRESS.md only. No .gd, no .json, no .md of the three owned files touched.
+TWITCH: no live test, ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro.
+NEXT: the 56 -> 57 republish the moment S122 reaches main - both `miniboss` leaves in
+data/commands.json and docs/COMMANDS.md regenerated by the real tools/_commands_doc.gd in the same
+commit. Then L56 (delve-heavy soak), which has now been split four firings running and needs a
+window longer than :48-to-:51:30 to start honestly. Decision for Mr. E: none.

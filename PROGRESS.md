@@ -18228,3 +18228,8 @@ is absent. If you move `CHAT_MAX_LEN`, my number has to follow it, and this row 
 that coupling. Nothing else is owed from you.
 
 Nothing for Mr. E to decide.
+
+## C-198 (24 Nov 2026 19:2x CST, content) - WROTE miniboss_feed.by_key.weigher (TRUEWEIGHT, THE 56th); FEED 55 -> 56
+TAKE THIS NEXT (18:58 CT block, 24 Nov) CONTENT row (:22): feed the 56th. Body weigher.glb is committed on origin/main (merged). Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Canon from the CANON row in tools/art/minibosses.py: IT MUST COME DOWN EVEN - tipped beam, a bright pan at each end, damage into the heavy pan paid back from the light one; the condition is where the party stands. Lines name the beam and the pans and favour no tactic; broken = the beam comes level. New _note_c198 (expected zero-hit key). MB_NAME (engine) still lacks weigher by my read of the plan block: the feed leads the engine, as it did for straker.
+VALIDATION OK: lore_lines.json parses; by_key 55 -> 56; every pre-existing key and value unchanged; only new keys are by_key.weigher and _note_c198. Edited lore_lines.json only.
+CODE WIRING: game build - add MB_NAME `"weigher": "Trueweight"` in delve.gd (the fall lines say "Trueweight is down"). Then the chat bot republishes 55 -> 56. Nobody should republish before the engine names it.

@@ -14608,6 +14608,45 @@
           "The Everyhand is down. Your arm remembers the hammer.",
           "The nails are in. Go on up."
         ]
+      },
+      "weigher": {
+        "arrive": [
+          "A man stood in the middle of the floor with a bar across his shoulders. A pan hung off each end.",
+          "The bar is not level. One pan rides up by his shoulder and one hangs down by his knee.",
+          "Both pans are scoured bright. They are the cleanest things in the room.",
+          "Old coat, black with handling. Boots set wide. He is holding a load up and he is not walking.",
+          "He is not looking at you. He is looking at which pan is lower.",
+          "Put your weight in one pan and the other comes up. He will pay it back from there.",
+          "Stand where you like. The bar goes where the room goes.",
+          "The town's own standard, sealed and hung. Somebody trusted it once, and it is still true.",
+          "He waits, and the beam waits with him. Neither one is in a hurry."
+        ],
+        "act": [
+          "The low pan sinks a hand's breadth. {name} feels the blow come back from the other side.",
+          "{name} strikes the heavy pan and the light one pays it out again.",
+          "The bar tips. {name} is standing under the wrong end of it.",
+          "{name} swings and the beam does not care how hard.",
+          "Both pans swing and settle. {name} looks at which one is up.",
+          "One side rises and the armour rises with it. {name} had put everything on the other.",
+          "{name} steps across the floor and the pans move with the step.",
+          "The chains creak. {name} watches the bar and not the man."
+        ],
+        "broken": [
+          "The pans come level. The bar stops creaking.",
+          "Both sides are even. The last blow goes in and counts.",
+          "He stands straight under it for the first time. The beam is true.",
+          "Nothing was struck down. It was brought level, and now he is yours."
+        ],
+        "fall": [
+          "Trueweight is down. The beam lies across the floor and the pans sit flat.",
+          "Both pans are on the flags, level. Nothing is hanging from either.",
+          "He carried the standard down here so the weights would stay honest.",
+          "Two bright pans, one beam, one man to hold it up. That was all he had.",
+          "Nobody was in a hurry to say which side had won.",
+          "Even on both sides. That is the only way it ever came down.",
+          "Trueweight is down. Your shoulders ache as if you had carried it.",
+          "The beam is true. Go on up."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -14649,7 +14688,8 @@
     "_note_c189": "C-189: stiltman (52nd miniboss, Downfast, fogbound, 3.20 m, ALREADY DOWN ONE: a man on stilts who has lost one, a crutch where the leg should be). The stilt that is left is breakable and breaking it works - his reach over the front line is gone and he is faster at your height; leaving it, he strikes down past the line into whoever is behind. The PARTY owns the decision and both ways cost; the lines name both and favour neither. Art body stiltman.glb tracked on BOTH origin/main and origin/art, blob 62aa562c, 71,716 B (ref checked via git ls-tree, not a worktree); canon row tools/art/minibosses.py:18749. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall; no per-hero item named. Zero-hit by design. NO LANE IS TO WIRE THIS KEY. Cascade: this row first, then game build (11:07) adds Delve.MB_NAME stiltman -> Downfast, MB_FIT stiltman 1.31, THEME_MINIBOSS_MORE fogbound += stiltman; feed 52 vs MB_NAME 51 is the expected transient until then.",
     "_note_c190": "C-190: nightman feed row (Nightwork, the 53rd, prison). Canon: IT WORKS IN THE DARK AND WAITS IN THE LIGHT. Lamp shutter open: it stands dead still and cannot be hurt. Shut: it can be killed and it works. Lines are mechanic-neutral on the party's choice; 'broken' = shutter open (the trade). Expected zero-hit key.",
     "_note_c193": "C-193: iceman feed row (Hoarback, the 54th, mess). Canon from tools/art/minibosses.py CANON row: IT CARRIES THE COLD AND THE COLD IS ON A COUNT. Four blocks on the rack plus a fifth in the tongs; while a block stands the room is cold and all in it work slow, him included; blocks go one at a time in their own time, nothing the party does takes one off; when the last goes the room thaws and he sets the tongs down and turns round. No choice for the party to make but how to spend the given rounds; the lines name that and favour no tactic. 'broken' = the thaw (last block gone), not a hit landing - there is no weakness to strike. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall. Body iceman.glb is on origin/main (merged 24 Nov). Expected zero-hit key.",
-    "_note_c195": "C-195: straker feed row (Everyhand, the 55th, wheel and four strakes). Canon from tools/art/minibosses.py CANON row: IT WILL NOT GO DOWN TO ONE HAND - it is straking a rim and the last blow does nothing until every hand in the party has struck it; a ledger of which hero has struck, only grows. No phase, nothing to out-manoeuvre; the condition is on the party. The four bright iron strakes on the tread are the count. Lines name that and favour no tactic. 'broken' = the last hand has struck and the rim is whole, not a weakness hit. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall. Body straker.glb is on origin/main (merged 24 Nov). Expected zero-hit key."
+    "_note_c195": "C-195: straker feed row (Everyhand, the 55th, wheel and four strakes). Canon from tools/art/minibosses.py CANON row: IT WILL NOT GO DOWN TO ONE HAND - it is straking a rim and the last blow does nothing until every hand in the party has struck it; a ledger of which hero has struck, only grows. No phase, nothing to out-manoeuvre; the condition is on the party. The four bright iron strakes on the tread are the count. Lines name that and favour no tactic. 'broken' = the last hand has struck and the rim is whole, not a weakness hit. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall. Body straker.glb is on origin/main (merged 24 Nov). Expected zero-hit key.",
+    "_note_c198": "C-198: weigher feed row (Trueweight, the 56th, beam and two pans). Canon from tools/art/minibosses.py CANON row: IT MUST COME DOWN EVEN - a weigh-beam across the shoulders with a pan at each end, already tipped; damage into the heavy pan is paid back out of the light one while the beam is out of true, so a party stacked on one flank moves nothing. No phase, no target choice, nothing to interrupt; the condition is on where the party STANDS. Lines name the tipped beam and the two bright pans and favour no tactic. 'broken' = the beam comes level, not a weakness hit. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Body weigher.glb is on origin/main (merged 24 Nov). Expected zero-hit key."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

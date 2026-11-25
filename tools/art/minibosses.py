@@ -22636,3 +22636,451 @@ def timberman():
 
 
 BUILDERS.update({"timberman": timberman})
+
+
+# -------------------------------------------------------------- 62 THE COLLIER
+CANON.update({
+    "collier": ("Halfblow", 2.10, (0.46, 0.40, 0.33), (1.00, 0.56, 0.20),
+                "wood",
+                "YOUR OWN HEAVY BLOW IS WHAT OPENS IT - it is earthed shut on a "
+                "live fire and every blow lands in full, but anything past a "
+                "measured stroke bursts a vent and the flare takes the whole "
+                "room. Take it down in half blows, or drive its four pale plugs "
+                "into the vents first",
+                0.38, "Something in here is shut on a fire."),
+})
+ORDER = ORDER + ["collier"]
+
+# THE OVERRIDE IS MEASURED, NOT A TASTE CALL - the same check the timberman ran
+# an hour ago, because the fault it exists for is this file's generator and not
+# any one body. At tint (0.46,0.40,0.33), aura (1.00,0.56,0.20) and wear 0.38
+# the derived palette gives body luminance 0.3242 and bone 0.4346: a
+# BONE/BODY RATIO OF 1.34. The one countable cue on this body would be a third
+# of a stop brighter than the mass it has to be counted against. That is the
+# Beadle's shipped fault arriving before a vertex is placed.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"collier"}
+OVERRIDE.update({
+    "collier": {
+        # DAMP DUG EARTH. The clamp was earthed up this week - rule 2, wear is
+        # a variable: the earth is new work, the iron on it is old.
+        'body': ((0.165, 0.132, 0.104), 0.88, 0.02),
+        # THE FOUR PLUGS, AND NOTHING ELSE IN THIS SLOT. Fresh-split sapwood.
+        # ratio against the body is 5.8, not 1.34.
+        'bone': ((0.842, 0.790, 0.628), 0.50, 0.00),
+        # iron: the three hoops, the vent collars, the apron, the shovel. Pulled
+        # COOL on purpose so the body is not two warm browns - the colour
+        # instruments read a monochrome body as a defect and they are right to.
+        'dark': ((0.042, 0.046, 0.054), 0.80, 0.06),
+        # THE FOUR VENTS. 1.9, not 3.2: the Dyer's pass-3 lesson is that an
+        # emissive which clips to white is a white hole and not a cue, and four
+        # small mouths clip sooner than one big one.
+        # *** PASS 2, FIX A - THE WORST FAULT OF PASS 1. *** At (1.00,0.56,0.20)
+        # strength 1.90 the four vents rendered as FLAT CREAM DISCS - the same
+        # value as the four plugs, so the body shipped EIGHT pale dots and
+        # nothing lit, which is both halves of my own FAULT 9/10 at once. A
+        # near-white emissive is a hole, not a fire (dyer pass 3). Deeper and
+        # weaker: the hue has to survive the view transform, so the green and
+        # blue come down before the strength does.
+        'glow': ((1.000, 0.300, 0.062), 1.15),
+    },
+})
+
+
+def collier():
+    """YOUR OWN HEAVY BLOW IS WHAT OPENS IT. The 62nd body.
+
+    THE IDEA. A charcoal burner's clamp is a stack of wood earthed over and lit
+    inside, and the whole trade is KEEPING IT SHUT: let air in and the smoulder
+    becomes a fire, and the week's work goes up in one flare. This body is that
+    clamp, with a man grown out of the crown of it. Every blow the party lands
+    lands IN FULL - it is not armoured, it is not immune, nothing is absorbed -
+    but a blow bigger than a measured stroke bursts one of the four vents on
+    its front and the flare takes the whole room, party and monsters alike. So
+    the party's heaviest hero is the liability and its lightest is the asset,
+    every round, for the whole fight. The second answer is on the body: four
+    pale plugs in a withy cradle on its right flank, countable from the
+    doorway. Drive them home and the vents are shut and the cap comes off.
+
+    WHAT THIS IS NOT. Sixty-one deep the re-skin is the easy failure, and the
+    two nearest neighbours are a mirror and a sibling. I am naming both.
+      NOT THE TIMBERMAN (61), WHICH SHIPPED AN HOUR BEFORE THIS ONE and is the
+            one body I could most easily be re-skinning. There the KILLING blow
+            is the hazard: one event, once, at the end, and the counter-play is
+            PREPARATION done before you finish it. Here no single blow ends
+            anything and the kill is ordinary; what is constrained is the SIZE
+            of every blow, continuously, and the counter-play is WHO SWINGS.
+            The timberman reorders the end of the fight. This reorders the
+            party's attack economy from the first round: it makes the big
+            hitter the problem and the chip-damage hero the answer, which no
+            other body in this file does in either direction.
+      NOT THE DREDGER (57), WHICH IS THE EXACT MIRROR AND I SAY SO. It "only
+            feels what gets through the mesh" - a damage FLOOR, where a small
+            blow does NOTHING. This is a CEILING, and no blow is ever
+            nullified: the full damage always lands and the cost is paid by the
+            room instead. Opposite direction, opposite play, and opposite
+            consequence - a dredger punishes the weak hero, this one punishes
+            the strong one, and a dredger's wasted blow costs you a round while
+            this one's costs you the room.
+      NOT THE STRICKLER (37). It scrapes your best hero DOWN to your worst - it
+            changes the hero. Nothing here touches any hero's numbers: your
+            heavy hitter is exactly as strong as they were and that is the
+            whole problem.
+      NOT THE PLEDGEMAN (59). There the party pays a real price out of the
+            health bar to win well. Here there is no price to pay, only a line
+            not to cross, and crossing it is free until it is not.
+      NOT THE STOKER (12), the other sealed-fire body. That one IS the fire -
+            "only as big as the fire; starve the pit and it starves", so the
+            answer is to take fuel AWAY. The fire here is not its strength and
+            starving it is not available: it is the hazard the party is trying
+            not to release.
+      NOT THE SCRAPWRIGHT (2), the other mound in the house. That is a lopsided
+            heap of torn PLATE that grows as you knock it off, on legs, angular
+            and bright metal. This is a banded earth dome that never changes
+            shape, with no legs at all.
+      NOT THE PANNER (51) OR THE NIGHTMAN (53), the two state-gated bodies.
+            Both have windows where there is nothing to hit or nothing to fear.
+            This body is open to be hit at every instant of the fight. There is
+            no window and no waiting; there is only the size of the swing.
+
+    WHAT A VIEWER READS FROM THE DOORWAY:
+      WHAT IS IT?        A low broad banded mound of earth with a man's
+                         shoulders and head growing out of the top of it. No
+                         legs. It is the widest and nearly the shortest thing
+                         in this file.
+      WHAT IS IT DOING?  Holding it shut. The long shovel is raked down the
+                         front of the mound with its blade at a vent, and his
+                         free hand is flat on his own crown.
+      HOW MANY OF US?    Not a count of us - A COUNT OF PLUGS. Four pale
+                         split billets in a cradle clear of his right flank,
+                         and they are the only pale objects on the body because
+                         they are the answer.
+      WHY NOT WALK ROUND? You can. It has no legs and it does not pursue - it
+                          slumps where it stands. The four lit vents are at
+                          knee height on the front arc, which is where a party
+                          can reach them.
+
+    THE READ IS BUILT ON THIS HOUSE'S OWN LOGGED FAULTS, NOT ON MY CONFIDENCE.
+      FAULT 1 - THE PALE CUE AT THE SAME VALUE AS THE MASS (Beadle; timberman
+            FAULT 1). Computed from the generator's own formulae BEFORE
+            modelling: derived bone/body luminance here is 1.34. Answered in
+            OVERRIDE above - 5.8.
+      FAULT 2 - THE CARRIED THING EATS THE BODY (crimp pass 1). The shovel runs
+            OUTWARD as well as down: fist x 0.40 to blade x 0.78, so on the
+            front camera it is a diagonal clear of the trunk's own |x| < 0.30,
+            and on the side camera it lives at y -0.26..-0.62, forward of the
+            leaning trunk's band.
+      FAULT 3 - A FLAT PLATE EDGE-ON TO EVERY HORIZONTAL CAMERA (harrowman pass
+            2). There is no plate on this body except the shovel blade, which
+            is RAKED about two axes, and the apron, which is a narrow strip and
+            not a panel.
+      FAULT 4 - A LOAD SLUNG ALONG THE FACING AXIS IS INVISIBLE IN THE FRONT
+            ORTHO (straker FIX K, dredger FIX C). The plug cradle is therefore
+            NOT on his back: it stands on the +X flank, x +0.62..+0.98, so the
+            front camera gets it against open sky beyond the mound's shoulder,
+            and the four are spread 0.62 m in Y so the side camera gets four
+            separate sticks and not one.
+      FAULT 5 - THREE THINGS IN ONE PLANE AT ONE ANGLE ARE ONE THING (timberman
+            pass 2 FIX D). The four plugs FAN: each has its own rake, its own
+            lean out of the plane and its own length, so the tips are 0.19 m
+            apart with open sky between them.
+      FAULT 6 - NO FREE ENDS. Every plug is capped with its own iron ferrule,
+            both lashings run across all four and back into the bundle, the
+            shovel terminates in a socket and a blade, and the mound is a
+            closed stack of courses.
+      FAULT 7 - IT MUST HAVE A FACING (Beadle: a pale band that wrapped the
+            head, so front and back rendered alike). Front and back cannot
+            match here by construction: all four vents are on the -Y arc, the
+            brow, sockets and mouth cloth are on -Y only, the shovel and the
+            plug cradle are both on +X, and the mound's own courses are bellied
+            toward -Y.
+      FAULT 8 - IT MUST NOT READ AS A HERO. It has no legs, no weapon and no
+            shield. The shovel is a broad-bladed tool on a long haft held
+            pointing at the ground, and the thing it is held against is its own
+            body.
+      FAULT 9 - THE SECOND PALE THING KILLS THE FIRST (timberman pass 2 FIX C,
+            where two crown cheeks in 'bone' came back as a white carton
+            competing with the three spares). The plugs are the ONLY geometry in
+            the 'bone' slot on this body. The apron, the hoops, the vent
+            collars, the hat and the shovel are all 'dark' on purpose.
+      FAULT 10 - AND THE SECOND GLOWING THING WOULD KILL THE COUNT. This body
+            deliberately has NO glow eyes, which is the first time in the file,
+            because the four vents are a COUNTABLE emissive cue and two lit
+            eyes above them would make six lit dots. The sockets are dark.
+
+    Static: no armature, so bestiary.gd wants a `model` path and NO `anims`.
+    """
+    P = Parts("collier")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    CROWN = 0.980
+    WAIST = 1.105
+    CHEST = 1.370
+    SHO = 1.540
+    HEAD = 1.775
+
+    # He is bent FORWARD over his own vents - the lean is in -Y, and it is the
+    # pose argument for the whole body: a man watching the front of his clamp.
+    # *** PASS 3, FIX G. *** Pass 2 stood him dead on the mound's axis of
+    # revolution, which is the other half of why it read as a figure in a
+    # dress: a bodice sits on the centre of a skirt. He steps 0.21 m FORWARD
+    # and 0.06 m to his left, so he is coming out of the mound's front
+    # shoulder and the heap runs away behind him.
+    def _s(v):
+        v = Vector(v)
+        t = max(0.0, (v.z - CROWN) / 0.80)
+        return Vector((v.x - 0.165, v.y - 0.210 - 0.130 * t, v.z))
+
+    # --------------------------------------------------------------- THE CLAMP
+    # Built first; everything about the man is positioned against it. FOUR
+    # COURSES, not one dome: a clamp is built in courses, and a stepped profile
+    # gives both orthos a real outline where a smooth ellipsoid gives them a
+    # blob. Each course is skewed in X (scone's s1/s2 move girth without adding
+    # mean radius) and offset in -Y, so the mound is BELLIED TOWARD THE FRONT
+    # and neither ortho sees a symmetrical hill.
+    _open()
+    # *** PASS 2, FIX B - THE SECOND WORST FAULT OF PASS 1, AND I ONLY SAW IT
+    # BY LOOKING. *** Four coaxial cones with gentle skew and no yaw came back
+    # on BOTH cameras as A BELL SKIRT WITH A MAN IN IT - a crinoline, not a
+    # heap of earth. Every number was green. The cause is that a cone's flank
+    # is a STRAIGHT LINE and four of them sharing an axis make one clean
+    # straight line from floor to waist, which is what a dress is and what a
+    # tipped heap of spoil never is. Three things change, all of them
+    # geometry rather than tuning: the courses are SHORTER AND BROADER so the
+    # flank is a shallow stack and not a tall funnel; each course gets its own
+    # YAW and its own lateral offset, so no two skews line up and the profile
+    # steps in and out as it rises; and the top course ends in a real SHELF
+    # with the man set INTO it, instead of tapering continuously into his
+    # waist the way a bodice meets a skirt.
+    _courses = [
+        # (r_bottom, r_top, h, z, skew_b, skew_t, y_off, x_off, yaw)
+        (0.880, 0.830, 0.235, 0.000, 0.120, 0.105, -0.030, 0.000, 0.00),
+        (0.838, 0.730, 0.250, 0.235, 0.105, 0.090, -0.060, 0.030, 0.55),
+        # *** PASS 4, FIX H. *** Pass 3 fixed the SIDE camera (the spoil tail
+        # and the man's step forward are both in Y) and left the FRONT camera
+        # exactly as it was: a symmetrical cone with a man on its centre line,
+        # which is still a bell skirt. The apex now walks 0.26 m to +X as it
+        # rises, so the front silhouette is a HEAP WITH A HIGH SIDE AND A LOW
+        # SHOULDER, and the man comes out of the low shoulder. Asymmetry in
+        # the camera's own horizontal axis is the only thing that answers it.
+        (0.742, 0.600, 0.250, 0.485, 0.095, 0.075, -0.092, 0.112, 1.15),
+        (0.612, 0.470, 0.245, 0.735, 0.080, 0.060, -0.112, 0.252, 1.95),
+    ]
+    for rb, rt, h, z, sb, st, yo, xo, yw in _courses:
+        P.add(L.scone(rb, rt, h, 18, s1=sb, s2=st), 'body',
+              loc=(xo, yo, z), rot=(0.0, 0.0, yw))
+    # the crown is capped, not open: a clamp with a hole in the top is a fire.
+    # Flattened hard, so it is a SHELF the man stands out of and not a dome.
+    P.add(L.sphere(0.482, 0.448, 0.112, 18, 8), 'body', loc=(0.252, -0.112, CROWN - 0.052))
+    # SEVEN SODS thrown on the flanks. An earthed clamp is turves laid by hand
+    # and it is lumpy; a lathe-true cone is the thing that made this a dress.
+    # Each breaks the straight flank at a different height on a different
+    # bearing, so no camera gets an unbroken line from floor to shelf.
+    for deg, z, r in ((-148.0, 0.175, 0.205), (-96.0, 0.520, 0.168),
+                      (-40.0, 0.690, 0.150), (8.0, 0.300, 0.190),
+                      (62.0, 0.600, 0.162), (124.0, 0.400, 0.182),
+                      (168.0, 0.780, 0.138)):
+        a = math.radians(deg)
+        rr = 0.868 - 0.440 * (z / 0.980)
+        P.add(L.sphere(r, r * 0.92, r * 0.58, 10, 7),
+              'body', loc=(rr * math.sin(a), rr * -math.cos(a) - 0.060, z))
+    # THREE IRON HOOPS at the course joins. They are what says SHUT, and they
+    # are also what stops a 1.7 m earth dome reading as one smooth lump on
+    # every camera - a banded profile has three places to catch light.
+    # *** PASS 3, FIX F - THE FAULT PASS 2 DID NOT FIX AND MADE WORSE. *** Pass
+    # 2's sods and shelf helped and the thing STILL read as a bell skirt on
+    # both cameras, because of an interaction I built myself: a body of
+    # revolution with THREE HORIZONTAL IRON RIBS ROUND IT IS A CRINOLINE,
+    # literally - that is what a crinoline is. The hoops were the best-reading
+    # object on the body and they were selling the wrong word. A charcoal
+    # clamp is STAKED: withies driven up the flank, with one ring lashing them.
+    # Eight verticals and one ring instead of three rings - the vertical lines
+    # cut every horizontal band the eye was joining into a hoop skirt, and
+    # they are what the real thing has.
+    for i in range(8):
+        a = math.radians(22.5 + 45.0 * i)
+        d = Vector((math.sin(a), -math.cos(a), 0.0))
+        # *** PASS 4, FIX I. *** At R 0.868 / 0.495 the stakes sat INSIDE the
+        # earth they were supposed to be driven into: pass 3's render shows
+        # one ring and about two stakes. A measure that is inside the mass is
+        # not a measure. Proud of the surface by about 0.06, and thicker.
+        lo = d * 0.928 + Vector((0.0, -0.030, 0.050))
+        # *** PASS 5, FIX M. *** The 0.040*i drift I added in FIX I to stop the
+        # eight heads coinciding walked the last few of them straight off the
+        # earth, and the +X stakes stand in clear air with daylight under
+        # them - a free end (FAULT 6) that I introduced while fixing
+        # something else. The heads follow the apex's own walk to +X instead.
+        hi = d * 0.572 + Vector((0.150, -0.104, 0.812))
+        P.raw(L.tube([lo, lo.lerp(hi, 0.5) + Vector((0.0, 0.0, 0.016)), hi],
+                     [0.040, 0.034, 0.026], 7), 'dark')
+    # ONE ring, lashing the stakes at mid height.
+    P.add(L.scone(0.754, 0.742, 0.044, 20, s1=0.09, s2=0.09),
+          'dark', loc=(0.0, -0.072, 0.452))
+    # THE SPOIL TAIL. A skirt has no tail. The earth this clamp is covered with
+    # came off the floor behind it and is still lying there in a bank, so the
+    # side camera gets a long shallow back slope running out to y +1.02 and the
+    # plan of the thing is an egg and not a circle.
+    for yy, zz, rr in ((0.560, 0.0, 0.420), (0.790, 0.0, 0.330), (1.000, 0.0, 0.232)):
+        P.add(L.sphere(rr * 1.10, rr, rr * 0.46, 12, 7), 'body',
+              loc=(0.030 * (1 if yy > 0.7 else -1), yy, zz + rr * 0.20))
+    _close("clamp")
+
+    # --------------------------------------------------------------- THE VENTS
+    # THE CUE, AND THE ONLY EMISSIVE THING ON THE BODY. Four, on the -Y arc, at
+    # knee height, each a dark collar with a lit mouth standing proud of it so
+    # there is a dark ring around every light. Spread -72..+72 degrees off the
+    # facing axis so the front camera gets four and the side camera still gets
+    # the outermost one in profile rather than four coincident dots.
+    _open()
+    # *** PASS 5, FIX L. *** The +72 vent rendered BEHIND THE SHOVEL on the
+    # front camera, so the count read three. The shovel's blade sits on a
+    # bearing of about +51 degrees and it is not moving - it is the sentence
+    # about what he is doing - so the vent arc swings clear of it instead.
+    for i, deg in enumerate((-78.0, -42.0, -10.0, 24.0)):
+        a = math.radians(deg)
+        d = Vector((math.sin(a), -math.cos(a), 0.0))
+        # *** PASS 4, FIX J. *** Three of the four were clipped by the lashing
+        # ring or a stake on the front camera, and the side camera got NONE.
+        # Dropped below the ring, moved to the 0.300 band and widened: the
+        # count is the mechanic and a cue you have to hunt for is not a cue.
+        z = 0.250 + 0.048 * (1 if i in (1, 2) else 0)
+        # collar: iron, sunk into the earth, axis pointing out along d
+        P.add(L.scone(0.128, 0.114, 0.062, 12), 'dark',
+              loc=tuple(d * 0.712 + Vector((0.0, -0.040, z))),
+              rot=(math.pi * 0.5, 0.0, a))
+        # mouth: proud of the collar by 0.03 so it is a light in a ring and not
+        # a bright patch on a dark patch
+        P.add(L.scone(0.088, 0.074, 0.082, 12), 'glow',
+              loc=tuple(d * 0.760 + Vector((0.0, -0.040, z))),
+              rot=(math.pi * 0.5, 0.0, a))
+    _close("vents")
+
+    # --------------------------------------------------------- THE FOUR PLUGS
+    # The answer, countable, entirely on the +X flank (FAULT 4), fanned (FAULT
+    # 5), ferruled and lashed (FAULT 6).
+    _open()
+    _tips = []
+    # *** PASS 2, FIX C. *** Pass 1 spread the four 0.62 m apart in Y to beat
+    # the front-ortho collapse, and on the SIDE camera - which projects (y, z)
+    # - that spread became A FOUR-BAR FENCE LAID ACROSS THE WHOLE MOUND. I
+    # answered one camera's question and asked nothing of the other. They keep
+    # their fan (four sticks, not one board) but the fan is now 0.35 m wide and
+    # 0.78 m long instead of 0.62 and 0.98, so it is a BUNDLE standing against
+    # the flank on both cameras rather than a railing on one of them.
+    # *** PASS 5, FIX K - PASS 4'S OWN FIX BROKE THIS. *** Walking the apex to
+    # +X (FIX H) put the mound's new HIGH shoulder directly in front of the
+    # plug bundle, and the front render came back with ONE pale sliver where
+    # there should be four countable billets. A fix that moves a mass must be
+    # re-asked what that mass now covers; I did not ask, and the render did.
+    # The bundle crosses to the LOW shoulder on -X, which is the side pass 4
+    # just opened up, so the four stand against clear sky on the front camera
+    # and forward of the heap on the side one.
+    for i in range(4):
+        # *** PASS 6, FIX O. *** On the hero sheet the first billet stood
+        # across the -78 vent and the ember count read three and a half. The
+        # bundle steps 0.17 m forward in -Y, which clears the vent arc and
+        # also puts the four in front of the mound's shoulder rather than
+        # against it.
+        base = (-0.700 - i * 0.030, -0.050 - i * 0.108, 0.055)
+        tip = (base[0] - 0.142 - i * 0.026, base[1] - 0.048 - i * 0.032,
+               base[2] + 0.760 - i * 0.046)
+        pts = seat([base, tip], 0.058)
+        limb(P, [tuple(p) for p in pts], 0.062, 0.044, 'bone', 9)
+        _tips.append(Vector(tuple(pts[-1])))
+        P.add(L.scone(0.054, 0.050, 0.058, 10), 'dark',
+              loc=(pts[-1].x, pts[-1].y, pts[-1].z - 0.014))
+    for zf in (0.30, 0.70):
+        a = Vector((-0.700, -0.050, 0.055)).lerp(_tips[0], zf)
+        b = Vector((-0.790, -0.374, 0.055)).lerp(_tips[3], zf)
+        pts = arc(tuple(a), tuple(b), -0.024, 7)
+        P.raw(L.tube([Vector(p) for p in pts], [0.015] * len(pts), 7), 'dark')
+    _close("plugs")
+
+    # ---------------------------------------------------------------- THE MAN
+    _open()
+    P.add(L.sphere(0.272, 0.244, 0.190, 16, 10), 'body', loc=tuple(_s((0.0, -0.010, WAIST))))
+    P.add(L.sphere(0.300, 0.256, 0.250, 16, 10), 'body', loc=tuple(_s((0.0, -0.020, CHEST))))
+    P.add(L.sphere(0.292, 0.232, 0.158, 14, 9), 'body', loc=tuple(_s((0.0, -0.024, SHO - 0.050))))
+    # the apron: a dark STRIP down his front, not a panel (crimp pass 3 cut a
+    # 0.090 placket to 0.048 because a dark T over the chest stopped the torso
+    # reading as a torso). This is half the facing.
+    P.add(L.box(0.052, 0.056, 0.400), 'dark', loc=tuple(_s((0.0, -0.214, CHEST - 0.040))))
+    _close("trunk")
+
+    _open()
+    _hd = _s((0.0, -0.030, HEAD))
+    # *** PASS 6, FIX N - FOUND ONLY ON THE HERO SHEET, NOT ON THE ORTHOS. ***
+    # At full size this head is fine. Beside a KayKit knight at stream
+    # distance it read as A POT WITH A LID ON IT: a small head under a flat
+    # disc wider than itself is a jar, and the face went entirely. The head
+    # grows, and the hat stops being a plate - it tapers UP into a crown
+    # narrower than the skull, with its brim on -Y only, which also buys
+    # another piece of facing (FAULT 7).
+    P.add(L.sphere(0.198, 0.204, 0.206, 16, 10), 'body', loc=tuple(_hd))
+    # brow band and the mouth cloth - BOTH -Y ONLY (FAULT 7)
+    P.add(L.box(0.292, 0.062, 0.054), 'dark', loc=(_hd.x, _hd.y - 0.134, _hd.z + 0.052))
+    P.add(L.box(0.212, 0.098, 0.096), 'dark', loc=(_hd.x, _hd.y - 0.106, _hd.z - 0.082))
+    # DARK sockets, not glow eyes (FAULT 10)
+    for s in (-1, 1):
+        P.add(L.sphere(0.042, 0.030, 0.034, 9, 6), 'dark',
+              loc=(_hd.x + s * 0.066, _hd.y - 0.134, _hd.z + 0.002))
+    # low flat burner's hat
+    P.add(L.scone(0.176, 0.124, 0.082, 14), 'dark', loc=(_hd.x, _hd.y + 0.004, _hd.z + 0.148))
+    P.add(L.box(0.310, 0.150, 0.036), 'dark', loc=(_hd.x, _hd.y - 0.126, _hd.z + 0.162))
+    _close("head")
+
+    # ---------------------------------------------------- THE SHOVEL, AND A HAND
+    # ON HIS OWN CROWN. Timberman pass 5: a hanging or braced arm reads, and a
+    # contrived second grip cost that body three passes. One arm works, one
+    # arm holds the thing shut, and neither crosses the face.
+    _open()
+    _fist = Vector(tuple(_s((0.400, -0.262, CHEST - 0.040))))
+    limb(P, [tuple(_s((0.272, -0.030, SHO - 0.030))), (0.392, -0.172, 1.492),
+             tuple(_fist)], 0.106, 0.078, 'body', 9)
+    P.add(L.sphere(0.092, 0.086, 0.082, 11, 7), 'dark', loc=tuple(_fist))
+    _close("arms_r")
+    _open()
+    # *** PASS 2, FIX E. *** 0.270 of haft above the fist ran straight past his
+    # jaw on the side camera - the crimp/timberman "something crossing the
+    # face" fault, arriving on a tool instead of an arm. 0.105 is a hand's
+    # grip and clears him.
+    _haft = [tuple(_fist + Vector((-0.030, -0.010, 0.105))),
+             tuple(_fist),
+             (0.560, -0.420, 0.880), (0.690, -0.540, 0.560), (0.772, -0.616, 0.372)]
+    P.raw(L.tube([Vector(p) for p in _haft], [0.034, 0.042, 0.040, 0.038, 0.034], 8), 'body')
+    # socket and blade, raked about two axes (FAULT 3)
+    P.add(L.scone(0.056, 0.048, 0.090, 10), 'dark', loc=(0.766, -0.606, 0.330),
+          rot=(0.62, 0.0, -0.52))
+    P.add(L.box(0.280, 0.230, 0.044), 'dark', loc=(0.792, -0.636, 0.236),
+          rot=(0.46, 0.22, -0.52))
+    _close("shovel")
+
+    _open()
+    # *** PASS 2, FIX D. *** Pass 1's left arm came off the shoulder in two
+    # straight runs with a hard corner and rendered as A BENT PLANK jutting off
+    # his -X side - the dredger/timberman "an arm with square corners is not an
+    # arm" fault. Four points, the elbow swung OUT in X and DOWN, so the limb
+    # has a curve in it and the hand lands flat on the shelf he is holding shut.
+    _lh = Vector((-0.396, -0.268, CROWN + 0.098))
+    limb(P, [tuple(_s((-0.268, -0.030, SHO - 0.040))), (-0.372, -0.120, 1.330),
+             (-0.418, -0.206, 1.170), tuple(_lh)], 0.100, 0.072, 'body', 9)
+    P.add(L.sphere(0.090, 0.098, 0.070, 11, 7), 'dark', loc=tuple(_lh))
+    _close("hand")
+
+    # The man is the trunk, the head and the two arms - he has NO legs, which
+    # is why this declaration is written out rather than copied from the body
+    # above it. `_backread` asks the viewer's question (render with and without
+    # the man through one camera, count the pixels that MOVED), and a body that
+    # declares a span it does not have is a lie and not an absence.
+    P.man_parts = ("trunk", "head", "arms_r", "hand")
+
+    return P
+
+
+BUILDERS.update({"collier": collier})

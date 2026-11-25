@@ -1,0 +1,78 @@
+=== hostile-RED rc=0
+m=602
+   lbl bottom=445 over=-173 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=509 over=-109 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=540 over=-78 a=1.00 lines=1 "The Rattling Host rises. A hun"
+   lbl bottom=571 over=-47 a=1.00 lines=1 "'Whatever it is, it is a guest"
+   lbl bottom=602 over=-16 a=0.74 lines=1 "It counts up, and it never rea"
+U180 plain=false k=180 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=602
+   lbl bottom=445 over=-173 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=509 over=-109 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=540 over=-78 a=1.00 lines=1 "The Rattling Host rises. A hun"
+   lbl bottom=571 over=-47 a=1.00 lines=1 "'Whatever it is, it is a guest"
+   lbl bottom=602 over=-16 a=1.00 lines=1 "It counts up, and it never rea"
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW speaks bolt; something else finishes it (8 vs DC 12).
+U180 plain=false k=200 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=602
+   lbl bottom=445 over=-173 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=509 over=-109 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=540 over=-78 a=1.00 lines=1 "The Rattling Host rises. A hun"
+   lbl bottom=571 over=-47 a=1.00 lines=1 "'Whatever it is, it is a guest"
+   lbl bottom=602 over=-16 a=1.00 lines=1 "It counts up, and it never rea"
+U180 plain=false k=220 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=602
+   lbl bottom=445 over=-173 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=509 over=-109 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=540 over=-78 a=1.00 lines=1 "The Rattling Host rises. A hun"
+   lbl bottom=571 over=-47 a=1.00 lines=1 "'Whatever it is, it is a guest"
+   lbl bottom=602 over=-16 a=1.00 lines=1 "It counts up, and it never rea"
+U180 plain=false k=240 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=602
+   lbl bottom=445 over=-173 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=509 over=-109 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=540 over=-78 a=1.00 lines=1 "The Rattling Host rises. A hun"
+   lbl bottom=571 over=-47 a=1.00 lines=1 "'Whatever it is, it is a guest"
+   lbl bottom=602 over=-16 a=1.00 lines=1 "It counts up, and it never rea"
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW casts Smite at drowned skeleton warrior.
+U175_LABEL s100 pane=director w=300 pane_w=960 text_w=274 trimmed=false "Now watching: Bellmire"
+U175_LABEL s100 pane=bits w=350 pane_w=960 text_w=324 trimmed=false "Now watching: the livestock"
+U175_LABEL s100 pane=subs w=375 pane_w=960 text_w=349 trimmed=false "Now watching: a townsperson"
+U175_LABEL s100 pane=points w=556 pane_w=960 text_w=1262 trimmed=true "Now watching: ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイ"
+U175_SHOT host_s100 (window (1920, 1080))
+U180 plain=false k=160 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "It counts up, and it never rea"
+U180 plain=false k=180 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "It counts up, and it never rea"
+U180 plain=false k=200 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "It counts up, and it never rea"
+U180 plain=false k=220 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "It counts up, and it never rea"
+U180 plain=false k=240 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "It counts up, and it never rea"
+U175_LABEL s125 pane=director w=376 pane_w=960 text_w=343 trimmed=false "Now watching: Bellmire"
+U175_LABEL s125 pane=bits w=438 pane_w=960 text_w=405 trimmed=false "Now watching: the livestock"
+U175_LABEL s125 pane=subs w=469 pane_w=960 text_w=436 trimmed=false "Now watching: a townsperson"
+U175_LABEL s125 pane=points w=550 pane_w=960 text_w=1579 trimmed=true "Now watching: ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイ"
+U175_SHOT host_s125 (window (1920, 1080))
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW casts Smite at bone sentinel.
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ casts Chain Bolt at bone sentinel.
+U180 plain=false k=160 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=579
+   lbl bottom=579 over=-28 a=1.00 lines=3 "The Commander of the Guards st"
+U180 plain=false k=180 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=579
+   lbl bottom=579 over=-28 a=1.00 lines=3 "The Commander of the Guards st"
+U180 plain=false k=200 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=603
+   lbl bottom=603 over=-4 a=0.03 lines=4 "ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWW"
+U180 plain=false k=220 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=603
+   lbl bottom=603 over=-4 a=0.70 lines=4 "ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWW"
+U180 plain=false k=240 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=603
+   lbl bottom=603 over=-4 a=1.00 lines=4 "ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWW"
+U175_LABEL s150 pane=director w=451 pane_w=960 text_w=412 trimmed=false "Now watching: Bellmire"
+U175_LABEL s150 pane=bits w=525 pane_w=960 text_w=486 trimmed=false "Now watching: the livestock"
+U175_LABEL s150 pane=subs w=546 pane_w=960 text_w=523 trimmed=true "Now watching: a townsperson"
+U175_LABEL s150 pane=points w=546 pane_w=960 text_w=1894 trimmed=true "Now watching: ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイ"
+U175_SHOT host_s150 (window (1920, 1080))
+U181_DONE checks=40 fails=0
+
+JOBDONE

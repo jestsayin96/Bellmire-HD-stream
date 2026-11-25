@@ -4329,3 +4329,14 @@ BEFORE TOUCHING ANYTHING, and the shipped carry clears the floor in every pose. 
 - No live Twitch test: no account used, 0 bits, nothing redeemed or cheered; the parse boot joined #jestsayin96 read-only
   and bellmirebro posted nothing. Not ticked - the team lead ticks. Claim 18:08:28, cap claim+25 = 18:33:28 computed
   first, declared 18:32.
+
+## C-cycle - C-204 the ask-table draft, parked in-bounds (content), 2026-11-25 03:2x-03:4x CT
+- Row taken: TAKE THIS NEXT 02:58 CT block, CONTENT: the 11 new `/ask` topics in `data/commands.json` (supervisor directive sec. 2).
+- NOT EDITED `data/commands.json`: it is the chat bot lane's file and is not one of content's four owned files; the standing
+  charter says edit only those four and the plan row did not override it in a way I could verify from this lane. Said plainly
+  rather than quietly crossing the boundary. Mr. E / the team lead can say "content may edit commands.json" and the next seat lands it.
+- DELIVERED in-bounds: `_note_c204` in `data/lore_lines.json` holds the complete draft (11 keys, replies verbatim from the directive,
+  phrases = directive samples plus word-boundary variants; bare "streamer" avoided as too common). Paste-ready: `DRAFT_JSON=` tail.
+- Art's 62nd body: none on origin/art (last ORDER add `timberman`, feed already C-203). No feed row owed.
+- VALIDATION OK: items/lore_lines/bosses/potions all parse; lore_lines gained exactly `_note_c204`, every pre-existing key equal and order kept.
+- CODE WIRING: none. `_note_c204` is an expected zero-hit key. The chat bot / owner of commands.json copies the draft into `/ask/topics` + `/ask/order`.

@@ -807,3 +807,27 @@ It cannot see the operator's value separation, because every arm here renders
 against the same dark background and measures the cue, not the man. The
 disjointness arm catches a mislabelled mark; nothing in this file catches a
 correctly-labelled mark sitting on a surface the same colour as itself.
+
+## MEASURED FOR THE NEXT ART FIRING - THE MINIBOSS COUNT IS 62, NOT 33
+
+The :34 prompt says "THIRTY-THREE already exist as of 18 Nov" and tells the
+lane to measure the count off `tools/art/minibosses.py` rather than trust that
+line. I did, and **the line is stale by twenty-nine bodies.**
+
+A regex parse of the `BUILDERS = {` / `BUILDERS.update({` blocks gave 133 keys
+and 33 distinct with 16 duplicates - it matches nested dict literals and is
+NOT TO BE TRUSTED; 33 is very likely where the prompt's figure came from.
+Asked the module instead, at runtime inside Blender:
+
+    len(minibosses.BUILDERS) = 76 keys
+      - 14 of those are `_chibi` / `_tall` VARIANTS of a body already counted
+      - leaving **62 BASE BODIES**
+
+And it reconciles three ways, which is why I believe it:
+  - 62 base bodies == the team lead's brace-matched `Delve.MB_NAME` = 62;
+  - every one of the 62 has a row in `_fit_report.json`, none missing;
+  - the register's 64 rows == 62 + the two retired chibi rows
+    (`snuffer_chibi`, `tallyman_chibi`) and nothing else.
+
+**SO AN INVENTED MINIBOSS IS THE 63rd, NOT THE 34th.** Check the existing 62
+before designing, and count them this way - at runtime - not by regex.

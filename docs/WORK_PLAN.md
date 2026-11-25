@@ -1,3 +1,173 @@
+## TAKE THIS NEXT - Updated THE 02:58 CT FIRING, 25 NOV 2026 (team lead; written 03:0x CT). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS d5aaef11. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
+*** FIVE LANES SHIPPED, ONE STOOD DOWN IN WRITING. NOBODY WAS STARVED AND NOBODY OVERRAN.
+***
+*** ===== THE CASCADE CLOSED ONE STEP AND REOPENED ONE STEP IN THE SAME HOUR: 61 BODIES / 61 FEED /
+*** ===== 60 ENGINE / 60 PUBLISHED. `crimp` IS DONE END TO END. `timberman` IS THE NEW JOIN.
+***   Measured by ME on d5aaef11 with a BRACE-MATCHED parse of `scripts/delve.gd`, never a flat regex:
+***     `Delve.MB_FIT` = 71 keys = **60 live bodies + 11 retired `_chibi`**. `timberman` **ABSENT**.
+***     `Delve.MB_NAME` = **60** keys, 60 distinct, zero `_chibi`. `crimp` PRESENT = "Oneshort".
+***     `miniboss_feed.by_key` = **61** keys, last `timberman` (content's C-203).
+***     `by_key - MB_NAME` = [`timberman`]. `MB_NAME - by_key` = []. `MB_NAME - MB_FIT` = [].
+***     `data/commands.json` `commands.miniboss` short AND what = **60**; `docs/COMMANDS.md:39` = 60.
+***   SO THE SAME LIVE FAULT AS LAST HOUR HAS MOVED ONE BODY ALONG, AND MY MERGE IS AGAIN WHAT MADE
+***   IT LIVE. `dungeon_hd.gd:262-264` admits a key to the draw when `Delve.miniboss_model(key)`
+***   resolves AND `Delve.miniboss_lines(key, "arrive")` is non-empty - it does NOT consult `MB_FIT`.
+***   `timberman.glb` + `.import` are on main and its feed has 9 `arrive` lines, so BOTH are true and
+***   it can be placed; `delve.gd:474` is `MB_NAME.get(key, key.capitalize())`, so its nameplate
+***   reads **"Timberman" instead of "Deadfall"**. That is `COMMANDS_DATA MINIBOSS UNNAMED`.
+***   Measured STATICALLY; I ran no gate and claimed no lock. The order is inherent (art :34,
+***   content :22, game build :07) and NO LANE IS AT FAULT - this is the cascade working, not failing.
+***
+*** ===== A ROW I OWN HAS NAMED THE WRONG REGISTER THREE TIMES AND THE CHAT BOT CAUGHT IT AGAIN. ====
+*** My 01:58 chat-bot row said "republish 59 -> 60 only once `Delve.MB_NAME` reads 60 on merged main".
+*** THAT GATE IS WRONG AND IT HAS BEEN WRONG SINCE B142. `chatcmd.gd:2243` is
+*** `elif mb_said[0] != mb_live.size()`, and `mb_live` is `miniboss_names()` - the **FEED** key set
+*** (`miniboss_feed.by_key`) - not `MB_NAME`. B146 read the code instead of obeying the row, paid the
+*** republish at 60 against a 60-key feed, and said so. It was right and my row was wrong.
+*** **THE REPUBLISH TRIGGER IS THE FEED. IT IS NEVER `MB_NAME`.** Written into the row below and into
+*** the owed-corrections list so the next seat cannot copy the mistake a fourth time.
+***
+*** ===== AND MY OWN FIRST INSTRUMENT UNDER-COUNTED THE FIVE SIBLING LITERALS BY TWO. =====
+*** The 01:58 block correctly raised the list from three files to FIVE. Measuring them this hour I
+*** ran `MB_NAME\.size\(\)\s*==\s*\d+` and it returned **THREE**, which would have read as two lanes
+*** silently dropping their assertions. BOTH MISSES WERE MY REGEX, NOT THE FILES:
+***   `tools/_s107_gate.gd:39-43` binds `var mbn := Delve.MB_NAME.size()` and asserts `mbn == 60`
+***     on a LATER line - no `.size()` adjacent to the number at all.
+***   `tools/_s126_crimp.gd:31` asserts `== (60 if fed else 59)` - a parenthesised conditional, not
+***     a bare digit.
+*** ALL FIVE ARE PRESENT AND ALL FIVE READ 60 TODAY, WHICH IS CORRECT. The honest instrument is
+*** `grep -rn "MB_NAME.size()" tools/ scripts/` and then READ EACH SITE. This is the flat-regex trap
+*** in my own charter, on my own first pass, caught before it reached a row - and it is the second
+*** hour running that this family of literals has needed a correction.
+***
+*** ===== DEAD-DATA AUDIT, MEASURED THIS HOUR ON d5aaef11. THE UNREAD COUNT DID NOT MOVE. =====
+***   Corpus `scripts/*.gd` (47) + `web/app.js` = **48 files / 2,398,379 chars** (+106 on the hour,
+***   which is the `crimp` MB_NAME row); `data/*.json` = 12 files / **155** top-level keys.
+***   Matcher: literal key substring over the concatenated corpus.
+***   UNREFERENCED ASSET DIRECTORIES (off `assets/` only): **ZERO** of 35 directories with files.
+***   UNREAD LIVE DATA KEYS: **ZERO**.
+***   Zero-hit keys **65 = 50 `_note_` + 15 NON-NOTE**, and the 15 are the SAME SET as every honest
+***   baseline since 21 Nov, key for key: `lord_intros_alt` + `unique_intros_alt` (READ at
+***   delve.gd:4022 via `base + "_alt"` - DO NOT WIRE), the four declared-dead `phase2_words`,
+***   `phase2_words_alt`, `phase2_words_alt2`, `town_levels_for_the_desktop`, and the nine prose/spec
+***   strings (`technique`, `boss_floors`, `chronicle_line`, `word_order`, `casing`,
+***   `promotion_line`, `one_roll`, `_gating`, `canon_silences`).
+***   Series: 52 (21 Nov) -> 53 -> 56 -> 65 -> 65 -> **65 (25 Nov 02:5x)**, the rise is notes only.
+***   NO LANE IS TO WIRE A `_note_` KEY, AND CONTENT IS NOT TO STOP WRITING THEM.
+***
+*** ===== WHAT I TICKED, AND WHAT I DELIBERATELY DID NOT. =====
+***   TICKED **S126 WHOLE** (game build). It was HALF DELIVERED at 01:58 and S126b closed it.
+***     Checked, not taken: `MB_NAME.crimp` reads **"Oneshort"**, which equals CANON
+***     (`tools/art/minibosses.py:21826`); `MB_NAME` is 60 by brace-matched parse with 60 distinct
+***     keys and zero `_chibi`; `MB_NAME - MB_FIT` is EMPTY, so every named body has a fit row; and
+***     all five sibling literals moved to 60 in the same change (see the block above for why a
+***     regex says three).
+***   TICKED **C-203** (content). I parsed the row myself rather than reading its note: `arrive` 9,
+***     `act` 8, `broken` 4, `fall` 8; `{name}` in **all 8** `act` lines and in NONE of
+***     `arrive`/`broken`/`fall`. Four phases and no others - the same shape C-202 shipped.
+***   TICKED **THE 61st BODY, THE TIMBERMAN** (art). `timberman.glb` + `.glb.import` on main;
+***     `_fit_report.json` `ok` **true**, verdict **GREEN**, **63 pairs** (61 live + 2 `_chibi`),
+***     `pairs.timberman.ratio` **1.24**, `fits_frame` true, 3 proving views, `frame_edge` zero on
+***     every side of every view, `seen` 1.0 front/side/back, `air_px` lowest on `front`/`back`
+***     (113-116 px) and never zero. `creature_h` **3.05** equals CANON `minibosses.py:22232`
+***     ("Deadfall", 3.05) - the register and the canon agree without my adjusting either.
+***     **AND I LOOKED AT THE PICTURE, FRONT AND BACK, NOT ONLY THE NUMBERS.** The Beadle taught this
+***     house that `seen: 1.0` on three views can still mean a body with no facing from behind. The
+***     timberman has a real back: the carried beam swaps arms across the two views, the hat reads as
+***     a brim from the front and a crown from behind, and the pole bundle moves from the body's left
+***     to its right. It is not a mirrored front.
+***   TICKED **the pack-catalogue entry for `quaternius_medieval_weapons_2018_CC0`** (landed on
+***     `hub`). I re-walked the pack on disk instead of reading the table: **97 files**, and the
+***     breakdown matches the entry exactly - 24 `.blend`, 24 `.fbx`, 24 `.obj`, 24 `.mtl`, 1 `.png`.
+***     Zero licence-like filenames; a case-insensitive grep of every file for `licen|cc0|creative
+***     commons|public domain|attribution|copyright` returned **nothing**. The folder name carries
+***     "CC0" and the folder name is not a licence. GATED is the right call and the entry says so.
+***   TICKED **B146** (chat bot) - the 59 -> 60 republish. Verified on main: `commands.json`
+***     `commands.miniboss.short` and `.what` both read 60, `docs/COMMANDS.md:39` reads 60, the file
+***     still parses, and the B145 L56 log is now committed to a ref (144 lines) instead of sitting
+***     in a working tree. The lane also named its own bad instrument (a `"word":` regex that
+***     reported 70 orphans where there are 3) before anyone asked.
+***   NOT TICKED **U166** (HUD) - a written-up stand-down has nothing to tick. Recorded, correct,
+***     and the even-hour cadence is its own row, not an absence.
+***   NOT TICKED **L56** - still not reproducible and nothing new was run on it this hour.
+***
+*** ===== THE SIX ROWS. =====
+***
+*** GAME BUILD (:07) - **CLOSE THE CASCADE: NAME THE 61st, AND MOVE ALL FIVE LITERALS WITH IT.**
+***   `timberman` is "Deadfall" in CANON (`tools/art/minibosses.py:22232`, `ORDER + ["timberman"]`).
+***   Content's C-203 `by_key.timberman` IS ALREADY ON MAIN, so the feed precondition is met and the
+***   `MB_FIT` row, the theme row and the `MB_NAME` row all belong in the SAME commit - that is the
+***   S122/S123/S124 precedent, and holding the name is what produces `MINIBOSS UNNAMED`.
+***   `MB_FIT` ratio is **1.24**, COPIED from art's `_fit_report.json` `pairs.timberman.ratio`, NOT
+***   re-derived. (`creature_h` 3.05 / `hero_h` 2.45. It is the tallest body in the register - the
+***   register says `fits_frame` true with `margin_x` 0.12, so it fits, but it fits with less room
+***   than any body before it. Say so in the row rather than letting a later seat discover it.)
+***   **ALL FIVE SIBLING LITERALS GO 60 -> 61 IN THE SAME COMMIT**, and two of them will NOT be found
+***   by the obvious regex: `_s51_names.gd:64`, `_s117_straker.gd:33`, `_s124_pledgeman.gd:31` are
+***   plain `== 60`; **`_s107_gate.gd:39-43` binds a variable first**; **`_s126_crimp.gd:31` is
+***   `== (60 if fed else 59)`**. Find them with `grep -rn "MB_NAME.size()" tools/ scripts/`.
+***   A lane that adds a counted literal must move every sibling in the same commit, or its own gate
+***   fails on a correct change.
+***
+*** CONTENT (:22) - **§2 OF THE SUPERVISOR'S 24 NOV DIRECTIVE, THIRD HOUR. IT BLOCKS ANOTHER LANE.**
+***   The 11 new `ask` topics. **THE PATH IS `/ask` AT THE TOP LEVEL of `data/commands.json`, NOT
+***   `commands.ask`** - B146 queried `commands.ask`, got an empty dict, and nearly reported that the
+***   ask table had been DELETED. Measured by me on d5aaef11: `ask.order` **10**, `ask.topics` **10**
+***   (bits, commands, gear, gold, hub, join, missed, myhero, real, what), `order` and `topics` key
+***   sets equal, and all 11 of the supervisor's topics (bug, suggest, afk, died, howdelve, howbands,
+***   standing, permadeath, creator, howoil, thanks) **ABSENT**. Until this lands the chat bot's ask
+***   gate has nothing to judge and it has correctly refused to fake one for three hours.
+***   C-203 was real work that closed a real join - this is not a reprimand, it is a priority.
+***   AFTER §2: the feed row for whatever art ships at :34 (C-204).
+***
+*** ART (:34) - **THE 62nd BODY, OR A WRITTEN STAND-DOWN THAT SAYS WHICH.** The lane may invent
+***   minibosses; that is the one genuinely dry lane's licence. The 01:34 gap is ANSWERED and I am
+***   closing that question: commit `8e0993fb` says in its own title that the firing "was neither dry
+***   nor a crash", and the row that asked for it worked. Also recorded with approval: the fit
+***   register now stamps **63 of 63 rows** with `measured_at` and `measured_by`, so a carried row
+***   can no longer pass as a fresh one - that is a lane fixing its own instrument, which is never a
+***   new item.
+***
+*** HUB (:37) - **STANDING CHECK; NOTHING OWED AND I AM NOT INVENTING ONE.** `web/` is identical to
+***   `origin/hub` and the lane said so. The gh-pages delta is with the SUPERVISOR, not with you, and
+***   the hub lane never publishes. If a `web/` change is made, the security claim must come with it.
+***
+*** CHAT BOT (:45) - **REPUBLISH 60 -> 61, AND THE TRIGGER IS THE FEED, NOT `MB_NAME`. MY ROW HAS
+***   NAMED THE WRONG REGISTER THREE TIMES; THIS ONE IS CORRECTED.** `chatcmd.gd:2243` compares the
+***   published count against `mb_live = miniboss_names()` = `miniboss_feed.by_key`. On d5aaef11 the
+***   feed is **61** and `commands.json` publishes **60**, so `COMMANDS_DATA MINIBOSS COUNT` is
+***   firing on main RIGHT NOW and the count half is yours the moment you read it. Do not wait on
+***   `Delve.MB_NAME`; do not wait on me.
+***   THEN THE TWO CONFIRMATIONS YOU SPLIT AND CARRIED, in a full window: `tools/_commands_doc.gd`
+***   (the REAL generator - your 32-row rebuild was an emulation and you said so) and then
+***   `tools/_l14_test.gd`. Expect L14's `MINIBOSS UNNAMED` arm to be GREEN only if the game build's
+***   :07 run named `timberman`; if it did not, report the red as not yours and name which arm.
+***   CLAIM BY :50 WITH A FINISH INSIDE :52. Splitting rather than crossing was correct at 02:45 and
+***   is correct again.
+***
+*** HUD (:52) - **03:52 IS AN ODD HOUR: WORK IT.** L74 (feed + theme under load), as U166 itself
+***   proposed. Your :52-:07 window has been free two hours running and nobody has taken it from you.
+***   The rarity-hue half of System 2 is CLOSED at U55 and is NOT yours to re-open - do not accept it
+***   if any row ever hands it back.
+***
+*** FOR THE SUPERVISOR:
+***   1. **THE HUB HAS WORK MERGED AND NOT PUBLISHED - NOW SIX DAYS.** Measured by me this hour, not
+***      copied: `origin/gh-pages` **5ce35f33**, tree **c03fa129**, pushed 24 Nov 15:30 CT;
+***      `origin/hub:web` tree **3d910499**. NOT equal. Delta 3 files / +17 / -1. The lane has NOT
+***      claimed "ready to publish", so I ran NO publish verification and I am reporting NO security
+***      gate - an unearned gate report is the same fault class as a lying gate. **Recommendation: if
+***      you want it live, say "publish" and I will do the subtree push by the proven plumbing recipe
+***      with the four assertions and verify `origin/gh-pages^{tree}` equals `origin/hub:web`
+***      afterwards.** Not mine to decide.
+***   2. **§2 OF YOUR 24 NOV DIRECTIVE IS THREE HOURS UNDELIVERED AND IT BLOCKS THE CHAT BOT'S ASK
+***      GATE.** Figures in the content row above, re-measured on d5aaef11 at the correct path
+***      (`/ask`, top level). Content shipped C-203 instead, which closed a live join.
+***      **Recommendation: leave the order as it is; I keep §2 at the head of content's row until it
+***      lands.** Routed up, not re-prioritised.
+***
+*** NEEDS MR. E: nothing.
+
 ## TAKE THIS NEXT - Updated THE 01:58 CT FIRING, 25 NOV 2026 (team lead; written 02:0x CT). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS 3ff95ede. ALL SIX LANE BRANCHES ARE MERGED, ZERO COMMITS UNMERGED.
 *** FOUR LANES SHIPPED, ONE STOOD DOWN IN WRITING, ONE DID NEITHER.

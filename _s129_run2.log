@@ -1,0 +1,60 @@
+=== s129 rc=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S129 collier model: 'res://assets/monsters/minibosses/collier.glb'
+S129 collier fed: true
+S129 wood draw: ["straker", "collier", "snarer", "drover", "winder"]
+S129_COLLIER OK (11 checks)
+
+=== REDPROOF (pre-edit delve.gd) rc=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S129 FAIL: MB_FIT has collier
+S129 FAIL: MB_FIT collier is art's 0.86
+S129 collier model: 'res://assets/monsters/minibosses/collier.glb'
+S129 collier fed: true
+S129 wood draw: ["straker", "collier", "snarer", "drover", "winder"]
+S129 FAIL: MB_NAME collier is Halfblow (got '')
+S129 FAIL: nameplate reads Halfblow, not Collier
+S129 FAIL: MB_NAME is 62 (got 61)
+S129_COLLIER FAILED (5 of 11)
+
+restored
+=== townwalk rc=0
+STDOUT:
+uctions=2969 solids=1485 plots=66 road_dropped=188 people=164
+HOUSES_ON_ROAD 0
+DOORS 66 door_off_ground=0 door_leg_through_other_house=0
+FEED 4 bandits are riding on the west road!
+FEED Initiative: the raiders 17, the watch 6 - the raiders strike first.
+RAID started raiders=4
+T=10s walking=98 still=0 (posted=0) inside=66 in_solid=0/726 stuck_on_route=0
+FEED A building is burning!
+T=20s walking=52 still=28 (posted=17) inside=84 in_solid=0/1610 stuck_on_route=0
+T=30s walking=46 still=27 (posted=17) inside=91 in_solid=0/2315 stuck_on_route=0
+FEED A building is burning!
+FEED Ysolde Coalfoot goes down and claws back up. (CON save 14)
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED The new frame slips. The townsfolk will try again. (4 vs DC 12)
+T=40s walking=39 still=28 (posted=18) inside=96 in_solid=0/2906 stuck_on_route=0
+FEED A building is burning!
+T=50s walking=38 still=29 (posted=18) inside=96 in_solid=0/3486 stuck_on_route=0
+FEED The attack is driven off. The gates hold.
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+T=60s walking=118 still=29 (posted=17) inside=16 in_solid=0/4577 stuck_on_route=1
+T=70s walking=122 still=30 (posted=18) inside=11 in_solid=0/6644 stuck_on_route=0
+FEED The new frame slips. The townsfolk will try again. (10 vs DC 12)
+T=80s walking=132 still=30 (posted=18) inside=1 in_solid=0/8731 stuck_on_route=1
+T=90s walking=119 still=40 (posted=20) inside=4 in_solid=0/10711 stuck_on_route=1
+FEED Osric Fenwick settles in Bellmire, looking for work.
+T=100s walking=117 still=43 (posted=24) inside=4 in_solid=0/12767 stuck_on_route=1
+FEED The townsfolk raise the ruin again.
+T=110s walking=112 still=47 (posted=24) inside=5 in_solid=0/14756 stuck_on_route=1
+T=120s walking=110 still=45 (posted=24) inside=9 in_solid=0/16744 stuck_on_route=1
+STUCK_ON_ROUTE_TOTAL 6 over 120 s (raw still-with-a-route-now 9)  watchdog fires=1 close=1 repath=0 nudge=0 giveup=0
+TOWNWALK in_solid=0/16744 (0.000%) raid_in_solid=0/8947 (0.000%) PASS
+BAD []
+STUCK_EX ["watch Cort the Younger (-137.0,-14.2) next=(-142.3515, 0.5, -10.37265) route=12 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.23 push=(0.0, 0.0, 0.0)", "watch Cort the Younger (-137.5,-15.1) next=(-142.3515, 0.5, -10.37265) route=12 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.59 push=(0.0, 0.0, 0.0)", "watch Cort the Younger (-137.5,-15.1) next=(-142.3515, 0.5, -10.37265) route=12 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.58 push=(0.0, 0.0, 0.0)", "watch Cort the Younger (-137.5,-15.1) next=(-142.3515, 0.5, -10.37265) route=12 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.59 push=(0.0, 0.0, 0.0)", "watch Cort the Younger (-137.5,-15.1) next=(-142.3515, 0.5, -10.37265) route=12 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.59 push=(0.0, 0.0, 0.0)", "watch Cort the Younger (-137.5,-15.1) next=(-142.3515, 0.5, -10.37265) route=12 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.58 push=(0.0, 0.0, 0.0)"]
+
+SE=0
+ALLDONE

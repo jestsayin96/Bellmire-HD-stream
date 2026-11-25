@@ -220,6 +220,56 @@
 ***
 *** NEEDS MR. E: nothing.
 
+**LOCK DISCIPLINE AND THE RUNNING CLEAN-HOUR COUNT - THE 03:58 CT FIRING, 25 NOV 2026.**
+A RECORD OF THIS HOUR, NOT A LANE ROW. Three windows, all read from R's WORKING copy of
+`docs/RUN_LOCK.txt` (the authoritative copy, uncommitted between game-build runs):
+  game build S127  claim 03:08:07 / cap 03:33:07 / declared 03:30:07 / IDLE 03:14:25 - clean, early,
+    and the cap was computed BEFORE the declaration, as its own 21 Nov fix requires. Unbroken since
+    02:08 on 21 Nov; I am not charging it with the old over-declaration pattern.
+  chat bot B147    claim 03:48:40 / cap 04:13:40 / declared 03:52:40 / IDLE 03:49:40 - inside its
+    declared finish, inside its cap, claimed before :50 and released before :52 exactly as my row
+    ordered, so the HUD kept its window. See the count below.
+  HUD U167         claim 03:54:12 / cap 04:09:12 / declared ~04:04 / IDLE 03:56:26 - clean and early.
+    Took its :52 window unobstructed for the third hour running.
+**No overrun of any cap, no claim over a live hold, no stale lock cleared, no starved lane, no two
+lanes holding at once.** Every RUNNING is followed by an IDLE from the same lane before the next
+RUNNING. Art took no lock this hour; the hub never needs one; the QA tester's window was last hour.
+**I took no Godot lock and ran no gate** - the game build fires at :07 and the window was not mine
+to spend - so every verdict in my block above is a file I parsed, a ref I read, or a diff I computed.
+
+**THE COUNT: IT RESETS TO 0, ON B147's FUTURE STAMP, AND I AM RULING AGAINST MY OWN FIRST READING.**
+B147 first wrote its IDLE stamped `03:51:40` while the live clock read `03:49:40` - a release stamped
+two minutes into the future - and CORRECTED IT ITSELF, in the same line, seconds later, naming the
+fault in its own words. The file as it now stands carries the true release.
+MY FIRST READING WAS THAT THIS SHOULD NOT BREAK THE COUNT: the correct stamp stands in the file, the
+IDLE was already written so the window was free either way, and the HUD claimed at 03:54:12 and was
+never at risk. **I AM NOT TAKING THAT READING, FOR TWO REASONS.** First, the charter lists "A FUTURE
+STAMP IN A LOCK LINE" as a count-breaker with no self-correction carve-out. Second, and this is the
+one that decides it: **THE SAME LANE DID THE SAME THING ON 24 NOV AND A SEAT IN THIS CHAIR RULED IT A
+RESET** - `IDLE 02:50:40` written when the clock read 02:49:39, self-corrected in the next line, and
+the ruling was "a future stamp in a lock line breaks the clean-hour count whoever finds it, so this
+hour resets to 0. That is the rule, not a charge against your judgement." Ruling the opposite way
+today, on the identical fault pattern, in the lane's favour and in my own count's favour, would make
+the rule mean whichever seat is holding it. **So: 0.**
+**THIS IS NOT A CHARGE AGAINST THE CHAT BOT AND THE ROW ABOVE SAYS SO.** Catching your own future
+stamp in seconds is the behaviour this house wants; the fix is the one the 24 Nov ruling already
+named - read the clock at the moment you write the line, never compute it from the claim.
+**AND A GAP OF MY OWN SEAT'S, SAID RATHER THAN QUIETLY SKIPPED:** I could not establish what the
+count was ENTERING this hour. The last explicit figure anywhere in this plan is **2, at the 17:58 CT
+firing on 24 Nov**, and the ten blocks between that one and mine did not carry it forward at all. A
+reset overrides the prior value so this hour's answer is 0 regardless, but a running count that stops
+being written down is not a running count. **Every team lead from here writes the figure in the plan,
+not only in the summary**, or the next seat inherits the same blank I did.
+
+**A CHARTER QUESTION FOR THE SUPERVISOR, NOT A DECISION I AM TAKING:** should a future stamp that the
+lane itself catches and corrects inside the same line, with the true stamp left standing and no other
+lane ever misled, break the count? Twice now a lane has been reset for self-reporting. There is a
+real argument that the rule as written punishes exactly the behaviour it wants more of - and an
+equally real argument that any future stamp makes the lock momentarily unreadable and the bright line
+is worth more than the fairness. **I have applied the rule as written and as precedented. Changing it
+is a charter change and it is yours, not mine.**
+
+
 ## TAKE THIS NEXT - Updated THE 02:58 CT FIRING, 25 NOV 2026 (team lead; written 03:0x CT). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS d5aaef11. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
 *** FIVE LANES SHIPPED, ONE STOOD DOWN IN WRITING. NOBODY WAS STARVED AND NOBODY OVERRAN.

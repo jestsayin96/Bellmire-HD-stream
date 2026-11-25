@@ -21,6 +21,142 @@
 ***     rename it, it will mislead a later reader.)
 ***   - **C-213** - content delivered nothing and did not stand down. Nothing to tick.
 
+## TAKE THIS NEXT - Updated THE 15:58 CT FIRING, 25 NOV 2026 (team lead; written 16:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** ALL SIX LANE BRANCHES MERGED. FOUR SHIPPED, ONE SILENT, ONE PUSHED MID-RUN. main 6561041c -> 0fb81047.
+*** PROGRESS.md took TWO conflicts (hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT. The strong
+*** assertion holds: PROGRESS.md is +263/-0 against 6561041c - ZERO LINES REMOVED - and a marker
+*** audit over every .md at HEAD with all four exact shapes returns nothing.
+*** HUD PUSHED U181 BETWEEN MY REF READ AND MY MERGE. At my 15:59 read hud-ui was aa74eed2 with
+*** nothing but plan syncs on it; by my merge it carried scripts/feed_hud.gd, tools/_u181_probe.gd,
+*** four run logs and six renders. The documented hazard, caught by re-reading the ref at merge time.
+
+>>> GAME BUILD (:07) <<<
+  **S138 IS A HONEST STEP 1 AND THE PICTURE IS THE PART THAT MATTERS.** You carried UAA fox, husky
+  and shiba on HeroPet, S138_PETS went OK, and then you said yourself that the picture shows a style
+  mismatch. Reporting a green gate and a bad picture in the same breath is the thing this house
+  keeps asking for, and your lock line computed cap-first again (claim 15:09:03, cap 15:34:03,
+  declared 15:30) - that is eight hours of clean declarations now.
+  TAKE **SYSTEM 13 STEP 2, THE WIRING HALF ONLY, AND LEAVE THE LOOK ALONE.** Prove the pet follows
+  the hero across a floor transition, survives a death and a revive, and does not break OFFFLOOR or
+  TOWNWALK. **DO NOT SETTLE THE STYLE MISMATCH YOURSELF.** You already have the right shape for this
+  from S137: when the UACP skin was the same class of question you wrote a ONE-LINE REVERSIBLE
+  override and the call went up. Do that again - name the one-line shape a style fix would take,
+  measure what the mismatch actually is in numbers AND in the picture, and ROUTE THE LOOK UP. A pet's
+  art direction is not a wiring decision and it is not yours or mine.
+
+>>> CONTENT (:22) <<<
+  **C-214 IS TICKED AND IT VERIFIED CELL BY CELL, WHICH IS WHY IT TICKED THIS FAST.** I did not read
+  your summary. I parsed both versions of data/lore_lines.json and compared key SETS and VALUES:
+  zero top-level keys added or removed, zero `by_key` entries added or removed, exactly ONE new key
+  (`_note_c214`), and exactly FOUR changed cells - changer arrive.1, arrive.2, arrive.8 and dyer
+  arrive.1 - which is precisely the four you named. Array lengths still 9/7/4/8 and 9/8. You asked to
+  be checked cell by cell rather than summarised, and that is exactly what made it checkable.
+  TAKE **CORRECTING YOUR OWN HELD LIST, WHICH IS TWO CELLS TOO WIDE, AND THEN FINISHING THE REWORD
+  UNDER MR. E'S OWN RULING.** Your `_note_c214` holds back "changer arrive.7, act.0, act.6,
+  broken.0-3, fall.0, fall.3, fall.6" as still naming bars or arms. I grepped all of them: the cells
+  that still name a bar or an arm are arrive.7, act.0, act.6, broken.0, broken.2, broken.3, fall.0
+  and fall.3 - EIGHT. **broken.1 ("The turnstile will not turn. The drum stays on its rung.") and
+  fall.6 ("The turnstile stands open. Nothing is owed.") name neither** - they are already
+  post-shaped and need no mechanic ruling at all. Fix the note; a held list that over-states is a
+  list the next lane cannot trust.
+  THEN REWORD THE REMAINING EIGHT, AND HERE IS WHY THAT IS NOT GUESSING A MECHANIC: **Mr. E already
+  ruled on 21 Nov, in his own words, "delete the bars."** The shipped body is man, post, collar and
+  drum. Text that names arms and bars does not promise an open mechanic - it contradicts a body he
+  already ruled on. Keep the jam counterplay as a promise (a post jams as well as an arm does), stop
+  naming arms and bars, and if a specific cell genuinely cannot be reworded without inventing a
+  mechanic, **HOLD THAT ONE CELL AND NAME IT BY NUMBER.** A cell held with a reason ticks; eight
+  cells held behind one sentence does not.
+
+>>> ART (:34) <<<
+  **THE 63rd IS THE OVERLOOKER AND YOU CAUGHT YOUR OWN CHESS PIECE.** Pass 1 was green on every
+  number and you looked at the picture anyway and said it reads as a chess piece. That is the second
+  time in two hours that this lane has been the one to find the defect its own numbers missed - the
+  pass-17 soot yesterday, the silhouette today - and it is the reason your register is worth reading.
+  Velrick's idea is also the strongest miniboss hook in weeks: it strikes whoever has hurt it LEAST,
+  so the back rank stops being safe.
+  TAKE **PASS 2 ON THE PICTURE, AND NOTHING ELSE.** The numbers are not the thing that is wrong, so
+  do not re-tune them - give it a silhouette that reads as a body at the rung the player sees, then
+  show me front, side and three-quarter at that rung and say in your own words whether it still reads
+  as a chess piece. I am not ticking the 63rd until the picture is right, and I am not asking you for
+  a 64th while the 63rd looks like that.
+
+>>> HUB (:37) <<<
+  **YOU WENT SILENT THIS HOUR AND I WILL NOT GUESS WHY.** Your branch carries nothing against main
+  but my own plan syncs coming back - no PROGRESS entry, no stand-down, nothing. Last hour your
+  written stand-down was accepted and I said so on the record; a dry cycle costs nothing. **A SILENT
+  cycle costs me the ability to tell a dry lane from a stalled one.** This is the same thing I had to
+  say to content at 14:58, and content answered it by shipping C-214 an hour later.
+  TAKE **WRITING THE STAND-DOWN, IN ONE SHORT ENTRY, AND SAYING PLAINLY THAT YOU ARE DRY.** Nothing
+  is owed on the CDN item ever again - ruled closed from above. If you want work beyond that, keep
+  sweeping your own published `web/` for defects; that is auditing shipped work, not a new item. And
+  do NOT claim READY TO PUBLISH unless you mean it - the publish call is the supervisor's.
+
+>>> CHAT BOT (:45) <<<
+  **B159 IS NOT TICKED, AND THAT IS NOT A CRITICISM - IT IS HALF AN ITEM AND THE OTHER HALF IS NOT
+  YOURS TO LAND.** You built the replacement, you proved it 8/8 on every shape you listed, you
+  killed the dictionary false positive STRUCTURALLY (a dict key sits inside an open brace, so its
+  depth is never 0), and your drift still reads 74 labels / 32 commands / 31 aliases with missing []
+  and unanswered [] - so the new instrument does not move the number it replaces, it only stops
+  lying about the shapes around it. **AND YOU FOUND A NINTH FAULT IN YOUR OWN FIX AND REPORTED IT
+  INSTEAD OF PATCHING IT OUT QUIETLY** - case 8, the nested `match arg:` that would have harvested
+  `seventh` and `eleven` as viewer verbs. You wrote the case nobody asked you for and it failed, and
+  you said so. That is worth more than the fix.
+  **I AM ROUTING YOUR OWNERSHIP QUESTION UP RATHER THAN ANSWERING IT MYSELF, AND YOU WERE RIGHT TO
+  REFUSE THE EDIT.** Your prompt forecloses tools/ in terms, and the precedent you cite is exact:
+  docs/COMMANDS.md moved to this lane by a SUPERVISOR RULING, not by a lead row. I will not take a
+  decision by row that the house took by ruling. See FOR THE SUPERVISOR below.
+  TAKE **MAKING THE LANDING A ONE-PASTE JOB FOR WHOEVER GETS THE RULING.** Commit the full
+  replacement as a reviewable diff inside a file you DO own, with the eight shape cases and the
+  three red-prove arms written beside it, so that the moment the ruling lands nobody has to rebuild
+  your work from a prose description. If that is already in your entry, say so in one line and stand
+  down - a stand-down with a reason ticks, and B158 already proved you know how to write one.
+
+>>> HUD (:52) <<<
+  **U181 IS IN AND YOU DID THE THREE THINGS I ASKED FOR IN THE ORDER I ASKED.** You fixed the
+  Chronicle `_stack_h` overrun in `feed_hud.gd` - your own file - you committed FOUR logs including
+  the red-prove runs, and you shot the fixed state at 100/125/150 AND at phone480. Last hour the gap
+  I named was that your U179 evidence was uncommitted; this hour there is nothing uncommitted to
+  complain about. **I am verifying the red-prove and the three rungs this hour and I will tick U181
+  on that verification, not on your summary** - if the strip-it-out arm shows the overrun coming
+  back and the fix is not paid for out of another rung's margin, it ticks.
+  TAKE **NOTHING NEW UNTIL I HAVE TICKED IT.** If my verification turns up a rung where the fix cost
+  margin, that is your next item and I will name it by number in the next row. If you are free before
+  then, the honest use of your window is the WORST-CASE frame rather than the prettiest: say which
+  rung in your own U181 log has the tightest remaining margin, and look at that one.
+
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+*** these on the first LIVE turn, all at once). THIS LIST IS CUMULATIVE - DO NOT DROP A LINE.
+***   Items 1-3 carried from the 13:58 firing and items 4-6 from the 14:58 firing ALL STAND AS
+***   WRITTEN. Re-read those two blocks rather than trusting any paraphrase. Added this hour:
+***   7. THE "ID" LINE AGAIN, MEASURED OFF THE MERGED TREE 0fb81047 THIS HOUR: B159, C-214, D100,
+***      H32, L74, S138, T5, U181, and art is on OVERLOOKER (the 63rd) pass 1. The prompt still
+***      names B104/C-163/S85/U124/paviser pass 8, and the 14:58 refresh named B158/C-213/S137/U180.
+***      This is a refresh of a line the prompt itself says to re-measure, not a contradiction.
+***   8. THE PROMPT'S MINIBOSS COUNT IS STALE IN THE "GENUINELY DRY" CLAUSE. It says the fit register
+***      judges 46 rows of which 44 are live bodies. Measured on 0fb81047 this hour the register
+***      carries 74 miniboss rows and the live body count is 63 (the OVERLOOKER is the 63rd and art
+***      names it so in its own commit subject). The prompt already says to measure off
+***      tools/art/minibosses.py or the register rather than off any number in the prompt, so this
+***      is the refresh that clause asks for.
+
+*** FOR THE SUPERVISOR - ONE ITEM, AND IT IS A FILE-OWNERSHIP RULING ONLY YOU CAN MAKE.
+*** THE CHAT BOT LANE HAS A PROVEN FIX IT IS NOT ALLOWED TO LAND. `tools/_l14_test.gd:30` harvests
+*** verb labels by anchoring on an 8-space indent; the lane measured at B156 exactly what that
+*** mis-reads and has now built and proved (8/8 shapes, in python against the real tree) a
+*** depth-and-bracket parse that reads every shape correctly and kills the dictionary false positive
+*** structurally. IT DID NOT COMMIT THE PATCH, because its own prompt says in terms that running a
+*** tool which reads its file is not owning tools/. It routed the question up instead of arguing it.
+*** THE EVIDENCE: `git log -- tools/_l14_test.gd` returns EIGHT commits and every one is the chat
+*** bot lane's (B80, B78, B22 by B-number; L14, L17, L21 and two chat-command commits by item). No
+*** other lane has ever touched that file. That is the same evidence class that won docs/COMMANDS.md
+*** for this lane on 16 Nov, and that move was made by a SUPERVISOR RULING, not by a lead row - which
+*** is exactly why I am not making it by a lead row now.
+*** MY RECOMMENDATION: grant the chat bot lane `tools/_l14_test.gd` specifically - the gate that
+*** reads only its own three files - and NOT tools/ generally. Until you rule, the fix sits unlanded
+*** and the gate keeps pattern-matching; the cost is a latent lie in an instrument, not a broken
+*** build. I am also leaving the hub's MERGED-AND-NOT-PUBLISHED state visible without re-asking: the
+*** outstanding delta is NOTES.md only, documentation, no web asset waiting.
+
 ## TAKE THIS NEXT - Updated THE 14:58 CT FIRING, 25 NOV 2026 (team lead; written 15:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** ALL SIX LANE BRANCHES MERGED. main c7a52247 -> f00420b1. FIVE SHIPPED; CONTENT WAS SILENT.
 *** PROGRESS.md took TWO conflicts (hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT by a state

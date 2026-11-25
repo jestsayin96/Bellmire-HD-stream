@@ -23705,3 +23705,350 @@ def _collier_soot(P):
 
 
 BUILDERS.update({"collier": collier})
+
+
+# ---------------------------------------------------------------------------
+# 63 THE OVERLOOKER. Invented under Mr. E's standing permission of 15 Nov
+# 17:43, taken this run because the plan's ART row said the one lane that may
+# invent takes the next miniboss body IF THE COLLIER IS DONE - and the team
+# lead's own 15:1x tick record in the same file closes the 360p collier brow
+# and says "ART: you are free to invent again".
+#
+# WHAT I CHECKED FOR FIRST, MEASURED OFF THIS FILE AND NOT REMEMBERED. The art
+# prompt still carries "THIRTY-THREE already exist as of 18 Nov" and that line
+# is STALE BY TWENTY-NINE. Measured four ways this run: `ORDER` holds 62 unique
+# keys; CANON holds 76 entries of which 62 are bases and 14 are the chibi/tall
+# variants; both agree. So this is the 63rd and the prompt's own instruction to
+# measure the count rather than trust the number in it is the only reason the
+# key below is not a collision.
+#
+# I THEN READ ALL 62 `idea` STRINGS BEFORE CHOOSING, parsed out of CANON with
+# ast rather than skimmed, and the families already taken are: light (snuffer,
+# nightman), air (blower, stopper), water (sluicekeeper), floor (pitman),
+# walls (dauber, hurdleman), position (changer, harrowman, strickler), the
+# party's kit (tallyman, quartermaster, almoner, reeve, tither, pledgeman,
+# sealer, scraper, winder, fuller, tapster), healing (leech), self-repair
+# (scrapwright, sexton, tanner, straker, paviser), removal of one hero
+# (gaoler, drover, hooper, ferryman, roper, crimp, dyer, moulder) and
+# damage-routing (collier, timberman, jointer, dredger, pressman).
+#
+# WHY THIS IS NOT THE DYER, WHICH IS THE ONE IT COULD HAVE BEEN. The Dyer
+# (24) MARKS ONE OF YOU AND HUNTS ONLY THE MARK. That mark is ARBITRARY and
+# FIXED: it is dealt out by the boss and the party's job is to play around a
+# choice already made. This one inverts both halves. Its target is not dealt,
+# it is EARNED - it is whoever has done it least harm - and it is not fixed,
+# it is re-read continuously, so the target moves the instant anybody's
+# contribution changes. The Dyer punishes luck; this punishes HANGING BACK.
+# Nothing in the 62 picks its target out of the party's own play, and that is
+# the whole idea: the safest place in the room is the thing that makes you the
+# target, so there is no safe place to stand and no healer or archer can sit
+# the fight out at the back. Said plainly because the re-skin was mine to make
+# and I checked it before a vertex was placed.
+#
+# THE PROP WAS KILLED BY THE SAME GREP, AND THIS IS WORTH THE LINES. The first
+# design I took as far as numbers was a man with a CANE held out, pointing -
+# and `cane` appears nowhere in this file, which looked like a clear run. It is
+# not: `staff` appears 30 times and `baton` 3, and both are carried by figures
+# of AUTHORITY. The BEADLE (33) carries a pale STAFF OF OFFICE and the
+# DRILLMASTER (1) a parade BATON. An overlooker with a stick is the Beadle with
+# the stick moved to horizontal, and worse, the Beadle's pale staff knob going
+# flat against his own pale panel on the side view is the exact shipped fault
+# the art prompt warns about by name. SO HE CARRIES NOTHING. In a file of
+# sixty-two carriers, haulers and stoopers, the one figure who holds no object
+# at all is a silhouette none of the others can be confused with, and it is
+# also the character: he is the only thing down there that is not working.
+#
+# THE HEAD IS THE MECHANIC, AND IT IS THE ONE CUE THIS FILE HAS NEVER USED.
+# I grepped for it: the only yawed head in the set is the TIMBERMAN'S head
+# tree at 22 degrees, and two bodies (14680, 14710) deliberately built heads
+# whose silhouette is IDENTICAL AT EVERY YAW - the opposite of this. His head
+# is turned 57 degrees off his own shoulders: he is not looking where he
+# stands, he is looking at whoever is doing least. That buys three things at
+# once and only the first is aesthetic.
+#   1. A silhouette cue that is unique in the set by measurement.
+#   2. AN UNAMBIGUOUS FACING, which is the BEADLE'S OTHER shipped fault - the
+#      team lead found by looking that his pale eye band wraps the head so the
+#      figure reads the same from front and back. A head turned off the
+#      shoulders cannot read the same from two sides: it is a profile from one
+#      and a face from the other, by construction and not by a value I tuned.
+#   3. The thing a player must READ to know who is about to be hit. The turn of
+#      the head IS the targeting telegraph, so the mechanic is visible before
+#      the fight starts - the Scrapwright lesson, which cost that body two
+#      rebuilds.
+#
+# THE YAW IS 57 DEGREES AND NOT 90, AND THAT IS THE DREDGER'S FIX A PAID
+# FORWARD. The fault there: a line's direction and the axis its copies spread
+# along must BOTH clear BOTH cameras, and a thing laid along one ortho's throw-
+# away axis collapses to a sliver while its number still reads fine. A head and
+# arm turned a clean 90 degrees point STRAIGHT AT the side camera - the arm
+# would foreshorten to a stub and the front camera would get it dead flat. At
+# 57 degrees the pointing arm presents 0.84 of its length to the front ortho
+# and 0.54 to the side one, so neither camera gets it flat-on or edge-on and
+# neither can be the one that lies.
+#
+# PLAINNESS IS THE VOICE (Mr. E's first rule). An overlooker is a real working
+# job - the man set over a floor of workers to watch for idle hands - and the
+# epitaph register in data/lore_lines.json is the test: "Measured the grain.
+# Counted the flasks. Kept the door." Nothing theatrical here. He is a tall man
+# in a kept coat with his head turned, and the horror is entirely that he is
+# watching the wrong person.
+#
+# WEAR 0.18, AND IT IS A SPREAD AND NOT A SETTING (Mr. E's second rule). Set
+# mean is 0.471 measured off CANON this run, so this is near the clean end and
+# it is argued rather than picked: HE DOES NOT DO THE WORK. Every filthy body
+# in this file is filthy because of what it handles - the Nightman at 0.88, the
+# Collier's soot - and a man whose whole trade is standing over other men
+# handling things keeps his coat. The spread inside that one scalar: the coat
+# and the high collar are kept and nearly new, the POINTING MITT is the
+# brightest thing on the body because it is the instrument of his office the
+# way the Drillmaster's gong is his, and the BOOTS are works-floor filthy,
+# because the one part of him that touches the job is his feet.
+#
+# `bone` IS THE MECHANIC AND NOTHING ELSE - the rule the weigher and dredger
+# carried forward, kept. Here that is THE POINTING FOREARM AND MITT, and
+# nothing else on the body is pale. THE HEAD CARRIES NO PALE AT ALL, answered
+# the way the panner, stiltman, iceman, straker, weigher and dredger answered
+# it: dark cap and hood, eyes `glow` only - and here the eyes sit on the HEAD'S
+# own facing vector rather than on -Y, which is the mechanic again and is why
+# `eyes()` could not be used for them.
+#
+# Static: no `anims` entry - bestiary.gd wants a `model` path and no anims.
+# ROOM-LOCK IS NOT CLAIMED HERE: minibossgen measures the real footprint and
+# the lid, and the pointing arm's reach is the number that decides it, not me.
+CANON.update({
+    "overlooker": ("Velrick", 2.40, (0.46, 0.44, 0.52), (0.86, 0.92, 1.00),
+                   "workshop",
+                   "IT STRIKES WHOEVER HAS DONE IT LEAST HARM - it does not "
+                   "pick a hero and it is not dealt a target: it goes for the "
+                   "one who has hurt it least, and it re-reads that the moment "
+                   "it changes. So the back of the room stops being the safe "
+                   "place. A healer who only heals, an archer who holds a "
+                   "shot, anyone who steps out to drink a flask - each of them "
+                   "becomes the target BY DOING THAT, and the hero who has "
+                   "been carrying the fight is the one it will not touch. "
+                   "Hitting it harder does not protect you; it only moves the "
+                   "mark onto whoever did not. The party cannot hold a line "
+                   "against it, because the line is what makes a back rank, "
+                   "and it answers a back rank by walking past the front one. "
+                   "THE THING TO READ IS THE HEAD: it is turned hard off his "
+                   "own shoulders and his cold eyes are on that line, with the "
+                   "pale mitt of his far arm held out level along it - so a "
+                   "viewer can see WHO he has picked before he moves, and can "
+                   "see the pick change.",
+                   0.18, "Someone up ahead is being watched, and it is not "
+                   "the man in front."),
+})
+ORDER = ORDER + ["overlooker"]
+
+# PER-SLOT MATERIALS. `bone` IS THE POINTING FOREARM AND MITT ONLY - see the
+# header. The coat is deliberately NOT black: a `body` that dark reads as one
+# blob at stream distance and the collar and shoulders stop existing. Measured
+# rec709 luma on these three: body 0.251, bone 0.921, dark 0.068, so the
+# BONE/BODY RATIO IS 3.67 - against the Beadle's shipped 1.07 pale-on-pale and
+# the Collier's 1.34, this pale cannot go flat against the coat on any view.
+# The assertion is in the builder, not in this comment.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"overlooker"}
+
+OVERRIDE.update({
+    "overlooker": {
+        'body': ((0.255, 0.246, 0.292), 0.62, 0.04),   # the kept coat, collar
+        'dark': ((0.070, 0.068, 0.074), 0.78, 0.06),   # cap, hood, belt, BOOTS
+        'bone': ((0.930, 0.922, 0.880), 0.34, 0.22),   # THE POINTING MITT ONLY
+        'glow': ((0.820, 0.900, 1.000), 0.80),         # eyes, on the HEAD's line
+    },
+})
+
+
+def _luma(c):
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
+
+
+def overlooker():
+    """THE OVERLOOKER - the 63rd. He holds nothing, and his head is turned.
+
+    THE ONE NUMBER THIS BUILDER ASSERTS RATHER THAN COMMENTS. The Beadle
+    shipped a pale knob at a bone/body luma ratio of 1.07 and it went flat
+    against his own pale panel on the side view while every number in his
+    register read green. A ratio is cheap to check and expensive to find by
+    looking, so it is checked HERE and the build dies if a later colour edit
+    walks it back under 1.30.
+
+    WHAT IS PALE: the pointing forearm and the mitt on the end of it. Nothing
+    else. The head has no pale at all.
+    """
+    bone_l, body_l = _luma(OVERRIDE["overlooker"]['bone'][0]), \
+        _luma(OVERRIDE["overlooker"]['body'][0])
+    ratio = bone_l / max(1e-6, body_l)
+    if ratio < 1.30:
+        raise ValueError(
+            "overlooker: bone/body luma ratio %.2f is under 1.30 - this is the "
+            "Beadle's shipped pale-on-pale fault arriving before a vertex is "
+            "placed (bone %.3f, body %.3f)" % (ratio, bone_l, body_l))
+
+    P = Parts("overlooker")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.105
+    KNEE = 0.560
+    HIP = 1.040
+    WAIST = 1.250
+    CHEST = 1.580
+    SHO = 1.810
+    HEAD = 2.155
+
+    # HE DOES NOT STOOP. Every carrier in this file leans into its load; this
+    # one carries nothing, so LEAN is zero and that is a statement, not a
+    # default - it is the only upright figure in the set.
+
+    # THE LINE HE IS WATCHING. 57 degrees off his own forward (-Y), which is
+    # the dredger's FIX A: at 90 the arm points into the side camera and
+    # collapses, at 0 it is the front camera's flat-on. F presents 0.84 of its
+    # length to the front ortho and 0.54 to the side one.
+    # PASS 2, FIX E. 57 degrees put 0.84 of the arm into the front ortho and
+    # only 0.54 into the side one, and the side render showed the mitt as a
+    # stub sitting right beside the dark head - a pale mass reading as part of
+    # the head, which is the Beadle's pale-knob fault wearing a different hat.
+    # 47 degrees splits it 0.73 / 0.68: both cameras get a diagonal and the
+    # side one gets enough length to carry the mitt clear of the skull.
+    HY = 0.820
+    F = Vector((-math.sin(HY), -math.cos(HY), 0.0)).normalized()
+    S = Vector((-F.y, F.x, 0.0)).normalized()        # across his line of sight
+
+    # ---- legs. Short visible run below the coat; the bell does the rest. ---
+    _open()
+    for _i in (-1, 1):
+        _h = Vector((0.175 * _i, 0.0, HIP))
+        _k = Vector((0.188 * _i, -0.020, KNEE))
+        _a = Vector((0.196 * _i, -0.010, ANK))
+        limb(P, [tuple(v) for v in seat([_h, _k, _a], 0.118)], 0.118, 0.092,
+             'body')
+        # BOOTS - works-floor filthy, the one dirty part of him.
+        P.add(L.box(0.118, 0.168, 0.072), 'dark',
+              loc=(0.196 * _i, -0.052, ANK - 0.052))
+    _close("legs")
+
+    # ---- the coat. A BELL, and it is the non-hero half of the silhouette. --
+    # A hero below the waist is two legs; this is one solid flare, so the
+    # bottom third of the figure cannot be read as an adventurer.
+    _open()
+    # PASS 2, FIX A - AND THIS ONE WAS A PLAIN BUG, NOT A JUDGEMENT. L.cone
+    # is (r_base, r_top, h) with the base at z=0, so pass 1's (0.300, 0.520)
+    # built the skirt NARROW AT THE HEM AND WIDE AT THE WAIST: an upturned
+    # bell whose widest point was his belt, 0.68 wider than his own shoulders.
+    # The render read as a chess piece with a man's top screwed into it - the
+    # Scrapwright's pass-1 "balloon on two legs" arrived by arithmetic. The
+    # radii are the right way round now and the hem is lifted, so the widest
+    # thing on the body is the SHOULDERS (0.87 across against the hem's 0.91,
+    # near enough to read as a coat and not as a plinth).
+    P.raw(aim(L.cone(0.455, 0.292, WAIST - 0.330, 22),
+              (0.0, 0.004, 0.330), (0.0, 0.0, 1.0)), 'body')
+    P.add(L.box(0.318, 0.212, 0.052), 'dark',
+          loc=(0.0, 0.0, WAIST - 0.030))            # the belt
+    _close("coat")
+
+    # ---- trunk and the square shoulders. ----------------------------------
+    # WIDE AND SQUARE on purpose: it puts the turned head in a notch instead
+    # of on a slope, which is what makes the turn read at distance.
+    _open()
+    limb(P, [(0.0, 0.004, WAIST - 0.050), (0.0, 0.000, CHEST),
+             (0.0, -0.010, SHO - 0.050)], 0.252, 0.236, 'body')
+    P.add(L.box(0.620, 0.248, 0.112), 'body', loc=(0.0, -0.012, SHO - 0.046))
+    for _i in (-1, 1):
+        P.add(L.sphere(0.136, 0.140, 0.120, 11, 8), 'body',
+              loc=(0.300 * _i, -0.012, SHO - 0.040))
+    _close("trunk")
+
+    # ---- the high collar. Dark, so the head sits IN something. -------------
+    _open()
+    # PASS 2, FIX C. Pass 1's collar was 0.246 at its mouth and 0.180 tall
+    # and the dark head sat INSIDE it: cap, skull and collar merged into one
+    # dark column and the side view read as a stack of plates with no face in
+    # it. Smaller and lower, so there is a lit neck between the two and the
+    # head is its own silhouette island.
+    P.raw(aim(L.cone(0.170, 0.205, 0.132, 18), (0.0, -0.014, SHO - 0.020),
+              (0.0, 0.0, 1.0)), 'dark')
+    _close("collar")
+
+    # ---- THE HEAD, TURNED. NO PALE ANYWHERE ON IT. ------------------------
+    # The yaw is applied to the cap, the brim and the jaw, so the profile the
+    # front camera gets is a real profile and not a sphere with eyes moved.
+    _open()
+    _HD = Vector((0.0, -0.020, HEAD))
+    limb(P, [(0.0, -0.012, SHO - 0.020), tuple(_HD - Vector((0.0, 0.0, 0.150)))],
+         0.088, 0.100, 'body')
+    P.add(L.sphere(0.196, 0.202, 0.196, 14, 9), 'dark', loc=tuple(_HD))
+    # PASS 2, FIX B - THE FAULT THAT MATTERED, AND IT WAS MINE BY NUMBER.
+    # Pass 1's "jaw" was a 0.090-thick slab aimed at +Z, i.e. laid FLAT, and
+    # 0.150 long. It vanished. The head was then a sphere under a round cap:
+    # rotationally symmetric, no profile from the front and NO FACE AT ALL
+    # from the side - which is the exact Beadle fault this body's whole claim
+    # was to answer, shipped in the first pass of the thing claiming to answer
+    # it. The number said nothing; the picture said it. It is now a SNOUT
+    # 0.250 long BUILT ALONG +Z AND AIMED DOWN F, so the head's mass is
+    # off-centre along his line of sight and no camera can find it symmetric.
+    P.raw(aim(L.box(0.158, 0.118, 0.250),
+              tuple(_HD + F * 0.128 - Vector((0.0, 0.0, 0.030))),
+              tuple(F)), 'dark')
+    # the cap and its brim, yawed with the head
+    P.add(L.sphere(0.206, 0.200, 0.132, 13, 8), 'dark',
+          loc=tuple(_HD + Vector((0.0, 0.0, 0.082))))
+    # the brim, WIDER and shoved along his line so it overhangs the face only
+    # PASS 3. The brim was 0.268 and the eyes sat at 0.208 along F, so the
+    # BRIM OVERHUNG ITS OWN EYES and the side render put them in its shadow -
+    # a cue I had built, measured as present, and could not see. Pulled in to
+    # 0.238 so the eyes clear it; it still overhangs the snout on his line.
+    P.raw(aim(L.cone(0.238, 0.238, 0.038, 18),
+              tuple(_HD + F * 0.090 + Vector((0.0, 0.0, 0.108))),
+              (0.0, 0.0, 1.0)), 'dark')
+    # EYES ON HIS OWN LINE, NOT ON -Y. `eyes()` offsets along y only, which is
+    # why it is not used here - the off-axis eye is the mechanic.
+    # PASS 2, FIX D. 0.025 eyes are 1.0 percent of a 2.40 m body and were
+    # already near-invisible at 700 px; at the 360p rung the collier was just
+    # measured at they would not exist. 0.046 and pushed out past the brim.
+    for _s in (-1.0, 1.0):
+        P.add(L.sphere(0.048, 0.048, 0.048, 9, 7), 'glow',
+              loc=tuple(_HD + F * 0.252 + S * (0.060 * _s) +
+                        Vector((0.0, 0.0, 0.040))))
+    _close("head")
+
+    # ---- THE POINTING ARM. THE ONLY PALE ON THE BODY. ---------------------
+    # Held LEVEL at shoulder height along his line of sight. A horizontal bar
+    # at the shoulder is a thing no hero silhouette has, and the gaoler's hook
+    # lesson is why the mitt is a mass and not a hairline: 0.105 at the wrist
+    # swelling to a 0.150 mitt, readable at pane distance.
+    _open()
+    _SH = Vector((-0.300, -0.012, SHO - 0.050))      # the far shoulder, -X side
+    _EL = _SH + F * 0.320 + Vector((0.0, 0.0, -0.034))
+    _WR = _SH + F * 0.770 + Vector((0.0, 0.0, -0.092))
+    limb(P, [tuple(_SH), tuple(_EL)], 0.112, 0.098, 'body')   # upper: coat
+    limb(P, [tuple(_EL), tuple(_WR)], 0.098, 0.105, 'bone')   # forearm: PALE
+    P.add(L.sphere(0.158, 0.158, 0.134, 12, 8), 'bone',
+          loc=tuple(_WR + F * 0.078))                          # THE MITT
+    _close("point")
+
+    # ---- the other arm. Down and tucked behind the hip. --------------------
+    # Hands behind the back is the overseer's stance and it also keeps the
+    # near side of the front ortho clear of the trunk, so the pointing arm is
+    # the only thing crossing the frame.
+    _open()
+    _SN = Vector((0.300, -0.012, SHO - 0.050))
+    limb(P, [tuple(_SN), tuple(_SN + Vector((0.040, 0.060, -0.330))),
+             tuple(_SN + Vector((-0.060, 0.148, -0.600)))], 0.112, 0.082,
+         'body')
+    _close("arm")
+
+    # THE FIGURE, STATED BY THIS BUILDER - see man_ranges(). He carries no
+    # gear, so every span IS the man. That is a declaration, not an omission:
+    # the one body in this file whose silhouette is entirely his own.
+    P.man_parts = ("legs", "coat", "trunk", "collar", "head", "point", "arm")
+    return P
+
+
+BUILDERS.update({"overlooker": overlooker})

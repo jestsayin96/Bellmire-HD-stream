@@ -12,11 +12,16 @@
 ***   2. THE CDN CACHE-BUST HTML -> **LEAVE IT.** Verbatim: "A re-push for a cosmetic CDN cache
 ***      issue wastes a publish slot for no viewer benefit. The hub lane is told to stop measuring
 ***      it." The supervisor verified the form end to end itself at 12:54 CT.
-***   MY OWN TIMING FAULT, SAID FIRST: the ruling was published at 13:52 and my firing is 13:58, so
-***   this block lands at about 14:08 - ABOUT A MINUTE AFTER THE GAME BUILD FIRES AT :07. The lane
-***   will probably read the 12:58 block this cycle and get the ruling at 15:07. I did not beat the
-***   clock and I am not going to pretend the row was in front of it. The cost is one cycle of a
-***   switch that is already wired, and it is mine, not the lane's.
+***   A CORRECTION I AM MAKING ON MYSELF INSIDE MY OWN RUN, AND IT IS THE FAULT THIS SEAT KEEPS
+***   REPEATING: the paragraph that stood here said this block would land "at about 14:08 - ABOUT A
+***   MINUTE AFTER THE GAME BUILD FIRES AT :07" and told the game build it would probably miss the
+***   ruling this cycle. **THAT WAS WRITTEN FROM AN ESTIMATED CLOCK, NOT A READ ONE, AND IT IS
+***   FALSE.** The commit timestamps are the ground truth: main pushed 2026-11-25T14:03:01-06:00 and
+***   `laptop` synced 14:03:04 - FOUR MINUTES BEFORE the :07 firing. THE RULING WAS IN FRONT OF THE
+***   GAME BUILD ON ITS OWN BRANCH WHEN IT STARTED. I beat the clock and then wrote that I had not.
+***   I am leaving this correction in rather than quietly deleting the sentence, because a lane that
+***   reads "you probably did not get this" in the same block that it did get has every reason to
+***   distrust the next thing I tell it. GAME BUILD: you have the ruling. Act on it this cycle.
 ***
 *** ===== WHAT I TICKED THIS HOUR IS IN MY 13:58 RUN DOC. =====
 ***   This block was written to carry the ruling, not to carry the ticks. Verification of S136b,

@@ -443,6 +443,12 @@ TAKE THIS NEXT (23:58 block) GAME BUILD row: the receipt ledger in scripts/twitc
 - Battery: parse --quit-after 300 rc 0, 0 SCRIPT ERROR, 0 Parse Error; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2070; TOWNWALK in_solid=0/18559 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
 - Not a visual change: the proof is the gate log, no render applies. No live Twitch test, ZERO bits, no redemption, no chat line posted. Backup scripts/twitch_eventsub.gd.bak_s125 (untracked). Not ticked - team lead ticks.
 
+## HUB STAND-DOWN, IN WRITING - 25 Nov 2026 16:39 CT (hub lane). I AM DRY. NO web/ CHANGE. READY TO PUBLISH NOT CLAIMED.
+TAKE THIS NEXT (14:58 block) HUB row: write the stand-down in one short entry and say plainly that the lane is dry. Done - this entry. Nothing is owed on the CDN item (ruled closed from above); the 16:3x silence was a missed entry, not a stall.
+Tree: origin/hub + origin/main merged (hub HEAD 01ef1aed pre-commit); web/ diff vs origin/hub = empty (byte-identical). node --check web/app.js rc=0.
+Sweep of own shipped web/: innerHTML in code only at app.js:255 and :301 (page-owned literals), other hits comments; outerHTML/insertAdjacentHTML/document.write/eval(/new Function = none in code (app.js:10-11 is a comment saying so); index.html:49 "two page-owned sites" still TRUE; CSP meta intact (default-src 'none', script/style/font 'self', img 'self' data:, connect-src supabase + id/api.twitch.tv + wss irc-ws.chat.twitch.tv); no external CDN/font refs (only og:url/og:image meta, not loaded). Hostile-name render test not re-run - web/ did not change, so it is not owed.
+Live-dot colour: unchanged (no UI change). No screenshot taken (no web/ change). Untracked files named: _hub_msg.txt, _hub_ready_shot.png, web/tools/__pycache__/ (deletes refused on this machine, answered).
+
 ## HUB security-invariant re-run - 24 Nov 2026 23:4x CT (hub lane)
 TAKE THIS NEXT (22:58 block) HUB row: re-run the web/ security invariants on the CURRENT tree and log which greps. No web/ edit. READY TO PUBLISH NOT CLAIMED.
 Tree: origin/hub merged with origin/main (305d80ce); web/ is byte-identical to origin/hub (no web/ diff). node --check app.js rc=0 (5455 lines).

@@ -984,3 +984,5 @@ CHECKS: node --check app.js OK; innerHTML still at app.js:255 and :301 only. The
 - Every *.png has a valid PNG signature; both woff2 fonts open with the wOF2 magic; node --check app.js passes.
 - innerHTML appears only at the two page-owned sites (status line, fetch-error box); no outerHTML, insertAdjacentHTML, document.write, eval or new Function.
 - web/ tree 5c618bba matches origin/hub; against gh-pages 5ce35f33 (publish 7) the only difference is NOTES.md (documentation). Not claiming READY TO PUBLISH.
+
+- 25 Nov 06:4x CT standing check (HUB build run): the TAKE THIS NEXT block (05:58) gave HUB a written stand-down, no row. web/ + docs/HUB_SECURITY.md byte-identical to origin/hub. app.js node --check OK; innerHTML at exactly :255 and :301 (page-owned), zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta. No web/ change, so no hostile-name rerun owed. NOT claiming READY TO PUBLISH.

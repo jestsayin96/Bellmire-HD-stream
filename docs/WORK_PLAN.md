@@ -29,7 +29,14 @@
 >>> HUD (:52) <<<
   **U180 IS THE RIGHT KIND OF FINDING: ONE IN YOUR OWN SHIPPED WORK, FOUND BY LOOKING AT THE FRAME
   YOUR OWN NUMBERS CALLED WORST.** You took the tightest U179 rung, opened it, and found the
-  Chronicle stack overruns the vellum bottom by 5-7 px on the newest line, hostile names and plain.
+  Chronicle stack overruns the vellum bottom on the newest line, hostile names and plain.
+  *** A CORRECTION ON MYSELF, INSIDE MY OWN RUN, AND IT IS THE FAULT THIS PROMPT WARNS ABOUT BY NAME.
+  *** I first wrote "by 5-7 px" here. THAT IS YOUR FIGURE AND I COPIED IT INSTEAD OF MEASURING IT.
+  *** Your own committed logs say vellum_bottom=617 with boxbottom=625 plain and 623 hostile, at every
+  *** rung k=160..240 - that is 8 px and 6 px, a 6-8 px overrun, not 5-7. The finding is REAL and
+  *** unchanged and I am not charging you for it; the wrong number in this row was mine. Re-state the
+  *** range off your own log when you fix it, and if 5-7 came from measuring the GLYPH bottom rather
+  *** than the box bottom, say which you meant - the two are different measurements.
   You wrote it as a probe with no fix and you committed your logs this time - both of them, plus the
   U179 log that was uncommitted when I ticked U179 last hour. That is the gap closed.
   TAKE **THE FIX, AS U181.** This is the second half of your own probe, not a new item: the overrun
@@ -95,7 +102,17 @@
 ***      collier pass 18. The prompt still names B104/C-163/S85/U124/paviser pass 8. The prompt
 ***      already says to re-measure these, so this is a refresh and not a contradiction.
 ***   5. THE DEAD-DATA BASELINE IN THE PROMPT IS DATED 21 NOV. Re-stamp it to the 25 Nov measurement
-***      in my run doc for this hour, keeping the 15 non-note keys and the series intact.
+***      in my run doc for this hour, keeping the 15 non-note keys and the series intact. Measured on
+***      merged main this hour: 48 files (47 scripts/*.gd + web/app.js), 2,408,516 chars, 12
+***      data/*.json, 156 top-level keys, 66 zero-hit = 51 `_note_` + 15 NON-NOTE (the same 15),
+***      36 asset dirs with files, ZERO unreferenced, ZERO unread live keys.
+***   6. THE PROMPT'S HUB PUBLISH BLOCK IS STALE AND I MEASURED IT MYSELF THIS HOUR. It says
+***      gh-pages is 05ac2679 / tree 9ca8051e / pushed 19 Nov 20:06, with 3 files / +59 / -1
+***      outstanding (NOTES.md +9, web/app.js +46/-1, web/style.css +4). LIVE NOW: gh-pages is
+***      **8d214d36, tree 1d8bce63, pushed 2026-11-25T09:55:03-06:00**, subject "hub publish 8
+***      (cache-bust): app.js?v=8 forces browsers to fetch new suggestion form JS". The app.js and
+***      style.css changes ARE PUBLISHED. The outstanding delta is now **NOTES.md +31/-0, ONE FILE,
+***      DOCUMENTATION ONLY** - no web asset is waiting. Do not carry the old three-file figure.
 
 *** FOR THE SUPERVISOR: nothing new this hour. The 13:52 ruling on both items I routed up is relayed
 *** above and the game build acted on it the same cycle. The hub remains MERGED-AND-NOT-PUBLISHED and

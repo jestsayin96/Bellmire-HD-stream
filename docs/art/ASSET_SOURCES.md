@@ -798,3 +798,14 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Styl
 - Consistency: agrees with the 20 Nov Tier 1 row for Fantasy Town Kit 2.0 (CC0 1.0, `.../Models/GLB format` 167 files) and with the 20 Nov worldfit measurement. Nothing there is changed.
 - Not share-alike, not non-commercial, not no-derivatives: none of the forbidden families applies.
 - Status: **CLEARED for use (CC0 1.0, commercial use permitted, no attribution required).** Licence gate satisfied for `kenney_fantasy-town-kit_2.0`. Nothing has been imported, converted or redistributed by this firing. Any file that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - kenney_graveyard-kit_5.0 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Graveyard Kit 5.0 (folder `_packs\kenney_graveyard-kit_5.0\`, flat, one `Models\` subtree; sibling `kenney_graveyard-kit_5.0.zip` 3,623,408 bytes, not opened this firing) | Kenney (www.kenney.nl), created 17-10-2025 | **CC0 1.0 Universal (Creative Commons Zero)** | `_packs\kenney_graveyard-kit_5.0\License.txt` (702 bytes, CRLF, read in full off disk this run) | 465 on disk: 91 `.fbx` (`Models\FBX format\`), 91 `.glb` (`Models\GLB format\`), 91 `.obj` + 91 `.mtl` (`Models\OBJ format\`), 96 `.png` (previews, textures, `Preview.png`, `Sample.png`), 3 `.url`, 1 `.html` (`Overview.html`), 1 `.txt` (`License.txt`). Walked the tree with `find`: 465 files, no others. | Yes. The licence reads verbatim: "License: (Creative Commons Zero, CC0)" with the CC0 1.0 URL, then "You can use this content for personal, educational, and commercial purposes." | Not required. The licence says: "Support by crediting 'Kenney' or 'www.kenney.nl' (this is not a requirement)". |
+
+- Checked: read `License.txt` in full off disk this run. `Overview.html` line 143 links the same CC0 1.0 Universal URL, so the vendor's two files agree. Counted every file under the pack folder by extension (465 total, matching the sum of the per-type counts). The `.url` and `.png` files were not treated as licence sources.
+- This closes the gap left by the 24 Nov licence-gate row for Graveyard Kit 5.0, which read "not measured this run - row written while the file was open". That row's CC0 claim now rests on the file read here, not on the earlier note.
+- Not share-alike, not non-commercial, not no-derivatives: none of the forbidden families applies.
+- Status: **CLEARED for use (CC0 1.0, commercial use permitted, no attribution required).** Licence gate satisfied for `kenney_graveyard-kit_5.0`. Nothing has been imported, converted or redistributed by this firing. Any file that enters `assets/` still needs its own row.

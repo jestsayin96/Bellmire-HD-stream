@@ -218,6 +218,131 @@
 ***      "thirty-three bodies" and "46 rows / 44 live" fit-register figures remain STRUCK; the
 ***      register now judges 63 pairs (61 live + 2 `_chibi`).
 ***
+*** ===== ADDENDUM TO THE 03:58 BLOCK, WRITTEN 04:1x CT. ART PUSHED THE 62nd BODY *BETWEEN MY TWO
+*** ===== PLAN SYNCS* AND THREE OF MY OWN ROWS WENT STALE INSIDE MY OWN RUN. I AM FIXING THEM.
+*** WHICH LANES THIS IS OWED TO THIS HOUR, SAID ON ITS FACE AS THE CHARTER REQUIRES: it is written
+*** after :05, so the GAME BUILD's amended row below is the **05:07 firing's** row, not 04:07's.
+*** CONTENT (:22), ART (:34), CHAT BOT (:45) and HUD (:52) have all NOT yet fired, so their rows
+*** below ARE owed this hour and supersede the matching rows above.
+***
+*** HOW I CAUGHT IT: my sync recipe re-reads each lane ref at sync time, and art's parent moved from
+*** `b316bdc5` to `3ff0793e` between sync 1 and sync 2. The charter says merge a lane that moves
+*** before you finish, so I did: `collier` is merged to main at **9395b356** and all six lanes are
+*** level again. This is the re-read rule earning its place, not a near-miss.
+***
+*** ===== THE CASCADE HAS REOPENED ONE STEP: 62 BODIES / 61 FEED / 61 ENGINE / 61 PUBLISHED. =====
+*** It was closed at 61/61/61/61 for about twenty minutes, which is the first full agreement in six
+*** hours and is still worth having had. Art is the only lane that can reopen it and it did its job.
+***
+*** ===== THE 62nd IS **HALF DELIVERED** AND I AM NOT TICKING IT. TWO REASONS, ONE OF THEM MINE
+*** ===== TO HAVE EXPECTED AND ONE OF THEM THE LANE'S OWN. =====
+***   WHAT IS IN, AND I CHECKED IT RATHER THAN READING THE SUMMARY: `assets/monsters/minibosses/
+***   collier.glb` is on main; `_fit_report.json` `ok` **true**, verdict **GREEN**, **64 pairs**
+***   (62 live + 2 `_chibi`), `pairs.collier.ratio` **0.86**, `creature_h` **2.10** = CANON
+***   (`minibosses.py:22643`, "Halfblow", 2.10) with no adjustment to either, `fits_frame` true,
+***   3 proving views, `seen` 1.0 creature AND hero on all three, every `frame_edge` zero on every
+***   side of every view, `air_px_min` 102. `_backread` man_seen front 0.9914 / side 0.9745 / back
+***   0.9966 against the house bar of 0.75.
+***   **(1) `collier.glb.import` IS ABSENT**, so the body is NOT loadable by the engine. This is the
+***   third body running with the same gap (`crimp` 00:52, `timberman` 02:09) and both times art
+***   closed it in a second short lock window. It is a known two-step, not a new fault - but a body
+***   the engine cannot load is half a delivery and the tick waits for the load proof.
+***   **(2) THE LANE'S OWN FAULT 4, AND I COUNTED IT MYSELF RATHER THAN READING IT.** I opened
+***   `renders/art/minibosses/collier/hero_front.png` and `hero_back.png` at hero scale and zoomed
+***   the clamp. **THE BACK IS A REAL BACK** - stepped earth courses where the front is a smooth
+***   cone, the man turned away, the shovel swapping sides and the plank bundle crossing from the
+***   body's left to its right. It is NOT a mirrored front, which is the Beadle test and it passes it.
+***   **BUT THE FRONT COUNT DOES NOT READ.** The body's whole mechanic is "four pale plugs in a
+***   cradle, **countable from the doorway**" - that is the lane's own acceptance cue, not mine.
+***   On the hero sheet I count **TWO clean circles, one sliver behind the plank bundle, and one
+***   bisected by a vertical stake**. The lane's fault 4 says *three* read cleanly and one is partly
+***   behind the mound's flank. **I AM A STEP WORSE THAN THE LANE, NOT BETTER** - and I am recording
+***   the disagreement rather than adopting its number, because the direction matters: pass 5 moved
+***   the fourth vent off the shovel blade and the flank and a stake each took a piece back.
+***   **THIS IS NOT A NEW FINDING AND I AM NOT DRESSING IT AS ONE.** Art found it first, wrote it as
+***   fault 4 in `docs/art/COLLIER_THE_62nd.md`, and named the cause in its own commit title ("my own
+***   pass-4 fix hid the count"). I checked it independently and agree it is open; that is all.
+***   **THE REGISTER IS GREEN AND THE PICTURE IS NOT, AND THE PICTURE IS THE ACCEPTANCE TEST.**
+***   `seen: 1.0` on three views, `frame_edge` zero everywhere and a GREEN verdict did not catch it,
+***   exactly as they did not catch the Beadle. Four passes of numbers; one look.
+***
+*** ===== THE AMENDED ROWS. THESE SUPERSEDE THE MATCHING ROWS IN THE BLOCK ABOVE. =====
+***
+*** CONTENT (:22) - **YOUR ROW IS NOW CONCRETE: C-205, THE FEED ROW FOR `collier`.** The conditional
+***   in your row above ("the feed row for whatever art ships at :34") has resolved: art shipped the
+***   62nd at 04:1x and `collier.glb` is on main at 9395b356. `miniboss_feed.by_key.collier`, name
+***   **"Halfblow"** (CANON `minibosses.py:22643`), four phases in the shape C-202/C-203/C-204 shipped
+***   - `arrive`, `act`, `broken`, `fall`, with `{name}` in the `act` lines and in none of the others.
+***   The trade is a charcoal burner and the mechanic is that the party's HEAVIEST blow is the
+***   liability - a measured stroke is safe, an overblow bursts a vent and the flare takes the room.
+***   `docs/art/COLLIER_THE_62nd.md` has the full idea; write to that, not to the key name.
+***   **§2 IS STILL NOT YOURS AND STILL NEVER WAS.** See the block above.
+***
+*** ART (:34) - **TWO THINGS, IN THIS ORDER, AND THE FIRST IS WHAT HOLDS THE TICK.**
+***   **(a) `collier.glb.import` + THE LOAD PROOF.** Third body running with this gap; you have the
+***   recipe down cold from `crimp` and `timberman` - headless `--import` on W5's OWN `project.godot`,
+***   then a `tools/art/_collier_load.gd` that is RED ON EMPTY, with `crimp` and `timberman` as the
+***   controls. The 62nd is not loadable until this lands and I am holding the tick on it.
+***   **CONSIDER MAKING IT ONE STEP INSTEAD OF TWO.** Three bodies in a row have shipped the mesh in
+***   one window and the import sibling in another. That is not a fault and I am not charging it -
+***   but if the sibling can be generated in the SAME run that writes the `.glb`, the body arrives
+***   loadable and the cascade loses a step. Your call; say which you chose either way.
+***   **(b) PASS 7: FAULTS 1 AND 4, which are your own list.** Fault 1 (the head reads as a pot at
+***   stream distance) you named first. Fault 4 is the count, and **my own look is one step worse
+***   than yours** - I read two clean and two partial where you read three and one. The mechanic is
+***   the count; if a player cannot count four from the doorway the body does not teach itself.
+***   A lane fixing a defect in what it has just shipped is NEVER a new item.
+***
+*** GAME BUILD - **THIS IS YOUR 05:07 ROW, NOT 04:07's, AND IT SAYS SO BECAUSE IT WAS WRITTEN AFTER
+***   :05.** By 05:07 you should have content's C-205 on main from 04:22 and art's import sibling
+***   from 04:34. If both are there, **TAKE THE COLLIER WHOLE IN ONE COMMIT** on the S126b/S127
+***   precedent: `bestiary.gd` row (`model: res://assets/monsters/minibosses/collier.glb`, **NO
+***   `anims`** - static, no armature, `h` 2.10), `MB_FIT` **0.86** COPIED from art's register and
+***   not re-derived, theme row **`wood`**, `MB_NAME` **"Halfblow"**, and **ALL FIVE sibling literals
+***   61 -> 62** - `grep -rn "MB_NAME.size()" tools/ scripts/` and READ each site, because
+***   `_s107_gate.gd:39-43` binds a variable and `_s126_crimp.gd:31` is a parenthesised conditional
+***   and a flat regex finds three of five. **IF CONTENT'S FEED ROW IS NOT THERE, HOLD THE NAME** and
+***   say so - a name with no feed row is `COMMANDS_DATA MINIBOSS GHOST`, which is the trap S126
+***   avoided correctly and which I nearly charged it for avoiding.
+***   **L56 IS YOUR SECOND ITEM AND IT CARRIES IF THE JOIN TAKES THE WINDOW.** The lying-gate row in
+***   the block above stands in full; it is not cancelled, it is ordered second.
+***
+*** FOR THE SUPERVISOR - ONE LINE ADDED TO THE TWO ABOVE:
+***   3. **ART IS PRODUCING A BODY AN HOUR AND THE HOUSE IS KEEPING UP WITH IT.** 62 bodies as of
+***      04:1x. Nothing is asked of you here; it is the one lane with a standing licence to invent
+***      and the cascade behind it is closing in one cycle per body. Recorded so that if you ever
+***      want that rate changed, you are changing it from a measured figure and not an impression.
+
+*** ===== SECOND ADDENDUM, 04:1x CT. ART CLOSED THE IMPORT GAP INSIDE THE SAME HOUR AND THE 62nd IS
+*** ===== NOW **TICKED**. THE ART ROW ABOVE IS AMENDED AGAIN: ITEM (a) IS DONE, ONLY PASS 7 REMAINS.
+***   Art claimed 04:07:58 / cap 04:32:58 / declared 04:15:58 / IDLE **04:09:15** - inside, clean.
+***   `assets/monsters/minibosses/collier.glb.import` and `tools/art/_collier_load.gd` are on main.
+***   **I READ THE GATE RATHER THAN THE VERDICT**, and it is a sound instrument: it calls
+***   `ResourceLoader.exists`, then `load()`, then `instantiate()`, then walks the tree counting
+***   `MeshInstance3D`, failing separately at each step; it carries `timberman` and `crimp` as
+***   CONTROLS that had siblings before this run; and `if checked == 0` is an explicit FAIL, so it is
+***   genuinely RED ON EMPTY and not merely described as such. Result: `LOADCHECK OK OWED collier 4
+***   meshes, CONTROL timberman 4, CONTROL crimp 4, checked=3 fails=0`, rc 0.
+***   **SO I TICK THE 62nd.** Body built, loadable, proved to load, register GREEN at 64 pairs, ratio
+***   0.86 matching CANON without adjustment, and a REAL back rather than a mirrored front. That is
+***   the same bar `crimp` and `timberman` were ticked at.
+***   **FAULT 4 IS CARRIED OPEN, NOT FOLDED IN.** The front count still does not read - the lane's own
+***   fault list says three of four embers read cleanly, my own look says two clean and two partial,
+***   and the disagreement stands in the record unresolved rather than averaged. It goes to pass 7
+***   with fault 1. A body ticked with a named open defect is how the last three shipped; a body
+***   ticked with the defect quietly dropped is not.
+***   **AND THE TWO-STEP I ASKED ABOUT IS WORTH ASKING ABOUT ANYWAY.** Art has now closed this gap in
+***   a second window three bodies running, each time fast and clean. It is not a fault. But the
+***   cascade spends a step on it every time, and the question in the row above stands for the 63rd.
+***
+*** GAME BUILD - **MY L56 ROW REACHED YOU AND YOU WERE ALREADY ON IT AS I WROTE THIS.** Your 04:10:21
+***   claim reads "L56 trap half made deterministic in tools/_l56_test.gd: parse + L56 normal +
+***   --redproof + --nospring + standing battery", cap computed first at 04:35:21, declared 04:32:21.
+***   A `--nospring` arm is exactly the right shape: it proves the gate still goes RED when no trap
+***   fires, which is the half that made B144's OK a coin flip. Verifying it next hour.
+***   **YOUR COLLIER ROW IS UNCHANGED AND IS STILL THE 05:07 ROW.** Art's import sibling is in, so by
+***   05:07 the only precondition left is content's C-205 feed row at 04:22.
+
 *** NEEDS MR. E: nothing.
 
 **LOCK DISCIPLINE AND THE RUNNING CLEAN-HOUR COUNT - THE 03:58 CT FIRING, 25 NOV 2026.**

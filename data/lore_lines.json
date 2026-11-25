@@ -14276,29 +14276,29 @@
           "He comes out of it beside whoever you were keeping back.",
           "Nobody is taken and nobody is lost. Everybody is just somewhere else.",
           "Look at the drum. It turns a third on every trade. Count the dark rungs.",
-          "The bars ride at hip height. A body set against one holds it.",
+          "The post turns only while nothing leans on it. A body set against it holds it.",
           "Good wool, a clean plate under the post, and a man who has done this every day for years."
         ],
         "act": [
-          "The arms come round. {name} is standing where he stood.",
+          "The post turns. {name} is standing where he stood.",
           "{name} struck hardest and paid for it. The turnstile turns.",
           "A third of a turn on the drum. {name} is somewhere new.",
           "{name} comes out the far side of him, and the back rank has company.",
           "He keeps to the turnstile. {name} keeps to the wrong place.",
           "One more trade. {name} watches the drum, not the man.",
-          "{name} puts a shoulder to a bar. It will not go round."
+          "{name} puts a shoulder to the post. It will not go round."
         ],
         "broken": [
-          "A body against the bar. The arms stop where they stand.",
+          "A body against the post. Everything stops where it stands.",
           "The turnstile will not turn. The drum stays on its rung.",
-          "He leans on the bars and nothing gives. The trade is off.",
-          "The arms are jammed. Everybody is where they chose to be."
+          "He leans on the post and nothing gives. The trade is off.",
+          "The post is jammed. Everybody is where they chose to be."
         ],
         "fall": [
-          "Evenhand is down. The arms hang still.",
+          "Evenhand is down. The drum hangs still.",
           "The drum has stopped on its last rung.",
           "He steps out of the turnstile and does not step back in.",
-          "The bars are idle. Stand where you like.",
+          "The post is idle. Stand where you like.",
           "Nobody trades with him now.",
           "He lays a hand on the post and lets go of it.",
           "The turnstile stands open. Nothing is owed.",
@@ -14931,7 +14931,7 @@
     "_note_c203": "C-203: timberman (Deadfall, the 61st) feed row, same shape as crimp - arrive 9, act 8, broken 4, fall 8, {name} in act only. Written off art's TIMBERMAN_THE_61st.md: death is the danger; three spare props and two wedges are the answers; the roof stays up while the fight lasts. Fall lines are neutral on whether the roof held, since one fall set covers either ending. Last arrive line is the art lane's own suggested line. Expected zero-hit key.",
     "_note_c205": "C-205: collier (Halfblow, the 62nd) feed row, same shape as timberman - arrive 9, act 8, broken 4, fall 8, {name} in act only. Written off art's COLLIER_THE_62nd.md: the party's heaviest blow is the liability (a measured stroke is safe, an overblow bursts a vent and the flare takes the room); four pale plugs answer the four vents; short man in a wide hat, shovel, eight stakes, spoil tail. Fall lines are neutral on whether the room flared, since one fall set covers either ending. Last arrive line is the art lane's own suggested line. Expected zero-hit key.",
     "_note_c212": "C-212: collier text change, shipped on the supervisor's 11:00 CT ruling (A) and the team lead's 11:58 plan row. The body shows three vents at 360p, so the count words came out and the mechanic words stayed: arrive.3 drops \"Four\", arrive.4 drops \"four\", act.6 becomes \"seats another plug. One more red eye goes out.\" in place of \"the third plug. Three dark mouths and one red\". Eight stakes (arrive.2) unchanged. Arrays stay 9/8/4/8, no key added or removed. _note_c205 above is left byte-identical as history; its \"four pale plugs answer the four vents\" is superseded by this note. Expected zero-hit key; NO LANE IS TO WIRE IT.",
-    "_note_c214": "C-214: C-213's prepared text diffs, landed on the team lead's 14:58 CT plan row. The changer's arms were deleted on 21 Nov (Mr. E: delete the bars); the body is man, post, collar and a pale drum with three dark rungs. Changed: changer arrive.1 drops three-armed turnstile for turnstile post; arrive.2 works the arms, and the arms work the room becomes works the post, and the post works the room; arrive.8 clean plates on the bar ends becomes a clean plate under the post. Dyer arrive.1 A fourth is in the vat becomes The vat is steaming (three cloths on the builder, none in the vat). HELD, not changed: changer arrive.7, act.0, act.6, broken.0-3, fall.0, fall.3, fall.6 still name bars or arms; they promise the jam counterplay, which is an open mechanic question for the lead, Mr. E and the code lane, and rewording them would guess a mechanic. Arrays stay 9/7/4/8 and 9/8. No key added except this note. Expected zero-hit key; NO LANE IS TO WIRE IT."
+    "_note_c214": "C-214: C-213's prepared text diffs, landed on the team lead's 14:58 CT plan row. The changer's arms were deleted on 21 Nov (Mr. E: delete the bars); the body is man, post, collar and a pale drum with three dark rungs. Changed: changer arrive.1 drops three-armed turnstile for turnstile post; arrive.2 works the arms, and the arms work the room becomes works the post, and the post works the room; arrive.8 clean plates on the bar ends becomes a clean plate under the post. Dyer arrive.1 A fourth is in the vat becomes The vat is steaming (three cloths on the builder, none in the vat). CORRECTED AND FINISHED IN C-215 (25 Nov): the held list over-stated by two - broken.1 and fall.6 never named a bar or an arm. The eight that did (arrive.7, act.0, act.6, broken.0, broken.2, broken.3, fall.0, fall.3) are now reworded to the post and drum; the jam counterplay survives as a promise (a body set against the post holds it) and no cell names an arm or a bar. Nothing is held. Arrays stay 9/7/4/8 and 9/8. No key added except this note. Expected zero-hit key; NO LANE IS TO WIRE IT."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

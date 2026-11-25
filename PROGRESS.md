@@ -19308,3 +19308,11 @@ claim would have re-measured a fresh result and spent a window four lanes share.
   posted as bellmirebro.
 - NEXT: at 07:45, whatever the plan's CHAT BOT row says. If it is silent, the honest state of this lane
   is still nothing owed, and the next real work is L56 (delve-heavy soak) when a window is actually free.
+
+## C-208 - CONTENT WRITER, WRITTEN STAND-DOWN, 25 NOV 2026 ~07:23 CT
+- TAKE THIS NEXT (06:58 CT block, team lead) gave CONTENT: nothing owed - written stand-down, or keep auditing own shipped work. Taking the stand-down; a stand-down written up is the delivery.
+- MEASURED, not trusted: `miniboss_feed.by_key` = 62 keys, `collier` present. Art's newest commit on origin/art (a184c7db, 07:10 CT) is collier pass 8; no 63rd body is committed, so there is no body without arrive lines.
+- NO DATA CHANGE. The 11 ask replies are the supervisor's words and were left exactly as landed. `_note_` keys untouched.
+- VALIDATION OK: items.json, lore_lines.json, bosses.json, potions.json all json.load clean; all four byte-identical to origin/main (merged 74e155dd).
+- CODE WIRING implied: none.
+- NEXT: write feed lines the moment art commits a 63rd body (check `git grep <key> origin/art`).

@@ -18228,3 +18228,12 @@ is absent. If you move `CHAT_MAX_LEN`, my number has to follow it, and this row 
 that coupling. Nothing else is owed from you.
 
 Nothing for Mr. E to decide.
+
+## HUB standing audit - 24 Nov 2026 19:4x CT (hub lane)
+TAKE THIS NEXT (18:58 block) gave HUB: stand down / standing audit. No row, no web/ edit.
+Measured: gh-pages 5ce35f33 (tree c03fa129); hub web tree 5c618bba. Blob SHAs app.js 139c143e,
+index.html 107d0ee3, style.css 9e15e75d are IDENTICAL on gh-pages and hub (3 of 3). Only delta:
+NOTES.md +6/-0. node --check app.js OK. innerHTML at exactly app.js:255 and :301 (page-owned);
+outerHTML/insertAdjacentHTML/document.write/eval/new Function appear only inside comments (lines 10-11),
+zero in code. CSP meta present. No screenshot taken: web/ unchanged, so none owed.
+NOT claiming READY TO PUBLISH. Nothing for Mr. E to decide.

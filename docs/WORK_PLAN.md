@@ -1,3 +1,223 @@
+## TAKE THIS NEXT - Updated THE 01:58 CT FIRING, 25 NOV 2026 (team lead; written 02:0x CT). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS 3ff95ede. ALL SIX LANE BRANCHES ARE MERGED, ZERO COMMITS UNMERGED.
+*** FOUR LANES SHIPPED, ONE STOOD DOWN IN WRITING, ONE DID NEITHER.
+***
+*** ===== THE CASCADE IS OPEN TWO STEPS: 60 BODIES / 60 FEED / 59 ENGINE / 59 PUBLISHED, AND THE
+*** ===== JOIN IS A LIVE `MINIBOSS UNNAMED` FAULT ON MAIN AS OF MY MERGE. NOBODY IS AT FAULT.
+***   Measured by ME on 3ff95ede with a BRACE-MATCHED parse of `scripts/delve.gd`, never a flat regex:
+***     `Delve.MB_FIT` = 71 keys = **60 live bodies + 11 retired `_chibi`**. `crimp` PRESENT at 0.99.
+***     `miniboss_feed.by_key` = **60** keys. `crimp` **PRESENT** (content's C-202).
+***     `Delve.MB_NAME` = **59** keys. `crimp` **ABSENT**.
+***     `by_key - MB_NAME` = **[`crimp`]**. `MB_NAME - by_key` = []. `MB_FIT - MB_NAME` = crimp + the 11 chibi.
+***     `data/commands.json` `commands.miniboss` short AND what = **59**; `docs/COMMANDS.md:39` = **59**.
+***   WHAT THAT STATE DOES, READ OFF THE CODE AND NOT OFF A COMMENT: `dungeon_hd.gd:264`
+***   `miniboss_for` admits a key when its model resolves AND its `arrive` lines are non-empty. Both
+***   are now true for `crimp`, so it CAN be placed in barracks - and `delve.gd:474` is
+***   `MB_NAME.get(key, key.capitalize())`, so its nameplate reads **"Crimp" instead of "Oneshort"**.
+***   `chatcmd.gd:2248` calls that `COMMANDS_DATA MINIBOSS UNNAMED` and says in its own words why it
+***   is "a fault and not a warning": nothing crashes and nothing reads wrong in a log. I measured
+***   this STATICALLY off lines 2224-2249; I did NOT run the gate and I claimed no lock.
+***
+*** ===== THE GAME BUILD WAS RIGHT TO HOLD THE NAME, AND I NEARLY CHARGED IT FOR BEING RIGHT. =====
+*** S126's comment says a name with no feed row "trips chatcmd.gd COMMANDS_DATA MINIBOSS GHOST".
+*** The prose at `chatcmd.gd:2191` describes GHOST as "an MB_NAME row keyed on a word that is not a
+*** body" - and `crimp` HAS a body, so on the comment alone the lane's reason looked wrong. THE CODE
+*** SAYS OTHERWISE: `mb_live` is `miniboss_names()`, the FEED key set, and GHOST at :2252 is
+*** `for mb_g in MB_NAME.keys(): if not mb_live.has(mb_g)`. A name with no FEED row trips GHOST
+*** exactly as the lane said. The loose thing is the comment's prose, not the lane's reasoning.
+*** I was one step from writing the opposite into this block off a comment. READ THE CODE, NOT THE
+*** CLAIM BESIDE IT - it is in my own charter and it caught me pointing the wrong way.
+*** SO THE ORDER IS INHERENT, NOT A LANE FAULT: the game build fires at :07 and content at :22, so
+*** body -> feed -> name cannot close inside one hour. The hold produced the UNNAMED state and the
+*** alternative would have produced GHOST. Both lanes did the right thing in the order available.
+***
+*** ===== FIVE TOOLS FILES HARD-CODE `MB_NAME.size() == 59`, AND THIS PLAN HAS NAMED ONLY THREE
+*** ===== FOR DAYS. TWO GATES WILL GO RED ON THE CORRECT NEXT CHANGE. THAT IS MY FAULT, NOT A LANE'S.
+***   `tools/_s51_names.gd:64`, `tools/_s107_gate.gd:43`, `tools/_s117_straker.gd:33` - the three
+***   this plan has named at lines 62 / 174 / 301 / 422 and which every seat has copied forward.
+***   **`tools/_s124_pledgeman.gd:31`** - never named in this plan at any point. Correct today.
+***   **`tools/_s126_crimp.gd:30`** - written THIS HOUR, correct today, and `grep -c _s126_crimp`
+***   over this plan returned **0** before this block.
+***   All five read `== 59` on 3ff95ede and all five are correct at 59. The moment `crimp` joins
+***   MB_NAME at 60, any file left behind FAILS ON A CORRECT CHANGE. The three-file list is a stale
+***   instrument I own; it is corrected here and the row below names all five.
+***
+*** ===== DEAD-DATA AUDIT, MEASURED THIS HOUR ON 3ff95ede. THE UNREAD COUNT DID NOT MOVE. =====
+***   Corpus `scripts/*.gd` (47) + `web/app.js` = **48 files / 2,398,273 chars**; `data/*.json` = 12
+***   files / **155** top-level keys. Matcher: literal key substring over the concatenated corpus.
+***   UNREFERENCED ASSET DIRECTORIES (off `assets/` only): **ZERO** of 35 directories with files.
+***   UNREAD LIVE DATA KEYS: **ZERO**.
+***   Zero-hit keys **65 = 50 `_note_` + 15 NON-NOTE**, and the 15 are the SAME 15 set as every
+***   honest baseline since 21 Nov, key for key: `lord_intros_alt` + `unique_intros_alt` (READ at
+***   delve.gd:4022 via `base + "_alt"` - DO NOT WIRE), the four declared-dead `phase2_words`,
+***   `phase2_words_alt`, `phase2_words_alt2`, `town_levels_for_the_desktop`, and the nine prose/spec
+***   strings (`technique`, `boss_floors`, `chronicle_line`, `word_order`, `casing`,
+***   `promotion_line`, `one_roll`, `_gating`, `canon_silences`).
+***   THE NON-NOTE COUNT IS THE SERIES TO WATCH AND IT IS STILL EXACTLY 15.
+***   Series: 52 (21 Nov 05:0x) -> 53 -> 56 -> 65 (25 Nov 01:0x) -> **65 (25 Nov 01:5x)**, notes only.
+***   NO LANE IS TO WIRE A `_note_` KEY, AND CONTENT IS NOT TO STOP WRITING THEM.
+***
+*** ===== THE ART FIT REGISTER IS GREEN AND I CHECKED THE PLAN BEFORE CALLING THAT A FINDING. =====
+*** `renders/art/minibosses/_fit_report.json` on 3ff95ede: `ok` **true**, `verdict` **"GREEN"**,
+*** **62 pairs** (60 live + `snuffer_chibi` + `tallyman_chibi`, both now carrying ratios), zero rows
+*** failing `fits_frame`, zero rows without a ratio, and NO `shipped_red` / `ok_shipped` keys at all
+*** any more - the schema changed. My prompt's standing note still says the register reads
+*** "RED / ok:false ... on two CARRIED unmeasured rows" and tells every seat not to report it green.
+*** THAT NOTE IS STALE AND INVERTED. It is ALREADY item 1 of the owed-corrections list the 00:58
+*** seat wrote below, which I found by grepping this plan rather than by publishing it as news.
+***
+*** ===== WHAT I TICKED, AND WHAT I DELIBERATELY DID NOT. =====
+***   TICKED **C-202** (content): I parsed the row myself rather than taking the note - `arrive` 9,
+***     `act` 8, `broken` 4, `fall` 8, `{name}` in `act` only and absent from `arrive`/`broken`/
+***     `fall`, exactly as C-202's own note declares. Four phases, no others.
+***   TICKED **the pack-catalogue entry for `modular_village_collection`** (landed on `hub`): I
+***     re-walked the pack on disk instead of reading the table - 143 files, 142 `.obj` + 1 `.mtl`,
+***     zero licence-like filenames, and a case-insensitive grep of every file for licence terms
+***     returned NOTHING. Unlicensed, GATED, nothing imported. That is the right call under the
+***     CC0-preferred rule and the entry says so in those words.
+***   NOT TICKED **S126** - HALF DELIVERED. The fit row (0.99, and I checked it against art's own
+***     `_fit_report.json` rather than the lane's sentence: `pairs.crimp.ratio` 0.99, `fits_frame`
+***     true, 3 proving views - copied faithfully, not re-derived), the barracks row, and
+***     `tools/_s126_crimp.gd` are all in and the gate PRINTS A VERDICT (`S126_CRIMP OK (%d checks)`)
+***     with a check-floor that fails a quiet run. The MB_NAME half is open. It inherits below.
+***   NOT TICKED **L56** - and the 00:58 seat's refusal to tick it is now PROVEN right, which is
+***     worth more than a tick. B145 re-ran `tools/_l56_test.gd` and got CHECKS 4 / **UNMET 2** /
+***     FAILS 0 with `L56 CAP HIT - NO VERDICT` on 3 of 4 runs, where B144 got UNMET 0 an hour
+***     earlier on the same script and the same shape. The trap half is earnable only when traps
+***     happen to spring. **B144's `L56_TEST OK` WAS ONE SAMPLE, NOT A PROPERTY.** The lane reported
+***     that against itself and kept the log. Nobody is to tick L56 on a single green run.
+***   NOT TICKED **U165** - a written-up stand-down IS the delivery, and there is nothing to tick in it.
+
+- **GAME BUILD** - **S126 is HALF TICKED-WORTHY and I did not tick it; the open half is now
+  UNBLOCKED.** Your hold was correct and I have written the proof above so no later seat re-litigates
+  it. Content's C-202 landed at 01:25 CT, ten minutes after your push, and my 01:58 merge joined
+  them - so as of 3ff95ede the feed has `crimp` and `MB_NAME` does not, which is a LIVE
+  `COMMANDS_DATA MINIBOSS UNNAMED: 1` and a nameplate reading "Crimp". **Take S127: name the 60th.**
+  Add `"crimp": "Oneshort"` to `Delve.MB_NAME` (59 -> 60); the name comes from art's
+  `docs/art/CRIMP_THE_60th.md` and content's C-202 fall lines, do not invent one.
+  **AND MOVE ALL FIVE SIBLING LITERALS IN THE SAME COMMIT, NOT THREE.** This plan has named three
+  for days and that list is wrong - it is my instrument and I am correcting it, not charging you:
+    `tools/_s51_names.gd:64`, `tools/_s107_gate.gd:43`, `tools/_s117_straker.gd:33`,
+    **`tools/_s124_pledgeman.gd:31`**, **`tools/_s126_crimp.gd:30`** - all five read `== 59`.
+  Leave any one at 59 and that gate FAILS ON A CORRECT CHANGE. Measure MB_NAME with a brace-matched
+  parse, never a flat regex. Your lock line last hour was clean: claim 01:09:25, cap 01:34:25,
+  declared 01:15, released 01:15:14, inside both - and the cap-first discipline held again.
+- **CONTENT** - **C-202 IS TICKED.** You shipped after a silent hour and the row is exactly right;
+  I parsed it rather than trusting its note. **Now the supervisor's §2, which is still undelivered
+  and is still blocking the chat bot's ask gate** - the 11 new `ask.topics` in `data/commands.json`
+  (`ask.topics` plus `ask.order`, appended AFTER `hub`, in this order: `bug, suggest, afk, died,
+  howdelve, howbands, standing, permadeath, creator, howoil, thanks`), replies and phrase lists
+  VERBATIM from the directive. I measured the file myself on 3ff95ede: `ask.order` is 10 long,
+  `ask.topics` holds the same 10 keys (`missed myhero join real what gear gold bits commands hub`),
+  and all 11 of the supervisor's are absent. The chat bot has now proved that twice off the right
+  file; it cannot run the gate until this lands. If you cannot finish it, write the stand-down.
+- **ART** - **your 01:34 firing left NO commit and NO `PROGRESS.md` entry.** `origin/main...origin/art`
+  is EMPTY and your branch's only commits this hour are my own plan syncs; your last PROGRESS touch
+  was 00:02:56. I am not charging you with a fault I cannot distinguish from a failed run - but a
+  dry hour MUST be written up, because silence and a crash look identical from here and the next
+  seat cannot tell them apart. **Write the stand-down this firing, naming which it was.** Then, if
+  you have a cycle: your `_fit_report.json` is `ok:true` / GREEN at 62 pairs with both `_chibi` rows
+  now carrying ratios - say in PROGRESS when and how those two were measured, because this house has
+  a standing note calling your register RED and your own file is the evidence that retires it.
+  Minibosses remain yours to invent; the 61st is open.
+- **HUB** - **the `modular_village_collection` catalogue entry IS TICKED** and I re-walked the pack
+  on disk to check it rather than reading your table. Unlicensed and gated is the right call; do not
+  soften it if someone finds a forum post, only an author licence PAGE counts. **Nothing is owed on
+  `web/` this hour and you do not publish - that is the supervisor's call, not yours and not mine.**
+  Merged-and-unpublished is 3 files / +17 / -1 (re-measure it yourself, do not copy that figure).
+  If dry, keep cataloguing packs under the same evidence standard: filenames, in-file text, and the
+  zip's central directory, with nothing guessed.
+- **CHAT BOT** - **B145 is the best report any lane filed this hour and it contains no green.** You
+  re-ran L56, got UNMET 2 where B144 got 0, named your own prior verdict as one sample rather than a
+  property, kept the log, and republished nothing because the count was not yours to move. That is
+  exactly right. **Do not republish the miniboss count yet** - it is 59/59 published against a 60-key
+  feed, but the engine half is 59 too and the game build is writing `MB_NAME` this hour; republish
+  59 -> 60 only once `Delve.MB_NAME` reads 60 on merged main, or you will publish a number the
+  nameplates cannot honour. **This hour: commit your log to your own ref.** `_b145_l56.log` is in
+  W6's working tree only, so on `origin/chatbot` there is nothing to judge your verdict by - the
+  quote in PROGRESS.md is your word about your own run. **And claim by :50 with a finish inside :52**,
+  as the schedule row has had it since 21 Nov; your 01:48:17 claim and 01:51:52 release honoured it.
+- **HUD** - **U165 recorded, nothing ticked, nothing owed.** A written-up stand-down on an odd hour
+  is the delivery and yours named the lock state and the seven byte-identical files. The lock was
+  free in your :52-:07 window this hour and the chat bot released at 01:51:52, before :52 - so you
+  were not starved and you did not stand down for another lane. Nothing in `web/` or `ui_theme.gd`
+  is owed to you. **System 2's HUD half stays CLOSED at U55** (`ui_theme.gd:176/196/200/204`,
+  `leaderboard_panel.gd:197/202`); the rarity row is not to be handed to you again, by me or anyone.
+
+**FOR THE SUPERVISOR.** Two things, both evidenced above, neither of them mine to take:
+  1. **THE HUB HAS WORK MERGED AND NOT PUBLISHED, AND IT HAS NOW WAITED FIVE DAYS.**
+     `origin/gh-pages` is **5ce35f33**, tree **c03fa129**, pushed **24 Nov 15:30 CT** ("hub publish
+     7"). `origin/hub:web` is a different tree and the delta is **3 files / +17 / -1**. The hub lane
+     has NOT claimed "ready to publish", so I ran NO publish verification this hour and I am
+     reporting no security gate - saying so plainly because an unearned gate report is the same
+     fault class as a lying gate. **Recommendation: if you want it live, say "publish" and I will do
+     the subtree push by the proven plumbing recipe with the four assertions and verify the tree
+     equality afterwards.** I will not decide it.
+  2. **CONTENT'S §2 OF YOUR 24 NOV DIRECTIVE IS NOW TWO HOURS UNDELIVERED AND IT BLOCKS A GATE.**
+     The 11 new `ask.topics` are absent from `data/commands.json` on 3ff95ede (measured: `ask.order`
+     10, `ask.topics` 10, all 11 missing), and the chat bot's ask gate has nothing to judge until
+     they land. Content shipped C-202 instead this hour, which was real work, so this is a queueing
+     question and not a refusal. **Recommendation: leave the order as it is - the feed row unblocked
+     a live `MINIBOSS UNNAMED` and was worth taking first - and I will keep §2 at the head of
+     content's row until it lands.** Routed up rather than re-prioritised by me.
+
+**NEEDS MR. E: nothing.**
+
+**FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, TO BE LANDED IN ONE LIVE TURN.** This list
+SUPERSEDES the one in the 00:58 block below. Every figure here was RE-MEASURED by me on 3ff95ede at
+01:5x-02:0x CT, not carried forward - and two of the 00:58 list's entries needed no change, which is
+only knowable by measuring them again.
+I attempted the write once this firing, as the rule says, with a no-op (`enabled=true` only, neither
+prompt nor name). It was REFUSED - **and the refusal was NOT the usual one, so I am quoting what I
+actually saw rather than restating what this prompt predicted.** Verbatim: "Permission for this
+action was denied by the Claude Code auto mode classifier. Reason: [Undermining Oversight]." That is
+the HARNESS CLASSIFIER, not the scheduled-task approval gate my charter describes ("a firing has no
+live turn to be approved in"). Both may be true at once; only one of them fired here. I did not
+retry and I did not look for another route, because the denial's own text says not to. THE PRACTICAL
+EFFECT IS UNCHANGED - the seven prompts cannot be written from a firing and this list is how the
+corrections survive - but a seat reading the old sentence would expect a different error and might
+retry against a block that is not about approval at all. SAY WHICH REFUSAL YOU GOT.
+  1. **THE ART FIT REGISTER NOTE IS STALE AND SAYS THE OPPOSITE OF THE TRUTH.** The standing note
+     "its top-level verdict reads RED / ok:false ... on two CARRIED unmeasured rows (`snuffer_chibi`,
+     `tallyman_chibi`)" is false. Measured by me on 3ff95ede: `ok` **true**, `verdict` **"GREEN"**,
+     **62 pairs**, zero rows failing `fits_frame`, zero rows without a ratio, and the note's own
+     evidence keys `shipped_red` / `ok_shipped` **DO NOT EXIST IN THE FILE ANY MORE** - the schema
+     changed, so a seat checking them reads `None` and could call the gate red on a missing key.
+     Replace the whole note with: MEASURE the register; never quote its verdict out of the prompt.
+     (Carried from the 00:58 list, re-measured, still owed, now with the schema half added.)
+  2. **THE HUB PUBLISH BASELINE IS STALE TWICE OVER.** The prompt still says "gh-pages is 05ac2679,
+     tree 9ca8051e, pushed 19 NOV 20:06 CT" with a "3 files / +59 / -1" delta. Measured by me:
+     gh-pages **5ce35f33**, tree **c03fa129**, pushed **24 NOV 15:30 CT**; `origin/hub:web` tree
+     **3d910499**; the two are NOT equal; delta **3 files / +17 / -1** - `NOTES.md` +12/-0,
+     `index.html` +2/-1, `style.css` +3/-0. `merge-base --is-ancestor origin/gh-pages origin/hub`
+     returns **rc=1**, so gh-pages is NOT an ancestor of hub and a publish is a fresh subtree
+     commit, not a fast-forward of the branch. KEEP the re-measure-it-yourself rule; it is the only
+     reason this was caught twice.
+  3. **THE ID LINE IS STALE.** As of 25 Nov 02:0x CT: **B145, C-202, D100, H32, L74, S126** (S127 is
+     the next game-build number and its row is written above), **T5, U165**, and art is **sixty
+     bodies deep** (`crimp`), long past the prompt's "paviser pass 8".
+  4. **EVERY MINIBOSS COUNT IN THE PROMPT IS STALE AND ALWAYS WILL BE.** The standing "44/44/44"
+     `Delve.MB_NAME` example and the "46 rows, of which 44 are live bodies" fit-register line should
+     both be replaced by a pointer to this plan's TAKE THIS NEXT block, which is re-measured hourly.
+     Today it is **60 bodies / 60 feed / 59 engine / 59 published**. Keep the brace-matched-parser
+     warning itself - it is the part that is still true and it earned its place again this hour.
+  5. **THE CLEAN-HOUR COUNT LINE IS STALE.** The prompt says it "STOOD AT 2 AFTER THE 08:58 FIRING
+     ON 21 NOV". It reset to **0** at the 00:58 firing on 25 Nov (chat bot declared-finish overrun)
+     and stands at **1** after this firing - no overrun, no stale lock cleared, no starved lane, no
+     future stamp, no two lanes holding at once.
+  6. **ADD A SENTENCE THE PROMPT DOES NOT HAVE AND THIS HOUR EARNED:** the `MB_NAME.size()` sibling
+     literals are **FIVE** files, not the three this plan has named for days - `_s51_names.gd:64`,
+     `_s107_gate.gd:43`, `_s117_straker.gd:33`, `_s124_pledgeman.gd:31`, `_s126_crimp.gd:30`. The
+     general rule worth baking in is the mirror of the one already there: a lane that LOOSENS a test
+     must prove it can still go red, and a lane that ADDS a counted literal must move every sibling
+     in the same commit or its own gate fails on a correct change.
+  7. **NO CHANGE OWED, RECORDED SO THE NEXT SEAT KNOWS IT WAS CHECKED RATHER THAN COPIED:** the
+     dead-data baseline's NON-NOTE count reads 15 in the prompt and MEASURES 15 today, key for key.
+  8. **ALREADY CORRECT, DO NOT "FIX" IT:** the prompt's struck rarity-hue paragraph (System 2's HUD
+     half CLOSED at U55) is right; I re-grepped `ui_theme.gd` and `leaderboard_panel.gd` this hour.
+     And the prompt's `device_bash` warning about git in a worktree is right - I tripped it myself
+     this hour and it cost one call.
+
 ## TAKE THIS NEXT - Updated THE 00:58 CT FIRING, 25 NOV 2026 (team lead; written 01:0x-01:1x CT). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS 39d8a7b9. ALL SIX LANE BRANCHES ARE MERGED. FIVE LANES SHIPPED; ONE
 *** DID NOT SHIP AND DID NOT STAND DOWN.

@@ -19762,3 +19762,10 @@ shipping it.** If the lead or the supervisor wants it, it is one clause appended
 - Commit message written to a FILE, never `-F -` - B152's wedge is not repeated.
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat line
   posted as bellmirebro, no channel setting touched.
+
+## Hub - 25 Nov 12:4x CT - the ONE measurement the 11:58 row asked for (no web/ change)
+- Row taken: HUB (:37) "one more measurement then stop measuring". Built-in browser, https://jestsayin96.github.io/Bellmire-HD-stream/?cb=1245, read at 12:45 CT.
+- RESULT (b), STILL STALE: document.lastModified = 11/25/2026 09:49:18; script tags = [app.js] with NO ?v=8. Third consecutive reading (10:4x, 11:39, 12:45) - the live HTML has not healed ~2h50m after the 09:55 push. Not re-litigating: it is with the supervisor; a re-push is not mine.
+- Extra data point: the stale HTML does contain #suggestions and a Suggestion Box control, so the form markup is live; whether the cached JS wires it for a returning viewer is untested.
+- COLD-CACHE CHECK NOT DONE: a same-origin fetch of app.js from the page threw "Failed to fetch" (CSP connect-src), and a real submit would write a row to the live suggestions table, so I did not run one. The pane profile is not provably cold. Needs the supervisor or a fresh profile.
+- web/ unchanged; greps: innerHTML only at the two page-owned sites, zero outerHTML/insertAdjacentHTML/document.write/eval/new Function. NOT claiming READY TO PUBLISH.

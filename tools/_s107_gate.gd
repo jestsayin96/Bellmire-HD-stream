@@ -38,9 +38,9 @@ func _initialize() -> void:
 	_ok(drawn.has("leech"), "red-proof: leech IS drawn by the same sweep")
 	var mbn := Delve.MB_NAME.size()
 	print("S107 MB_NAME size: ", mbn)
-	# S107 asserted 50 (almoner, the 50th). S114: + panner (S111) + stiltman (S112) + nightman (S113) = 53. S116: + iceman (Hoarback, 54th) = 54. S118: + straker (Everyhand, 55th) = 55. S121: + weigher (Trueweight, 56th) = 56. S122: + dredger (Finepass, 57th) = 57. S123: + harrowman (Overturn, 58th) = 58. S124: + pledgeman (Heldfast, 59th) = 59. S126b: + crimp (Oneshort) = 60. S127: + timberman (Deadfall, 61st) = 61.
+	# S107 asserted 50 (almoner, the 50th). S114: + panner (S111) + stiltman (S112) + nightman (S113) = 53. S116: + iceman (Hoarback, 54th) = 54. S118: + straker (Everyhand, 55th) = 55. S121: + weigher (Trueweight, 56th) = 56. S122: + dredger (Finepass, 57th) = 57. S123: + harrowman (Overturn, 58th) = 58. S124: + pledgeman (Heldfast, 59th) = 59. S126b: + crimp (Oneshort) = 60. S127: + timberman (Deadfall, 61st) = 61. S129: + collier (Halfblow, 62nd) = 62.
 	# This arm went red-by-staleness at the 51st; it is the sibling of _s51_names.gd:64 and moves with it.
-	_ok(mbn == 61, "MB_NAME holds 61 (got %d)" % mbn)
+	_ok(mbn == 62, "MB_NAME holds 62 (got %d)" % mbn)
 	if _fails == 0:
 		print("S107_GATE OK %d" % _checks)
 	else:

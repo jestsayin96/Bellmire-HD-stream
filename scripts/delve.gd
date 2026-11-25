@@ -427,6 +427,7 @@ const MB_FIT := {
 	"harrowman": 1.0,   # S123: art's _fit_report.json pairs.harrowman.ratio (58th, Overturn in CANON minibosses.py:21156, h 2.45 / hero 2.45, tag grassland - field 5, fits_frame true, 3/3 proving views, air_px_min 67), copied not re-derived; harrowman.glb + .import on main, content's C-200 by_key.harrowman landed, so MB_NAME row written in the same change
 	"pledgeman": 1.05,   # S124: art's _fit_report.json pairs.pledgeman.ratio (59th, Heldfast in CANON minibosses.py:21464, h 2.58 / hero 2.45, tag treasury - field 5, fits_frame true, 3/3 proving views, air_px_min 136), copied not re-derived; pledgeman.glb + .import on main, content's C-201 by_key.pledgeman landed, so MB_NAME row written in the same change
 	"timberman": 1.24,   # S127: art's _fit_report.json pairs.timberman.ratio (61st, Deadfall in CANON minibosses.py:22232, h 3.05 / hero 2.45, tag crypt - field 5, fits_frame true but margin_x 0.12 - the TALLEST body in the register and the least room of any), copied not re-derived; timberman.glb + .import on main, content's C-203 by_key.timberman landed, so MB_NAME row written in the same change
+	"collier": 0.86,   # S129: art's _fit_report.json pairs.collier.ratio (62nd, Halfblow in CANON minibosses.py:22643, h 2.10 / hero 2.45, tag wood - field 5, fits_frame true, margin_x 0.12, 3/3 proving views), copied not re-derived; collier.glb + .import on main, content's C-205 by_key.collier landed, so MB_NAME row written in the same change
 	"crimp": 0.99,   # S126: art's _fit_report.json pairs.crimp.ratio (60th, Oneshort in CANON minibosses.py:21826, h 2.42 / hero 2.45, tag barracks - field 5, fits_frame true, 3/3 proving views), copied not re-derived; crimp.glb + .import on main. MB_NAME row added at S126b once content's C-202 by_key.crimp landed
 	"roper": 1.0,   # S101: art's _fit_report.json pairs.roper.ratio (49th, Drawtight in CANON, h 2.46 / hero 2.45, tag grassland - field 5, fits_frame true, 3/3 proving views), copied not re-derived. MB_NAME row added at S102 once content C-177 wrote the feed
 }
@@ -472,7 +473,8 @@ const MB_NAME := {
 	"harrowman": "Overturn",   # S123: content's C-200 by_key.harrowman landed (9/8/4/8, _note_c200 "Overturn") and art's CANON title (minibosses.py:21156), both read
 	"pledgeman": "Heldfast",   # S124: content's C-201 by_key.pledgeman landed (9/8/4/8, _note_c201 "Heldfast", fall lines "Heldfast is down") and art's CANON title (minibosses.py:21464), both read
 	"crimp": "Oneshort",   # S126: content's C-202 by_key.crimp landed (9/8/4/8, _note_c202 "Oneshort", fall lines "Oneshort is down") and art's CANON title (minibosses.py:21826), both read
-	"timberman": "Deadfall"}   # S127: content's C-203 by_key.timberman landed (9/8/4/8) and art's CANON title (minibosses.py:22232), both read
+	"timberman": "Deadfall",   # S127: content's C-203 by_key.timberman landed (9/8/4/8) and art's CANON title (minibosses.py:22232), both read
+	"collier": "Halfblow"}   # S129: content's C-205 by_key.collier landed (9/8/4/8, fall lines name Halfblow) and art's CANON title (minibosses.py:22643), both read
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []

@@ -61,7 +61,7 @@ func _initialize() -> void:
 	# red at S75 with nobody re-reading it; the key-SET check below is the real guard, this is the count beside it.
 	# S99: + changer (Evenhand, 47th, C-174) = 47. S102: + roper (Drawtight, 49th body, C-177) = 48. S103: + stopper (Chokewell, 48th body, C-176, .glb on main 41f71825) = 49. S107: + almoner (Dolehand, 50th body, C-182, .import committed) = 50.
 	# S113: + panner (Onceround, S111) + stiltman (Downfast, S112) = 52 - S111 and S112 never moved this count, so this arm was red on main for two cycles; + nightman (Nightwork, 53rd, C-190) = 53. S116: + iceman (Hoarback, 54th, C-193) = 54. S118: + straker (Everyhand, 55th, C-195) = 55. S121: + weigher (Trueweight, 56th, C-198) = 56. S122: + dredger (Finepass, 57th, C-199) = 57. S123: + harrowman (Overturn, 58th, C-200) = 58. S124: + pledgeman (Heldfast, 59th, C-201) = 59.
-	_ok(Delve.MB_NAME.size() == 61, "MB_NAME is 61 (got %d)" % Delve.MB_NAME.size())
+	_ok(Delve.MB_NAME.size() == 62, "MB_NAME is 62 (got %d)" % Delve.MB_NAME.size())
 	var seen := {}
 	var bodies := 0
 	var fed := 0

@@ -974,3 +974,5 @@ GUARD: `make_item_icons.py` gained `verify_icons()` and a `--verify` mode (no wr
 CHECKS: node --check app.js OK; innerHTML still at app.js:255 and :301 only. The browser hostile-name run was NOT repeated: no code path changed, only one binary thumbnail and the offline tool. Not claiming READY TO PUBLISH (one icon + tool change; nothing the supervisor was asked about).
 
 - 24 Nov 15:4x CT standing audit (no row owed): web/ tree c03fa129 == origin/main:web == origin/gh-pages tree (publish 7, 5ce35f33, 15:30 CT). Zero 0-byte files in web/icons/items on hub and on gh-pages. app.js: innerHTML only at :255 and :301 (page-owned); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function; node --check OK; CSP meta present. web/ unchanged this run, so the hostile-name test is not re-owed.
+
+- 24 Nov 17:4x CT hub standing audit (row HUB 17:37): web/ tree d27fe17c == origin/main:web == origin/hub:web; vs gh-pages c03fa129 delta = NOTES.md only. innerHTML only app.js:255, :301 (page-owned); CSP default-src 'none' present; node --check OK; 0 zero-byte icons. No READY TO PUBLISH claimed.

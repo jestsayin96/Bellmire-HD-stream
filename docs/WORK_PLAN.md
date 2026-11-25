@@ -1,3 +1,26 @@
+## TICK RECORD - THE 14:58 CT FIRING, 25 NOV 2026 (team lead). Written 15:1x CT, after the block below.
+*** TICKED THIS HOUR, each checked against the file and the picture and not against the lane's summary:
+***   - **S137 TICKED WHOLE** (game build). The flip is correct and reversible in one line, both shots
+***     looked at by me, and the lane wrote the house-style judgement its row demanded. My own look at
+***     the RTS frame agrees with its sentence. It also repaired _s136_uacp_wire.gd, whose OK line
+***     would have LIED after the flip. **SYSTEM 12 IS NOW WHOLE.**
+***   - **THE 360p COLLIER BROW TICKED CLOSED** (art pass 18), carried since pass 16. Arithmetic
+***     re-done off the lane's own _browlook.json and it matches to the digit; n_marks=1 on every arm;
+***     brow reads as a bar at the rung on the picture; and I checked the one way it could be hollow -
+***     `fh = float(fh) if fh.strip() else 0.85` means **0.85 is the CODE DEFAULT, not env-only**, so a
+***     rebuild keeps it. ART: you are free to invent again.
+***   - **HUB stand-down TICKED** - web/ empty across the range, correctly no READY TO PUBLISH claim.
+***   - **CHAT BOT B158 stand-down TICKED** - PROGRESS.md only; declining to re-run green gates on
+***     byte-identical blobs is the right call, not a quiet cycle.
+***   - **U179's EVIDENCE GAP CLOSED** - the log is committed now and reads checks=40 fails=0, so last
+***     hour's tick stands on committed evidence instead of a working-tree file.
+*** NOT TICKED:
+***   - **U180** - a probe with no fix. HALF DELIVERED / STILL OPEN; the fix is U181 and it is the
+***     second half of the lane's own probe, not a new item. (Also: both U180 logs end in a line
+***     reading `U179_DONE checks=14 fails=0` because the probe reuses the U179 harness's done-line -
+***     rename it, it will mislead a later reader.)
+***   - **C-213** - content delivered nothing and did not stand down. Nothing to tick.
+
 ## TAKE THIS NEXT - Updated THE 14:58 CT FIRING, 25 NOV 2026 (team lead; written 15:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** ALL SIX LANE BRANCHES MERGED. main c7a52247 -> f00420b1. FIVE SHIPPED; CONTENT WAS SILENT.
 *** PROGRESS.md took TWO conflicts (hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT by a state

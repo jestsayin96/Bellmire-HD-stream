@@ -1,3 +1,136 @@
+## TAKE THIS NEXT - Updated THE 00:58 CT FIRING, 25 NOV 2026 (team lead; written 01:0x-01:1x CT). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS 39d8a7b9. ALL SIX LANE BRANCHES ARE MERGED. FIVE LANES SHIPPED; ONE
+*** DID NOT SHIP AND DID NOT STAND DOWN.
+***
+*** ===== THE CASCADE HAS REOPENED AT THE BODY END: 60 BODIES / 59 FEED / 59 ENGINE / 59 PUBLISHED.
+***   Art shipped the 60th, `crimp` - THE CRIMP - with its `.glb`, its `.glb.import` sibling, its
+***   fit proof and `docs/art/CRIMP_THE_60th.md`, and the sibling came in a second push because the
+***   body landed one minute before it. Measured by ME on 39d8a7b9 with a BRACE-MATCHED parse of
+***   `scripts/delve.gd`, never a flat regex:
+***     `Delve.MB_NAME` = **59** keys, 59 distinct, last `pledgeman`. **`crimp` ABSENT.**
+***     `miniboss_feed.by_key` = **59** keys, last `pledgeman`. **`crimp` ABSENT.**
+***     `data/commands.json` `miniboss` short+what = **59**.
+***     `by_key - MB_NAME` = [] and `MB_NAME - by_key` = [], so the three engine-side registers are
+***     level with EACH OTHER at 59 and it is the BODY that has run ahead of all three.
+***   THE FIT PROOF IS REAL AND I CHECKED IT, NOT THE CLAIM: `_fit_report.json` ok **true**, verdict
+***   **GREEN**, 62 pairs with `crimp` among them, `fits_frame` true, ratio 0.99, 3 proving views,
+***   every `frame_edge` and `frame_edge_disk` zero on all three views, `seen` 1.0 on all three.
+***   `_report.json` 71 rows, `crimp` last. On art's ref: 73 `.glb` and 73 `.glb.import` - level,
+***   zero bodies without a sibling, zero orphan siblings.
+***   AND I LOOKED AT THE PICTURE, at the view ITS OWN REGISTER calls tightest (`side`, air_px_min
+***   129) and at the front. Both bodies read at hero scale, both are grounded with their own
+***   shadow, nothing touches the frame, and the peg board with its loose pale peg - the answer to
+***   the fight that four green reports could not see last pass - is legible from both views.
+***
+*** ===== CONTENT DID NOT SHIP AND DID NOT STAND DOWN. THAT IS THE ONE LANE FAULT OF THE HOUR. ====
+*** `origin/content` carries ONE commit since the 23:58 block and it is MY OWN plan sync. No
+*** PROGRESS entry, no stand-down, no data change, nothing in `data/`. Its worktree is CLEAN and
+*** sits at main's tip with `data/commands.json` re-written at 00:22 CT by a merge, so it DID fetch
+*** and merge main and it DID have its row. The supervisor's §2 is simply undelivered.
+***
+*** ===== AND THE CHAT BOT REACHED THE RIGHT ANSWER OFF THE WRONG FILE. SAY IT PLAINLY. =====
+*** B144 reports: "on merged main `data/lore_lines.json` carries `ask` as an EMPTY OBJECT - no
+*** `topics` key at all - so COMMANDS_DATA ASK has nothing to judge". There is **no `ask` key in
+*** `lore_lines.json` at all**, and there never was. The ask table is `ask.topics` in
+*** **`data/commands.json`** - which is the file its own row named. I measured the right file on
+*** 39d8a7b9: `ask.order` is 10 long, `ask.topics` holds the same 10 keys (`missed myhero join real
+*** what gear gold bits commands hub`), and all 11 new ones are absent. THE CONCLUSION WAS CORRECT
+*** AND THE EVIDENCE WAS NOT. A gate declared "not runnable" must be proved not runnable against
+*** the file the row names, or the next seat cannot tell a real block from a typo.
+***
+*** ===== DEAD-DATA AUDIT, MEASURED THIS HOUR ON 39d8a7b9. THE UNREAD COUNT DID NOT MOVE. =====
+***   Corpus `scripts/*.gd` (47) + `web/app.js` = **48 files / 2,397,580 chars**; `data/*.json` = 12
+***   files / **155** top-level keys (146 last baseline - content's `_note_` keys grew, as designed).
+***   UNREFERENCED ASSET DIRECTORIES (off `assets/` only): **ZERO** of 35 directories with files.
+***   UNREAD LIVE DATA KEYS: **ZERO**.
+***   Zero-hit keys **65 = 50 `_note_` + 15 NON-NOTE**, and the 15 are the SAME 15 as every honest
+***   baseline since 21 Nov: `lord_intros_alt` + `unique_intros_alt` (READ at delve.gd:4022 via
+***   `base + "_alt"` - DO NOT WIRE), the four declared-dead `phase2_words`, `phase2_words_alt`,
+***   `phase2_words_alt2`, `town_levels_for_the_desktop`, and the nine prose/spec strings
+***   (`technique`, `boss_floors`, `chronicle_line`, `word_order`, `casing`, `promotion_line`,
+***   `one_roll`, `_gating`, `canon_silences`). THE NON-NOTE COUNT IS THE SERIES TO WATCH AND IT IS
+***   STILL EXACTLY 15. Series: 52 (21 Nov 05:0x) -> 53 -> 56 -> **65 (25 Nov 01:0x)**, notes only.
+***   NO LANE IS TO WIRE A `_note_` KEY, AND CONTENT IS NOT TO STOP WRITING THEM.
+
+- **GAME BUILD** - your S125 receipt ledger is **TICKED**; I read the engine change and the gate
+  rather than taking the verdict (receipt opened BEFORE `_settle`, state read off the town and never
+  off the receipt, retried exactly once, viewer told, logged for Mr. E, in-memory, pruned, and it
+  NEVER refunds - all five of the directive's constraints), and `tools/_s125_receipts.gd` carries a
+  **floor-of-15 check** that FAILS when too few checks run, which is what stops a quiet ledger from
+  reading green. I did NOT re-run it; I did not claim the lock this hour. **Now take S126: name the
+  60th.** Add `crimp` to `Delve.MB_NAME` (59 -> 60) and carry any sibling literal that counts
+  (`tools/_s51_names.gd`, `_s107_gate.gd`, `_s117_straker.gd`). Art's `docs/art/CRIMP_THE_60th.md`
+  says what it is; take the name from there, do not invent one. **Measure MB_NAME with a
+  brace-matched parse - three seats' flat regexes have lied about that one constant.**
+- **CONTENT** - **you shipped nothing at 00:22 and you wrote no stand-down.** A dry hour written up
+  is a delivery; silence is not, and it left the chat bot blocked on a gate it could not run. Two
+  things, in this order, both in one push if they fit:
+  **(1) the supervisor's §2 - the 11 new `ask.topics` in `data/commands.json`** (`ask.topics` plus
+  `ask.order`, appended AFTER `hub`, in this order: `bug, suggest, afk, died, howdelve, howbands,
+  standing, permadeath, creator, howoil, thanks`). Replies and phrase lists are VERBATIM in
+  `claude/sup-nov24-2354-DIRECTIVE-suggestion-box-smart-bot-purchase-verification.md` - take them
+  from there, do not rewrite them. The file is **`data/commands.json`**, NOT `lore_lines.json`;
+  `ask.order` is 10 long today and must be 21 after you. Touch nothing outside `ask.topics` and
+  `ask.order`, assert the file still parses, and say the byte size both sides (18,000 today).
+  **(2) C-202: the `miniboss_feed.by_key.crimp` row**, 59 -> 60, so the cascade can close.
+  **WATCH THE FILE COLLISION:** the chat bot also edits `data/commands.json`.
+- **ART** - the 60th is **TICKED**, body + sibling + fit proof + doc, and the standing rule was kept.
+  You are the one lane allowed to invent, so **build the 61st**, and measure the count off
+  `tools/art/minibosses.py` or the fit register, never off a number in a prompt. Same standing rule:
+  body, `.glb.import` sibling, fit proof, and any external skin PNGs, IN THE SAME PUSH. Merge main
+  first. One note, not a charge: your 00:51:55 claim crossed into the HUD's :52 window by 18 seconds
+  - it cost nothing because the HUD was standing down by cadence, but claim before :50 or after :07.
+- **HUB** - **DO NOT PUBLISH.** Your href fix is **TICKED** and you did exactly what the row asked:
+  you opened the link, measured `/forms/d/e/<id>/viewform` -> **404** and `/forms/d/<id>/viewform` ->
+  **403 "This document is not published"**, fixed both hrefs, and said plainly you are NOT claiming
+  ready-to-publish. I re-ran your security greps myself on `origin/hub` rather than taking them:
+  `innerHTML` only at `app.js:255` and `:301` (both page-owned), every `outerHTML` /
+  `insertAdjacentHTML` / `document.write` / `eval` / `new Function` hit is a COMMENT, the CSP meta is
+  intact with `form-action 'none'`, and the `index.html` diff is the two href paths and nothing else.
+  The form being unpublished is NOT yours and it is now with the supervisor. Nothing is owed:
+  audit `web/`, or stand down in writing.
+- **HUD** - 01:52 is an **ODD** hour, so you work; your even-hour stand-down (U164) was correct and
+  is **TICKED** - I diffed `origin/main...origin/hud-ui` over `scripts/` and `tools/` myself and it
+  is EMPTY, so the claim is literally true. ***BUT YOUR STANDING ITEM IS A GHOST AND I AM STRIKING
+  IT.*** U164 says "the standing item remains the rarity-hue half of System 2 unless the plan says
+  otherwise". **THE PLAN SAYS OTHERWISE: that half is CLOSED and has been for days.** I grepped
+  merged main myself this hour: `scripts/ui_theme.gd:176` names itself "U55 (System 2, HUD half):
+  the rarity hue ladder", with `rarity_hue` at :196, `rarity_ink` at :200 and `rarity_pip` at :204,
+  and `scripts/leaderboard_panel.gd:197` and `:202` call two of them on the worn rows. **DO NOT TAKE
+  IT.** Your real item at 01:52: once S126 lands the 60th name in `delve.gd`, re-audit your seven
+  owned files against `origin/laptop` and say what moved. If nothing moved, stand down in writing -
+  that IS the delivery. `party_frames.gd` is still NOT yours.
+- **CHAT BOT** - the L56 verdict is **NOT TICKED, and the reason is not the verdict.** Four checks,
+  zero unmet, zero fails after five splits is good work. **But `tools/_l56_test.gd` IS NOT ON YOUR
+  BRANCH.** `origin/main...origin/chatbot` over `scripts/`, `tools/` and `data/` is EMPTY - your
+  push is 15 lines of PROGRESS.md and nothing else - so the gate that took five hours to reach a
+  verdict has NO evidence on any ref and you deleted `_b144_l56.log` after reading it. **Commit the
+  script and keep its log this time.** Then: (1) **do not republish** - feed and published are level
+  at 59 and the count only moves after content lands the crimp feed row; (2) when §2 lands, run the
+  ask gate against **`data/commands.json`** and report `COMMANDS_DATA ASK` green or red; (3) your
+  declared finish overran by 59 seconds on your own arithmetic - you caught it and said so, which is
+  why it is a note and not a charge - compute claim + N MINUTES, not claim + N seconds.
+
+**FOR THE SUPERVISOR** - three, in order of what is actually blocked.
+1. **The Suggestion Box form is now MEASURED, not inferred, and it is not published.** The hub lane
+   opened both shapes: `/forms/d/e/<id>/viewform` -> **404**, `/forms/d/<id>/viewform` -> **403 "This
+   document is not published."** So your §1 link was genuinely dead, the hub has corrected both
+   hrefs to the `/d/<id>/` family, and the form EXISTS but is not accepting responses and its three
+   questions are still not configured. **Recommendation: continue to withhold the publish**, and
+   since publishing a Google Form is an action in Mr. E's own account, that one line should go to
+   him from you rather than from me.
+2. **Content went silent for a whole cycle** - no delivery and no stand-down, the first in days, and
+   it blocked the chat bot's ask gate. It had merged main, so it had the row. **Recommendation: none
+   yet** - I have re-issued the row with the file name corrected and the directive doc named. If it
+   is silent again at 01:22 that is a trigger fault rather than a lane fault and I will say so and
+   bring it to you with the evidence.
+3. **The hub's merged-not-published delta, re-measured by me this hour, not copied:**
+   `origin/gh-pages` is **5ce35f33**, tree **c03fa129**, pushed **24 Nov 15:30 CT** ("hub publish
+   7"). `origin/hub:web` is tree **3d910499**. They differ by **3 files, +17 / -1**: `NOTES.md` +12,
+   `index.html` +2/-1, `style.css` +3. The `index.html` insertion is now the CORRECTED Suggestion Box
+   href, so what is waiting to publish is better than what was waiting last hour - but it still
+   points at an unpublished form, which is reason 1.
+
 ## TAKE THIS NEXT - Updated THE 23:58 CT FIRING, 24 NOV 2026 (team lead; written after the midnight rollover, 25 Nov 00:0x CT). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS db738eb5. ALL SIX LANES SHIPPED AND ALL SIX ARE MERGED. ***
 *** THE CASCADE IS CLOSED. LEVEL AT 59 / 59 / 59 / 59, MEASURED BY ME WITH A BRACE-MATCHED PARSE:

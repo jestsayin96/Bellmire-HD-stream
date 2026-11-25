@@ -443,6 +443,12 @@ TAKE THIS NEXT (23:58 block) GAME BUILD row: the receipt ledger in scripts/twitc
 - Battery: parse --quit-after 300 rc 0, 0 SCRIPT ERROR, 0 Parse Error; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2070; TOWNWALK in_solid=0/18559 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
 - Not a visual change: the proof is the gate log, no render applies. No live Twitch test, ZERO bits, no redemption, no chat line posted. Backup scripts/twitch_eventsub.gd.bak_s125 (untracked). Not ticked - team lead ticks.
 
+## HUB STAND-DOWN, IN WRITING - 25 Nov 2026 16:39 CT (hub lane). I AM DRY. NO web/ CHANGE. READY TO PUBLISH NOT CLAIMED.
+TAKE THIS NEXT (14:58 block) HUB row: write the stand-down in one short entry and say plainly that the lane is dry. Done - this entry. Nothing is owed on the CDN item (ruled closed from above); the 16:3x silence was a missed entry, not a stall.
+Tree: origin/hub + origin/main merged (hub HEAD 01ef1aed pre-commit); web/ diff vs origin/hub = empty (byte-identical). node --check web/app.js rc=0.
+Sweep of own shipped web/: innerHTML in code only at app.js:255 and :301 (page-owned literals), other hits comments; outerHTML/insertAdjacentHTML/document.write/eval(/new Function = none in code (app.js:10-11 is a comment saying so); index.html:49 "two page-owned sites" still TRUE; CSP meta intact (default-src 'none', script/style/font 'self', img 'self' data:, connect-src supabase + id/api.twitch.tv + wss irc-ws.chat.twitch.tv); no external CDN/font refs (only og:url/og:image meta, not loaded). Hostile-name render test not re-run - web/ did not change, so it is not owed.
+Live-dot colour: unchanged (no UI change). No screenshot taken (no web/ change). Untracked files named: _hub_msg.txt, _hub_ready_shot.png, web/tools/__pycache__/ (deletes refused on this machine, answered).
+
 ## HUB security-invariant re-run - 24 Nov 2026 23:4x CT (hub lane)
 TAKE THIS NEXT (22:58 block) HUB row: re-run the web/ security invariants on the CURRENT tree and log which greps. No web/ edit. READY TO PUBLISH NOT CLAIMED.
 Tree: origin/hub merged with origin/main (305d80ce); web/ is byte-identical to origin/hub (no web/ diff). node --check app.js rc=0 (5455 lines).
@@ -20412,3 +20418,327 @@ func _harvest(src: String) -> Array:
 					depth = 0
 	return verbs
 ```
+
+## U182 (HUD, 25 Nov 16:5x CT) - WORST-CASE FRAME FOR U181: ONE HOSTILE RUN, NUMBERS INSIDE, BUT THE PICTURE I SHOT DOES NOT SHOW THE TIGHT STATE
+- TAKE THIS NEXT (15:58 block, `>>> HUD (:52) <<<`): "NOTHING NEW UNTIL U181 IS TICKED"; if free, shoot the WORST-CASE frame - the tightest rung of the U181 log (hostile s150, -4).
+- Found first: the only 150% frame I opened (renders/cycles/20261125_u181/fixed/host_s150_1080.png) is the PLAIN-names run (it says Plainname1). The hostile 150% frame was never photographed, as the team lead said.
+- Ran tools/_u182_probe.gd (= _u181_probe.gd with OUT -> 20261125_u182), windowed 1920x1080, HOSTILE names, no code change: U181_DONE checks=40 fails=0, 0 SCRIPT ERROR, 0 Parse Error. Worst newest-label-bottom minus vellum-bottom over all 33 sampled labels = -7 (inside). My per-rung split of this log was unreliable (group sizes 18/10/5 differ per sample), so I do NOT claim a per-rung figure; the U181 hostile s150 -4 stays the tightest recorded.
+- LOOK: opened renders/cycles/20261125_u182/host_s150_1080.png. It shows a clean Chronicle ("The Rattling Host rises...") inside the vellum at 150%. BUT it is shot at k=262, after the hostile smite lines have expired and been replaced by a lore line, so it is NOT the tight state. The numbers cover k=160..240; the picture does not. OWED: save the shot at the tightest k (probe `_save` inside `_probe_chron` at k=200) so the frame matches the number. Not done this window - did not re-claim the lock to chase it.
+- Red-proof still owed (deterministic fixed line set, old vs new `_stack_h`).
+- Lock: R working RUN_LOCK last line before me IDLE 16:50:23 (chat bot B160); tasklist Godot* = 0. Claim 16:53:31, cap 17:08:31, declared 17:03. IDLE written 16:55:25.
+- CHANGED: tools/_u182_probe.gd, _u182_run.log, renders/cycles/20261125_u182/, this note. No owned .gd file touched. Decision for Mr. E: none.
+## ART - 25 Nov 2026 17:1x CT - OVERLOOKER PASS 4: THE SILHOUETTE, AND NOTHING ELSE (the 16:0x row)
+TOOK: the 15:58 TAKE THIS NEXT for ART verbatim - "give it a silhouette that reads as a body at the rung the player sees", "the numbers are not the thing that is wrong, so do not re-tune them". NOTHING in this commit changes a colour, the bone/body luma assert (still 3.67), wear, the mechanic, the height, the theme or a gate value.
+CHECKED FIRST, MEASURED: grepped the tree for overlooker (glb + doc + renders dir, all present), read the shipped builder, and LOOKED at the three pass-3 PNGs before touching a vertex. No new body was invented and nothing was rebuilt that existed.
+THE FAULT, NAMED: a chess piece is a TURNED SOLID and pass 3 was all three of its properties, each readable off my own builder - (a) the outline NEVER narrows: collar 0.41 -> waist 0.58 -> hem 0.91 across; (b) visible leg 0.225 m of 2.40 = 9 percent, so the figure stood on a base; (c) every coat section axisymmetric, so front and side orthos got the IDENTICAL outline.
+FIXES, EACH RENDERED AND LOOKED AT ALONE BEFORE THE NEXT. G: hem 0.330 -> 0.660 (above the knee) - visible leg 9 -> 23 percent and it now contains a joint; stance +-0.232 and feet STAGGERED (pass 3's legs shared a y and were one column from the side). H: coat waist 0.212, flare moved from belt to hip - AND ON ITS OWN THIS DID NOTHING, the render was unchanged, because the trunk inside was a uniform 0.252 tube that swallowed the pinch. H2: trunk waist 0.214 -> chest 0.274 -> shoulder 0.242, so the 22 percent pinch is visible. I: both coat sections squashed to 0.76 in y - side rung bbox 98 -> 86 px while the front barely moved.
+ONE AT A TIME IS WHAT CAUGHT H BEING INERT. Had G, H and I shared one render I would have logged a fix that did nothing as part of the fix that worked.
+FIT PROOF / THE PICTURE: renders/art/minibosses/_ol_rung_ab.png - pass 3 vs pass 4, front/three-quarter/side, whole frame area-averaged to the 160 px / 360p rung this file already uses for the collier brow, in colour AND as pure silhouette with shading thrown away. I looked at it. IN MY OWN WORDS: no, it no longer reads as a chess piece - shoulders, waist, hip, knee-length coat and two legs with daylight between them, in all three views, at 160 px. Harness tools/art/_ol_rung_ab.py goes RED on an empty rung mask and RED on a body touching the border.
+THE RULE I BENT, SAID OUT LOUD: pass 3's docstring argued the bell WAS compliance with "never a hero body". I gave it two legs. Tested rather than asserted - renders/art/minibosses/_ol_hero_ab.png puts a real KayKit hero at the same rung beside it: hero w/h 0.543, blocky, huge head; Overlooker side w/h 0.453 with a horizontal pale arm no hero has. Not confusable. But what keeps it out is now the arm, the height and the hat, NOT the base. If the lead reads the bar more strictly, HEM back toward 0.50 is the one-line reversal.
+STILL WRONG, NOT CLAIMED OTHERWISE: the lit neck closes at the rung in the side view (a 700 px claim only); the idle arm is still a plank and was outside this brief; the thighs merge under the hem; NO BACK VIEW HAS EVER BEEN RENDERED on the body whose whole claim is that it has a facing.
+GATE: ok true, errors [], blanks [], border clean, 4 meshes, span 1.54 m CORRIDOR-SAFE UNDER-LID, 850 faces (was 824). Godot lock: NOT CLAIMED - this run rendered only and never touched docs/RUN_LOCK.txt.
+WIRING FOR THE GAME BUILD (unchanged by this pass, still not mine): bestiary.gd `overlooker` -> model assets/monsters/minibosses/overlooker.glb, NO anims; delve.gd target = LEAST cumulative damage dealt to this creature, re-read each selection; dungeon_hd.gd theme workshop, no spawn gate (not room-locked).
+PUSHED: art 999c51fe (merged origin/art first - local HEAD was one commit behind, as warned).
+## B160 - 25 Nov 2026, 16:45 CT firing (chat bot) - THE CARRIED ENGINE GATE IS PAID, B159_HARVEST OK 15/15 FIRST TRY, AND THE LANDING IS NOW ONE PASTE INSTEAD OF A PROSE DESCRIPTION
+
+TOOK: the 15:58 CHAT BOT row - make the landing a one-paste job for whoever gets the ownership
+ruling, with the eight shape cases and the three red-prove arms written BESIDE the patch. B159 had
+the patch verbatim in its entry; it did NOT have the cases or the red arms as anything a lane could
+run - they were a table of expected results and three sentences. So the row's "if that is already
+in your entry, say so and stand down" does not apply: a third of it was there, two thirds were
+prose. I built the runnable thing and paid B159's carried engine gate with the same run.
+
+MERGE: origin/main into W6 clean, zero conflicts, fast-forward 3bb99570 -> 536e5982 (32 commits).
+
+*** THE ENGINE GATE B159 CARRIED, PAID. ONE headless launch, green on the first try:
+    Godot_v4.7.2 --headless --path W6 --script res://_b159_harvest.gd
+      ok  case 1 tab indent -> ["delve", "fish"]
+      ok  case 2 label depth 12, not 8 -> ["delve", "fish"]
+      ok  case 3 no space after the comma -> ["inv", "bag"]
+      ok  case 4 two spaces after the comma -> ["inv", "bag"]
+      ok  case 5 underscore and digit in the verb -> ["buy_brew", "test2"]
+      ok  case 6 dict key AT label depth - the old false positive -> ["delve", "forge"]
+      ok  case 7 dict literal opened inside a body -> ["delve", "forge"]
+      ok  case 8 nested `match arg:` is argument sub-dispatch, not commands -> ["title", "forge"]
+      ok  real tree: 74 label words harvested (got 74)
+      ok  real tree: 59 unique (got 59)
+      ok  real tree: `gold` is NOT harvested
+      ok  real tree: drift zero BOTH ways (missing [] / unanswered [])
+      ok  red 1: an injected `zzznew` label goes RED on missing (["zzznew"])
+      ok  red 2: stripping `memorial` loses it AND orphans its data key (["memorial"])
+      ok  red 3: old harvests gold ["delve", "gold", "forge"], new does not ["delve", "forge"]
+    B159_HARVEST OK (15 checks)
+WHAT THE ENGINE ADDED THAT PYTHON COULD NOT. B159 proved the harvester 8/8 in python. This run
+proves the GDScript transcription - the real RegEx engine, the real String indexing, the real
+`split("\n")` - reads the same eight shapes the python port did, and the three red arms are now
+EXECUTED rather than described. Red 3 is the one worth naming: over the same dict-literal source
+the OLD pattern harvests ["delve", "gold", "forge"] and the new one ["delve", "forge"]. The false
+positive is not argued away in prose any more, it is printed side by side with its replacement.
+
+*** THE OWNERSHIP WALL IS UNCHANGED AND I DID NOT CLIMB IT. tools/_l14_test.gd is NOT edited. The
+lead routed the question up rather than answering by row, and I am not going to treat a row as the
+ruling either. Nothing below is installed; it is the paste.
+
+*** THE LANDING, AS ONE FILE. Paste the three helpers, `_harvest` and the eight `_cases` into
+tools/_l14_test.gd, replace the `var rx := RegEx.new()` / `rx.compile("(?m)^        ...")` /
+`search_all` block at :29-35 with `var verbs: Array = _harvest(src)`, and leave the `missing` and
+`unanswered` arms alone. `_harvest_old` and the three red arms are the proof, not the install -
+they can stay in a harness or be dropped once the gate is green. Verbatim, as run this firing:
+
+```gdscript
+extends SceneTree
+# B160: the B159 replacement harvester for tools/_l14_test.gd:29-35, with the EIGHT
+## shape cases and the THREE red-prove arms beside it, so the landing is one paste
+## for whoever gets the ownership ruling. Prints B159_HARVEST OK.
+## Written at the worktree root and DELETED at the end of the run (the _b2_ask.gd
+## precedent). Nothing of this lane is left in the worktree.
+var _fail := 0
+var _checks := 0
+
+func _ok(c: bool, what: String) -> void:
+	_checks += 1
+	print(("  ok  " if c else "  FAIL ") + what)
+	if not c:
+		_fail += 1
+
+# ---------------------------------------------------------------- THE PATCH
+# Replaces the `var rx := RegEx.new()` / `rx.compile("(?m)^        ...")` /
+# `search_all` block at tools/_l14_test.gd:29-35. Call site becomes
+#   var verbs: Array = _harvest(src)
+# The `missing` and `unanswered` arms below it are unchanged.
+
+func _strip_comment(line: String) -> String:
+	var i := 0
+	var n := line.length()
+	while i < n:
+		var c := line[i]
+		if c == "\"":
+			i += 1
+			while i < n:
+				if line[i] == "\\":
+					i += 2
+					continue
+				if line[i] == "\"":
+					i += 1
+					break
+				i += 1
+			continue
+		if c == "#":
+			return line.substr(0, i)
+		i += 1
+	return line
+
+func _strip_strings(line: String) -> String:
+	var out := ""
+	var i := 0
+	var n := line.length()
+	while i < n:
+		var c := line[i]
+		if c == "\"":
+			i += 1
+			while i < n:
+				if line[i] == "\\":
+					i += 2
+					continue
+				if line[i] == "\"":
+					i += 1
+					break
+				i += 1
+			out += "S"
+			continue
+		if c == "#":
+			break
+		out += c
+		i += 1
+	return out
+
+func _indent_of(line: String) -> int:
+	var col := 0
+	for ch in line:
+		if ch == " ":
+			col += 1
+		elif ch == "\t":
+			col += 4 - (col % 4)
+		else:
+			break
+	return col
+
+## The replacement harvester. No depth constant, no end anchor, no 8-space assumption.
+func _harvest(src: String) -> Array:
+	var verbs: Array = []
+	var depth := 0
+	var st_ind: Array = []
+	var st_lab: Array = []
+	var rx_match := RegEx.new()
+	rx_match.compile("^match\\b.*:$")
+	var rx_lab := RegEx.new()
+	rx_lab.compile("^((?:\"[^\"]*\"\\s*,\\s*)*\"[^\"]*\")\\s*:")
+	var rx_word := RegEx.new()
+	rx_word.compile("^\"([a-z][a-z0-9_]*)\"$")
+	for raw in src.split("\n"):
+		if raw.strip_edges() == "":
+			continue
+		var code := _strip_strings(raw)
+		if code.strip_edges() == "":
+			continue
+		var start_depth := depth
+		var ind := _indent_of(raw)
+		if start_depth == 0:
+			while st_ind.size() > 0 and ind <= int(st_ind[st_ind.size() - 1]):
+				st_ind.pop_back()
+				st_lab.pop_back()
+		var body := code.strip_edges()
+		var text := _strip_comment(raw).strip_edges()
+		if start_depth == 0 and rx_match.search(body) != null:
+			st_ind.append(ind)
+			st_lab.append(-1)
+		elif start_depth == 0 and st_ind.size() > 0:
+			var top_ind := int(st_ind[st_ind.size() - 1])
+			# only the OUTERMOST match dispatches viewer verbs; a nested `match arg:`
+			# inside a label body is argument sub-dispatch, not a command.
+			if ind > top_ind and st_ind.size() == 1:
+				if int(st_lab[st_lab.size() - 1]) == -1:
+					st_lab[st_lab.size() - 1] = ind
+				if ind == int(st_lab[st_lab.size() - 1]):
+					var m := rx_lab.search(text)
+					if m != null:
+						var parts := m.get_string(1).split(",")
+						var words: Array = []
+						var good := true
+						for p in parts:
+							var mm := rx_word.search(p.strip_edges())
+							if mm != null:
+								words.append(mm.get_string(1))
+							else:
+								good = false
+						if good:
+							for w in words:
+								verbs.append(w)
+		for ch in code:
+			if ch == "(" or ch == "[" or ch == "{":
+				depth += 1
+			elif ch == ")" or ch == "]" or ch == "}":
+				depth -= 1
+				if depth < 0:
+					depth = 0
+	return verbs
+
+## The instrument it replaces, kept ONLY as the contrast arm of red-prove 3.
+func _harvest_old(src: String) -> Array:
+	var rx := RegEx.new()
+	rx.compile("(?m)^        ((?:\"[a-z]+\", )*\"[a-z]+\"):")
+	var verbs: Array = []
+	for mt in rx.search_all(src):
+		for w in mt.get_string(1).split(", "):
+			verbs.append(w.replace("\"", ""))
+	return verbs
+
+# ------------------------------------------------- THE EIGHT SHAPE CASES
+# Each case is the source as the harvester sees it and the verbs it must read.
+# Cases 1-5 are INVISIBLE to the old 8-space pattern; 6 is its FALSE POSITIVE.
+func _cases() -> Array:
+	return [
+		["1 tab indent",
+			"func h(c):\n\tmatch c:\n\t\t\"delve\", \"fish\":\n\t\t\tpass\n",
+			["delve", "fish"]],
+		["2 label depth 12, not 8",
+			"func h(c):\n    match c:\n            \"delve\", \"fish\":\n                pass\n",
+			["delve", "fish"]],
+		["3 no space after the comma",
+			"func h(c):\n    match c:\n        \"inv\",\"bag\":\n            pass\n",
+			["inv", "bag"]],
+		["4 two spaces after the comma",
+			"func h(c):\n    match c:\n        \"inv\",  \"bag\":\n            pass\n",
+			["inv", "bag"]],
+		["5 underscore and digit in the verb",
+			"func h(c):\n    match c:\n        \"buy_brew\":\n            pass\n        \"test2\":\n            pass\n",
+			["buy_brew", "test2"]],
+		["6 dict key AT label depth - the old false positive",
+			"func h(c):\n    match c:\n        \"delve\":\n            var d = {\n        \"gold\": 1,\n            }\n        \"forge\":\n            pass\n",
+			["delve", "forge"]],
+		["7 dict literal opened inside a body",
+			"func h(c):\n    match c:\n        \"delve\":\n            var d = {\n                \"gold\": 1,\n            }\n        \"forge\":\n            pass\n",
+			["delve", "forge"]],
+		["8 nested `match arg:` is argument sub-dispatch, not commands",
+			"func h(c, arg):\n    match c:\n        \"title\":\n            match arg:\n                \"seventh\", \"eleven\":\n                    pass\n        \"forge\":\n            pass\n",
+			["title", "forge"]],
+	]
+
+func _initialize() -> void:
+	for case in _cases():
+		var got: Array = _harvest(String(case[1]))
+		_ok(got == case[2], "case %s -> %s" % [case[0], got])
+
+	var src := FileAccess.get_file_as_string("res://scripts/chatcmd.gd")
+	var verbs: Array = _harvest(src)
+	var uniq: Array = []
+	for v in verbs:
+		if not uniq.has(v):
+			uniq.append(v)
+	_ok(verbs.size() == 74, "real tree: 74 label words harvested (got %d)" % verbs.size())
+	_ok(uniq.size() == 59, "real tree: 59 unique (got %d)" % uniq.size())
+	_ok(not verbs.has("gold"), "real tree: `gold` is NOT harvested")
+	var cdata: Dictionary = ChatCmd.commands()
+	var cs: Dictionary = cdata["commands"]
+	var missing: Array = []
+	for v in verbs:
+		if not cs.has(ChatCmd.canonical(v)) and not v.begins_with("test"):
+			missing.append(v)
+	var unanswered: Array = []
+	for k in cs:
+		if not verbs.has(k):
+			unanswered.append(k)
+	_ok(missing.is_empty() and unanswered.is_empty(), "real tree: drift zero BOTH ways (missing %s / unanswered %s)" % [missing, unanswered])
+
+	var inj := src.replace("        \"memorial\":", "        \"zzznew\":\n            pass\n        \"memorial\":")
+	var iv: Array = _harvest(inj)
+	var im: Array = []
+	for v in iv:
+		if not cs.has(ChatCmd.canonical(v)) and not v.begins_with("test"):
+			im.append(v)
+	_ok(iv.has("zzznew") and im == ["zzznew"], "red 1: an injected `zzznew` label goes RED on missing (%s)" % [im])
+
+	var strp := src.replace("        \"memorial\":", "        \"zzzgone\":")
+	var sv: Array = _harvest(strp)
+	var su: Array = []
+	for k in cs:
+		if not sv.has(k):
+			su.append(k)
+	_ok(not sv.has("memorial") and su.has("memorial"), "red 2: stripping `memorial` loses it AND orphans its data key (%s)" % [su])
+
+	var dictsrc := String(_cases()[5][1])
+	var old_g: Array = _harvest_old(dictsrc)
+	var new_g: Array = _harvest(dictsrc)
+	_ok(old_g.has("gold") and not new_g.has("gold"), "red 3: old harvests gold %s, new does not %s" % [old_g, new_g])
+
+	if _checks < 15:
+		_fail += 1
+		print("  FAIL only %d checks ran - below the floor of 15" % _checks)
+	print(("B159_HARVEST OK (%d checks)" % _checks) if _fail == 0 else ("B159_HARVEST FAIL %d (%d checks)" % [_fail, _checks]))
+	quit(0 if _fail == 0 else 1)
+```
+
+NO FILE OF MINE CHANGED. scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md are
+byte-identical to 536e5982. data/commands.json re-validated with json.load: 8 top-level keys
+(_source, hub_url, cooldown_s, twitch_cooldown_s, order, commands, ask, foreign), 32 commands,
+every pre-existing key byte-identical. Drift checked BOTH directions by the gate itself above -
+missing [] and unanswered [], zero either way. docs/COMMANDS.md needs no regeneration: no command
+was added, renamed or re-worded, and the QA lane's own COMMANDS_DOC OK 32 commands at 16:46:41
+reports the doc unchanged. PROGRESS.md B160 only.
+
+THE HARNESS IS GONE FROM THE WORKTREE. `_b159_harvest.gd` was written at the worktree root, run
+once, and DELETED (os.remove, existence re-checked False) per the _b2_ask.gd precedent. Its source
+is above, so nothing is lost by deleting it, and the worktree carries nothing of mine.
+
+LOCK, AND IT CLOSED BEFORE THE HUD'S WINDOW RATHER THAN INSIDE IT. Read at 16:46:40 and again at
+16:49:47: last line was QA tester IDLE 2026-11-25T16:46:41-06:00, tasklist Godot* = 0 checked live
+both times. Claimed RUNNING 16:50:04, cap claim+15 = 17:05:04, DECLARED FINISH 16:52. The run took
+about fifteen seconds; IDLE written 16:50:23, nineteen seconds after the claim and ninety seconds
+clear of the HUD's :52. B159 stood down on this same window because it was thirty seconds in front
+of :52 with the harness still unwritten; the difference this hour is that the harness was written
+BEFORE the claim, as file-only work, so the claim covered a launch and nothing else.
+
+NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro, no channel setting touched, no sub or gift of any kind.
+
+FOR THE GAME BUILD LANE: nothing. twitch_eventsub.gd is untouched and needs no change for this.

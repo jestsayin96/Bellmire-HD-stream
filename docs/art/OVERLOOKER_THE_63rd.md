@@ -103,11 +103,103 @@ is his; the BOOTS are works-floor filthy, the one part of him that touches the j
 
 ## FIT AND THE GATE
 
-`renders/art/minibosses/_report.json`, run against today's `scripts/floorgen.gd`:
+`renders/art/minibosses/_report.json`, re-run at pass 4 against today's `scripts/floorgen.gd`:
 `ok: true`, errors `[]`, blanks `[]`, border check clean.
-**span 1.56 m — CORRIDOR-SAFE** (clear span 11.0 m) · **UNDER-LID** (underside 9.5 m,
-read at `scripts/floorgen.gd:1383`) · **4 meshes, the bar is four** · 824 faces.
+**span 1.54 m — CORRIDOR-SAFE** (clear span 11.0 m) · **UNDER-LID** (underside 9.5 m,
+read at `scripts/floorgen.gd:1383`) · **4 meshes, the bar is four** · 850 faces (was 824 at pass 3).
 **NOT room-locked** - the gate measured the real footprint, including the arm's reach.
+
+## PASS 4 - THE PICTURE ONLY. THE TEAM LEAD WAS RIGHT AND SO WAS PASS 3's OWN NOTE.
+
+The 15:58 row said it plainly: *"give it a silhouette that reads as a body at the rung
+the player sees"*, and *"the numbers are not the thing that is wrong, so do not re-tune
+them."* **Nothing in this pass changed a colour, a luma ratio, a wear value, the
+mechanic, the height, the theme or the gate.** The ratio assert is untouched at 3.67 and
+the report still reads `ok: true`, errors `[]`, blanks `[]`, border clean, 4 meshes.
+
+### THE FAULT, NAMED EXACTLY RATHER THAN AS "IT LOOKS LIKE A CHESS PIECE"
+
+A chess piece is a **TURNED SOLID**: one axisymmetric profile, monotonically widening
+downward, standing on its own base. Pass 3 was all three of those things, and each is a
+number I could have read off my own builder without rendering anything:
+
+| the property | pass 3 | why it is the chess piece |
+|---|---|---|
+| outline from collar to hem | collar 0.41 → waist 0.58 → hem 0.91 across | **never narrows anywhere.** A shape that only widens downward IS a lathe profile |
+| visible leg below the hem | hem z=0.330, ankle z=0.105 → 0.225 m of 2.40 m = **9 %** | nine percent of leg under a closed flare is a pawn's base, not a man standing |
+| front ortho vs side ortho | every coat section axisymmetric, 22 segments | the two views got **the identical outline** - that is not a resemblance to a turned piece, it is the manufacturing method |
+
+### THE THREE FIXES, EACH RENDERED AND LOOKED AT ON ITS OWN BEFORE THE NEXT
+
+**FIX G - THE HEM CAME UP AND THE LEGS BECAME THE BOTTOM THIRD.** `HEM` 0.330 → 0.660,
+clear above the knee at 0.560, so the visible run is 0.555 m (**23 %**) *and it contains a
+joint*. A knee in the outline is the cheapest thing in this file a turned piece cannot
+have. The stance went to ±0.232 at the ankle and the feet were **staggered** (forward foot
+on his pointing side): pass 3's two legs sat at the same y, so from the side they were one
+column and the figure had one leg.
+
+**FIX H - A WAIST AND A HIP. AND FIX H ON ITS OWN DID NOTHING, WHICH IS WHY IT IS TWO
+ENTRIES.** I narrowed the coat at the waist to 0.212, rendered it, and **the side view did
+not change at all.** The trunk inside the coat was a uniform 0.252 tube from belt to
+shoulder and simply swallowed the pinch. *A waist is not a narrow thing, it is a thing
+narrower than what is above it, and there was nothing above it.* **FIX H2** gave the trunk
+a real taper - waist 0.214 → chest 0.274 → shoulder 0.242 - so the chest is 0.55 across
+against a 0.43 waist, a 22 % pinch the coat can sit inside instead of behind. The skirt
+flare now starts at the **hip** (1.040), not at the belt. **One change at a time is what
+caught this**: had I shipped G, H and I in one render I would have recorded the fix that
+did nothing as part of the fix that worked.
+
+**FIX I - KILL THE LATHE.** Both coat sections squashed to **0.76 in y**, so the hem is
+0.80 across the front and 0.61 deep in the side and no yaw of the camera finds the same
+shape twice. Measured at the rung: the side silhouette's bounding box went **98 px wide →
+86**, the front's barely moved. That split is the whole point.
+
+### THE EVIDENCE, AND IT IS A PICTURE BECAUSE THE ASK WAS A PICTURE
+
+`renders/art/minibosses/_ol_rung_ab.png` (and the two halves beside it) - pass 3 against
+pass 4, all three views, **area-averaged down to the 160 px / 360p rung this file already
+uses for the collier brow**, in colour and again as **pure silhouette with the shading
+thrown away**, because colour is what lets a bad silhouette pass. Built by
+`tools/art/_ol_rung_ab.py`, which goes **RED on an empty rung mask and RED on a body
+touching the border** - a metric over zero pixels reads green and means nothing, and a
+clipped figure is not a blank one.
+
+**IN MY OWN WORDS, LOOKING AT IT: NO, IT NO LONGER READS AS A CHESS PIECE.** In the pass-3
+row all three silhouettes are a bell with a head on it and the side one is textbook pawn.
+In the pass-4 row there are shoulders, a waist, a hip, a knee-length coat and two separate
+legs with daylight between them, in all three views, at 160 px. I would not have said that
+of pass 3 at any resolution.
+
+### THE RULE I BENT DOING IT, SAID OUT LOUD RATHER THAN LEFT FOR SOMEONE TO FIND
+
+The standing bar is **"never a hero body"**, and pass 3's own docstring argued the bell
+*was* the compliance: *"a hero below the waist is two legs; this is one solid flare, so
+the bottom third cannot be read as an adventurer."* **I have just given it two legs.** So I
+tested it instead of asserting it: `renders/art/minibosses/_ol_hero_ab.png` puts an actual
+KayKit hero body at the same rung beside it. The hero is a short wide blocky mass -
+w/h **0.543**, enormous head, armoured shoulders, 9 % of rows showing two legs. The
+Overlooker is a tall thin figure, side w/h **0.453**, with a horizontal pale arm at
+shoulder height that no hero silhouette has. They are not confusable and the picture says
+so. **But the honest version is that what keeps it out of hero territory is now the arm,
+the height and the hat - not the base.** If the team lead reads the bar more strictly than
+that, the fix is cheap (drop `HEM` back toward 0.50) and I would rather be told than guess.
+
+## WHAT I CAN STILL SEE WRONG AFTER PASS 4 (looked at, at the rung, not inferred)
+
+1. **The neck closes at the rung in the side view.** FIX C in pass 3 opened a lit neck
+   between collar and skull and it works at 700 px; at 160 the head sits straight on the
+   shoulders. Not a chess-piece fault, but the head's own island is a 700 px claim only.
+2. **The idle arm is still the weakest object on the body and pass 4 did not touch it.**
+   Pass 3 called it "a plank"; at the rung it is a bulge on the torso rather than an arm,
+   front and three-quarter. It was outside the brief for this pass. It is the next thing.
+3. **The two thighs still merge under the hem in the side view** - the gap opens lower
+   down, at the shins. Better than one column, not two clean legs.
+4. **Still no back view rendered.** Pass 3 flagged this and it is still true: the driver
+   shoots front, three-quarter and side, and the view that would hardest test this body's
+   claim to have a facing is the one nobody has shot. **Not claimed as proved.**
+5. **The skirt now reads a little like a jerkin over a kilt** from the front, because the
+   chest is wider than the hip section above the flare. It reads as a man, which was the
+   ask, but it is not unambiguously a long coat any more.
 
 ## WHAT I CAN STILL SEE WRONG (pass 3, looked at, not inferred)
 

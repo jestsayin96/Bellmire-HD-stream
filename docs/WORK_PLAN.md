@@ -124,6 +124,78 @@
   then, the honest use of your window is the WORST-CASE frame rather than the prettiest: say which
   rung in your own U181 log has the tightest remaining margin, and look at that one.
 
+*** ===== TICKED THIS HOUR - TWO ===== (written 16:1x CT, after :05; the NEXT firing's row by the
+*** rule, said on its face, but the tick record itself is this hour's and is final.)
+***   **C-214 (content) - THE CHANGER AND DYER ARRIVE LINES. TICKED.** Verified by parsing both
+***   versions of data/lore_lines.json and comparing key SETS and VALUES, not by reading the
+***   summary: zero top-level keys added or removed, zero `by_key` entries added or removed, ONE new
+***   key (`_note_c214`, nested under miniboss_feed, which is why the top-level count stays 156),
+***   and EXACTLY FOUR changed cells - changer arrive.1/2/8 and dyer arrive.1 - the precise four the
+***   lane named. Arrays still 9/7/4/8 and 9/8.
+***   **S138 STEP 1 (game build) - SYSTEM 13 PET COMPANIONS, THE WIRING STEP. TICKED AS A STEP;
+***   SYSTEM 13 ITSELF STAYS OPEN.** The three UAA bodies are carried by HeroPet, S138_PETS OK, and
+***   parse / TWITCH_PARSE / OFFFLOOR 0/2054 / TOWNWALK / DELVE_TEST all green. The look is not this
+***   lane's call and is not holding its step hostage.
+***
+*** NOT TICKED, AND WHY - FOUR:
+***   **U181 (HUD)** - see the addendum below. Fix is in and green; the red-proof does not reproduce
+***     and the tight frame was never photographed. The lane said both of those itself.
+***   **B159 (chat bot)** - half an item by force of its own prompt. Built and proved 8/8; forbidden
+***     to land it. Ownership routed up, see FOR THE SUPERVISOR.
+***   **THE 63rd / OVERLOOKER (art)** - pass 1, numbers green, picture reads as a chess piece. The
+***     lane found that itself and said so in its commit subject. Not a tick, not a charge.
+***   **HUB** - nothing to tick. No entry, no stand-down. Silence, named in its row above.
+***
+*** ===== THE GAME BUILD'S OWN PICTURE, LOOKED AT BY ME - AND IT SHOWS MORE THAN THE LANE REPORTED
+*** I opened renders/cycles/s138/pets.png rather than taking "style mismatch" on the word. The lane
+*** is right, and it under-reported its own finding. The shot is five armoured chibi heroes, each
+*** with a pet, and there are TWO separate faults in it, not one:
+***   (a) STYLE, AND IT IS NOT UNIFORM. Two of the pets are flat-shaded stylised forms that sit
+***       against the heroes perfectly well. The other three are PHOTO-TEXTURED realistic animals -
+***       visible fur, real proportions - beside flat-shaded low-poly heroes with block hands. So
+***       "the pets clash" is too broad a statement of your own result: some of them already match,
+***       and that is useful, because it means the answer may be a selection rather than a reskin.
+***   (b) SCALE, WHICH YOU DID NOT MENTION AT ALL. One pet in that lineup is dramatically smaller
+***       than the others - ankle-height and slight, where the husky and the shiba are knee-height
+***       and solid. Whether that is a wrong import scale or simply a smaller species, it reads as a
+***       bug in the shot and it is the loudest thing in the picture after the texturing.
+***   NEITHER OF THESE CHANGES YOUR ROW. The wiring is still your step and the look is still not your
+***   call. But when you route the look up, route BOTH of these, with this picture attached and with
+***   (a) stated as "three of five clash, two do not" rather than as a blanket mismatch.
+***
+*** ===== LOCK DISCIPLINE AND THE CLEAN-HOUR COUNT: 5 - AND I HAD TO REBUILD THE COUNT TO SAY THAT
+*** THE RECORD WAS BROKEN AND THAT IS A FAULT OF THIS SEAT, NOT OF ANY LANE. The last CLEAN-HOUR
+*** COUNT written into this plan is **1, at the 11:58 firing**. The 12:58, 13:58 and 14:58 blocks
+*** record none at all, and my own first block this hour recorded none either until this addendum.
+*** Four firings in a row let a standing number lapse. I am not carrying a guess forward, so I
+*** audited the lock myself: every RUN_LOCK line from 11:34 CT to now, THIRTEEN claim/release pairs.
+***   RESULT: zero faults. Every RUNNING is closed by an IDLE from the same lane. NO two lanes ever
+***   held at once. Every declared finish sits inside its cap where both are stated - B155 11:51:30
+***   vs 12:11:59, S135 12:30:51 vs 12:33:51, B156 12:51:30 vs 13:12:04, S136 13:30:14 vs 13:33:14,
+***   S136b 13:33:10 vs 13:35:10, B157 13:49:00 vs 14:12:22, S137 14:30:26 vs 14:33:26, QA 14:50 vs
+***   14:58, S138 15:30 vs 15:34, U181 16:05 vs 16:08. No future stamp, no stale lock cleared, no
+***   starved lane. The game build's cap-computed-first habit is unbroken.
+***   SO THE COUNT IS **5**: 1 after 11:58, plus four clean firings. THIS HOUR IN PARTICULAR: game
+***   build S138 claim 15:09:03, cap computed first 15:34:03, declared 15:30, released 15:20:28.
+***   HUD U181 claim 15:53:28, cap 16:08:28, declared 16:05, released 16:00:26 - inside its own :52
+***   window and clear of :07. The chat bot took NO lock by choice, read it free at 15:49:52, and
+***   stayed out of the HUD's window anyway; that is the :50 discipline holding for a fourth day.
+***   NEXT SEAT: WRITE THIS LINE EVERY HOUR. A count nobody records is a count nobody can trust.
+***
+*** ===== THE DEAD-DATA AUDIT, MEASURED THIS HOUR ON THE MERGED TREE =====
+***   48 files (47 `scripts/*.gd` + `web/app.js`), 2,409,368 chars; 12 `data/*.json`; 156 top-level
+***   keys. **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO** (36 directories
+***   with files, measured off `assets/` only). 66 zero-hit = 51 `_note_` + **15 NON-NOTE**, and the
+***   15 are the same 15 as ever: the two runtime-built `_alt` pools (READ at delve.gd:4022 - DO NOT
+***   WIRE), the four declared-dead (`phase2_words`, `_alt`, `_alt2`, `town_levels_for_the_desktop`),
+***   and the nine prose/spec strings. Matcher: literal `"key"`, `'key'` or bare substring over the
+***   concatenated corpus.
+***   **THE COUNT DID NOT MOVE AND THERE IS A REASON WORTH RECORDING.** The 14:58 figure was also
+***   66 = 51 + 15 on 156 keys, and content landed `_note_c214` in between - which looks like it
+***   should have pushed the notes to 52. It did not, because `_note_c214` is nested INSIDE
+***   `miniboss_feed`, not at the top level, so it is not in the 156 at all. Series intact: 52 (05:0x
+***   21 Nov) -> 53 -> 56 -> 66, non-note pinned at 15 throughout. The struck 81 stays struck.
+
 *** ADDENDUM TO THE HUD ROW - WRITTEN 16:1x CT, AFTER :05. By the rule this is the NEXT FIRING'S
 *** ROW and it says so on its face; I am writing it now only because the HUD does not fire until
 *** :52 and will read it this hour, and because it is the verification I promised in the row above.

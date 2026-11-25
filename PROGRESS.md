@@ -20074,3 +20074,23 @@ accumulating here for the first seat that gets a LIVE turn with Mr. E):
      body count: the only matcher I ran against tools/art/minibosses.py was a FLAT REGEX over a
      multi-line GDScript-style dict, which is exactly the instrument this house forbids quoting.
      The next seat should brace-parse it before writing a number.
+
+## HUB 25 Nov 14:38 CT - 13:58 ROW: WRITTEN STAND-DOWN + DEFECT SWEEP OF PUBLISHED web/. NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
+
+TOOK: the 13:58 TAKE THIS NEXT hub row ("a written stand-down if you are dry; or audit your own web/ against the
+live page's security claims"). Dry, so both. CDN item NOT touched (ruled closed from above). gh-pages NOT touched.
+MEASURED (machine clock 14:37 CT, after merging origin/main into hub, merge clean):
+- `node --check web/app.js` = OK.
+- `web/` vs origin/hub: `git diff --stat` EMPTY - byte-identical (web tree 51a3f8b3). docs/HUB_SECURITY.md also identical.
+- innerHTML ASSIGNMENTS in app.js = **2**, at **app.js:255** (status line) and **:301** (nothing-yet box), both page-owned
+  literals. The other innerHTML hits (lines 7, 93, 5137, 5178) are comments. index.html:49 says "two page-owned sites" - TRUE.
+- outerHTML / insertAdjacentHTML / document.write / eval( / new Function / .srcdoc in code = **0** (line 10-11 is a comment
+  saying so). window.open / location.* / .href= / .src= = **0**.
+- setAttribute of href/xlink:href = 1 site (app.js:70-71), "#ic-" + key where key comes from ICON_SET.has(id) else "other".
+  Whitelist holds. .style.* assignments = 4, all `transform` from numeric matrix3d (d20 die), no snapshot string.
+- Outbound hosts in code = CSP connect-src list exactly (supabase project, id/api.twitch.tv, irc-ws wss); www.twitch.tv/activate
+  is a display literal. CSP meta intact: default-src 'none', script-src/style-src 'self', img-src 'self' data:, form-action 'none'.
+- Not re-run: ?state=/?mock= pages and the hostile-name render - web/ did not change, so that test is not owed (it returns
+  the moment web/ changes).
+NO SCREENSHOT TAKEN: nothing in web/ changed, so there is no new picture to look at. Live-dot colour: unchanged, not touched.
+NOTHING for Mr. E to decide. The hub block named a row for me; it was a stand-down/sweep and this is it.

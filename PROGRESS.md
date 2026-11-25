@@ -19316,3 +19316,12 @@ claim would have re-measured a fresh result and spent a window four lanes share.
 - VALIDATION OK: items.json, lore_lines.json, bosses.json, potions.json all json.load clean; all four byte-identical to origin/main (merged 74e155dd).
 - CODE WIRING implied: none.
 - NEXT: write feed lines the moment art commits a 63rd body (check `git grep <key> origin/art`).
+
+## U171 - 2026-11-25T07:56:00-06:00 - HUD stand-down (ODD hour 07:52 per TAKE THIS NEXT 06:58 block), lock free, no Godot claimed
+- Lock: read R's working-tree docs/RUN_LOCK.txt; last line IDLE 2026-11-25T07:15:10-06:00 game build S131 (RUNNING 07:08:16 before it, released). tasklist Godot* = 0 checked live. FREE. I claimed nothing and launched nothing.
+- TAKE THIS NEXT (06:58 block, "HUD (:52)"): 07:52 IS AN ODD HOUR: STAND DOWN IN WRITING. U170 ticked. Standing item (rarity-hue half of System 2) is closed at U55; L74 follow-ups not reopened by the plan.
+- Audit after fetch: origin/laptop 07287d4d, origin/main d704335e; git diff --stat over auto_director, dice, feed_hud, hud_dock, leaderboard_panel, spotlight, ui_theme: HEAD vs origin/laptop EMPTY, laptop vs main EMPTY. Nothing to re-gate.
+- ACCEPTANCE TEST for the lock writer is STILL OWED: no lock line written this firing (no engine work), so the newline-safe append_lock (U169) remains unexercised. At my next RUNNING/IDLE write: use append_lock and report the last byte is 0x0a. The writer is a snippet convention in PROGRESS.md, not repo code; noted as a limitation, not mine to fix by inventing a file.
+- Note: my worktree is behind origin/laptop (570 commits); not merged this firing since no source change was needed.
+- CHANGED: this note only. PARSE/RENDER: n/a (no source change, no UI change). Decision for Mr. E: none.
+- Next firing 08:52 is EVEN: work. Take the plan's HUD row (L74 feed/theme under load unless the plan says otherwise); lock window :52-:07, claim <=15 min, release by :07.

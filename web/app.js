@@ -5453,3 +5453,62 @@ function finderOpen(r) {
     }
   });
 })();
+
+// ===========================================================================
+// Suggestion Box (supervisor directive, 25 Nov 2026).
+// POSTs to Supabase's suggestions table via the REST API with the same
+// publishable key the snapshot uses. Anonymous INSERT is allowed by RLS;
+// no SELECT/UPDATE/DELETE. Client-side: 60-second cooldown between sends,
+// body length 10-2000, category required. No new CSP origin needed.
+// ===========================================================================
+(function () {
+  var form = document.getElementById("suggestForm");
+  if (!form) return;
+  var catEl  = document.getElementById("sugCat");
+  var bodyEl = document.getElementById("sugBody");
+  var userEl = document.getElementById("sugUser");
+  var btn    = document.getElementById("sugSend");
+  var stat   = document.getElementById("sugStatus");
+  var URL_SUG = "https://paaukwaffaamazgrndbv.supabase.co/rest/v1/suggestions";
+  var cooldown = false;
+
+  function setStatus(msg, ok) {
+    stat.textContent = msg;
+    stat.className = "suggest-status " + (ok ? "ok" : "err");
+  }
+
+  btn.addEventListener("click", async function () {
+    if (cooldown) { setStatus("Please wait a minute between submissions.", false); return; }
+    var cat  = catEl.value;
+    var body = bodyEl.value.trim();
+    var user = userEl.value.trim();
+    if (!cat) { setStatus("Pick a category.", false); catEl.focus(); return; }
+    if (body.length < 10) { setStatus("Description needs at least 10 characters.", false); bodyEl.focus(); return; }
+    if (body.length > 2000) { setStatus("Description is too long (2000 max).", false); bodyEl.focus(); return; }
+
+    btn.disabled = true;
+    setStatus("Sending…", true);
+    try {
+      var res = await fetch(URL_SUG, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: KEY,
+          Authorization: "Bearer " + KEY,
+          Prefer: "return=minimal"
+        },
+        body: JSON.stringify({ category: cat, body: body, username: user || "" })
+      });
+      if (!res.ok) throw new Error("server " + res.status);
+      setStatus("Sent! Thank you — Mr. E will see this.", true);
+      bodyEl.value = "";
+      catEl.value = "";
+      userEl.value = "";
+      cooldown = true;
+      setTimeout(function () { cooldown = false; btn.disabled = false; }, 60000);
+    } catch (e) {
+      setStatus("Could not send — try again in a moment.", false);
+      btn.disabled = false;
+    }
+  });
+})();

@@ -22903,8 +22903,66 @@ def collier():
     # Eight verticals and one ring instead of three rings - the vertical lines
     # cut every horizontal band the eye was joining into a hoop skirt, and
     # they are what the real thing has.
+    # *** PASS 11, THE SINGLE CHANGE UNDER TEST: THE RING'S PHASE. ***
+    # The 07:58 row said "shift the centre stake". MEASURED first, because
+    # there IS no centre stake - pass 10 correction (d) - they sit at
+    # 22.5 + 45i, and the stake that kills the +24 vent is the one at +22.5.
+    # `tools/art/_collier_stakeclear.py` sweeps the ring's phase over its full
+    # 45 deg period against the shipped vent arc and finds exactly ONE band
+    # that clears every vent of stakes: 40.0 ... 51.0 deg (ONE band - the
+    # sweep wraps), centre 0.5, i.e. the shipped 22.5 moved -22.0. At that
+    # phase the predicted stake cover goes +24: 0.406 -> 0.000 and
+    # -78: 0.647 -> 0.000, at the SHIPPED pass-8 row height - so it costs
+    # nothing against the lashing ring, which is the whole reason the 0.360
+    # row is still behind COLLIER_VENTZ.
+    # WHAT THE PREDICTOR CANNOT SEE, and why this is a flag and not a default
+    # until the render is looked at: it models stakes only, so it says nothing
+    # about the plug bundle (which also covers -78, 11/13) or the sod at
+    # bearing 8; it does not model the lashing ring, the side camera or the
+    # back camera; and it cannot say whether eight stakes at this phase still
+    # READ as a staked clamp. At every clear phase a stake lands within 6 deg
+    # of dead front, because the vent arc leaves no wider gap - so this change
+    # puts a vertical up the centre line under the man, and that is a
+    # silhouette risk only an eye can judge.
+    _STAKEBASE = 22.5
+    try:
+        _sb = os.environ.get("COLLIER_STAKEBASE", "").strip()
+        if _sb:
+            _STAKEBASE = float(_sb)
+    except ValueError:
+        pass
+    # *** PASS 12 CANDIDATE: NUDGE THE TWO STAKES THAT ACTUALLY OCCLUDE. ***
+    # Rotating the WHOLE ring (COLLIER_STAKEBASE, tried and rendered this
+    # firing) heals the front and WRECKS THE SIDE: with every stake moved, the
+    # side camera loses most of the withy lattice and the flank goes back to
+    # reading as stacked horizontal courses - the hoop-skirt fault the eight
+    # verticals were introduced to kill. I looked at both side renders; that
+    # is an eye judgement, not a number.
+    # So move only the two that stand in front of a vent, measured with
+    # `_collier_stakeclear.py`: the stake at -67.5 (covers -78 by 0.647) and
+    # the one at +22.5 (covers +24 by 0.406). Six stakes are UNTOUCHED, and
+    # the two that move are the two nearest edge-on to the side camera, so the
+    # side lattice is kept. Predicted cover after: 0.000 on all four.
+    # *** AND THE PAIR MOVE WAS RENDERED AND IT MADE -78 WORSE. ***
+    # Predicted cover 0.000 on all four; the render says the -78 mark went
+    # from ONE 41 px mark to TWO of 9 and 3 px. Moving the -67.5 stake to
+    # -74.0 walked it TOWARDS that vent, and the predictor missed it because
+    # its depth test compares the stake's centre y against the vent's nearest
+    # y - a single-point test that is too crude when BOTH are near edge-on,
+    # which is exactly where -78 lives. Recorded, not hidden: the instrument
+    # is wrong in the regime that matters most to it.
+    # WHAT SURVIVES IS THE HALF THAT WORKED. The +22.5 stake alone is what
+    # splits the +24 mark, and a +3.0 deg nudge of that ONE stake heals it
+    # while SEVEN stakes stay exactly where they ship - no side-view cost, no
+    # ring-gap risk, nothing else on the body moves.
+    _NUDGE = {}
+    _nd = os.environ.get("COLLIER_STAKENUDGE", "").strip()
+    if _nd == "12":
+        _NUDGE = {0: +3.0, 6: -6.5}     # DISPROVED: -78 got worse. Kept to reproduce.
+    elif _nd == "13":
+        _NUDGE = {0: +3.0}              # the +24 split heal, and nothing else
     for i in range(8):
-        a = math.radians(22.5 + 45.0 * i)
+        a = math.radians(_STAKEBASE + 45.0 * i + _NUDGE.get(i, 0.0))
         d = Vector((math.sin(a), -math.cos(a), 0.0))
         # *** PASS 4, FIX I. *** At R 0.868 / 0.495 the stakes sat INSIDE the
         # earth they were supposed to be driven into: pass 3's render shows
@@ -22986,6 +23044,60 @@ def collier():
     _arc = ((-48.0, -22.0, 4.0, 30.0)
             if os.environ.get("COLLIER_VENTARC", "").strip() == "9"
             else (-78.0, -42.0, -10.0, 24.0))
+    # *** PASS 10 - THE ONE THING CHANGED IS THE ROW HEIGHT, AND THE STAGGER
+    # *** WAS RUNNING BACKWARDS. ***
+    # Measured, not reasoned, with `tools/art/_collier_occlude.py`: a BVH
+    # raycast of the front camera's own ray at the face centroids of the real
+    # mouth solid, with the vent span removed from the BVH so no mouth
+    # occludes itself. Visible share of a mouth that has nothing in front of
+    # it, by bearing and row height (every number below is a MEASURED row, not
+    # an interpolation):
+    #     bearing   z=0.250   z=0.298   z=0.360
+    #       -78       0.00      0.03      0.06
+    #       -42       0.74      0.74      0.74
+    #       -10       0.76      0.91      0.98
+    #       +24       0.00      0.07      0.42
+    # Pass 8 shipped `0.250 + 0.048 * (i in (1,2))`, which puts the INNER two
+    # at 0.298 and the OUTER two at 0.250. The outer two are the most oblique
+    # to the front camera and the most occluded, and the stagger handed them
+    # the WORSE height - it was helping the two vents that needed no help. So
+    # the shipped row was -78 @ 0.00, -42 @ 0.74, -10 @ 0.91, +24 @ 0.00, and
+    # the two reading zero are exactly the two the renders show as a 41 px
+    # sliver and a mark SPLIT IN TWO (139 + 17 px).
+    # THE ROW UNDER TEST IS FLAT AT 0.360, which is the best height measured
+    # for every one of the four and costs none of them anything. The mechanism is
+    # the flank's own taper - course 1 runs r 0.838 -> 0.730 and course 2
+    # 0.742 -> 0.600, so a mouth whose outer face reaches r 0.801 is BURIED at
+    # the bottom of the row and stands PROUD higher up. Still below the lashing
+    # ring at z 0.430-0.474, so pass 4's FIX J constraint is kept.
+    # NOT THE BEARING. Pass 5 pushed a vent to -78 and pass 9 pulled one to +4
+    # and lost it entirely; the arc has been disproved twice and is frozen.
+    # *** AND IT IS STAGED, NOT SHIPPED, BECAUSE IT HAS NEVER BEEN RENDERED.
+    # *** COLLIER_VENTZ=10 TURNS IT ON. UNSET IS PASS 8, BYTE FOR BYTE. ***
+    # The 25 Nov 09:0x CT firing derived this row height and then lost the
+    # Blender bridge before it could render it - Mr. E's Blender was not
+    # running, and that bridge is the only way this lane renders, runs Godot,
+    # or commits anything. The lane's own rule is that a piece which has never
+    # been rendered on a body is NOT DONE and must not be reported as done, so
+    # the DEFAULT STAYS AT PASS 8 and this is a flag.
+    # A raycast is not a render. The probe says the flank's taper should let a
+    # mouth at r 0.801 stand proud at 0.360 where it is buried at 0.250, and
+    # the probe has ALREADY been wrong once on this body this hour: rev 0 of it
+    # read `vis 0.000` for the +24 vent that the committed render shows as a
+    # 139 px mark, because it sampled only the mouth's end disc. It was fixed
+    # and it agrees with the render on which vent is the smallest - but "agrees
+    # on the ranking" is not "predicts the pixels", and nothing here is a pass
+    # until somebody has LOOKED at the row at the 360p rung.
+    # THE NEXT RUN'S JOB, AND IT IS TWO STEPS:
+    #   1. COLLIER_VENTZ=10, render the glow-only arm, run
+    #      tools/art/_collier_ventlabel.py so the marks are LABELLED BY
+    #      CONSTRUCTION and not by eye, and run tools/art/_streamscale.py for
+    #      the rung ladder. ACCEPT ONLY IF THE 360p RUNG READS FOUR.
+    #   2. If it does, make this the default and delete the flag. If it does
+    #      NOT, say so and STOP CUTTING AT THE BODY - the team lead's 07:58
+    #      row says the fallback is then a text change, which is content's and
+    #      not this lane's to make.
+    _VENTZ10 = os.environ.get("COLLIER_VENTZ", "").strip() == "10"
     for i, deg in enumerate(_arc):
         a = math.radians(deg)
         d = Vector((math.sin(a), -math.cos(a), 0.0))
@@ -22993,7 +23105,7 @@ def collier():
         # ring or a stake on the front camera, and the side camera got NONE.
         # Dropped below the ring, moved to the 0.300 band and widened: the
         # count is the mechanic and a cue you have to hunt for is not a cue.
-        z = 0.250 + 0.048 * (1 if i in (1, 2) else 0)
+        z = 0.360 if _VENTZ10 else (0.250 + 0.048 * (1 if i in (1, 2) else 0))
         # collar: iron, sunk into the earth, axis pointing out along d
         P.add(L.scone(0.128, 0.114, 0.062, 12), 'dark',
               loc=tuple(d * 0.712 + Vector((0.0, -0.040, z))),
@@ -23084,9 +23196,21 @@ def collier():
     # IS BYTE-FOR-BYTE WHAT IT WAS, which is the same discipline MB_CUEOFF
     # keeps.
     _SR = float(os.environ.get("COLLIER_SEAMR", "1.0"))
-    for zs, dc, dw, sink, rad in ((0.248, 103.0, 14.0, 0.020, 0.034 * _SR),
+    # *** COLLIER_SEAMOFF=1 DROPS THE THREE SEAMS AND NOTHING ELSE. ***
+    # ART, 25 Nov 08:5x CT, pass 10. It exists because of a question the
+    # shipped numbers CANNOT answer: `MB_CUEOFF=glow` turns off every glow on
+    # this body at once, so the A/B's front marks are VENTS AND SEAMS MIXED,
+    # and every pass since 7 has been attributing all seven front marks to
+    # four vents by eye. With the seams dropped, (full - glowoff) is vents
+    # only and (full - seamoff) is seams only, so each mark is LABELLED by
+    # construction instead of by inference. UNSET IS 1.0-EQUIVALENT AND THE
+    # SHIPPED PATH IS BYTE-FOR-BYTE WHAT IT WAS, the same discipline as
+    # MB_CUEOFF, COLLIER_SEAMR, COLLIER_VENTARC and COLLIER_BROW.
+    _SEAMOFF = os.environ.get("COLLIER_SEAMOFF", "").strip() == "1"
+    for zs, dc, dw, sink, rad in (() if _SEAMOFF else
+                                  ((0.248, 103.0, 14.0, 0.020, 0.034 * _SR),
                                   (0.503, 92.0, 14.0, 0.018, 0.029 * _SR),
-                                  (0.742, 99.0, 9.0, 0.015, 0.023 * _SR)):
+                                  (0.742, 99.0, 9.0, 0.015, 0.023 * _SR))):
         r0, xo, yo = _flank_r(zs)
         pts, radii = [], []
         n = 9

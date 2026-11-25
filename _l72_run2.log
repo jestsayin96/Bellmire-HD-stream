@@ -1,0 +1,296 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+FEED JestFan takes the oath as a dwarf knight (down from the hill mines; sees in the dark). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED BigAxe takes the oath as an orc barbarian (came over the west road and stayed; sees in the dark). The most meat. Swings heavy, guards nothing.
+FEED BigAxe, JestFan descend below, the door kept behind them and chalk in the pocket.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned skeleton warrior, 1 hollowed bone bowman, 1 bone sentinel, 1 drowned bone sentinel, 1 risen bones.
+FEED A game of dice lies half-played on a barrel-head.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The braziers in the hall burn blue, and then burn cold.
+FEED BigAxe rolls a 20 for initiative and is moving before anything else.
+DIRECTOR t=0.0 CUT lord_736201046693 shot=shoulder pri=101.0 why=start held_prev=0.0 pace=1.0 | lord_736201046693/shoulder=101.0(lord), fight_736201046693/shoulder=85.0(hurt 0.00), chat_2104/follow=49.7(chat 2s ago), hero_2104/follow=31.4(town life), tour_0/push=10.0(quiet baseline)
+L72_TEST hollow_king director on the lord after 1 frames, rising=true
+L72_TEST hollow_king t=0.3s inside=60/60 size=(3.7 w, 1.7 h, 5.2 d) dist=9.1 pitch=-41 cam_in_solid=false
+L72_TEST hollow_king t=1.6s inside=59/60 size=(3.7 w, 3.0 h, 5.2 d) dist=9.3 pitch=-48 cam_in_solid=false
+L72_TEST hollow_king t=3.0s inside=60/60 size=(3.7 w, 4.1 h, 5.2 d) dist=9.5 pitch=-54 cam_in_solid=false
+L72_TEST hollow_king t=5.5s inside=59/60 size=(4.5 w, 4.9 h, 3.7 d) dist=11.0 pitch=-55 cam_in_solid=false
+RIG: no clip 'Idle_B' on Barbarian - playing its idle
+L72_TEST hollow_king t=8.0s inside=60/60 size=(3.9 w, 5.0 h, 3.7 d) dist=11.5 pitch=-55 cam_in_solid=false
+FEED Someone has swept the first landing. The sweepings are not dust.
+FEED They carry 0 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 4 skeleton warriors, 1 bone bowman.
+FEED A shop with its shutters up and its scales still balanced.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The floor is wet, and getting wetter.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR t=9.3 CUT lord_1196718848352 shot=shoulder pri=101.0 why=start held_prev=0.9 pace=1.0 | lord_1196718848352/shoulder=101.0(lord), fight_1196718848352/shoulder=79.0(hurt 0.00 same-shot-6), chat_2104/follow=48.5(chat 12s ago), hero_2101/follow=33.4(town life), tour_1/push=10.0(quiet baseline)
+L72_TEST grubmother director on the lord after 31 frames, rising=false
+L72_TEST grubmother t=0.3s inside=6/12 size=(8.5 w, 5.4 h, 7.0 d) dist=9.2 pitch=-37 cam_in_solid=false
+L72_TEST grubmother t=1.6s inside=9/12 size=(8.5 w, 5.4 h, 7.0 d) dist=11.1 pitch=-42 cam_in_solid=false
+L72_TEST grubmother t=3.0s inside=10/12 size=(9.4 w, 5.4 h, 10.3 d) dist=13.9 pitch=-49 cam_in_solid=false
+L72_TEST grubmother t=5.5s inside=12/12 size=(9.4 w, 5.4 h, 10.3 d) dist=17.2 pitch=-55 cam_in_solid=false
+L72_TEST grubmother t=8.0s inside=12/12 size=(7.8 w, 5.4 h, 9.1 d) dist=17.0 pitch=-55 cam_in_solid=false
+FEED BigAxe, JestFan descend past the bell with no clapper and down.
+FEED They carry 0 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 46 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 bone sentinels, 1 drowned skeleton warrior, 1 skeleton warrior, 1 bone bowman.
+FEED Chimneys with no smoke, and no soot either.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR t=17.5 CUT lord_1586403246083 shot=shoulder pri=101.0 why=start held_prev=0.6 pace=1.0 | lord_1586403246083/shoulder=101.0(lord), fight_1586403246083/shoulder=79.0(hurt 0.00 same-shot-6), chat_2104/follow=47.4(chat 22s ago), hero_2104/follow=31.9(town life), tour_1/push=10.0(quiet baseline)
+L72_TEST rattling_host director on the lord after 14 frames, rising=true
+FEED BigAxe sets the wizard's lamp burning. The dark pulls back from floor 5.
+L72_TEST rattling_host t=0.3s inside=63/68 size=(4.0 w, 5.1 h, 5.0 d) dist=9.0 pitch=-37 cam_in_solid=false
+L72_TEST rattling_host t=1.6s inside=65/68 size=(5.0 w, 5.2 h, 4.0 d) dist=9.7 pitch=-42 cam_in_solid=false
+L72_TEST rattling_host t=3.0s inside=67/68 size=(5.1 w, 5.1 h, 4.0 d) dist=10.8 pitch=-49 cam_in_solid=false
+L72_TEST rattling_host t=5.5s inside=68/68 size=(5.1 w, 5.2 h, 4.0 d) dist=11.7 pitch=-55 cam_in_solid=false
+L72_TEST rattling_host t=8.0s inside=68/68 size=(4.8 w, 5.3 h, 4.0 d) dist=11.7 pitch=-55 cam_in_solid=false
+FEED Down is the only direction the stair knows.
+FEED They carry 0 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 46 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned risen bones, 1 hollowed skeleton warrior, 1 hollowed bone sentinel, 1 bone bowman, 1 skeleton warrior.
+FEED Washing on a line, moved to catch a wind that is not here.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR t=25.6 CUT lord_1968823108160 shot=shoulder pri=101.0 why=start held_prev=0.6 pace=1.0 | lord_1968823108160/shoulder=101.0(lord), fight_1968823108160/shoulder=79.0(hurt 0.00 same-shot-6), chat_2104/follow=46.2(chat 32s ago), hero_2104/follow=34.7(town life), tour_1/push=10.0(quiet baseline)
+L72_TEST nightwing director on the lord after 19 frames, rising=false
+L72_TEST nightwing t=0.3s inside=8/20 size=(3.3 w, 7.8 h, 2.1 d) dist=9.2 pitch=-37 cam_in_solid=false
+L72_TEST nightwing t=1.6s inside=8/20 size=(3.3 w, 7.7 h, 2.1 d) dist=10.5 pitch=-42 cam_in_solid=false
+L72_TEST nightwing t=3.0s inside=9/20 size=(3.3 w, 7.9 h, 2.1 d) dist=12.5 pitch=-49 cam_in_solid=false
+L72_TEST nightwing t=5.5s inside=20/20 size=(2.6 w, 8.2 h, 3.4 d) dist=15.0 pitch=-55 cam_in_solid=false
+L72_TEST nightwing t=8.0s inside=20/20 size=(1.8 w, 7.9 h, 3.2 d) dist=15.0 pitch=-55 cam_in_solid=false
+FEED BigAxe, JestFan descend below with a full lamp and a tight lip.
+FEED They carry 0 flasks of oil between them.
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 5; lights 56 (shadowed 2)
+L28D_DECALS floor 10 wood: 17 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 emberbound imp, 1 emberbound scar adder, 1 gorged silk mother, 1 wraithtouched imp, 1 emberbound silk mother, 3 gorged gloom bats.
+FEED Chains cut, not unlocked.
+FEED The Gravewyrm rises. The thing the dungeon was built to hold.
+FEED The dungeon was built around this, and it knows it.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR t=33.8 CUT lord_2339834463984 shot=shoulder pri=101.0 why=start held_prev=0.9 pace=1.0 | lord_2339834463984/shoulder=101.0(lord), fight_2339834463984/shoulder=82.5(hurt 0.35 same-shot-6), chat_2104/follow=45.0(chat 43s ago), hero_2101/follow=30.4(town life), tour_1/push=10.0(quiet baseline)
+L72_TEST gravewyrm director on the lord after 37 frames, rising=false
+FEED BigAxe is badly hurt and breaks off, making for the way up.
+L72_TEST gravewyrm t=0.3s inside=2/20 size=(5.8 w, 15.0 h, 7.5 d) dist=11.3 pitch=-36 cam_in_solid=false
+L72_TEST gravewyrm t=1.6s inside=2/20 size=(5.8 w, 15.2 h, 7.5 d) dist=14.9 pitch=-41 cam_in_solid=false
+L72_TEST gravewyrm t=3.0s inside=9/20 size=(5.8 w, 15.2 h, 7.5 d) dist=21.2 pitch=-49 cam_in_solid=false
+FEED Spiderlings spill from the silk mother's back.
+FEED BigAxe should be dead - and stands back up (16).
+FEED BigAxe the barbarian falls on floor 10 to the dark below. Level 1, 0 kills. !reroll to rise again.
+L72_TEST gravewyrm t=5.5s inside=20/20 size=(5.8 w, 14.9 h, 7.5 d) dist=26.3 pitch=-55 cam_in_solid=false
+L72_TEST gravewyrm t=8.0s inside=20/20 size=(5.8 w, 14.8 h, 7.5 d) dist=25.7 pitch=-55 cam_in_solid=false
+FEED JestFan descends below the guild post, roll in hand.
+FEED They carry 0 flasks of oil between them.
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 5; lights 56 (shadowed 2)
+L28D_DECALS floor 10 wood: 17 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 mossbacked pit wyrm, 1 skeleton rogue, 1 emberbound silk mother, 1 gorged bone bowman, 1 veilstruck lost delver, 1 duskforged bone bowman, 1 veilstruck pale cutthroat, 1 mossbacked bone sentinel.
+FEED Tally marks on one wall run into the thousands.
+FEED The Ossuary Lord rises. It does not hurry; it does not need to.
+FEED It has waited a very long time. A little longer is nothing.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR t=41.8 CUT lord_2812213758012 shot=shoulder pri=101.0 why=start held_prev=0.7 pace=1.0 | lord_2812213758012/shoulder=101.0(lord), death_2339834463984_38/hard_cut=90.0(death), fight_2812213758012/shoulder=81.4(hurt 0.24 same-shot-6), chat_2104/follow=43.8(chat 53s ago), hero_2101/follow=30.8(town life)
+L72_TEST ossuary_lord director on the lord after 29 frames, rising=false
+L72_TEST ossuary_lord t=0.3s inside=8/12 size=(7.6 w, 10.7 h, 2.2 d) dist=10.6 pitch=-37 cam_in_solid=false
+L72_TEST ossuary_lord t=1.6s inside=8/12 size=(7.6 w, 10.7 h, 2.2 d) dist=14.1 pitch=-41 cam_in_solid=false
+L72_TEST ossuary_lord t=3.0s inside=9/12 size=(7.6 w, 10.7 h, 2.2 d) dist=19.7 pitch=-49 cam_in_solid=false
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 10.
+L72_TEST ossuary_lord t=5.5s inside=12/12 size=(7.6 w, 10.7 h, 2.2 d) dist=24.4 pitch=-55 cam_in_solid=false
+FEED JestFan get out alive, and come home with what they carried.
+FEED JestFan comes home to Bellmire with 0 gold. 0 kills.
+L72_TEST ossuary_lord t=8.0s inside=12/12 size=(7.6 w, 10.7 h, 2.2 d) dist=24.4 pitch=-55 cam_in_solid=false
+FEED The door is kept. The way is open.
+FEED They carry 0 flasks of oil between them.
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 7; lights 57 (shadowed 2)
+L28D_DECALS floor 10 wood: 17 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 3 emberbound blood wasps, 1 duskforged ash wight, 1 scarborn lost delver, 1 gorged imp, 1 duskforged pit wyrm, 1 emberbound skeleton mage.
+FEED The guard posts face inward. Whatever was kept here was worth it.
+FEED The Pale Duchess rises. She opens throats, not doors.
+FEED A lady laughs somewhere ahead, very politely.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR t=49.9 CUT lord_3290280527589 shot=shoulder pri=101.0 why=start held_prev=0.7 pace=1.0 | lord_3290280527589/shoulder=101.0(lord), fight_3290280527589/shoulder=82.3(hurt 0.33 same-shot-6), chat_2104/follow=42.5(chat 63s ago), hero_2101/follow=33.4(town life), tour_1/push=10.0(quiet baseline)
+L72_TEST pale_duchess director on the lord after 28 frames, rising=false
+L72_TEST pale_duchess t=0.3s inside=63/76 size=(4.6 w, 5.2 h, 4.9 d) dist=9.0 pitch=-37 cam_in_solid=false
+L72_TEST pale_duchess t=1.6s inside=73/76 size=(4.6 w, 5.2 h, 4.9 d) dist=9.5 pitch=-42 cam_in_solid=false
+L72_TEST pale_duchess t=3.0s inside=74/76 size=(4.6 w, 5.2 h, 4.8 d) dist=10.3 pitch=-50 cam_in_solid=false
+L72_TEST pale_duchess t=5.5s inside=76/76 size=(4.6 w, 5.2 h, 4.7 d) dist=10.8 pitch=-55 cam_in_solid=false
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 10.
+L72_TEST pale_duchess t=8.0s inside=76/76 size=(4.6 w, 5.2 h, 4.8 d) dist=10.8 pitch=-55 cam_in_solid=false
+FEED JestFan descends down the guild stair, the tenth already weighed.
+FEED They carry 0 flasks of oil between them.
+L28C_EMITTERS floor 10 wood: 3 (cap 12), creatures 4; lights 57 (shadowed 2)
+L28D_DECALS floor 10 wood: 17 (cap 24)
+FEED Floor 10 - a prison, remade as a buried wood: 1 duskforged pale cutthroat, 1 mossbacked skeleton mage, 1 sporeblown silk mother, 3 scarborn blood wasps, 1 scarborn risen bones, 1 emberbound gravecaller.
+FEED The key-ring hangs on its hook, one key short, and that key is warm.
+FEED Mourncoil rises. Frost comes off it in sheets.
+FEED Breath steams. Then the steam freezes.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR t=58.1 CUT lord_3773984443596 shot=shoulder pri=101.0 why=start held_prev=0.5 pace=1.0 | lord_3773984443596/shoulder=101.0(lord), fight_3773984443596/shoulder=79.0(hurt 0.00 same-shot-6), fish_558412881309/follow=60.0(catch), chat_2104/follow=41.4(chat 74s ago), hero_2104/follow=35.0(town life)
+L72_TEST mourncoil director on the lord after 8 frames, rising=false
+L72_TEST mourncoil t=0.3s inside=4/20 size=(6.4 w, 15.8 h, 8.4 d) dist=10.5 pitch=-37 cam_in_solid=false
+L72_TEST mourncoil t=1.6s inside=7/20 size=(6.4 w, 16.6 h, 8.4 d) dist=16.3 pitch=-43 cam_in_solid=false
+L72_TEST mourncoil t=3.0s inside=10/20 size=(6.4 w, 16.5 h, 8.4 d) dist=24.3 pitch=-51 cam_in_solid=false
+L72_TEST mourncoil t=5.5s inside=20/20 size=(6.4 w, 16.9 h, 8.4 d) dist=29.5 pitch=-55 cam_in_solid=false
+L72_TEST mourncoil t=8.0s inside=20/20 size=(6.4 w, 16.7 h, 8.4 d) dist=29.7 pitch=-55 cam_in_solid=false
+L72_TEST DONE fails=1
+ERROR: 4 RID allocations of type 'N10RendererRD14TextureStorage13DecalInstanceE' were leaked at exit.
+ERROR: 4 RID allocations of type 'N10RendererRD14TextureStorage5DecalE' were leaked at exit.
+ERROR: 1 RID allocations of type 'N10RendererRD14TextureStorage7TextureE' were leaked at exit.
+ERROR: 4 RID allocations of type 'N17RendererSceneCull8InstanceE' were leaked at exit.
+ERROR: Decal Atlas: 1 textures were not removed from the atlas.
+   at: ~TextureStorage (servers/rendering/renderer_rd/storage_rd/texture_storage.cpp:672)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: Leaked instance dependency: Bug - did not call instance_notify_deleted when freeing.
+   at: ~Dependency (servers/rendering/storage/utilities.cpp:56)
+WARNING: 2 RIDs of type "Texture" were leaked.
+   at: finalize (servers/rendering/rendering_device.cpp:8900)
+WARNING: 5 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

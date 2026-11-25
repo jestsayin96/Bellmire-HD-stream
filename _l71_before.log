@@ -1,0 +1,209 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+RIG: no clip 'Idle_B' on Mage - playing its idle
+FAIL ellipsis @100 Hobwick the Knight (Lv 3, STR 16 DEX 12 CON 15 INT 9 WIS 11 CHA 10) - 24 HP, AC 17, wielding a longsword; carries 41 gold.
+  [100] 1L: Hobwick the Knight (Lv 3, STR 16 DEX 12 CON 15 INT 9 WIS 11 CHA 10) - 24 HP, AC 17, wielding a longsword; carries 41 gold.
+  [100] box h=30.0 sheet h=225.625
+FAIL ellipsis @100 Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+  [100] 1L: Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+  [100] box h=30.0 sheet h=225.625
+FAIL ellipsis @100 Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+  [100] 1L: Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+  [100] box h=30.0 sheet h=225.625
+FAIL ellipsis @100 Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+  [100] 1L: Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+  [100] box h=30.0 sheet h=225.625
+FAIL ellipsis @100 E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [100] 1L: E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [100] box h=30.0 sheet h=225.625
+FAIL ellipsis @100 Hobwick the Knight (Lv 3, STR 16 DEX 12 CON 15 INT 9 WIS 11 CHA 10) - 24 HP, AC 17, wielding a longsword; carries 41 gold.
+  [100] 1L: Hobwick the Knight (Lv 3, STR 16 DEX 12 CON 15 INT 9 WIS 11 CHA 10) - 24 HP, AC 17, wielding a longsword; carries 41 gold.
+FAIL ellipsis @100 Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+  [100] 1L: Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+FAIL ellipsis @100 Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+  [100] 1L: Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+FAIL ellipsis @100 Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+  [100] 1L: Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+FAIL ellipsis @100 E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [100] 1L: E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [100] box h=154.0 sheet h=225.625
+SHOT l71_before_100
+FAIL ellipsis @125 Hobwick the Knight (Lv 3, STR 16 DEX 12 CON 15 INT 9 WIS 11 CHA 10) - 24 HP, AC 17, wielding a longsword; carries 41 gold.
+  [125] 1L: Hobwick the Knight (Lv 3, STR 16 DEX 12 CON 15 INT 9 WIS 11 CHA 10) - 24 HP, AC 17, wielding a longsword; carries 41 gold.
+  [125] box h=36.0 sheet h=216.125
+FAIL ellipsis @125 Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+  [125] 1L: Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+  [125] box h=36.0 sheet h=216.125
+FAIL ellipsis @125 Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+  [125] 1L: Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+  [125] box h=36.0 sheet h=216.125
+FAIL ellipsis @125 Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+  [125] 1L: Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+  [125] box h=36.0 sheet h=216.125
+FAIL ellipsis @125 E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [125] 1L: E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [125] box h=36.0 sheet h=216.125
+FAIL ellipsis @125 Hobwick the Knight (Lv 3, STR 16 DEX 12 CON 15 INT 9 WIS 11 CHA 10) - 24 HP, AC 17, wielding a longsword; carries 41 gold.
+  [125] 1L: Hobwick the Knight (Lv 3, STR 16 DEX 12 CON 15 INT 9 WIS 11 CHA 10) - 24 HP, AC 17, wielding a longsword; carries 41 gold.
+FAIL ellipsis @125 Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+  [125] 1L: Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+FAIL ellipsis @125 Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+  [125] 1L: Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+FAIL ellipsis @125 Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+  [125] 1L: Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+FAIL ellipsis @125 E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [125] 1L: E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [125] box h=184.0 sheet h=216.125
+SHOT l71_before_125
+FAIL ellipsis @150 Hobwick the Knight (Lv 3, STR 16 DEX 12 CON 15 INT 9 WIS 11 CHA 10) - 24 HP, AC 17, wielding a longsword; carries 41 gold.
+  [150] 1L: Hobwick the Knight (Lv 3, STR 16 DEX 12 CON 15 INT 9 WIS 11 CHA 10) - 24 HP, AC 17, wielding a longsword; carries 41 gold.
+  [150] box h=45.0 sheet h=208.375
+FAIL ellipsis @150 Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+  [150] 1L: Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+  [150] box h=45.0 sheet h=208.375
+FAIL ellipsis @150 Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+  [150] 1L: Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+  [150] box h=45.0 sheet h=208.375
+FAIL ellipsis @150 Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+  [150] 1L: Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+  [150] box h=45.0 sheet h=208.375
+FAIL ellipsis @150 E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [150] 1L: E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [150] box h=45.0 sheet h=208.375
+FAIL ellipsis @150 Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+  [150] 1L: Viewer1001 steps on a pressure plate - fire! DEX 12 vs DC 13, 9 damage (halved).
+FAIL ellipsis @150 Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+  [150] 1L: Viewer1002 spots a swarm grate (Perception 20 vs DC 13) and disarms it with thieves' tools (17).
+FAIL ellipsis @150 Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+  [150] 1L: Viewer1003 searches the chest - Successfully found loot!! 38 gold (Investigation 14 vs DC 12).
+FAIL ellipsis @150 E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [150] 1L: E3PO the Commander raises his halberd: 'Hold the line at the east gate! The Scar will not take Bellmire tonight!'
+  [150] box h=183.0 sheet h=208.375
+SHOT l71_before_150
+L71_TEST FAIL
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)

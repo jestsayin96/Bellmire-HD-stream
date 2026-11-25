@@ -229,12 +229,30 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S48: `fuller` (35th, art's tag fogbound) joins fogbound; content's C-126 lines are in. `stackman`
 ## (36th, art's tag grassland) is listed and held out by the gate until content writes it.
 ## S65: `dauber` (37th, Wetwall, art's tag keep - field 5 of its CANON tuple) joins keep; content's C-142 lines are in.
+## S69: `scraper` (41st, Scourstone, art's tag crypt - field 5) joins crypt; content's feed row has since landed (by_key.scraper arrive 9 / fall 8), so miniboss_for draws it (S91, measured).
+## S71: `ferryman` (42nd, Slackwater, art's tag flooded - field 5) joins flooded; content's feed row has since landed (by_key.ferryman arrive 9 / fall 8), so miniboss_for draws it (S91, measured).
+## S72: content's C-149 ferryman lines are in (9 arrive / 8 fall), so the gate now lets it into the flooded draw.
+## S73: `winder` (43rd, Haulback in art's CANON, art's tag wood - field 5) joins wood; content's C-151 lines landed and S75 added its MB_NAME row, so it now enters the wood draw.
+## S76: `pitman` (44th, Underfoot in art's CANON, art's tag crypt - field 5) joins crypt; content's C-152 lines (9 arrive / 8 fall) and its MB_NAME row land together, so it enters the crypt draw now.
+## S89: `tither` (45th, Tenthpart in art's CANON, art's tag prison - field 5) joins prison; content's C-167 landed by_key.tither (arrive 9 / act 7 / broken 4 / fall 8), so miniboss_for draws it (S91, measured).
+## S93: `blower` (46th, Deadair in art's CANON, art's tag fogbound - field 5) joins fogbound with MB_FIT 1.01; content's C-169 lines have NOT landed (by_key.blower absent), so miniboss_for correctly holds it out until they do. S94: C-169 landed (by_key.blower 9 arrive / 8 fall) and its MB_NAME row is written, so it enters the fogbound draw now.
+## S98: `changer` (47th, Evenhand in art's CANON, art's tag treasury - field 5) joins treasury with MB_FIT 1.11; content's by_key.changer has NOT landed, so miniboss_for correctly holds it out and NO MB_NAME row is written (tools/_s51_names.gd requires every MB_NAME key in by_key). When it lands the row is one line: "changer": "Evenhand".
+## S101: `stopper` (48th, Chokewell, art's tag crypt - field 5) joins crypt with MB_FIT 0.97. Content's C-176 landed, but stopper.glb is on NO branch: miniboss_model returns "" so miniboss_for holds it out, and NO MB_NAME row is written because tools/_s51_names.gd requires every MB_NAME key to have a .glb stem. When the mesh lands the row is one line: "stopper": "Chokewell".
+## S101: `roper` (49th, Drawtight, art's tag grassland - field 5) joins grassland with MB_FIT 1.0; no feed row yet, so NO MB_NAME row and the arrive-lines half of the gate holds it out.
+## S107: `almoner` (50th, Dolehand, art's tag shrine - field 5) joins shrine with MB_FIT 1.03; content's C-182 by_key.almoner landed and almoner.glb.import is committed alongside, so miniboss_for can draw it.
+## S113: `nightman` (53rd, Nightwork, art's tag prison - field 5) joins prison with MB_FIT 0.94; content's C-190 by_key.nightman landed (9/7/4/8) and nightman.glb.import is committed alongside, so miniboss_for can draw it.
+## S115: `iceman` (54th, Hoarback, art's tag mess - field 5) joins mess with MB_FIT 1.27; content's by_key.iceman has NOT landed, so miniboss_for correctly holds it out and NO MB_NAME row is written (tools/_s51_names.gd requires every MB_NAME key in by_key). When C-lines land the row is one line: "iceman": "Hoarback", and _s51_names.gd:64 / _s107_gate.gd:43 move 53 -> 54 with it.
+## S117: `straker` (55th, Everyhand, art's tag wood - field 5) joins wood with MB_FIT 0.98; content's by_key.straker has NOT landed, so miniboss_for correctly holds it out and NO MB_NAME row is written (tools/_s51_names.gd requires every MB_NAME key in by_key). When C-195 lands the row is one line: "straker": "Everyhand", and _s51_names.gd / _s107_gate.gd move 54 -> 55 with it. S118: C-195 landed; MB_NAME straker "Everyhand" written, gates at 55.
+## S120: `weigher` (56th, Trueweight, art's tag treasury - field 5) joins treasury with MB_FIT 1.04; content's by_key.weigher has NOT landed (zero hits for weigher/Trueweight in data/*.json at 19:1x CT 24 Nov), so miniboss_for correctly holds it out and NO MB_NAME row is written (tools/_s51_names.gd requires every MB_NAME key in by_key). When the C-lines land the row is one line: "weigher": "Trueweight", and _s51_names.gd / _s107_gate.gd move 55 -> 56 with it.
+## S122: `dredger` (57th, Finepass, art's tag confection - field 5) joins confection with MB_FIT 0.98; content's C-199 by_key.dredger landed and dredger.glb.import is on main, so the MB_NAME row is written in the same change and _s51_names.gd / _s107_gate.gd / _s117_straker.gd move 56 -> 57 with it.
+## S123: `harrowman` (58th, Overturn, art's tag grassland - field 5) joins grassland with MB_FIT 1.0; content's C-200 by_key.harrowman landed and harrowman.glb.import is on main, so the MB_NAME row is written in the same change and _s51_names.gd / _s107_gate.gd / _s117_straker.gd move 57 -> 58 with it.
+## S124: `pledgeman` (59th, Heldfast, art's tag treasury - field 5) joins treasury with MB_FIT 1.05; content's C-201 by_key.pledgeman landed and pledgeman.glb.import is on main, so the MB_NAME row is written in the same change and _s51_names.gd / _s107_gate.gd / _s117_straker.gd move 58 -> 59 with it.
 const THEME_MINIBOSS_MORE := {
-    "barracks": ["quartermaster"], "workshop": ["jointer", "greener", "dyer"],
-    "prison": ["pressman"], "shrine": ["leech", "beadle"], "crypt": ["ratcatcher"],
-    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler"], "mess": ["loader"],
-    "flooded": ["tanner", "rammer"], "grassland": ["hurdleman", "stackman"], "wood": ["drover"],
-    "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller"], "confection": ["comfitmaker"]}
+    "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
+    "prison": ["pressman", "tither", "nightman"], "shrine": ["leech", "beadle", "almoner"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper"],
+    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer", "weigher", "pledgeman"], "mess": ["loader", "hooper", "iceman"],
+    "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman", "roper", "harrowman"], "wood": ["drover", "winder", "straker"],
+    "firepit": ["moulder", "tapster"], "fogbound": ["fenman", "fuller", "blower", "stiltman"], "confection": ["comfitmaker", "panner", "dredger"]}
 static func miniboss_for(theme: String, n: int) -> String:
     var base := String(THEME_MINIBOSS.get(theme, ""))
     if base == "":

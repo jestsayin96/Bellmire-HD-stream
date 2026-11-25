@@ -958,3 +958,29 @@ after pass 4, so no behaviour leaves the page. The `.shop-good` CSS is NOT dead:
 CHECKS (measured): node --check app.js OK; innerHTML at app.js:255 and :301 only, both page-owned;
 zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code. No browser run: this
 run changed only NOTES.md, so the hostile-name test is not owed. Not claiming READY TO PUBLISH.
+
+## 20 Nov 2026, 18:4x CT - HUB firing: payload ask (answers the team lead's 17:58 row)
+Measured: origin/gh-pages^{tree} = origin/hub:web = origin/main:web = 9ca8051e (delta ZERO). web/ unchanged; no READY TO PUBLISH claim.
+THE ONE-LINE PAYLOAD ASK (owner: snapshot_pub.gd, currently PAYLOAD_V 5): bump to v6 and add, per hero in the heroes rows, "mana" / "mana_max" (ints, roster.gd h["mana"], h["mana_max"], 0/0 for non-casters), and per delving band in `parties` a "miniboss" key (the MB_NAME key string, "" when none) so the hub can show a boss-fight chip and a mana bar. Today the hub carries zero mana and zero miniboss fields (app.js has no reference to either). Hub will gate on v>=6 and fall back honestly on v5.
+
+V6 PAYLOAD CONSUMED (20 Nov 19:40 CT, hub). KNOWN_V now accepts "6". Per hero: manaBar() draws an MP bar only when mana_max > 0 (non-casters 0/0 and v5 rows show nothing). Per band: parties[].miniboss is accepted only if it is a snake_case token (^[a-z][a-z0-9_]{0,39}$), shown as "Boss fight - <Title Case>" in the band header via el()/textContent; anything else is dropped. ?mock=v6 exercises both with hostile strings. The game still publishes PAYLOAD_V 5 (scripts/snapshot_pub.gd:48), so live pages show neither yet - the hub falls back honestly. Mana fill is a functional blue (the one new bar colour). No CSP change, no new data source.
+
+## 20 Nov 2026, 20:4x CT - HUB firing: boss chip shows the NAME (answers the team lead's 19:58 HUB row)
+Amended v6 ask: parties[].miniboss_name = the MB_NAME display value ("Shacklemaw"); parties[].miniboss (the key) may ride alongside for matching but is never shown. Chip = "Boss fight - <miniboss_name>" via el()/textContent; name must match letters/digits/space/'-.,, <=40 chars, else dropped. A band with only a key shows NO chip. ?mock=v6 now has: named band (chip), hostile key+name (no chip, no <img>), key-only band (no chip). Snapshot_pub.gd owner: send miniboss_name; the hub ignores the key for display.
+
+## 24 Nov 2026, 12:4x CT - HUB firing: the zero-byte icon (answers the team lead's 12:37 HUB row)
+`web/icons/items/hat/turbary_hood.webp` was 0 bytes on main from 17 Nov 07:42 while `_manifest.json` still said 2718. It was the ONLY zero-byte file under web/, assets/, data/ and scripts/ (measured: `find ... -size 0`). Regenerated from `assets/icons/items/hat/turbary_hood.png` with the generator's own parameters (160 px, webp q85, method 6): it is now **2718 bytes - byte-identical to the manifest figure**, decodes as 160x160 RGBA. The other 519 were not touched; app.js is byte-identical (the ITEM_ICONS whitelist block did not change).
+GUARD: `make_item_icons.py` gained `verify_icons()` and a `--verify` mode (no writes). Every .webp under web/icons/items must be non-empty, equal the manifest's byte count, decode, and be THUMB x THUMB; manifest entries missing on disk are red too. The full generator now runs the same check before its budget check and exits non-zero. RED-PROVED: a copy with the file re-zeroed prints `ZERO BYTES: hat/turbary_hood.webp`; the real tree prints `verify: GREEN (0 problem(s))`.
+CHECKS: node --check app.js OK; innerHTML still at app.js:255 and :301 only. The browser hostile-name run was NOT repeated: no code path changed, only one binary thumbnail and the offline tool. Not claiming READY TO PUBLISH (one icon + tool change; nothing the supervisor was asked about).
+
+- 24 Nov 15:4x CT standing audit (no row owed): web/ tree c03fa129 == origin/main:web == origin/gh-pages tree (publish 7, 5ce35f33, 15:30 CT). Zero 0-byte files in web/icons/items on hub and on gh-pages. app.js: innerHTML only at :255 and :301 (page-owned); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function; node --check OK; CSP meta present. web/ unchanged this run, so the hostile-name test is not re-owed.
+
+- 24 Nov 17:4x CT hub standing audit (row HUB 17:37): web/ tree d27fe17c == origin/main:web == origin/hub:web; vs gh-pages c03fa129 delta = NOTES.md only. innerHTML only app.js:255, :301 (page-owned); CSP default-src 'none' present; node --check OK; 0 zero-byte icons. No READY TO PUBLISH claimed.
+
+- 24 Nov 18:4x CT hub standing audit (row HUB 18:37): web/ tree 5a570056 == origin/main:web == origin/hub:web; vs gh-pages c03fa129 (publish 7, 5ce35f33, 15:30 CT) delta = NOTES.md only (+4 before this line). innerHTML only app.js:255, :301 (page-owned); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP default-src/script-src/style-src 'self'/base-uri/form-action 'none' present; node --check OK; 0 zero-byte webp in web/. web/ code unchanged so hostile-name test not re-owed; no screenshot taken (no code change). PACK_CATALOGUE gate unchanged (nothing imported). No READY TO PUBLISH claimed.
+
+## Standing audit, 24 Nov 2026 20:4x CT (zero-byte guard across all of web/)
+- 539 files under web/ (excluding tools/__pycache__): 0 zero-byte, 0 unreadable, 0 under 100 bytes.
+- Every *.png has a valid PNG signature; both woff2 fonts open with the wOF2 magic; node --check app.js passes.
+- innerHTML appears only at the two page-owned sites (status line, fetch-error box); no outerHTML, insertAdjacentHTML, document.write, eval or new Function.
+- web/ tree 5c618bba matches origin/hub; against gh-pages 5ce35f33 (publish 7) the only difference is NOTES.md (documentation). Not claiming READY TO PUBLISH.

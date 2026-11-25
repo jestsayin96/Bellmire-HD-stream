@@ -1,0 +1,35 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+FEED No one speaks on the first flight. No one ever does.
+FEED They carry 9 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed skeleton warrior, 1 drowned skeleton warrior, 1 bone sentinel, 1 cave spider, 1 drowned cave spider.
+FEED A doll in a window box. Someone waved from here, once.
+FEED Nightwing rises. Too fast to see coming.
+FEED The lamps duck all together, as if something passed over.
+FEED Purse0 rolls a 20 for initiative and is moving before anything else.
+FEED The hollowed skeleton warrior's purse spills across the floor - 120 gold, for whoever goes to it.
+  ok  a PursePile is registered on the floor with its purse
+  ok  purses_dropped == 1 (1)
+  ok  no gold is paid at the kill - the purse is on the floor
+  ok  the pile sits on the floor (dy -0.001)
+SAVED s83_1_purse_on_floor state=fight
+FEED Purse2 casts Smite at bone sentinel.
+FEED Purse2 casts Bolt at drowned skeleton warrior.
+FEED Purse2 casts Bolt at cave spider.
+FEED Purse2 rolls a 20 - Nightwing reels.
+FEED Nightwing shifts, and the fight changes with it.
+FEED Bats pour out of the dark around Nightwing.
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Nightwing falls to Purse1.
+FEED Nightwing is slain on floor 5!
+FEED The hoard is split 3 ways - 68 gold each to Purse0, Purse1, Purse2.
+SAVED s83_2_walked_to_it state=search
+FEED Purse1 gathers up the purse - 120 gold, 40 a share, 3 ways.
+  ok  a delver stood within reach of the pile in the search state before it was taken
+  ok  the walked-to-it frame was rendered
+  ok  the pile is gathered up (node freed)
+  ok  every alive delver's gold rose by at least the share (40)
+S83_PURSE OK (8 checks, 0 failed)

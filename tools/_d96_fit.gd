@@ -32,6 +32,11 @@ func _initialize() -> void:
 		if not seen.has(k):
 			seen[k] = t
 			_keys.append([k, t])
+	# S103: `-- key=<k>:<theme>` shoots ONE body (e.g. a THEME_MINIBOSS_MORE key) instead of the fourteen.
+	for ua: String in OS.get_cmdline_user_args():
+		if ua.begins_with("key="):
+			var kt := ua.substr(4).split(":")
+			_keys = [[kt[0], kt[1] if kt.size() > 1 else "crypt"]]
 	_cam = Camera3D.new()
 	_cam.fov = 40.0
 	root.add_child(_cam)
@@ -64,6 +69,9 @@ func _stage(k: String, theme: String) -> bool:
 		var sps: Array = dh.info.get("set_pieces", [])
 		if not sps.is_empty() and String((sps[0] as Dictionary).get("kind", "")) == "miniboss":
 			sp = sps[0]; fn = f
+			# S124: the floor's own roll may name a sibling from the theme row (the S124 pledgeman shot
+			# came back as changer.glb), so pin the key under test - the shot is of THIS body or it proves nothing.
+			sp["mb_key"] = k
 			break
 		if tries >= 8 or not sps.is_empty():
 			var at: Vector3 = (sps[0] as Dictionary)["pos"] if not sps.is_empty() else dh.info["entry"]
@@ -157,8 +165,9 @@ func _process(_dt: float) -> bool:
 			print("D96 ROWS:")
 			for r in _rows:
 				print("  " + r)
-			if _checks < 70:  ## S11: measured 70; fewer means something stopped being checked
-				_fails.append("check floor: %d checks is under 70" % _checks)
+			var floor_n := 5 * _keys.size() if _keys.size() < 14 else 70  ## S11: measured 70 for 14 bodies (5 each); S103: a one-key run owes 5
+			if _checks < floor_n:  ## fewer means something stopped being checked
+				_fails.append("check floor: %d checks is under %d" % [_checks, floor_n])
 			if _fails.is_empty():
 				print("D96_FIT OK %d checks, 14 minibosses in their own bodies" % _checks)
 			else:

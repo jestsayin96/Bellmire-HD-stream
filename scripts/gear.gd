@@ -27,6 +27,11 @@ const WEAPONS := [
     # L3: never forged in Bellmire - only ever found below, grown in the scar's wild magic
     {"name": "scarforged", "cost": 0, "atk": 34, "scale": 1.3, "glow": 1.3, "found": true, "dice": [2, 8]},
 ]
+## S87 WRITE-DOWN (B103's ask, closed): this ARMOUR copy is NOT read by any game path. The till is
+## Roster.ARMOUR (roster.gd:183, Roster.buy_armour) and so are hp/ac (roster.gd:337/:368). Its ONLY reader is
+## chatcmd.gd's ARMOURY drift arm (:2744), which compares it to Roster.ARMOUR - so it is KEPT as that
+## arm's second authority, not deleted. Gear.WEAPONS differs: town.gd:4571 dresses the smithy stall from it.
+## Do not wire a shop or a stat to this table; change prices in roster.gd and mirror them here.
 const ARMOUR := [
     {"name": "rags", "cost": 0, "hp": 0, "ac": 0},
     {"name": "leather", "cost": 50, "hp": 10, "ac": 1},
@@ -199,6 +204,8 @@ const DUN := "res://assets/gear/dungeon/"
 ## LICENSE in the dir) for the 7 kinds it covers - sword, greatsword, dagger, axe, greataxe, mace, bow. staff,
 ## quarterstaff, wand and crossbow keep their kit[4]. Art (ARTIFACT_GOLD_VS_SCARRED.md): keep the gold, no red tint.
 const ART := "res://assets/gear/artifact/"
+## S80 (System 8 row (b)): the Quaternius Medieval Weapons shields (CC0, LICENSE in the dir), armour tiers 4-5.
+const SHD := "res://assets/gear/shields/"
 const KINDS := {
     "sword":      {"family": "blade", "noun": "sword", "kit": [DUN + "sword_common.glb", DUN + "sword_uncommon.glb", DUN + "sword_rare.glb", KIT + "sword_C.gltf", ART + "sword_golden.glb"]},
     "greatsword": {"family": "blade", "noun": "greatsword", "kit": [ADV + "sword_2handed.gltf", ADV + "sword_2handed.gltf", ADV + "sword_2handed_color.gltf", KIT + "sword_D.gltf", ART + "sword_big_golden.glb"]},
@@ -253,8 +260,14 @@ static func held_rot(path: String) -> Vector3:
     ## body (AXIS: prod +X along world -Z). The wanted map in the slot frame (+Y forward, +X down, measured S19) is
     ## mesh +Z -> slot +Y (stock forward), mesh +Y -> slot -X (up), mesh +X -> slot -Z (prod across): Godot YXZ
     ## euler (-90, 0, 90), solved off that matrix, not guessed. tools/_s20_hand.gd gates prod level + stock forward.
+    ## S95: art's 35 deg ROLL about the slot's own forward axis (slot +Y), measured on the corrected local-frame
+    ## weaponfit gate (show 0.757 vs SHOW_MIN 0.70) and on the picture: held level the prod lay in a horizontal
+    ## plane and every camera caught it edge-on as a lath. Godot's YXZ euler is Basis = Ry * Rx * Rz with Ry
+    ## OUTERMOST, i.e. applied in the PARENT (slot) frame, so a roll about slot +Y is exactly the euler's y term:
+    ## Ry(35) * [Ry(0) Rx(-90) Rz(90)] == euler (-90, 35, 90). Derived, not guessed; scale stays x1.0.
+    ## tools/_s20_hand.gd now gates "prod CANTED 25-45 deg, stock forward" instead of "prod level".
     if path.begins_with(DUN + "crossbow_"):
-        return Vector3(-90, 0, 90)
+        return Vector3(-90, 35, 90)
     return Vector3.ZERO
 
 ## S20: the off hand's scale. The pack shield is built like the Adventurers' shields it replaces (face in the mesh
@@ -263,7 +276,14 @@ static func held_rot(path: String) -> Vector3:
 static func offhand_scale(path: String) -> float:
     if path.begins_with(DUN + "shield_"):
         return 1.2
+    if path.begins_with(SHD):
+        return float(SHD_SCALE.get(path.get_file(), 1.0))
     return 1.0
+
+## S80: measured on the hand by tools/_s80_shield.gd at x1.0 (largest world dim against the pack's rare shield at its
+## x1.2: heater_2 2.34x, round_2 1.86x, celtic 3.97x), not off a file print. Heater/round brought to ~1.0x; the celtic
+## is a tall kite, so ~1.2x.
+const SHD_SCALE := {"shield_heater_2.fbx": 0.43, "shield_round_2.fbx": 0.54, "shield_celtic_golden.fbx": 0.30}
 
 ## the KayKit weapon bits are modelled ~1.6x a KayKit hand
 ## D94b: except the bow - at x0.62 the KayKit bow was a toy in the fist and a "Greatbow" read small

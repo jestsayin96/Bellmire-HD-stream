@@ -1,0 +1,37 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  quartermaster  barracks   ratio 0.96 lines true drawn 160/400
+  relief         barracks   ratio 1.03 lines true drawn 120/400
+  jointer        workshop   ratio 0.92 lines true drawn 100/400
+  greener        workshop   ratio 1.02 lines true drawn 100/400
+  dyer           workshop   ratio 1.06 lines true drawn 100/400
+  pressman       prison     ratio 1.16 lines true drawn 160/400
+  tither         prison     ratio 0.99 lines true drawn 120/400
+  leech          shrine     ratio 0.95 lines true drawn 120/400
+  beadle         shrine     ratio 1.20 lines true drawn 120/400
+  ratcatcher     crypt      ratio 1.07 lines true drawn 100/400
+  scraper        crypt      ratio 1.04 lines true drawn 100/400
+  pitman         crypt      ratio 0.94 lines true drawn 100/400
+  reeve          keep       ratio 0.80 lines true drawn 100/400
+  paviser        keep       ratio 1.09 lines true drawn 100/400
+  dauber         keep       ratio 1.05 lines true drawn 100/400
+  strickler      treasury   ratio 1.04 lines true drawn 129/400
+  sealer         treasury   ratio 0.99 lines true drawn 151/400
+  loader         mess       ratio 1.08 lines true drawn 129/400
+  hooper         mess       ratio 0.96 lines true drawn 151/400
+  tanner         flooded    ratio 1.12 lines true drawn 100/400
+  rammer         flooded    ratio 1.12 lines true drawn 100/400
+  ferryman       flooded    ratio 1.07 lines true drawn 100/400
+  hurdleman      grassland  ratio 1.04 lines true drawn 160/400
+  stackman       grassland  ratio 1.16 lines true drawn 120/400
+  drover         wood       ratio 1.00 lines true drawn 129/400
+  winder         wood       ratio 0.96 lines true drawn 151/400
+  moulder        firepit    ratio 1.18 lines true drawn 129/400
+  tapster        firepit    ratio 1.14 lines true drawn 120/400
+  fenman         fogbound   ratio 1.03 lines true drawn 120/400
+  fuller         fogbound   ratio 1.09 lines true drawn 160/400
+  comfitmaker    confection ratio 0.93 lines true drawn 200/400
+  bestiary body broodglut: placed by Bestiary, not a theme draw
+  bestiary body lastcuff: placed by Bestiary, not a theme draw
+  bodies 45, drawn-with-lines 31, held-for-lines 0
+S33_DRAW OK 186 checks

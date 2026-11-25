@@ -351,10 +351,16 @@ func _process(_dt: float) -> bool:
 
 	if _d == null:
 		return false
-	if _d.state == "home" or _f > 60 * 180:
-		var total := 0
-		for k in Delve.setpieces_fired:
-			total += int(Delve.setpieces_fired[k])
+	# S85: the cap was 60 * 180 frames (180 game-seconds). Floors grew (D91) and fights got
+	# longer, so the soak was cut off MID-FIGHT on floor 3 every run (state=fight frames=10801)
+	# before the party ever reached a set piece - a harness budget, not a set-piece fault.
+	# Measured (renders/cycles/s85/diag2.log): floor 3 fight ends at frame 11738, the first
+	# set piece (an ambush on floor 4) fires at frame 19758. Arm C only asks for >= 1, so the
+	# soak now ends the moment one fires, with a 600 game-second ceiling for a true stall.
+	var total := 0
+	for k in Delve.setpieces_fired:
+		total += int(Delve.setpieces_fired[k])
+	if _d.state == "home" or total >= 1 or _f > 60 * 600:
 		_soak_fired = total
 		print("L29c C: soak ended state=%s frames=%d fired=%s (total=%d)"
 			% [_d.state, _f, Delve.setpieces_fired, _soak_fired])

@@ -1,0 +1,76 @@
+
+=== u131 rc=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+SHOT l74_u131_100  shown=5 cap=5 pending=2
+SHOT l74_u131_125  shown=5 cap=5 pending=0
+SHOT l74_u131_150  shown=5 cap=4 pending=0
+U84 crit_kept=true cap=4 tag=u131
+  SHORT pri=1 seen=9.3s need=9.3s len=150 'Ingrid Bramble, Tove Hollow, Osric Ashwood, Aldric Ashwood, '
+STATS { "seen": 55, "admitted": 21, "merged": 34, "dropped": 0, "dropped_protected": 0, "min_gap": 0.80033333333331, "by_pri": [6, 8, 3, 4] }
+L74 measured=17 fed=48 by_pri=[4, 8, 2, 3] taken_off_unread=[0, 1, 0, 0]
+L74_TEST OK protected_unread=0 dropped_protected=0
+rs.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://assets/gear/dungeon/shield_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+
+=== res://tools/_u126_regress.gd rc=0
+ in the dark). The most meat. Swings heavy, guards nothing.
+FEED The air changes hands here - theirs for the scar's.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 cave spider, 1 bone bowman, 2 skeleton warriors, 1 hollowed bone sentinel.
+FEED The street sign names a lane that was never built above.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED A cadence of knuckles against stone, coming closer.
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW rolls a 20 for initiative and is moving before anything else.
+DIRECTOR t=0.0 CUT lord_746586143565 shot=shoulder pri=101.0 why=start held_prev=0.0 pace=1.0 | lord_746586143565/shoulder=101.0(lord), fight_746586143565/shoulder=85.0(delve start hurt 0.00), chat_2104/follow=49.8(chat 2s ago), hero_2101/follow=31.5(town life), tour_0/push=10.0(quiet baseline)
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW casts Smite at skeleton warrior.
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ casts Bolt at skeleton warrior.
+U126_LABEL s100 pane=director w=300 pane_w=960 text_w=274 trimmed=false "Now watching: Bellmire"
+U126_LABEL s100 pane=bits w=940 pane_w=960 text_w=1483 trimmed=true "Now watching: ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWW"
+U126_LABEL s100 pane=subs w=375 pane_w=960 text_w=349 trimmed=false "Now watching: a townsperson"
+U126_LABEL s100 pane=points w=375 pane_w=960 text_w=349 trimmed=false "Now watching: a townsperson"
+U126_SHOT host_s100 (window (1920, 1080))
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW's smite unravels half-said (8 vs DC 12).
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ shapes bolt. A spark, a cough, no more (1 vs DC 12).
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ casts Chain Bolt at skeleton warrior.
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW casts Bolt at skeleton warrior.
+U126_LABEL s125 pane=director w=376 pane_w=960 text_w=343 trimmed=false "Now watching: Bellmire"
+U126_LABEL s125 pane=bits w=934 pane_w=960 text_w=1854 trimmed=true "Now watching: ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWW"
+U126_LABEL s125 pane=subs w=469 pane_w=960 text_w=436 trimmed=false "Now watching: a townsperson"
+U126_LABEL s125 pane=points w=469 pane_w=960 text_w=436 trimmed=false "Now watching: a townsperson"
+U126_SHOT host_s125 (window (1920, 1080))
+U126_LABEL s150 pane=director w=451 pane_w=960 text_w=412 trimmed=false "Now watching: Bellmire"
+U126_LABEL s150 pane=bits w=930 pane_w=960 text_w=2222 trimmed=true "Now watching: ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWW"
+U126_LABEL s150 pane=subs w=546 pane_w=960 text_w=523 trimmed=true "Now watching: a townsperson"
+U126_LABEL s150 pane=points w=546 pane_w=960 text_w=523 trimmed=true "Now watching: a townsperson"
+U126_SHOT host_s150 (window (1920, 1080))
+U126_DONE checks=40 fails=0
+rs.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://assets/gear/dungeon/dagger_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)

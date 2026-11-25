@@ -1,0 +1,27 @@
+
+##### PARSE 2026-11-24T17:53:57-06:00
+
+
+##### u40 1080p 2026-11-24T17:54:22-06:00
+U40_TEST OK lines=9
+
+##### u88 1080p 2026-11-24T17:55:14-06:00
+U88_WORN OK rows=15
+
+##### u90 1080p 2026-11-24T17:55:18-06:00
+U90 labels=4172 panels=1260 fails=0 stats={ "seen": 186, "admitted": 15, "merged": 21, "dropped": 144, "dropped_protected": 0, "min_gap": 0.80185700000001, "by_pri": [0, 1, 6, 8] }
+U90 crit admitted=8
+FEED_LOAD OK
+
+##### u91 1080p 2026-11-24T17:56:18-06:00
+
+
+##### u40 RED default window 2026-11-24T17:57:28-06:00
+U40_TEST NO VERDICT - capture (1152.0, 648.0) is smaller than 1920x1080; run --windowed --resolution 1920x1080
+
+##### u88 RED default window 2026-11-24T17:57:52-06:00
+U88_WORN NO VERDICT - capture (1152.0, 648.0) is smaller than 1920x1080; run --windowed --resolution 1920x1080
+
+##### u90 RED default window 2026-11-24T17:57:54-06:00
+U90 NO VERDICT - capture (1152.0, 648.0) is smaller than 1920x1080; run --windowed --resolution 1920x1080
+DONE 2026-11-24T17:58:22-06:00

@@ -1,0 +1,1580 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+ERROR: Cannot open file 'res://.godot/imported/river_flow.ogg-94e79d5797cc50d9e2011a3046a03fd4.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3863)
+ERROR: Failed loading resource: res://.godot/imported/river_flow.ogg-94e79d5797cc50d9e2011a3046a03fd4.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3863)
+ERROR: Failed loading resource: res://assets/audio/amb/river_flow.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3863)
+ERROR: Cannot open file 'res://.godot/imported/market_murmur.ogg-15d178c679870446c12935288669cf3e.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3868)
+ERROR: Failed loading resource: res://.godot/imported/market_murmur.ogg-15d178c679870446c12935288669cf3e.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3868)
+ERROR: Failed loading resource: res://assets/audio/amb/market_murmur.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3868)
+ERROR: Cannot open file 'res://.godot/imported/forge_fire.ogg-999692f81a13165066ac82c262ef5609.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3873)
+ERROR: Failed loading resource: res://.godot/imported/forge_fire.ogg-999692f81a13165066ac82c262ef5609.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3873)
+ERROR: Failed loading resource: res://assets/audio/amb/forge_fire.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3873)
+ERROR: Cannot open file 'res://.godot/imported/bellmire_day.ogg-137ca865af59973a53f9edee69acf6c9.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://.godot/imported/bellmire_day.ogg-137ca865af59973a53f9edee69acf6c9.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://assets/audio/music/bellmire_day.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+FEED Viewer1001 takes the oath as a human knight (valley-born, like most of Bellmire). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED Viewer1002 takes the oath as a scarkin knight (born too near the scar; its light in the eyes, its dark no bother). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED Viewer1003 takes the oath as a halfling knight (from the field-farms; a natural 1 is rolled again). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED Viewer1004 takes the oath as a dwarf knight (down from the hill mines; sees in the dark). Stout, shielded. Hard to kill, slow to finish a fight.
+DIRECTOR t=0.0 CUT chat_1004 shot=follow pri=49.9 why=start held_prev=0.0 pace=1.0 | chat_1004/follow=49.9(chat 0s ago), hero_1004/follow=34.9(town life), tour_0/push=10.0(quiet baseline)
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+ERROR: Cannot open file 'res://.godot/imported/bellmire_night.ogg-12943518bf65c9362768224767f2ac2c.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://.godot/imported/bellmire_night.ogg-12943518bf65c9362768224767f2ac2c.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://assets/audio/music/bellmire_night.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+FEED Nessa of the Ford settles in Bellmire, looking for work.
+DIRECTOR t=13.2 CUT fish_558446435735 shot=follow pri=54.0 why=better_after_min held_prev=13.2 pace=1.0 | fish_558446435735/follow=54.0(catch same-shot-6), chat_1004/follow=48.4(chat 13s ago), hero_1004/follow=24.4(town life same-shot-6), tour_5/push=10.0(quiet baseline)
+FEED Wren Fenwick settles in Bellmire, looking for work.
+FEED Corvin Hollow settles in Bellmire, looking for work.
+DIRECTOR t=31.4 CUT hero_1003 shot=follow pri=28.8 why=max_hold held_prev=18.2 pace=1.0 | chat_1004/follow=46.3(chat 32s ago REPEAT-held-out), hero_1003/follow=28.8(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+DIRECTOR t=36.4 CUT fish_557104258396 shot=follow pri=54.0 why=hotter held_prev=5.0 pace=1.0 | fish_557104258396/follow=54.0(catch same-shot-6), chat_1004/follow=45.7(chat 37s ago REPEAT-held-out), hero_1004/follow=26.0(town life same-shot-6), tour_5/push=10.0(quiet baseline)
+FEED Edda the Younger settles in Bellmire, looking for work.
+MUSTER timed out: dists=[108, 85, 97, 71, 88, 112, 34, 97] vis=true stay=false route=70 inside=false
+FEED Dunn the Younger settles in Bellmire, looking for work.
+FEED Sable Stonehand settles in Bellmire, looking for work.
+DIRECTOR t=55.5 CUT hero_1004 shot=follow pri=28.7 why=max_hold held_prev=19.1 pace=1.0 | fish_558446435735/follow=60.0(catch REPEAT-held-out), chat_1004/follow=43.4(chat 56s ago REPEAT-held-out), hero_1004/follow=28.7(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Talen Fenwick settles in Bellmire, looking for work.
+FEED Down. The lamps go first because nothing else will.
+FEED They carry 23 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 slimes, 1 skeleton minion.
+FEED Grave goods, left where they lay. Nobody down here needs a comb.
+FEED Mira Quarryman rolls a 20 for initiative and is moving before anything else.
+FEED Mira Rivers casts Frost at skeleton minion.
+FEED Osric of the Ford casts Frost at skeleton minion.
+FEED Osric Coalfoot casts Frost at skeleton minion.
+FEED Mira Quarryman casts Bolt at skeleton minion.
+FEED The slime divides.
+FEED Mira Fenwick turns on the wounded slime to finish it.
+FEED Mira Rivers casts Bolt at slime.
+FEED Osric of the Ford casts Bolt at slime.
+FEED Mira Rivers searches (Investigation 18) and turns up 13 gold on floor 1.
+FEED Floor 1 quiet. Too quiet for a room this size.
+FEED Mira Rivers finds a vial of Pennymend.
+DIRECTOR t=65.6 CUT delve_2791074463330 shot=follow pri=39.0 why=better_after_min held_prev=10.1 pace=1.0 | fish_557104258396/follow=60.0(catch REPEAT-held-out), chat_1004/follow=42.0(chat 68s ago REPEAT-held-out), delve_2791074463330/follow=39.0(walking same-shot-6), hero_1004/follow=32.1(town life), tour_2/establishing=10.0(quiet baseline)
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED Mira Quarryman spots a blade trap (Perception 10 vs DC 10) and steps round it.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 slime, 1 hollowed bog frog, 1 cave spider, 1 cave bat.
+FEED Rask the Younger rolls a 20 for initiative and is moving before anything else.
+DIRECTOR t=70.6 CUT fight_2791074463330 shot=shoulder pri=75.0 why=hotter held_prev=5.0 pace=1.0 | fight_2791074463330/shoulder=75.0(hurt 0.00), chat_1004/follow=41.3(chat 74s ago REPEAT-held-out), hero_1002/follow=28.5(town life same-shot-6), tour_7/push=10.0(quiet baseline)
+FEED Osric of the Ford casts Frost at cave spider.
+FEED Mira Rivers's frost goes out like a lamp in wind - wild magic (8 vs DC 11).
+FEED Osric Coalfoot casts Frost at cave spider.
+FEED Osric of the Ford's bolt goes somewhere, and not where it was sent (1 vs DC 11).
+FEED Mira Rivers casts Bolt at cave spider.
+FEED Mira Quarryman casts Bolt at cave spider.
+FEED Osric of the Ford casts Frost at cave bat.
+FEED Osric Coalfoot casts Frost at slime.
+FEED Osric of the Ford casts Bolt at slime.
+FEED Mira Rivers casts Frost at slime.
+FEED The slime divides.
+FEED Mira Quarryman mouths bolt and the scar answers in a rival tongue (7 vs DC 11).
+FEED Mira Rivers searches (Investigation 20) and turns up 27 gold on floor 2.
+FEED What was loud is quiet. What was ours, is ours.
+FEED Sable Rivers settles in Bellmire, looking for work.
+FEED Mira Rivers searches the chest - Successfully found loot!! 36 gold (Investigation 15 vs DC 11).
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED Osric Coalfoot spots a pressure plate (Perception 15 vs DC 11) and steps round it.
+FEED Mira Rivers cracks the chain off a captive - 42 gold passes to the party, split 8 ways.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed slime, 1 drowned giant rat, 1 slime, 1 drowned slime.
+FEED Osric Coalfoot rolls a 20 for initiative and is moving before anything else.
+FEED Osric Coalfoot spends frost and the scar keeps the change (1 vs DC 11).
+FEED Osric of the Ford calls frost and the wall calls back (7 vs DC 11).
+FEED Rask the Younger rolls a 20 - and the drowned giant rat is gone.
+FEED Mira Quarryman casts Fire at hollowed slime.
+FEED Mira Rivers's bolt folds in on itself - wild magic (6 vs DC 11).
+FEED Mira Quarryman's bolt curdles on the tongue and comes out wrong (1 vs DC 11).
+FEED The hollowed slime divides.
+FEED Mira Quarryman casts Fire at slime.
+FEED Mira Quarryman casts Bolt at drowned slimeling.
+FEED Mira Fenwick rolls a 20 - and the drowned slimeling is gone.
+FEED Mira Rivers searches (Investigation 22) and turns up 43 gold on floor 3.
+FEED Floor 3 is a floor again. For now.
+FEED Ysolde Stonehand settles in Bellmire, looking for work.
+FEED Mira Rivers steps on a plate - a stone from the ceiling! DEX 12 vs DC 11, 1 damage (halved).
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED Mira Rivers spots a fire grate (Perception 15 vs DC 11) and steps round it.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 3 cave bats, 1 hollowed cave spider, 1 slime.
+FEED The oil is running low.
+FEED Osric Coalfoot calls bolt and the wall calls back (10 vs DC 12).
+FEED Mira Rivers turns on the wounded cave bat to finish it.
+FEED Osric Coalfoot turns on the wounded cave bat to finish it.
+FEED Osric of the Ford turns on the wounded cave bat to finish it.
+FEED Mira Quarryman turns on the wounded cave bat to finish it.
+FEED Hilda Hollow turns on the wounded cave bat to finish it.
+FEED Corvin Stonehand turns on the wounded cave bat to finish it.
+FEED Rask the Younger turns on the wounded cave bat to finish it.
+FEED Mira Fenwick turns on the wounded cave bat to finish it.
+FEED Mira Rivers works frost; the scar does the last line for them (8 vs DC 12).
+FEED Corvin Stonehand rolls a 20 - and the cave bat is gone.
+FEED Hilda Hollow rolls a 20 - and the hollowed cave spider is gone.
+FEED The slime divides.
+DIRECTOR t=86.6 CUT tour_0 shot=push pri=10.0 why=max_hold held_prev=16.1 pace=1.0 | fish_557104258396/follow=60.0(catch REPEAT-held-out), fish_558446435735/follow=60.0(catch REPEAT-held-out), chat_1004/follow=39.0(chat 94s ago REPEAT-held-out), hero_1004/follow=31.9(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+FEED Mira Rivers searches (Investigation 7) and turns up 35 gold on floor 4.
+FEED Floor 4 swept. The chalk goes on the wall.
+FEED Shadows peel off the walls - an ambush! 1 drowned puglin, 1 slime surges in.
+FEED Mira Rivers steps on a loose flagstone - darts! DEX 19 vs DC 12, 4 damage (halved).
+DIRECTOR t=88.7 CUT hero_1002 shot=follow pri=34.1 why=hotter held_prev=2.0 pace=1.0 | delve_2791074463330/follow=45.0(walking REPEAT-held-out), chat_1004/follow=38.7(chat 96s ago REPEAT-held-out), hero_1002/follow=34.1(town life), tour_2/establishing=10.0(quiet baseline)
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED Osric of the Ford steps on a spiked plate - spikes! DEX 6 vs DC 12, 6 damage.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 skeleton mage, 1 bone sentinel, 2 drowned skeleton warriors, 1 hollowed skeleton warrior.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The braziers in the hall burn blue, and then burn cold.
+FEED Mira Rivers's renew splits in two, and neither half works (5 vs DC 12).
+FEED Osric Coalfoot reaches for bolt; the scar reaches back (1 vs DC 12).
+FEED Osric of the Ford's frost splits in two, and neither half works (1 vs DC 12).
+FEED Osric of the Ford settles in Bellmire, looking for work.
+DIRECTOR t=92.7 CUT lord_2791074463330 shot=shoulder pri=100.0 why=lord_rises held_prev=4.1 pace=1.0 | lord_2791074463330/shoulder=100.0(lord), fight_2791074463330/shoulder=80.8(hurt 0.58 REPEAT-held-out), chat_1004/follow=32.1(chat 101s ago same-shot-6), hero_1001/follow=25.6(town life same-shot-6), tour_6/push=10.0(quiet baseline)
+FEED Rask the Younger has the wind back and turns to fight.
+FEED Cold fire rolls off the Hollow King.
+FEED The Hollow King shifts, and the fight changes with it.
+FEED The Hollow King is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Hollow King falls to Rask the Younger.
+FEED Osric of the Ford casts Frost at bone sentinel.
+FEED Mira Quarryman's bolt sparks, stutters, and sulks (10 vs DC 12).
+FEED Mira Rivers casts Bolt at bone sentinel.
+DIRECTOR t=94.7 CUT chat_1004 shot=follow pri=37.9 why=shot_gone held_prev=2.0 pace=1.0 | fight_2791074463330/shoulder=78.8(hurt 0.38 REPEAT-held-out), chat_1004/follow=37.9(chat 103s ago), hero_1002/follow=34.5(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+FEED Mira Rivers searches (Investigation 6) and turns up 44 gold on floor 5.
+FEED The dust settles on a quiet room and a tired party.
+FEED Mira Rivers searches the chest - Successfully found loot!! 51 gold (Investigation 22 vs DC 12).
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Mira Rivers and 7 others come home to Bellmire with 249 gold, 9 ore, 6 stone, 3 pieces of salvaged gear and 3 potions. 36 kills between them.
+FEED Mira Rivers is fitted with leather. (+10 hp) Haggled 11% off (13).
+FEED The chalk starts again below, in a hand nobody knows.
+FEED They carry 27 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 1 slime, 1 bog frog.
+FEED A mourner's bench, worn shiny, facing the wrong wall.
+FEED Mira Rivers's frost flares, sputters, and lands on the chalk (6 vs DC 10).
+FEED Osric Coalfoot casts Frost at bog frog.
+FEED Osric of the Ford casts Frost at bog frog.
+FEED Mira Quarryman casts Bolt at bog frog.
+FEED Mira Rivers casts Bolt at cave bat.
+FEED Osric of the Ford casts Frost at slime.
+FEED Mira Rivers casts Bolt at slime.
+FEED Osric Coalfoot casts Bolt at slime.
+FEED Mira Quarryman casts Fire at slime.
+FEED The slime divides.
+DIRECTOR t=101.8 CUT fight_6255452128625 shot=shoulder pri=75.0 why=hotter held_prev=7.1 pace=1.0 | fight_6255452128625/shoulder=75.0(hurt 0.00), fish_558446435735/follow=60.0(catch REPEAT-held-out), chat_1004/follow=36.8(chat 113s ago), hero_1003/follow=30.9(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED Mira Rivers searches (Investigation 19) and turns up 13 gold on floor 1.
+FEED Loot, then rest, then onward.
+FEED Ysolde Bramble settles in Bellmire, looking for work.
+FEED 6 bandits are riding on the west road!
+FEED Initiative: the raiders 9, the watch 17 - the watch is ready for them.
+FEED Mira Rivers searches the chest - Successfully found loot!! 19 gold (Investigation 14 vs DC 10).
+FEED Mira Rivers cannot get to the chest and leaves it.
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+ERROR: Cannot open file 'res://.godot/imported/bellmire_raid.ogg-c58e19d5633860119a259de4fae52b48.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://.godot/imported/bellmire_raid.ogg-c58e19d5633860119a259de4fae52b48.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://assets/audio/music/bellmire_raid.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+FEED Mira Fenwick steps on a slot in the floor - a blade! DEX 20 vs DC 10, 2 damage (halved).
+FEED Ysolde Coalfoot goes down and claws back up. (CON save 12)
+FEED Ysolde Coalfoot is killed by a bandit.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 3 bog frogs, 1 cave spider.
+FEED Mira Quarryman rolls a 20 for initiative and is moving before anything else.
+FEED Cort Ashwood goes down and claws back up. (CON save 10)
+FEED Cort Ashwood is killed by a bandit.
+FEED Osric of the Ford casts Frost at bog frog.
+FEED Osric Coalfoot casts Frost at bog frog.
+FEED Mira Rivers sets frost loose and it forgets who sent it (7 vs DC 11).
+FEED Mira Quarryman's bolt spends itself on the stone instead (1 vs DC 11).
+FEED Mira Rivers casts Bolt at bog frog.
+FEED Mira Quarryman casts Fire at cave spider.
+FEED Osric of the Ford casts Frost at bog frog.
+FEED Mira Rivers rolls a 20 searching the floor!
+FEED Mira Rivers searches (Investigation 23) and turns up 35 gold on floor 2.
+FEED The way back is chalked and clear.
+FEED The attack is driven off. The gates hold.
+FEED Mira Rivers searches the chest - ...no loot... (Investigation 5 vs DC 11).
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED Mira Rivers finds a man in a cage still alive. He slips 42 gold to them on the way out, 8 ways to split it.
+FEED Mira Rivers steps on a plate - darts! DEX 7 vs DC 11, 13 damage.
+ERROR: Cannot open file 'res://.godot/imported/sting_victory.ogg-7fea0e83d96977619e1effef39ad5139.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] play_sting (res://scripts/sfx.gd:629)
+       [2] _switch (res://scripts/sfx.gd:593)
+       [3] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://.godot/imported/sting_victory.ogg-7fea0e83d96977619e1effef39ad5139.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] play_sting (res://scripts/sfx.gd:629)
+       [2] _switch (res://scripts/sfx.gd:593)
+       [3] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://assets/audio/music/sting_victory.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] play_sting (res://scripts/sfx.gd:629)
+       [2] _switch (res://scripts/sfx.gd:593)
+       [3] _process (res://scripts/sfx.gd:546)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 3; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned giant rat, 1 drowned puglin, 1 giant rat, 1 drowned skeleton minion.
+FEED Osric of the Ford's frost arrives late, and small (10 vs DC 11).
+FEED Mira Rivers casts bolt. The scar adds a verse of its own (7 vs DC 11).
+FEED Mira Rivers searches (Investigation 5) and turns up 26 gold on floor 3.
+FEED Swept once, which down here is enough.
+FEED Mira Rivers spots a pressure plate (Perception 19 vs DC 11) and steps round it.
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+DIRECTOR t=117.9 CUT fish_558446435735 shot=follow pri=60.0 why=max_hold held_prev=16.1 pace=1.0 | fish_558446435735/follow=60.0(catch), delve_6255452128625/follow=45.0(walking), hero_1004/follow=33.4(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED Mira Rivers steps on a grate - fire! DEX 4 vs DC 11, 10 damage.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 slimes, 1 drowned cave spider, 1 hollowed skeleton minion, 1 hollowed cave spider.
+FEED Mira Rivers steps on a loose flagstone - darts! DEX 7 vs DC 12, 9 damage.
+FEED Osric Coalfoot's frost goes out sideways into the stone (8 vs DC 12).
+FEED Mira Rivers sets bolt loose and it forgets who sent it (5 vs DC 12).
+FEED Osric of the Ford's frost goes somewhere, and not where it was sent (7 vs DC 12).
+FEED The slime divides.
+FEED Rask the Younger is badly hurt and breaks off, making for the way up.
+FEED Osric of the Ford breaks off to mend Rask the Younger, who is nearly down.
+FEED Mira Rivers breaks off to mend Rask the Younger, who is nearly down.
+FEED Osric Coalfoot turns on the wounded slimeling to finish it.
+FEED Mira Quarryman turns on the wounded slimeling to finish it.
+FEED Hilda Hollow turns on the wounded slimeling to finish it.
+FEED Corvin Stonehand turns on the wounded slimeling to finish it.
+FEED Mira Fenwick turns on the wounded slimeling to finish it.
+FEED Hilda Hollow rolls a 20 - and the slimeling is gone.
+FEED Mira Rivers searches (Investigation 5) and turns up 35 gold on floor 4.
+FEED Floor 4 holds for the guild, and the guild holds for the town.
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED Mira Rivers spots a spike trap (Perception 14 vs DC 12) and steps round it.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 skeleton mage, 1 hollowed bone sentinel, 1 drowned cave spider, 1 risen bones, 1 drowned skeleton warrior.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED The oil is running low.
+FEED Mira Rivers reaches for bolt; the scar reaches back (8 vs DC 12).
+DIRECTOR t=128.0 CUT lord_6255452128625 shot=shoulder pri=100.0 why=lord_rises held_prev=10.1 pace=1.0 | lord_6255452128625/shoulder=100.0(lord), fight_6255452128625/shoulder=78.2(hurt 0.32 REPEAT-held-out), fish_557104258396/follow=54.0(catch same-shot-6), hero_1003/follow=27.6(town life same-shot-6), tour_1/push=10.0(quiet baseline)
+FEED Osric of the Ford's bolt breaks apart over the stone (7 vs DC 12).
+FEED Mira Fenwick spots a poison-dart trap (Perception 19 vs DC 12) and steps round it.
+FEED 7 creatures boil out of the dungeon!
+FEED Initiative: the raiders 17, the watch 21 - the watch is ready for them.
+FEED Osric Coalfoot casts Frost at drowned skeleton warrior.
+FEED Mira Rivers casts Frost at drowned skeleton warrior.
+FEED Osric Coalfoot works bolt and the room takes the benefit (1 vs DC 12).
+FEED Mira Quarryman's bolt fires off behind them (9 vs DC 12).
+FEED Mira Rivers casts Frost at hollowed bone sentinel.
+FEED Mira Rivers breaks off to mend Rask the Younger, who is nearly down.
+FEED Rask the Younger is badly hurt and breaks off, making for the way up.
+FEED Mira Quarryman casts Fire at hollowed bone sentinel.
+FEED Osric Coalfoot casts Frost at The Rattling Host.
+FEED Osric of the Ford breaks off to mend Rask the Younger, who is nearly down.
+FEED Mira Rivers casts Renew at Rask the Younger.
+FEED Mira Quarryman casts Fire at The Rattling Host.
+FEED Osric of the Ford casts Bolt at The Rattling Host.
+FEED The Rattling Host shifts, and the fight changes with it.
+FEED Dead men drop out of the harness.
+FEED The Rattling Host is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dead men drop out of the harness.
+FEED Osric Coalfoot casts Frost at The Rattling Host.
+FEED The Rattling Host falls to Mira Fenwick.
+FEED Mira Rivers casts Renew at Rask the Younger.
+FEED Mira Quarryman casts Fire at risen bones.
+FEED Osric of the Ford turns on the wounded risen bones to finish it.
+FEED Mira Quarryman turns on the wounded risen bones to finish it.
+FEED Mira Rivers turns on the wounded risen bones to finish it.
+FEED Osric Coalfoot turns on the wounded risen bones to finish it.
+FEED Hilda Hollow turns on the wounded risen bones to finish it.
+FEED Corvin Stonehand turns on the wounded risen bones to finish it.
+FEED Mira Fenwick turns on the wounded risen bones to finish it.
+FEED Osric of the Ford casts Renew at Rask the Younger.
+FEED Osric Coalfoot casts Frost at risen bones.
+DIRECTOR t=132.1 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=4.0 pace=0.6 | raid/shoulder=95.0(raid live), fight_6255452128625/shoulder=80.7(hurt 0.57 REPEAT-held-out), fish_557104258396/follow=60.0(catch), hero_1002/follow=33.2(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED Mira Rivers casts Bolt at risen bones.
+FEED Mira Quarryman casts Fire at risen bones.
+FEED Mira Rivers searches (Investigation 9) and turns up 44 gold on floor 5.
+FEED Held. Somebody sit down before they fall down.
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED Corvin Stonehand spots a spike trap (Perception 19 vs DC 12) and steps round it.
+FEED Aldric Ashwood goes down and claws back up. (CON save 13)
+FEED Aldric Ashwood, the chief of Bellmire, is killed by skeleton minion.
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 2; lights 60 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 2 wraithtouched scar rats, 2 risen bones, 2 marrow hewers.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Mira Rivers spots a poison-dart trap (Perception 16 vs DC 13) and steps round it.
+FEED Osric Coalfoot's frost answers to the ground instead (7 vs DC 13).
+FEED Osric of the Ford's frost fires off behind them (10 vs DC 13).
+FEED A building is burning!
+FEED Tove Quarryman goes down and claws back up. (CON save 15)
+FEED Tove Quarryman is killed by skeleton minion.
+FEED Mira Rivers spends frost and the scar keeps the change (5 vs DC 13).
+FEED The attack is driven off. The gates hold.
+FEED Mira Rivers searches (Investigation 15) and turns up 69 gold on floor 6.
+FEED Floor 6: the last echo dies.
+DIRECTOR t=140.2 CUT fish_557104258396 shot=follow pri=60.0 why=shot_gone held_prev=8.1 pace=1.0 | fish_557104258396/follow=60.0(catch), fish_558446435735/follow=60.0(catch REPEAT-held-out), delve_6255452128625/follow=45.0(walking), hero_1003/follow=32.9(town life), tour_5/push=10.0(quiet baseline)
+FEED Out of oil, the party feels its way back up from floor 6.
+FEED Mira Rivers and 7 others come home to Bellmire with 241 gold, 12 ore, 9 stone, 3 pieces of salvaged gear and 3 potions. 38 kills between them.
+FEED Mira Rivers takes up a fine steel focus. (+9 atk, 1d8) Folded twice; the smith signs it.
+FEED Corvin Hollow has starved.
+FEED Down past the last mark anybody left.
+FEED They carry 28 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 puglin, 1 skeleton minion, 1 giant rat.
+FEED Footprints cross the dust, and every pair is bare.
+FEED Mira Rivers pays for frost in the wrong coin (5 vs DC 10).
+FEED Osric of the Ford casts Frost at giant rat.
+FEED Osric Coalfoot casts Frost at giant rat.
+FEED Mira Quarryman casts Bolt at giant rat.
+FEED Mira Rivers casts Bolt at puglin.
+FEED Osric of the Ford casts Frost at puglin.
+FEED Mira Quarryman casts Fire at skeleton minion.
+FEED Mira Rivers searches (Investigation 17) and turns up 13 gold on floor 1.
+FEED Floor 1 holds. The scar keeps count too.
+FEED Mira Rivers finds a vial of Mirewine.
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED Hilda Hollow steps on a slot in the floor - a blade! DEX 15 vs DC 10, 4 damage (halved).
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 puglin, 1 bog frog, 1 cave bat, 1 giant rat.
+FEED Mira Fenwick rolls a 20 for initiative and is moving before anything else.
+DIRECTOR t=151.3 CUT fight_9855406477434 shot=shoulder pri=75.6 why=better_after_min held_prev=11.1 pace=1.0 | fight_9855406477434/shoulder=75.6(hurt 0.06), hero_1001/follow=25.0(town life same-shot-6), tour_1/push=10.0(quiet baseline)
+FEED Osric of the Ford's frost flares, sputters, and lands on the chalk (1 vs DC 11).
+FEED Mira Rivers casts Frost at cave bat.
+FEED Osric of the Ford casts Bolt at bog frog.
+FEED Mira Rivers casts Frost at puglin.
+FEED Osric Coalfoot casts Frost at puglin.
+FEED Mira Quarryman casts Bolt at puglin.
+FEED Mira Rivers searches (Investigation 4) and turns up 13 gold on floor 2.
+FEED Floor 2 holds, and the roll gets a tick, not a dagger.
+FEED 7 creatures boil out of the dungeon!
+FEED Initiative: the raiders 7, the watch 12 - the watch is ready for them.
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED Mira Rivers gets a captive free. 42 gold, 8 ways - small thanks for a poor life.
+FEED Hilda Hollow spots a pressure plate (Perception 17 vs DC 11) and steps round it.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 44 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed slime, 2 bone bowmans, 1 risen bones.
+FEED Mira Rivers starts bolt, loses the thread, and finishes it badly (6 vs DC 11).
+FEED Osric of the Ford calls bolt and the scar calls louder (10 vs DC 11).
+FEED Mira Quarryman's fire turns in their hand - the scar answers (8 vs DC 11).
+FEED The hollowed slime divides.
+FEED Mira Rivers turns on the wounded hollowed slimeling to finish it.
+FEED Osric Coalfoot turns on the wounded hollowed slimeling to finish it.
+FEED Osric of the Ford turns on the wounded hollowed slimeling to finish it.
+FEED Mira Quarryman turns on the wounded hollowed slimeling to finish it.
+FEED Hilda Hollow turns on the wounded hollowed slimeling to finish it.
+FEED Corvin Stonehand turns on the wounded hollowed slimeling to finish it.
+FEED Rask the Younger turns on the wounded hollowed slimeling to finish it.
+FEED Mira Fenwick turns on the wounded hollowed slimeling to finish it.
+FEED Mira Rivers searches (Investigation 21) and turns up 42 gold on floor 3.
+FEED Floor 3 cleared; the Chronicle writes it in ink.
+FEED A building is burning!
+FEED Mira Rivers spots a fire grate (Perception 21 vs DC 11) and steps round it.
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED A building is burning!
+FEED Tove Ashwood goes down and claws back up. (CON save 11)
+FEED Tove Ashwood is killed by skeleton warrior.
+DIRECTOR t=161.4 CUT raid shot=shoulder pri=95.0 why=better_after_min held_prev=10.1 pace=0.6 | raid/shoulder=95.0(raid live), delve_9855406477434/follow=45.0(walking), hero_1004/follow=34.0(town life), tour_2/establishing=10.0(quiet baseline)
+FEED Mira Rivers spots a pressure plate (Perception 16 vs DC 11) and steps round it.
+FEED The attack is driven off. The gates hold.
+FEED Mira Rivers touches the altar - a curse. Something older than the floor takes a bite.
+DIRECTOR t=162.4 CUT delve_9855406477434 shot=follow pri=45.0 why=shot_gone held_prev=1.0 pace=1.0 | delve_9855406477434/follow=45.0(walking), hero_1003/follow=32.9(town life), tour_3/push=10.0(quiet baseline)
+FEED Hilda Bramble settles in Bellmire, looking for work.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 hollowed slimes, 2 drowned cave bats, 1 drowned slime.
+FEED Rask the Younger steps on a spiked plate - spikes! DEX 16 vs DC 12, 4 damage (halved).
+FEED Mira Rivers casts Bolt at drowned cave bat.
+FEED Osric of the Ford casts Frost at drowned cave bat.
+FEED Mira Quarryman casts Fire at drowned cave bat.
+FEED Mira Rivers's frost unspools in their hands (6 vs DC 12).
+FEED Osric of the Ford shapes bolt and the floor finishes the shape (8 vs DC 12).
+FEED Osric Coalfoot casts Bolt at drowned cave bat.
+FEED Rask the Younger rolls a 20 - and the drowned cave bat is gone.
+FEED Mira Quarryman starts bolt, loses the thread, and finishes it badly (11 vs DC 12).
+FEED Mira Rivers casts Frost at hollowed slime.
+FEED Osric of the Ford casts Frost at hollowed slime.
+FEED The hollowed slime divides.
+FEED Mira Quarryman casts Fire at hollowed slime.
+FEED Osric Coalfoot casts Bolt at hollowed slime.
+FEED Corvin Stonehand turns on the wounded hollowed slimeling to finish it.
+FEED Rask the Younger turns on the wounded hollowed slimeling to finish it.
+FEED Mira Fenwick turns on the wounded hollowed slimeling to finish it.
+FEED Osric Coalfoot works frost and the room takes the benefit (6 vs DC 12).
+FEED Mira Rivers casts Frost at drowned slime.
+FEED Osric of the Ford casts Frost at drowned slimeling.
+FEED Mira Quarryman casts Fire at drowned slimeling.
+FEED Osric Coalfoot casts Bolt at drowned slimeling.
+FEED Mira Rivers searches (Investigation 8) and turns up 35 gold on floor 4.
+FEED Floor 4 holds; the band counts fingers, then flasks.
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED Mira Rivers steps on a loose flagstone - darts! DEX 4 vs DC 12, 8 damage.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 46 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed skeleton mage, 1 drowned bone sentinel, 1 bone sentinel, 1 drowned bone bowman, 1 skeleton mage.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+FEED The oil is running low.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+DIRECTOR t=171.6 CUT lord_9855406477434 shot=shoulder pri=100.0 why=lord_rises held_prev=9.2 pace=1.0 | lord_9855406477434/shoulder=100.0(lord), fight_9855406477434/shoulder=76.0(hurt 0.10 REPEAT-held-out), fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1002/follow=32.0(town life REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+FEED Mira Rivers's frost fizzles into a belch of ash (6 vs DC 12).
+FEED Osric Coalfoot steps on a spiked plate - spikes! DEX 3 vs DC 12, 9 damage.
+FEED Osric of the Ford casts frost and the floor answers instead (9 vs DC 12).
+FEED Nessa Stonehand settles in Bellmire, looking for work.
+FEED Nightwing shifts, and the fight changes with it.
+FEED Bats pour out of the dark around Nightwing.
+FEED Osric Coalfoot's frost fizzles into a damp little hiss (8 vs DC 12).
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Nightwing falls to Mira Fenwick.
+FEED Mira Quarryman's bolt takes a step and sits down (10 vs DC 12).
+FEED Mira Rivers casts Bolt at drowned bone bowman.
+DIRECTOR t=174.6 CUT hero_1004 shot=follow pri=30.1 why=shot_gone held_prev=3.0 pace=1.0 | fight_9855406477434/shoulder=80.7(hurt 0.57 REPEAT-held-out), hero_1004/follow=30.1(town life), tour_7/push=10.0(quiet baseline)
+FEED Osric of the Ford casts Renew at Rask the Younger.
+FEED Osric Coalfoot casts Bolt at drowned bone sentinel.
+FEED Mira Rivers casts Frost at drowned bone sentinel.
+FEED Mira Quarryman casts Bolt at drowned bone sentinel.
+FEED Mira Rivers searches (Investigation 14) and turns up 58 gold on floor 5.
+FEED Floor 5 gives up its gold and keeps its grudge.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 8, the watch 10 - the watch is ready for them.
+DIRECTOR t=176.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), delve_9855406477434/follow=45.0(walking REPEAT-held-out), hero_1004/follow=33.7(town life), tour_1/push=10.0(quiet baseline)
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED A building is burning!
+FEED Hilda Hollow steps on a loose flagstone - green darts! DEX 5 vs DC 12, 4 damage.
+FEED Hilda Hollow is venomed - the poison works over the next few seconds.
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 4; lights 60 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 2 blood wasps, 1 drowned gravecaller, 2 drowned marrow hewers, 1 drowned risen bones.
+FEED Mira Rivers rolls a 20 for initiative and is moving before anything else.
+FEED Mira Rivers spots a spike trap (Perception 18 vs DC 13) and steps round it.
+FEED Osric Coalfoot casts frost; the scar casts something else (7 vs DC 13).
+FEED Mira Rivers's frost turns in their hand - the scar answers (12 vs DC 13).
+FEED A building is burning!
+FEED Osric of the Ford casts bolt. The scar adds a verse of its own (9 vs DC 13).
+FEED Mira Quarryman's bolt goes wrong - the scar answers (10 vs DC 13).
+FEED Mira Rivers searches (Investigation 7) and turns up 52 gold on floor 6.
+FEED Held. Somebody sit down before they fall down.
+FEED Viewer1001 fails the save. (CON 9)
+FEED Viewer1001 is knocked senseless, but lives. The guild's grace - once.
+FEED Viewer1003 fails the save. (CON 8)
+FEED Viewer1003 is knocked senseless, but lives. The guild's grace - once.
+FEED Viewer1002 rolls a 20 on a bandit!
+FEED Corvin the Younger settles in Bellmire, looking for work.
+FEED Mira Rivers steps on a loose flagstone - green darts! DEX 16 vs DC 13, 2 damage (halved).
+FEED Viewer1002 goes down and claws back up. (CON save 11)
+FEED Viewer1002 is knocked senseless, but lives. The guild's grace - once.
+FEED Mira Rivers and 7 others take a breather, and press on deeper.
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED Viewer1004 rolls a 20 - and a bandit falls.
+FEED The attack is driven off. The gates hold.
+FEED Viewer1001 comes round.
+FEED Viewer1002 comes round.
+FEED Viewer1003 comes round.
+L28C_EMITTERS floor 7 workshop: 3 (cap 12), creatures 6; lights 49 (shadowed 1)
+L28D_DECALS floor 7 workshop: 18 (cap 24)
+FEED Floor 7 - a workshop, remade as a workshop: 2 drowned scar rats, 2 wraithtouched puglins, 1 fen lurker, 1 wraithtouched scar rat.
+FEED Cinderjack is down here. The firepits let him out.
+FEED Someone has been playing with the firepits.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Osric Coalfoot speaks bolt too quickly and the magic falls behind (10 vs DC 13).
+FEED Mira Rivers reaches for bolt and the scar hands back something else (9 vs DC 13).
+FEED Osric of the Ford loses the shape of bolt halfway (11 vs DC 13).
+FEED Rask the Younger should be dead - and stands back up (16).
+FEED Cinderjack goes up like a struck match.
+FEED Mira Quarryman's bolt arrives late, and small (11 vs DC 13).
+DIRECTOR t=188.8 CUT lord_9855406477434 shot=shoulder pri=100.0 why=shot_gone held_prev=12.1 pace=1.0 | lord_9855406477434/shoulder=100.0(lord), fight_9855406477434/shoulder=84.4(hurt 0.94 REPEAT-held-out), hero_1004/follow=33.1(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED Mira Rivers breaks off to mend Hilda Hollow, who is nearly down.
+FEED Osric of the Ford breaks off to mend Hilda Hollow, who is nearly down.
+FEED Corvin Stonehand should be dead - and stands back up (13).
+FEED Mira Rivers breaks off to mend Corvin Stonehand, who is nearly down.
+FEED Corvin Stonehand the warden falls on floor 7 to the dark below. Level 4, 13 kills. !reroll to rise again.
+FEED Osric of the Ford breaks off to mend Hilda Hollow, who is nearly down.
+FEED Rask the Younger the duelist falls on floor 7 to the dark below. Level 5, 14 kills. !reroll to rise again.
+FEED Cinderjack shifts, and the fight changes with it.
+FEED Osric of the Ford breaks off to mend Mira Fenwick, who is nearly down.
+FEED Mira Rivers breaks off to mend Hilda Hollow, who is nearly down.
+FEED Hilda Hollow should be dead - and stands back up (10).
+FEED Mira Rivers breaks off to mend Hilda Hollow, who is nearly down.
+FEED Hilda Hollow the knight falls on floor 7 to the dark below. Level 4, 10 kills. !reroll to rise again.
+FEED Mira Rivers casts Renew at Osric Coalfoot.
+FEED Osric Coalfoot casts Bolt at Cinderjack.
+FEED Mira Quarryman casts Bolt at Cinderjack.
+FEED Osric of the Ford casts Renew at Osric Coalfoot.
+FEED Cinderjack is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Mira Fenwick has the wind back and turns to fight.
+FEED Mira Rivers casts Bolt at Cinderjack.
+FEED Mira Quarryman casts Bolt at Cinderjack.
+FEED Cinderjack falls to Osric of the Ford.
+FEED Cinderjack is slain on floor 7!
+FEED The hoard is split 5 ways - 39 gold each to Mira Rivers, Osric Coalfoot, Osric of the Ford, Mira Quarryman, Mira Fenwick.
+FEED Mira Rivers prises a runed wand from the dead on floor 7.
+DIRECTOR t=192.8 CUT death_9855406477434_190 shot=hard_cut pri=90.0 why=death held_prev=4.0 pace=1.0 | death_9855406477434_190/hard_cut=90.0(death), death_9855406477434_191/hard_cut=90.0(death), delve_9855406477434/follow=45.0(walking REPEAT-held-out), hero_1004/follow=31.0(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+FEED Mira Rivers searches the chest - Successfully found loot!! 67 gold (Investigation 13 vs DC 13).
+FEED Out of oil, the party feels its way back up from floor 7.
+FEED Mira Rivers and 4 others come home to Bellmire with 475 gold, 16 ore, 12 stone, 4 pieces of salvaged gear and 4 potions. 44 kills between them.
+FEED Mira Rivers is fitted with plate. (+48 hp)
+FEED The townsfolk raise the ruin again.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 18, the watch 7 - the raiders strike first.
+DIRECTOR t=195.8 CUT raid shot=shoulder pri=95.0 why=better_after_min held_prev=3.0 pace=0.6 | raid/shoulder=95.0(raid live), death_9855406477434_190/hard_cut=90.0(death), death_9855406477434_191/hard_cut=90.0(death), hero_1001/follow=33.8(town life), tour_4/push=10.0(quiet baseline)
+FEED The rail is cold, and then it is not.
+FEED They carry 22 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 bog frogs, 1 hollowed slime.
+FEED Grave goods laid out for the living: boots, bread, a lamp.
+FEED Osric of the Ford casts Frost at bog frog.
+FEED Mira Rivers casts Frost at bog frog.
+FEED Osric Coalfoot casts Frost at bog frog.
+FEED Osric of the Ford's bolt arrives, but something else wore it in (8 vs DC 10).
+FEED Mira Quarryman's bolt goes out like a lamp in wind - wild magic (9 vs DC 10).
+FEED Mira Rivers's bolt fires off behind them (8 vs DC 10).
+FEED Mira Quarryman casts Fire at hollowed slime.
+FEED The hollowed slime divides.
+FEED Mira Rivers goes down and claws back up. (CON save 16)
+FEED Mira Rivers casts Frost at hollowed slimeling.
+FEED Osric of the Ford casts Frost at hollowed slimeling.
+FEED Osric Coalfoot casts Frost at hollowed slimeling.
+FEED Mira Rivers searches (Investigation 22) and turns up 14 gold on floor 1.
+FEED Floor 1 held, flasks counted, nobody owed.
+FEED Mira Rivers the sage is cut down defending Bellmire by skeleton minion. Level 5, 20 kills. !reroll to rise again.
+FEED Mira Rivers steps on a slot in the floor - a blade! DEX 12 vs DC 10, 3 damage (halved).
+FEED Mira Rivers searches the chest - Successfully found loot!! 20 gold (Investigation 11 vs DC 10).
+FEED Mira Rivers and 4 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 skeleton minion, 1 hollowed skeleton minion, 1 cave bat, 1 bog frog.
+FEED Osric of the Ford casts Bolt at cave bat.
+FEED Mira Rivers casts Bolt at cave bat.
+FEED Osric Coalfoot's bolt folds in on itself - wild magic (10 vs DC 11).
+FEED Mira Rivers pays for frost and the scar keeps the receipt (1 vs DC 11).
+FEED Mira Quarryman casts Bolt at bog frog.
+FEED Osric of the Ford's frost folds in on itself - wild magic (8 vs DC 11).
+FEED Osric Coalfoot casts Frost at bog frog.
+FEED A building is burning!
+FEED Osric of the Ford casts Bolt at skeleton minion.
+FEED Mira Rivers casts Frost at skeleton minion.
+FEED Mira Rivers searches (Investigation 8) and turns up 17 gold on floor 2.
+FEED Floor 2 empties, and the scar notes the loss.
+FEED Mira Rivers cracks the chain off a captive - 42 gold passes to the party, split 5 ways.
+FEED Hilda Fenwick goes down and claws back up. (CON save 13)
+FEED Hilda Fenwick is killed by skeleton minion.
+FEED Viewer1004 rolls a 20 - and skeleton rogue falls.
+FEED The attack is driven off. The gates hold.
+FEED Mira Rivers and 4 others take a breather, and press on deeper.
+DIRECTOR t=205.9 CUT delve_14281085057324 shot=follow pri=45.0 why=shot_gone held_prev=10.1 pace=1.0 | fish_558446435735/follow=60.0(catch REPEAT-held-out), delve_14281085057324/follow=45.0(walking), hero_1001/follow=32.7(town life), tour_6/push=10.0(quiet baseline)
+FEED Rask Quarryman settles in Bellmire, looking for work.
+FEED Mira Fenwick spots a pressure plate (Perception 14 vs DC 11) and steps round it.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 risen bones, 1 cave bat, 1 drowned slime, 1 hollowed slime.
+FEED Mira Quarryman's bolt breaks apart over the stone (1 vs DC 11).
+FEED The hollowed slime divides.
+FEED Mira Rivers turns on the wounded hollowed slimeling to finish it.
+FEED Osric Coalfoot turns on the wounded hollowed slimeling to finish it.
+FEED Osric of the Ford turns on the wounded hollowed slimeling to finish it.
+FEED Mira Quarryman turns on the wounded hollowed slimeling to finish it.
+FEED Mira Fenwick turns on the wounded hollowed slimeling to finish it.
+FEED Mira Rivers sets frost loose and it forgets who sent it (9 vs DC 11).
+FEED Osric of the Ford's bolt flares, sputters, and lands on the chalk (10 vs DC 11).
+FEED Mira Quarryman casts Fire at hollowed slimeling.
+DIRECTOR t=208.9 CUT fight_14281085057324 shot=shoulder pri=75.0 why=hotter held_prev=3.0 pace=1.0 | fight_14281085057324/shoulder=75.0(hurt 0.00), hero_1002/follow=26.3(town life same-shot-6), tour_1/push=10.0(quiet baseline)
+FEED Osric of the Ford casts Frost at risen bones.
+FEED Mira Fenwick spots a pressure plate (Perception 16 vs DC 11) and steps round it.
+FEED Osric of the Ford casts Bolt at drowned slime.
+FEED Mira Rivers casts Bolt at drowned slime.
+FEED Osric Coalfoot casts Bolt at drowned slime.
+FEED Mira Quarryman casts Bolt at drowned slime.
+FEED Mira Rivers searches (Investigation 13) and turns up 34 gold on floor 3.
+FEED Blades wiped, breaths caught. The door stands open.
+FEED Mira Rivers and 4 others take a breather, and press on deeper.
+FEED Mira Fenwick spots a fire grate (Perception 18 vs DC 11) and steps round it.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 slime, 3 hollowed slimes, 1 risen bones.
+FEED Osric Coalfoot's bolt curves like a drunk arrow (11 vs DC 12).
+FEED Mira Rivers's bolt comes apart like wet rope (1 vs DC 12).
+FEED Ysolde Quarryman settles in Bellmire, looking for work.
+FEED The slime divides.
+FEED Mira Quarryman's bolt comes out sideways - wild magic (8 vs DC 12).
+FEED Osric of the Ford's frost comes out sideways - wild magic (11 vs DC 12).
+FEED Osric of the Ford breaks off to mend Mira Fenwick, who is nearly down.
+FEED Mira Fenwick is badly hurt and breaks off, making for the way up.
+FEED Mira Rivers turns on the wounded hollowed slimeling to finish it.
+FEED Osric Coalfoot turns on the wounded hollowed slimeling to finish it.
+FEED Mira Quarryman turns on the wounded hollowed slimeling to finish it.
+FEED Mira Rivers searches (Investigation 23) and turns up 58 gold on floor 4.
+FEED Cleared. The dark moves back a pace, and no further.
+FEED Mira Rivers and 4 others take a breather, and press on deeper.
+FEED Mira Rivers steps on a spiked plate - spikes! DEX 13 vs DC 12, 6 damage (halved).
+FEED Osric of the Ford spots a dart trap (Perception 15 vs DC 12) and steps round it.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 18, the watch 8 - the raiders strike first.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 skeleton warriors, 1 drowned skeleton warrior, 1 drowned bone sentinel, 1 hollowed cave spider.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The floor is wet, and getting wetter.
+FEED The oil is running low.
+FEED Mira Quarryman rolls a 20 for initiative and is moving before anything else.
+FEED Mira Rivers starts renew, loses the thread, and finishes it badly (7 vs DC 12).
+FEED Osric of the Ford's renew splits in two, and neither half works (9 vs DC 12).
+DIRECTOR t=225.0 CUT lord_14281085057324 shot=shoulder pri=100.0 why=lord_rises held_prev=16.1 pace=0.6 | lord_14281085057324/shoulder=100.0(lord), raid/shoulder=95.0(raid live), fight_14281085057324/shoulder=80.4(hurt 0.54), fish_558446435735/follow=60.0(catch), hero_1004/follow=31.2(town life REPEAT-held-out)
+FEED A building is burning!
+FEED Osric Coalfoot steps on a loose flagstone - green darts! DEX 8 vs DC 12, 6 damage.
+FEED Osric Coalfoot is venomed - the poison works over the next few seconds.
+FEED Mira Quarryman's fire arrives, but something else wore it in (10 vs DC 12).
+FEED Osric of the Ford casts Frost at The Grubmother.
+FEED Mira Rivers casts Bolt at The Grubmother.
+FEED Osric Coalfoot casts Frost at The Grubmother.
+FEED The Grubmother shifts, and the fight changes with it.
+FEED The Grubmother's brood spills out of her.
+FEED Mira Rivers casts Frost at The Grubmother.
+FEED Osric of the Ford casts Frost at The Grubmother.
+FEED Osric Coalfoot casts Frost at The Grubmother.
+FEED Mira Quarryman casts Fire at The Grubmother.
+FEED The Grubmother is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Grubmother falls to Osric of the Ford.
+FEED Mira Rivers casts Bolt at slimeling.
+FEED Mira Rivers rolls a 20 searching the floor!
+FEED The Grubmother is slain on floor 5!
+FEED The hoard is split 5 ways - 52 gold each to Mira Rivers, Osric Coalfoot, Osric of the Ford, Mira Quarryman, Mira Fenwick.
+FEED Hilda of the Ford goes down and claws back up. (CON save 16)
+FEED Hilda of the Ford is knocked senseless, but lives. The guild's grace - once.
+FEED Viewer1003 rolls a 20 on a bandit!
+DIRECTOR t=230.0 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=5.1 pace=0.6 | raid/shoulder=95.0(raid live), delve_14281085057324/follow=45.0(walking REPEAT-held-out), hero_1003/follow=34.0(town life), tour_6/push=10.0(quiet baseline)
+FEED Mira Rivers searches the chest - Successfully found loot!! 56 gold (Investigation 12 vs DC 12).
+FEED Cort Thatcher settles in Bellmire, looking for work.
+FEED Viewer1003 goes down and claws back up. (CON save 18)
+FEED Viewer1003 the knight is cut down defending Bellmire by a bandit. Level 1, 0 kills. !reroll to rise again.
+FEED Mira Rivers and 4 others take a breather, and press on deeper.
+FEED Ysolde Rivers goes down and claws back up. (CON save 21)
+FEED Ysolde Rivers is killed by a bandit.
+FEED Mira Fenwick steps on a spiked plate - spikes! DEX 10 vs DC 12, 8 damage.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+FEED Hilda of the Ford comes round.
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 2; lights 60 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 2 pit vipers, 2 gorged blood wasps, 1 drowned bone bowman, 1 sporeblown marrow hewer.
+FEED Mira Rivers spots a poison-dart trap (Perception 20 vs DC 13) and steps round it.
+FEED Osric of the Ford starts bolt, loses the thread, and finishes it badly (8 vs DC 13).
+FEED Mira Rivers casts bolt and gets weather for it (10 vs DC 13).
+FEED Osric Coalfoot's bolt flickers, thinks better of it, and quits (6 vs DC 13).
+DIRECTOR t=235.1 CUT hero_1001 shot=follow pri=30.5 why=shot_gone held_prev=5.0 pace=1.0 | fight_14281085057324/shoulder=83.4(hurt 0.84 REPEAT-held-out), hero_1001/follow=30.5(town life), tour_3/push=10.0(quiet baseline)
+FEED Mira Quarryman's bolt turns to smoke a breath too early (10 vs DC 13).
+FEED Mira Fenwick should be dead - and stands back up (22).
+FEED Mira Rivers searches (Investigation 16) and turns up 71 gold on floor 6.
+FEED Floor 6 is a story now, not a fight.
+FEED Mira Rivers and 4 others take a breather, and press on deeper.
+FEED Mira Rivers steps on a spiked plate - spikes! DEX 12 vs DC 13, 15 damage.
+FEED Osric Coalfoot steps on a spiked plate - spikes! DEX 7 vs DC 13, 12 damage.
+L28C_EMITTERS floor 7 workshop: 3 (cap 12), creatures 5; lights 48 (shadowed 1)
+L28D_DECALS floor 7 workshop: 18 (cap 24)
+FEED Floor 7 - a workshop, remade as a workshop: 1 skeleton warrior, 1 wraithtouched fen lurker, 1 wraithtouched bone sentinel, 2 sporeblown blood wasps, 1 puglin.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Mira Rivers's renew lands somewhere nobody aimed (12 vs DC 13).
+FEED Osric of the Ford's frost fizzles into a damp little hiss (10 vs DC 13).
+DIRECTOR t=242.1 CUT lord_14281085057324 shot=shoulder pri=100.0 why=lord_rises held_prev=7.1 pace=1.0 | lord_14281085057324/shoulder=100.0(lord), fight_14281085057324/shoulder=80.8(hurt 0.58 REPEAT-held-out), hero_1002/follow=24.8(town life same-shot-6), tour_2/establishing=10.0(quiet baseline)
+FEED Mira Quarryman casts fire; the scar casts something else (11 vs DC 13).
+FEED Osric Coalfoot's frost goes wrong - the scar answers (9 vs DC 13).
+FEED Sable Hollow settles in Bellmire, looking for work.
+FEED Gnawbone's children come squealing.
+FEED Osric of the Ford breaks off to mend Mira Rivers, who is nearly down.
+FEED Osric Coalfoot turns on the wounded wraithtouched fen lurker to finish it.
+FEED Mira Quarryman turns on the wounded wraithtouched fen lurker to finish it.
+FEED Osric Coalfoot should be dead - and stands back up (11).
+FEED Osric Coalfoot the druid falls on floor 7 to the dark below. Level 5, 13 kills. !reroll to rise again.
+FEED Mira Quarryman should be dead - and stands back up (15).
+FEED Osric of the Ford breaks off to mend Mira Quarryman, who is nearly down.
+FEED Mira Fenwick the barbarian falls on floor 7 to the dark below. Level 6, 23 kills. !reroll to rise again.
+FEED Mira Quarryman the warlock falls on floor 7 to the dark below. Level 7, 36 kills. !reroll to rise again.
+FEED Osric of the Ford breaks off to mend Osric of the Ford, who is nearly down.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 7.
+FEED Mira Rivers and 4 others get out alive, and come home with what they carried.
+FEED Mira Rivers, Osric of the Ford come home to Bellmire with 530 gold, 12 ore, 9 stone, 5 pieces of salvaged gear and 5 potions. 47 kills between them.
+FEED Osric of the Ford is fitted with chainmail. (+26 hp)
+DIRECTOR t=245.1 CUT death_14281085057324_244 shot=hard_cut pri=90.0 why=shot_gone held_prev=3.0 pace=1.0 | death_14281085057324_244/hard_cut=90.0(death), hero_1002/follow=33.4(town life), tour_5/push=10.0(quiet baseline)
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 18, the watch 5 - the raiders strike first.
+FEED The mounted watch rides out to meet them - 2 riders.
+DIRECTOR t=252.3 CUT raid shot=shoulder pri=95.0 why=better_after_min held_prev=7.1 pace=0.6 | raid/shoulder=95.0(raid live), fish_557104258396/follow=60.0(catch), hero_1002/follow=31.7(town life), tour_4/push=10.0(quiet baseline)
+FEED Osric of the Ford fails the save. (CON 5)
+FEED Osric of the Ford the sage is cut down defending Bellmire by skeleton rogue. Level 6, 27 kills. !reroll to rise again.
+FEED Bran Fenwick settles in Bellmire, looking for work.
+FEED A building is burning!
+FEED A building is burning!
+FEED Ysolde Ashwood goes down and claws back up. (CON save 18)
+FEED Ysolde Ashwood is killed by skeleton warrior.
+FEED Viewer1002 rolls a 20 on skeleton rogue!
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=262.3 CUT fish_557104258396 shot=follow pri=60.0 why=shot_gone held_prev=10.0 pace=1.0 | fish_557104258396/follow=60.0(catch), hero_1001/follow=33.0(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED Rolf Bramble settles in Bellmire, looking for work.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 14, the watch 7 - the raiders strike first.
+DIRECTOR t=281.4 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=19.1 pace=0.6 | raid/shoulder=95.0(raid live), fish_558446435735/follow=54.0(catch same-shot-6), hero_1004/follow=27.4(town life same-shot-6), tour_1/push=10.0(quiet baseline)
+FEED Mira Stonehand settles in Bellmire, looking for work.
+FEED A building is burning!
+FEED Rolf Bramble is killed by a bandit.
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED Bran Fenwick goes down and claws back up. (CON save 14)
+FEED Bran Fenwick is killed by a bandit.
+FEED A building is burning!
+FEED A building is burning!
+FEED Viewer1001 rolls a 20 - and a bandit falls.
+FEED Viewer1002 rolls a 20 - and a bandit falls.
+FEED The attack is driven off. The gates hold.
+MUSTER timed out: dists=[283, 299] vis=true stay=true route=94 inside=false
+FEED Maela Hollow settles in Bellmire, looking for work.
+DIRECTOR t=293.5 CUT fish_558446435735 shot=follow pri=60.0 why=shot_gone held_prev=12.1 pace=1.0 | fish_558446435735/follow=60.0(catch), hero_1002/follow=30.9(town life), tour_5/push=10.0(quiet baseline)
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 7, the watch 5 - the raiders strike first.
+RAID started at 300.006301444417
+DIRECTOR t=300.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=7.1 pace=0.6 | raid/shoulder=95.0(raid live), fish_558446435735/follow=60.0(catch), hero_1004/follow=27.2(town life same-shot-6), tour_4/push=10.0(quiet baseline)
+FEED Tove Quarryman settles in Bellmire, looking for work.
+FEED Dunn Thatcher's charge crashes into skeleton warrior!
+FEED Dunn Thatcher goes down and claws back up. (CON save 15)
+FEED Dunn Thatcher is killed by skeleton warrior.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 7, the watch 15 - the watch is ready for them.
+FEED The mounted watch rides out to meet them - 1 riders.
+FEED Ingrid Fenwick is killed by skeleton warrior.
+DIRECTOR t=305.7 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=5.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_1001/follow=30.6(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+FEED A building is burning!
+FEED A raider fumbles the torch - it hisses out in the mud.
+SHOT l64_raid cur=raid
+MUSTER timed out: dists=[141, 143] vis=true stay=true route=161 inside=false
+FEED A building is burning!
+FEED A building is burning!
+FEED Viewer1001 fails the save. (CON 6)
+FEED Viewer1001 the knight is cut down defending Bellmire by a bandit. Level 1, 0 kills. !reroll to rise again.
+FEED A building is burning!
+FEED Viewer1002 fails the save. (CON 7)
+FEED Viewer1002 the knight is cut down defending Bellmire by a bandit. Level 1, 0 kills. !reroll to rise again.
+FEED Harl Thatcher rolls a 20 - and a bandit falls.
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=317.8 CUT hero_1004 shot=follow pri=33.9 why=shot_gone held_prev=12.1 pace=1.0 | fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=33.9(town life), tour_5/push=10.0(quiet baseline)
+FEED Bran Fenwick settles in Bellmire, looking for work.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 3, the watch 4 - the watch is ready for them.
+DIRECTOR t=324.8 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=7.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=32.1(town life), tour_4/push=10.0(quiet baseline)
+FEED A building is burning!
+FEED Aldric the Younger fails the save. (CON 3)
+FEED Aldric the Younger is knocked senseless, but lives. The guild's grace - once.
+FEED A building is burning!
+MUSTER timed out: dists=[234, 276] vis=true stay=true route=74 inside=false
+FEED Nessa Quarryman goes down and claws back up. (CON save 15)
+FEED Nessa Quarryman is knocked senseless, but lives. The guild's grace - once.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+FEED Nessa Quarryman comes round.
+FEED Aldric the Younger comes round.
+DIRECTOR t=332.9 CUT tour_4 shot=push pri=10.0 why=shot_gone held_prev=8.0 pace=1.4 | hero_1004/follow=33.7(town life REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+FEED Bran Stonehand settles in Bellmire, looking for work.
+FEED Corvin Fenwick settles in Bellmire, looking for work.
+MUSTER timed out: dists=[195, 106] vis=true stay=false route=106 inside=false
+DIRECTOR t=353.0 CUT fish_557104258396 shot=follow pri=60.0 why=hotter held_prev=20.1 pace=1.0 | fish_557104258396/follow=60.0(catch), hero_1004/follow=34.8(town life REPEAT-held-out), tour_1/push=4.0(quiet baseline same-shot-6)
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 6, the watch 16 - the watch is ready for them.
+FEED Tove of the Ford settles in Bellmire, looking for work.
+DIRECTOR t=355.0 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=31.4(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED A building is burning!
+FEED Hilda of the Ford goes down and claws back up. (CON save 15)
+FEED Hilda of the Ford the druid is cut down defending Bellmire by skeleton warrior. Level 1, 0 kills. !reroll to rise again.
+FEED Nessa Quarryman goes down and claws back up. (CON save 16)
+FEED Nessa Quarryman the sage is cut down defending Bellmire by skeleton warrior. Level 1, 0 kills. !reroll to rise again.
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=363.0 CUT tour_2 shot=establishing pri=10.0 why=shot_gone held_prev=8.1 pace=1.4 | hero_1004/follow=31.2(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Wren the Younger settles in Bellmire, looking for work.
+MUSTER timed out: dists=[48, 139] vis=true stay=false route=35 inside=false
+FEED Petra Rivers settles in Bellmire, looking for work.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 5, the watch 22 - the watch is ready for them.
+DIRECTOR t=381.2 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=18.1 pace=0.6 | raid/shoulder=95.0(raid live), fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=34.4(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED A building is burning!
+FEED Aldric the Younger goes down and claws back up. (CON save 18)
+FEED Aldric the Younger the rogue is cut down defending Bellmire by a bandit. Level 1, 0 kills. !reroll to rise again.
+FEED Edda Quarryman goes down and claws back up. (CON save 19)
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED Edda Quarryman is knocked senseless, but lives. The guild's grace - once.
+FEED Viewer1004 rolls a 20 - and a bandit falls.
+FEED The attack is driven off. The gates hold.
+FEED Edda Quarryman comes round.
+FEED Garm Quarryman settles in Bellmire, looking for work.
+DIRECTOR t=392.3 CUT tour_7 shot=push pri=10.0 why=shot_gone held_prev=11.1 pace=1.4 | hero_1004/follow=32.9(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED Hilda Bramble settles in Bellmire, looking for work.
+DIRECTOR t=400.3 CUT fish_558446435735 shot=follow pri=60.0 why=hotter held_prev=8.0 pace=1.0 | fish_558446435735/follow=60.0(catch), hero_1004/follow=33.8(town life REPEAT-held-out), tour_1/push=4.0(quiet baseline same-shot-6)
+FEED Talen Bramble settles in Bellmire, looking for work.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 17, the watch 7 - the raiders strike first.
+DIRECTOR t=411.4 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=11.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=25.5(town life same-shot-6), tour_3/push=10.0(quiet baseline)
+FEED The chalk starts again below, in a hand nobody knows.
+FEED They carry 6 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 cave spider, 1 slime.
+FEED The oldest name on the wall is wet.
+FEED Harl Thatcher goes down and claws back up. (CON save 13)
+FEED Harl Thatcher is knocked senseless, but lives. The guild's grace - once.
+FEED Harl Thatcher casts Bolt at giant rat.
+FEED Harl Thatcher casts Bolt at slime.
+FEED The slime divides.
+FEED Edda Quarryman searches (Investigation 14) and turns up 12 gold on floor 1.
+FEED Floor 1 done - the door is still kept.
+FEED Edda Quarryman finds a vial of Pennymend.
+FEED Edda Quarryman spots a blade trap (Perception 10 vs DC 10) and disarms it with thieves' tools (23).
+FEED Edda Quarryman searches the chest - Successfully found loot!! 23 gold (Investigation 19 vs DC 10).
+FEED Harl Thatcher, Edda Quarryman take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave bat, 2 bog frogs, 1 slime.
+FEED Edda Quarryman rolls a 20 for initiative and is moving before anything else.
+FEED Harl Thatcher casts Bolt at cave bat.
+FEED Tove Hollow goes down and claws back up. (CON save 10)
+FEED Tove Hollow is killed by skeleton minion.
+FEED Harl Thatcher casts Bolt at bog frog.
+FEED A building is burning!
+FEED Harl Thatcher's fire goes out like a lamp in wind - wild magic (9 vs DC 11).
+FEED Viewer1004 goes down and claws back up. (CON save 22)
+FEED Viewer1004 is knocked senseless, but lives. The guild's grace - once.
+FEED Harl Thatcher casts Fire at slime.
+FEED The slime divides.
+FEED Edda Quarryman searches (Investigation 5) and turns up 17 gold on floor 2.
+FEED Nothing moves on floor 2 but the dust.
+FEED Rask Ashwood goes down and claws back up. (CON save 10)
+FEED Rask Ashwood is knocked senseless, but lives. The guild's grace - once.
+FEED Edda Quarryman finds a man in a cage still alive. He slips 42 gold to them on the way out, 2 ways to split it.
+FEED A building is burning!
+DIRECTOR t=421.4 CUT delve_24208885190104 shot=follow pri=45.0 why=max_hold held_prev=10.0 pace=0.6 | delve_24208885190104/follow=45.0(walking), hero_1004/follow=30.2(town life), tour_5/push=10.0(quiet baseline)
+FEED Petra Bramble is sworn into the watch.
+FEED Harl Thatcher, Edda Quarryman take a breather, and press on deeper.
+FEED The townsfolk raise the ruin again.
+FEED A building is burning!
+DIRECTOR t=423.5 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), delve_24208885190104/follow=45.0(walking), hero_1004/follow=24.7(town life same-shot-6), tour_1/push=10.0(quiet baseline)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned puglin, 2 puglins, 1 cave bat.
+FEED The oil is running low.
+FEED Harl Thatcher's bolt folds in on itself - wild magic (10 vs DC 11).
+FEED Harl Coalfoot settles in Bellmire, looking for work.
+FEED Harl Thatcher casts Bolt at puglin.
+FEED Harl Thatcher casts Bolt at drowned puglin.
+FEED Edda Quarryman searches (Investigation 6) and turns up 26 gold on floor 3.
+FEED The room empties. The lamps steady.
+FEED A building is burning!
+FEED Edda Quarryman steps on a grate - fire! DEX 6 vs DC 11, 12 damage.
+FEED Edda Quarryman spots a pressure plate (Perception 12 vs DC 11) and disarms it with thieves' tools (22).
+FEED A building is burning!
+DIRECTOR t=430.5 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=7.1 pace=0.6 | raid/shoulder=95.0(raid live), delve_24208885190104/follow=45.0(walking REPEAT-held-out), hero_1004/follow=32.8(town life), tour_6/push=10.0(quiet baseline)
+FEED Harl Thatcher, Edda Quarryman take a breather, and press on deeper.
+FEED Mira of the Ford goes down and claws back up. (CON save 11)
+FEED Mira of the Ford is knocked senseless, but lives. The guild's grace - once.
+FEED A building is burning!
+FEED Petra Bramble is killed by skeleton minion.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 3 giant rats, 2 drowned cave bats.
+FEED Mother Silk is down here. Every thread in the dark is hers.
+FEED The threads across the doorway are new.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED The townsfolk raise the ruin again.
+FEED Harl Thatcher spots a spike trap (Perception 14 vs DC 12) and steps round it.
+DIRECTOR t=434.6 CUT lord_24208885190104 shot=shoulder pri=100.0 why=lord_rises held_prev=4.1 pace=0.6 | lord_24208885190104/shoulder=100.0(lord), raid/shoulder=95.0(raid live), fight_24208885190104/shoulder=76.3(hurt 0.73 same-shot-6), fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=31.0(town life)
+FEED Talen Thatcher settles in Bellmire, looking for work.
+FEED Shadows peel off the walls - an ambush! 1 cave spider, 1 hollowed slime surges in.
+FEED Edda Quarryman spots a dart trap (Perception 14 vs DC 12) and disarms it with thieves' tools (13).
+FEED Edda Quarryman is badly hurt and breaks off, making for the way up.
+FEED Spiders drop from Mother Silk's threads.
+FEED A building is burning!
+FEED Harl Thatcher's bolt rebounds off a stone that was not there (1 vs DC 12).
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED Harl Thatcher, Edda Quarryman get out alive, and come home with what they carried.
+FEED Harl Thatcher, Edda Quarryman come home to Bellmire with 78 gold, 3 ore, 2 stone, 1 piece of salvaged gear and 1 potion. 17 kills between them.
+FEED Harl Thatcher is fitted with leather. (+10 hp) Haggled 11% off (13).
+FEED Edda Quarryman is fitted with leather. (+10 hp) Haggled 18% off (20).
+FEED The attack is driven off. The gates hold.
+FEED Viewer1004 comes round.
+FEED Harl Thatcher comes round.
+FEED Rask Ashwood comes round.
+FEED Mira of the Ford comes round.
+DIRECTOR t=438.6 CUT hero_1004 shot=follow pri=30.7 why=shot_gone held_prev=4.0 pace=1.4 | hero_1004/follow=30.7(town life), tour_6/push=10.0(quiet baseline)
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 12, the watch 18 - the watch is ready for them.
+SCRIPT ERROR: Trying to cast a freed object.
+   at: Raids._musters (res://scripts/raids.gd:559)
+   GDScript backtrace (most recent call first):
+       [0] _musters (res://scripts/raids.gd:559)
+       [1] _process (res://scripts/raids.gd:444)
+DIRECTOR t=442.7 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=4.1 pace=0.6 | raid/shoulder=95.0(raid live), fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=33.1(town life), tour_3/push=10.0(quiet baseline)
+FEED Harl Thatcher, Edda Quarryman descend down where the architect ran out of plans.
+FEED They carry 7 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave spider, 1 giant rat, 1 slime.
+FEED Flowers on a slab, dried but not old.
+FEED Harl Thatcher goes down and claws back up. (CON save 11)
+FEED Harl Thatcher the warlock is cut down defending Bellmire by skeleton minion. Level 2, 8 kills. !reroll to rise again.
+FEED Harl Thatcher casts Bolt at cave spider.
+FEED The townsfolk raise the ruin again.
+FEED Harl Thatcher calls bolt down and the scar answers up (9 vs DC 10).
+FEED The slime divides.
+FEED Harl Thatcher casts Bolt at slimeling.
+FEED Edda Quarryman searches (Investigation 19) and turns up 13 gold on floor 1.
+FEED Floor 1: counted, corked, kept.
+FEED Edda Quarryman finds a vial of Bitterleaf Tincture.
+FEED Edda Quarryman searches the chest - Successfully found loot!! 13 gold (Investigation 17 vs DC 10).
+FEED Edda Quarryman searches the chest - Successfully found loot!! 21 gold (Investigation 21 vs DC 10).
+FEED Harl Thatcher, Edda Quarryman take a breather, and press on deeper.
+FEED Harl Thatcher spots a blade trap (Perception 15 vs DC 10) and steps round it.
+FEED A building is burning!
+FEED Harl Coalfoot goes down and claws back up. (CON save 21)
+FEED Harl Coalfoot is killed by skeleton rogue.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 skeleton minion, 1 hollowed puglin.
+FEED A building is burning!
+FEED Mira of the Ford the cleric is cut down defending Bellmire by skeleton rogue. Level 1, 0 kills. !reroll to rise again.
+FEED Viewer1004 rolls a 20 on skeleton minion!
+DIRECTOR t=451.7 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=9.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_26876680638338/shoulder=69.0(hurt 0.00 same-shot-6), hero_1004/follow=34.5(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED Harl Thatcher's bolt splits in two, and neither half works (6 vs DC 11).
+FEED The attack is driven off. The gates hold.
+FEED Harl Thatcher casts Fire at skeleton minion.
+FEED Harl Thatcher casts Fire at bog frog.
+FEED Edda Quarryman searches (Investigation 15) and turns up 24 gold on floor 2.
+FEED Floor 2 holds, and the roll gets a tick, not a dagger.
+FEED Edda Quarryman finds a vial of The Snuffer's Salve-Water.
+DIRECTOR t=452.7 CUT delve_26876680638338 shot=follow pri=45.0 why=shot_gone held_prev=1.0 pace=1.0 | delve_26876680638338/follow=45.0(walking), hero_1004/follow=33.8(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED Edda Quarryman gets a captive free. 42 gold, 2 ways - small thanks for a poor life.
+FEED Cort Rivers settles in Bellmire, looking for work.
+FEED Harl Thatcher, Edda Quarryman take a breather, and press on deeper.
+FEED Hilda of the Ford is sworn into the watch.
+FEED The new frame slips. The townsfolk will try again. (6 vs DC 12)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 puglin, 1 hollowed giant rat, 1 slime, 1 cave spider.
+FEED Harl Thatcher rolls a 20 for initiative and is moving before anything else.
+DIRECTOR t=458.8 CUT fight_26876680638338 shot=shoulder pri=75.0 why=hotter held_prev=6.0 pace=1.0 | fight_26876680638338/shoulder=75.0(hurt 0.00), fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=33.5(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED Edda Quarryman steps on a plate - darts! DEX 23 vs DC 11, 3 damage (halved).
+FEED Harl Thatcher casts Bolt at puglin.
+FEED Edda Quarryman spots a fire grate (Perception 14 vs DC 11) and disarms it with thieves' tools (14).
+FEED Harl Thatcher casts Fire at slime.
+FEED The slime divides.
+FEED Harl Thatcher's fire unravels mid-word - wild magic (7 vs DC 11).
+FEED Edda Quarryman searches (Investigation 12) and turns up 33 gold on floor 3.
+FEED Floor 3 breathes easy. Briefly.
+FEED Edda Quarryman cannot get to the chest and leaves it.
+FEED Harl Thatcher, Edda Quarryman take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed bone bowman, 1 hollowed slime, 2 hollowed giant rats, 1 cave bat.
+FEED The oil is running low.
+FEED Edda Quarryman spots a dart trap (Perception 21 vs DC 12) and disarms it with thieves' tools (17).
+FEED Harl Thatcher mouths bolt and the scar answers in a rival tongue (1 vs DC 12).
+FEED Edda Quarryman is badly hurt and breaks off, making for the way up.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 6, the watch 3 - the raiders strike first.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED Harl Thatcher, Edda Quarryman get out alive, and come home with what they carried.
+FEED Harl Thatcher, Edda Quarryman come home to Bellmire with 104 gold, 3 ore, 2 stone, 3 pieces of salvaged gear and 3 potions. 18 kills between them.
+FEED Edda Quarryman is fitted with chainmail. (+26 hp) Haggled 20% off (23).
+FEED Ysolde Thatcher is sworn into the watch.
+DIRECTOR t=468.8 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=10.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=30.4(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED Edda Quarryman rolls a 20 on skeleton warrior!
+FEED Edda Quarryman goes down and claws back up. (CON save 11)
+FEED Edda Quarryman the bard is cut down defending Bellmire by skeleton warrior. Level 3, 16 kills. !reroll to rise again.
+DIRECTOR t=470.8 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=34.9(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED A building is burning!
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED Nessa of the Ford rolls a 20 - and skeleton rogue falls.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=476.9 CUT tour_5 shot=push pri=10.0 why=shot_gone held_prev=6.0 pace=1.4 | hero_1004/follow=33.5(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+DIRECTOR t=482.9 CUT fish_557104258396 shot=follow pri=60.0 why=hotter held_prev=6.0 pace=1.0 | fish_557104258396/follow=60.0(catch), hero_1004/follow=31.9(town life REPEAT-held-out), tour_3/push=4.0(quiet baseline same-shot-6)
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 17, the watch 8 - the raiders strike first.
+DIRECTOR t=486.9 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=4.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=33.0(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+MUSTER timed out: dists=[176, 152] vis=true stay=true route=70 inside=false
+FEED Hilda of the Ford goes down and claws back up. (CON save 13)
+FEED Hilda of the Ford is killed by skeleton minion.
+FEED A building is burning!
+FEED Viewer1004 rolls a 20 - and skeleton minion falls.
+FEED Nessa of the Ford goes down and claws back up. (CON save 15)
+DIRECTOR t=495.0 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=8.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=31.5(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED Nessa of the Ford is knocked senseless, but lives. The guild's grace - once.
+FEED The attack is driven off. The gates hold.
+FEED Nessa of the Ford comes round.
+DIRECTOR t=497.0 CUT tour_1 shot=push pri=10.0 why=shot_gone held_prev=2.0 pace=1.4 | hero_1004/follow=33.0(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+FEED The townsfolk raise the ruin again.
+DIRECTOR t=507.1 CUT fish_558446435735 shot=follow pri=60.0 why=hotter held_prev=10.1 pace=1.0 | fish_558446435735/follow=60.0(catch), hero_1004/follow=34.6(town life REPEAT-held-out), tour_3/push=4.0(quiet baseline same-shot-6)
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 3, the watch 9 - the watch is ready for them.
+DIRECTOR t=509.2 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=30.1(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED The townsfolk raise the ruin again.
+FEED A building is burning!
+FEED Nessa of the Ford rolls a 20 - and skeleton minion falls.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=519.2 CUT tour_6 shot=push pri=10.0 why=shot_gone held_prev=10.1 pace=1.4 | hero_1004/follow=32.4(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+MUSTER timed out: dists=[203, 187] vis=true stay=true route=170 inside=false
+FEED Ysolde Stonehand settles in Bellmire, looking for work.
+FEED Harl the Younger is sworn into the watch.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 8, the watch 19 - the watch is ready for them.
+DIRECTOR t=527.3 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=8.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=30.3(town life REPEAT-held-out), tour_3/push=4.0(quiet baseline same-shot-6)
+FEED Talen Hollow is sworn into the watch.
+FEED Rask Ashwood goes down and claws back up. (CON save 14)
+FEED Rask Ashwood the sage is cut down defending Bellmire by skeleton minion. Level 1, 0 kills. !reroll to rise again.
+FEED Nessa of the Ford goes down and claws back up. (CON save 11)
+FEED A building is burning!
+FEED Nessa of the Ford the warden is cut down defending Bellmire by skeleton rogue. Level 1, 0 kills. !reroll to rise again.
+DIRECTOR t=534.4 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=7.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=30.4(town life), tour_3/push=10.0(quiet baseline)
+FEED Viewer1004 rolls a 20 - and skeleton rogue falls.
+FEED A building is burning!
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=536.4 CUT hero_1004 shot=follow pri=33.6 why=shot_gone held_prev=2.0 pace=1.4 | hero_1004/follow=33.6(town life), tour_3/push=10.0(quiet baseline)
+DIRECTOR t=562.3 CUT tour_3 shot=push pri=10.0 why=start held_prev=5.0 pace=1.4 | hero_1004/follow=32.0(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+DIRECTOR t=574.3 CUT fish_557104258396 shot=follow pri=60.0 why=hotter held_prev=12.1 pace=1.0 | fish_557104258396/follow=60.0(catch), hero_1004/follow=32.5(town life REPEAT-held-out), tour_0/push=4.0(quiet baseline same-shot-6)
+DIRECTOR t=599.5 CUT fish_558446435735 shot=follow pri=54.0 why=max_hold held_prev=25.2 pace=1.0 | fish_558446435735/follow=54.0(catch same-shot-6), hero_1004/follow=34.0(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+FEED The townsfolk raise the ruin again.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 16, the watch 6 - the raiders strike first.
+DIRECTOR t=621.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=22.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=31.7(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+FEED Tove of the Ford goes down and claws back up. (CON save 16)
+FEED Tove of the Ford is knocked senseless, but lives. The guild's grace - once.
+FEED Hilda Fenwick is sworn into the watch.
+FEED A building is burning!
+DIRECTOR t=631.6 CUT hero_1004 shot=follow pri=30.6 why=max_hold held_prev=10.1 pace=0.6 | fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=30.6(town life), tour_0/push=10.0(quiet baseline)
+DIRECTOR t=633.7 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=33.2(town life), tour_0/push=10.0(quiet baseline)
+FEED Ysolde Quarryman fails the save. (CON 5)
+FEED Ysolde Quarryman is knocked senseless, but lives. The guild's grace - once.
+FEED Hilda Fenwick goes down and claws back up. (CON save 11)
+FEED Hilda Fenwick is killed by a bandit.
+FEED A raider fumbles the torch - it hisses out in the mud.
+DIRECTOR t=643.7 CUT tour_0 shot=push pri=10.0 why=max_hold held_prev=10.1 pace=0.6 | hero_1004/follow=33.4(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+DIRECTOR t=645.7 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=34.8(town life REPEAT-held-out), tour_4/push=4.0(quiet baseline same-shot-6)
+FEED Talen Hollow goes down and claws back up. (CON save 15)
+FEED Talen Hollow is killed by a bandit.
+FEED Wren Ashwood fails the save. (CON 5)
+FEED Wren Ashwood is knocked senseless, but lives. The guild's grace - once.
+DIRECTOR t=655.7 CUT tour_4 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=33.9(town life REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+DIRECTOR t=657.8 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=34.5(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Harl the Younger goes down and claws back up. (CON save 13)
+FEED Harl the Younger is killed by a bandit.
+FEED The attack is driven off. The gates hold.
+FEED Wren Ashwood comes round.
+FEED Ysolde Quarryman comes round.
+FEED Tove of the Ford comes round.
+FEED Corvin the Younger is sworn into the watch.
+DIRECTOR t=680.9 CUT tour_2 shot=establishing pri=10.0 why=max_hold held_prev=23.1 pace=1.4 | hero_1004/follow=31.6(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Hilda Rivers settles in Bellmire, looking for work.
+MUSTER timed out: dists=[169, 173] vis=true stay=false route=104 inside=false
+DIRECTOR t=698.0 CUT fish_558446435735 shot=follow pri=60.0 why=hotter held_prev=17.1 pace=1.0 | fish_558446435735/follow=60.0(catch), hero_1004/follow=30.2(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED Cort Quarryman is sworn into the watch.
+DIRECTOR t=724.1 CUT hero_1004 shot=follow pri=24.2 why=max_hold held_prev=26.2 pace=1.4 | hero_1004/follow=24.2(town life same-shot-6), tour_7/push=10.0(quiet baseline)
+FEED Rolf Stonehand settles in Bellmire, looking for work.
+FEED The townsfolk raise the ruin again.
+DIRECTOR t=737.2 CUT fish_557104258396 shot=follow pri=54.0 why=better_after_min held_prev=13.1 pace=1.0 | fish_557104258396/follow=54.0(catch same-shot-6), hero_1004/follow=31.3(town life), tour_7/push=10.0(quiet baseline)
+FEED Aldric the Younger is sworn into the watch.
+DIRECTOR t=762.3 CUT tour_7 shot=push pri=10.0 why=start held_prev=5.0 pace=1.0 | fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=33.4(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 11, the watch 11 - the watch is ready for them.
+DIRECTOR t=786.5 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=24.2 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=33.8(town life REPEAT-held-out), tour_5/push=4.0(quiet baseline same-shot-6)
+DIRECTOR t=796.6 CUT tour_5 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=35.0(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+DIRECTOR t=798.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=32.5(town life REPEAT-held-out), tour_1/push=4.0(quiet baseline same-shot-6)
+SYNTHETIC death injected at 800.000067347254
+SHOT l64_death cur=raid
+FEED Aldric the Younger goes down and claws back up. (CON save 10)
+FEED Aldric the Younger is killed by a bandit.
+FEED The new frame slips. The townsfolk will try again. (9 vs DC 12)
+FEED Cort Quarryman is killed by a bandit.
+FEED Cort of the Ford settles in Bellmire, looking for work.
+DIRECTOR t=808.6 CUT tour_1 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | hero_1004/follow=33.5(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+DIRECTOR t=810.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_558446435735/follow=60.0(catch), hero_1004/follow=31.9(town life REPEAT-held-out), tour_6/push=4.0(quiet baseline same-shot-6)
+FEED A building is burning!
+FEED Corvin the Younger goes down and claws back up. (CON save 19)
+FEED Corvin the Younger is killed by a bandit.
+MUSTER timed out: dists=[267, 248] vis=true stay=true route=81 inside=false
+DIRECTOR t=820.7 CUT hero_1004 shot=follow pri=33.5 why=max_hold held_prev=10.1 pace=0.6 | hero_1004/follow=33.5(town life), tour_6/push=10.0(quiet baseline)
+DIRECTOR t=822.7 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=30.9(town life), tour_6/push=10.0(quiet baseline)
+FEED Wren Ashwood fails the save. (CON 8)
+FEED Wren Ashwood the rogue is cut down defending Bellmire by a bandit. Level 1, 0 kills. !reroll to rise again.
+FEED The new frame slips. The townsfolk will try again. (9 vs DC 12)
+FEED Ysolde Thatcher is killed by a bandit.
+FEED Mira Ashwood is sworn into the watch.
+DIRECTOR t=832.7 CUT fish_557104258396 shot=follow pri=60.0 why=max_hold held_prev=10.0 pace=0.6 | fish_557104258396/follow=60.0(catch), hero_1004/follow=34.9(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+DIRECTOR t=834.7 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_557104258396/follow=60.0(catch), hero_1004/follow=33.8(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED The attack is driven off. The gates hold.
+FEED The townsfolk raise the ruin again.
+DIRECTOR t=857.9 CUT tour_6 shot=push pri=10.0 why=max_hold held_prev=23.1 pace=1.4 | hero_1004/follow=31.9(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+DIRECTOR t=860.9 CUT fish_558446435735 shot=follow pri=60.0 why=hotter held_prev=3.0 pace=1.0 | fish_558446435735/follow=60.0(catch), hero_1004/follow=34.6(town life REPEAT-held-out), tour_3/push=4.0(quiet baseline same-shot-6)
+FEED Bran Quarryman is sworn into the watch.
+DIRECTOR t=879.0 CUT tour_3 shot=push pri=10.0 why=max_hold held_prev=18.1 pace=1.0 | hero_1004/follow=31.8(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED Aldric Quarryman settles in Bellmire, looking for work.
+DIRECTOR t=906.1 CUT tour_0 shot=push pri=4.0 why=max_hold held_prev=27.1 pace=1.0 | fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=30.5(town life REPEAT-held-out), tour_0/push=4.0(quiet baseline same-shot-6)
+FEED Talen Ashwood is sworn into the watch.
+DIRECTOR t=911.1 CUT hero_1004 shot=follow pri=34.9 why=hotter held_prev=5.0 pace=1.4 | hero_1004/follow=34.9(town life), tour_4/push=4.0(quiet baseline same-shot-6)
+FEED The townsfolk raise the ruin again.
+DIRECTOR t=924.1 CUT fish_557104258396 shot=follow pri=54.0 why=hotter held_prev=13.0 pace=1.0 | fish_557104258396/follow=54.0(catch same-shot-6), hero_1004/follow=30.1(town life), tour_4/push=10.0(quiet baseline)
+MUSTER timed out: dists=[70, 64, 182] vis=true stay=false route=58 inside=false
+DIRECTOR t=942.2 CUT tour_4 shot=push pri=10.0 why=max_hold held_prev=18.1 pace=1.0 | fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=33.4(town life REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 17, the watch 7 - the raiders strike first.
+DIRECTOR t=944.2 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=31.8(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Petra Ashwood is sworn into the watch.
+DIRECTOR t=954.3 CUT tour_2 shot=establishing pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | hero_1004/follow=30.6(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+DIRECTOR t=956.3 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=31.5(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+DIRECTOR t=966.3 CUT tour_7 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | hero_1004/follow=30.7(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+DIRECTOR t=968.3 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=32.9(town life REPEAT-held-out), tour_5/push=4.0(quiet baseline same-shot-6)
+FEED A building is burning!
+DIRECTOR t=978.4 CUT fish_558446435735 shot=follow pri=60.0 why=max_hold held_prev=10.0 pace=0.6 | fish_558446435735/follow=60.0(catch), hero_1004/follow=33.4(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+DIRECTOR t=980.4 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=33.5(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED Ingrid Stonehand rolls a 20 on skeleton rogue!
+FEED Tove of the Ford goes down and claws back up. (CON save 16)
+FEED Tove of the Ford the sage is cut down defending Bellmire by skeleton minion. Level 1, 0 kills. !reroll to rise again.
+FEED A building is burning!
+FEED Dunn Hollow fails the save. (CON 9)
+FEED Dunn Hollow is knocked senseless, but lives. The guild's grace - once.
+DIRECTOR t=990.5 CUT tour_5 shot=push pri=10.0 why=max_hold held_prev=10.1 pace=0.6 | hero_1004/follow=32.5(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED The attack is driven off. The gates hold.
+FEED Dunn Hollow comes round.
+FEED Edda Quarryman is sworn into the watch.
+SHOT l64_quiet cur=tour_5
+FEED The townsfolk raise the ruin again.
+DIRECTOR t=1001.5 CUT hero_1004 shot=follow pri=33.9 why=hotter held_prev=11.1 pace=1.0 | fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=33.9(town life), tour_1/push=4.0(quiet baseline same-shot-6)
+FEED Garm Coalfoot settles in Bellmire, looking for work.
+DIRECTOR t=1027.7 CUT tour_1 shot=push pri=10.0 why=max_hold held_prev=26.1 pace=1.4 | tour_1/push=10.0(quiet baseline)
+DIRECTOR t=1031.7 CUT fish_557104258396 shot=follow pri=60.0 why=hotter held_prev=4.0 pace=1.0 | fish_557104258396/follow=60.0(catch), hero_1004/follow=32.0(town life REPEAT-held-out), tour_6/push=4.0(quiet baseline same-shot-6)
+DIRECTOR t=1054.8 CUT tour_6 shot=push pri=10.0 why=max_hold held_prev=23.2 pace=1.0 | hero_1004/follow=31.8(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 20, the watch 18 - the raiders strike first.
+DIRECTOR t=1065.9 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=11.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=31.0(town life REPEAT-held-out), tour_3/push=4.0(quiet baseline same-shot-6)
+FEED Cort Stonehand fails the save. (CON 4)
+FEED Cort Stonehand is knocked senseless, but lives. The guild's grace - once.
+DIRECTOR t=1075.9 CUT fish_558446435735 shot=follow pri=60.0 why=max_hold held_prev=10.1 pace=0.6 | fish_558446435735/follow=60.0(catch), hero_1004/follow=32.3(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+DIRECTOR t=1078.0 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=32.3(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED Harl Hollow goes down and claws back up. (CON save 20)
+FEED Harl Hollow is knocked senseless, but lives. The guild's grace - once.
+FEED Petra Ashwood is killed by a bandit.
+DIRECTOR t=1088.0 CUT tour_3 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=30.4(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+DIRECTOR t=1090.0 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=31.1(town life REPEAT-held-out), tour_0/push=4.0(quiet baseline same-shot-6)
+FEED Edda Quarryman goes down and claws back up. (CON save 18)
+FEED Edda Quarryman is killed by a bandit.
+FEED Talen Ashwood goes down and claws back up. (CON save 20)
+FEED Talen Ashwood is killed by a bandit.
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED Bran Quarryman is killed by a bandit.
+DIRECTOR t=1100.1 CUT hero_1004 shot=follow pri=34.8 why=max_hold held_prev=10.1 pace=0.6 | hero_1004/follow=34.8(town life), tour_0/push=10.0(quiet baseline)
+DIRECTOR t=1102.1 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=30.9(town life), tour_0/push=10.0(quiet baseline)
+FEED A building is burning!
+FEED Mira Ashwood goes down and claws back up. (CON save 11)
+FEED Mira Ashwood is killed by a bandit.
+FEED Mira Quarryman is sworn into the watch.
+DIRECTOR t=1112.1 CUT tour_0 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | hero_1004/follow=34.0(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+DIRECTOR t=1114.1 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=34.8(town life REPEAT-held-out), tour_4/push=4.0(quiet baseline same-shot-6)
+FEED The attack is driven off. The gates hold.
+FEED Harl Hollow comes round.
+FEED Cort Stonehand comes round.
+DIRECTOR t=1130.2 CUT tour_4 shot=push pri=10.0 why=max_hold held_prev=16.1 pace=1.0 | fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=32.2(town life REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+DIRECTOR t=1139.2 CUT fish_557104258396 shot=follow pri=60.0 why=hotter held_prev=9.0 pace=1.0 | fish_557104258396/follow=60.0(catch), hero_1004/follow=35.0(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Wren Quarryman is sworn into the watch.
+DIRECTOR t=1165.4 CUT tour_2 shot=establishing pri=10.0 why=max_hold held_prev=26.2 pace=1.4 | hero_1004/follow=34.0(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+DIRECTOR t=1176.5 CUT fish_558446435735 shot=follow pri=60.0 why=hotter held_prev=11.1 pace=1.0 | fish_558446435735/follow=60.0(catch), hero_1004/follow=30.2(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED The new frame slips. The townsfolk will try again. (4 vs DC 12)
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 3, the watch 20 - the watch is ready for them.
+DIRECTOR t=1178.5 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_558446435735/follow=60.0(catch), hero_1004/follow=32.6(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED Wren Thatcher settles in Bellmire, looking for work.
+DIRECTOR t=1188.6 CUT tour_7 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | hero_1004/follow=30.3(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED Cort Stonehand rolls a 20 on a bandit!
+DIRECTOR t=1190.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=33.5(town life), tour_5/push=4.0(quiet baseline same-shot-6)
+FEED Cort Stonehand fails the save. (CON 3)
+FEED Cort Stonehand the paladin is cut down defending Bellmire by a bandit. Level 1, 0 kills. !reroll to rise again.
+FEED Rask Thatcher is sworn into the watch.
+FEED Wren Quarryman goes down and claws back up. (CON save 20)
+FEED Wren Quarryman is killed by a bandit.
+FEED A building is burning!
+FEED The townsfolk raise the ruin again.
+FEED Mira Quarryman is killed by a bandit.
+DIRECTOR t=1200.6 CUT hero_1004 shot=follow pri=34.3 why=max_hold held_prev=10.0 pace=0.6 | fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=34.3(town life), tour_5/push=10.0(quiet baseline)
+MUSTER timed out: dists=[191, 192, 218, 315] vis=true stay=true route=146 inside=false
+DIRECTOR t=1202.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=32.3(town life), tour_5/push=10.0(quiet baseline)
+FEED Rask Thatcher goes down and claws back up. (CON save 13)
+FEED Rask Thatcher is killed by a bandit.
+FEED A building is burning!
+FEED Harl Hollow goes down and claws back up. (CON save 20)
+FEED Harl Hollow the sage is cut down defending Bellmire by a bandit. Level 1, 0 kills. !reroll to rise again.
+DIRECTOR t=1212.6 CUT tour_5 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | hero_1004/follow=31.0(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED Hilda Coalfoot rolls a 20 on a bandit!
+DIRECTOR t=1214.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=31.1(town life REPEAT-held-out), tour_1/push=4.0(quiet baseline same-shot-6)
+FEED The attack is driven off. The gates hold.
+FEED Osric Quarryman is sworn into the watch.
+DIRECTOR t=1237.7 CUT tour_1 shot=push pri=10.0 why=max_hold held_prev=23.1 pace=1.4 | hero_1004/follow=33.8(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+DIRECTOR t=1247.8 CUT fish_557104258396 shot=follow pri=60.0 why=hotter held_prev=10.0 pace=1.0 | fish_557104258396/follow=60.0(catch), hero_1004/follow=32.0(town life REPEAT-held-out), tour_6/push=4.0(quiet baseline same-shot-6)
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 2, the watch 14 - the watch is ready for them.
+RAID started at 1250.00329763322
+DIRECTOR t=1250.8 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=3.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_557104258396/follow=60.0(catch), hero_1004/follow=33.5(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+DIRECTOR t=1260.9 CUT tour_6 shot=push pri=10.0 why=max_hold held_prev=10.1 pace=0.6 | fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=31.6(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+DIRECTOR t=1262.9 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=34.7(town life REPEAT-held-out), tour_3/push=4.0(quiet baseline same-shot-6)
+FEED Hilda Stonehand is sworn into the watch.
+DIRECTOR t=1272.9 CUT tour_3 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | hero_1004/follow=33.2(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+DIRECTOR t=1274.9 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=32.5(town life REPEAT-held-out), tour_0/push=4.0(quiet baseline same-shot-6)
+DIRECTOR t=1285.0 CUT tour_0 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | hero_1004/follow=32.2(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+DIRECTOR t=1287.0 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=33.8(town life REPEAT-held-out), tour_4/push=4.0(quiet baseline same-shot-6)
+FEED Hilda Coalfoot goes down and claws back up. (CON save 11)
+FEED Hilda Coalfoot is knocked senseless, but lives. The guild's grace - once.
+FEED Dunn Hollow rolls a 20 - and skeleton minion falls.
+FEED Dunn Hollow fails the save. (CON 6)
+FEED Dunn Hollow the necromancer is cut down defending Bellmire by skeleton rogue. Level 1, 0 kills. !reroll to rise again.
+FEED Ysolde Quarryman goes down and claws back up. (CON save 17)
+FEED Ysolde Quarryman the mage is cut down defending Bellmire by skeleton warrior. Level 1, 0 kills. !reroll to rise again.
+DIRECTOR t=1297.0 CUT fish_558446435735 shot=follow pri=60.0 why=max_hold held_prev=10.0 pace=0.6 | fish_558446435735/follow=60.0(catch), hero_1004/follow=32.7(town life), tour_4/push=10.0(quiet baseline)
+DIRECTOR t=1299.0 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=28.3(town life same-shot-6), tour_4/push=10.0(quiet baseline)
+FEED Viewer1004 rolls a 20 - and skeleton warrior falls.
+FEED The attack is driven off. The gates hold.
+FEED Hilda Coalfoot comes round.
+DIRECTOR t=1306.1 CUT hero_1004 shot=follow pri=33.1 why=shot_gone held_prev=7.0 pace=1.0 | fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=33.1(town life), tour_4/push=10.0(quiet baseline)
+FEED The townsfolk raise the ruin again.
+FEED Rolf Fenwick is sworn into the watch.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 3, the watch 21 - the watch is ready for them.
+DIRECTOR t=1328.2 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=22.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=32.5(town life), tour_4/push=10.0(quiet baseline)
+FEED A building is burning!
+DIRECTOR t=1338.2 CUT tour_4 shot=push pri=10.0 why=max_hold held_prev=10.1 pace=0.6 | hero_1004/follow=32.3(town life REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+DIRECTOR t=1340.2 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=30.9(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Ysolde the Younger goes down and claws back up. (CON save 19)
+FEED Ysolde the Younger is knocked senseless, but lives. The guild's grace - once.
+FEED Rolf Fenwick goes down and claws back up. (CON save 18)
+FEED Rolf Fenwick is killed by a bandit.
+DIRECTOR t=1350.3 CUT tour_2 shot=establishing pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | hero_1004/follow=30.8(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Corvin Hollow is sworn into the watch.
+DIRECTOR t=1352.3 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=34.4(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED Hilda Stonehand goes down and claws back up. (CON save 17)
+FEED The attack is driven off. The gates hold.
+FEED Ysolde the Younger comes round.
+DIRECTOR t=1369.3 CUT tour_7 shot=push pri=10.0 why=max_hold held_prev=17.1 pace=1.0 | fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=30.2(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED The new frame slips. The townsfolk will try again. (11 vs DC 12)
+FEED Petra Thatcher settles in Bellmire, looking for work.
+DIRECTOR t=1379.4 CUT fish_557104258396 shot=follow pri=60.0 why=hotter held_prev=10.0 pace=1.0 | fish_557104258396/follow=60.0(catch), hero_1004/follow=30.9(town life REPEAT-held-out), tour_5/push=4.0(quiet baseline same-shot-6)
+FEED Edda Quarryman is sworn into the watch.
+FEED The townsfolk raise the ruin again.
+DIRECTOR t=1397.4 CUT hero_1004 shot=follow pri=24.2 why=max_hold held_prev=18.1 pace=1.0 | hero_1004/follow=24.2(town life same-shot-6), tour_5/push=10.0(quiet baseline)
+DIRECTOR t=1407.5 CUT fish_558446435735 shot=follow pri=54.0 why=hotter held_prev=10.1 pace=1.0 | fish_558446435735/follow=54.0(catch same-shot-6), hero_1004/follow=33.5(town life), tour_5/push=10.0(quiet baseline)
+DIRECTOR t=1427.6 CUT tour_5 shot=push pri=10.0 why=max_hold held_prev=20.1 pace=1.0 | fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=31.5(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED Garm of the Ford is sworn into the watch.
+DIRECTOR t=1460.7 CUT tour_1 shot=push pri=4.0 why=max_hold held_prev=33.1 pace=1.0 | fish_557104258396/follow=60.0(catch REPEAT-held-out), hero_1004/follow=32.3(town life REPEAT-held-out), tour_1/push=4.0(quiet baseline same-shot-6)
+MUSTER timed out: dists=[272, 148] vis=true stay=false route=36 inside=false
+FEED Tove Ashwood is sworn into the watch.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 3, the watch 4 - the watch is ready for them.
+DIRECTOR t=1480.8 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=20.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=32.3(town life REPEAT-held-out), tour_6/push=4.0(quiet baseline same-shot-6)
+FEED The townsfolk raise the ruin again.
+FEED A building is burning!
+DIRECTOR t=1490.8 CUT hero_1004 shot=follow pri=30.1 why=max_hold held_prev=10.1 pace=0.6 | hero_1004/follow=30.1(town life), tour_6/push=10.0(quiet baseline)
+DIRECTOR t=1492.9 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=32.6(town life), tour_6/push=10.0(quiet baseline)
+FEED Tove Ashwood is killed by a bandit.
+FEED A building is burning!
+FEED Maela Hollow goes down and claws back up. (CON save 12)
+FEED Maela Hollow is knocked senseless, but lives. The guild's grace - once.
+DIRECTOR t=1502.9 CUT tour_6 shot=push pri=10.0 why=max_hold held_prev=10.1 pace=0.6 | hero_1004/follow=33.3(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED Garm of the Ford goes down and claws back up. (CON save 12)
+FEED Garm of the Ford is killed by a bandit.
+DIRECTOR t=1504.9 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=31.2(town life REPEAT-held-out), tour_3/push=4.0(quiet baseline same-shot-6)
+FEED The new frame slips. The townsfolk will try again. (11 vs DC 12)
+FEED A building is burning!
+FEED Mira Thatcher is sworn into the watch.
+FEED The attack is driven off. The gates hold.
+FEED Maela Hollow comes round.
+DIRECTOR t=1521.0 CUT fish_558446435735 shot=follow pri=60.0 why=max_hold held_prev=16.1 pace=1.0 | fish_558446435735/follow=60.0(catch), hero_1004/follow=31.1(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED Ysolde Fenwick settles in Bellmire, looking for work.
+DIRECTOR t=1547.2 CUT tour_3 shot=push pri=10.0 why=max_hold held_prev=26.2 pace=1.4 | hero_1004/follow=33.0(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED Corvin Coalfoot is sworn into the watch.
+FEED The new frame slips. The townsfolk will try again. (8 vs DC 12)
+DIRECTOR t=1553.2 CUT fish_557104258396 shot=follow pri=60.0 why=hotter held_prev=6.0 pace=1.0 | fish_557104258396/follow=60.0(catch), hero_1004/follow=32.6(town life REPEAT-held-out), tour_0/push=4.0(quiet baseline same-shot-6)
+DIRECTOR t=1571.3 CUT tour_0 shot=push pri=10.0 why=max_hold held_prev=18.1 pace=1.0 | hero_1004/follow=30.9(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+FEED The townsfolk raise the ruin again.
+DIRECTOR t=1581.4 CUT hero_1004 shot=follow pri=33.7 why=hotter held_prev=10.1 pace=1.4 | hero_1004/follow=33.7(town life), tour_4/push=4.0(quiet baseline same-shot-6)
+MUSTER timed out: dists=[317, 265] vis=true stay=false route=4 inside=false
+FEED Corvin Bramble is sworn into the watch.
+DIRECTOR t=1599.5 CUT tour_4 shot=push pri=10.0 why=max_hold held_prev=18.1 pace=1.0 | fish_558446435735/follow=60.0(catch REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 2, the watch 5 - the watch is ready for them.
+DIRECTOR t=1613.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=14.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=31.4(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED The townsfolk raise the ruin again.
+FEED A building is burning!
+DIRECTOR t=1623.6 CUT tour_2 shot=establishing pri=10.0 why=max_hold held_prev=10.1 pace=0.6 | hero_1004/follow=31.1(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+DIRECTOR t=1625.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=31.0(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED Hilda Ashwood's charge crashes into a bandit!
+FEED Corvin Bramble is killed by a bandit.
+FEED A building is burning!
+FEED Corvin Coalfoot is sworn into the watch.
+FEED Cort Fenwick goes down and claws back up. (CON save 15)
+FEED Cort Fenwick is knocked senseless, but lives. The guild's grace - once.
+DIRECTOR t=1635.7 CUT tour_7 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | hero_1004/follow=31.0(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED A building is burning!
+DIRECTOR t=1637.7 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=32.1(town life REPEAT-held-out), tour_5/push=4.0(quiet baseline same-shot-6)
+FEED The townsfolk raise the ruin again.
+FEED The attack is driven off. The gates hold.
+FEED Cort Fenwick comes round.
+FEED Corvin Coalfoot settles in Bellmire, looking for work.
+DIRECTOR t=1658.8 CUT fish_558446435735 shot=follow pri=60.0 why=max_hold held_prev=21.1 pace=1.0 | fish_558446435735/follow=60.0(catch), hero_1004/follow=32.1(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED The new frame slips. The townsfolk will try again. (4 vs DC 12)
+FEED Petra Bramble is sworn into the watch.
+DIRECTOR t=1679.9 CUT hero_1004 shot=follow pri=27.0 why=max_hold held_prev=21.1 pace=1.0 | hero_1004/follow=27.0(town life same-shot-6), tour_5/push=10.0(quiet baseline)
+DIRECTOR t=1682.9 CUT fish_557104258396 shot=follow pri=54.0 why=hotter held_prev=3.0 pace=1.0 | fish_558446435735/follow=60.0(catch REPEAT-held-out), fish_557104258396/follow=54.0(catch same-shot-6), hero_1004/follow=30.1(town life), tour_5/push=10.0(quiet baseline)
+FEED The new frame slips. The townsfolk will try again. (5 vs DC 12)
+FEED The new frame slips. The townsfolk will try again. (6 vs DC 12)
+DIRECTOR t=1708.0 CUT tour_5 shot=push pri=10.0 why=max_hold held_prev=25.1 pace=1.0 | fish_558446435735/follow=60.0(catch REPEAT-held-out), hero_1004/follow=33.6(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED Osric Thatcher settles in Bellmire, looking for work.
+MUSTER timed out: dists=[137, 6, 155] vis=true stay=false route=71 inside=false
+FEED The townsfolk raise the ruin again.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 7, the watch 13 - the watch is ready for them.
+FEED The mounted watch rides out to meet them - 1 riders.
+DIRECTOR t=1732.1 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=24.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=34.3(town life REPEAT-held-out), tour_1/push=4.0(quiet baseline same-shot-6)
+DIRECTOR t=1742.1 CUT tour_1 shot=push pri=10.0 why=max_hold held_prev=10.0 pace=0.6 | hero_1004/follow=32.7(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+DIRECTOR t=1744.1 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=32.4(town life REPEAT-held-out), tour_6/push=4.0(quiet baseline same-shot-6)
+FEED The townsfolk raise the ruin again.
+FEED A building is burning!
+FEED Petra Bramble is killed by a bandit.
+DIRECTOR t=1754.2 CUT tour_6 shot=push pri=10.0 why=max_hold held_prev=10.1 pace=0.6 | hero_1004/follow=30.7(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+DIRECTOR t=1756.2 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_1004/follow=34.7(town life REPEAT-held-out), tour_3/push=4.0(quiet baseline same-shot-6)
+FEED Hilda Ashwood's charge crashes into a bandit!
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=1779.3 CUT hero_1004 shot=follow pri=32.9 why=max_hold held_prev=23.1 pace=1.4 | hero_1004/follow=32.9(town life), tour_3/push=10.0(quiet baseline)
+FEED Maela Thatcher settles in Bellmire, looking for work.
+DIRECTOR t=1789.4 CUT fish_557104258396 shot=follow pri=54.0 why=hotter held_prev=10.1 pace=1.0 | fish_557104258396/follow=54.0(catch same-shot-6), hero_1004/follow=34.5(town life), tour_3/push=10.0(quiet baseline)
+FEED Mira Rivers is sworn into the watch.
+L64_LONG cuts=183 shots={ "follow": 59, "shoulder": 75, "push": 41, "hard_cut": 2, "establishing": 6 } natural_death=false bad=0 dual_ambient_frames=0 of 138053 worst_streak_s=0.00
+L64_LONG OK

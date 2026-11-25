@@ -1,0 +1,256 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+ERROR: Cannot open file 'res://.godot/imported/river_flow.ogg-94e79d5797cc50d9e2011a3046a03fd4.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3863)
+ERROR: Failed loading resource: res://.godot/imported/river_flow.ogg-94e79d5797cc50d9e2011a3046a03fd4.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3863)
+ERROR: Failed loading resource: res://assets/audio/amb/river_flow.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3863)
+ERROR: Cannot open file 'res://.godot/imported/market_murmur.ogg-15d178c679870446c12935288669cf3e.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3868)
+ERROR: Failed loading resource: res://.godot/imported/market_murmur.ogg-15d178c679870446c12935288669cf3e.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3868)
+ERROR: Failed loading resource: res://assets/audio/amb/market_murmur.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3868)
+ERROR: Cannot open file 'res://.godot/imported/forge_fire.ogg-999692f81a13165066ac82c262ef5609.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3873)
+ERROR: Failed loading resource: res://.godot/imported/forge_fire.ogg-999692f81a13165066ac82c262ef5609.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3873)
+ERROR: Failed loading resource: res://assets/audio/amb/forge_fire.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3873)
+ERROR: Cannot open file 'res://.godot/imported/bellmire_day.ogg-137ca865af59973a53f9edee69acf6c9.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://.godot/imported/bellmire_day.ogg-137ca865af59973a53f9edee69acf6c9.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://assets/audio/music/bellmire_day.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+FEED Viewer1001 takes the oath as a human knight (valley-born, like most of Bellmire). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED Viewer1002 takes the oath as a human knight (valley-born, like most of Bellmire). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED Viewer1003 takes the oath as an orc knight (came over the west road and stayed; sees in the dark). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED Viewer1004 takes the oath as a dwarf knight (down from the hill mines; sees in the dark). Stout, shielded. Hard to kill, slow to finish a fight.
+DIRECTOR t=0.0 CUT chat_1004 shot=follow pri=49.9 why=start held_prev=0.0 pace=1.0 | chat_1004/follow=49.9(chat 0s ago), hero_1003/follow=32.0(town life), tour_0/push=10.0(quiet baseline)
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+DIRECTOR t=10.1 CUT fish_558396104087 shot=follow pri=54.0 why=better_after_min held_prev=10.1 pace=1.0 | fish_558396104087/follow=54.0(catch same-shot-6), chat_1004/follow=48.7(chat 10s ago), hero_1002/follow=24.3(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+ERROR: Cannot open file 'res://.godot/imported/bellmire_night.ogg-12943518bf65c9362768224767f2ac2c.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://.godot/imported/bellmire_night.ogg-12943518bf65c9362768224767f2ac2c.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://assets/audio/music/bellmire_night.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+FEED Hilda Bramble settles in Bellmire, looking for work.
+DIRECTOR t=28.2 CUT fish_557053926748 shot=follow pri=54.0 why=max_hold held_prev=18.2 pace=1.0 | fish_557053926748/follow=54.0(catch same-shot-6), chat_1004/follow=46.6(chat 29s ago REPEAT-held-out), hero_1003/follow=27.8(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Garm of the Ford settles in Bellmire, looking for work.
+FEED Sable of the Ford settles in Bellmire, looking for work.
+DIRECTOR t=53.5 CUT hero_1003 shot=follow pri=25.2 why=max_hold held_prev=25.2 pace=1.0 | fish_558396104087/follow=60.0(catch REPEAT-held-out), chat_1004/follow=43.7(chat 54s ago REPEAT-held-out), hero_1003/follow=25.2(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+MUSTER timed out: dists=[93, 6, 78, 109, 55, 58, 54, 86] vis=true stay=false route=67 inside=false
+FEED Harl Ashwood settles in Bellmire, looking for work.
+FORCE dbg susp=false proc=true dsub_same=true eye_same=true mode=grid
+FORCE lane=bits onto director subject @Node3D@7316
+DIRECTOR t=74.7 CUT hero_1001 shot=follow pri=24.7 why=max_hold held_prev=21.2 pace=1.0 | fish_558396104087/follow=60.0(catch REPEAT-held-out), chat_1004/follow=41.2(chat 75s ago REPEAT-held-out), hero_1001/follow=24.7(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FORCE result: pane yielded=true
+FEED Harl Rivers settles in Bellmire, looking for work.
+FEED Bran Stonehand and 2 others descend where the bell's note fails.
+FEED They carry 9 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed slime, 1 cave bat, 1 hollowed puglin.
+FEED A ceremonial way runs dead straight to a door meant to stay shut.
+DIRECTOR t=84.8 CUT fight_2758476332291 shot=shoulder pri=75.0 why=hotter held_prev=10.1 pace=1.0 | fight_2758476332291/shoulder=75.0(hurt 0.00), chat_1004/follow=39.2(chat 92s ago REPEAT-held-out), hero_1004/follow=26.3(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Corvin Coalfoot rolls a 20 - and the hollowed puglin is gone.
+FEED The hollowed slime divides.
+FEED Corvin Coalfoot turns on the wounded hollowed slimeling to finish it.
+FEED Bran Stonehand searches (Investigation 5) and turns up 6 gold on floor 1.
+FEED Held. Somebody sit down before they fall down.
+FEED Bran Stonehand searches the chest - Successfully found loot!! 24 gold (Investigation 13 vs DC 10).
+FEED Bran Stonehand and 2 others take a breather, and press on deeper.
+FEED Harl Rivers steps on a slot in the floor - a blade! DEX 21 vs DC 10, 7 damage (halved).
+L644 frames=5948 dual_ambient=0 dual_paid=0 worst_streak_s=0.00 swaps=1
+L644_HANDOFF OK
+
+=== TEST DONE

@@ -1,0 +1,54 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Aen and 3 others descend down past the toll-post. The reeve nods them on.
+FEED They carry 48 flasks of oil between them.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave spider, 1 cave bat, 1 slime, 1 hollowed cave spider.
+FEED The forge is banked, not cold. Somebody keeps it.
+S85 frame=1 floor=2  -> fight
+FEED Corvin casts Smite at slime.
+FEED Bram casts Bolt at slime.
+FEED The slime divides.
+FEED Corvin reaches for smite and finds the shelf bare (10 vs DC 11).
+FEED Bram casts Chain Bolt at cave bat.
+FEED Corvin casts Smite at cave bat.
+S85_DUMP stalled frame=1801 floor=2 state=fight back_to=
+   mon cave spider state=0 hp=26.0/26.0 pos=(25.99897, -400.0, 21.60414) in_tree=true cell=(21, 21) target=<null>
+   mon cave bat state=3 hp=-5.1/13.0 pos=(22.12955, -400.1977, 34.82824) in_tree=true cell=(20, 25) target=<null>
+   mon <freed>
+   mon hollowed cave spider state=0 hp=19.5/19.5 pos=(27.62134, -400.0, -48.00039) in_tree=true cell=(21, 4) target=<null>
+   mon <freed>
+   mon <freed>
+   hero 29c1 hp=77.6 pos=(25.79967, -400.0, 31.06817) cell=(21, 24)
+   hero 29c2 hp=47.0 pos=(25.99997, -400.0, 35.34519) cell=(21, 25)
+   hero 29c3 hp=60.0 pos=(26.0002, -400.0, 36.38548) cell=(21, 25)
+   hero 29c4 hp=74.7 pos=(25.95545, -400.0, 30.1531) cell=(21, 24)
+FEED Bram casts Fire at cave spider.
+FEED Corvin spots a pressure plate (Perception 12 vs DC 11) and steps round it.
+S85_DUMP stalled frame=3601 floor=2 state=fight back_to=
+   mon <freed>
+   mon <freed>
+   mon <freed>
+   mon hollowed cave spider state=0 hp=5.6/19.5 pos=(26.02922, -400.0, -12.24173) in_tree=true cell=(21, 13) target=<null>
+   mon <freed>
+   mon <freed>
+   hero 29c1 hp=77.6 pos=(25.70719, -400.0, -10.27459) cell=(21, 13)
+   hero 29c2 hp=47.0 pos=(25.99998, -400.0, -2.990001) cell=(21, 15)
+   hero 29c3 hp=60.0 pos=(33.9999, -400.0, 5.164022) cell=(23, 17)
+   hero 29c4 hp=58.2 pos=(26.29026, -400.0, -10.37514) cell=(21, 13)
+FEED Bram searches (Investigation 13) and turns up 23 gold on floor 2.
+FEED They sit with their backs to the wall and their boots out.
+S85 frame=3694 floor=2 fight -> search
+S85_DUMP end frame=4001 floor=2 state=search back_to=
+   mon <freed>
+   mon <freed>
+   mon <freed>
+   mon hollowed cave spider state=3 hp=-6.2/19.5 pos=(26.02922, -400.2137, -12.24173) in_tree=true cell=(21, 13) target=<null>
+   mon <freed>
+   mon <freed>
+   hero 29c1 hp=77.6 pos=(25.70719, -400.0, -10.27459) cell=(21, 13)
+   hero 29c2 hp=47.0 pos=(17.56662, -400.0, -3.981642) cell=(19, 15)
+   hero 29c3 hp=60.0 pos=(33.99994, -400.0, 2.993432) cell=(23, 17)
+   hero 29c4 hp=45.6 pos=(26.29026, -400.0, -10.37514) cell=(21, 13)
+S85_DIAG DONE

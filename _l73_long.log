@@ -1,0 +1,1582 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:814)
+       [1] _ready (res://scripts/town.gd:370)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+FEED JestFan takes the oath as a dwarf knight (down from the hill mines; sees in the dark). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED Mira takes the oath as an elf ranger (out of the old woods past the fields; sees in the dark). Kills things before they arrive.
+FEED Tuck takes the oath as a halfling rogue (from the field-farms; a natural 1 is rolled again). Fast and sharp, but folds under a real hit.
+FEED BigAxe takes the oath as an orc barbarian (came over the west road and stayed; sees in the dark). The most meat. Swings heavy, guards nothing.
+FEED The floor above goes quiet the moment the band is off it.
+FEED They carry 4 flasks of oil between them.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 2 bog frogs, 1 cave spider.
+FEED The bellows breathe by themselves.
+DIRECTOR t=0.0 CUT fight_755880721287 shot=shoulder pri=85.0 why=start held_prev=0.0 pace=1.0 | fight_755880721287/shoulder=85.0(delve start hurt 0.00), chat_2104/follow=49.6(chat 3s ago), hero_2103/follow=32.7(town life), tour_0/push=10.0(quiet baseline)
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+FEED Mira rolls a 20 - and the bog frog is gone.
+FEED Mira searches (Investigation 14) and turns up 23 gold on floor 2.
+FEED The lamps come back brighter than they went down.
+FEED Mira finds a vial of Collier's Brew.
+FEED Mira searches the chest - Successfully found loot!! 33 gold (Investigation 17 vs DC 11).
+FEED JestFan, Mira take a breather, and press on deeper.
+FEED Dunn Coalfoot settles in Bellmire, looking for work.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 3; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned cave bat, 1 giant rat, 1 drowned slime, 1 drowned risen bones.
+FEED The oil is running low.
+FEED The drowned slime divides.
+FEED Mira turns on the wounded drowned slimeling to finish it.
+FEED Mira rolls a 20 - and the drowned slimeling is gone.
+FEED Mira searches (Investigation 6) and turns up 26 gold on floor 3.
+FEED Clear. The lamps stop shaking first, then the hands.
+DIRECTOR t=16.2 CUT breath_16 shot=breath pri=20.0 why=breath held_prev=16.2 pace=1.0 | delve_755880721287/follow=55.0(walking), chat_2104/follow=47.4(chat 22s ago), hero_2103/follow=33.2(town life), tour_0/push=10.0(quiet baseline)
+FEED Mira spots a pressure plate (Perception 23 vs DC 11) and steps round it.
+FEED Battered, the party climbs back out from floor 3.
+FEED JestFan, Mira come home to Bellmire with 82 gold, 3 ore, 2 stone, 1 piece of salvaged gear and 1 potion. 10 kills between them.
+FEED Mira is fitted with Tanner's Jerkin. (+10 hp) Haggled 15% off (17).
+DIRECTOR t=20.2 CUT chat_2104 shot=follow pri=46.9 why=hotter held_prev=4.0 pace=1.0 | chat_2104/follow=46.9(chat 26s ago), hero_2104/follow=30.9(town life), tour_4/push=10.0(quiet baseline)
+FEED Corvin Ashwood settles in Bellmire, looking for work.
+FEED Wren Hollow settles in Bellmire, looking for work.
+DIRECTOR t=35.3 CUT fish_559285296542 shot=follow pri=54.0 why=better_after_min held_prev=15.1 pace=1.0 | fish_559285296542/follow=54.0(catch same-shot-6), chat_2104/follow=45.2(chat 41s ago), hero_2102/follow=28.7(town life same-shot-6), tour_3/push=10.0(quiet baseline)
+MUSTER timed out: dists=[94, 95, 91, 64, 124, 81, 65, 47] vis=true stay=false route=67 inside=false
+FEED Sable the Younger settles in Bellmire, looking for work.
+DIRECTOR t=60.5 CUT hero_2103 shot=follow pri=29.0 why=max_hold held_prev=25.2 pace=1.0 | chat_2104/follow=42.2(chat 66s ago REPEAT-held-out), hero_2103/follow=29.0(town life same-shot-6), tour_5/push=10.0(quiet baseline)
+FEED Ingrid Ashwood settles in Bellmire, looking for work.
+FEED Cort Bramble and 3 others descend down, flasks measured out loud at the door.
+FEED They carry 12 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 puglins, 1 skeleton minion.
+FEED Candle stubs by the dozen, burned down in a single night.
+DIRECTOR t=64.6 CUT fight_4187593148690 shot=shoulder pri=75.0 why=hotter held_prev=4.1 pace=1.0 | fight_4187593148690/shoulder=75.0(delve start hurt 0.00), fish_557943119203/follow=54.0(catch same-shot-6), chat_2104/follow=41.4(chat 73s ago REPEAT-held-out), hero_2104/follow=28.8(town life same-shot-6), tour_1/push=10.0(quiet baseline)
+FEED Harl Hollow casts Bolt at puglin.
+FEED Harl Hollow's fire turns in their hand - the scar answers (7 vs DC 10).
+FEED Cort Bramble searches (Investigation 6) and turns up 8 gold on floor 1.
+FEED Over. The stair is kinder on the way up.
+FEED Cort Bramble searches the chest - Successfully found loot!! 32 gold (Investigation 20 vs DC 10).
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 bog frog, 1 cave spider, 1 slime, 1 puglin.
+FEED Ysolde Quarryman and 3 others descend below with the lamps lit and the oil topped.
+FEED They carry 12 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 giant rats, 1 slime.
+FEED A tomb cut for one, filled by a hundred.
+FEED Aldric Hollow settles in Bellmire, looking for work.
+FEED Harl Hollow casts Fire at slime.
+FEED Aldric Stonehand casts Frost at slime.
+FEED Cort the Younger casts Bolt at slime.
+FEED The slime divides.
+FEED Aldric Quarryman turns on the wounded slimeling to finish it.
+FEED The slime divides.
+FEED Harl Hollow casts Fire at slimeling.
+FEED Ysolde Quarryman casts Frost at slimeling.
+FEED Aldric Stonehand casts Bolt at giant rat.
+FEED Cort the Younger casts Fire at giant rat.
+FEED Harl Hollow casts Bolt at cave spider.
+FEED Ysolde Quarryman casts Bolt at giant rat.
+FEED Ysolde Quarryman searches (Investigation 14) and turns up 12 gold on floor 1.
+FEED Done, and the draught has changed direction.
+FEED Ysolde Quarryman finds a vial of Mirethistle Tincture.
+FEED Harl Hollow casts Fire at puglin.
+FEED Harl Hollow asks for bolt. The scar is not taking requests (7 vs DC 11).
+FEED Cort Bramble searches (Investigation 18) and turns up 26 gold on floor 2.
+FEED The room empties. The lamps steady.
+FEED Ysolde Quarryman and 3 others take a breather, and press on deeper.
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+FEED Aldric Quarryman cracks the chain off a captive - 42 gold passes to the party, split 4 ways.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 puglin, 1 bog frog, 2 slimes.
+FEED Ysolde Quarryman casts Frost at slime.
+FEED Aldric Stonehand casts Bolt at slime.
+FEED Cort the Younger casts Bolt at slime.
+FEED The slime divides.
+FEED Aldric Stonehand turns on the wounded slimeling to finish it.
+FEED Cort the Younger turns on the wounded slimeling to finish it.
+FEED Talen Stonehand turns on the wounded slimeling to finish it.
+FEED Aldric Stonehand casts Frost at bog frog.
+FEED Ysolde Quarryman casts Bolt at bog frog.
+FEED Cort the Younger casts Fire at bog frog.
+DIRECTOR t=80.7 CUT breath_80 shot=breath pri=20.0 why=breath held_prev=16.1 pace=1.0 | fight_5783844584549/shoulder=75.0(delve start hurt 0.00), fish_557943119203/follow=60.0(catch), delve_4187593148690/follow=45.0(walking), chat_2104/follow=38.7(chat 96s ago REPEAT-held-out), hero_2102/follow=31.5(town life)
+FEED Ysolde Quarryman casts Frost at puglin.
+FEED Aldric Stonehand casts Bolt at puglin.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 skeleton minion, 1 drowned slime, 1 drowned puglin, 1 hollowed slime.
+FEED Ysolde Quarryman's bolt goes off a beat late and a foot wide (10 vs DC 11).
+FEED Cort the Younger pays for bolt and the scar keeps the receipt (9 vs DC 11).
+FEED Aldric Stonehand's bolt arrives late, and small (1 vs DC 11).
+FEED Aldric Stonehand casts Frost at slime.
+FEED Ysolde Quarryman casts Bolt at slime.
+FEED Cort the Younger casts Fire at slime.
+FEED Ysolde Quarryman searches (Investigation 10) and turns up 17 gold on floor 2.
+FEED Blades wiped, breaths caught. The door stands open.
+FEED Harl Hollow casts Fire at drowned puglin.
+FEED Cort Bramble rolls a 20 - and the drowned puglin is gone.
+FEED Mira Ashwood settles in Bellmire, looking for work.
+FEED Ysolde Quarryman searches the chest - ...no loot... (Investigation 3 vs DC 11).
+FEED Ysolde Quarryman cannot get to the chest and leaves it.
+FEED Ysolde Quarryman and 3 others take a breather, and press on deeper.
+DIRECTOR t=84.8 CUT delve_5783844584549 shot=follow pri=55.0 why=hotter held_prev=4.0 pace=1.0 | fight_4187593148690/shoulder=76.4(hurt 0.14 REPEAT-held-out), delve_5783844584549/follow=55.0(delve start), chat_2104/follow=38.0(chat 103s ago REPEAT-held-out), hero_2101/follow=33.2(town life), tour_5/push=10.0(quiet baseline)
+FEED The hollowed slime divides.
+FEED Harl Hollow casts Fire at drowned slime.
+FEED Cort Bramble searches (Investigation 11) and turns up 33 gold on floor 3.
+FEED Floor 3 gives up its gold and keeps its grudge.
+FEED Cort Bramble finds a vial of Mirethistle Tincture.
+FEED Cort Bramble searches the chest - Successfully found loot!! 42 gold (Investigation 16 vs DC 11).
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned giant rat, 1 hollowed cave spider, 1 hollowed giant rat, 1 risen bones.
+DIRECTOR t=89.8 CUT fight_5783844584549 shot=shoulder pri=75.0 why=hotter held_prev=5.0 pace=1.0 | fight_5783844584549/shoulder=75.0(hurt 0.00), fish_559285296542/follow=60.0(catch REPEAT-held-out), delve_4187593148690/follow=39.0(walking same-shot-6), chat_2104/follow=37.1(chat 110s ago REPEAT-held-out), hero_2102/follow=27.2(town life same-shot-6)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed slime, 1 slime, 1 drowned slime, 1 skeleton minion, 1 drowned risen bones.
+FEED The oil is running low.
+FEED Ysolde Quarryman casts Bolt at hollowed giant rat.
+FEED Aldric Stonehand speaks frost. The scar spells it backwards (8 vs DC 11).
+FEED Harl Hollow's fire goes out sideways into the stone (9 vs DC 12).
+FEED Ysolde Quarryman's frost flickers, thinks better of it, and quits (1 vs DC 11).
+FEED Cort the Younger casts Fire at drowned giant rat.
+FEED Ysolde Quarryman casts Bolt at drowned giant rat.
+FEED The hollowed slime divides.
+FEED Ysolde Quarryman casts Frost at hollowed cave spider.
+FEED Cort the Younger's bolt lands somewhere between a spell and a hiccup (1 vs DC 11).
+FEED Ysolde Quarryman searches (Investigation 13) and turns up 34 gold on floor 3.
+FEED Finished. The next room has gone from silent to listening.
+FEED Cort Bramble steps on a spiked plate - spikes! DEX 11 vs DC 12, 8 damage.
+FEED Harl Hollow turns on the wounded slimeling to finish it.
+FEED Aldric Quarryman turns on the wounded slimeling to finish it.
+FEED Sable Quarryman settles in Bellmire, looking for work.
+FEED Ysolde Quarryman and 3 others take a breather, and press on deeper.
+FEED Cort Bramble turns on the wounded drowned slimeling to finish it.
+FEED Harl Hollow turns on the wounded drowned slimeling to finish it.
+FEED Aldric Quarryman turns on the wounded drowned slimeling to finish it.
+FEED Ysolde of the Ford turns on the wounded drowned slimeling to finish it.
+FEED Cort Bramble searches (Investigation 18) and turns up 51 gold on floor 4.
+FEED The way ahead is open, and it knows it.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 cave bats, 1 hollowed cave spider, 2 slimes.
+FEED The oil is running low.
+FEED Cort the Younger rolls a 20 for initiative and is moving before anything else.
+FEED Aldric Stonehand casts bolt; the scar casts something else (9 vs DC 12).
+FEED Ysolde Quarryman's bolt comes apart like wet rope (1 vs DC 12).
+FEED The slime divides.
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+FEED 6 creatures boil out of the dungeon!
+FEED Initiative: the raiders 14, the watch 9 - the raiders strike first.
+FEED Talen Stonehand rolls a 20 - and the slimeling is gone.
+FEED Harl Hollow touches the altar - a curse. Something older than the floor takes a bite.
+FEED Cort the Younger tries bolt and the ground gives it back wrong (6 vs DC 12).
+DIRECTOR t=99.9 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=10.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_5783844584549/shoulder=75.0(hurt 0.00), delve_4187593148690/follow=45.0(walking), hero_2104/follow=31.0(town life), tour_4/push=10.0(quiet baseline)
+FEED 6 creatures boil out of the dungeon!
+FEED Initiative: the raiders 7, the watch 3 - the raiders strike first.
+EVENT raid at 100.0
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 risen bones, 1 bone sentinel, 1 hollowed bone sentinel, 1 drowned skeleton warrior, 1 bone bowman.
+FEED The Rattling Host, Tithe-Collecting rises. Each of its dead carries a purse of bones - fell one and it spills coin and noise.
+FEED The guild has put down The Rattling Host before. Not this one.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Ysolde Quarryman rolls a 20 searching the floor!
+FEED Ysolde Quarryman searches (Investigation 22) and turns up 70 gold on floor 4.
+FEED Cleared. The dark moves back a pace, and no further.
+FEED Ysolde Quarryman finds a vial of Millrace.
+DIRECTOR t=101.9 CUT lord_4187593148690 shot=shoulder pri=100.0 why=lord_rises held_prev=2.0 pace=0.6 | lord_4187593148690/shoulder=100.0(lord), raid/shoulder=95.0(raid live), fight_4187593148690/shoulder=78.0(hurt 0.30 REPEAT-held-out), fish_559285296542/follow=60.0(catch REPEAT-held-out), delve_5783844584549/follow=45.0(walking REPEAT-held-out)
+SHOT l73_raid_100_a shot=shoulder key=lord_4187593148690 dist=9.0
+FEED Harl Hollow's bolt sparks, stutters, and sulks (9 vs DC 12).
+FEED Aldric Ashwood, the chief of Bellmire, is killed by skeleton warrior.
+FEED Ysolde Quarryman and 3 others take a breather, and press on deeper.
+FEED Talen Stonehand steps on a loose flagstone - darts! DEX 14 vs DC 12, 5 damage (halved).
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 4; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 drowned bone sentinels, 1 hollowed bone sentinel, 1 drowned skeleton warrior, 1 risen bones.
+FEED Nightwing, Moulting rises. Shedding, raw and bad-tempered - thinner in the wing and quicker to bite.
+FEED The guild has put down Nightwing before. Not this one.
+FEED Every torch on the floor gutters at once.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Aldric Stonehand calls bolt and something older takes the call (1 vs DC 12).
+FEED Cort Ashwood is killed by skeleton rogue.
+FEED A building is burning!
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Ysolde Quarryman works frost and the scar gives it back inside out (8 vs DC 12).
+FEED Ysolde Coalfoot is killed by skeleton rogue.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Tuck rolls a 20 on skeleton rogue!
+FEED Sable Quarryman goes down and claws back up. (CON save 14)
+FEED Cort the Younger's bolt goes wide, and the wall is unamused (7 vs DC 12).
+FEED Sable Quarryman is killed by skeleton warrior.
+FEED Harl Hollow is cut off and falls back to the others.
+SHOT l73_raid_100_b shot=shoulder key=lord_4187593148690 dist=15.9
+FEED Mira rolls a 20 - and skeleton minion falls.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED The attack is driven off. The gates hold.
+FEED Ysolde Quarryman breaks off to mend Talen Stonehand, who is nearly down.
+FEED Aldric Stonehand breaks off to mend Talen Stonehand, who is nearly down.
+FEED The Rattling Host, Tithe-Collecting shifts, and the fight changes with it.
+FEED Dead men drop out of the harness.
+FEED Talen Stonehand is badly hurt and breaks off, making for the way up.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED The new frame slips. The townsfolk will try again. (5 vs DC 12)
+FEED Harl Hollow casts Fire at The Rattling Host, Tithe-Collecting.
+FEED Aldric Stonehand casts Bolt at drowned skeleton warrior.
+FEED Ysolde Quarryman breaks off to mend Talen Stonehand, who is nearly down.
+FEED Aldric Stonehand breaks off to mend Talen Stonehand, who is nearly down.
+FEED Aldric Stonehand casts Renew at Talen Stonehand.
+FEED Harl Hollow should be dead - and stands back up (17).
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 5.
+FEED Talen Stonehand has the wind back and turns to fight.
+FEED Aldric Stonehand casts Bolt at Nightwing, Moulting.
+FEED Cort Bramble and 3 others get out alive, and come home with what they carried.
+FEED Cort Bramble and 3 others come home to Bellmire with 192 gold, 6 ore, 4 stone, 3 pieces of salvaged gear and 3 potions. 33 kills between them.
+FEED Cort Bramble is fitted with Tanner's Jerkin. (+10 hp) Haggled 11% off (13).
+FEED Harl Hollow is fitted with Reed-Cloth Robe. (+10 hp) A natural 20 at the counter - a quarter off.
+FEED Ysolde of the Ford is fitted with Tanner's Jerkin. (+10 hp) Haggled 10% off (12).
+FEED Bats pour out of the dark around Nightwing.
+DIRECTOR t=112.0 CUT lord_5783844584549 shot=shoulder pri=100.0 why=shot_gone held_prev=10.1 pace=1.0 | lord_5783844584549/shoulder=100.0(lord), fight_5783844584549/shoulder=77.4(hurt 0.24 REPEAT-held-out), hero_2101/follow=34.2(town life), tour_0/push=10.0(quiet baseline)
+FEED Aldric Stonehand casts Bolt at Nightwing, Moulting.
+FEED Ysolde Quarryman is badly hurt and breaks off, making for the way up.
+FEED Talen Stonehand breaks off to mend Ysolde Quarryman, who is nearly down.
+FEED Talen Stonehand's heal slips the words - wild magic (8 vs DC 12).
+FEED Aldric Stonehand breaks off to mend Ysolde Quarryman, who is nearly down.
+FEED Ysolde Quarryman should be dead - and stands back up (15).
+FEED Cort the Younger casts Bolt at Nightwing, Moulting.
+FEED Aldric Stonehand casts Renew at Ysolde Quarryman.
+FEED Aldric Stonehand casts Renew at Ysolde Quarryman.
+FEED A tally by the door, and one scratch more than there are names.
+FEED They carry 13 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 hollowed cave bat, 1 puglin.
+FEED The slabs are lifted and leaned back, every one, from the inside.
+FEED Ysolde Quarryman has the wind back and turns to fight.
+FEED Nightwing, Moulting shifts, and the fight changes with it.
+FEED Aldric Stonehand breaks off to mend Talen Stonehand, who is nearly down.
+FEED Talen Stonehand the paladin falls on floor 5 to the dark below. Level 3, 14 kills. !reroll to rise again.
+FEED Cort the Younger casts Fire at Nightwing, Moulting.
+FEED The new frame slips. The townsfolk will try again. (6 vs DC 12)
+FEED Ysolde Quarryman casts Renew at Aldric Stonehand.
+FEED Aldric Stonehand casts Frost at Nightwing, Moulting.
+FEED Cort the Younger casts Fire at Nightwing, Moulting.
+FEED Ysolde Quarryman breaks off to mend Aldric Stonehand, who is nearly down.
+FEED Harl Hollow casts Bolt at hollowed cave bat.
+FEED Aldric Stonehand breaks off to mend Aldric Stonehand, who is nearly down.
+FEED Aldric Stonehand casts Renew at Aldric Stonehand.
+FEED Ysolde Quarryman casts Bolt at Nightwing, Moulting.
+FEED Aldric Stonehand should be dead - and stands back up (15).
+FEED Aldric Stonehand the sage falls on floor 5 to the dark below. Level 2, 8 kills. !reroll to rise again.
+FEED Cort the Younger casts Bolt at Nightwing, Moulting.
+FEED Harl Hollow's fire takes a step and sits down (7 vs DC 10).
+FEED Nightwing, Moulting is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Ysolde Quarryman casts Renew at Cort the Younger.
+FEED Cort the Younger is badly hurt and breaks off, making for the way up.
+FEED Cort the Younger should be dead - and stands back up (12).
+FEED Cort the Younger the warlock falls on floor 5 to the dark below. Level 2, 2 kills. !reroll to rise again.
+FEED Ysolde Quarryman casts Bolt at Nightwing, Moulting.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 5.
+DIRECTOR t=116.0 CUT death_5783844584549_113 shot=hard_cut pri=90.0 why=death held_prev=4.0 pace=1.0 | death_5783844584549_113/hard_cut=90.0(death), death_5783844584549_114/hard_cut=90.0(death), death_5783844584549_115/hard_cut=90.0(death), fight_10967652016066/shoulder=75.0(delve start hurt 0.00), delve_5783844584549/follow=45.0(walking REPEAT-held-out)
+FEED Ysolde Quarryman and 3 others get out alive, and come home with what they carried.
+FEED Ysolde Quarryman comes home to Bellmire with 133 gold, 6 ore, 4 stone, 3 pieces of salvaged gear and 4 potions. 30 kills between them.
+FEED Ysolde Quarryman is fitted with Reed-Cloth Robe. (+10 hp)
+FEED Cort Bramble searches (Investigation 13) and turns up 11 gold on floor 1.
+FEED Cleared. Somebody write it down before it is argued over.
+FEED Cort Bramble finds a vial of Collier's Brew.
+FEED The townsfolk raise the ruin again.
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+FEED 6 creatures boil out of the dungeon!
+FEED Initiative: the raiders 12, the watch 20 - the watch is ready for them.
+DIRECTOR t=120.1 CUT raid shot=shoulder pri=95.0 why=better_after_min held_prev=4.1 pace=0.6 | raid/shoulder=95.0(raid live), death_5783844584549_113/hard_cut=90.0(death), death_5783844584549_114/hard_cut=90.0(death), death_5783844584549_115/hard_cut=90.0(death), delve_10967652016066/follow=55.0(delve start)
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 cave spiders, 1 bog frog, 1 cave bat.
+FEED Harl Hollow casts Bolt at cave bat.
+FEED Harl Hollow casts Fire at bog frog.
+FEED Harl Hollow casts Bolt at cave spider.
+FEED Cort Bramble searches (Investigation 7) and turns up 17 gold on floor 2.
+FEED Finished. The next room has gone from silent to listening.
+FEED Ysolde Quarryman fails the save. (CON 5)
+FEED Ysolde Quarryman is knocked senseless, but lives. The guild's grace - once.
+FEED A building is burning!
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+FEED The attack is driven off. The gates hold.
+FEED Ysolde Quarryman comes round.
+DIRECTOR t=128.2 CUT delve_10967652016066 shot=follow pri=55.0 why=shot_gone held_prev=8.1 pace=1.0 | delve_10967652016066/follow=55.0(delve start), hero_2104/follow=34.4(town life), tour_0/push=10.0(quiet baseline)
+FEED The townsfolk raise the ruin again.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 slimes, 1 drowned risen bones, 1 puglin.
+DIRECTOR t=133.2 CUT fight_10967652016066 shot=shoulder pri=77.4 why=hotter held_prev=5.0 pace=1.0 | fight_10967652016066/shoulder=77.4(hurt 0.24), hero_2104/follow=25.0(town life same-shot-6), tour_5/push=10.0(quiet baseline)
+FEED Harl Hollow casts Bolt at puglin.
+FEED Harl Hollow reaches for fire and the scar hands back something else (9 vs DC 11).
+FEED Harl Hollow casts Bolt at slime.
+FEED The slime divides.
+FEED Ysolde of the Ford turns on the wounded slimeling to finish it.
+FEED Harl Hollow casts Bolt at drowned risen bones.
+FEED Harl Hollow casts Bolt at slime.
+FEED Cort Bramble searches (Investigation 19) and turns up 40 gold on floor 3.
+FEED Floor 3 cleared - the guild will want its cut.
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 slimes, 3 giant rats.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED The oil is running low.
+DIRECTOR t=143.3 CUT lord_10967652016066 shot=shoulder pri=100.0 why=lord_rises held_prev=10.1 pace=1.0 | lord_10967652016066/shoulder=100.0(lord), fight_10967652016066/shoulder=76.7(hurt 0.17), fish_557943119203/follow=60.0(catch), hero_2103/follow=34.8(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED The slime divides.
+FEED Harl Hollow turns on the wounded slimeling to finish it.
+FEED Harl Hollow turns on the wounded giant rat to finish it.
+FEED Gnawbone's children come squealing.
+FEED Gnawbone shifts, and the fight changes with it.
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Gnawbone falls to Harl Hollow.
+FEED Aldric Quarryman is badly hurt and breaks off, making for the way up.
+FEED Cort Bramble turns on the wounded slimeling to finish it.
+FEED Harl Hollow turns on the wounded slimeling to finish it.
+FEED Gnawbone is slain on floor 4!
+FEED The hoard is split 4 ways - 22 gold each to Cort Bramble, Harl Hollow, Aldric Quarryman, Ysolde of the Ford.
+DIRECTOR t=147.3 CUT breath_147 shot=breath pri=20.0 why=breath held_prev=4.0 pace=1.0 | delve_10967652016066/follow=45.0(walking REPEAT-held-out), hero_2101/follow=30.0(town life), tour_3/push=10.0(quiet baseline)
+FEED Cort Bramble touches the altar - a curse. Something older than the floor takes a bite.
+FEED 6 creatures boil out of the dungeon!
+FEED Initiative: the raiders 16, the watch 9 - the raiders strike first.
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+DIRECTOR t=150.3 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=3.0 pace=0.6 | raid/shoulder=95.0(raid live), delve_10967652016066/follow=45.0(walking REPEAT-held-out), hero_2103/follow=33.8(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 4; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone sentinel, 1 drowned cave spider, 1 hollowed bone bowman, 1 drowned bone bowman, 1 drowned skeleton warrior.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The floor is wet, and getting wetter.
+DIRECTOR t=152.3 CUT lord_10967652016066 shot=shoulder pri=100.0 why=lord_rises held_prev=2.0 pace=0.6 | lord_10967652016066/shoulder=100.0(lord), raid/shoulder=95.0(raid live), fight_10967652016066/shoulder=82.4(hurt 0.74 REPEAT-held-out), hero_2101/follow=34.8(town life), tour_0/push=10.0(quiet baseline)
+FEED Harl Hollow's bolt curdles before it leaves the hand (11 vs DC 12).
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED The attack is driven off. The gates hold.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED The Grubmother's brood spills out of her.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Ysolde of the Ford is cut off and falls back to the others.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED The Grubmother shifts, and the fight changes with it.
+FEED Harl Hollow casts Fire at The Grubmother.
+FEED The Grubmother is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Cort Bramble rolls a 20 - The Grubmother reels.
+FEED Cort Bramble is badly hurt and breaks off, making for the way up.
+FEED Ysolde of the Ford is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Harl Hollow casts Fire at The Grubmother.
+FEED Ysolde of the Ford is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Ysolde of the Ford is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Ysolde of the Ford is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Ysolde of the Ford is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Ysolde of the Ford is cut off and falls back to the others.
+FEED Harl Hollow casts Bolt at The Grubmother.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED The Grubmother falls to Ysolde of the Ford.
+FEED Harl Hollow casts Bolt at slimeling.
+FEED Ysolde of the Ford is cut off and falls back to the others.
+FEED Harl Hollow casts Bolt at slimeling.
+FEED Cort Bramble searches (Investigation 14) and turns up 58 gold on floor 5.
+FEED The air smells of smoke and settled debts.
+DIRECTOR t=164.4 CUT breath_164 shot=breath pri=20.0 why=breath held_prev=12.1 pace=1.0 | fish_559285296542/follow=60.0(catch), delve_10967652016066/follow=45.0(walking REPEAT-held-out), hero_2101/follow=34.6(town life), tour_4/push=10.0(quiet baseline)
+FEED Cort Bramble searches the chest - ...no loot... (Investigation 3 vs DC 12).
+FEED Petra the Younger settles in Bellmire, looking for work.
+FEED Cort Bramble searches the chest - Successfully found loot!! 59 gold (Investigation 18 vs DC 12).
+FEED Cort Bramble and 3 others take a breather, and press on deeper.
+FEED Ysolde of the Ford spots a spike trap (Perception 12 vs DC 12) and disarms it with thieves' tools (16).
+DIRECTOR t=168.4 CUT fish_557943119203 shot=follow pri=60.0 why=hotter held_prev=4.0 pace=1.0 | fish_557943119203/follow=60.0(catch), delve_10967652016066/follow=45.0(walking REPEAT-held-out), hero_2101/follow=30.6(town life), tour_0/push=10.0(quiet baseline)
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 3; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 1 wraithtouched pit viper, 1 duskforged fen lurker, 1 wraithtouched fen lurker, 1 gorged fen lurker, 1 pit viper, 1 gorged bone bowman.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED 7 creatures boil out of the dungeon!
+FEED Initiative: the raiders 10, the watch 16 - the watch is ready for them.
+FEED Ysolde of the Ford the bard falls on floor 6 to the dark below. Level 4, 23 kills. !reroll to rise again.
+FEED Ysolde Quarryman goes down and claws back up. (CON save 10)
+DIRECTOR t=173.5 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=5.0 pace=0.6 | raid/shoulder=95.0(raid live), death_10967652016066_173/hard_cut=90.0(death), fight_10967652016066/shoulder=80.7(hurt 0.57 REPEAT-held-out), hero_2104/follow=24.8(town life same-shot-6), tour_5/push=10.0(quiet baseline)
+FEED Ysolde Quarryman the sage is cut down defending Bellmire by skeleton minion. Level 2, 6 kills. !reroll to rise again.
+FEED Harl Hollow should be dead - and stands back up (22).
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 6.
+FEED Cort Bramble and 3 others get out alive, and come home with what they carried.
+FEED Cort Bramble and 2 others come home to Bellmire with 273 gold, 9 ore, 6 stone, 4 pieces of salvaged gear and 4 potions. 36 kills between them.
+FEED Cort Bramble takes up a Millstone Axe. (+9 atk, 1d8) Folded twice; the smith signs it. Haggled 15% off (17).
+FEED Cort Bramble rolls a 20 on skeleton warrior!
+FEED Aldric Quarryman rolls a 20 on skeleton minion!
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=178.5 CUT death_10967652016066_173 shot=hard_cut pri=90.0 why=shot_gone held_prev=5.0 pace=1.0 | death_10967652016066_173/hard_cut=90.0(death), fish_557943119203/follow=60.0(catch REPEAT-held-out), fish_559285296542/follow=60.0(catch), hero_2104/follow=34.4(town life), tour_2/establishing=10.0(quiet baseline)
+DIRECTOR t=186.6 CUT breath_186 shot=breath pri=20.0 why=breath held_prev=8.1 pace=1.0 | fish_559285296542/follow=60.0(catch), hero_2104/follow=32.3(town life), tour_2/establishing=10.0(quiet baseline)
+FEED Tove Quarryman settles in Bellmire, looking for work.
+FEED The rail is cold, and then it is not.
+FEED They carry 13 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed giant rat, 1 slime, 1 bog frog.
+FEED Fresh flowers on a grave a hundred years older than flowers.
+FEED Harl Hollow casts Bolt at bog frog.
+FEED Harl Hollow casts Fire at hollowed giant rat.
+FEED The slime divides.
+FEED Harl Hollow casts Fire at slimeling.
+FEED Cort Bramble searches (Investigation 1) and turns up 6 gold on floor 1.
+FEED Clear - and that is one more the architect lost.
+FEED Cort Bramble searches the chest - ...no loot... (Investigation 6 vs DC 10).
+DIRECTOR t=190.6 CUT delve_16472340472560 shot=follow pri=55.0 why=hotter held_prev=4.0 pace=1.0 | delve_16472340472560/follow=55.0(delve start), hero_2101/follow=33.1(town life), tour_6/push=10.0(quiet baseline)
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 10, the watch 15 - the watch is ready for them.
+DIRECTOR t=194.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=4.0 pace=0.6 | raid/shoulder=95.0(raid live), delve_16472340472560/follow=45.0(walking), hero_2102/follow=26.2(town life same-shot-6), tour_2/establishing=10.0(quiet baseline)
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 giant rat, 1 skeleton minion.
+FEED A building is burning!
+FEED Harl Hollow casts Bolt at bog frog.
+FEED Harl Hollow's fire goes wide, and the wall is unamused (1 vs DC 11).
+FEED Harl Hollow casts Bolt at giant rat.
+FEED The townsfolk raise the ruin again.
+FEED Sable Ashwood goes down and claws back up. (CON save 18)
+FEED Sable Ashwood is knocked senseless, but lives. The guild's grace - once.
+FEED Harl Hollow casts Fire at bog frog.
+FEED Cort Bramble searches (Investigation 19) and turns up 27 gold on floor 2.
+FEED Floor 2 breathes easy. Briefly.
+FEED Cort Bramble searches the chest - ...no loot... (Investigation 5 vs DC 11).
+FEED Tuck goes down and claws back up. (CON save 14)
+FEED Tuck is knocked senseless, but lives. The guild's grace - once.
+FEED Cort Bramble spots a pressure plate (Perception 14 vs DC 11) and steps round it.
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED The attack is driven off. The gates hold.
+FEED Tuck comes round.
+FEED Sable Ashwood comes round.
+FEED Aldric Quarryman cracks the chain off a captive - 42 gold passes to the party, split 3 ways.
+DIRECTOR t=202.7 CUT hero_2104 shot=follow pri=31.3 why=shot_gone held_prev=8.1 pace=1.0 | delve_16472340472560/follow=45.0(walking REPEAT-held-out), hero_2104/follow=31.3(town life), tour_2/establishing=10.0(quiet baseline)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 slime, 2 drowned slimes, 1 hollowed cave spider.
+DIRECTOR t=205.8 CUT fight_16472340472560 shot=shoulder pri=75.0 why=hotter held_prev=3.1 pace=1.0 | fight_16472340472560/shoulder=75.0(hurt 0.00), hero_2102/follow=25.2(town life same-shot-6), tour_5/push=10.0(quiet baseline)
+FEED Harl Hollow's bolt fires off behind them (9 vs DC 11).
+FEED Harl Hollow casts Bolt at drowned slime.
+FEED The drowned slime divides.
+FEED Aldric Quarryman turns on the wounded drowned slimeling to finish it.
+FEED Ysolde Ashwood settles in Bellmire, looking for work.
+FEED Cort Bramble rolls a 20 - and the slimeling is gone.
+FEED Aldric Quarryman searches (Investigation 14) and turns up 35 gold on floor 3.
+FEED Floor 3 cleared, and the roll gets another tick.
+FEED Aldric Quarryman searches the chest - Successfully found loot!! 41 gold (Investigation 14 vs DC 11).
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 19, the watch 14 - the raiders strike first.
+DIRECTOR t=217.8 CUT raid shot=shoulder pri=95.0 why=better_after_min held_prev=12.1 pace=0.6 | raid/shoulder=95.0(raid live), delve_16472340472560/follow=45.0(walking REPEAT-held-out), hero_2103/follow=32.8(town life), tour_1/push=10.0(quiet baseline)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned slime, 2 puglins, 1 skeleton minion, 1 cave spider.
+FEED A building is burning!
+EVENT death at 220.0
+FEED The drowned slime divides.
+FEED Talen Quarryman goes down and claws back up. (CON save 20)
+FEED Talen Quarryman is knocked senseless, but lives. The guild's grace - once.
+FEED Cort Bramble turns on the wounded skeleton minion to finish it.
+FEED Harl Hollow turns on the wounded skeleton minion to finish it.
+SHOT l73_death_220_a shot=shoulder key=raid dist=30.0
+FEED Aldric Quarryman searches (Investigation 14) and turns up 46 gold on floor 4.
+FEED The room empties. The lamps steady.
+FEED Aldric Quarryman finds a vial of Gatewater.
+FEED Tove of the Ford settles in Bellmire, looking for work.
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED Sable Ashwood goes down and claws back up. (CON save 17)
+FEED Sable Ashwood the barbarian is cut down defending Bellmire by a bandit. Level 1, 0 kills. !reroll to rise again.
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED A building is burning!
+FEED Tuck goes down and claws back up. (CON save 11)
+FEED Tuck the rogue is cut down defending Bellmire by a bandit. Level 1, 0 kills. !reroll to rise again.
+FEED The attack is driven off. The gates hold.
+FEED Talen Quarryman comes round.
+DIRECTOR t=226.0 CUT death_755880721287_220 shot=hard_cut pri=90.0 why=death held_prev=8.1 pace=1.0 | death_755880721287_220/hard_cut=90.0(death), delve_16472340472560/follow=45.0(walking REPEAT-held-out), hero_2104/follow=33.2(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 bone sentinels, 2 hollowed bone sentinels, 1 bone bowman.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The braziers in the hall burn blue, and then burn cold.
+FEED The oil is running low.
+FEED Aldric Quarryman rolls a 20 for initiative and is moving before anything else.
+DIRECTOR t=228.0 CUT lord_16472340472560 shot=shoulder pri=100.0 why=lord_rises held_prev=2.0 pace=1.0 | lord_16472340472560/shoulder=100.0(lord), fight_16472340472560/shoulder=79.1(hurt 0.41 REPEAT-held-out), hero_2102/follow=31.7(town life), tour_3/push=10.0(quiet baseline)
+SHOT l73_death_220_b shot=shoulder key=lord_16472340472560 dist=9.9
+FEED Aldric Quarryman rolls a 20 on the death save - and gets up swinging.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Harl Hollow casts Bolt at bone sentinel.
+FEED Harl Hollow's fire goes somewhere, and not where it was sent (1 vs DC 12).
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Harl Hollow casts Bolt at bone sentinel.
+FEED Cold fire rolls off the Hollow King.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Harl Hollow casts Bolt at The Hollow King.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Harl Hollow casts Bolt at The Hollow King.
+FEED Cort Bramble is cut off and falls back to the others.
+FEED Harl Hollow casts Bolt at The Hollow King.
+FEED The Hollow King shifts, and the fight changes with it.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Harl Hollow casts Bolt at The Hollow King.
+FEED The Hollow King is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The new frame slips. The townsfolk will try again. (10 vs DC 12)
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Harl Hollow casts Fire at The Hollow King.
+FEED Harl Hollow casts Fire at The Hollow King.
+FEED Harl Hollow casts Fire at The Hollow King.
+FEED The Hollow King falls to Harl Hollow.
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 3 ways - 68 gold each to Cort Bramble, Harl Hollow, Aldric Quarryman.
+FEED The townsfolk raise the ruin again.
+DIRECTOR t=239.0 CUT breath_239 shot=breath pri=20.0 why=breath held_prev=11.1 pace=1.0 | delve_16472340472560/follow=45.0(walking REPEAT-held-out), hero_2101/follow=33.2(town life), tour_6/push=10.0(quiet baseline)
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED Bran Quarryman settles in Bellmire, looking for work.
+DIRECTOR t=244.1 CUT hero_2102 shot=follow pri=32.8 why=better_after_min held_prev=5.0 pace=1.0 | delve_16472340472560/follow=45.0(walking REPEAT-held-out), hero_2102/follow=32.8(town life), tour_3/push=10.0(quiet baseline)
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 4; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 1 bone sentinel, 1 wraithtouched bone sentinel, 1 sporeblown skeleton rogue, 2 duskforged blood wasps, 1 gravecaller.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED The townsfolk raise the ruin again.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 8, the watch 22 - the watch is ready for them.
+DIRECTOR t=246.1 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_16472340472560/shoulder=81.6(hurt 0.66 REPEAT-held-out), hero_2101/follow=27.9(town life same-shot-6), tour_5/push=10.0(quiet baseline)
+FEED Harl Hollow's fire bends away from them - the scar has opinions (9 vs DC 13).
+FEED A gravecaller raises the dead on floor 6.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 6.
+FEED Cort Bramble and 2 others get out alive, and come home with what they carried.
+FEED Cort Bramble and 2 others come home to Bellmire with 359 gold, 9 ore, 6 stone, 4 pieces of salvaged gear and 4 potions. 33 kills between them.
+FEED Cort Bramble is fitted with Emberleather Coat. (+48 hp) Haggled 12% off (14).
+FEED Harl Hollow is fitted with Guild Vestments. (+26 hp) Haggled 20% off (23).
+FEED Aldric Quarryman is fitted with Studded Brigandine. (+26 hp) Haggled 20% off (22).
+FEED A building is burning!
+FEED A building is burning!
+FEED Tove Quarryman fails the save. (CON 4)
+FEED Tove Quarryman is knocked senseless, but lives. The guild's grace - once.
+FEED The townsfolk raise the ruin again.
+FEED Talen Quarryman rolls a 20 - and skeleton rogue falls.
+FEED The attack is driven off. The gates hold.
+FEED Tove Quarryman comes round.
+DIRECTOR t=255.2 CUT hero_2101 shot=follow pri=31.9 why=shot_gone held_prev=9.1 pace=1.4 | hero_2101/follow=31.9(town life), tour_6/push=10.0(quiet baseline)
+FEED Garm Stonehand settles in Bellmire, looking for work.
+DIRECTOR t=259.3 CUT fish_557943119203 shot=follow pri=54.0 why=hotter held_prev=4.0 pace=1.0 | fish_557943119203/follow=54.0(catch same-shot-6), hero_2102/follow=31.6(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED The townsfolk raise the ruin again.
+MUSTER timed out: dists=[30, 179] vis=true stay=false route=15 inside=false
+FEED Cort Bramble and 2 others descend into the scar, where the architect is still at work.
+FEED They carry 15 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed giant rat, 1 giant rat, 1 skeleton minion.
+FEED Grave-dust swept in a spiral toward one tomb.
+DIRECTOR t=267.3 CUT fight_21774930583664 shot=shoulder pri=75.0 why=better_after_min held_prev=8.1 pace=1.0 | fight_21774930583664/shoulder=75.0(delve start hurt 0.00), hero_2104/follow=30.2(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Harl Hollow casts Bolt at giant rat.
+FEED Sable Coalfoot settles in Bellmire, looking for work.
+FEED Harl Hollow casts Bolt at skeleton minion.
+FEED Cort Bramble searches (Investigation 14) and turns up 12 gold on floor 1.
+FEED The last of it falls, and the stillness has a weight.
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 1 bog frog, 2 slimes.
+FEED Harl Hollow casts Fire at slime.
+FEED The slime divides.
+FEED Harl Hollow pays for fire in the wrong coin (9 vs DC 11).
+FEED Cort Bramble rolls a 20 - and the bog frog is gone.
+FEED Harl Hollow casts Bolt at giant rat.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 7, the watch 14 - the watch is ready for them.
+FEED The mounted watch rides out to meet them - 2 riders.
+FEED Tove Quarryman fails the save. (CON 5)
+FEED Tove Quarryman the sage is cut down defending Bellmire by skeleton warrior. Level 1, 0 kills. !reroll to rise again.
+DIRECTOR t=277.4 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=10.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_21774930583664/shoulder=75.0(hurt 0.00), fish_559285296542/follow=60.0(catch), hero_2101/follow=31.0(town life REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+FEED Harl Hollow casts Fire at slime.
+FEED Cort Bramble searches (Investigation 2) and turns up 13 gold on floor 2.
+FEED The ground is quiet underfoot, and honest.
+FEED Ingrid Fenwick's charge crashes into skeleton minion!
+FEED Ingrid Fenwick is killed by skeleton warrior.
+FEED Cort Bramble searches the chest - ...no loot... (Investigation 6 vs DC 11).
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED Dunn Thatcher goes down and claws back up. (CON save 11)
+FEED Dunn Thatcher is killed by skeleton warrior.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 puglin, 1 drowned slime, 1 risen bones, 1 giant rat.
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=286.5 CUT tour_5 shot=push pri=10.0 why=shot_gone held_prev=9.1 pace=1.0 | fight_21774930583664/shoulder=75.0(hurt 0.00 REPEAT-held-out), hero_2102/follow=32.1(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED Aldric Quarryman rolls a 20 - and the puglin is gone.
+FEED Harl Rivers settles in Bellmire, looking for work.
+FEED The drowned slime divides.
+FEED Harl Hollow casts Fire at drowned slimeling.
+FEED Cort Bramble turns on the wounded drowned slimeling to finish it.
+FEED Harl Hollow turns on the wounded drowned slimeling to finish it.
+FEED Aldric Quarryman turns on the wounded drowned slimeling to finish it.
+FEED Cort Bramble searches (Investigation 2) and turns up 19 gold on floor 3.
+FEED Swept once, which down here is enough.
+DIRECTOR t=291.6 CUT delve_21774930583664 shot=follow pri=45.0 why=hotter held_prev=5.0 pace=1.0 | delve_21774930583664/follow=45.0(walking), hero_2102/follow=34.3(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 slime, 1 bone bowman, 1 hollowed slime, 2 drowned puglins.
+FEED Aldric Stonehand, Kept by the Scar is down here. A sage of the guild who fell below, and the scar did not let go.
+FEED A voice the guild knew calls a name the guild remembers.
+DIRECTOR t=294.7 CUT lord_21774930583664 shot=shoulder pri=100.0 why=lord_rises held_prev=3.1 pace=1.0 | lord_21774930583664/shoulder=100.0(lord), fight_21774930583664/shoulder=75.0(hurt 0.00 REPEAT-held-out), hero_2101/follow=31.7(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED The slime divides.
+FEED Harl Hollow's bolt breaks apart over the stone (1 vs DC 12).
+FEED Aldric Stonehand, Kept by the Scar shifts, and the fight changes with it.
+FEED Aldric Stonehand, Kept by the Scar is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Aldric Stonehand, Kept by the Scar is enraged.
+FEED Aldric Stonehand, Kept by the Scar falls to Cort Bramble.
+FEED Cort Bramble searches (Investigation 2) and turns up 26 gold on floor 4.
+FEED Whatever was alive here has finished being so.
+DIRECTOR t=300.7 CUT breath_300 shot=breath pri=20.0 why=breath held_prev=6.0 pace=1.0 | fish_557943119203/follow=60.0(catch REPEAT-held-out), delve_21774930583664/follow=45.0(walking REPEAT-held-out), hero_2102/follow=30.0(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED Cort Bramble touches the altar - a curse. Something older than the floor takes a bite.
+FEED Cort Bramble searches the chest - Successfully found loot!! 53 gold (Investigation 19 vs DC 12).
+FEED Harl the Younger settles in Bellmire, looking for work.
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 20, the watch 11 - the raiders strike first.
+FEED Harl Hollow steps on a loose flagstone - darts! DEX 22 vs DC 12, 4 damage (halved).
+DIRECTOR t=303.7 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=3.0 pace=0.6 | raid/shoulder=95.0(raid live), delve_21774930583664/follow=45.0(walking REPEAT-held-out), hero_2104/follow=31.1(town life), tour_6/push=10.0(quiet baseline)
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 3 skeleton warriors, 1 drowned bone sentinel, 1 bone sentinel.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+FEED The oil is running low.
+DIRECTOR t=306.7 CUT lord_21774930583664 shot=shoulder pri=100.0 why=lord_rises held_prev=3.0 pace=0.6 | lord_21774930583664/shoulder=100.0(lord), raid/shoulder=95.0(raid live), fight_21774930583664/shoulder=82.4(hurt 0.74 REPEAT-held-out), hero_2104/follow=34.7(town life), tour_1/push=10.0(quiet baseline)
+MUSTER timed out: dists=[172, 208] vis=true stay=true route=47 inside=false
+FEED Bats pour out of the dark around Nightwing.
+FEED Nightwing shifts, and the fight changes with it.
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Aldric Quarryman should be dead - and stands back up (12).
+FEED Harl Hollow's bolt doubles back and finds them first (9 vs DC 12).
+FEED Aldric Quarryman the bard falls on floor 5 to the dark below. Level 5, 28 kills. !reroll to rise again.
+FEED Nightwing falls to Cort Bramble.
+FEED Harl Hollow casts Bolt at bone sentinel.
+DIRECTOR t=312.8 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=6.1 pace=0.6 | raid/shoulder=95.0(raid live), death_21774930583664_311/hard_cut=90.0(death), fight_21774930583664/shoulder=80.1(hurt 0.51 REPEAT-held-out), fish_557943119203/follow=60.0(catch REPEAT-held-out), hero_2101/follow=31.4(town life REPEAT-held-out)
+FEED Cort Bramble searches (Investigation 11) and turns up 44 gold on floor 5.
+FEED Floor 5 cleared - the guild owes nothing yet.
+FEED The attack is driven off. The gates hold.
+FEED Dunn Thatcher settles in Bellmire, looking for work.
+DIRECTOR t=313.8 CUT death_21774930583664_311 shot=hard_cut pri=90.0 why=shot_gone held_prev=1.0 pace=1.0 | death_21774930583664_311/hard_cut=90.0(death), delve_21774930583664/follow=45.0(walking REPEAT-held-out), hero_2102/follow=34.1(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+FEED Cort Bramble searches the chest - ...no loot... (Investigation 6 vs DC 12).
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 3; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 1 bone sentinel, 1 risen bones, 1 wraithtouched bone bowman, 1 bone bowman, 2 sporeblown scar rats.
+FEED Harl Hollow pays for fire and the scar keeps the receipt (1 vs DC 13).
+FEED Cort Bramble steps on a loose flagstone - green darts! DEX 6 vs DC 13, 6 damage.
+FEED Cort Bramble is venomed - the poison works over the next few seconds.
+DIRECTOR t=320.8 CUT breath_320 shot=breath pri=20.0 why=breath held_prev=7.1 pace=1.0 | fight_21774930583664/shoulder=79.7(hurt 0.47 REPEAT-held-out), hero_2102/follow=32.0(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED Edda Bramble settles in Bellmire, looking for work.
+FEED Harl Hollow casts Bolt at bone sentinel.
+DIRECTOR t=325.9 CUT fish_559285296542 shot=follow pri=60.0 why=hotter held_prev=5.0 pace=1.0 | fight_21774930583664/shoulder=84.2(hurt 0.92 REPEAT-held-out), fish_559285296542/follow=60.0(catch), hero_2101/follow=32.6(town life REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 6.
+FEED Cort Bramble and 2 others get out alive, and come home with what they carried.
+FEED Cort Bramble, Harl Hollow come home to Bellmire with 167 gold, 9 ore, 6 stone, 2 pieces of salvaged gear and 2 potions. 39 kills between them.
+FEED Cort Bramble, Harl Hollow descend down past the toll-post. The reeve nods them on.
+FEED They carry 10 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 cave spider, 1 giant rat.
+FEED The lids were moved from the inside, and then put back.
+FEED Harl Hollow casts Bolt at cave spider.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 16, the watch 14 - the raiders strike first.
+FEED Harl Hollow casts Bolt at giant rat.
+DIRECTOR t=332.9 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=7.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_26960633821531/shoulder=75.0(delve start hurt 0.00), hero_2104/follow=26.4(town life same-shot-6), tour_3/push=10.0(quiet baseline)
+FEED Talen Quarryman goes down and claws back up. (CON save 17)
+FEED Talen Quarryman the warlock is cut down defending Bellmire by skeleton minion. Level 1, 0 kills. !reroll to rise again.
+FEED Harl Hollow mutters fire, and the rune mutters back something else (8 vs DC 10).
+FEED Harl Hollow casts Bolt at slime.
+FEED The slime divides.
+FEED Harl Hollow turns on the wounded slimeling to finish it.
+FEED Cort Bramble searches (Investigation 12) and turns up 11 gold on floor 1.
+FEED Floor 1 is done. The lamps climb back up.
+FEED Cort Bramble searches the chest - ...no loot... (Investigation 3 vs DC 10).
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Wren Rivers settles in Bellmire, looking for work.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave spider, 1 skeleton minion, 1 puglin, 1 slime.
+FEED A building is burning!
+FEED Tove Ashwood goes down and claws back up. (CON save 12)
+FEED Harl Hollow casts Bolt at skeleton minion.
+FEED Tove Ashwood is killed by skeleton minion.
+FEED The attack is driven off. The gates hold.
+FEED Harl Hollow casts Fire at cave spider.
+FEED The townsfolk raise the ruin again.
+DIRECTOR t=342.0 CUT fight_26960633821531 shot=shoulder pri=75.0 why=shot_gone held_prev=9.1 pace=1.0 | fight_26960633821531/shoulder=75.0(delve start hurt 0.00), hero_2101/follow=32.3(town life REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+FEED Harl Hollow casts Fire at slime.
+FEED The slime divides.
+FEED Cort Bramble searches (Investigation 15) and turns up 24 gold on floor 2.
+FEED Silence, except for flasks being counted.
+FEED Cort Bramble finds a vial of Reedcutter's Brew.
+FEED Cort Bramble gets a captive free. 42 gold, 2 ways - small thanks for a poor life.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Cort Bramble spots a pressure plate (Perception 17 vs DC 11) and steps round it.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 cave spider, 1 slime, 1 drowned puglin, 1 skeleton minion.
+FEED Cort Bramble rolls a 20 - and the skeleton minion is gone.
+FEED Harl Hollow casts Bolt at drowned puglin.
+FEED Harl Hollow casts Bolt at cave spider.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 21, the watch 11 - the raiders strike first.
+FEED Harl Hollow casts Fire at slime.
+DIRECTOR t=355.1 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=13.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_26960633821531/shoulder=76.0(hurt 0.10), hero_2102/follow=30.8(town life), tour_1/push=10.0(quiet baseline)
+FEED The slime divides.
+FEED Harl Hollow casts Fire at slimeling.
+FEED Cort Bramble turns on the wounded slimeling to finish it.
+FEED Cort Bramble searches (Investigation 18) and turns up 39 gold on floor 3.
+FEED Held. Chalk it before the walls change their mind.
+FEED Cort Bramble finds a vial of The Alewife's Short Measure.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED A building is burning!
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 cave bats, 1 slime, 2 hollowed puglins.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+DIRECTOR t=361.2 CUT lord_26960633821531 shot=shoulder pri=100.0 why=lord_rises held_prev=6.1 pace=0.6 | lord_26960633821531/shoulder=100.0(lord), raid/shoulder=95.0(raid live), fight_26960633821531/shoulder=75.0(hurt 0.00 REPEAT-held-out), hero_2102/follow=30.6(town life), tour_7/push=10.0(quiet baseline)
+FEED Harl Hollow speaks bolt too quickly and the magic falls behind (1 vs DC 12).
+FEED Tove Quarryman is killed by skeleton warrior.
+FEED The attack is driven off. The gates hold.
+FEED Mira Ashwood settles in Bellmire, looking for work.
+FEED The new frame slips. The townsfolk will try again. (7 vs DC 12)
+FEED Harl Hollow turns on the wounded hollowed puglin to finish it.
+FEED Gnawbone's children come squealing.
+FEED Gnawbone shifts, and the fight changes with it.
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Cort Bramble rolls a 20 - and the Gnawbone is gone.
+FEED Gnawbone falls to Cort Bramble.
+FEED The slime divides.
+FEED Harl Hollow turns on the wounded slimeling to finish it.
+DIRECTOR t=365.2 CUT breath_365 shot=breath pri=20.0 why=breath held_prev=4.0 pace=1.0 | fight_26960633821531/shoulder=78.0(hurt 0.30 REPEAT-held-out), hero_2104/follow=32.6(town life), tour_3/push=10.0(quiet baseline)
+FEED Cort Bramble searches (Investigation 5) and turns up 35 gold on floor 4.
+FEED Floor 4 is the guild's. The scar can ask for it back.
+FEED Cort Bramble spots a dart trap (Perception 12 vs DC 12) and steps round it.
+FEED The townsfolk raise the ruin again.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Harl Hollow spots a spike trap (Perception 18 vs DC 12) and steps round it.
+DIRECTOR t=369.2 CUT delve_26960633821531 shot=follow pri=45.0 why=hotter held_prev=4.0 pace=1.0 | delve_26960633821531/follow=45.0(walking), hero_2102/follow=34.8(town life), tour_7/push=10.0(quiet baseline)
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 bone sentinels, 1 drowned bone bowman, 1 skeleton warrior, 1 risen bones.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The braziers in the hall burn blue, and then burn cold.
+DIRECTOR t=370.2 CUT lord_26960633821531 shot=shoulder pri=100.0 why=lord_rises held_prev=1.0 pace=1.0 | lord_26960633821531/shoulder=100.0(lord), fight_26960633821531/shoulder=75.5(hurt 0.05 REPEAT-held-out), fish_559285296542/follow=60.0(catch REPEAT-held-out), hero_2104/follow=26.5(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Harl Hollow shapes bolt and the scar bends it (10 vs DC 12).
+FEED Sable Bramble settles in Bellmire, looking for work.
+MUSTER timed out: dists=[243, 265] vis=true stay=false route=43 inside=false
+FEED Cold fire rolls off the Hollow King.
+FEED The Hollow King shifts, and the fight changes with it.
+FEED The Hollow King is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED Harl Hollow casts Bolt at The Hollow King.
+FEED Harl Hollow casts Fire at The Hollow King.
+FEED Harl Hollow casts Fire at The Hollow King.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 11, the watch 21 - the watch is ready for them.
+FEED Harl Hollow casts Fire at The Hollow King.
+FEED Harl Hollow casts Fire at The Hollow King.
+FEED The Hollow King falls to Harl Hollow.
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 2 ways - 89 gold each to Cort Bramble, Harl Hollow.
+DIRECTOR t=382.3 CUT raid shot=shoulder pri=95.0 why=max_hold held_prev=12.1 pace=0.6 | raid/shoulder=95.0(raid live), fish_557943119203/follow=60.0(catch), delve_26960633821531/follow=45.0(walking REPEAT-held-out), hero_2104/follow=31.0(town life), tour_4/push=10.0(quiet baseline)
+FEED Cort Bramble searches the chest - Successfully found loot!! 90 gold (Investigation 21 vs DC 12).
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Aldric Ashwood settles in Bellmire, looking for work.
+FEED A building is burning!
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 3; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 2 wraithtouched blood wasps, 1 drowned skeleton warrior, 1 skeleton rogue, 2 marrow hewers.
+FEED The oil is running low.
+FEED The townsfolk raise the ruin again.
+FEED Hilda Fenwick goes down and claws back up. (CON save 10)
+DIRECTOR t=389.4 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=7.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_26960633821531/shoulder=80.4(hurt 0.54 REPEAT-held-out), fish_557943119203/follow=60.0(catch), hero_2102/follow=32.7(town life), tour_3/push=10.0(quiet baseline)
+FEED Hilda Fenwick is killed by skeleton minion.
+FEED The attack is driven off. The gates hold.
+FEED Harl Hollow's bolt is swallowed whole by the scar (1 vs DC 13).
+DIRECTOR t=390.4 CUT hero_2101 shot=follow pri=32.0 why=shot_gone held_prev=1.0 pace=1.0 | fight_26960633821531/shoulder=80.4(hurt 0.54 REPEAT-held-out), hero_2101/follow=32.0(town life), tour_4/push=10.0(quiet baseline)
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 6.
+FEED Cort Bramble, Harl Hollow get out alive, and come home with what they carried.
+FEED Cort Bramble, Harl Hollow come home to Bellmire with 377 gold, 9 ore, 6 stone, 4 pieces of salvaged gear and 4 potions. 32 kills between them.
+FEED Cort Bramble takes up a Rune-Cut Hewer. (+16 atk, 1d10) Runes along the fuller smoulder when it is drawn. Haggled 16% off (18).
+FEED Hilda Coalfoot settles in Bellmire, looking for work.
+DIRECTOR t=393.4 CUT fish_557943119203 shot=follow pri=54.0 why=hotter held_prev=3.0 pace=1.0 | fish_557943119203/follow=54.0(catch same-shot-6), hero_2102/follow=27.0(town life same-shot-6), tour_7/push=10.0(quiet baseline)
+MUSTER timed out: dists=[328, 328] vis=true stay=false route=77 inside=false
+FEED Cort Bramble, Harl Hollow descend the stair, one tread at a time.
+FEED They carry 11 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 hollowed skeleton minion, 1 cave bat.
+FEED Flowers on a slab, dried but not old.
+DIRECTOR t=396.5 CUT fight_32036765078644 shot=shoulder pri=75.0 why=hotter held_prev=3.1 pace=1.0 | fight_32036765078644/shoulder=75.0(delve start hurt 0.00), hero_2102/follow=26.4(town life same-shot-6), tour_2/establishing=10.0(quiet baseline)
+FEED Harl Hollow casts Bolt at cave bat.
+FEED Harl Hollow casts Fire at hollowed skeleton minion.
+FEED Cort Bramble searches (Investigation 8) and turns up 8 gold on floor 1.
+FEED Floor 1 quiet - the kind that means finished.
+FEED There is a smell of old rain and older things below.
+FEED They carry 2 flasks of oil between them.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 cave bats, 1 drowned slime, 1 hollowed slime, 1 hollowed cave bat.
+FEED A pick rings somewhere ahead, steady as a heartbeat.
+FEED The oil is running low.
+EVENT delve_start at 400.0
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 11, the watch 4 - the raiders strike first.
+FEED Aldric Ashwood settles in Bellmire, looking for work.
+SHOT l73_delve_start_400_a shot=shoulder key=fight_32036765078644 dist=22.0
+FEED BigAxe rolls a 20 - and the cave bat is gone.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed slime, 2 bog frogs, 1 hollowed skeleton minion.
+FEED Harl Hollow works fire; the scar does the last line for them (9 vs DC 11).
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED Harl Hollow casts Bolt at bog frog.
+FEED The hollowed slime divides.
+FEED BigAxe get out alive, and come home with what they carried.
+FEED BigAxe comes home to Bellmire with 0 gold. 3 kills.
+FEED Harl Hollow casts Bolt at bog frog.
+DIRECTOR t=406.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=10.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_32036765078644/shoulder=75.4(hurt 0.04), fish_557943119203/follow=60.0(catch REPEAT-held-out), fish_559285296542/follow=60.0(catch REPEAT-held-out), hero_2101/follow=33.9(town life REPEAT-held-out)
+FEED Cort Bramble searches (Investigation 12) and turns up 22 gold on floor 2.
+FEED The last of the noise stops, and the quiet is the loud part.
+FEED Mira Ashwood is killed by skeleton rogue.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+SHOT l73_delve_start_400_b shot=shoulder key=raid dist=30.0
+FEED The attack is driven off. The gates hold.
+FEED Edda Bramble settles in Bellmire, looking for work.
+DIRECTOR t=409.7 CUT delve_32036765078644 shot=follow pri=45.0 why=shot_gone held_prev=3.0 pace=1.0 | delve_32036765078644/follow=45.0(walking), hero_2102/follow=34.1(town life), tour_7/push=10.0(quiet baseline)
+FEED Cort Bramble cracks the chain off a captive - 42 gold passes to the party, split 2 ways.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned slime, 1 drowned giant rat, 1 hollowed bone bowman, 1 cave bat.
+MUSTER timed out: dists=[134, 142] vis=true stay=false route=72 inside=false
+FEED Harl Hollow casts Fire at cave bat.
+FEED Harl Hollow casts Bolt at drowned giant rat.
+FEED Cort Bramble turns on the wounded drowned giant rat to finish it.
+FEED Harl Hollow casts Fire at drowned giant rat.
+FEED Harl Hollow offers fire to the scar, and the scar keeps it (8 vs DC 11).
+FEED The drowned slime divides.
+FEED Cort Bramble turns on the wounded drowned slimeling to finish it.
+FEED Harl Hollow turns on the wounded drowned slimeling to finish it.
+FEED Harl Hollow casts Bolt at drowned slimeling.
+FEED Cort Bramble searches (Investigation 10) and turns up 26 gold on floor 3.
+FEED Quiet - the kind you get after, not the kind you get before.
+FEED Cort Bramble searches the chest - Successfully found loot!! 39 gold (Investigation 17 vs DC 11).
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 cave bats, 2 drowned giant rats, 1 hollowed risen bones.
+FEED Aldric Stonehand, Kept by the Scar is down here. A sage of the guild who fell below, and the scar did not let go.
+FEED A voice the guild knew calls a name the guild remembers.
+DIRECTOR t=421.7 CUT lord_32036765078644 shot=shoulder pri=100.0 why=lord_rises held_prev=12.1 pace=1.0 | lord_32036765078644/shoulder=100.0(lord), fight_32036765078644/shoulder=75.0(hurt 0.00 REPEAT-held-out), fish_559285296542/follow=54.0(catch same-shot-6), hero_2102/follow=26.2(town life same-shot-6), tour_3/push=10.0(quiet baseline)
+FEED Aldric Rivers settles in Bellmire, looking for work.
+FEED Aldric Stonehand, Kept by the Scar shifts, and the fight changes with it.
+FEED Aldric Stonehand, Kept by the Scar is enraged.
+FEED Aldric Stonehand, Kept by the Scar is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Aldric Stonehand, Kept by the Scar falls to Harl Hollow.
+FEED Aldric Stonehand, Kept by the Scar is slain on floor 4!
+FEED The hoard is split 2 ways - 49 gold each to Cort Bramble, Harl Hollow.
+FEED Cort Bramble finds a vial of Lampwater.
+FEED Cort Bramble searches the chest - Successfully found loot!! 72 gold (Investigation 21 vs DC 12).
+DIRECTOR t=425.8 CUT breath_425 shot=breath pri=20.0 why=breath held_prev=4.0 pace=1.0 | fish_557943119203/follow=60.0(catch REPEAT-held-out), delve_32036765078644/follow=45.0(walking REPEAT-held-out), hero_2102/follow=32.4(town life), tour_7/push=10.0(quiet baseline)
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Harl Hollow touches the altar - a curse. Something older than the floor takes a bite.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 cave spider, 1 drowned bone sentinel, 1 hollowed bone bowman, 1 drowned cave spider, 1 skeleton warrior.
+FEED The Rattling Host, Rusted Through rises. Rust has them all - they snap and crumble, but there are so many.
+FEED The guild has put down The Rattling Host before. Not this one.
+FEED Somewhere ahead, something counts its own bones out loud.
+DIRECTOR t=430.8 CUT lord_32036765078644 shot=shoulder pri=100.0 why=lord_rises held_prev=5.0 pace=1.0 | lord_32036765078644/shoulder=100.0(lord), fight_32036765078644/shoulder=78.0(hurt 0.30 REPEAT-held-out), fish_557943119203/follow=60.0(catch REPEAT-held-out), hero_2102/follow=30.5(town life), tour_4/push=10.0(quiet baseline)
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 18, the watch 13 - the raiders strike first.
+FEED Cort of the Ford settles in Bellmire, looking for work.
+FEED Harl Hollow steps on a spiked plate - spikes! DEX 7 vs DC 12, 3 damage.
+FEED Harl Hollow's bolt lands on the wrong foe - the scar edits it (1 vs DC 12).
+FEED The Rattling Host, Rusted Through shifts, and the fight changes with it.
+FEED Dead men drop out of the harness.
+FEED The Rattling Host, Rusted Through is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dead men drop out of the harness.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED The Rattling Host, Rusted Through falls to Harl Hollow.
+FEED A building is burning!
+DIRECTOR t=436.9 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=6.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_32036765078644/shoulder=83.0(hurt 0.80 REPEAT-held-out), fish_557943119203/follow=60.0(catch REPEAT-held-out), hero_2102/follow=34.9(town life), tour_2/establishing=10.0(quiet baseline)
+FEED Harl Hollow is cut off and falls back to the others.
+FEED The new frame slips. The townsfolk will try again. (9 vs DC 12)
+FEED BigAxe fails the save. (CON 4)
+FEED BigAxe is knocked senseless, but lives. The guild's grace - once.
+FEED Harl Hollow is cut off and falls back to the others.
+FEED A building is burning!
+FEED Sable Quarryman fails the save. (CON 7)
+FEED Sable Quarryman is knocked senseless, but lives. The guild's grace - once.
+FEED Harl Hollow casts Fire at risen bones.
+FEED Harl Hollow casts Fire at risen bones.
+MUSTER timed out: dists=[287, 288] vis=true stay=true route=113 inside=false
+FEED Harl the Younger goes down and claws back up. (CON save 12)
+FEED Harl the Younger is killed by a bandit.
+FEED Cort Bramble rolls a 20 searching the floor!
+FEED Cort Bramble searches (Investigation 21) and turns up 88 gold on floor 5.
+FEED Floor 5 quiet - the kind of quiet that remembers.
+FEED The attack is driven off. The gates hold.
+FEED BigAxe comes round.
+FEED Sable Quarryman comes round.
+FEED The townsfolk raise the ruin again.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Sable Ashwood settles in Bellmire, looking for work.
+DIRECTOR t=443.9 CUT hero_2102 shot=follow pri=34.0 why=shot_gone held_prev=7.1 pace=1.0 | delve_32036765078644/follow=45.0(walking REPEAT-held-out), hero_2102/follow=34.0(town life), tour_1/push=10.0(quiet baseline)
+FEED The townsfolk raise the ruin again.
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 3; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 1 emberbound pit viper, 1 pit viper, 1 sporeblown bone sentinel, 1 gorged skeleton rogue, 1 risen bones, 1 emberbound marrow hewer.
+FEED Harl Hollow casts fire and the scar sneezes (10 vs DC 13).
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 6.
+FEED Cort Bramble, Harl Hollow get out alive, and come home with what they carried.
+FEED Cort Bramble, Harl Hollow come home to Bellmire with 353 gold, 9 ore, 6 stone, 4 pieces of salvaged gear and 5 potions. 33 kills between them.
+FEED Cort Bramble is fitted with Wyrmhide Coat. (+80 hp) Haggled 15% off (17).
+FEED Harl Hollow is fitted with Rune-Hemmed Vestment. (+48 hp) Haggled 20% off (23).
+FEED Down we go. The Ford forgets us at the first landing.
+FEED They carry 11 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed cave spider, 2 slimes.
+FEED They buried the lamps with them, and the oil is still good.
+DIRECTOR t=450.1 CUT fight_36835115967805 shot=shoulder pri=75.0 why=hotter held_prev=6.1 pace=1.0 | fight_36835115967805/shoulder=75.0(delve start hurt 0.00), hero_2104/follow=28.1(town life same-shot-6), tour_7/push=10.0(quiet baseline)
+FEED Harl Hollow casts Bolt at slime.
+FEED Harl Hollow turns on the wounded slime to finish it.
+FEED The slime divides.
+FEED Harl Hollow casts Bolt at slimeling.
+FEED Harl Hollow casts Fire at slime.
+FEED Cort Bramble searches (Investigation 18) and turns up 13 gold on floor 1.
+FEED Floor 1 won. Count the flasks; one is always short.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 9, the watch 10 - the watch is ready for them.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+MUSTER timed out: dists=[93, 89] vis=true stay=true route=25 inside=false
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 hollowed puglin, 1 slime.
+FEED Harl Hollow's fire lands somewhere nobody aimed (1 vs DC 11).
+FEED A building is burning!
+FEED Harl Hollow casts Bolt at hollowed puglin.
+FEED Harl Hollow casts Bolt at hollowed puglin.
+FEED Rask Stonehand goes down and claws back up. (CON save 12)
+DIRECTOR t=460.2 CUT raid shot=shoulder pri=95.0 why=better_after_min held_prev=10.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_36835115967805/shoulder=75.0(hurt 0.00), hero_2101/follow=31.5(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+FEED Rask Stonehand is knocked senseless, but lives. The guild's grace - once.
+FEED Rask Hollow rolls a 20 - and skeleton warrior falls.
+FEED Rask Hollow goes down and claws back up. (CON save 15)
+FEED The attack is driven off. The gates hold.
+FEED Rask Stonehand comes round.
+DIRECTOR t=462.2 CUT fish_559285296542 shot=follow pri=60.0 why=shot_gone held_prev=2.0 pace=1.0 | fight_36835115967805/shoulder=75.0(hurt 0.00 REPEAT-held-out), fish_559285296542/follow=60.0(catch), hero_2102/follow=32.5(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED Harl Hollow casts Fire at slime.
+FEED The new frame slips. The townsfolk will try again. (10 vs DC 12)
+FEED The slime divides.
+FEED Harl Hollow turns on the wounded slimeling to finish it.
+FEED Cort Bramble searches (Investigation 13) and turns up 23 gold on floor 2.
+FEED Floor 2 is swept, and the broom was not theirs.
+FEED Cort Bramble finds a vial of Tallow Salve.
+FEED Cort Bramble searches the chest - Successfully found loot!! 41 gold (Investigation 21 vs DC 11).
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED The new frame slips. The townsfolk will try again. (8 vs DC 12)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 hollowed slime, 1 slime, 1 hollowed puglin, 1 skeleton minion.
+FEED The new frame slips. The townsfolk will try again. (9 vs DC 12)
+FEED The stair turns, and so does the dark.
+FEED They carry 6 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 bog frog, 1 giant rat.
+FEED The sarcophagus lid sits a thumb's width ajar, and the gap is warm.
+DIRECTOR t=471.3 CUT fight_39098295288623 shot=shoulder pri=75.0 why=better_after_min held_prev=9.1 pace=1.0 | fight_36835115967805/shoulder=75.0(hurt 0.00 REPEAT-held-out), fight_39098295288623/shoulder=75.0(delve start hurt 0.00), hero_2101/follow=30.5(town life REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+FEED Rask Hollow casts Bolt at bog frog.
+FEED Rask Hollow loses the shape of chain halfway (7 vs DC 10).
+FEED Rask Hollow casts Bolt at slime.
+FEED The slime divides.
+FEED Harl Hollow casts Bolt at hollowed slime.
+FEED Rask Hollow casts Bolt at giant rat.
+FEED The hollowed slime divides.
+FEED Rask Hollow searches (Investigation 14) and turns up 12 gold on floor 1.
+FEED Floor 1 holds, and the stone is listening.
+FEED The townsfolk raise the ruin again.
+FEED Rask Hollow searches the chest - ...no loot... (Investigation 7 vs DC 10).
+FEED Harl Hollow casts Bolt at slimeling.
+FEED Cort Bramble searches (Investigation 19) and turns up 40 gold on floor 3.
+FEED Clean sweep. Mark it down.
+FEED Cort Bramble finds a vial of Collier's Brew.
+FEED Rask Hollow, Rask Stonehand take a breather, and press on deeper.
+FEED Cort Bramble searches the chest - ...no loot... (Investigation 2 vs DC 11).
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Rask Hollow spots a blade trap (Perception 12 vs DC 10) and steps round it.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed bog frog, 2 bog frogs, 1 hollowed skeleton minion.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 20, the watch 15 - the raiders strike first.
+FEED The mounted watch rides out to meet them - 1 riders.
+FEED Dunn Stonehand fails the save. (CON 9)
+FEED Dunn Stonehand is knocked senseless, but lives. The guild's grace - once.
+MUSTER timed out: dists=[7, 69] vis=true stay=true route=0 inside=false
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed bone bowman, 1 skeleton minion, 1 slime, 1 risen bones, 1 hollowed cave bat.
+FEED Rask Hollow casts Bolt at bog frog.
+DIRECTOR t=481.5 CUT raid shot=shoulder pri=95.0 why=better_after_min held_prev=10.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_36835115967805/shoulder=75.0(hurt 0.00 REPEAT-held-out), fight_39098295288623/shoulder=75.0(hurt 0.00), fish_557943119203/follow=60.0(catch REPEAT-held-out), fish_559285296542/follow=60.0(catch REPEAT-held-out)
+FEED Cort Bramble steps on a loose flagstone - darts! DEX 10 vs DC 12, 10 damage.
+FEED Rask Hollow casts Chain Bolt at hollowed bog frog.
+FEED Rask Hollow's bolt comes out sideways - wild magic (10 vs DC 11).
+FEED Hilda Ashwood's charge crashes into skeleton rogue!
+FEED Harl Hollow's fire lands somewhere between a spell and a hiccup (10 vs DC 12).
+FEED Rask Hollow casts Chain Bolt at bog frog.
+FEED Rask Hollow searches (Investigation 13) and turns up 23 gold on floor 2.
+FEED Floor 2 cleared; the Chronicle writes it in ink.
+FEED Hilda Ashwood goes down and claws back up. (CON save 20)
+FEED Hilda Ashwood is killed by skeleton rogue.
+FEED Rask Hollow searches the chest - Successfully found loot!! 34 gold (Investigation 14 vs DC 11).
+FEED The slime divides.
+FEED Cort Bramble searches (Investigation 19) and turns up 53 gold on floor 4.
+FEED Over. The stair is kinder on the way up.
+FEED Rask Hollow, Rask Stonehand take a breather, and press on deeper.
+FEED Cort Bramble touches the altar - a curse. Something older than the floor takes a bite.
+FEED A raider fumbles the torch - it hisses out in the mud.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Garm of the Ford settles in Bellmire, looking for work.
+FEED The attack is driven off. The gates hold.
+FEED Dunn Stonehand comes round.
+DIRECTOR t=488.5 CUT delve_36835115967805 shot=follow pri=45.0 why=shot_gone held_prev=7.0 pace=1.0 | fish_559285296542/follow=60.0(catch REPEAT-held-out), delve_36835115967805/follow=45.0(walking), delve_39098295288623/follow=45.0(walking), hero_2102/follow=30.8(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 puglin, 1 hollowed puglin, 1 hollowed slime, 1 hollowed skeleton minion.
+FEED The oil is running low.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 2 skeleton warriors, 1 bone sentinel, 1 drowned skeleton mage, 1 risen bones.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The floor is wet, and getting wetter.
+FEED Harl Hollow rolls a 20 for initiative and is moving before anything else.
+FEED Harl Hollow's fire goes out sideways into the stone (11 vs DC 12).
+DIRECTOR t=489.5 CUT lord_36835115967805 shot=shoulder pri=100.0 why=lord_rises held_prev=1.0 pace=1.0 | lord_36835115967805/shoulder=100.0(lord), fight_36835115967805/shoulder=75.0(hurt 0.00 REPEAT-held-out), fight_39098295288623/shoulder=75.0(hurt 0.00 REPEAT-held-out), hero_2101/follow=28.9(town life same-shot-6), tour_6/push=10.0(quiet baseline)
+FEED Cort Bramble turns on the wounded skeleton warrior to finish it.
+FEED Rask Hollow's chain flares, sputters, and lands on the chalk (9 vs DC 11).
+FEED The hollowed slime divides.
+FEED Rask Hollow casts Chain Bolt at hollowed slimeling.
+FEED Rask Hollow casts Chain Bolt at puglin.
+FEED Rask Hollow casts Chain Bolt at hollowed puglin.
+FEED Rask Hollow searches (Investigation 7) and turns up 26 gold on floor 3.
+FEED Floor 3: counted, corked, kept.
+FEED The Grubmother's brood spills out of her.
+FEED The Grubmother shifts, and the fight changes with it.
+FEED Harl Hollow turns on the wounded slimeling to finish it.
+FEED The Grubmother is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Grubmother falls to Cort Bramble.
+FEED The Grubmother is slain on floor 5!
+FEED The hoard is split 2 ways - 66 gold each to Cort Bramble, Harl Hollow.
+FEED The stair does not echo, which is worse than if it did.
+FEED They carry 5 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 giant rats, 1 bog frog.
+FEED The oldest stone here is newer than the one beside it.
+FEED Rask Hollow searches the chest - Successfully found loot!! 39 gold (Investigation 14 vs DC 11).
+FEED Rask Hollow, Rask Stonehand take a breather, and press on deeper.
+FEED Cort Bramble searches the chest - Successfully found loot!! 55 gold (Investigation 18 vs DC 12).
+DIRECTOR t=496.6 CUT breath_496 shot=breath pri=20.0 why=breath held_prev=7.0 pace=1.0 | fight_42284338940739/shoulder=75.0(delve start hurt 0.00), delve_36835115967805/follow=45.0(walking REPEAT-held-out), delve_39098295288623/follow=45.0(walking), hero_2104/follow=32.0(town life), tour_6/push=10.0(quiet baseline)
+FEED Rask Stonehand steps on a plate - a stone from the ceiling! DEX 8 vs DC 11, 2 damage.
+FEED Rask Ashwood settles in Bellmire, looking for work.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 slimes, 1 risen bones, 2 giant rats.
+FEED Rask Stonehand rolls a 20 for initiative and is moving before anything else.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Sable Quarryman rolls a 20 - and the giant rat is gone.
+FEED Sable Quarryman searches (Investigation 11) and turns up 11 gold on floor 1.
+FEED Floor 1 empties, and the scar notes the loss.
+FEED Rask Hollow mouths bolt and the scar answers in a rival tongue (11 vs DC 12).
+FEED Sable Quarryman searches the chest - Successfully found loot!! 18 gold (Investigation 15 vs DC 10).
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 13, the watch 20 - the watch is ready for them.
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 3; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 2 emberbound blood wasps, 1 duskforged skeleton warrior, 2 skeleton warriors, 1 gorged marrow hewer.
+FEED Dunn Stonehand, Sable Quarryman take a breather, and press on deeper.
+DIRECTOR t=499.6 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=3.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_39098295288623/shoulder=81.4(hurt 0.64 REPEAT-held-out), fight_36835115967805/shoulder=75.2(hurt 0.02 REPEAT-held-out), delve_42284338940739/follow=55.0(delve start), hero_2101/follow=33.1(town life)
+FEED Rask Stonehand the knight falls on floor 4 to the dark below. Level 2, 9 kills. !reroll to rise again.
+FEED The slime divides.
+FEED Harl Hollow's fire fizzles into a belch of ash (10 vs DC 13).
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED A building is burning!
+FEED Garm of the Ford goes down and claws back up. (CON save 17)
+FEED Rask Hollow, Rask Stonehand get out alive, and come home with what they carried.
+FEED Rask Hollow comes home to Bellmire with 134 gold, 3 ore, 2 stone, 2 pieces of salvaged gear and 2 potions. 18 kills between them.
+FEED Rask Hollow is fitted with Reed-Cloth Robe. (+10 hp) Haggled 11% off (13).
+FEED Garm of the Ford is killed by a bandit.
+FEED The new frame slips. The townsfolk will try again. (5 vs DC 12)
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave spider, 3 bog frogs.
+FEED A building is burning!
+FEED Cort Bramble searches (Investigation 10) and turns up 52 gold on floor 6.
+FEED Somewhere above, the bell rings a small relief.
+FEED A building is burning!
+FEED A building is burning!
+FEED Mira rolls a 20 on a bandit!
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Harl Hollow steps on a spiked plate - spikes! DEX 10 vs DC 13, 8 damage.
+FEED BigAxe goes down and claws back up. (CON save 17)
+FEED BigAxe the barbarian is cut down defending Bellmire by a bandit. Level 1, 3 kills. !reroll to rise again.
+FEED The townsfolk raise the ruin again.
+FEED The attack is driven off. The gates hold.
+FEED Sable Quarryman searches (Investigation 4) and turns up 17 gold on floor 2.
+FEED Nothing left to kill and everything left to carry.
+FEED Harl Stonehand is sworn into the watch.
+L28C_EMITTERS floor 7 workshop: 3 (cap 12), creatures 3; lights 58 (shadowed 1)
+L28D_DECALS floor 7 workshop: 18 (cap 24)
+FEED Floor 7 - a workshop, remade as a workshop: 1 bone sentinel, 1 bone bowman, 1 drowned skeleton rogue, 2 sporeblown puglins, 1 puglin.
+FEED The oil is running low.
+FEED Sable Quarryman searches the chest - Successfully found loot!! 23 gold (Investigation 12 vs DC 11).
+FEED Sable Quarryman cannot get to the chest and leaves it.
+FEED Dunn Stonehand, Sable Quarryman take a breather, and press on deeper.
+FEED The new frame slips. The townsfolk will try again. (9 vs DC 12)
+DIRECTOR t=510.7 CUT delve_42284338940739 shot=follow pri=55.0 why=shot_gone held_prev=11.1 pace=1.0 | fight_36835115967805/shoulder=75.8(hurt 0.08 REPEAT-held-out), delve_42284338940739/follow=55.0(delve start), hero_2102/follow=34.9(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED Dunn Stonehand finds a man in a cage still alive. He slips 42 gold to them on the way out, 2 ways to split it.
+FEED The townsfolk raise the ruin again.
+FEED Cort Bramble searches (Investigation 13) and turns up 77 gold on floor 7.
+FEED Floor 7, and the guild adds a line in the honest hand.
+FEED Cort Bramble finds a vial of Bitterleaf Tincture.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 puglins, 1 slime, 1 drowned slime.
+FEED The oil is running low.
+DIRECTOR t=515.8 CUT fight_42284338940739 shot=shoulder pri=78.0 why=hotter held_prev=5.1 pace=1.0 | fight_42284338940739/shoulder=78.0(hurt 0.30), delve_36835115967805/follow=45.0(walking REPEAT-held-out), hero_2101/follow=26.2(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Mira Hollow settles in Bellmire, looking for work.
+FEED The new frame slips. The townsfolk will try again. (7 vs DC 12)
+FEED The slime divides.
+FEED Sable Quarryman turns on the wounded slimeling to finish it.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 21, the watch 7 - the raiders strike first.
+EVENT raid at 520.0
+L28C_EMITTERS floor 8 treasury: 2 (cap 12), creatures 6; lights 77 (shadowed 1)
+L28D_DECALS floor 8 treasury: 18 (cap 24)
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 emberbound pale cutthroat, 1 wraithtouched risen bones, 1 duskforged skeleton mage, 1 risen bones, 1 wraithtouched silk mother, 2 emberbound gloom bats.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Rask Hollow fails the save. (CON 3)
+FEED Rask Hollow is knocked senseless, but lives. The guild's grace - once.
+FEED Dunn Stonehand turns on the wounded drowned slimeling to finish it.
+FEED Sable Quarryman rolls a 20 - and the drowned slimeling is gone.
+FEED The new frame slips. The townsfolk will try again. (5 vs DC 12)
+FEED Sable Quarryman searches (Investigation 4) and turns up 26 gold on floor 3.
+FEED The last echo dies, and no new one rises.
+FEED Harl Hollow's fire goes out like a lamp in a draught (1 vs DC 14).
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 7, the watch 9 - the watch is ready for them.
+FEED Cort Bramble is badly hurt and breaks off, making for the way up.
+FEED Edda Thatcher is sworn into the watch.
+SHOT l73_raid_520_a shot=shoulder key=fight_42284338940739 dist=17.9
+FEED Sable Quarryman searches the chest - Successfully found loot!! 41 gold (Investigation 20 vs DC 11).
+FEED Out of oil, the party feels its way back up from floor 3.
+FEED Dunn Stonehand, Sable Quarryman come home to Bellmire with 136 gold, 3 ore, 2 stone, 1 piece of salvaged gear and 1 potion. 15 kills between them.
+FEED Dunn Stonehand is fitted with Tanner's Jerkin. (+10 hp) A natural 1 - the smith takes offence and charges a tenth over.
+FEED Sable Quarryman takes up a Ford-Stalker's Crossbow. (+4 atk, 1d6) Bellmire iron: honest, dull, and better than bare hands. Haggled 16% off (18).
+DIRECTOR t=522.9 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=7.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_36835115967805/shoulder=82.9(hurt 0.79 REPEAT-held-out), hero_2102/follow=32.6(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+FEED Spiderlings spill from the silk mother's back.
+FEED Sable Quarryman goes down and claws back up. (CON save 20)
+FEED Sable Quarryman the ranger is cut down defending Bellmire by skeleton rogue. Level 2, 5 kills. !reroll to rise again.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 8.
+FEED Cort Bramble, Harl Hollow get out alive, and come home with what they carried.
+FEED Cort Bramble, Harl Hollow come home to Bellmire with 486 gold, 16 ore, 12 stone, 5 pieces of salvaged gear and 6 potions. 49 kills between them.
+FEED Cort Bramble takes up a Dragontooth Axe. (+26 atk, 1d12) Dragontooth - nobody in Bellmire will say whose tooth.
+FEED The new frame slips. The townsfolk will try again. (4 vs DC 12)
+FEED Dunn Stonehand fails the save. (CON 8)
+FEED Dunn Stonehand the duelist is cut down defending Bellmire by skeleton warrior. Level 2, 10 kills. !reroll to rise again.
+DIRECTOR t=526.9 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=4.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_2102/follow=31.6(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED Corvin Bramble goes down and claws back up. (CON save 12)
+FEED Corvin Bramble is knocked senseless, but lives. The guild's grace - once.
+FEED The new frame slips. The townsfolk will try again. (11 vs DC 12)
+FEED Harl Stonehand goes down and claws back up. (CON save 11)
+FEED Harl Stonehand is killed by skeleton rogue.
+SHOT l73_raid_520_b shot=shoulder key=raid dist=30.0
+FEED A building is burning!
+FEED Ysolde Ashwood is killed by skeleton warrior.
+FEED Ysolde Thatcher settles in Bellmire, looking for work.
+FEED The attack is driven off. The gates hold.
+FEED Rask Hollow comes round.
+FEED Corvin Bramble comes round.
+DIRECTOR t=530.9 CUT fish_557943119203 shot=follow pri=60.0 why=shot_gone held_prev=4.0 pace=1.0 | fish_557943119203/follow=60.0(catch), hero_2101/follow=33.1(town life), tour_7/push=10.0(quiet baseline)
+FEED The new frame slips. The townsfolk will try again. (5 vs DC 12)
+FEED Somewhere below, something wakes up to the sound of boots.
+FEED They carry 11 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 puglin, 1 slime, 1 giant rat.
+FEED The censer swings one way. The chain goes the other.
+FEED Tove of the Ford is sworn into the watch.
+FEED Harl Hollow casts Bolt at giant rat.
+FEED The townsfolk raise the ruin again.
+FEED Harl Hollow casts Fire at puglin.
+FEED Cort Bramble turns on the wounded puglin to finish it.
+FEED Harl Hollow casts Fire at slime.
+FEED The slime divides.
+FEED Cort Bramble searches (Investigation 8) and turns up 8 gold on floor 1.
+FEED Finished - and the next door has gone from shut to merely closed.
+FEED Cort Bramble searches the chest - Successfully found loot!! 20 gold (Investigation 19 vs DC 10).
+FEED The townsfolk raise the ruin again.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Cort Rivers settles in Bellmire, looking for work.
+FEED Cort Hollow is sworn into the watch.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 bog frog, 1 skeleton minion, 1 hollowed cave spider, 1 puglin.
+DIRECTOR t=543.1 CUT fight_46937818572597 shot=shoulder pri=75.0 why=better_after_min held_prev=12.1 pace=1.0 | fight_46937818572597/shoulder=75.0(delve start hurt 0.00), hero_2101/follow=24.6(town life same-shot-6), tour_3/push=10.0(quiet baseline)
+FEED Harl Hollow casts Fire at hollowed cave spider.
+FEED The townsfolk raise the ruin again.
+FEED Cort Bramble spots a pressure plate (Perception 13 vs DC 11) and steps round it.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 8, the watch 3 - the raiders strike first.
+FEED Cort Bramble rolls a 20 - and the puglin is gone.
+FEED Harl Hollow casts Fire at skeleton minion.
+FEED Rask Hollow goes down and claws back up. (CON save 14)
+FEED Rask Hollow the necromancer is cut down defending Bellmire by skeleton warrior. Level 2, 9 kills. !reroll to rise again.
+FEED Cort Bramble searches (Investigation 10) and turns up 17 gold on floor 2.
+FEED Floor 2 holds. The scar keeps count too.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Corvin Bramble goes down and claws back up. (CON save 15)
+FEED Corvin Bramble the bard is cut down defending Bellmire by skeleton rogue. Level 1, 0 kills. !reroll to rise again.
+FEED A building is burning!
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned slime, 1 hollowed puglin, 1 cave bat, 1 hollowed cave bat.
+FEED Edda Thatcher goes down and claws back up. (CON save 14)
+FEED Edda Thatcher is killed by skeleton warrior.
+DIRECTOR t=553.2 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=10.2 pace=0.6 | raid/shoulder=95.0(raid live), fight_46937818572597/shoulder=75.0(hurt 0.00), fish_557943119203/follow=60.0(catch REPEAT-held-out), hero_2101/follow=30.6(town life), tour_6/push=10.0(quiet baseline)
+FEED The attack is driven off. The gates hold.
+FEED Harl Hollow casts Fire at cave bat.
+DIRECTOR t=554.2 CUT fish_559285296542 shot=follow pri=60.0 why=shot_gone held_prev=1.0 pace=1.0 | fight_46937818572597/shoulder=75.0(hurt 0.00 REPEAT-held-out), fish_559285296542/follow=60.0(catch), hero_2102/follow=34.0(town life), tour_6/push=10.0(quiet baseline)
+FEED The townsfolk raise the ruin again.
+FEED Rolf Ashwood is sworn into the watch.
+FEED Harl Hollow casts Bolt at hollowed puglin.
+FEED Harl Hollow speaks fire too quickly and the magic falls behind (1 vs DC 11).
+FEED Harl Hollow casts Bolt at drowned slime.
+FEED The drowned slime divides.
+FEED Harl Hollow casts Bolt at drowned slimeling.
+FEED Cort Bramble searches (Investigation 5) and turns up 26 gold on floor 3.
+FEED Clear. Bind the wounds, then check behind the door.
+FEED Cort Bramble searches the chest - ...no loot... (Investigation 8 vs DC 11).
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED Wren Stonehand settles in Bellmire, looking for work.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 3 slimes, 2 puglins.
+FEED The slime divides.
+FEED Harl Hollow shapes bolt and the scar unshapes it (11 vs DC 12).
+FEED Harl Hollow turns on the wounded slimeling to finish it.
+FEED Cort Bramble spots a dart trap (Perception 18 vs DC 12) and steps round it.
+FEED Cort Bramble searches (Investigation 3) and turns up 35 gold on floor 4.
+FEED Clear, and the quiet sounds like a favour owed.
+FEED Cort Bramble steps on a spiked plate - spikes! DEX 21 vs DC 12, 3 damage (halved).
+FEED Cort Bramble touches the altar - a curse. Something older than the floor takes a bite.
+FEED Cort Bramble searches the chest - Successfully found loot!! 42 gold (Investigation 13 vs DC 12).
+FEED Cort Bramble cannot get to the chest and leaves it.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed skeleton mage, 1 skeleton warrior, 1 bone bowman, 1 drowned skeleton warrior, 1 bone sentinel.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The braziers in the hall burn blue, and then burn cold.
+DIRECTOR t=570.4 CUT lord_46937818572597 shot=shoulder pri=100.0 why=lord_rises held_prev=16.2 pace=1.0 | lord_46937818572597/shoulder=100.0(lord), fight_46937818572597/shoulder=75.0(hurt 0.00 REPEAT-held-out), fish_557943119203/follow=60.0(catch REPEAT-held-out), hero_2102/follow=25.0(town life same-shot-6), tour_6/push=10.0(quiet baseline)
+FEED Harl Hollow's bolt lands on the floor like a dropped flask (1 vs DC 12).
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 2, the watch 13 - the watch is ready for them.
+FEED Cold fire rolls off the Hollow King.
+FEED The Hollow King shifts, and the fight changes with it.
+FEED The Hollow King is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED The Hollow King falls to Cort Bramble.
+FEED Cort Bramble rolls a 20 searching the floor!
+FEED The Hollow King is slain on floor 5!
+FEED The hoard is split 2 ways - 132 gold each to Cort Bramble, Harl Hollow.
+FEED Cort Bramble finds a vial of Fellstill.
+DIRECTOR t=577.4 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=7.0 pace=0.6 | raid/shoulder=95.0(raid live), delve_46937818572597/follow=45.0(walking), hero_2102/follow=31.0(town life), tour_6/push=10.0(quiet baseline)
+FEED Cort Bramble searches the chest - Successfully found loot!! 61 gold (Investigation 14 vs DC 12).
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED A building is burning!
+FEED Cort Bramble spots a spike trap (Perception 14 vs DC 12) and steps round it.
+FEED A building is burning!
+FEED The townsfolk raise the ruin again.
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=581.5 CUT delve_46937818572597 shot=follow pri=45.0 why=shot_gone held_prev=4.0 pace=1.0 | fish_557943119203/follow=60.0(catch REPEAT-held-out), delve_46937818572597/follow=45.0(walking), hero_2102/follow=30.7(town life), tour_1/push=10.0(quiet baseline)
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 6; lights 66 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 2 wraithtouched scar rats, 2 duskforged marrow hewers, 2 sporeblown blood wasps.
+FEED Cort Bramble rolls a 20 - and the sporeblown blood wasp is gone.
+FEED Cort Bramble turns on the wounded sporeblown blood wasp to finish it.
+FEED Harl Hollow turns on the wounded sporeblown blood wasp to finish it.
+FEED The townsfolk raise the ruin again.
+FEED Cort Bramble drinks off what is on them.
+FEED Cort Bramble drinks Bitterleaf Tincture.
+FEED Cort Bramble searches (Investigation 14) and turns up 67 gold on floor 6.
+FEED Finished. The next room has gone from silent to listening.
+FEED Cort Bramble finds a vial of Netmender's Dram.
+FEED Cort Bramble searches the chest - Successfully found loot!! 91 gold (Investigation 21 vs DC 13).
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+FEED duskforged bone bowman holds this chamber alone - a mini-boss stands between you and the way deeper.
+FEED duskforged bone bowman finds its second wind - its strikes land harder.
+FEED The duskforged bone bowman is down. The chamber keeps a purse of 113 gold - 56 a share, 2 ways.
+L28C_EMITTERS floor 7 workshop: 3 (cap 12), creatures 5; lights 58 (shadowed 1)
+L28D_DECALS floor 7 workshop: 18 (cap 24)
+FEED Floor 7 - a workshop, remade as a workshop: 1 emberbound risen bones, 1 emberbound bone bowman, 1 wraithtouched fen lurker, 2 duskforged scar rats, 1 skeleton warrior.
+FEED The oil is running low.
+FEED Harl Hollow offers fire to the scar, and the scar keeps it (12 vs DC 13).
+FEED Cort Bramble searches (Investigation 6) and turns up 61 gold on floor 7.
+FEED Floor 7 stands down. Reload, rebind, relight.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 18, the watch 21 - the watch is ready for them.
+FEED Cort Bramble searches the chest - ...no loot... (Investigation 10 vs DC 13).
+FEED Cort Bramble cannot get to the chest and leaves it.
+FEED Cort Bramble, Harl Hollow take a breather, and press on deeper.
+DIRECTOR t=597.5 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=16.1 pace=0.6 | raid/shoulder=95.0(raid live), delve_46937818572597/follow=45.0(walking), hero_2102/follow=26.7(town life same-shot-6), tour_1/push=10.0(quiet baseline)
+L28C_EMITTERS floor 8 treasury: 2 (cap 12), creatures 2; lights 77 (shadowed 1)
+L28D_DECALS floor 8 treasury: 18 (cap 24)
+FEED Floor 8 - a fallen hold, remade as a treasury: 1 scarborn ash wight, 1 gorged imp, 1 scar adder, 1 duskforged silk mother, 1 gravecaller, 1 gorged gravecaller, 1 wraithtouched bone sentinel.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Harl Hollow's fire goes somewhere, and not where it was sent (12 vs DC 14).
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 8.
+FEED A building is burning!
+FEED Cort Bramble, Harl Hollow get out alive, and come home with what they carried.
+FEED Cort Bramble, Harl Hollow come home to Bellmire with 804 gold, 16 ore, 12 stone, 2 pieces of salvaged gear and 4 potions. 45 kills between them.
+FEED The townsfolk raise the ruin again.
+FEED Ingrid the Younger rolls a 20 - and skeleton minion falls.
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=604.7 CUT hero_2102 shot=follow pri=34.6 why=shot_gone held_prev=7.1 pace=1.4 | hero_2102/follow=34.6(town life), tour_0/push=10.0(quiet baseline)
+FEED Corvin Hollow settles in Bellmire, looking for work.
+FEED Rolf of the Ford is sworn into the watch.
+FEED Mira Stonehand settles in Bellmire, looking for work.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 4, the watch 20 - the watch is ready for them.
+DIRECTOR t=618.8 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=14.1 pace=0.6 | raid/shoulder=95.0(raid live), fish_559285296542/follow=60.0(catch REPEAT-held-out), hero_2101/follow=28.2(town life same-shot-6), tour_6/push=10.0(quiet baseline)
+FEED Cort Bramble rolls a 20 - and skeleton warrior falls.
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=619.8 CUT tour_7 shot=push pri=10.0 why=shot_gone held_prev=1.0 pace=1.4 | hero_2102/follow=30.9(town life REPEAT-held-out), tour_7/push=10.0(quiet baseline)
+EVENT death at 620.0
+DIRECTOR t=620.9 CUT death_32720503735952_620 shot=hard_cut pri=90.0 why=death held_prev=1.1 pace=1.0 | death_32720503735952_620/hard_cut=90.0(death), fish_559285296542/follow=60.0(catch REPEAT-held-out), hero_2101/follow=31.9(town life), tour_0/push=4.0(quiet baseline same-shot-6)
+SHOT l73_death_620_a shot=hard_cut key=death_32720503735952_620 dist=15.7
+FEED Talen the Younger is sworn into the watch.
+DIRECTOR t=628.9 CUT breath_628 shot=breath pri=20.0 why=breath held_prev=8.0 pace=1.0 | fish_559285296542/follow=60.0(catch REPEAT-held-out), hero_2102/follow=31.6(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+SHOT l73_death_620_b shot=breath key=breath_628 dist=14.0
+DIRECTOR t=634.9 CUT fish_557943119203 shot=follow pri=60.0 why=hotter held_prev=6.0 pace=1.0 | fish_557943119203/follow=60.0(catch), hero_2102/follow=32.3(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 19, the watch 13 - the raiders strike first.
+FEED The mounted watch rides out to meet them - 1 riders.
+FEED Aldric Rivers settles in Bellmire, looking for work.
+DIRECTOR t=639.9 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=5.0 pace=0.6 | raid/shoulder=95.0(raid live), hero_2101/follow=27.6(town life same-shot-6), tour_3/push=10.0(quiet baseline)
+FEED Cort Bramble rolls a 20 - and skeleton minion falls.
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=641.9 CUT hero_2101 shot=follow pri=34.6 why=shot_gone held_prev=2.0 pace=1.4 | hero_2101/follow=34.6(town life), tour_6/push=10.0(quiet baseline)
+DIRECTOR t=646.0 CUT fish_559285296542 shot=follow pri=54.0 why=hotter held_prev=4.0 pace=1.0 | fish_559285296542/follow=54.0(catch same-shot-6), hero_2101/follow=31.7(town life), tour_1/push=10.0(quiet baseline)
+FEED Edda Coalfoot settles in Bellmire, looking for work.
+FEED Aldric Quarryman settles in Bellmire, looking for work.
+FEED 8 bandits are riding on the west road!
+FEED Initiative: the raiders 15, the watch 6 - the raiders strike first.
+FEED The mounted watch rides out to meet them - 1 riders.
+DIRECTOR t=667.1 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=21.2 pace=0.6 | raid/shoulder=95.0(raid live), hero_2102/follow=32.0(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED Corvin Ashwood is sworn into the watch.
+FEED Nessa Thatcher settles in Bellmire, looking for work.
+FEED Dunn Bramble's charge crashes into a bandit!
+FEED Dunn Bramble goes down and claws back up. (CON save 21)
+FEED Dunn Bramble is killed by a bandit.
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=675.2 CUT tour_6 shot=push pri=10.0 why=shot_gone held_prev=8.1 pace=1.4 | hero_2101/follow=34.5(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED Rask Quarryman is sworn into the watch.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 20, the watch 11 - the raiders strike first.
+DIRECTOR t=694.3 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=19.1 pace=0.6 | raid/shoulder=95.0(raid live), hero_2101/follow=30.3(town life REPEAT-held-out), tour_1/push=4.0(quiet baseline same-shot-6)
+FEED The attack is driven off. The gates hold.
+FEED Wren Thatcher settles in Bellmire, looking for work.
+DIRECTOR t=696.4 CUT hero_2102 shot=follow pri=32.3 why=shot_gone held_prev=2.0 pace=1.4 | hero_2102/follow=32.3(town life), tour_3/push=10.0(quiet baseline)
+FEED Lamps lit, door kept - down they go.
+FEED They carry 57 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 slimes, 1 hollowed giant rat.
+FEED Two names on one stone, and only one body-shaped hollow.
+FEED Harl Hollow casts Bolt at slime.
+FEED The slime divides.
+DIRECTOR t=704.4 CUT fight_56169313892323 shot=shoulder pri=75.0 why=hotter held_prev=8.1 pace=1.0 | fight_56169313892323/shoulder=75.0(delve start hurt 0.00), hero_2102/follow=33.7(town life), tour_3/push=10.0(quiet baseline)
+FEED Harl Hollow's bolt goes out like a lamp in wind - wild magic (1 vs DC 10).
+FEED Harl Hollow casts Fire at slimeling.
+FEED Ingrid the Younger searches (Investigation 14) and turns up 12 gold on floor 1.
+FEED Floor 1 quiet. Too quiet for a room this size.
+FEED Ingrid the Younger finds a vial of The Alewife's Short Measure.
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+FEED Cort Bramble spots a blade trap (Perception 17 vs DC 10) and steps round it.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 skeleton minion, 1 cave bat, 1 bog frog, 1 hollowed bog frog.
+FEED Harl Hollow casts Bolt at bog frog.
+FEED Harl Hollow spots a pressure plate (Perception 20 vs DC 11) and steps round it.
+FEED Harl Hollow casts Fire at skeleton minion.
+FEED Cort Bramble cracks the chain off a captive - 42 gold passes to the party, split 3 ways.
+FEED Harl Hollow casts Bolt at hollowed bog frog.
+FEED Ingrid the Younger searches (Investigation 6) and turns up 17 gold on floor 2.
+FEED Floor 2 cleared, and the lamps get their first steady minute.
+FEED Maela Ashwood settles in Bellmire, looking for work.
+FEED Ingrid the Younger searches the chest - Successfully found loot!! 41 gold (Investigation 22 vs DC 11).
+FEED Cort Bramble and 2 others take a breather, and press on deeper.
+L73_LONG quiet_samples=1044 quiet_median_dist=20.3
+L73_LONG event=raid t=100 first_cut_after=2.2s dist=[9.1..30.0] shots={ "shoulder": 32, "hard_cut": 7 } told=true
+L73_LONG event=death t=220 first_cut_after=6.4s dist=[9.2..30.0] shots={ "shoulder": 33, "hard_cut": 4, "breath": 2 } told=true
+L73_LONG event=delve_start t=400 first_cut_after=7.0s dist=[20.4..30.0] shots={ "shoulder": 18, "follow": 21 } told=true
+L73_LONG event=raid t=520 first_cut_after=3.0s dist=[12.0..30.0] shots={ "shoulder": 21, "follow": 18 } told=true
+L73_LONG event=death t=620 first_cut_after=1.0s dist=[12.0..45.8] shots={ "push": 1, "hard_cut": 16, "breath": 12, "follow": 10 } told=true
+L73_LONG events=5 cuts_logged=103 fails=0
+L73_LONG OK

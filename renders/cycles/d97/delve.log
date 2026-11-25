@@ -1,0 +1,42 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED JestFan and 3 others descend into the dark, and the dark does not object.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed puglin, 1 giant rat, 1 slime.
+FEED Every skull faces the door, and the door faces us.
+T10s floor=1 state=fight foes=3 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at giant rat.
+T20s floor=1 state=fight foes=2 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED DawnCleric casts Bolt at hollowed puglin.
+FEED MossyMage casts Bolt at hollowed puglin.
+T30s floor=1 state=fight foes=1 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+T40s floor=1 state=fight foes=1 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+T50s floor=1 state=fight foes=1 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+T60s floor=1 state=fight foes=1 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED DawnCleric works bolt; the scar does the last line for them (8 vs DC 10).
+FEED DawnCleric casts Smite at slime.
+FEED The slime divides.
+FEED MossyMage casts Bolt at slimeling.
+FEED JestFan rolls a 20 - and the slimeling is gone.
+FEED MossyMage searches (Investigation 9) and turns up 8 gold on floor 1.
+FEED Done here. Bind the wounds, count the flasks.
+T70s floor=1 state=search foes=0 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED MossyMage searches the chest - Successfully found loot!! 19 gold (Investigation 20 vs DC 10).
+T80s floor=1 state=search foes=0 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+T90s floor=1 state=search foes=0 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T100s floor=1 state=descend foes=0 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+T110s floor=1 state=descend foes=0 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+T120s floor=1 state=descend foes=0 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave bat, 1 skeleton minion, 1 hollowed cave spider, 1 bog frog.
+FEED The oil is running low.
+T130s floor=2 state=fight foes=4 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED MossyMage reaches for chain and the scar hands back something else (7 vs DC 11).
+T140s floor=2 state=fight foes=3 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+T150s floor=2 state=fight foes=3 ["JestFan 93/93", "MossyMage 63/63", "DawnCleric 96/96", "BigAxe 124/124"]
+
+RC 0

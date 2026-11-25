@@ -1,0 +1,52 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Wet slate on the stair. Somebody has laid straw down it.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 cave bats, 1 slime.
+FEED A coin on every lid, and every coin has been turned face down.
+FEED MossyMage rolls a 20 for initiative and is moving before anything else.
+FEED BigAxe rolls a 20 for initiative and is moving before anything else.
+FEED DawnCleric casts Smite at slime.
+FEED MossyMage casts Bolt at slime.
+FEED The slime divides.
+T10s floor=1 state=fight foes=2 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at cave bat.
+FEED MossyMage casts Chain Bolt at cave bat.
+T20s floor=1 state=fight foes=1 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED DawnCleric casts Bolt at cave bat.
+FEED MossyMage searches (Investigation 25) and turns up 17 gold on floor 1.
+FEED Clear, and the quiet sounds like a favour owed.
+FEED MossyMage finds a vial of Tallow Salve.
+T30s floor=1 state=search foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED MossyMage searches the chest - Successfully found loot!! 22 gold (Investigation 20 vs DC 10).
+T40s floor=1 state=search foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+T50s floor=1 state=search foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T60s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+T70s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+T80s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+T90s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 1; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed skeleton minion, 1 hollowed cave bat, 1 hollowed cave spider, 1 puglin.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED Something in the stone is still eating.
+FEED The oil is running low.
+T100s floor=2 state=fight foes=4 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at hollowed cave spider.
+FEED DawnCleric's bolt stalls. The floor hums once, unimpressed (8 vs DC 11).
+FEED MossyMage casts Fire at hollowed cave spider.
+T110s floor=2 state=fight foes=5 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED DawnCleric casts Smite at puglin.
+FEED MossyMage casts Bolt at puglin.
+T120s floor=2 state=fight foes=3 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 124/124"]
+FEED DawnCleric casts Bolt at hollowed cave bat.
+FEED DawnCleric casts Smite at hollowed skeleton minion.
+T130s floor=2 state=fight foes=1 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 118/124"]
+T140s floor=2 state=fight foes=1 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 118/124"]
+T150s floor=2 state=fight foes=1 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 118/124"]
+DELVE_TEST OK ran 9001 frames, floor reached 2, state fight (capped at 9001 frames); engine error lines are still read off the log
+
+RC 0

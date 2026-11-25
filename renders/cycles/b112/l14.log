@@ -1,0 +1,48 @@
+# chat bot B112 gate l14
+# cmd: D:\1game\Godot_v4.7.2-stable_win64_console.exe --headless --path C:\hd adventure\bellmire-bot --script tools/_l14_test.gd
+# rc=1
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  FAIL no COMMANDS_DATA guard arm fired on the load (2 fired: ["MINIBOSS COUNT", "MINIBOSS UNNAMED"])
+  ok  every verb ChatCmd answers is in the data (74 verbs; missing [])
+  ok  every command in the data is answered (unanswered [])
+  ok  !stats -> Ash the human knight, Unproven, level 1  |  AC 15  HP 82  prof +2  to-hit +6  |  STR 18(+4
+  ok  !inv -> Ash carries Worn Arming Sword and wears Patched Gambeson  |  1 Mending, 2 oil, 40 gold
+  ok  !commands -> Commands: !enlist !hero !catchup !inventory !weapon !armour !delve !muster !fish !forge !a
+  ok  !lamp -> Ash buys 1 flask of oil. Now carrying 3.
+  ok  !help forge -> !forge [kind | list] - Next weapon tier at the smithy, in a kind of your calling (!forge l
+  ok  !help names every command
+  ok  a typo is nudged: No !forg here - did you mean !forge? (!help lists them all)
+  ok  other bots' commands are left alone
+  ok  fightoverlay's commands, its v-prefix and near misses stay silent (answered: [])
+  ok  Bellmire's own typo !hro is still nudged: No !hro here - did you mean !hero? (!help lists them all)
+  ok  Bellmire's own typo !fsh is still nudged: No !fsh here - did you mean !fish? (!help lists them all)
+  ok  Bellmire's own typo !enlst is still nudged: No !enlst here - did you mean !enlist? (!help lists them all)
+  ok  Bellmire's own typo !memoral is still nudged: No !memoral here - did you mean !memorial? (!help lists them all)
+  ok  !ranks still answers the Guild Roll: The guild roll: 1. Ash the Unproven (0)
+  ok  twitch_reply: the plain !hero answer for ash ([["ash", "Ash the human knight, Unproven, level 1  |  AC 15  HP 82  prof +2  to-hit +6  |  STR 18(+4) DEX 17(+3) CON 15(+2) INT 17(+3) WIS 8(-1) CHA 17(+3)  |  saves STR +6 CON +4  |  Worn Arming Sword (1d4), rags  |  1 potions, 3 oil, 28 gold  |  deepest floor 0, 0 kills  |  Full sheet: https://jestsayin96.github.io/Bellmire-HD-stream/"]])
+  ok  twitch_reply: the login when one is given
+  ok  twitch_reply: nothing for the local keyboard or for fightoverlay's words (2)
+  ok  no Bellmire command or alias is another app's or starts with its prefix (clash: [])
+  ok  a friendly gold reply: Ash needs 40 gold for leather - you have 28.
+  ok  docs/COMMANDS.md carries every field the data publishes, verbatim (32 rows; unpublished [])
+  ok  docs/COMMANDS.md publishes nothing the data does not say (32 rows; stale [])
+L14_TEST FAIL 1 (24 checks)
+
+--- STDERR ---
+ERROR: COMMANDS_DATA MINIBOSS COUNT: `miniboss` publishes 45 elites and content writes feed rows for 46 - docs/COMMANDS.md counts the chambers wrong and a viewer finds out by asking for one that is not there
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] commands (res://scripts/chatcmd.gd:2244)
+       [1] _initialize (res://tools/_l14_test.gd:18)
+COMMANDS_DATA MINIBOSS COUNT - published 45, feed rows 46
+ERROR: COMMANDS_DATA MINIBOSS UNNAMED: 1 body(s) content writes a feed for carry no `Delve.MB_NAME` row, so the nameplate falls back to the capitalised trade and !miniboss answers the trade word the rename exists to remove - nothing crashes and nothing reads wrong in a log, which is why this is a fault and not a warning: ["blower"]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] commands (res://scripts/chatcmd.gd:2248)
+       [1] _initialize (res://tools/_l14_test.gd:18)
+COMMANDS_DATA MINIBOSS UNNAMED - 1 bodies draw a feed with no MB_NAME row and answer to their trade word instead of a name: ["blower"]
+WARNING: 5 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

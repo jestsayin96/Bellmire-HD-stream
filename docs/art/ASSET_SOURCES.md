@@ -335,6 +335,130 @@ licensed**, and two of these three are CC0 outright. A filename is not a licence
 in either direction. The recipe that counts files answers "where do I have to go
 and read", not "what am I allowed to use".
 
+
+## PACK CATALOGUE - 3d_crystals_new (20 Nov 2026, pack-catalogue firing)
+
+| Pack | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|
+| 3d_crystals_new | **NO LICENCE FILE FOUND** | none | 5 (`crystals.blend`, `174.jpg`, `174_norm.jpg`, `crystal.jpg`, `crystal_simple_norm.jpg`) | not established | not established |
+
+- Checked: every file in `_packs\3d_crystals_new\` and every entry in the sibling `3d_crystals_new.zip` (the same five files, read by listing the archive, not extracted). No file named licence, license, copying, readme, credits, terms, or about, and no text file of any kind.
+- A `.blend` can carry text datablocks with terms, but none was opened for this entry; the pack is recorded as unlicensed until a licence is found on disk.
+- Status: **NOT CLEARED.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. The crystal textures are not to be imported on the strength of their folder name or of any search snippet.
+
+
+## PACK CATALOGUE - Animals_Pack_by_Quaternius (20 Nov 2026, pack-catalogue firing)
+
+| Pack | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|
+| Animals_Pack_by_Quaternius | **NO LICENCE FILE FOUND** | none | 21 (`Animals Pack by Quaternius\Blends\`: Bird, Chick, Fish, Red Fox, Whale `.blend` plus `FishTexture.png`; `FBX\`: 5 `.fbx`; `OBJ\`: 5 `.obj` + 5 `.mtl`) | not established | not established |
+
+- Checked: every file under `_packs\Animals_Pack_by_Quaternius\` and every entry in the sibling `Animals_Pack_by_Quaternius.zip` (listed by reading the archive, not extracted). No file named licence, license, copying, readme, credits, terms, or about, and no text file apart from the three `.mtl` material files, which carry material values only.
+- The folder name, the `Quaternius` author credit and the Animals Pack's public listing are not a licence and are not treated as one here.
+- Status: **NOT CLEARED.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file.
+
+
+## PACK CATALOGUE - Church1_blend (20 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Church1_blend (Blendswap 75990 "Medieval Church") | Daniel74 | **CC0 1.0 Universal (Public Domain)** | `_packs/Church1_blend/75990_Church1Upload_blend/75990 - Medieval Church - License.html` | 17 on disk (`Church1Upload.blend`, `church.dae`, `preview_75990.jpg`, 13 textures under `EXPORT\`, the licence HTML); the sibling `Church1_blend.zip` lists the same content | permitted | not required; credit kept (Daniel74, blendswap.com/blends/view/75990) |
+
+- Checked: the whole `_packs\Church1_blend\` tree by walking it, and the sibling `Church1_blend.zip` by listing its entries (not extracted). The licence was read off the file this run, not from a search snippet. The HTML page states: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain)" and "There are no requirements for CC-Zero licensed blends."
+- Note for later seats: the HTML is a Blend Swap page wrapper, and the text it holds is the licence statement itself. The `.blend` may carry its own text datablocks and embedded assets; none was opened here, so the CC0 grant is recorded for the pack as published, not re-checked per embedded texture.
+- Status: **CLEARED for use (CC0 1.0).** Import still goes through the licence gate in this file, which this entry now satisfies for `Church1_blend`.
+
+## PACK CATALOGUE - Fantasy_Props_MegaKit (20 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Fantasy_Props_MegaKit (Quaternius, FREE standard version) | Quaternius | **CC0 1.0 Universal (Public Domain)** | `_packs\Fantasy_Props_MegaKit\License_Standard.txt` | 517 on disk: 94 each of `.fbx`, `.gltf` + `.bin`, `.obj` + `.mtl`; 43 `.png`, 3 `.jpg` (previews), 1 `.txt` (the licence) | permitted | not required; the file asks for a Patreon/Discord link only as a courtesy, not a condition |
+
+- Checked: the whole `_packs\Fantasy_Props_MegaKit\` tree by walking it, and the sibling `Fantasy_Props_MegaKit.zip` by listing its entries (517 files, same count; not extracted). The licence was read off disk this run, not from a search snippet.
+- The text reads, verbatim: "License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/" and "Models by @Quaternius". It also states this is the FREE standard subset of the Fantasy Props MegaKit; the PRO and SOURCE versions are paid and are not in this pack.
+- Status: **CLEARED for use (CC0 1.0).** Import still goes through the licence gate in this file, which this entry now satisfies for `Fantasy_Props_MegaKit`.
+
+## PACK CATALOGUE - Fantasy_Ruins_Pack (20 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Fantasy_Ruins_Pack (folder `FantasyRuins_Ready`) | not named in the licence text; the file prefix is `3TD` | **CC0 1.0 Universal (Public Domain)** | `_packs\Fantasy_Ruins_Pack\FantasyRuins_Ready\3TD_CC0_License_EULA.pdf` | 110 on disk: 39 `.jpg`, 35 `.png`, 12 `.dts`, 12 `.dae`, 11 `.cs`, 1 `.pdf` (the licence) | permitted | not required |
+
+- Checked: every file in `_packs\Fantasy_Ruins_Pack\` by walking the tree (110 files). The sibling `Fantasy_Ruins_Pack.zip` was not opened in this firing.
+- The licence PDF was read off disk this run, not from a search snippet. Its text layer is a Calibri TrueType subset with no plain-text strings, so the text was recovered by decoding the three page content streams through the font's ToUnicode map. The recovered text is the Creative Commons CC0 legal code: a Statement of Purpose, the "Work made available under CC0" wording, and the grant "for any purpose whatsoever, including without limitation commercial, advertising or promotional purposes".
+- The earlier catalogue line that called this licence "unreadable" (docs/PACK_CATALOGUE.md, Licence flags) is superseded by this entry.
+- Formats: `.dts` (Torque), `.dae` (Collada) and `.cs` (game-engine scripts). No glTF, GLB or FBX, so any use needs a conversion step. The `.cs` files are engine code and are not to be copied into the repo.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for this pack. Nothing is redistributed as an asset; any model that enters `assets/` must still be recorded in its own row.
+
+## Pack catalogue verification - 3d_crystals_new (20 Nov 2026, pack-catalogue worker)
+
+| Field | Value |
+|---|---|
+| Pack directory | `C:\hd adventure\_packs\3d_crystals_new\` (sibling `3d_crystals_new.zip` checked: identical 5 entries, no extra files) |
+| Author | Not stated in any file in the pack |
+| Licence | **NO LICENCE FILE FOUND** - no LICENSE / License.txt / README / credits / terms file in the directory or the zip. Nothing guessed. |
+| File count | 5 (4 x .jpg: `174.jpg`, `174_norm.jpg`, `crystal.jpg`, `crystal_simple_norm.jpg`; 1 x .blend: `crystals.blend`) |
+| Commercial use | Not determinable from the pack |
+| Attribution | Not determinable from the pack |
+| File dates | jpg 2014-01-24 / 2014-07-17; blend 2014-07-18 (inside zip) |
+| Cleared for use | **NO.** Unlicensed. Do not ship, convert or redistribute any file from this pack until an author licence is found. |
+
+Method: directory listed and zip central directory read with Python `zipfile` (not extracted); the one licence-like search (`*licen*`, `*readme*`, `*credit*`, `*terms*`, `*.txt`, `*.md`, `*.html`) returned nothing in either location. The `.blend` was not opened.
+
+
+## PACK CATALOGUE - HandPainted_Plants (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| HandPainted_Plants (folder `HandPainted_Plants`, sibling `HandPainted_Plants.7z`) | Nobiax / Yughues | **CC0 1.0 Universal (Public Domain)** | `_packs\HandPainted_Plants\ReadMe - Licence.txt` | 36 on disk: 15 `.fbx` (`FBX\`), 15 `.obj` (`OBJ\`), 2 `.tga` (`LP-Plants_d.tga`, `LP-Plants_d-outline.tga`), 3 `.jpg` (`HP Plants.jpg`, `HP Plants bis.jpg`, `HP Plants outline_d.jpg`), 1 `.txt` (the licence) | permitted | not required by CC0; the file asks for a Patreon link and a share if used |
+
+- Checked: every file under `_packs\HandPainted_Plants\` by walking the tree (36 files, counted by `find -type f`). The sibling `HandPainted_Plants.7z` was not opened in this firing; the extracted directory is the copy read.
+- The licence was read off the file on disk this run, not from a search snippet. The file reads, verbatim: "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication. No Copyright" and "You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission." It also says "Absolutely free to use or to modify in any kind of work (personal, commercial, educational or else)".
+- The same file carries a request, "Please, don't be an ass, don't do basic reselling of it", plus a Patreon and Twitter link. Under CC0 this is a courtesy, not a condition of the grant. Nothing from this pack is to be redistributed AS an asset, which keeps the request satisfied in any case.
+- Formats: FBX and OBJ, so any import into `assets/` needs a headless Blender batch convert to .glb first, the same route the Quaternius packs take. Each model that enters `assets/` must still get its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `HandPainted_Plants`.
+
+
+## PACK CATALOGUE - House1_blend (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| House1_blend (Blendswap 75519 "Medieval houses") | Daniel74 | **CC0 1.0 Universal (Public Domain)** | `_packs\House1_blend\75519 - Medieval houses - License.html` | 3 on disk: `House1Upload.blend` (7.9 MB), `preview_75519.jpg`, the licence HTML. The sibling `House1_blend.zip` lists the same three entries (not extracted) | permitted | not required by CC0; credit kept (Daniel74, blendswap.com/blends/view/75519) |
+
+- Checked: every file in `_packs\House1_blend\` by listing the tree (3 files), and the sibling `House1_blend.zip` by reading its entries with Python `zipfile` (not extracted). The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
+- Note for later seats: the HTML is a Blend Swap page wrapper, so its text is the licence statement itself. The `.blend` may carry embedded textures or text datablocks; the `.blend` was not opened here, so the CC0 grant is recorded for the pack as published and not re-checked per embedded asset.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `House1_blend`. Nothing is redistributed AS an asset; any model that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - House2_blend (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| House2_blend (Blendswap 75861 "Medieval House") | Daniel74 | **CC0 1.0 Universal (Public Domain)** | `_packs\House2_blend\75861 - Medieval House - License.html` | 3 on disk: `House2_1Upload.blend` (8.8 MB), `preview_75861.jpg`, the licence HTML. The sibling `House2_blend.zip` lists the same three entries (not extracted) | permitted | not required by CC0; credit kept (Daniel74, blendswap.com/blends/view/75861) |
+
+- Checked: every file in `_packs\House2_blend\` by listing the tree (3 files), and the sibling `House2_blend.zip` by reading its entries with Python `zipfile` (not extracted). The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
+- Note for later seats: the HTML is a Blend Swap page wrapper, so its text is the licence statement itself. The `.blend` may carry embedded textures or text datablocks; the `.blend` was not opened here, so the CC0 grant is recorded for the pack as published and not re-checked per embedded asset.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `House2_blend`. Nothing is redistributed AS an asset; any model that enters `assets/` still needs its own row.
+
+
+## PACK CATALOGUE - House3_blend (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| House3_blend (Blendswap 75862 "Medieval house") | Daniel74 | **CC0 1.0 Universal (Public Domain)** | `_packs\House3_blend\75862 - Medieval house - License.html` | 3 on disk: `House3Upload.blend` (8.6 MB), `preview_75862.jpg`, the licence HTML. The sibling `House3_blend.zip` lists the same three entries (listed and integrity-tested with `zipfile.testzip()`, not extracted) | permitted | not required by CC0; credit kept (Daniel74, blendswap.com/blends/view/75862) |
+
+- Checked: every file in `_packs\House3_blend\` by listing the tree (3 files), and the sibling `House3_blend.zip` by reading its entries with Python `zipfile` (not extracted). The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
+- Note for later seats: the HTML is a Blend Swap page wrapper, so its text is the licence statement itself. The `.blend` may carry embedded textures or text datablocks; the `.blend` was not opened here, so the CC0 grant is recorded for the pack as published and not re-checked per embedded asset.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `House3_blend`. Nothing is redistributed AS an asset; any model that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - House4_blend (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| House4_blend (Blendswap 75864 "Medieval House") | Daniel74 | **CC0 1.0 Universal (Public Domain)** | `_packs\House4_blend\75864 - Medieval House - License.html` | 3 on disk: `House4Upload.blend` (10.8 MB), `preview_75864.jpg`, the licence HTML. The sibling `House4_blend.zip` lists the same three entries (listed and integrity-tested with `zipfile.testzip()`, which returned no error; not extracted) | permitted | not required by CC0; credit kept (Daniel74, blendswap.com/blends/view/75864) |
+
+- Checked: every file in `_packs\House4_blend\` by listing the tree (3 files), and the sibling `House4_blend.zip` by reading its entries with Python `zipfile` (not extracted). The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
+- Note for later seats: the HTML is a Blend Swap page wrapper, so its text is the licence statement itself. The `.blend` may carry embedded textures or text datablocks; the `.blend` was not opened here, so the CC0 grant is recorded for the pack as published and not re-checked per embedded asset.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `House4_blend`. Nothing is redistributed AS an asset; any model that enters `assets/` still needs its own row.
 ### 21 Nov 2026 - System 2: the three dungeon crossbows are MODIFIED in place (art)
 `assets/gear/dungeon/crossbow_{common,uncommon,rare}.glb` are the **KayKit
 Dungeon Pack 1.0 (Kay Lousberg, CC0 1.0)** models already listed in the table
@@ -348,3 +472,356 @@ asset. THE PRISTINE COPY, if these ever need restoring, is
 generator REFUSES to run on an already augmented mesh - it asserts the vertex
 count against the pack's own 395/531/688 first, so a second stirrup cannot be
 added by a re-run.
+
+
+## PACK CATALOGUE - KayKit_RPGToolsBits_1.0_FREE (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| KayKit : RPG Tools Bits (1.0) (folder `KayKit_RPGToolsBits_1.0_FREE`, nested one level as `KayKit_RPGToolsBits_1.0_FREE\KayKit_RPGToolsBits_1.0_FREE\`) | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0 Universal (Public Domain)** | `_packs\KayKit_RPGToolsBits_1.0_FREE\KayKit_RPGToolsBits_1.0_FREE\License.txt` | 339 on disk: 49 models in each of `Assets\gltf\` (`.gltf` + `.bin`), `Assets\fbx\` (`.fbx`), `Assets\fbx(unity)\` (`.fbx`), `Assets\obj\` (59 `.obj` + `.mtl`, incl. sub-parts); 21 `.png`; 3 `.url` (Patreon, Discord, more-assets links); 1 `.txt` (the licence) | permitted | not required; the licence asks for a credit "Kay Lousberg, www.kaylousberg.com" as optional |
+
+- Checked: every file under `_packs\KayKit_RPGToolsBits_1.0_FREE\` by walking the tree (339 files, counted with Python `os.walk`). The sibling `KayKit_RPGToolsBits_1.0_FREE.zip` was not opened in this firing; the extracted directory is the copy read.
+- The licence was read off `License.txt` on disk this run, not from a search snippet. The file reads, verbatim: "License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/" and "This content is free to use in personal, educational and commercial projects." Crediting is stated as optional ("this is not mandatory").
+- The same file asks, as a courtesy and not as a condition of the grant, for support via the EXTRA/SOURCE tiers, a donation, or Patreon.
+- Formats: glTF (with `.bin`), FBX and OBJ. The glTF set needs no conversion before Godot; the FBX and OBJ sets would need a headless Blender batch convert to `.glb` first, as the other packs do.
+- The pack is a tools-and-props set (anvil, grindstone, journal, lantern, map, torch, wrench and similar), not a weapon or character pack. Any model that enters `assets/` must still get its own row in the table above.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `KayKit_RPGToolsBits_1.0_FREE`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - KayKit_ResourceBits_1.0_FREE (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| KayKit : Resource Bits (1.0) (folder `KayKit_ResourceBits_1.0_FREE`, nested one level as `KayKit_ResourceBits_1.0_FREE\KayKit_ResourceBits_1.0_FREE\`) | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0 Universal (Public Domain)** | `_packs\KayKit_ResourceBits_1.0_FREE\KayKit_ResourceBits_1.0_FREE\License.txt` | 466 on disk: 76 glTF models (`Assets\gltf\`: 76 `.gltf` + 76 `.bin`, plus 1 `.png`), 77 `.fbx` (`Assets\fbx\`), 77 `.fbx` (`Assets\fbx(unity)\`), 153 `.obj`/`.mtl` set (`Assets\obj\`), 1 texture (`Textures\resource_bits_texture.png`), 1 `contents.png`, 3 `.url` (Discord, more assets, Patreon), 1 `License.txt` | permitted | not required; the licence says crediting is "not mandatory, but would be appreciated" |
+
+- Checked: every file under `_packs\KayKit_ResourceBits_1.0_FREE\` by walking the tree (466 files, counted with `find -type f`). The sibling `KayKit_ResourceBits_1.0_FREE.zip` was not opened in this firing; the extracted directory is the copy read.
+- The licence was read off `License.txt` on disk this run, not from a search snippet. The file reads, verbatim: "License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/" and "This content is free to use in personal, educational and commercial projects." Crediting: "this is not mandatory, but would be appreciated".
+- The same file asks, as a courtesy and not as a condition of the grant, for support via Patreon or the EXTRA/SOURCE packs on itch.io.
+- Formats: glTF (with `.bin`) needs no conversion before Godot; the FBX and OBJ sets would need a headless Blender batch convert to `.glb` first, as the other packs do.
+- The pack is a resource-props set (copper, gold, iron and silver bars, nuggets and stacks; fuel barrels and jerrycans; pallets; stone bricks and chunks; textiles; wood logs and planks; parts piles and cogs). It is not a weapon or character pack. Any model that enters `assets/` must still get its own row in the table above.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `KayKit_ResourceBits_1.0_FREE`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - Smith1_blend (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Smith1_blend (Blendswap 75579 "Medieval Smith Pack") | Daniel74 | **CC0 1.0 Universal (Public Domain)** | `_packs\Smith1_blend\75579 - Medieval Smith Pack - License.html` | 3 on disk: `Smith1Upload.blend`, `preview_75579.jpg`, the licence HTML (folder count 3; the sibling `Smith1_blend.zip` was not opened this firing) | permitted | not required by CC0; credit kept (Daniel74, blendswap.com/blends/view/75579) |
+
+- Checked: every file in `_packs\Smith1_blend\` by walking the tree (3 files). The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
+- Note for later seats: the HTML is a Blend Swap page wrapper, so its text is the licence statement itself. The `.blend` may carry embedded textures or text datablocks; it was not opened here, so the CC0 grant is recorded for the pack as published and not re-checked per embedded asset.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Smith1_blend`. Nothing is redistributed AS an asset; any model that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - ThePaintedWench_blend (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| ThePaintedWench_blend (Blendswap 75282 "Medieval Tavern") | Daniel74 | **CC0 1.0 Universal (Public Domain)** | `_packs\ThePaintedWench_blend\75282 - Medieval Tavern - License.html` | 3 on disk: `ThePaintedWench_02Upload.blend` (5,351,400 bytes), `preview_75282.jpg` (3,066 bytes), the licence HTML (5,278 bytes). The sibling `ThePaintedWench_blend.zip` lists the same three entries and was not extracted. | permitted | not required by CC0; credit kept (Daniel74, blendswap.com/blends/view/75282) |
+
+- Checked: every file in `_packs\ThePaintedWench_blend\` by walking the tree (3 files), and the sibling zip's entry list read with Python `zipfile`. The licence was read off the HTML file on disk this run, not from a search snippet. The page states, verbatim: "This file has been released by Daniel74 under the following license: Creative Commons Zero (Public Domain). You can use this model for any porposes according to the following conditions: There are no requirements for CC-Zero licensed blends."
+- Note for later seats: the `.blend` was not opened here, so the CC0 grant is recorded for the pack as published. Any model that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `ThePaintedWench_blend`. Nothing is redistributed AS an asset.
+
+
+## PACK CATALOGUE - Ultimate_Animated_Animals (21 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Ultimate_Animated_Animals (folder `Ultimate Animated Animals - July 2021\`) | Quaternius (patreon.com/quaternius) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\Ultimate_Animated_Animals\Ultimate Animated Animals - July 2021\License.txt` (364 bytes, read in full this run) | 63 on disk: 12 `.blend` (Blends\), 12 `.fbx` (FBX\), 12 `.gltf` (glTF\), 12 `.obj` + 12 `.mtl` (OBJ\), `Preview.jpg`, `Preview.mp4`, `License.txt` | permitted | not required by CC0; credit kept (Quaternius, "LowPoly Models by @Quaternius") |
+
+- Checked: every file under `_packs\Ultimate_Animated_Animals\` by walking the tree (63 files), and the licence file read in full off disk. The licence text states: "LowPoly Models by @Quaternius ... License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/".
+- Animals in the pack (12 species, each present in the blend, FBX, glTF and OBJ sets): Alpaca, Bull, Cow, Deer, Donkey, Fox, Horse, Horse_White, Husky, ShibaInu, Stag, Wolf.
+- Note for later seats: the `.zip` sibling `Ultimate_Animated_Animals.zip` was not opened this firing; the CC0 grant is recorded for the pack as published. Any animal that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Animated_Animals`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - Ultimate_Monsters (23 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Ultimate_Monsters (folder `Ultimate Monsters\`, licence header reads "Ultimate Platformer Pack by @Quaternius") | Quaternius (patreon.com/quaternius) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\Ultimate_Monsters\Ultimate Monsters\License.txt` (374 bytes, read in full this run) | 69 on disk: `Atlas_Monsters.png`, `Color Guide.png`, `Preview.jpg`, `Big\` (8 `.blend`, 17 `.fbx`, 17 `.obj` + `.mtl`, 4 `.gltf`), `Blob\` (9 `.fbx`), `Flying\` (4 `.blend`, 8 `.obj` + `.mtl`), `License.txt`. The sibling `Ultimate_Monsters.zip` was not opened this firing. | permitted | not required by CC0; credit kept (Quaternius, "Ultimate Platformer Pack by @Quaternius") |
+
+- Checked: every file under `_packs\Ultimate_Monsters\` by walking the tree (69 files), and the licence file read in full off disk. The licence text states, verbatim: "Ultimate Platformer Pack by @Quaternius ... License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/".
+- Naming discrepancy noted, not resolved: the folder and zip are named "Ultimate Monsters" but the licence header names the pack "Ultimate Platformer Pack". The CC0 statement is the same either way; the pack-title mismatch is recorded so a later reader is not confused about which Quaternius release this is.
+- Monsters in the pack (named in the file tree): Alien, Birb, BlueDemon, Frog, Ninja, Orc_Skull, Tribal, Cactoro, Dino, Fish, Monkroose, MushroomKing, Orc, Yeti, GreenBlob, GreenSpikyBlob, Mushnub, Pigeon, PinkBlob, Wizard, Glub, Glub_Evolved, Goleling_Evolved, Squidle, Alpaking_Evolved, Ghost, Hywirl, Bunny. Any monster that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Monsters`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - forest-monster (23 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| forest-monster (folder `_packs\forest-monster\`; sibling `forest-monster.7z`, not opened) | Čestmír Dammer (CDmir), project www.kelgar.org, idea Torben | **CC0** (stated as "Creative Commons (CC0)", no version given) | `_packs\forest-monster\Licenses.txt` (589 bytes, read in full this run) | 10 on disk: `forest-monster-final.blend`, `Licenses.txt`, `texture\forest-monster-AO.png`, `-norm.png`, `-skin.png`, `-skin1.png`, `-spec.png`, `tree.png`, `tree-norm.png`, `tree-spec.png` | permitted (CC0) | not required by CC0; credit kept (CDmir / kelgar.org) |
+
+- Checked: every file under `_packs\forest-monster\` by walking the tree (10 files), and `Licenses.txt` read in full off disk. The file states, verbatim: "Author: Čestmír Dammer (CDmir) / License: Creative Commons (CC0) / Project: www.kelgar.org / Textures: UV-Teture was derived from textures by Rick Hoppmann."
+- Animations listed in the file (frame ranges, not separate files): Idle, Walk, melee hold, melee strike, melee charge, melee cooldown, Dying, Dead.
+- OPEN NOTE FOR MR. E, not resolved here: the UV texture is stated to be derived from textures by Rick Hoppmann, and the licence file gives no licence for those source textures. The model's CC0 statement is clear; the texture provenance is not. Confirm before any `forest-monster` texture enters `assets/`.
+- Note for later seats: the `.blend` was not opened, so the CC0 grant is recorded for the pack as published. Any monster that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0) for the model as stated. Texture provenance open (see note).** Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - kaykit_character_animations_CC0 (23 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| kaykit_character_animations_CC0 (KayKit : Character Animations 1.0; folder `_packs\kaykit_character_animations_CC0\`) | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0 Universal (Public Domain)** | `_packs\kaykit_character_animations_CC0\License.txt` (638 bytes, read in full this run) | 53 | Yes. The licence reads: "free to use in personal, educational and commercial projects" | Not mandatory. The licence says crediting Kay Lousberg is "not mandatory"; recorded here anyway |
+
+- Checked: every file under `_packs\kaykit_character_animations_CC0\` by walking the tree (53 files), and `License.txt` read in full off disk. The file states, verbatim: "KayKit : Character Animations (1.0) / Created/distributed by Kay Lousberg (www.kaylousberg.com) / Creation date: 03/02/2021 15:00 / License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/".
+- File breakdown (by extension): 22 .fbx, 6 .obj, 6 .mtl, 3 .dae, 2 .glb, 1 .gltf, 7 .png (brand resources), 3 .pdf (Godot, Unity, Unreal implementation guides), 1 .txt, 2 .url (links only).
+- Content: one combined animation FBX (`Animations\KayKit Animated Character_v1.0.fbx`) plus 18 single-animation FBX files in `Animations\Single Animations\` (Attack(1h), BasePose, Block, Cheer, Climbing, Defeat, HeavyAttack, Hop, Idle, Jump, LayingDownIdle, Run, Shoot(1h), Shoot(2h), Shooting(1h), Shooting(2h), Walk, Wave). Also three static props in `Models\` (Case, Pencil, PrototypePete), each as obj/fbx/dae, with PrototypePete additionally as gltf.
+- Naming note: the pack title in the licence is "KayKit : Character Animations", and the folder is `kaykit_character_animations_CC0`. Both refer to the same pack.
+- Note for later seats: the `.zip` sibling `kaykit_character_animations_CC0.zip` was not opened this firing; the CC0 grant is recorded for the pack as published. The rigged character meshes these animations target are in the separate KayKit Dungeon Pack (already catalogued above), so any animation used with those meshes is a rig-compatibility question, not a licence question. Any file that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kaykit_character_animations_CC0`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - kenney_3d-road-tiles (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| kenney_3d-road-tiles (folder `_packs\kenney_3d-road-tiles\`, sibling `kenney_3d-road-tiles.zip` not opened) | Kenney Vleugels for Kenney (www.kenney.nl) | **CC0 1.0 Universal (Public Domain)** | `_packs\kenney_3d-road-tiles\License.txt` | 915 on disk: 302 `.gltf`, 302 `.obj`, 302 `.mtl` (`Models\roadTile_001`-`roadTile_302`), 2 `.png` (`Preview.png`, `Sample.png`), 1 `.py` (`Convert\Three.js (Blender)\fixQuads.py`), 2 `.txt` (`License.txt`, `Convert\Three.js (Blender)\readme.txt`), 1 `.unitypackage` (`Unity package\roadPack_unity.unitypackage`), 3 `.url` (donation/social links) | Permitted: "You may use these textures/photographs in personal and commercial projects." | Not required. Credit to Kenney / www.kenney.nl is requested ("would be nice but is not mandatory"). |
+
+**Licence text read in full from disk this firing.** `License.txt` names the CC0 1.0 Universal URL (creativecommons.org/publicdomain/zero/1.0/) and states the commercial-use permission above. No share-alike, no non-commercial, no no-derivatives clause. The `Convert\Three.js (Blender)\readme.txt` is a conversion note only (Three.js needs quads; points to a third-party `fixQuads.py` gist) and states no separate licence. The `fixQuads.py` script is a third-party tool shipped in the pack and is NOT part of what enters `assets/`; do not import it.
+
+Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_3d-road-tiles`. Any file that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - kenney_retro-fantasy-kit (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| kenney_retro-fantasy-kit (Retro Fantasy Kit 2.0; folder `_packs\kenney_retro-fantasy-kit\`, sibling `kenney_retro-fantasy-kit.zip` not opened) | Kenney (www.kenney.nl) | **CC0 1.0 Universal (Public Domain)** | `_packs\kenney_retro-fantasy-kit\License.txt` (720 bytes, read in full this run) | 562 on disk: FBX, GLB and OBJ+MTL model sets (one file per piece, with a shared Textures folder in each format), `Previews\` (PNG per model), `Preview.png`, `Sample.png`, `Overview.html`, 3 `.url` link files | Yes. The licence reads: "You can use this content for personal, educational, and commercial purposes." | Not required. The licence says crediting 'Kenney' or 'www.kenney.nl' is "not a requirement"; recorded here anyway |
+
+- Checked: every file under `_packs\kenney_retro-fantasy-kit\` by walking the tree (562 files), and `License.txt` read in full off disk. The file states, verbatim: "Retro Fantasy Kit (2.0) / Created/distributed by Kenney (www.kenney.nl) / Creation date: 19-02-2025 16:10 / License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/". `Overview.html` (line 157) independently links the same CC0 1.0 Universal URL.
+- Note for later seats: the `.zip` sibling was not opened this firing; the CC0 grant is recorded for the pack as published. Any file that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `kenney_retro-fantasy-kit`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - quaternius_rpg_characters_CC0 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| quaternius_rpg_characters_CC0 (the pack is titled "RPG Characters - Nov 2020"; folder `_packs\quaternius_rpg_characters_CC0\RPG Characters - Nov 2020\`, one level deeper than the folder name; no `.zip` sibling exists) | Quaternius (patreon.com/quaternius) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\quaternius_rpg_characters_CC0\RPG Characters - Nov 2020\License.txt` (read in full this run) | 60 on disk: 11 `.blend` (`Blends\`: Cleric, Monk, Ranger, Rogue, Warrior, Wizard, plus 5 weapon-only blends in `Blends\Only Weapons\`), 12 `.fbx` (`FBX\`, incl. `Only Weapons\` with 6 weapons and a Ranger arrow), 24 `.obj` + `.mtl` files, 12 pairs (`OBJ\`, incl. `Only Weapons\`), 11 `.png` (`Textures\`), `Preview.jpg`, `License.txt` | permitted (CC0 1.0: no attribution or share-alike obligation) | not required by CC0; credit kept (Quaternius, "LowPoly Models by @Quaternius") |
+
+- Checked: every file under `_packs\quaternius_rpg_characters_CC0\` by walking the tree (60 files), and `License.txt` read in full off disk. The file states, verbatim: "LowPoly Models by @Quaternius ... License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/".
+- Naming note: the folder is `quaternius_rpg_characters_CC0` but the pack inside is "RPG Characters - Nov 2020". Recorded so a later reader does not confuse it with other Quaternius RPG releases.
+- Not opened this firing: the 11 `.blend` files and the `.fbx`/`.obj` geometry. The CC0 grant is recorded for the pack as published. Any character or weapon that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `quaternius_rpg_characters_CC0`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - quaternius_ultimate_rpg_items_CC0 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| quaternius_ultimate_rpg_items_CC0 (the pack is titled "Ultimate RPG Items Pack - Aug 2019"; folder `_packs\quaternius_ultimate_rpg_items_CC0\Ultimate RPG Items Pack - Aug 2019\`, one level deeper than the folder name; no `.zip` opened this firing) | Quaternius (patreon.com/quaternius) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\quaternius_ultimate_rpg_items_CC0\Ultimate RPG Items Pack - Aug 2019\License.txt` (364 bytes, read in full this run) | 533 on disk: 106 `.blend` (`Blends\`), 106 `.fbx` (`FBX\`), 106 `.obj` + 106 `.mtl` (`OBJ\`), 107 `.png` (`Icons\`), `Preview.jpg`, `License.txt` | permitted (CC0 1.0: no attribution or share-alike obligation) | not required by CC0; credit kept (Quaternius, "LowPoly Models by @Quaternius") |
+
+- Checked: every file under `_packs\quaternius_ultimate_rpg_items_CC0\` by walking the tree (533 files, counted by extension), and `License.txt` read in full off disk. The file states, verbatim: "LowPoly Models by @Quaternius ... License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/".
+- Naming note: the folder is `quaternius_ultimate_rpg_items_CC0` but the pack inside is "Ultimate RPG Items Pack - Aug 2019". Recorded so a later reader does not confuse it with the Quaternius "Ultimate Animated Character" or "Ultimate Nature" releases.
+- Not opened this firing: the individual `.blend`, `.fbx` and `.obj` geometry. The CC0 grant is recorded for the pack as published. Any item that enters `assets/` (potions, crystals, weapons, and so on) still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `quaternius_ultimate_rpg_items_CC0`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - ultimate_nature_pack_by_quaternius (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| ultimate_nature_pack_by_quaternius (the pack is titled "Ultimate Nature Pack - Jun 2019"; folder `_packs\ultimate_nature_pack_by_quaternius\Ultimate Nature Pack - Jun 2019\`, one level deeper than the folder name; sibling `.zip` (22.99 MB) not opened this firing) | Quaternius (patreon.com/quaternius) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\ultimate_nature_pack_by_quaternius\Ultimate Nature Pack - Jun 2019\License.txt` (read in full this run) | 602 on disk: 150 `.blend`, 150 `.fbx`, 150 `.obj` + 150 `.mtl` (`OBJ\`), `Preview.jpg`, `License.txt` (counted by extension by walking the tree) | permitted (CC0 1.0: no attribution or share-alike obligation) | not required by CC0; credit kept (Quaternius, "LowPoly Models by @Quaternius") |
+
+- Checked: every file under `_packs\ultimate_nature_pack_by_quaternius\` by walking the tree (602 files), and `License.txt` read in full off disk. The file states, verbatim: "LowPoly Models by @Quaternius ... License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/".
+- Content note: nature set (rocks, tree stumps, wood logs, wheat, and many willow variants in plain, autumn, snow, and dead forms). Recorded so a later reader can find it by contents.
+- Not opened this firing: the individual `.blend`, `.fbx` and `.obj` geometry. The CC0 grant is recorded for the pack as published. Any model that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `ultimate_nature_pack_by_quaternius`. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - Bestiary_Dungeon_Monsters_Kit (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Bestiary_Dungeon_Monsters_Kit (the pack is titled "Bestiary - Dungeon Monsters Kit [Standard]", the FREE version; folder `_packs\Bestiary_Dungeon_Monsters_Kit\Bestiary - Dungeon Monsters Kit[Standard]\`) | Quaternius (patreon.com/quaternius) | **Quaternius Asset License (QAL) v1.0** (quaternius.com/license.html, "Last updated: 8/28/2026") | `Bestiary - Dungeon Monsters Kit[Standard]\License_Standard.txt` (read in full off disk this run) | 22 on disk: 2 `.fbx` (Exports\FBX (Unity)\), 2 `.glb` (Exports\GLB (Godot-Unreal)\), 2 preview `.png` (Importing_Godot.png, Importing_UnrealUnity.png), 13 texture `.png` (Textures\, plus Textures\Unreal Normals\ x2), `Preview.jpg`, `License_Standard.txt` | permitted: Section 2 grants use, modification and commercial exploitation of a Product with no fee, royalty or credit | not required (QAL s.2: "No attribution is required"); credit kept (Quaternius, "Models by @Quaternius") |
+
+- Checked: every file under `_packs\Bestiary_Dungeon_Monsters_Kit\` by walking the tree (22 files), and `License_Standard.txt` read in full off disk. The file states, verbatim: "License: Quaternius Asset License (QAL) v1.0 ... You can use these assets, free of charge, in personal, educational, and commercial games and other projects, with no credit required. You just can't resell or redistribute the assets themselves as assets."
+- Restriction that binds us: QAL s.3(a) forbids redistributing the Assets as a standalone asset, asset pack, or similar product. Shipping the monsters inside a game is allowed; re-exporting an Imp or Puglin file as a loose asset is not. This is the same line already recorded for the Imp/Puglin/broodglut rows above.
+- Scope note: this is the FREE Standard edition (its own licence file says it holds only part of the models). The SOURCE edition is not in `_packs\` and is not covered by this row.
+- Status: **CLEARED for use (QAL v1.0).** Licence gate satisfied for `Bestiary_Dungeon_Monsters_Kit`. Commercial use permitted; no attribution required. Nothing is redistributed AS an asset.
+
+## PACK CATALOGUE - Castle (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Castle (folder `_packs\Castle\`, nested one level as `_packs\Castle\Castle\`; sibling `Castle.zip` 75 MB, names listed only, not extracted) | Not named in any file on disk | **NO LICENCE FILE FOUND** | None. No licence, readme, terms, credit or URL file exists in the folder tree or in the zip listing. | 15 on disk: 11 `.FBX` (`Castle_Building_Blocks\`: Arch, Brick_Wall, Cathedral_Window, Cornice, Door, Narrow_Pillar, Pillar_Standalone, Pillar_Top, Wide_Pillar_No_Door, Wide_Pillar_With_Door, Windows), 3 `.tga` + 1 `.psd` (`Castle_Texture_Atlas\`: Castle_D, Castle_N, Castle_S, Castle_Master_Mat) | Unknown. Not granted on disk. | Unknown |
+
+- Checked: walked every file under `_packs\Castle\` (15 files, by extension) and listed the names inside `Castle.zip`. Searched for licence/copying/readme/terms/credit/url/pdf/html names: none. Grepped the binary texture and psd files for licence wording: the only hits were pixel-data noise, not licence text. The FBX header carries an empty author field.
+- The folder name carries no licence claim, so none is inferred from it.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Import into `assets/` is gated until a licence is supplied by the source or by Mr. E. Nothing has been imported, converted or redistributed.
+
+## PACK CATALOGUE - dragon_oga (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| dragon_oga (folder `_packs\dragon_oga\`, sibling `dragon_oga.zip` 1.35 MB, names listed only) | Not named in any licence file. Exporter metadata in the `.dae` files reads "Blender User" (an authoring-tool default, not a licence). | **NO LICENCE FILE FOUND** | None. No licence, readme, terms, credit or URL file exists in the folder or in the zip listing. | 11 on disk: 5 `.dae` (`dragon.dae`, `dragon_attack.dae`, `dragon_die.dae`, `dragon_idle.dae`, `dragon_walk.dae`), 1 `.obj` + 1 `.mtl`, 2 `.blend` (`dragon-2_79b.blend`, `dragon-2_80.blend`), 2 `.png` (`dragon.png`, `dragon_black.png`). Zip holds the same 11 entries. | Not stated | Not stated |
+
+- Checked: walked every file under `_packs\dragon_oga\` (11 files) and listed the 11 entries inside `dragon_oga.zip`. No file name matches licence, copying, readme, terms, credit, url, about or pdf/html/json/md.
+- Grepped the text-like files (`.obj`, `.mtl`, `.dae`) for licence, copyright, creative commons, CC0, public domain and all-rights wording: no hits. The `.mtl` names `dragon.png` as its only texture and carries no terms. The one raw grep hit was in `dragon_black.png`, an empty XMP `plus:CopyrightOwner` template field, which is binary noise and not a licence.
+- The folder name carries no licence claim, so none is inferred from it.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Import into `assets/` is gated until a licence is supplied by the source or by Mr. E. Nothing has been imported, converted or redistributed.
+
+
+## PACK CATALOGUE - dungeon_collection_2 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| dungeon_collection_2 (folder `_packs\dungeon_collection_2\`, subfolder `Dungeon Set 2\`; sibling `dungeon_collection_2.zip` 269 KB, 180 entries, names listed only, not extracted) | Not named in any file on disk | **NO LICENCE FILE FOUND** | None. No licence, readme, terms, credit or URL file exists in the folder tree or in the zip listing. A grep of every file for licence, copyright, creative commons, CC0, CC-BY, public domain, all rights, terms of use, free to use and attribution returned no hits. | 180 on disk, all in `Dungeon Set 2\`: 90 `.obj` + 90 `.mtl` (dungeon props, walls, floors, traps, doors, pillars and steps; materials Dark_Grey, Grey, Iron, Steel, Wood, Dark_Wood, Red_Wood). No texture images. The `.obj` and `.mtl` headers carry no author or tool comment. | Not established | Not established |
+
+- Checked: walked every file under `_packs\dungeon_collection_2\` (180 files, counted by type), listed the 180 entries inside `dungeon_collection_2.zip` with Python `zipfile` (not extracted; no licence-named entry), and grepped all 180 text files for licence wording. The folder name carries no licence claim, so none is inferred from it.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. Nothing has been imported, converted or redistributed.
+
+## PACK CATALOGUE - KayKit_Forest_Nature_Pack_1.0_FREE (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| KayKit_Forest_Nature_Pack_1.0_FREE (folder `_packs\KayKit_Forest_Nature_Pack_1.0_FREE\`, nested one level as `_packs\KayKit_Forest_Nature_Pack_1.0_FREE\KayKit_Forest_Nature_Pack_1.0_FREE\`; sibling `KayKit_Forest_Nature_Pack_1.0_FREE.zip` 6.4 MB, not opened this firing) | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0 (Creative Commons Zero)** | `...\KayKit_Forest_Nature_Pack_1.0_FREE\License.txt` (1,469 bytes, read in full off disk this firing) | 641 files on disk: 105 `.gltf` + 105 `.bin` (Assets\gltf), 210 `.fbx` (Assets\fbx and Assets\fbx(unity)), 105 `.obj` + 105 `.mtl` (Assets\obj), 7 `.png` (forest texture, sample, contents image), 1 `.txt` (License.txt), 3 `.url` (Discord, More KayKit Assets, Patreon). 105 distinct models; the same models appear in glTF, FBX and OBJ sets. | permitted: the licence says "free to use in personal, educational and commercial projects" | not required by CC0; the licence text asks for credit to Kay Lousberg, www.kaylousberg.com ("not mandatory, but would be appreciated") |
+
+- Checked: walked every file under the pack (641 files, counted by extension and by directory), listed the licence-named files (only `License.txt`), and read `License.txt` in full. The licence text states: "License: (Creative Commons Zero, CC0) http://creativecommons.org/publicdomain/zero/1.0/" and "This content is free to use in personal, educational and commercial projects."
+- The folder name and the earlier tier-1 row (line 244, which cites this pack's `License.txt`) were not used as the licence claim; the CC0 grant comes from the file read this firing.
+- Format note for the art lane: glTF/GLB is available (`Assets\gltf`), so no Blender conversion is needed for this pack. KayKit double-extension rule from the Notes section still applies to any file that is renamed on import.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `KayKit_Forest_Nature_Pack_1.0_FREE`. Nothing has been imported, converted or redistributed by this firing. Any model that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - dungeon_collection_for_assetforge (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| dungeon_collection_for_assetforge (folder `_packs\dungeon_collection_for_assetforge\`, flat, no subfolder; sibling `dungeon_collection_for_assetforge.zip` 78,780 bytes, 112 entries, names listed only, not extracted) | Not named in any file on disk | **NO LICENCE FILE FOUND** | None. No licence, readme, terms, credit or URL file exists in the folder or in the zip listing. A grep of every file for licen, copyright, creative commons, cc0, cc-by, public domain, all rights, terms, attribution, author and credit returned no hits. | 112 on disk: 56 `.obj` + 56 `.mtl` (modular dungeon pieces: floors, walls, doorframes, pillars, rails, steps, gateways, levers, pedestal, switch floor; each in Full / Half / Outer / Large variants). Materials: Dark_Grey, Grey, Light_Grey, Green_Stone_-_Dark, Green_Stone_-_Normal. No texture images. The `.obj` and `.mtl` headers carry only `mtllib` and object names, no author or tool comment. | Not established | Not established |
+
+- Checked: walked every file under `_packs\dungeon_collection_for_assetforge\` (112 files, counted by type), listed the 112 entries inside `dungeon_collection_for_assetforge.zip` with Python `zipfile` (not extracted; no licence-named entry), and grepped all text files for licence wording. The folder name carries no licence claim, so none is inferred from it.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. Nothing has been imported, converted or redistributed.
+
+## PACK CATALOGUE - free_mine_assets (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| free_mine_assets (folder `_packs\free_mine_assets\`, flat, no subfolder; sibling `free_mine_assets.zip` 15,879,070 bytes, 10 entries, names listed only, not extracted) | Not named in any file on disk (a `.blend` `author[80]` field exists in the binary header but holds no value worth reading as a licence) | **NO LICENCE FILE FOUND** | None. No licence, readme, terms, credit or URL file exists in the folder or in the zip listing. A grep of every file for licen, copyright, creative commons, cc0, cc-by, public domain, all rights, attribution, author and readme returned no licence wording. The seven PNGs carry only `IHDR`, `IDAT`, `pHYs`, `tIME`, `bKGD` chunks, no `tEXt`/`zTXt`/`iTXt` text. The one `cc0` byte run inside `rock1_norm.png` is raw compressed pixel data, not a licence. | 9 on disk: `mine_parts.blend`, `mine_parts_prev.blend`, and `textures\` holding `iron_diffuse`, `iron_normal`, `rock1`, `rock1_norm`, `rock1_spec`, `wood1`, `wood1_norm` (.png). | Not established | Not established |
+
+- Checked: walked every file under `_packs\free_mine_assets\` (9 files), listed the 10 zip entries with Python `zipfile` (not extracted), grepped all nine files for licence wording, and parsed the PNG chunk tables of the seven textures. The folder name carries no licence claim, so none is inferred from it.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Under the licence gate in this file, nothing from this pack goes into `assets/` until a licence is read off disk or the author's own terms are on file. Nothing has been imported, converted or redistributed.
+
+## PACK CATALOGUE - Medieval_Village_MegaKit (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Medieval Village MegaKit, STANDARD (free) edition (folder `_packs\Medieval_Village_MegaKit\Medieval Village MegaKit[Standard]\`; sibling `Medieval_Village_MegaKit.zip` 161,003,471 bytes, 10 entries not extracted) | Quaternius (quaternius.com) | CC0 1.0 Universal | `License_Standard.txt`, read verbatim: "License: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication https://creativecommons.org/publicdomain/zero/1.0/" then "Models by @Quaternius" | 936 files on disk: 176 models each in FBX, glTF, OBJ (with 176 .mtl and 176 .bin companions), 54 PNG and 1 JPG textures, 1 TXT licence | Yes (CC0) | Not required. The file asks for Patreon and Discord support only. |
+
+- Checked: walked the whole pack folder with `find` (936 files, by extension), read `License_Standard.txt` in full, confirmed the CC0 1.0 grant. Nothing extracted, converted or imported.
+- Scope: the file says this is the STANDARD free edition, which holds only a portion of the models. The PRO and SOURCE editions are separate purchases and are not on disk. Nothing from them is covered by this entry.
+- Status: **CLEARED. CC0 1.0, usable for commercial use, no attribution required.** Covers only the 176 models in this folder.
+
+## PACK CATALOGUE - golem_clean_blend (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| golem_clean_blend (folder `_packs\golem_clean_blend\`, flat, one file; sibling `golem_clean_blend.zip` holds the same single entry, not extracted) | Gapchich Vladislav (aka gavlig), named in the file's own text block | **NO LICENCE FILE FOUND.** The author's informal note is inside the .blend only: no named licence (not CC0, not CC-BY, not any family on the forbidden list) | None as a file. Inside `golem_clean.blend` a text datablock reads, verbatim: "You can use it in any way you want, you don't even have to credit me as an author (Though I'd like to know if you use it in some interesing project just to please my ego :))" and "So if you like it and want to use it - go ahead!" and "please, email me at gavlig@gmail.com" for mistakes or a request. A second note: "Concept was taken from http://www.render.ru/gallery/show_work.php?work_id=72971 (Many thanks to Boris. for his super awesome artwork!)". A third: "This version of .blend doesn't include diffuse, normal and spec maps because I used a texture from cgtextures.com and blendswap.com forbids sharing textures". | 1 on disk: `golem_clean.blend` (7,019,420 bytes, Blender 2.64 format). No texture files shipped. The blend names `golem_emit.png` and `golem_swap.png` as image references, which are not in the pack. | Granted in the author's note ("any way you want"). Not stated as a formal licence. | Not required by the note. Author asks for a link or a message, which is a request, not a condition. |
+
+- Checked: walked `_packs\golem_clean_blend\` (1 file), listed the 1 zip entry with Python `zipfile` (not extracted), grepped the .blend for licence, copyright, CC, attribution, author, credit and URL wording, and read the full text of the two datablocks that carry the author's notes. The folder name carries no licence claim, so none is inferred from it.
+- Judgement call, for Mr. E: the author's note is a real, commercially permissive grant, and the log's own gate counts "the author's own terms on file" as enough. It is still not a named licence, it does not say whether redistribution is allowed beyond "use it", and the concept is credited to another artist's render.ru artwork, whose rights are not on file. For those reasons this firing records it as NOT CLEARED rather than reading the note as CC0. The author's address is in the note if a written licence is wanted.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND. Author's informal note only (gavlig, in-file, permissive but unnamed); concept-art provenance (render.ru) unverified.** Nothing from this pack goes into `assets/` until Mr. E decides or a named licence is on file. Nothing has been imported, converted or redistributed.
+
+## PACK CATALOGUE - handpainted_weapons (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| handpainted_weapons (folder `_packs\handpainted_weapons\`, sibling `handpainted_weapons.zip` 2.1 MB, 73 entries incl. one directory, not extracted) | not named in any file on disk | **NO LICENCE FILE FOUND** | none. No LICENSE, README, credits or terms file in the folder or in the zip. | 72 on disk, agreeing with the zip: `shield_a..d` and `sword_a..j` as `.obj` + `.mtl` (8 + 20), two Blender scenes `handpainted weapons 2-79.blend` and `2-80.blend`, and `textures/` with 42 PNG | not established | not established |
+
+- Checked: walked the folder (72 files), listed every zip entry with `unzip -l` (not extracted), name-scanned both for licence, readme, credits, terms, about and copying (none), and grepped every file, the binary `.blend` scenes included, for licence, CC0, CC-BY, public domain and copyright wording. The only hits in the PNGs are the stock XMP metadata template, with empty CopyrightOwner and Licensor fields. The OBJ and MTL headers name a Blender scene and nothing else.
+- LEAD, NOT A LICENCE: both `.blend` scenes carry an embedded text datablock reading "The models are based on Cethiel's CC0 2D weapon collection", linking opengameart.org/content/weapons-collection and Cethiel's Patreon and Twitter, and saying "under CC0 as well". That points at a CC0 source and is worth a follow-up, but it is a note inside a model file, not a licence file, and the source page was not read from disk or fetched this firing. Per the gate it does not clear the pack.
+- This closes the open question left in the System 8 section above: the folder has no licence file, so `shield_a..d` remain out of the repo.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Lead only: an in-blend note naming Cethiel's CC0 2D weapon collection. Nothing from this pack goes into `assets/` until a licence is read off disk, or the Cethiel OGA page's terms are read and recorded here under their own row.
+
+## PACK CATALOGUE - low-poly_RPG_item_collection_2 (24 Nov 2026, pack-catalogue firing)
+
+- **Licence: NO LICENCE FILE FOUND.** Checked the extracted folder and the sibling `low-poly_RPG_item_collection_2.zip`: neither holds a licence, copying, readme, terms or credits file. The zip lists 27 entries, all models and textures. The `.blend` and `.3ds` binaries carry no readable licence text (a string scan found only binary noise). Per the rule, nothing is recorded as CC0 or any other licence.
+- **Import status: GATED.** No model from this pack goes into `assets/` until a licence is found. Measuring it is allowed, and importing is not.
+- **File count:** 27 files in the folder (the zip holds the same 27 entries). Contents: 8 `.obj` models and 17 `.png` textures (each model has a numbered second texture, and crystal has a third) (armor, barrel, book, crossbow, crystal, dagger, key, scroll; crystal has 3), plus `rpg items 2.blend` and `rpg items 2.3ds` sources.
+- **Commercial use:** unknown, because no licence text was found. Not cleared for use.
+- **Attribution:** unknown.
+- **Action for Mr. E or the art lane:** find the original listing (the author or source page) and take its licence text, then put that text in this folder before any import.
+
+## PACK CATALOGUE - low-poly_RPG_item_collection_3 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| low-poly_RPG_item_collection_3 (folder `_packs\low-poly_RPG_item_collection_3\`, sibling `low-poly_RPG_item_collection_3.zip` 24.5 MB, 27 entries, not extracted) | not named in any file on disk | **NO LICENCE FILE FOUND** | none. No LICENSE, COPYING, README, credits or terms file in the folder or in the zip. | 27 on disk, agreeing with the zip entry for entry: 7 `.obj` (`bridge`, `conifer`, `house`, `rock`, `sign`, `tree`, `well`), 18 `.png` textures (each model has one or two numbered textures, plus `dirt`, `grass`, `pavement`, `sand`), `rpg items 3.blend` (13 MB), `rpg items 3.3ds` | not established | not established |
+
+- Checked: walked the folder (27 files, counted by extension), listed every zip entry with `python zipfile` (names only, not extracted), name-scanned both for licence, copying, readme, terms, credits and about (none), grepped every `.obj` header for licence, copyright, CC0, public domain, author and Quaternius or Kenney wording (no hits), and ran `strings` over the `.blend` and `.3ds` binaries for the same terms (no licence text; the only hits are Blender's own `author` metadata field name).
+- Naming note: the sibling `low-poly_RPG_item_collection_2` (catalogued 24 Nov, see above) is a different pack with the same no-licence result. Do not treat either as covered by the other.
+- Status: **NOT CLEARED. NO LICENCE FILE FOUND.** Nothing from this pack goes into `assets/` until a licence is found: take the original listing's licence text from its author or source page and record it here under its own row.
+
+## PACK CATALOGUE - Stone_coffin (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Stone_coffin (folder `_packs\Stone_coffin\`, flat, no subfolder; sibling `Stone_coffin.7z` 1,004,262 bytes, not opened this firing) | Nobiax (named in the readme: "Provided by Nobiax") | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\Stone_coffin\readme.txt` (885 bytes, read in full off disk this run) | 5 on disk: `Stone_coffin.FBX` (32,288 bytes), `Stone_coffin.obj` (16,832 bytes), `diffuse.tga` (1.57 MB), `preview.jpg` (1280x720), `readme.txt`. Walked the tree with `find`: 5 files, no others. | Yes. The readme states: "You can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission." | Not required. The readme asks for a link back ("Please, give me a link of the result at nobiax.deviantart.com ..."), which is a request, not a condition. |
+
+- Checked: walked every file under `_packs\Stone_coffin\` (5 files), read `readme.txt` in full off disk (CRLF text; it names "CC0 1.0 Universal (CC0 1.0) / Public Domain Dedication" and quotes the grant wording in the Licence column; it carries no URL). The `grep` for licence terms hit `preview.jpg` only; inspected it with `grep -a` and `file`: the hits are JPEG/Exif byte noise ("CC00CB"), not licence text, so no licence is taken from the image.
+- Consistency: this agrees with the earlier gap entry in the LICENCE GATE section (THE THREE PACKS IN THE 18/21 GAP, 20 Nov), which read the same readme. Nothing there is changed.
+- Note for later seats: the `.7z` sibling was not opened; the CC0 grant is recorded for the pack as published. Any mesh or texture that enters `assets/` still needs its own row.
+- Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Stone_coffin`. Nothing has been imported, converted or redistributed by this firing.
+
+## PACK CATALOGUE - Ultimate_Stylized_Nature (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Ultimate Stylized Nature - May 2022 (folder `_packs\Ultimate_Stylized_Nature\`, one subfolder `Ultimate Stylized Nature - May 2022\`; no zip sibling on disk) | Quaternius (quaternius.com, Patreon link in the file) | **CC0 1.0 Universal (Public Domain Dedication)** | `_packs\Ultimate_Stylized_Nature\Ultimate Stylized Nature - May 2022\License.txt` (read in full off disk this firing) | 369 on disk: 64 `.blend`, 63 `.obj`, 63 `.mtl`, 63 `.fbx`, 36 `.gltf` with 36 `.bin` sidecars, 36 `.png`, 7 `.jpg`, 1 `.txt` (`License.txt`) | Permitted: the CC0 1.0 grant covers commercial use with no conditions. | Not required by the licence. |
+
+**Licence text read in full from disk this firing.** The file carries the CC0 1.0 Universal grant and the URL `creativecommons.org/publicdomain/zero/1.0/`, with the Quaternius Patreon line above it. No share-alike, no non-commercial, no no-derivatives clause.
+
+**Vendor header error, recorded so it is not quoted as proof for the wrong pack.** The title line inside that `License.txt` reads "Ultimate Platformer Pack by @Quaternius", not "Ultimate Stylized Nature". This is the same copy-paste already logged in the licence-gate note above (ONE THING WRONG IN A LICENCE FILE). The grant beneath it is unambiguous CC0 1.0 and Quaternius's blanket licence covers the pack either way. If a stricter proof is ever wanted, the authority is quaternius.com's licence page for this pack.
+
+Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Stylized_Nature`. Nothing has been imported, converted or redistributed by this firing. Any file that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - grass_07 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| grass_07 (folder `_packs\grass_07\`, flat, no subfolder; sibling `grass_07.7z` 1,386,811 bytes, not opened this firing) | Nobiax (named in the readme: "Provided by Nobiax") | **Custom permissive grant - NOT CC0.** Do not re-record as CC0. | `_packs\grass_07\readme.txt` (262 bytes, CRLF, read in full off disk this run) | 8 on disk: `grass_07.FBX` (38,896 bytes), `grass_07.obj` (4,314 bytes), `diffus.tga`, `normal.tga`, `opacity.tga`, `specular.tga`, `preview.jpg`, `readme.txt`. Walked the tree with `find`: 8 files, no others. | Yes. The readme states, verbatim: "Absolutely free to use or to modify in any kind of work (personal, commercial or else)." | Not required. The readme says "Give me a link of the result at nobiax.deviantart.com or my other account on OpenGameArt.com or ShareCG.com" - a request, with no "provided that" anywhere, so it is not an attribution condition. |
+
+- Checked: read `readme.txt` in full off disk this run (the whole file is three short paragraphs and is quoted in the table above). A content scan of all 8 files for licence, copyright, CC0 and "free to use" terms hit only `readme.txt`; the binaries and `preview.jpg` were not treated as licence sources.
+- Consistency: agrees with the 20 Nov entry in THE THREE PACKS IN THE 18/21 GAP section, which read the same readme. Nothing there is changed.
+- Not share-alike, not non-commercial, not no-derivatives: none of the three forbidden families applies, so the pack is not rejected.
+- Note for later seats: the readme grants a custom permissive licence, not CC0. Any repo copy that is not a file-for-file re-export should still carry its own row, and any redistribution AS an asset is outside what this readme states on its face.
+- Status: **CLEARED for use (custom permissive grant, commercial use permitted, no attribution required; link-back requested).** Licence gate satisfied for `grass_07`. Nothing has been imported, converted or redistributed by this firing.
+
+## PACK CATALOGUE - kaykit_dungeon_pack_CC0 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| KayKit Dungeon Pack 1.0 (folder `_packs\kaykit_dungeon_pack_CC0\`, sibling `kaykit_dungeon_pack_CC0.zip`) | Kay Lousberg (www.kaylousberg.com) | **CC0 1.0 Universal** (text states "License: (Creative Commons Zero, CC0)" with link to creativecommons.org/publicdomain/zero/1.0/) | `License.txt` (630 bytes, CRLF, read in full off disk this run) | 1,079 files on disk in total: 226 .obj, 226 .mtl, 208 .fbx, 202 .dae, 192 .glb, 12 .png, 10 .gltf, 2 .url, 1 .txt. `Models/gltf/` holds 185 `*.gltf.glb` models (as the 20 Nov rows record). | Yes. The licence states verbatim: "This content is free to use in personal, educational and commercial projects." | Not required. The licence states: "Support me by using a brand resource provided in this pack or by crediting Kay Lousberg, www.kaylousberg.com (this is not mandatory)". |
+
+- Checked: read `License.txt` in full off disk this run (quoted in the table). Tallied file types with `find` on the pack tree. The `.url` and `.png` files were not treated as licence sources.
+- Consistency: agrees with the 20 Nov worldfit note (`kaykit_dungeon_pack_CC0`, 185 models, CC0 1.0). Nothing there is changed.
+- Not share-alike, not non-commercial, not no-derivatives: none of the forbidden families applies.
+- Status: **CLEARED for use (CC0 1.0, commercial use permitted, no attribution required).** Licence gate satisfied for `kaykit_dungeon_pack_CC0`. Nothing has been imported, converted or redistributed by this firing.
+
+## PACK CATALOGUE - kenney_fantasy-town-kit_2.0 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Fantasy Town Kit (2.0) (folder `_packs\kenney_fantasy-town-kit_2.0\`, flat, no nested subfolder; sibling `kenney_fantasy-town-kit_2.0.zip` 3,854,691 bytes, not opened this firing) | Kenney (www.kenney.nl), created 03-08-2025 | **CC0 1.0 Universal (Creative Commons Zero)** | `_packs\kenney_fantasy-town-kit_2.0\License.txt` (read in full off disk this run, CRLF text) | 847 on disk: 167 models each in FBX (`Models\FBX format\`), GLB (`Models\GLB format\`), and OBJ + MTL (`Models\OBJ format\`), i.e. 668 model files; 174 `.png` (`Previews\` per model, `Models\*\Textures\colormap.png`, `Models\Textures\variation-a.png`, `Preview.png`, `Preview (Variation A).png`, `Sample.png`); 3 `.url` (documentation, Kenney, Patreon); `Overview.html`; `License.txt` | Yes. The licence reads verbatim: "License: (Creative Commons Zero, CC0)" with the CC0 1.0 URL, then "You can use this content for personal, educational, and commercial purposes." | Not required. The licence says: "Support by crediting 'Kenney' or 'www.kenney.nl' (this is not a requirement)". Credit kept anyway. |
+
+- Checked: read `License.txt` in full off disk this run (the whole file is a header, the CC0 grant, a support note and social links). Counted every file under the pack folder by extension with `find`: 847 files, no others. The `.png` and `.url` files were not treated as licence sources.
+- Consistency: agrees with the 20 Nov Tier 1 row for Fantasy Town Kit 2.0 (CC0 1.0, `.../Models/GLB format` 167 files) and with the 20 Nov worldfit measurement. Nothing there is changed.
+- Not share-alike, not non-commercial, not no-derivatives: none of the forbidden families applies.
+- Status: **CLEARED for use (CC0 1.0, commercial use permitted, no attribution required).** Licence gate satisfied for `kenney_fantasy-town-kit_2.0`. Nothing has been imported, converted or redistributed by this firing. Any file that enters `assets/` still needs its own row.
+
+## PACK CATALOGUE - kenney_graveyard-kit_5.0 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Graveyard Kit 5.0 (folder `_packs\kenney_graveyard-kit_5.0\`, flat, one `Models\` subtree; sibling `kenney_graveyard-kit_5.0.zip` 3,623,408 bytes, not opened this firing) | Kenney (www.kenney.nl), created 17-10-2025 | **CC0 1.0 Universal (Creative Commons Zero)** | `_packs\kenney_graveyard-kit_5.0\License.txt` (702 bytes, CRLF, read in full off disk this run) | 465 on disk: 91 `.fbx` (`Models\FBX format\`), 91 `.glb` (`Models\GLB format\`), 91 `.obj` + 91 `.mtl` (`Models\OBJ format\`), 96 `.png` (previews, textures, `Preview.png`, `Sample.png`), 3 `.url`, 1 `.html` (`Overview.html`), 1 `.txt` (`License.txt`). Walked the tree with `find`: 465 files, no others. | Yes. The licence reads verbatim: "License: (Creative Commons Zero, CC0)" with the CC0 1.0 URL, then "You can use this content for personal, educational, and commercial purposes." | Not required. The licence says: "Support by crediting 'Kenney' or 'www.kenney.nl' (this is not a requirement)". |
+
+- Checked: read `License.txt` in full off disk this run. `Overview.html` line 143 links the same CC0 1.0 Universal URL, so the vendor's two files agree. Counted every file under the pack folder by extension (465 total, matching the sum of the per-type counts). The `.url` and `.png` files were not treated as licence sources.
+- This closes the gap left by the 24 Nov licence-gate row for Graveyard Kit 5.0, which read "not measured this run - row written while the file was open". That row's CC0 claim now rests on the file read here, not on the earlier note.
+- Not share-alike, not non-commercial, not no-derivatives: none of the forbidden families applies.
+- Status: **CLEARED for use (CC0 1.0, commercial use permitted, no attribution required).** Licence gate satisfied for `kenney_graveyard-kit_5.0`. Nothing has been imported, converted or redistributed by this firing. Any file that enters `assets/` still needs its own row.
+
+
+## PACK CATALOGUE - medieval_pack_CC0 (24 Nov 2026, pack-catalogue firing)
+
+| Field | Value |
+|---|---|
+| Pack directory | `C:\hd adventure\_packs\medieval_pack_CC0\` (sibling `medieval_pack_CC0.zip` checked: identical 28 files, no extras) |
+| Author | Not stated in any file in the pack |
+| Licence | **NO LICENCE FILE FOUND** - no LICENSE / License.txt / README / credits / terms file in the directory or the zip; zip comment empty. The folder name `CC0` is NOT a licence. Nothing guessed. |
+| File count | 28 (`MedievalPack/Blends/`: 9 x .blend incl. `Katana.blend1` backup; `Blends/Textures/`: 5 x .png; `OBJ/`: 14 x .obj/.mtl) |
+| Contents | Club, Dagger, DoubleAxe, Katana, LongSword, ShortSword, SimpleAxe, Spear |
+| Commercial use | Not determinable from the pack |
+| Attribution | Not determinable from the pack |
+| Cleared for use | **NO.** Unlicensed and gated. Do not import, convert or redistribute any file from this pack until an author licence is found. |
+
+Method: directory listed recursively and zip central directory read with Python `zipfile` (not extracted); licence-like search (`*licen*`, `*readme*`, `*credit*`, `*terms*`, `*.txt`, `*.md`, `*.html`, `*.pdf`) returned nothing in either location. No `.blend` or `.obj` was opened.

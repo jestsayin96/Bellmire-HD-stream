@@ -1,0 +1,371 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+FEED JestFan takes the oath as a dwarf knight (down from the hill mines; sees in the dark). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED BigAxe takes the oath as an orc barbarian (came over the west road and stayed; sees in the dark). The most meat. Swings heavy, guards nothing.
+FEED Down. The air changes first and the sound after.
+FEED They carry 4 flasks of oil between them.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 cave spider, 2 puglins, 1 hollowed puglin.
+FEED The lids were moved from the inside, and then put back.
+DIRECTOR t=0.0 CUT fight_737392229051 shot=shoulder pri=85.0 why=start held_prev=0.0 pace=1.0 | fight_737392229051/shoulder=85.0(delve start hurt 0.00), chat_2104/follow=49.5(chat 3s ago), hero_2104/follow=34.9(town life), tour_0/push=10.0(quiet baseline)
+RIG: no clip 'Idle_B' on Barbarian - playing its idle
+FEED JestFan searches (Investigation 15) and turns up 36 gold on floor 3.
+FEED Done. The dark backs off and takes notes.
+FEED JestFan finds a vial of Ember Dregs.
+FEED JestFan searches the chest - ...no loot... (Investigation 3 vs DC 11).
+FEED Battered, the party climbs back out from floor 3.
+FEED BigAxe, JestFan come home to Bellmire with 36 gold, 1 ore, 1 stone, 1 piece of salvaged gear and 1 potion. 4 kills between them.
+FEED JestFan is fitted with leather. (+10 hp)
+DIRECTOR t=16.1 CUT breath_16 shot=breath pri=20.0 why=breath held_prev=16.1 pace=1.0 | fish_558312218013/follow=60.0(catch), chat_2104/follow=47.6(chat 20s ago), hero_2104/follow=32.4(town life), tour_0/push=10.0(quiet baseline)
+DIRECTOR t=20.1 CUT chat_2104 shot=follow pri=47.1 why=hotter held_prev=4.0 pace=1.0 | chat_2104/follow=47.1(chat 24s ago), hero_2101/follow=32.4(town life), tour_4/push=10.0(quiet baseline)
+FEED Ingrid Rivers settles in Bellmire, looking for work.
+DIRECTOR t=38.3 CUT hero_2104 shot=follow pri=28.1 why=max_hold held_prev=18.2 pace=1.0 | hero_2104/follow=28.1(town life same-shot-6), tour_7/push=10.0(quiet baseline)
+DIRECTOR t=42.3 CUT fish_556970040674 shot=follow pri=54.0 why=hotter held_prev=4.0 pace=1.0 | fish_556970040674/follow=54.0(catch same-shot-6), chat_2104/follow=44.5(chat 46s ago REPEAT-held-out), hero_2101/follow=28.0(town life same-shot-6), tour_3/push=10.0(quiet baseline)
+DIRECTOR t=65.5 CUT fish_558312218013 shot=follow pri=54.0 why=max_hold held_prev=23.2 pace=1.0 | fish_558312218013/follow=54.0(catch same-shot-6), chat_2104/follow=41.8(chat 70s ago REPEAT-held-out), hero_2104/follow=31.8(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Mira Fenwick settles in Bellmire, looking for work.
+DIRECTOR t=83.8 CUT tour_4 shot=push pri=10.0 why=max_hold held_prev=18.3 pace=1.0 | fish_556970040674/follow=60.0(catch REPEAT-held-out), chat_2104/follow=39.7(chat 88s ago REPEAT-held-out), hero_2104/follow=34.7(town life REPEAT-held-out), tour_4/push=10.0(quiet baseline)
+DIRECTOR t=85.8 CUT hero_2101 shot=follow pri=32.2 why=hotter held_prev=2.0 pace=1.4 | chat_2104/follow=39.5(chat 90s ago REPEAT-held-out), hero_2101/follow=32.2(town life), tour_6/push=4.0(quiet baseline same-shot-6)
+FEED Dunn Stonehand settles in Bellmire, looking for work.
+DIRECTOR t=111.0 CUT chat_2104 shot=follow pri=30.5 why=max_hold held_prev=25.2 pace=1.4 | hero_2104/follow=32.7(town life REPEAT-held-out), chat_2104/follow=30.5(chat 115s ago same-shot-6), tour_7/push=10.0(quiet baseline)
+MUSTER timed out: dists=[109, 41, 40, 52, 55, 36, 41, 53] vis=true stay=false route=72 inside=false
+FEED Tove the Younger settles in Bellmire, looking for work.
+DIRECTOR t=137.2 CUT tour_1 shot=push pri=10.0 why=max_hold held_prev=26.2 pace=1.4 | hero_2101/follow=33.3(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+DIRECTOR t=142.2 CUT fish_556970040674 shot=follow pri=60.0 why=hotter held_prev=5.0 pace=1.0 | fish_556970040674/follow=60.0(catch), hero_2104/follow=32.3(town life), tour_6/push=4.0(quiet baseline same-shot-6)
+FEED The chalk starts again below, in a hand nobody knows.
+FEED They carry 20 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave spider, 1 bog frog, 1 giant rat.
+FEED The slabs were lifted from beneath - the chips all fell outward.
+DIRECTOR t=160.5 CUT fight_4438630629940 shot=shoulder pri=75.0 why=better_after_min held_prev=18.2 pace=1.0 | fight_4438630629940/shoulder=75.0(delve start hurt 0.00), hero_2104/follow=24.8(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Edda Rivers casts Smite at giant rat.
+FEED Edda Fenwick casts Bolt at giant rat.
+FEED Edda Rivers's bolt turns to smoke a breath too early (9 vs DC 10).
+FEED Tove Ashwood casts Bolt at cave spider.
+FEED Osric the Younger reaches for bolt; the scar reaches back (9 vs DC 10).
+FEED Edda Rivers casts Smite at bog frog.
+FEED Tove Thatcher searches (Investigation 9) and turns up 8 gold on floor 1.
+FEED Floor 1: counted, corked, kept.
+FEED Tove Thatcher spots a blade trap (Perception 17 vs DC 10) and steps round it.
+FEED Tove Thatcher searches the chest - ...no loot... (Investigation 7 vs DC 10).
+FEED Nessa Rivers settles in Bellmire, looking for work.
+FEED Garm Fenwick and 6 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 cave spider, 1 giant rat.
+FEED Edda Fenwick rolls a 20 for initiative and is moving before anything else.
+FEED Edda Fenwick rolls a 20 for initiative and is moving before anything else.
+DIRECTOR t=176.7 CUT hero_2101 shot=follow pri=32.7 why=max_hold held_prev=16.2 pace=1.0 | fish_556970040674/follow=60.0(catch REPEAT-held-out), hero_2101/follow=32.7(town life), tour_2/establishing=10.0(quiet baseline)
+FEED Edda Fenwick casts Bolt at giant rat.
+FEED Osric the Younger casts Bolt at giant rat.
+FEED Edda Rivers casts Bolt at cave spider.
+FEED Edda Fenwick casts Fire at bog frog.
+FEED Tove Ashwood casts Bolt at bog frog.
+FEED Edda Rivers casts Bolt at bog frog.
+FEED Osric the Younger casts Fire at bog frog.
+FEED Tove Thatcher searches (Investigation 6) and turns up 17 gold on floor 2.
+FEED Floor 2 cleared. Something underneath heard it happen.
+DIRECTOR t=184.8 CUT delve_4438630629940 shot=follow pri=39.0 why=better_after_min held_prev=8.1 pace=1.0 | delve_4438630629940/follow=39.0(walking same-shot-6), hero_2101/follow=33.1(town life), tour_2/establishing=10.0(quiet baseline)
+FEED Tove Thatcher searches the chest - Successfully found loot!! 30 gold (Investigation 17 vs DC 11).
+FEED Garm Fenwick and 6 others take a breather, and press on deeper.
+FEED Edda Fenwick spots a pressure plate (Perception 15 vs DC 11) and steps round it.
+FEED Tove Thatcher gets a captive free. 42 gold, 7 ways - small thanks for a poor life.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 skeleton minions, 1 hollowed slime, 1 drowned slime.
+FEED The oil is running low.
+FEED Tove Thatcher rolls a 20 for initiative and is moving before anything else.
+FEED Edda Rivers steps on a grate - fire! DEX 10 vs DC 11, 14 damage.
+DIRECTOR t=198.9 CUT fish_558312218013 shot=follow pri=54.0 why=better_after_min held_prev=14.1 pace=1.0 | fight_4438630629940/shoulder=77.0(hurt 0.20 REPEAT-held-out), fish_558312218013/follow=54.0(catch same-shot-6), hero_2104/follow=26.2(town life same-shot-6), tour_7/push=10.0(quiet baseline)
+FEED 5 creatures boil out of the dungeon!
+FEED Initiative: the raiders 9, the watch 12 - the watch is ready for them.
+DIRECTOR t=200.9 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_4438630629940/shoulder=77.6(hurt 0.26 REPEAT-held-out), fish_556970040674/follow=60.0(catch REPEAT-held-out), hero_2101/follow=33.2(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Edda Rivers offers bolt to the scar, and the scar keeps it (9 vs DC 11).
+FEED Edda Fenwick's bolt flickers, thinks better of it, and quits (6 vs DC 11).
+FEED Tove Ashwood's bolt splits in two, and neither half works (7 vs DC 11).
+FEED The hollowed slime divides.
+FEED Garm Fenwick steps on a plate - darts! DEX 21 vs DC 11, 4 damage (halved).
+FEED Tove Ashwood casts Fire at drowned slime.
+FEED Edda Fenwick casts Bolt at drowned slime.
+FEED Garm Rivers settles in Bellmire, looking for work.
+FEED Edda Rivers casts Bolt at drowned slimeling.
+FEED Osric the Younger casts Fire at drowned slimeling.
+FEED Tove Thatcher searches (Investigation 15) and turns up 36 gold on floor 3.
+FEED Clear - another room the architect never got to finish.
+FEED Tove Thatcher finds a vial of Field Dressing.
+DIRECTOR t=211.0 CUT tour_5 shot=push pri=10.0 why=max_hold held_prev=10.1 pace=0.6 | delve_4438630629940/follow=45.0(walking REPEAT-held-out), hero_2101/follow=33.4(town life REPEAT-held-out), tour_5/push=10.0(quiet baseline)
+FEED Garm Fenwick and 6 others take a breather, and press on deeper.
+DIRECTOR t=213.1 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), delve_4438630629940/follow=45.0(walking REPEAT-held-out), hero_2101/follow=31.5(town life REPEAT-held-out), tour_6/push=4.0(quiet baseline same-shot-6)
+DIRECTOR t=217.1 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=4.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_556970040674/follow=60.0(catch REPEAT-held-out), delve_4438630629940/follow=45.0(walking REPEAT-held-out), hero_2104/follow=30.2(town life), tour_2/establishing=10.0(quiet baseline)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed bone bowman, 1 risen bones, 2 cave bats, 1 slime.
+FEED Edda Rivers rolls a 20 for initiative and is moving before anything else.
+FEED Tove Thatcher rolls a 20 for initiative and is moving before anything else.
+FEED Garm Fenwick steps on a spiked plate - spikes! DEX 11 vs DC 12, 1 damage.
+FEED Edda Rivers reaches for smite and the scar reaches back (6 vs DC 12).
+FEED The attack is driven off. The gates hold.
+FEED Tove Ashwood speaks fire; something else finishes it (8 vs DC 12).
+FEED Osric the Younger's bolt slips the words - wild magic (1 vs DC 12).
+DIRECTOR t=223.2 CUT hero_2104 shot=follow pri=33.0 why=shot_gone held_prev=6.1 pace=1.0 | fight_4438630629940/shoulder=78.2(hurt 0.32 REPEAT-held-out), hero_2104/follow=33.0(town life), tour_0/push=10.0(quiet baseline)
+FEED Edda Fenwick's bolt comes apart like wet rope (8 vs DC 12).
+FEED The slime divides.
+FEED Tove Thatcher searches (Investigation 21) and turns up 55 gold on floor 4.
+FEED Won, and nobody is arguing about shares yet.
+FEED Tove Thatcher finds a vial of The Reeve's Measure.
+FEED Tove Thatcher searches the chest - Successfully found loot!! 48 gold (Investigation 21 vs DC 12).
+FEED Garm Fenwick and 6 others take a breather, and press on deeper.
+FEED Ingrid Rivers settles in Bellmire, looking for work.
+FEED Garm Fenwick spots a dart trap (Perception 15 vs DC 12) and steps round it.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 2; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed skeleton warrior, 2 skeleton mages, 1 drowned bone sentinel, 1 bone bowman.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR t=238.4 CUT lord_4438630629940 shot=shoulder pri=100.0 why=lord_rises held_prev=15.3 pace=1.0 | lord_4438630629940/shoulder=100.0(lord), fight_4438630629940/shoulder=75.7(hurt 0.07 REPEAT-held-out), fish_558312218013/follow=60.0(catch REPEAT-held-out), hero_2104/follow=30.5(town life), tour_7/push=10.0(quiet baseline)
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Garm Fenwick sets the wizard's lamp burning. The dark pulls back from floor 5.
+FEED Osric the Younger's bolt unspools in their hands (11 vs DC 12).
+FEED Edda Rivers shapes smite and the scar bends it (9 vs DC 12).
+FEED Edda Fenwick's fire flares, sputters, and lands on the chalk (10 vs DC 12).
+FEED Tove Ashwood pays for bolt and the scar keeps the receipt (1 vs DC 12).
+FEED Edda Fenwick casts Fire at The Rattling Host.
+FEED Tove Ashwood casts Fire at The Rattling Host.
+FEED The Rattling Host shifts, and the fight changes with it.
+FEED Dead men drop out of the harness.
+FEED Edda Rivers casts Smite at The Rattling Host.
+FEED The Rattling Host is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dead men drop out of the harness.
+FEED The Rattling Host falls to Garm Fenwick.
+FEED Osric the Younger casts Fire at risen bones.
+FEED Tove Thatcher rolls a 20 - and the risen bones is gone.
+FEED Tove Thatcher the duelist falls on floor 5 to the dark below. Level 3, 10 kills. !reroll to rise again.
+DIRECTOR t=249.5 CUT death_4438630629940_249 shot=hard_cut pri=90.0 why=death held_prev=11.1 pace=1.0 | death_4438630629940_249/hard_cut=90.0(death), fight_4438630629940/shoulder=76.5(hurt 0.15 REPEAT-held-out), hero_2101/follow=34.6(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Edda Rivers casts Smite at skeleton mage.
+FEED Edda Fenwick casts Bolt at risen bones.
+FEED Tove Ashwood casts Bolt at risen bones.
+FEED Osric the Younger casts Bolt at risen bones.
+FEED Edda Rivers casts Smite at risen bones.
+FEED Edda Rivers searches (Investigation 4) and turns up 44 gold on floor 5.
+FEED Floor 5 quiet - the kind of quiet that remembers.
+FEED Edda Rivers searches the chest - ...no loot... (Investigation 10 vs DC 12).
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Garm Fenwick and 5 others come home to Bellmire with 238 gold, 9 ore, 6 stone, 2 pieces of salvaged gear and 3 potions. 32 kills between them.
+FEED Edda Rivers is fitted with leather. (+10 hp) Haggled 11% off (13).
+DIRECTOR t=259.5 CUT breath_259 shot=breath pri=20.0 why=breath held_prev=10.0 pace=1.4 | hero_2101/follow=34.0(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED Ingrid Hollow settles in Bellmire, looking for work.
+DIRECTOR t=268.5 CUT hero_2101 shot=follow pri=31.2 why=better_after_min held_prev=9.0 pace=1.4 | hero_2101/follow=31.2(town life), tour_6/push=10.0(quiet baseline)
+FEED Garm Fenwick and 5 others descend into the scar, and Bellmire goes quiet above them.
+FEED They carry 19 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave spider, 1 giant rat, 1 cave bat.
+FEED A ceremonial way runs dead straight to a door meant to stay shut.
+DIRECTOR t=280.7 CUT fight_8897662321682 shot=shoulder pri=75.0 why=hotter held_prev=12.1 pace=1.0 | fight_8897662321682/shoulder=75.0(delve start hurt 0.00), hero_2104/follow=34.1(town life REPEAT-held-out), tour_2/establishing=10.0(quiet baseline)
+FEED Edda Rivers's smite lands on the wrong foe - the scar edits it (7 vs DC 10).
+FEED Tove Ashwood casts Bolt at cave bat.
+FEED Edda Rivers casts Bolt at giant rat.
+FEED Edda Fenwick casts Bolt at giant rat.
+FEED Osric the Younger casts Bolt at giant rat.
+FEED Edda Rivers searches (Investigation 21) and turns up 14 gold on floor 1.
+FEED Floor 1: nothing left standing that was not standing before Bellmire.
+FEED Edda Rivers spots a blade trap (Perception 15 vs DC 10) and steps round it.
+FEED 6 bandits are riding on the west road!
+FEED Initiative: the raiders 15, the watch 8 - the raiders strike first.
+FEED Garm Fenwick and 5 others take a breather, and press on deeper.
+DIRECTOR t=290.8 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=10.1 pace=0.6 | raid/shoulder=95.0(raid live), delve_8897662321682/follow=45.0(walking), hero_2101/follow=31.3(town life REPEAT-held-out), tour_3/push=10.0(quiet baseline)
+FEED A building is burning!
+FEED Cort Hollow settles in Bellmire, looking for work.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed puglin, 1 slime, 1 hollowed giant rat, 1 bog frog.
+FEED The new frame slips. The townsfolk will try again. (11 vs DC 12)
+FEED Tove Ashwood casts Bolt at bog frog.
+FEED Edda Rivers casts Bolt at bog frog.
+FEED Ysolde Coalfoot goes down and claws back up. (CON save 13)
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED Cort Ashwood goes down and claws back up. (CON save 19)
+FEED Edda Fenwick's fire lands on the floor like a dropped flask (9 vs DC 11).
+FEED Osric the Younger casts Fire at hollowed giant rat.
+FEED Cort Ashwood is killed by a bandit.
+FEED Edda Rivers sets smite loose and it forgets who sent it (6 vs DC 11).
+FEED Tove Ashwood casts Fire at hollowed giant rat.
+FEED Tove Ashwood's bolt turns to smoke a breath too early (10 vs DC 11).
+FEED Edda Fenwick casts Fire at hollowed puglin.
+FEED Edda Rivers casts Smite at hollowed puglin.
+FEED Osric the Younger's fire bends away from them - the scar has opinions (10 vs DC 11).
+DIRECTOR t=300.9 CUT tour_6 shot=push pri=10.0 why=max_hold held_prev=10.1 pace=0.6 | fight_8897662321682/shoulder=75.6(hurt 0.06 REPEAT-held-out), hero_2104/follow=33.1(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+FEED Garm Fenwick turns on the wounded hollowed puglin to finish it.
+FEED Edda Fenwick turns on the wounded hollowed puglin to finish it.
+FEED Tove Ashwood casts Fire at slime.
+FEED Osric the Younger casts Bolt at slime.
+FEED The slime divides.
+FEED The attack is driven off. The gates hold.
+FEED Edda Fenwick turns on the wounded slimeling to finish it.
+FEED Edda Rivers turns on the wounded slimeling to finish it.
+FEED Tove Ashwood turns on the wounded slimeling to finish it.
+FEED Edda Rivers searches (Investigation 4) and turns up 17 gold on floor 2.
+FEED Floor 2 stands empty. Stand with it a breath.
+DIRECTOR t=302.9 CUT fish_558312218013 shot=follow pri=60.0 why=hotter held_prev=2.0 pace=1.0 | fish_558312218013/follow=60.0(catch), delve_8897662321682/follow=45.0(walking), hero_2101/follow=34.5(town life REPEAT-held-out), tour_0/push=4.0(quiet baseline same-shot-6)
+L73_LOG t=0.0 CUT fight_737392229051 shot=shoulder pri=85.0 why=start held_prev=0.0 pace=1.0 | fight_737392229051/shoulder=85.0(delve start hurt 0.00), chat_2104/follow=49.5(chat
+L73_LOG t=16.1 CUT breath_16 shot=breath pri=20.0 why=breath held_prev=16.1 pace=1.0 | fish_558312218013/follow=60.0(catch), chat_2104/follow=47.6(chat 20s ago), hero_2104/follow
+L73_LOG t=20.1 CUT chat_2104 shot=follow pri=47.1 why=hotter held_prev=4.0 pace=1.0 | chat_2104/follow=47.1(chat 24s ago), hero_2101/follow=32.4(town life), tour_4/push=10.0(quie
+L73_LOG t=38.3 CUT hero_2104 shot=follow pri=28.1 why=max_hold held_prev=18.2 pace=1.0 | hero_2104/follow=28.1(town life same-shot-6), tour_7/push=10.0(quiet baseline)
+L73_LOG t=42.3 CUT fish_556970040674 shot=follow pri=54.0 why=hotter held_prev=4.0 pace=1.0 | fish_556970040674/follow=54.0(catch same-shot-6), chat_2104/follow=44.5(chat 46s ago
+L73_LOG t=65.5 CUT fish_558312218013 shot=follow pri=54.0 why=max_hold held_prev=23.2 pace=1.0 | fish_558312218013/follow=54.0(catch same-shot-6), chat_2104/follow=41.8(chat 70s 
+L73_LOG t=83.8 CUT tour_4 shot=push pri=10.0 why=max_hold held_prev=18.3 pace=1.0 | fish_556970040674/follow=60.0(catch REPEAT-held-out), chat_2104/follow=39.7(chat 88s ago REPEA
+L73_LOG t=85.8 CUT hero_2101 shot=follow pri=32.2 why=hotter held_prev=2.0 pace=1.4 | chat_2104/follow=39.5(chat 90s ago REPEAT-held-out), hero_2101/follow=32.2(town life), tour_
+L73_LOG t=111.0 CUT chat_2104 shot=follow pri=30.5 why=max_hold held_prev=25.2 pace=1.4 | hero_2104/follow=32.7(town life REPEAT-held-out), chat_2104/follow=30.5(chat 115s ago sa
+L73_LOG t=137.2 CUT tour_1 shot=push pri=10.0 why=max_hold held_prev=26.2 pace=1.4 | hero_2101/follow=33.3(town life REPEAT-held-out), tour_1/push=10.0(quiet baseline)
+L73_LOG t=142.2 CUT fish_556970040674 shot=follow pri=60.0 why=hotter held_prev=5.0 pace=1.0 | fish_556970040674/follow=60.0(catch), hero_2104/follow=32.3(town life), tour_6/push
+L73_LOG t=160.5 CUT fight_4438630629940 shot=shoulder pri=75.0 why=better_after_min held_prev=18.2 pace=1.0 | fight_4438630629940/shoulder=75.0(delve start hurt 0.00), hero_2104/
+L73_LOG t=176.7 CUT hero_2101 shot=follow pri=32.7 why=max_hold held_prev=16.2 pace=1.0 | fish_556970040674/follow=60.0(catch REPEAT-held-out), hero_2101/follow=32.7(town life), 
+L73_LOG t=184.8 CUT delve_4438630629940 shot=follow pri=39.0 why=better_after_min held_prev=8.1 pace=1.0 | delve_4438630629940/follow=39.0(walking same-shot-6), hero_2101/follow=
+L73_LOG t=198.9 CUT fish_558312218013 shot=follow pri=54.0 why=better_after_min held_prev=14.1 pace=1.0 | fight_4438630629940/shoulder=77.0(hurt 0.20 REPEAT-held-out), fish_55831
+L73_LOG t=200.9 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_4438630629940/shoulder=77.6(hurt 0.26 REPEAT-held-out), f
+L73_LOG t=211.0 CUT tour_5 shot=push pri=10.0 why=max_hold held_prev=10.1 pace=0.6 | delve_4438630629940/follow=45.0(walking REPEAT-held-out), hero_2101/follow=33.4(town life REP
+L73_LOG t=213.1 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), delve_4438630629940/follow=45.0(walking REPEAT-held-out), hero_
+L73_LOG t=217.1 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=4.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_556970040674/follow=60.0(catch REPEAT-held-out), delve_
+L73_LOG t=223.2 CUT hero_2104 shot=follow pri=33.0 why=shot_gone held_prev=6.1 pace=1.0 | fight_4438630629940/shoulder=78.2(hurt 0.32 REPEAT-held-out), hero_2104/follow=33.0(town
+L73_LOG t=238.4 CUT lord_4438630629940 shot=shoulder pri=100.0 why=lord_rises held_prev=15.3 pace=1.0 | lord_4438630629940/shoulder=100.0(lord), fight_4438630629940/shoulder=75.7
+L73_LOG t=249.5 CUT death_4438630629940_249 shot=hard_cut pri=90.0 why=death held_prev=11.1 pace=1.0 | death_4438630629940_249/hard_cut=90.0(death), fight_4438630629940/shoulder=
+L73_LOG t=259.5 CUT breath_259 shot=breath pri=20.0 why=breath held_prev=10.0 pace=1.4 | hero_2101/follow=34.0(town life REPEAT-held-out), tour_6/push=10.0(quiet baseline)
+L73_LOG t=268.5 CUT hero_2101 shot=follow pri=31.2 why=better_after_min held_prev=9.0 pace=1.4 | hero_2101/follow=31.2(town life), tour_6/push=10.0(quiet baseline)
+L73_LOG t=280.7 CUT fight_8897662321682 shot=shoulder pri=75.0 why=hotter held_prev=12.1 pace=1.0 | fight_8897662321682/shoulder=75.0(delve start hurt 0.00), hero_2104/follow=34.
+L73_LOG t=290.8 CUT raid shot=shoulder pri=95.0 why=hotter held_prev=10.1 pace=0.6 | raid/shoulder=95.0(raid live), delve_8897662321682/follow=45.0(walking), hero_2101/follow=31.
+L73_LOG t=300.9 CUT tour_6 shot=push pri=10.0 why=max_hold held_prev=10.1 pace=0.6 | fight_8897662321682/shoulder=75.6(hurt 0.06 REPEAT-held-out), hero_2104/follow=33.1(town life
+L73_LOG t=302.9 CUT fish_558312218013 shot=follow pri=60.0 why=hotter held_prev=2.0 pace=1.0 | fish_558312218013/follow=60.0(catch), delve_8897662321682/follow=45.0(walking), her
+L73_TEST establish { "d0": 34.0, "want": 20.0, "d6": 21.4174594002589 }
+L73_TEST tighten {  }
+L73_TEST FAIL tighten
+L73_TEST death hold>=3s true, breath after true
+L73_TEST DONE fails=1

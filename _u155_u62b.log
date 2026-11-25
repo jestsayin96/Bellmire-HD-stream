@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+U62 IMG (1920, 1080)  root=(1920, 1080)  viewport_rect=[P: (0.0, 0.0), S: (1920.0, 1080.0)]
+U62 scale=1.00 h=96 px8=8 cap=8.00 top_cy=11.00 stripe=[17.72,19.00] ink=[4,16] ink_bot=17 rod_bot=19.00 stripe_top-ink_bot=0.72 clear=true
+U62 scale=1.00 h=120 px8=8 cap=8.00 top_cy=11.00 stripe=[17.72,19.00] ink=[4,16] ink_bot=17 rod_bot=19.00 stripe_top-ink_bot=0.72 clear=true
+U62 scale=1.00 h=150 px8=8 cap=8.00 top_cy=11.00 stripe=[17.72,19.00] ink=[4,16] ink_bot=17 rod_bot=19.00 stripe_top-ink_bot=0.72 clear=true
+U62 scale=1.00 h=159 px8=8 cap=8.00 top_cy=11.00 stripe=[17.72,19.00] ink=[4,16] ink_bot=17 rod_bot=19.00 stripe_top-ink_bot=0.72 clear=true
+U62 IMG (1920, 1080)  root=(1920, 1080)  viewport_rect=[P: (0.0, 0.0), S: (1920.0, 1080.0)]
+U62 scale=1.25 h=120 px8=10 cap=10.00 top_cy=13.50 stripe=[21.82,23.50] ink=[5,20] ink_bot=21 rod_bot=23.50 stripe_top-ink_bot=0.82 clear=true
+U62 scale=1.25 h=150 px8=10 cap=10.00 top_cy=13.50 stripe=[21.82,23.50] ink=[5,20] ink_bot=21 rod_bot=23.50 stripe_top-ink_bot=0.82 clear=true
+U62 scale=1.25 h=187 px8=10 cap=10.00 top_cy=13.50 stripe=[21.82,23.50] ink=[5,20] ink_bot=21 rod_bot=23.50 stripe_top-ink_bot=0.82 clear=true
+U62 scale=1.25 h=198 px8=10 cap=10.00 top_cy=13.50 stripe=[21.82,23.50] ink=[5,20] ink_bot=21 rod_bot=23.50 stripe_top-ink_bot=0.82 clear=true
+U62 IMG (1920, 1080)  root=(1920, 1080)  viewport_rect=[P: (0.0, 0.0), S: (1920.0, 1080.0)]
+U62 scale=1.50 h=144 px8=12 cap=12.00 top_cy=17.00 stripe=[27.24,29.00] ink=[7,26] ink_bot=27 rod_bot=29.00 stripe_top-ink_bot=0.24 clear=true
+U62 scale=1.50 h=180 px8=12 cap=12.00 top_cy=17.00 stripe=[27.24,29.00] ink=[7,26] ink_bot=27 rod_bot=29.00 stripe_top-ink_bot=0.24 clear=true
+U62 scale=1.50 h=225 px8=12 cap=12.00 top_cy=17.00 stripe=[27.24,29.00] ink=[7,26] ink_bot=27 rod_bot=29.00 stripe_top-ink_bot=0.24 clear=true
+U62 scale=1.50 h=238 px8=12 cap=12.00 top_cy=17.00 stripe=[27.24,29.00] ink=[7,26] ink_bot=27 rod_bot=29.00 stripe_top-ink_bot=0.24 clear=true
+U62_SCALES OK bad=0 measured=12

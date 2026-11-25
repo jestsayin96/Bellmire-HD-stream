@@ -1,0 +1,52 @@
+START 05:12:55
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED The lamps show stone that was not there last delve.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 hollowed cave spider, 1 cave spider.
+FEED Footprints cross the dust, and every pair is bare.
+FEED MossyMage rolls a 20 for initiative and is moving before anything else.
+FEED DawnCleric rolls a 20 for initiative and is moving before anything else.
+T10s floor=1 state=fight foes=3 ["JestFan 93/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED MossyMage casts Bolt at hollowed cave spider.
+FEED DawnCleric casts Smite at hollowed cave spider.
+T20s floor=1 state=fight foes=2 ["JestFan 93/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T30s floor=1 state=fight foes=1 ["JestFan 93/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED DawnCleric casts Smite at slime.
+FEED The slime divides.
+FEED MossyMage mislays the middle of chain (9 vs DC 10).
+FEED DawnCleric's smite goes thin as watered ale (9 vs DC 10).
+FEED MossyMage searches (Investigation 10) and turns up 11 gold on floor 1.
+FEED Blades wiped, packs checked, nobody hurried.
+FEED MossyMage finds a vial of Draught of Mending.
+T40s floor=1 state=search foes=0 ["JestFan 85/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T50s floor=1 state=search foes=0 ["JestFan 85/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T60s floor=1 state=search foes=0 ["JestFan 85/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED MossyMage searches the chest - Successfully found loot!! 24 gold (Investigation 18 vs DC 10).
+FEED JestFan and 3 others take a breather, and press on deeper.
+T70s floor=1 state=descend foes=0 ["JestFan 93/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T80s floor=1 state=descend foes=0 ["JestFan 93/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T90s floor=1 state=descend foes=0 ["JestFan 93/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T100s floor=1 state=descend foes=0 ["JestFan 93/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T110s floor=1 state=descend foes=0 ["JestFan 93/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 1; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave spider, 2 bog frogs, 1 slime.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED Chewing. Patient, enormous chewing.
+FEED The oil is running low.
+T120s floor=2 state=fight foes=4 ["JestFan 93/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+T130s floor=2 state=fight foes=5 ["JestFan 93/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED DawnCleric casts Smite at slime.
+FEED MossyMage casts Bolt at slime.
+FEED The slime divides.
+FEED MossyMage starts bolt and the scar takes the last word (10 vs DC 11).
+FEED DawnCleric fumbles bolt and the words go sideways (6 vs DC 11).
+T140s floor=2 state=fight foes=4 ["JestFan 87/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED DawnCleric casts Smite at bog frog.
+T150s floor=2 state=fight foes=3 ["JestFan 87/93", "MossyMage 68/68", "DawnCleric 91/91", "BigAxe 119/119"]
+DELVE_TEST OK ran 9001 frames, floor reached 2, state fight (capped at 9001 frames); engine error lines are still read off the log
+
+RC 0 END 05:14:03

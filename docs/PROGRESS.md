@@ -3928,3 +3928,404 @@ TAKE THIS NEXT (02:58/03:58 row 1): pick ONE body art has measured, give it a be
 - CAMERA: the first S63 shot (fov 40, from z 86) fit every piece but showed three overlapping rows as specks. Re-shot from (0,22,62) at fov 46: renders/cycles/s63/s63_props.png - LOOKED AT: three separate rows, nothing clipped at either edge, every piece on the floor line, the stall and coin pile visible at the right where S62 cut off.
 - Battery: parse 0 SCRIPT ERROR / 0 Parse Error; OFFFLOOR_VERDICT OK 0 of 2284, MON_INPROP 0 of 324; TWITCH_PARSE OK (8 checks); DELVE_TEST OK (0 SCRIPT ERROR); TOWNWALK in_solid=0/15935 raid 0/9023 PASS.
 - DISCLOSED: the battery ran WITHOUT JESTS_NO_TWITCH=1 again (the S57 note asked for it; I read that note after launching). The parse run joined EventSub as bellmirebro READ-ONLY (token check, join, subs seed, welcome). Nothing posted, redeemed or cheered, 0 bits. The re-shot S63 run set it.
+
+## S66 - game build, 2026-11-20T13:14:00-06:00 - the Sealer (Leadbite, 38th) named, fitted and drawn on treasury floors
+TAKE THIS NEXT (12:58 CT row 1): "the same row again, for `sealer`" - closes MINIBOSS UNNAMED.
+- `Delve.MB_NAME` + `"sealer": "Leadbite"` (content's `_note_c143` and art's CANON tuple in tools/art/minibosses.py, both read) -> 38 keys.
+- `Delve.MB_FIT` + `"sealer": 0.99` - read out of art's `renders/art/minibosses/_fit_fit_sealer_register.json` `pairs.sealer.ratio` (creature_h 2.42 / hero_h 2.45, verdict GREEN). NOTE for art: sealer is NOT in `_fit_report.json`; its register carries a doubled `_fit_fit_` prefix.
+- `dungeon_hd.gd` `THEME_MINIBOSS_MORE["treasury"]` = `["strickler", "sealer"]` (art's tag, field 5 of the tuple = `treasury`).
+- `tools/_s51_names.gd` TABLE + sealer, size checks 37 -> 38.
+- RED FIRST: S51 run against the pre-edit delve.gd -> **S51_NAMES FAIL 5 of 161** (MB_NAME 37, sealer -> "Sealer", drawable key sealer has no MB_NAME entry). After: **S51_NAMES OK 160 checks**.
+- New gate `tools/_s66_sealer.gd` (copy of S65). **MY OWN INSTRUMENT WAS WRONG FIRST RUN**: the S65 shape takes a floor's own naturally-rolled miniboss set piece AS-IS, so floor 8 drew TALLYMAN and the gate "proved" tallyman_chibi.glb at its own 0.88 while reporting it as the sealer (model/ratio checks passed, only arrive/fall failed). Fixed: every staged chamber is rebuilt for the gated key, and a new check asserts the model file is the key's own body. **S66_SEALER OK 9 checks** (treasury draws 150/400, Leadbite, MB_FIT 0.99, sealer.glb, stands 2.43 m = 0.99 x hero vs art 0.99, arrive + fall lines). S65's gate carries the same latent fault (it passed only because its floor did not roll a natural elite) - not fixed this hour, flagged.
+- LOOKED AT IT: renders/cycles/s66/sealer.png - Leadbite stands on the treasury floor beside the knight, press in hand, the strip of lead blanks on the hip, plate "Leadbite".
+- Battery (JESTS_NO_TWITCH=1 set this time): --import rc 0; parse --quit-after 300 rc 0, ZERO ERROR / Parse Error lines; OFFFLOOR_VERDICT OK 0 of 2351; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/16235 raid 0/7733 PASS; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
+- NOT done: the Sealer's IDEA (a bite shuts one hero's pack) is not delve behaviour yet - it is a named, fitted elite. Hooper (39th) has a body but no content lines; gate correctly holds it out. Batch 4 and wall-placement rows still mine. No twitch test, 0 bits.
+
+## C-145 - 20 Nov 2026 14:3x CT (content): miniboss feed lines for the Relief (40th, Watchturn, barracks)
+TAKE THIS NEXT (13:58 block) row 3: C-145, the Relief's lines. Body is committed (assets/monsters/minibosses/relief.glb on main; CANON row 40 in tools/art/minibosses.py). Added miniboss_feed.by_key.relief: arrive 9 / fall 8, recent shape (no act, no broken, {name} unused). Mechanic said plainly: a quarter turn of the capstan rotates the whole line one place, nobody hurt or gone, every reach and heal aimed at the wrong body; four notches in the ratchet plate with the dog in one are the gauge; jam the dog to stop the turn. Added _note_c145 (nested under miniboss_feed, beside c143 and c144). by_key is now 40 rows. data/lore_lines.json only. VALIDATION OK: json.load passes, every pre-existing key byte-identical in value (diff is the added block plus the comma on _note_c144). CODE WIRING IMPLIED: none for the feed (miniboss_for draws the body once lines exist). Game build still owes Delve.MB_NAME relief -> Watchturn and MB_FIT (art has no relief hero register yet), and the chat bot's 'The N elites' publish count must follow by_key (39 -> 40 here, MB_NAME stays behind). NO CODE LANE IS TO WIRE _note_c145.
+
+## C-146 - 20 Nov 2026 15:3x CT (content): audit of my own shipped miniboss feed (no 41st body exists)
+- ITEM: TAKE THIS NEXT (14:58 CT block) row 3, CONTENT. The block says the engine is one step short (no 41st body), so the hour goes to bringing the earliest `miniboss_feed.by_key` rows up to the settled shape (arrive 9 / fall 8).
+- MEASURED first: 40 keys. Short on arrive: drillmaster 8, scrapwright 8, quartermaster 8, loader 8, hurdleman 8. Every key already has fall 8.
+- ADDED one arrive line to each of those five (now 9 / 9 / 9 / 9 / 9): drillmaster, scrapwright, quartermaster, loader, hurdleman. Mechanic in plain words, no `{name}`.
+- NOT TOUCHED, deliberately: the `act` and `broken` blocks on the 18 old keys that carry them (additive only; nothing deleted or reworded).
+- VALIDATION OK: json.load passes on all four owned files; against a pre-edit copy every other key and entry is byte-identical, key order unchanged, only the five arrive arrays grew by one at the end.
+- CODE WIRING: none. These keys already exist and are already drawn from.
+Next content: C-147.
+## C-147 - 20 Nov 2026 16:3x CT (content): miniboss feed lines for the Scraper (41st, Scourstone, crypt)
+TAKE THIS NEXT (15:58 block) row 2: "a feed row for the 41st body (`scraper`, Scourstone) is ordinary chain work". Body is committed (assets/monsters/minibosses/scraper.glb on main, art ad070505, docs/art/SCRAPER.md), so I wrote against it. Without arrive lines miniboss_for never draws the body.
+- ADDED data/lore_lines.json miniboss_feed.by_key["scraper"]: arrive 9 / fall 8, recent shape (no act, no broken, no {name}). First arrive line is art's own barker, word for word ("Someone is rubbing a name off the wall."). The mechanic is said plainly: at round end it draws the stone down the slab and the party's last action is undone; hitting harder fails because the hit is what it removes; the five cuts on each plinth face are the gauge. Rest is scene, plain register, no floor counts, ASCII only. Man worn, slab and slates left unaged.
+- ADDED miniboss_feed._note_c147 (expected zero-hit key; no lane is to wire it).
+- COUNT: by_key 40 -> 41 rows; arrive 9 and fall 8 on the new row, 9 distinct arrive lines.
+- VALIDATION OK: json.load passes; every pre-existing key and entry byte-identical (recursive subset check against pre-edit copy); file round-trips at indent 2.
+- CODE WIRING for other lanes (not mine): scripts/bestiary.gd `scraper` (h 2.55, no anims); scripts/delve.gd MB_NAME["scraper"] = "Scourstone" (41st key); scripts/dungeon_hd.gd THEME_MINIBOSS_MORE["crypt"] may take "scraper"; chat bot commands.json "40 elites" -> 41 once MB_NAME lands. scraper.glb has no .glb.import yet.
+Next content: C-148.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## C-149 - 20 Nov 2026 18:2x CT (content): miniboss feed lines for the Ferryman (42nd, Slackwater, flooded)
+TAKE THIS NEXT (17:58 CT block), CONTENT row: the Ferryman's feed lines and `_note_`. Body is committed (assets/monsters/minibosses/ferryman.glb on main; CANON row 42 in tools/art/minibosses.py), so I wrote against it. Without arrive lines miniboss_for never draws the body.
+- ADDED data/lore_lines.json miniboss_feed.by_key["ferryman"]: arrive 9 / fall 8, recent shape (no act, no broken, no {name}). First arrive line is art's own barker, word for word. Mechanic said plainly: the punt holds one, only the hero aboard can hurt it, everyone else's blows do not land, the pegs along the gunwales are crossings left, the last peg drawn is the window. Fall lines say everyone's blows land again.
+- ADDED miniboss_feed._note_c149 (expected zero-hit key; no lane is to wire it).
+- COUNT: by_key 41 -> 42 rows.
+- VALIDATION OK: json.load passes on all four owned files; every pre-existing key and entry byte-identical (recursive subset check against a pre-edit copy), key order unchanged, file round-trips at indent 2.
+- CODE WIRING for other lanes (not mine): scripts/delve.gd MB_NAME["ferryman"] = "Slackwater" (42nd key, S71 holds until this lands) + MB_FIT; dungeon_hd.gd THEME_MINIBOSS_MORE["flooded"]; chat bot commands.json "41 elites" -> 42 once MB_NAME lands.
+Next content: C-150.
+Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+
+## D-cycle - S73 the Winder (43rd, Haulback): fitted, in the wood row, HELD on a named condition. 2026-11-20T20:08-06:00 (game build)
+TAKE THIS NEXT (19:58 CT block) gave GAME BUILD: S73 - wire the 43rd body, the Winder.
+- delve.gd MB_FIT["winder"] = 0.96, copied from art's _fit_winder_register.json pairs.winder.ratio (creature_h 2.34 /
+  hero 2.45, verdict GREEN, 3/3 proving views), cited in the line the way S71 cited the ferryman. Tag read off field 5
+  of the CANON tuple (minibosses.py:14974) = "wood"; dungeon_hd.gd THEME_MINIBOSS_MORE["wood"] = ["drover", "winder"].
+- MB_NAME["winder"] NOT added (S51): content has no by_key.winder yet. CANON title is "Haulback".
+- tools/_s73_winder.gd built in the S72 shape: FED is a NAMED CONDITION read off content's own file
+  (lore_lines.json miniboss_feed.by_key has "winder"), and every hold arm sits beside its post-hold arm, chosen by FED.
+  When content writes the feed (C-151 or later) the gate flips BY ITSELF - zero lines to edit - and the post-hold
+  arms then demand MB_NAME["winder"] == "Haulback", so it goes RED until this lane lands the name. That RED is the ask.
+- THE MECHANIC ("takes GROUND": drags hooked delvers back toward the chamber mouth): NOT BUILT, by the row. Plainly:
+  the engine DOES have a displacement primitive - MB_WAYS "hook" (delve.gd:2087, the gaoler) teleports the FARTHEST
+  delver IN to 1.6 m of the miniboss, cell-checked. The Winder's idea is the reverse direction (away, toward the
+  entry) and per-turn; it would be a new way "haul" on that same cell-checked move. It also needs content's act/broken
+  lines to fire at all (S34: a key with no act lines gets no way). Not invented this hour.
+- FIRST S73 RUN WAS RED AND RIGHT: "No loader found for winder.glb" - the merge brought the .glb with no .import. Ran
+  --headless --import, re-ran: green. (My own pre-merge untracked winder.glb differed from main's; moved aside as
+  winder.glb.bak_pre_s73_moved, main's is the one committed. Three art renders likewise backed up *.bak_pre_s73.)
+- Looked at renders/cycles/s73/winder_static.png: drum on a low frame, bowed man on the bar, three hooked ropes on the
+  floor, standing at 2.35 m. Reads as the CANON describes.
+- Gates: parse 0 SCRIPT ERROR / 0 Parse Error (rc 0, 29s); S73_WINDER OK 7 checks (hold shape); TWITCH_PARSE OK (8
+  checks); OFFFLOOR_VERDICT OK 0 of 2063 samples off the floor; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+  TOWNWALK: NO VERDICT LINE = RED (COORDINATION 15). It ran with 0 SCRIPT ERROR and in_solid 0 at every print, but
+  at ~1/20 real speed: run 1 reached T=40s of 120 in 240 s wall and hit my timeout; run 2 reached T=10s and I killed
+  it at 20:22. Cause measured, not guessed: Marvel Rivals + OBS were the top CPU processes on cruzader (Mr. E is
+  playing, maybe streaming), and my windowless Godot showed "Not Responding". My diff touches no town code (two
+  dungeon consts + a new tool), but a gate without a verdict is not a pass, so S73 is NOT pushed to laptop:
+  committed locally and pushed to origin s73-wip as a checkpoint. NEXT FIRING: re-run _townwalk.gd when the machine
+  is free, then push laptop.
+
+## D-cycle - S74: S73 re-battery on merged main (fef3f932) - TOWNWALK RED AGAIN UNDER LOAD, still NOT pushed to laptop. 2026-11-20T21:20:51-06:00 (game build)
+TAKE THIS NEXT (19:58 CT block, still the top block) gave GAME BUILD: S73 (the Winder). S73's code is unchanged; this run
+only re-ran the battery the 20:08 run could not finish.
+- Content check first: `by_key.winder` is still absent from data/ (grep), so the hold stands and no flip is owed.
+- Gates on the merged tree (origin/main merged clean, art renders + 8 _fit_el json only): parse rc 0, 0 SCRIPT ERROR /
+  0 Parse Error (47s); S73_WINDER OK 7 checks (hold shape); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2050
+  samples off the floor (home); DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+- TOWNWALK: NO VERDICT LINE = RED. 0 SCRIPT ERROR, in_solid 0 at every print (0/6922 at T=40s), stuck_on_route 0, but it
+  reached T=40s of 120 in 420 s wall and hit the timeout - the SAME ~1/10 speed as 20:08. Marvel-Win64-Shipping and
+  obs64 are again the top CPU processes on cruzader. A full walk needs ~20 min wall at that rate, which does not fit a
+  25-minute claim alongside the rest of the battery. Not my diff (no town code touched) - but no verdict is no pass.
+- FOUND AND FIXED IN MY OWN TOOL: tools/_s73_winder.gd raised "SCRIPT ERROR: Cannot call method 'save_png' on a null
+  value" (:224) under --headless - no framebuffer, get_image() is null. The verdict still printed OK, but a gate that
+  throws is not clean. Added _snap(): null image -> print "picture skipped", checks untouched. Re-run: S73_WINDER OK 7
+  checks, 0 SCRIPT ERROR. (The picture itself was looked at at 20:08 and is unchanged.)
+- Checkpoint only: committed locally on laptop and pushed to origin s73-wip. NEXT FIRING: run _townwalk.gd FIRST and
+  ALONE when the machine is free (or windowed at a quiet hour), then push laptop. If load persists, team lead may want
+  to rule whether a town walk can be skipped for a diff that touches no town file - that is his call, not mine.
+
+## D-cycle - S75: S73 LANDED with the name - MB_NAME["winder"] = "Haulback"; chain goes 44 feed / 43 named. 2026-11-20T22:16:55-06:00 (game build)
+TAKE THIS NEXT (21:58 CT block) gave GAME BUILD: merge main first, then land S73 and the winder's name in one push.
+- Merged origin/main (52aa9607 + plan 5159fd2b) and origin/laptop into the S74 checkpoint 6efb0834: clean. On the merged
+  tree `miniboss_feed.by_key` has 44 rows and `winder` carries 9 arrive / 8 fall (C-151) - the hold condition is met.
+- delve.gd MB_NAME: + "winder": "Haulback" - content's _note_c151 and art's CANON (tools/art/minibosses.py:14974) both read.
+  Stale hold comments in delve.gd MB_FIT and dungeon_hd.gd wood row updated. No other code changed.
+- Gates (machine quiet this hour; Marvel/OBS gone): parse rc 0, 0 SCRIPT ERROR / 0 Parse Error (22s);
+  TOWNWALK in_solid=0/16584 (0.000%) raid_in_solid=0/6125 (0.000%) PASS, STUCK_ON_ROUTE_TOTAL 0 over 120 s (89s wall);
+  TWITCH_PARSE OK (8 checks); S73_WINDER OK 13 checks, Haulback stands on a wood floor in its own body (post-hold shape,
+  FED) - the tool flipped to its post-hold arms by itself off content's data; OFFFLOOR_VERDICT OK 0 of 2360;
+  DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- NOTE: my first townwalk capture lost the verdict line (I glued stdout+stderr and kept the tail, which was all import
+  warnings). Re-ran it alone with stdout kept separately; the PASS above is that run's verdict line, not an rc.
+- chatcmd's COMMANDS_DATA guard now names only ["pitman"] as UNNAMED (winder cleared) and still reports COUNT published
+  42 / feed 44 - that is the chat bot's publish to make, not mine.
+- NEXT FIRING: the 44th, the PITMAN - MB_FIT 0.94 (art's register), crypt row, MB_NAME "Underfoot" (C-152 on main),
+  STATIC body, footprint_span 3.10 m from _report.json (not the 2.85 m prose).
+
+## D-cycle - S76: the PITMAN (44th) wired AND named in one push - MB_FIT 0.94, crypt row, MB_NAME "Underfoot"; chain goes 44 feed / 44 named. 2026-11-20T23:15:00-06:00 (game build)
+TAKE THIS NEXT (22:58 CT block) gave GAME BUILD: S76 - wire the pitman, the 44th.
+- Merged origin/main and origin/laptop at the claim: clean.
+- delve.gd MB_FIT: + "pitman": 0.94 - COPIED from art's renders/art/minibosses/_fit_pitman_register.json pairs.pitman.ratio
+  (frame_edge 0 on front/side/back, fits_frame true), not re-derived.
+- delve.gd MB_NAME: + "pitman": "Underfoot" - content's miniboss_feed._note_c152 and art's CANON (tools/art/minibosses.py:15251), both read.
+- dungeon_hd.gd THEME_MINIBOSS_MORE crypt: + "pitman" under art's own tag (CANON field 5 = "crypt"). by_key.pitman has 9 arrive / 8 fall.
+- pitman.glb had no .import sibling: --headless --import run first (rc 0, 0 SCRIPT ERROR); the .import is committed.
+- New gate tools/_s76_pitman.gd, the S73 named-condition shape (FED read off content's data, hold and post-hold arms side by side).
+- Gates (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks);
+  S76_PITMAN OK 13 checks, Underfoot stands on a crypt floor in its own body (post-hold shape, FED) - 100 of 400 crypt draws;
+  OFFFLOOR_VERDICT OK 0 of 2086 samples off the floor; TOWNWALK in_solid=0/17255 (0.000%) raid_in_solid=0/7315 (0.000%) PASS
+  (STUCK_ON_ROUTE_TOTAL 5, watchdog repath 4, giveup 0); DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- LOOKED AT renders/cycles/s76/pitman.png: the "Underfoot" nameplate over the pitman's dark body with its pick, beside its pit and
+  ladder, on the crypt's hex floor next to a hero. Body present, own model, standing.
+- INSTRUMENT NOTE (not counted): pitman_static.png is a blank grey frame. In the FED shape the template snaps the static AFTER the
+  staged floor is cleared, so it sees nothing. The S73 template carries the same order; winder_static.png is from its hold-shape
+  run. Not committed. The real picture is pitman.png. Worth a one-line fix (snap static before staging) in the next gate built from it.
+- NOT YET DONE: the pitman's ONE IDEA (it opens a pit under a delver, who loses a beat climbing out; the pit stays) is not delve
+  behaviour yet - this push wires body, fit, name and draw only. Offered as the next game-build row, not taken early.
+## C-154 - 20 Nov 2026 23:3x CT (content): pool top-up (epitaphs +12, descend +12, cleared +12)
+TAKE THIS NEXT (22:58 CT block) gave CONTENT: C-154, pool top-up. No miniboss owed (44 feed rows, 44 bodies; the 44th's lines are C-152).
+- data/lore_lines.json: epitaphs 804->816, descend 493->505, cleared 478->490. Plain strings, plain register, no names, no mechanics, no floor counts.
+- `_note_c154` is nested under miniboss_feed beside _note_c150-152 (the nesting the plan asked for). Expected zero-hit key: DO NOT WIRE.
+- VALIDATION OK: json.load parses; every pre-existing key and every pre-existing list entry unchanged; no duplicates against existing pools.
+- Code wiring: none. Lines join the existing pools the game already draws from.
+Next content: C-155.
+
+## D-cycle - S77: boss_bar.gd - the boss card no longer covers the Director "Now watching" chip at 150%. 2026-11-21T00:16:30-06:00 (game build)
+TAKE THIS NEXT (23:58 CT 20 Nov block, merged off origin/laptop c6c8771c) gave GAME BUILD: boss_bar.gd at 150% (HUD reported it at U113/U114/U115).
+- CAUSE, MEASURED: at 150% the card's unscaled min size is ~960 x 238; _dock put it UNDER the pane's label plate at the pane's
+  0.85, so it was 815 x 202 tall, and HudDock.put()'s Chronicle rule (L40) then LIFTED it above the Chronicle box
+  (y = box.top - m - h = 140), straight up over "Now watching: Bellmire" (label rect y 94..156).
+- FIX (boss_bar.gd only, hud_dock.gd untouched): new _fit_k() caps the card's scale so it fits where it is put - the pane (or
+  beside-plate room) width, and the height between its top and the Chronicle box when the box crosses that column. Applied on
+  all three placements in _dock. A card that fits is never lifted. Backup scripts/boss_bar.gd.bak_s77 (not committed).
+- New gate tools/_s77_bossbar.gd (the HUD's _u104_shot.gd scene, own OUT dir) + S77_BOSSCARD: at 100/125/150 the card must be
+  inside its pane, over no visible label chip of that pane, and clear of the Chronicle box.
+  RED on the pre-edit code: S77_BOSSCARD FAIL 12 checks ["scale=1.5 card over 1 label chip(s)"] (card 815x202 at y 140).
+  GREEN after: S77_BOSSCARD OK 12 checks (150%: card 677x168 at (142,174), below the chip, above the Chronicle top 360).
+  100% and 125% placements are byte-identical before/after (they already fit beside the plate).
+- LOOKED AT renders/cycles/s77/mana_150_1080.png: "Now watching: Bellmire" fully readable, the card sits under it inside the
+  Director pane, clear of the Chronicle and the Mana plate.
+- FOR THE HUD (not mine, not touched): a faint "NOW FIGHTING" banner ghost shows BEHIND the card in that frame (fading) -
+  the U108 banner docks under the card; it is no longer over the chip, but worth a look in your lane at 150%.
+- Gates (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error; S77_BOSSCARD OK 12 checks; TWITCH_PARSE OK (8 checks);
+  OFFFLOOR_VERDICT OK 0 of 2068 samples off the floor; DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR;
+  TOWNWALK in_solid=0/18332 (0.000%) raid_in_solid=0/6128 (0.000%) PASS (STUCK_ON_ROUTE_TOTAL 4, giveup 1).
+- No Twitch test, 0 bits. NEXT (offered, not taken): the pitman's ONE IDEA (a pit under a delver, a lost beat, the pit stays).
+
+## D-cycle - S79: the PITMAN'S ONE IDEA - it opens the floor under a delver, who loses a beat climbing out; the pit stays. HELD on content's act/broken lines. 2026-11-21T02:15:58-06:00 (game build)
+TAKE THIS NEXT (01:58 CT block) offered GAME BUILD a choice: the lowest open Phase 2 system, or the pitman's ONE IDEA offered at S77.
+I TOOK THE PITMAN'S IDEA - miniboss-family work this lane already owns, offered twice (S76, S77) and never taken early. No Phase 2 number was taken.
+- delve.gd MB_WAYS: + "pitman": "pit". New consts MB_PIT_MAX 3, MB_PIT_R 1.0, MB_PIT_BEAT 1.5 s, MB_PIT_CLIMB 3.0 s; new static Delve.pitman_fell.
+- The act: a pit opens under the nearest delver (meta mb_pits; oldest closes past MB_PIT_MAX) and they go straight in: +MB_PIT_BEAT on their
+  next swing. _pit_tick runs every way-tick BEFORE the broken/lines guard, so anyone who stands on an open pit goes in, once per MB_PIT_CLIMB.
+  Broken = it stops digging; the pits it already dug still take people. _pit_mark puts a dark mouth in the floor, parented beside the Pitman.
+- HOLD: content's by_key.pitman has arrive 9 / fall 8 and NO act/broken lines, so the existing gate in _mb_way_tick keeps this way off every
+  real floor until content writes them. CONTENT IS OWED: pitman act + broken lines (the act line takes {name} - the delver it dug under).
+- HONEST LIMIT (in the code comment): pits are ticked by the Pitman; once it is dead they take nobody (marks stay as scenery).
+- New gate tools/_s79_pitman.gd: HOLD arm on real data first, then act/broken lines FED IN MEMORY ONLY ("[S79 TEST ...]", never written to data/).
+  S79_PITMAN OK (16 checks). Red: S79_RED=1 fills the pits in after each act -> S79_PITMAN FAIL (16 checks), 7 named failures.
+- LOOKED AT renders/cycles/s79/pitman_2pit.png: the first render (mark at y 0.025) showed NO pit - the hex tiles' bevelled tops hid it. Raised to
+  y 0.09, re-shot: a dark round mouth in the floor beside the knight who has stepped off it, the Pitman and its ladder behind. That is the fix
+  the picture made, not the number.
+- Gates (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error (after the y edit); S79_PITMAN OK (16 checks) (after the y edit);
+  TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2265 samples off the floor (home); TOWNWALK in_solid=0/16148 raid_in_solid=0/8237 PASS;
+  DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. The last four ran on the build before the cosmetic y 0.025 -> 0.09 edit; parse and S79 re-ran after.
+- No Twitch test, 0 bits.
+
+## D-cycle - S80: SYSTEM 8 (SHIELD VARIETY) ROW (b) - armour tiers 4-5 now carry the five-shield Quaternius set's heater/round/celtic on the off hand, sized on the hand. 2026-11-21T03:08-06:00 (game build)
+TAKE THIS NEXT (02:58 CT block) gave GAME BUILD: "the lowest open Phase 2 system, your own pick". I TOOK SYSTEM 8 ROW (b).
+WHY IT IS THE LOWEST OPEN ONE: Systems 1-6 and 10 are ticked; System 7 (armour variety) is HELD on art's own fit numbers (S49 row (a) only,
+gear.gd wiring held by the plan) and is not mine to unhold; System 8 row (a) landed at S50 (five .fbx + .import + CC0 note in
+assets/gear/shields/) and its row (b) - the gear wiring and the on-body proof - was named there as my next firing and never taken.
+- roster.gd offhand_mesh: a shield-bearer at armour tier 4 now takes shields/shield_heater_2.fbx (a round-shield class: shield_round_2.fbx,
+  the quartered buckler); tier 5 takes shield_celtic_golden.fbx. Tiers 0 and 1-3 unchanged (kit / the dungeon pack ladder). The class
+  field is untouched, so armour_class's +2 and delve's shield check read exactly as before. Backups roster.gd/gear.gd .bak_s80 (not committed).
+- gear.gd: const SHD + per-file SHD_SCALE in offhand_scale. MEASURED, NOT GUESSED: the first gate run at x1.0 came back RED -
+  S80_SHIELD FAIL (5 shields, 5 sized, 8 shots, 4 failures): heater_2 2.34x, round_2 1.86x, celtic 3.97x the rare pack shield's largest
+  world dimension, and the picture showed three cart-wheel shields. That run is the red proof (S80_RED=1 also forces x3 on demand).
+  Scales 0.43 / 0.54 / 0.30 bring them to 1.00x / 1.01x / 1.19x (the celtic is a tall kite; 1.19x is on purpose).
+- New gate tools/_s80_shield.gd (windowed; the S22 scene on the real Roster.offhand_mesh -> Gear.equip path). S80_SHIELD OK (5 shields,
+  5 sized, 8 shots, 0 failures).
+- LOOKED AT renders/cycles/s80/s80_front_all.png and s80_close_2.png: five bearers at kit size; the gold Celtic stands upright at the knight's
+  left hand, rim and blue field readable, carried at the same edge-on angle as the pack's rare shield beside it (the S22 settled read - same
+  for kit and pack). NOT a back view: the off hand is the only thing changed and S22 settled its read front/side; the close shots are front.
+- shield_heater.fbx and shield_round.fbx stay unwired files in an already-referenced dir (the S50 five; two tiers, three faces chosen).
+  assets/gear/shields/ is NO LONGER AN UNREFERENCED ASSET DIR (gear.gd SHD) - the lead's audit count should drop by one.
+
+- Gates (verdict lines, all on the final x0.43/0.54/0.30 build): parse 0 SCRIPT ERROR / 0 Parse Error; S80_SHIELD OK (5 shields, 5 sized,
+  8 shots, 0 failures); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2095 samples off the floor (home); TOWNWALK in_solid=0/20470
+  (0.000%) raid_in_solid=0/10014 (0.000%) PASS (STUCK_ON_ROUTE_TOTAL 0, giveup 0); DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+  All runs with JESTS_NO_TWITCH=1. No Twitch test, 0 bits.
+- Lock: claim 03:08:18, claim+25 = 03:33 computed first, declared 03:33.
+- Pitman way still HELD on content's act/broken lines - not touched, as the row said.
+
+## D-cycle - S81: THE PITMAN'S HOLD LIFTS ON ITS OWN, AND THE TIER-4 SHIELD QUESTION IS ANSWERED OFF THE FILES. 2026-11-21T04:08-06:00 (game build)
+TAKE THIS NEXT: the 04:0x block (supersedes the 02:58 block; its GAME BUILD row is labelled for 05:07 but was on main at 04:08, and its
+two asks are measurements on shipped work, so I took them now): (1) re-run the S79 gate now C-158 is on main and report the branch;
+(2) say whether shield_heater/shield_round are a painted pair that tier 4 should carry instead of the _2 pair. No engine edit made.
+- (1) S79_PITMAN OK (16 checks). On disk: by_key.pitman arrive 9 / act 7 / broken 4 / fall 8. The gate printed
+  "content by_key.pitman act lines on disk: 7" and "ok HOLD lifted: content's act lines are on disk (7)" - THE LIFTED BRANCH, taken by the
+  guard with no edit. The in-memory test-line feed was skipped (has("act") true), so the feed in the run shows CONTENT'S REAL LINES
+  ("The mattock comes down. The floor goes from under Dugunder.", "The ladder is knocked out of the ring. He has nothing to dig with.").
+  Crypt draw reaches the Pitman 100 of 400 n; pit under the nearest delver, second delver walks in, climb window, cap 3, broken stops
+  digging and the pit still takes a delver. LOOKED AT renders/cycles/s79/pitman_2pit.png: a dark open ring with a ladder beside the knight
+  on the crypt floor, the Pitman behind it.
+- (2) New probe tools/_s81_shieldmat.gd (headless; lists every surface material of the five shields). S81_SHIELDMAT OK (5 files, 0 load
+  failures). ANSWER: THERE IS NO PAINTED PAIR. shield_heater, shield_heater_2 and shield_round all carry exactly Steel (0.58,0.60,0.63) /
+  LightSteel (0.64,0.66,0.69) / DarkWood (0.40,0.27,0.19) / LightWood (0.47,0.32,0.22); shield_round_2 adds White (0.82); untextured,
+  metallic 0. The ONLY coloured file is shield_celtic_golden (Gold / LightGold / LightBlue / Green). So the whole Quaternius set is plain
+  steel-and-wood but the celtic: swapping heater/round in would change nothing, and the ladder stands as a deliberate plain-to-gold step
+  (tier 3 the pack's coloured rare, tier 4 plain steel/wood, tier 5 gold). If the lead wants tier 4 richer than tier 3, that is a TINT
+  decision (Gear tint on the off hand), not a file swap - not taken, not mine to rule.
+- Gates (verdict lines, this tree, JESTS_NO_TWITCH=1): parse 0 SCRIPT ERROR / 0 Parse Error; S79_PITMAN OK (16 checks); S81_SHIELDMAT OK;
+  TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 1996 samples off the floor (home); TOWNWALK in_solid=0/18912 (0.000%)
+  raid_in_solid=0/5359 (0.000%) PASS (STUCK_ON_ROUTE_TOTAL 0, giveup 0); DELVE_TEST OK ran 9001 frames, floor reached 2.
+- No Twitch test, 0 bits, no account used.
+- Lock: claim 04:08:40, claim+25 = 04:33 computed first, declared 04:33.
+- Next: the lowest open Phase 2 system, own pick (System 7 still held on art's fit numbers - not unheld by me).
+
+## D-cycle - S82: SYSTEM 9 (LOOT ON THE GROUND) IS THE LOWEST OPEN PHASE 2 SYSTEM - SCOPED OFF THE CODE THIS HOUR, NO ENGINE EDIT. 2026-11-21T05:08-06:00 (game build)
+TAKE THIS NEXT (04:58 block): "Take the lowest open Phase 2 system, your own pick. System 7 stays HELD." I TOOK SYSTEM 9.
+WHY IT IS THE LOWEST OPEN ONE (the fleet's numbering, as S80 used it): 1-6 and 10 ticked; 7 HELD on art's fit numbers (not unheld by me);
+8 (shields) row (a) S50 + row (b) S80, both ticked - nothing of it is open. 9 is next. Master Vision text: "When monsters die or chests open,
+items physically appear on the dungeon floor. Weapons, potions, crystals, gold. Heroes walk over to pick them up."
+NOTE FOR THE LEAD: the Master Vision doc numbers 6/7/8 as crystal drops / chests by rarity / mimics; the 18 Nov 16:58 directive renumbered
+6/7/8 as weapon / armour / shield variety, and the fleet has used that numbering since. Both agree on 9 = loot on the ground. The vision's
+6-8 (crystals, rarity chests, mimics) are NOT ticked under either name - I am naming that, not ruling it.
+MEASURED - what of System 9 ALREADY EXISTS (grep -n, read in context, delve.gd):
+- POTIONS: already on the floor. _loot :2486 `_show_vial(seeker, pk, true)` - S31 System 5 drops the found vial on the floor first.
+- CHESTS: L49 (:1445-1541) - a delver walks to a placed chest, kneels SEARCH_S 1.8 s, the Chronicle says found / no loot. The gold is
+  awarded as a number; nothing appears on the floor.
+- GOLD: never physical. _loot :2432 `found` and the L29c miniboss purse in _on_kill :1905 pay by roster.award + _float_text "+N" only.
+- GEAR: _loot :2470 roster.find_gear(...) returns a line; nothing appears on the floor.
+- MONSTER KILLS: _on_kill drops nothing for an ordinary monster (only splits and the miniboss purse).
+- MODELS ON DISK, no new import needed: assets/props/Coin.gltf, Coin_Pile.gltf, Coin_Pile_2.gltf (Fantasy Props MegaKit, CC0, LICENSE
+  already beside them), assets/dungeon/Bag_Coins.glb (KayKit). Coin_Pile_2 and Bag_Coins are already fit-measured in dungeon_hd.gd
+  (:92 h 0.0584, treasury row :100) - I would reuse that measured entry, not re-fit.
+THE ROWS I PROPOSE (mine to build, one per firing, each with its own render):
+  (a) the miniboss purse and a lord's hoard land as a coin pile where the body fell (Coin_Pile_2 / Bag_Coins), and the gold is paid when
+      the nearest delver WALKS TO IT - the same walk-and-kneel the L49 chest search already uses, so no new movement code.
+  (b) a deep-floor gear find (find_gear) shows the weapon family's own KayKit model on the floor before it is taken (gear.gd KINDS + kind_path
+      already resolve the path - no second map).
+  (c) an ordinary kill sometimes drops a single Coin - small, cheap, and the "visual feedback for every kill" line.
+WHY NO ENGINE EDIT THIS HOUR: claim 05:08, cap 05:33. Row (a) needs a windowed gate that fells a miniboss and RENDERS the pile and the walk;
+I could not write, run and LOOK at that inside the cap, and shipping it unrendered is not done. So this hour is the measurement, and row (a)
+is my next firing.
+- Gates on the merged tree (verdict lines, JESTS_NO_TWITCH=1): see the GATES line below.
+- No Twitch test, 0 bits, no account used.
+- GATES (verdict lines, merged tree 0cd7c803, JESTS_NO_TWITCH=1, no engine edit): parse 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks);
+  OFFFLOOR_VERDICT OK 0 of 2305 samples off the floor (home); DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR;
+  TOWNWALK in_solid=0/17063 (0.000%) raid_in_solid=0/7911 (0.000%) PASS. ONE HONEST DIFFERENCE: STUCK_ON_ROUTE_TOTAL 5 (giveup 0, watchdog 2)
+  where S81 read 0 - the gate still PASSES and I changed no town code; named so nobody finds it later. Logs in renders/cycles/s82/.
+- Lock: claim 05:08:33, claim+25 = 05:33 computed first, declared 05:30; released 05:17:09, no Godot of mine alive.
+- Next: System 9 row (a) - the purse/hoard coin pile and the walk to it, with its own windowed gate and render.
+
+## D-cycle - S83 (pointer): System 9 row (a) built and rendered but HELD on branch `s83-wip` (f42ccbac) - S83_PURSE OK, DELVE_TEST OK, parse 0, but L29C soak C regresses (FAIL 2/2 with the edit, OK 1/1 on HEAD). Full entry on s83-wip. Not for merge yet. 2026-11-21T06:25:19-06:00 (game build)
+
+## D-cycle - S84: S83 (SYSTEM 9 ROW (a), THE MINIBOSS PURSE SPILLS AND A DELVER WALKS TO IT) LANDS ON laptop - THE L29C SOAK-C "REGRESSION" IS PRE-EXISTING ON HEAD, NOT S83. 2026-11-21T07:19:49-06:00 (game build)
+TAKE THIS NEXT: the 05:58 block names no new GAME BUILD row; my own S83 named the next step - find why L29C soak C fired 0 set pieces with the edit.
+MEASURED, NOT ARGUED: L29C on laptop HEAD 59403016 WITHOUT the S83 edit, three runs: soak ended state=fight frames=10801 fired={} (total=0),
+L29C_TEST FAIL - 3 of 3 (renders/cycles/s84/l29c_base0-2.log). S83's single green baseline (prisoner 1, total=1) was a lucky draw: Delve
+calls _rng.randomize() (delve.gd:53), so the soak is unseeded, and every run - base and edit - times out in "fight" at 10801 frames, so it sees
+at most a floor or two. The S83 edit is inert unless a purse-carrying miniboss dies in a LIVE fight. With the edit: 0 of 1 green (same 0) and
+B.miniboss all ok. So base 1/4, edit 0/3 - indistinguishable. FOR THE TEAM LEAD: L29C soak C is a flaky/red gate on HEAD (not a required gate);
+widening it (more frames, or seeding the soak) is test work, not owed by S83 - named so nobody re-blames the purse.
+WHAT LANDED: scripts/delve.gd + tools/_s83_purse.gd + renders/cycles/s83 taken from s83-wip f42ccbac (delve.gd unchanged a4edbf74..laptop, so
+no conflict; backup delve.gd.bak_s84). Full design entry is S83's on s83-wip; the lord's hoard (_loot) still splits as a number - next.
+RENDER LOOKED AT: s83_2_walked_to_it.png - the delver's hand down on the coin pile, pile on the flagstones, not sunk. Legible.
+GATES (verdict lines, laptop 59403016 + this edit, JESTS_NO_TWITCH=1, logs renders/cycles/s84/): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error;
+S83_PURSE OK (8 checks, 0 failed); DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR; OFFFLOOR_VERDICT OK 0 of 2146 samples off
+the floor (home); TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/20294 (0.000%) raid_in_solid=0/10246 (0.000%) PASS, STUCK_ON_ROUTE_TOTAL 1.
+- No Twitch test, 0 bits, no account used.
+- Lock: claim 07:08:31, claim+25 = 07:33 (my lock line rounded it to 07:34 - a 29 s overstatement; the declared finish 07:30 was inside it).
+
+## D-cycle - S85: THE L29C ARM C RED WAS THE SOAK'S CLOCK, NOT THE SET PIECES - floor 3's fight outlasted the 180 s budget. 2026-11-21T08:22:00-06:00 (game build)
+TAKE THIS NEXT (07:58 block, GAME BUILD row): the named open defect is L29C arm C itself ("0 set pieces", state=fight frames=10801, red on HEAD x4).
+MEASURED (tools/_s85_diag.gd, same soak setup, logs renders/cycles/s85/diag.log + diag2.log): NOT A HANG. Run 2 state trace:
+floor 2 fight -> search @2307, descend @4047, floor 3 fight @7868 -> search @11738 (past the old 10800 cap), floor 4 fight @15731 -> search
+@18645, first set piece (ambush) @19758. Run 1's floor-2 fight alone took 3694 frames (unseeded RNG). The soak was simply being cut off
+mid-fight on floor 3 every run, before the party ever walked past a set piece. "The slime divides." was the last line only because it was the
+last thing said before the cap - the slimelings are killed and the fight ends (checked: slimeling carries no `splits`, def_of takes WAYS only
+for TYPES keys).
+FIX (tools/_l29c_test.gd only - no game code changed; backup .bak_s85): the soak ends the moment >= 1 set piece fires (all arm C asks), with
+the ceiling raised 60*180 -> 60*600 frames for a true stall. The red half is unchanged: a soak that fires nothing still ends at the ceiling
+or at "home" and FAILs arm C. NOT RED-PROVED THIS HOUR by perturbation (no time inside the window) - the 4 S84 base logs are the red arm on
+the old cap.
+GATES (verdict lines, laptop + merge origin/main 5c2b6507, logs renders/cycles/s85/): parse 0 SCRIPT ERROR / 0 Parse Error;
+L29C_TEST OK (CHECKS 33 FAILS 0; soak ended state=fight frames=18825 fired={ "ambush": 1 } (total=1)); TWITCH_PARSE OK (8 checks);
+OFFFLOOR_VERDICT OK 0 of 2300 samples off the floor (home); TOWNWALK in_solid=0/20903 (0.000%) raid_in_solid=0/2270 (0.000%) PASS;
+DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR.
+- HONEST SLIP: I ran this hour's gates WITHOUT JESTS_NO_TWITCH=1. parse.log shows the bot token validated (bellmirebro), joined #jestsayin96
+  and subscribed 7 of 7 EventSub topics for the 300-frame parse run (and likely the Town-scene gates). No send/post line in any log; nothing
+  redeemed, 0 bits, no account action. Read-only connect - but it should have been off. Next run sets the env var.
+- Chat bot asks (Gear.ARMOUR alias, REWORK_DIVISOR / OIL_PER_HEAD constants): not taken this hour - window spent on the owed defect. Open.
+- Lock: claim 08:08:13, claim+25 = 08:33 computed first, declared 08:30.
+
+## D-cycle - S94: THE BLOWER'S MB_NAME ROW LANDS - by_key 46 / MB_NAME 46, and Deadair enters the fogbound draw. 2026-11-21T17:12:42-06:00 (game build)
+- TAKE THIS NEXT (16:58 CT block) gave game build the Blower's MB_NAME / MB_FIT engine row; C-169 is on main (by_key.blower arrive 9 / act 7 / broken 4 / fall 8).
+- delve.gd MB_NAME += "blower": "Deadair" - read in TWO places, content's miniboss_feed._note_c169 ("Deadair") and art's CANON title (minibosses.py:16064). MB_FIT blower 1.01 (S93) unchanged; its "NO MB_NAME row yet" comment corrected. dungeon_hd.gd's S93 note updated (fogbound row already held blower).
+- tools/_s51_names.gd count line 45 -> 46. The key-SET check is the real guard and its drizzler red-proof still produces 4 named faults.
+- Battery, renders/cycles/s94/ (JESTS_NO_TWITCH=1): parse --quit-after 300 RC 0, 0 SCRIPT ERROR/Parse Error; S51_NAMES OK 176 checks (by_key 46, MB_FIT base 46, glb stems 48); S33_DRAW OK 191 checks - "blower fogbound ratio 1.01 lines true drawn 100/400", bodies 46, drawn-with-lines 32, held-for-lines 0 (S93 read 31 / 1); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2056; TOWNWALK in_solid=0/17937 raid 0/3465 PASS; DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR.
+- LOOKED: S33_LOOK OK (5 checks) with S33_KEY=blower - fitted h 2.47 vs knight 2.54, min y 0.000, no overlap; renders/cycles/s33/blower_1front.png viewed: stands on the floor beside the knight, bag and bellows read.
+- HONEST LIMIT / NEXT ROW: Deadair's ONE IDEA (C-169: the CLOCK - air drawn a stroke at a time, every delver slower each stroke, heaviest-laden gives out first, holing the bag stops it) is NOT built. MB_WAYS has no "blower" entry, so it fights as a fitted body with the generic loop and reads its arrive/fall lines. Its act/broken lines exist and wait for that behaviour. Not pulled early - needs a row.
+
+## D-cycle - S96: SYSTEM 9 ROW (b) - A DEEP-FLOOR WEAPON FIND LIES ON THE FLOOR IN ITS OWN MODEL BEFORE IT IS TAKEN. 2026-11-21T19:08-06:00 (game build)
+TAKE THIS NEXT (18:58 block, GAME BUILD row): "S95 is ticked; do not redo it, do not re-roll the crossbows. TAKE THE NEXT UNSTARTED PHASE 2 SYSTEM in Mr. E's own order, and NAME IT."
+I TOOK SYSTEM 9 ROW (b). HONEST SLIP: my 19:08 claim line did NOT name it (it says only "game build"); it is named here and on the IDLE line. WHY IT IS THE LOWEST OPEN ONE: 1-6, 8 and 10 ticked; 7 HELD on art's fit numbers (not unheld by me);
+9 row (a) ticked at S83/S84; rows (b) and (c) were scoped by me at S82 and never started. S85-S95 were defect/interlock rows, not System 9.
+WHAT CHANGED (scripts/delve.gd, backup delve.gd.bak_s96):
+- _loot: records the finder's weapon tier before roster.find_gear; if the find raised it (a WEAPON find - an armour find does not), calls _show_find(finder, roster.weapon_mesh(h)).
+- new _show_find: the weapon's OWN mesh (roster.weapon_mesh - the same path the hand will carry; no second map) is laid flat on the stones 0.7 m in front of the finder,
+  turns once over 3 s, is lifted to the hand and freed - the same choreography S31's on-floor vial uses. Guarded like miniboss_model: ResourceLoader.exists + "is PackedScene"
+  before instantiate, so a path that fails to load is skipped, never instantiated through a null (the gear.gd:104 class of fault does not repeat here).
+- The gold/number behaviour of find_gear is unchanged; the Chronicle line is unchanged.
+NEW GATE tools/_s96_find.gd (windowed, quits itself): real Delve.start, the delve's own _loot called in the first fight with floor_no raised so find_gear can fire
+(test artifacts, named: _loot pays its gold each call; the lord is held aside for the call; foes hidden for the frame).
+RENDER LOOKED AT: renders/cycles/s96/s96_1_find_on_floor.png - a plain steel spear lying flat across the hex flagstones in front of the finder, not sunk, not floating, legible.
+The red glow at its butt is the SAME _loot's vial find (Crowfeather Draught) also lying on the floor - System 5 working alongside. A wall edge crowds the right third; the find itself is clear.
+FIRST RENDER WAS USELESS AND I SAY SO: the camera at a fixed world offset sat inside a wall (all brown). Re-aimed over the finder's shoulder and re-run; the gate verdict was OK both times.
+GATES (verdict lines, laptop 7a07e92e + this edit, JESTS_NO_TWITCH=1, logs renders/cycles/s96/):
+  parse rc=0, 0 SCRIPT ERROR / 0 Parse Error
+  S96_FIND OK (6 checks, 0 failed) - finds_shown 1, mesh == finder's weapon_mesh (spear_A.gltf) and loads, dy 0.040, freed in 3.8 s
+  TWITCH_PARSE OK (8 checks)
+  OFFFLOOR_VERDICT OK 0 of 2614 samples off the floor (home)
+  DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR
+  TOWNWALK in_solid=0/18520 (0.000%) raid_in_solid=0/6310 (0.000%) PASS
+INTERLOCK CONFIRMED (prompt's two live items): LEECH - MB_FIT 0.95, shrine row present, miniboss_feed.by_key has leech -> it is in the shrine draw. BEADLE - MB_FIT 1.2, shrine row present, by_key has beadle -> in the draw too; both already closed, nothing to do.
+- No Twitch test, 0 bits, no account used.
+- NEXT: System 9 row (c) - an ordinary kill sometimes drops a single Coin.
+## D-cycle - S97: THE STAFF DOES NOT DRAG THROUGH THE FLOOR IN THE GAME - ART'S REGISTER CARRIES IT 0.475 m TOO LOW (it never reads STAFF_GRIP_SHIFT). NO gear.gd CHANGE. 2026-11-21T20:07:48-06:00 (game build)
+TAKE THIS NEXT (19:58 block, GAME BUILD row) gave S97: "the staff carry drags through the floor on all three tiers"
+(art's register: staff_common 51 verts / 0.180 m under, uncommon 38 / 0.216, rare 149 / 0.212). MEASURED IN THE ENGINE
+BEFORE TOUCHING ANYTHING, and the shipped carry clears the floor in every pose. I am refusing the fix and saying why.
+- THE CAUSE OF THE RED, read off the file, not guessed: tools/art/weaponfit.py gear_overrides() reads only two things
+  from gear.gd per family - hand_scale (1.9) and held_rot (0,0,90). It does NOT read gear.gd:90 STAFF_GRIP_SHIFT = 0.25,
+  which Gear.equip (gear.gd:121-130, S24) applies to the staff model's children along mesh +Y BEFORE the x1.9 scale.
+  Under held_rot mesh +Y is world UP, so the register carries every staff 0.25 x 1.9 = 0.475 m LOWER than the game
+  does. Its deepest break is 0.216 m, so on art's own numbers the shipped butt sits roughly +0.26 m above its floor.
+  It also does not model staff_grip.gd's end-for-end flip in Cheer. Same family as FAULT 6 (the crossbow roll): a
+  register mirroring part of the engine carry scores a carry the game does not ship.
+- THE ENGINE MEASUREMENT, this tree, 20:09 CT, tools/_s21_staff.gd unchanged (windowed, build/s97_battery.log). Row A =
+  the real path (Gear.equip on handslot.r via roster.weapon_mesh, all three pack tiers, D94 ribbons included), lowest
+  vertex in world space sampled every frame, 132 samples per pose:
+  Idle 0.106 | Walking_A 0.089 | Hit_A 0.203 | Spellcast_Shoot 0.204 | Use_Item 0.170 | Cheer 0.425 | 1H_Melee_Attack_Chop 0.259.
+  S21_STAFF WORST row A: 0.089 m in Walking_A. AXIS (idle) row A (0.0, 1.0, -0.02) on all three tiers.
+  VERDICT LINE: S21_STAFF OK (9 staves, 7 poses, 0 failures). (S24 measured worst 0.097 Idle; unchanged within noise.)
+- LOOKED AT: renders/cycles/s21/s21_side_A.png - shaft upright in the fist, butt at the boot top ABOVE the floor,
+  crystal over the hat brim. s21_pose_A_Walking_A.png (the worst pose) - staff swung over the shoulder, nothing near
+  the ground.
+- HANDED TO ART (tools/art is art's, not edited): weaponfit.py must read STAFF_GRIP_SHIFT out of gear.gd the same
+  red-on-empty way it reads scale and rot, and apply it as a translation of +SHIFT along the mesh's glTF +Y (Blender +Z
+  after the importer) INSIDE the scale - base @ Rslot @ S @ T - then re-run the register. If art's floor still breaks
+  after that, the next suspect is the hero/pose (engine hero scale on the held node reads 1.88-2.10, not 1.9 flat) and
+  I will measure again; until then the game is clear and the engine number is the one that ships.
+- Battery on this tree (build/s97_battery.log, build/s97_gates.log): parse --quit-after 300 rc=0, 0 SCRIPT ERROR / 0
+  Parse Error; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2230 samples off the floor (home);
+  TOWNWALK in_solid=0/14998 (0.000%) raid_in_solid=0/8311 (0.000%) PASS; DELVE_TEST OK ran 9001 frames, floor reached 2.
+- Merge note: origin/main's merge was blocked by 4 untracked miniboss .glb.import files (ferryman, hooper, relief,
+  scraper) left by art's 19:43 headless import. Each was BYTE-IDENTICAL to main's committed copy (same uid, same
+  length); moved aside to C:\hd adventure\_gb_import_aside_2007 (not deleted), then merged clean.
+- No live Twitch test - no account used, 0 bits, nothing redeemed, bellmirebro posted nothing. Not ticked - the team
+  lead ticks. Claim 20:07:48, cap claim+25 = 20:32:48 computed first, declared 20:31.
+
+## D-cycle - S119: MY FRAME-COUNTING GATES AUDITED FOR THE 1080p TRAP (U157) - SEVEN OF SEVEN NAMED GATES ARE CORRECTLY EXEMPT; ONE ON-SCREEN GATE (L31_ICONS) NOW GOES RED UNDER 1080p. 2026-11-24T18:18-06:00 (game build)
+- Row: TAKE THIS NEXT 17:58 CT. S118 NOT re-done (MB_NAME 55, L31 a/b shipped and ticked).
+- AUDIT, read off each file, not inferred: `_s51_names.gd`, `_s107_gate.gd`, `_s115_iceman.gd`, `_s117_straker.gd` read only
+  Delve/DungeonHD tables, ResourceLoader and data lines - no viewport, no camera, no texture. `_offfloor.gd`,
+  `_townwalk.gd`, `_delve_test.gd` measure WORLD-space positions (floor height, solid rects, floor reached), which do not
+  depend on the window size. A grep for `get_texture()|unproject_position|get_visible_rect` hits NONE of the seven.
+  All seven are EXEMPT - nothing they audit is on screen.
+- THE ONE THAT NEEDED IT: `tools/_l31_icons.gd` (my L31 acceptance gate, shipped S118) audits a POSITIONAL fact -
+  every status chip ends inside its row's bar - and saves the 1080p picture that is the acceptance test. It had no
+  size guard. It now prints `L31_ICONS NO VERDICT - capture ... is smaller than 1920x1080` and quit(2), in the exact
+  `_u40_pad_test.gd:41` shape. RED-PROVED: at --resolution 1152x648 it reads `L31_ICONS NO VERDICT - capture (1152.0,
+  648.0) is smaller than 1920x1080` rc=2; at 1920x1080 it reads `L31_FIT chips_past_bar=0` / `L31_ICONS OK 15`, and I
+  LOOKED at renders/cycles/l31/l31_icons_1080.png: three delvers' rows, icon + word + seconds, nothing clipped.
+- NOT SWEPT (said so, not hidden): ~100 older one-off `_d*/_l*/_s*_shot` capture tools also read the screen without a
+  guard; most print no verdict at all (they are picture tools, the eye is the gate) and are not in my battery. Four
+  already carry the guard (_s53_clock, _s54_broodglut, _s56_lastcuff, _theme_sweep). If the lead wants them all
+  guarded that is a sweep row, not this one.
+- Battery (build/_s119_battery.log): parse --quit-after 300 rc=0, 0 SCRIPT ERROR / 0 Parse Error; S51_NAMES OK 176
+  checks; S107_GATE OK 12; S115_ICEMAN OK 10; S117_STRAKER OK 11; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of
+  2289 samples off the floor (home); DELVE_TEST OK ran 9001 frames, floor reached 2.
+  TOWNWALK in_solid=0/15775 (0.000%) raid_in_solid=0/5746 (0.000%) PASS (STUCK_ON_ROUTE_TOTAL 0).
+- No live Twitch test: no account used, 0 bits, nothing redeemed or cheered; the parse boot joined #jestsayin96 read-only
+  and bellmirebro posted nothing. Not ticked - the team lead ticks. Claim 18:08:28, cap claim+25 = 18:33:28 computed
+  first, declared 18:32.

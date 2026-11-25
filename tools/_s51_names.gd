@@ -15,7 +15,12 @@ const TABLE := {"drillmaster": "Karvok", "scrapwright": "Ironhyde", "gaoler": "S
 	"greener": "Corrodan", "moulder": "Ashform", "ratcatcher": "Skivven", "drover": "Yokebane", "paviser": "Shieldmaw",
 	"fenman": "Bogwarden", "comfitmaker": "Brindle", "leech": "Gulworth", "beadle": "Ordrik", "rammer": "Breachar",
 	"fuller": "Wrynn", "stackman": "Huskpile",
-	"dauber": "Wetwall"}   # S65: the 37th, content's C-142 name
+	"dauber": "Wetwall",   # S65: the 37th, content's C-142 name
+	"sealer": "Leadbite",   # S66: the 38th, content's C-143 name
+	"hooper": "Hoopfast",   # S67: the 39th, content's C-144 name
+	"relief": "Watchturn",   # S68: the 40th, content's C-145 name
+	"scraper": "Scourstone",   # S70: the 41st, content's C-147 name
+	"ferryman": "Slackwater"}   # S72: the 42nd, content's C-149 name
 var _fails := 0
 var _checks := 0
 func _ok(c: bool, what: String) -> void:
@@ -51,8 +56,12 @@ func _keyset_faults(names: Dictionary, live: Dictionary) -> Array:
 	return out
 
 func _initialize() -> void:
-	_ok(TABLE.size() == 37, "directive table is 37 (36 + S65 dauber)")
-	_ok(Delve.MB_NAME.size() == 37, "MB_NAME is 37 (got %d)" % Delve.MB_NAME.size())
+	_ok(TABLE.size() == 42, "directive table is 42 (36 + S65 dauber + S66 sealer + S67 hooper + S68 relief + S70 scraper + S72 ferryman)")
+	# S93: 45 = the 42-row directive table + S75 winder + S76 pitman + S89 tither (+ S94 blower = 46). This line read 42 since S72 and went
+	# red at S75 with nobody re-reading it; the key-SET check below is the real guard, this is the count beside it.
+	# S99: + changer (Evenhand, 47th, C-174) = 47. S102: + roper (Drawtight, 49th body, C-177) = 48. S103: + stopper (Chokewell, 48th body, C-176, .glb on main 41f71825) = 49. S107: + almoner (Dolehand, 50th body, C-182, .import committed) = 50.
+	# S113: + panner (Onceround, S111) + stiltman (Downfast, S112) = 52 - S111 and S112 never moved this count, so this arm was red on main for two cycles; + nightman (Nightwork, 53rd, C-190) = 53. S116: + iceman (Hoarback, 54th, C-193) = 54. S118: + straker (Everyhand, 55th, C-195) = 55. S121: + weigher (Trueweight, 56th, C-198) = 56. S122: + dredger (Finepass, 57th, C-199) = 57. S123: + harrowman (Overturn, 58th, C-200) = 58. S124: + pledgeman (Heldfast, 59th, C-201) = 59.
+	_ok(Delve.MB_NAME.size() == 59, "MB_NAME is 59 (got %d)" % Delve.MB_NAME.size())
 	var seen := {}
 	var bodies := 0
 	var fed := 0

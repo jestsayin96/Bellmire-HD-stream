@@ -192,8 +192,15 @@ func _process(_d: float) -> bool:
                     var px: Vector3 = (hn as Node3D).global_transform.basis.x.normalized()
                     var pz: Vector3 = (hn as Node3D).global_transform.basis.z.normalized()
                     print("S20_HEFT AXIS %s: mesh +X %s +Y %s +Z %s" % [hn.name, str(px.snapped(Vector3.ONE * 0.01)), str(up.snapped(Vector3.ONE * 0.01)), str(pz.snapped(Vector3.ONE * 0.01))])
-                    if _xbow.has(hn) and absf(px.y) > 0.35:   # S20: the crossbow prod (+X) must lie LEVEL, not stand
-                        print("S20_HEFT FAIL crossbow prod not level: +X.y %.2f" % px.y)
+                    # S95: INTENT CHANGED, ARM NOT WEAKENED. Was "prod LEVEL" (|+X.y| <= 0.35). Art's 35 deg roll (gear.gd
+                    # held_rot) cants the prod out of the horizontal plane so it reads as a crossbow and not a lath, so the
+                    # prod must now be CANTED 25-45 deg: |+X.y| in [sin 25, sin 45] = [0.42, 0.71]. A LEVEL prod (the old,
+                    # unrolled carry) FAILS this arm, and so does one stood upright (the pre-S20 fault).
+                    var cant := rad_to_deg(asin(clampf(absf(px.y), 0.0, 1.0)))
+                    if _xbow.has(hn):
+                        print("S20_HEFT CANT %s: prod +X.y %.2f = %.1f deg" % [hn.name, px.y, cant])
+                    if _xbow.has(hn) and (absf(px.y) < 0.42 or absf(px.y) > 0.71):
+                        print("S20_HEFT FAIL crossbow prod not canted 25-45 deg: +X.y %.2f (%.1f deg)" % [px.y, cant])
                         _fails += 1
                     if _xbow.has(hn) and pz.z > -0.6:   # S20: and the stock (+Z) must point the way the hero faces (-Z here)
                         print("S20_HEFT FAIL crossbow stock not forward: +Z %s" % str(pz.snapped(Vector3.ONE * 0.01)))

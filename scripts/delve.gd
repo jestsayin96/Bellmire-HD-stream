@@ -158,7 +158,7 @@ func _next_floor() -> void:
 			dun.lord.phase_changed.connect(_lord_phase)
 	# a floor costs one flask per two bodies
 	var alive_now := _alive().size()
-	oil = maxf(0.0, oil - float(maxi(1, int(ceil(float(alive_now) * 0.5)))))
+	oil = maxf(0.0, oil - float(maxi(OIL_FLOOR_MIN, int(ceil(float(alive_now) * OIL_PER_HEAD)))))
 	var origin_key := FloorGen.origin_for(floor_no)
 	var of := String((FloorGen.ORIGINS.get(origin_key, {}) as Dictionary).get("of", "a ruin"))
 	var biome := String(dun.info.get("theme_name", "the dark"))
@@ -216,6 +216,8 @@ static var setpieces_fired := {}            # kind -> count (tools/_l29c_test.gd
 ## setpieces_fired - _l29c_test C sums that dict and could otherwise pass on holds alone.
 static var order_held_frames := 0
 static var rammer_struck := 0                # S38: delvers caught on the pile at the count
+static var fuller_struck := 0                # S78: delvers under the stocks when the Fuller wrung
+static var pitman_fell := 0                  # S79: delvers who went into one of the Pitman's pits
 static var rammer_read := 0                  # S38: delvers on the pile who read the hold and stepped off
 const _AMBUSH_LINE := [
 	"Shadows peel off the walls - an ambush! %s surges in.",
@@ -328,6 +330,11 @@ func _setpiece_prisoner(sp: Dictionary, at: Vector3) -> void:
 ## point is the risk of the touch, not the hit.
 const SHRINE_BOON_FRAC := 1.0           # a boon mends the party back to full
 const SHRINE_CURSE_HP := 12.0           # a curse takes this many hp from each
+## S86: the oil a floor burns - OIL_PER_HEAD flasks per living delver, rounded up,
+## never under OIL_FLOOR_MIN. Named so the chat bot's `delve`/`oil` wording guards
+## read the engine (two authorities) instead of only their own sentence.
+const OIL_PER_HEAD := 0.5
+const OIL_FLOOR_MIN := 1
 
 func _setpiece_shrine(sp: Dictionary, at: Vector3) -> void:
 	var alive := _alive()
@@ -397,7 +404,30 @@ const MB_FIT := {
 	"beadle": 1.2,   # S35: art's _fit_beadle_register.json beadle.ratio (MINIBOSSES.md 33), copied not re-derived
 	"fuller": 1.09,   # S48: art's _fit_report.json pairs.fuller.ratio (35th, lead's 17:58 tick), copied not re-derived
 	"stackman": 1.16,   # S48: art's _fit_report.json pairs.stackman.ratio (36th, lead's 18:58 tick), copied not re-derived
-	"dauber": 1.05}   # S65: art's _fit_report.json pairs.dauber.ratio (37th, h 2.58, tag keep), copied not re-derived
+	"dauber": 1.05,   # S65: art's _fit_report.json pairs.dauber.ratio (37th, h 2.58, tag keep), copied not re-derived
+	"sealer": 0.99,   # S66: art's _fit_fit_sealer_register.json pairs.sealer.ratio (38th, h 2.42, tag treasury, verdict GREEN), copied not re-derived
+	"hooper": 0.96,   # S67: art has NO hero-pair register for the Hooper, so this is _fit_report.json pairs.hooper.ratio (39th, h 2.36 / hero 2.45, tag mess), copied not re-derived
+	"relief": 1.03,   # S68: art's _fit_relief_register.json pairs.relief.ratio (40th, h 2.52 / hero 2.45, tag barracks, 3/3 proving views), copied not re-derived
+	"scraper": 1.04,   # S69: art's _fit_scraper_register.json pairs.scraper.ratio (41st, h 2.55 / hero 2.45, tag crypt, 3/3 proving views), copied not re-derived. MB_NAME row added at S70 once content C-147 wrote the feed
+	"ferryman": 1.07,   # S71: art's _fit_ferryman_register.json pairs.ferryman.ratio (42nd, h 2.62 / hero 2.45, tag flooded - field 5, 3/3 proving views), copied not re-derived. MB_NAME row added at S72 once content C-149 wrote the feed
+	"winder": 0.96,   # S73: art's _fit_winder_register.json pairs.winder.ratio (43rd, Haulback in CANON, h 2.34 / hero 2.45, tag wood - field 5, 3/3 proving views, verdict GREEN), copied not re-derived. MB_NAME row added at S75 once content C-151 wrote the feed
+	"pitman": 0.94,   # S76: art's _fit_pitman_register.json pairs.pitman.ratio (44th, Underfoot in CANON, h 2.30, tag crypt - field 5, frame_edge 0 on all three views, fits_frame true), copied not re-derived
+	"tither": 0.99,   # S89: art's _fit_report.json pairs.tither.ratio (45th, Tenthpart in CANON, h 2.42 / hero 2.45, tag prison - field 5, fits_frame true), copied not re-derived
+	"blower": 1.01,   # S93: art's _fit_report.json pairs.blower.ratio (46th, Deadair in CANON, h 2.48 / hero 2.45, tag fogbound - field 5, fits_frame true, 3/3 proving views), copied not re-derived. MB_NAME row added at S94 once content C-169 wrote the feed
+	"changer": 1.11,   # S98: art's _fit_report.json pairs.changer.ratio (47th, Evenhand in CANON, h 2.72 / hero 2.45, tag treasury - field 5, fits_frame true, 3/3 proving views), copied not re-derived
+	"stopper": 0.97,   # S101: art's _fit_report.json pairs.stopper.ratio (48th, Chokewell in CANON, h 2.38 / hero 2.45, tag crypt - field 5, fits_frame true, 3/3 proving views), copied not re-derived. stopper.glb is NOT on any branch, so miniboss_model holds it out until art commits the mesh
+	"almoner": 1.03,   # S107: art's _fit_report.json pairs.almoner.ratio (50th, Dolehand in CANON, h 2.52 / hero 2.45, tag shrine - field 5, fits_frame true, 3/3 proving views), copied not re-derived; almoner.glb.import committed in the same change
+	"panner": 0.92,   # S111: art's _fit_report.json pairs.panner.ratio (51st, Onceround in CANON, h 2.26 / hero 2.45, tag confection - field 5, fits_frame true, 3/3 proving views), copied not re-derived
+	"stiltman": 1.31,   # S112: art's _fit_report.json pairs.stiltman.ratio (52nd, Downfast in CANON, h 3.20 / hero 2.45, tag fogbound - field 5, fits_frame true, 3/3 proving views), copied not re-derived; stiltman.glb.import tracked on main
+	"nightman": 0.94,   # S113: art's _fit_report.json pairs.nightman.ratio (53rd, Nightwork in CANON minibosses.py:19075, h 2.30 / hero 2.45, tag prison - field 5, fits_frame true, 3/3 proving views), copied not re-derived
+	"iceman": 1.27,   # S115: art's _fit_report.json pairs.iceman.ratio (54th, Hoarback in CANON minibosses.py:19421, h 3.12 / hero 2.45, tag mess - field 5, fits_frame true), copied not re-derived. MB_NAME row added at S116 once content's by_key.iceman (C-193) landed (S98 precedent)
+	"straker": 0.98,   # S117: art's _fit_report.json pairs.straker.ratio (55th, Everyhand in CANON minibosses.py:19822, h 2.40 / hero 2.45, tag wood - field 5, fits_frame true, 3/3 proving views), copied not re-derived. NO MB_NAME row until content's by_key.straker lands (S115 precedent)
+	"weigher": 1.04,   # S120: art's _fit_report.json pairs.weigher.ratio (56th, Trueweight in CANON minibosses.py:20600, h 2.55 / hero 2.45, tag treasury - field 5, fits_frame true, 3/3 proving views), copied not re-derived. MB_NAME row added at S121 once content's by_key.weigher (C-198) landed
+	"dredger": 0.98,   # S122: art's _fit_report.json pairs.dredger.ratio (57th, Finepass in CANON minibosses.py:20871, h 2.39 / hero 2.45, tag confection - field 5, fits_frame true, 3/3 proving views, air_px_min 160), copied not re-derived; dredger.glb + .import on main, content's C-199 by_key.dredger landed, so MB_NAME row written in the same change
+	"harrowman": 1.0,   # S123: art's _fit_report.json pairs.harrowman.ratio (58th, Overturn in CANON minibosses.py:21156, h 2.45 / hero 2.45, tag grassland - field 5, fits_frame true, 3/3 proving views, air_px_min 67), copied not re-derived; harrowman.glb + .import on main, content's C-200 by_key.harrowman landed, so MB_NAME row written in the same change
+	"pledgeman": 1.05,   # S124: art's _fit_report.json pairs.pledgeman.ratio (59th, Heldfast in CANON minibosses.py:21464, h 2.58 / hero 2.45, tag treasury - field 5, fits_frame true, 3/3 proving views, air_px_min 136), copied not re-derived; pledgeman.glb + .import on main, content's C-201 by_key.pledgeman landed, so MB_NAME row written in the same change
+	"roper": 1.0,   # S101: art's _fit_report.json pairs.roper.ratio (49th, Drawtight in CANON, h 2.46 / hero 2.45, tag grassland - field 5, fits_frame true, 3/3 proving views), copied not re-derived. MB_NAME row added at S102 once content C-177 wrote the feed
+}
 ## S51: MR. E's 19 Nov directive (supervisor doc sup-nov19-2150): the minibosses keep their
 ## bodies, mechanics and fit ratios and LOSE THEIR TRADE NAMES. The KEY stays the trade word -
 ## it is art's file name (MB_DIR + key + ".glb"), MB_FIT's key, THEME_MINIBOSS_MORE's entry and
@@ -416,7 +446,29 @@ const MB_NAME := {
 	"tanner": "Flenscar", "reeve": "Lockwarden", "tapster": "Dregsallow", "pressman": "Crushwright", "strickler": "Murkspit", "dyer": "Venomshade",
 	"greener": "Corrodan", "moulder": "Ashform", "ratcatcher": "Skivven", "drover": "Yokebane", "paviser": "Shieldmaw", "fenman": "Bogwarden",
 	"comfitmaker": "Brindle", "leech": "Gulworth", "beadle": "Ordrik", "rammer": "Breachar", "fuller": "Wrynn", "stackman": "Huskpile",
-	"dauber": "Wetwall"}   # S65: content's _note_c142 "the Dauber (Wetwall)" and art's CANON title, both read
+	"dauber": "Wetwall",   # S65: content's _note_c142 "the Dauber (Wetwall)" and art's CANON title, both read
+	"sealer": "Leadbite",   # S66: content's _note_c143 "Leadbite" and art's CANON title (minibosses.py), both read
+	"hooper": "Hoopfast",   # S67: content's _note_c144 "Hoopfast" and art's CANON title (minibosses.py:13186), both read
+	"relief": "Watchturn",   # S68: content's miniboss_feed._note_c145 "Watchturn" and art's CANON title (minibosses.py:13584), both read
+	"scraper": "Scourstone",   # S70: content's miniboss_feed._note_c147 "Scourstone" and art's CANON title (minibosses.py:14068), both read
+	"ferryman": "Slackwater",   # S72: content's miniboss_feed._note_c149 "Slackwater" and art's CANON title (minibosses.py:14501), both read
+	"winder": "Haulback",   # S75: content's miniboss_feed._note_c151 "Haulback" and art's CANON title (minibosses.py:14974), both read
+	"pitman": "Underfoot",   # S76: content's miniboss_feed._note_c152 "Underfoot" and art's CANON title (minibosses.py:15251), both read
+	"tither": "Tenthpart",   # S89: art's CANON title (minibosses.py:15830); content's C-167 by_key.tither has landed, so miniboss_for draws the body (S91)
+	"blower": "Deadair",   # S94: content's miniboss_feed._note_c169 "Deadair" and art's CANON title (minibosses.py:16064), both read; C-169 by_key.blower landed (9/7/4/8)
+	"changer": "Evenhand",   # S99: content's miniboss_feed._note_c174 "Evenhand" and art's CANON title (minibosses.py:16466), both read; C-174 by_key.changer landed (9/7/4/8)
+	"roper": "Drawtight",   # S102: content's miniboss_feed._note_c177 "Drawtight" and art's CANON title (minibosses.py:17262), both read; C-177 by_key.roper landed (9/7/4/8)
+	"stopper": "Chokewell",   # S103: content's miniboss_feed._note_c176 "Chokewell" and art's CANON title (minibosses.py:16881), both read; C-176 by_key.stopper landed (9/7/4/8); stopper.glb tracked on main 41f71825 - the S101/S102 hold is lifted
+	"almoner": "Dolehand",   # S107: content's C-182 by_key.almoner landed (9/7/4/8) and art's CANON title (minibosses.py:17903), both read
+	"panner": "Onceround",   # S111: content's C-187 by_key.panner landed (9/7/4/8), _note_c187 "Onceround", and art's CANON title (minibosses.py:18373), both read; panner.glb.import committed at S110
+	"stiltman": "Downfast",   # S112: content's C-189 by_key.stiltman landed (9/7/4/8) and art's CANON title (minibosses.py:18749), both read
+	"nightman": "Nightwork",   # S113: content's C-190 by_key.nightman landed (9/7/4/8) and art's CANON title (minibosses.py:19075), both read
+	"iceman": "Hoarback",   # S116: content's C-193 by_key.iceman landed (9/7/4/8, fall lines name Hoarback) and art's CANON title (minibosses.py:19421), both read - the close S115 specified
+	"straker": "Everyhand",   # S118: content's C-195 by_key.straker landed (9/7/4/8, fall lines name the Everyhand) and art's CANON title (minibosses.py:19931), both read - the close S117 specified
+	"weigher": "Trueweight",   # S121: content's C-198 by_key.weigher landed (9/8/4/8, _note_c198 "Trueweight") and art's CANON title (minibosses.py:20600), both read - the close S120 specified
+	"dredger": "Finepass",   # S122: content's C-199 by_key.dredger landed (9/8/4/8, _note_c199 "Finepass") and art's CANON title (minibosses.py:20871), both read
+	"harrowman": "Overturn",   # S123: content's C-200 by_key.harrowman landed (9/8/4/8, _note_c200 "Overturn") and art's CANON title (minibosses.py:21156), both read
+	"pledgeman": "Heldfast"}   # S124: content's C-201 by_key.pledgeman landed (9/8/4/8, _note_c201 "Heldfast", fall lines "Heldfast is down") and art's CANON title (minibosses.py:21464), both read
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []
@@ -1466,11 +1518,16 @@ func _search_tick(delta: float) -> void:
 	# the whole searching phase is capped far shorter.
 	if alive.is_empty() or left.is_empty() or _t > 12.0:
 		_search_t = 0.0
+		_purses_left(alive)          # S83: a spilled purse is never lost to the search cap
 		_floor_decision(_alive())
 		return
 	var cd: Dictionary = left[0]
+	for c in left:
+		if (c as Dictionary).has("purse"):
+			cd = c          # S83: gold lying on the floor is gone to first, before any chest
+			break
 	var node: Node3D = cd["node"]
-	var m := _seeker(alive)
+	var m := _nearest_to(alive, node.global_position) if cd.has("purse") else _seeker(alive)
 	var b: HeroBody = m["body"]
 	if not is_instance_valid(b):
 		cd["searched"] = true
@@ -1480,6 +1537,9 @@ func _search_tick(delta: float) -> void:
 		# give up on a chest we are plainly not getting to, rather than grinding at it
 		if stuck_on(b, 2.0):
 			cd["searched"] = true
+			if cd.has("purse"):
+				_take_purse(m, cd)
+				return
 			chests_unreachable += 1
 			_prog.erase(b)
 			_say("%s cannot get to the chest and leaves it." % m["h"]["name"])
@@ -1496,7 +1556,76 @@ func _search_tick(delta: float) -> void:
 		return
 	_search_t = 0.0
 	cd["searched"] = true
+	if cd.has("purse"):
+		_take_purse(m, cd)
+		return
 	_open_chest(m, cd)
+
+## ---------------------------------------------------------------- S83: SYSTEM 9 row (a)
+## the miniboss purse lands as a coin pile where the body fell. Coin_Pile_2 is art's measured
+## prop (dungeon_hd PROP_BATCH base_dz_m +0.0003 - effectively on the floor at any scale).
+const PURSE_MODEL := "res://assets/props/Coin_Pile_2.gltf"
+const PURSE_SCALE := 4.0          # h 0.0584 m * 4 = 0.23 m: reads at the RTS camera, still ankle-high
+var purses_dropped := 0
+var purses_taken := 0
+
+func _drop_purse(tgt: Monster, purse: int) -> bool:
+	if dun == null or not is_instance_valid(dun) or not ResourceLoader.exists(PURSE_MODEL):
+		return false
+	var ps = load(PURSE_MODEL)
+	if not (ps is PackedScene):
+		return false
+	var pile: Node3D = (ps as PackedScene).instantiate()
+	pile.name = "PursePile"
+	pile.scale = Vector3.ONE * PURSE_SCALE
+	dun.add_child(pile)
+	var at := tgt.global_position
+	pile.global_position = Vector3(at.x, dun.global_position.y - 0.0003 * PURSE_SCALE, at.z)
+	pile.set_meta("purse", purse)
+	if not dun.info.has("chests"):
+		dun.info["chests"] = []
+	(dun.info["chests"] as Array).append({"node": pile, "searched": false, "purse": purse})
+	purses_dropped += 1
+	return true
+
+func _nearest_to(alive: Array, at: Vector3) -> Dictionary:
+	var best: Dictionary = alive[0]
+	var bd := INF
+	for m in alive:
+		var d := _flat(b_pos(m), at)
+		if d < bd:
+			bd = d
+			best = m
+	return best
+
+## the delver who reached it gathers it; the gold is still split the old way (L29c share rule)
+func _take_purse(m: Dictionary, cd: Dictionary) -> void:
+	var purse := int(cd.get("purse", 0))
+	cd.erase("purse")
+	cd["searched"] = true
+	var node: Node3D = cd["node"]
+	var alive := _alive()
+	if alive.is_empty() or purse <= 0:
+		return
+	var share := maxi(1, purse / alive.size())
+	for a in alive:
+		roster.award(String(a["uid"]), share, 0, 0, floor_no)
+		_float_text(a, "+%d" % share, Color(1.0, 0.85, 0.35))
+	_gold += share * alive.size()
+	purses_taken += 1
+	Delve.setpieces_fired["purse_taken"] = int(Delve.setpieces_fired.get("purse_taken", 0)) + 1
+	Sfx.play("coin", -4.0)
+	_say("%s gathers up the purse - %d gold, %d a share, %d ways." % [m["h"]["name"], purse, share, alive.size()])
+	if is_instance_valid(node):
+		node.queue_free()
+
+func _purses_left(alive: Array) -> void:
+	if dun == null or not dun.info.has("chests") or alive.is_empty():
+		return
+	for c in dun.info["chests"]:
+		var cd: Dictionary = c
+		if cd.has("purse"):
+			_take_purse(_nearest_to(alive, (cd["node"] as Node3D).global_position if is_instance_valid(cd["node"]) else b_pos(alive[0])), cd)
 
 ## the find itself: an Investigation check, the chest opens, and the Chronicle reads BOTH ways
 func _open_chest(m: Dictionary, cd: Dictionary) -> void:
@@ -1894,6 +2023,19 @@ func _on_kill(tgt: Monster, by: Dictionary = {}) -> void:
 		var purse := int(tgt.get_meta("l29c_miniboss_purse"))
 		tgt.remove_meta("l29c_miniboss_purse")
 		var alive := _alive()
+		# S83 / SYSTEM 9 row (a): in a live fight the purse SPILLS where the body fell and is
+		# paid only when a delver walks to it (the L49 walk-and-kneel). Anywhere else - a test
+		# calling _on_kill cold, a kill on the walk to the stairs - it pays at once, as before.
+		if not alive.is_empty() and state == "fight" and _back_to == "" and _drop_purse(tgt, purse):
+			var mbk0 := String(tgt.get_meta("mb_key", ""))
+			if mbk0 != "":
+				_say(_miniboss_say(mbk0, "fall"))
+				Delve.setpieces_fired["miniboss_feed_fall"] = int(Delve.setpieces_fired.get("miniboss_feed_fall", 0)) + 1
+			_say("The %s's purse spills across the floor - %d gold, for whoever goes to it."
+				% [String(tgt.def.get("name", "elite")), purse])
+			Delve.setpieces_fired["miniboss_down"] = int(Delve.setpieces_fired.get("miniboss_down", 0)) + 1
+			Delve.setpieces_fired["purse_dropped"] = int(Delve.setpieces_fired.get("purse_dropped", 0)) + 1
+			alive = []
 		if not alive.is_empty():
 			var share := maxi(1, purse / alive.size())
 			for m in alive:
@@ -1972,8 +2114,32 @@ const MB_WAYS := {
 	"scrapwright": "plate", "stoker": "grow", "cook": "mend",
 	"snuffer": "snuff", "gaoler": "hook", "tallyman": "strip", "porter": "bar",
 	"sluicekeeper": "flood", "snarer": "snare", "bellman": "blink", "boiler": "set",
-	"beadle": "order", "rammer": "drop",
+	"beadle": "order", "rammer": "drop", "fuller": "wring", "pitman": "pit",
 }
+## S78: the Fuller KEEPS EVERY BLOW (content's C-126 words, verbatim: "Every blow you land goes into
+## the cloth. It keeps them. It gives them all back at once."). Each act it counts the hp it lost
+## since its last act into the trough (meta mb_store). When the trough holds MB_WRING_FULL of its
+## max hp it WRINGS: everyone within MB_WRING_R takes MB_WRING_MULT of the store (DEX save halves,
+## capped at MB_WRING_CAP x its atk) and the trough empties. Hitting it slowly fills it slowly;
+## broken = the trough cracks and the store is spilled, never given back.
+const MB_WRING_FULL := 0.20
+const MB_WRING_R := 3.2
+const MB_WRING_MULT := 0.5
+const MB_WRING_CAP := 4.0
+## S79: the Pitman OPENS THE FLOOR (art's idea, S76 hand-off: "it opens a pit under a delver, who loses
+## a beat climbing out; the pit stays"). Each act a pit opens under the delver nearest it (meta
+## mb_pits, at most MB_PIT_MAX - the oldest closes when a new one opens). Anyone who stands within
+## MB_PIT_R of an open pit goes in and loses MB_PIT_BEAT seconds off their next swing; climbing out
+## they cannot go in again for MB_PIT_CLIMB seconds. THE PIT STAYS: pits outlive the act and the break.
+## Broken = it stops digging; the pits it already opened are still in the floor.
+## LIVE (S113 note): the old HOLD here is spent - content's C-158 landed by_key.pitman act/broken
+## (arrive 9 / act 7 / broken 4 / fall 8), so _mb_way_tick's gate admits this way on real floors.
+## HONEST LIMIT: the pits are ticked by the Pitman - once it is dead they stop taking anyone (the marks
+## stay in the floor as scenery); a floor-owned hazard that outlives its maker is not built.
+const MB_PIT_MAX := 3
+const MB_PIT_R := 1.0
+const MB_PIT_BEAT := 1.5
+const MB_PIT_CLIMB := 3.0
 ## S38: the Rammer DROPS ON THE COUNT (art's idea: "the answer is not what you do, it is when").
 ## Its act is the haul: the iron goes up and HOLDS for MB_DROP_HOLD seconds, then comes down on the
 ## pile - everyone within MB_DROP_R of the frame at that moment. A delver on the pile makes a DEX
@@ -2009,6 +2175,8 @@ const MB_CALLS := {"drillmaster": "warrior", "sexton": "bones", "sower": "adder"
 func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) -> void:
 	var key := String(mon.get_meta("mb_key"))
 	var way := String(MB_WAYS.get(key, ""))
+	if mon.has_meta("mb_pits"):
+		_pit_tick(mon, alive, delta)                  # S79: the pits stay - broken or not
 	if way == "" or bool(mon.get_meta("mb_broken", false)) or miniboss_lines(key, "act").is_empty():
 		return
 	if mon.hp / maxf(1.0, mon.max_hp) <= MB_BROKEN_FRAC:
@@ -2019,6 +2187,8 @@ func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) ->
 			_order_uid = ""                               # the roll is dropped: everyone acts again
 		if mon.has_meta("mb_drop_t"):
 			mon.remove_meta("mb_drop_t")                  # S38: the rope parts - the iron never comes down
+		if mon.has_meta("mb_store"):
+			mon.remove_meta("mb_store")                   # S78: the trough cracks - the store is spilled
 		if mon.has_meta("mb_base_atk"):
 			var d0: Dictionary = mon.def.duplicate()
 			d0["atk"] = float(mon.get_meta("mb_base_atk"))
@@ -2105,6 +2275,27 @@ func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) ->
 			_give(near, "slowed", 5.0)                # the floor goes hard round their feet
 		"drop":
 			mon.set_meta("mb_drop_t", MB_DROP_HOLD)        # S38: the haul - up, and it holds
+		"wring":
+			# S78: what it lost since its last act goes into the trough; full, it gives it all back
+			var last := float(mon.get_meta("mb_last_hp", mon.max_hp))
+			var store := float(mon.get_meta("mb_store", 0.0)) + maxf(0.0, last - mon.hp)
+			mon.set_meta("mb_last_hp", mon.hp)
+			if store >= mon.max_hp * MB_WRING_FULL:
+				_fuller_wring(mon, live_heroes, store)
+				store = 0.0
+			mon.set_meta("mb_store", store)
+		"pit":
+			# S79: the floor opens under the nearest delver, and they go straight in
+			var nb := near["body"] as Node3D
+			var pits: Array = mon.get_meta("mb_pits", [])
+			while pits.size() >= MB_PIT_MAX:
+				var old: Array = pits.pop_front()
+				if is_instance_valid(old[1]):
+					(old[1] as Node).queue_free()
+			pits.append([Vector3(nb.global_position.x, 0.0, nb.global_position.z), _pit_mark(mon, nb.global_position)])
+			mon.set_meta("mb_pits", pits)
+			near.erase("pit_out")                     # the one it dug under has no footing to save them
+			_pit_tick(mon, [near], 0.0)
 		"order":
 			# the same name again while it still stands; a new one only when the called hero is down
 			var called: Dictionary = {}
@@ -2141,6 +2332,56 @@ func _rammer_drop(mon: Monster, alive: Array) -> void:
 	if mon.is_inside_tree():
 		mon.nova(MB_DROP_R)                           # S39: the count is SEEN - a shock ring the size of the pile
 	Delve.setpieces_fired["miniboss_drop"] = int(Delve.setpieces_fired.get("miniboss_drop", 0)) + 1
+
+## S78: the wring. The trough gives back what it kept, to everyone standing under the stocks.
+func _fuller_wring(mon: Monster, live_heroes: Array, store: float) -> void:
+	var base := minf(store * MB_WRING_MULT, float(mon.def.get("atk", 4.0)) * MB_WRING_CAP)
+	for o in live_heroes:
+		if _flat((o["body"] as Node3D).global_position, mon.global_position) >= MB_WRING_R:
+			continue                                  # out from under it: the wring passes them by
+		var save := _rng.randi_range(1, 20) + roster.save_bonus(o["h"], "dex")
+		o["hp"] = float(o["hp"]) - _soak(o, base * (0.5 if save >= 12 + floor_no / 4 else 1.0))
+		_hero_hit(o)
+		Delve.fuller_struck += 1
+	Sfx.at("hit", mon.global_position)
+	if mon.is_inside_tree():
+		mon.nova(MB_WRING_R)                          # the wring is SEEN - a ring the size of the stocks
+	Delve.setpieces_fired["miniboss_wring"] = int(Delve.setpieces_fired.get("miniboss_wring", 0)) + 1
+
+## S79: who is standing in an open pit goes in and loses a beat; climbing out buys MB_PIT_CLIMB seconds.
+func _pit_tick(mon: Monster, alive: Array, delta: float) -> void:
+	var pits: Array = mon.get_meta("mb_pits", [])
+	for o in alive:
+		if float(o.get("hp", 0.0)) <= 0.0:
+			continue
+		var po := float(o.get("pit_out", 0.0))
+		if po > 0.0:
+			o["pit_out"] = po - delta
+			continue
+		var bp := (o["body"] as Node3D).global_position
+		for pv in pits:
+			if _flat(bp, pv[0]) < MB_PIT_R:
+				o["swing"] = float(o.get("swing", 0.0)) + MB_PIT_BEAT   # the lost beat: climbing out
+				o["pit_out"] = MB_PIT_CLIMB
+				Delve.pitman_fell += 1
+				Delve.setpieces_fired["miniboss_pit_fell"] = int(Delve.setpieces_fired.get("miniboss_pit_fell", 0)) + 1
+				break
+
+## S79: the pit is SEEN - a dark mouth in the floor, parented beside the Pitman so it goes with its floor.
+func _pit_mark(mon: Monster, at: Vector3) -> Node3D:
+	var mi := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = MB_PIT_R; cm.bottom_radius = MB_PIT_R * 0.8; cm.height = 0.04; cm.radial_segments = 20
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.04, 0.03, 0.02); mat.roughness = 1.0
+	cm.material = mat
+	mi.mesh = cm
+	var par := mon.get_parent()
+	if par == null:
+		return mi
+	par.add_child(mi)
+	mi.global_position = Vector3(at.x, 0.09, at.z)   # above the hex tiles' bevelled tops, which hid it at 0.025
+	return mi
 
 ## L2: a lord's mechanics (and a unique's). Runs while the party is within 16 m.
 func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, delta: float) -> void:
@@ -2352,8 +2593,12 @@ func _loot(alive: Array) -> void:
 	var finder: Dictionary = seeker
 	var lordly := boss and not uniq
 	var deep_find := sd == 20 or (sd != 1 and st >= 25 - floor_no / 2 - (5 if lordly else 0))
+	var w_before := int(finder["h"].get("weapon", 0))
 	var found_line := roster.find_gear(String(finder["uid"]), floor_no, 0.0 if deep_find else 1.0, lordly)
 	if found_line != "":
+		# S96 / SYSTEM 9 row (b): a found WEAPON lies on the stones first, in its own model, then is taken up
+		if int(finder["h"].get("weapon", 0)) > w_before:
+			_show_find(finder, roster.weapon_mesh(finder["h"]))
 		_say(found_line)
 		var fb: HeroBody = finder["body"]
 		if is_instance_valid(fb):
@@ -3453,6 +3698,41 @@ func _tint_vial(n: Node, col: Color) -> void:
 	for c in n.find_children("*", "MeshInstance3D", true, false):
 		(c as MeshInstance3D).material_overlay = mat
 
+## S96 / SYSTEM 9 row (b): a deep-floor weapon find lies on the floor at the finder's feet in the weapon's own
+## mesh (roster.weapon_mesh - the same path the hand will carry, no second map), turns once, and is lifted away.
+## Guarded like miniboss_model: a path that does not load is skipped, never instantiated through a null.
+const FIND_SCALE := 0.8
+var finds_shown := 0
+var _find_scn := {}
+
+func _show_find(m: Dictionary, path: String) -> void:
+	var b = m.get("body")
+	if path == "" or not (b is Node3D) or not is_instance_valid(b) or not (b as Node3D).is_inside_tree():
+		return
+	if not ResourceLoader.exists(path):
+		return
+	if not _find_scn.has(path):
+		_find_scn[path] = load(path)
+	if not (_find_scn[path] is PackedScene):
+		return
+	var w: Node3D = (_find_scn[path] as PackedScene).instantiate()
+	w.name = "FoundWeapon"
+	w.top_level = true
+	var host: Node = dun.info["root"] if dun and dun.info.has("root") else self
+	host.add_child(w)
+	var bn := b as Node3D
+	var fwd := bn.global_transform.basis.z.normalized()
+	# laid flat on the stones: the kit meshes are built along +Y, so -90 about X lays the blade down
+	w.global_transform = Transform3D(Basis(Vector3.RIGHT, deg_to_rad(-90.0)).scaled(Vector3.ONE * FIND_SCALE),
+		bn.global_position + fwd * 0.7 + Vector3(0, 0.04, 0))
+	w.set_meta("find_path", path)
+	finds_shown += 1
+	var tw := w.create_tween()
+	tw.tween_property(w, "rotation:y", TAU, 3.0)
+	tw.tween_property(w, "global_position", bn.global_position + Vector3(0, 1.1, 0), 0.5).set_ease(Tween.EASE_IN)
+	tw.tween_property(w, "scale", Vector3.ONE * 0.01, 0.25)
+	tw.tween_callback(w.queue_free)
+
 func _show_vial(m: Dictionary, key: String, on_floor: bool) -> void:
 	var b = m.get("body")
 	if not (b is Node3D) or not is_instance_valid(b) or not (b as Node3D).is_inside_tree():
@@ -3599,18 +3879,46 @@ func _give(m: Dictionary, name: String, secs: float) -> void:
 		return
 	if name == "burning" and has_st(m, "resist_fire"):
 		return
-	if name == "slowed":
-		if has_st(m, "resist_frost"):
-			return
-		m["slow"] = maxf(float(m.get("slow", 0.0)), secs)
+	if name == "slowed" and has_st(m, "resist_frost"):
 		return
-	if name == "poisoned":
-		m["venom"] = maxf(float(m.get("venom", 0.0)), secs)
-		return
-	if not m.has("st"):
-		m["st"] = {}
+	# S118 (L31 remainder b): `was` is now read - a state that is NEW on this delver
+	# gets its on-apply line (the state's own word and colour out of potions.json
+	# `states`, the same words the potion path floats); a refresh of a state already
+	# held stays silent, so a venom that ticks every hit does not spam the floor.
 	var was := has_st(m, name)
-	m["st"][name] = maxf(float((m["st"] as Dictionary).get(name, 0.0)), secs)
+	if name == "slowed":
+		m["slow"] = maxf(float(m.get("slow", 0.0)), secs)
+	elif name == "poisoned":
+		m["venom"] = maxf(float(m.get("venom", 0.0)), secs)
+	else:
+		if not m.has("st"):
+			m["st"] = {}
+		m["st"][name] = maxf(float((m["st"] as Dictionary).get(name, 0.0)), secs)
+	if not was and has_st(m, name):
+		_on_apply(m, name)
+
+## S118: the on-apply line for a newly given state. Counted (applied_lines) so a gate
+## can prove it fired without a body on the floor; drawn only when there is one.
+var applied_lines := 0
+func _on_apply(m: Dictionary, name: String) -> void:
+	var spec: Dictionary = (Roster.potions().get("states", {}) as Dictionary).get(name, {})
+	if spec.is_empty():
+		return
+	applied_lines += 1
+	if m.has("body") and is_instance_valid(m["body"]):
+		_float_text(m, String(spec["word"]), Color.html(String(spec.get("colour", "ffffff"))), 64, 2.0)
+
+## S118 (L31 remainder a): the seconds a state has left - venom and slow keep their
+## old fields, everything else is m["st"][name]. 0.0 when not held.
+func st_secs(m, name: String) -> float:
+	if m == null:
+		return 0.0
+	match name:
+		"poisoned":
+			return maxf(0.0, float(m.get("venom", 0.0)))
+		"slowed":
+			return maxf(0.0, float(m.get("slow", 0.0)))
+	return maxf(0.0, float((m.get("st", {}) as Dictionary).get(name, 0.0)))
 
 func _status_tick(m: Dictionary, delta: float) -> void:
 	if not m.has("st"):
@@ -3743,8 +4051,8 @@ func statuses(m: Dictionary) -> Array:
 	for bad in [true, false]:
 		for k in states:
 			if bool(states[k]["bad"]) == bad and has_st(m, k):
-				# L31: [word, colour, key, bad] - callers that read [0]/[1] are unchanged
-				out.append([String(states[k]["word"]), Color.html(String(states[k]["colour"])), String(k), bad])
+				# L31: [word, colour, key, bad, secs] - callers that read [0]/[1] are unchanged; S118 adds [4], the seconds left
+				out.append([String(states[k]["word"]), Color.html(String(states[k]["colour"])), String(k), bad, st_secs(m, String(k))])
 	return out
 
 ## the states over each delver's head (on the floor, not the body - HeroBody

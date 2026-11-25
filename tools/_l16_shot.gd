@@ -52,7 +52,7 @@ func _process(_dt: float) -> bool:
 		_eye.director._set_on(true)
 	if _d and _d.lord_fighting() != null and _n == 0 and _f > 400:
 		_n = 1
-		_eye.boss_bar.refresh()
+		if _eye.boss_bar: _eye.boss_bar.refresh()   # S89: the eye builds no boss card
 		for c in _d.party:
 			if (c["body"] as Node3D).is_inside_tree():
 				_eye._select(c["body"])
@@ -70,7 +70,7 @@ func _process(_dt: float) -> bool:
 	if _f == 10030:
 		_save("ui100")
 		UiTheme.set_scale(1.5)
-		_eye.boss_bar.refresh()
+		if _eye.boss_bar: _eye.boss_bar.refresh()   # S89: the eye builds no boss card
 	if _f == 10070:
 		_save("ui150")
 		UiTheme.set_scale(1.0)

@@ -1,0 +1,5 @@
+import rc=0 8s
+parse2 rc=0 21s
+s33_draw2 rc=0 4s
+s33_red rc=1 5s
+ALL DONE

@@ -7,6 +7,7 @@ class FakeSheet extends Node:
 var _f := 0
 var _step := 0
 var _bad := 0
+var _n := 0  # U154: rows walked
 var _out := ""
 var _layer: CanvasLayer
 var _sat: Node
@@ -41,6 +42,8 @@ func _pips() -> Dictionary:
 	return out
 func _process(_d: float) -> bool:
 	_f += 1
+	if root.get_visible_rect().size.x < 1919 or root.get_visible_rect().size.y < 1079:
+		print("U88_WORN NO VERDICT - capture %s is smaller than 1920x1080; run --windowed --resolution 1920x1080" % str(root.get_visible_rect().size)); quit(2); return true
 	if _f < 30: return false
 	var sc: float = UiTheme.STEPS[_step]
 	if _f % 40 == 30:
@@ -50,6 +53,7 @@ func _process(_d: float) -> bool:
 	if _f % 40 == 10 and _sat != null:
 		var p := _pips()
 		print("ROWS @", sc, " ", p)
+		_n += p.size()
 		var want := {"Scarglass Ring  (ring)": true, "Mender Wraps  (gloves)": true}
 		for k in p:
 			var low := String(k).to_lower()
@@ -65,6 +69,7 @@ func _process(_d: float) -> bool:
 		_step += 1
 		_sat = null
 		if _step >= 3:
-			print("U88_WORN ", "OK" if _bad == 0 else "FAIL %d" % _bad)
+			if _n == 0: print("U88_WORN NO VERDICT - 0 rows walked"); _bad += 1
+			print("U88_WORN ", "OK" if _bad == 0 else "FAIL %d" % _bad, " rows=", _n)
 			quit(0 if _bad == 0 else 1)
 	return false

@@ -12,3 +12,9 @@ Duck.glb, Corgi.glb, Red.glb (+ their _0.png textures)
   brought in (cycle A4). See that entry for the source page.
 
 No Quaternius "Bestiary" / QAL-licensed content is used here.
+
+uaa/ - Alpaca, Bull, Deer, Donkey, Fox, Husky, ShibaInu, Stag, Wolf (.gltf, single-file, embedded buffers)
+  Quaternius - Ultimate Animated Animals (July 2021). CC0 1.0 Universal (public domain).
+  The pack's own License.txt was read (S105) and is copied beside them as uaa/License.txt.
+  Copied unchanged from the pack's glTF/ folder (S108, System 11). Fox.gltf replaces GobKit Red.glb
+  as the town fox; Red.glb is kept on disk but no longer read by scripts/town.gd.

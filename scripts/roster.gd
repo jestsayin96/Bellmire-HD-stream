@@ -212,6 +212,10 @@ const POTION_COST := 35
 # should be priced out of, because a hero who cannot afford it drags the
 # whole party into the dark (see Expedition).
 const OIL_COST := 12
+# S86: a hero already at the best forgeable tier pays this fraction (1/N) of the
+# steel's cost to have it reworked into another kind. Named so the chat bot's
+# `forge`.cost "a quarter" guard reads the engine rather than its own wording.
+const REWORK_DIVISOR := 4
 const REROLL_COST := 120
 const RESPEC_COST := 200
 
@@ -507,7 +511,7 @@ func buy_weapon(user_id: String, kind := "") -> String:
                 return "%s already carries %s %s." % [h["name"], _an(weapon_name(h)), weapon_name(h)]
             if bool(WEAPONS[int(h["weapon"])].get("found", false)):
                 return "No smith in Bellmire will put a hammer to scarforged steel."
-            var rework := haggle(h, cost_for(h, int(int(WEAPONS[int(h["weapon"])]["cost"]) / 4)))
+            var rework := haggle(h, cost_for(h, int(int(WEAPONS[int(h["weapon"])]["cost"]) / REWORK_DIVISOR)))
             if not spend(h, rework):
                 return "%s needs %d gold to have it reworked into a %s - you have %d." % [h["name"], rework, kind, int(h["gold"])]
             h["wkind"] = kind
@@ -933,6 +937,13 @@ func offhand_mesh(h: Dictionary) -> String:
         var t := int(h.get("armour", 0))
         if t >= 1 and t <= 3:
             return Gear.DUN + "shield_%s.glb" % ["common", "uncommon", "rare"][t - 1]
+        # S80 (System 8 row (b), shield variety): armour tiers 4-5 take the Quaternius Medieval Weapons shields (CC0,
+        # LICENSE in assets/gear/shields/) instead of falling back to the class's kit shield. A round-shield class keeps
+        # a round face at tier 4 (the quartered buckler); every bearer at tier 5 carries the gold Celtic shield.
+        if t == 4:
+            return Gear.SHD + ("shield_round_2.fbx" if off.begins_with("shield_round") else "shield_heater_2.fbx")
+        if t >= 5:
+            return Gear.SHD + "shield_celtic_golden.fbx"
     return off
 
 # most offhands are held; a quiver is worn

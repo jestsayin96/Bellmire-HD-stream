@@ -12,6 +12,7 @@ var _tag := "after"
 var _step := 0
 var _fed := 0
 var _bad := 0
+var _n := 0  # U154: lines audited - a verdict needs a denominator
 var _shot := false
 const RAID := [
 	"Warband of raiders sighted at the east gate - the Scar is on the march!",
@@ -36,6 +37,8 @@ func _initialize() -> void:
 	root.add_child(_t)
 func _process(_d: float) -> bool:
 	_f += 1
+	if root.get_visible_rect().size.x < 1919 or root.get_visible_rect().size.y < 1079:
+		print("U40_TEST NO VERDICT - capture %s is smaller than 1920x1080; run --windowed --resolution 1920x1080" % str(root.get_visible_rect().size)); quit(2); return true
 	if _f == 20:
 		_eye = RtsCamera.new()
 		_t.add_child(_eye)
@@ -72,12 +75,14 @@ func _process(_d: float) -> bool:
 		if _step >= UiTheme.STEPS.size():
 			var f := FileAccess.open(_out + "u40_feed_log_%s.txt" % _tag, FileAccess.WRITE)
 			f.store_string(_hud.log_text())
-			print("U40_TEST ", "OK" if _bad == 0 else "FAIL")
+			if _n == 0: print("U40_TEST NO VERDICT - 0 feed lines audited"); _bad += 1
+			print("U40_TEST ", "OK" if _bad == 0 else "FAIL", " lines=", _n)
 			return true
 	return false
 func _audit(pct: int) -> void:
 	for lb in _hud._box.get_children():
 		var l := lb as Label
+		_n += 1
 		if "..." in l.text or "…" in l.text:
 			print("FAIL ellipsis @", pct, " ", l.text); _bad += 1
 		print("  [", pct, "] ", l.get_line_count(), "L: ", l.text)

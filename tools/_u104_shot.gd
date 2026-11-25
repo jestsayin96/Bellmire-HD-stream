@@ -1,3 +1,4 @@
+# U129 RETIRED GATE: asserts a floating boss card (hud_boss/BossCard) that S89 removed. Its successor is tools/_u126_regress.gd. Kept for history; do not gate on it.
 extends SceneTree
 ## L21 (Mr. E, Nov 11): the interface over the spotlight panes. THE RULE, checked here in
 ## code: while more than one view is on screen, no HUD element may overlap a pane seam or sit
@@ -21,8 +22,9 @@ var _fails: Array = []
 var _checks := 0
 var _stage := "boot"
 var _at := 0
+var _scales: Array = []
 var _shots := not DisplayServer.get_name().to_lower().contains("headless")
-const OUT := "res://renders/cycles/20261120_u104"
+const OUT := "res://renders/cycles/20261121_u116"
 
 func _initialize() -> void:
 	# a known screen: headless Godot gives a 100x100 window where nothing can be judged (that is
@@ -94,11 +96,54 @@ func _process(_dt: float) -> bool:
 				_stage = "mana"
 				_at = _f
 		"mana":
-			if _f - _at == 60:
+			if _f - _at == 180:
 				var ms := _t.get_node_or_null("ManaStrip")
 				var plates := ms.get_child_count() if ms else -1
 				print("U104_MANA strip=%s plates=%d casters=%d" % [ms != null, plates, ManaStrip_count()])
 				_save("full")
+				_scales = [1.25, 1.5]
+				_stage = "scales"
+				_at = _f
+		"scales":
+			# U105: the same plate at 125% / 150% (ui_theme scale steps) - 40 frames to settle each
+			if _f - _at == 1 and not _scales.is_empty():
+				UiTheme.set_scale(float(_scales[0]))
+			if _f - _at == 40 and not _scales.is_empty():
+				var ms2 := _t.get_node_or_null("ManaStrip")
+				var bad := 0
+				if ms2:
+					for pl in ms2.get_children():
+						if pl is Control:
+							var rr: Rect2 = (pl as Control).get_global_rect()
+							if rr.position.x < 0 or rr.position.y < 0 or rr.end.x > root.size.x or rr.end.y > root.size.y:
+								bad += 1
+				var prs: Array = []
+				if ms2:
+					for pl2 in ms2.get_children():
+						if pl2 is Control:
+							prs.append((pl2 as Control).get_global_rect())
+				var chr_r := Rect2()
+				for cn in get_nodes_in_group("hud_chronicle"):
+					if cn is Control:
+						chr_r = (cn as Control).get_global_rect()
+				var hit := 0
+				for q in prs:
+					if (q as Rect2).intersects(chr_r):
+						hit += 1
+				print("U105_MANA scale=%s plates=%d offscreen=%d rects=%s chronicle=%s under_chronicle=%d" % [UiTheme.scale, ms2.get_child_count() if ms2 else -1, bad, prs, chr_r, hit])
+				for fh in get_nodes_in_group("hud_chronicle"):
+					var fp := fh.get_parent()
+					var fcard = fp.get("_card") if fp != null else null
+					print("U109_CARD parent=%s card=%s" % [fp, fcard])
+					if fcard is Control:
+						print("U109_CARD vis=%s min=%s rect=%s" % [(fcard as Control).visible, (fcard as Control).get_combined_minimum_size(), (fcard as Control).get_global_rect()])
+					if fp != null and fp.has_method("_chrome_text_w"):
+						print("U109_TEXTW w=%s" % fp.call("_chrome_text_w"))
+				_save("mana_%d" % int(round(UiTheme.scale * 100.0)))
+				_scales.remove_at(0)
+				_at = _f
+			if _scales.is_empty():
+				UiTheme.set_scale(1.0)
 				print("U104_DONE")
 				return true
 		"pair":

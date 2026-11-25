@@ -4,7 +4,7 @@ extends SceneTree
 ## upscale that would draw the body wider than the corridor clear READ out of FloorGen (11.0 m).
 ## Windowed, quits itself:
 ##   <console> --path . --resolution 1920x1080 --script tools/_s58_span.gd
-## Prints S58_SPAN OK n=<checks> | S58_SPAN FAIL <what> | S58_SPAN NO VERDICT.
+## Prints S58_SPAN OK n=<checks> | S58_SPAN FAIL <what> | S58_SPAN NO VERDICT | S58_SPAN WINDOWED-ONLY <why>.
 ## S58_RED=1 blinds the guard (corridor_clear_override = 100) and checks the drawn span against the
 ## REAL 11.0 m: a forced upscale past x1.057 must cross the corridor, so it must FAIL.
 var _fails: Array = []
@@ -14,6 +14,7 @@ var _cam: Camera3D
 var _stage: Node3D
 var _mons: Array = []
 var _red := false
+var _refused := false
 const OUT := "res://renders/cycles/s58/"
 const CLEAR := 11.0
 
@@ -35,7 +36,26 @@ func _vis_w(n: Node) -> Vector2:
 		hi = hi.max(a.end)
 	return Vector2(maxf(hi.x - lo.x, hi.z - lo.z), hi.y - lo.y) if hi.y > lo.y else Vector2.ZERO
 
+## S104: this gate writes into res://renders/cycles/s58/, which is TRACKED. Run headless (or on the dummy
+## renderer) there is no real frame, and the old gate went RED and overwrote the committed renders on the
+## way down. Refuse up front with a verdict line and write NOTHING - not the directory, not a png.
+func _windowless() -> String:
+	if DisplayServer.get_name() == "headless":
+		return "display server is headless"
+	if RenderingServer.get_current_rendering_driver_name() in ["", "dummy"]:
+		return "rendering driver is dummy"
+	return ""
+
+func _refuse(why: String) -> void:
+	_refused = true
+	print("S58_SPAN WINDOWED-ONLY %s - refused, nothing written (run: <console> --path . --resolution 1920x1080 --script tools/_s58_span.gd)" % why)
+	quit()
+
 func _initialize() -> void:
+	var why := _windowless()
+	if why != "":
+		_refuse(why)
+		return
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
 	_red = OS.get_environment("S58_RED") == "1"
 	var real := Bestiary.corridor_clear()
@@ -86,6 +106,8 @@ func _initialize() -> void:
 	_cam.look_at_from_position(Vector3(-7, 5, -34), Vector3(-7, 3.3, 0))
 
 func _process(_d: float) -> bool:
+	if _refused:
+		return true
 	_f += 1
 	if _f == 40:
 		var plain_w := 0.0
@@ -99,7 +121,12 @@ func _process(_d: float) -> bool:
 			if plain_w > 0.0 and e[1] != "plain":
 				var wh := _vis_w(e[0])
 				_ok(absf(wh.x / plain_w - float(e[2])) < 0.02, "broodglut %s mesh width ratio %.3f matches k %.3f" % [e[1], wh.x / plain_w, e[2]])
-		root.get_texture().get_image().save_png(ProjectSettings.globalize_path(OUT + ("s58_red.png" if _red else "s58_span.png")))
+		var tex := root.get_texture()
+		var img: Image = tex.get_image() if tex != null else null
+		if img == null or img.is_empty():
+			_refuse("viewport texture gave no image")
+			return true
+		img.save_png(ProjectSettings.globalize_path(OUT + ("s58_red.png" if _red else "s58_span.png")))
 		if _checks == 0:
 			print("S58_SPAN NO VERDICT")
 		elif _fails.is_empty():

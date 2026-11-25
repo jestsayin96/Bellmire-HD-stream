@@ -1,0 +1,20 @@
+# chat bot B112 gate commands_doc
+# cmd: D:\1game\Godot_v4.7.2-stable_win64_console.exe --headless --path C:\hd adventure\bellmire-bot --script tools/_commands_doc.gd
+# rc=0
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+COMMANDS_DOC OK wrote 32 commands
+
+--- STDERR ---
+ERROR: COMMANDS_DATA MINIBOSS COUNT: `miniboss` publishes 45 elites and content writes feed rows for 46 - docs/COMMANDS.md counts the chambers wrong and a viewer finds out by asking for one that is not there
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] commands (res://scripts/chatcmd.gd:2244)
+       [1] _initialize (res://tools/_commands_doc.gd:6)
+COMMANDS_DATA MINIBOSS COUNT - published 45, feed rows 46
+ERROR: COMMANDS_DATA MINIBOSS UNNAMED: 1 body(s) content writes a feed for carry no `Delve.MB_NAME` row, so the nameplate falls back to the capitalised trade and !miniboss answers the trade word the rename exists to remove - nothing crashes and nothing reads wrong in a log, which is why this is a fault and not a warning: ["blower"]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] commands (res://scripts/chatcmd.gd:2248)
+       [1] _initialize (res://tools/_commands_doc.gd:6)
+COMMANDS_DATA MINIBOSS UNNAMED - 1 bodies draw a feed with no MB_NAME row and answer to their trade word instead of a name: ["blower"]

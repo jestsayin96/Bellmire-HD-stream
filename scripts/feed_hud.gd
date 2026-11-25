@@ -20,6 +20,7 @@ var _card: PanelContainer
 var _card_title: Label
 var _card_sub: Label
 var _card_t := 0.0
+var legacy_margin := false      # U112: a test switch - the pre-U111 geometry (4px pad, label fills the box) for the A/B capture
 
 ## put a name card up in the town's Chronicle (no-op without a FeedHUD)
 static func card_on(town: Node, title: String, sub: String, col: Color) -> void:
@@ -153,9 +154,11 @@ func _build_chrome() -> void:
     _card_sub.autowrap_mode = TextServer.AUTOWRAP_OFF
     _card_sub.max_lines_visible = 1
     _card_sub.text_overrun_behavior = TextServer.OVERRUN_TRIM_WORD_ELLIPSIS
-    _card_sub.custom_minimum_size = Vector2(UiTheme.px(240), 0)
+    _card_sub.custom_minimum_size = Vector2(UiTheme.px(150), 0)
     _card_sub.add_theme_font_size_override("font_size", UiTheme.px(CARD_SUB_PX))
     _card_sub.add_theme_color_override("font_color", UiTheme.ON_DARK)
+    # U109: sub line is ellipsis-trimmed; its old 240px floor made the card 396px at 150% and left the
+    # Chronicle text a 200px column. 150px keeps the card readable and the text a column.
     cv.add_child(_card_sub)
     _card.visible = false
     h.add_child(_card)
@@ -278,6 +281,10 @@ func _build() -> void:
     _panel.visible = false
 
 func card(title: String, sub: String, col: Color) -> void:
+    # U126 (Mr. E 21 Nov 10:17 directive): the boss info card is OUT of the Chronicle - it is for
+    # event text only; boss info lives on the hub. The card stays built but never shows.
+    if true:
+        return
     if _card == null:
         return
     _card_title.text = title
@@ -351,7 +358,11 @@ func _rebuild() -> void:
         # whole text fits the vellum's height. The roll's outcome is never the part that is cut.
         var avail := _chrome_text_w()
         wrap_w = avail
-        var font: Font = ThemeDB.fallback_font
+        # U114: measure with the font the Labels will really draw with (the theme's), not the engine
+        # fallback: at 100% the two disagree and a 7-line stack was judged to fit a 5-line vellum.
+        var font: Font = _box.get_theme_font("font", "Label")
+        if font == null:
+            font = ThemeDB.fallback_font
         var budget := _chrome_h()
         for i in lines.size():
             lines[i] = tidy(String(lines[i]))
@@ -361,6 +372,12 @@ func _rebuild() -> void:
             ents.remove_at(ti)
         if lines.size() == 1 and _stack_h(lines, font, fs, avail) > budget:
             lines[0] = tidy(String(lines[0]), true)       # last resort: detail goes, outcome stays
+        # U107: at 150% with a lord's card up the vellum is narrow and ONE line still wrapped past
+        # the lower rail ("descend into the scar, and" ran off the scroll). Last, last resort: the
+        # font steps down (never below 70% of the Chronicle size) until the stack fits the vellum.
+        var fs_floor := int(floor(float(fs) * 0.7))
+        while fs > fs_floor and _stack_h(lines, font, fs, avail) > budget:
+            fs -= 1
     for i in lines.size():
         var lb := Label.new()
         lb.text = String(lines[i])
@@ -375,7 +392,7 @@ func _rebuild() -> void:
             lb.text_overrun_behavior = TextServer.OVERRUN_NO_TRIMMING
             lb.clip_text = false
             lb.custom_minimum_size = Vector2(wrap_w, 0)
-            lb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+            lb.size_flags_horizontal = Control.SIZE_EXPAND_FILL if legacy_margin else Control.SIZE_SHRINK_BEGIN   # U111: width = the padded wrap width, not the box
         lb.add_theme_font_size_override("font_size", fs)
         # older lines fade toward the parchment; the newest is full ink
         var k := float(i + 1) / float(lines.size())
@@ -389,8 +406,10 @@ func _chrome_text_w() -> float:
     if _panel is HudDock.ChronicleScroll:
         w = _vellum().size.x
     if card_showing() and _card != null:
-        w -= _card.get_combined_minimum_size().x + float(UiTheme.px(14))
-    return maxf(w - 4.0, 120.0)
+        # U109: the card never takes more than 40% of the vellum; the text keeps at least 60%
+        w -= minf(_card.get_combined_minimum_size().x + float(UiTheme.px(14)), w * 0.4)
+    # U111: right padding - U110's 150% frame had a word touching the vellum edge (~2px margin)
+    return maxf(w - (4.0 if legacy_margin else float(UiTheme.px(10))), 120.0)
 
 func _chrome_h() -> float:
     if _panel is HudDock.ChronicleScroll:

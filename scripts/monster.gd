@@ -168,9 +168,11 @@ func _height() -> float:
 func _label() -> void:
     var boss := bool(def.get("boss", false))
     var lb := Label3D.new()
+    # S88 (Mr. E, 21 Nov 10:17): the boss title leaves the HUD, so this plate IS the boss's title -
+    # its NAME only, like any other creature. The epithet used to ride a second line at lord size,
+    # sat on the health bar and ran off a 1080 frame for the written variants (measured S88); it is
+    # still spoken whole in the Chronicle as the lord rises (Delve: "X rises. <note>.").
     lb.text = String(def.get("name", "?"))
-    if boss and String(def.get("note", "")) != "":
-        lb.text += "\n" + String(def["note"])
     lb.font_size = 72 if boss else 40
     lb.pixel_size = 0.009 if boss else 0.005
     lb.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -179,6 +181,10 @@ func _label() -> void:
     lb.modulate = (def.get("aura", Color(1, 0.8, 0.4)) as Color).lightened(0.3) if boss else Color(1.0, 0.55, 0.45)
     lb.visibility_range_end = 90.0 if boss else 60.0
     lb.name = "name_tag"
+    if boss:
+        # S88: grow UP from the anchor, so the plate (which scales with camera distance) can never
+        # sink onto the health bar that sits 0.25 m under it
+        lb.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
     add_child(lb)
     lb.position = Vector3(0, _height() + 0.5, 0)
 

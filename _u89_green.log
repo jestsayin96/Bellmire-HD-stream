@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+ROWS @1.0 { "Worn Arming Sword": false, "rags": false, "Scarglass Ring  (ring)": true, "Mender\'s Wraps  (gloves)": true, "Market Seal  (ring2)": false }
+ROWS @1.25 { "Worn Arming Sword": false, "rags": false, "Scarglass Ring  (ring)": true, "Mender\'s Wraps  (gloves)": true, "Market Seal  (ring2)": false }
+ROWS @1.5 { "Worn Arming Sword": false, "rags": false, "Scarglass Ring  (ring)": true, "Mender\'s Wraps  (gloves)": true, "Market Seal  (ring2)": false }
+U88_WORN OK
+WARNING: 8 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)
+
+RC=0

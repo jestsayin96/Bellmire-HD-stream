@@ -1,0 +1,1009 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+ERROR: Cannot open file 'res://.godot/imported/river_flow.ogg-94e79d5797cc50d9e2011a3046a03fd4.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] bed (res://scripts/sfx.gd:463)
+       [2] _lay_sound_beds (res://scripts/town.gd:3481)
+ERROR: Failed loading resource: res://.godot/imported/river_flow.ogg-94e79d5797cc50d9e2011a3046a03fd4.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] bed (res://scripts/sfx.gd:463)
+       [2] _lay_sound_beds (res://scripts/town.gd:3481)
+ERROR: Failed loading resource: res://assets/audio/amb/river_flow.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] bed (res://scripts/sfx.gd:463)
+       [2] _lay_sound_beds (res://scripts/town.gd:3481)
+ERROR: Cannot open file 'res://.godot/imported/market_murmur.ogg-15d178c679870446c12935288669cf3e.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] bed (res://scripts/sfx.gd:463)
+       [2] _lay_sound_beds (res://scripts/town.gd:3486)
+ERROR: Failed loading resource: res://.godot/imported/market_murmur.ogg-15d178c679870446c12935288669cf3e.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] bed (res://scripts/sfx.gd:463)
+       [2] _lay_sound_beds (res://scripts/town.gd:3486)
+ERROR: Failed loading resource: res://assets/audio/amb/market_murmur.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] bed (res://scripts/sfx.gd:463)
+       [2] _lay_sound_beds (res://scripts/town.gd:3486)
+ERROR: Cannot open file 'res://.godot/imported/forge_fire.ogg-999692f81a13165066ac82c262ef5609.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] bed (res://scripts/sfx.gd:463)
+       [2] _lay_sound_beds (res://scripts/town.gd:3491)
+ERROR: Failed loading resource: res://.godot/imported/forge_fire.ogg-999692f81a13165066ac82c262ef5609.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] bed (res://scripts/sfx.gd:463)
+       [2] _lay_sound_beds (res://scripts/town.gd:3491)
+ERROR: Failed loading resource: res://assets/audio/amb/forge_fire.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] bed (res://scripts/sfx.gd:463)
+       [2] _lay_sound_beds (res://scripts/town.gd:3491)
+ERROR: Cannot open file 'res://.godot/imported/bellmire_day.ogg-137ca865af59973a53f9edee69acf6c9.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] _switch (res://scripts/sfx.gd:587)
+       [2] _process (res://scripts/sfx.gd:535)
+ERROR: Failed loading resource: res://.godot/imported/bellmire_day.ogg-137ca865af59973a53f9edee69acf6c9.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] _switch (res://scripts/sfx.gd:587)
+       [2] _process (res://scripts/sfx.gd:535)
+ERROR: Failed loading resource: res://assets/audio/music/bellmire_day.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] _switch (res://scripts/sfx.gd:587)
+       [2] _process (res://scripts/sfx.gd:535)
+FEED Viewer1001 takes the oath as a dwarf knight (down from the hill mines; sees in the dark). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED Viewer1002 takes the oath as a halfling knight (from the field-farms; a natural 1 is rolled again). Stout, shielded. Hard to kill, slow to finish a fight.
+FEED Viewer1003 takes the oath as an orc knight (came over the west road and stayed; sees in the dark). Stout, shielded. Hard to kill, slow to finish a fight.
+DIRECTOR t=0.0 CUT chat_1003 shot=follow pri=49.9 why=start held_prev=0.0 pace=1.0 | chat_1003/follow=49.9(chat 0s ago), hero_1001/follow=32.1(town life), tour_0/push=10.0(quiet baseline)
+RIG: no clip 'Idle_B' on Rogue_Hooded - playing its idle
+DIRECTOR t=9.2 CUT fish_556953263452 shot=follow pri=54.0 why=better_after_min held_prev=9.2 pace=1.0 | fish_556953263452/follow=54.0(catch same-shot-6), fish_558295440791/follow=54.0(catch same-shot-6), chat_1003/follow=48.4(chat 13s ago), hero_1002/follow=25.3(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+ERROR: Cannot open file 'res://.godot/imported/bellmire_night.ogg-12943518bf65c9362768224767f2ac2c.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] _switch (res://scripts/sfx.gd:587)
+       [2] _process (res://scripts/sfx.gd:535)
+ERROR: Failed loading resource: res://.godot/imported/bellmire_night.ogg-12943518bf65c9362768224767f2ac2c.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] _switch (res://scripts/sfx.gd:587)
+       [2] _process (res://scripts/sfx.gd:535)
+ERROR: Failed loading resource: res://assets/audio/music/bellmire_night.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] _switch (res://scripts/sfx.gd:587)
+       [2] _process (res://scripts/sfx.gd:535)
+FEED Ysolde Stonehand settles in Bellmire, looking for work.
+DIRECTOR t=27.3 CUT hero_1003 shot=follow pri=24.9 why=max_hold held_prev=18.1 pace=1.0 | chat_1003/follow=46.3(chat 31s ago REPEAT-held-out), hero_1003/follow=24.9(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Mira Quarryman settles in Bellmire, looking for work.
+DIRECTOR t=32.3 CUT fish_558295440791 shot=follow pri=54.0 why=hotter held_prev=5.0 pace=1.0 | fish_556953263452/follow=60.0(catch REPEAT-held-out), fish_558295440791/follow=54.0(catch same-shot-6), chat_1003/follow=45.7(chat 36s ago REPEAT-held-out), hero_1001/follow=26.4(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Edda the Younger settles in Bellmire, looking for work.
+DIRECTOR t=53.4 CUT hero_1001 shot=follow pri=28.0 why=max_hold held_prev=21.1 pace=1.0 | fish_556953263452/follow=60.0(catch REPEAT-held-out), chat_1003/follow=43.3(chat 57s ago REPEAT-held-out), hero_1001/follow=28.0(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Rask Bramble settles in Bellmire, looking for work.
+MUSTER timed out: dists=[92, 8, 60, 56, 24, 24, 87, 94] vis=true stay=false route=66 inside=false
+FEED Wren Hollow settles in Bellmire, looking for work.
+DIRECTOR t=74.5 CUT tour_0 shot=push pri=10.0 why=max_hold held_prev=21.1 pace=1.0 | fish_558295440791/follow=60.0(catch REPEAT-held-out), chat_1003/follow=40.8(chat 78s ago REPEAT-held-out), hero_1003/follow=34.4(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+FEED Garm Fenwick and 2 others descend below, and the crier does not wait to see them off.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 skeleton minion, 1 cave spider, 1 bog frog.
+FEED Grave-dust swept in a spiral toward one tomb.
+DIRECTOR t=79.6 CUT fight_3321536478336 shot=shoulder pri=75.0 why=hotter held_prev=5.0 pace=1.0 | fight_3321536478336/shoulder=75.0(hurt 0.00), chat_1003/follow=39.9(chat 86s ago REPEAT-held-out), hero_1001/follow=34.3(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+FEED Dunn Quarryman searches (Investigation 4) and turns up 8 gold on floor 1.
+FEED Floor 1 clears to the last shape. Reload, relight, read on.
+FEED Dunn Quarryman searches the chest - ...no loot... (Investigation 8 vs DC 10).
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+FEED Dunn Quarryman spots a blade trap (Perception 13 vs DC 10) and steps round it.
+FEED Osric Thatcher settles in Bellmire, looking for work.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 puglin, 1 cave spider, 1 hollowed cave spider, 1 bog frog.
+FEED Garm Fenwick rolls a 20 for initiative and is moving before anything else.
+FEED Mira Stonehand rolls a 20 - and the hollowed cave spider is gone.
+FEED Dunn Quarryman searches (Investigation 19) and turns up 27 gold on floor 2.
+FEED Floor 2 is the guild's now. Mind the chalk.
+FEED Dunn Quarryman searches the chest - Successfully found loot!! 25 gold (Investigation 14 vs DC 11).
+FEED Another lamp goes down. Another count begins.
+FEED They carry 14 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 skeleton minion, 1 slime, 1 hollowed slime.
+FEED Grave-dust swept in a spiral toward one tomb.
+FEED Osric Hollow rolls a 20 for initiative and is moving before anything else.
+FEED Cort Hollow rolls a 20 for initiative and is moving before anything else.
+FEED Bran the Younger casts Frost at skeleton minion.
+FEED Harl Thatcher casts Smite at skeleton minion.
+FEED Cort Hollow casts Frost at skeleton minion.
+FEED Dunn of the Ford casts Bolt at hollowed slime.
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+FEED The hollowed slime divides.
+FEED Bran the Younger's frost comes apart like wet rope (7 vs DC 10).
+FEED Cort Hollow turns on the wounded hollowed slimeling to finish it.
+FEED Bran the Younger searches (Investigation 12) and turns up 11 gold on floor 1.
+FEED Swept. The guild will want this written down.
+FEED Bran the Younger finds a vial of The Thatcher's Cup.
+FEED Bran the Younger searches the chest - ...no loot... (Investigation 4 vs DC 10).
+DIRECTOR t=95.7 CUT delve_3321536478336 shot=follow pri=45.0 why=max_hold held_prev=16.1 pace=1.0 | delve_3321536478336/follow=45.0(walking), delve_4645728582944/follow=45.0(walking), chat_1003/follow=37.5(chat 107s ago), hero_1002/follow=30.6(town life), tour_0/push=10.0(quiet baseline REPEAT-held-out)
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 puglins, 1 hollowed cave spider, 1 drowned cave spider.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED The walls squeal.
+FEED The oil is running low.
+DIRECTOR t=98.7 CUT lord_3321536478336 shot=shoulder pri=100.0 why=lord_rises held_prev=3.0 pace=1.0 | lord_3321536478336/shoulder=100.0(lord), fight_3321536478336/shoulder=75.4(hurt 0.04 REPEAT-held-out), delve_4645728582944/follow=39.0(walking same-shot-6), hero_1001/follow=31.4(town life REPEAT-held-out), chat_1003/follow=30.8(chat 112s ago same-shot-6)
+FEED Gnawbone shifts, and the fight changes with it.
+FEED Gnawbone's children come squealing.
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 hollowed puglin, 1 skeleton minion.
+FEED Garm Stonehand settles in Bellmire, looking for work.
+FEED 5 creatures boil out of the dungeon!
+FEED Initiative: the raiders 14, the watch 12 - the raiders strike first.
+RAID started at 100.056718
+ERROR: Cannot open file 'res://.godot/imported/bellmire_raid.ogg-c58e19d5633860119a259de4fae52b48.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] _switch (res://scripts/sfx.gd:587)
+       [2] _process (res://scripts/sfx.gd:535)
+ERROR: Failed loading resource: res://.godot/imported/bellmire_raid.ogg-c58e19d5633860119a259de4fae52b48.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] _switch (res://scripts/sfx.gd:587)
+       [2] _process (res://scripts/sfx.gd:535)
+ERROR: Failed loading resource: res://assets/audio/music/bellmire_raid.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] _switch (res://scripts/sfx.gd:587)
+       [2] _process (res://scripts/sfx.gd:535)
+FEED Gnawbone falls to Dunn Quarryman.
+FEED Bran the Younger casts Frost at hollowed puglin.
+FEED Harl Thatcher works bolt; the scar does the last line for them (8 vs DC 11).
+FEED Dunn of the Ford casts Bolt at hollowed puglin.
+FEED Cort Hollow's frost lands on the wrong foe - the scar edits it (9 vs DC 11).
+FEED Harl Thatcher casts Bolt at skeleton minion.
+FEED Bran the Younger casts Bolt at bog frog.
+FEED Garm Fenwick is badly hurt and breaks off, making for the way up.
+DIRECTOR t=101.7 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=3.0 pace=0.6 | raid/shoulder=95.0(raid live), fight_3321536478336/shoulder=84.3(hurt 0.93 REPEAT-held-out), fight_4645728582944/shoulder=69.0(hurt 0.00 same-shot-6), chat_1003/follow=36.3(chat 117s ago), hero_1001/follow=32.4(town life REPEAT-held-out)
+FEED Bran the Younger's frost is swallowed whole by the scar (9 vs DC 11).
+FEED Dunn of the Ford calls bolt and something older takes the call (10 vs DC 11).
+FEED Dunn Quarryman searches (Investigation 11) and turns up 33 gold on floor 3.
+FEED Swept. The dark goes back to waiting.
+FEED Harl Thatcher casts Smite at bog frog.
+FEED Cort Hollow casts Frost at bog frog.
+FEED Bran the Younger searches (Investigation 15) and turns up 24 gold on floor 2.
+FEED Nothing moves on floor 2 but the dust.
+FEED Bran the Younger finds a vial of Bargeman's Draught.
+FEED Bran the Younger finds a man in a cage still alive. He slips 42 gold to them on the way out, 5 ways to split it.
+FEED Dunn Quarryman spots a pressure plate (Perception 16 vs DC 11) and steps round it.
+FEED Out of oil, the party feels its way back up from floor 3.
+FEED Garm Fenwick and 2 others come home to Bellmire with 93 gold, 3 ore, 2 stone, 2 pieces of salvaged gear and 2 potions. 13 kills between them.
+FEED Dunn Quarryman is fitted with leather. (+10 hp)
+FEED Bran the Younger searches the chest - Successfully found loot!! 28 gold (Investigation 20 vs DC 11).
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+SHOT l64_raid cur=raid
+FEED 3 creatures boil out of the dungeon!
+FEED Initiative: the raiders 2, the watch 19 - the watch is ready for them.
+DIRECTOR t=108.7 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=7.0 pace=0.6 | raid/shoulder=95.0(raid live), fish_558295440791/follow=60.0(catch REPEAT-held-out), delve_4645728582944/follow=45.0(walking), hero_1003/follow=32.0(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline REPEAT-held-out)
+FEED Bran the Younger spots a pressure plate (Perception 19 vs DC 11) and steps round it.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 cave spider, 1 puglin, 1 drowned slime, 1 drowned cave bat.
+FEED The oil is running low.
+FEED Bran the Younger rolls a 20 for initiative and is moving before anything else.
+FEED Harl Thatcher rolls a 20 for initiative and is moving before anything else.
+DIRECTOR t=110.8 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=2.0 pace=0.6 | raid/shoulder=95.0(raid live), fight_4645728582944/shoulder=69.0(hurt 0.00 same-shot-6), hero_1003/follow=33.6(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline REPEAT-held-out)
+FEED Dunn of the Ford casts Bolt at drowned cave bat.
+FEED Bran the Younger casts Frost at cave spider.
+FEED Harl Thatcher casts Smite at cave spider.
+FEED Dunn of the Ford spends fire and the scar keeps the change (1 vs DC 11).
+FEED Cort Hollow's frost arrives, but something else wore it in (9 vs DC 11).
+FEED Bran the Younger's frost curves like a drunk arrow (9 vs DC 11).
+FEED Bran the Younger casts Bolt at drowned slime.
+FEED Dunn of the Ford casts Bolt at drowned slime.
+FEED Harl Thatcher casts Bolt at drowned slime.
+FEED Cort Hollow casts Bolt at drowned slime.
+FEED The drowned slime divides.
+FEED Harl Thatcher's smite lands somewhere nobody aimed (9 vs DC 11).
+FEED Dunn of the Ford casts Bolt at drowned slimeling.
+FEED Bran the Younger casts Frost at drowned slimeling.
+FEED Harl Thatcher casts Bolt at drowned slimeling.
+FEED Cort Hollow casts Bolt at drowned slimeling.
+FEED Bran the Younger searches (Investigation 15) and turns up 36 gold on floor 3.
+FEED Over. The guild gets its tenth and Bellmire gets its night.
+FEED The attack is driven off. The gates hold.
+FEED Petra Thatcher settles in Bellmire, looking for work.
+FEED Bran the Younger searches the chest - ...no loot... (Investigation 4 vs DC 11).
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+DIRECTOR t=114.8 CUT delve_4645728582944 shot=follow pri=45.0 why=shot_gone held_prev=4.0 pace=1.0 | delve_4645728582944/follow=45.0(walking), hero_1003/follow=32.4(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline REPEAT-held-out)
+FEED Osric Hollow spots a fire grate (Perception 18 vs DC 11) and steps round it.
+ERROR: Cannot open file 'res://.godot/imported/sting_victory.ogg-7fea0e83d96977619e1effef39ad5139.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] play_sting (res://scripts/sfx.gd:618)
+       [2] _switch (res://scripts/sfx.gd:582)
+       [3] _process (res://scripts/sfx.gd:535)
+ERROR: Failed loading resource: res://.godot/imported/sting_victory.ogg-7fea0e83d96977619e1effef39ad5139.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] play_sting (res://scripts/sfx.gd:618)
+       [2] _switch (res://scripts/sfx.gd:582)
+       [3] _process (res://scripts/sfx.gd:535)
+ERROR: Failed loading resource: res://assets/audio/music/sting_victory.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:334)
+       [1] play_sting (res://scripts/sfx.gd:618)
+       [2] _switch (res://scripts/sfx.gd:582)
+       [3] _process (res://scripts/sfx.gd:535)
+FEED Osric Hollow steps on a plate - a stone from the ceiling! DEX 19 vs DC 11, 3 damage (halved).
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 puglins, 2 cave bats, 1 slime.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Cort Hollow mouths frost and the scar answers in a rival tongue (9 vs DC 12).
+FEED Bran the Younger breaks off to mend Bran the Younger, who is nearly down.
+FEED Dunn of the Ford turns on the wounded cave bat to finish it.
+FEED Osric Hollow turns on the wounded cave bat to finish it.
+FEED Cort Hollow turns on the wounded cave bat to finish it.
+FEED Harl Thatcher breaks off to mend Bran the Younger, who is nearly down.
+DIRECTOR t=120.8 CUT fight_4645728582944 shot=shoulder pri=79.7 why=hotter held_prev=6.0 pace=1.0 | fight_4645728582944/shoulder=79.7(hurt 0.47), hero_1002/follow=27.0(town life same-shot-6), tour_0/push=10.0(quiet baseline REPEAT-held-out)
+FEED Harl Thatcher's bolt fizzles into a belch of ash (8 vs DC 12).
+FEED The slime divides.
+FEED Bran the Younger searches (Investigation 10) and turns up 35 gold on floor 4.
+FEED Floor 4 cleared. Something underneath heard it happen.
+FEED Garm Fenwick and 2 others descend into the dark, and the dark makes room.
+FEED They carry 11 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave spider, 1 slime, 1 skeleton minion.
+FEED A tomb with a doorbell. It has been rung.
+FEED Out of oil, the party feels its way back up from floor 4.
+FEED Bran the Younger and 4 others come home to Bellmire with 134 gold, 6 ore, 4 stone, 3 pieces of salvaged gear and 4 potions. 24 kills between them.
+FEED Bran the Younger is fitted with leather. (+10 hp)
+DIRECTOR t=124.8 CUT fight_7937418367990 shot=shoulder pri=69.0 why=shot_gone held_prev=4.0 pace=1.0 | fight_7937418367990/shoulder=69.0(hurt 0.00 same-shot-6), hero_1002/follow=33.0(town life), tour_0/push=10.0(quiet baseline REPEAT-held-out)
+FEED The slime divides.
+FEED Dunn Quarryman searches (Investigation 19) and turns up 13 gold on floor 1.
+FEED Last one down, and it took its time about it.
+FEED Dunn Quarryman searches the chest - Successfully found loot!! 31 gold (Investigation 21 vs DC 10).
+FEED Ysolde Bramble settles in Bellmire, looking for work.
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+FEED Mira Stonehand steps on a slot in the floor - a blade! DEX 15 vs DC 10, 6 damage (halved).
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed cave spider, 1 bog frog, 1 cave spider, 1 puglin.
+FEED The guild's tenth is cheap at the top of the stair and dear at the bottom.
+FEED They carry 17 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 giant rats, 1 bog frog.
+FEED The lid of one sarcophagus has been set down gently, beside it.
+FEED Bran the Younger casts Frost at giant rat.
+FEED Harl Thatcher casts Smite at giant rat.
+FEED Dunn of the Ford casts Bolt at giant rat.
+FEED Cort Hollow casts Frost at giant rat.
+FEED Bran the Younger's frost arrives, but something else wore it in (6 vs DC 10).
+FEED Bran the Younger searches (Investigation 22) and turns up 14 gold on floor 1.
+FEED Floor 1 quiets, and something deeper takes notice.
+FEED Dunn Quarryman searches (Investigation 8) and turns up 17 gold on floor 2.
+FEED Floor 2 gives it up. The lamps go lower.
+FEED Dunn Quarryman spots a pressure plate (Perception 15 vs DC 11) and steps round it.
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED Dunn Quarryman searches the chest - ...no loot... (Investigation 10 vs DC 11).
+FEED Osric Hollow steps on a slot in the floor - a blade! DEX 17 vs DC 10, 4 damage (halved).
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+DIRECTOR t=140.9 CUT delve_7937418367990 shot=follow pri=45.0 why=max_hold held_prev=16.1 pace=1.0 | delve_7937418367990/follow=45.0(walking), delve_9158598361712/follow=45.0(walking), hero_1003/follow=32.1(town life), tour_0/push=10.0(quiet baseline REPEAT-held-out)
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 1 bog frog, 1 slime, 1 cave bat.
+FEED Harl Thatcher rolls a 20 for initiative and is moving before anything else.
+FEED Talen of the Ford settles in Bellmire, looking for work.
+FEED Garm Fenwick finds a man in a cage still alive. He slips 42 gold to them on the way out, 3 ways to split it.
+FEED Bran the Younger casts Bolt at bog frog.
+FEED Harl Thatcher casts Bolt at bog frog.
+FEED Cort Hollow's frost takes a step and sits down (8 vs DC 11).
+FEED Dunn of the Ford casts Bolt at slime.
+DIRECTOR t=142.9 CUT fight_9158598361712 shot=shoulder pri=75.9 why=hotter held_prev=2.0 pace=1.0 | fight_9158598361712/shoulder=75.9(hurt 0.09), delve_7937418367990/follow=45.0(walking), hero_1001/follow=34.4(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline REPEAT-held-out)
+FEED Cort Hollow casts Bolt at slime.
+FEED Harl Thatcher casts Smite at slime.
+FEED Bran the Younger loses the shape of frost halfway (9 vs DC 11).
+FEED Dunn of the Ford shapes fire and the floor finishes the shape (10 vs DC 11).
+FEED The slime divides.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 puglin, 1 hollowed risen bones, 1 drowned puglin, 1 drowned bone bowman.
+FEED Dunn of the Ford turns on the wounded slimeling to finish it.
+FEED Cort Hollow turns on the wounded slimeling to finish it.
+FEED Harl Thatcher turns on the wounded slimeling to finish it.
+FEED Bran the Younger turns on the wounded slimeling to finish it.
+FEED Dunn of the Ford casts Bolt at slimeling.
+FEED Harl Thatcher's smite goes somewhere, and not where it was sent (8 vs DC 11).
+FEED Cort Hollow casts Bolt at giant rat.
+FEED Bran the Younger casts Frost at giant rat.
+FEED Harl Thatcher casts Smite at giant rat.
+FEED Garm Fenwick turns on the wounded hollowed risen bones to finish it.
+FEED Dunn Quarryman turns on the wounded hollowed risen bones to finish it.
+FEED Bran the Younger searches (Investigation 18) and turns up 26 gold on floor 2.
+FEED Last one down, and it took its time about it.
+FEED Dunn Quarryman searches (Investigation 20) and turns up 41 gold on floor 3.
+FEED Swept, chalked, and nobody short a limb.
+FEED Dunn Quarryman finds a vial of Ropewalk Dram.
+FEED Bran the Younger spots a pressure plate (Perception 15 vs DC 11) and steps round it.
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED Dunn Quarryman searches the chest - ...no loot... (Investigation 4 vs DC 11).
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+FEED 7 bandits are riding on the west road!
+FEED Initiative: the raiders 18, the watch 4 - the raiders strike first.
+FEED Dunn Quarryman steps on a plate - a stone from the ceiling! DEX 10 vs DC 11, 7 damage.
+FEED A building is burning!
+FEED A building is burning!
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 cave bat, 1 hollowed risen bones, 1 hollowed puglin, 1 slime.
+FEED The slime divides.
+FEED Bran the Younger casts bolt and the scar spends it elsewhere (8 vs DC 11).
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 drowned risen bones, 2 cave bats, 2 puglins.
+FEED The oil is running low.
+DIRECTOR t=153.1 CUT raid shot=shoulder pri=95.0 why=better_after_min held_prev=10.2 pace=0.6 | raid/shoulder=95.0(raid live), fight_7937418367990/shoulder=77.7(hurt 0.27 REPEAT-held-out), fight_9158598361712/shoulder=75.3(hurt 0.03), fish_558295440791/follow=60.0(catch), hero_1003/follow=33.8(town life)
+FEED Ysolde Coalfoot is killed by a bandit.
+FEED Osric Hollow turns on the wounded hollowed risen bones to finish it.
+FEED The townsfolk raise the ruin again.
+FEED The attack is driven off. The gates hold.
+FEED Cort Hollow works frost and the scar gives it back inside out (8 vs DC 11).
+FEED Bran the Younger searches (Investigation 9) and turns up 26 gold on floor 3.
+FEED Floor 3 is done. The lamps climb back up.
+FEED Dunn Ashwood settles in Bellmire, looking for work.
+FEED Dunn Quarryman rolls a 20 - and the puglin is gone.
+FEED Dunn Quarryman searches (Investigation 21) and turns up 70 gold on floor 4.
+FEED The lamps burn steady. That is the whole victory.
+FEED Bran the Younger spots a pressure plate (Perception 12 vs DC 11) and steps round it.
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED Dunn Quarryman spots a spike trap (Perception 14 vs DC 12) and steps round it.
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+FEED Bran the Younger spots a fire grate (Perception 13 vs DC 11) and steps round it.
+FEED The new frame slips. The townsfolk will try again. (11 vs DC 12)
+DIRECTOR t=161.1 CUT fish_558295440791 shot=follow pri=60.0 why=shot_gone held_prev=8.1 pace=1.0 | fish_558295440791/follow=60.0(catch), delve_7937418367990/follow=45.0(walking REPEAT-held-out), delve_9158598361712/follow=45.0(walking), hero_1001/follow=33.5(town life), tour_0/push=10.0(quiet baseline REPEAT-held-out)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 skeleton minion, 1 hollowed slime, 2 drowned cave bats, 1 hollowed puglin.
+FEED The oil is running low.
+FEED Bran the Younger spots a spike trap (Perception 20 vs DC 12) and steps round it.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 4; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed bone bowman, 1 drowned skeleton warrior, 1 skeleton warrior, 1 drowned bone sentinel, 1 drowned bone bowman.
+FEED The Hollow King rises. Wreathed in cold fire.
+FEED The braziers in the hall burn blue, and then burn cold.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Bran the Younger's frost turns to smoke a breath too early (10 vs DC 12).
+FEED Harl Thatcher's smite arrives, but something else wore it in (11 vs DC 12).
+DIRECTOR t=164.2 CUT lord_7937418367990 shot=shoulder pri=100.0 why=lord_rises held_prev=3.1 pace=1.0 | lord_7937418367990/shoulder=100.0(lord), fight_7937418367990/shoulder=81.3(hurt 0.63 REPEAT-held-out), fight_9158598361712/shoulder=75.0(hurt 0.00 REPEAT-held-out), hero_1002/follow=25.6(town life same-shot-6), tour_0/push=10.0(quiet baseline REPEAT-held-out)
+FEED Dunn of the Ford casts Fire at skeleton minion.
+FEED Mira Stonehand is badly hurt and breaks off, making for the way up.
+FEED Cort Hollow casts Frost at hollowed slime.
+FEED Bran the Younger casts Bolt at hollowed slime.
+FEED Dunn of the Ford's bolt takes a step and sits down (9 vs DC 12).
+FEED Harl Thatcher casts Smite at hollowed slime.
+FEED The townsfolk raise the ruin again.
+FEED Mira Stonehand should be dead - and stands back up (14).
+FEED The hollowed slime divides.
+FEED Bran the Younger searches (Investigation 8) and turns up 35 gold on floor 4.
+FEED Held, and the door is still ours.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 5.
+FEED Garm Fenwick and 2 others get out alive, and come home with what they carried.
+FEED Garm Fenwick and 2 others come home to Bellmire with 172 gold, 6 ore, 4 stone, 3 pieces of salvaged gear and 3 potions. 19 kills between them.
+FEED Dunn Quarryman is fitted with chainmail. (+26 hp) A natural 20 at the counter - a quarter off.
+DIRECTOR t=166.2 CUT fish_556953263452 shot=follow pri=60.0 why=shot_gone held_prev=2.0 pace=1.0 | fish_556953263452/follow=60.0(catch), delve_9158598361712/follow=45.0(walking), hero_1003/follow=30.1(town life), tour_0/push=10.0(quiet baseline)
+FEED Shadows peel off the walls - an ambush! 1 drowned bone bowman, 1 slime surges in.
+FEED Bran the Younger searches the chest - Successfully found loot!! 54 gold (Investigation 14 vs DC 12).
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED Hilda Fenwick settles in Bellmire, looking for work.
+FEED Garm Fenwick and 2 others descend down, boots counted out on the stone.
+FEED They carry 11 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave spider, 1 skeleton minion, 1 puglin.
+FEED The dust lies flat except in one line, wall to wall.
+FEED Dunn Quarryman spots a blade trap (Perception 18 vs DC 10) and steps round it.
+FEED Osric Hollow steps on a loose flagstone - darts! DEX 6 vs DC 12, 10 damage.
+FEED Dunn Quarryman rolls a 20 searching the floor!
+FEED Dunn Quarryman searches (Investigation 21) and turns up 17 gold on floor 1.
+FEED Floor 1: the dark steps back a pace.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 hollowed skeleton mage, 1 skeleton warrior, 2 bone sentinels, 1 hollowed bone bowman.
+FEED The Grubmother rises. Vast, slow, and patient.
+FEED The floor is wet, and getting wetter.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Dunn Quarryman searches the chest - Successfully found loot!! 20 gold (Investigation 19 vs DC 10).
+FEED Dunn Quarryman cannot get to the chest and leaves it.
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+DIRECTOR t=173.3 CUT lord_9158598361712 shot=shoulder pri=100.0 why=lord_rises held_prev=7.0 pace=1.0 | lord_9158598361712/shoulder=100.0(lord), fight_9158598361712/shoulder=76.0(hurt 0.10 REPEAT-held-out), delve_13043916378421/follow=39.0(walking same-shot-6), hero_1002/follow=28.4(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Bran the Younger sets the wizard's lamp burning. The dark pulls back from floor 5.
+FEED Bran the Younger spots a poison-dart trap (Perception 20 vs DC 12) and steps round it.
+FEED Cort Hollow's bolt splits in two, and neither half works (10 vs DC 12).
+FEED Bran the Younger asks for frost. The scar is not taking requests (8 vs DC 12).
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 skeleton minions, 1 bog frog, 1 slime.
+FEED Bran the Younger casts Frost at skeleton warrior.
+FEED Harl Thatcher's smite rebounds off a stone that was not there (1 vs DC 12).
+FEED Cort Hollow casts Bolt at skeleton warrior.
+FEED Harl Thatcher casts Bolt at skeleton warrior.
+FEED Dunn of the Ford casts Bolt at skeleton warrior.
+FEED Dunn of the Ford spots a spike trap (Perception 19 vs DC 12) and steps round it.
+FEED Bran the Younger casts Bolt at The Grubmother.
+FEED The Grubmother's brood spills out of her.
+FEED Harl Thatcher casts Smite at slimeling.
+FEED Dunn of the Ford casts fire and gets weather for it (9 vs DC 12).
+FEED Cort Hollow casts Bolt at The Grubmother.
+FEED The Grubmother shifts, and the fight changes with it.
+FEED Bran the Younger casts Renew at Osric Hollow.
+FEED Harl Thatcher casts Bolt at The Grubmother.
+FEED Osric Hollow rolls a 20 - The Grubmother reels.
+FEED Dunn of the Ford casts Fire at The Grubmother.
+FEED The slime divides.
+FEED Mira Stonehand turns on the wounded slimeling to finish it.
+FEED Dunn Quarryman searches (Investigation 20) and turns up 27 gold on floor 2.
+FEED Floor 2 empty, and the air moves from below.
+FEED Dunn Quarryman finds a vial of Orchard Water.
+FEED Cort Hollow casts Bolt at The Grubmother.
+FEED The Grubmother is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Harl Thatcher casts Bolt at The Grubmother.
+FEED The Grubmother falls to Osric Hollow.
+FEED The Grubmother is slain on floor 5!
+FEED The hoard is split 5 ways - 33 gold each to Bran the Younger, Dunn of the Ford, Osric Hollow, Cort Hollow, Harl Thatcher.
+FEED 6 bandits are riding on the west road!
+FEED Initiative: the raiders 18, the watch 14 - the raiders strike first.
+FEED The mounted watch rides out to meet them - 2 riders.
+FEED Dunn Quarryman searches the chest - Successfully found loot!! 34 gold (Investigation 18 vs DC 11).
+FEED Dunn Quarryman cannot get to the chest and leaves it.
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+FEED Mira Stonehand steps on a plate - darts! DEX 18 vs DC 11, 5 damage (halved).
+DIRECTOR t=181.3 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=8.1 pace=0.6 | raid/shoulder=95.0(raid live), delve_9158598361712/follow=45.0(walking), delve_13043916378421/follow=45.0(walking), hero_1003/follow=33.8(town life), tour_0/push=10.0(quiet baseline)
+FEED A building is burning!
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Bran the Younger and 4 others come home to Bellmire with 320 gold, 9 ore, 6 stone, 3 pieces of salvaged gear and 4 potions. 29 kills between them.
+FEED Bran the Younger is fitted with chainmail. (+26 hp) Haggled 16% off (18).
+FEED Harl Thatcher takes up a plain steel focus. (+4 atk, 1d6) Bellmire iron: honest, dull, and better than bare hands. Haggled 10% off (12).
+FEED Dunn Quarryman cracks the chain off a captive - 42 gold passes to the party, split 3 ways.
+FEED Dunn Thatcher's charge crashes into a bandit!
+FEED A building is burning!
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 3; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 3 drowned slimes, 1 hollowed slime.
+FEED The attack is driven off. The gates hold.
+FEED Harl Coalfoot settles in Bellmire, looking for work.
+FEED The drowned slime divides.
+FEED Garm Fenwick spots a pressure plate (Perception 14 vs DC 11) and steps round it.
+FEED Bran the Younger and 4 others descend into the cold the scar breathes up.
+FEED They carry 19 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 cave bat, 1 cave spider.
+FEED Somebody has been leaving fresh flowers. Nothing down here grows flowers.
+FEED Bran the Younger casts Frost at cave bat.
+FEED Harl Thatcher casts Smite at cave bat.
+FEED Dunn of the Ford casts Bolt at cave spider.
+FEED Cort Hollow casts Frost at slime.
+FEED Harl Thatcher reaches for smite; the scar reaches back (9 vs DC 10).
+FEED The slime divides.
+FEED Bran the Younger casts Bolt at slimeling.
+FEED Bran the Younger searches (Investigation 12) and turns up 11 gold on floor 1.
+FEED Won, and nobody is arguing about shares yet.
+SYNTHETIC death injected at 190.000709333328
+DIRECTOR t=190.4 CUT death_synthetic_190 shot=hard_cut pri=90.0 why=death held_prev=9.1 pace=1.0 | death_synthetic_190/hard_cut=90.0(death), fight_13043916378421/shoulder=75.8(hurt 0.68 same-shot-6), delve_15308890871037/follow=45.0(walking), hero_1003/follow=34.6(town life), tour_0/push=10.0(quiet baseline)
+FEED Dunn Quarryman searches (Investigation 5) and turns up 26 gold on floor 3.
+FEED Floor 3 gives in.
+FEED Bran the Younger searches the chest - Successfully found loot!! 24 gold (Investigation 10 vs DC 10).
+SHOT l64_death cur=death_synthetic_190
+FEED The townsfolk raise the ruin again.
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+FEED Osric Hollow spots a blade trap (Perception 14 vs DC 10) and steps round it.
+FEED Mira Stonehand spots a fire grate (Perception 14 vs DC 11) and disarms it with thieves' tools (20).
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 slimes, 1 skeleton minion, 1 bone bowman, 1 hollowed slime.
+FEED The oil is running low.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave spider, 1 bog frog, 1 slime, 1 skeleton minion.
+FEED The slime divides.
+FEED Garm Fenwick is badly hurt and breaks off, making for the way up.
+DIRECTOR t=197.4 CUT fight_13043916378421 shot=shoulder pri=83.2 why=max_hold held_prev=7.0 pace=1.0 | fight_13043916378421/shoulder=83.2(hurt 0.82), fight_15308890871037/shoulder=75.0(hurt 0.00), fish_556953263452/follow=60.0(catch REPEAT-held-out), hero_1001/follow=34.2(town life), tour_0/push=10.0(quiet baseline)
+FEED Bran the Younger casts Frost at bog frog.
+FEED Harl Thatcher casts Smite at bog frog.
+FEED Dunn of the Ford casts Bolt at bog frog.
+FEED Cort Hollow casts Bolt at bog frog.
+FEED Dunn of the Ford's fire comes out as heat, light and nothing useful (1 vs DC 11).
+FEED Harl Thatcher casts Bolt at slime.
+FEED The slime divides.
+FEED Bran the Younger casts Frost at slimeling.
+FEED Bran the Younger turns on the wounded slimeling to finish it.
+FEED Dunn of the Ford turns on the wounded slimeling to finish it.
+FEED Cort Hollow turns on the wounded slimeling to finish it.
+FEED Harl Thatcher turns on the wounded slimeling to finish it.
+FEED Bran the Younger speaks bolt. The scar spells it backwards (6 vs DC 11).
+FEED Harl Thatcher's bolt comes out as heat, light and nothing useful (9 vs DC 11).
+FEED Dunn of the Ford casts Bolt at cave spider.
+FEED Harl Thatcher casts Smite at cave spider.
+FEED Cort Hollow casts Bolt at cave spider.
+FEED Bran the Younger casts Bolt at skeleton minion.
+FEED Bran the Younger searches (Investigation 5) and turns up 17 gold on floor 2.
+FEED Every corner checked. Every corner empty.
+FEED The fight is going badly - the party breaks off and runs for the way up from floor 4.
+FEED Garm Fenwick and 2 others get out alive, and come home with what they carried.
+FEED Garm Fenwick and 2 others come home to Bellmire with 124 gold, 3 ore, 2 stone, 2 pieces of salvaged gear and 2 potions. 27 kills between them.
+DIRECTOR t=201.4 CUT delve_15308890871037 shot=follow pri=45.0 why=shot_gone held_prev=4.0 pace=1.0 | delve_15308890871037/follow=45.0(walking), hero_1002/follow=32.6(town life), tour_0/push=10.0(quiet baseline)
+FEED Petra Stonehand settles in Bellmire, looking for work.
+FEED Bran the Younger steps on a plate - darts! DEX 6 vs DC 11, 8 damage.
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED Bran the Younger cracks the chain off a captive - 42 gold passes to the party, split 5 ways.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 drowned puglins, 1 cave bat, 1 slime.
+FEED Cort Hollow rolls a 20 for initiative and is moving before anything else.
+DIRECTOR t=208.5 CUT fight_15308890871037 shot=shoulder pri=75.4 why=hotter held_prev=7.0 pace=1.0 | fight_15308890871037/shoulder=75.4(hurt 0.04), hero_1003/follow=28.0(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Harl Thatcher's smite fires off behind them (8 vs DC 11).
+FEED Dunn of the Ford loses the shape of fire halfway (10 vs DC 11).
+FEED Bran the Younger's bolt goes off wrong - that is the scar's toll (1 vs DC 11).
+FEED The slime divides.
+FEED Bran the Younger turns on the wounded slimeling to finish it.
+FEED Dunn of the Ford turns on the wounded slimeling to finish it.
+FEED Osric Hollow turns on the wounded slimeling to finish it.
+FEED Cort Hollow turns on the wounded slimeling to finish it.
+FEED Harl Thatcher turns on the wounded slimeling to finish it.
+FEED Harl Thatcher casts Smite at slimeling.
+FEED Dunn of the Ford casts Bolt at slimeling.
+FEED Cort Hollow casts Bolt at slimeling.
+FEED Bran the Younger casts Bolt at slimeling.
+FEED Harl Thatcher casts Bolt at drowned puglin.
+FEED Bran the Younger casts Frost at drowned puglin.
+FEED Bran the Younger searches (Investigation 11) and turns up 33 gold on floor 3.
+FEED Floor 3 - the dark takes a step back and marks the spot.
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED Harl of the Ford settles in Bellmire, looking for work.
+FEED Osric Hollow spots a fire grate (Perception 11 vs DC 11) and steps round it.
+FEED Osric Hollow steps on a plate - a stone from the ceiling! DEX 17 vs DC 11, 4 damage (halved).
+FEED The stair goes down. So does everyone on it.
+FEED They carry 12 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 puglin, 1 slime, 1 cave spider.
+FEED A second bench, built facing the first - and the first is not empty.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 4 cave bats, 1 hollowed slime.
+FEED Harl Thatcher's bolt goes wrong - the scar answers (10 vs DC 12).
+FEED Dunn of the Ford's bolt arrives, but something else wore it in (9 vs DC 12).
+FEED Cort Hollow's bolt doubles back and finds them first (1 vs DC 12).
+FEED Osric Hollow rolls a 20 - and the cave bat is gone.
+FEED Bran the Younger's bolt fizzles into a belch of ash (10 vs DC 12).
+FEED The hollowed slime divides.
+FEED Bran the Younger searches (Investigation 5) and turns up 35 gold on floor 4.
+FEED Floor 4 cleared, and the lamps still lit.
+FEED The slime divides.
+FEED Dunn Quarryman searches (Investigation 9) and turns up 8 gold on floor 1.
+FEED Floor 1 swept. The chalk goes on the wall.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 7, the watch 18 - the watch is ready for them.
+FEED The mounted watch rides out to meet them - 2 riders.
+DIRECTOR t=221.7 CUT raid shot=shoulder pri=95.0 why=better_after_min held_prev=13.2 pace=0.6 | raid/shoulder=95.0(raid live), delve_15308890871037/follow=45.0(walking REPEAT-held-out), delve_18007371843478/follow=45.0(walking), hero_1003/follow=34.7(town life), tour_0/push=10.0(quiet baseline)
+FEED Dunn Quarryman searches the chest - Successfully found loot!! 17 gold (Investigation 13 vs DC 10).
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED Bran the Younger steps on a spiked plate - spikes! DEX 12 vs DC 12, 4 damage (halved).
+FEED Dunn Quarryman spots a blade trap (Perception 16 vs DC 10) and steps round it.
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+FEED Dunn Thatcher's charge crashes into skeleton minion!
+FEED Bran the Younger steps on a loose flagstone - darts! DEX 15 vs DC 12, 3 damage (halved).
+FEED Dunn Thatcher goes down and claws back up. (CON save 22)
+FEED Dunn Thatcher is killed by skeleton minion.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave spider, 1 bog frog, 1 hollowed puglin, 1 cave bat.
+FEED Ingrid Fenwick goes down and claws back up. (CON save 10)
+FEED Ingrid Fenwick is killed by skeleton minion.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 4; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 drowned skeleton mage, 1 hollowed skeleton mage, 1 drowned bone sentinel, 1 bone bowman, 1 drowned bone bowman.
+FEED Nightwing rises. Too fast to see coming.
+FEED Every torch on the floor gutters at once.
+FEED The oil is running low.
+DIRECTOR t=228.7 CUT lord_15308890871037 shot=shoulder pri=100.0 why=lord_rises held_prev=7.1 pace=0.6 | lord_15308890871037/shoulder=100.0(lord), raid/shoulder=95.0(raid live), fight_15308890871037/shoulder=76.8(hurt 0.18 REPEAT-held-out), fight_18007371843478/shoulder=69.0(hurt 0.00 same-shot-6), fish_558295440791/follow=60.0(catch REPEAT-held-out)
+FEED Dunn of the Ford steps on a spiked plate - spikes! DEX 10 vs DC 12, 6 damage.
+FEED Dunn Quarryman searches (Investigation 11) and turns up 22 gold on floor 2.
+FEED Quiet. The bell with no clapper rang anyway.
+FEED Dunn Quarryman finds a vial of Field Dressing.
+FEED Dunn of the Ford's fire goes wide, and the wall is unamused (8 vs DC 12).
+FEED Harl Thatcher casts bolt. The scar adds a verse of its own (10 vs DC 12).
+FEED Bran the Younger's frost bends away from them - the scar has opinions (7 vs DC 12).
+FEED Dunn Quarryman spots a pressure plate (Perception 12 vs DC 11) and steps round it.
+FEED Cort Hollow's bolt arrives, but something else wore it in (7 vs DC 12).
+FEED Bats pour out of the dark around Nightwing.
+FEED Nightwing shifts, and the fight changes with it.
+FEED Cort Hollow casts Bolt at Nightwing.
+FEED Dunn of the Ford casts Fire at Nightwing.
+FEED Nightwing is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Nightwing falls to Cort Hollow.
+FEED Bran the Younger turns on the wounded cave bat to finish it.
+FEED Dunn of the Ford turns on the wounded cave bat to finish it.
+FEED Osric Hollow turns on the wounded cave bat to finish it.
+FEED Cort Hollow turns on the wounded cave bat to finish it.
+FEED Harl Thatcher turns on the wounded cave bat to finish it.
+FEED Cort Bramble settles in Bellmire, looking for work.
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+FEED Harl Thatcher casts Smite at hollowed skeleton mage.
+FEED Dunn of the Ford casts Bolt at hollowed skeleton mage.
+FEED Nightwing is slain on floor 5!
+FEED The hoard is split 5 ways - 42 gold each to Bran the Younger, Dunn of the Ford, Osric Hollow, Cort Hollow, Harl Thatcher.
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=233.8 CUT delve_18007371843478 shot=follow pri=45.0 why=shot_gone held_prev=5.0 pace=1.0 | delve_15308890871037/follow=45.0(walking REPEAT-held-out), delve_18007371843478/follow=45.0(walking), hero_1003/follow=30.9(town life), tour_0/push=10.0(quiet baseline)
+FEED Bran the Younger searches the chest - ...no loot... (Investigation 8 vs DC 12).
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned giant rat, 1 drowned puglin, 1 cave bat, 1 hollowed slime.
+DIRECTOR t=237.9 CUT fight_18007371843478 shot=shoulder pri=75.0 why=hotter held_prev=4.1 pace=1.0 | fight_18007371843478/shoulder=75.0(hurt 0.00), delve_15308890871037/follow=45.0(walking REPEAT-held-out), hero_1002/follow=24.6(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Osric Hollow spots a poison-dart trap (Perception 12 vs DC 12) and steps round it.
+FEED The hollowed slime divides.
+FEED Dunn Quarryman searches (Investigation 6) and turns up 26 gold on floor 3.
+FEED Nothing left upright. Somebody sit down.
+L28C_EMITTERS floor 6 firepit: 2 (cap 12), creatures 1; lights 60 (shadowed 1)
+L28D_DECALS floor 6 firepit: 18 (cap 24)
+FEED Floor 6 - a worked seam, remade as the firepits: 1 drowned risen bones, 2 gorged marrow hewers, 1 gorged skeleton warrior, 1 fen lurker, 1 puglin.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED Dunn Quarryman spots a fire grate (Perception 20 vs DC 11) and steps round it.
+FEED Bran the Younger steps on a spiked plate - spikes! DEX 7 vs DC 13, 5 damage.
+FEED Dunn Quarryman spots a pressure plate (Perception 14 vs DC 11) and steps round it.
+FEED Bran the Younger's bolt takes a step and sits down (7 vs DC 13).
+FEED Cort Hollow's frost goes somewhere, and not where it was sent (7 vs DC 13).
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+FEED Harl Thatcher's bolt slips the words - wild magic (10 vs DC 13).
+FEED Dunn of the Ford's fire goes off a beat late and a foot wide (10 vs DC 13).
+FEED Bran the Younger searches (Investigation 19) and turns up 77 gold on floor 6.
+FEED Floor 6 is swept, and the broom was not theirs.
+FEED Bran the Younger finds a vial of Potter's Glaze.
+FEED Bran the Younger spots a poison-dart trap (Perception 20 vs DC 13) and steps round it.
+FEED Out of oil, the party feels its way back up from floor 6.
+FEED Bran the Younger and 4 others come home to Bellmire with 407 gold, 12 ore, 9 stone, 4 pieces of salvaged gear and 4 potions. 37 kills between them.
+FEED Bran the Younger is fitted with plate. (+48 hp)
+FEED Cort Hollow takes up a plain steel staff. (+4 atk, 1d6) Bellmire iron: honest, dull, and better than bare hands. Haggled 17% off (19).
+FEED Harl Thatcher is fitted with chainmail. (+26 hp)
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed bone bowman, 2 cave bats, 1 bone bowman, 1 skeleton minion.
+FEED The oil is running low.
+FEED Dunn Quarryman spots a spike trap (Perception 16 vs DC 12) and steps round it.
+FEED Dunn Quarryman rolls a 20 - and the cave bat is gone.
+SHOT l64_quiet cur=fight_18007371843478
+FEED Dunn Quarryman searches (Investigation 3) and turns up 35 gold on floor 4.
+FEED Floor 4 sleeps. Nobody is fool enough to wake it.
+FEED Dunn Quarryman searches the chest - Successfully found loot!! 48 gold (Investigation 17 vs DC 12).
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+DIRECTOR t=253.9 CUT hero_1002 shot=follow pri=32.8 why=max_hold held_prev=16.1 pace=1.0 | delve_18007371843478/follow=45.0(walking REPEAT-held-out), hero_1002/follow=32.8(town life), tour_0/push=10.0(quiet baseline)
+FEED Mira Stonehand steps on a loose flagstone - darts! DEX 7 vs DC 12, 8 damage.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 1; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone sentinel, 2 bone bowmans, 1 risen bones, 1 hollowed bone bowman.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED Somewhere ahead, something counts its own bones out loud.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+FEED The stair is colder than the night that fed it.
+FEED They carry 22 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 skeleton minion, 2 giant rats.
+FEED Offerings, fresh. Somebody still comes down to pay.
+FEED A brass hand-bell rests against the stand. It has no clapper. Nobody touches it.
+FEED Garm Fenwick sets the wizard's lamp burning. The dark pulls back from floor 5.
+DIRECTOR t=256.9 CUT lord_18007371843478 shot=shoulder pri=100.0 why=lord_rises held_prev=3.0 pace=1.0 | lord_18007371843478/shoulder=100.0(lord), fight_18007371843478/shoulder=76.7(hurt 0.17 REPEAT-held-out), fight_22073581802697/shoulder=75.0(hurt 0.00), hero_1002/follow=33.1(town life), tour_0/push=10.0(quiet baseline)
+FEED Bran the Younger casts Frost at giant rat.
+FEED Harl Thatcher casts Smite at giant rat.
+FEED Dunn of the Ford's bolt bends away from them - the scar has opinions (1 vs DC 10).
+FEED Cort Hollow asks for frost. The scar is not taking requests (7 vs DC 10).
+FEED Bran the Younger searches (Investigation 11) and turns up 11 gold on floor 1.
+FEED Floor 1 is done, and the guild writes it down.
+FEED Bran the Younger finds a vial of The Wickmender's Sip.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 11, the watch 19 - the watch is ready for them.
+FEED Mira of the Ford settles in Bellmire, looking for work.
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED The Rattling Host shifts, and the fight changes with it.
+FEED Dead men drop out of the harness.
+FEED The Rattling Host is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Dead men drop out of the harness.
+FEED Mira Stonehand rolls a 20 - The Rattling Host reels.
+FEED The Rattling Host falls to Dunn Quarryman.
+FEED Dunn Quarryman rolls a 20 - and the risen bones is gone.
+FEED Osric Hollow spots a blade trap (Perception 14 vs DC 10) and steps round it.
+FEED Dunn Quarryman is badly hurt and breaks off, making for the way up.
+DIRECTOR t=263.0 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=6.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_18007371843478/shoulder=83.9(hurt 0.89 REPEAT-held-out), delve_22073581802697/follow=45.0(walking), hero_1003/follow=31.6(town life), tour_0/push=10.0(quiet baseline)
+FEED Garm Fenwick rolls a 20 - and the bone bowman is gone.
+FEED Dunn Quarryman searches (Investigation 14) and turns up 58 gold on floor 5.
+FEED Cleared to the last stone. Chalk the way back.
+FEED Dunn Quarryman steps on a loose flagstone - green darts! DEX 17 vs DC 12, 2 damage (halved).
+FEED Dunn Quarryman searches the chest - ...no loot... (Investigation 7 vs DC 12).
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 cave bats, 1 hollowed bog frog, 1 hollowed cave bat.
+FEED Osric Hollow spots a pressure plate (Perception 17 vs DC 11) and steps round it.
+FEED Harl Thatcher casts Smite at cave bat.
+FEED Bran the Younger's frost is swallowed whole by the scar (9 vs DC 11).
+FEED Dunn of the Ford casts Fire at hollowed bog frog.
+FEED Bran the Younger casts Bolt at hollowed bog frog.
+FEED Cort Hollow casts Bolt at hollowed bog frog.
+FEED Out of oil, the party feels its way back up from floor 5.
+FEED Garm Fenwick and 2 others come home to Bellmire with 214 gold, 9 ore, 6 stone, 2 pieces of salvaged gear and 3 potions. 30 kills between them.
+FEED Dunn Quarryman is fitted with plate. (+48 hp) Haggled 15% off (17).
+FEED Osric Hollow finds a man in a cage still alive. He slips 42 gold to them on the way out, 5 ways to split it.
+FEED Harl Thatcher's smite answers to the ground instead (1 vs DC 11).
+FEED Bran the Younger casts Frost at cave bat.
+FEED Dunn of the Ford casts Bolt at hollowed cave bat.
+FEED Bran the Younger searches (Investigation 5) and turns up 13 gold on floor 2.
+FEED Over. The only blood still moving is theirs.
+FEED Aldric Ashwood goes down and claws back up. (CON save 12)
+FEED Aldric Ashwood, the chief of Bellmire, is killed by skeleton warrior.
+FEED Bran the Younger searches the chest - Successfully found loot!! 23 gold (Investigation 17 vs DC 11).
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED Cort Ashwood rolls a 20 on the save - and is up again, sword in hand.
+FEED Cort Ashwood is killed by skeleton rogue.
+FEED The attack is driven off. The gates hold.
+DIRECTOR t=274.1 CUT delve_22073581802697 shot=follow pri=45.0 why=shot_gone held_prev=11.1 pace=1.0 | delve_22073581802697/follow=45.0(walking), hero_1001/follow=33.8(town life), tour_0/push=10.0(quiet baseline)
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned puglin, 1 drowned slime, 1 cave bat, 1 giant rat.
+DIRECTOR t=276.1 CUT fight_22073581802697 shot=shoulder pri=75.0 why=hotter held_prev=2.0 pace=1.0 | fight_22073581802697/shoulder=75.0(hurt 0.00), hero_1001/follow=24.9(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Harl Thatcher casts Smite at cave bat.
+FEED Dunn Thatcher settles in Bellmire, looking for work.
+FEED Cort Hollow casts Frost at drowned puglin.
+FEED Dunn of the Ford's bolt unspools in their hands (8 vs DC 11).
+FEED Harl Thatcher casts Bolt at drowned puglin.
+FEED Harl Thatcher works bolt and the room takes the benefit (10 vs DC 11).
+FEED The drowned slime divides.
+FEED Bran the Younger casts Frost at drowned slimeling.
+FEED Harl Thatcher casts Smite at drowned slimeling.
+FEED Cort Hollow casts Frost at drowned slimeling.
+FEED Dunn of the Ford casts Bolt at drowned slimeling.
+FEED Bran the Younger searches (Investigation 16) and turns up 37 gold on floor 3.
+FEED Floor 3 cleared.
+FEED Bran the Younger finds a vial of Thawbottle.
+FEED Their own footsteps come back up a beat late.
+FEED They carry 13 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 cave bat, 1 bog frog, 1 giant rat.
+FEED The dust lies flat except in one line, wall to wall.
+FEED Bran the Younger searches the chest - Successfully found loot!! 44 gold (Investigation 23 vs DC 11).
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED Osric Hollow spots a fire grate (Perception 16 vs DC 11) and steps round it.
+FEED Dunn Quarryman searches (Investigation 7) and turns up 8 gold on floor 1.
+FEED Clear - and that is one more the architect lost.
+FEED Osric Hollow steps on a plate - darts! DEX 18 vs DC 11, 4 damage (halved).
+FEED Dunn Quarryman searches the chest - ...no loot... (Investigation 8 vs DC 10).
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 3; lights 41 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 drowned cave bats, 2 giant rats, 1 bone bowman.
+FEED The Weeping Bowman is down here. It never stops drawing.
+FEED A string twangs in the dark, and something weeps after it.
+FEED Bran the Younger steps on a spiked plate - spikes! DEX 13 vs DC 12, 6 damage (halved).
+FEED The Weeping Bowman shifts, and the fight changes with it.
+FEED The Weeping Bowman is driven to its last - whatever it has been holding back, it is not holding it now.
+DIRECTOR t=286.2 CUT lord_22073581802697 shot=shoulder pri=100.0 why=lord_rises held_prev=10.1 pace=1.0 | lord_22073581802697/shoulder=100.0(lord), fight_22073581802697/shoulder=75.6(hurt 0.06), delve_24131995207800/follow=45.0(walking), hero_1001/follow=30.3(town life), tour_0/push=10.0(quiet baseline)
+FEED The Weeping Bowman nocks a volley - cover!
+FEED The Weeping Bowman falls to Harl Thatcher.
+FEED Garm Fenwick spots a blade trap (Perception 19 vs DC 10) and steps round it.
+FEED Bran the Younger's bolt splits in two, and neither half works (7 vs DC 12).
+FEED Harl Thatcher's bolt slips the words - wild magic (1 vs DC 12).
+DIRECTOR t=287.2 CUT delve_24131995207800 shot=follow pri=45.0 why=shot_gone held_prev=1.0 pace=1.0 | fight_22073581802697/shoulder=76.7(hurt 0.17 REPEAT-held-out), delve_24131995207800/follow=45.0(walking), hero_1002/follow=31.8(town life REPEAT-held-out), tour_0/push=10.0(quiet baseline)
+FEED Dunn of the Ford's fire comes apart like wet rope (9 vs DC 12).
+FEED Bran the Younger searches (Investigation 12) and turns up 44 gold on floor 4.
+FEED Floor 4 stands down. Reload, rebind, relight.
+FEED Bran the Younger finds a vial of Shepherd's Flask.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 cave bats, 1 slime, 1 hollowed bog frog.
+FEED Dunn Quarryman rolls a 20 for initiative and is moving before anything else.
+FEED The slime divides.
+DIRECTOR t=289.2 CUT fight_24131995207800 shot=shoulder pri=75.0 why=hotter held_prev=2.0 pace=1.0 | fight_24131995207800/shoulder=75.0(hurt 0.00), delve_22073581802697/follow=45.0(walking REPEAT-held-out), hero_1001/follow=24.9(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Dunn Quarryman searches (Investigation 9) and turns up 17 gold on floor 2.
+FEED Held - and the healer sits down for the first time since the stair.
+FEED Bran the Younger and 4 others take a breather, and press on deeper.
+FEED Dunn Quarryman searches the chest - Successfully found loot!! 24 gold (Investigation 19 vs DC 11).
+FEED Garm Fenwick and 2 others take a breather, and press on deeper.
+FEED Bran the Younger steps on a loose flagstone - darts! DEX 22 vs DC 12, 4 damage (halved).
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 4; lights 47 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 risen bones, 1 skeleton warrior, 2 drowned bone sentinels, 1 drowned bone bowman.
+FEED The Grubmother, Shorn rises. Her brood cut away before she rose - lighter than a wall and far too quick for one.
+FEED The guild has put down The Grubmother before. Not this one.
+FEED The floor is wet, and getting wetter.
+FEED The oil is running low.
+FEED Bran the Younger's frost fires off behind them (1 vs DC 12).
+DIRECTOR t=295.4 CUT lord_22073581802697 shot=shoulder pri=100.0 why=lord_rises held_prev=6.1 pace=1.0 | lord_22073581802697/shoulder=100.0(lord), fight_22073581802697/shoulder=75.0(hurt 0.00 REPEAT-held-out), delve_24131995207800/follow=45.0(walking REPEAT-held-out), hero_1001/follow=34.4(town life), tour_0/push=10.0(quiet baseline)
+FEED Dunn of the Ford's bolt comes out as heat, light and nothing useful (11 vs DC 12).
+FEED Sable Fenwick settles in Bellmire, looking for work.
+FEED Dunn Quarryman spots a pressure plate (Perception 22 vs DC 11) and steps round it.
+FEED The Grubmother's brood spills out of her.
+FEED Harl Thatcher's smite splits in two, and neither half works (11 vs DC 12).
+FEED Cort Hollow's bolt goes wrong - the scar answers (9 vs DC 12).
+FEED The Grubmother, Shorn shifts, and the fight changes with it.
+FEED The Grubmother, Shorn is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED 8 creatures boil out of the dungeon!
+FEED Initiative: the raiders 3, the watch 12 - the watch is ready for them.
+FEED The Grubmother, Shorn falls to Osric Hollow.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned giant rat, 1 cave bat, 1 drowned skeleton minion, 1 slime.
+FEED Bran the Younger casts Bolt at drowned bone sentinel.
+FEED Harl Thatcher casts Smite at drowned bone sentinel.
+DIRECTOR t=299.4 CUT raid shot=shoulder pri=95.0 why=shot_gone held_prev=4.1 pace=0.6 | raid/shoulder=95.0(raid live), fight_22073581802697/shoulder=78.7(hurt 0.37 REPEAT-held-out), fight_24131995207800/shoulder=75.0(hurt 0.00 REPEAT-held-out), fish_558295440791/follow=60.0(catch), hero_1002/follow=33.7(town life REPEAT-held-out)
+FEED Dunn of the Ford casts Bolt at drowned bone sentinel.
+FEED Cort Hollow casts Frost at drowned bone sentinel.
+FEED Bran the Younger searches (Investigation 9) and turns up 44 gold on floor 5.
+FEED Floor 5 quiets. The next stair listens.
+L64_TEST cuts=41 shots={ "follow": 15, "push": 1, "shoulder": 24, "hard_cut": 1 } natural_death=false bad=0
+L64_TEST OK

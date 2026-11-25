@@ -1,0 +1,16 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+SNAPSHOT off: no service key in user://_s89_no_such_file.json - the hub will not update
+PASS 0 off without a key file (no network in this test)
+mage 48/48  cleric 19/48  knight 0/0
+PASS 1 every row carries mana and mana_max
+PASS 2 caster mana_max > 0 and = Roster.mana_max
+PASS 3 never-cast caster publishes a full pool
+PASS 4 spent pool publishes what is left, below the max
+PASS 5 non-caster publishes 0 / 0 (hub draws no bar)
+PASS 6 publisher stored nothing into the hero dict
+S89_MANA OK
+WARNING: 6 ObjectDB instances were leaked at exit (run with `--verbose` for details).
+   at: cleanup (core/object/object.cpp:2536)
+ERROR: 2 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:822)

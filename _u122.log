@@ -1,0 +1,649 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+ERROR: COMMANDS_DATA MINIBOSS COUNT: `miniboss` publishes 36 elites and content writes feed rows for 37 - docs/COMMANDS.md counts the chambers wrong and a viewer finds out by asking for one that is not there
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] commands (res://scripts/chatcmd.gd:2090)
+       [1] @implicit_new (res://scripts/twitch_chat.gd:10)
+       [2] _ready (res://scripts/town.gd:350)
+COMMANDS_DATA MINIBOSS COUNT - published 36, feed rows 37
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+ERROR: Cannot open file 'res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:51)
+ERROR: Failed loading resource: res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:51)
+ERROR: Failed loading resource: res://assets/gear/dungeon/staff_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:51)
+ERROR: Cannot open file 'res://.godot/imported/dagger_uncommon.glb-8ea7db9d0d725f384bf618f7c2188065.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:53)
+ERROR: Failed loading resource: res://.godot/imported/dagger_uncommon.glb-8ea7db9d0d725f384bf618f7c2188065.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:53)
+ERROR: Failed loading resource: res://assets/gear/dungeon/dagger_uncommon.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:53)
+ERROR: Cannot open file 'res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:53)
+ERROR: Failed loading resource: res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:53)
+ERROR: Failed loading resource: res://assets/gear/dungeon/staff_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] make (res://scripts/adventurers.gd:77)
+       [4] found (res://scripts/adventurers.gd:53)
+SNAPSHOT on: https://paaukwaffaamazgrndbv.supabase.co every 60 s
+ERROR: Cannot open file 'res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://assets/gear/dungeon/shield_rare.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Cannot open file 'res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://assets/gear/dungeon/shield_rare.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Cannot open file 'res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://assets/gear/dungeon/shield_rare.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Cannot open file 'res://.godot/imported/dagger_uncommon.glb-8ea7db9d0d725f384bf618f7c2188065.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://.godot/imported/dagger_uncommon.glb-8ea7db9d0d725f384bf618f7c2188065.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://assets/gear/dungeon/dagger_uncommon.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Cannot open file 'res://.godot/imported/crossbow_common.glb-0f3cf24ecb96f4168fddd5cb8bfbbd39.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://.godot/imported/crossbow_common.glb-0f3cf24ecb96f4168fddd5cb8bfbbd39.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://assets/gear/dungeon/crossbow_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Cannot open file 'res://.godot/imported/shield_common.glb-c98de4149c4fdfc631aaf973c2a4ded4.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://.godot/imported/shield_common.glb-c98de4149c4fdfc631aaf973c2a4ded4.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://assets/gear/dungeon/shield_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Cannot open file 'res://.godot/imported/crossbow_common.glb-0f3cf24ecb96f4168fddd5cb8bfbbd39.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://.godot/imported/crossbow_common.glb-0f3cf24ecb96f4168fddd5cb8bfbbd39.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+ERROR: Failed loading resource: res://assets/gear/dungeon/crossbow_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5350)
+TWITCH_EVENTSUB bot token valid (bellmirebro), 175 min left
+TWITCH joined #jestsayin96
+TWITCH_EVENTSUB seeded subs pane with 3 subscriber(s)
+FEED V0 the dwarf knight, Delver, level 1  |  AC 18  HP 130  prof +2  to-hit +5  |  STR 16(+3) DEX 13(+1) CON 15(+2) INT 11(+0) WIS 16(+3) CHA 12(+1)  |  saves STR +5 CON +4  |  Seam-Parting Dagger (1d10), plate  |  1 potions, 0 oil, 48 gold  |  deepest floor 5, 1 kills
+ERROR: Cannot open file 'res://.godot/imported/dagger_uncommon.glb-8ea7db9d0d725f384bf618f7c2188065.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] chat_line (res://scripts/town.gd:5338)
+       [3] _say (res://tools/_u122_chron_width.gd:47)
+       [4] _process (res://tools/_u122_chron_width.gd:113)
+ERROR: Failed loading resource: res://.godot/imported/dagger_uncommon.glb-8ea7db9d0d725f384bf618f7c2188065.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] chat_line (res://scripts/town.gd:5338)
+       [3] _say (res://tools/_u122_chron_width.gd:47)
+       [4] _process (res://tools/_u122_chron_width.gd:113)
+ERROR: Failed loading resource: res://assets/gear/dungeon/dagger_uncommon.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] chat_line (res://scripts/town.gd:5338)
+       [3] _say (res://tools/_u122_chron_width.gd:47)
+       [4] _process (res://tools/_u122_chron_width.gd:113)
+ERROR: Cannot open file 'res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] chat_line (res://scripts/town.gd:5338)
+       [3] _say (res://tools/_u122_chron_width.gd:47)
+       [4] _process (res://tools/_u122_chron_width.gd:113)
+ERROR: Failed loading resource: res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] chat_line (res://scripts/town.gd:5338)
+       [3] _say (res://tools/_u122_chron_width.gd:47)
+       [4] _process (res://tools/_u122_chron_width.gd:113)
+ERROR: Failed loading resource: res://assets/gear/dungeon/shield_rare.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] chat_line (res://scripts/town.gd:5338)
+       [3] _say (res://tools/_u122_chron_width.gd:47)
+       [4] _process (res://tools/_u122_chron_width.gd:113)
+FEED V1 the elf mage, Unproven, level 1  |  AC 12  HP 42  prof +2  to-hit +6  |  STR 12(+1) DEX 14(+2) CON 10(+0) INT 18(+4) WIS 9(-1) CHA 13(+1)  |  saves INT +6 WIS +1  |  Ink-Stained Wand (1d4), rags  |  1 potions, 0 oil, 40 gold  |  deepest floor 0, 0 kills
+FEED V2 the human cleric, Delver, level 1  |  AC 19  HP 123  prof +2  to-hit +5  |  STR 16(+3) DEX 15(+2) CON 16(+3) INT 14(+2) WIS 17(+3) CHA 11(+0)  |  saves WIS +5 CHA +2  |  Rune-Banded Mace (1d10), plate  |  1 potions, 0 oil, 64 gold  |  deepest floor 5, 3 kills
+ERROR: Cannot open file 'res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] chat_line (res://scripts/town.gd:5338)
+       [3] _say (res://tools/_u122_chron_width.gd:47)
+       [4] _process (res://tools/_u122_chron_width.gd:113)
+ERROR: Failed loading resource: res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] chat_line (res://scripts/town.gd:5338)
+       [3] _say (res://tools/_u122_chron_width.gd:47)
+       [4] _process (res://tools/_u122_chron_width.gd:113)
+ERROR: Failed loading resource: res://assets/gear/dungeon/shield_rare.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] chat_line (res://scripts/town.gd:5338)
+       [3] _say (res://tools/_u122_chron_width.gd:47)
+       [4] _process (res://tools/_u122_chron_width.gd:113)
+FEED V3 the orc barbarian, Unproven, level 1  |  AC 11  HP 98  prof +2  to-hit +6  |  STR 18(+4) DEX 13(+1) CON 14(+2) INT 12(+1) WIS 12(+1) CHA 11(+0)  |  saves STR +6 CON +4  |  Rough Wood-Axe (1d4), rags  |  1 potions, 0 oil, 40 gold  |  deepest floor 0, 0 kills
+ERROR: Cannot open file 'res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] start (res://scripts/delve.gd:63)
+       [4] _process (res://tools/_u122_chron_width.gd:126)
+ERROR: Failed loading resource: res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] start (res://scripts/delve.gd:63)
+       [4] _process (res://tools/_u122_chron_width.gd:126)
+ERROR: Failed loading resource: res://assets/gear/dungeon/shield_rare.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] start (res://scripts/delve.gd:63)
+       [4] _process (res://tools/_u122_chron_width.gd:126)
+ERROR: Cannot open file 'res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] start (res://scripts/delve.gd:63)
+       [4] _process (res://tools/_u122_chron_width.gd:126)
+ERROR: Failed loading resource: res://.godot/imported/shield_rare.glb-2248b7fc78618661eeb7383c805457f1.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] start (res://scripts/delve.gd:63)
+       [4] _process (res://tools/_u122_chron_width.gd:126)
+ERROR: Failed loading resource: res://assets/gear/dungeon/shield_rare.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] start (res://scripts/delve.gd:63)
+       [4] _process (res://tools/_u122_chron_width.gd:126)
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ and 3 others descend down. The keeper tallies them in and tallies them out.
+FEED They carry 0 flasks of oil between them.
+L28C_EMITTERS floor 5 barracks: 3 (cap 12), creatures 3; lights 51 (shadowed 2)
+L28D_DECALS floor 5 barracks: 18 (cap 24)
+FEED Floor 5 - a buried town, remade as a barrack room: 1 bone bowman, 1 drowned cave spider, 1 drowned skeleton warrior, 1 skeleton mage, 1 bone sentinel.
+FEED The lane bends where no lane above bends.
+FEED The Rattling Host rises. A hundred dead men in one harness.
+FEED The dark ahead keeps roll, and the roll is long.
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ rolls a 20 for initiative and is moving before anything else.
+FEED Somewhere below, a bell with no clapper rings once. The dungeon is one floor deeper than it was.
+FEED The last lantern gutters out. They are fighting blind.
+DIRECTOR t=0.0 CUT lord_775677836453 shot=shoulder pri=101.0 why=start held_prev=0.0 pace=1.0 | lord_775677836453/shoulder=101.0(lord), fight_775677836453/shoulder=85.0(delve start hurt 0.00), chat_2104/follow=49.8(chat 1s ago), hero_1003/follow=31.1(town life), tour_0/push=10.0(quiet baseline)
+WARNING: HudDock: /root/Town/@Node3D@7479/@CanvasLayer@7481/@PanelContainer@8322 has no home (HudDock.mark) - hidden while the spotlight panes are up
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] guard (res://scripts/hud_dock.gd:285)
+       [1] _dock_hud (res://scripts/rts_camera.gd:153)
+       [2] _process (res://scripts/rts_camera.gd:197)
+RIG: no clip 'Idle_B' on Rogue_Hooded - playing its idle
+TWITCH_EVENTSUB seeded subs pane with 3 subscriber(s)
+TWITCH_EVENTSUB welcome, session AgoQuks8, keepalive 10 s
+TWITCH_EVENTSUB subscribed 7 of 7
+U122_LINE s100_k120 a=1.00 vis_clip=false lblw=434 textw=425 over_vellum=-19.1 over_panel=-73.0 bottom_over=-160.3 fs=21 "Bellmire is a hamlet now - a well dug, a"
+U122_LINE s100_k120 a=1.00 vis_clip=false lblw=434 textw=420 over_vellum=-24.1 over_panel=-78.0 bottom_over=-66.3 fs=21 "Somewhere below, a bell with no clapper "
+U122_PANE s100_k120 lines=2 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum=[P: (635.96, 400.6875), S: (648.08, 216.625)] card=true
+U122_LINE s100_k180 a=1.00 vis_clip=false lblw=434 textw=425 over_vellum=-19.1 over_panel=-73.0 bottom_over=-160.3 fs=21 "Bellmire is a hamlet now - a well dug, a"
+U122_LINE s100_k180 a=1.00 vis_clip=false lblw=434 textw=420 over_vellum=-24.1 over_panel=-78.0 bottom_over=-66.3 fs=21 "Somewhere below, a bell with no clapper "
+U122_PANE s100_k180 lines=2 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum=[P: (635.96, 400.6875), S: (648.08, 216.625)] card=true
+ERROR: Cannot open file 'res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://assets/gear/dungeon/staff_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Cannot open file 'res://.godot/imported/dagger_uncommon.glb-8ea7db9d0d725f384bf618f7c2188065.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://.godot/imported/dagger_uncommon.glb-8ea7db9d0d725f384bf618f7c2188065.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://assets/gear/dungeon/dagger_uncommon.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Cannot open file 'res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://assets/gear/dungeon/staff_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:99)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+U122_LINE s100_k240 a=1.00 vis_clip=false lblw=434 textw=425 over_vellum=-19.1 over_panel=-73.0 bottom_over=-160.3 fs=21 "Bellmire is a hamlet now - a well dug, a"
+U122_LINE s100_k240 a=1.00 vis_clip=false lblw=434 textw=420 over_vellum=-24.1 over_panel=-78.0 bottom_over=-66.3 fs=21 "Somewhere below, a bell with no clapper "
+U122_PANE s100_k240 lines=2 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum=[P: (635.96, 400.6875), S: (648.08, 216.625)] card=true
+U122_LINE s100_k300 a=1.00 vis_clip=false lblw=434 textw=425 over_vellum=-19.1 over_panel=-73.0 bottom_over=-160.3 fs=21 "Bellmire is a hamlet now - a well dug, a"
+U122_LINE s100_k300 a=1.00 vis_clip=false lblw=434 textw=420 over_vellum=-24.1 over_panel=-78.0 bottom_over=-66.3 fs=21 "Somewhere below, a bell with no clapper "
+U122_PANE s100_k300 lines=2 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum=[P: (635.96, 400.6875), S: (648.08, 216.625)] card=true
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ's bolt answers to the ground instead (8 vs DC 12).
+U122_LINE s100_k360 a=1.00 vis_clip=false lblw=434 textw=425 over_vellum=-19.1 over_panel=-73.0 bottom_over=-160.3 fs=21 "Bellmire is a hamlet now - a well dug, a"
+U122_LINE s100_k360 a=1.00 vis_clip=false lblw=434 textw=420 over_vellum=-24.1 over_panel=-78.0 bottom_over=-66.3 fs=21 "Somewhere below, a bell with no clapper "
+U122_PANE s100_k360 lines=2 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum=[P: (635.96, 400.6875), S: (648.08, 216.625)] card=true
+U122_LINE s100_k420 a=1.00 vis_clip=false lblw=434 textw=425 over_vellum=-19.1 over_panel=-73.0 bottom_over=-188.3 fs=21 "Bellmire is a hamlet now - a well dug, a"
+U122_LINE s100_k420 a=1.00 vis_clip=false lblw=434 textw=420 over_vellum=-24.1 over_panel=-78.0 bottom_over=-94.3 fs=21 "Somewhere below, a bell with no clapper "
+U122_LINE s100_k420 a=0.67 vis_clip=false lblw=434 textw=381 over_vellum=-63.1 over_panel=-117.0 bottom_over=-27.3 fs=21 "The last lantern gutters out. They are f"
+U122_PANE s100_k420 lines=3 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum=[P: (635.96, 400.6875), S: (648.08, 224.0)] card=true
+U122_LINE s100_k480 a=1.00 vis_clip=false lblw=434 textw=425 over_vellum=-19.1 over_panel=-73.0 bottom_over=-159.3 fs=21 "Bellmire is a hamlet now - a well dug, a"
+U122_LINE s100_k480 a=1.00 vis_clip=false lblw=434 textw=381 over_vellum=-63.1 over_panel=-117.0 bottom_over=-95.3 fs=21 "The last lantern gutters out. They are f"
+U122_LINE s100_k480 a=0.63 vis_clip=false lblw=434 textw=391 over_vellum=-53.1 over_panel=-107.0 bottom_over=-61.3 fs=21 "Director ON - the camera runs itself (V)"
+U122_PANE s100_k480 lines=3 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum=[P: (635.96, 400.6875), S: (648.08, 216.625)] card=true
+U122_SHOT chron_s100 (window (1920, 1080))
+U122_LINE s125_k120 a=0.98 vis_clip=false lblw=367 textw=317 over_vellum=-61.0 over_panel=-120.5 bottom_over=-70.6 fs=26 "A cart of salt wagons has been turned ba"
+U122_PANE s125_k120 lines=1 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum=[P: (643.48, 407.4375), S: (633.04, 204.125)] card=true
+U122_LINE s125_k180 a=1.00 vis_clip=false lblw=367 textw=317 over_vellum=-61.0 over_panel=-120.5 bottom_over=-70.6 fs=26 "A cart of salt wagons has been turned ba"
+U122_PANE s125_k180 lines=1 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum=[P: (643.48, 407.4375), S: (633.04, 204.125)] card=true
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ casts Fire at bone sentinel.
+U122_LINE s125_k240 a=0.64 vis_clip=false lblw=367 textw=362 over_vellum=-16.0 over_panel=-75.5 bottom_over=-70.6 fs=26 "The bells of the lower ward rang out of "
+U122_PANE s125_k240 lines=1 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum=[P: (643.48, 407.4375), S: (633.04, 204.125)] card=true
+U122_LINE s125_k300 a=1.00 vis_clip=false lblw=367 textw=362 over_vellum=-16.0 over_panel=-75.5 bottom_over=-70.6 fs=26 "The bells of the lower ward rang out of "
+U122_PANE s125_k300 lines=1 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum=[P: (643.48, 407.4375), S: (633.04, 204.125)] card=true
+U122_LINE s125_k360 a=1.00 vis_clip=false lblw=367 textw=362 over_vellum=-16.0 over_panel=-75.5 bottom_over=-70.6 fs=26 "The bells of the lower ward rang out of "
+U122_PANE s125_k360 lines=1 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum=[P: (643.48, 407.4375), S: (633.04, 204.125)] card=true
+U122_LINE s125_k420 a=1.00 vis_clip=false lblw=620 textw=576 over_vellum=-57.0 over_panel=-116.5 bottom_over=-141.6 fs=26 "A cart of salt wagons has been turned ba"
+U122_LINE s125_k420 a=1.00 vis_clip=false lblw=620 textw=607 over_vellum=-26.0 over_panel=-85.5 bottom_over=-65.6 fs=26 "The bells of the lower ward rang out of "
+U122_PANE s125_k420 lines=2 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum=[P: (643.48, 407.4375), S: (633.04, 204.125)] card=false
+U122_LINE s125_k480 a=1.00 vis_clip=false lblw=620 textw=607 over_vellum=-26.0 over_panel=-85.5 bottom_over=-141.6 fs=26 "The bells of the lower ward rang out of "
+U122_LINE s125_k480 a=1.00 vis_clip=false lblw=620 textw=591 over_vellum=-42.0 over_panel=-101.5 bottom_over=-65.6 fs=26 "Pale smoke lies low over the mill pond a"
+U122_PANE s125_k480 lines=2 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum=[P: (643.48, 407.4375), S: (633.04, 204.125)] card=false
+U122_SHOT chron_s125 (window (1920, 1080))
+DIRECTOR t=16.2 CUT fight_775677836453 shot=shoulder pri=91.9 why=max_hold held_prev=16.2 pace=1.0 | fight_775677836453/shoulder=91.9(delve start hurt 0.69), chat_2104/follow=47.9(chat 18s ago), hero_9001/follow=32.0(town life), tour_1/push=10.0(quiet baseline)
+WARNING: HudDock: /root/Town/@Node3D@7479/@CanvasLayer@7481/@PanelContainer@8606 has no home (HudDock.mark) - hidden while the spotlight panes are up
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] guard (res://scripts/hud_dock.gd:285)
+       [1] _dock_hud (res://scripts/rts_camera.gd:153)
+       [2] _process (res://scripts/rts_camera.gd:197)
+U122_LINE s150_k120 a=1.00 vis_clip=false lblw=607 textw=594 over_vellum=-27.5 over_panel=-91.8 bottom_over=-63.7 fs=28 "Corvin Thatcher, Petra Rivers, Edda the "
+U122_PANE s150_k120 lines=1 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum=[P: (649.24, 412.3125), S: (621.52, 194.875)] card=false
+DIRECTOR t=17.2 CUT lord_775677836453 shot=shoulder pri=101.0 why=lord_rises held_prev=1.0 pace=1.0 | lord_775677836453/shoulder=101.0(lord), fight_775677836453/shoulder=91.9(hurt 0.69), chat_2104/follow=47.7(chat 19s ago), hero_7102/follow=30.7(town life), tour_2/establishing=10.0(quiet baseline)
+U122_LINE s150_k180 a=1.00 vis_clip=false lblw=607 textw=594 over_vellum=-27.5 over_panel=-91.8 bottom_over=-63.7 fs=28 "Corvin Thatcher, Petra Rivers, Edda the "
+U122_PANE s150_k180 lines=1 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum=[P: (649.24, 412.3125), S: (621.52, 194.875)] card=false
+SNAPSHOT: first publish ok (200, 37860 bytes)
+U122_LINE s150_k240 a=1.00 vis_clip=false lblw=607 textw=576 over_vellum=-45.5 over_panel=-109.8 bottom_over=-67.7 fs=32 "ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ'"
+U122_PANE s150_k240 lines=1 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum=[P: (649.24, 412.3125), S: (621.52, 194.875)] card=false
+FEED iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii is badly hurt and breaks off, making for the way up.
+TWITCH_EVENTSUB D70 moment for 2104 not told (no Twitch login known): fell
+FEED iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii the barbarian falls on floor 5 to the dark below. Level 1, 1 kills. !reroll to rise again.
+U122_LINE s150_k300 a=1.00 vis_clip=false lblw=607 textw=561 over_vellum=-60.5 over_panel=-124.8 bottom_over=-51.7 fs=32 "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+U122_PANE s150_k300 lines=1 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum=[P: (649.24, 412.3125), S: (621.52, 194.875)] card=false
+U122_LINE s150_k360 a=1.00 vis_clip=false lblw=607 textw=561 over_vellum=-60.5 over_panel=-124.8 bottom_over=-51.7 fs=32 "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+U122_PANE s150_k360 lines=1 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum=[P: (649.24, 412.3125), S: (621.52, 194.875)] card=false
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ casts Bolt at skeleton mage.
+U122_LINE s150_k420 a=0.55 vis_clip=false lblw=607 textw=576 over_vellum=-45.5 over_panel=-109.8 bottom_over=-93.7 fs=32 "Dunn the Younger swings a stick at a lor"
+U122_PANE s150_k420 lines=1 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum=[P: (649.24, 412.3125), S: (621.52, 194.875)] card=false
+U122_LINE s150_k480 a=1.00 vis_clip=false lblw=607 textw=576 over_vellum=-45.5 over_panel=-109.8 bottom_over=-93.7 fs=32 "Dunn the Younger swings a stick at a lor"
+U122_PANE s150_k480 lines=1 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum=[P: (649.24, 412.3125), S: (621.52, 194.875)] card=false
+U122_SHOT chron_s150 (window (1920, 1080))
+U122_DONE checks=118 fails=0

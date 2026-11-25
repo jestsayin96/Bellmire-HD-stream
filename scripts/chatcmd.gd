@@ -26,6 +26,22 @@ signal twitch_reply(user_login: String, text: String)
 const COOLDOWN := 1.5          # seconds per viewer, anti-spam
 const QUEUE_MAX := 6
 
+## B104: THE COUNTER SET - every command that puts a viewer in front of a shopkeeper. A hero on
+## the scar road or below it is refused with where they are instead of being dragged back to a
+## till. This was a bare list inside handle() and it was MISSING `oil`: every other haggled
+## purchase refused while a hero was away, and the chandler sold flasks to a hero standing in
+## the dark. `fish` is here too and is not a purchase - it walks a hero to the docks, which is
+## the same thing being refused. The COUNTER AWAY guard below reads scripts/roster.gd and holds
+## this list to the engine's own haggle() sites, so a new shop cannot be added to the game
+## without this gate hearing about it.
+## `armory` is the one ALIAS kept as a literal here, exactly as the old list had it. handle()
+## canonicalises before this gate, so the alias would normally arrive as `armoury` and the
+## literal is redundant - but canonical() reads data/commands.json, and if that file ever fails
+## to parse the alias arrives verbatim and the till is reached ungated. Keeping it costs one
+## string and removes that path. The guard below only asks that every counter KEY is present, so
+## an alias sitting in this list is not a fault.
+const AWAY_COUNTERS := ["fish", "forge", "armoury", "armory", "brew", "oil", "wear", "dye"]
+
 const C_OK := Color(0.72, 0.95, 0.76)
 const C_INFO := Color(0.80, 0.88, 1.00)
 const C_WARN := Color(1.00, 0.72, 0.42)
@@ -126,7 +142,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
 
     var out := ""
     var gold0 := int(h.get("gold", 0)) if not h.is_empty() else -1      # S3: money that moves chinks
-    if verb in ["fish", "forge", "armoury", "armory", "brew", "wear", "dye"] and away.has(user_id) and not h.is_empty():
+    if verb in AWAY_COUNTERS and away.has(user_id) and not h.is_empty():
         _last[user_id] = now
         last_cmd[user_id] = now
         return _reply(user_id, display, login, "%s is %s." % [h["name"], away[user_id]])
@@ -172,6 +188,8 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                     out = _hub()
         "satchel", "sell", "prices":
                     out = _satchel_line()
+        "caravan", "trader", "cargo":
+                    out = _caravan_line()
         "festival", "feast":
                     out = _festival_line()
         "town", "bellmire":
@@ -512,6 +530,14 @@ func _armour_line(user_id: String) -> String:
 
 func _satchel_line() -> String:
     return "The counter pays two fifths of shop cost for anything you own and are not wearing." + _hub_tail()
+
+## B100: the caravan. town.gd brings a master up the west road with a wagon every 70-120 s, holds
+## him at the market, settles the trade against the economy's own prices (sells the town a good
+## priced over 1.12x base while the treasury is over 80, buys back anything over 90 in store) and
+## walks him out. A festival shortens the wait. !festival already named the caravan and nothing
+## answered when a viewer asked after it. READ-ONLY: this command trades nothing and calls nothing.
+func _caravan_line() -> String:
+    return "A caravan comes up the west road with a wagon and stands at the market. It sells the town what the town is short of, buys up the surplus, and takes the road back out. A festival brings one sooner." + _hub_tail()
 
 ## D63: a festival is an event with a reason. A paid one is named for whoever paid.
 func _festival_line() -> String:
@@ -968,6 +994,58 @@ static func commands() -> Dictionary:
                 _guard_faults.append("ORDER GHOST")
                 push_error("COMMANDS_DATA ORDER GHOST: `order` names %d key(s) no command answers: %s" % [ghost.size(), ghost])
                 printerr("COMMANDS_DATA ORDER GHOST - `order` names %d dead key(s): %s" % [ghost.size(), ghost])
+        # B108: THE ALIAS COLUMN HAS BEEN PUBLISHED SINCE L14 AND NO ARM HAS EVER READ IT.
+        # I grepped my own file for an ALIAS tag before writing this - rc=1, no arm - and
+        # tools/_l14_test.gd:97-100 asks only whether an alias collides with ANOTHER APP's
+        # words, never whether it routes HERE. canonical() (:2996) is the only router: it
+        # returns `word` when `commands` already has it, otherwise the first key whose
+        # `aliases` list holds it. docs/COMMANDS.md publishes every alias as a route a viewer
+        # can type, so an alias that does not route is a published lie, and all four shapes
+        # below are silent in every gate today. Not fatal - the command still answers under
+        # its own name - so each says it out loud and carries on, the shape `order` uses above.
+        var al_bad: Array = []          # `aliases` is not an array: canonical() would call
+                                        # .has() on Nil and EVERY command stops routing
+        var al_shadow: Array = []       # the alias is also a command key, so cs.has(word)
+                                        # wins first and the alias never reaches this command
+        var al_clash: Array = []        # the same alias on two commands: whichever key the
+                                        # dictionary walks first wins, silently
+        var al_dead: Array = []         # handle() lowercases and splits on whitespace before
+                                        # canonical(), so upper case/blank/padded never arrives
+        var al_seen: Dictionary = {}
+        for k in cmd_d:
+            var av: Variant = (cmd_d[k] as Dictionary).get("aliases", [])
+            if typeof(av) != TYPE_ARRAY:
+                al_bad.append(String(k))
+                continue
+            for a in (av as Array):
+                if typeof(a) != TYPE_STRING:
+                    al_dead.append("%s:<%s>" % [k, type_string(typeof(a))])
+                    continue
+                var al_s := String(a)
+                if al_s.is_empty() or al_s != al_s.to_lower() or al_s.strip_edges() != al_s or al_s.contains(" "):
+                    al_dead.append("%s:%s" % [k, al_s])
+                if cmd_d.has(al_s):
+                    al_shadow.append("%s:%s" % [k, al_s])
+                if al_seen.has(al_s):
+                    al_clash.append("%s:%s (already %s)" % [k, al_s, al_seen[al_s]])
+                else:
+                    al_seen[al_s] = k
+        if not al_bad.is_empty():
+            _guard_faults.append("ALIAS UNUSABLE")
+            push_error("COMMANDS_DATA ALIAS UNUSABLE: `aliases` is not an array on %d command(s) - canonical() cannot route at all: %s" % [al_bad.size(), al_bad])
+            printerr("COMMANDS_DATA ALIAS UNUSABLE - `aliases` not an array on %d command(s): %s" % [al_bad.size(), al_bad])
+        if not al_shadow.is_empty():
+            _guard_faults.append("ALIAS SHADOW")
+            push_error("COMMANDS_DATA ALIAS SHADOW: %d alias(es) are also command keys, so they answer that command and never this one: %s" % [al_shadow.size(), al_shadow])
+            printerr("COMMANDS_DATA ALIAS SHADOW - %d alias(es) shadowed by a command key: %s" % [al_shadow.size(), al_shadow])
+        if not al_clash.is_empty():
+            _guard_faults.append("ALIAS CLASH")
+            push_error("COMMANDS_DATA ALIAS CLASH: %d alias(es) are declared on two commands and route by dictionary order: %s" % [al_clash.size(), al_clash])
+            printerr("COMMANDS_DATA ALIAS CLASH - %d alias(es) declared twice: %s" % [al_clash.size(), al_clash])
+        if not al_dead.is_empty():
+            _guard_faults.append("ALIAS DEAD")
+            push_error("COMMANDS_DATA ALIAS DEAD: %d published alias(es) can never reach canonical() as written: %s" % [al_dead.size(), al_dead])
+            printerr("COMMANDS_DATA ALIAS DEAD - %d published alias(es) unreachable: %s" % [al_dead.size(), al_dead])
         # B23: the earnability pass run over my own files. Every guard above stops at the key
         # it names, and five live reads sit one level below them. `ask` being a non-empty
         # dictionary says nothing about `topics`, and `ask.order` is the same instrument as
@@ -1299,6 +1377,77 @@ static func commands() -> Dictionary:
             _guard_faults.append("SATCHEL RATE")
             push_error("COMMANDS_DATA SATCHEL RATE: `satchel`.what publishes \"%s\" (%s) of shop cost and SELL_BACK pays %s - docs/COMMANDS.md prices a viewer's satchel at money the counter does not pay; %s" % [s_phrase, str(s_said), str(s_panel), s_tip])
             printerr("COMMANDS_DATA SATCHEL RATE - published \"%s\" (%s), enforced %s" % [s_phrase, str(s_said), str(s_panel)])
+        # B96: THE SAME NUMBER, SAID IN THREE PLACES, AND THE GUARD ABOVE READS ONE OF THEM.
+        # The three paths above check `satchel`.what and nothing else. `satchel`.what is the ONLY
+        # one of the three that reaches docs/COMMANDS.md, and that is exactly why it is the only
+        # one that was ever checked - the drift arms are built around what the generator
+        # publishes. But the sell-back rate is stated to a viewer in THREE places in my own file:
+        #   `satchel`.what    "two fifths of its shop cost"  -> published, GATED above.
+        #   `satchel`.short   "two fifths of shop cost"      -> chat only. `help_line()` sends it
+        #                       verbatim on `!help satchel`; the generator does not publish
+        #                       `short` AT ALL (B95's finding), so no drift arm can see it.
+        #   `ask.gold`.reply  "pays two fifths of shop cost"  -> answered to a plain question in
+        #                       chat by the `ask` tree. The ASK arms above check that topics have
+        #                       phrases and are not mute; NOTHING reads what an answer SAYS.
+        # SO THE FAILURE IS CONCRETE, not theoretical: change SELL_BACK to 0.3 and the RATE arm
+        # goes red on `.what` alone. A lane fixes `.what`, the gate goes green, and `!help satchel`
+        # and every plain "how do I get gold" answer keep paying a viewer two fifths at a counter
+        # that pays three tenths. A GREEN GATE BESIDE A WRONG SENTENCE IS THE FAULT CLASS THE LEAD
+        # NAMED AT 23:58 - it is the one the art lane fixed this hour and the one B95 found in this
+        # very file. Here it is a THIRD time, and twice over in one value.
+        # THE ARM: sweep every viewer-facing string my file owns - `short` and `what` on all 31
+        # commands, and every `ask` topic `reply` - for a known fraction phrase in front of
+        # "of shop cost" or "of its shop cost", and require EVERY site to state SELL_BACK. The
+        # vocabulary is `s_words`, already built above; this adds no second table to drift.
+        # It does NOT fire when SPLIT fired: with two disagreeing authorities there is no rate to
+        # check any site against, and saying so once is the honest reading.
+        if absf(s_panel - s_pub) <= 0.0005:
+            var se_tails: Array[String] = [" of its shop cost", " of shop cost"]
+            var se_sites: Array = []
+            for se_k in cmd_d:
+                var se_row: Dictionary = cmd_d[se_k] as Dictionary
+                for se_f in ["short", "what"]:
+                    if se_row.has(se_f):
+                        se_sites.append(["`%s`.%s" % [String(se_k), se_f], String(se_row[se_f])])
+            var se_ask: Dictionary = (ask_d if ask_d is Dictionary else {}) as Dictionary
+            var se_top: Dictionary = se_ask.get("topics", {}) as Dictionary
+            for se_t in se_top:
+                var se_tr: Dictionary = se_top[se_t] as Dictionary
+                if se_tr.has("reply"):
+                    se_sites.append(["`ask.%s`.reply" % String(se_t), String(se_tr["reply"])])
+            var se_bad: Array = []
+            var se_seen: int = 0
+            for se_pair in se_sites:
+                var se_name: String = String((se_pair as Array)[0])
+                var se_text: String = String((se_pair as Array)[1]).to_lower()
+                for se_tail in se_tails:
+                    var se_from: int = 0
+                    while true:
+                        var se_at: int = se_text.find(se_tail, se_from)
+                        if se_at < 0:
+                            break
+                        se_from = se_at + 1
+                        # " of shop cost" is a suffix of " of its shop cost"; count the longer
+                        # tail only, or every `.what` is reported twice for one sentence.
+                        if se_tail == " of shop cost" and se_text.substr(0, se_at).ends_with(" of its"):
+                            continue
+                        var se_head: String = se_text.substr(0, se_at)
+                        var se_ph := ""
+                        var se_val: float = -1.0
+                        for se_w in s_words:
+                            var se_ws := String(se_w)
+                            if se_head.ends_with(se_ws) and se_ws.length() > se_ph.length():
+                                se_ph = se_ws
+                                se_val = float(s_words[se_w])
+                        if se_val < 0.0:
+                            continue   # no phrase this guard knows; ANCHOR is the arm for that
+                        se_seen += 1
+                        if absf(se_val - s_panel) > 0.0005:
+                            se_bad.append("%s says \"%s\" (%s)" % [se_name, se_ph, str(se_val)])
+            if not se_bad.is_empty():
+                _guard_faults.append("SATCHEL ECHO")
+                push_error("COMMANDS_DATA SATCHEL ECHO: %d viewer-facing site(s) state a sell-back rate that is not SELL_BACK (%s) - a viewer reads one number and is paid another, and only `satchel`.what is covered by the RATE arm above: %s" % [se_bad.size(), str(s_panel), ", ".join(PackedStringArray(se_bad))])
+                printerr("COMMANDS_DATA SATCHEL ECHO - %d site(s) off SELL_BACK %s: %s" % [se_bad.size(), str(s_panel), ", ".join(PackedStringArray(se_bad))])
         # B37: THE ARMOURY - CHOSEN ON SHAPE, AND THE ONLY CLAIM LEFT WHERE *MY OWN FILE*
         # DECLARES THE SAME LADDER TWICE. The row let me pick on shape over size. This one wins
         # on all three of the shapes the row named, which is why it beat the two smaller ones:
@@ -1314,6 +1463,11 @@ static func commands() -> Dictionary:
         #   nothing in the house compared them. So one guard covers the NAMES and THE MONEY.
         #   AN AUTHORITY IN A FILE I DO NOT OWN - scripts/gear.gd is the GAME BUILD's, and it holds
         #   TWO tables, not one: Gear.ARMOUR (names, costs, the found-only flag) and
+        ##  B103 CORRECTS THE LINE BELOW AND THE THREE ARMS THAT TRUSTED IT: Gear.ARMOUR is NOT
+        ##  the authority for the ladder, the prices or the found-only flag, because NO SHOP READS
+        ##  IT. `Roster.buy_armour` charges `Roster.ARMOUR` (roster.gd:183). The ladder, COST and
+        ##  FOUND arms below now read Roster.ARMOUR; only ARMOUR_LOOK is still Gear's, and that
+        ##  one is correct - it has no second copy. See the B103 block at the end of this guard.
         #   Gear.ARMOUR_LOOK (which pieces actually show, per tier). A tier added there is exactly
         #   how `greataxe` (S20) and `sceptre` (D94b) reached the smithy unpublished.
         # AND IT CORRECTS MY OWN LANE'S RECORD. B36's leftovers list said this claim's authority
@@ -1356,7 +1510,7 @@ static func commands() -> Dictionary:
         var a_real: Array = []
         var a_real_cost: Array = []
         var a_found: Array = []
-        for a_row in Gear.ARMOUR:
+        for a_row in Roster.ARMOUR:
             var a_r: Dictionary = a_row
             var a_nm := String(a_r.get("name", "")).to_lower()
             if a_nm == "":
@@ -1402,25 +1556,25 @@ static func commands() -> Dictionary:
                     a_real_pc.append(String(a_k))
         if a_said.is_empty():
             _guard_faults.append("ARMOURY ANCHOR")
-            push_error("COMMANDS_DATA ARMOURY ANCHOR: `armoury`.what no longer carries \"%s\" - the published armour ladder can no longer be checked against Gear.ARMOUR (%s), and neither can the prices" % [a_anchor, a_real])
+            push_error("COMMANDS_DATA ARMOURY ANCHOR: `armoury`.what no longer carries \"%s\" - the published armour ladder can no longer be checked against Roster.ARMOUR (%s), and neither can the prices" % [a_anchor, a_real])
             printerr("COMMANDS_DATA ARMOURY ANCHOR - `armoury`.what lost its \"%s\" anchor; the ladder and the prices are now unchecked" % a_anchor)
         else:
             if a_said_short != a_said:
                 var a_sp_tip: String = "`armoury`.short no longer carries the ladder at all" if a_said_short.is_empty() else "short says %s" % str(a_said_short)
                 _guard_faults.append("ARMOURY SPLIT")
-                push_error("COMMANDS_DATA ARMOURY SPLIT: the armour ladder is declared TWICE in data/commands.json and the two no longer agree - `armoury`.what says %s and %s, so !armoury's reply and docs/COMMANDS.md promise different tiers and no single published ladder exists to check against Gear.ARMOUR" % [str(a_said), a_sp_tip])
+                push_error("COMMANDS_DATA ARMOURY SPLIT: the armour ladder is declared TWICE in data/commands.json and the two no longer agree - `armoury`.what says %s and %s, so !armoury's reply and docs/COMMANDS.md promise different tiers and no single published ladder exists to check against Roster.ARMOUR" % [str(a_said), a_sp_tip])
                 printerr("COMMANDS_DATA ARMOURY SPLIT - what %s vs short %s; no single published ladder" % [str(a_said), str(a_said_short)])
             if a_said != a_real:
                 var a_unsaid: Array = a_real.filter(func(n): return not a_said.has(n))
                 var a_ghost2: Array = a_said.filter(func(n): return not a_real.has(n))
                 var a_tip: String = "same names, WRONG ORDER - a ladder's order is the claim" if (a_unsaid.is_empty() and a_ghost2.is_empty()) else "unpublished: %s; invented: %s" % [str(a_unsaid), str(a_ghost2)]
                 _guard_faults.append("ARMOURY LADDER")
-                push_error("COMMANDS_DATA ARMOURY LADDER: `armoury`.what publishes %s and Gear.ARMOUR sells %s - docs/COMMANDS.md does not describe the armour a viewer can actually buy; %s" % [str(a_said), str(a_real), a_tip])
+                push_error("COMMANDS_DATA ARMOURY LADDER: `armoury`.what publishes %s and Roster.ARMOUR sells %s - docs/COMMANDS.md does not describe the armour a viewer can actually buy; %s" % [str(a_said), str(a_real), a_tip])
                 printerr("COMMANDS_DATA ARMOURY LADDER - published %s, sold %s; %s" % [str(a_said), str(a_real), a_tip])
             if a_said_cost != a_real_cost:
                 var a_ctip: String = "`armoury`.cost no longer states a slash-separated price ladder" if a_said_cost.is_empty() else "published %d price(s) against %d tier(s)" % [a_said_cost.size(), a_real_cost.size()]
                 _guard_faults.append("ARMOURY COST")
-                push_error("COMMANDS_DATA ARMOURY COST: `armoury`.cost publishes %s gold by tier and Gear.ARMOUR charges %s - a viewer is quoted a price the shop does not take; %s" % [str(a_said_cost), str(a_real_cost), a_ctip])
+                push_error("COMMANDS_DATA ARMOURY COST: `armoury`.cost publishes %s gold by tier and Roster.ARMOUR charges %s - a viewer is quoted a price the shop does not take; %s" % [str(a_said_cost), str(a_real_cost), a_ctip])
                 printerr("COMMANDS_DATA ARMOURY COST - published %s, charged %s" % [str(a_said_cost), str(a_real_cost)])
             if a_said_pc != a_real_pc:
                 var a_ptip: String = "`armoury`.what no longer carries \"It shows: \"" if a_said_pc.is_empty() else "published %s" % str(a_said_pc)
@@ -1432,7 +1586,7 @@ static func commands() -> Dictionary:
             if not a_sold_found.is_empty() or not a_mute_found.is_empty():
                 var a_ftip: String = "named in the buy ladder though it cannot be bought: %s" % str(a_sold_found) if not a_sold_found.is_empty() else "found-only armour `armoury`.what never mentions: %s" % str(a_mute_found)
                 _guard_faults.append("ARMOURY FOUND")
-                push_error("COMMANDS_DATA ARMOURY FOUND: Gear.ARMOUR marks %s as found-only (cost 0, `found` true) and `armoury`.what does not tell that truth - %s" % [str(a_found), a_ftip])
+                push_error("COMMANDS_DATA ARMOURY FOUND: Roster.ARMOUR marks %s as found-only (cost 0, `found` true) and `armoury`.what does not tell that truth - %s" % [str(a_found), a_ftip])
                 printerr("COMMANDS_DATA ARMOURY FOUND - found-only %s; %s" % [str(a_found), a_ftip])
         # B38: THE BREW - CHOSEN ON SHAPE AGAIN, AND ITS AUTHORITIES SIT IN TWO FILES I DO NOT
         # OWN. The row let me choose on shape over size; `brew` beat the three small ones that
@@ -2345,8 +2499,601 @@ static func commands() -> Dictionary:
                     _guard_faults.append("NEEDS_HERO EXEMPT")
                     push_error("COMMANDS_DATA NEEDS_HERO EXEMPT: %s now route(s) through the living-hero gate, and it was carved out of this guard precisely because it must not - a dead viewer can no longer raise a new hero, which is the one thing that command exists to do" % [nh_broke])
                     printerr("COMMANDS_DATA NEEDS_HERO EXEMPT - %s now gates on a LIVING hero; revival is broken for every dead viewer" % [nh_broke])
+        # ---- B101: THE FIVE SPECIAL BUILDINGS !town NAMES. -------------------------------
+        # A CLAIM ON MY OWN SURFACE THAT NOTHING HAS EVER CHECKED, AND IT IS A SECOND COPY OF
+        # SOMEBODY ELSE'S TABLE SITTING IN MY OWN FILE. `_town_line()` turns the growth lane's
+        # special-building KEYS into words through `TOWN_BUILT`, declared in this file - and the
+        # lookup is `TOWN_BUILT.get(String(k), "")` with an EMPTY-STRING fallback that is then
+        # skipped. So if the growth lane adds a sixth special, or renames one of the five keys,
+        # the building is SILENTLY DROPPED OFF THE !town LINE: no crash, no log line, no wrong
+        # word on screen - just a building a viewer built and the bot never mentions, while
+        # `town`.what goes on naming all five to them. Same fault class as the MB_NAME map and
+        # the satchel split, and it is the reason this arm exists.
+        # THE AUTHORITY IS `UNLOCK` IN scripts/growth.gd, READ OFF THE SCRIPT, NOT COPIED.
+        # growth.gd carries no `class_name`, so there is no global to reach it by; the constant
+        # comes out of the script's own constant map, which is the lane's declaration itself. If
+        # the growth lane ever renames UNLOCK the AUTHORITY arm fires, rather than this guard
+        # scoring a green off an empty table - a guard that cannot read its authority must say so.
+        var tb_unlock: Dictionary = {}
+        if ResourceLoader.exists("res://scripts/growth.gd"):
+            var tb_script: Variant = load("res://scripts/growth.gd")
+            if tb_script is Object and (tb_script as Object).has_method("get_script_constant_map"):
+                var tb_cm: Variant = (tb_script as Object).call("get_script_constant_map")
+                if tb_cm is Dictionary:
+                    var tb_raw: Variant = (tb_cm as Dictionary).get("UNLOCK", null)
+                    if tb_raw is Dictionary:
+                        tb_unlock = tb_raw as Dictionary
+        # the names `town`.what publishes, read out of the sentence rather than assumed
+        var tw: String = String(((cmd_d.get("town", {}) as Dictionary)).get("what", ""))
+        var tb_lead := "which of "
+        var tb_tail := " are open"
+        var tb_said: Array[String] = []
+        var tb_a: int = tw.find(tb_lead)
+        var tb_b: int = tw.find(tb_tail)
+        if tb_a >= 0 and tb_b > tb_a:
+            var tb_list: String = tw.substr(tb_a + tb_lead.length(), tb_b - tb_a - tb_lead.length())
+            for tb_part in tb_list.replace(" and ", ", ").split(","):
+                var tb_p := String(tb_part).strip_edges()
+                if tb_p.begins_with("the "):
+                    tb_p = tb_p.substr(4).strip_edges()
+                if tb_p != "":
+                    tb_said.append(tb_p)
+        # the words my own table would actually print, with the article stripped the same way
+        var tb_mine: Array[String] = []
+        for tb_k in TOWN_BUILT.keys():
+            var tb_w := String(TOWN_BUILT[tb_k]).strip_edges()
+            if tb_w.begins_with("the "):
+                tb_w = tb_w.substr(4).strip_edges()
+            if tb_w != "":
+                tb_mine.append(tb_w)
+        if tb_unlock.is_empty():
+            _guard_faults.append("TOWN SPECIALS AUTHORITY")
+            push_error("COMMANDS_DATA TOWN SPECIALS AUTHORITY: scripts/growth.gd carries no readable `UNLOCK` dictionary, so the specials the growth lane can open cannot be read at all - the %d name(s) in this file's own TOWN_BUILT table and the %d `town`.what publishes are both unanchored, and a sixth building would reach a viewer's town with nothing here to name it" % [tb_mine.size(), tb_said.size()])
+            printerr("COMMANDS_DATA TOWN SPECIALS AUTHORITY - growth.gd has no readable UNLOCK; TOWN_BUILT (%d) and `town`.what (%d) are unchecked" % [tb_mine.size(), tb_said.size()])
+        else:
+            var tb_unnamed: Array[String] = []
+            var tb_ghost: Array[String] = []
+            for tb_u in tb_unlock.keys():
+                if String(TOWN_BUILT.get(String(tb_u), "")) == "":
+                    tb_unnamed.append(String(tb_u))
+            for tb_m in TOWN_BUILT.keys():
+                if not tb_unlock.has(String(tb_m)):
+                    tb_ghost.append(String(tb_m))
+            if not tb_unnamed.is_empty():
+                _guard_faults.append("TOWN SPECIALS UNNAMED")
+                push_error("COMMANDS_DATA TOWN SPECIALS UNNAMED: the growth lane can open %d special(s) this file's TOWN_BUILT table has no word for - %s - and `_town_line()` skips a key it cannot name, so a viewer builds it and !town never says it stands while `town`.what still promises it by name" % [tb_unnamed.size(), tb_unnamed])
+                printerr("COMMANDS_DATA TOWN SPECIALS UNNAMED - %d unlockable special(s) TOWN_BUILT drops in silence: %s" % [tb_unnamed.size(), tb_unnamed])
+            if not tb_ghost.is_empty():
+                _guard_faults.append("TOWN SPECIALS GHOST")
+                push_error("COMMANDS_DATA TOWN SPECIALS GHOST: TOWN_BUILT carries %d name(s) keyed on a special the growth lane never unlocks - %s - so that word can never print on the !town line, and the table looks complete while being short by that many live keys" % [tb_ghost.size(), tb_ghost])
+                printerr("COMMANDS_DATA TOWN SPECIALS GHOST - %d TOWN_BUILT key(s) nothing can open: %s" % [tb_ghost.size(), tb_ghost])
+            if tb_said.is_empty():
+                _guard_faults.append("TOWN SPECIALS ANCHOR")
+                push_error("COMMANDS_DATA TOWN SPECIALS ANCHOR: `town`.what no longer says \"which of <buildings> are open\" - the buildings docs/COMMANDS.md tells a viewer !town will name can no longer be checked against the words TOWN_BUILT prints, so a dropped building would go unpublished in silence")
+                printerr("COMMANDS_DATA TOWN SPECIALS ANCHOR - `town`.what lost its \"which of ... are open\" list; the published buildings are now unchecked")
+            else:
+                var tb_said_ghost: Array[String] = []
+                var tb_said_miss: Array[String] = []
+                for tb_s in tb_said:
+                    if not tb_mine.has(tb_s):
+                        tb_said_ghost.append(tb_s)
+                for tb_v in tb_mine:
+                    if not tb_said.has(tb_v):
+                        tb_said_miss.append(tb_v)
+                if not tb_said_ghost.is_empty():
+                    _guard_faults.append("TOWN SPECIALS SAID GHOST")
+                    push_error("COMMANDS_DATA TOWN SPECIALS SAID GHOST: `town`.what names %d building(s) the !town line can never print - %s - the words it does print are %s, so docs/COMMANDS.md sends a viewer looking for a building that is not on the line" % [tb_said_ghost.size(), tb_said_ghost, tb_mine])
+                    printerr("COMMANDS_DATA TOWN SPECIALS SAID GHOST - %d published building(s) nothing prints: %s" % [tb_said_ghost.size(), tb_said_ghost])
+                if not tb_said_miss.is_empty():
+                    _guard_faults.append("TOWN SPECIALS SAID SHORT")
+                    push_error("COMMANDS_DATA TOWN SPECIALS SAID SHORT: the !town line can print %d building(s) `town`.what never names - %s - so a viewer reads docs/COMMANDS.md, learns which buildings the command reports, and is told about fewer than it reports" % [tb_said_miss.size(), tb_said_miss])
+                    printerr("COMMANDS_DATA TOWN SPECIALS SAID SHORT - %d printable building(s) unpublished: %s" % [tb_said_miss.size(), tb_said_miss])
+        # ---- B101: THE CARAVAN COUNT, AND IT IS SPELLED OUT IN WORDS. ---------------------
+        # `caravan`.what states THREE things about the content writer's manifest list: how many
+        # carts are written, that each carries a name / a road it came from / a load, and that
+        # the town's growth decides which can turn up. The team lead verified all three BY HAND
+        # at 04:58 - which is exactly why this arm is worth writing: a claim that needs a human
+        # to re-count it every hour is an unguarded claim. The authority is data/items.json
+        # `caravan_manifests.caravans`, the CONTENT lane's file, read through `Roster.items()` -
+        # the same accessor the dye and wear arms use - and town.gd:6203 reads the same rows.
+        # THE NUMBER IS A WORD, NOT A DIGIT: "Twenty-eight". No digit search in the house would
+        # ever have found it, which is why the satchel arm's word table had to be joined by one
+        # for whole numbers - `_word_int` below.
+        # THE GROWTH CLAUSE IS THE SUBTLE ONE. town.gd:6207 tests
+        # `int(m.get("first_tier", 99)) <= economy.town_level`, and the growth ladder tops out at
+        # 6, so a row carrying no `first_tier` can NEVER turn up: it is written and unreachable.
+        # My sentence counts it as written. A quiet half-truth, not a crash, so it gets its own
+        # arm rather than a mention in a comment.
+        var cv_rows: Array = []
+        var cv_man: Variant = (Roster.items().get("caravan_manifests", {}) as Dictionary).get("caravans", [])
+        if cv_man is Array:
+            cv_rows = cv_man as Array
+        var cw: String = String(((cmd_d.get("caravan", {}) as Dictionary)).get("what", ""))
+        var cv_tail := " carts are written"
+        var cv_said: int = -1
+        var cv_phrase := ""
+        var cv_at: int = cw.find(cv_tail)
+        if cv_at > 0:
+            var cv_head: String = cw.substr(0, cv_at)
+            var cv_sp: int = cv_head.rfind(" ")
+            cv_phrase = (cv_head.substr(cv_sp + 1) if cv_sp >= 0 else cv_head).strip_edges()
+            cv_said = _word_int(cv_phrase)
+        if cv_rows.is_empty():
+            _guard_faults.append("CARAVAN AUTHORITY")
+            push_error("COMMANDS_DATA CARAVAN AUTHORITY: data/items.json carries no `caravan_manifests.caravans` rows, so every cart that comes up the west road is an unnamed crossing (town.gd reads the same list) and `caravan`.what counts carts that are not written")
+            printerr("COMMANDS_DATA CARAVAN AUTHORITY - items.json has no caravan_manifests.caravans rows; the published count is unanchored")
+        elif cv_said < 0:
+            _guard_faults.append("CARAVAN ANCHOR")
+            push_error("COMMANDS_DATA CARAVAN ANCHOR: `caravan`.what no longer says \"<number> carts are written\" in words this guard can read (it reads \"%s\") - the number of manifests docs/COMMANDS.md publishes can no longer be checked against the %d row(s) in data/items.json" % [cv_phrase, cv_rows.size()])
+            printerr("COMMANDS_DATA CARAVAN ANCHOR - `caravan`.what lost its \"<number> carts are written\" phrase (read \"%s\"); the count is now unchecked" % cv_phrase)
+        else:
+            if cv_said != cv_rows.size():
+                _guard_faults.append("CARAVAN COUNT")
+                push_error("COMMANDS_DATA CARAVAN COUNT: `caravan`.what publishes \"%s\" (%d) carts and data/items.json carries %d manifest row(s) - docs/COMMANDS.md counts the content writer's carts wrong, and the number is spelled out in words so no digit search would ever find it" % [cv_phrase, cv_said, cv_rows.size()])
+                printerr("COMMANDS_DATA CARAVAN COUNT - published \"%s\" (%d), rows %d" % [cv_phrase, cv_said, cv_rows.size()])
+            var cv_short: Array[String] = []
+            var cv_notier: Array[String] = []
+            for cv_i in cv_rows.size():
+                var cv_r: Variant = cv_rows[cv_i]
+                var cv_id := "row %d" % cv_i
+                if not (cv_r is Dictionary):
+                    cv_short.append("%s (not a row)" % cv_id)
+                    continue
+                var cv_d: Dictionary = cv_r as Dictionary
+                cv_id = String(cv_d.get("id", cv_id))
+                var cv_lack: Array[String] = []
+                if String(cv_d.get("name", "")).strip_edges() == "":
+                    cv_lack.append("name")
+                if String(cv_d.get("origin", "")).strip_edges() == "":
+                    cv_lack.append("origin")
+                if not (cv_d.get("cargo", null) is Array) or (cv_d["cargo"] as Array).is_empty():
+                    cv_lack.append("cargo")
+                if not cv_lack.is_empty():
+                    cv_short.append("%s: %s" % [cv_id, ", ".join(PackedStringArray(cv_lack))])
+                if not cv_d.has("first_tier"):
+                    cv_notier.append(cv_id)
+            if not cv_short.is_empty():
+                _guard_faults.append("CARAVAN FIELDS")
+                push_error("COMMANDS_DATA CARAVAN FIELDS: `caravan`.what promises every cart carries a name, a road it came from and a load, and %d row(s) in data/items.json are missing one of the three - %s - so !caravan publishes a promise the manifest list does not keep" % [cv_short.size(), cv_short])
+                printerr("COMMANDS_DATA CARAVAN FIELDS - %d row(s) short of name/origin/cargo: %s" % [cv_short.size(), cv_short])
+            if not cv_notier.is_empty():
+                _guard_faults.append("CARAVAN TIER")
+                push_error("COMMANDS_DATA CARAVAN TIER: %d manifest row(s) carry no `first_tier` - %s - and town.gd:6207 reads a missing one as 99, above every growth level, so those carts are written and can NEVER turn up; `caravan`.what counts them among the %d it tells a viewer are waiting on the road" % [cv_notier.size(), cv_notier, cv_said])
+                printerr("COMMANDS_DATA CARAVAN TIER - %d row(s) with no first_tier can never be drawn: %s" % [cv_notier.size(), cv_notier])
+        # B102: THE LAST OF B34's FOUR NUMERIC CLAIMS, AND A HALF-TRUTH FOUND WHILE READING FOR IT.
+        # B35 listed four `what` claims carrying a number. `look` (B35), `satchel` (B36, echoed
+        # B96) and `bestiary`'s eight lords (BESTIARY LORDS above) are all gated. The fourth was
+        # left with a reason written at line 1223: `oil`.what "two delvers" is a burn RATE in
+        # delve.gd with NO CONSTANT TO READ. That reason still holds and I am not pretending
+        # otherwise - see the ASK at the bottom of this block.
+        # WHAT I DID READ, BY HAND, THIS RUN, off scripts/delve.gd on the merged tree:
+        #   :161  `oil = maxf(0.0, oil - float(maxi(1, int(ceil(float(alive_now) * 0.5)))))`
+        #         - one flask per two bodies a floor, AND A FLOOR NEVER COSTS LESS THAN ONE
+        #           FLASK, however few go down. `maxi(1, ...)` is that minimum.
+        #   :2453 `oil = maxf(0.0, oil - 0.5)` - half a flask more to search a room.
+        #   :78-80 every hero's flasks are added to one party total and their own count is SET TO
+        #         ZERO at the mouth; :80 then says in the game's own voice "They carry %d flasks of
+        #         oil between them." delve.gd's own docstring (:26-27) says the same: "Each hero
+        #         empties their own satchel into the party's at the mouth".
+        # SO `oil`.what WAS RIGHT AND INCOMPLETE, and `delve`.what WAS WRONG. It said "Everyone
+        # carries their own oil", which reads to a viewer as: my flasks light me, and a hero who
+        # brought none goes dark alone. The engine pools them - a hero with no oil descends on the
+        # party's pool, and a hero who brought three loses them to it. That is a quiet half-truth
+        # in a published line, the fault class the lead named at 23:58, and it is MINE. Both
+        # sentences are corrected in data/commands.json this cycle.
+        # WHAT THIS ARM IS, SAID PLAINLY: a WORDING-REGRESSION guard, not an engine guard. It
+        # holds the two corrected sentences in place - the pooling clause and the floor minimum -
+        # and reads the delver count so a reword to "three delvers" goes red. It CANNOT catch the
+        # game build retuning the 0.5, because there is nothing to read. If that number moves,
+        # this arm and my sentence go stale together, and I would rather that be written here than
+        # discovered later.
+        # ASK TO THE GAME BUILD LANE (scripts/delve.gd is theirs, not mine): `class_name Delve` is
+        # already declared, so one named const - say `const OIL_PER_HEAD := 0.5` and
+        # `const OIL_FLOOR_MIN := 1` at :161 - turns this into a real two-authority arm like LOOK
+        # and SATCHEL, and closes the last of B34's four. I am not editing their file to get it.
+        var dvw: String = String(((cmd_d.get("delve", {}) as Dictionary)).get("what", ""))
+        if not dvw.to_lower().contains("pooled at the mouth"):
+            _guard_faults.append("DELVE POOL")
+            push_error("COMMANDS_DATA DELVE POOL: `delve`.what no longer says the oil is \"pooled at the mouth\" (it reads \"%s\") - delve.gd:78-80 empties every hero's flasks into ONE party total and zeroes their own, and :80 says \"between them\" in the game's own voice, so a published line that leaves the pooling out tells a viewer their flasks light only them" % dvw)
+            printerr("COMMANDS_DATA DELVE POOL - `delve`.what lost the pooling clause; the published line implies per-hero oil")
+        var olw: String = String(((cmd_d.get("oil", {}) as Dictionary)).get("what", ""))
+        var o_tail := " delvers"
+        var o_said: int = -1
+        var o_phrase := ""
+        var o_at: int = olw.find(o_tail)
+        if o_at > 0:
+            var o_head: String = olw.substr(0, o_at)
+            var o_sp: int = o_head.rfind(" ")
+            o_phrase = (o_head.substr(o_sp + 1) if o_sp >= 0 else o_head).strip_edges()
+            o_said = _word_int(o_phrase)
+        if o_said < 0:
+            _guard_faults.append("OIL DELVERS ANCHOR")
+            push_error("COMMANDS_DATA OIL DELVERS ANCHOR: `oil`.what no longer says \"<number> delvers\" in words this guard can read (it reads \"%s\") - the burn rate docs/COMMANDS.md publishes can no longer be checked against `Delve.OIL_PER_HEAD` at all" % o_phrase)
+            printerr("COMMANDS_DATA OIL DELVERS ANCHOR - `oil`.what lost its \"<number> delvers\" phrase (read \"%s\")" % o_phrase)
+        # B106: THE OIL ARMS ARE TWO-AUTHORITY ARMS NOW, AND THIS IS THE ASK ABOVE BEING ANSWERED.
+        # S86 (game build, 10:14 today) named `OIL_PER_HEAD := 0.5` and `OIL_FLOOR_MIN := 1` at
+        # delve.gd:336-337 and READS them at :161 - I grepped the read, not just the declaration.
+        # So these arms no longer carry a number of my own: they rebuild the engine's burn out of
+        # the engine's own constants and ask whether the sentence I publish is true of it. THE 2
+        # THAT USED TO LIVE IN THIS FILE IS GONE, and nothing here restates a figure delve.gd owns.
+        # The ask block above is left standing exactly as written - it is the record of how this
+        # arm got here, and a lane that answered an ask deserves the asking kept, not tidied away.
+        # WHAT THE SENTENCE CLAIMS, READ STRICTLY: "one flask lights a floor for two delvers" is a
+        # CEILING claim, so it is two-sided and BOTH sides are checked - N delvers must burn
+        # exactly one flask, and N+1 must burn more. An arm that checked only the first half would
+        # pass unchanged if the engine got cheaper and my sentence quietly understated the light,
+        # which is the same half-truth class as B102's pooling fault and also mine to catch.
+        # The floor is folded into both, because delve.gd:161 wraps the burn in `maxi()`: a raised
+        # OIL_FLOOR_MIN makes "for two delvers" false without OIL_PER_HEAD moving at all.
+        if o_said >= 0:
+            var o_burn: int = maxi(Delve.OIL_FLOOR_MIN, int(ceil(float(o_said) * Delve.OIL_PER_HEAD)))
+            var o_next: int = maxi(Delve.OIL_FLOOR_MIN, int(ceil(float(o_said + 1) * Delve.OIL_PER_HEAD)))
+            if o_burn != 1:
+                _guard_faults.append("OIL DELVERS")
+                push_error("COMMANDS_DATA OIL DELVERS: `oil`.what publishes one flask per \"%s\" (%d) delvers and delve.gd:161 burns %d flask(s) for that many bodies - `maxi(OIL_FLOOR_MIN %d, ceil(alive * OIL_PER_HEAD %s))`. A viewer buying at the published rate goes dark on the floor they paid for" % [o_phrase, o_said, o_burn, Delve.OIL_FLOOR_MIN, str(Delve.OIL_PER_HEAD)])
+                printerr("COMMANDS_DATA OIL DELVERS - published %d delvers a flask, delve.gd:161 burns %d for %d" % [o_said, o_burn, o_said])
+            elif o_next <= 1:
+                _guard_faults.append("OIL DELVERS CEILING")
+                push_error("COMMANDS_DATA OIL DELVERS CEILING: `oil`.what publishes \"%s\" (%d) delvers to a flask, but delve.gd:161 still burns only %d flask(s) for %d bodies - the engine lights MORE delvers than the sentence promises, so the published rate is not the ceiling it reads as and a viewer overbuys light they already had. OIL_PER_HEAD is %s, OIL_FLOOR_MIN %d" % [o_phrase, o_said, o_next, o_said + 1, str(Delve.OIL_PER_HEAD), Delve.OIL_FLOOR_MIN])
+                printerr("COMMANDS_DATA OIL DELVERS CEILING - published %d a flask, engine lights %d on the same one" % [o_said, o_said + 1])
+        # THE FLOOR CLAUSE, NOW READ AS A NUMBER RATHER THAN AS A STRING. It used to be
+        # `contains("a flask at least")`, a wording guard that could not tell a raised floor from a
+        # kept promise. The quantity word in front of "flask" is parsed and compared to
+        # `Delve.OIL_FLOOR_MIN`, so the engine doubling the floor goes red HERE instead of being
+        # discovered by a solo delver paying twice what this file quoted them.
+        var o_fl_said: int = -1
+        var o_fl_word := ""
+        var o_fl_at: int = olw.to_lower().find(" at least")
+        if o_fl_at > 0:
+            var o_fl_parts: PackedStringArray = olw.substr(0, o_fl_at).strip_edges().split(" ", false)
+            if o_fl_parts.size() >= 2 and String(o_fl_parts[o_fl_parts.size() - 1]).to_lower().begins_with("flask"):
+                o_fl_word = String(o_fl_parts[o_fl_parts.size() - 2]).strip_edges()
+                var o_fl_low := o_fl_word.to_lower()
+                o_fl_said = (1 if (o_fl_low == "a" or o_fl_low == "an") else _word_int(o_fl_word))
+        if o_fl_said < 0:
+            _guard_faults.append("OIL FLOOR ANCHOR")
+            push_error("COMMANDS_DATA OIL FLOOR ANCHOR: `oil`.what no longer carries a readable \"<n> flask(s) at least\" clause (it reads \"%s\"; the quantity word this guard found was \"%s\") - delve.gd:161 wraps the burn in `maxi(OIL_FLOOR_MIN, ...)` and that floor is now published nowhere a guard can read, so a lone delver's cost goes unwatched" % [olw, o_fl_word])
+            printerr("COMMANDS_DATA OIL FLOOR ANCHOR - `oil`.what lost its readable floor clause (quantity word \"%s\")" % o_fl_word)
+        elif o_fl_said != Delve.OIL_FLOOR_MIN:
+            _guard_faults.append("OIL FLOOR MIN")
+            push_error("COMMANDS_DATA OIL FLOOR MIN: `oil`.what publishes a floor of \"%s\" (%d) flask(s) a floor and `Delve.OIL_FLOOR_MIN` is %d - delve.gd:161 charges the engine's figure, so a viewer sending one hero down is quoted %d and pays %d" % [o_fl_word, o_fl_said, Delve.OIL_FLOOR_MIN, o_fl_said, Delve.OIL_FLOOR_MIN])
+            printerr("COMMANDS_DATA OIL FLOOR MIN - published floor %d, engine OIL_FLOOR_MIN %d" % [o_fl_said, Delve.OIL_FLOOR_MIN])
+        # B103: THE ARMOURY'S PRICE GUARD WAS READING A TABLE NO SHOP CHARGES, AND THE FORGE'S
+        # PRICE LADDER HAD NO ARM AT ALL. Both found by measurement, and the second one disproves
+        # a sentence THIS FILE PUBLISHES ABOUT ITSELF.
+        # WHAT B83 ASSERTS, ~1200 LINES ABOVE: "every one of them already sits under an arm. No
+        # published number in this file is unwatched", listing "forge 60/160/420/1100" among the
+        # numbers it had walked. THAT IS FALSE, AND IT WAS FALSE WHEN IT WAS WRITTEN. `forge`.cost
+        # publishes four prices; the FORGE arms above check Gear.KINDS and nothing else - the KIND
+        # LIST. Nothing in the house has ever compared the forge's money to the smith's. (The same
+        # comment still says "miniboss 36"; the published count has been 44 since B94. Neither
+        # line is rewritten - a lane's wrong sentence is the evidence of how the mistake happened,
+        # and the correction belongs where the work is, which is here.)
+        # WORSE, AND THE REASON THIS IS NOT MERELY A GAP: `grep -rn "Gear\.ARMOUR\b" scripts/`
+        # over the whole game returns NOTHING OUTSIDE THIS FILE. Gear.ARMOUR (gear.gd:30) is read
+        # by my own guard and by no shop, no till and no stall. `Roster.buy_armour` charges
+        # `Roster.ARMOUR` (roster.gd:183), a SECOND six-row table carrying its own copy of every
+        # price. So ARMOURY COST has been checking the price I publish against a table no viewer
+        # ever pays, and its own error text said "Gear.ARMOUR charges" - a false statement about
+        # the engine, written by me, inside the arm built to catch false statements about the
+        # engine. The two copies agree row for row TODAY, which is exactly why it printed OK and
+        # why no battery, mine or anyone's, could see it.
+        # THE SAME SHAPE ON THE WEAPONS SIDE, with one difference that makes it worse rather than
+        # better: `Roster.WEAPONS` (roster.gd:171) is what `buy_weapon` charges, and Gear.WEAPONS
+        # IS read elsewhere - town.gd:4571 dresses the smithy's stall out of it. A drift between
+        # those two copies does not just blind a guard: it puts one price on the goods a viewer
+        # can SEE on the stall and a different one in the till.
+        # WHAT I CHANGED, AND WHAT I REFUSED TO DO: the armoury arms now read the table that
+        # CHARGES, and I did NOT copy a price into this file to compare against. B41's rule holds
+        # - a fourth copy of a price would be the defect and not the guard. Instead the two engine
+        # copies are now compared TO EACH OTHER, so the drift that would have hidden all of this
+        # is the thing that goes red first.
+        # FIVE NEW PATHS, all independent: FORGE COST ANCHOR and FORGE COST (two authorities, the
+        # published ladder against the till), one AUTHORITY arm per ladder (till copy against
+        # stall copy), and FORGE REWORK, which is WORDING ONLY and says so.
+        var f_d: Dictionary = (cmd_d.get("forge", {}) as Dictionary)
+        var f_cost: String = String(f_d.get("cost", ""))
+        # the published ladder: leading digits of each slash-separated piece, the same reading
+        # ARMOURY COST uses, so one published-ladder reader serves both shops.
+        var f_said_cost: Array = []
+        for f_pc in f_cost.split("/", false):
+            var f_piece := String(f_pc).strip_edges()
+            var f_dig := ""
+            for f_i in f_piece.length():
+                var f_ch := f_piece[f_i]
+                if f_ch >= "0" and f_ch <= "9":
+                    f_dig += f_ch
+                elif f_dig != "":
+                    break
+            if f_dig != "":
+                f_said_cost.append(int(f_dig))
+        # what the smith actually charges. `bare hands` is neither bought nor found - it is the
+        # state a hero starts in - and `scarforged` is found-only, so neither is a priced tier.
+        var f_real_cost: Array = []
+        var f_real_name: Array = []
+        for f_row in Roster.WEAPONS:
+            var f_r: Dictionary = f_row
+            if bool(f_r.get("found", false)):
+                continue
+            if int(f_r.get("cost", 0)) > 0:
+                f_real_cost.append(int(f_r.get("cost", 0)))
+                f_real_name.append(String(f_r.get("name", "")))
+        if f_said_cost.is_empty():
+            _guard_faults.append("FORGE COST ANCHOR")
+            push_error("COMMANDS_DATA FORGE COST ANCHOR: `forge`.cost no longer carries a slash-separated price ladder (it reads \"%s\") - the forge prices docs/COMMANDS.md publishes can no longer be checked against Roster.WEAPONS, which charges %s for %s" % [f_cost, str(f_real_cost), str(f_real_name)])
+            printerr("COMMANDS_DATA FORGE COST ANCHOR - `forge`.cost lost its price ladder; the smith's money is now unchecked")
+        elif f_said_cost != f_real_cost:
+            var f_ctip: String = "published %d price(s) against %d forgeable tier(s)" % [f_said_cost.size(), f_real_cost.size()]
+            if f_said_cost.size() == f_real_cost.size():
+                f_ctip = "same count, wrong money - a price ladder's order is the claim"
+            _guard_faults.append("FORGE COST")
+            push_error("COMMANDS_DATA FORGE COST: `forge`.cost publishes %s gold by tier and `Roster.buy_weapon` charges %s for %s - a viewer is quoted a price the smith does not take, and finds out by paying; %s" % [str(f_said_cost), str(f_real_cost), str(f_real_name), f_ctip])
+            printerr("COMMANDS_DATA FORGE COST - published %s, charged %s" % [str(f_said_cost), str(f_real_cost)])
+        # THE TWO COPIES OF EACH LADDER. The till's table is the authority for what a viewer pays;
+        # the other copy is what the rest of the game dresses itself from. They are compared on
+        # the three fields my own arms read - name, cost and the found-only flag - and nothing is
+        # restated here: both sides of every comparison are the engine's own.
+        for f_auth in [["ARMOURY", "armour", Roster.ARMOUR, Gear.ARMOUR, "Roster.ARMOUR (roster.gd:183)", "Gear.ARMOUR (gear.gd:30)", "Roster.buy_armour", "nothing outside this guard reads the gear.gd copy, so a drift there is silent until a lane wires it up"],
+                       ["FORGE", "weapon", Roster.WEAPONS, Gear.WEAPONS, "Roster.WEAPONS (roster.gd:171)", "Gear.WEAPONS (gear.gd:21)", "Roster.buy_weapon", "town.gd:4571 dresses the smithy's stall from the gear.gd copy, so a drift puts one price on the stall and another in the till"]]:
+            var au_tag: String = String(f_auth[0])
+            var au_word: String = String(f_auth[1])
+            var au_till: Array = f_auth[2]
+            var au_other: Array = f_auth[3]
+            var au_tname: String = String(f_auth[4])
+            var au_oname: String = String(f_auth[5])
+            var au_buyer: String = String(f_auth[6])
+            var au_why: String = String(f_auth[7])
+            var au_diff: Array = []
+            if au_till.size() != au_other.size():
+                au_diff.append("%d rows in %s against %d in %s" % [au_till.size(), au_tname, au_other.size(), au_oname])
+            for au_i in range(mini(au_till.size(), au_other.size())):
+                var au_a: Dictionary = au_till[au_i]
+                var au_b: Dictionary = au_other[au_i]
+                for au_k in ["name", "cost", "found"]:
+                    var au_va: String = str(au_a.get(au_k, null))
+                    var au_vb: String = str(au_b.get(au_k, null))
+                    if au_va != au_vb:
+                        au_diff.append("row %d `%s`: %s vs %s" % [au_i, String(au_k), au_va, au_vb])
+            if not au_diff.is_empty():
+                _guard_faults.append("%s AUTHORITY" % au_tag)
+                push_error("COMMANDS_DATA %s AUTHORITY: the %s ladder is declared TWICE IN THE ENGINE and the two no longer agree - %s is what %s charges, %s is the other copy, and they differ: %s. docs/COMMANDS.md can only be right about one of them, and %s" % [au_tag, au_word, au_tname, au_buyer, au_oname, str(au_diff), au_why])
+                printerr("COMMANDS_DATA %s AUTHORITY - the two engine %s tables disagree: %s" % [au_tag, au_word, str(au_diff)])
+        # THE REWORK CLAUSE, AND WHAT THIS ARM HONESTLY IS. `forge`.cost ends "(rework at the top:
+        # a quarter)" - the promise that a hero already at the best forgeable tier pays a QUARTER
+        # to have their steel remade in another kind. The engine site is roster.gd:510,
+        # `int(int(WEAPONS[int(h["weapon"])]["cost"]) / 4)`. THE 4 IS A BARE LITERAL: there is no
+        # named constant anywhere in scripts/ for it, so there is no second authority to compare
+        # against and THIS ARM GUARDS MY OWN WORDING, NOT THE ENGINE - exactly the limit B102's
+        # oil arms carry, and it is said here rather than left for a reader to work out. If the
+        # GAME BUILD lane ever wants this to be a real two-authority arm, one const at that site
+        # (`REWORK_DIVISOR := 4`) is all it needs and this arm will read it instead. Declining
+        # that is free; the wording guard stands either way, because a clause silently deleted
+        # from my own file is the failure this arm actually catches.
+        # B106: AND THE REWORK CLAUSE IS A TWO-AUTHORITY ARM NOW TOO - the other half of the same
+        # ask, answered by the same cycle. `Roster.REWORK_DIVISOR := 4` is declared at roster.gd:218
+        # and READ at :514 (I grepped both ends; the ask block above still says :510 because that
+        # is where the bare literal stood when the ask was written, and S86's edit moved the line).
+        # The arm no longer asks whether the WORD "quarter" is present. It reads WHICH fraction word
+        # the sentence publishes, turns it into the divisor that word means, and compares that to the
+        # engine's constant. So re-pricing the rework to a third goes red with my sentence named, and
+        # so does rewording my sentence to a third while the smith still charges a quarter. A wording
+        # guard could catch neither: it only ever noticed the clause being deleted outright.
+        var f_rw_words := {"half": 2, "third": 3, "quarter": 4, "fifth": 5, "sixth": 6,
+                           "seventh": 7, "eighth": 8, "ninth": 9, "tenth": 10}
+        var f_rw_low := f_cost.to_lower()
+        var f_rw_word := ""
+        var f_rw_said: int = -1
+        for f_rw_k in f_rw_words:
+            if f_rw_low.contains(String(f_rw_k)):
+                f_rw_word = String(f_rw_k)
+                f_rw_said = int(f_rw_words[f_rw_k])
+                break
+        if f_rw_said < 0:
+            _guard_faults.append("FORGE REWORK")
+            push_error("COMMANDS_DATA FORGE REWORK: `forge`.cost no longer carries a readable fraction word for the rework clause (it reads \"%s\") - roster.gd:514 charges `cost / REWORK_DIVISOR` (%d) to remake the top tier in another kind, and with the clause gone a viewer at the top of the ladder is told only that the forge sells nothing more" % [f_cost, Roster.REWORK_DIVISOR])
+            printerr("COMMANDS_DATA FORGE REWORK - `forge`.cost lost its rework fraction word; the top-tier price is unpublished")
+        elif f_rw_said != Roster.REWORK_DIVISOR:
+            _guard_faults.append("FORGE REWORK RATE")
+            push_error("COMMANDS_DATA FORGE REWORK RATE: `forge`.cost publishes the top-tier rework at \"a %s\" (1/%d) and `Roster.REWORK_DIVISOR` is %d, which roster.gd:514 charges - a hero at the top of the ladder is quoted one fraction of their steel's cost and billed another, and the gap is paid in gold before anybody reads a log" % [f_rw_word, f_rw_said, Roster.REWORK_DIVISOR])
+            printerr("COMMANDS_DATA FORGE REWORK RATE - published 1/%d (\"a %s\"), engine REWORK_DIVISOR %d" % [f_rw_said, f_rw_word, Roster.REWORK_DIVISOR])
+        # B104: THE COUNTER SET AGAINST THE ENGINE'S OWN TILLS - A TWO-AUTHORITY ARM, AND THE
+        # DEFECT IT WAS WRITTEN FOR WAS MINE. handle() refuses a shop command while a hero is on
+        # the scar road or below it. That list was a bare literal and `oil` was never in it, so
+        # `!oil` charged gold, rolled the counter haggle and handed flasks to a hero standing in
+        # the dark while every other till said "Tilda is below." Nothing published it and no arm
+        # watched it: a gate is a promise kept in code, so a hole in one is silent by nature.
+        # THE SECOND AUTHORITY IS roster.gd ITSELF. `haggle()` is the counter: it is called by
+        # exactly the functions that stand a viewer in front of a shopkeeper, and the engine
+        # decides that, not me. Every call site is collected from the source and held to
+        # AWAY_COUNTERS. The one restated thing is the func -> command map, and it is restated
+        # BECAUSE it is the join nothing else in the house writes down; a new till arrives as an
+        # unmapped name and the UNKNOWN arm below says so rather than passing silently.
+        # `kit_up_after_delve` mentions haggle() in a COMMENT and must not be collected - the
+        # scan drops everything after a `#`, which is why it reads the code and not the prose.
+        var ca_map := {"buy_weapon": "forge", "buy_armour": "armoury", "buy_potion": "brew",
+                       "buy_brew": "brew", "buy_oil": "oil", "wear": "wear", "dye": "dye"}
+        var ca_f := FileAccess.open("res://scripts/roster.gd", FileAccess.READ)
+        if ca_f == null:
+            _guard_faults.append("COUNTER AWAY ANCHOR")
+            push_error("COMMANDS_DATA COUNTER AWAY ANCHOR: scripts/roster.gd cannot be opened, so the engine's own counter set (every caller of `haggle()`) cannot be read and the %d-command away gate in handle() is held to nothing - a shop added to the game would reach a hero who is below ground and no arm here would know" % AWAY_COUNTERS.size())
+            printerr("COMMANDS_DATA COUNTER AWAY ANCHOR - roster.gd unreadable; the away gate is unchecked")
+        else:
+            var ca_lines: PackedStringArray = ca_f.get_as_text().split("\n")
+            var ca_fn := ""
+            var ca_tills: Array = []
+            for ca_ln in ca_lines:
+                var ca_raw: String = String(ca_ln)
+                if ca_raw.begins_with("func "):
+                    var ca_p: int = ca_raw.find("(")
+                    ca_fn = ca_raw.substr(5, ca_p - 5).strip_edges() if ca_p > 5 else ""
+                var ca_h: int = ca_raw.find("#")
+                var ca_code: String = ca_raw.substr(0, ca_h) if ca_h >= 0 else ca_raw
+                if ca_fn != "" and ca_fn != "haggle" and ca_code.contains("haggle(") and not ca_tills.has(ca_fn):
+                    ca_tills.append(ca_fn)
+            if ca_tills.is_empty():
+                _guard_faults.append("COUNTER AWAY ANCHOR")
+                push_error("COMMANDS_DATA COUNTER AWAY ANCHOR: not one call to `haggle()` survives in scripts/roster.gd, so the engine no longer names its own counters and the away gate in handle() has nothing left to be checked against - either the haggle has been renamed (this arm must follow it) or every shop now charges list price with no CHA check at the till, which `_source` publishes as the rule for every cost in docs/COMMANDS.md")
+                printerr("COMMANDS_DATA COUNTER AWAY ANCHOR - no haggle() call sites in roster.gd; the counter set is unreadable")
+            else:
+                var ca_unknown: Array = []
+                var ca_open: Array = []
+                for ca_t in ca_tills:
+                    var ca_name: String = String(ca_t)
+                    if not ca_map.has(ca_name):
+                        ca_unknown.append(ca_name)
+                        continue
+                    var ca_v: String = String(ca_map[ca_name])
+                    if not AWAY_COUNTERS.has(ca_v):
+                        ca_open.append("%s -> !%s" % [ca_name, ca_v])
+                if not ca_unknown.is_empty():
+                    _guard_faults.append("COUNTER UNKNOWN")
+                    push_error("COMMANDS_DATA COUNTER UNKNOWN: scripts/roster.gd stands a viewer at a till in %s, and this guard's func -> command map has never heard of %s - a new shop has been added to the engine and the away gate in handle() cannot be checked for it, so a hero who is below ground may be able to buy from it. One line in the map beside the command that calls it closes this" % [str(ca_unknown), str(ca_unknown)])
+                    printerr("COMMANDS_DATA COUNTER UNKNOWN - unmapped haggle site(s) in roster.gd: %s" % str(ca_unknown))
+                if not ca_open.is_empty():
+                    _guard_faults.append("COUNTER AWAY")
+                    push_error("COMMANDS_DATA COUNTER AWAY: %s charge(s) a haggled price in scripts/roster.gd and the command is NOT in AWAY_COUNTERS - %s, so a hero on the scar road or below it is served at that counter while every other till refuses with where the hero is. The viewer pays gold and the bot describes a shop the hero is nowhere near" % [str(ca_open), str(ca_open)])
+                    printerr("COMMANDS_DATA COUNTER AWAY - ungated counter(s): %s" % str(ca_open))
+        # B114: THE SMITHY'S LEVEL IS THE CEILING, AND NOTHING PUBLISHED IT. D64a (game build,
+        # scripts/economy.gd) gave the smithy a LEVEL and made that level alone the top rarity the
+        # counter will ever stock - `shop_cap()` feeds `Roster.town_tier`, clamped to
+        # SHOP_MAX_LEVEL. A hero with the gold for the top step is refused by the BUILDING, not by
+        # their purse. `forge`.what said only "The best tiers need Bellmire to grow" - true and
+        # unmeasurable - and `armoury`.what said NOTHING AT ALL, so a viewer saving 1000 gold for
+        # warded plate had no published way to learn the counter would turn them away. Both now
+        # state the ceiling in the ladder's own words and this arm holds those words to the engine.
+        # THE AUTHORITY IS READ AS SOURCE TEXT, not through a class name: economy.gd is the GAME
+        # BUILD's file and is NOT an autoload (project.godot registers only `Lore`), so the
+        # COUNTER AWAY arm's habit of reading the file is the one that survives a rename. Comment
+        # lines are dropped before the consts are read - that is the trap that read MB_NAME as 37.
+        # NOT FATAL: the commands answer either way. A battery greps COMMANDS_DATA and no line is
+        # the healthy reading; the tag is registered so guard_faults() counts it.
+        var sc_f := FileAccess.open("res://scripts/economy.gd", FileAccess.READ)
+        var sc_rar: Array = []
+        var sc_max := -1
+        if sc_f != null:
+            for sc_ln in sc_f.get_as_text().split("\n"):
+                var sc_raw: String = String(sc_ln)
+                if sc_raw.strip_edges().begins_with("#"):
+                    continue
+                var sc_h: int = sc_raw.find("#")
+                var sc_code: String = sc_raw.substr(0, sc_h) if sc_h >= 0 else sc_raw
+                if sc_rar.is_empty() and sc_code.contains("const RARITY :="):
+                    var sc_a: int = sc_code.find("[")
+                    var sc_b: int = sc_code.rfind("]")
+                    if sc_a >= 0 and sc_b > sc_a:
+                        for sc_w in sc_code.substr(sc_a + 1, sc_b - sc_a - 1).split(",", false):
+                            var sc_t: String = String(sc_w).strip_edges().trim_prefix("\"").trim_suffix("\"")
+                            if sc_t != "":
+                                sc_rar.append(sc_t)
+                if sc_max < 0 and sc_code.contains("const SHOP_MAX_LEVEL :="):
+                    var sc_n: String = sc_code.get_slice(":=", 1).strip_edges()
+                    if sc_n.is_valid_int():
+                        sc_max = int(sc_n)
+        if sc_rar.is_empty() or sc_max < 1 or sc_max >= sc_rar.size():
+            _guard_faults.append("SHOP CAP AUTHORITY")
+            push_error("COMMANDS_DATA SHOP CAP AUTHORITY: scripts/economy.gd no longer yields a readable `const RARITY :=` ladder and `const SHOP_MAX_LEVEL :=` (read %s and %d), so the top tier a counter will ever stock cannot be checked and the ceiling `forge`.what and `armoury`.what publish to chat is unguarded" % [str(sc_rar), sc_max])
+            printerr("COMMANDS_DATA SHOP CAP AUTHORITY - economy.gd RARITY/SHOP_MAX_LEVEL unreadable (%s, %d); the published shop ceiling is unchecked" % [str(sc_rar), sc_max])
+        else:
+            var sc_rx := RegEx.new()
+            sc_rx.compile("level\\s+(\\d+)\\s+stocks\\s+([a-z][a-z ]*?)\\s*(?:,|\\.|;|$)")
+            for sc_key in ["forge", "armoury"]:
+                var sc_what: String = String(((cmd_d.get(sc_key, {}) as Dictionary)).get("what", "")).to_lower()
+                var sc_pairs: Array = []
+                for sc_m in sc_rx.search_all(sc_what):
+                    sc_pairs.append([int(sc_m.get_string(1)), String(sc_m.get_string(2)).strip_edges()])
+                if sc_pairs.size() < 2:
+                    _guard_faults.append("SHOP CAP ANCHOR")
+                    push_error("COMMANDS_DATA SHOP CAP ANCHOR: `%s`.what carries %d \"level <n> stocks <rarity>\" phrase(s) and this arm needs the floor and the ceiling - the smithy's level is what refuses a hero who has the gold (economy.gd shop_cap -> Roster.town_tier, top level %d = \"%s\"), and docs/COMMANDS.md no longer tells a viewer that before they save for it" % [sc_key, sc_pairs.size(), sc_max, String(sc_rar[sc_max])])
+                    printerr("COMMANDS_DATA SHOP CAP ANCHOR - `%s`.what lost its \"level <n> stocks <rarity>\" phrases; the published ceiling is unchecked" % sc_key)
+                    continue
+                var sc_bad: Array = []
+                var sc_top := -1
+                for sc_p in sc_pairs:
+                    var sc_lv: int = int(sc_p[0])
+                    var sc_word: String = String(sc_p[1])
+                    sc_top = maxi(sc_top, sc_lv)
+                    if sc_lv < 1 or sc_lv > sc_max or String(sc_rar[sc_lv]) != sc_word:
+                        sc_bad.append("level %d stocks \"%s\"" % [sc_lv, sc_word])
+                if not sc_bad.is_empty():
+                    _guard_faults.append("SHOP CAP DRIFT")
+                    push_error("COMMANDS_DATA SHOP CAP DRIFT: `%s`.what publishes %s and economy.gd's ladder is %s capped at level %d - a viewer is told a level stocks a tier the counter will not put on it; %s" % [sc_key, str(sc_bad), str(sc_rar), sc_max, str(sc_pairs)])
+                    printerr("COMMANDS_DATA SHOP CAP DRIFT - `%s`.what: %s against ladder %s cap %d" % [sc_key, str(sc_bad), str(sc_rar), sc_max])
+                if sc_top != sc_max:
+                    _guard_faults.append("SHOP CAP CEILING")
+                    push_error("COMMANDS_DATA SHOP CAP CEILING: `%s`.what publishes level %d as the best a smithy reaches and economy.gd's SHOP_MAX_LEVEL is %d (\"%s\") - the doc either promises a tier no building can stock or hides one a grown town can, and D66's raise_shop() moves this number" % [sc_key, sc_top, sc_max, String(sc_rar[sc_max])])
+                    printerr("COMMANDS_DATA SHOP CAP CEILING - `%s`.what tops out at level %d, SHOP_MAX_LEVEL is %d" % [sc_key, sc_top, sc_max])
         _cmds = parsed
+        # ---- B138: THE ONE THING THIS FILE PUBLISHES THAT IT NEVER MEASURED - THE LENGTH OF ITS
+        # OWN ANSWER. Every arm above checks whether a published WORD is true. None checks whether
+        # the line carrying it ARRIVES. twitch_eventsub.gd (the game build's) pastes "@<login> "
+        # on the front and, past CHAT_MAX_LEN, cuts the result and appends "...". That cut is the
+        # one drop in that whole function with NO _say_log beside it - the queue-full drop, the
+        # stale drop and the duplicate drop all log; truncation is silent. So a line of mine that
+        # grows past the cap loses its tail on stream and says so nowhere, and what sits at the
+        # tail of the longest line this file emits is the hub URL - the one thing a viewer needs
+        # when the answer was too long to finish.
+        # WHY IT IS A FAULT NOW AND WAS NOT BEFORE: help_line("") is built from `order`, so it
+        # grows whenever ANY lane adds a command, not when I touch anything. It is the only reply
+        # in this file whose length is decided by a list other lanes extend.
+        # TWO NUMBERS BELOW ARE MIRRORS OF ANOTHER LANE'S FILE AND ARE LABELLED AS SUCH:
+        # CHAT_MAX_LEN (480) and the 25-character ceiling Twitch puts on a login. I do not read
+        # them from twitch_eventsub.gd on purpose - this file must not fall over when that script
+        # is absent - so if the game build moves CHAT_MAX_LEN, this arm's number has to follow it,
+        # and my summary says so in the same breath. 25 is Twitch's own limit, not that lane's.
+        # MEASURED, NOT EMULATED: the lines come from help_line() itself, reading the cache set
+        # one line above, so the arm cannot drift from the function it guards. A key carrying
+        # neither `short` nor `what` is SKIPPED, not measured - help_line() would fault on it and
+        # the NO WHAT arm above already names it; crashing the loader here would turn a reported
+        # fault into a dead bot.
+        var hl_cap := 480            # mirror of twitch_eventsub.gd CHAT_MAX_LEN
+        var hl_pre := 1 + 25 + 1     # "@" + the longest login Twitch issues + " "
+        var hl_budget: int = hl_cap - hl_pre
+        var hl_over: Array[String] = []
+        var hl_rows: Array = [["!help", help_line("")]]
+        var hl_cs: Dictionary = (parsed as Dictionary).get("commands", {})
+        for hl_k in hl_cs.keys():
+            var hl_c: Variant = hl_cs[hl_k]
+            if not (hl_c is Dictionary):
+                continue
+            var hl_d: Dictionary = hl_c as Dictionary
+            if String(hl_d.get("short", "")) == "" and String(hl_d.get("what", "")) == "":
+                continue
+            hl_rows.append(["!help " + String(hl_k), help_line(String(hl_k))])
+        for hl_r in hl_rows:
+            var hl_len: int = String(hl_r[1]).length()
+            if hl_len > hl_budget:
+                hl_over.append("%s is %d chars, %d over" % [String(hl_r[0]), hl_len, hl_len - hl_budget])
+        if not hl_over.is_empty():
+            _guard_faults.append("HELP LINE CUT")
+            push_error("COMMANDS_DATA HELP LINE CUT: %d reply(s) this file publishes are longer than the %d characters that survive a worst-case \"@<login> \" prefix under a %d-char cap, so chat cuts the tail and appends \"...\" with nothing logged anywhere - the hub URL is what sits at that tail: %s" % [hl_over.size(), hl_budget, hl_cap, hl_over])
+            printerr("COMMANDS_DATA HELP LINE CUT - %d reply(s) over the %d-char budget and silently truncated on stream: %s" % [hl_over.size(), hl_budget, hl_over])
     return _cmds
+
+## B101: a whole number written out in words, or -1 when this guard cannot read it. The satchel
+## arm already had to carry a FRACTION table ("two fifths" -> 0.4) because the voice of this bot
+## spells its numbers out; the caravan count is the first WHOLE number published the same way,
+## and a digit search would have walked straight past it. Digits are accepted too, so the
+## sentence can be rewritten either way without the arm going blind.
+static func _word_int(w: String) -> int:
+    var s := w.strip_edges().to_lower()
+    if s.is_valid_int():
+        return int(s)
+    var units := {"zero": 0, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6,
+                  "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve": 12,
+                  "thirteen": 13, "fourteen": 14, "fifteen": 15, "sixteen": 16,
+                  "seventeen": 17, "eighteen": 18, "nineteen": 19}
+    var tens := {"twenty": 20, "thirty": 30, "forty": 40, "fifty": 50, "sixty": 60,
+                 "seventy": 70, "eighty": 80, "ninety": 90}
+    if units.has(s):
+        return int(units[s])
+    if tens.has(s):
+        return int(tens[s])
+    var parts: PackedStringArray = s.split("-")
+    if parts.size() == 2 and tens.has(String(parts[0])) and units.has(String(parts[1])):
+        var u: int = int(units[String(parts[1])])
+        if u >= 1 and u <= 9:
+            return int(tens[String(parts[0])]) + u
+    return -1
 
 ## B53: THE GATE TEST READS CODE, NEVER PROSE. The first emulation of the needs_hero arm found
 ## the text `_needs(` inside the arm's OWN COMMENT BLOCK and scored it as a hero gate on

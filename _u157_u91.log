@@ -1,0 +1,3 @@
+U91 labels=17309 panels=1260 fails=0 stats={ "seen": 104, "admitted": 24, "merged": 44, "dropped": 30, "dropped_protected": 0, "min_gap": 0.810347, "by_pri": [8, 4, 1, 11] }
+U91 crit admitted=11
+LONGNAME OK

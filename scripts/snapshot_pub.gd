@@ -615,6 +615,14 @@ func _sheet(r: Roster, h: Dictionary, id := "", delv: Dictionary = {}) -> Dictio
         "satchel": sat["rows"], "satchel_total": int(sat["total"]),
         "sellable": sat["sellable"], "sell_prices": sat["prices"],
     }
+    # S89 (additive): mana for the hub's character sheet (web/app.js manaBar reads h.mana /
+    # h.mana_max) - Mr. E's 10:17 directive, option A, took the floating strip off the game view.
+    # Roster computes it (mana_max / the stored pool); non-casters publish 0 and the hub
+    # draws nothing, which is its documented behaviour.
+    # Read without writing: mana_of() stores into the hero dict, and a publisher must not.
+    var mmx := r.mana_max(h)
+    row["mana"] = int(floor(clampf(float(h.get("mana", mmx)), 0.0, mmx)))
+    row["mana_max"] = int(round(mmx))
     # D59 (v4, additive): the rest of H20's sheet, only what the game computes.
     # initiative = the bonus delve.gd/raids.gd add to their d20 (DEX mod);
     # speed = the hero's own move speed in the game (m/s, Roster.speed).

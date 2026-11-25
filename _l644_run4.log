@@ -1,0 +1,418 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:811)
+       [1] _ready (res://scripts/town.gd:367)
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+SNAPSHOT on: https://paaukwaffaamazgrndbv.supabase.co every 60 s
+ERROR: Cannot open file 'res://.godot/imported/river_flow.ogg-94e79d5797cc50d9e2011a3046a03fd4.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3863)
+ERROR: Failed loading resource: res://.godot/imported/river_flow.ogg-94e79d5797cc50d9e2011a3046a03fd4.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3863)
+ERROR: Failed loading resource: res://assets/audio/amb/river_flow.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3863)
+ERROR: Cannot open file 'res://.godot/imported/market_murmur.ogg-15d178c679870446c12935288669cf3e.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3868)
+ERROR: Failed loading resource: res://.godot/imported/market_murmur.ogg-15d178c679870446c12935288669cf3e.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3868)
+ERROR: Failed loading resource: res://assets/audio/amb/market_murmur.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3868)
+ERROR: Cannot open file 'res://.godot/imported/forge_fire.ogg-999692f81a13165066ac82c262ef5609.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3873)
+ERROR: Failed loading resource: res://.godot/imported/forge_fire.ogg-999692f81a13165066ac82c262ef5609.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3873)
+ERROR: Failed loading resource: res://assets/audio/amb/forge_fire.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] bed (res://scripts/sfx.gd:468)
+       [2] _lay_sound_beds (res://scripts/town.gd:3873)
+ERROR: Cannot open file 'res://.godot/imported/bellmire_day.ogg-137ca865af59973a53f9edee69acf6c9.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://.godot/imported/bellmire_day.ogg-137ca865af59973a53f9edee69acf6c9.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://assets/audio/music/bellmire_day.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+TWITCH_EVENTSUB bot token valid (bellmirebro), 183 min left
+TWITCH joined #jestsayin96
+TWITCH_EVENTSUB seeded subs pane with 5 subscriber(s)
+FEED Viewer1001 the human knight, Unproven, level 1  |  AC 14  HP 62  prof +2  to-hit +5  |  STR 17(+3) DEX 15(+2) CON 7(-2) INT 14(+2) WIS 13(+1) CHA 12(+1)  |  saves STR +5 CON +0  |  bare hands (1d4), rags  |  1 potions, 2 oil, 40 gold  |  deepest floor 0, 0 kills
+FEED Viewer1002 the human knight, Unproven, level 1  |  AC 13  HP 62  prof +2  to-hit +6  |  STR 18(+4) DEX 13(+1) CON 7(-2) INT 11(+0) WIS 17(+3) CHA 8(-1)  |  saves STR +6 CON +0  |  bare hands (1d4), rags  |  1 potions, 2 oil, 40 gold  |  deepest floor 0, 0 kills
+FEED Viewer1003 the human knight, Unproven, level 1  |  AC 13  HP 67  prof +2  to-hit +4  |  STR 15(+2) DEX 13(+1) CON 8(-1) INT 9(-1) WIS 12(+1) CHA 10(+0)  |  saves STR +4 CON +1  |  bare hands (1d4), rags  |  1 potions, 2 oil, 40 gold  |  deepest floor 0, 0 kills
+FEED Viewer1004 the elf knight, Unproven, level 1  |  AC 12  HP 62  prof +2  to-hit +4  |  STR 15(+2) DEX 11(+0) CON 7(-2) INT 14(+2) WIS 9(-1) CHA 10(+0)  |  saves STR +4 CON +0  |  bare hands (1d4), rags  |  1 potions, 2 oil, 40 gold  |  deepest floor 0, 0 kills
+DIRECTOR t=0.0 CUT chat_1004 shot=follow pri=49.9 why=start held_prev=0.0 pace=1.0 | chat_1004/follow=49.9(chat 0s ago), hero_1004/follow=31.6(town life), tour_0/push=10.0(quiet baseline)
+TWITCH_EVENTSUB welcome, session AgoQ7krM, keepalive 10 s
+TWITCH_EVENTSUB seeded subs pane with 5 subscriber(s)
+RIG: no clip 'Idle_B' on Barbarian - playing its idle
+TWITCH_EVENTSUB subscribed 7 of 7
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+SNAPSHOT: first publish ok (200, 19862 bytes)
+TWITCH_EVENTSUB welcome, session AgoQU_Eh, keepalive 10 s
+TWITCH_EVENTSUB subscribed 7 of 7
+DIRECTOR t=8.1 CUT fish_558547099040 shot=follow pri=54.0 why=better_after_min held_prev=8.1 pace=1.0 | fish_558547099040/follow=54.0(catch same-shot-6), chat_1004/follow=49.0(chat 8s ago), hero_138821183/follow=27.8(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQGrne, keepalive 10 s
+ERROR: Cannot open file 'res://.godot/imported/bellmire_night.ogg-12943518bf65c9362768224767f2ac2c.oggvorbisstr'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://.godot/imported/bellmire_night.ogg-12943518bf65c9362768224767f2ac2c.oggvorbisstr.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+ERROR: Failed loading resource: res://assets/audio/music/bellmire_night.ogg.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] _load (res://scripts/sfx.gd:339)
+       [1] _switch (res://scripts/sfx.gd:598)
+       [2] _process (res://scripts/sfx.gd:546)
+TWITCH_EVENTSUB subscribed 7 of 7
+FEED Corvin Fenwick settles in Bellmire, looking for work.
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQ69aV, keepalive 10 s
+TWITCH_EVENTSUB subscribed 7 of 7
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQJNAp, keepalive 10 s
+TWITCH_EVENTSUB subscribed 7 of 7
+DIRECTOR t=26.3 CUT hero_1003 shot=follow pri=27.5 why=max_hold held_prev=18.2 pace=1.0 | chat_1004/follow=46.9(chat 26s ago REPEAT-held-out), hero_1003/follow=27.5(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQnzWD, keepalive 10 s
+DIRECTOR t=29.3 CUT fish_557204921701 shot=follow pri=54.0 why=hotter held_prev=3.0 pace=1.0 | fish_557204921701/follow=54.0(catch same-shot-6), chat_1004/follow=46.5(chat 29s ago REPEAT-held-out), hero_local_mre/follow=28.4(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+FEED Wren the Younger settles in Bellmire, looking for work.
+TWITCH_EVENTSUB subscribed 7 of 7
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQXklN, keepalive 10 s
+TWITCH_EVENTSUB subscribed 7 of 7
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQLzKA, keepalive 10 s
+TWITCH_EVENTSUB subscribed 7 of 7
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQ2zxX, keepalive 10 s
+FEED Dunn Hollow settles in Bellmire, looking for work.
+DIRECTOR t=47.5 CUT hero_local_mre shot=follow pri=27.3 why=max_hold held_prev=18.2 pace=1.0 | chat_1004/follow=44.4(chat 48s ago REPEAT-held-out), hero_local_mre/follow=27.3(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+TWITCH_EVENTSUB subscribed 7 of 7
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQjwfL, keepalive 10 s
+TWITCH_EVENTSUB subscribed 7 of 7
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQI_Qg, keepalive 10 s
+TWITCH_EVENTSUB subscribed 7 of 7
+MUSTER timed out: dists=[92, 73, 19, 18, 80, 18, 17, 49] vis=true stay=false route=66 inside=false
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQAPLK, keepalive 10 s
+FEED Ysolde Fenwick settles in Bellmire, looking for work.
+TWITCH_EVENTSUB subscribed 7 of 7
+DIRECTOR t=67.7 CUT hero_138821183 shot=follow pri=24.9 why=max_hold held_prev=20.2 pace=1.0 | fish_557204921701/follow=60.0(catch REPEAT-held-out), chat_1004/follow=42.0(chat 68s ago REPEAT-held-out), hero_138821183/follow=24.9(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQjZ_I, keepalive 10 s
+FORCE lane=bits onto director subject @Node3D@7326
+TWITCH_EVENTSUB subscribed 7 of 7
+DBG lane=bits dsub_same=false susp=false hand_t=-74.9061835833329 eye=false
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQy406, keepalive 10 s
+FORCE result: pane yielded=false
+DBG lane=bits dsub_same=false susp=false hand_t=-78.0903663611108 eye=false
+TWITCH_EVENTSUB subscribed 7 of 7
+FEED Petra of the Ford settles in Bellmire, looking for work.
+DBG lane=bits dsub_same=false susp=false hand_t=-81.463652583333 eye=false
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQO6A1, keepalive 10 s
+FEED Corvin Fenwick and 4 others descend down, and Bellmire holds its breath.
+FEED They carry 14 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 slimes, 1 giant rat.
+FEED A mourner's cup, full, on a step nobody uses.
+DIRECTOR t=82.9 CUT fight_2587164180259 shot=shoulder pri=75.0 why=hotter held_prev=15.2 pace=1.0 | fight_2587164180259/shoulder=75.0(hurt 0.00), chat_1004/follow=39.9(chat 86s ago REPEAT-held-out), hero_7103/follow=26.0(town life same-shot-6), tour_0/push=10.0(quiet baseline)
+TWITCH_EVENTSUB subscribed 7 of 7
+FEED Corvin Fenwick spots a blade trap (Perception 16 vs DC 10) and disarms it with thieves' tools (21).
+FEED Petra Fenwick casts Bolt at slime.
+FEED The slime divides.
+FEED Cort Thatcher turns on the wounded giant rat to finish it.
+FEED Petra Fenwick turns on the wounded giant rat to finish it.
+FEED Corvin Fenwick rolls a 20 - and the slimeling is gone.
+FEED Petra Fenwick casts Bolt at slimeling.
+FEED Corvin Coalfoot searches (Investigation 21) and turns up 14 gold on floor 1.
+FEED Over. The only blood still moving is theirs.
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQHbX4, keepalive 10 s
+FEED Corvin Coalfoot searches the chest - Successfully found loot!! 23 gold (Investigation 12 vs DC 10).
+TWITCH_EVENTSUB subscribed 7 of 7
+FEED Corvin Fenwick and 4 others take a breather, and press on deeper.
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 skeleton minion, 1 hollowed skeleton minion, 1 hollowed puglin, 1 cave spider.
+FEED Petra Fenwick rolls a 20 for initiative and is moving before anything else.
+FEED Nessa Fenwick settles in Bellmire, looking for work.
+TWITCH_EVENTSUB welcome, session AgoQNlw6, keepalive 10 s
+FEED Petra Fenwick casts Fire at hollowed puglin.
+FEED Corvin Fenwick turns on the wounded hollowed skeleton minion to finish it.
+FEED Garm Coalfoot turns on the wounded hollowed skeleton minion to finish it.
+FEED Corvin Coalfoot turns on the wounded hollowed skeleton minion to finish it.
+FEED Cort Thatcher turns on the wounded hollowed skeleton minion to finish it.
+FEED Petra Fenwick turns on the wounded hollowed skeleton minion to finish it.
+FEED Petra Fenwick casts Bolt at skeleton minion.
+FEED Corvin Coalfoot searches (Investigation 12) and turns up 22 gold on floor 2.
+FEED Floor 2 clear - the guild's tenth just got heavier.
+TWITCH_EVENTSUB subscribed 7 of 7
+FEED Corvin Coalfoot steps on a plate - darts! DEX 15 vs DC 11, 4 damage (halved).
+FEED Corvin Coalfoot cracks the chain off a captive - 42 gold passes to the party, split 5 ways.
+FEED Corvin Fenwick and 4 others take a breather, and press on deeper.
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQeLyl, keepalive 10 s
+DIRECTOR t=99.0 CUT delve_2587164180259 shot=follow pri=45.0 why=max_hold held_prev=16.1 pace=1.0 | delve_2587164180259/follow=45.0(walking), chat_1004/follow=37.8(chat 104s ago), hero_7102/follow=33.7(town life), tour_0/push=10.0(quiet baseline)
+FEED Garm Hollow and 2 others descend down the stair the architect never finished.
+FEED They carry 9 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 cave spiders, 1 giant rat.
+FEED The slabs were lifted from beneath - the chips all fell outward.
+TWITCH_EVENTSUB subscribed 7 of 7
+DIRECTOR t=101.0 CUT fight_3988296597175 shot=shoulder pri=75.0 why=hotter held_prev=2.0 pace=1.0 | fight_3988296597175/shoulder=75.0(hurt 0.00), fish_558547099040/follow=54.0(catch same-shot-6), delve_2587164180259/follow=45.0(walking), chat_1004/follow=31.3(chat 108s ago same-shot-6), hero_7103/follow=26.3(town life same-shot-6)
+FEED Garm Hollow's frost answers to the ground instead (7 vs DC 10).
+FEED Cort Thatcher casts Frost at giant rat.
+FEED Garm Hollow casts Bolt at cave spider.
+FEED Garm Hollow turns on the wounded cave spider to finish it.
+FEED Petra Quarryman turns on the wounded cave spider to finish it.
+FEED Cort Thatcher turns on the wounded cave spider to finish it.
+FEED Garm Hollow searches (Investigation 14) and turns up 12 gold on floor 1.
+FEED Nothing left to hit, nothing left to fear. For now.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 45 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 drowned puglin, 1 cave bat, 1 drowned slime, 1 puglin.
+FEED The oil is running low.
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+TWITCH_EVENTSUB welcome, session AgoQmASE, keepalive 10 s
+FEED Corvin Fenwick spots a fire grate (Perception 16 vs DC 11) and disarms it with thieves' tools (21).
+FEED Garm Hollow and 2 others take a breather, and press on deeper.
+FEED Petra Quarryman steps on a slot in the floor - a blade! DEX 15 vs DC 10, 4 damage (halved).
+FEED Petra Fenwick casts Fire at puglin.
+TWITCH_EVENTSUB subscribed 7 of 7
+FEED Hilda Coalfoot settles in Bellmire, looking for work.
+FEED Petra Fenwick casts Fire at drowned slime.
+FEED The drowned slime divides.
+FEED Petra Fenwick turns on the wounded drowned slimeling to finish it.
+FEED Corvin Coalfoot searches (Investigation 13) and turns up 34 gold on floor 3.
+FEED The scar eases its grip, for now.
+FEED Corvin Coalfoot finds a vial of The Hearthstone Loosener.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed giant rat, 1 bog frog, 1 skeleton minion, 1 puglin.
+FEED Cort Thatcher casts Frost at bog frog.
+FEED Garm Hollow casts bolt and the scar spends it elsewhere (6 vs DC 11).
+FEED Garm Hollow casts Frost at skeleton minion.
+TWITCH_EVENTSUB no keepalive for 20 s - reconnecting
+TWITCH_EVENTSUB closed (1000 client disconnected)
+TWITCH_EVENTSUB reconnecting in 2 s
+FEED Cort Thatcher's frost flickers, thinks better of it, and quits (8 vs DC 11).
+L644 frames=6617 dual_ambient=735 dual_paid=0 worst_streak_s=51.28 swaps=0
+L644_HANDOFF FAIL
+
+=== TEST DONE

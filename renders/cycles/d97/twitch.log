@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS 1 command -> chat_line
+PASS 2 ping -> pong
+PASS 3 plain chat ignored
+PASS 4 bot ignored
+PASS 5 cooldown
+PASS 6 split packet
+PASS 7 four per frame
+PASS 7b rest next frame
+TWITCH_PARSE OK
+
+RC 0

@@ -1,0 +1,162 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 644 flora on the grass islands
+VALLEY verges 176
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+NAV ready=true bake_ms=859 obstructions=2969 solids=1485 plots=66 road_dropped=188 people=164
+HOUSES_ON_ROAD 0
+DOORS 66 door_off_ground=0 door_leg_through_other_house=0
+FEED 4 bandits are riding on the west road!
+FEED Initiative: the raiders 17, the watch 8 - the raiders strike first.
+RAID started raiders=4
+T=10s walking=104 still=0 (posted=0) inside=60 in_solid=0/788 stuck_on_route=0
+FEED A building is burning!
+T=20s walking=55 still=28 (posted=17) inside=81 in_solid=0/1748 stuck_on_route=0
+FEED Ysolde Coalfoot is killed by a bandit.
+T=30s walking=47 still=27 (posted=17) inside=89 in_solid=0/2508 stuck_on_route=0
+FEED Cort Ashwood goes down and claws back up. (CON save 19)
+FEED Cort Ashwood is killed by a bandit.
+FEED The townsfolk raise the ruin again.
+T=40s walking=39 still=28 (posted=17) inside=95 in_solid=0/3142 stuck_on_route=0
+FEED A building is burning!
+T=50s walking=39 still=28 (posted=17) inside=95 in_solid=0/3742 stuck_on_route=0
+T=60s walking=29 still=33 (posted=18) inside=100 in_solid=0/4281 stuck_on_route=1
+FEED The attack is driven off. The gates hold.
+T=70s walking=132 still=29 (posted=17) inside=1 in_solid=0/5263 stuck_on_route=0
+FEED The new frame slips. The townsfolk will try again. (6 vs DC 12)
+T=80s walking=134 still=27 (posted=17) inside=1 in_solid=0/7651 stuck_on_route=1
+T=90s walking=128 still=33 (posted=17) inside=1 in_solid=0/9843 stuck_on_route=1
+FEED Sable Rivers settles in Bellmire, looking for work.
+T=100s walking=115 still=47 (posted=17) inside=1 in_solid=0/11778 stuck_on_route=1
+FEED The townsfolk raise the ruin again.
+T=110s walking=98 still=64 (posted=17) inside=1 in_solid=0/13344 stuck_on_route=1
+T=120s walking=83 still=78 (posted=20) inside=2 in_solid=0/14804 stuck_on_route=1
+STUCK_ON_ROUTE_TOTAL 6 over 120 s (raw still-with-a-route-now 8)  watchdog fires=6 close=4 repath=2 nudge=0 giveup=0
+TOWNWALK in_solid=0/14804 (0.000%) raid_in_solid=0/10820 (0.000%) PASS
+BAD []
+STUCK_EX ["watch Cort the Younger (-137.0,-14.2) next=(-151.8848, 0.5, -8.796213) route=13 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.17 push=(0.0, 0.0, 0.0)", "watch Cort the Younger (-137.5,-15.1) next=(-151.8848, 0.5, -8.796213) route=13 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.59 push=(0.0, 0.0, 0.0)", "watch Cort the Younger (-137.5,-15.1) next=(-151.8848, 0.5, -8.796213) route=13 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.58 push=(0.0, 0.0, 0.0)", "watch Cort the Younger (-137.5,-15.1) next=(-151.8848, 0.5, -8.796213) route=13 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.59 push=(0.0, 0.0, 0.0)", "watch Cort the Younger (-137.5,-15.1) next=(-151.8848, 0.5, -8.796213) route=13 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.59 push=(0.0, 0.0, 0.0)", "watch Cort the Younger (-137.5,-15.1) next=(-151.8848, 0.5, -8.796213) route=13 solid=[(-136.9109, -15.38734)][(2.113094, 0.487344)] navoff=0.60 push=(0.0, 0.0, 0.0)"]
+
+__RC 0

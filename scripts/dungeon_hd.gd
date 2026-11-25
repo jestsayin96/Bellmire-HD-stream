@@ -247,8 +247,9 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S122: `dredger` (57th, Finepass, art's tag confection - field 5) joins confection with MB_FIT 0.98; content's C-199 by_key.dredger landed and dredger.glb.import is on main, so the MB_NAME row is written in the same change and _s51_names.gd / _s107_gate.gd / _s117_straker.gd move 56 -> 57 with it.
 ## S123: `harrowman` (58th, Overturn, art's tag grassland - field 5) joins grassland with MB_FIT 1.0; content's C-200 by_key.harrowman landed and harrowman.glb.import is on main, so the MB_NAME row is written in the same change and _s51_names.gd / _s107_gate.gd / _s117_straker.gd move 57 -> 58 with it.
 ## S124: `pledgeman` (59th, Heldfast, art's tag treasury - field 5) joins treasury with MB_FIT 1.05; content's C-201 by_key.pledgeman landed and pledgeman.glb.import is on main, so the MB_NAME row is written in the same change and _s51_names.gd / _s107_gate.gd / _s117_straker.gd move 58 -> 59 with it.
+## S126: `crimp` (60th, Oneshort, art's tag barracks - field 5) joins barracks with MB_FIT 0.99; miniboss_for holds it out until content's C-202 by_key.crimp arrive lines land, and MB_NAME waits for the same feed (chatcmd.gd MINIBOSS GHOST).
 const THEME_MINIBOSS_MORE := {
-    "barracks": ["quartermaster", "relief"], "workshop": ["jointer", "greener", "dyer"],
+    "barracks": ["quartermaster", "relief", "crimp"], "workshop": ["jointer", "greener", "dyer"],
     "prison": ["pressman", "tither", "nightman"], "shrine": ["leech", "beadle", "almoner"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper"],
     "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer", "weigher", "pledgeman"], "mess": ["loader", "hooper", "iceman"],
     "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman", "roper", "harrowman"], "wood": ["drover", "winder", "straker"],

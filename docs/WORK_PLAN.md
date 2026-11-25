@@ -131,6 +131,40 @@
    href, so what is waiting to publish is better than what was waiting last hour - but it still
    points at an unpublished form, which is reason 1.
 
+**FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, TO BE LANDED IN ONE LIVE TURN.** This list
+SUPERSEDES the one in the 23:58 block below, and two of that list's own figures had already gone
+stale - which is the point of re-measuring instead of carrying a number forward.
+I attempted the write once this firing, as the rule says, with a no-op (`enabled=true` only). It was
+REFUSED. A firing has no live turn to be approved in; this is not something Mr. E can click.
+  1. **THE ART FIT REGISTER NOTE IS STALE AND SAYS THE OPPOSITE OF THE TRUTH.** The standing note
+     "its top-level verdict reads RED / ok:false ... on two CARRIED unmeasured rows" is false and
+     has been for two days. Measured by me on 39d8a7b9: `ok: true`, `verdict: "GREEN"`, **62 pairs**,
+     errors 0, blind_views 0, stale_margin 0, unproved_cells 0. Replace the note with: MEASURE the
+     register; never quote a verdict out of the prompt.
+  2. **THE HUB PUBLISH BASELINE IS STALE TWICE OVER.** The prompt still says "gh-pages is 05ac2679,
+     tree 9ca8051e, pushed 19 NOV 20:06 CT" with a "3 files / +59 / -1" delta. The 23:58 list's
+     replacement ("ONE file, NOTES.md +12/-0", hub:web 405450bf) is ALSO stale now. Measured by me
+     at 01:0x on 25 Nov: gh-pages **5ce35f33**, tree **c03fa129**, pushed **24 NOV 15:30 CT** ("hub
+     publish 7"); `origin/hub:web` tree **3d910499**; delta **3 files, +17 / -1** - `NOTES.md` +12,
+     `index.html` +2/-1, `style.css` +3. Keep the re-measure-it-yourself rule; it is why this was
+     caught.
+  3. **THE ID LINE IS STALE.** As of 25 Nov 01:0x CT: **B144, C-201, D100, H32, L74, S125** (S126 in
+     flight), **T5, U164**, and art is sixty bodies deep (`crimp`), long past paviser pass 8.
+  4. **EVERY MINIBOSS COUNT IN THE PROMPT IS STALE AND ALWAYS WILL BE.** The standing "44/44/44"
+     `Delve.MB_NAME` example and the "46 rows, of which 44 are live bodies" fit-register line should
+     both be replaced by a pointer to this plan's TAKE THIS NEXT block, which is re-measured hourly.
+     Today it is 60 bodies / 59 feed / 59 engine / 59 published.
+  5. **THE CLEAN-HOUR COUNT LINE IS STALE.** The prompt says it "STOOD AT 2 AFTER THE 08:58 FIRING
+     ON 21 NOV". It reset to **0** at the 00:58 firing on 25 Nov (chat bot's declared-finish
+     overrun - see the lock paragraph in this block).
+  6. **NO CHANGE OWED, RECORDED SO THE NEXT SEAT KNOWS IT WAS CHECKED RATHER THAN COPIED:** the
+     dead-data baseline's NON-NOTE count still reads 15 in the prompt and still MEASURES 15 today.
+  7. **ALREADY CORRECT, DO NOT "FIX" IT:** the prompt's struck rarity-hue paragraph (System 2's HUD
+     half is CLOSED at U55) is right, and I re-proved it by grep this hour. The stale copy of that
+     belief lives in the HUD's own PROGRESS note, not in the prompt, and I have struck it in the
+     HUD row above.
+
+
 ## TAKE THIS NEXT - Updated THE 23:58 CT FIRING, 24 NOV 2026 (team lead; written after the midnight rollover, 25 Nov 00:0x CT). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS db738eb5. ALL SIX LANES SHIPPED AND ALL SIX ARE MERGED. ***
 *** THE CASCADE IS CLOSED. LEVEL AT 59 / 59 / 59 / 59, MEASURED BY ME WITH A BRACE-MATCHED PARSE:

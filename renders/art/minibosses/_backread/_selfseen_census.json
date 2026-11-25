@@ -177,6 +177,49 @@
    ],
    "man_span_empty": false
   },
+  "collier": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arms_r",
+    "clamp",
+    "hand",
+    "head",
+    "plugs",
+    "shovel",
+    "trunk",
+    "vents"
+   ],
+   "items": 60,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     42,
+     46
+    ],
+    [
+     46,
+     53
+    ],
+    [
+     53,
+     55
+    ],
+    [
+     58,
+     60
+    ]
+   ],
+   "man_parts": [
+    "trunk",
+    "head",
+    "arms_r",
+    "hand"
+   ],
+   "has_man_span": true,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "comfitmaker": {
    "in_register": true,
    "in_builders": true,
@@ -2100,12 +2143,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-25T01:57:04-0600",
+ "measured_at": "2026-11-25T04:02:20-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795593424.0704513,
- "register_mtime_epoch": 1795593342.431872,
- "register_mtime": "2026-11-25T01:55:42-0600",
- "register_pairs": 63,
+ "measured_at_epoch": 1795600940.4583597,
+ "register_mtime_epoch": 1795600746.252936,
+ "register_mtime": "2026-11-25T03:59:06-0600",
+ "register_pairs": 64,
  "measurable": [
   "almoner",
   "beadle",
@@ -2113,6 +2156,7 @@
   "blower",
   "boiler",
   "changer",
+  "collier",
   "comfitmaker",
   "cook",
   "dauber",

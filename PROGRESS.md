@@ -19030,3 +19030,12 @@ NEXT: at 03:45, with the lock in a full window - `tools/_commands_doc.gd` as the
 - No live Twitch test, ZERO bits.
 ## Hub standing check - 25 Nov 03:4x CT (hub lane)
 TAKE THIS NEXT gave the HUB row "STANDING CHECK; NOTHING OWED". web/ is byte-identical to origin/hub (git diff --stat empty). node --check app.js OK. innerHTML at app.js:255 and :301 only (page-owned literals); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code (comment mentions only). 1 CSP meta. No CDN/font URLs. 539 files in web/, 0 zero-byte. No web/ change, so no hostile-name rerun owed, no screenshot taken, READY TO PUBLISH not claimed. Merged origin/main into hub (no web/ delta). Untracked _hub_ready_shot.png and web/tools/__pycache__/ still present, delete refused on this machine.
+
+## U167 - 2026-11-25T03:56:47-06:00 - L74 RE-VERIFIED (odd hour, worked), no .gd changed, lock released 03:56:26
+- Lock: R working-tree RUN_LOCK last line IDLE 03:49:40 chat bot B147, tasklist Godot* = 0 -> FREE. Claimed 03:54:12-06:00 (declared finish ~04:04, cap +15), released 03:56:26-06:00.
+- TAKE THIS NEXT named for HUD: L74 (feed + theme under load); rarity-hue half of System 2 is CLOSED at U55, not taken.
+- Audit: after fetch origin/laptop 45935af2, origin/main 56724088; git diff over the seven owned files vs both = EMPTY. The S127 61st-body change touched no HUD file.
+- Ran tools/_l74_test.gd WINDOWED 1920x1080 (log _u167_l74.log): L74_TEST OK - 17 lines measured of 48 fed, taken_off_unread=[0,1,0,0] (routine/normal/town/crit), protected_unread=0, dropped_protected=0, 0 SCRIPT ERROR from HUD files. The only errors are the known gear.gd:104 staff_common.glb import-cache noise from this worktree's thin .godot/imported (team lead traced it 18 Nov; not mine, not chased).
+- LOOKED at renders/cycles/l74/l74_u167_150.png: Chronicle at 150% reads as one designed panel, 4 lines, fall/raid line on top, x5 merge visible, nothing clipped or overlapping the quadrant labels.
+- Guard question (U74b follow-up): parse_fish() end-finder not re-opened this hour; no nested brace in RARITY_COLOR today.
+- CHANGED: this note + log only. Decision for Mr. E: none. Next firing 04:52 is EVEN: stand down unless plan reopens HUD; 05:52 odd.

@@ -20181,3 +20181,17 @@ NOTHING for Mr. E to decide. The hub block named a row for me; it was a stand-do
   are untouched; this commit is PROGRESS.md alone.
 - Nothing owed to the GAME BUILD lane in `twitch_eventsub.gd`. **No Twitch activity of any kind: zero
   bits, no cheer, no redemption, no channel-point change, no chat line posted, no account touched.**
+
+## C-214 (content, 25 Nov 2026 15:2x CST) - C-213's PREPARED DIFFS LANDED. ONE FILE, FOUR STRINGS, ONE NOTE.
+ITEM: TAKE THIS NEXT (14:58 CT block, `>>> CONTENT (:22)`): land C-213's second half in the shape C-212 landed in. Additive only, one new `_note_` key, every other value byte-identical.
+CELL-BY-CELL (data/lore_lines.json, miniboss_feed.by_key; a structural diff against the pre-edit file lists exactly these five and nothing else):
+1. changer.arrive[1]  "A tall man standing inside a three-armed turnstile, and a pale drum on the post behind him." -> "A tall man standing at a turnstile post, and a pale drum on the top of it behind him."
+2. changer.arrive[2]  "He does not chase anyone. He works the arms, and the arms work the room." -> "He does not chase anyone. He works the post, and the post works the room."
+3. changer.arrive[8]  "Good wool, clean plates on the bar ends, and a man who has done this every day for years." -> "Good wool, a clean plate under the post, and a man who has done this every day for years."
+4. dyer.arrive[1]     "Three cloths hang to dry. A fourth is in the vat." -> "Three cloths hang to dry. The vat is steaming."
+5. miniboss_feed._note_c214  ADDED (the only new key). _note_c212 gained a trailing comma, no value change.
+HELD ON PURPOSE: changer arrive.7, act.0, act.6, broken.0-3, fall.0/3/6 still name bars or arms. They promise the jam counterplay, an open mechanic question (lead / Mr. E / code lane); rewording them would guess a mechanic. The changer is therefore still half-reworded by design, and the note says so.
+VALIDATION OK: all four owned files json.load; array lengths unchanged (changer 9/7/4/8, dyer 9/8); 62 by_key keys; items/bosses/potions untouched.
+Lock: none taken, I never run Godot. Git via the Blender bridge.
+NO CODE WIRING. `_note_c214` is an expected zero-hit key; NO LANE IS TO WIRE IT.
+Next content: C-215, on a row; else the standing backlog.

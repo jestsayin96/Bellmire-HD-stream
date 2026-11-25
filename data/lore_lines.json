@@ -13639,7 +13639,7 @@
       "dyer": {
         "arrive": [
           "Something back there just marked one of you.",
-          "Three cloths hang to dry. A fourth is in the vat.",
+          "Three cloths hang to dry. The vat is steaming.",
           "The dye-house floor is wet to the ankle, and the wet is not water.",
           "A man at a vat, paddle in hand, blue to the elbow.",
           "Woad, madder, weld. He has all three going.",
@@ -14270,14 +14270,14 @@
       "changer": {
         "arrive": [
           "Something ahead is turning, slow and even.",
-          "A tall man standing inside a three-armed turnstile, and a pale drum on the post behind him.",
-          "He does not chase anyone. He works the arms, and the arms work the room.",
+          "A tall man standing at a turnstile post, and a pale drum on the top of it behind him.",
+          "He does not chase anyone. He works the post, and the post works the room.",
           "Land your best blow on him and you will be standing where he stood. He will be where you were.",
           "He comes out of it beside whoever you were keeping back.",
           "Nobody is taken and nobody is lost. Everybody is just somewhere else.",
           "Look at the drum. It turns a third on every trade. Count the dark rungs.",
           "The bars ride at hip height. A body set against one holds it.",
-          "Good wool, clean plates on the bar ends, and a man who has done this every day for years."
+          "Good wool, a clean plate under the post, and a man who has done this every day for years."
         ],
         "act": [
           "The arms come round. {name} is standing where he stood.",
@@ -14930,7 +14930,8 @@
     "_note_c202": "C-202: crimp feed row (Oneshort, the 60th, a man with a hook in one hand and a nine-socket muster board slung off one shoulder). Canon from tools/art/minibosses.py CANON row (tag barracks) and docs/art/CRIMP_THE_60th.md: IT TAKES ONE OF YOU INTO ITS OWN CREW - the hook takes a hero by the collar, the name goes on the board, and that hero fights for the crimp at full strength; the answer is the one lit peg with the signed tag, and striking the peg strikes the name off. Lines name the board turned out on his off side in the open, the four old grey pegs, the one pale peg with a blank tag, the berth loops by every socket, and the hook that is bright where he is dull; act lines show the hero taken, signed, turned on the party and the peg being struck, never a mechanical number. 'broken' claims nothing about the signed hero. Fall lines use the name Oneshort (art doc, MB_NAME value) and end on 'Go on up.' Expected zero-hit key - no lane is to wire it.",
     "_note_c203": "C-203: timberman (Deadfall, the 61st) feed row, same shape as crimp - arrive 9, act 8, broken 4, fall 8, {name} in act only. Written off art's TIMBERMAN_THE_61st.md: death is the danger; three spare props and two wedges are the answers; the roof stays up while the fight lasts. Fall lines are neutral on whether the roof held, since one fall set covers either ending. Last arrive line is the art lane's own suggested line. Expected zero-hit key.",
     "_note_c205": "C-205: collier (Halfblow, the 62nd) feed row, same shape as timberman - arrive 9, act 8, broken 4, fall 8, {name} in act only. Written off art's COLLIER_THE_62nd.md: the party's heaviest blow is the liability (a measured stroke is safe, an overblow bursts a vent and the flare takes the room); four pale plugs answer the four vents; short man in a wide hat, shovel, eight stakes, spoil tail. Fall lines are neutral on whether the room flared, since one fall set covers either ending. Last arrive line is the art lane's own suggested line. Expected zero-hit key.",
-    "_note_c212": "C-212: collier text change, shipped on the supervisor's 11:00 CT ruling (A) and the team lead's 11:58 plan row. The body shows three vents at 360p, so the count words came out and the mechanic words stayed: arrive.3 drops \"Four\", arrive.4 drops \"four\", act.6 becomes \"seats another plug. One more red eye goes out.\" in place of \"the third plug. Three dark mouths and one red\". Eight stakes (arrive.2) unchanged. Arrays stay 9/8/4/8, no key added or removed. _note_c205 above is left byte-identical as history; its \"four pale plugs answer the four vents\" is superseded by this note. Expected zero-hit key; NO LANE IS TO WIRE IT."
+    "_note_c212": "C-212: collier text change, shipped on the supervisor's 11:00 CT ruling (A) and the team lead's 11:58 plan row. The body shows three vents at 360p, so the count words came out and the mechanic words stayed: arrive.3 drops \"Four\", arrive.4 drops \"four\", act.6 becomes \"seats another plug. One more red eye goes out.\" in place of \"the third plug. Three dark mouths and one red\". Eight stakes (arrive.2) unchanged. Arrays stay 9/8/4/8, no key added or removed. _note_c205 above is left byte-identical as history; its \"four pale plugs answer the four vents\" is superseded by this note. Expected zero-hit key; NO LANE IS TO WIRE IT.",
+    "_note_c214": "C-214: C-213's prepared text diffs, landed on the team lead's 14:58 CT plan row. The changer's arms were deleted on 21 Nov (Mr. E: delete the bars); the body is man, post, collar and a pale drum with three dark rungs. Changed: changer arrive.1 drops three-armed turnstile for turnstile post; arrive.2 works the arms, and the arms work the room becomes works the post, and the post works the room; arrive.8 clean plates on the bar ends becomes a clean plate under the post. Dyer arrive.1 A fourth is in the vat becomes The vat is steaming (three cloths on the builder, none in the vat). HELD, not changed: changer arrive.7, act.0, act.6, broken.0-3, fall.0, fall.3, fall.6 still name bars or arms; they promise the jam counterplay, which is an open mechanic question for the lead, Mr. E and the code lane, and rewording them would guess a mechanic. Arrays stay 9/7/4/8 and 9/8. No key added except this note. Expected zero-hit key; NO LANE IS TO WIRE IT."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

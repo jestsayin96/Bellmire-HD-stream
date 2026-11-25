@@ -22961,6 +22961,87 @@ def collier():
               rot=(math.pi * 0.5, 0.0, a))
     _close("vents")
 
+    # ------------------------------------------------- THE FLANK SEAMS (+X)
+    # *** PASS 7, FIX P - MY OWN CUE-READ CENSUS FOUND THIS AND THE PICTURE
+    # *** AGREES WITH THE NUMBER. ***
+    # The census (`_cueread.json`, 25 Nov 04:5x CT) renders the body twice
+    # through ONE camera, with and without the cue materials, and counts the
+    # pixels that MOVED. On this body: front 3784, back 2430, SIDE **41**.
+    # Forty-one pixels is 20x below the next-worst view in the whole sample.
+    # I then looked at `collier/hero_side.png` and the number is honest - from
+    # +X this is an earth mound with a man on it and no fire anywhere.
+    # WHY THE SIDE AND NOT THE BACK. The vents are on the -Y arc and the plug
+    # bundle is on the -X flank. The BACK camera (+Y) sees the plugs past the
+    # mound's upper profile - 2393 px of `bone`, the count reads from behind.
+    # The SIDE camera (+X) sees neither: the plug bundle is on the far flank
+    # with 0.86 m of earth in front of it, and every vent is at radius 0.712
+    # inside a mound whose +X extent is 0.85. Nothing on the -Y arc can be
+    # brightened into view from +X; it is occluded, not dim.
+    # WHAT I DID NOT DO, AND WHY.
+    #   NOT a fifth vent. The count IS the mechanic (FAULT 10).
+    #   NOT the vent arc swung out to +80. A vent at +80 is edge-on to the
+    #     front camera, so the front would read three. Pass 5 already paid for
+    #     answering one camera and asking the other nothing.
+    #   NOT the plug bundle moved back to +X. Pass 5 FIX K moved it OFF +X
+    #     because pass 4's apex walk put the mound's high shoulder in front of
+    #     it; putting it back is reverting a fix that was right.
+    # WHAT THIS IS. A clamp shut on a live fire LEAKS at its course joins, and
+    # that is the one thing on this body that can be on the +X arc without
+    # being a second countable cue: three SHORT ember seams, bowed, in the bay
+    # between the 67.5 and 112.5 stakes, sunk into the flank so the earth is
+    # their own lip. Not discs, not in iron collars, not countable - a
+    # different shape class from a vent, which is the whole of FAULT 10's
+    # actual concern. Lengths and centres are staggered on purpose: three
+    # equal horizontal bars stacked up one flank is the crinoline of pass 3
+    # arriving as light instead of iron.
+    def _flank_r(z):
+        for rb, rt, h, z0, sb, st, yo, xo, yw in _courses:
+            if z0 - 1e-6 <= z <= z0 + h + 1e-6:
+                t = (z - z0) / h
+                return rb + (rt - rb) * t, xo, yo
+        return 0.470, 0.252, -0.112
+
+    _open()
+    # *** PASS 7b - THE ONE THING CHANGED, AND IT IS THE BEARING WINDOW. ***
+    # 7a centred the seams on 95/87/98 and the FRONT render came back with two
+    # small orange nicks on the mound's right rim: the 76-90 end of the middle
+    # seam crosses the front camera's silhouette, and a fifth and sixth ember
+    # on the front is FAULT 10 arriving by the back door. Every seam now
+    # starts at bearing 93 or beyond, so nothing on the +X arc faces -Y at
+    # all. The side camera sits at bearing 90 and still sees all three
+    # foreshortened by at most 27 degrees; what the front loses the back gains.
+    # *** PASS 7c - 7b OVERPAID. *** 7a (95/87/98) put TWO orange nicks on the
+    # front rim and read best from the side, 393 px. 7b (105/101/104) cleared
+    # the front to one small rim mark and cost 133 of those 393 - a third of
+    # the fix - for a nick that was never the real hazard. The hazard is
+    # specific and I had not named it: it is a fifth ember AT THE VENT ROW'S
+    # OWN HEIGHT, because that is the row a viewer counts. Only the LOWEST
+    # seam (z 0.248) sits in that band, so only the lowest seam is held off
+    # the front arc. The two above it are mid-flank, well clear of the row,
+    # and are allowed to graze the rim where the side read is paid for.
+    # Radii and sinks are FROZEN at their 7a values on purpose: the bearing
+    # window is the one thing that moved between these three renders, so the
+    # three numbers are comparable. If the side is still thin, the radius is
+    # the next pass's single change and not this one's.
+    for zs, dc, dw, sink, rad in ((0.248, 103.0, 14.0, 0.020, 0.034),
+                                  (0.503, 92.0, 14.0, 0.018, 0.029),
+                                  (0.742, 99.0, 9.0, 0.015, 0.023)):
+        r0, xo, yo = _flank_r(zs)
+        pts, radii = [], []
+        n = 9
+        for j in range(n):
+            t = j / (n - 1.0)
+            a = math.radians(dc - dw + 2.0 * dw * t)
+            rr = r0 - sink
+            # the seam rides UP across the join rather than running dead
+            # level - a level line on a round flank is a hoop
+            zz = zs + 0.046 * math.sin(math.pi * t) + 0.030 * (t - 0.5)
+            pts.append(Vector((xo + rr * math.sin(a),
+                               yo + rr * -math.cos(a), zz)))
+            radii.append(rad * (0.26 + 0.74 * math.sin(math.pi * t) ** 0.6))
+        P.raw(L.tube(pts, radii, 7), 'glow')
+    _close("seams")
+
     # --------------------------------------------------------- THE FOUR PLUGS
     # The answer, countable, entirely on the +X flank (FAULT 4), fanned (FAULT
     # 5), ferruled and lashed (FAULT 6).

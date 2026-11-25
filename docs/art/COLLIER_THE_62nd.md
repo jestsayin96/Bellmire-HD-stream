@@ -146,10 +146,23 @@ Looked at on the hero sheet at hero scale, front, side and back:
 2. **The side camera is the weak view for the mechanic.** One ember shows at
    the mound's edge and the plug bundle goes nearly edge-on behind the front
    face. The count is a **front cue by construction** and the side carries the
-   silhouette instead.
-3. **The back carries no cue at all** - by design (all four vents are on the -Y
-   arc, which is the facing) but worth the game build lane knowing: a party
-   arriving from behind sees a heap and a man, not the mechanic.
+   silhouette instead. **THIS WAS THE REAL FAULT AND IT IS NOW MEASURED AND
+   PARTLY ANSWERED (PASS 7, 25 Nov 05:3x-06:0x CT):** the cue census put the
+   side at **41 px** against a front of 3784, and three ember seams on the +X
+   flank took it to **427**. It is no longer blind and it is still the thinnest
+   cue in the ten-body sample. Full write-up, the two arms I rejected and the
+   faults I can still see: `docs/art/CUE_READ.md`, PASS 7.
+3. ~~**The back carries no cue at all**~~ - **STRUCK 25 Nov 05:4x CT, AND IT IS
+   THE ONE FAULT IN THIS LIST I GOT WRONG BY EYE.** I wrote this before the cue
+   census existed, reasoning from construction (the vents ARE all on the -Y
+   arc) instead of from a render. Measured: **the back moves 2430 cue pixels**
+   - the four pale plugs stand clear of the mound's upper profile from +Y and
+   the count reads perfectly well from behind. The blind view was the **SIDE**,
+   at 41 px, and fault 2 below had already half-seen it. This struck sentence
+   was quoted into `minibossgen.py`'s switch comment and from there into the
+   04:58 CT plan row, which duly told me to fix the back; three documents
+   repeating one unmeasured sentence is how that happens. Fixed at PASS 7 -
+   side 41 -> 427 - see `docs/art/CUE_READ.md`.
 4. **Three of the four embers read cleanly on the front; the fourth is partly
    behind the mound's own left flank** depending on the camera's yaw. Pass 5
    moved it off the shovel and the flank took a piece of it back.

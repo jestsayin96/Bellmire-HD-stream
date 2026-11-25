@@ -21452,3 +21452,349 @@ def harrowman():
 
 
 BUILDERS.update({"harrowman": harrowman})
+
+
+# ---------------------------------------------------------------- 59 PLEDGEMAN
+# THE 59th. The one question this body had to answer before a line was written
+# was not "what does it do to you" - fifty-eight bodies already answer that -
+# but "what does it make you NOT do". Every other body in this file is fought
+# by doing more. This one is fought by doing less, and the thing that measures
+# the fight is not its health bar but what is still alive when the bar empties.
+CANON.update({
+    "pledgeman": ("Heldfast", 2.58, (0.54, 0.50, 0.44), (1.00, 0.93, 0.62),
+                  "treasury", "IT HAS SOMETHING OF YOURS THAT IS NOT YOURS "
+                  "TO SPEND - it has already taken a pledge against the "
+                  "town's debt and it carries that pledge lashed to a board "
+                  "on its back, strapped through its own harness, ALIVE. The "
+                  "pledge takes a share of every blow that lands on the "
+                  "pledgeman, because the two are tied into one load: so the "
+                  "party that fights this the way it fights everything else "
+                  "kills the pledge on the way to the kill, and the room pays "
+                  "out nothing. Nothing is taken from you here and nobody is "
+                  "chosen - the payout is whole when you walk in and the "
+                  "PARTY IS THE ONLY THING IN THE ROOM THAT CAN DESTROY IT. "
+                  "The answer is the three lashings: cut them and the board "
+                  "comes off its back, the pledge drops clear, and what is "
+                  "left is an ordinary heavy brawl with nothing riding on it. "
+                  "So damage is a BUDGET and not a goal, winning the fight "
+                  "and winning the room are two different things, and for the "
+                  "first time in this file hitting it is the wrong move. THE "
+                  "THING TO READ IS THAT THERE ARE TWO BODIES: a stooped man "
+                  "under a raked board slung high off his shoulders, a bound "
+                  "hooded figure lying lashed along that board with its head "
+                  "clear at the top and its feet bound at the bottom, THREE "
+                  "BRIGHT LASHINGS crossing it - the only pale on the whole "
+                  "body, because they are what you are meant to hit - and a "
+                  "strap from each lower corner of the board running over a "
+                  "shoulder into a fist, so a viewer can see that the load is "
+                  "carried and cannot be put down.",
+                  0.45, "Someone is being carried who is not walking."),
+})
+ORDER = ORDER + ["pledgeman"]
+
+
+def pledgeman():
+    """IT HAS SOMETHING OF YOURS THAT IS NOT YOURS TO SPEND. The 59th body.
+
+    THE ACCEPTANCE TEST IS TWO BODIES AND THREE BRIGHT TIES, and all three
+    terms have to survive the front ortho, the side ortho and a hero standing
+    next to it. If a viewer sees one big man with a lumpy pack, the mechanic is
+    not on the model, it is only in this docstring - and this mechanic is worse
+    than most to lose, because a party that cannot SEE the pledge has no reason
+    to stop swinging and will never learn what the fight was.
+
+    WHAT THIS IS NOT. Fifty-eight bodies deep the re-skin is the easy failure,
+    so every near neighbour gets named with the daylight between it and this.
+      NOT THE GAOLER (3), HOOPER (39), DROVER (28) or DYER (24), which take one
+            of YOUR heroes - hook, cask, yoke, mark. All four choose a target
+            and the cost is a body out of your line. Nothing here is chosen and
+            the pledge is NOT a hero: it was taken before the party arrived,
+            and losing it costs the ROOM'S PAY, not a fighter.
+      NOT THE PAVISER (29), which is the other body carrying a thing between
+            you and it. A pavise is a BLOCK on a hinge and the answer is to get
+            round it, so that fight is positional. This one is not positional
+            at all: every angle hits for the same, behind is no better than in
+            front, and the thing being protected is protected from YOU BY YOUR
+            OWN RESTRAINT and by nothing else on the model.
+      NOT THE TITHER (45), REEVE (20), ALMONER (50) or TALLYMAN (7), the money
+            trades, which take payment, haul, kit or gear FROM you. Here
+            nothing is taken. The payout is already in the room and intact.
+      NOT THE PRESSMAN (22), which consumes heroes that have ALREADY FALLEN.
+            That is a penalty on losing. This is a penalty on winning badly.
+      NOT THE COMFITMAKER (31), which hands you the one thing that cuts it.
+            The lashings are not a gift and they help nobody: cutting them
+            costs actions and deals no damage, which is the whole point.
+      NOT THE COOK (8), whose pot heals the room so spilling it is pure gain
+            with no trade-off.
+      NOT THE WEIGHER (56), whose beam MUST COME DOWN EVEN. That is a balance
+            kept on ITS body and read off ITS geometry. This is a budget kept
+            on YOUR output.
+    The family - THE REWARD LIVES INSIDE THE HEALTH BAR, so the party's own
+    damage is the resource being spent against the pay, and the fight is won by
+    restraint - is new in this file, and it is the reason this body was built.
+
+    THE READ IS BUILT ON THIS HOUSE'S OWN LOGGED FAULTS AND NOT ON MY
+    CONFIDENCE. Each of these is somebody's shipped mistake, re-used:
+      THE BOARD IS YAWED *AND* RAKED, which is TWO questions and not one. A
+            load slung on the back along the facing axis is INVISIBLE IN THE
+            FRONT ORTHO (straker FIX K, dredger FIX C, harrowman's yaw), and a
+            load laid FLAT is edge-on to every horizontal camera however well
+            it is yawed (harrowman pass 2, where a yawed flat lattice rendered
+            as a garden rake because only the azimuth question had been asked).
+            So the board's plane normal here has a real component in X, in Y
+            AND in Z by construction: it is neither hidden behind him on the
+            front camera nor edge-on to either. That is geometry, not a tuned
+            number.
+      THE BOARD BREAKS HIS OWN SILHOUETTE. Its top rides ABOVE his head and its
+            outer edge stands clear of his outline, so the second body is not
+            inside the first body's outline on the camera that matters. The
+            Beadle's pale knob went FLAT AGAINST his own pale panel on the side
+            view and passed every number in the register; the fix for that
+            class of fault is clear air, and clear air is a thing you can see.
+      THE PLEDGE SITS ON THE OUTWARD FACE. Laid on the inner face it would be
+            sandwiched between the board and the man and read as padding.
+      THE PLEDGE HAS A NECK NOTCH AND DIVIDED FEET, or it is a bedroll. A
+            silhouette with no neck is luggage; this is the whole difference
+            between a hostage and a pack, and it is carried by geometry rather
+            than by colour so it survives the flat lighting.
+      IT HAS A FACING BY CONSTRUCTION. The Beadle's pale eye-band wrapped his
+            head so the figure read the SAME FROM FRONT AND BACK. Here the
+            pledge is ASYMMETRIC ALONG THE BOARD - head clear at the top, bound
+            feet at the bottom - so front and back cannot render alike, and the
+            man gets a dark brow and jaw on his -Y side only.
+      NO FREE ENDS ANYWHERE. The dredger shipped a carrying strap that crossed
+            the chest as a dark rod ending IN MID AIR. Every strap here runs
+            board-corner -> over the shoulder -> INTO A FIST, and every lashing
+            runs board-edge -> over the pledge -> board-edge.
+      WEAR 0.45 IS A SPREAD AND NOT ONE VALUE. His harness and the board are
+            old working kit, scuffed and re-used; THE ROPE IS NEW, because the
+            pledge was taken today. That is also why the rope is the brightest
+            thing on him - the wear story and the targeting cue are the same
+            decision, which is how wear is supposed to work in this house.
+    """
+    P = Parts("pledgeman")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.095
+    KNEE = 0.520
+    HIP = 0.950
+    WAIST = 1.140
+    CHEST = 1.440
+    SHO = 1.620
+    HEAD = 1.850
+
+    # NEGATIVE of the harrowman's: he is not hauling forward, he is STOOPED
+    # UNDER a load that hangs off his back, so the trunk shears BACK as it
+    # rises. Smaller magnitude than the harrowman's 0.150 haul - a carried
+    # load bends a man, it does not pitch him over.
+    LEAN = -0.105
+
+    def _s(v):
+        v = Vector(v)
+        return Vector((v.x, v.y - LEAN * (v.z - HIP), v.z))
+
+    # ---- THE BOARD. Local frame built explicitly so the docstring's claim
+    # about the normal is arithmetic and not a hope. U = along the board
+    # (up and back and across), W = across its width, N = its outward normal.
+    # *** PASS 2, AND THIS IS A ROOT FAULT AND NOT A DETAIL. ***
+    # PASS 1 SLUNG THE BOARD ON HIS BACK AND PUT THE PLEDGE ON ITS OUTWARD
+    # FACE, AND THE FRONT ORTHO SHOWED ONE BODY. A board raked BACK has its
+    # outward normal pointing back AND up: +Y, which is straight away from the
+    # front camera. So the camera got the board's blank underside, the pledge
+    # sat entirely behind it, and the three lashings came out as four pale
+    # nubs on the board's rim reading as RIVETS. The body read as a man with a
+    # big dark SHIELD on his back - which is the PAVISER, the one neighbour
+    # this body's docstring spends a paragraph swearing it is not.
+    # This is the dredger FIX C / straker FIX K family arriving a third way,
+    # and the lesson is the house's own: I answered the TILT question (don't
+    # lie flat) and the AZIMUTH question (don't hide behind the man) and never
+    # asked WHICH WAY THE LOADED FACE POINTS - which is the only one that
+    # decides whether the mechanic is on the model at all.
+    # THE FIX IS NOT A NUMBER, IT IS WHERE THE LOAD IS CARRIED: the board comes
+    # off his back and onto his SIDE, yawed past 90 degrees so its loaded face
+    # turns out toward the viewer with the dark board standing BEHIND the
+    # pledge as a backdrop. Computed before rendering, not tuned after:
+    #   pass 1  N = (+0.431, +0.704, -0.565)  -> Ny > 0, face turned AWAY
+    #   pass 2  N = (+0.712, -0.417, -0.565)  -> Ny < 0, face turned TO camera
+    # and |Nx| rises 0.431 -> 0.712, so the side camera gets MORE of the face
+    # too. No view is traded for another here; if it had been, that would have
+    # had to be said.
+    TILT = -0.60                 # tips +Z back toward +Y
+    YAWB = -2.10                 # PAST 90 deg: turns the loaded face OUTWARD
+    _ct, _st = math.cos(TILT), math.sin(TILT)
+    _cy, _sy = math.cos(YAWB), math.sin(YAWB)
+
+    def _rot(v):
+        v = Vector(v)
+        v = Vector((v.x, v.y * _ct - v.z * _st, v.y * _st + v.z * _ct))
+        return Vector((v.x * _cy - v.y * _sy, v.x * _sy + v.y * _cy, v.z))
+
+    U = _rot((0.0, 0.0, 1.0)).normalized()
+    W = _rot((1.0, 0.0, 0.0)).normalized()
+    N = _rot((0.0, 1.0, 0.0)).normalized()
+    # Carried at his side, not on his spine - see the pass-2 note above.
+    BC = Vector((0.455, -0.090, 1.700))
+    BL, BW, BT = 1.120, 0.640, 0.072     # length, width, thickness
+
+    _open()
+    P.add(L.box(BW, BT, BL), 'dark', loc=tuple(BC),
+          rot=(TILT, 0.0, YAWB))
+    # two battens across the back of the board, so it reads as a BOARD and not
+    # a slab - and they sit on the inner face where they cannot steal pale.
+    for _b in (-0.30, 0.26):
+        P.add(L.box(BW * 1.04, 0.058, 0.070), 'dark',
+              loc=tuple(BC + U * (BL * _b) - N * (BT * 0.5 + 0.030)),
+              rot=(TILT, 0.0, YAWB))
+    _close("board")
+
+    # ---- THE PLEDGE. On the OUTWARD face, laid along U, head at the top.
+    OUT = BT * 0.5 + 0.150
+    PC = BC + N * OUT
+    _open()
+    # torso, thickest at the shoulders and tapering to the hips
+    for _k in range(7):
+        _t = -0.30 + 0.098 * _k
+        _r = 0.168 - 0.030 * abs(_t + 0.02) / 0.32
+        P.add(L.sphere(_r, _r * 0.80, _r, 10, 7),
+              'body', loc=tuple(PC + U * (BL * _t)))
+    # THE NECK NOTCH - narrow, and it is the reason this is not a bedroll.
+    P.add(L.cone(0.072, 0.064, 0.085, 9), 'body',
+          loc=tuple(PC + U * (BL * 0.345) - U * 0.040))
+    # the hood. Dark, so the three lashings keep the pale to themselves.
+    P.add(L.sphere(0.148, 0.138, 0.152, 12, 8), 'dark',
+          loc=tuple(PC + U * (BL * 0.432)))
+    # bound legs - DIVIDED, then wrapped at the ankle into one bundle.
+    for _i in (-1, 1):
+        limb(P, [tuple(PC + U * (BL * -0.285) + W * (0.062 * _i)),
+                 tuple(PC + U * (BL * -0.408) + W * (0.050 * _i)),
+                 tuple(PC + U * (BL * -0.470) + W * (0.030 * _i))],
+             0.068, 0.050, 'body')
+    P.add(L.sphere(0.078, 0.070, 0.074, 10, 7), 'dark',
+          loc=tuple(PC + U * (BL * -0.487)))
+    _close("pledge")
+
+    # ---- THE THREE LASHINGS. The only pale on the body and the targets.
+    # Each runs board-edge -> over the pledge -> board-edge: anchored at both
+    # ends, no free end, and bowed so it reads as rope OVER something rather
+    # than as a stripe painted on it.
+    _open()
+    for _t in (0.230, -0.010, -0.250):
+        _a = BC + U * (BL * _t) + W * (BW * 0.52) - N * (BT * 0.60)
+        _b = BC + U * (BL * _t) - W * (BW * 0.52) - N * (BT * 0.60)
+        _mid = PC + U * (BL * _t) + N * 0.120
+        P.raw(L.tube([tuple(_a),
+                      tuple(_a * 0.25 + _mid * 0.75),
+                      tuple(_mid),
+                      tuple(_b * 0.25 + _mid * 0.75),
+                      tuple(_b)], 0.034, 9), 'bone')
+    _close("lashings")
+
+    # ---- THE SHOULDER STRAPS. Lower board corners -> over each shoulder ->
+    # INTO A FIST. Grips come down to waist height and OUT past the trunk, so
+    # the run is long, outside his own outline and crosses nothing - the
+    # harrowman's pass-4 lesson, where chest-height grips read from the front
+    # as a man standing beside his gear instead of carrying it.
+    _open()
+    _GRIP = []
+    for _i in (-1, 1):
+        _corner = BC + U * (BL * -0.46) + W * (BW * 0.46 * _i)
+        _shoulder = Vector(tuple(_s((0.250 * _i, 0.034, SHO + 0.074))))
+        _grip = Vector(tuple(_s((0.372 * _i, -0.330, 1.108))))
+        _GRIP.append(_grip)
+        limb(P, [tuple(_corner), tuple(_shoulder), tuple(_grip)],
+             0.040, 0.033, 'dark')
+    _close("straps")
+
+    # ---- the man. legs ---------------------------------------------------
+    _open()
+    for _i in (-1, 1):
+        _h = Vector(tuple(_s((0.148 * _i, 0.0, HIP))))
+        _k = Vector(tuple(_s((0.168 * _i, -0.052, KNEE))))
+        _a = Vector((0.172 * _i, -0.018, ANK))
+        _pts = [tuple(_h), tuple(_k), tuple(_a)]
+        limb(P, seat(_pts, 0.093), 0.126, 0.093, 'body')
+        P.add(L.box(0.195, 0.330, 0.085), 'dark',
+              loc=(0.172 * _i, -0.072, 0.042))
+    _close("legs")
+
+    # ---- the man. trunk: wide at the shoulders, because he is a carrier ---
+    _open()
+    for _k in range(8):
+        _t = _k / 7.0
+        _z = HIP + (SHO - HIP) * _t
+        _rx = 0.226 + 0.072 * _t
+        _ry = 0.150 + 0.028 * _t
+        _c = _s((0.0, 0.0, _z))
+        P.add(L.sphere(_rx, _ry, 0.105, 12, 7), 'body', loc=tuple(_c))
+    # the harness that the board's straps pass through - across the chest,
+    # both ends landing ON the trunk, dark so it takes no pale.
+    for _i in (-1, 1):
+        limb(P, [tuple(_s((0.268 * _i, -0.126, SHO - 0.030))),
+                 tuple(_s((0.062 * _i, -0.166, CHEST - 0.090))),
+                 tuple(_s((0.088 * -_i, -0.150, WAIST - 0.030)))],
+             0.046, 0.038, 'dark')
+    _close("trunk")
+
+    # ---- the man. head: a BROW AND JAW ON -Y ONLY, which is his facing. ---
+    _open()
+    _hd = Vector(tuple(_s((0.0, 0.0, HEAD))))
+    P.add(L.sphere(0.206, 0.214, 0.228, 13, 9), 'body', loc=tuple(_hd))
+    P.add(L.box(0.300, 0.088, 0.062), 'dark',
+          loc=tuple(_hd + Vector((0.0, -0.164, 0.072))))
+    P.add(L.box(0.228, 0.152, 0.088), 'dark',
+          loc=tuple(_hd + Vector((0.0, -0.118, -0.150))))
+    _close("head")
+
+    # ---- the man. arms. BOTH outside the trunk, both ending on a strap. ---
+    _open()
+    for _n, _i in enumerate((-1, 1)):
+        _sh = Vector(tuple(_s((0.272 * _i, -0.034, SHO - 0.078))))
+        _el = _sh + Vector((0.086 * _i, -0.198, -0.244))
+        limb(P, [tuple(_sh), tuple(_el), tuple(_GRIP[_n])],
+             0.084, 0.058, 'body')
+        P.add(L.sphere(0.074, 0.068, 0.064, 10, 7), 'body',
+              loc=tuple(_GRIP[_n]))
+    _close("arms")
+
+    # THE FIGURE is the MAN. The board, the pledge, the lashings and the straps
+    # are his load - and the pledge is emphatically not part of the man, which
+    # is why it is listed nowhere here.
+    P.man_parts = ("legs", "trunk", "head", "arms")
+    return P
+
+
+BUILDERS.update({"pledgeman": pledgeman})
+
+
+# PASS 3, AND IT IS THE TARGETING CUE AND NOT A TASTE CHANGE. The pass-2 render
+# read as TWO BODIES - that part worked - but the three lashings came out as
+# the same pale as the man's own hide and the pledge's torso, so they read as
+# the RUNGS OF A LADDER and not as ties. The docstring's claim that they are
+# "the only pale on the whole body" was therefore FALSE AS SHIPPED, and it is
+# the one claim that matters, because the lashings are what the party is
+# supposed to hit instead of hitting the body.
+# This is arithmetic, not an opinion, and it was measured off the generator's
+# own formulae before anything was re-rendered:
+#   body = (0.440, 0.408, 0.328)   from tint 0.54/0.50/0.44 + aura at 0.20
+#   bone = (0.476, 0.459, 0.432)   from (0.30 + tint*0.55) * dull
+# - about 8% apart in luminance, which no viewer at stream distance resolves.
+# The tint-derived bone slot CANNOT carry a targeting cue on a body whose tint
+# is already this pale; that is a property of the formula, not of my numbers.
+# NEW HEMP IS GENUINELY MUCH PALER THAN OLD BOARD AND WORN LEATHER, so this is
+# also the physically honest answer and not a cheat for contrast - and it is
+# the same decision as the wear story already in the docstring: his kit is old,
+# THE ROPE WAS CUT TODAY, because the pledge was taken today.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"pledgeman"}
+OVERRIDE.update({
+    "pledgeman": {
+        # new hemp, dry, not polished - the three lashings and nothing else.
+        'bone': ((0.865, 0.795, 0.565), 0.62, 0.00),
+    },
+})

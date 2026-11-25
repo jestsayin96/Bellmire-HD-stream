@@ -1023,6 +1023,49 @@
    ],
    "man_span_empty": false
   },
+  "pledgeman": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arms",
+    "board",
+    "head",
+    "lashings",
+    "legs",
+    "pledge",
+    "straps",
+    "trunk"
+   ],
+   "items": 41,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     20,
+     24
+    ],
+    [
+     24,
+     34
+    ],
+    [
+     34,
+     37
+    ],
+    [
+     37,
+     41
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "trunk",
+    "head",
+    "arms"
+   ],
+   "has_man_span": true,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "porter": {
    "in_register": true,
    "in_builders": true,
@@ -1993,12 +2036,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-24T21:02:55-0600",
+ "measured_at": "2026-11-24T21:48:23-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795575775.3016245,
- "register_mtime_epoch": 1795575650.114144,
- "register_mtime": "2026-11-24T21:00:50-0600",
- "register_pairs": 60,
+ "measured_at_epoch": 1795578503.1297174,
+ "register_mtime_epoch": 1795578482.0583766,
+ "register_mtime": "2026-11-24T21:48:02-0600",
+ "register_pairs": 61,
  "measurable": [
   "almoner",
   "beadle",
@@ -2029,6 +2072,7 @@
   "nightman",
   "paviser",
   "pitman",
+  "pledgeman",
   "porter",
   "pressman",
   "quartermaster",

@@ -290,6 +290,22 @@
     held for several hours, but the prompt is where it belongs.
   - TEAM LEAD prompt, STEP 4: add that the **GAME BUILD row is written FIRST**, before the other
     five, because that lane fires at :07 and a row finished after :05 reaches it an hour late.
+  - **REFRESH, 19:58 CT 24 NOV - THREE OF THE FIGURES ABOVE MOVED AGAIN THIS HOUR. USE THESE, NOT
+    THE ONES ABOVE THEM** (the items above stay as written so the trail is intact):
+      * ART FIT REGISTER: **59 rows (57 live bodies + 2 retired `_chibi`)**, `ok: true`, `GREEN`,
+        `shipped_red []`, `retired_red []`. The 57th is `dredger` ("Finepass").
+      * THE MINIBOSS EXAMPLE: `Delve.MB_NAME` **55**, `miniboss_feed.by_key` **56**, published
+        **55**, bodies on disk **57**. The halves DISAGREE by exactly `['weigher']` - the feed led
+        the engine. "55/55/55 with a 56th waiting" is now itself stale.
+      * DEAD-DATA BASELINE: **2,388,845 chars** over the same 48 files, **155** top-level keys,
+        **65 zero-hit = 50 `_note_` + 15 NON-NOTE**, NON-NOTE unchanged and still the same 15,
+        **35** asset directories with files, **ZERO** unreferenced, **ZERO** unread live keys.
+      * STEP 5 ID list: live IDs are now **B139, C-198, D100, H32, L74, S120, T5, U159**, and art
+        is on the **57th** miniboss.
+  - TEAM LEAD prompt, the GODOT LOCK block: it says the game build's cap-before-declaration habit
+    is "ZERO over-declarations in seven hours as of 21 Nov 08:58". It is now **twelve consecutive
+    hours** by my own reading of the lock file (S119 18:08 and S120 19:08 both carry
+    "claim HH:MM, cap claim+25" with the cap computed first). Do not charge it with the old pattern.
 
 
 ## TAKE THIS NEXT - Updated THE 17:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.

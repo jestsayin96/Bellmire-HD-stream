@@ -4468,3 +4468,36 @@ VALIDATION OK: all four owned files json.load; array lengths unchanged (changer 
 Lock: none taken, I never run Godot. Git via the Blender bridge.
 NO CODE WIRING. `_note_c214` is an expected zero-hit key; NO LANE IS TO WIRE IT.
 Next content: C-215, on a row; else the standing backlog.
+
+## D-cycle - S139: SYSTEM 13 STEP 2, THE PET WIRING HALF. THE LOOK IS MEASURED AND ROUTED UP, NOT SETTLED. 2026-11-25T16:08-06:00 (game build)
+ITEM: TAKE THIS NEXT (15:58 CT block, `>>> GAME BUILD (:07)`): prove the pet follows the hero across a floor transition,
+survives a death and a revive, does not break OFFFLOOR/TOWNWALK; name the one-line shape a style fix would take, measure the
+mismatch in numbers and in the picture, route the look up.
+- NO GAME SOURCE CHANGED. scripts/hero_pet.gd and gear.gd dress_cosmetics already carry all five cases; this cycle proves it.
+- NEW tools/_s139_pet_wiring.gd (windowed). A KayKit Knight inside a host Node3D exactly as HeroBody holds its model, pet hung
+  by the REAL Gear.dress_cosmetics(cos.pet = pet_corgi, shipped), plus a UAA Fox on HeroPet directly:
+  A heel 4 m walk; B floor = the body teleported as delve._next_floor moves it (x+700, DELVE_Y -400); C death = Death_A
+  played, body stays (delve: Rig.play Death_A, b.fallen = true); D revive = death save stands them up, then re-dressed TWICE;
+  E re-roll = the fallen body freed.
+- VERDICT LINES: S139_PET_WIRING OK heel, floor change, death, revive re-dress and re-roll all hold. (A 0.25 m off spot, both
+  pets; B 0.00 m off, dy 0.00, 3 frames after the jump - HeroPet's d>12 snap; C pet valid, visible, beside the body; D exactly
+  1 HeroPet after two re-dresses, new pet starts at heel; E the freed body took its pet with it.)
+- WHAT THIS DOES NOT PROVE: it is the HeroPet/Gear path in a probe scene, not a pet riding a live delve through _next_floor.
+  A dead hero's body is not moved to the next floor (_next_floor walks _alive() only), so a fallen hero's pet stays with the
+  corpse on the old floor and is freed with it - which is what I would want, but it is inference from the code, not a run.
+- PICTURE: renders/cycles/s139/heel.png, death.png. In death.png the corgi sits half under the fallen Knight: the heel spot is
+  taken off the body ROOT, and Death_A throws the mesh forward of the root. Cosmetic, logged, not touched.
+- THE LOOK, MEASURED (S139_STYLE lines, same run):
+    knight(host)        tris 6952  surfaces 15  textured 15  mean albedo (1.00,1.00,1.00) sat 0.00  (KayKit palette atlas)
+    pet_corgi (shipped) tris  508  surfaces  1  textured  1  mean albedo (0.91,0.91,0.91) sat 0.00
+    fox_uaa             tris 1848  surfaces  5  textured  0  mean albedo (0.41,0.36,0.32) sat 0.23  (flat material colours)
+  In the picture (s138/pets.png beside s139): the KayKit hero and the shipped corgi/red fox are chunky chibi - big head, stub
+  legs; the UAA fox/husky/shiba are realistic-proportion quadrupeds with long thin legs. That proportion gap is the mismatch;
+  the flat-vs-atlas material difference is secondary and barely reads at RTS pitch.
+- THE ONE-LINE REVERSIBLE SHAPE A STYLE FIX WOULD TAKE (NOT APPLIED): hero_pet.gd:22 `m.scale = Vector3.ONE * scale_f` ->
+  `m.scale = Vector3(scale_f * 1.3, scale_f * 0.8, scale_f * 1.3)` gated on the model path containing "/uaa/" (a chibi squash);
+  or, with no code at all, keep the UAA dogs out of items.json and ship only the farm-kit pets. Both are art direction, so the
+  call goes UP (Mr. E / art), not to this lane.
+- GATES: parse 0 SCRIPT ERROR / 0 Parse Error. TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 1954. TOWNWALK in_solid=0/18007
+  raid_in_solid=0/5522 PASS. DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR / 0 ERROR lines.
+- No Twitch test, zero bits, no cheer, no redemption, no chat line.

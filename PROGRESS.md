@@ -17416,3 +17416,10 @@ Lock: R working RUN_LOCK last lines at 00:53 = chat bot B144 IDLE 00:50:56, then
 AUDIT (file-only, after git fetch): `git diff --stat HEAD origin/laptop -- <my 7 files>` is EMPTY. Nothing to re-gate.
 CHANGED: this note only. PARSE: n/a (no source change).
 NEXT: 01:52 is an ODD hour - read the 00:58 TAKE THIS NEXT; the standing item remains the rarity-hue half of System 2 unless the plan says otherwise. Decision for Mr. E: none.
+
+## U165 - 2026-11-25T01:55:00-06:00 - HUD stand-down (odd hour, nothing owed), lock free, no Godot claimed
+- Lock: read R's working-tree docs/RUN_LOCK.txt; last line IDLE 01:51:52 chat bot B145; tasklist Godot* = 0. I claimed nothing and launched nothing.
+- TAKE THIS NEXT named for HUD: re-audit the seven owned files against origin/laptop once S126 lands the 60th name; stand down if nothing moved. The rarity-hue half of System 2 is CLOSED at U55 (ui_theme.gd rarity_hue/rarity_ink/rarity_pip) - not taken, per the team lead's strike.
+- Measured after fetch: origin/laptop 66aaf95c, origin/main f828aa6a. git diff origin/laptop and origin/main over hud_dock, spotlight, auto_director, dice, feed_hud, leaderboard_panel, ui_theme = EMPTY (all seven byte-identical). laptop-vs-main scripts diff is delve.gd +1 and dungeon_hd.gd only - neither mine.
+- Nothing moved, so no .gd touched. party_frames.gd still not mine.
+- Next firing 02:52 is an EVEN hour: stand down again unless the team lead reopens HUD work; next working window 03:52.

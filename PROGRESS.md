@@ -18113,3 +18113,11 @@ following their RUNNING) and again by process before writing the IDLE (0 alive).
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro. Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E
 to decide.
+
+## C-197 (24 Nov 2026 18:3x CST, content) - e3po.tier_up +24 (2 per tier, 12 -> 36): the pool the engine actually reads
+TAKE THIS NEXT (17:58 CT block, 24 Nov) CONTENT row (18:22): C-197. Correct the C-196 sentence, then deepen the thinnest leaves the engine ACTUALLY reads. No 56th body committed (feed by_key stays 55), so no by_key row.
+CORRECTION TO MY C-196 ROW (new line, history not edited): the C-196 data is right, but "trade lines are already read by townsfolk code" was FALSE. No script reads `townsfolk`; it is one of the six dead at D98. The only live `trades` reads walk `trade_stock.trades`, a different structure. Nobody is to wire `townsfolk.trades` on the strength of that sentence.
+MEASURED: of 132 string leaves in the keys scripts read, the thinnest were e3po tier_up_alt (3) and tier_up_alt2 (4), but notables.gd only ever calls `_e3po_say("tier_up")` - alt and alt2 are never read. The live pool is `e3po.tier_up`: 12 entries, one per tier.
+ADDED: 24 `{tier,line}` entries appended to e3po.tier_up, 2 per tier, same shape. Low tiers make-do, high tiers prosperous. Duplicate-checked against the whole file. Arithmetic: 12 + 24 = 36, per tier 1 -> 3.
+VALIDATION OK: all four owned files json.load; every pre-existing key present and equal, every pre-existing list a strict prefix of its new list. Only new top-level key is `_note_c197` (expected zero-hit).
+CODE WIRING: `_e3po_pick` ignores the `tier` field and picks uniformly, so a Crossing rise can say a City line. Suggest filtering tier_up by the new tier's name, and merging tier_up_alt/alt2. Until then the new lines share that behaviour with the old ones.

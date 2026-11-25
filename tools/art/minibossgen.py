@@ -118,8 +118,15 @@ def build_miniboss(key):
     # WHY. `seen: 1.0` in the fit register answers "is the CREATURE visible
     # past the hero" and says NOTHING about whether the thing the fight is
     # ABOUT can be seen. The collier is shut on a fire and its four vents are
-    # all on the -Y arc by construction, so from behind a party sees a mound of
-    # earth and no fire at all - and every number in the register was green.
+    # all on the -Y arc by construction, so from ONE SIDE a party sees a mound
+    # of earth and no fire at all - and every number in the register was green.
+    # *** THIS SENTENCE SAID "FROM BEHIND" UNTIL 25 Nov 05:4x CT AND THAT WAS
+    # *** AN UNMEASURED GUESS, COPIED OUT OF THE BODY'S OWN FAULT LIST. ***
+    # The census that this switch exists to serve contradicted it within the
+    # hour: collier back 2430 px (the four pale plugs read fine from behind),
+    # collier SIDE 41. The wrong word was then quoted into a plan row, which
+    # sent a lane to fix the wrong face of the body. Corrected at the source so
+    # it stops travelling. See docs/art/CUE_READ.md, PASS 7.
     # That is the pass-11 fault of 17 Nov in a new coat: an instrument that
     # cannot see is not a pass.
     # THE TEST IS THE VIEWER'S QUESTION, NOT A MEASUREMENT OF THE OBJECT.

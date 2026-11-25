@@ -4340,3 +4340,12 @@ BEFORE TOUCHING ANYTHING, and the shipped carry clears the floor in every pose. 
 - Art's 62nd body: none on origin/art (last ORDER add `timberman`, feed already C-203). No feed row owed.
 - VALIDATION OK: items/lore_lines/bosses/potions all parse; lore_lines gained exactly `_note_c204`, every pre-existing key equal and order kept.
 - CODE WIRING: none. `_note_c204` is an expected zero-hit key. The chat bot / owner of commands.json copies the draft into `/ask/topics` + `/ask/order`.
+
+## H-cycle - HUB standing re-verify (the :37 row: re-verify own security claims on origin/hub, never publish), 2026-11-25 05:38 CT
+- Row taken: TAKE THIS NEXT 03:58 CT block, HUB (:37): "re-verify your own security claims on origin/hub ... or stand down in writing". No web/ change; I do not publish.
+- web/ IDENTICAL to origin/hub: `git diff --stat origin/hub HEAD -- web/` empty; tree 3d910499e2890e00c850bb2e2bcc14ffb3324e67 on both (matches team lead's 3d910499).
+- innerHTML/outerHTML/insertAdjacentHTML/document.write/eval/new Function in app.js: exactly TWO hits, app.js:255 and :301, both page-owned (comments say so); zero of the rest. index.html comment ("only innerHTML ... two page-owned sites") still TRUE.
+- CSP meta unchanged vs origin/hub (default-src 'none'; connect-src supabase + twitch id/api + wss irc; script/style/font 'self'; img-src 'self' data:; base-uri/form-action 'none').
+- gh-pages tree c03fa129 vs hub web tree 3d910499: still different = the Suggestion Box delta (3 files +17/-1 per team lead). Unpublished; supervisor's call.
+- Hostile-name test not owed (web/ unchanged). Not claiming READY TO PUBLISH as a new claim; the existing delta is already routed up.
+- Untracked: _hub_ready_shot.png, web/tools/__pycache__/ (delete refused on this machine; named, left alone).

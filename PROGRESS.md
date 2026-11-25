@@ -19163,3 +19163,73 @@ TAKE THIS NEXT gave the HUB row "STANDING CHECK; NOTHING OWED". web/ is byte-ide
 - PICTURE: LOOKED at renders/art/minibosses/collier/hero_front.png - the collier sits on its earthed charcoal mound beside the hero, four glowing vents and the pale plugs propped at its flank, a shorter read than the hero as 0.86 says, nothing clipped. No in-engine render of the Halfblow on a wood floor this run.
 - NOT DONE, SAID PLAINLY: its idea - "YOUR OWN HEAVY BLOW IS WHAT OPENS IT", past a measured stroke a vent bursts and the flare takes the room; half blows or plug the four vents - is NOT yet delve-side behaviour; it ships as a placed, named body. A follow-up row, not taken early. Art's open cue-read defect (vents all on the -Y arc, nothing reads from behind) is art's row and untouched by this change.
 - No live Twitch test, ZERO bits.
+## C-206 (25 Nov 2026 05:23 CST, content) - AUDIT OF ALL 62 miniboss_feed.by_key ROWS; NO ROW WRITTEN, NO DATA FILE TOUCHED
+- ITEM: TAKE THIS NEXT (04:58 CT, 25 Nov) CONTENT row, C-206: written stand-down or self-audit of the feed. I audited. origin/main merged into content clean (35c24374 line); collier is the 62nd and C-205 stands.
+- MEASURED (json.load of data/lore_lines.json): by_key = 62 keys. Shapes: 37 carry arrive/act/broken/fall, 25 carry arrive/fall only. NO phase is present-but-empty, no blank or non-string line, no duplicate line inside any phase, every line ASCII.
+- {name}: appears in no arrive or fall line anywhere. One broken line carries it (nightman, 'The shutter is open. {name} stands...'); delve.gd:4164-4177 fills {name} in any phase line, so it resolves. Not a defect, left as is.
+- Eleven older rows (drillmaster, scrapwright, snuffer, sexton, porter, cook, sluicekeeper, stoker, rammer, fuller, stackman) have act lines that mostly lack {name}; they predate the C-86 convention. Additive only: left alone. Nothing for the engine to fix: untokened act lines are legal.
+- Recent five (harrowman, pledgeman, crimp, timberman, collier) all 9 arrive / 8 fall, no act/broken where not owed (collier carries 8 act / 4 broken per C-205).
+- VALIDATION OK: no content file edited; only PROGRESS.md appended. CODE WIRING: none implied.
+Next content: C-207.
+
+## U169 - 2026-11-25T05:58:00-06:00 - HUD self-audit: THE GLUED-LOCK-LINE FAULT IS MINE, ROOT-CAUSED, WRITER DISCIPLINE FIXED. No Godot claimed, no source change.
+- TAKE THIS NEXT (05:0x block, U169): window is the HUD's, nothing owed; self-audit of own shipped work counts. Took the team lead's flagged item: glued `)RUNNING` after an IDLE ending `(HUD)`.
+- Lock read from R's WORKING tree by bytes: last line IDLE 05:48:51 chat bot B149; tasklist Godot* = 0; file ends in a newline now (1355 lines). I launched nothing and wrote no RUNNING/IDLE line this hour (no Godot work), so nothing for another lane to misread.
+- MEASURED: `)RUNNING` glued with no newline = 6 occurrences (16 Nov 13:10, 20 Nov 15:08, 20 Nov 22:08, 21 Nov 22:07, 24 Nov 15:08, 25 Nov 04:07). ALL SIX follow an IDLE line ending `(HUD)`: 6 of 84 HUD IDLE lines (7%) vs 0 of the other lanes' IDLE lines (452 IDLE lines total in the file). So the team lead is right and the cause is mine: my IDLE writes sometimes went in with open(..., "a").write(line) and no trailing "\n", so the next lane's append landed on the same line.
+- THE FIX (there is no lock-writer file in W2; the writer is the snippet each firing runs on the Windows bridge, so the fix is the snippet). Use this for every lock line from now on; self-tested on a temp file in the faulty state (file ending `(HUD)` with no newline -> `IDLE x (HUD)\nRUNNING y (art)\nIDLE z (HUD)\n`, selftest_ok True):
+    def append_lock(path, line):
+        data = open(path, "rb").read()
+        pre = b"" if (not data or data.endswith(b"\n")) else b"\n"   # heal a lane that left no newline
+        open(path, "ab").write(pre + line.rstrip("\r\n").encode("utf-8") + b"\n")  # and always end ours
+- Also verify after every IDLE write: read the last byte of the file; it must be 0x0a.
+- Reader side (for anyone testing "is the last line RUNNING"): a glued line starts IDLE and ends with RUNNING; test by `"RUNNING" in last_line and last_line.rindex("RUNNING") > last_line.rindex("IDLE")` or split on `)RUNNING` first. Not changed in anyone's code; noted only.
+- Not count-breaking: no overrun, no cleared lock, no two-lanes-at-once on any of the six occasions.
+- CHANGED: this note only. PARSE: n/a (no source change; seven HUD files untouched). LOOKED: n/a, no UI change, so no render this hour. Decision for Mr. E: none.
+- Next firing 06:52 is EVEN: stand down unless the plan reopens HUD.
+## B149 - 25 Nov 2026, 05:45 CT firing - THE 61 -> 62 REPUBLISH IS PAID AT THE FEED AND THE COUNT ARM IS CLOSED
+- ITEM: B149 off the plan's TAKE THIS NEXT CHAT BOT row (team lead, 04:58 CT firing). Pay the 61 -> 62
+  republish and close the COUNT arm. Measured at the FEED, not at `MB_NAME`, exactly as the row orders.
+- MEASURED FIRST, ON MERGED MAIN `80e627d1` (W6 merged origin/main clean, no unmerged chatbot commits):
+  `miniboss_feed.by_key` (data/lore_lines.json) = **62**, `collier` PRESENT. `Delve.MB_NAME` = **61** by
+  BRACE-MATCHED parse of `scripts/delve.gd`, `collier` ABSENT. `MB_FIT` = **72** (61 live + 11 retired
+  `_chibi`). `by_key - MB_NAME` = `['collier']`, `MB_NAME - by_key` = `[]`, `MB_NAME - MB_FIT` = `[]`.
+  Published `commands.miniboss` short AND what = **61**. So the COUNT arm (`chatcmd.gd:2243`, published vs
+  `mb_live` = the feed) was 61 against 62 and the row was payable this hour.
+- CHANGED: `data/commands.json` `commands.miniboss` **short** and **what**, 61 -> 62. Two leaves and nothing
+  else: a recursive key-set + value walk of the parsed file before and after reports CHANGED LEAVES
+  `['/commands/miniboss/short', '/commands/miniboss/what']` and no other path; the reversed-before check
+  (put `62` back to `61`) returns the pre-edit file BYTE-FOR-BYTE, 21,232 bytes both sides. Forge's own
+  `60 / 160 / 420 / 1100 gold` and every other number in the file are untouched - the only occurrences of
+  the string replaced were the two in these leaves (counted: exactly 2).
+- `docs/COMMANDS.md` REGENERATED BY THE REAL `tools/_commands_doc.gd`, never an emulation: RC 0,
+  `COMMANDS_DOC OK wrote 32 commands`, and line 39 now reads `The 62 elites`. One occurrence in the doc,
+  which is the one row that publishes the count.
+- GATE RESULTS, headless on W6's own `project.godot`:
+  - parse `--quit-after 300` RC **0**, **0 SCRIPT ERROR**.
+  - `tools/_commands_doc.gd` RC **0**, `COMMANDS_DOC OK wrote 32 commands`.
+  - `tools/_l14_test.gd` RC **1**, `L14_TEST FAIL 1 (24 checks)` - **ONE** fail and it is **RED-PROVED NOT
+    MINE**: `no COMMANDS_DATA guard arm fired on the load (1 fired: ["MINIBOSS UNNAMED"])`.
+- **MY ARM IS CLOSED AND THE ONE RED IS THE TEAM LEAD'S OWN DECLARED MERGE.** The COUNT arm fired before
+  this change (61 published against 62 in the feed, measured above) and is **SILENT** now - it is not in
+  the fired list. The single fired arm is **MINIBOSS UNNAMED** (`chatcmd.gd:2248`), `["collier"]`: a feed
+  key with no `Delve.MB_NAME` row. The team lead's 04:58 block states in its own words that merging the
+  62nd's feed row before the engine names the body is what made UNNAMED live, that **"THIS IS MINE"**, and
+  that an L14 RED on `by_key - MB_NAME` this hour is that merge and may be quoted as the red-proof. The
+  game build's S129 (IDLE 05:16:56) names `collier` "Halfblow" and moves `MB_NAME` 61 -> 62, but it is on
+  `laptop` and **NOT YET MERGED TO main** - I re-measured `MB_NAME` = 61 on `80e627d1` myself rather than
+  reading its IDLE line. UNNAMED goes green the moment that merge lands. No lane is at fault and I did not
+  touch `delve.gd` to chase it - it is not my file.
+- DRIFT CHECKED BOTH DIRECTIONS: 32 command entries, every one with a literal in `scripts/chatcmd.gd`,
+  0 code literals unanswered. `data/commands.json` parses. NO CODE CHANGE - the register is data-driven and
+  `scripts/chatcmd.gd` is byte-identical.
+- LOCK: claim 2026-11-25T05:47:19-06:00, cap claim+25 = 06:12:19, DECLARED FINISH 2026-11-25T05:52:00-06:00
+  (inside :52 as my row orders). Lock was free - last line was IDLE 2026-11-25T05:16:56-06:00 game build
+  S129 and `tasklist Godot*` was checked live and came back 0. Released inside the declared finish.
+  The lock file already ended in a newline, so my claim did not glue onto the previous line (the team
+  lead's 05:1x addendum names that hazard).
+- GAME BUILD: nothing owed in `twitch_eventsub.gd`. The one thing owed to this lane's gate is the S129
+  merge to `main`, which closes UNNAMED; it is already written and is not mine to merge.
+- TWITCH: no live test. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line posted
+  as bellmirebro.
+- NEXT: at 06:45, whatever the plan's CHAT BOT row says. If it is silent: all four registers agree at 62
+  the moment S129 reaches main, and the honest open item on this lane is nothing.

@@ -1,13 +1,23 @@
 {
  "what": "MB_CUEOFF unset and MB_CUEOFF=0 must leave the SHIPPED render path byte-identical",
- "when_ct": "25 Nov 2026 05:0x CT",
+ "when_ct": "25 Nov 2026 05:5x CT (re-run on the PASS 7c body)",
  "method": "re-render collier through minibossfit with the env var unset, and again with =0, into --tag dirs; MD5 the three hero views against the shipped renders/art/minibosses/collier/",
  "shipped_md5": {
-  "hero_front.png": "0e7d166467e8b675236e5d405b7d4daa",
-  "hero_side.png": "a53c4799597921de4e477cdb4b0550b4",
-  "hero_back.png": "f2300ed6e2e318bc1d6d264ccbda0e71"
+  "hero_front.png": "af73ed1b8229335ba62cc24b2666cb60",
+  "hero_side.png": "b4e2f426b2a3f039c9f40b379bb39672",
+  "hero_back.png": "1fccdbd6eddc310e6aec2cc824fec2f9"
  },
  "unset_identical": true,
  "zero_identical": true,
- "note": "the first cut of the switch read == \"1\", so census arm A was launched with MB_CUEOFF=0; the slot rewrite turned that same string into a KeyError. An off-switch whose OFF value crashes is worse than no switch. Both are now off and an unknown value asserts."
+ "unset_md5": {
+  "hero_front.png": "af73ed1b8229335ba62cc24b2666cb60",
+  "hero_side.png": "b4e2f426b2a3f039c9f40b379bb39672",
+  "hero_back.png": "1fccdbd6eddc310e6aec2cc824fec2f9"
+ },
+ "zero_md5": {
+  "hero_front.png": "af73ed1b8229335ba62cc24b2666cb60",
+  "hero_side.png": "b4e2f426b2a3f039c9f40b379bb39672",
+  "hero_back.png": "1fccdbd6eddc310e6aec2cc824fec2f9"
+ },
+ "note": "re-run after PASS 7c added the +X flank ember seams. The shipped MD5s MOVE between passes because the BODY changed; what this file asserts is that the A/B switch itself moves no pixel on the shipped path, and both arms still match the shipped render byte for byte."
 }

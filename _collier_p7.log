@@ -1,0 +1,135 @@
+
+===== GEN =====
+00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+INFO Draco is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_draco_bridge.dll
+INFO MeshOptimizer is available, use library at C:\Program Files\Blender Foundation\Blender 5.2\5.2\scripts\addons_core\io_scene_gltf2\bf_intern_meshopt_bridge.dll
+05:40:44 | INFO: Starting glTF 2.0 export
+05:40:44 | INFO: Extracting primitive: collier_body
+05:40:44 | INFO: Primitives created: 1
+05:40:44 | INFO: Extracting primitive: collier_bone
+05:40:44 | INFO: Primitives created: 1
+05:40:44 | INFO: Extracting primitive: collier_dark
+05:40:44 | INFO: Primitives created: 1
+05:40:44 | INFO: Extracting primitive: collier_glow
+05:40:44 | INFO: Primitives created: 1
+05:40:44 | INFO: Finished glTF 2.0 export in 0.036446571350097656 s
+00:02.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier\front.png'
+00:02.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier\three_quarter.png'
+00:03.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier\side.png'
+
+MINIBOSSGEN_REPORT {"ok": true, "n": 73, "errors": [], "blank": [], "corridor_clear_m": 11.0, "lid_underside_m": 9.5, "lid_read_at": "scripts\\floorgen.gd:1383", "through_lid": [], "room_locked": [], "tallest": [[3.2, "stiltman"], [3.12, "iceman"], [3.05, "timberman"]], "spans": {"snarer": [3.25, "CORRIDOR-SAFE", "UNDER-LID", 4, 1529], "drillmaster": [1.39, "CORRIDOR-SAFE", "UNDER-LID", 4, 1366], "scrapwright": [2.76, "CORRIDOR-SAFE", "UNDER-LID", 4, 975], "gaoler": [3.56, "CORRIDOR-SAFE", "UNDER-LID", 4, 1912], "snuffer": [1.51, "CORRIDOR-SAFE", "UNDER-LID", 4, 1107], "sexton": [2.2, "CORRIDOR-SAFE", "UNDER-LID", 4, 1292], "porter": [3.52, "CORRIDOR-SAFE", "UNDER-LID", 4, 1094], "tallyman": [1.89, "CORRIDOR-SAFE", "UNDER-LID", 4, 1722], "cook": [2.39, "CORRIDOR-SAFE", "UNDER-LID", 4, 1324], "sluicekeeper": [2.66, "CORRIDOR-SAFE", "UNDER-LID", 4, 1166], "sower": [3.5, "CORRIDOR-SAFE", "UNDER-LID", 4, 1029], "stoker": [3.11, "CORRIDOR-SAFE", "UNDER-LID", 4, 864], "bellman": [2.72, "CORRIDOR-SAFE", "UNDER-LID", 4, 842], "boiler": [3.65, "CORRIDOR-SAFE", "UNDER-LID", 4, 1426], "tallyman_chibi": [1.72, "CORRIDOR-SAFE", "UNDER-LID", 4, 1558], "cook_chibi": [2.1, "CORRIDOR-SAFE", "UNDER-LID", 4, 2539], "sluicekeeper_chibi": [3.5, "CORRIDOR-SAFE", "UNDER-LID", 4, 2623], "sower_chibi": [3.29, "CORRIDOR-SAFE", "UNDER-LID", 4, 1994], "boiler_chibi": [3.65, "CORRIDOR-SAFE", "UNDER-LID", 4, 1940], "snarer_chibi": [3.73, "CORRIDOR-SAFE", "UNDER-LID", 4, 2523], "gaoler_chibi": [3.57, "CORRIDOR-SAFE", "UNDER-LID", 3, 2412], "porter_chibi": [3.66, "CORRIDOR-SAFE", "UNDER-LID", 4, 1590], "sexton_chibi": [2.07, "CORRIDOR-SAFE", "UNDER-LID", 4, 1530], "stoker_chibi": [2.88, "CORRIDOR-SAFE", "UNDER-LID", 4, 1808], "snuffer_chibi": [2.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 1258], "jointer": [2.18, "CORRIDOR-SAFE", "UNDER-LID", 4, 1005], "quartermaster": [2.62, "CORRIDOR-SAFE", "UNDER-LID", 4, 2804], "loader": [2.39, "CORRIDOR-SAFE", "UNDER-LID", 4, 1221], "hurdleman": [2.98, "CORRIDOR-SAFE", "UNDER-LID", 4, 1790], "tanner": [2.5, "CORRIDOR-SAFE", "UNDER-LID", 4, 1284], "reeve": [3.26, "CORRIDOR-SAFE", "UNDER-LID", 4, 1420], "tapster": [3.04, "CORRIDOR-SAFE", "UNDER-LID", 4, 2479], "pressman": [2.61, "CORRIDOR-SAFE", "UNDER-LID", 4, 1439], "strickler": [2.99, "CORRIDOR-SAFE", "UNDER-LID", 4, 3642], "dyer": [3.28, "CORRIDOR-SAFE", "UNDER-LID", 4, 2294], "greener": [2.71, "CORRIDOR-SAFE", "UNDER-LID", 4, 6433], "moulder": [2.36, "CORRIDOR-SAFE", "UNDER-LID", 4, 1987], "ratcatcher": [3.73, "CORRIDOR-SAFE", "UNDER-LID", 4, 1510], "drover": [3.59, "CORRIDOR-SAFE", "UNDER-LID", 4, 5053], "paviser": [3.43, "CORRIDOR-SAFE", "UNDER-LID", 4, 731], "fenman": [2.48, "CORRIDOR-SAFE", "UNDER-LID", 4, 948], "comfitmaker": [1.83, "CORRIDOR-SAFE", "UNDER-LID", 4, 2626], "leech": [2.26, "CORRIDOR-SAFE", "UNDER-LID", 4, 986], "beadle": [1.87, "CORRIDOR-SAFE", "UNDER-LID", 4, 698], "rammer": [2.03, "CORRIDOR-SAFE", "UNDER-LID", 4, 1046], "fuller": [3.29, "CORRIDOR-SAFE", "UNDER-LID", 4, 1866], "stackman": [3.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 1674], "dauber": [1.65, "CORRIDOR-SAFE", "UNDER-LID", 4, 1300], "sealer": [1.64, "CORRIDOR-SAFE", "UNDER-LID", 4, 1284], "hooper": [1.4, "CORRIDOR-SAFE", "UNDER-LID", 4, 2209], "relief": [1.84, "CORRIDOR-SAFE", "UNDER-LID", 4, 1462], "scraper": [2.2, "CORRIDOR-SAFE", "UNDER-LID", 4, 1266], "ferryman": [3.68, "CORRIDOR-SAFE", "UNDER-LID", 4, 1757], "winder": [3.26, "CORRIDOR-SAFE", "UNDER-LID", 4, 2233], "pitman": [3.1, "CORRIDOR-SAFE", "UNDER-LID", 3, 932], "tither": [2.39, "CORRIDOR-SAFE", "UNDER-LID", 4, 1230], "blower": [1.88, "CORRIDOR-SAFE", "UNDER-LID", 4, 1928], "changer": [1.35, "CORRIDOR-SAFE", "UNDER-LID", 4, 788], "stopper": [2.24, "CORRIDOR-SAFE", "UNDER-LID", 4, 910], "roper": [3.15, "CORRIDOR-SAFE", "UNDER-LID", 4, 1403], "almoner": [2.59, "CORRIDOR-SAFE", "UNDER-LID", 4, 939], "panner": [1.74, "CORRIDOR-SAFE", "UNDER-LID", 2, 958], "stiltman": [1.24, "CORRIDOR-SAFE", "UNDER-LID", 4, 628], "nightman": [1.63, "CORRIDOR-SAFE", "UNDER-LID", 4, 701], "iceman": [1.38, "CORRIDOR-SAFE", "UNDER-LID", 4, 779], "straker": [2.1, "CORRIDOR-SAFE", "UNDER-LID", 4, 953], "dredger": [1.29, "CORRIDOR-SAFE", "UNDER-LID", 4, 820], "harrowman": [2.72, "CORRIDOR-SAFE", "UNDER-LID", 4, 1216], "pledgeman": [1.67, "CORRIDOR-SAFE", "UNDER-LID", 3, 1932], "weigher": [2.62, "CORRIDOR-SAFE", "UNDER-LID", 4, 816], "crimp": [1.76, "CORRIDOR-SAFE", "UNDER-LID", 4, 1725], "timberman": [2.01, "CORRIDOR-SAFE", "UNDER-LID", 4, 1691], "collier": [2.16, "CORRIDOR-SAFE", "UNDER-LID", 4, 2591]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR:
+
+RC=0
+
+===== FITA =====
+00:00.015  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+05:40:51 | INFO: Data are loaded, start creating Blender stuff
+05:40:51 | INFO: Blender create Mesh node Cube.125
+05:40:51 | INFO: Blender create Mesh node Cube.126
+05:40:51 | INFO: Blender create Mesh node PrototypePete_body.020
+05:40:51 | INFO: Blender create Mesh node PrototypePete_head.001
+05:40:51 | INFO: Blender create Mesh node Cube.128
+05:40:51 | INFO: Blender create Mesh node Cube.127
+05:40:51 | INFO: Blender create Mesh node Cube.003
+05:40:51 | INFO: Blender create Mesh node Cylinder.280
+05:40:51 | INFO: Blender create Mesh node Cylinder.005
+05:40:51 | INFO: Blender create Mesh node Cylinder.010
+05:40:51 | INFO: Blender create Mesh node Cylinder.022
+05:40:51 | INFO: Blender create Mesh node Cube.11839
+05:40:51 | INFO: Blender create Mesh node Cube.12993
+05:40:51 | INFO: Blender create Mesh node Cube.124
+05:40:51 | INFO: Blender create Mesh node Plane.004
+05:40:51 | INFO: glTF import finished in 0.50s
+00:03.046  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_p7A\hero_front.png'
+00:03.171  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:03.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:03.421  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:03.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:03.671  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_p7A\hero_side.png'
+00:03.781  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:03.890  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:04.031  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:04.140  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:04.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_p7A\hero_back.png'
+00:04.390  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:04.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:04.640  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:04.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+MINIBOSSFIT_REPORT {"verdict": "RED", "ok": false, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": ["self_seen: the census was taken over 64 register rows and is being read against 1 - it describes a different house. Re-run tools/art/_selfseen_census.py"], "blind_views": [], "proving": {"collier": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[102, "collier", "side"]], "rows_judged": 1, "rendered": 1, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 3, "failures": [], "cells": 1, "expected_files": 3, "scope": "named_subset"}, "ratios": {"collier": [0.86, 3.9, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR:
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:552: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:426: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+
+RC=0
+
+===== FITC =====
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+05:40:57 | INFO: Data are loaded, start creating Blender stuff
+05:40:57 | INFO: Blender create Mesh node Cube.125
+05:40:57 | INFO: Blender create Mesh node Cube.126
+05:40:57 | INFO: Blender create Mesh node PrototypePete_body.020
+05:40:57 | INFO: Blender create Mesh node PrototypePete_head.001
+05:40:57 | INFO: Blender create Mesh node Cube.128
+05:40:57 | INFO: Blender create Mesh node Cube.127
+05:40:57 | INFO: Blender create Mesh node Cube.003
+05:40:57 | INFO: Blender create Mesh node Cylinder.280
+05:40:57 | INFO: Blender create Mesh node Cylinder.005
+05:40:57 | INFO: Blender create Mesh node Cylinder.010
+05:40:57 | INFO: Blender create Mesh node Cylinder.022
+05:40:57 | INFO: Blender create Mesh node Cube.11839
+05:40:57 | INFO: Blender create Mesh node Cube.12993
+05:40:57 | INFO: Blender create Mesh node Cube.124
+05:40:57 | INFO: Blender create Mesh node Plane.004
+05:40:58 | INFO: glTF import finished in 0.50s
+00:03.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_p7C\hero_front.png'
+00:03.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:03.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:03.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:03.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:03.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_p7C\hero_side.png'
+00:03.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:03.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:04.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:04.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:04.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\collier_p7C\hero_back.png'
+00:04.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:04.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:04.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:04.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+MINIBOSSFIT_REPORT {"verdict": "RED", "ok": false, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": ["self_seen: the census was taken over 64 register rows and is being read against 1 - it describes a different house. Re-run tools/art/_selfseen_census.py"], "blind_views": [], "proving": {"collier": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[102, "collier", "side"]], "rows_judged": 1, "rendered": 1, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 3, "failures": [], "cells": 1, "expected_files": 3, "scope": "named_subset"}, "ratios": {"collier": [0.86, 3.9, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR:
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:552: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:426: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+
+RC=0
+
+===== CUE =====
+00:00.015  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+CUEREAD ok=True pairs=3 errors=0 -> C:\hd adventure\bellmire-art\renders\art\minibosses\_cueread_p7.json
+  collier      GREEN - cue reads on all three views           {'front': 3904, 'side': 393, 'back': 2512}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+STDERR:
+
+RC=0
+
+===== DONE =====

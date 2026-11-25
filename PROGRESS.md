@@ -17478,3 +17478,15 @@ NEXT: 01:52 is an ODD hour - read the 00:58 TAKE THIS NEXT; the standing item re
 - Note: my worktree is behind origin/laptop (570 commits); not merged this firing since no source change was needed.
 - CHANGED: this note only. PARSE/RENDER: n/a (no source change, no UI change). Decision for Mr. E: none.
 - Next firing 08:52 is EVEN: work. Take the plan's HUD row (L74 feed/theme under load unless the plan says otherwise); lock window :52-:07, claim <=15 min, release by :07.
+
+## U-standdown 2026-11-25T08:58-06:00 (HUD, hourly :52)
+STAND-DOWN, NO GODOT CLAIM. The Blender bridge (cruzader) timed out twice (140s each) at 08:53-08:58 CST, so R docs/RUN_LOCK.txt could not be read and no git/Godot could run. device_bash cannot see R (only bellmire-hud mounted) and cannot commit safely. No lock claimed, no item work done. Written by device_bash, UNCOMMITTED: next firing commit this line to hud-ui. Next firing: check Blender bridge, read R RUN_LOCK working copy + tasklist, then take the rarity-hue half of System 2 (TAKE THIS NEXT block in docs/WORK_PLAN.md).
+
+## U175 - 2026-11-25T09:57-06:00 - HUD: WORST-FRAME REGRESSION AT 125% (2x2 panes, Chronicle up), 40 CHECKS GREEN. NO .gd OF MINE CHANGED
+- TAKE THIS NEXT (07:58 block, HUD (:52)): regression pass on own shipped work at the worst frame; prove the margin from the picture. Also commits the uncommitted 08:58 stand-down line above (bridge was wedged then).
+- Lock: read R's WORKING RUN_LOCK.txt: last line chat bot B153 IDLE 09:52:00, tasklist Godot* none. ONE claim RUNNING 09:53:28 (expected finish 10:01:28), IDLE 09:54:38, tasklist none after. Released 28 min inside :07. Lock writer = U169 append_lock; last byte 0x0a confirmed (the acceptance test U171 owed).
+- RAN: tools/_u175_regress.gd (copy of U125's hostile tool, output renders/cycles/20261125_u175), WINDOWED 1920x1080, scales 100/125/150: U175_DONE checks=40 fails=0; 0 Parse Error / 0 SCRIPT ERROR in the log. Pane labels at 125%: director 376/960 (text 343), bits 469/960 (436), subs/points 438/960 (405) - none trimmed, margins ~26-33 px by design.
+- LOOKED AT renders/cycles/20261125_u175/host_s125_1080.png: four pane labels and "Now watching" plates clean inside their panes, Chronicle scroll centred on the seam with the lord line wrapped fully inside the vellum (4 rows, bottom edge clear of the lower rail), clock plate unclipped bottom-right. Nothing wrong; no feed_hud.gd/ui_theme.gd edit.
+- Caveat: worktree is far behind origin/laptop, but U171 proved the seven HUD files byte-identical to laptop and main, so the HUD result holds; engine/import-cache differences not chased.
+- Next firing 10:52 is EVEN: work. Open candidate (U125's, unchanged): sample the hostile 60-char Chronicle line every 10 frames over its arrival at 150% and assert bottom stays in the vellum.
+- Decision for Mr. E: none.

@@ -7,6 +7,12 @@ extends SceneTree
 ## that exists nowhere in this game, and passed. The KEY-SET checks below read three INDEPENDENT
 ## sources instead: content's miniboss_feed.by_key, MB_FIT's base keys, and the .glb stems under
 ## MB_DIR. A self red-proof plants `drizzler` in a copy of the map and must see it caught.
+## S131: the FIFTH LINK. by_key/MB_NAME/MB_FIT can all agree on a key that no theme table lists, and
+## such a key can never be SELECTED (snarer_chibi is the standing proof: an MB_FIT cell, unreachable).
+## _theme_faults() reads the live DungeonHD.THEME_MINIBOSS (base, one per theme) and THEME_MINIBOSS_MORE
+## (the art rows) as the engine itself holds them - not a text parse - and every MB_NAME key must sit in
+## one of them. Both set differences are printed. Red-proof: collier erased from a DEEP COPY of the
+## wood row must be caught, and only collier.
 const TABLE := {"drillmaster": "Karvok", "scrapwright": "Ironhyde", "gaoler": "Shacklemaw", "snuffer": "Duskhollow",
 	"sexton": "Gravrik", "porter": "Drudgewall", "tallyman": "Velmok", "cook": "Blisterhand", "sluicekeeper": "Rothenwell",
 	"sower": "Thorncast", "snarer": "Griplash", "stoker": "Cindrak", "bellman": "Tolburn", "boiler": "Scaldmere",
@@ -55,6 +61,27 @@ func _keyset_faults(names: Dictionary, live: Dictionary) -> Array:
 			out.append("drawable key %s has no MB_NAME entry" % k)
 	return out
 
+## every MB_NAME key must be selectable: a THEME_MINIBOSS base value or a THEME_MINIBOSS_MORE member.
+## Returns {"unreachable": MB_NAME keys in no theme table, "unnamed": theme keys with no MB_NAME}.
+func _theme_faults(names: Dictionary, base: Dictionary, more: Dictionary) -> Dictionary:
+	var drawable := {}
+	for th: String in base:
+		drawable[String(base[th])] = th
+	for th: String in more:
+		for k in (more[th] as Array):
+			drawable[String(k)] = th
+	var unreachable := []
+	for k: String in names:
+		if not drawable.has(k):
+			unreachable.append(k)
+	var unnamed := []
+	for k: String in drawable:
+		if not names.has(k):
+			unnamed.append(k)
+	unreachable.sort()
+	unnamed.sort()
+	return {"unreachable": unreachable, "unnamed": unnamed, "drawable": drawable.size()}
+
 func _initialize() -> void:
 	_ok(TABLE.size() == 42, "directive table is 42 (36 + S65 dauber + S66 sealer + S67 hooper + S68 relief + S70 scraper + S72 ferryman)")
 	# S93: 45 = the 42-row directive table + S75 winder + S76 pitman + S89 tither (+ S94 blower = 46). This line read 42 since S72 and went
@@ -92,6 +119,22 @@ func _initialize() -> void:
 	var caught := _keyset_faults(bad, live)
 	print("S52 red-proof (drizzler planted): %d faults: %s" % [caught.size(), ", ".join(caught)])
 	_ok(caught.size() >= 2, "red-proof catches the planted drizzler both ways")
+	# ---- S131 the fifth link: every named key must be in a theme table, or it never spawns
+	var tf := _theme_faults(Delve.MB_NAME, DungeonHD.THEME_MINIBOSS, DungeonHD.THEME_MINIBOSS_MORE)
+	print("S131 theme arm: drawable %d ; MB_NAME - theme = %s ; theme - MB_NAME = %s" % [tf["drawable"], tf["unreachable"], tf["unnamed"]])
+	for k: String in tf["unreachable"]:
+		_ok(false, "MB_NAME key %s is in no THEME_MINIBOSS / THEME_MINIBOSS_MORE row - it can never be selected" % k)
+	_ok((tf["unreachable"] as Array).is_empty(), "every MB_NAME key is selectable from a theme table")
+	# a theme key with no name is the cascade's held state (unfed body); the S52 arm above already fails it once fed
+	for k: String in tf["unnamed"]:
+		_ok(Delve.miniboss_lines(k, "arrive").is_empty(), "theme key %s has no MB_NAME and is fed - it would spawn nameless" % k)
+	# red-proof on a COPY: erase collier from the wood row, the arm must fire on collier and nothing else
+	var more_bad: Dictionary = DungeonHD.THEME_MINIBOSS_MORE.duplicate(true)
+	(more_bad["wood"] as Array).erase("collier")
+	var tb := _theme_faults(Delve.MB_NAME, DungeonHD.THEME_MINIBOSS, more_bad)
+	print("S131 red-proof (collier erased from a copy of wood): MB_NAME - theme = %s" % [tb["unreachable"]])
+	_ok(tb["unreachable"] == ["collier"], "red-proof: the theme arm fires on collier, and only collier")
+	_ok((DungeonHD.THEME_MINIBOSS_MORE["wood"] as Array).has("collier"), "the live wood row is untouched by the red-proof")
 	print("S51 bodies on disk resolving by trade key: %d ; keys with arrive lines: %d" % [bodies, fed])
 	_ok(bodies >= 35, "bodies still resolve (%d)" % bodies)
 	_ok(fed >= 30, "feed still reads by trade key (%d)" % fed)

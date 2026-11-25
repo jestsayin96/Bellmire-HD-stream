@@ -18024,3 +18024,92 @@ RUN (--windowed --resolution 1920x1080): RED arm (injected) -> 'injected ... 1 v
 NOTE: full-screen steps inject 0 (no visible Pane_ there) - by design, only the grid steps arm the proof.
 PARSE: headless --quit-after 300 -> 0 SCRIPT ERROR / Parse Error lines.
 Logs: _u156_red.log, _u156_control.log. Decision for Mr. E: none.
+
+## D-S118 (game build, 24 Nov 2026 17:08-17:2x CT) - THE 55th IS NAMED EVERYHAND; L31 REMAINDER (a) AND (b) BUILT; A SCRATCH CLASS WAS SHADOWING THE REAL PARTY FRAMES
+TAKE THIS NEXT (16:58 block) gave GAME BUILD: S118 - name the 55th, then the two open L31-remainder bits.
+- delve.gd MB_NAME += `"straker": "Everyhand"` (content's C-195 by_key.straker read myself: by_key 55, 9/7/4/8, fall lines name the Everyhand; art CANON minibosses.py:19931). MB_FIT and the wood row were NOT touched (S117, verified).
+- tools/_s51_names.gd and tools/_s107_gate.gd 54 -> 55; tools/_s117_straker.gd gains four HARD arms (fed, drawn in wood, MB_NAME straker == Everyhand, MB_NAME 55).
+- L31 (b): `_give` now READS `was` - a state NEW on a delver calls `_on_apply`, which floats the state's own word/colour from potions.json `states` (no invented words); a refresh of a held state is silent. `was` is now computed before the venom/slow branches too, so poisoned and slowed get their line. Counted in `applied_lines` for the gate.
+- L31 (a): `st_secs(m, name)` (venom/slow fields honoured); `statuses()` tuple gains [4] = seconds left; party_frames.gd draws "word Ns" beside the icon.
+- DEFECT FOUND AND FIXED IN R's WORKTREE: the untracked scratch `_gb_l31c/pf_new.gd` (this lane's own L31c scratch) carries `class_name PartyFrames`, and `.godot/global_script_class_cache.cfg` pointed PartyFrames AT THE SCRATCH COPY - so every Godot run in R (and an export from R) was drawing the stale party frames, not scripts/party_frames.gd. My first 1080p render showed no durations at all; that is how it surfaced. Renamed to `pf_new.gd.stale_s118` (+ .uid), re-ran --headless --import, cache now reads res://scripts/party_frames.gd, re-rendered: durations visible. Other worktrees: check for a `_gb_*` dir holding a class_name before trusting a frame render.
+- Verdict lines: PARSE rc=0, 0 SCRIPT ERROR / 0 Parse Error (one ERROR line is COMMANDS_DATA MINIBOSS COUNT published 54 vs feed 55 - the chat bot's owed republish, payable now that MB_NAME is 55); S117_STRAKER OK 11; S51_NAMES OK 176 checks; S107_GATE OK 12; S115_ICEMAN OK 10; S118_STATUS OK 14 (incl. red-proof: warded burning not held, no line); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2178; TOWNWALK in_solid=0/18867 raid 0/4534 PASS; DELVE_TEST OK 9001 frames (re-run after the cache fix); L31_FIT chips_past_bar=0, L31_ICONS OK 15 - render renders/cycles/l31/l31_icons_1080.png LOOKED AT: every chip reads "word 30s" and wraps inside its bar.
+- No live Twitch test, zero bits.
+## C-196 (24 Nov 2026 17:3x CST, content) - NO 56th BODY, SO FEED DEPTH: townsfolk.trades time-of-day leaves +112 (28 trades x 4 slots, 2 -> 3 each)
+TAKE THIS NEXT (16:58 CT block, 24 Nov) CONTENT row (17:22): C-196, deepen the thinnest leaves; no by_key row for a body that does not exist. Checked origin/art: last body commit is the Straker (55th); no 56th committed. by_key stays 55 (straker IN), untouched.
+The thinnest real pools were the 112 trade morning/midday/evening/night leaves at 2 lines each (the only 1-line leaves are phase2 vault.inventory and carry.dropped_stays, single-purpose). Added exactly one plain line per leaf; duplicate-checked against every existing trade line and bark; all 112 unique. Condition tracks the trade's tier (high-tier trades are tidy, not worn). Per-leaf arithmetic: 112 leaves x (2 -> 3) = +112; 28 trades, every one touched, none skipped.
+VALIDATION OK: all four owned files json.load; every pre-existing key present and equal, every pre-existing list a strict prefix of its new list (leaf-level compare); only new top-level key is `_note_c196` (expected zero-hit). File round-trips byte-exact under indent=2 before editing, so no reformat noise.
+CODE WIRING: none - trade lines are already read by townsfolk code; only the new zero-hit `_note_c196` is unread.
+
+## U157 - THE 1080p TRAP AUDIT: U40/U88/U90/U91 NOW SAY NO VERDICT BELOW 1920x1080, 2026-11-24T18:00:40-06:00 (17:52 firing)
+ITEM: WORK_PLAN 17:52 HUD row ("pick your next U item from your own open list") -> U155's own follow-up: audit the U-gates that lay out in 1080p coordinates for the capture-size trap. U62 already guarded (U155).
+Lock: R working RUN_LOCK last line = chat bot B137 IDLE 17:51:10, 0 Godot by process -> claimed 17:53:57 (declared 18:05, cap 18:08:57), IDLE written 18:00:40.
+FOUND: none of _u40_pad_test, _u88_worn, _u90_feed_load, _u91_long_names checked the capture size; a bare --windowed (1152x648) run could pass or fail for the wrong reason.
+CHANGED (tools only, no HUD .gd): each prints "<gate> NO VERDICT - capture (w,h) is smaller than 1920x1080" and quit(2) when the viewport is under 1920x1080.
+RUN (--windowed --resolution 1920x1080): U40_TEST OK lines=9; U88_WORN OK rows=15; U90 FEED_LOAD OK (labels=4172 fails=0); U91 LONGNAME OK (labels=17309 fails=0; takes ~2 min, first 70 s attempt timed out with no verdict - a timeout, not a failure, rerun with 140 s).
+RED ARM (default window): U40, U88, U90 each print NO VERDICT capture (1152.0, 648.0). U91 red arm not run (same 4-line guard, out of time).
+PARSE: headless --quit-after 300 -> 0 SCRIPT ERROR / Parse Error.
+Logs: _u157.log, _u157_u91.log. NEXT: U91 red arm; audit remaining U-gates (U56 etc.) for the same trap. Decision for Mr. E: none.
+## B137 - 24 Nov 2026, 17:45 CT (chat bot) - THE 54 -> 55 REPUBLISH IS PAID OFF THE LANE REFS, AND THE ONE REMAINING L14 FAIL IS RED-PROVED NOT MINE
+TAKE THIS NEXT (16:58 block) gave CHAT BOT: republish 54 -> 55, and measure the three halves OFF THE
+LANE REFS rather than off main, because main only advances at the team lead's :58 merge and a :45
+lane therefore cannot see the same hour's :22 content work or :07 engine work. That rule is the
+team lead's fix for the defect that made B136 go stale 22 minutes before it was written. I obeyed it
+and it is the whole reason this hour's payment is sound.
+
+A MOUNT CHANGE THAT COST THE FIRST TWO CALLS OF THE RUN, RECORDED SO THE NEXT FIRING DOES NOT PAY IT
+AGAIN: the prompt's verified path `$HOME/mnt/hd adventure/bellmire-bot` NO LONGER EXISTS. The two
+repos are now mounted directly as `$HOME/mnt/bellmire-bot` and `$HOME/mnt/jests-hd-medieval-adventure`,
+with no `hd adventure` level. This is a harness change, not a missing permission, and I did NOT call
+device_request_folder_access - I listed `$HOME/mnt` and found both repos one level up.
+
+THE THREE HALVES, EACH READ WHERE IT IS WRITTEN AND EACH WITH ITS SHA:
+  - engine `Delve.MB_NAME` from `origin/laptop` **d8951273** = **55** keys, 0 duplicates,
+    `iceman` IN, `straker` IN (tail: stiltman, nightman, iceman, straker).
+  - feed `miniboss_feed.by_key` from `origin/content` **ba818212** = **55**, `straker` IN.
+  - published count from `data/commands.json` on my merged HEAD **0086e34a** (ff of
+    `origin/chatbot` a3e8402a, then merge of `origin/main` 38f2aa1a - 0 conflict markers, and the
+    merge touched none of my three files) = **54** at BOTH `miniboss` leaves.
+  `by_key - MB_NAME` = **[]** and `MB_NAME - by_key` = **[]**. ZERO DRIFT BOTH WAYS. The two source
+  halves AGREE at 55, so the publish was payable even with main behind - exactly the case the 17:45
+  row described. Parse was comments-STRIPPED-BEFORE-SPLITTING, string-aware, brace-matched, anchored
+  on `const MB_NAME :=`; the JSON halves were parsed with json, not grepped.
+
+THE PAYMENT: `miniboss.what` and `miniboss.short` 54 -> 55 at BOTH leaves. 18000 bytes before and
+after, 8 top keys, `order` == `commands` == 32, leaves gained `[]` lost `[]`, and a full leaf-walk
+against a pre-edit copy says EXACTLY `/commands/miniboss/short` and `/commands/miniboss/what`
+changed and nothing else; `armoury.cost` byte-identical; no `54` left anywhere in the file.
+`docs/COMMANDS.md` rewritten by the REAL `tools/_commands_doc.gd`, not by hand - one row changed,
+and it matches the data.
+
+FIVE GATES, behind a `--headless --import` pass run FIRST, all finishing 42 s after launch so
+nothing was split or carried:
+| IMPORT | rc=0, 0 ERROR. 39 WARNINGs, all "missing .uid, re-created from cache" on tools/ scripts,
+  pre-existing and not mine |
+| PARSE (`--quit-after 300`) | rc=0, 24.5 s, 0 ERROR / 0 SCRIPT ERROR / 0 Parse Error. 18
+  pre-existing invalid-UID ext_resource WARNINGs on asset-kit .tres (MI_Cobble and siblings) |
+| TWITCH_PARSE | OK, 8 checks, rc=0 |
+| COMMANDS_DOC | OK wrote 32 commands, and CORRECTLY not a no-op this hour - I changed the data, so
+  the generator rewriting the doc is the right answer, not a defect |
+| L14_TEST | FAIL 1 of 24, AND IT IS NOT MINE - PROVED WITH A CONTROL ARM RATHER THAN ASSERTED |
+
+THE CONTROL ARM, BECAUSE "THE REMAINING FAIL IS NOT MY FAULT" IS THE EASIEST THING IN THIS HOUSE TO
+CLAIM AND THE EASIEST TO BE WRONG ABOUT: I put the PRE-EDIT `commands.json` back, re-ran the SAME
+gate, and restored my file (md5 verified identical to the post-edit copy, and the temp copy deleted
+from the worktree).
+  - PRE-EDIT: `L14_TEST FAIL 3 (24 checks)`, arms fired = **MINIBOSS COUNT + MINIBOSS UNNAMED**.
+  - POST-EDIT: `L14_TEST FAIL 1 (24 checks)`, arms fired = **MINIBOSS UNNAMED `["straker"]` only**.
+So my edit closed two of the three failures. The surviving one fires because `MB_NAME` on MY MERGED
+TREE still reads 54: the engine's S118 naming (`"straker": "Everyhand"`, IDLE 17:24:33) is on
+`origin/laptop` d8951273 and has NOT reached `origin/main` 38f2aa1a. It is the same one-merge lag,
+seen from the other side this hour - last hour it made my count stale, this hour it leaves a guard
+arm lit on a count that is right. NO LANE SHOULD "FIX" IT: it clears at the team lead's :58 merge,
+and both COMMANDS.md drift arms PASS (32 rows, unpublished `[]`, stale `[]`, checked both ways).
+
+LOCK: claim 17:47:40, cap 18:12:40, declared finish 17:51:30, released 17:51:10 - BEFORE the HUD's
+:52 window, the tenth hour running this lane has kept that. Window checked BY PROCESS before the
+claim (Get-Process Godot* = 0, last lock line game build IDLE 17:24:33, an IDLE from the same lane
+following their RUNNING) and again by process before writing the IDLE (0 alive).
+
+NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro. Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E
+to decide.

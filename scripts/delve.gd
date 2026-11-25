@@ -459,7 +459,8 @@ const MB_NAME := {
 	"panner": "Onceround",   # S111: content's C-187 by_key.panner landed (9/7/4/8), _note_c187 "Onceround", and art's CANON title (minibosses.py:18373), both read; panner.glb.import committed at S110
 	"stiltman": "Downfast",   # S112: content's C-189 by_key.stiltman landed (9/7/4/8) and art's CANON title (minibosses.py:18749), both read
 	"nightman": "Nightwork",   # S113: content's C-190 by_key.nightman landed (9/7/4/8) and art's CANON title (minibosses.py:19075), both read
-	"iceman": "Hoarback"}   # S116: content's C-193 by_key.iceman landed (9/7/4/8, fall lines name Hoarback) and art's CANON title (minibosses.py:19421), both read - the close S115 specified
+	"iceman": "Hoarback",   # S116: content's C-193 by_key.iceman landed (9/7/4/8, fall lines name Hoarback) and art's CANON title (minibosses.py:19421), both read - the close S115 specified
+	"straker": "Everyhand"}   # S118: content's C-195 by_key.straker landed (9/7/4/8, fall lines name the Everyhand) and art's CANON title (minibosses.py:19931), both read - the close S117 specified
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []
@@ -3870,18 +3871,46 @@ func _give(m: Dictionary, name: String, secs: float) -> void:
 		return
 	if name == "burning" and has_st(m, "resist_fire"):
 		return
-	if name == "slowed":
-		if has_st(m, "resist_frost"):
-			return
-		m["slow"] = maxf(float(m.get("slow", 0.0)), secs)
+	if name == "slowed" and has_st(m, "resist_frost"):
 		return
-	if name == "poisoned":
-		m["venom"] = maxf(float(m.get("venom", 0.0)), secs)
-		return
-	if not m.has("st"):
-		m["st"] = {}
+	# S118 (L31 remainder b): `was` is now read - a state that is NEW on this delver
+	# gets its on-apply line (the state's own word and colour out of potions.json
+	# `states`, the same words the potion path floats); a refresh of a state already
+	# held stays silent, so a venom that ticks every hit does not spam the floor.
 	var was := has_st(m, name)
-	m["st"][name] = maxf(float((m["st"] as Dictionary).get(name, 0.0)), secs)
+	if name == "slowed":
+		m["slow"] = maxf(float(m.get("slow", 0.0)), secs)
+	elif name == "poisoned":
+		m["venom"] = maxf(float(m.get("venom", 0.0)), secs)
+	else:
+		if not m.has("st"):
+			m["st"] = {}
+		m["st"][name] = maxf(float((m["st"] as Dictionary).get(name, 0.0)), secs)
+	if not was and has_st(m, name):
+		_on_apply(m, name)
+
+## S118: the on-apply line for a newly given state. Counted (applied_lines) so a gate
+## can prove it fired without a body on the floor; drawn only when there is one.
+var applied_lines := 0
+func _on_apply(m: Dictionary, name: String) -> void:
+	var spec: Dictionary = (Roster.potions().get("states", {}) as Dictionary).get(name, {})
+	if spec.is_empty():
+		return
+	applied_lines += 1
+	if m.has("body") and is_instance_valid(m["body"]):
+		_float_text(m, String(spec["word"]), Color.html(String(spec.get("colour", "ffffff"))), 64, 2.0)
+
+## S118 (L31 remainder a): the seconds a state has left - venom and slow keep their
+## old fields, everything else is m["st"][name]. 0.0 when not held.
+func st_secs(m, name: String) -> float:
+	if m == null:
+		return 0.0
+	match name:
+		"poisoned":
+			return maxf(0.0, float(m.get("venom", 0.0)))
+		"slowed":
+			return maxf(0.0, float(m.get("slow", 0.0)))
+	return maxf(0.0, float((m.get("st", {}) as Dictionary).get(name, 0.0)))
 
 func _status_tick(m: Dictionary, delta: float) -> void:
 	if not m.has("st"):
@@ -4014,8 +4043,8 @@ func statuses(m: Dictionary) -> Array:
 	for bad in [true, false]:
 		for k in states:
 			if bool(states[k]["bad"]) == bad and has_st(m, k):
-				# L31: [word, colour, key, bad] - callers that read [0]/[1] are unchanged
-				out.append([String(states[k]["word"]), Color.html(String(states[k]["colour"])), String(k), bad])
+				# L31: [word, colour, key, bad, secs] - callers that read [0]/[1] are unchanged; S118 adds [4], the seconds left
+				out.append([String(states[k]["word"]), Color.html(String(states[k]["colour"])), String(k), bad, st_secs(m, String(k))])
 	return out
 
 ## the states over each delver's head (on the floor, not the body - HeroBody

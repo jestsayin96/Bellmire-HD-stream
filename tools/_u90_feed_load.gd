@@ -46,6 +46,8 @@ func _process(_d: float) -> bool:
 	if _f < 90: return false
 	if _wait > 0:
 		_wait -= 1; return false
+	if root.get_visible_rect().size.x < 1919 or root.get_visible_rect().size.y < 1079:
+		print("U90 NO VERDICT - capture %s is smaller than 1920x1080; run --windowed --resolution 1920x1080" % str(root.get_visible_rect().size)); quit(2); return true
 	var sc := [1.0, 1.25, 1.5]
 	var h := _hud()
 	if h == null:

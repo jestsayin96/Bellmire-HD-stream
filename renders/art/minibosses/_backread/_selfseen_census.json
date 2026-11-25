@@ -60,12 +60,35 @@
   "bellman": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm_hi",
+    "arm_lo",
+    "body",
+    "gear_bell_hi",
+    "gear_bells"
+   ],
    "items": 22,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     12,
+     13
+    ]
+   ],
+   "man_parts": [
+    "body",
+    "arm_hi",
+    "arm_lo"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -184,12 +207,29 @@
   "cook": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm",
+    "gear_ladle_kit",
+    "gear_yoke_pot",
+    "man_core"
+   ],
    "items": 31,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     12
+    ],
+    [
+     23,
+     24
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arm"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -236,12 +276,36 @@
   "drillmaster": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm_l",
+    "arm_r",
+    "gear_baton",
+    "gear_frame_gong",
+    "gear_mallet",
+    "man_core"
+   ],
    "items": 31,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     13
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     29,
+     30
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arm_r",
+    "arm_l"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -272,12 +336,36 @@
   "drillmaster_tall": {
    "in_register": false,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm_l",
+    "arm_r",
+    "gear_baton",
+    "gear_frame_gong",
+    "gear_mallet",
+    "man_core"
+   ],
    "items": 31,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     13
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     29,
+     30
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arm_r",
+    "arm_l"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -424,12 +512,35 @@
   "gaoler": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm_l",
+    "arm_r",
+    "gear_hook_chain",
+    "gear_keys",
+    "man_core"
+   ],
    "items": 33,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     17,
+     18
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arm_l",
+    "arm_r"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -583,12 +694,43 @@
   "jointer": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm_mallet",
+    "arm_saw",
+    "arm_spare",
+    "gear_mallet",
+    "gear_peg",
+    "gear_pin_seam",
+    "gear_saw",
+    "halves"
+   ],
    "items": 58,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     24
+    ],
+    [
+     36,
+     37
+    ],
+    [
+     40,
+     41
+    ],
+    [
+     56,
+     58
+    ]
+   ],
+   "man_parts": [
+    "halves",
+    "arm_mallet",
+    "arm_saw",
+    "arm_spare"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -623,12 +765,29 @@
   "loader": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm_boom",
+    "gear_load",
+    "gear_store",
+    "man_core"
+   ],
    "items": 40,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     13
+    ],
+    [
+     33,
+     35
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arm_boom"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -784,12 +943,29 @@
   "porter": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arms",
+    "gear_brackets",
+    "gear_door_bar",
+    "man_core"
+   ],
    "items": 45,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     14
+    ],
+    [
+     39,
+     43
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arms"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -835,25 +1011,66 @@
   "quartermaster": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm_down",
+    "arm_offer",
+    "gear_brand",
+    "gear_mark",
+    "gear_offered",
+    "gear_store",
+    "hands",
+    "man_core"
+   ],
    "items": 35,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     13
+    ],
+    [
+     22,
+     23
+    ],
+    [
+     24,
+     28
+    ],
+    [
+     29,
+     30
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arm_offer",
+    "hands",
+    "arm_down"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
   "rammer": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "man"
+   ],
    "items": 35,
-   "man_from": "",
-   "man_ranges": [],
+   "man_from": "span",
+   "man_ranges": [
+    [
+     21,
+     35
+    ]
+   ],
    "man_parts": [],
-   "has_man_span": false,
-   "man_span": null,
+   "has_man_span": true,
+   "man_span": [
+    21,
+    35
+   ],
    "man_span_empty": false
   },
   "ratcatcher": {
@@ -999,12 +1216,29 @@
   "scrapwright": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "gear_plates",
+    "gear_spares",
+    "head_arm",
+    "mass"
+   ],
    "items": 46,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     8
+    ],
+    [
+     38,
+     44
+    ]
+   ],
+   "man_parts": [
+    "mass",
+    "head_arm"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -1037,12 +1271,29 @@
   "sexton": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arms",
+    "gear_hod",
+    "gear_spade",
+    "man_core"
+   ],
    "items": 75,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     12
+    ],
+    [
+     67,
+     69
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arms"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -1061,12 +1312,35 @@
   "sluicekeeper": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm_l",
+    "arm_r",
+    "gear_board",
+    "gear_sluice",
+    "man_core"
+   ],
    "items": 39,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     12
+    ],
+    [
+     36,
+     37
+    ],
+    [
+     38,
+     39
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arm_r",
+    "arm_l"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -1085,12 +1359,30 @@
   "snarer": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm",
+    "gear_ground",
+    "gear_pole",
+    "gear_snares",
+    "man_core"
+   ],
    "items": 32,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     11
+    ],
+    [
+     27,
+     28
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arm"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -1109,12 +1401,35 @@
   "snuffer": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm",
+    "gear_candles",
+    "gear_taken",
+    "head",
+    "stand"
+   ],
    "items": 66,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     15
+    ],
+    [
+     53,
+     62
+    ],
+    [
+     62,
+     63
+    ]
+   ],
+   "man_parts": [
+    "stand",
+    "head",
+    "arm"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -1133,12 +1448,36 @@
   "sower": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm_cast",
+    "arm_near",
+    "gear_hopper",
+    "gear_seeds",
+    "gear_shoots",
+    "man_core"
+   ],
    "items": 41,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     12
+    ],
+    [
+     16,
+     18
+    ],
+    [
+     22,
+     23
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arm_cast",
+    "arm_near"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -1226,12 +1565,30 @@
   "stoker": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arm",
+    "gear_basket",
+    "gear_flue",
+    "gear_rake",
+    "man_core"
+   ],
    "items": 37,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     19
+    ],
+    [
+     31,
+     32
+    ]
+   ],
+   "man_parts": [
+    "man_core",
+    "arm"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -1350,12 +1707,36 @@
   "tallyman": {
    "in_register": true,
    "in_builders": true,
-   "spans": [],
+   "spans": [
+    "arms",
+    "gear_frame",
+    "gear_quill",
+    "gear_taken",
+    "head",
+    "man_lower"
+   ],
    "items": 70,
-   "man_from": "",
-   "man_ranges": [],
-   "man_parts": [],
-   "has_man_span": false,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     10
+    ],
+    [
+     39,
+     42
+    ],
+    [
+     43,
+     51
+    ]
+   ],
+   "man_parts": [
+    "man_lower",
+    "head",
+    "arms"
+   ],
+   "has_man_span": true,
    "man_span": null,
    "man_span_empty": false
   },
@@ -1487,46 +1868,63 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-24T16:45:35-0600",
+ "measured_at": "2026-11-24T17:45:56-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795560335.1653066,
- "register_mtime_epoch": 1795557626.7580874,
- "register_mtime": "2026-11-24T16:00:26-0600",
+ "measured_at_epoch": 1795563956.3602567,
+ "register_mtime_epoch": 1795560948.4998,
+ "register_mtime": "2026-11-24T16:55:48-0600",
  "register_pairs": 57,
  "measurable": [
   "almoner",
   "beadle",
+  "bellman",
   "blower",
   "boiler",
   "changer",
   "comfitmaker",
+  "cook",
   "dauber",
+  "drillmaster",
   "drover",
   "dyer",
   "fenman",
   "ferryman",
   "fuller",
+  "gaoler",
   "greener",
   "hooper",
   "hurdleman",
   "iceman",
+  "jointer",
   "leech",
+  "loader",
   "moulder",
   "nightman",
   "paviser",
   "pitman",
+  "porter",
   "pressman",
+  "quartermaster",
+  "rammer",
   "ratcatcher",
   "reeve",
   "relief",
   "roper",
   "scraper",
+  "scrapwright",
   "sealer",
+  "sexton",
+  "sluicekeeper",
+  "snarer",
+  "snuffer",
+  "sower",
   "stackman",
   "stiltman",
+  "stoker",
   "stopper",
   "straker",
   "strickler",
+  "tallyman",
   "tanner",
   "tapster",
   "tither",
@@ -1536,24 +1934,7 @@
   "panner"
  ],
  "not_measurable": [
-  "bellman",
-  "cook",
-  "drillmaster",
-  "gaoler",
-  "jointer",
-  "loader",
-  "porter",
-  "quartermaster",
-  "rammer",
-  "scrapwright",
-  "sexton",
-  "sluicekeeper",
-  "snarer",
-  "snuffer",
   "snuffer_chibi",
-  "sower",
-  "stoker",
-  "tallyman",
   "tallyman_chibi"
  ],
  "build_failed": [],

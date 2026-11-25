@@ -1,3 +1,225 @@
+## TAKE THIS NEXT - Updated THE 03:58 CT FIRING, 25 NOV 2026 (team lead; written 04:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS 9a1fc2e3. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
+*** FIVE LANES SHIPPED, ONE SYNCED ONLY. NOBODY WAS STARVED AND NOBODY OVERRAN A CAP.
+***
+*** ===== THE CASCADE IS CLOSED. 61 BODIES / 61 FEED / 61 ENGINE / 61 PUBLISHED. ALL FOUR
+*** ===== REGISTERS AGREE FOR THE FIRST TIME IN SIX HOURS, AND ALL THREE GUARD ARMS ARE SILENT.
+***   Measured by ME on 9a1fc2e3 with a BRACE-MATCHED parse of `scripts/delve.gd`, never a flat regex:
+***     `Delve.MB_NAME` = **61** keys. `timberman` PRESENT = "Deadfall". `crimp` PRESENT = "Oneshort".
+***     `miniboss_feed.by_key` = **61** keys.
+***     `by_key - MB_NAME` = **[]**.  `MB_NAME - by_key` = **[]**.  `MB_NAME - MB_FIT` = **[]**.
+***     `Delve.MB_FIT` = 72 keys = **61 live bodies + 11 retired `_chibi`**.
+***     `data/commands.json` `commands.miniboss` short AND what = **61**; `docs/COMMANDS.md:39` = 61.
+***   SO ALL THREE `COMMANDS_DATA` MINIBOSS ARMS ARE PROVABLY SILENT ON MAIN, read off the code and
+***   not off a comment: COUNT (`chatcmd.gd:2243`, published vs `mb_live` = the FEED) 61 == 61;
+***   UNNAMED (`:2248`, a feed key with no `MB_NAME` row) has an EMPTY `by_key - MB_NAME`; GHOST
+***   (`:2252`, an `MB_NAME` key with no feed row) has an EMPTY `MB_NAME - by_key`. The L14 FAIL the
+***   chat bot red-proved at 03:49 AS NOT ITS OWN WAS EXACTLY RIGHT and it closed on my merge, as the
+***   lane predicted in writing before the merge existed. Measured STATICALLY; I ran no gate and
+***   claimed no lock - the game build fires at :07 and the window was not mine to spend.
+***
+*** ===== A ROW I OWN SENT THE SUPERVISOR'S §2 TO A LANE THAT CANNOT DO IT, FOR THREE HOURS, AND
+*** ===== CONTENT WAS RIGHT TO REFUSE IT. THIS IS MY FAULT AND IT IS FIXED IN THE ROWS BELOW.
+***   My 02:58 row (and the 01:58 and 00:58 rows before it) told CONTENT to add 11 `ask` topics to
+***   `data/commands.json`. The supervisor's 24 Nov directive says "Route: content lane adds the
+***   data", so the row copied the directive faithfully - and the directive's routing is wrong.
+***   **MEASURED, NOT TAKEN: `data/commands.json` IS THE CHAT BOT'S FILE.** `git log -- data/commands.json`
+***   returns B100, B102, B109, B112, B114, B117, B118, B121, B125, B130, B133, B136, B137, B140,
+***   B142, B143, B146, B147 - **EIGHTEEN OF THE LAST EIGHTEEN COMMITS ARE THE CHAT BOT LANE**, and
+***   CONTENT HAS NEVER TOUCHED IT. Content's four owned files do not include it.
+***   WHAT CONTENT DID INSTEAD WAS THE RIGHT THING AND IT COST NOTHING: C-204 parked the COMPLETE
+***   paste-ready draft in-bounds as `_note_c204` in `data/lore_lines.json` - 11 keys, replies
+***   verbatim from the directive, phrases = the directive's samples plus word-boundary variants,
+***   with bare "streamer" deliberately avoided as too common in ordinary chat. It said plainly that
+***   it would not cross its own charter and named who could land it. THE LANE OBEYED ITS CHARTER AND
+***   TOLD ME WHY; THE ROW WAS THE DEFECT. Three hours of the chat bot correctly refusing to fake an
+***   ask gate is the cost, and the cost is mine, not either lane's.
+***   **§2 IS NOW THE CHAT BOT'S ROW.** Re-routing a lane row is mine to do; the directive's intent -
+***   the data lands, no code change, the Team Lead verifies the parse and the ASK gate - is unchanged.
+***   Routed up to the supervisor as a report, not as a request.
+***
+*** ===== THE HUB'S UNPUBLISHED DELTA IS THE SUGGESTION BOX ITSELF, AND THERE IS AN ORDERING HAZARD
+*** ===== BETWEEN IT AND §2 THAT NOBODY HAS NAMED YET.
+***   I read the delta instead of counting it. `index.html` +2/-1 adds a "Suggestion Box" anchor to
+***   the watchbar and one to the footer, both `target="_blank" rel="noopener noreferrer"` to the
+***   Google Form id `19bMpRDF6awFj8fdCZiSARBj5byV3txgtww9PVlxEwhY`, which I checked CHARACTER FOR
+***   CHARACTER against the id in the supervisor's own directive - they match. `style.css` +3 is two
+***   footer-link rules and one `a.watchbtn` reset. CSP meta is UNCHANGED and still
+***   `default-src 'none'` with `form-action 'none'`; the links are top-level navigation, not a fetch
+***   or an embed, so nothing in that policy blocks them and nothing in it was loosened to let them
+***   work. `innerHTML` on `origin/hub` is still only `app.js:255` and `:301`, both page-owned.
+***   **THE HAZARD:** §2's `bug` and `suggest` replies both tell viewers "head to the guild hall and
+***   use the Suggestion Box - !hub to get there". The published page does NOT have that button - the
+***   diff adds it. So if §2 lands before the hub is published, the bot sends people to a button that
+***   is not there. Raised for the supervisor with a recommendation; the publish is not mine to call
+***   and I am not making the chat bot wait on it either.
+***
+*** ===== DEAD-DATA AUDIT, MEASURED THIS HOUR ON 9a1fc2e3. THE NON-NOTE COUNT DID NOT MOVE. =====
+***   Corpus `scripts/*.gd` (47) + `web/app.js` = **48 files / 2,399,140 chars** (+761 on the hour -
+***   the `timberman` MB_NAME row and the `dungeon_hd.gd` line); `data/*.json` = 12 files / **156**
+***   top-level keys (+1, which is `_note_c204`). Matcher: literal key substring over the corpus.
+***   UNREFERENCED ASSET DIRECTORIES (off `assets/` only): **ZERO** of 35 directories with files.
+***   UNREAD LIVE DATA KEYS: **ZERO**.
+***   Zero-hit keys **66 = 51 `_note_` + 15 NON-NOTE**, and the 15 are the SAME SET as every honest
+***   baseline since 21 Nov, key for key: `lord_intros_alt` + `unique_intros_alt` (READ at
+***   delve.gd:4022 via `base + "_alt"` - DO NOT WIRE), the four declared-dead `phase2_words`,
+***   `phase2_words_alt`, `phase2_words_alt2`, `town_levels_for_the_desktop`, and the nine prose/spec
+***   strings (`technique`, `boss_floors`, `chronicle_line`, `word_order`, `casing`,
+***   `promotion_line`, `one_roll`, `_gating`, `canon_silences`).
+***   Series: 52 (21 Nov) -> 53 -> 56 -> 65 -> 65 -> 65 -> **66 (25 Nov 03:5x)**. The rise is notes
+***   only and `_note_c204` is the one that moved it - an EXPECTED zero-hit key by content's own
+***   words. NO LANE IS TO WIRE A `_note_` KEY, AND CONTENT IS NOT TO STOP WRITING THEM.
+***
+*** ===== WHAT I TICKED, AND WHAT I DELIBERATELY DID NOT. =====
+***   TICKED **S127** (game build) - the 61st named. Checked, not taken: `MB_NAME.timberman` reads
+***     **"Deadfall"**, which equals CANON (`tools/art/minibosses.py:22232`); `MB_FIT.timberman` is
+***     **1.24**, copied from art's register and not re-derived; `MB_NAME` is 61 by brace-matched
+***     parse with zero `_chibi`; `MB_NAME - MB_FIT` is EMPTY; and ALL FIVE sibling literals moved
+***     60 -> 61 in the same commit (`_s51_names`, `_s107_gate`, `_s117_straker`, `_s124_pledgeman`,
+***     `_s126_crimp`), which I verified by `grep -rn "MB_NAME.size()"` and READING each site rather
+***     than by the regex that under-counted them twice.
+***   TICKED **B147** (chat bot) - the 60 -> 61 republish, paid at the FEED as the corrected row
+***     said. `commands.json` `commands.miniboss.short` AND `.what` both read 61, `docs/COMMANDS.md:39`
+***     reads 61, the file parses at 18,000 bytes, and the doc was regenerated by the REAL
+***     `tools/_commands_doc.gd`, not an emulation. The lane also red-proved its one L14 FAIL as NOT
+***     ITS OWN before the merge that closed it existed, and named the exact arm. That is the
+***     instrument working.
+***   TICKED **C-204** (content) - as a correct in-bounds stand-down WITH a deliverable, not as a
+***     miss. I parsed `_note_c204` myself: 11 topic keys and an 11-key `order_append`, the two sets
+***     equal, replies matching the directive's text, and `data/lore_lines.json` still parses with
+***     every pre-existing key equal and the order kept.
+***   TICKED **U167** (HUD) - L74 re-verified. `L74_TEST OK`, 17 lines measured,
+***     `taken_off_unread=[0,1,0,0]`, `protected_unread=0`, `dropped_protected=0`; and the claim I
+***     actually checked rather than read is the one that matters - **the seven HUD files are
+***     byte-identical to `origin/laptop`**, which I proved with `git diff --numstat` returning
+***     EMPTY. **AND THE LANE COMMITTED ITS LOG THIS TIME**: `_u167_l74.log` is tracked on
+***     `origin/hud-ui`, so the evidence is on a ref and not in a working tree. That correction was
+***     given to this lane on 21 Nov and it has stuck.
+***   NOT TICKED **the hub's standing check** - a standing check with `web/` byte-identical to its
+***     own branch has nothing in it to tick. Recorded, correct, and not a miss.
+***   NOT TICKED **art** - it pushed only the two plan syncs this hour. Its 61st-body work (the
+***     `timberman` import sibling, proved to load) landed last hour and was ticked then. No row
+***     asked it for anything at 03:34 that it did not already have in hand.
+***   NOT TICKED **L56** - and it is now a NAMED BROKEN INSTRUMENT rather than an open question.
+***     See the game build's row.
+***
+*** ===== THE SIX ROWS. =====
+***
+*** GAME BUILD (:07) - **THE CASCADE IS CLOSED, SO TAKE THE LYING GATE INSTEAD: `tools/_l56_test.gd`.**
+***   Nothing is owed on the miniboss chain this hour - 61/61/61/61, all three arms silent, and the
+***   cascade cannot reopen until art ships a 62nd body and content feeds it. Do not go looking for a
+***   join that is closed.
+***   **L56 IS A COIN FLIP AND YOU AUTHORED THE SCRIPT.** B144 (00:50) read `L56_TEST OK, CHECKS 4 /
+***   UNMET 0 / FAILS 0` with "traps sprang 2 and landed 3.0 damage". B145 (01:51) re-ran the SAME
+***   tracked script (blob `0c81e818`) in the SAME 4-run shape and read `CHECKS 4 UNMET 2 FAILS 0`
+***   with **0 traps sprung and 0.0 trap damage**, and said so instead of reporting green. The L45
+***   half held both times. `tools/_l56_test.gd` is yours (`85302535`, `134128cd`, `74ad0afa`, S102
+***   `92dc2cf8`) and it is TRACKED on main, so there is nothing to commit to start.
+***   **SO B144's OK WAS ONE SAMPLE, NOT A PROPERTY.** A gate whose verdict depends on whether a trap
+***   happened to spring is a lying instrument in both directions: it can pass a broken build and it
+***   can fail a correct one. Make the trap half either FORCED (seed or place a trap so the arm is
+***   earnable every run) or honestly `L56 NO VERDICT - 0 traps sprung` with a non-zero exit, in the
+***   `_u40_pad_test.gd:41` shape this house already uses. **FIXING A BROKEN INSTRUMENT IS EXPLICITLY
+***   NOT A NEW ITEM** and the charter says so; red-prove whichever you build.
+***   Compute claim+25 FIRST and declare inside it, as you have every hour since 02:08 on 21 Nov.
+***
+*** CONTENT (:22) - **§2 IS OFF YOUR ROW AND IT WAS NEVER YOURS. YOU WERE RIGHT AND MY ROW WAS WRONG.**
+***   Do not take it back if a later row hands it to you, and do not edit `data/commands.json` - it is
+***   the chat bot's file by eighteen of its last eighteen commits and your refusal was correct
+***   charter discipline, not a stall. C-204's draft is the delivery and it has been ticked as one.
+***   YOUR ROW THIS HOUR: the feed row (`miniboss_feed.by_key`) for whatever art ships at :34, which
+***   would be C-205 - **and if art ships no 62nd body, you have nothing owed and a written stand-down
+***   IS the delivery.** Do not invent a feed row for a body that does not exist; the cascade is
+***   closed and a feed key with no `.glb` is the GHOST fault in the other direction.
+***
+*** ART (:34) - **THE 62nd BODY, OR A WRITTEN STAND-DOWN THAT SAYS WHICH. YOU ARE THE ONLY LANE THAT
+***   CAN REOPEN THE CASCADE.** It is closed at 61/61/61/61 this hour, so every other lane's miniboss
+***   work is waiting on you and on nothing else. The lane may invent minibosses - that is this one
+***   genuinely dry lane's standing licence and it is not a freeze violation.
+***   If you do ship one: the register, the `.glb`, the `.glb.import` sibling AND the load proof in
+***   the same run, which is the shape you have now run three bodies in a row (`crimp`, `timberman`).
+***   **AND LOOK AT THE PICTURE FRONT AND BACK BEFORE YOU CALL IT FIT.** `seen: 1.0` on three views
+***   did not catch the Beadle having no facing from behind, and the timberman passed that eye test
+***   on its real back (the beam swaps arms, the hat reads brim-then-crown) - hold the 62nd to that.
+***
+*** HUB (:37) - **STANDING CHECK; NOTHING OWED AND I AM NOT INVENTING ONE.** `web/` is byte-identical
+***   to `origin/hub` and the lane said so. The gh-pages delta is the suggestion box and it is with
+***   the SUPERVISOR, not with you; **the hub lane never publishes.** If you do change anything under
+***   `web/`, the security claim ships with it in the same run and I will re-run the greps myself.
+***
+*** CHAT BOT (:45) - **LAND §2. IT IS YOUR FILE AND IT ALWAYS WAS - MY ROW SENT IT TO CONTENT FOR
+***   THREE HOURS AND THAT WAS MY ERROR, NOT YOUR WAIT.**
+***   `data/lore_lines.json` `_note_c204` carries the complete paste-ready draft on its `DRAFT_JSON=`
+***   tail. Copy `topics` into **`/ask/topics` AT THE TOP LEVEL** of `data/commands.json` and append
+***   `order_append` to **`/ask/order`** - *** THE PATH IS `/ask`, NOT `commands.ask`. *** B146
+***   queried `commands.ask`, got an empty dict, and nearly reported the ask table DELETED; do not
+***   repeat it. Measured by me on 9a1fc2e3: `ask.order` 10, `ask.topics` 10 (bits, commands, gear,
+***   gold, hub, join, missed, myhero, real, what), the two key sets equal, and all 11 new keys ABSENT.
+***   After it lands: `/ask/order` and `/ask/topics` must both read 21 with EQUAL key sets, the file
+***   must still parse, and then run `COMMANDS_DATA ASK` - the gate you have correctly refused to fake
+***   for three hours finally has something to judge. No code change is needed; the table is data-driven.
+***   **ONE THING TO KNOW BEFORE YOU WRITE THE REPLIES:** `bug` and `suggest` both point viewers at a
+***   Suggestion Box button that is **NOT ON THE PUBLISHED PAGE YET** - it is in the hub's unpublished
+***   delta, with the supervisor. Land §2 anyway; the directive's text is the directive's text and I
+***   have raised the ordering with the seat that owns the publish. Do not reword the supervisor's replies.
+***   CLAIM BY :50 WITH A FINISH INSIDE :52. Splitting rather than crossing has been right four hours
+***   running. Your 03:48 line also caught and fixed a two-minute future stamp in its own IDLE seconds
+***   after writing it - that is the discipline this house wants and I am recording it as such.
+***
+*** HUD (:52) - **04:52 IS AN EVEN HOUR: STAND DOWN IN WRITING.** The supervisor's 24 Nov directive §4
+***   drops this lane to every two hours until something HUD-scoped reopens, and names the Team Lead as
+***   the seat that implements it by writing the stand-down on alternate hours. 03:52 was the odd hour
+***   and you worked it - U167, L74 re-verified, log committed to a ref. So this one is a stand-down,
+***   and a stand-down written up IS the delivery; it is not a dry report and it does not count against
+***   you. The rarity-hue half of System 2 is CLOSED at U55 and is NOT yours to re-open - do not accept
+***   it if any row ever hands it back.
+***
+*** FOR THE SUPERVISOR:
+***   1. **§2 OF YOUR 24 NOV DIRECTIVE WAS ROUTED TO A LANE THAT CANNOT DO IT, AND I HAVE MOVED IT.
+***      TELLING YOU, NOT ASKING YOU.** Your directive says "Route: content lane adds the data", and
+***      `data/commands.json` is the chat bot's file: eighteen of its last eighteen commits are chat
+***      bot (B100 -> B147) and content has never touched it. Content refused on charter grounds,
+***      said so plainly, and delivered the complete paste-ready draft in-bounds as `_note_c204` -
+***      the lane behaved correctly and my rows carried your routing for three hours without
+***      checking it. §2 is now the chat bot's row for 04:45. **Recommendation: no action needed from
+***      you; the data lands this hour and I verify the parse and the ASK gate, exactly as §2 asks of
+***      me.** If you meant content to be granted `commands.json`, say so and I will write that
+***      instead - that grant is yours, not mine.
+***   2. **THE HUB DELTA IS YOUR SUGGESTION BOX, AND THERE IS AN ORDERING CALL IN IT THAT IS YOURS.**
+***      Re-measured by me this hour, not copied: `origin/gh-pages` **5ce35f33**, tree **c03fa129**,
+***      pushed **24 Nov 15:30 CT** (hub publish 7); `origin/hub:web` tree **3d910499**. NOT equal.
+***      Delta **3 files / +17 / -1** - `NOTES.md` +12, `index.html` +2/-1, `style.css` +3. The form id
+***      in the diff matches your directive character for character; CSP unchanged and not loosened.
+***      The lane has NOT claimed "ready to publish", so **I ran NO publish verification and I am
+***      reporting NO security gate** - an unearned gate report is the same fault class as a lying
+***      gate. **Recommendation: §2's `bug` and `suggest` replies send viewers to a button that is
+***      only in this unpublished delta, so I would publish this delta BEFORE or WITH §2 landing -
+***      but your own directive says the form still needs its three questions configured first, and
+***      an empty form is worse than a missing button. So: configure the form, then say "publish" and
+***      I will do the subtree push by the proven plumbing recipe with the four assertions and verify
+***      `origin/gh-pages^{tree}` equals `origin/hub:web` afterwards.** Not mine to decide.
+***
+*** FOR THE NEXT TEAM LEAD - THE OWED PROMPT-CORRECTIONS LIST IS **NOT** SUPERSEDED BY THIS BLOCK.
+***   "THIS SUPERSEDES EVERY LANE ROW BELOW IT" means the LANE ROWS, and I have put that word in the
+***   header this hour so the mechanism cannot be read away. Items 1-10 from the 01:58 and 02:58
+***   blocks STAND IN FULL and are still the thing to land in one live turn. TWO TO ADD:
+***  11. **THE PROMPT'S HUB BLOCK IS STALE, AND IT IS STALE IN THE VERY PARAGRAPH THAT WARNS AGAINST
+***      COPYING ITS OWN FIGURES.** The charter says gh-pages is `05ac2679`, tree `9ca8051e`, pushed
+***      19 Nov 20:06 CT, with a delta of "3 files / +59 / -1 - NOTES.md +9, web/app.js +46/-1,
+***      web/style.css +4". MEASURED 25 Nov 04:0x CT: gh-pages **5ce35f33**, tree **c03fa129**,
+***      pushed **24 Nov 15:30 CT** (hub publish 7, which has its own supervisor doc); `origin/hub:web`
+***      tree **3d910499**; delta **3 files / +17 / -1** - NOTES.md +12, index.html +2/-1, style.css +3.
+***      The `05ac2679` / 19 Nov figures join `45a7904` and `40223be` as STRUCK. Three stale SHAs in
+***      one block is the argument for the rule the block itself states: RE-MEASURE, NEVER COPY.
+***  12. **THE ID LINE AND THE CASCADE FIGURES** - as of 25 Nov 03:5x CT: **B147, C-204, D100, H32,
+***      L74, S127, T5, U167**, and art is **SIXTY-ONE** bodies deep (`timberman`, "Deadfall").
+***      Today the cascade is **CLOSED at 61 / 61 / 61 / 61** and all three `COMMANDS_DATA` miniboss
+***      arms are silent - the first hour in six that every register agrees. The charter's
+***      "thirty-three bodies" and "46 rows / 44 live" fit-register figures remain STRUCK; the
+***      register now judges 63 pairs (61 live + 2 `_chibi`).
+***
+*** NEEDS MR. E: nothing.
+
 ## TAKE THIS NEXT - Updated THE 02:58 CT FIRING, 25 NOV 2026 (team lead; written 03:0x CT). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS d5aaef11. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
 *** FIVE LANES SHIPPED, ONE STOOD DOWN IN WRITING. NOBODY WAS STARVED AND NOBODY OVERRAN.

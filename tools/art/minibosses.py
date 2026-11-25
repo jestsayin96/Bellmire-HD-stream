@@ -23415,13 +23415,47 @@ def collier():
             # buys almost nothing and starts walking back toward the burial
             # this whole pass exists to fix, so flush is where it stops.
             _fo = float(os.environ.get("COLLIER_FACE_OUT", "0.0"))
+            # *** PASS 16 - THE ~48 px SIDE NUB, AND "FLUSH" WAS THE WRONG WORD.
+            # Pass 15 swept COLLIER_FACE_OUT and called 0.0 "flush: the face
+            # sits exactly on the skull". It does not. `_face` returns a point
+            # ON the ellipsoid and that point is the tube's AXIS, so at OUT=0
+            # the brow's skin stands a whole tube RADIUS (0.024) proud, and
+            # `surf` thickens the rag SYMMETRICALLY (creatures.py:88, +-thick/2)
+            # so its skin stands 0.010 proud. The residual the pass could not
+            # explain is the pieces' own half-thickness, which is why the span
+            # sweep never moved it: the break is the brow's MIDDLE crossing the
+            # profile, not its ends, and the middle sits at xf 0 whatever the
+            # span. Measured at flush, ablated: all 47 px / no brow 29 / no rag
+            # 26 / no eyes 43 / no face 0, and the span sweep 0.85/0.70/0.55 is
+            # 47/47/47 while the front face read falls 939 -> 835. Span is pure
+            # cost. COLLIER_FACE_SKIN=1 sinks each piece by its OWN half-
+            # thickness so the SKIN is what sits on the skull.
+            # A FRACTION, NOT A FLAG, AND THE PICTURE IS WHY. At SKIN=1 the
+            # tube is tangent to the ideal ellipsoid from inside, so it shows
+            # through ONLY where the 16-segment sphere's facets sag in - the
+            # brow renders as a DASHED line. face_front_px fell just 939 -> 855
+            # for that, i.e. the number cannot tell solid from dashed and must
+            # not be allowed to decide this. Sweep it and look.
+            # SHIPPED AT 0.6. The sweep, measured as new silhouette px
+            # outside the p14 outline on hero_side.png / front face-change px:
+            # 0.0 = 47/939, 0.40 = 32/909, 0.60 = 22/897, 0.80 = 15/872,
+            # 1.00 = 10/855. The NUMBERS want 1.0 and the PICTURE forbids it:
+            # at 0.8 the brow is thinning and at 1.0 it is two separate dashes
+            # at the 360p rung, because a tube sunk by its full radius is
+            # tangent from inside and only the facet sag lets it through.
+            # 0.6 halves the nub - the "broken handle" read is gone on the
+            # side crop - and the brow is still one solid bar at 360p.
+            # COLLIER_FACE_SKIN=0 reproduces pass 15 byte for byte.
+            _skin = float(os.environ.get("COLLIER_FACE_SKIN", "0.6") or 0.0)
             _ends = (0.52 if _taper else 0.60) * _span
             _bp, _br = [], []
             for i in range(11):
                 _t = -1.0 + 2.0 * i / 10.0
-                _bp.append(_face(_ends * _t, 0.26, _fo * 0.012))
-                _br.append((0.030 if _fo else 0.024)
-                           * (1.0 - 0.78 * _t * _t) if _taper else 0.030)
+                _r = ((0.030 if _fo else 0.024)
+                      * (1.0 - 0.78 * _t * _t) if _taper else 0.030)
+                _bp.append(_face(_ends * _t, 0.26,
+                                 _fo * 0.012 - _r * _skin))
+                _br.append(_r)
             P.raw(L.tube(_bp, _br, 8), 'dark')
         # THE SOCKETS - set 0.010 INTO the surface so they read as holes in the
         # pot and not beads on it. Still DARK and never lit: FAULT 10 is that
@@ -23459,6 +23493,9 @@ def collier():
             _rw = (0.40 if os.environ.get("COLLIER_FACE_TAPER", "1") != "0" else 0.46) * _sp
             _ro = (0.006 if os.environ.get("COLLIER_FACE_TAPER", "1") != "0"
                    else 0.010) * float(os.environ.get("COLLIER_FACE_OUT", "0.0"))
+            # See the brow note: surf() is symmetric about the grid, so half
+            # the 0.020 thickness is outside the skull at _ro 0.
+            _ro -= 0.010 * float(os.environ.get("COLLIER_FACE_SKIN", "0.6") or 0.0)
             _rows = []
             for i in range(5):
                 _zf = -0.14 - 0.44 * i / 4.0

@@ -1,3 +1,106 @@
+## TAKE THIS NEXT - Updated THE 14:58 CT FIRING, 25 NOV 2026 (team lead; written 15:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** ALL SIX LANE BRANCHES MERGED. main c7a52247 -> f00420b1. FIVE SHIPPED; CONTENT WAS SILENT.
+*** PROGRESS.md took TWO conflicts (hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT by a state
+*** machine, not a blanket delete. Residual markers 0 on all FOUR exact shapes across every tracked
+*** text file. numstat vs old main: root PROGRESS.md +75/-0, docs/PROGRESS.md +22/-0. ZERO LINES
+*** REMOVED, which is the assertion that matters.
+*** AN ARITHMETIC GAP I AM REPORTING RATHER THAN ROUNDING OFF: the three lanes' own per-lane
+*** numstats are hub +20, hud-ui +9, chatbot +47 = 76, and the merged file reads +75. One line is
+*** unaccounted for. -0 holds and the marker audit is clean on all four shapes, so nothing was
+*** deleted; the likely cause is two lanes appending one identical line that the merge kept once.
+*** I HAVE NOT YET PROVED THAT, so I am not calling it benign. It is named here and in my run doc
+*** and I run it down this hour. A seat that reports +75 as if it equalled 76 teaches the next seat
+*** that these sums are decorative.
+
+>>> GAME BUILD (:07) <<<
+  **S137 LANDED AND THE SUPERVISOR'S RULING IS SPENT.** You flipped `UACP_SKIN` to override with
+  KayKit's measured 246,195,159, kept it reversible in one line, and shot the lineup ON with the OFF
+  control beside it at 13 m and at the RTS pitch. That is the order I asked for: the picture, with
+  its control, not a number.
+  TAKE **YOUR OWN SENTENCE ON THE PICTURE, IF YOU HAVE NOT WRITTEN IT.** The row you were given
+  asked for one thing the metric cannot supply - whether the two body families now read as ONE house
+  style at the distance the player actually sees them. Your IDLE line reports the shots and the
+  gates; it does not report that judgement. If it is in your PROGRESS entry, say which line it is and
+  I will tick S137 whole. If it is not, write it this cycle - that is the acceptance test for a
+  visual call and it is the half only you can close.
+  THEN take the next open Phase 2 system in order and name its number in your claim line, so the
+  plan and your lock line agree on what you are building.
+
+>>> HUD (:52) <<<
+  **U180 IS THE RIGHT KIND OF FINDING: ONE IN YOUR OWN SHIPPED WORK, FOUND BY LOOKING AT THE FRAME
+  YOUR OWN NUMBERS CALLED WORST.** You took the tightest U179 rung, opened it, and found the
+  Chronicle stack overruns the vellum bottom by 5-7 px on the newest line, hostile names and plain.
+  You wrote it as a probe with no fix and you committed your logs this time - both of them, plus the
+  U179 log that was uncommitted when I ticked U179 last hour. That is the gap closed.
+  TAKE **THE FIX, AS U181.** This is the second half of your own probe, not a new item: the overrun
+  is in `feed_hud.gd`'s Chronicle stack against the vellum panel, both your files. Fix it, then
+  RED-PROVE it - strip your change out of a copy and show the 5-7 px comes back - and re-run the
+  100/125/150 regression so the fix is not paid for out of another rung's margin.
+
+>>> CONTENT (:22) <<<
+  **YOU WENT SILENT AT 14:22 AND THAT IS THE ONE THING I NEED CHANGED.** Your branch tip is
+  1f42cc4f at 14:08:36 and every commit on it since my last merge is one of my own plan syncs coming
+  back. No entry, no stand-down, no stand-down written up. A dry cycle is allowed and costs nothing;
+  a SILENT cycle costs me the ability to tell a dry lane from a stalled one, and I will not guess
+  which you were.
+  TAKE **C-213's SECOND HALF - LANDING THE PREPARED DIFFS - IN EXACTLY THE SHAPE C-212 LANDED IN:**
+  additive only, one new `_note_` key, every existing key's VALUE byte-identical, and the
+  cell-by-cell list of which cells changed written into your entry so I can check it cell by cell
+  rather than reading your summary. IF YOU ARE DRY INSTEAD, WRITE THE STAND-DOWN. A stand-down
+  written up IS the delivery and it ticks; silence does not.
+
+>>> ART (:34) <<<
+  **PASS 18 AND THE TITLE IS THE WHOLE VALUE: "the soot landed on the face, and the soot was mine."**
+  You were sent to settle whether the 360p brow reads as a brow or a smear, and you found the smear
+  was not the brow's geometry at all - it was your own pass-17 soot sitting on the face. A lane that
+  traces a defect back to its own previous pass, and says so in the commit subject, is doing the
+  thing this house keeps asking for.
+  TAKE **FINISHING THAT ON THE PICTURE AND NOT ON THE SWEEP.** You have `_browlook`, `_browzoom`,
+  `_bodyzoom` and a shipped hero all in one pass; name the value you actually shipped, show the 360p
+  rung with the corrected soot, and say in your own words whether the brow now reads at the rung the
+  player sees. If it does, the 360p brow item is closed for good and I will tick it closed - say so
+  plainly and I will not make you carry it a nineteenth pass.
+  IF THE COLLIER IS DONE, YOU ARE THE ONE LANE THAT MAY INVENT: take the next miniboss body, and
+  MEASURE THE COUNT off tools/art/minibosses.py or the fit register, never off a number in a prompt.
+
+>>> HUB (:37) <<<
+  **YOUR STAND-DOWN IS ACCEPTED AS WRITTEN AND YOU DID THE RIGHT THING TWICE OVER.** You swept your
+  own published `web/` against the live page's security claims, changed nothing in `web/`, and
+  explicitly did NOT claim READY TO PUBLISH - so no publish gate was owed and I ran none. I want that
+  sentence on the record: I ran no publish verification this hour, because none was earned.
+  TAKE **A WRITTEN STAND-DOWN AGAIN IF YOU ARE DRY, AND SAY SO PLAINLY.** Nothing is owed on the CDN
+  item ever again - it is ruled closed from above. If you want work, keep sweeping your own published
+  surface for defects; that is auditing shipped work, not a new item.
+
+>>> CHAT BOT (:45) <<<
+  **B158 IS A STAND-DOWN WITH A REASON, WHICH IS THE GOOD KIND.** You took no lock and ran no gate
+  because the QA tester had just paid all four of yours on blobs you proved byte-identical. Not
+  re-running a green gate on identical bytes to look busy is the correct call and I am not charging
+  you a quiet cycle for it.
+  TAKE **THE ONE REGEX INSTRUMENT YOU ALREADY NAMED, IF YOU WANT WORK.** At B156 you measured that
+  `tools/_l14_test.gd:30` pattern-matches rather than parses, and listed exactly what it would
+  mis-read - a tab indent, any depth but 8 spaces, a verb with an underscore or digit, and a false
+  positive on a lowercase dictionary key at the same depth. At B157 you wrote a guard note above the
+  dispatcher rather than editing the gate. FINISHING IT IS FIXING YOUR OWN INSTRUMENT, NOT A NEW
+  ITEM: make it brace-parse or depth-check instead of anchoring on 8 spaces, and prove it by feeding
+  it the five synthetic lines you already wrote down - each must now read correctly, and the gate
+  must still go RED on a genuinely missing entry.
+
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+*** these on the first LIVE turn, all at once). THIS LIST IS CUMULATIVE - DO NOT DROP A LINE.
+***   The three carried from the 13:58 firing stand as written in that block; re-read it rather than
+***   trusting my paraphrase, and carry them forward with these.
+***   4. THIS PROMPT'S "ID" LINE IS STALE EVERY HOUR BY DESIGN. As of the 14:58 firing the live set
+***      measured off the merged tree is B158, C-213, D100, H32, L74, S137, T5, U180, and art is on
+***      collier pass 18. The prompt still names B104/C-163/S85/U124/paviser pass 8. The prompt
+***      already says to re-measure these, so this is a refresh and not a contradiction.
+***   5. THE DEAD-DATA BASELINE IN THE PROMPT IS DATED 21 NOV. Re-stamp it to the 25 Nov measurement
+***      in my run doc for this hour, keeping the 15 non-note keys and the series intact.
+
+*** FOR THE SUPERVISOR: nothing new this hour. The 13:52 ruling on both items I routed up is relayed
+*** above and the game build acted on it the same cycle. The hub remains MERGED-AND-NOT-PUBLISHED and
+*** has been with you since 20 Nov; I am not re-asking, only keeping the fact visible.
+
 ## TAKE THIS NEXT - Updated THE 13:58 CT FIRING, 25 NOV 2026 (team lead; written 14:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** ALL SIX LANE BRANCHES MERGED. SIX SHIPPED, NOBODY DRY. main 2aa92486 -> 252558b9.
 *** PROGRESS.md took THREE conflicts (hub, hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT by a

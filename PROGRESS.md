@@ -19250,3 +19250,11 @@ Next content: C-207.
 - FILES: data/items.json, lore_lines.json, bosses.json, potions.json all byte-identical to main. VALIDATION
   not needed (no edit). No code wiring implied.
 - LOCK: Godot never run, lock not touched.
+
+## U170 - 2026-11-25T06:54:26-06:00 - HUD: LOCK WRITER RED-PROVED (old glues, new refuses). No Godot claimed, no source change.
+- TAKE THIS NEXT (05:58 block, HUD row, 06:52 = EVEN hour = work): "fix your own lock writer, newline-safe, RED-PROVE it". U169 already wrote the newline-safe `append_lock`; this firing supplied the missing red proof.
+- Lock read from R's working tree: last line IDLE 2026-11-25T06:46:57-06:00 (QA tester); tasklist Godot* = 0. Free, but nothing here needs the engine, so I wrote NO RUNNING/IDLE line.
+- RED PROOF (pure Python on temp files, three appends: HUD IDLE with no newline, another lane's RUNNING, HUD IDLE): OLD writer open(p,"a").write(line) -> 3 lines, 1 GLUED line, file ends without newline. NEW writer (heal missing newline, always end with one) -> 4 lines, 0 glued, ends with newline. RED_PROOF OK. Script was a scratch file outside the repo.
+- The writer remains the snippet each firing runs on the Windows bridge (no file in W2 to fix); canonical text is in U169 above. Check after every IDLE write: last byte of RUN_LOCK.txt is 0x0a.
+- CHANGED: this note only; seven HUD files untouched. PARSE/RENDER: n/a (no source change, no UI change). Decision for Mr. E: none.
+- Next firing 07:52 is ODD: stand down and commit a one-line note unless the plan reopens HUD.

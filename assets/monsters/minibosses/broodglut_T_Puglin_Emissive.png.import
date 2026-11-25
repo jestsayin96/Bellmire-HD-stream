@@ -2,19 +2,19 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6apucwhjw00n"
-path="res://.godot/imported/lastcuff_T_Imp_ORM.png-25de236fdde20d7d66cf5ae53de0784f.ctex"
+uid="uid://cjfoudqk8rvfx"
+path="res://.godot/imported/broodglut_T_Puglin_Emissive.png-792e8368996884f74e08b48d15cbb8b3.ctex"
 metadata={
 "vram_texture": false
 }
 generator_parameters={
-"md5": "601bef77fb805b4e94292dca2f2b830b"
+"md5": "84ecda8599e3a361b1f5c82194172344"
 }
 
 [deps]
 
-source_file="res://assets/monsters/minibosses/lastcuff_T_Imp_ORM.png"
-dest_files=["res://.godot/imported/lastcuff_T_Imp_ORM.png-25de236fdde20d7d66cf5ae53de0784f.ctex"]
+source_file="res://assets/monsters/minibosses/broodglut_T_Puglin_Emissive.png"
+dest_files=["res://.godot/imported/broodglut_T_Puglin_Emissive.png-792e8368996884f74e08b48d15cbb8b3.ctex"]
 
 [params]
 

@@ -1,0 +1,8 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S52 live key sources: by_key 56, MB_FIT base 56, glb stems 59
+FAIL drawable key weigher has no MB_NAME entry
+FAIL MB_NAME key set matches the live keys
+S52 red-proof (drizzler planted): 5 faults: MB_NAME key drizzler is not in feed, MB_NAME key drizzler is not in fit, MB_NAME key drizzler is not in glb, drawable key strickler has no MB_NAME entry, drawable key weigher has no MB_NAME entry
+S51 bodies on disk resolving by trade key: 42 ; keys with arrive lines: 42
+S51_NAMES FAIL 2 of 177

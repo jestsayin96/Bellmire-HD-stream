@@ -18338,3 +18338,13 @@ spends about nine of them.
 
 No live Twitch test this cycle: ZERO BITS, no cheer, no redemption, no reward read or written, and no
 chat line posted as bellmirebro. Nothing for Mr. E to decide.
+
+## D-S121 (game build, 24 Nov 2026 20:08-20:2x CT) - THE 56th IS NAMED TRUEWEIGHT, AND ALL THREE HARDCODED 55s MOVED WITH IT IN ONE COMMIT
+- Item: TAKE THIS NEXT (19:58 CT) row GAME BUILD - S121.
+- `Delve.MB_NAME["weigher"] = "Trueweight"` (scripts/delve.gd). Canon read in two places: art CANON minibosses.py:20600 and content `_note_c198`; `miniboss_feed.by_key.weigher` is on merged main (arrive 9 / act 8 / broken 4 / fall 8). MB_FIT comment updated (the S120 "no MB_NAME row" note is now struck).
+- THE TEAM LEAD'S READING WAS RIGHT, AND I PROVED IT BY RUNNING, NOT READING: with the pre-S121 delve.gd + _s51_names.gd swapped back in, the gate printed `FAIL drawable key weigher has no MB_NAME entry` / `FAIL MB_NAME key set matches the live keys` / `S51_NAMES FAIL 2 of 177`. Arm A was firing on merged main before this change.
+- THREE literals, not one: `MB_NAME.size() == 55` lived in tools/_s51_names.gd, tools/_s107_gate.gd AND tools/_s117_straker.gd. All three moved to 56 in the same commit, comment chains updated. Bumping only the one named would have left two arms red on a correct change.
+- Verdict lines (logs in _s121/): pre-fix `S51_NAMES FAIL 2 of 177`; after: parse 0 SCRIPT ERROR / 0 Parse Error; `S51_NAMES OK 176 checks`; `S107_GATE OK 12`; `S117_STRAKER OK 11`; `TWITCH_PARSE OK (8 checks)`; `OFFFLOOR_VERDICT OK 0 of 2003 samples off the floor (home)`; `TOWNWALK in_solid=0/15248 (0.000%) ... PASS`; `DELVE_TEST OK ran 9001 frames, floor reached 2` with 0 SCRIPT ERROR.
+- ONE ERROR LINE IN THE PARSE LOG, NOT MINE AND CORRECT: chatcmd.gd:2244 `COMMANDS_DATA MINIBOSS COUNT: miniboss publishes 55 elites and content writes feed rows for 56`. That is the chat bot's guard seeing C-198 on main; it is now TRUE that the republish 55 -> 56 is owed, because the engine half reached 56 with this commit. Chat bot lane's file; I did not touch commands.json.
+- No render: the change is a name string; the body was rendered and looked at by art and the team lead.
+- No live Twitch test, zero bits.

@@ -20074,3 +20074,50 @@ accumulating here for the first seat that gets a LIVE turn with Mr. E):
      body count: the only matcher I ran against tools/art/minibosses.py was a FLAT REGEX over a
      multi-line GDScript-style dict, which is exactly the instrument this house forbids quoting.
      The next seat should brace-parse it before writing a number.
+
+## B158 - 25 Nov 2026, 14:45 CT firing (chat bot) - I TOOK NO LOCK AND RAN NO GATE, BECAUSE THE QA LANE HAD JUST PAID ALL FOUR OF MINE ON BLOBS I PROVED BYTE-IDENTICAL TO MY OWN
+- **Row taken as written.** The 13:58 CT CHAT BOT row ticks B157 for putting B156's warning where the
+  trip would be authored rather than where the instrument lives, then says plainly: "YOUR LANE IS
+  OTHERWISE DRY AND A WRITTEN STAND-DOWN IS THE DELIVERY", with "CLAIM BY :50 WITH A FINISH INSIDE
+  :52". I am taking the stand-down, and the reason is not that the lock was held.
+- **THE LOCK WAS HELD WHEN I FIRED, AND THEN IT WASN'T.** At 14:45:53Z the last line of
+  `docs/RUN_LOCK.txt` was `RUNNING 14:43:00 (QA tester ... DECLARED FINISH 14:50)` with no IDLE after
+  it - live by the yield rule. I checked **by process, not by the file alone**: `Get-Process Godot*`
+  returned nothing. **I DID NOT CLEAR IT.** A claim three minutes old with no process yet is a lane
+  between its claim and its first battery, which is exactly the shape B4 was right not to clear.
+  At 14:47:30 the QA tester wrote its own IDLE and the window was free. I still did not launch.
+- **WHY NOT, AND THIS IS THE WHOLE DELIVERY.** QA's battery at 14:47:30 reads: parse **0 errors**,
+  **L14_TEST OK**, **TWITCH_PARSE OK**, **COMMANDS_DOC OK 32 commands** - items 1, 2, 3 and 5 of my
+  owed list, all four. The question is whether that verdict is about **my** bytes, and I measured it
+  instead of assuming it. QA ran in R on `laptop` at `ec75c99f`; I hold `chatbot` at `c7a52247`,
+  different commits. The three files I own resolve to the **same blobs on both**:
+  `scripts/chatcmd.gd` -> `01741c05`, `data/commands.json` -> `431eb4c1`, `docs/COMMANDS.md` ->
+  `71d1c7f2`. Byte-identical, so a relaunch of those four gates would print what QA already printed,
+  four minutes before the HUD's :52. **A green gate re-run on identical bytes is not evidence, it is
+  a spent window.** I wrote no RUNNING line, because a RUNNING line is for a launch.
+- **ITEM 4 OF MY OWED LIST IS RETIRED, NOT OWED.** The list still asks for `_b2_ask.gd` at the
+  worktree root -> `B2_ASK OK`, then delete it and the `.b2_*` logs. **Neither the script nor any
+  `.b2_*` log exists in the tree** - an earlier cycle ran it and cleaned up after itself. Nothing to
+  run and nothing to delete. (Item 5's "26 commands" was already corrected to 32 at B157.)
+- **A DRIFT FINDING I RAISED AND THEN DISPROVED INSIDE MY OWN RUN.** My first drift pass reported
+  **four published entries with no literal in `chatcmd.gd`**: `armor`, `sheet`, `spotlight`, `watch`.
+  All four are real aliases (`armor`->`armour`, `sheet`->`hero`, `spotlight` and `watch`->`look`), so
+  this looked like four published routes a viewer could type and nothing would answer. **IT WAS MY
+  INSTRUMENT.** `canonical()` at `chatcmd.gd:3171-3187` walks the commands dictionary and resolves
+  aliases **from the data at runtime** - an alias needs no literal in code to route, so a literal
+  search can never answer this question. And the file already guards the real property properly:
+  `COMMANDS_DATA ALIAS DEAD` at line 1058 asks whether a published alias can reach `canonical()` at
+  all, which is the check my regex was a bad imitation of. **The flat regex over quoted lowercase
+  strings is the instrument this house forbids quoting, and it caught me the same way it caught the
+  team lead's note (c) this hour.** Reporting it rather than deleting it: a lane that reads a clean
+  drift line from me should know which pass produced it.
+- Drift, measured by the mechanism that can actually answer it: **32 commands, 31 aliases, missing
+  [], unanswered [], zero both directions**. `data/commands.json` parses (`json.load` OK, 21232
+  bytes, sha `0ba2f895`) and every pre-existing key is byte-identical - the blob is unchanged from
+  main. `docs/COMMANDS.md` sha `7acbd42b`, unchanged.
+- **Merge.** `chatbot` fast-forwarded `97d36445` -> `c7a52247` (origin/main), **no conflicts**, no
+  PROGRESS.md markers to resolve this hour, tracked tree clean before I wrote this cycle.
+- **NO SOURCE CHANGE THIS CYCLE.** `scripts/chatcmd.gd`, `data/commands.json` and `docs/COMMANDS.md`
+  are untouched; this commit is PROGRESS.md alone.
+- Nothing owed to the GAME BUILD lane in `twitch_eventsub.gd`. **No Twitch activity of any kind: zero
+  bits, no cheer, no redemption, no channel-point change, no chat line posted, no account touched.**

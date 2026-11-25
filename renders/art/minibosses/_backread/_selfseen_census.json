@@ -625,6 +625,48 @@
    ],
    "man_span_empty": false
   },
+  "harrowman": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arms",
+    "frame",
+    "head",
+    "legs",
+    "tines",
+    "traces",
+    "trunk"
+   ],
+   "items": 50,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     12,
+     18
+    ],
+    [
+     46,
+     50
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "trunk",
+    "head",
+    "arms"
+   ],
+   "has_man_span": true,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "hooper": {
    "in_register": true,
    "in_builders": true,
@@ -979,6 +1021,49 @@
     35,
     51
    ],
+   "man_span_empty": false
+  },
+  "pledgeman": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arms",
+    "board",
+    "head",
+    "lashings",
+    "legs",
+    "pledge",
+    "straps",
+    "trunk"
+   ],
+   "items": 41,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     20,
+     24
+    ],
+    [
+     24,
+     34
+    ],
+    [
+     34,
+     37
+    ],
+    [
+     37,
+     41
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "trunk",
+    "head",
+    "arms"
+   ],
+   "has_man_span": true,
+   "man_span": null,
    "man_span_empty": false
   },
   "porter": {
@@ -1951,12 +2036,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-24T19:50:38-0600",
+ "measured_at": "2026-11-24T21:48:23-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795571438.4624975,
- "register_mtime_epoch": 1795571370.8453896,
- "register_mtime": "2026-11-24T19:49:30-0600",
- "register_pairs": 59,
+ "measured_at_epoch": 1795578503.1297174,
+ "register_mtime_epoch": 1795578482.0583766,
+ "register_mtime": "2026-11-24T21:48:02-0600",
+ "register_pairs": 61,
  "measurable": [
   "almoner",
   "beadle",
@@ -1976,6 +2061,7 @@
   "fuller",
   "gaoler",
   "greener",
+  "harrowman",
   "hooper",
   "hurdleman",
   "iceman",
@@ -1986,6 +2072,7 @@
   "nightman",
   "paviser",
   "pitman",
+  "pledgeman",
   "porter",
   "pressman",
   "quartermaster",

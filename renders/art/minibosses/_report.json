@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "7ec8a146187f29d40eefce66dbf6eb8954cd380a",
+   "head": "01310f5823f974b479258f0f0a784c337ad2ff1c",
    "ref": "origin/main",
-   "ref_commit": "bc92b4e6b36219438b52031f222c90c11a2b514f",
+   "ref_commit": "4a561ba3f7234f9ad81fce18bf8fbc5b7ac5e9b9",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3091,7 +3091,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 8.904,
+   "corridor_margin_m": 8.9,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.1,
    "read_from": {
@@ -3117,13 +3117,107 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "dredger": {
+   "title": "Finepass",
+   "theme": "confection",
+   "idea": "IT ONLY FEELS WHAT GETS THROUGH THE MESH - it works a dredging sieve in front of it and that sieve IS the creature's whole contact with the room. A heavy blow stops dead on the bars: the harder it is swung the more certainly it is caught and spent, which is the one thing a party never tries, because every instinct says hit it harder. Only a LIGHT hand passes the mesh, so the weakest hand in the file is the only hand that scores, and the hero everybody normally protects is the hero who has to do the killing while the rest of the party keeps the room off them. It does not choose a target, it has no phase, nothing summons and nothing splits - the condition is on HOW HARD YOU SWING, which no other body in this file asks about. THE THING TO READ IS THE SIEVE: one big pale disc held low in both hands, barred across both ways in black, and the bars are plainly what a blow would land on.",
+   "wear": 0.16,
+   "feed_line": "Something ahead is dusting the floor.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 820,
+   "size": [
+    0.96,
+    1.29,
+    2.39
+   ],
+   "footprint_span": 1.29,
+   "height_m": 2.39,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.71,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.11,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.439929686583037,
+    "ortho": 2.751396417617798,
+    "clip": [
+     6.494562149047852,
+     16.268178939819336
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "harrowman": {
+   "title": "Overturn",
+   "theme": "grassland",
+   "idea": "IT IS NOT FIGHTING YOU AND IT WILL NOT TURN ASIDE - it drags a spiked harrow on a fixed round of the room and it works that round whatever is standing on it. It picks nobody, it cannot be interrupted, it has no phase and it does not speed up: a hero caught on the round is taken ALONG with the harrow to the end of the pass and let go there, out of the file and out of position, and the party that was lined up is now strung across the room in the order the harrow dropped them. So the fight is not a target at all, it is GROUND: the round is a moving line you can see coming and the party either keeps off it and fights in the time between passes, or stands its ground and is re-arranged every pass. Hitting it harder does nothing to the round. THE THING TO READ IS THE HARROW: a dark barred lattice dragged low and raked behind him, with bright tines standing down out of it into the floor, and the two traces running from its front corners up over his shoulders to his hands - so a viewer can see that he is HAULING and can see exactly what is being hauled.",
+   "wear": 0.52,
+   "feed_line": "Something is being dragged across the floor up ahead.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1216,
+   "size": [
+    2.72,
+    2.68,
+    2.45
+   ],
+   "footprint_span": 2.72,
+   "height_m": 2.45,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.279,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.05,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.2686979566337477,
+    "ortho": 4.1269307136535645,
+    "clip": [
+     8.778742790222168,
+     22.069032669067383
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs bc92b4e6b36219438b52031f222c90c11a2b514f sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 4a561ba3f7234f9ad81fce18bf8fbc5b7ac5e9b9 sha bc3a603f",
  "blank_check": {
-  "files": 165,
+  "files": 174,
   "failures": []
  }
 }

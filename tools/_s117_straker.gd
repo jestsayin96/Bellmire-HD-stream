@@ -30,7 +30,7 @@ func _initialize() -> void:
 	_ok(fed, "S118: straker is fed (content's by_key.straker arrive lines)")
 	_ok(drawn.has("straker"), "S118: straker IS drawn by the wood sweep")
 	_ok(Delve.MB_NAME.get("straker", "") == "Everyhand", "S118: MB_NAME straker is Everyhand (got '%s')" % Delve.MB_NAME.get("straker", ""))
-	_ok(Delve.MB_NAME.size() == 56, "S118/S121: MB_NAME is 56 (got %d) - S121 + weigher" % Delve.MB_NAME.size())
+	_ok(Delve.MB_NAME.size() == 57, "S118/S121/S122: MB_NAME is 57 (got %d) - S121 + weigher, S122 + dredger" % Delve.MB_NAME.size())
 	if _fails == 0:
 		print("S117_STRAKER OK %d" % _checks)
 	else:

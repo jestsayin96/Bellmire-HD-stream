@@ -21133,3 +21133,322 @@ def dredger():
 
 
 BUILDERS.update({"dredger": dredger})
+
+# ---------------------------------------------------------------------------
+# 58 THE HARROWMAN. THE PROP WAS CHOSEN BY MEASURING THE FILE, NOT BY TASTE.
+# I grepped this file for sixty-odd working props before drawing anything, and
+# `harrow` is one of thirty that appear NOWHERE in it. The first design I took
+# to the point of writing numbers was a NAILER - a man with a hod of spikes and
+# a hammer - and it died on that same grep: the STRAKER (55) is already a man
+# nailing iron to a rim, with a hammer held down over the next nail and four
+# nail heads as its only pale. A nailer would have been the straker with the
+# wheel taken away. Said here because the re-skin was mine and was two minutes
+# from being built.
+# A harrow also answers the DREDGER'S FIX A for free, which is why it is a good
+# object for this set rather than merely an unused one: the fault there was
+# three parallel bars collapsing to one sliver in the ortho whose axis they
+# very nearly lay along, and the answer was that a line's direction and the
+# axis its copies are spread along must BOTH clear BOTH cameras - so it had to
+# become a grid. A harrow IS a grid. Whichever axis a camera collapses, the
+# other set of bars still reads at full length, by construction and not by a
+# number I tuned.
+CANON.update({
+    "harrowman": ("Overturn", 2.45, (0.58, 0.54, 0.46), (0.92, 0.88, 0.72),
+                  "grassland", "IT IS NOT FIGHTING YOU AND IT WILL NOT TURN "
+                  "ASIDE - it drags a spiked harrow on a fixed round of the "
+                  "room and it works that round whatever is standing on it. It "
+                  "picks nobody, it cannot be interrupted, it has no phase and "
+                  "it does not speed up: a hero caught on the round is taken "
+                  "ALONG with the harrow to the end of the pass and let go "
+                  "there, out of the file and out of position, and the party "
+                  "that was lined up is now strung across the room in the "
+                  "order the harrow dropped them. So the fight is not a target "
+                  "at all, it is GROUND: the round is a moving line you can "
+                  "see coming and the party either keeps off it and fights in "
+                  "the time between passes, or stands its ground and is "
+                  "re-arranged every pass. Hitting it harder does nothing to "
+                  "the round. THE THING TO READ IS THE HARROW: a dark barred "
+                  "lattice dragged low and raked behind him, with bright tines "
+                  "standing down out of it into the floor, and the two traces "
+                  "running from its front corners up over his shoulders to his "
+                  "hands - so a viewer can see that he is HAULING and can see "
+                  "exactly what is being hauled.",
+                  0.52, "Something is being dragged across the floor up "
+                  "ahead."),
+})
+ORDER = ORDER + ["harrowman"]
+
+
+def harrowman():
+    """IT IS NOT FIGHTING YOU AND IT WILL NOT TURN ASIDE. The 58th body.
+
+    THE ACCEPTANCE TEST IS A MAN HAULING A HARROW, AND BOTH HALVES OF THAT
+    MUST READ: the HARROW as a barred lattice with tines standing down into the
+    floor (not a plank, not a board, not a mound), and the HAUL as two traces
+    running from the lattice's front corners up over his shoulders into his
+    hands - IN THE FRONT VIEW, THE SIDE VIEW AND BESIDE A HERO. If a viewer
+    sees a man and a dark smudge behind him, the mechanic is not on the model;
+    it is only in this docstring.
+
+    WHAT THIS IS NOT. The set is 57 deep and the re-skin is the easy failure,
+    so each near neighbour is named with the daylight between it and this.
+      NOT THE GAOLER (3), which DRAGS A HERO TO ITSELF on a hook. That is
+            aimed, it chooses, and the hero ends up next to the monster. This
+            drags nobody anywhere on purpose - what is on the round goes with
+            the harrow because the harrow is passing through, and it is let go
+            where the pass ends, away from it.
+      NOT THE WINDER (43), which winds heroes BACK on three hooked ropes.
+            Again aimed, and the destination is the body. Here the destination
+            is wherever the round happens to finish.
+      NOT THE SNARER (11), whose lines are SET BEFORE YOU ARRIVE and do not
+            move. The whole point here is that the hazard MOVES on a schedule
+            you can watch, so the room is dangerous in TIME and not in places.
+      NOT THE RAMMER (34), which is the other timing body and the closest one.
+            The rammer drops on a count AT ONE SPOT and the answer is to stand
+            off that spot. This has no spot: the line sweeps the floor, so
+            standing still is the thing that fails and the answer is to move
+            with it.
+      NOT THE HURDLEMAN (18), which PLANTS a barrier through your line and
+            leaves it there. A planted hurdle splits the party once. A round
+            re-splits it every pass, differently.
+      NOT THE SOWER (10), the other field trade in this theme, whose casting
+            STANDS UP AS THORN and makes new terrain. Nothing new is left
+            behind here - the floor is the same floor after the pass, and the
+            thing that changed is where everybody is standing.
+      NOT THE STACKMAN (36) or DAUBER (37), which take space away for good. No
+            space is taken here; it is borrowed, on a cycle.
+    The family - an unaimed, uninterruptible hazard that MOVES ON A FIXED ROUND
+    and re-arranges the party rather than wounding it - is new in this file,
+    and it is the reason this body was built.
+
+    THE READ IS BUILT ON THE DREDGER'S AND THE STRAKER'S OWN FAULTS, NOT ON MY
+    CONFIDENCE:
+      THE YAW. A harrow trailing straight back along the body's facing axis is
+            INVISIBLE IN THE FRONT ORTHO - it hides behind the man, and the
+            front view becomes a man leaning with a dark smudge at his feet.
+            That is the straker FIX K / dredger FIX C family (an object parked
+            where the camera cannot separate it from the body) arriving from a
+            new direction. So the whole rig is YAWED off the facing axis: the
+            harrow trails back AND across, which puts it beside him in the
+            front view and behind him in the side view, and neither camera
+            gets it hidden or edge-on. This is asserted by measurement, not by
+            eye - see _harrow_read.py, which renders the frame and tines ALONE
+            through each camera and reports their area in each.
+      THE GRID. See the file comment above: parallel bars cannot clear both
+            orthos, a grid can, and a harrow is a grid anyway.
+      THE TRACES ARE ANCHORED AT BOTH ENDS. The dredger shipped a carrying
+            strap at pass 3 that crossed the chest as a dark rod ENDING IN MID
+            AIR, which is a pipe-arm in all but name. Each trace here starts at
+            a frame corner and ends IN A HAND; there is no free end anywhere on
+            this body.
+      THE TINES ARE THE ONLY PALE ON IT. Wear 0.52 is a SPREAD and not one
+            value: the frame is old field iron and the tines are polished
+            bright by the ground they are dragged through, which is how a
+            harrow actually wears and is also the thing that needs to read.
+    """
+    P = Parts("harrowman")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.095
+    KNEE = 0.520
+    HIP = 0.950
+    WAIST = 1.140
+    CHEST = 1.440
+    SHO = 1.620
+    HEAD = 1.850
+
+    # POSITIVE: he is pitched FORWARD over his feet, hauling. The dredger's
+    # LEAN is negative for the opposite reason - it leans back off a tray.
+    LEAN = 0.150
+
+    def _s(v):
+        v = Vector(v)
+        return Vector((v.x, v.y - LEAN * (v.z - HIP), v.z))
+
+    # ---- THE HARROW. Trailing +Y and ACROSS in +X, so neither ortho gets
+    # it hidden behind the man (front) nor flat on (side). See docstring.
+    # PASS 5: 0.66 -> 0.80. At 0.66 the harrow's near corner sat behind his
+    # own hip in the front ortho and TOOK THE NEAR TRACE WITH IT, so the front
+    # view showed one trace and one empty fist while the side view showed both
+    # - the haul half-reading, which is the same half-pass the grips were
+    # moved for at pass 4. Swinging it further across gives both traces open
+    # air on that camera. PREDICTED BEFORE RENDERING off _harrow_read's own
+    # projection maths and then checked against it: front worst 0.736 -> 0.70
+    # (still far above the 0.35 bar) and side worst 0.613 -> 0.72, so the
+    # lattice reads BETTER on the side and no worse where it matters. A change
+    # that trades one view for another has to be stated as a trade; this one
+    # is not, and that is why it was taken.
+    YAWH = 0.80
+    DIR = Vector((math.sin(YAWH), math.cos(YAWH), 0.0)).normalized()
+    CROSS = Vector((DIR.y, -DIR.x, 0.0)).normalized()
+    HALF = 0.600                 # half the lattice side
+    NEAR = 0.760                 # how far back the near edge sits
+    # *** PASS 2, AND THIS IS A ROOT FAULT AND NOT A DETAIL. ***
+    # Pass 1 raked the lattice 0.480 -> 0.175, which is very nearly FLAT, and
+    # a near-horizontal plane is EDGE-ON TO EVERY HORIZONTAL CAMERA however it
+    # is yawed. I had answered the AZIMUTH question (don't hide behind the man)
+    # and never asked the TILT one, which is the dredger's FIX A error exactly:
+    # two separate questions, one of them answered twice. The side camera has
+    # some elevation and showed a perfect barred grid; the front camera is
+    # nearer head-on and showed ONE BAR WITH TEETH UNDER IT - a garden RAKE,
+    # which is a different tool and not the thing the mechanic is carried by.
+    # Found by looking at the render, not by any number here: the blank check,
+    # the border check and the span check were all green on that rake.
+    # So the frame rides UP on its leading edge, which is what a dragged
+    # harrow actually does over rough ground, and the plane now has a large
+    # horizontal component in its normal - it reads as a grid from both.
+    # PASS 3 BACKED THIS OFF FROM 1.060/0.150 (37 degrees) TO 31, BECAUSE
+    # PASS 2 BOUGHT THE GRID BY LIFTING THE WHOLE HARROW OFF THE FLOOR. With
+    # the tines run perpendicular to a 37-degree frame their tips dropped
+    # BELOW the soles, and minibossgen grounds a body on its GLOBAL minimum -
+    # so the lowest tine became the floor and THE MAN WAS LEFT HANGING ABOVE
+    # IT. That is the Rammer's float fault, which `seat()` exists for, walking
+    # back in through a prop instead of a leg. Measured, not eyeballed: lowest
+    # tine row z 0.345, plumb tine 0.330, tip 0.015, soles 0.0 - so the soles
+    # are the lowest thing on the body again and the rear rank just bites.
+    Z_NEAR = 0.975               # still rides up, 31 degrees: grid intact
+    Z_FAR = 0.255
+    NBAR = 5                     # bars each way -> a real grid
+
+    def _hp(u, v):
+        """A point on the lattice plane. u across (-1..1), v along (0..1)."""
+        return (DIR * (NEAR + v * (2.0 * HALF)) + CROSS * (u * HALF)
+                + Vector((0.0, 0.0, Z_NEAR + v * (Z_FAR - Z_NEAR))))
+
+    # ---- the legs: a stride, not a stance - one foot trails -------------
+    _open()
+    for _i in (-1, 1):
+        _x = 0.235 * _i
+        # PASS 6: 0.055 -> 0.175. A HAULER WITH NO STRIDE IS A POST. At 0.055
+        # the two legs superimposed almost exactly in the side ortho and the
+        # whole lower body read as ONE PALE SLAB from the waist down - so the
+        # view that shows the haul best showed a column being leaned against
+        # it. Found by looking at hero_side.png; no number in the register
+        # asks whether two legs resolve as two, and `seen: 1.0` was true of
+        # this the whole time. A real stride also earns the forward LEAN,
+        # which until now was a man tipping over rather than pulling.
+        _back = 0.175 * _i
+        limb(P, seat([(_x, _back + 0.090, ANK), (_x * 1.03, _back - 0.030, KNEE),
+                      (_x * 0.82, _back - 0.060, HIP)], 0.108),
+             0.108, 0.132, 'body')
+        P.add(L.box(0.214, 0.330, 0.072), 'dark',
+              loc=(_x, _back + 0.120, 0.036))
+    P.add(L.box(0.448, 0.288, 0.172), 'body', loc=(0.0, 0.0, HIP + 0.052))
+    _close("legs")
+
+    # ---- the trunk, pitched forward; a back for the side view -----------
+    _open()
+    limb(P, [tuple(_s((0.0, 0.0, HIP + 0.020))),
+             tuple(_s((0.0, -0.010, WAIST))),
+             tuple(_s((0.0, -0.040, CHEST)))],
+         0.198, 0.206, 'body')
+    P.add(L.box(0.404, 0.236, 0.086), 'dark',
+          loc=tuple(_s((0.0, -0.012, WAIST + 0.026))))
+    P.add(L.sphere(0.246, 0.206, 0.168, 14, 9), 'body',
+          loc=tuple(_s((0.0, -0.040, SHO - 0.080))))
+    for _i in (-1, 1):
+        P.add(L.sphere(0.148, 0.152, 0.126, 11, 8), 'body',
+              loc=tuple(_s((0.232 * _i, -0.040, SHO - 0.066))))
+        P.add(L.box(0.206, 0.232, 0.054), 'dark',
+              loc=tuple(_s((0.232 * _i, -0.030, SHO + 0.034))),
+              rot=(0.10, 0.0, 0.0))
+    _close("trunk")
+
+    # ---- the head: dark hood, tipped DOWN because he is pulling ---------
+    _open()
+    _HD = Vector(tuple(_s((0.0, -0.085, HEAD))))
+    limb(P, [tuple(_s((0.0, -0.045, SHO + 0.010))),
+             tuple(_HD - Vector((0.0, 0.0, 0.135)))], 0.080, 0.092, 'body')
+    P.add(L.sphere(0.192, 0.198, 0.186, 14, 9), 'dark', loc=tuple(_HD))
+    P.add(L.sphere(0.208, 0.200, 0.142, 13, 8), 'dark',
+          loc=tuple(_HD + Vector((0.0, 0.030, 0.066))))
+    P.add(L.box(0.248, 0.112, 0.050), 'dark',
+          loc=tuple(_HD + Vector((0.0, -0.142, 0.046))), rot=(-0.22, 0.0, 0.0))
+    eyes(P, tuple(_HD + Vector((0.0, 0.0, -0.010))), 0.042, 0.022, -0.180)
+    _close("head")
+
+    # ---- THE LATTICE. Dark, barred BOTH WAYS, raked low behind him. -----
+    _open()
+    for _k in range(NBAR):
+        _u = -1.0 + 2.0 * _k / (NBAR - 1.0)
+        _a, _b = _hp(_u, 0.0), _hp(_u, 1.0)
+        P.raw(aim(L.cone(0.030, 0.030, (_b - _a).length, 9), tuple(_a),
+                  tuple((_b - _a).normalized())), 'dark')
+    for _k in range(NBAR):
+        _v = _k / (NBAR - 1.0)
+        _a, _b = _hp(-1.0, _v), _hp(1.0, _v)
+        P.raw(aim(L.cone(0.030, 0.030, (_b - _a).length, 9), tuple(_a),
+                  tuple((_b - _a).normalized())), 'dark')
+    _close("frame")
+
+    # ---- THE TINES. THE ONLY PALE ON THE BODY, AND THEY STAND IN THE
+    # FLOOR - which is what makes it a harrow and not a grating carried about.
+    _open()
+    # PLUMB AND ONE LENGTH. Pass 2 ran them square out of the frame, which is
+    # what a rigid harrow does, and on a tipped frame that aims them DOWN AND
+    # FORWARD - so on the side render they read as spikes standing proud on
+    # the frame's TOP face, a bed of nails being towed, instead of teeth
+    # working the floor. The mechanic is the floor, so the teeth have to point
+    # at the floor: physical rigidity lost to readability on purpose, and said
+    # here so nobody re-derives it as a bug. One length, so it is a harrow and
+    # not the comb of uneven spikes pass 1's flat frame produced.
+    _TD = Vector((0.0, 0.0, -1.0))
+    TINE = 0.330
+    for _ku in range(NBAR - 1):
+        _u = -1.0 + 2.0 * (_ku + 0.5) / (NBAR - 1.0)
+        for _kv in range(NBAR - 1):
+            _v = (_kv + 0.5) / (NBAR - 1.0)
+            _top = _hp(_u, _v)
+            P.raw(aim(L.cone(0.042, 0.011, TINE, 8), tuple(_top),
+                      tuple(_TD)), 'bone')
+    _close("tines")
+
+    # ---- THE TRACES. Frame corner -> over the shoulder -> INTO THE HAND.
+    # No free end on this body; see docstring.
+    _open()
+    _GRIP = []
+    for _i in (-1, 1):
+        _corner = _hp(1.0 * _i, 0.0)
+        _shoulder = Vector(tuple(_s((0.242 * _i, -0.030, SHO + 0.076))))
+        # PASS 4. THE HAUL DID NOT READ IN THE FRONT VIEW AND THE SIDE VIEW
+        # HID IT FROM ME. Passes 1-3 gripped at chest height, 0.286 out and
+        # 0.252 forward - which from the side is a clean trace over the
+        # shoulder into a hand, and from the FRONT is two dark rails passing
+        # behind the shoulders into two mitts tucked against the chest. A
+        # viewer there sees a man STANDING BESIDE a spiked contraption, not a
+        # man pulling one, and half the acceptance test in this docstring was
+        # therefore failing while the other half passed. The grips come DOWN
+        # to waist height, OUT past the trunk and FORWARD, so the run from
+        # shoulder to fist is long, outside the body's own outline, and
+        # crosses nothing - the one segment a front camera can actually see.
+        _grip = Vector(tuple(_s((0.368 * _i, -0.345, 1.120))))
+        _GRIP.append(_grip)
+        limb(P, [tuple(_corner), tuple(_shoulder), tuple(_grip)],
+             0.038, 0.032, 'dark')
+    _close("traces")
+
+    # ---- the arms. BOTH outside the trunk, both ending on a trace. ------
+    _open()
+    for _n, _i in enumerate((-1, 1)):
+        _sh = Vector(tuple(_s((0.252 * _i, -0.040, SHO - 0.070))))
+        _el = _sh + Vector((0.082 * _i, -0.205, -0.250))
+        limb(P, [tuple(_sh), tuple(_el), tuple(_GRIP[_n])],
+             0.080, 0.056, 'body')
+        P.add(L.sphere(0.072, 0.066, 0.062, 10, 7), 'body',
+              loc=tuple(_GRIP[_n]))
+    _close("arms")
+
+    # THE FIGURE, STATED BY THIS BUILDER - see man_ranges(). The lattice, the
+    # tines and the traces are his gear.
+    P.man_parts = ("legs", "trunk", "head", "arms")
+    return P
+
+
+BUILDERS.update({"harrowman": harrowman})

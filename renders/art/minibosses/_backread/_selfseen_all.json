@@ -9656,11 +9656,194 @@
     "dredger_glow_man"
    ],
    "engine": "BLENDER_EEVEE"
+  },
+  "harrowman": {
+   "key": "harrowman",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 87607,
+     "man_seen_px": 87465,
+     "man_seen": 0.9984,
+     "value_creature": {
+      "px": 138717,
+      "p5": 0.1249,
+      "p50": 0.4241,
+      "p95": 0.6036,
+      "spread": 0.4788,
+      "dark_frac": 0.1697,
+      "bands": [
+       0.0502,
+       0.1884,
+       0.2101,
+       0.2956,
+       0.2285,
+       0.0248,
+       0.0012,
+       0.0012
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 87465,
+      "p5": 0.2062,
+      "p50": 0.4638,
+      "p95": 0.6201,
+      "spread": 0.414,
+      "dark_frac": 0.0435,
+      "bands": [
+       0.0072,
+       0.063,
+       0.1928,
+       0.3945,
+       0.3056,
+       0.0346,
+       0.0005,
+       0.0018
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "side": {
+     "man_alone_px": 77523,
+     "man_seen_px": 72747,
+     "man_seen": 0.9384,
+     "value_creature": {
+      "px": 141845,
+      "p5": 0.1569,
+      "p50": 0.3148,
+      "p95": 0.5896,
+      "spread": 0.4327,
+      "dark_frac": 0.1165,
+      "bands": [
+       0.0224,
+       0.1958,
+       0.3673,
+       0.1873,
+       0.2091,
+       0.0173,
+       0.0004,
+       0.0005
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 72747,
+      "p5": 0.1678,
+      "p50": 0.4451,
+      "p95": 0.6,
+      "spread": 0.4322,
+      "dark_frac": 0.0884,
+      "bands": [
+       0.0053,
+       0.152,
+       0.2277,
+       0.3041,
+       0.2898,
+       0.0197,
+       0.0005,
+       0.0009
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "back": {
+     "man_alone_px": 87209,
+     "man_seen_px": 81527,
+     "man_seen": 0.9348,
+     "value_creature": {
+      "px": 148557,
+      "p5": 0.1678,
+      "p50": 0.3213,
+      "p95": 0.6207,
+      "spread": 0.4529,
+      "dark_frac": 0.0701,
+      "bands": [
+       0.0179,
+       0.1629,
+       0.3756,
+       0.1367,
+       0.2695,
+       0.0372,
+       0.0002,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 81527,
+      "p5": 0.1754,
+      "p50": 0.4834,
+      "p95": 0.6288,
+      "spread": 0.4534,
+      "dark_frac": 0.0635,
+      "bands": [
+       0.0053,
+       0.1251,
+       0.21,
+       0.2263,
+       0.3773,
+       0.0555,
+       0.0005,
+       0.0
+      ],
+      "bands_5pct": 5
+     }
+    }
+   },
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     12,
+     18
+    ],
+    [
+     46,
+     50
+    ]
+   ],
+   "bounds_control": [
+    -0.52166,
+    -0.51392,
+    0.0,
+    2.19937,
+    2.1659,
+    2.45
+   ],
+   "bounds_split": [
+    -0.52166,
+    -0.51392,
+    0.0,
+    2.19937,
+    2.1659,
+    2.45
+   ],
+   "objs_control": 4,
+   "objs_split": 5,
+   "item_counts": {
+    "inside": 22,
+    "outside": 28,
+    "total": 50
+   },
+   "man_objs": [
+    "harrowman_body_man",
+    "harrowman_dark_man",
+    "harrowman_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE"
   }
  },
  "errors": [
   "panner: the man span merged to no object"
  ],
  "ok": false,
- "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds. | 24 Nov 2026 19:5x CT for the DREDGER (57th), measured by tools/art/_backread.py --keys dredger and MERGED into this file row-by-row. NOT written with --out, which OVERWRITES and would have destroyed the other 56 rows - the same wholesale-wipe shape this file's own carry rule exists to prevent."
+ "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds. | 24 Nov 2026 19:5x CT for the DREDGER (57th), measured by tools/art/_backread.py --keys dredger and MERGED into this file row-by-row. NOT written with --out, which OVERWRITES and would have destroyed the other 56 rows - the same wholesale-wipe shape this file's own carry rule exists to prevent. 24 Nov 2026 21:0x CT for the 58th body (harrowman), measured by tools/art/_backread.py --keys harrowman in the same run that built it; its own row carries its measured_at."
 }

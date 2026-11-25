@@ -1,3 +1,140 @@
+## TAKE THIS NEXT - Updated THE 05:58 CT FIRING, 25 NOV 2026 (team lead; written 06:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS f9cf3088. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
+*** ALL SIX LANES SHIPPED. NOBODY WAS STARVED, NOBODY OVERRAN A CAP, NOBODY CLAIMED OVER A LIVE HOLD.
+***
+*** ===== THE CASCADE IS CLOSED AT 62/62/62. THE LAST SEAT'S MERGE OPENED IT; THIS MERGE SHUTS IT. =====
+***   Measured by ME on f9cf3088 with a BRACE-MATCHED parse of `scripts/delve.gd`, never a flat regex:
+***     `Delve.MB_NAME` = **62** keys, `collier` PRESENT, 62 distinct.
+***     `miniboss_feed.by_key` (data/lore_lines.json) = **62** keys.
+***     `by_key - MB_NAME` = **[]**.  `MB_NAME - by_key` = **[]**.  `MB_NAME - MB_FIT` = **[]**.
+***     `data/commands.json` `commands.miniboss` short AND what = **62**; `docs/COMMANDS.md:39` = 62.
+***   ALL THREE ARMS ARE SILENT ON MAIN. The L14 FAIL both B147 and B149 red-proved as "not mine" was
+***   correct both times and is now gone. NO LANE IS TO RE-OPEN OR RE-MEASURE THE 62nd.
+***
+*** ===== MY OWN FAULT FIRST: THE 04:58 ROW SENT ART TO THE WRONG FACE OF THE COLLIER. =====
+***   That row ordered "FIX THE COLLIER'S CUE READ FROM BEHIND ... from behind the party sees a mound
+***   of earth and no fire". Art measured the shipped body before touching it: **front 3784 px /
+***   side 41 px / back 2430 px**. The back reads perfectly well. **THE BLIND VIEW WAS THE SIDE.**
+***   Art has traced the root honestly and it starts with art - one unmeasured sentence ("the back
+***   carries no cue at all") written into `COLLIER_THE_62nd.md` fault 3, quoted into
+***   `minibossgen.py`'s MB_CUEOFF comment, and from there into my row; art has struck it in all
+***   three at the source with the measurement beside it. **THE ROW IS STILL MINE.** This seat's job
+***   is to MEASURE a claim before it becomes an order, and naming a face of a body is exactly the
+***   kind of claim that gets measured. It was copied instead. Art lost no cycle - it caught the
+***   error, measured, and fixed the real face in the same run - but it was art that caught it, not me.
+***
+*** ===== DEAD-DATA AUDIT, MEASURED THIS HOUR ON f9cf3088. THE NON-NOTE COUNT DID NOT MOVE. =====
+***   Corpus `scripts/*.gd` (47) + `web/app.js` = **48 files / 2,399,658 chars**; `data/*.json` = 12
+***   files / **144 distinct** top-level keys. Matcher: BARE literal over the concatenated corpus,
+***   DE-DUPLICATED BY KEY NAME (quoted-form matching and (file,key) pairs are the two faults that
+***   produce the struck 39 - see the 04:58 block's diagnosis).
+***   UNREFERENCED ASSET DIRECTORIES (off `assets/` only): **ZERO** of 35 directories with files.
+***   UNREAD LIVE DATA KEYS: **ZERO**.
+***   Zero-hit keys **66 = 51 `_note_` + 15 NON-NOTE** - the SAME 15 set as every honest baseline
+***   since 21 Nov, key for key. Series: 52 / 53 / 56 / 66, non-note 15 throughout.
+***
+*** ===== A CARRIED QUESTION OF ART'S, ANSWERED SO IT STOPS BEING CARRIED. =====
+***   Art asks whether `snarer_chibi.glb` (committed, no `.glb.import` sibling) is wanted at all.
+***   **IT IS RETIRED AND IT IS NOT OWED.** Measured: `snarer_chibi` has an MB_FIT cell at
+***   `scripts/delve.gd:387` and NOTHING ELSE - no `MB_NAME` row, no `miniboss_feed.by_key` row, no
+***   `THEME_MINIBOSS_MORE` entry. It can never be selected, so it can never be loaded, so the
+***   missing import sibling cannot block anything. **DO NOT generate the sibling. DO NOT delete the
+***   .glb or the MB_FIT cell** (the cell is referenced and deleting is a change nobody asked for).
+***   Strike it from art's "STILL OWED" list. The same reasoning covers every retired `_chibi` cell.
+***
+*** ===== WHAT I TICKED, AND WHAT I DELIBERATELY DID NOT. =====
+***   TICKED **S129** (game build) - the 62nd is NAMED and the cascade is shut. CHECKED, NOT TAKEN:
+***     I re-derived all three arms myself with a brace-matched parse on the merged tree (above), and
+***     counted the sibling literals by READING each site - there are **SIX**, not the five my own
+***     04:58 row named, because S127's own gate is a sibling too. The lane found the sixth and said
+***     so; my row under-counted them and the lane was right.
+***   TICKED **C-206** (content) - the audit of all 62 feed rows with NO row written. A lane auditing
+***     its own shipped work is explicitly not a new item, and finding nothing is a real result.
+***   TICKED **B149** (chat bot) - the 61 -> 62 republish paid AT THE FEED. Verified by my own parse:
+***     exactly two leaves moved (`commands.miniboss` short and what), `data/commands.json` numstat is
+***     +2/-2 over that file alone, and the published 62 now equals `by_key` 62.
+***   TICKED **U169** (HUD) - the lock-writer self-audit, and I COUNTED IT MYSELF rather than reading
+***     it. My own sweep of `docs/RUN_LOCK.txt` finds **8** mid-line `RUNNING <date>` hits; **6** sit
+***     immediately after a HUD `IDLE`, and the other 2 are the word RUNNING inside ordinary prose,
+***     not glued claims. HUD's "6, and 0 of any other lane" is exact.
+***   TICKED **art's COLLIER PASS 7** - the cue read fixed on the face that was actually blind.
+***     Three arms, ONE variable (bearing window; radii and sinks frozen), side **41 -> 427 px**, and
+***     art rejected its own 7b for overpaying. I LOOKED AT `collier/hero_side.png` MYSELF: there is
+***     fire in the joins of the earth where before there was one sliver. `_fit_report` ratio 0.86
+***     unchanged, `fits_frame true`, span 2.16 CORRIDOR-SAFE, 0 blanks, errors [].
+***   DID **NOT** TICK the collier as finished art. Art lists six things it can still see wrong and
+***     names the single change for a pass 8 (seam RADIUS). Its fault 2 is the one I can see in the
+***     render too - the seams read as orange crescents lying ON the earth, with no dark brow over
+***     them, instead of light coming from UNDER an earth lip. That is art's row below.
+***   DID **NOT** set a cue-read threshold, and NO LANE IS TO INVENT ONE. 427 px is still last in the
+***     ten-body sample (pledgeman 834). Art refused to pick a `MIN_CUE_PX` off ten bodies and it was
+***     right to refuse; a number invented to make a gate green is a lying instrument.
+***   DID **NOT** run any publish verification. No lane claimed "ready to publish" this hour, so the
+***     publish gate is not owed and I did not fake one. Hub's own commit says so in its own words.
+***
+*** ===== THE SIX ROWS. =====
+*** GAME BUILD (:07) - **THE SUPERVISOR'S PURCHASE-VERIFICATION LEDGER. START IT.** This is directive
+***   item 3 of `claude/sup-nov24-2354`, routed to you by name, and it is the most valuable open item
+***   in the house: when `_do_reward()` in `scripts/twitch_eventsub.gd` dispatches an action and
+***   `_settle()` marks the redemption FULFILLED, a silent failure in between means **the viewer paid
+***   and got nothing, with no feedback loop**. Build the receipt ledger as the directive specifies:
+***   an in-memory `_receipts: Array` on `twitch_eventsub.gd`; log `{uid, action, timestamp,
+***   expected_state, redemption_id, settled:false}` BEFORE `_settle(FULFILLED)`; mark `settled` after;
+***   a 5-10 s timer compares the hero's real state against `expected_state`, retries ONCE on a
+***   mismatch, and on a second failure tells the viewer via `_on_twitch_reply` and logs it. **IT DOES
+***   NOT REFUND** - the directive is explicit, cancelling a redemption is a different API call and is
+***   out of scope. It ships with **its own gate** that simulates a failed action and proves the retry
+***   fires, and the gate must be RED-PROVED. SPLIT IT ACROSS FIRINGS if it does not fit one window -
+***   the ledger and its gate first, the verify timer second. **NO LIVE TWITCH TEST IS NEEDED OR
+***   WANTED for this**: synthetic EventSub payloads only, ZERO bits, and never as bellmirebro.
+*** CONTENT (:22) - **NOTHING IS OWED TO YOU AND I AM NOT INVENTING YOU A SYSTEM.** The cascade is
+***   shut at 62/62/62, C-206 audited all 62 rows and found nothing, and `_note_c204` is spent. The
+***   11 ask replies are the SUPERVISOR'S OWN WORDS and are NOT yours to reword, even though voice is
+***   your lane - leave them exactly as landed. So: a WRITTEN STAND-DOWN, or keep auditing your own
+***   shipped work. A stand-down written up IS the delivery and it will be ticked as one.
+*** ART (:34) - **COLLIER PASS 8: THE EARTH LIP. YOUR OWN FAULT 2, YOUR OWN BODY.** You named the
+***   single change yourself - the seam RADIUS - so that the light comes from UNDER a brow of earth
+***   instead of lying on it as a crescent. **ONE VARIABLE, as in pass 7**: radius moves, bearings and
+***   sinks frozen, so the three numbers stay comparable. Keep the count mechanic intact - still four
+***   embers and only four from the front, no fifth at the vent row's height. LOOK AT ALL THREE VIEWS
+***   and say whether the brow reads, because the px count cannot tell you that and this is the fault
+***   the number missed. Do NOT chase 834 px; there is no threshold and you were right not to set one.
+***   `snarer_chibi` is RETIRED - see the block above - strike it from your STILL OWED list.
+*** HUB (:37) - **WRITTEN STAND-DOWN, AND DO NOT PUBLISH.** Your delta is 3 files / +17 / -1 and it is
+***   with the supervisor, who published last at 24 Nov 15:30 CT. Publishing is NOT yours and NOT
+***   mine. If you want work: keep the standing re-verify honest, and do NOT claim "ready to publish"
+***   unless you mean it - an unearned publish gate is the same fault class as a lying gate.
+*** CHAT BOT (:45) - **WRITTEN STAND-DOWN, AND CLAIM BY :50 IF YOU TAKE THE LOCK AT ALL.** B149 paid
+***   the republish, the COUNT arm is shut and the ask table is landed and proved silent on all five
+***   arms. Nothing is owed. **The Suggestion Box problem you flagged is REAL and it is NOT yours to
+***   solve** - I have routed it up, see FOR THE SUPERVISOR. Do NOT reword `bug` or `suggest`: those
+***   replies are the supervisor's own words and softening them is a decision above both of us.
+*** HUD (:52) - **FIX YOUR OWN LOCK WRITER. THIS IS AN ON HOUR.** The supervisor dropped your cadence
+***   to every 2 hours (directive item 4) and implementing that is mine, so here is the rule in
+***   writing: **you work on EVEN hours and write a stand-down on ODD ones.** 06:52 is even - work.
+***   U169 found that your writer glues a `RUNNING` line onto the end of your previous `IDLE` line
+***   instead of starting a new one, 6 times, and no other lane does it. That is your own shipped
+***   defect and fixing it is explicitly not a new item. Make the writer newline-safe, and RED-PROVE
+***   it: show a copy of the old writer producing a glued line and the new one refusing to.
+***
+*** ===== FOR THE SUPERVISOR =====
+***   **1. THE SUGGESTION BOX IS LIVE IN THE BOT AND MISSING FROM THE PUBLISHED PAGE.** Your directive
+***   item 2 landed (B148, verified: `/ask/order` and `/ask/topics` both 21, key sets equal, all five
+***   guard arms silent). Two of those topics - `bug` and `suggest` - now tell viewers to go to the
+***   guild hall and use the Suggestion Box. Your item 1 put that button on `origin/hub`, but
+***   **gh-pages was last published 24 Nov 15:30 CT (commit 5ce35f33, tree c03fa129) and does not
+***   have it.** So a viewer who types `!ask bug` today is sent to a button that is not on the page.
+***   The unpublished delta is 3 files / +17 / -1: NOTES.md +12, index.html +2/-1 (the watchbar button
+***   and the footer link), style.css +3. **MY RECOMMENDATION: publish, but only after the Google Form
+***   has its three questions** - your own note says the form has no fields yet, so publishing now
+***   sends viewers to an empty form, which is worse than a missing button. The ordering is yours; the
+***   mismatch is live either way, and I did not reword the bot's replies to paper over it.
+***   **2. PURCHASE VERIFICATION IS NOW IN FRONT OF THE GAME BUILD** as directive item 3, with its own
+***   red-proved gate and a split-across-firings instruction. No live Twitch test, zero bits. Tell me
+***   if you want it sequenced behind anything.
+***   **3. HUD CADENCE IMPLEMENTED** as directive item 4: even hours work, odd hours stand down,
+***   written into the HUD row above. The trigger stays hourly at :52 as you specified.
+
 ## TAKE THIS NEXT - Updated THE 04:58 CT FIRING, 25 NOV 2026 (team lead; written 05:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS 35c24374. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
 *** ALL SIX LANES SHIPPED. NOBODY WAS STARVED, NOBODY OVERRAN A CAP, NOBODY CLAIMED OVER A LIVE HOLD.

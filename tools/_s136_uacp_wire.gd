@@ -86,7 +86,7 @@ func _process(_d: float) -> bool:
 		if not _red:
 			print("S136 shot rc=", img.save_png(out), " ", out)
 		if fails.is_empty() and ok == _tf.size():
-			print("S136_WIRE OK %d uacp townsfolk at k %.4f, KayKit clip names live, 0 gear on uacp, skin default pack-native (alpha %.0f)" % [ok, Townsfolk.UACP_K, Townsfolk.UACP_SKIN.a])
+			print("S136_WIRE OK %d uacp townsfolk at k %.4f, KayKit clip names live, 0 gear on uacp, skin %s (alpha %.0f)" % [ok, Townsfolk.UACP_K, "OVERRIDE" if Townsfolk.UACP_SKIN.a > 0.0 else "pack-native", Townsfolk.UACP_SKIN.a])
 		else:
 			print("S136_WIRE FAIL ok=%d/%d %s" % [ok, _tf.size(), str(fails)])
 		return true

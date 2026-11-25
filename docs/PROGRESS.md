@@ -4432,3 +4432,25 @@ NOTE: added `_note_c212` beside `_note_c205`. I did NOT amend `_note_c205` (addi
 VALIDATION OK: json.load passes; every pre-existing key present; the only changed values are the three strings above. commands.json holds no "four" text (C-211 grep) and is not mine.
 CODE WIRING: none. Text only, same keys, same shape.
 Next content: C-213.
+
+## D-cycle - S137: THE UACP SKIN OVERRIDE IS ON (supervisor ruling B, 25 Nov 13:52 CT) AND PROVED ON A PICTURE WITH ITS CONTROL BESIDE IT. 2026-11-25T14:08-06:00 (game build)
+- THE FLIP: scripts/townsfolk.gd `UACP_SKIN` Color(0,0,0,0) -> Color(246/255, 195/255, 159/255, 1). The colour is NOT invented:
+  it is KayKit's own skin, measured as the modal texel under the *_Head UVs in the pack textures (Knight (247,197,162),
+  Barbarian (247,196,161), Mage face (245,188,151); Rogue's head is mostly hair). REVERSIBLE in one line - Color(0,0,0,0)
+  puts every UACP body back on Quaternius' pack-native dark skin; the comment at the const says so.
+- tools/_s136_uacp_wire.gd: its OK line said "skin default pack-native" unconditionally - it would have lied after the flip.
+  It now prints OVERRIDE / pack-native off the switch. No check changed.
+- NEW tools/_s137_skin_lineup.gd (windowed): KayKit Rogue/Knight/Mage + 6 UACP bodies, back row = CONTROL (pack-native),
+  front row = override ON. Shots renders/cycles/s137/lineup_close.png (13 m) and lineup_rts.png (~24 m town pitch).
+  tools/_s137_town_shot.gd = the S136 in-town frame with the override live -> renders/cycles/s137/in_town_skin_on.png.
+- WHAT I SAW: close up, the ON row's faces, arms and bare torsos (Viking pair) read flesh beside the KayKit heads; the control
+  row's black heads/hands are exactly the S135 look. At the RTS pitch the difference is the whole point: the ON row reads as
+  ONE house with the KayKit three, the OFF row reads as black silhouettes with white eye marks. MY SENTENCE: at the distance
+  the player sees them, the two families now read as one house style; the UACP skin is a touch paler/less pink than KayKit's
+  painted faces close up, which I do not count against it. The in-town frame catches the miller (Chef_Male) from BEHIND in
+  whites - it proves nothing broke in town, it is NOT evidence about the skin, and I say so rather than lean on it.
+- VERDICT LINES: parse 0 SCRIPT ERROR / 0 Parse Error. S137_LINEUP OK 6 Skin surfaces overridden on 6 UACP bodies, control row
+  pack-native, switch ON. S137_TOWN uacp walkers=18, shot rc=0. S136_WIRE OK 6 uacp townsfolk at k 0.5728 ... skin OVERRIDE
+  (alpha 1). OFFFLOOR_VERDICT OK 0 of 2247. TWITCH_PARSE OK (8 checks). TOWNWALK in_solid=0/17406 raid_in_solid=0/5115 PASS.
+  DELVE_TEST OK ran 9001 frames, 0 ERROR lines.
+- No Twitch test, zero bits, no cheer, no redemption, no chat line.

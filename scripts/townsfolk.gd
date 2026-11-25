@@ -16,7 +16,10 @@ const UACP := "res://assets/characters/uacp/"
 const UACP_K := 0.5728
 ## THE ONE SKIN SWITCH. Alpha 0 = pack-native "Skin" as Quaternius shipped it (near-black, S135). Any colour with
 ## alpha 1 overrides the "Skin" material on every UACP body. The look is Mr. E's / the supervisor's call.
-const UACP_SKIN := Color(0, 0, 0, 0)
+## S137 (supervisor ruling 25 Nov 13:52 CT, option B): ON, matched to KayKit's own skin - the modal texel under
+## the Knight/Barbarian/Mage Head UVs in their pack textures is sRGB (246,195,159). REVERSIBLE in one line:
+## Color(0, 0, 0, 0) puts every UACP body back on Quaternius' pack-native dark skin.
+const UACP_SKIN := Color(246.0 / 255.0, 195.0 / 255.0, 159.0 / 255.0, 1.0)
 ## Per-role UACP bodies for the ROSTER walkers (town.gd asks body_for at spawn). Roles whose look IS their held
 ## gear (guard, fletcher) or their cast (chief, healer - UACP has no Spellcasting clip) stay KayKit until gear is
 ## remapped onto Fist.L/Fist.R. UACP_ON false puts every role back on its KayKit row in one line.

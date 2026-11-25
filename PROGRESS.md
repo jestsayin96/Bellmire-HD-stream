@@ -19873,3 +19873,44 @@ shipping it.** If the lead or the supervisor wants it, it is one clause appended
 - Commit message written to a FILE, never `-F -` - B152's wedge is not repeated.
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat line
   posted as bellmirebro, no channel setting touched.
+
+## B157 - 25 Nov 2026, 13:45 CT firing (chat bot) - THE LATENT FALSE POSITIVE I FOUND AT B156 IS NOW WRITTEN WHERE THE LANE THAT TRIPS IT WILL BE STANDING, NOT WHERE I FOUND IT
+- **Row taken as written.** The 12:58 CT CHAT BOT row ticks B156, says my lane is dry and the written
+  stand-down is the delivery, and names one optional target: the latent false positive I reported in
+  `tools/_l14_test.gd:30` is **not mine to change but still mine to make unmissable**. It adds, in
+  its own words, "do not edit the gate". I did not edit the gate.
+- **WHERE I PUT THE SENTENCE, AND WHY NOT IN THE GATE.** The row offered "if the gate has a comment
+  header you own" - it does not; `tools/` is not mine and every line of that file belongs to the
+  harness. So the note goes in **`scripts/chatcmd.gd`, immediately above the dispatcher's
+  `match verb:` at line 149** - the exact eight-space depth that trips it, and the exact place a lane
+  adding a dictionary literal will have its cursor. A note in the gate is found after the mystery; a
+  note here is found **while the offending line is being written**. Eleven comment lines, no code.
+- The note states the trigger, the shape (`        "gold": 140,`), that the gate is NOT broken and the
+  change is NOT wrong, the two fixes (nest one level deeper, or build the literal outside the match
+  block), and **the wrong fix explicitly**: do not add an entry to `data/commands.json` to silence it,
+  because that publishes a verb no viewer can call.
+- **GATES, all four, headless on W6 at the merged head:**
+  - `--headless --path W6 --quit-after 300` -> RC 0, **zero `SCRIPT ERROR`**.
+  - `tools/_l14_test.gd` -> RC 0, **`L14_TEST OK (24 checks)`**, `74 verbs; missing []`,
+    `unanswered []`, `0 fired: []`, and both COMMANDS.md arms clean at **32 rows**.
+  - `tools/_twitch_parse.gd` -> RC 0, **`TWITCH_PARSE OK (8 checks)`**.
+  - `tools/_commands_doc.gd` -> RC 0, **`COMMANDS_DOC OK wrote 32 commands`**, and `git status` over
+    `data/commands.json` and `docs/COMMANDS.md` is **EMPTY afterwards**. The real generator changed
+    nothing, so I claim no doc change and the 26 in my prompt's owed list is simply stale - the data
+    has carried 32 commands for some time.
+- **THE COMMENT IS INERT TO THE INSTRUMENT, AND I MEASURED THAT RATHER THAN ASSUMING IT.** My note
+  quotes the offending shape verbatim inside itself, which is precisely the thing that could make a
+  guard note trip its own guard. The harvest run over the file **before** my edit and **after** it
+  returns the **same 74 verbs in the same order** (list equality, not a count). The quoted line sits
+  at four spaces behind `##`, and the pattern anchors on exactly eight - so it cannot match.
+- Drift re-measured **both directions** after the edit: 32 commands, 31 aliases (read per-command, not
+  from a top-level `aliases` key - my first pass read that key, found none, and reported 30 false
+  "missing" verbs that were all aliases; **the miss was my map, not the data**), 74 code labels.
+  **MISSING = [] and UNANSWERED = [].** `data/commands.json` byte-identical, sha `0ba2f895d1f38344`.
+- **LOCK.** Last line was game build S136's IDLE; `Get-Process Godot*` = 0 checked live. Claimed
+  13:47:22 with a **declared finish of 13:49:00**, cap 14:12:22. All four gates finished 13:48:05 and
+  I released at **13:48:18 - inside my own declared finish and clear of the HUD's :52 window**. I
+  declared two launches and the first two came back in 22 s, so the remaining two fit inside the
+  finish I had already declared; I did not re-declare, extend or cross anything. Log `_b157_run.log`.
+- No live Twitch test: **ZERO BITS**, no cheer, no redemption, no reward read or written, no chat line
+  posted as bellmirebro, no channel setting touched.

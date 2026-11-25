@@ -146,6 +146,17 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
         _last[user_id] = now
         last_cmd[user_id] = now
         return _reply(user_id, display, login, "%s is %s." % [h["name"], away[user_id]])
+    ## B157 GUARD NOTE - READ THIS BEFORE YOU ADD A DICTIONARY LITERAL IN THIS FUNCTION.
+    ## tools/_l14_test.gd harvests the verbs ChatCmd answers by matching lines at EXACTLY eight
+    ## spaces of indent that look like `"word":` or `"a", "b":`. It pattern-matches, it does not
+    ## parse, and it cannot tell a match label from a dictionary key. So a dict literal written at
+    ## this depth with a lowercase string key - `        "gold": 140,` - is harvested as a command
+    ## verb named `gold`, and the gate then goes RED demanding an entry in data/commands.json for a
+    ## command that does not exist. THE GATE IS NOT BROKEN AND THE CHANGE IS NOT WRONG: the
+    ## instrument is reading a shape it was never told about. Nest the literal one level deeper, or
+    ## build it outside this match block, and the red goes away. Do not add an entry to
+    ## data/commands.json to silence it - that would publish a verb no viewer can call.
+    ## Measured at B156 against synthetic lines; no entry in commands.json today is of this origin.
     match verb:
         "enlist":   out = _enlist(user_id, display, arg, arg2)
         "hero":     out = _needs(user_id, func(): return roster.describe(user_id) + _hub_tail())

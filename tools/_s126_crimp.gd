@@ -20,14 +20,15 @@ func _initialize() -> void:
 	var fed := not Delve.miniboss_lines("crimp", "arrive").is_empty()
 	print("S126 crimp fed: %s" % fed)
 	if fed:
-		print("S126 NOTE: content's by_key.crimp has landed - the MB_NAME row (Oneshort) is now owed")
+		print("S126 NOTE: content's by_key.crimp has landed - the MB_NAME row (Oneshort) is written (S126b)")
 	var drawn := {}
 	for n in 4000:
 		drawn[DungeonHD.miniboss_for("barracks", n)] = true
 	print("S126 barracks draw: %s" % [drawn.keys()])
 	_ok(drawn.has("crimp") == fed, "crimp is drawn exactly when fed (fed=%s drawn=%s)" % [fed, drawn.has("crimp")])
 	_ok(not Delve.MB_NAME.has("crimp") or fed, "MB_NAME carries no crimp row while the feed is absent")
-	_ok(Delve.MB_NAME.size() == 59, "MB_NAME is 59 (got %d)" % Delve.MB_NAME.size())
+	_ok(not fed or Delve.MB_NAME.get("crimp", "") == "Oneshort", "S126b: fed, so MB_NAME crimp is Oneshort (got '%s')" % Delve.MB_NAME.get("crimp", ""))
+	_ok(Delve.MB_NAME.size() == (60 if fed else 59), "MB_NAME is 60 once fed (got %d)" % Delve.MB_NAME.size())
 	for k in ["quartermaster", "relief"]:
 		_ok(drawn.has(k), "red-proof: %s IS drawn by the same sweep" % k)
 	if _n < 9:

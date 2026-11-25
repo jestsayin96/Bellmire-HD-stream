@@ -19106,3 +19106,11 @@ TAKE THIS NEXT gave the HUB row "STANDING CHECK; NOTHING OWED". web/ is byte-ide
 - LOOKED at renders/cycles/l74/l74_u167_150.png: Chronicle at 150% reads as one designed panel, 4 lines, fall/raid line on top, x5 merge visible, nothing clipped or overlapping the quadrant labels.
 - Guard question (U74b follow-up): parse_fish() end-finder not re-opened this hour; no nested brace in RARITY_COLOR today.
 - CHANGED: this note + log only. Decision for Mr. E: none. Next firing 04:52 is EVEN: stand down unless plan reopens HUD; 05:52 odd.
+
+## C-205 (25 Nov 2026 04:3x CST, content) - WROTE miniboss_feed.by_key.collier (HALFBLOW, THE 62nd); FEED 61 -> 62
+- ROW: TAKE THIS NEXT (03:58 CT 25 Nov, amended rows) - CONTENT: "C-205, THE FEED ROW FOR collier". Body committed: collier.glb on origin/main (merged this run). Name "Halfblow" from art's CANON.
+- ADDED: data/lore_lines.json miniboss_feed.by_key.collier - arrive 9, act 8, broken 4, fall 8; {name} in act only. Plus miniboss_feed._note_c205 (expected zero-hit key).
+- WRITTEN TO art's COLLIER_THE_62nd.md: heaviest blow is the liability, four plugs answer four vents; short man, wide hat, shovel, stakes, spoil tail. Fall lines neutral on whether the room flared. Last arrive line is art's suggested line.
+- VALIDATION OK: lore_lines.json parses; every pre-existing key and value unchanged (recursive subset check); by_key 61 -> 62.
+- NOT MINE: section 2 (ask topics in commands.json) is the chat bot's file; untouched. Ran no Godot.
+- CODE WIRING: none beyond the game build's MB_NAME "Halfblow" row and the 61 -> 62 literals already scheduled for 05:07; the chat bot's 61 -> 62 publish follows the feed.

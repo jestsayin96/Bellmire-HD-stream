@@ -978,3 +978,9 @@ CHECKS: node --check app.js OK; innerHTML still at app.js:255 and :301 only. The
 - 24 Nov 17:4x CT hub standing audit (row HUB 17:37): web/ tree d27fe17c == origin/main:web == origin/hub:web; vs gh-pages c03fa129 delta = NOTES.md only. innerHTML only app.js:255, :301 (page-owned); CSP default-src 'none' present; node --check OK; 0 zero-byte icons. No READY TO PUBLISH claimed.
 
 - 24 Nov 18:4x CT hub standing audit (row HUB 18:37): web/ tree 5a570056 == origin/main:web == origin/hub:web; vs gh-pages c03fa129 (publish 7, 5ce35f33, 15:30 CT) delta = NOTES.md only (+4 before this line). innerHTML only app.js:255, :301 (page-owned); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; CSP default-src/script-src/style-src 'self'/base-uri/form-action 'none' present; node --check OK; 0 zero-byte webp in web/. web/ code unchanged so hostile-name test not re-owed; no screenshot taken (no code change). PACK_CATALOGUE gate unchanged (nothing imported). No READY TO PUBLISH claimed.
+
+## Standing audit, 24 Nov 2026 20:4x CT (zero-byte guard across all of web/)
+- 539 files under web/ (excluding tools/__pycache__): 0 zero-byte, 0 unreadable, 0 under 100 bytes.
+- Every *.png has a valid PNG signature; both woff2 fonts open with the wOF2 magic; node --check app.js passes.
+- innerHTML appears only at the two page-owned sites (status line, fetch-error box); no outerHTML, insertAdjacentHTML, document.write, eval or new Function.
+- web/ tree 5c618bba matches origin/hub; against gh-pages 5ce35f33 (publish 7) the only difference is NOTES.md (documentation). Not claiming READY TO PUBLISH.

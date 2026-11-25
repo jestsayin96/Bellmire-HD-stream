@@ -18049,3 +18049,67 @@ RUN (--windowed --resolution 1920x1080): U40_TEST OK lines=9; U88_WORN OK rows=1
 RED ARM (default window): U40, U88, U90 each print NO VERDICT capture (1152.0, 648.0). U91 red arm not run (same 4-line guard, out of time).
 PARSE: headless --quit-after 300 -> 0 SCRIPT ERROR / Parse Error.
 Logs: _u157.log, _u157_u91.log. NEXT: U91 red arm; audit remaining U-gates (U56 etc.) for the same trap. Decision for Mr. E: none.
+## B137 - 24 Nov 2026, 17:45 CT (chat bot) - THE 54 -> 55 REPUBLISH IS PAID OFF THE LANE REFS, AND THE ONE REMAINING L14 FAIL IS RED-PROVED NOT MINE
+TAKE THIS NEXT (16:58 block) gave CHAT BOT: republish 54 -> 55, and measure the three halves OFF THE
+LANE REFS rather than off main, because main only advances at the team lead's :58 merge and a :45
+lane therefore cannot see the same hour's :22 content work or :07 engine work. That rule is the
+team lead's fix for the defect that made B136 go stale 22 minutes before it was written. I obeyed it
+and it is the whole reason this hour's payment is sound.
+
+A MOUNT CHANGE THAT COST THE FIRST TWO CALLS OF THE RUN, RECORDED SO THE NEXT FIRING DOES NOT PAY IT
+AGAIN: the prompt's verified path `$HOME/mnt/hd adventure/bellmire-bot` NO LONGER EXISTS. The two
+repos are now mounted directly as `$HOME/mnt/bellmire-bot` and `$HOME/mnt/jests-hd-medieval-adventure`,
+with no `hd adventure` level. This is a harness change, not a missing permission, and I did NOT call
+device_request_folder_access - I listed `$HOME/mnt` and found both repos one level up.
+
+THE THREE HALVES, EACH READ WHERE IT IS WRITTEN AND EACH WITH ITS SHA:
+  - engine `Delve.MB_NAME` from `origin/laptop` **d8951273** = **55** keys, 0 duplicates,
+    `iceman` IN, `straker` IN (tail: stiltman, nightman, iceman, straker).
+  - feed `miniboss_feed.by_key` from `origin/content` **ba818212** = **55**, `straker` IN.
+  - published count from `data/commands.json` on my merged HEAD **0086e34a** (ff of
+    `origin/chatbot` a3e8402a, then merge of `origin/main` 38f2aa1a - 0 conflict markers, and the
+    merge touched none of my three files) = **54** at BOTH `miniboss` leaves.
+  `by_key - MB_NAME` = **[]** and `MB_NAME - by_key` = **[]**. ZERO DRIFT BOTH WAYS. The two source
+  halves AGREE at 55, so the publish was payable even with main behind - exactly the case the 17:45
+  row described. Parse was comments-STRIPPED-BEFORE-SPLITTING, string-aware, brace-matched, anchored
+  on `const MB_NAME :=`; the JSON halves were parsed with json, not grepped.
+
+THE PAYMENT: `miniboss.what` and `miniboss.short` 54 -> 55 at BOTH leaves. 18000 bytes before and
+after, 8 top keys, `order` == `commands` == 32, leaves gained `[]` lost `[]`, and a full leaf-walk
+against a pre-edit copy says EXACTLY `/commands/miniboss/short` and `/commands/miniboss/what`
+changed and nothing else; `armoury.cost` byte-identical; no `54` left anywhere in the file.
+`docs/COMMANDS.md` rewritten by the REAL `tools/_commands_doc.gd`, not by hand - one row changed,
+and it matches the data.
+
+FIVE GATES, behind a `--headless --import` pass run FIRST, all finishing 42 s after launch so
+nothing was split or carried:
+| IMPORT | rc=0, 0 ERROR. 39 WARNINGs, all "missing .uid, re-created from cache" on tools/ scripts,
+  pre-existing and not mine |
+| PARSE (`--quit-after 300`) | rc=0, 24.5 s, 0 ERROR / 0 SCRIPT ERROR / 0 Parse Error. 18
+  pre-existing invalid-UID ext_resource WARNINGs on asset-kit .tres (MI_Cobble and siblings) |
+| TWITCH_PARSE | OK, 8 checks, rc=0 |
+| COMMANDS_DOC | OK wrote 32 commands, and CORRECTLY not a no-op this hour - I changed the data, so
+  the generator rewriting the doc is the right answer, not a defect |
+| L14_TEST | FAIL 1 of 24, AND IT IS NOT MINE - PROVED WITH A CONTROL ARM RATHER THAN ASSERTED |
+
+THE CONTROL ARM, BECAUSE "THE REMAINING FAIL IS NOT MY FAULT" IS THE EASIEST THING IN THIS HOUSE TO
+CLAIM AND THE EASIEST TO BE WRONG ABOUT: I put the PRE-EDIT `commands.json` back, re-ran the SAME
+gate, and restored my file (md5 verified identical to the post-edit copy, and the temp copy deleted
+from the worktree).
+  - PRE-EDIT: `L14_TEST FAIL 3 (24 checks)`, arms fired = **MINIBOSS COUNT + MINIBOSS UNNAMED**.
+  - POST-EDIT: `L14_TEST FAIL 1 (24 checks)`, arms fired = **MINIBOSS UNNAMED `["straker"]` only**.
+So my edit closed two of the three failures. The surviving one fires because `MB_NAME` on MY MERGED
+TREE still reads 54: the engine's S118 naming (`"straker": "Everyhand"`, IDLE 17:24:33) is on
+`origin/laptop` d8951273 and has NOT reached `origin/main` 38f2aa1a. It is the same one-merge lag,
+seen from the other side this hour - last hour it made my count stale, this hour it leaves a guard
+arm lit on a count that is right. NO LANE SHOULD "FIX" IT: it clears at the team lead's :58 merge,
+and both COMMANDS.md drift arms PASS (32 rows, unpublished `[]`, stale `[]`, checked both ways).
+
+LOCK: claim 17:47:40, cap 18:12:40, declared finish 17:51:30, released 17:51:10 - BEFORE the HUD's
+:52 window, the tenth hour running this lane has kept that. Window checked BY PROCESS before the
+claim (Get-Process Godot* = 0, last lock line game build IDLE 17:24:33, an IDLE from the same lane
+following their RUNNING) and again by process before writing the IDLE (0 alive).
+
+NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro. Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E
+to decide.

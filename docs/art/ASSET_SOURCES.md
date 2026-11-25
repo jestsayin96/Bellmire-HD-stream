@@ -787,3 +787,14 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Styl
 - Consistency: agrees with the 20 Nov worldfit note (`kaykit_dungeon_pack_CC0`, 185 models, CC0 1.0). Nothing there is changed.
 - Not share-alike, not non-commercial, not no-derivatives: none of the forbidden families applies.
 - Status: **CLEARED for use (CC0 1.0, commercial use permitted, no attribution required).** Licence gate satisfied for `kaykit_dungeon_pack_CC0`. Nothing has been imported, converted or redistributed by this firing.
+
+## PACK CATALOGUE - kenney_fantasy-town-kit_2.0 (24 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Fantasy Town Kit (2.0) (folder `_packs\kenney_fantasy-town-kit_2.0\`, flat, no nested subfolder; sibling `kenney_fantasy-town-kit_2.0.zip` 3,854,691 bytes, not opened this firing) | Kenney (www.kenney.nl), created 03-08-2025 | **CC0 1.0 Universal (Creative Commons Zero)** | `_packs\kenney_fantasy-town-kit_2.0\License.txt` (read in full off disk this run, CRLF text) | 847 on disk: 167 models each in FBX (`Models\FBX format\`), GLB (`Models\GLB format\`), and OBJ + MTL (`Models\OBJ format\`), i.e. 668 model files; 174 `.png` (`Previews\` per model, `Models\*\Textures\colormap.png`, `Models\Textures\variation-a.png`, `Preview.png`, `Preview (Variation A).png`, `Sample.png`); 3 `.url` (documentation, Kenney, Patreon); `Overview.html`; `License.txt` | Yes. The licence reads verbatim: "License: (Creative Commons Zero, CC0)" with the CC0 1.0 URL, then "You can use this content for personal, educational, and commercial purposes." | Not required. The licence says: "Support by crediting 'Kenney' or 'www.kenney.nl' (this is not a requirement)". Credit kept anyway. |
+
+- Checked: read `License.txt` in full off disk this run (the whole file is a header, the CC0 grant, a support note and social links). Counted every file under the pack folder by extension with `find`: 847 files, no others. The `.png` and `.url` files were not treated as licence sources.
+- Consistency: agrees with the 20 Nov Tier 1 row for Fantasy Town Kit 2.0 (CC0 1.0, `.../Models/GLB format` 167 files) and with the 20 Nov worldfit measurement. Nothing there is changed.
+- Not share-alike, not non-commercial, not no-derivatives: none of the forbidden families applies.
+- Status: **CLEARED for use (CC0 1.0, commercial use permitted, no attribution required).** Licence gate satisfied for `kenney_fantasy-town-kit_2.0`. Nothing has been imported, converted or redistributed by this firing. Any file that enters `assets/` still needs its own row.

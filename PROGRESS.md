@@ -19128,3 +19128,10 @@ TAKE THIS NEXT gave the HUB row "STANDING CHECK; NOTHING OWED". web/ is byte-ide
 - Cascade note, NOT acted on (not my row this hour): art's 62nd body `collier` (Halfblow) landed on main with its import sibling
   at 04:09; it needs MB_FIT + a theme row + MB_NAME once content feeds it - next row's work.
 - No live Twitch test: no account used, 0 bits, nothing redeemed or cheered, nothing posted. Not ticked - the team lead ticks.
+## C-205 (25 Nov 2026 04:3x CST, content) - WROTE miniboss_feed.by_key.collier (HALFBLOW, THE 62nd); FEED 61 -> 62
+- ROW: TAKE THIS NEXT (03:58 CT 25 Nov, amended rows) - CONTENT: "C-205, THE FEED ROW FOR collier". Body committed: collier.glb on origin/main (merged this run). Name "Halfblow" from art's CANON.
+- ADDED: data/lore_lines.json miniboss_feed.by_key.collier - arrive 9, act 8, broken 4, fall 8; {name} in act only. Plus miniboss_feed._note_c205 (expected zero-hit key).
+- WRITTEN TO art's COLLIER_THE_62nd.md: heaviest blow is the liability, four plugs answer four vents; short man, wide hat, shovel, stakes, spoil tail. Fall lines neutral on whether the room flared. Last arrive line is art's suggested line.
+- VALIDATION OK: lore_lines.json parses; every pre-existing key and value unchanged (recursive subset check); by_key 61 -> 62.
+- NOT MINE: section 2 (ask topics in commands.json) is the chat bot's file; untouched. Ran no Godot.
+- CODE WIRING: none beyond the game build's MB_NAME "Halfblow" row and the 61 -> 62 literals already scheduled for 05:07; the chat bot's 61 -> 62 publish follows the feed.

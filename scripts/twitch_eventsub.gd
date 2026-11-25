@@ -429,6 +429,7 @@ func _schedule_retry() -> void:
     _backoff = minf(_backoff * 2.0, 120.0)
 
 func _process(delta: float) -> void:
+    _tick_receipts(delta)
     if not enabled or offline:
         _tick_chat(delta)
         return
@@ -661,8 +662,12 @@ func handle_event(kind: String, e: Dictionary) -> void:
                     _on_twitch_reply(login, "you need a hero first - type !enlist. Your points were returned.")
                 _settle(String(e.get("id", "")), rid, false)
                 return
+            # S125 (supervisor 23:54 directive §3): the receipt is written BEFORE the settle,
+            # marked settled after it, and checked against the hero's real state later
+            var rc := _receipt_open(uid, login, String(want.get("action", "spotlight")),
+                    String(e.get("id", "")), rid)
             _do_reward(uid, want, String(rw.get("title", want["title"])))
-            _settle(String(e.get("id", "")), rid, true)
+            _settle_receipt(rc, String(e.get("id", "")), rid)
 
 ## Mr. E: a redeemed reward -> the right action. Every one also spotlights the
 ## hero so viewers watch what they paid for (the points pane then rests on them).
@@ -699,6 +704,126 @@ func _has_hero(uid: String) -> bool:
         return true
     var r: Object = town.get("roster")
     return r.has_method("get_hero") and not (r.call("get_hero", uid) as Dictionary).is_empty()
+
+# ---------------------------------------------------------------- S125 the receipt ledger
+## Supervisor directive 23:54 CT 24 Nov §3 (Mr. E's authority): a viewer who paid must get
+## what they paid for. Every redeemed hero reward writes a receipt BEFORE the settle, is marked
+## settled after it, and RECEIPT_CHECK_S later the hero's real state is compared with what the
+## action should have left. A match -> verified and pruned. A miss -> the action is retried
+## ONCE. A second miss -> the viewer is told in chat and the failure is logged for Mr. E.
+## In memory only, one session. IT NEVER REFUNDS: a refund is a different Helix call that a
+## human (or a later feature) makes from the logged redemption_id.
+const RECEIPT_CHECK_S := 8.0         # inside the directive's 5-10 s window
+const RECEIPT_FAILED_MAX := 50
+const RECEIPT_WORDS := {"delve": "delve", "join": "place in the delve party", "fish": "fishing trip",
+        "patch": "healing potion", "rally": "rally", "spotlight": "spotlight"}
+var _receipts: Array = []            # open receipts, pruned once verified or failed
+var receipts_verified := 0
+var receipts_retried := 0
+var receipts_failed: Array = []      # the failures, kept for Mr. E's log (capped)
+var _rc_clock := 0.0
+
+func _receipt_open(uid: String, login: String, action: String, redemption_id: String, reward_id: String) -> Dictionary:
+    var expected := {"kind": action}
+    if action == "patch":
+        expected["potions"] = _hero_potions(uid) + 1
+    var rc := {"uid": uid, "login": login, "action": action, "timestamp": Time.get_unix_time_from_system(),
+            "expected_state": expected, "redemption_id": redemption_id, "reward_id": reward_id,
+            "settled": false, "verified": false, "retries": 0, "due": _rc_clock + RECEIPT_CHECK_S}
+    _receipts.append(rc)
+    return rc
+
+func _settle_receipt(rc: Dictionary, redemption_id: String, reward_id: String) -> void:
+    await _settle(redemption_id, reward_id, true)
+    rc["settled"] = true
+
+func _hero_potions(uid: String) -> int:
+    var r = town.get("roster") if town else null
+    if r == null or not r.has_method("get_hero"):
+        return 0
+    return int((r.call("get_hero", uid) as Dictionary).get("potions", 0))
+
+## does the hero's real state show the action happened? Read off the town, never off the receipt.
+func receipt_met(rc: Dictionary) -> bool:
+    var uid := String(rc["uid"])
+    var ex: Dictionary = rc["expected_state"]
+    if town == null:
+        return false
+    match String(ex.get("kind", "")):
+        "patch":
+            return _hero_potions(uid) >= int(ex.get("potions", 1))
+        "delve", "join":
+            var c = town.get("chat")
+            if c != null:
+                var away = c.get("away")
+                var q = c.get("delve_queue")
+                if (away is Dictionary and away.has(uid)) or (q is Array and q.has(uid)):
+                    return true
+            var mouth = town.get("_at_mouth")
+            if mouth is Array and mouth.has(uid):
+                return true
+            return town.get("delve") != null      # the party already went below with them
+        "fish":
+            var hs = town.get("heroes")
+            if not (hs is Dictionary) or not hs.has(uid):
+                return false
+            var b: Node = hs[uid]
+            if String(b.get("errand")) == "fish":
+                return true
+            for ch in b.get_children():
+                if ch is Angler:
+                    return true
+            return false
+        "rally":
+            var r = town.get("roster")
+            if r != null and r.has_method("get_hero"):
+                if float((r.call("get_hero", uid) as Dictionary).get("rally_secs", 0.0)) > 0.0:
+                    return true
+            return town.get("delve") != null      # a live delve takes the rally on the combatant (apply_rally)
+        _:
+            for s in spotlights:
+                if String(s[0]) == uid:
+                    return true
+            return false
+
+func _receipt_retry(rc: Dictionary) -> void:
+    var action := String(rc["action"])
+    for key in REWARDS:
+        if String(REWARDS[key].get("action", "")) == action:
+            _do_reward(String(rc["uid"]), REWARDS[key], String(REWARDS[key]["title"]))
+            return
+
+func _tick_receipts(delta: float) -> void:
+    _rc_clock += delta
+    if _receipts.is_empty():
+        return
+    var keep: Array = []
+    for rc in _receipts:
+        if _rc_clock < float(rc["due"]):
+            keep.append(rc)
+            continue
+        if receipt_met(rc):
+            rc["verified"] = true
+            receipts_verified += 1
+            continue
+        if int(rc["retries"]) == 0:
+            rc["retries"] = 1
+            receipts_retried += 1
+            _say_log("TWITCH_EVENTSUB RECEIPT RETRY %s for %s (redemption %s): state did not match %s" % [
+                    rc["action"], rc["uid"], rc["redemption_id"], JSON.stringify(rc["expected_state"])])
+            _receipt_retry(rc)
+            rc["due"] = _rc_clock + RECEIPT_CHECK_S
+            keep.append(rc)
+            continue
+        rc["failed"] = true
+        receipts_failed.append(rc)
+        if receipts_failed.size() > RECEIPT_FAILED_MAX:
+            receipts_failed.pop_front()
+        _say_log("TWITCH_EVENTSUB RECEIPT FAILED %s for %s (redemption %s, reward %s, settled %s): retry did not take - NOT refunded" % [
+                rc["action"], rc["uid"], rc["redemption_id"], rc["reward_id"], str(rc["settled"])])
+        if String(rc["login"]) != "":
+            _on_twitch_reply(String(rc["login"]), "your %s didn't go through - the builders have been told. Your points are safe." % String(RECEIPT_WORDS.get(rc["action"], rc["action"])))
+    _receipts = keep
 
 func _spot(uid: String, lane: String, seconds: float, reason: String) -> void:
     spotlights.append([uid, lane, seconds, reason])

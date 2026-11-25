@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "8f2c09d02a0f491ca45ae1294d58b0b4518b9997",
+   "head": "f4c95684794111faf87ecb7e7c46beed4b17da50",
    "ref": "origin/main",
-   "ref_commit": "2d0638eda3749fb3af85f955d6e26e12a83802c2",
+   "ref_commit": "8d55859f7547c18936e3aa45ed0c15365c8be15d",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3279,7 +3279,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 8.379,
+   "corridor_margin_m": 8.38,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.95,
    "read_from": {
@@ -3305,13 +3305,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "crimp": {
+   "title": "Oneshort",
+   "theme": "barracks",
+   "idea": "IT TAKES ONE OF YOU INTO ITS OWN CREW - it does not wound, it SIGNS. The hook takes a hero by the collar, the name goes on the muster board, and from that moment that hero is fighting FOR the crimp: the party's own best weapon is in the room swinging at them, at full strength, and it cannot be talked down. Nobody is removed and nothing is stolen, which is what makes this worse than the hook trades - the party is not one short, it is two apart, and killing the signed hero ends the problem the one way the party can never accept. The answer is on the CRIMP and not on the hero: one peg on the board is lit, that peg is the signature, and striking the peg off strikes the name off. So the fight has a target that is not a body, the party has to fight defensively against its own man while someone gets to the board, and the board is deliberately carried out on his off side in clear air where it can be reached - the mechanic is only fair if a viewer can SEE where the answer is kept.",
+   "wear": 0.38,
+   "feed_line": "Someone is signing a name in the dark.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1725,
+   "size": [
+    1.67,
+    1.76,
+    2.42
+   ],
+   "footprint_span": 1.76,
+   "height_m": 2.42,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.238,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.08,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.7142298127324107,
+    "ortho": 2.7139251232147217,
+    "clip": [
+     6.997179985046387,
+     18.223918914794922
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 2d0638eda3749fb3af85f955d6e26e12a83802c2 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 8d55859f7547c18936e3aa45ed0c15365c8be15d sha bc3a603f",
  "blank_check": {
-  "files": 177,
+  "files": 180,
   "failures": []
  }
 }

@@ -245,6 +245,28 @@
    "man_span": null,
    "man_span_empty": false
   },
+  "crimp": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arm_board",
+    "board",
+    "head",
+    "hook",
+    "legs",
+    "loops",
+    "peg",
+    "sockets",
+    "trunk"
+   ],
+   "items": 51,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "dauber": {
    "in_register": true,
    "in_builders": true,
@@ -2036,12 +2058,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-24T21:48:23-0600",
+ "measured_at": "2026-11-25T00:48:19-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795578503.1297174,
- "register_mtime_epoch": 1795578482.0583766,
- "register_mtime": "2026-11-24T21:48:02-0600",
- "register_pairs": 61,
+ "measured_at_epoch": 1795589299.5528448,
+ "register_mtime_epoch": 1795589243.465067,
+ "register_mtime": "2026-11-25T00:47:23-0600",
+ "register_pairs": 62,
  "measurable": [
   "almoner",
   "beadle",
@@ -2106,6 +2128,7 @@
   "panner"
  ],
  "not_measurable": [
+  "crimp",
   "snuffer_chibi",
   "tallyman_chibi"
  ],

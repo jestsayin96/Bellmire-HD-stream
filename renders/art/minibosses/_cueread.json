@@ -13,27 +13,27 @@
   "collier": {
    "views": {
     "hero_front.png": {
-     "cue_px": 3784,
-     "body_px": 85742,
-     "cue_frac": 0.04413
+     "cue_px": 3902,
+     "body_px": 85798,
+     "cue_frac": 0.04548
     },
     "hero_side.png": {
-     "cue_px": 41,
+     "cue_px": 427,
      "body_px": 75688,
-     "cue_frac": 0.00054
+     "cue_frac": 0.00564
     },
     "hero_back.png": {
-     "cue_px": 2430,
-     "body_px": 87688,
-     "cue_frac": 0.02771
+     "cue_px": 2518,
+     "body_px": 87739,
+     "cue_frac": 0.0287
     }
    },
    "cue_blind_views": [],
    "verdict": "GREEN - cue reads on all three views",
-   "cue_px_total": 6255,
+   "cue_px_total": 6847,
    "weakest_view": [
     "hero_side.png",
-    41
+    427
    ]
   },
   "timberman": {
@@ -274,7 +274,7 @@
  "weakest_views_ranked": [
   {
    "key": "collier",
-   "cue_px": 41
+   "cue_px": 427
   },
   {
    "key": "pledgeman",

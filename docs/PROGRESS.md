@@ -4304,3 +4304,28 @@ BEFORE TOUCHING ANYTHING, and the shipped carry clears the floor in every pose. 
   length); moved aside to C:\hd adventure\_gb_import_aside_2007 (not deleted), then merged clean.
 - No live Twitch test - no account used, 0 bits, nothing redeemed, bellmirebro posted nothing. Not ticked - the team
   lead ticks. Claim 20:07:48, cap claim+25 = 20:32:48 computed first, declared 20:31.
+
+## D-cycle - S119: MY FRAME-COUNTING GATES AUDITED FOR THE 1080p TRAP (U157) - SEVEN OF SEVEN NAMED GATES ARE CORRECTLY EXEMPT; ONE ON-SCREEN GATE (L31_ICONS) NOW GOES RED UNDER 1080p. 2026-11-24T18:18-06:00 (game build)
+- Row: TAKE THIS NEXT 17:58 CT. S118 NOT re-done (MB_NAME 55, L31 a/b shipped and ticked).
+- AUDIT, read off each file, not inferred: `_s51_names.gd`, `_s107_gate.gd`, `_s115_iceman.gd`, `_s117_straker.gd` read only
+  Delve/DungeonHD tables, ResourceLoader and data lines - no viewport, no camera, no texture. `_offfloor.gd`,
+  `_townwalk.gd`, `_delve_test.gd` measure WORLD-space positions (floor height, solid rects, floor reached), which do not
+  depend on the window size. A grep for `get_texture()|unproject_position|get_visible_rect` hits NONE of the seven.
+  All seven are EXEMPT - nothing they audit is on screen.
+- THE ONE THAT NEEDED IT: `tools/_l31_icons.gd` (my L31 acceptance gate, shipped S118) audits a POSITIONAL fact -
+  every status chip ends inside its row's bar - and saves the 1080p picture that is the acceptance test. It had no
+  size guard. It now prints `L31_ICONS NO VERDICT - capture ... is smaller than 1920x1080` and quit(2), in the exact
+  `_u40_pad_test.gd:41` shape. RED-PROVED: at --resolution 1152x648 it reads `L31_ICONS NO VERDICT - capture (1152.0,
+  648.0) is smaller than 1920x1080` rc=2; at 1920x1080 it reads `L31_FIT chips_past_bar=0` / `L31_ICONS OK 15`, and I
+  LOOKED at renders/cycles/l31/l31_icons_1080.png: three delvers' rows, icon + word + seconds, nothing clipped.
+- NOT SWEPT (said so, not hidden): ~100 older one-off `_d*/_l*/_s*_shot` capture tools also read the screen without a
+  guard; most print no verdict at all (they are picture tools, the eye is the gate) and are not in my battery. Four
+  already carry the guard (_s53_clock, _s54_broodglut, _s56_lastcuff, _theme_sweep). If the lead wants them all
+  guarded that is a sweep row, not this one.
+- Battery (build/_s119_battery.log): parse --quit-after 300 rc=0, 0 SCRIPT ERROR / 0 Parse Error; S51_NAMES OK 176
+  checks; S107_GATE OK 12; S115_ICEMAN OK 10; S117_STRAKER OK 11; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of
+  2289 samples off the floor (home); DELVE_TEST OK ran 9001 frames, floor reached 2.
+  TOWNWALK in_solid=0/15775 (0.000%) raid_in_solid=0/5746 (0.000%) PASS (STUCK_ON_ROUTE_TOTAL 0).
+- No live Twitch test: no account used, 0 bits, nothing redeemed or cheered; the parse boot joined #jestsayin96 read-only
+  and bellmirebro posted nothing. Not ticked - the team lead ticks. Claim 18:08:28, cap claim+25 = 18:33:28 computed
+  first, declared 18:32.

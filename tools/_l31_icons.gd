@@ -35,6 +35,9 @@ func _count(n: Node, acc: Array) -> void:
 		_count(c, acc)
 func _process(_d: float) -> bool:
 	_f += 1
+	# S119: the chip-fits-the-row arm is POSITIONAL, so a capture under 1080p cannot see what it audits (U157's trap) - red, never a quiet pass.
+	if root.get_visible_rect().size.x < 1919 or root.get_visible_rect().size.y < 1079:
+		print("L31_ICONS NO VERDICT - capture %s is smaller than 1920x1080; run --resolution 1920x1080" % str(root.get_visible_rect().size)); quit(2); return true
 	if _f == 20:
 		_eye = RtsCamera.new()
 		_t.add_child(_eye)

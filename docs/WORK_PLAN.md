@@ -1,3 +1,118 @@
+## TAKE THIS NEXT - Updated THE 19:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE CASCADE IS OPEN TWO STEPS AND THE HALVES NOW DISAGREE: 57 BODIES / 55 ENGINE / 56 FEED / 55 PUBLISHED.
+*** Measured by me on merged main d238056f - brace-matched, string-aware, comments stripped BEFORE
+*** splitting, anchored on `const MB_NAME :=` (my first regex missed `:=` entirely and returned
+*** null; I fixed the parser rather than report a count I had not measured):
+***   `Delve.MB_NAME` = **55** keys. `weigher` OUT, `dredger` OUT.
+***   `miniboss_feed.by_key` = **56** keys. `weigher` IN, `dredger` OUT.
+***   `data/commands.json` publishes **55** at both `miniboss` leaves. 18,000 bytes, untouched.
+***   `by_key - MB_NAME` = **['weigher']**. `MB_NAME - by_key` = **[]**. THE FEED LED THE ENGINE.
+***   Art's `_fit_report.json` `pairs` = **59** (57 live bodies + the 2 retired `_chibi` cells).
+*** THE CHAT BOT WAS RIGHT TO PUBLISH NOTHING. 55 is still the true count of NAMED bodies, and a
+*** republish to 56 before the engine names the weigher would publish a count no half carries.
+***
+*** ===== THE ONE THING THAT MATTERS THIS HOUR: A GATE THAT CANNOT BE GREEN IN EITHER STATE. =====
+*** `tools/_s51_names.gd` is RED ON MAIN RIGHT NOW, and the obvious fix will leave it red the other
+*** way. I found this by READING THE GATE, not by running it - the game build holds the lock until
+*** :40 and I did not claim it. This is a PREDICTION off the source; the game build's own run is the
+*** verification, and if my reading is wrong I want to be told so.
+***   ARM A, live now: `_keyset_faults` loops `for k in live["feed"]` and appends
+***   "drawable key %s has no MB_NAME entry" when `live["glb"].has(k) and not names.has(k)`.
+***   On merged main `weigher` is in by_key (C-198), has `weigher.glb` on disk, and is NOT in
+***   MB_NAME. **So that arm fires now.** (`dredger` has a .glb but no feed row, so it does NOT
+***   trip this arm - only `weigher` does.)
+***   ARM B, fires on the fix: `_ok(Delve.MB_NAME.size() == 55, ...)` is a HARDCODED LITERAL. The
+***   moment the weigher row is added it reads 56 and **that arm goes RED on a correct change.**
+***   THE GATE'S OWN COMMENTS SAY THIS HAS HAPPENED TWICE BEFORE: "This line read 42 since S72 and
+***   went red at S75 with nobody re-reading it", and "S111 and S112 never moved this count, so this
+***   arm was red on main for two cycles". It is a repeat offender, and the comment beside it
+***   already concedes the key-SET check is the real guard and the count "is the count beside it".
+***   SO BOTH EDITS GO IN THE SAME COMMIT. Naming the weigher without bumping the literal just
+***   swaps one red for another.
+***
+*** WHAT I VERIFIED MYSELF AND TICKED THIS HOUR, SO NO LANE RE-PROVES IT:
+***  - **THE 57th MINIBOSS, THE DREDGER ("Finepass"), TICKED (art).** Register checked by KEY SET,
+***    not by row count, against pre-merge main: `pairs` 58 -> 59, gained exactly **['dredger']**,
+***    lost **[]**. `ok: true`, `verdict: GREEN`, `red_summary.shipped_red` **[]**, `retired_red`
+***    **[]**. ratio 0.98 (2.39 / 2.45), `fits_frame` true, `frame_edge` 0 on every side of every
+***    view, all three views `seen: 1.0` / `proves: true`, ground shadow measured in all three.
+***    **I LOOKED AT THE FRONT AND THE BACK RENDERS MYSELF.** Front: a tall stooped figure holding a
+***    round grated sieve across its body - the grating reads instantly and is plainly the thing the
+***    player is meant to read. Back: it reads as well as the front (stoop, long legs, head and the
+***    sieve's back plate all legible), so **the Beadle failure mode - no facing from behind - does
+***    NOT apply.** ONE HONEST QUALIFIER, not a defect and NOT WORK: from behind you read the
+***    POSTURE, not the sieve, because the grating is held in front. That is physically right.
+***    `air_px_min` is **160** (tightest view side) - far roomier than the weigher's 72.
+***  - **S120 TICKED (game build).** `MB_FIT["weigher"] = 1.04` and I checked it against art's
+***    register rather than the commit message: `pairs.weigher.ratio` is **1.04**. Copied, not
+***    re-derived, exactly as the row claims. And the lane was RIGHT NOT TO ADD MB_NAME in the same
+***    breath - its own row says "no MB_NAME until content's by_key.weigher lands". That land has
+***    now happened, which is why the row below is owed.
+***  - **C-198 TICKED (content).** `by_key` 55 -> 56, gained exactly **['weigher']**, lost **[]**,
+***    and **no existing by_key row lost a single line** (I summed every row's lines on both sides
+***    and compared, rather than trusting the +41/-1 numstat). Phases arrive 9 / act 8 / broken 4 /
+***    fall 8. The one new key is `_note_c198`, nested inside `miniboss_feed`, an expected zero-hit
+***    note. Its canon matches art's CANON row and the MB_FIT comment independently.
+***  - **B139 TICKED (chat bot).** The gate B138 owed. **THE LOGS ARE COMMITTED THIS TIME** - five
+***    of them on `origin/chatbot` - and I read the VERDICT LINES out of them, not the return codes:
+***    `L14_TEST OK (24 checks)`, `TWITCH_PARSE OK (8 checks)`, `COMMANDS_DOC OK wrote 32 commands`,
+***    parse log 0 SCRIPT ERROR / 0 ERROR / 0 Parse Error, import log 0 ERROR. And the arm's own
+***    verdict, which I counted myself across all five logs: **`HELP LINE CUT` appears 0 times.**
+***    The lane PREDICTED this in python off `help_line()`'s formula before the gate ran and the
+***    gate agreed - prediction then verification, which is the right order and the opposite of
+***    emulating a gate in place of running it.
+***  - **THE HUB'S STANDING AUDIT VERIFIED (hub).** Its claim is that web/ is byte-identical to
+***    publish 7. **TRUE, and I measured it by TREE, not by eye:** `origin/gh-pages^{tree}` is
+***    c03fa129, `origin/hub:web` is 5c618bba, and the ONLY difference between them is
+***    **`NOTES.md` +6 / -0** - documentation, not a web asset. Not one byte of shipped web code
+***    differs. The lane did NOT claim "ready to publish", so **the publish gate is not owed and I
+***    RAN NO PUBLISH VERIFICATION THIS HOUR.** Saying so plainly, because an unearned gate report
+***    is the same fault class as a lying gate.
+***  - **U159 RECORDED AS A CLEAN STAND-DOWN (HUD), NOT TICKED** - there is nothing to tick. Its
+***    three-dot diff against main touches `PROGRESS.md` and `docs/WORK_PLAN.md` and **no `.gd` at
+***    all**, which is exactly what the row claims. A stand-down written up IS the delivery.
+***
+*** TWO CORRECTIONS I OWE, BECAUSE MY OWN STANDING NOTES ARE OUT OF DATE:
+***  1. **ART'S FIT REGISTER IS NO LONGER RED.** The standing note in the team lead prompt says it
+***     reads `RED / ok:false` on two carried `_chibi` rows and tells you to look at `shipped_red`.
+***     Measured today: `ok: true`, `verdict: GREEN`, `red_summary.shipped_red` `[]`. The old note
+***     is STALE. Do not quote "the art gate reads RED" at art again.
+***  2. **gh-pages HAS MOVED AND THE STANDING DELTA IS PAID.** The prompt still carries
+***     "gh-pages is 05ac2679, pushed 19 Nov" and a pending "3 files / +59 / -1". Measured today:
+***     gh-pages is **5ce35f33, "hub publish 7", 24 Nov 15:30:43 CT**, and the old delta is PAID.
+***     Both struck.
+***
+*** -------------------- THE SIX ROWS --------------------
+*** GAME BUILD - **S121: NAME THE WEIGHER, AND BUMP THE GATE IN THE SAME COMMIT.** Add
+***   `MB_NAME["weigher"] = "Trueweight"` (canon agrees in two independent places: art's CANON row
+***   at `tools/art/minibosses.py` and content's `_note_c198`). **IN THE SAME COMMIT** change
+***   `tools/_s51_names.gd`'s `_ok(Delve.MB_NAME.size() == 55, ...)` to 56 and update the comment
+***   chain beside it. Then run the gate and PASTE THE VERDICT LINE. If my reading above is wrong
+***   and arm A was not already firing, SAY SO - I would rather be corrected than agreed with.
+*** CONTENT - **C-199: `miniboss_feed.by_key.dredger`**, the 57th body ("Finepass"), four phases in
+***   your usual shape. Art's body and CANON row are on main. Additive only; do not touch another
+***   row. This keeps the feed one step ahead of the engine, which is how this house has always run.
+*** ART - **THE 58th MINIBOSS.** Yours to invent (the standing dry-lane exception). Nothing is owed
+***   on the Dredger and nothing is owed on the Weigher - do not spend a cycle re-proving either.
+*** HUD - **FINISH THE 1080p SIZE-GUARD AUDIT ON YOUR REMAINING OWNED GATES.** U157 guarded four and
+***   U158 found no further exposed gate; close the audit by naming every owned gate and saying for
+***   each whether it reads the screen at all. Red-prove any new guard at 1152x648, and **COMMIT THE
+***   LOG** - U124's evidence was a working-tree file with nothing on the branch to judge by.
+*** CHAT BOT - **B140: RED-PROVE THE HELP-LINE-CUT ARM.** You named this yourself and you were right
+***   to: an unfired guard is not a proven guard. Pad a THROWAWAY copy of commands.json past the 453
+***   budget and show the arm PRINTS and faults. **DO NOT REPUBLISH** - 55 stays correct until the
+***   game build lands S121. **CLAIM BY :50 WITH A FINISH INSIDE :52** - that schedule row is mine,
+***   it is working, and it keeps you clear of the HUD's window.
+*** HUB - **NOTHING TO PUBLISH AND NOTHING TO CLAIM.** Verified by tree above. Keep the standing
+***   audit, and carry the publish-7 zero-byte guard across the rest of web/'s assets - if any other
+***   shipped asset is 0 bytes or unreadable, that is a defect in work you have already shipped and
+***   fixing it is not a new item.
+***
+*** FOR THE SUPERVISOR: **nothing is owed and nothing is waiting on you.** Publish 7 (24 Nov
+*** 15:30:43 CT, gh-pages 5ce35f33) PAID the 3-file delta that had been with you since 20 Nov. The
+*** only thing now merged-and-unpublished is `NOTES.md +6` - documentation, no shipped web code -
+*** so there is nothing I would recommend publishing for. The hub lane has not claimed ready to
+*** publish and I ran no publish verification. RECOMMENDATION: no action.
 ## TAKE THIS NEXT - Updated THE 18:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** THE CASCADE HAS REOPENED AT THE TOP: 56 BODIES / 55 ENGINE / 55 FEED / 55 PUBLISHED.
 *** Art landed the **56th miniboss, the Weigher ("Trueweight")**, this hour. The three published

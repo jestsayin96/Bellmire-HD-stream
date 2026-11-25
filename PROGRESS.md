@@ -19381,3 +19381,38 @@ is ticked." I took the stand-down and claimed NO lock. I measured the registers 
   reword either line.
 - No live Twitch test. ZERO BITS. No cheer, no redemption, no reward read or written, no chat line
   posted as bellmirebro, no channel setting touched.
+
+## B152 - 25 Nov 2026, 08:45 CT firing (chat bot) - A THIRD WRITTEN STAND-DOWN, AND THE RED I HANDED BACK AT 05:45 IS CLOSED BY SOMEONE ELSE'S MERGE, WHICH I MEASURED INSTEAD OF ASSUMING
+- MY ROW (team lead, 07:58): nothing is owed at the feed, 62/62 is paid and Section 2 landed, so the row
+  is a WRITTEN STAND-DOWN **unless my own drift check finds something**, and the window goes to re-running
+  the ask gate's five arms on the 21 topics. My drift check found NOTHING, and this entry is the delivery.
+- THE ONE L14 RED I HANDED BACK AT B149 IS NOW GREEN, AND IT CLOSED THE WAY I SAID IT WOULD. At 05:45 the
+  `MINIBOSS UNNAMED` arm fired on `[collier]` and I red-proved it was not mine: `by_key` held 62 while
+  `Delve.MB_NAME` held 61 with collier absent, and game build's S129 had named it Halfblow on `laptop`
+  without merging. That merge has landed. **MEASURED BY ME on merged main b2afbbd0 with a brace-matched
+  parse of the `MB_NAME` literal, not taken from their IDLE line**: feed `by_key` **62**, `MB_NAME` **62**,
+  `by_key - MB_NAME` **[]**, `MB_NAME - by_key` **[]**, and `miniboss`.short and `miniboss`.what both
+  publish **"62 elites"**. 62/62/62 - so COUNT, UNNAMED and GHOST are silent AT THE FEED, not merely
+  absent from a log.
+- THE FIVE ASK ARMS, RE-PROVEN SILENT ON 21 TOPICS. parse `--quit-after 300` RC 0, **0 SCRIPT ERROR**, and
+  **ZERO COMMANDS_DATA lines on the load**, so ASK NO TOPICS, ASK ORDER SHORT, ASK ORDER GHOST, ASK TOPIC
+  NO PHRASES and ASK TOPIC MUTE are all PROVABLY SILENT. `tools/_l14_test.gd` RC 0, **L14_TEST OK (24
+  checks)**, "no COMMANDS_DATA guard arm fired on the load (0 fired: [])".
+- AND I CHECKED THE TOPIC SHAPE BY HAND RATHER THAN TRUSTING A GREEN LOAD, because a gate going quiet is
+  not the same as a file being right. 21/21 topics carry **either a `reply` or a `cmd`**; the four
+  reply-less ones are **routes, not mutes** - `missed`->`catchup`, `myhero`->`hero`, `commands`->`help`,
+  `hub`->`hub` - and all four targets exist in `commands`. Zero empty phrase lists, `order` has no
+  duplicates, and `topics`/`order` key sets are **EQUAL** at 21.
+- DRIFT CHECKED BOTH WAYS: 32 entries, every one with a literal in `scripts/chatcmd.gd`, **0 code literals
+  unanswered**.
+- NO FILE OF MINE CHANGED. The REAL `tools/_commands_doc.gd` ran (RC 0, "COMMANDS_DOC OK wrote 32
+  commands") and `docs/COMMANDS.md` came back **byte-identical**, so there was nothing to regenerate and I
+  am saying that rather than claiming a doc change. `scripts/chatcmd.gd` and `data/commands.json`
+  byte-identical. This cycle's only edit is this PROGRESS.md entry.
+- STILL NOT MINE, STILL CARRIED: `bug` and `suggest` send viewers to a Suggestion Box button that exists
+  only in the hub's UNPUBLISHED delta. Real, not mine, with the supervisor. I did not reword either line.
+- LOCK: claim 2026-11-25T08:47:08-06:00, cap 09:12:08, declared finish 08:52:00, **released 08:48:46** -
+  inside the declared finish, with the HUD's :52 window left clear. Lock was free when I claimed (last line
+  IDLE 08:42:38 QA tester, `tasklist Godot*` alive=False checked live). Godot exited, `Godot*` = 0.
+- No live Twitch test. ZERO BITS. No cheer, no redemption, no reward read or written, no chat line posted
+  as bellmirebro, no channel setting touched.

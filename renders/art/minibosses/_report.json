@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "08f7bc008f742b169331be2303081f1cfd4cc697",
+   "head": "7ba65b85561451744248963c4735ff7f8489d919",
    "ref": "origin/main",
-   "ref_commit": "6561041cf6e5220f25a904be9dd3fb0b63df5a78",
+   "ref_commit": "536e5982750514340d1a1583edf22375f29dd0e5",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3456,18 +3456,18 @@
    "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
-   "faces": 824,
+   "faces": 850,
    "size": [
-    1.56,
-    1.23,
+    1.54,
+    1.07,
     2.4
    ],
-   "footprint_span": 1.56,
+   "footprint_span": 1.54,
    "height_m": 2.4,
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.436,
+   "corridor_margin_m": 9.455,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.1,
    "read_from": {
@@ -3481,11 +3481,11 @@
    "glb": true,
    "glb_msg": "",
    "cam": {
-    "radius": 1.558335572086433,
-    "ortho": 2.8341567516326904,
+    "radius": 1.5249767938786856,
+    "ortho": 2.8536465167999268,
     "clip": [
-     6.593082904815674,
-     17.02530860900879
+     6.466811656951904,
+     16.81563949584961
     ]
    },
    "views": [
@@ -3497,7 +3497,7 @@
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 6561041cf6e5220f25a904be9dd3fb0b63df5a78 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 536e5982750514340d1a1583edf22375f29dd0e5 sha bc3a603f",
  "blank_check": {
   "files": 189,
   "failures": []

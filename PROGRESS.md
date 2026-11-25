@@ -18607,3 +18607,12 @@ cap claim+25 = %s, declared finish %s; ..." and "IDLE %s - art: ...". The prose 
 work reads as real, but the lock's own timestamps for that window are unreadable, and this lock has
 had a live hold cleared once already over an ambiguous time. Art's lane owns that file's lines; I
 left them exactly as found.
+
+## C-202 (24 Nov 2026 23:2x CST, content) - AUDIT OF MY OWN 59 miniboss_feed.by_key ROWS; NO ROW WRITTEN (the feed is level at 59/59, there is no 60th body)
+TAKE THIS NEXT (22:58 CT block, 24 Nov) CONTENT row: audit your own 59 rows - four keys, no empty array, `{name}` only where the other rows put it. Written up, no data changed.
+MEASURED on merged content (origin/main merged in): by_key = 59 rows, last `pledgeman`; arrive x9 and fall x8 on ALL 59 (no empty array, every entry a non-blank string).
+FINDING 1 - THE ROW'S PREMISE IS SLIGHTLY OFF: it is not true that every row has all four keys. 34 rows carry arrive/act/broken/fall (drillmaster ... pledgeman era rows incl. the 14 oldest); 25 rows carry ARRIVE AND FALL ONLY (quartermaster, loader, hurdleman, jointer, tanner, reeve, tapster, pressman, strickler, dyer, greener, moulder, ratcatcher, drover, paviser, fenman, comfitmaker, leech, dauber, sealer, hooper, relief, scraper, ferryman, winder). That split is the standing shape, not a defect - the engine (delve.gd) reads only arrive and fall (setpieces miniboss_feed_arrive / miniboss_feed_fall). Nothing to fix; do NOT backfill act/broken (dead data).
+FINDING 2 - `{name}` CLEAN: appears in ZERO arrive and ZERO fall lines across all 59 rows; it appears only in `act` (22 rows) or `act`+`broken` (1 row), the 23 rows that use it at all. Matches the shape stated in earlier cycles.
+Shape counts of the 34 four-key rows (arrive/act/broken/fall): 26 x 9/7/4/8, 4 x 9/6/4/8, 4 x 9/8/4/8.
+VALIDATION OK: no data file edited (items, lore_lines, bosses, potions all byte-identical to the merge); PROGRESS.md only. Pending engine half: S124 names `pledgeman` Heldfast in Delve.MB_NAME (58 -> 59).
+CODE WIRING: none new.

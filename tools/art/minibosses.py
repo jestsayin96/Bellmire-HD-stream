@@ -23902,6 +23902,7 @@ def overlooker():
     CHEST = 1.580
     SHO = 1.810
     HEAD = 2.155
+    HEM = 0.660          # PASS 4 FIX G - was 0.330, which buried the legs
 
     # HE DOES NOT STOOP. Every carrier in this file leans into its load; this
     # one carries nothing, so LEAN is zero and that is a statement, not a
@@ -23921,17 +23922,28 @@ def overlooker():
     F = Vector((-math.sin(HY), -math.cos(HY), 0.0)).normalized()
     S = Vector((-F.y, F.x, 0.0)).normalized()        # across his line of sight
 
-    # ---- legs. Short visible run below the coat; the bell does the rest. ---
+    # ---- legs. PASS 4, FIX G - THE HEM CAME UP AND THESE BECAME THE
+    # SILHOUETTE'S BOTTOM THIRD INSTEAD OF TWO STUBS UNDER A BELL. Pass 3's
+    # hem sat at z=0.330 against an ankle at 0.105, so 0.225 m of a 2.40 m
+    # body - NINE PERCENT - was leg, and nine percent of leg under a closed
+    # flare is not a man standing, it is a chess pawn's base. The hem is now
+    # at HEM=0.660, clear ABOVE the knee at 0.560, so the visible run is
+    # 0.555 m (23 percent) AND IT CONTAINS A JOINT. A knee in the outline is
+    # the cheapest thing in this file that a turned piece cannot have.
+    # The stance is also widened and STAGGERED: pass 3's two legs sat at the
+    # same y, so from the side they were one column and the figure had one
+    # leg. His forward foot is the side he is pointing from.
     _open()
     for _i in (-1, 1):
+        _fwd = -0.085 if _i < 0 else 0.055
         _h = Vector((0.175 * _i, 0.0, HIP))
-        _k = Vector((0.188 * _i, -0.020, KNEE))
-        _a = Vector((0.196 * _i, -0.010, ANK))
+        _k = Vector((0.205 * _i, _fwd * 0.55 - 0.020, KNEE))
+        _a = Vector((0.232 * _i, _fwd, ANK))
         limb(P, [tuple(v) for v in seat([_h, _k, _a], 0.118)], 0.118, 0.092,
              'body')
         # BOOTS - works-floor filthy, the one dirty part of him.
         P.add(L.box(0.118, 0.168, 0.072), 'dark',
-              loc=(0.196 * _i, -0.052, ANK - 0.052))
+              loc=(0.232 * _i, _fwd - 0.042, ANK - 0.052))
     _close("legs")
 
     # ---- the coat. A BELL, and it is the non-hero half of the silhouette. --
@@ -23947,8 +23959,34 @@ def overlooker():
     # radii are the right way round now and the hem is lifted, so the widest
     # thing on the body is the SHOULDERS (0.87 across against the hem's 0.91,
     # near enough to read as a coat and not as a plinth).
-    P.raw(aim(L.cone(0.455, 0.292, WAIST - 0.330, 22),
-              (0.0, 0.004, 0.330), (0.0, 0.0, 1.0)), 'body')
+    # PASS 4, FIX H - A WAIST AND A HIP, SO THE OUTLINE GOES IN BEFORE IT
+    # GOES OUT. This is the fault that actually made it a chess piece, and
+    # fixing the hem in FIX G did not touch it: from the collar to the hem
+    # pass 3's outline was ONE MONOTONIC WIDENING LINE. Collar 0.41 across,
+    # waist 0.58, hem 0.91 - it never narrows, anywhere, and a shape that
+    # only ever widens downward is the definition of a turned piece. A man in
+    # a coat narrows at the waist and the skirt breaks at the HIP, not at the
+    # belt. Two sections now:
+    #   BODY   hip 1.040 -> waist 1.250, r 0.268 -> 0.250. Fitted. 0.50 across
+    #          at the waist against 0.87 of shoulder - the pinch is real and
+    #          it is where a waist is.
+    #   SKIRT  hem 0.660 -> hip 1.040, r 0.400 -> 0.268. The flare starts at
+    #          the hip and is 0.38 m tall, so it reads as the fall of a coat
+    #          and not as a base the figure is standing in.
+    # PASS 4, FIX I - KILL THE LATHE. This is the last of the three and it is
+    # the one that names the fault exactly: a chess piece is a TURNED solid,
+    # and so was this coat. Every section of it was axisymmetric, so the
+    # front ortho and the side ortho got THE IDENTICAL OUTLINE - which is not
+    # a resemblance to a turned piece, it is the manufacturing method. A coat
+    # on a man is wider across than it is deep. Both sections are squashed to
+    # 0.76 in y, so the hem is 0.80 across the front and 0.61 deep in the
+    # side, and no yaw of the camera can find the same shape twice.
+    P.raw(aim(L.cone(0.268, 0.212, WAIST - HIP, 22),
+              (0.0, 0.004, HIP), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.76, 1.0)), 'body')
+    P.raw(aim(L.cone(0.400, 0.268, HIP - HEM, 22),
+              (0.0, 0.004, HEM), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.76, 1.0)), 'body')
     P.add(L.box(0.318, 0.212, 0.052), 'dark',
           loc=(0.0, 0.0, WAIST - 0.030))            # the belt
     _close("coat")
@@ -23957,8 +23995,18 @@ def overlooker():
     # WIDE AND SQUARE on purpose: it puts the turned head in a notch instead
     # of on a slope, which is what makes the turn read at distance.
     _open()
-    limb(P, [(0.0, 0.004, WAIST - 0.050), (0.0, 0.000, CHEST),
-             (0.0, -0.010, SHO - 0.050)], 0.252, 0.236, 'body')
+    # PASS 4, FIX H2 - FIX H ALONE DID NOT SHOW, AND THE RENDER IS WHY I KNOW.
+    # I narrowed the coat at the waist and the side view did not change at
+    # all, because the TRUNK INSIDE IT was a uniform 0.252 tube from belt to
+    # shoulder and simply swallowed the pinch. A waist is not a narrow thing,
+    # it is a thing NARROWER THAN WHAT IS ABOVE IT, and there was nothing
+    # above it. Two sections now: waist 0.214 -> chest 0.274 -> shoulder
+    # 0.242, so the chest is 0.55 across against a 0.43 waist - a 22 percent
+    # pinch that the coat's 0.212 can sit inside instead of behind.
+    limb(P, [(0.0, 0.004, WAIST - 0.060), (0.0, 0.000, CHEST)],
+         0.214, 0.274, 'body')
+    limb(P, [(0.0, 0.000, CHEST), (0.0, -0.010, SHO - 0.050)],
+         0.274, 0.242, 'body')
     P.add(L.box(0.620, 0.248, 0.112), 'body', loc=(0.0, -0.012, SHO - 0.046))
     for _i in (-1, 1):
         P.add(L.sphere(0.136, 0.140, 0.120, 11, 8), 'body',

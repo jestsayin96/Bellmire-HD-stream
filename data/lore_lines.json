@@ -14686,6 +14686,45 @@
           "Finepass is down. Your hands are floured to the wrist.",
           "The mesh is clear. Go on up."
         ]
+      },
+      "harrowman": {
+        "arrive": [
+          "A man stood leaning into two traces in the middle of the floor. Behind him, something dragged.",
+          "The harrow is a dark lattice, low and raked. Bright tines stand down out of it into the flags.",
+          "The traces run from the front corners of the frame up over his shoulders into his fists.",
+          "Old field iron, black with years. The tines are the only clean thing on it. The ground did that.",
+          "He is pitched forward over his feet, the way a man walks into a hill.",
+          "The flags behind him are scored in long pale lines. Some of them are fresh.",
+          "He is not looking at you. He is looking at the end of the room, and the way to it.",
+          "A plain coat, the colour of old oats. A hat pulled low. He has walked this round before.",
+          "Something is being dragged across the floor, and he does not mean to stop for it."
+        ],
+        "act": [
+          "{name} strikes and the blow lands. He does not turn. The traces do not slacken.",
+          "{name} stands to meet the harrow. The tines go by and {name} goes with them.",
+          "The round comes on. {name} had thought the harrow was behind him.",
+          "{name} swings hard. The pass is already half done and the swing changes none of it.",
+          "{name} steps aside and the lattice goes through the place where {name} stood.",
+          "The frame creaks and the tines bite the flags. {name} is on the wrong side of it.",
+          "{name} cuts at the traces and the traces hold. He leans and the harrow follows.",
+          "{name} is let go at the far end of the pass, a long way from where {name} began."
+        ],
+        "broken": [
+          "A hard blow catches him in the traces and he does not break stride.",
+          "He pauses at the end of a pass, hands full, and then he takes up the round again.",
+          "The tines are dull for a moment, and then the floor makes them bright.",
+          "Nothing was stopped. It went by, and the room is different for it."
+        ],
+        "fall": [
+          "Overturn is down. The harrow lies where it was dropped, tines in the air.",
+          "The traces are slack. The flags are scored from wall to wall, and they are still.",
+          "He worked the floor so that what lay under it could come up.",
+          "A hat, a pair of traces and a harrow. That was all he had.",
+          "He never once turned his head. He had a round to finish.",
+          "Turned over and left. That is how a field is made ready.",
+          "Overturn is down. Your boots are in the wrong place and you do not remember walking there.",
+          "The round is done. Go on up."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -14729,7 +14768,8 @@
     "_note_c193": "C-193: iceman feed row (Hoarback, the 54th, mess). Canon from tools/art/minibosses.py CANON row: IT CARRIES THE COLD AND THE COLD IS ON A COUNT. Four blocks on the rack plus a fifth in the tongs; while a block stands the room is cold and all in it work slow, him included; blocks go one at a time in their own time, nothing the party does takes one off; when the last goes the room thaws and he sets the tongs down and turns round. No choice for the party to make but how to spend the given rounds; the lines name that and favour no tactic. 'broken' = the thaw (last block gone), not a hit landing - there is no weakness to strike. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall. Body iceman.glb is on origin/main (merged 24 Nov). Expected zero-hit key.",
     "_note_c195": "C-195: straker feed row (Everyhand, the 55th, wheel and four strakes). Canon from tools/art/minibosses.py CANON row: IT WILL NOT GO DOWN TO ONE HAND - it is straking a rim and the last blow does nothing until every hand in the party has struck it; a ledger of which hero has struck, only grows. No phase, nothing to out-manoeuvre; the condition is on the party. The four bright iron strakes on the tread are the count. Lines name that and favour no tactic. 'broken' = the last hand has struck and the rim is whole, not a weakness hit. Arrive x9, act x7, broken x4, fall x8; no {name} in arrive or fall. Body straker.glb is on origin/main (merged 24 Nov). Expected zero-hit key.",
     "_note_c198": "C-198: weigher feed row (Trueweight, the 56th, beam and two pans). Canon from tools/art/minibosses.py CANON row: IT MUST COME DOWN EVEN - a weigh-beam across the shoulders with a pan at each end, already tipped; damage into the heavy pan is paid back out of the light one while the beam is out of true, so a party stacked on one flank moves nothing. No phase, no target choice, nothing to interrupt; the condition is on where the party STANDS. Lines name the tipped beam and the two bright pans and favour no tactic. 'broken' = the beam comes level, not a weakness hit. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Body weigher.glb is on origin/main (merged 24 Nov). Expected zero-hit key.",
-    "_note_c199": "C-199: dredger feed row (Finepass, the 57th, a sieve held low in both hands). Canon from tools/art/minibosses.py CANON row: IT ONLY FEELS WHAT GETS THROUGH THE MESH - a heavy blow stops dead on the bars and is spent; only a light hand passes the mesh, so the weakest hero is the one who scores. No phase, no target choice, nothing summons or splits; the condition is on HOW HARD you swing. Lines name the pale sieve, the black bars and the flour and hint the mesh without favouring a tactic. 'broken' = a light blow passes the mesh, not a weakness hit. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Body dredger.glb is on origin/main (merged 24 Nov). Expected zero-hit key."
+    "_note_c199": "C-199: dredger feed row (Finepass, the 57th, a sieve held low in both hands). Canon from tools/art/minibosses.py CANON row: IT ONLY FEELS WHAT GETS THROUGH THE MESH - a heavy blow stops dead on the bars and is spent; only a light hand passes the mesh, so the weakest hero is the one who scores. No phase, no target choice, nothing summons or splits; the condition is on HOW HARD you swing. Lines name the pale sieve, the black bars and the flour and hint the mesh without favouring a tactic. 'broken' = a light blow passes the mesh, not a weakness hit. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Body dredger.glb is on origin/main (merged 24 Nov). Expected zero-hit key.",
+    "_note_c200": "C-200: harrowman feed row (Overturn, the 58th, a man hauling a spiked harrow on a fixed round). Canon from tools/art/minibosses.py CANON row on origin/art: IT IS NOT FIGHTING YOU AND IT WILL NOT TURN ASIDE - an unaimed, uninterruptible round that carries whatever is on it along to the end of the pass and lets it go out of position; no target choice, no phase, no speed-up. The fight is ground, not a target. Lines name the dark lattice, the bright tines, the two traces to his hands and the scored flags; act lines show the heroes being carried or missed, never a hit that changes the round. 'broken' makes no mechanical claim (nothing stops the round). Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. CODE WIRING: game build - MB_NAME needs \"harrowman\": \"Overturn\" in delve.gd (fall lines say 'Overturn is down'), and the tools/_s51_names.gd, _s107_gate.gd and _s117_straker.gd MB_NAME.size() literals move together in the same commit. Then the chat bot republishes the miniboss count in data/commands.json and docs/COMMANDS.md."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

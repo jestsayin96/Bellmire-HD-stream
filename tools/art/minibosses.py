@@ -22903,8 +22903,66 @@ def collier():
     # Eight verticals and one ring instead of three rings - the vertical lines
     # cut every horizontal band the eye was joining into a hoop skirt, and
     # they are what the real thing has.
+    # *** PASS 11, THE SINGLE CHANGE UNDER TEST: THE RING'S PHASE. ***
+    # The 07:58 row said "shift the centre stake". MEASURED first, because
+    # there IS no centre stake - pass 10 correction (d) - they sit at
+    # 22.5 + 45i, and the stake that kills the +24 vent is the one at +22.5.
+    # `tools/art/_collier_stakeclear.py` sweeps the ring's phase over its full
+    # 45 deg period against the shipped vent arc and finds exactly ONE band
+    # that clears every vent of stakes: 40.0 ... 51.0 deg (ONE band - the
+    # sweep wraps), centre 0.5, i.e. the shipped 22.5 moved -22.0. At that
+    # phase the predicted stake cover goes +24: 0.406 -> 0.000 and
+    # -78: 0.647 -> 0.000, at the SHIPPED pass-8 row height - so it costs
+    # nothing against the lashing ring, which is the whole reason the 0.360
+    # row is still behind COLLIER_VENTZ.
+    # WHAT THE PREDICTOR CANNOT SEE, and why this is a flag and not a default
+    # until the render is looked at: it models stakes only, so it says nothing
+    # about the plug bundle (which also covers -78, 11/13) or the sod at
+    # bearing 8; it does not model the lashing ring, the side camera or the
+    # back camera; and it cannot say whether eight stakes at this phase still
+    # READ as a staked clamp. At every clear phase a stake lands within 6 deg
+    # of dead front, because the vent arc leaves no wider gap - so this change
+    # puts a vertical up the centre line under the man, and that is a
+    # silhouette risk only an eye can judge.
+    _STAKEBASE = 22.5
+    try:
+        _sb = os.environ.get("COLLIER_STAKEBASE", "").strip()
+        if _sb:
+            _STAKEBASE = float(_sb)
+    except ValueError:
+        pass
+    # *** PASS 12 CANDIDATE: NUDGE THE TWO STAKES THAT ACTUALLY OCCLUDE. ***
+    # Rotating the WHOLE ring (COLLIER_STAKEBASE, tried and rendered this
+    # firing) heals the front and WRECKS THE SIDE: with every stake moved, the
+    # side camera loses most of the withy lattice and the flank goes back to
+    # reading as stacked horizontal courses - the hoop-skirt fault the eight
+    # verticals were introduced to kill. I looked at both side renders; that
+    # is an eye judgement, not a number.
+    # So move only the two that stand in front of a vent, measured with
+    # `_collier_stakeclear.py`: the stake at -67.5 (covers -78 by 0.647) and
+    # the one at +22.5 (covers +24 by 0.406). Six stakes are UNTOUCHED, and
+    # the two that move are the two nearest edge-on to the side camera, so the
+    # side lattice is kept. Predicted cover after: 0.000 on all four.
+    # *** AND THE PAIR MOVE WAS RENDERED AND IT MADE -78 WORSE. ***
+    # Predicted cover 0.000 on all four; the render says the -78 mark went
+    # from ONE 41 px mark to TWO of 9 and 3 px. Moving the -67.5 stake to
+    # -74.0 walked it TOWARDS that vent, and the predictor missed it because
+    # its depth test compares the stake's centre y against the vent's nearest
+    # y - a single-point test that is too crude when BOTH are near edge-on,
+    # which is exactly where -78 lives. Recorded, not hidden: the instrument
+    # is wrong in the regime that matters most to it.
+    # WHAT SURVIVES IS THE HALF THAT WORKED. The +22.5 stake alone is what
+    # splits the +24 mark, and a +3.0 deg nudge of that ONE stake heals it
+    # while SEVEN stakes stay exactly where they ship - no side-view cost, no
+    # ring-gap risk, nothing else on the body moves.
+    _NUDGE = {}
+    _nd = os.environ.get("COLLIER_STAKENUDGE", "").strip()
+    if _nd == "12":
+        _NUDGE = {0: +3.0, 6: -6.5}     # DISPROVED: -78 got worse. Kept to reproduce.
+    elif _nd == "13":
+        _NUDGE = {0: +3.0}              # the +24 split heal, and nothing else
     for i in range(8):
-        a = math.radians(22.5 + 45.0 * i)
+        a = math.radians(_STAKEBASE + 45.0 * i + _NUDGE.get(i, 0.0))
         d = Vector((math.sin(a), -math.cos(a), 0.0))
         # *** PASS 4, FIX I. *** At R 0.868 / 0.495 the stakes sat INSIDE the
         # earth they were supposed to be driven into: pass 3's render shows

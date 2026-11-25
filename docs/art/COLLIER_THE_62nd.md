@@ -567,3 +567,98 @@ The files changed in the worktree are
 `renders/art/minibosses/collier_vlabel/` and
 `collier_stream/_collier_occlude.json`. The first run with a working Blender
 bridge must `git merge origin/art` and push them before anything else.
+
+---
+
+# PASS 11-13 — 25 Nov 2026, the 09:35 CT firing
+
+**HEADLINE: three occluder changes were built, rendered and LOOKED AT. One
+reads FOUR at 360p and wrecks the side view. One is a strict improvement that
+still reads THREE. The fourth vent is capped by its own bearing and cannot be
+bought back by moving occluders — so, per the 07:58 row, STOP CUTTING AT THE
+BODY. The default is UNCHANGED and red-proves PIXEL-IDENTICAL.**
+
+## WHAT SHIPS: NOTHING. THE DEFAULT IS PASS 8, PROVED.
+
+With `COLLIER_STAKEBASE` and `COLLIER_STAKENUDGE` unset, the three ventlabel
+arms are **0 differing pixels** against the committed pass-10 baseline — not
+an md5 claim, a pixelwise compare (Blender's PNG bytes are not reproducible
+across runs; the md5s differ and the pixels do not, and the earlier md5-based
+claim in this doc is the kind of thing that caused correction (c)).
+
+## THE THREE CHANGES, EACH RENDERED AND EACH LOOKED AT
+
+Vent-row marks, `seamoff - glowoff` (the vents alone), by rung:
+
+| | full | 1080p | 720p | 480p | **360p** |
+|---|---|---|---|---|---|
+| **shipped (pass 8)** | 6 `[462,452,139,41,17,2]` | 6 | 5 | 5 | **5** `[28,25,12,2,2]` |
+| **p13** `+22.5 -> 25.5` | 5 `[462,452,204,41,2]` | 5 | 4 | 4 | **4** `[28,25,15,2]` |
+| **p11** whole ring `22.5 -> 0.5` | 4 `[448,424,237,63]` | 4 | 4 | 4 | **4** `[26,24,17,6]` |
+
+- **p11, rotate the whole eight-fold ring to base 0.5.** Clears every vent of
+  stakes. The +24 mark stops being split (139+17 -> 237) and -78 grows 41 ->
+  63. At 360p **I counted four orange marks by eye, against three on the
+  shipped body.** Fit GREEN, errors [], ratio 0.86 unchanged.
+  **AND IT IS NOT SHIPPABLE, FOR A REASON NO NUMBER HERE REPORTED.** 34.8% of
+  the side view's pixels moved. I put the two side renders next to each other
+  and looked: the shipped side carries a clear lattice of dark withies cutting
+  the horizontal courses; the rotated side has lost most of it and the flank
+  goes back to reading as stacked bands — **the hoop-skirt fault the eight
+  verticals were introduced to kill** (pass 7). Rotating the ring moves the
+  flank stakes off the side camera to buy the front. Front gain, side loss.
+- **p12, nudge the two stakes that occlude** (-67.5 -> -74.0, +22.5 -> 25.5),
+  six held so the side lattice is kept. Predicted cover 0.000 on all four.
+  **The render says otherwise: -78 went from ONE 41 px mark to TWO of 9 and
+  3 px.** Moving the -67.5 stake to -74.0 walked it *towards* that vent.
+  DISPROVED, and kept behind `COLLIER_STAKENUDGE=12` so it is not re-derived.
+- **p13, nudge the +22.5 stake alone by +3.0 deg.** `COLLIER_STAKENUDGE=13`.
+  A **strict improvement**: -42 (462), -10 (452) and -78 (41) are pixel-for-
+  pixel what they ship, and +24 heals from a split 139+17 into one 204 px
+  mark. Nothing on the body gets worse; six stakes and the row height never
+  move, so there is no side cost and no lashing-ring risk. Fit GREEN.
+  **It still reads THREE at 360p** — I looked, and the fourth mark is 2 px,
+  exactly as it ships. It does not meet the acceptance bar.
+
+## WHY THE FOURTH VENT CANNOT BE BOUGHT BACK BY MOVING OCCLUDERS
+
+-78 degrees is 12 off edge-on. It presents `cos(78) = 0.21` of its mouth to
+the front camera, and pass 10's raycast measured its visible share at **0.06
+even at the best row height with nothing in front of it**. Removing its stake
+(p11) took it from 41 to 63 px — real, and still a sixth of its neighbours.
+The arc is frozen: pass 5 pushed a vent to -78 and pass 9 pulled one to +4 and
+lost it. So four *equal-reading* vents are not available on this arc, and the
+only change that reaches four countable marks pays for it on the side.
+
+**PER THE 07:58 ROW, THAT IS THE STOP CONDITION.** The fallback is the text
+change — the command text says "drive its four pale plugs into the vents" and
+the body carries three that read plus a sliver. That is content's line to
+change, not this lane's, and the team lead routes it.
+
+## MY OWN INSTRUMENT WAS WRONG TWICE, AND BOTH ARE RECORDED
+
+`tools/art/_collier_stakeclear.py` is a cheap analytic predictor of one thing:
+does a withy stand in front of a vent on the front camera.
+1. **Its first validation arm tested the wrong column.** It compared against
+   the raycast's *attribution*, went RED, and the model was right. A BVH
+   raycast attributes a ray to its FIRST hit, so attribution names the
+   NEAREST occluder and can never rule out a second one behind it. Fixing the
+   arm to test the *visibility* column changed a finding: **-78 has TWO
+   occluders, the plugs AND a stake**, so lifting the plug bundle alone would
+   never have healed it.
+2. **Its first sweep read its own seam as a boundary.** The ring's period is
+   45 deg, so 44 and 0 are adjacent; the sweep reported one clear band as two
+   and so offered two candidate centres where there is one.
+3. **And it is still wrong where it matters most.** p12 was its recommendation
+   and the render refuted it. Its depth test compares the stake's centre y
+   against the vent's nearest y — a single-point test that is too crude when
+   both are near edge-on, which is precisely where -78 lives. The script says
+   so in its own docstring. It is a render-saver, not evidence.
+
+## WHAT THE HARNESS STILL CANNOT SEE
+
+The stake notches. At full resolution p11's two middle mouths carry a dark
+bite where a stake crosses the rim; the connected-component count reads them
+as one mark each and is happy. I only have that because I cropped the row at
+4x and looked. At 360p the notch is invisible, so it costs nothing at stream
+distance — but no number in this lane would have told me it was there.

@@ -66,6 +66,9 @@ def _args():
     a = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", required=True)
+    # pass 11: render a candidate without overwriting the committed pass-10
+    # baseline, so the two can be compared mark for mark.
+    ap.add_argument("--tag", default="")
     return ap.parse_args(a)
 
 
@@ -157,7 +160,8 @@ def blank_and_border(path):
 
 def main():
     ns = _args()
-    out = os.path.join(ns.repo, "renders", "art", "minibosses", "collier_vlabel")
+    out = os.path.join(ns.repo, "renders", "art", "minibosses",
+                       "collier_vlabel" + (("_" + ns.tag) if ns.tag else ""))
     os.makedirs(out, exist_ok=True)
     rep = {"key": KEY, "camera": {"az": FRONT_AZ, "el": FRONT_EL,
                                   "ortho": FRAME_W, "cell": [CELL_X, CELL_Y],

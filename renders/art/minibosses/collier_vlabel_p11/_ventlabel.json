@@ -1,0 +1,115 @@
+{
+ "key": "collier",
+ "camera": {
+  "az": 0.0,
+  "el": 6.0,
+  "ortho": 5.6,
+  "cell": [
+   760,
+   520
+  ],
+  "locked": true,
+  "target": [
+   -0.0389,
+   0.1147,
+   1.05
+  ]
+ },
+ "not_a_pass": "no threshold; ZERO is the only verdict on its own (05:58 ruling, 25 Nov).",
+ "arms": {
+  "full": {
+   "opaque_px": 43266,
+   "border_alpha": 0.0
+  },
+  "glowoff": {
+   "opaque_px": 43266,
+   "border_alpha": 0.0
+  },
+  "seamoff": {
+   "opaque_px": 43258,
+   "border_alpha": 0.0
+  }
+ },
+ "labels": {
+  "all_lit__full_minus_glowoff": [
+   {
+    "px": 449,
+    "cx": 366.3,
+    "cy": 359.6
+   },
+   {
+    "px": 424,
+    "cx": 313.0,
+    "cy": 356.8
+   },
+   {
+    "px": 237,
+    "cx": 429.0,
+    "cy": 362.6
+   },
+   {
+    "px": 64,
+    "cx": 283.7,
+    "cy": 354.0
+   },
+   {
+    "px": 38,
+    "cx": 498.6,
+    "cy": 290.1
+   },
+   {
+    "px": 27,
+    "cx": 498.9,
+    "cy": 318.0
+   }
+  ],
+  "vents_only__seamoff_minus_glowoff": [
+   {
+    "px": 449,
+    "cx": 366.3,
+    "cy": 359.6
+   },
+   {
+    "px": 424,
+    "cx": 313.0,
+    "cy": 356.8
+   },
+   {
+    "px": 237,
+    "cx": 429.0,
+    "cy": 362.6
+   },
+   {
+    "px": 64,
+    "cx": 283.7,
+    "cy": 354.0
+   },
+   {
+    "px": 30,
+    "cx": 498.8,
+    "cy": 290.5
+   },
+   {
+    "px": 5,
+    "cx": 499.8,
+    "cy": 315.4
+   }
+  ],
+  "seams_only__full_minus_seamoff": [
+   {
+    "px": 38,
+    "cx": 498.6,
+    "cy": 290.1
+   },
+   {
+    "px": 27,
+    "cx": 498.9,
+    "cy": 318.0
+   }
+  ]
+ },
+ "errors": [],
+ "vent_mark_count": 6,
+ "seam_mark_count": 2,
+ "ok": true
+}

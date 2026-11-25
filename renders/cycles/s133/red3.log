@@ -1,0 +1,32 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S133 ADV Rogue h=2.187
+S133 ADV Knight h=2.467
+S133 ADV Barbarian h=2.398
+S133 ADV Mage h=3.003
+S133 UACP BlueSoldier_Female h=3.204 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP BlueSoldier_Male h=3.284 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Chef_Female h=3.204 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Chef_Male h=3.205 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Elf h=4.096 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Goblin_Female h=3.204 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Goblin_Male h=3.147 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Knight_Golden_Female h=3.204 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Knight_Golden_Male h=3.186 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Knight_Male h=3.589 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP OldClassy_Female h=3.772 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP OldClassy_Male h=3.772 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Soldier_Female h=3.204 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Soldier_Male h=3.284 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Viking_Female h=3.204 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Viking_Male h=3.635 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Witch h=4.292 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Wizard h=4.096 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Worker_Female h=3.429 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 UACP Worker_Male h=3.336 ymin=-0.019 meshes=1 clips=11 ["Defeat", "Idle", "PickUp", "Punch", "RecieveHit", "Shoot_OneHanded", "SitDown", "StandUp", "Victory", "Walk", "Walk_Carry"]
+S133 ADV mean h=2.514  UACP mean h=3.467 min=3.147 max=4.292  scale UACP->ADV = 0.7249
+UACP_PROBE FAIL ok=20/21 fails=["Nobody_Redprove: missing"]
+
+---ERR---
+
+RC 0

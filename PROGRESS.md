@@ -19486,3 +19486,31 @@ the next seat does not re-derive it and "fix" six lines of good text.
   declared finish, HUD's :52 window clear. Godot exited, `tasklist Godot*` = 0 checked live.
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat
   line posted as bellmirebro, no channel setting touched.
+
+## D-S133 (game build, 25 Nov 2026 10:08-10:2x CT) - SYSTEM 12 (NPC variety) STEP S110c-1: LICENCE PAGE READ (CC0), 20 UACP BODIES MEASURED IN GODOT OFF-REPO, NEW GATE tools/_s133_uacp_probe.gd RED-PROVED. NOTHING WIRED, NOTHING ADDED TO assets/.
+TAKE THIS NEXT (09:58 CT) GAME BUILD row: next unticked system in Mr. E's approved Phase 2 order. **I TOOK SYSTEM 12 (NPC variety, Quaternius Ultimate
+Animated Character Pack)** - scoped at S109, S110b converted 20 bodies off-repo, S110c carried at S111/S112 and never started since.
+MERGE: origin/main into laptop clean -> 1742e688. (Two git.exe processes from 08:49:25 are still alive on cruzader - the 08:58 wedge's leftovers; they
+did not block fetch or merge this hour and I did not kill them.)
+1. LICENCE, the owed per-pack read: https://quaternius.com/packs/ultimatedanimatedcharacter.html - "License: CC0" (links creativecommons.org/publicdomain/zero/1.0),
+   "free to use in personal and commercial projects", November 2019, 52 models. CC0, so no attribution owed; LICENSE note goes beside the glbs when they enter assets/.
+2. MEASURED IN GODOT, loading C:\hd adventure\_gb_s110_uacp\*.glb through GLTFDocument so no asset enters assets/ and no import cache moves (S108's rule:
+   import and wiring in the same commit or neither). Findings the wiring must honour:
+   (a) **EVERY CLIP ARRIVES PREFIXED "CharacterArmature|CharacterArmature|Idle"** - 220 of 220. Rig.play(anim, "Idle") would MISS all of them. The
+       wiring must strip to the name after the last "|" (or rename on import). Bare set, identical on all 20: Defeat Idle PickUp Punch RecieveHit
+       Shoot_OneHanded SitDown StandUp Victory Walk Walk_Carry - no Run, so Run->Walk fallback stands.
+   (b) HEIGHT: KayKit ADV Rogue 2.187 / Knight 2.467 / Barbarian 2.398 / Mage 3.003 (mean 2.514, accessories and hats included); UACP 3.147-4.292
+       (mean 3.467; Witch 4.292, Wizard/Elf 4.096 are hat height). Coarse scale UACP->ADV = 0.7249. Use per-body, not one constant, before wiring.
+   (c) One skinned mesh per body, ymin -0.019 on all 20 (feet on the floor).
+3. MY OWN FAULT, CAUGHT BEFORE IT SHIPPED: the probe's first two runs measured with global_transform inside _initialize, where nodes are not yet in the
+   tree - it logged !is_inside_tree and returned identity, so the ADV mean read 3.355 and the scale 0.9676. WRONG. Fixed by accumulating local
+   transforms up to the instanced root; re-run reads 0 ERROR lines and the 0.7249 above. The first run also FAILED 0/20 on the prefixed clip names -
+   that was a TRUE red and is finding (a), not a gate bug.
+GATE: tools/_s133_uacp_probe.gd -> `UACP_PROBE OK 20 bodies, all with Idle+Walk (bare names; 220 clips carry the armature prefix), scale 0.7249`.
+RED-PROOF: `-- --redprove` appends a missing body -> `UACP_PROBE FAIL ok=20/21 fails=["Nobody_Redprove: missing"]`.
+NOT RENDERED: nothing reaches the screen this cycle (no asset, no wiring); the picture is owed by the wiring commit.
+GATES on merged 1742e688: parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error | OFFFLOOR_VERDICT OK 0 of 2127 | TWITCH_PARSE OK (8 checks) |
+TOWNWALK in_solid=0/18633 raid_in_solid=0/5573 PASS | DELVE_TEST OK ran 9001 frames, floor reached 2. Logs: renders/cycles/s133/.
+NEXT (S110c-2): copy the 20 into assets/townsfolk/uacp/ + LICENSE, --import, commit the .import siblings, and wire per role in townsfolk.gd (Rig.play
+prefix strip, per-body scale, gear skipped) with a render - ONE commit.
+No live Twitch test. ZERO BITS. No cheer, no redemption, no chat line as bellmirebro. My RUNNING line said "S129" - wrong tag, this is S133.

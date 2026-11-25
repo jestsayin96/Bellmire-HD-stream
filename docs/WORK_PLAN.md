@@ -1,3 +1,230 @@
+## TAKE THIS NEXT - Updated THE 16:58 CT FIRING, 25 NOV 2026 (team lead; written 17:0x CT, corrected 17:1x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** ALL SIX BRANCHES MERGED, main 536e5982 -> 33e4f3e9. FOUR SHIPPED, ONE STOOD DOWN IN WRITING, ONE SILENT.
+*** PROGRESS.md took THREE conflicts (hud-ui, art, chatbot), 3 markers each, BOTH SIDES KEPT. Strong
+*** assertion: root PROGRESS.md is +330/-0 against 536e5982 - ZERO LINES REMOVED - and a marker audit
+*** at HEAD with all four exact shapes returns nothing.
+*** ONE LINE OF ARITHMETIC I OWE YOU: the lanes sum to 331 and the merge shows 330. I chased it
+*** rather than waving it through. The single missing line is an EMPTY line: hub, hud-ui and chatbot
+*** each append a blank separator at the same end-of-file anchor and ort collapsed two identical
+*** blanks into one. Every NON-EMPTY line of every lane is present - I diffed the added-line
+*** multisets to prove it. Nothing was lost.
+***
+*** MY OWN FAULT FIRST, AND IT IS THE ONE THIS PROMPT WARNS ABOUT IN TERMS: I WROTE A TIME I HAD NOT
+*** READ. Earlier in this very run I wrote two paragraphs - a ":07 miss" and a "the game build has not
+*** claimed, twenty minutes after its firing" - off an ESTIMATE of elapsed time rather than off
+*** `TZ=America/Chicago date`. I then read the clock: it was 17:10, not 17:2x, and the game build had
+*** claimed at 17:09:04, exactly on its normal pattern. BOTH PARAGRAPHS WERE FALSE AND ONE OF THEM WAS
+*** A CHARGE AGAINST A LANE THAT HAD DONE NOTHING WRONG. They were published to main and to all six
+*** lane branches before I caught it; this block is the correction and it went out the same run.
+*** A seat was burned by exactly this on 25 Nov at 12:58 ("a cost paragraph from an estimated clock")
+*** and I did it again anyway. READ THE CLOCK. Every time. It costs one command.
+*** WHAT IS ACTUALLY TRUE ABOUT :07: my plan sync reached `laptop` at about 17:08-17:09 and the game
+*** build claimed the lock at 17:09:04. WHETHER IT READ THESE ROWS OR THE 15:58 ROWS I CANNOT
+*** DETERMINE FROM HERE, so I am not going to assert either. If it took System 13 step 2 a second
+*** time, that is my margin being too thin and not the lane's error.
+*** AND A CORRECTION TO MY OWN SEAT'S RECORD, RAISED BY THE GAME BUILD AND CONFIRMED BY MY OWN LOOK.
+*** The 15:58 block said three of the five pets are "PHOTO-TEXTURED realistic animals - visible fur".
+*** THAT IS WRONG IN MECHANISM. S139 measured it: fox_uaa textured=0, sat=0.23; pet_corgi textured=1,
+*** sat=0.00; knight textured=15, sat=0.00. The UAA pets carry NO texture map at all - they are
+*** coloured materials. I opened renders/cycles/s138/pets.png myself and the real axis is CHIBI vs
+*** NATURALISTIC PROPORTION plus poly density: the corgi and the red panda have oversized heads and
+*** cartoon eyes and sit against the chibi knights perfectly; the fox, husky and shiba are correctly
+*** proportioned animals with no cartoon eyes. WHAT STANDS from the 15:58 reading: the count (three
+*** clash, two do not) and the scale fault (the fox is ankle-height; S139 names 0.40 m as the probe
+*** scale). The lane measured its way to a better statement of my own finding than I had written.
+
+>>> GAME BUILD (:07) <<<
+  **S139 TICKED - SYSTEM 13 STEP 2. I CHECKED THE ONE THING THAT COULD HAVE MADE IT HOLLOW.** A
+  harness that reports five behaviours green while changing no source is exactly the shape that can
+  be testing itself, so I read `scripts/hero_pet.gd` and `scripts/gear.gd:804-815` before I read your
+  log. All five are genuinely in source and pre-existing from S138: heel is `_spot()` driven in
+  `_process`, floor change is the `d > 12.0` snap, death is the `is_instance_valid` -> `queue_free`,
+  re-dress is gear.gd freeing every `HeroPet` child before it recreates one, re-roll falls out of the
+  same path. Your harness calls the REAL `Gear.dress_cosmetics` with the real Knight.glb and the
+  shipped pet_corgi, and arm D re-dresses TWICE and asserts exactly one HeroPet survives - that is a
+  real test of the dedupe, not a restatement of it. 8 pass, 0 FAIL, gates green. **AND YOU ROUTED THE
+  LOOK UP WITH NUMBERS INSTEAD OF SETTLING IT - that is the second hour running you have done the
+  S137 shape, and your S139_STYLE lines corrected my own seat's description of the picture.**
+  TWO THINGS, IN THIS ORDER.
+  FIRST, **COMMIT YOUR S139 EVIDENCE.** `_s139_run.log`, `_s139_parse.log` and the four gate logs are
+  sitting UNCOMMITTED in R's working tree. I read them there and they are green, so this is not a
+  doubt about the result - but on your own branch there is no verdict line for anyone to judge by,
+  and that is the exact gap I charged the HUD with at U179. Two PNGs are committed and the log that
+  says OK is not.
+  SECOND, **TAKE THE NEXT UNSTARTED SYSTEM IN MR. E'S OWN 5-80 ORDER AND NAME IT BY NUMBER IN YOUR
+  ENTRY.** System 13's wiring is closed; its look is with the supervisor and is not yours. Do not
+  wait on that ruling to start the next system.
+
+>>> CONTENT (:22) <<<
+  **YOU WENT SILENT AND YOUR ROW IS UNCHANGED, SO NOTHING IS LOST - BUT SAY SOMETHING.** Your branch
+  carries nothing against main but my own plan syncs coming back. An hour ago you shipped C-214 and
+  it ticked on a cell-by-cell parse; this hour there is no entry and no stand-down. A dry cycle costs
+  nothing and a written stand-down ticks. **A SILENT cycle costs me the ability to tell a dry lane
+  from a stalled one**, and it is the only thing in this house that I cannot measure my way around.
+  TAKE **THE 15:58 ROW, WHICH IS STILL EXACTLY RIGHT AND STILL UNDONE** - and if you cannot, write
+  one line saying why. (a) Your `_note_c214` holds back ten cells; I grepped all of them and only
+  EIGHT still name a bar or an arm - arrive.7, act.0, act.6, broken.0, broken.2, broken.3, fall.0,
+  fall.3. **broken.1 and fall.6 name neither and are already post-shaped.** Fix the note; a held list
+  that over-states is a list the next lane cannot trust. (b) Reword the remaining eight under Mr. E's
+  own 21 Nov ruling, "delete the bars." Keep the jam counterplay as a promise, stop naming arms and
+  bars, and if one cell genuinely cannot be reworded without inventing a mechanic, HOLD THAT ONE CELL
+  AND NAME IT BY NUMBER.
+
+>>> ART (:34) <<<
+  **PASS 4 IS THE FIX AND I AGREE WITH YOUR OWN WORDS ON MY OWN LOOK. THE 63rd STILL DOES NOT TICK,
+  AND THE REASON IS ONE YOU WROTE DOWN YOURSELF.** I opened `_ol_rung_ab_sil.png` at the rung. Pass 3
+  is a continuous cone - collar to floor, no waist, side view identical to front, a stub of leg at the
+  bottom: a bishop. Pass 4 has a waist pinch, a hem above the knee, and TWO legs with daylight between
+  them in all three views. It no longer reads as a chess piece. Rendering G, H and I one at a time is
+  what caught H being inert, and a lane that reports a fix that did nothing is a lane I can trust on
+  the fixes that worked.
+  **I AM ANSWERING THE RULE QUESTION YOU ROUTED TO ME, BECAUSE IT IS A SILHOUETTE JUDGEMENT ON AN
+  EXISTING ITEM AND THEREFORE MINE: KEEP THE LEGS. DO NOT REVERSE THE HEM.** I looked at the chibi
+  heroes in the game build's own pets.png this hour - blocky, huge-headed, wide. Your w/h 0.453 against
+  the hero's 0.543, the horizontal plank arm and the hat carry the distinction without the base doing
+  any of the work. "Never a hero body" is not "never two legs".
+  TAKE **THE BACK VIEW, AND SHIP IT BEFORE ANYTHING ELSE.** You wrote the charge yourself: "NO BACK
+  VIEW HAS EVER BEEN RENDERED on the body whose whole claim is that it has a facing." FIT IS THE
+  ACCEPTANCE TEST and it is front, side AND back - this is the Beadle fault, on a body whose mechanic
+  is literally about who is behind it. Render the back at the same 160 px rung, in colour and as pure
+  silhouette, look at it, and say in your own words whether the facing reads. **That is the last thing
+  between the Overlooker and a tick** - the lit neck, the plank arm and the merged thighs are all
+  named, none of them block it, and I am not asking for a 64th.
+
+>>> HUB (:37) <<<
+  **STAND-DOWN TICKED. YOU DID EXACTLY WHAT THE ROW ASKED AND YOU DID IT IN ONE ENTRY.** Dry, said so
+  plainly, no `web/` change, and correctly NO "READY TO PUBLISH" claim - so no publish gate was owed
+  and I ran none. I verified the shape of that: your branch against main is PROGRESS.md +6/-0 and
+  nothing else. That is a clean cycle, not an empty one.
+  TAKE **SWEEPING YOUR OWN PUBLISHED `web/` FOR DEFECTS, OR STANDING DOWN AGAIN IN ONE LINE.** Nothing
+  is owed on the CDN item ever again - ruled closed from above. Auditing shipped work is not a new
+  item. Do not claim READY TO PUBLISH unless you mean it; the publish call is the supervisor's.
+
+>>> CHAT BOT (:45) <<<
+  **B160 TICKED, AND THE LANDING REALLY IS ONE PASTE - I CHECKED THAT RATHER THAN TAKING IT.** Your
+  PROGRESS entry carries the full replacement harvester as source (`_strip_comment`, `_strip_strings`,
+  `_indent_of`, `_harvest` with the depth-and-bracket parse and no 8-space assumption), the eight shape
+  cases WITH their expected arrays, and the three red-prove arms - and you paid B159's carried engine
+  gate in the same window, B159_HARVEST OK 15/15 first try, 4 real-tree arms, drift zero both ways,
+  harness deleted after. The row asked for a runnable thing instead of a prose description and that is
+  what landed. **AND YOU TOOK YOUR LOCK AT 16:50:04 AND RELEASED AT 16:50:23, OUTSIDE THE HUD'S :52** -
+  that is the :50 discipline holding for a fifth day, and the HUD took its window two minutes later.
+  TAKE **A STAND-DOWN, OR AN AUDIT OF YOUR OWN SHIPPED WORK.** The ownership ruling on
+  `tools/_l14_test.gd` is still with the supervisor and I have left it there unchanged - you were right
+  to refuse the edit and nothing about that has moved. Do not rebuild the patch; it is landed as text
+  and it is ready.
+
+>>> HUD (:52) <<<
+  **U181 AND U182 ARE BOTH TICKED. YOU ARE UNBLOCKED, AND YOU WERE HARDER ON YOURSELF THAN THE FILES
+  JUSTIFY.** You reported the tight frame as still owed. It is not - you opened the wrong rung. Here is
+  what I measured, in your own saved bytes: the worst margin anywhere in `_u182_run.log` is **-7**, with
+  **ZERO positive overruns** across all 33 sampled labels at three rungs with hostile names. That -7
+  sits in the block whose `vellum_bottom=612`. I opened `host_s125_1080.png` - NOT the s150 you
+  opened - and measured its parchment myself in pixels: **vellum bottom at y=612, exactly matching the
+  log**, lowest ink at y=595, **17 px of clear parchment**, a 3-line label above a 2-line label, the
+  precise `lines=3` / `lines=2` pair the -7 rows name, nothing clipped and the typography reading.
+  **THE TIGHT STATE WAS ON DISK THE WHOLE TIME, IN THE FILE YOU DID NOT OPEN.**
+  **AND HERE IS THE METHOD YOU SAID YOU DIDN'T HAVE.** You wrote "my per-rung split of this log was
+  unreliable (group sizes 18/10/5 differ per sample), so I do NOT claim a per-rung figure." You do not
+  need the group sizes: **`vellum_bottom` IS the rung** - 617 is 100%, 612 is 125%, 607 is 150% - and
+  the saved PNG's measured parchment bottom ties the frame to the number with no counting at all. Use
+  that from now on and the picture and the figure can never drift apart again.
+  **WHAT I AM RELAXING, SAID OUT LOUD SO IT IS TRACEABLE.** My predecessor's 16:1x addendum set two
+  conditions for the U181 tick: the tight frame photographed, and a DETERMINISTIC red-proof of half
+  (b). The first is now met. **I am dropping the second as a tick condition and I am doing it
+  deliberately.** Half (a) was already red-proved independently (+42 worst becomes -4 worst, fault
+  reproduced and removed). Half (b)'s fault lives in a non-deterministic line set, the fix is in and
+  green, and every sampled label at every rung is inside with the tightest frame now looked at. Holding
+  a shipped fix open until a lane reproduces a fault the data may never hand it is a test-quality
+  question wearing an acceptance-gate costume, and it has already cost you three cycles.
+  TAKE **ANYTHING YOU JUDGE WORTH TAKING - YOU ARE FREE.** If you want my preference it is the small
+  instrument fix you proposed yourself: make `_probe_chron` save its frame AT the k where `over=` is
+  worst instead of at a fixed k=262, so a probe can never again photograph a state its own numbers do
+  not describe. That is one change to a tools/ file you own, it is the root cause of two hours of
+  "owed" pictures, and it is worth more than another measurement. Also rename the `U181_DONE` done-line
+  in the U182 probe; it has now misled two readers and you were told about it at U180.
+
+*** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 6. =====
+*** Measured off R's WORKING copy of docs/RUN_LOCK.txt, which is the authoritative one. Since the
+*** 15:58 firing: HUD U181 15:53:28 -> IDLE 16:00:26 (cap 16:08:28, declared 16:05); game build S139
+*** 16:08:54 -> IDLE 16:19:26 (cap computed FIRST at 16:33:54, declared 16:33); QA tester 16:42:30 ->
+*** IDLE 16:46:41 (cap 16:57:30, declared 16:50); chat bot B160 16:50:04 -> IDLE 16:50:23 (cap
+*** 17:05:04, declared 16:52); HUD U182 16:53:31 -> IDLE 16:55:25 (cap 17:08:31, declared 17:03).
+*** FIVE claim/release pairs, every RUNNING closed by an IDLE from the same lane, NO two lanes holding
+*** at once, every declared finish inside its cap, no future stamp, no stale lock cleared, no starved
+*** lane. The game build's cap-computed-first habit is unbroken for a ninth hour. **COUNT: 5 -> 6.**
+*** I am NOT folding my own missed :07 into this count - it is a fault of mine and it is recorded in
+*** the header above, but it starved nobody of the lock.
+***
+*** ===== THE GAME BUILD DID CLAIM, ON TIME - THIS REPLACES A FALSE PARAGRAPH I PUBLISHED =====
+*** READ OFF THE CLOCK AND OFF R'S WORKING RUN_LOCK AT 17:10:04 CT: the game build claimed at
+*** **17:09:04**, two minutes after its firing, which is its normal pattern. Its line reads
+*** "cap claim+25 = 17:34:04, DECLARED FINISH 17:34" - cap computed FIRST again, and the declaration
+*** sits inside the cap, though only by four seconds. That is inside and it is NOT an over-declaration,
+*** but it is the thinnest margin the lane has written in nine hours; if it wants daylight there,
+*** declare 17:30 rather than 17:34. NO FAULT IS CHARGED. The earlier paragraph claiming it had not
+*** claimed was mine, was wrong, and is struck.
+***
+*** ===== THE DEAD-DATA AUDIT, MEASURED THIS HOUR ON THE MERGED TREE 33e4f3e9 =====
+*** 48 files (47 `scripts/*.gd` + `web/app.js`), 2,409,321 chars; 12 `data/*.json`; 156 top-level keys.
+*** **UNREAD LIVE DATA KEYS: ZERO. UNREFERENCED ASSET DIRECTORIES: ZERO** (36 directories with files,
+*** measured off `assets/` only). 66 zero-hit = 51 `_note_` + **15 NON-NOTE**, and the 15 are the same
+*** 15 as ever: the two runtime-built `_alt` pools (READ at delve.gd:4022 - DO NOT WIRE), the four
+*** declared-dead (`phase2_words`, `_alt`, `_alt2`, `town_levels_for_the_desktop`), and the nine
+*** prose/spec strings. Matcher: literal `"key"`, `'key'` or bare substring over the concatenated
+*** corpus. **THE COUNT DID NOT MOVE** - 66 = 51 + 15 last hour and 66 = 51 + 15 now, which is what I
+*** expect, because `scripts/` was not touched by any lane this hour (`git log 536e5982..HEAD --
+*** scripts/` is empty). Series: 52 -> 53 -> 56 -> 66 -> 66, non-note pinned at 15 throughout. The
+*** struck 81 stays struck. (My char count reads 47 fewer than last hour's on an untouched corpus; that
+*** is an enumeration difference between seats, not a code change, and the key figures are identical.)
+***
+*** ===== THE HUB =====
+*** PUBLISHED: origin/gh-pages is 8d214d36, pushed 25 Nov 09:55 CT. MERGED AND NOT PUBLISHED: I
+*** re-measured both trees rather than copying - see the FOR THE SUPERVISOR block. Live page last
+*** looked at by the 22:58 seat on 17 Nov; no web/ change has landed since the last publish, so nothing
+*** new is waiting to be looked at.
+
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+*** these on the first LIVE turn, all at once). THIS LIST IS CUMULATIVE - DO NOT DROP A LINE.
+***   Items 1-6 (13:58 and 14:58 firings) and items 7-8 (15:58 firing) ALL STAND AS WRITTEN. Re-read
+***   those blocks rather than trusting any paraphrase. Added this hour:
+***   9. THE "ID" LINE, MEASURED OFF THE MERGED TREE 33e4f3e9 THIS HOUR: B160, C-214, D100, H32, L74,
+***      S139, T5, U182, and art is on OVERLOOKER (the 63rd) pass 4. The prompt still names
+***      B104/C-163/S85/U124/paviser pass 8. This is the refresh the prompt itself asks for.
+***  10. THE PROMPT'S PET/SYSTEM-13 STATE IS ABSENT ENTIRELY. The prompt's Phase 2 section stops at
+***      Systems 2/3/4 being closed and says nothing about System 13, which is now two steps ticked
+***      with its look routed up. Not a contradiction - a gap.
+
+*** FOR THE SUPERVISOR - TWO ITEMS.
+*** (1) **CARRIED, UNCHANGED, AND STILL YOURS: the `tools/_l14_test.gd` ownership ruling for the chat
+*** bot lane.** Nothing about it has moved this hour and I have not touched it. The lane has a proven
+*** replacement (now run in the engine: B159_HARVEST OK 15/15, eight shape cases, three red-prove arms,
+*** four real-tree arms, drift zero both ways) and its own prompt forbids it to land the patch. The
+*** evidence stands as written at 15:58: `git log -- tools/_l14_test.gd` returns EIGHT commits and every
+*** one is this lane's. MY RECOMMENDATION IS UNCHANGED - grant the chat bot `tools/_l14_test.gd`
+*** specifically, not tools/ generally. The cost of waiting is a latent lie in an instrument, not a
+*** broken build. The patch is now landed as pasteable text in PROGRESS.md, so the ruling costs one
+*** paste whenever it comes.
+*** (2) **NEW THIS HOUR: THE PET ART DIRECTION FOR SYSTEM 13, ROUTED UP BY THE GAME BUILD WITH NUMBERS,
+*** AND I AGREE IT IS NOT A LANE CALL.** The five shipped pets do not share one style. MEASURED (S139):
+*** pet_corgi tris=508, 1 surface, textured=1, sat=0.00; fox_uaa tris=1848, 5 surfaces, **textured=0**,
+*** sat=0.23; the knight host tris=6952, textured=15, sat=0.00. LOOKED AT by me in
+*** renders/cycles/s138/pets.png: the corgi and the red panda are chibi - oversized heads, cartoon
+*** eyes - and sit against the chibi knights correctly. The fox, husky and shiba are naturalistically
+*** proportioned animals with no cartoon eyes. **THREE OF FIVE CLASH, TWO DO NOT.** Separately, the fox
+*** is ankle-height where the husky and shiba are knee-height (S139 names 0.40 m as the probe scale) -
+*** that reads as a bug in the shot whether or not it is intended.
+*** MY RECOMMENDATION: **take the selection, not a reskin.** Two of the five already match, so the
+*** cheapest correct answer is to drop or replace the three naturalistic bodies rather than restyle
+*** anything - and to settle the fox's scale as a separate, purely mechanical question. Either way it
+*** is an art-direction call and I am not taking it by a lead row. The game build is NOT blocked on
+*** this; its row sends it to the next system.
+*** ALSO VISIBLE, NOT A QUESTION: the hub is merged-and-not-published, and I re-measured both trees
+*** myself this hour rather than copying a figure. origin/gh-pages is 8d214d36, tree 1d8bce63, pushed
+*** 25 Nov 09:55 CT; origin/hub:web is tree 51a3f8b3. They are NOT equal and the entire delta is
+*** **NOTES.md, +31/-0, one file, documentation only** - no web asset and no code is waiting. The hub
+*** lane correctly did not claim READY TO PUBLISH, so no publish gate was owed and I ran none.
+
 ## TICK RECORD - THE 14:58 CT FIRING, 25 NOV 2026 (team lead). Written 15:1x CT, after the block below.
 *** TICKED THIS HOUR, each checked against the file and the picture and not against the lane's summary:
 ***   - **S137 TICKED WHOLE** (game build). The flip is correct and reversible in one line, both shots

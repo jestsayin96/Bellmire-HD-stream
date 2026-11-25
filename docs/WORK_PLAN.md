@@ -313,6 +313,36 @@
 ***      and the cascade behind it is closing in one cycle per body. Recorded so that if you ever
 ***      want that rate changed, you are changing it from a measured figure and not an impression.
 
+*** ===== SECOND ADDENDUM, 04:1x CT. ART CLOSED THE IMPORT GAP INSIDE THE SAME HOUR AND THE 62nd IS
+*** ===== NOW **TICKED**. THE ART ROW ABOVE IS AMENDED AGAIN: ITEM (a) IS DONE, ONLY PASS 7 REMAINS.
+***   Art claimed 04:07:58 / cap 04:32:58 / declared 04:15:58 / IDLE **04:09:15** - inside, clean.
+***   `assets/monsters/minibosses/collier.glb.import` and `tools/art/_collier_load.gd` are on main.
+***   **I READ THE GATE RATHER THAN THE VERDICT**, and it is a sound instrument: it calls
+***   `ResourceLoader.exists`, then `load()`, then `instantiate()`, then walks the tree counting
+***   `MeshInstance3D`, failing separately at each step; it carries `timberman` and `crimp` as
+***   CONTROLS that had siblings before this run; and `if checked == 0` is an explicit FAIL, so it is
+***   genuinely RED ON EMPTY and not merely described as such. Result: `LOADCHECK OK OWED collier 4
+***   meshes, CONTROL timberman 4, CONTROL crimp 4, checked=3 fails=0`, rc 0.
+***   **SO I TICK THE 62nd.** Body built, loadable, proved to load, register GREEN at 64 pairs, ratio
+***   0.86 matching CANON without adjustment, and a REAL back rather than a mirrored front. That is
+***   the same bar `crimp` and `timberman` were ticked at.
+***   **FAULT 4 IS CARRIED OPEN, NOT FOLDED IN.** The front count still does not read - the lane's own
+***   fault list says three of four embers read cleanly, my own look says two clean and two partial,
+***   and the disagreement stands in the record unresolved rather than averaged. It goes to pass 7
+***   with fault 1. A body ticked with a named open defect is how the last three shipped; a body
+***   ticked with the defect quietly dropped is not.
+***   **AND THE TWO-STEP I ASKED ABOUT IS WORTH ASKING ABOUT ANYWAY.** Art has now closed this gap in
+***   a second window three bodies running, each time fast and clean. It is not a fault. But the
+***   cascade spends a step on it every time, and the question in the row above stands for the 63rd.
+***
+*** GAME BUILD - **MY L56 ROW REACHED YOU AND YOU WERE ALREADY ON IT AS I WROTE THIS.** Your 04:10:21
+***   claim reads "L56 trap half made deterministic in tools/_l56_test.gd: parse + L56 normal +
+***   --redproof + --nospring + standing battery", cap computed first at 04:35:21, declared 04:32:21.
+***   A `--nospring` arm is exactly the right shape: it proves the gate still goes RED when no trap
+***   fires, which is the half that made B144's OK a coin flip. Verifying it next hour.
+***   **YOUR COLLIER ROW IS UNCHANGED AND IS STILL THE 05:07 ROW.** Art's import sibling is in, so by
+***   05:07 the only precondition left is content's C-205 feed row at 04:22.
+
 *** NEEDS MR. E: nothing.
 
 **LOCK DISCIPLINE AND THE RUNNING CLEAN-HOUR COUNT - THE 03:58 CT FIRING, 25 NOV 2026.**

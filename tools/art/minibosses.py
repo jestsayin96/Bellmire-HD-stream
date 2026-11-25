@@ -23349,13 +23349,133 @@ def collier():
     # narrower than the skull, with its brim on -Y only, which also buys
     # another piece of facing (FAULT 7).
     P.add(L.sphere(0.198, 0.204, 0.206, 16, 10), 'body', loc=tuple(_hd))
-    # brow band and the mouth cloth - BOTH -Y ONLY (FAULT 7)
-    P.add(L.box(0.292, 0.062, 0.054), 'dark', loc=(_hd.x, _hd.y - 0.134, _hd.z + 0.052))
-    P.add(L.box(0.212, 0.098, 0.096), 'dark', loc=(_hd.x, _hd.y - 0.106, _hd.z - 0.082))
-    # DARK sockets, not glow eyes (FAULT 10)
-    for s in (-1, 1):
-        P.add(L.sphere(0.042, 0.030, 0.034, 9, 6), 'dark',
-              loc=(_hd.x + s * 0.066, _hd.y - 0.134, _hd.z + 0.002))
+    # *** PASS 15, FIX A - THE FACE WAS BURIED INSIDE THE SKULL, AND THE CAUSE
+    # IS ARITHMETIC, NOT TASTE. *** Pass 14 reported "his head has almost no
+    # facing" as an eye judgement and could not say why. Measured: the head is
+    # an ellipsoid of radii (0.198, 0.204, 0.206). The brow band sat at
+    # y -0.134 with depth 0.062, so its outer face reached y -0.165 - the
+    # head's own surface at that height is y -0.197. The sockets reached
+    # -0.164 against a surface at -0.192. The mouth cloth reached -0.155
+    # against -0.187. ALL THREE WERE SUNK ABOUT 0.03 m INSIDE THE HEAD, and
+    # the only part of any of them that ever rendered was the sliver the
+    # sphere's curvature left behind near the silhouette - the two small
+    # slanted marks on the shipped hero_front.png. The head carried no facing
+    # worth the name. That is FAULT 7 shipped, in my own body.
+    #
+    # A FLAT BOX CANNOT SIMPLY BE PUSHED OUT. At the band's own ends
+    # (x +-0.146) the sphere has receded to y -0.128, so a box set proud at
+    # the centre stands 0.08 m off the head at its tips: wings, not a brow.
+    # That is very likely why it was sunk in the first place. So the face
+    # FOLLOWS THE SURFACE now - every piece is placed on the ellipsoid by
+    # construction, and no offset here is a guess.
+    _HR = (0.198, 0.204, 0.206)
+
+    def _face(xf, zf, out=0.0):
+        """A point on the FRONT (-Y) of the head. xf/zf are fractions of the
+        head's own radii; `out` pushes along the true outward normal."""
+        q = max(0.0, 1.0 - xf * xf - zf * zf) ** 0.5
+        pt = Vector((_HR[0] * xf, -_HR[1] * q, _HR[2] * zf))
+        n = Vector((pt.x / _HR[0] ** 2, pt.y / _HR[1] ** 2,
+                    pt.z / _HR[2] ** 2)).normalized()
+        return _hd + pt + n * out
+
+    if os.environ.get("COLLIER_FACE", "1") != "0":
+        # THE BROW RIDGE - a tube along the surface, -Y only, standing 0.012
+        # proud so it throws a shadow line instead of being a painted stripe.
+        # It spans 60% of the head's half-width and STOPS DEAD at the sides,
+        # so it cannot wrap: the Beadle's pale-band fault is answered by
+        # construction, and the side and back views are the check that it held.
+        #
+        # *** PASS 15b, AND IT IS A FAULT PASS 15 ITSELF CREATED. *** The first
+        # version ran the brow to xf +-0.60 at a FLAT radius of 0.030 and the
+        # rag to xf +-0.46. Both of those are far enough round the skull that
+        # the surface is already turning away, so the tube's end caps and the
+        # rag's outer edge STOOD OUT PAST THE HEAD'S OWN SILHOUETTE: on
+        # hero_side.png they read as a dark hook hanging off the side of his
+        # head, like a broken handle. I saw that on the side crop, not in any
+        # number - the front view and every count I had were happy. So the
+        # brow is pulled in to +-0.52 and TAPERED to nothing at its ends, and
+        # the rag is pulled in to +-0.40 and sits closer to the skull.
+        if os.environ.get("COLLIER_FACE_BROW", "1") != "0":
+            _taper = os.environ.get("COLLIER_FACE_TAPER", "1") != "0"
+            # HOW FAR ROUND THE SKULL THE FACE IS ALLOWED TO REACH. Swept
+            # against a MEASURED target, not chosen: the acceptance test is
+            # that the face adds ZERO pixels outside the head's own silhouette
+            # on hero_side.png (see _facingread/_silbreak in the pass notes).
+            _span = float(os.environ.get("COLLIER_FACE_SPAN", "1.0"))
+            # HOW FAR THE FACE STANDS OFF THE SKULL. 0 = flush. See the
+            # silhouette note on the sockets: anything proud on the front of a
+            # round head can cross the profile in the side view.
+            # SHIPPED AT 0.0 - THE FACE SITS EXACTLY ON THE SKULL. The sweep
+            # that chose it, measured as new silhouette px outside the shipped
+            # outline on hero_side.png: +0.012 proud = 88, +0.0054 = 71,
+            # FLUSH = 48, -0.0042 = 48, -0.0090 = 39. Proudness is real and
+            # costs about 40 px of it, so none is bought. The residual ~48 is
+            # NOT explained - see the pass-15 fault list; insetting past flush
+            # buys almost nothing and starts walking back toward the burial
+            # this whole pass exists to fix, so flush is where it stops.
+            _fo = float(os.environ.get("COLLIER_FACE_OUT", "0.0"))
+            _ends = (0.52 if _taper else 0.60) * _span
+            _bp, _br = [], []
+            for i in range(11):
+                _t = -1.0 + 2.0 * i / 10.0
+                _bp.append(_face(_ends * _t, 0.26, _fo * 0.012))
+                _br.append((0.030 if _fo else 0.024)
+                           * (1.0 - 0.78 * _t * _t) if _taper else 0.030)
+            P.raw(L.tube(_bp, _br, 8), 'dark')
+        # THE SOCKETS - set 0.010 INTO the surface so they read as holes in the
+        # pot and not beads on it. Still DARK and never lit: FAULT 10 is that
+        # the only glowing things on this body are the four vents, and two more
+        # lit dots would wreck the count that IS the mechanic.
+        if os.environ.get("COLLIER_FACE_EYES", "1") != "0":
+            # *** THE SOCKETS WERE THE SILHOUETTE BREAK, AND A SWEEP IS WHAT
+            # PROVED IT - NOT MY REASONING, WHICH WAS WRONG TWICE. *** Pass 15
+            # added 130 px of NEW outline outside the head on hero_side.png.
+            # I blamed the brow ends, tapered them, and got 115. I then blamed
+            # the rag's width and swept the whole face span 1.00 -> 0.78 ->
+            # 0.58 -> 0.40: the break went 115 -> 113 -> 113 -> 112. A cause
+            # that does not move when you shrink it is not the cause. The
+            # sockets never scaled with that span, and they were ROUND BALLS
+            # of y-radius 0.052 sunk only 0.010 into a head of y-radius 0.204,
+            # so each one stood 0.042 proud of the skull IN EVERY DIRECTION
+            # and the near one broke the profile. A socket is a HOLE, so it
+            # wants no depth outward at all: flat in Y, and set INTO the
+            # surface.
+            _ef = os.environ.get("COLLIER_FACE_EYEFLAT", "1") != "0"
+            for s in (-1, 1):
+                if _ef:
+                    P.add(L.sphere(0.050, 0.018, 0.042, 9, 6), 'dark',
+                          loc=tuple(_face(s * 0.30, 0.02, -0.004)))
+                else:
+                    P.add(L.sphere(0.052, 0.052, 0.044, 9, 6), 'dark',
+                          loc=tuple(_face(s * 0.30, 0.02, -0.010)))
+        # THE SMOKE RAG over mouth and nose. A charcoal burner ties one on
+        # against his own clamp - rule 1, a thing looks like what it is FOR -
+        # and it is the one piece with enough area to carry the facing at
+        # stream distance. A curved patch, not a box: `surf` thickens it along
+        # its own normals so it sits down on the skull.
+        if os.environ.get("COLLIER_FACE_RAG", "1") != "0":
+            _sp = float(os.environ.get("COLLIER_FACE_SPAN", "1.0"))
+            _rw = (0.40 if os.environ.get("COLLIER_FACE_TAPER", "1") != "0" else 0.46) * _sp
+            _ro = (0.006 if os.environ.get("COLLIER_FACE_TAPER", "1") != "0"
+                   else 0.010) * float(os.environ.get("COLLIER_FACE_OUT", "0.0"))
+            _rows = []
+            for i in range(5):
+                _zf = -0.14 - 0.44 * i / 4.0
+                _rows.append([_face(-_rw + 2.0 * _rw * j / 6.0, _zf, _ro)
+                              for j in range(7)])
+            P.raw(surf(_rows, 0.020), 'dark')
+    else:
+        # THE CONTROL ARM - the shipped pass-14 face, buried exactly as it
+        # shipped. Kept so the A/B has a real `before` and the claim above can
+        # be re-rendered by anyone who doubts it. COLLIER_FACE=0.
+        P.add(L.box(0.292, 0.062, 0.054), 'dark',
+              loc=(_hd.x, _hd.y - 0.134, _hd.z + 0.052))
+        P.add(L.box(0.212, 0.098, 0.096), 'dark',
+              loc=(_hd.x, _hd.y - 0.106, _hd.z - 0.082))
+        for s in (-1, 1):
+            P.add(L.sphere(0.042, 0.030, 0.034, 9, 6), 'dark',
+                  loc=(_hd.x + s * 0.066, _hd.y - 0.134, _hd.z + 0.002))
     # low flat burner's hat
     P.add(L.scone(0.176, 0.124, 0.082, 14), 'dark', loc=(_hd.x, _hd.y + 0.004, _hd.z + 0.148))
     P.add(L.box(0.310, 0.150, 0.036), 'dark', loc=(_hd.x, _hd.y - 0.126, _hd.z + 0.162))

@@ -1,3 +1,124 @@
+## TAKE THIS NEXT - Updated THE 13:58 CT FIRING, 25 NOV 2026 (team lead; written 14:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** ALL SIX LANE BRANCHES MERGED. SIX SHIPPED, NOBODY DRY. main 2aa92486 -> 252558b9.
+*** PROGRESS.md took THREE conflicts (hub, hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT by a
+*** state machine, not a blanket delete. Residual markers 0 on all FOUR exact shapes across every
+*** tracked text file. numstat vs old main: PROGRESS.md +116/-0. ZERO LINES REMOVED.
+***
+*** ===== THE SUPERVISOR HAS RULED ON BOTH ITEMS I ROUTED UP AT 12:58. RELAYING IT FIRST. =====
+*** Ruling doc: claude/sup-nov25-1352-RULING-uacp-skin-override-and-cdn-leave-it.md, 13:52 CT.
+***   1. UACP BODY SKIN STYLE -> **(B) OVERRIDE THE UACP SKIN TO MATCH KAYKIT FOR TOWNSFOLK.**
+***      Verbatim: "Two body styles on screen together reads as a bug, not a deliberate style."
+***      And: "Game build: flip the switch to override skin. Do not hold for further approval."
+***   2. THE CDN CACHE-BUST HTML -> **LEAVE IT.** Verbatim: "A re-push for a cosmetic CDN cache
+***      issue wastes a publish slot for no viewer benefit. The hub lane is told to stop measuring
+***      it." The supervisor verified the form end to end itself at 12:54 CT.
+***   A CORRECTION I AM MAKING ON MYSELF INSIDE MY OWN RUN, AND IT IS THE FAULT THIS SEAT KEEPS
+***   REPEATING: the paragraph that stood here said this block would land "at about 14:08 - ABOUT A
+***   MINUTE AFTER THE GAME BUILD FIRES AT :07" and told the game build it would probably miss the
+***   ruling this cycle. **THAT WAS WRITTEN FROM AN ESTIMATED CLOCK, NOT A READ ONE, AND IT IS
+***   FALSE.** The commit timestamps are the ground truth: main pushed 2026-11-25T14:03:01-06:00 and
+***   `laptop` synced 14:03:04 - FOUR MINUTES BEFORE the :07 firing. THE RULING WAS IN FRONT OF THE
+***   GAME BUILD ON ITS OWN BRANCH WHEN IT STARTED. I beat the clock and then wrote that I had not.
+***   I am leaving this correction in rather than quietly deleting the sentence, because a lane that
+***   reads "you probably did not get this" in the same block that it did get has every reason to
+***   distrust the next thing I tell it. GAME BUILD: you have the ruling. Act on it this cycle.
+***
+*** ===== WHAT I TICKED THIS HOUR IS IN MY 13:58 RUN DOC. =====
+***   This block was written to carry the ruling, not to carry the ticks. Verification of S136b,
+***   C-213, collier pass 17, U179, B157 and the hub's catalogue row is in my run doc for this hour;
+***   where I had not finished checking a claim at the time of writing, I say so there rather than
+***   ticking it here.
+
+>>> GAME BUILD (:07) <<<
+  **THE SKIN CALL IS ANSWERED AND IT IS (B). FLIP `UACP_SKIN` TO OVERRIDE.** The supervisor's own
+  words are above: override to match KayKit, and "Do not hold for further approval." S136b already
+  wired the switch, so this is a flip and a proof, not new work - it is the second half of System 12
+  S110c-3, which is already an open item of Mr. E's.
+  TAKE **S137: flip the switch to the KayKit-matching skin, then prove it on a picture and not on a
+  number.** What I want to see: the town lineup re-shot with the override ON, the same shot with it
+  OFF kept beside it as the control, and your own sentence on whether the two body families now read
+  as ONE house style at the distance the player actually sees them. The metric cannot answer that;
+  only the picture can. Keep the switch and keep it reversible - the supervisor said explicitly that
+  flipping is "fully reversible if Mr. E prefers the pack's native dark skin later."
+  DO NOT re-open the near-black finding. You withdrew it correctly at S135 and I confirmed it on
+  Quaternius' own pack preview. The black IS the pack's design; we are overriding it by choice now.
+
+>>> HUD (:52) <<<
+  **U179 IS A REAL CLOSE AND THE ROW THAT HID FROM YOU LAST HOUR IS NOW SPENT.** You proved the
+  lock-writer newline closed on a LIVE write rather than on a historical count, and you did not
+  reproduce the banner ghost at 150% - 40 checks, 0 fails, no source change. An item closed by
+  disproving it counts fully, and you also took the window at :53 and released it inside the cap.
+  TAKE **THE WORST FRAME, NOT THE PRETTIEST ONE.** Your own U179 log carries three rungs; name which
+  of 100/125/150 had the TIGHTEST margin in your own numbers, and open THAT frame and look at it.
+  If the tightest rung is clean on the picture as well as in the checks, say so and the regression
+  item is closed for good. If it is not, that is a finding in your own shipped work and not a new
+  item. AND COMMIT YOUR LOG: U124's evidence was an uncommitted file in your working tree and U179's
+  log should not repeat that - on your own branch there must be something to judge by.
+
+>>> CONTENT (:22) <<<
+  **C-213 IS AN AUDIT WITH DIFFS PREPARED AND NO DATA CHANGE, WHICH IS THE RIGHT ORDER.** You read
+  the older A-row bodies against the art source and found the changer's arms deleted and the dyer's
+  vat, and you prepared the diffs instead of landing them unreviewed.
+  TAKE **LANDING THE C-213 DIFFS, IN EXACTLY THE SHAPE C-212 LANDED IN** - additive only, one new
+  `_note_` key, every existing key's VALUE byte-identical, and the cell-by-cell list of which cells
+  changed written into your entry so I can check it cell by cell rather than reading your summary.
+  That is how C-212 earned its tick and it is the same instrument here.
+
+>>> ART (:34) <<<
+  **PASS 17 SHIPPED AND YOUR OWN TITLE IS THE HONEST PART**: "half my first number was a shadow."
+  A lane that names which half of its own measurement was an artefact is worth more than one that
+  reports a clean number.
+  TAKE **THE 360p BROW, WHICH IS THE ONE THING STILL UNRESOLVED ON THE COLLIER AND IS YOURS.** At
+  pass 16 you measured the brow as one solid bar at the 360p rung and I said plainly in that tick
+  that the sheet DOES NOT RESOLVE IT AT THAT SCALE and that the half was your measurement and not
+  mine. So settle it: render the brow at the rung the player sees, LOOK at it, and say whether it
+  reads as a brow or as a smear. If it needs a value change, sweep it as you swept COLLIER_FACE_SKIN
+  and ship the value the PICTURE allows, not the one the metric maximises - that sentence of yours is
+  now house doctrine.
+
+>>> HUB (:37) <<<
+  **THE CDN ITEM IS NOT JUST CLOSED BY ME, IT IS RULED CLOSED FROM ABOVE. STOP MEASURING IT.**
+  The supervisor's words are above: leave it, and the form is verified working end to end. You were
+  right three times and right to refuse the cold-cache test; nothing more is owed on it ever.
+  Your catalogue row is accepted as written: `_packs` walks to 49 = catalogue, no new pack, `web/`
+  unchanged, and you correctly did NOT claim READY TO PUBLISH - so no publish gate was owed and I
+  ran none.
+  TAKE **A WRITTEN STAND-DOWN IF YOU ARE DRY, AND SAY SO PLAINLY.** If you want work, audit your own
+  published `web/` against the live page's security claims - that is a defect sweep in what you have
+  already shipped, not a new item. Do not touch gh-pages.
+
+>>> CHAT BOT (:45) <<<
+  **B157 DID THE RIGHT THING WITH B156'S FINDING: IT WROTE THE WARNING WHERE THE TRIP WOULD BE
+  AUTHORED, NOT WHERE THE INSTRUMENT LIVES.** A guard note above the dispatcher reaches the lane
+  that would add an 8-space dict literal; a comment in the gate would not. And you did NOT edit the
+  gate to chase a fault that has no instance today. That restraint is the tick.
+  **CLAIM BY :50 WITH A FINISH INSIDE :52.** That row has now held five firings running and the HUD
+  has had its window every single time. Keep it.
+  YOUR LANE IS OTHERWISE DRY AND A WRITTEN STAND-DOWN IS THE DELIVERY.
+
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot edit a scheduled task, so
+*** they accumulate here for the first seat that gets a LIVE turn with Mr. E). THREE NEW THIS HOUR,
+*** all three MEASURED BY ME TODAY, none of them copied from the prompt I am correcting:
+***   a. THE ART FIT REGISTER STANDING NOTE IS NOW THE OPPOSITE OF THE TRUTH. The prompt says the
+***      register "reads RED / ok:false" on two carried `_chibi` rows with `shipped_red` empty and
+***      `ok_shipped` true, and instructs the seat NOT to report the art gate as green. Measured on
+***      origin/art today the report is a DIFFERENT SHAPE: top-level `ok: true`, `verdict: "GREEN"`,
+***      64 `pairs`, `errors` 0, `blind_views` 0, `unproved_cells` 0, 64/64 rows stamped, and NO
+***      `shipped_red` or `ok_shipped` key exists at all. REWRITE THAT NOTE.
+***   b. THE HUB BLOCK'S PUBLISHED SHA AND DELTA ARE BOTH STALE. Prompt says gh-pages 05ac2679 /
+***      tree 9ca8051e / 19 Nov 20:06 with a 3-file +59/-1 delta. MEASURED TODAY: gh-pages is
+***      8d214d36, tree 1d8bce63, pushed 25 Nov 09:55:03 CT ("hub publish 8 (cache-bust)"), and the
+***      unpublished delta is ONE file, NOTES.md +31/-0. NOTHING VIEWER-FACING IS UNPUBLISHED.
+***   c. THE MINIBOSS BODY COUNT ("46 rows, 44 live bodies, two retired `_chibi`") no longer matches
+***      the register, which judges 64 pairs. I am NOT supplying a replacement number: the only
+***      matcher I ran over tools/art/minibosses.py was a FLAT REGEX on a multi-line dict, which is
+***      the one instrument this house forbids quoting. Brace-parse it before writing a count.
+***
+*** FOR THE SUPERVISOR: nothing new this hour. Both items I routed up at 12:58 were ruled at 13:52
+*** and are relayed above - the UACP skin as (B) override, the CDN as leave-it. Nothing is waiting
+*** on you from me right now.
+*** NEEDS MR. E: nothing.
+
 ## TAKE THIS NEXT - Updated THE 12:58 CT FIRING, 25 NOV 2026 (team lead; written 13:2x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** ALL SIX LANE BRANCHES MERGED. SIX SHIPPED, NOBODY DRY. main 08bf044c -> 1c71c922.
 *** PROGRESS.md took two conflicts (hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT, state machine

@@ -5889,6 +5889,102 @@
       {
         "tier": "City in all but Charter",
         "line": "'A city in all but the word. The scar grew with us. Keep the door.'"
+      },
+      {
+        "tier": "Crossing",
+        "line": "'Two planks and a rope. It is a crossing if you trust it. I do not, yet.'"
+      },
+      {
+        "tier": "Crossing",
+        "line": "'A cookfire and a cart. Carts mean trade. Trade means thieves. I shall be early.'"
+      },
+      {
+        "tier": "Hamlet",
+        "line": "'Three roofs now. Thatch, mostly. I have stood under worse.'"
+      },
+      {
+        "tier": "Hamlet",
+        "line": "'The well has a bucket and the bucket has a rope. Progress comes in small things.'"
+      },
+      {
+        "tier": "The Guild Post",
+        "line": "'A ledger on a table, a lock on the door. That is how a guild begins.'"
+      },
+      {
+        "tier": "The Guild Post",
+        "line": "'A post with a sign over it. Somebody had to paint the sign. Somebody will want paying.'"
+      },
+      {
+        "tier": "Village",
+        "line": "'Forty chimneys, near enough. I shall learn which ones go cold first.'"
+      },
+      {
+        "tier": "Village",
+        "line": "'A lane with a name. Now it can be walked at night on purpose.'"
+      },
+      {
+        "tier": "Market Day",
+        "line": "'Stalls, scales, a crier. Check the weights before the coin changes hands.'"
+      },
+      {
+        "tier": "Market Day",
+        "line": "'Market day brings strangers. Strangers bring coin and trouble in equal measure.'"
+      },
+      {
+        "tier": "The Chapel",
+        "line": "'A chapel and a bell. Bury the dead properly and the living sleep better.'"
+      },
+      {
+        "tier": "The Chapel",
+        "line": "'The bell is sound. I tested it. The priest says that is not how it works.'"
+      },
+      {
+        "tier": "Craft Row",
+        "line": "'Hammers before dawn. A town that works early is a town that eats.'"
+      },
+      {
+        "tier": "Craft Row",
+        "line": "'Forge, loom, tannery. Keep the fire buckets by the doors and the doors unblocked.'"
+      },
+      {
+        "tier": "The Garrison",
+        "line": "'Barracks, a yard, a rack of spears. Now the Watch has somewhere to be tired.'"
+      },
+      {
+        "tier": "The Garrison",
+        "line": "'A drill every morning. They will hate me by the third day and thank me by the tenth.'"
+      },
+      {
+        "tier": "Market Town",
+        "line": "'Slate roofs, two inns, a paved square. Bellmire is a place people plan journeys to.'"
+      },
+      {
+        "tier": "Market Town",
+        "line": "'The caravans come on schedule now. Raiders can read a schedule as well as anyone.'"
+      },
+      {
+        "tier": "The First Wall",
+        "line": "'Dressed stone, a proper gate, a walkway on top. I shall pace it before I trust it.'"
+      },
+      {
+        "tier": "The First Wall",
+        "line": "'The wall is finished and the wind has not noticed. Good. Let it try.'"
+      },
+      {
+        "tier": "Walled Town",
+        "line": "'Lamps on the wall and glass in the windows. We are well kept, and I intend to keep it so.'"
+      },
+      {
+        "tier": "Walled Town",
+        "line": "'Banners, a full garrison, a gate with a name. This is a town that was worth the saving.'"
+      },
+      {
+        "tier": "City in all but Charter",
+        "line": "'Glass, lamps, painted doors, a market that never quite closes. And still the cellar below. Keep the door.'"
+      },
+      {
+        "tier": "City in all but Charter",
+        "line": "'No charter, but nobody here would call it less than a city. I have stopped correcting them.'"
       }
     ],
     "night_watch": [
@@ -15059,5 +15155,6 @@
   "_note_c191": "C-191 (24 Nov 2026 CST): no miniboss body owed (53 bodies, 53 keys in by_key; no 54th committed). Own queue per TAKE THIS NEXT 12:22: epitaphs +24, barks.trap +10, barks.misfire +10, town_life crier/market/growth +8 each. Plain register, plain string lists, no placeholders. No new readers - all appended to existing pools. The 25 arrive/fall-only miniboss rows deliberately NOT backfilled (no reader outside MB_WAYS).",
   "_note_c192": "C-192 (24 Nov 2026 CST): no miniboss body owed (53 bodies, 53 keys in by_key; no 54th committed). Own queue per TAKE THIS NEXT 13:22: descend +8, cleared +8, barks.enter +10, barks.lord +7, barks.hurt +10, barks.drink +10. Plain strings appended to pools the engine already reads; no placeholders, no mechanics, no floor counts. Expected zero-hit key; do not wire.",
   "_note_c194": "C-194: own queue, no new body (54 bodies, 54 by_key keys, iceman fed in C-193). Appended plain strings to descend, cleared, barks.enter, barks.lord, barks.hurt, barks.drink. Expected zero-hit key.",
-  "_note_c196": "C-196 (24 Nov 2026, content): townsfolk.trades.<trade>.{morning,midday,evening,night} +1 line each, 28 trades, +112 lines (2 -> 3 per leaf). Appended only; existing lines untouched. EXPECTED ZERO-HIT KEY - no lane is to wire it."
+  "_note_c196": "C-196 (24 Nov 2026, content): townsfolk.trades.<trade>.{morning,midday,evening,night} +1 line each, 28 trades, +112 lines (2 -> 3 per leaf). Appended only; existing lines untouched. EXPECTED ZERO-HIT KEY - no lane is to wire it.",
+  "_note_c197": "C-197 (24 Nov 2026, content): e3po.tier_up +24 entries (2 per tier, 12 -> 36, same {tier,line} shape, appended). tier_up is the pool notables.gd _e3po_pick actually reads; tier_up_alt/alt2 are dead. CORRECTION to the C-196 note: townsfolk.trades is NOT read by any script (townsfolk is one of the six dead at D98); trade_stock.trades is a different structure. EXPECTED ZERO-HIT KEY - no lane is to wire it."
 }

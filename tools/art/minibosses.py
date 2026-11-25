@@ -20588,3 +20588,272 @@ def straker():
 
 
 BUILDERS.update({"straker": straker})
+
+
+# ---------------------------------------------------------------- 56 THE WEIGHER
+# WEAR 0.30, AND IT IS A SPREAD. His coat, his boots and the yoke pad are old
+# and black with handling; THE TWO PANS ARE THE TOWN'S SEALED STANDARD and are
+# scoured bright, because a weigher whose pans are dirty is a weigher nobody
+# trusts. Same argument the straker's nails were given: the object the mechanic
+# is counted on is the best-kept thing the body owns.
+CANON.update({
+    "weigher": ("Trueweight", 2.55, (0.60, 0.56, 0.50), (0.96, 0.94, 0.80),
+                "treasury", "IT MUST COME DOWN EVEN - it carries a weigh-beam "
+                "across its shoulders with a pan hanging off either end, and "
+                "the beam is already tipped. Whatever you put into it goes "
+                "into the pan on the side you are standing on, and while the "
+                "beam is tipped the risen side is armoured: the hurt you put "
+                "into the heavy pan is paid straight back out of the light "
+                "one. So a party that does what it always does - everybody on "
+                "one flank, everything into one target - moves this fight "
+                "nowhere at all, however hard it hits. It has to be brought "
+                "down LEVEL: both flanks worked at once, both pans loaded "
+                "together, and the last blow only counts while the beam is "
+                "even. It does not choose a target, it has no phase and there "
+                "is nothing to interrupt - the condition is on where the party "
+                "STANDS. THE THING TO READ IS THE BEAM: two bright pans, one "
+                "up by his shoulder and one down by his knee, hung off a black "
+                "bar that is plainly out of true.",
+                0.30, "A beam is out of true, and something is under it."),
+})
+
+ORDER = ORDER + ["weigher"]
+
+# PER-SLOT MATERIALS - THE TITHER'S, ICEMAN'S AND STRAKER'S ONE RULE CARRIED
+# FORWARD: `bone` IS THE MECHANIC AND NOTHING ELSE. Here that is the TWO PANS.
+# Not the beam they hang from, not the chains, not the yoke pad, not a mark on
+# the head. Everything worn and carried is `dark` or `body`, so the only two
+# light objects in the whole silhouette are the two things a viewer has to be
+# able to compare - and comparing them IS reading the mechanic.
+# THE HEAD CARRIES NO PALE AT ALL - the Beadle's measured fault answered the
+# way the panner, stiltman, iceman and straker answered it: a dark hood, eyes
+# on -Y only, so the back view is a dark head under a dark bar and cannot be
+# taken for the front.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"weigher"}
+
+OVERRIDE.update({
+    "weigher": {
+        'body': ((0.228, 0.214, 0.192), 0.86, 0.03),   # old coat and hose
+        'dark': ((0.086, 0.082, 0.078), 0.70, 0.10),   # beam, chains, yoke, hood
+        'bone': ((0.936, 0.922, 0.846), 0.30, 0.28),   # THE TWO PANS ONLY
+        'glow': ((0.960, 0.940, 0.800), 0.70),         # eyes, forward only
+    },
+})
+
+
+def weigher():
+    """IT MUST COME DOWN EVEN. The 56th body.
+
+    THE ACCEPTANCE TEST IS A MAN UNDER A TIPPED BEAM, AND THE TWO PANS MUST
+    READ AS A PAIR OUT OF TRUE - one high, one low, obviously the same object
+    at two different heights - IN THE FRONT VIEW, THE SIDE VIEW AND BESIDE A
+    HERO. If a viewer cannot see that the beam is out of true, the mechanic is
+    not on the model; it is only in this docstring.
+
+    WHAT THIS IS NOT, STATED BECAUSE THE SET IS 55 DEEP AND A RE-SKIN IS THE
+    EASY FAILURE HERE:
+      NOT THE JOINTER (15), which comes apart into two halves that each keep
+            working. This is ONE body with a constraint across it; nothing
+            splits, and killing "a half" is not available.
+      NOT THE TANNER (19), whose immunity is per DAMAGE TYPE and is answered by
+            changing WHAT you swing. This is answered by changing WHERE YOU
+            STAND, and a party of one weapon type can beat it from two sides.
+      NOT THE STRAKER (55), whose ledger is per HERO and is answered by walking
+            every hand up to it one at a time. This wants two flanks AT ONCE,
+            which is the opposite demand: a party that queues up loses.
+      NOT THE PAVISER (29), which turns a shield to face you. The armour here
+            is not aimed at anybody - it is on whichever side has RISEN, which
+            the party itself decides by where it puts its blows.
+    The family - a spatial condition on the party's own footing - is new in this
+    file, and that is the whole reason this body was built.
+
+    THE READ, in the order a viewer gets it:
+      MAN CENTRE, BEAM ACROSS HIM, PANS OUT TO BOTH SIDES. He is the stand: a
+                weigh-beam normally sits on a post, and the one idea that makes
+                this body plain rather than theatrical is that the post is a
+                person. Nothing gothic, nothing hung in a frame.
+      YAWED 0.60 RAD so neither ortho gets the beam end-on. A bar lying in the
+                XZ plane is a BAR to the front camera and a DOT to the side
+                camera, and a dot carries no pans - that is the STRAKER'S
+                WHEEL FAULT in a straight line instead of a circle.
+      TIPPED 0.22 RAD, which is the arrival state and the only state the
+                mechanic can be read in. An even beam is a beam at rest and
+                says nothing. The tilt is small on purpose: the PANS carry the
+                statement, at z 1.72 and z 0.44, a 1.28 separation that neither
+                camera can collapse. The beam only has to look wrong.
+      THE PANS ARE THE ONLY PALE. 0.30 top radius each, 1.76 apart along the
+                beam, so at stream distance they are two discs and not two
+                smudges - the ICEMAN'S LESSON that two pale things pitched
+                closer than their own size are one pale thing.
+      TILT CAPPED SO THE HEAD IS STILL THE TOP OF THE MESH. The high beam end
+                stands at 2.02 and the skull at 2.10. `h` normalises on the
+                whole body, so a beam end poking above the head would shrink
+                the man inside it and the prop would do all the work - the
+                STRAKER'S RAISED-HAMMER ARGUMENT, paid before it was spent.
+      BOTH LEGS PLANTED WIDE. He is holding a load up, not walking.
+      NEITHER ARM HORIZONTAL IN EITHER ORTHO. The near arm falls to the low
+                pan's chain at 41 degrees in BOTH views (0.51 X, 0.52 Y, 0.45
+                Z), which is the straker's FIX G/J rule: a reach that is
+                horizontal in one ortho is the pipe-arm, and only a reach
+                DOWNWARD AND DIAGONAL escapes both. The far arm is swung 0.18
+                clear of the trunk so the front view cannot read a one-armed
+                man (straker FIX K, iceman FIX G).
+
+    Static: no `anims` entry. The level is ENGINE state, not geometry - the
+    mesh ships TIPPED, which is how it is met.
+    ROOM-LOCK IS NOT CLAIMED HERE - minibossgen measures span and lid, and the
+    beam's own 1.92 span in X is the number that decides it, not my opinion.
+    """
+    P = Parts("weigher")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.095
+    KNEE = 0.520
+    HIP = 0.980
+    WAIST = 1.160
+    CHEST = 1.480
+    SHO = 1.660
+    HEAD = 1.900
+
+    STOOP = 0.100               # a yoke-bearer presses down, carried from the hip
+
+    def _s(v):
+        v = Vector(v)
+        return Vector((v.x, v.y - STOOP * (v.z - HIP), v.z))
+
+    # ---- THE BEAM. Fulcrum on the yoke, yawed so both orthos get a length,
+    # tipped so the thing is visibly out of true.
+    YAW = 0.60
+    TILT = 0.22
+    HALF = 0.980
+    # FIX A - THE BEAM WENT THROUGH THE HEAD, AND BOTH ORTHOS SHOWED IT.
+    # Pass 1 put the fulcrum at SHO + 0.120 = 1.780. The skull's underside is
+    # HEAD - 0.196 = 1.704 and the neck's base is 1.675, so a bar of radius
+    # 0.056 centred at 1.780 ran from 1.724 to 1.836 and cut the jaw in the
+    # front view and the whole face in the side view. It is not a value fault
+    # and no amount of detail could have answered it - the bar was simply
+    # inside the head. The fulcrum drops to SHO - 0.130 = 1.530, so the beam
+    # tops out at 1.586 and the yoke pad at 1.608, both clear under the neck
+    # base by 0.067 - and the bar now visibly RESTS ACROSS THE SHOULDER BALLS
+    # (1.456 - 1.720), which is where a yoke-bearer actually carries it and
+    # reads better than the pass-1 placement did even where it was not
+    # clipping. The low chain shortens by the same 0.250 so the LOW PAN DOES
+    # NOT MOVE: the fix is one lever, and the pan heights are measured again
+    # below rather than assumed.
+    FC = Vector(tuple(_s((0.0, -0.030, SHO - 0.130))))
+    D = Vector((math.cos(YAW) * math.cos(TILT),
+                math.sin(YAW) * math.cos(TILT),
+                math.sin(TILT)))
+    HI = FC + D * HALF          # the risen end  - the armoured side
+    LO = FC - D * HALF          # the sunk end   - the loaded side
+
+    # ---- the legs: planted wide, both square to the floor ---------------
+    _open()
+    for _i in (-1, 1):
+        _x = 0.258 * _i
+        limb(P, seat([(_x, 0.0, ANK), (_x * 1.03, -0.020, KNEE),
+                      (_x * 0.80, 0.010, HIP)], 0.112),
+             0.112, 0.138, 'body')
+        P.add(L.box(0.225, 0.330, 0.074), 'dark', loc=(_x, -0.040, 0.037))
+    P.add(L.box(0.470, 0.300, 0.180), 'body', loc=(0.0, 0.0, HIP + 0.056))
+    _close("legs")
+
+    # ---- the trunk, the belt, a back, and the YOKE the beam sits in -----
+    _open()
+    limb(P, [(0.0, 0.010, HIP + 0.090),
+             tuple(_s((0.0, -0.010, WAIST))),
+             tuple(_s((0.0, -0.035, CHEST)))],
+         0.216, 0.262, 'body')
+    P.add(L.box(0.420, 0.300, 0.070), 'dark',
+          loc=tuple(_s((0.0, -0.010, WAIST + 0.030))))
+    # a back: a tube's depth is only its diameter, and the side view is half
+    # the fit proof
+    P.add(L.box(0.340, 0.230, 0.400), 'body',
+          loc=tuple(_s((0.0, 0.135, CHEST - 0.095))), rot=(0.10, 0.0, 0.0))
+    # the shoulders, as two balls proud of a LOW bar - straker FIX L, which
+    # found that a shoulder plank's fault is its HEIGHT and not its width
+    P.add(L.box(0.345, 0.290, 0.105), 'body',
+          loc=tuple(_s((0.0, -0.035, SHO - 0.085))))
+    for _i in (-1, 1):
+        P.add(L.sphere(0.154, 0.158, 0.132, 11, 8), 'body',
+              loc=tuple(_s((0.240 * _i, -0.035, SHO - 0.072))))
+    # THE YOKE PAD - the fulcrum, dark, lying along the beam's own yaw so the
+    # beam is seen to REST on him and not to pass through him
+    P.raw(aim(L.cone(0.130, 0.130, 0.470, 10),
+              tuple(FC - Vector((D.x, D.y, 0.0)).normalized() * 0.235
+                    - Vector((0.0, 0.0, 0.052))),
+              tuple(Vector((D.x, D.y, 0.0)).normalized())), 'dark')
+    _close("trunk")
+
+    # ---- the head: dark hood, NO PALE, eyes on -Y only ------------------
+    _open()
+    _HD = Vector(tuple(_s((0.0, -0.055, HEAD))))
+    limb(P, [tuple(_s((0.0, -0.035, SHO + 0.015))),
+             tuple(_HD - Vector((0.0, 0.0, 0.140)))], 0.084, 0.096, 'body')
+    P.add(L.sphere(0.200, 0.206, 0.196, 14, 9), 'dark', loc=tuple(_HD))
+    # a hood that sits ON the skull and forward of the face, so the side view
+    # gets a brow and not a hump behind the head (straker FIX E2)
+    P.add(L.sphere(0.216, 0.210, 0.150, 13, 8), 'dark',
+          loc=tuple(_HD + Vector((0.0, 0.030, 0.070))))
+    P.add(L.box(0.260, 0.120, 0.052), 'dark',
+          loc=tuple(_HD + Vector((0.0, -0.150, 0.058))), rot=(-0.16, 0.0, 0.0))
+    eyes(P, tuple(_HD + Vector((0.0, 0.0, 0.010))), 0.044, 0.023, -0.186)
+    _close("head")
+
+    # ---- THE BEAM ITSELF, plus its two hanger irons. ALL DARK. ----------
+    _open()
+    _bp = [FC + D * (HALF * (-1.0 + 2.0 * k / 8.0)) for k in range(9)]
+    P.raw(L.tube(_bp, [0.056] * len(_bp), 7), 'dark')
+    # the end irons: a short cross piece at each end, so a pan hangs off a
+    # fitting and not off the bar's bare tip
+    _AX = Vector((-math.sin(YAW), math.cos(YAW), 0.0))
+    for _E in (HI, LO):
+        P.raw(aim(L.cone(0.046, 0.046, 0.230, 9),
+                  tuple(_E - _AX * 0.115), tuple(_AX)), 'dark')
+    _close("beam")
+
+    # ---- THE CHAINS: two per pan, a V down to the rim. DARK. ------------
+    PAN_HI = HI - Vector((0.0, 0.0, 0.345))
+    PAN_LO = LO - Vector((0.0, 0.0, 0.850))   # FIX A: -0.250, so the pan holds its height
+    _open()
+    for _E, _C in ((HI, PAN_HI), (LO, PAN_LO)):
+        for _i in (-1, 1):
+            limb(P, [tuple(_E), tuple(_C + _AX * (0.250 * _i)
+                                      + Vector((0.0, 0.0, 0.040)))],
+                 0.026, 0.022, 'dark')
+    _close("chains")
+
+    # ---- THE TWO PANS. THE ONLY PALE ON THE BODY. -----------------------
+    # Mass, not detail: a shallow dish each, 0.30 at the rim, 1.28 apart in Z
+    # and 1.76 apart along the beam. These are the mechanic.
+    _open()
+    for _C in (PAN_HI, PAN_LO):
+        P.raw(aim(L.cone(0.215, 0.300, 0.105, 18),
+                  tuple(_C - Vector((0.0, 0.0, 0.052))),
+                  (0.0, 0.0, 1.0)), 'bone')
+    _close("pans")
+
+    # ---- the arms. Near one down to the low chain, far one swung clear. --
+    _open()
+    _SN = _s((-0.290, -0.040, SHO - 0.110))
+    _SF = _s((0.290, -0.040, SHO - 0.110))
+    _GRIP = PAN_LO + Vector((0.080, 0.040, 0.560))
+    limb(P, [tuple(_SN), tuple(_SN + Vector((-0.195, -0.260, -0.330))),
+             tuple(_GRIP)], 0.084, 0.058, 'body')
+    limb(P, [tuple(_SF), tuple(_SF + Vector((0.180, -0.130, -0.300))),
+             (0.455, -0.265, HIP + 0.020)], 0.084, 0.058, 'body')
+    _close("arms")
+    # THE FIGURE, STATED BY THIS BUILDER - see man_ranges(). The beam, the
+    # chains and the two pans are his gear.
+    P.man_parts = ("legs", "trunk", "head", "arms")
+    return P
+
+
+BUILDERS.update({"weigher": weigher})

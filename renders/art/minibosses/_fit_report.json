@@ -10142,6 +10142,174 @@
    "air_px_eps": 0.02,
    "air_px_min": 110,
    "air_px_tightest_view": "front"
+  },
+  "weigher": {
+   "creature_h": 2.55,
+   "hero_h": 2.45,
+   "ratio": 1.04,
+   "pair_w": 4.48,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.118,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "weigher",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 43185,
+      "vis": 43185,
+      "delta": 51102,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43671,
+      "vis": 43671,
+      "delta": 53697,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 31617,
+      "vis": 31617,
+      "delta": 41579,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37777,
+      "vis": 37777,
+      "delta": 44332,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 42758,
+      "vis": 42758,
+      "delta": 53295,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44007,
+      "vis": 44007,
+      "delta": 50868,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 248520,
+     "shadow_px": 4812,
+     "mean": 0.4627,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4576,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 251560,
+     "shadow_px": 4525,
+     "mean": 0.4377,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 4159,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 248520,
+     "shadow_px": 4622,
+     "mean": 0.4603,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 5150,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     75,
+     72
+    ],
+    "side": [
+     112,
+     112
+    ],
+    "back": [
+     73,
+     75
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 72,
+   "air_px_tightest_view": "front"
   }
  },
  "errors": [],
@@ -10167,41 +10335,24 @@
   "census": "tools/art/_selfseen_census.py",
   "bar": 0.75,
   "derived": "recomputed this run - this block is RUN-OWNED and is never carried forward",
-  "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`.",
+  "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds.",
   "instrument_errors": [
    "panner: the man span merged to no object"
   ],
-  "measured_cells": 111,
-  "measured_bodies": 37,
+  "measured_cells": 165,
+  "measured_bodies": 55,
   "no_man": [
    "panner"
   ],
   "no_man_reason": "the builder declares an EMPTY `man` span - a deliberate marker that this body has no operator at all (panner pass 4 removed his, by A/B, and left the empty span to say so). A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED and this is NOT red - the first cut of this rule called panner MEASURABLE and turned the register red on a correct body, which is an unearned FAIL and the same fault as an unearned pass.",
-  "census_measured_at": "2026-11-24T16:45:35-0600",
-  "census_register_mtime": "2026-11-24T16:00:26-0600",
-  "census_register_pairs": 57,
+  "census_measured_at": "2026-11-24T18:46:41-0600",
+  "census_register_mtime": "2026-11-24T18:43:23-0600",
+  "census_register_pairs": 58,
   "census_errors": [],
   "build_failed": [],
   "build_failed_reason": "the builder RAISED, so nothing was measurable and nothing is claimed - that is RED, never an honest absence. This list and the census's own `errors` were both unread until 24 Nov 12:3x.",
   "not_measurable": [
-   "bellman",
-   "cook",
-   "drillmaster",
-   "gaoler",
-   "jointer",
-   "loader",
-   "porter",
-   "quartermaster",
-   "rammer",
-   "scrapwright",
-   "sexton",
-   "sluicekeeper",
-   "snarer",
-   "snuffer",
    "snuffer_chibi",
-   "sower",
-   "stoker",
-   "tallyman",
    "tallyman_chibi"
   ],
   "not_measurable_reason": "no `man` span on the builder, so there is nothing to split and NOTHING IS CLAIMED for these rows - absent, not green.",
@@ -10213,150 +10364,180 @@
   "under_bar": [
    {
     "rank": 1,
+    "key": "porter",
+    "view": "back",
+    "man_seen": 0.1758
+   },
+   {
+    "rank": 2,
     "key": "fuller",
     "view": "side",
     "man_seen": 0.4611
    },
    {
-    "rank": 2,
+    "rank": 3,
+    "key": "drillmaster",
+    "view": "back",
+    "man_seen": 0.4668
+   },
+   {
+    "rank": 4,
     "key": "beadle",
     "view": "side",
     "man_seen": 0.5174
    },
    {
-    "rank": 3,
+    "rank": 5,
     "key": "blower",
     "view": "back",
     "man_seen": 0.5228
    },
    {
-    "rank": 4,
+    "rank": 6,
+    "key": "sexton",
+    "view": "back",
+    "man_seen": 0.5463
+   },
+   {
+    "rank": 7,
+    "key": "cook",
+    "view": "side",
+    "man_seen": 0.5675
+   },
+   {
+    "rank": 8,
     "key": "paviser",
     "view": "front",
     "man_seen": 0.574
    },
    {
-    "rank": 5,
+    "rank": 9,
     "key": "tanner",
     "view": "side",
     "man_seen": 0.5759
    },
    {
-    "rank": 6,
+    "rank": 10,
     "key": "moulder",
     "view": "back",
     "man_seen": 0.5837
    },
    {
-    "rank": 7,
+    "rank": 11,
     "key": "dyer",
     "view": "back",
     "man_seen": 0.5949
    },
    {
-    "rank": 8,
+    "rank": 12,
     "key": "roper",
     "view": "back",
     "man_seen": 0.6151
    },
    {
-    "rank": 9,
+    "rank": 13,
     "key": "roper",
     "view": "front",
     "man_seen": 0.6163
    },
    {
-    "rank": 10,
+    "rank": 14,
     "key": "tanner",
     "view": "front",
     "man_seen": 0.6173
    },
    {
-    "rank": 11,
+    "rank": 15,
     "key": "greener",
     "view": "back",
     "man_seen": 0.6257
    },
    {
-    "rank": 12,
+    "rank": 16,
     "key": "beadle",
     "view": "front",
     "man_seen": 0.6325
    },
    {
-    "rank": 13,
+    "rank": 17,
     "key": "stopper",
     "view": "side",
     "man_seen": 0.6341
    },
    {
-    "rank": 14,
+    "rank": 18,
     "key": "ferryman",
     "view": "front",
     "man_seen": 0.6405
    },
    {
-    "rank": 15,
+    "rank": 19,
     "key": "almoner",
     "view": "side",
     "man_seen": 0.6501
    },
    {
-    "rank": 16,
+    "rank": 20,
     "key": "hurdleman",
     "view": "back",
     "man_seen": 0.6749
    },
    {
-    "rank": 17,
+    "rank": 21,
     "key": "beadle",
     "view": "back",
     "man_seen": 0.6854
    },
    {
-    "rank": 18,
+    "rank": 22,
     "key": "relief",
     "view": "front",
     "man_seen": 0.6887
    },
    {
-    "rank": 19,
+    "rank": 23,
     "key": "sealer",
     "view": "back",
     "man_seen": 0.6949
    },
    {
-    "rank": 20,
+    "rank": 24,
     "key": "stopper",
     "view": "front",
     "man_seen": 0.6989
    },
    {
-    "rank": 21,
+    "rank": 25,
     "key": "boiler",
     "view": "side",
     "man_seen": 0.7057
    },
    {
-    "rank": 22,
+    "rank": 26,
     "key": "winder",
     "view": "front",
     "man_seen": 0.7102
    },
    {
-    "rank": 23,
+    "rank": 27,
     "key": "fenman",
     "view": "side",
     "man_seen": 0.7301
    },
    {
-    "rank": 24,
+    "rank": 28,
+    "key": "scrapwright",
+    "view": "front",
+    "man_seen": 0.7412
+   },
+   {
+    "rank": 29,
     "key": "blower",
     "view": "side",
     "man_seen": 0.7469
    }
   ],
-  "under_bar_count": 24,
+  "under_bar_count": 29,
   "top_end": {
    "key": "straker",
    "view": "back",
@@ -10366,16 +10547,16 @@
  },
  "unproved_cells": [],
  "measured": [
-  "boiler"
+  "weigher"
  ],
  "asked": [
-  "boiler"
+  "weigher"
  ],
  "blank_check": {
-  "files": 165,
+  "files": 168,
   "failures": [],
-  "cells": 55,
-  "expected_files": 165,
+  "cells": 56,
+  "expected_files": 168,
   "scope": "whole_house"
  },
  "red_summary": {
@@ -10386,5 +10567,5 @@
  },
  "verdict": "GREEN",
  "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (57), re-derived from stored measurements; 1 of them rendered this run"
+ "verdict_scope": "every row in pairs (58), re-derived from stored measurements; 1 of them rendered this run"
 }

@@ -18113,3 +18113,118 @@ following their RUNNING) and again by process before writing the IDLE (0 alive).
 NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
 posted as bellmirebro. Nothing owed from the game build in `twitch_eventsub.gd`. Nothing for Mr. E
 to decide.
+
+## C-197 (24 Nov 2026 18:3x CST, content) - e3po.tier_up +24 (2 per tier, 12 -> 36): the pool the engine actually reads
+TAKE THIS NEXT (17:58 CT block, 24 Nov) CONTENT row (18:22): C-197. Correct the C-196 sentence, then deepen the thinnest leaves the engine ACTUALLY reads. No 56th body committed (feed by_key stays 55), so no by_key row.
+CORRECTION TO MY C-196 ROW (new line, history not edited): the C-196 data is right, but "trade lines are already read by townsfolk code" was FALSE. No script reads `townsfolk`; it is one of the six dead at D98. The only live `trades` reads walk `trade_stock.trades`, a different structure. Nobody is to wire `townsfolk.trades` on the strength of that sentence.
+MEASURED: of 132 string leaves in the keys scripts read, the thinnest were e3po tier_up_alt (3) and tier_up_alt2 (4), but notables.gd only ever calls `_e3po_say("tier_up")` - alt and alt2 are never read. The live pool is `e3po.tier_up`: 12 entries, one per tier.
+ADDED: 24 `{tier,line}` entries appended to e3po.tier_up, 2 per tier, same shape. Low tiers make-do, high tiers prosperous. Duplicate-checked against the whole file. Arithmetic: 12 + 24 = 36, per tier 1 -> 3.
+VALIDATION OK: all four owned files json.load; every pre-existing key present and equal, every pre-existing list a strict prefix of its new list. Only new top-level key is `_note_c197` (expected zero-hit).
+CODE WIRING: `_e3po_pick` ignores the `tier` field and picks uniformly, so a Crossing rise can say a City line. Suggest filtering tier_up by the new tier's name, and merging tier_up_alt/alt2. Until then the new lines share that behaviour with the old ones.
+
+
+## U158 - U91 RED ARM RUN + THE REST OF THE 1080p-TRAP AUDIT: NO FURTHER GATE IS EXPOSED, 2026-11-24T18:57:00-06:00 (18:52 firing)
+ITEM: WORK_PLAN 16:58 HUD row ("pick your next U item from your own open list") -> U157's NEXT: U91 red arm; audit remaining U-gates for the capture-size trap.
+Lock: R working RUN_LOCK last line = QA tester IDLE 18:46:49, 0 Godot by process -> claimed 18:53:33 (declared 19:03, cap 19:08), IDLE written right after the run.
+RED ARM (default --windowed, 1152x648): "U91 NO VERDICT - capture (1152.0, 648.0) is smaller than 1920x1080; run --windowed --resolution 1920x1080" - guard fires, no pass-by-accident. U40/U88/U90/U91 now all red-proved (log _u158_u91_red.log). The gear.gd:104 null-instantiate ERRORs in that log are the known worktree import-cache gap, not HUD.
+AUDIT (tools/*.gd that print verdicts and mention 1080p): _u121_hostile, _u122_chron_width, _u125/_u126_regress, _u134_chron_sample150 all force `root.size = Vector2i(1920,1080)` themselves (not capture-size dependent); _u58_contrast and _u61_stripe are headless-safe (own 1920x1080 holder / pure maths); _u104.._u117, _u3/_u4/_u9/_u25/_u26 *_shot are image dumps with no verdict; _u55/_u71 are data guards. Nothing else needs a NO VERDICT guard.
+CHANGED: no .gd edited (log + this note only). PARSE: n/a (no source change).
+NEXT: L74 feed/theme under load, or take whatever the 19:58 TAKE THIS NEXT names. Decision for Mr. E: none.
+## B138 - 24 Nov 2026, 18:45 CT (chat bot) - NOTHING OWED ON THE COUNT AND I PROVED IT ANYWAY; THE DEFECT I FOUND IS THAT THIS FILE NEVER MEASURED WHETHER ITS OWN ANSWER ARRIVES
+
+THE COUNT FIRST, BECAUSE MY ROW TOLD ME IT WAS CLOSED AND I STILL CHECKED. All three halves
+measured by me on my merged tree at 18:47 CT, off the lane refs, brace-matched and string-aware
+with comments stripped BEFORE splitting, anchored on `const MB_NAME :=`:
+  - `Delve.MB_NAME` = **55** keys, 0 duplicates, `iceman` IN, `straker` IN.
+  - `data/lore_lines.json` -> `miniboss_feed.by_key` = **55** keys, 0 duplicates.
+  - `data/commands.json` publishes **55** at BOTH `miniboss` leaves (`.what` and `.short`).
+  - `by_key - MB_NAME` = **[]**. `MB_NAME - by_key` = **[]**. BOTH DIRECTIONS EMPTY.
+The team lead's measurement holds. **I published nothing and republished nothing** - `commands.json`
+and `docs/COMMANDS.md` are untouched this cycle, so no regeneration was owed and none was done.
+The residual L14 arm my B137 row predicted would clear (`MINIBOSS UNNAMED ["straker"]`) fires on a
+name `MB_NAME` lacks, and `MB_NAME` now carries it. That is the arm's input measured, NOT a gate
+verdict - see the LOCK paragraph for why I ran no gate and what is owed next firing.
+
+THE DEFECT, IN WORK I SHIPPED MYSELF. Every one of the twenty-odd `COMMANDS_DATA` arms in
+`chatcmd.gd` asks whether a published WORD is true. Not one asks whether the LINE CARRYING IT
+ARRIVES. `twitch_eventsub.gd` (the game build's) pastes `"@<login> "` on the front and, past
+`CHAT_MAX_LEN` (480), cuts the result and appends `"..."`. **That cut is the only drop in that
+whole function with no `_say_log` beside it** - queue-full, stale and duplicate all log; truncation
+is silent. So a reply of mine that grows past the cap loses its tail on stream and says so nowhere,
+and what sits at the tail of the longest line this file emits is **the hub URL** - the one thing a
+viewer needs when an answer was too long to finish. The lane already KNEW about the 480 cut: a
+comment of mine at :1854 says "chat cut it at 480 mid-word, so naming a handful is the deliberate
+shape". It designed around the cap in one place and never measured it anywhere.
+
+WHY IT IS A FAULT NOW AND WAS NOT WHEN I WROTE IT: `help_line("")` is built from `order`, so it
+grows **whenever any lane adds a command**, not when I touch anything. It is the only reply in this
+file whose length is decided by a list other lanes extend. That is the same shape as the miniboss
+count - a number of mine that other lanes move - and that one has had a guard for forty cycles.
+
+THE ARM (`COMMANDS_DATA HELP LINE CUT`, `scripts/chatcmd.gd`, +44 lines, one file):
+budget = 480 - (1 + 25 + 1) = **453 characters of text**, the 25 being the longest login Twitch
+issues. It calls **`help_line()` ITSELF** - the no-argument list and one line per command - so it
+cannot drift from the function it guards. **MEASURED, NOT EMULATED.**
+
+TWO THINGS I GOT WRONG AND CAUGHT BY READING MY OWN INSERT, NOT BY A GATE:
+  1. **I placed the arm BEFORE `_cmds = parsed`.** Every guard in this loader runs inside
+     `if _cmds.is_empty():`, so `help_line()` there re-enters `commands()` with the cache still
+     empty - **infinite recursion on load, a dead bot, from a guard meant to protect a chat line.**
+     Moved to immediately AFTER the assignment, where the cache is live. The arm is the first thing
+     in this file that had to run after `_cmds` is set rather than before, and that is why.
+  2. **My first drift instrument lied and reported eleven commands unanswered** (`hero`, `delve`,
+     `enlist`, `help` ...). My scraper only caught `match` labels on their own line and missed the
+     one-line form `"hero":     out = _needs(...)`. Rewritten to walk the two `match` blocks (:149,
+     :312) at label indentation. The true reading: **ENTRY NO COMMAND ANSWERS = []**. I report the
+     fixed instrument's number, and the fact that the first one was wrong.
+
+DRIFT BOTH DIRECTIONS, on the repaired instrument: 32 commands, 0 unanswered, 0 labels with no data
+entry except `testbits`/`testpoints`/`testsub` (deliberate test hooks, never published to viewers).
+Seven published aliases (`armor`, `commands`, `sheet`, `spotlight`, `stats`, `steel`, `watch`) are
+not `match` labels **and need not be**: `:133` canonicalises the verb BEFORE the match, and the
+existing `ALIAS DEAD` arm already guards that path. Not a defect; stated so it is not re-found.
+
+RED-PROVED BOTH BRANCHES IN EMULATION, because an arm that cannot go red is decoration:
+  - GREEN on real data: over-budget lines = `[]`, **no false red**.
+  - RED, list branch: +12 synthetic commands -> `!help is 498 chars, 45 over`.
+  - RED, per-command branch: a 460-char `short` on `forge` -> `!help forge is 568 chars, 115 over`.
+  - Neither red run touched `data/commands.json`; both were built in memory from a copy.
+**THE HEADROOM, STATED PLAINLY BECAUSE IT IS THE USEFUL NUMBER:** the longest line this file emits
+is `!help` with no argument at **352 of 453 characters - 101 spare, about 12 more commands** at the
+7.8-character average of the current 32. The house is twelve commands from silently losing the hub
+URL off the end of its own command list. Nothing else is close: the longest `!help <command>` is
+`forge` at 180, and all 55 `!miniboss <name>` replies fit, the worst being `relief` at 234.
+
+WHAT I CHECKED AND FOUND CLEAN, so no lane re-proves it: `caravan`.what is 569 characters, over the
+cap - **and it is NOT a defect**, because `help_line()` emits `short`, never `what`; `what` is the
+doc and hub field only. I checked the emitted path before calling it a find. No token collisions
+(name vs alias, both ways), no `order`/`commands` mismatch either way, no duplicate display name
+across the 55 elites, every required field present on all 32 commands.
+
+**AWAITING THE GODOT GATE - THIS IS A CHECKPOINT COMMIT, AND THE ARM IS UNPROVEN BY ENGINE.** Owed
+at my next firing, in this order: `--headless --quit-after 300` parse (the recursion fix above is
+exactly what a parse plus one load would catch), then `tools/_l14_test.gd`, then
+`tools/_twitch_parse.gd`. The emulation above is an EMULATION and I am not calling it a verdict.
+
+LOCK: **I TOOK NO LOCK AND LAUNCHED NO GODOT THIS HOUR, AND THAT WAS THE CORRECT CALL, NOT A
+STARVING.** The QA tester held the window (RUNNING 18:41:56, declared 18:50) and released early -
+`IDLE 2026-11-24T18:46:49-06:00`, an IDLE from the same lane, which frees the window at once under
+the yield rule. I read that at **18:49:59**, which left under two minutes before the HUD's :52
+window, and my own row requires a declared finish inside :52. **I had not yet written a line of the
+arm, so a claim then would have been a claim with nothing to run.** Per the yield rule I SPLIT THE
+JOB rather than declare a crossing: the file work landed this hour, the gates go to 19:45. The
+HUD's window was not touched. No claim over a live hold, no stale lock cleared, no second Godot.
+
+NO LIVE TWITCH TEST. **ZERO BITS, no cheer, no redemption, no reward created, read, deleted or
+re-priced, no chat line posted as bellmirebro, no channel setting touched, no sub event of any
+kind.** No tokens or secrets in this commit or in any log.
+
+FOR THE GAME BUILD LANE, ONE THING, AND IT IS A REQUEST NOT A CLAIM ON YOUR FILE: `chat_line_for()`
+in `twitch_eventsub.gd` truncates at `CHAT_MAX_LEN` with **no `_say_log`**, while the three other
+drops in `_tick_chat` all log. One `_say_log` on that branch would make a cut visible in your own
+log instead of only on stream. **The 480 in my arm is a MIRROR of your constant, declared as such
+in the comment** - I do not read it from your script on purpose, so my file still loads when yours
+is absent. If you move `CHAT_MAX_LEN`, my number has to follow it, and this row is the record of
+that coupling. Nothing else is owed from you.
+
+Nothing for Mr. E to decide.

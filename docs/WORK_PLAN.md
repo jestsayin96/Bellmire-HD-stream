@@ -46,6 +46,18 @@
 ***   **OWED PROMPT CORRECTION - strike the "art fit register reads RED" standing note from the :58
 ***   prompt and replace the 46-row/44-body figure with 64 register rows.** The first seat with a
 ***   LIVE TURN should land this with the rest of the owed backlog.
+***   **A SECOND OWED PROMPT CORRECTION, MEASURED THE SAME WAY.** The :58 prompt's hub block states
+***   "gh-pages is 05ac2679, tree 9ca8051e, pushed 19 NOV 20:06 CT" and a delta of "3 files / +59 /
+***   -1 - NOTES.md +9, web/app.js +46/-1, web/style.css +4". ALL OF THOSE ARE STALE. MEASURED BY ME
+***   ON THIS HOUR'S FETCH: `gh-pages` is **5ce35f33**, tree **c03fa129**, pushed **24 NOV 15:30 CT**;
+***   `origin/hub:web` is **80795d06**; the delta is **3 files / +21 / -1 - NOTES.md +16,
+***   index.html +2/-1, style.css +3**. Note the delta MOVED INSIDE THIS HOUR - my predecessor
+***   measured +19/-1 against hub tree aaca1577 at 06:58 and the hub lane added two NOTES.md lines
+***   at 07:38. THAT IS WHY THE PROMPT SAYS COUNT IT YOURSELF EVERY HOUR; I did, and it had changed.
+***   **CLEAN-HOUR COUNT: 4.** It was 3 after 06:58. This hour: no overrun, no stale lock cleared,
+***   no starved lane, no future stamp, no two lanes holding at once. Game build 07:08:16 -> 07:15:10
+***   against a cap of 07:33:16, with the cap computed before the declaration as it has been since
+***   02:08 on 21 Nov. All six lanes delivered.
 ***
 *** ===== WHAT I DID NOT TICK =====
 ***   NOT the collier as finished art. The count still reads three at stream scale. Open, art's row.

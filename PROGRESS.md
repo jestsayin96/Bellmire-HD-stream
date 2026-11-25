@@ -18545,3 +18545,11 @@ TAKE THIS NEXT (21:58 CT block, 24 Nov) CONTENT row: C-201, the 59th's feed row,
 Canon from the CANON row: the pledge is tied into one load with the man and takes a share of every blow, so a party that fights it like everything else kills the pledge on the way to the kill; nothing is taken and nobody is chosen; three bright lashings cut free the board; damage is a budget, not a goal. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Fall lines do not say whether the pledge lived - the engine pays that out. 'broken' makes no claim.
 VALIDATION OK: all four owned files parse; by_key 58 -> 59; every pre-existing key and value unchanged (round-trip diff empty); only new keys are by_key.pledgeman and _note_c201. Edited lore_lines.json and PROGRESS.md only.
 CODE WIRING: game build - MB_NAME "pledgeman": "Heldfast" in delve.gd (fall lines say 'Heldfast is down'); MB_NAME.size() literals in tools/_s51_names.gd, _s107_gate.gd, _s117_straker.gd move together. S123 (harrowman -> Overturn) is ahead of it. Pledgeman's fit row is not yet on a ref, so the engine half waits on art committing the registers. Then the chat bot republishes the miniboss count.
+
+
+## U162 - HUD STAND-DOWN, NO GODOT CLAIMED, NO .gd CHANGED, 2026-11-24T22:52:57-06:00 (22:52 firing)
+ITEM: R WORK_PLAN 21:58 TAKE THIS NEXT, HUD row: "DRY, AND THAT IS THE CORRECT STATE. STAND DOWN IN WRITING, OR AUDIT YOUR OWN SHIPPED WORK." U161 closed the U160 audit; rarity-hue half of System 2 is U55 and shipped.
+Lock: R working RUN_LOCK last line = chat bot B142 IDLE 22:51:50 (after RUNNING 22:48:40); tasklist showed 0 Godot -> lock FREE, but no run is owed, so I claimed nothing and RUN_LOCK is untouched. Noted for the team lead: art's 22:42 lock pair carries unformatted %s placeholders (B142 reported it too); not mine, left as found.
+AUDIT (file-only, after git fetch): hud-ui is 331 commits behind origin/laptop, yet `git diff --stat HEAD origin/laptop -- <my 7 files>` is EMPTY, so all seven HUD files are still byte-identical to main (latest touch on main is 1a171424 U126). Nothing to re-gate.
+CHANGED: this note only. PARSE: n/a (no source change).
+NEXT: take whatever the 23:58 TAKE THIS NEXT names; otherwise re-audit the seven files against origin/laptop. Decision for Mr. E: none.

@@ -20742,3 +20742,17 @@ NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or writt
 posted as bellmirebro, no channel setting touched, no sub or gift of any kind.
 
 FOR THE GAME BUILD LANE: nothing. twitch_eventsub.gd is untouched and needs no change for this.
+
+## HUB 25 Nov 17:3x CT - 15:58 ROW: WRITTEN STAND-DOWN. DRY. NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
+
+TOOK: the 15:58 TAKE THIS NEXT hub row ("write the stand-down, in one short entry, and say plainly that you are dry").
+I AM DRY. CDN item NOT touched (ruled closed from above). gh-pages NOT touched (still 8d214d36).
+MEASURED (machine clock 17:38 CT, after merging origin/main c27bc167 into hub, merge clean):
+- web/ tree 51a3f8b382c3 is IDENTICAL on HEAD, origin/main and origin/hub; `git diff --stat` over web/ and docs/HUB_SECURITY.md = EMPTY.
+- `node --check web/app.js` = OK.
+- innerHTML ASSIGNMENTS in app.js = 2, at app.js:255 and :301, page-owned literals; other hits are comments. index.html:49 "two page-owned sites" still TRUE.
+- outerHTML / insertAdjacentHTML / document.write / eval( / new Function in code = 0 (the 2 grep hits at app.js:10-11 are the comment saying so).
+- CSP meta present (1); index.html has no external host beyond og: display metas and supabase.
+- Not re-run: ?state=/?mock= pages and hostile-name render - web/ did not change, so not owed. No screenshot: nothing changed to look at. Live-dot colour untouched.
+- Untracked web/tools/__pycache__/ is a stray of mine from an earlier tool run; the delete is refused on this machine, so it is named here.
+NOTHING for Mr. E to decide.

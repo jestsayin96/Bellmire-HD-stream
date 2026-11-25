@@ -1,0 +1,113 @@
+{
+  "hero_front.png": {
+    "bbox_px": [
+      380,
+      164,
+      644,
+      457
+    ],
+    "creature_w": 265,
+    "creature_h": 294,
+    "share_of_frame_w": 0.349,
+    "creature_px_at_rung": {
+      "1080p": [
+        167,
+        186
+      ],
+      "720p": [
+        112,
+        124
+      ],
+      "480p": [
+        74,
+        82
+      ],
+      "360p": [
+        56,
+        62
+      ]
+    },
+    "sheet": "creature_front.png",
+    "strip_order": [
+      "1080p",
+      "720p",
+      "480p",
+      "360p"
+    ],
+    "nearest_x": 4
+  },
+  "hero_side.png": {
+    "bbox_px": [
+      380,
+      182,
+      654,
+      483
+    ],
+    "creature_w": 275,
+    "creature_h": 302,
+    "share_of_frame_w": 0.362,
+    "creature_px_at_rung": {
+      "1080p": [
+        174,
+        191
+      ],
+      "720p": [
+        116,
+        127
+      ],
+      "480p": [
+        77,
+        85
+      ],
+      "360p": [
+        58,
+        64
+      ]
+    },
+    "sheet": "creature_side.png",
+    "strip_order": [
+      "1080p",
+      "720p",
+      "480p",
+      "360p"
+    ],
+    "nearest_x": 4
+  },
+  "hero_back.png": {
+    "bbox_px": [
+      115,
+      177,
+      379,
+      484
+    ],
+    "creature_w": 265,
+    "creature_h": 308,
+    "share_of_frame_w": 0.349,
+    "creature_px_at_rung": {
+      "1080p": [
+        167,
+        195
+      ],
+      "720p": [
+        112,
+        130
+      ],
+      "480p": [
+        74,
+        86
+      ],
+      "360p": [
+        56,
+        65
+      ]
+    },
+    "sheet": "creature_back.png",
+    "strip_order": [
+      "1080p",
+      "720p",
+      "480p",
+      "360p"
+    ],
+    "nearest_x": 4
+  }
+}

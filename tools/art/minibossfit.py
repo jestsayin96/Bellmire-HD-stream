@@ -1113,12 +1113,43 @@ def derive_self_seen(rep, repo):
                     "age is unknowable - an un-ageable census is the snapshot "
                     "this gate exists to abolish. Re-run "
                     "tools/art/_selfseen_census.py")
+    # *** A SUBSET RUN IS NOT A DIFFERENT HOUSE. ART, 25 Nov 07:5x CT. ***
+    # This arm compared the census's row count against THIS RUN's `pairs`, so
+    # every `--only <key>` run cried "it describes a different house. Re-run
+    # tools/art/_selfseen_census.py" - and the census was not stale at all.
+    # Measured before touching a line: `_selfseen_census.json` says
+    # register_pairs 64, stamped 2026-11-25T04:02:20-0600, and the committed
+    # `_fit_report.json` has 64 pairs. The two AGREE. What disagreed was 64
+    # against the 10 rows a subset run happens to carry, which is arithmetic
+    # about the run and says nothing about the census.
+    # THE 06:58 PLAN ROW TOLD ME TO RE-RUN THE CENSUS. I did the measurement
+    # first and it would have changed nothing: the file is current, and the
+    # next `--only` run would have cried RED again. Following the row would
+    # have spent a window and left the fault in place, so I am following the
+    # evidence, which that row explicitly told me to do.
+    # The count was only ever a PROXY for "does the census know about every
+    # row in front of me?", and that question is already asked directly, per
+    # key, by `uncensused` above. So the proxy keeps its teeth only where the
+    # direct arm cannot see: when this run's rows are NOT a subset of what the
+    # census covers. When they are a strict subset, the mismatch is EXPECTED
+    # and is NOT A VERDICT - the same discipline `_cueread.py` already applies
+    # to a `--slot` run, because a file on disk saying RED is one read away
+    # from somebody chasing a fault that is not there. It cost exactly that:
+    # `_collier_p8ship.log` shipped a RED nobody could act on.
     _cp = blk.get("census_register_pairs")
     if cen is not None and _cp is not None and _cp != len(pairs):
-        errs.append("self_seen: the census was taken over %d register rows and "
-                    "is being read against %d - it describes a different "
-                    "house. Re-run tools/art/_selfseen_census.py"
-                    % (_cp, len(pairs)))
+        _covered = (able | unable | noman | failed)
+        _subset = bool(pairs) and pairs <= _covered and _cp > len(pairs)
+        blk["census_count_scope"] = (
+            "NOT A VERDICT: this run carries %d of the census's %d rows and "
+            "every one of them is censused - a subset run, not a different "
+            "house" % (len(pairs), _cp)) if _subset else "judged"
+        if not _subset:
+            errs.append("self_seen: the census was taken over %d register rows "
+                        "and is being read against %d, and this run's rows are "
+                        "NOT a subset of what it covers - it describes a "
+                        "different house. Re-run tools/art/_selfseen_census.py"
+                        % (_cp, len(pairs)))
     if cen is None and pairs:
         errs.append("self_seen: no census on record - coverage is unjudged, "
                     "and unjudged is not green")

@@ -1,0 +1,168 @@
+{
+  "hero_front.png": {
+    "full": {
+      "marks": 5,
+      "sizes_px": [
+        452,
+        367,
+        109,
+        28,
+        23
+      ],
+      "marks_ge_2px": 5,
+      "marks_ge_4px": 5
+    },
+    "1080p": {
+      "marks": 5,
+      "sizes_px": [
+        187,
+        156,
+        49,
+        12,
+        11
+      ],
+      "marks_ge_2px": 5,
+      "marks_ge_4px": 5
+    },
+    "720p": {
+      "marks": 5,
+      "sizes_px": [
+        84,
+        75,
+        24,
+        6,
+        6
+      ],
+      "marks_ge_2px": 5,
+      "marks_ge_4px": 5
+    },
+    "480p": {
+      "marks": 5,
+      "sizes_px": [
+        42,
+        35,
+        12,
+        4,
+        4
+      ],
+      "marks_ge_2px": 5,
+      "marks_ge_4px": 5
+    },
+    "360p": {
+      "marks": 5,
+      "sizes_px": [
+        26,
+        24,
+        8,
+        1,
+        1
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    }
+  },
+  "hero_side.png": {
+    "full": {
+      "marks": 4,
+      "sizes_px": [
+        199,
+        173,
+        91,
+        5
+      ],
+      "marks_ge_2px": 4,
+      "marks_ge_4px": 4
+    },
+    "1080p": {
+      "marks": 4,
+      "sizes_px": [
+        82,
+        74,
+        41,
+        2
+      ],
+      "marks_ge_2px": 4,
+      "marks_ge_4px": 3
+    },
+    "720p": {
+      "marks": 4,
+      "sizes_px": [
+        42,
+        38,
+        18,
+        1
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    },
+    "480p": {
+      "marks": 4,
+      "sizes_px": [
+        23,
+        19,
+        9,
+        1
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    },
+    "360p": {
+      "marks": 4,
+      "sizes_px": [
+        14,
+        11,
+        8,
+        1
+      ],
+      "marks_ge_2px": 3,
+      "marks_ge_4px": 3
+    }
+  },
+  "hero_back.png": {
+    "full": {
+      "marks": 2,
+      "sizes_px": [
+        69,
+        25
+      ],
+      "marks_ge_2px": 2,
+      "marks_ge_4px": 2
+    },
+    "1080p": {
+      "marks": 2,
+      "sizes_px": [
+        30,
+        14
+      ],
+      "marks_ge_2px": 2,
+      "marks_ge_4px": 2
+    },
+    "720p": {
+      "marks": 2,
+      "sizes_px": [
+        16,
+        6
+      ],
+      "marks_ge_2px": 2,
+      "marks_ge_4px": 2
+    },
+    "480p": {
+      "marks": 2,
+      "sizes_px": [
+        8,
+        4
+      ],
+      "marks_ge_2px": 2,
+      "marks_ge_4px": 2
+    },
+    "360p": {
+      "marks": 2,
+      "sizes_px": [
+        6,
+        2
+      ],
+      "marks_ge_2px": 2,
+      "marks_ge_4px": 1
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "rungs": {
+    "source 1080p": {
+      "pane_render_px": [
+        480,
+        328
+      ],
+      "views": {
+        "hero_front.png": {
+          "moved_px": 1591,
+          "frame_px": 157440
+        },
+        "hero_side.png": {
+          "moved_px": 176,
+          "frame_px": 157440
+        },
+        "hero_back.png": {
+          "moved_px": 1060,
+          "frame_px": 157440
+        }
+      },
+      "sheet": "ladder_source_1080p_480px.png",
+      "nearest_x": 1
+    },
+    "720p": {
+      "pane_render_px": [
+        320,
+        219
+      ],
+      "views": {
+        "hero_front.png": {
+          "moved_px": 733,
+          "frame_px": 70080
+        },
+        "hero_side.png": {
+          "moved_px": 87,
+          "frame_px": 70080
+        },
+        "hero_back.png": {
+          "moved_px": 490,
+          "frame_px": 70080
+        }
+      },
+      "sheet": "ladder_720p_320px.png",
+      "nearest_x": 1
+    },
+    "480p": {
+      "pane_render_px": [
+        213,
+        146
+      ],
+      "views": {
+        "hero_front.png": {
+          "moved_px": 350,
+          "frame_px": 31098
+        },
+        "hero_side.png": {
+          "moved_px": 47,
+          "frame_px": 31098
+        },
+        "hero_back.png": {
+          "moved_px": 227,
+          "frame_px": 31098
+        }
+      },
+      "sheet": "ladder_480p_213px.png",
+      "nearest_x": 2
+    },
+    "360p": {
+      "pane_render_px": [
+        160,
+        109
+      ],
+      "views": {
+        "hero_front.png": {
+          "moved_px": 204,
+          "frame_px": 17440
+        },
+        "hero_side.png": {
+          "moved_px": 29,
+          "frame_px": 17440
+        },
+        "hero_back.png": {
+          "moved_px": 134,
+          "frame_px": 17440
+        }
+      },
+      "sheet": "ladder_360p_160px.png",
+      "nearest_x": 2
+    }
+  },
+  "note": "zero means the cue has stopped existing at that size; non-zero is not a pass",
+  "full_size_moved": {
+    "hero_front.png": 3897,
+    "hero_side.png": 413,
+    "hero_back.png": 2591
+  },
+  "verdict": "GREEN"
+}

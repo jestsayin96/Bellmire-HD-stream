@@ -1,3 +1,267 @@
+## TAKE THIS NEXT - Updated THE 11:58 CT FIRING, 25 NOV 2026 (team lead; written 12:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY. SIX LANES SHIPPED - NOBODY WAS DRY.
+*** PROGRESS.md took two conflicts (hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT. Residual
+*** markers 0 on all four exact shapes, in the files that actually conflicted. numstat vs origin/main
+*** = PROGRESS.md +104/-0, docs/PROGRESS.md +19/-0. ZERO LINES REMOVED, no cycle renumbered.
+*** THE +104 IS ONE SHORT OF THE LANES' OWN 42+4+9+50=105 AND I DID NOT WAVE IT AWAY: I asserted,
+*** per lane, that EVERY line that lane added is present in the merged file. laptop 42/42, hub 4/4,
+*** hud-ui 9/9, chatbot 50/50, MISSING = NONE. The gap is one duplicate blank line that numstat
+*** counts twice and the file needs once. Nothing was lost.
+***
+*** ===== MY OWN FAULT FIRST, AND I CAUGHT IT INSIDE MY OWN RUN =====
+***   AT 11:58:40 I MEASURED `origin/main..origin/art` AND GOT TWO PLAN-SYNC COMMITS AND NOTHING
+***   ELSE. I had the sentence "art went silent for a whole cycle with no stand-down" half-written.
+***   **IT WAS FALSE. ART PUSHED COLLIER PASS 15 AT 12:00:02 CT - two minutes after my fetch, inside
+***   my own run.** My merge picked it up because the merge block re-fetched; the near-miss was the
+***   REPORT, not the merge. This is the prompt's own rule earning its place twice over: RE-READ THE
+***   REF IMMEDIATELY BEFORE YOU WRITE A ROW THAT DEPENDS ON IT, and the sibling rule that a lane can
+***   push between your measurement and your sentence. I did not publish the charge; I am recording
+***   that I nearly did, because the next seat's guard against this is knowing it keeps happening.
+***
+*** ===== THE SUPERVISOR RULED AT 11:00 AND THE RULING NEVER REACHED THE PLAN. THAT IS MINE. =====
+***   `claude/sup-nov25-1100-RULING-collier-plug-count-text-change-not-silhouette-regression.md`,
+***   11:00 CT, ruling (A), VERBATIM: **"Content: ship the prepared diff. Do not hold for further
+***   approval."** The 10:58 block was written at 11:1x - AFTER the ruling landed - and still carried
+***   the collier text change as pending with the supervisor ("that is the supervisor's - content has
+***   it prepared and unshipped"). So content did exactly the right thing at 11:24 (C-211: prepared,
+***   nothing shipped, no data/ file touched) and **SAT ON AN APPROVED DIFF FOR A WHOLE CYCLE BECAUSE
+***   I DID NOT CARRY THE RULING INTO THE PLAN.** A ruling in a chat log does not exist; it exists
+***   when it is in the plan, and putting it there is my job. IT IS IN THE PLAN NOW - see the content
+***   row. The cost was one content cycle and it is charged to me, not to content.
+***
+*** ===== WHAT I TICKED =====
+***   TICKED **S134** (game build) - System 12 step S110c-2, and it is ticked for the two findings,
+***     not for a wiring that correctly did not happen. The gate is real and I checked IT CAN STILL
+***     GO RED rather than taking the pass: `tools/_s134_uacp_scale.gd:144` requires BOTH
+***     `fails.is_empty()` AND `ok_n == BODIES.size()`, and it was red-proved THREE ways including
+***     against the real defect (`--redprove` 20/21, `--redprove-bone` 0/20, pre-fix 0/20 cut away).
+***     FINDING 1: the off-repo FBX->glb conversion wrote all 120 materials at base alpha 0.0 +
+***     alphaMode MASK, so Godot imported ALPHA_SCISSOR at alpha 0 and the first lineup drew NO UACP
+***     BODY AT ALL while every number measured fine. FINDING 2: after the alpha fix the skin comes
+***     through near-black (baseColor 0.0134 grey). **I LOOKED AT renders/cycles/s134/lineup.png
+***     MYSELF AND CONFIRM FINDING 2 ON THE PICTURE**: the three KayKit bodies carry correct skin and
+***     every UACP body is a black silhouette with floating white eyes - face, HANDS and LEGS, not
+***     just the face plate. It also corrected S133's own scale: the per-body spread 3.147-4.292 was
+***     HATS; measured off the head bone it is k 0.5728 on all 20, so S133's 0.7249 would have stood
+***     every UACP head ~27% proud. NOTHING IS WIRED AND NOTHING IS IN assets/ ON `laptop` - I
+***     verified that by numstat, not by the claim: laptop carries PROGRESS.md, RUN_LOCK.txt and the
+***     render only; the 20 glbs + LICENSE.txt live on `gamebuild-s134-wip` alone. Correct under
+***     S108's rule. Lock: claim 11:08:44, cap claim+25 = 11:33:44 COMPUTED FIRST, declared 11:30:44,
+***     released 11:18:47 - inside both.
+***   TICKED **ART COLLIER PASS 15** - and the reason to tick it is that art found the ARITHMETIC
+***     behind pass 14's eye judgement. Pass 14 said "his head has almost no facing" and could not
+***     say why; pass 15 measured it: brow, sockets and mouth cloth all sat ~0.03 m INSIDE an
+***     ellipsoid of radii (0.198, 0.204, 0.206), so only the sliver the curvature left near the
+***     silhouette ever rendered. The face now follows the surface by construction.
+***     **I VERIFIED IT TWO WAYS MYSELF AND THE SECOND IS STRONGER THAN ART'S OWN CLAIM.** By eye,
+***     against the p14 control at 3x: the control head is a bare lump with two faint slanted marks;
+***     p15 reads as a brow, two sockets and a mouth. BY MEASUREMENT: front silhouette XOR between
+***     p14ctl and p15 is **ZERO PIXELS** - not "unchanged" by eye, byte-identical - and the 1,110
+***     interior pixels that did change sit entirely in y188-234 on a body spanning y143-486, i.e.
+***     inside the head box and nowhere else. Art's "the facing does not wrap" is true and provable.
+***     Art also told the truth against itself three times: three wrong guesses at the side break,
+***     each disproved by a render ("a cause that does not move when you shrink it is not the
+***     cause"); a list of what is STILL wrong (a ~48 px side nub, cause NOT established; it reads as
+***     "a head with a front" at the 360p rung; the operator is still brown-on-brown with his clamp);
+***     and - the valuable one - that its NEW tool `_facingread.py` DID NOT DECIDE THE PASS and
+***     cannot see a face at all (78% differing on the CONTROL). The picture decided. Register green:
+***     errors [], blind_views [], unproved_cells [], 62 cells.
+***   TICKED **B155** (chat bot) - the four engine gates B154 SPLIT AND CARRIED are paid on merged
+***     main dd4ffbb1, all four with verdict lines: parse --quit-after 300 RC 0 / 0 SCRIPT ERROR / 0
+***     COMMANDS_DATA; L14_TEST OK (24); TWITCH_PARSE OK (8); COMMANDS_DOC OK 32 with `git diff`
+***     EMPTY. The split-and-carry worked exactly as the yield rule intends. **AND IT CAUGHT TWO OF
+***     ITS OWN FAULTS INSTEAD OF REPORTING THEM AS THE CODE'S**: (1) a reverse-drift regex said "14
+***     published commands unreachable" because it required the `match` label to END ITS LINE, while
+***     chatcmd.gd writes `"delve":    out = _delve(user_id)` with the body on the same line -
+***     reparsed by block indentation, 59 case labels and ZERO unreachable. That is A REGEX IS NOT A
+***     PARSER in a brand-new family, the second new family in two hours. (2) `testbits`/`testsub`/
+***     `testpoints` are gated at chatcmd.gd:204 on `local_` ids, so their ABSENCE from commands.json
+***     is correct and publishing them would advertise commands no viewer can run.
+***   TICKED **U177** (HUD) - a written stand-down, and I checked the claim rather than the word: the
+***     rarity-hue half of System 2 IS wired, `ui_theme.gd:176/196/200/204` and
+***     `leaderboard_panel.gd:197/202` all present on origin/hud-ui exactly as named. The HUD is
+***     right that no HUD-owned Phase 2 system is open. It is not charged for a dry hour.
+***   TICKED **C-211** (content) - audit step 2 plus the prepared collier diff, and I verified the
+***     "no data change" by numstat: docs/PROGRESS.md +19/-0 and NOT ONE data/ file. Correct under
+***     the rule it was given. It was right to hold - see my fault above for why it was still holding.
+***   TICKED **THE HUB'S CDN RE-MEASURE** - and the finding matters more than the commit size.
+***
+*** ===== THE HUB: THE BYTES ARE RIGHT AND THE LIVE PAGE IS NOT SERVING THEM =====
+***   PUBLISHED: gh-pages **8d214d36**, tree **1d8bce63**, pushed 09:55:03 CT today. MEASURED BY ME.
+***   **I CONFIRMED THE PUBLISHED BYTES CARRY THE FIX**: `origin/gh-pages:index.html:519` is
+***   `<script src="app.js?v=8" defer></script>`. The repo side is correct and complete.
+***   **THE LIVE PAGE IS NOT.** The hub re-measured at 11:39 and the live HTML is STILL
+***   `document.lastModified` 09:49:18 serving `<script src="app.js">` with NO version query - the
+***   pre-cache-bust HTML, now ~1h45m after the 09:55 push, and NOT self-healed across two
+***   measurements (10:4x and 11:39).
+***   WHY THIS IS NOT COSMETIC, AND THIS IS THE PART NOBODY HAS WRITTEN DOWN YET: the cache-bust
+***   exists precisely so a returning viewer does not run a STALE CACHED app.js. While the CDN serves
+***   the unversioned HTML, a viewer whose browser cached app.js before 09:43 loads old JS against
+***   the new page - and the old JS has no Suggestion Box handler. So the one surface the chat bot's
+***   `bug` and `suggest` commands send viewers to can silently not work FOR EXACTLY THE RETURNING
+***   VIEWERS the cache-bust was written for. A first-time viewer is fine. I am not claiming a
+***   sighting - no one has reproduced it in a cold-cached browser - I am naming the mechanism.
+***   MERGED AND NOT PUBLISHED: `origin/hub:web` is **fa615c02** vs published tree **1d8bce63**, and
+***   I counted the per-file split MYSELF rather than copying it: **web/NOTES.md +30/-0, ONE FILE,
+***   DOCUMENTATION ONLY.** (Last hour it was +22; the hub added 8 lines.) NO html, NO js, NO css, NO
+***   asset is unpublished. **THERE IS NOTHING FUNCTIONAL TO PUBLISH AND I AM NOT ASKING FOR A
+***   PUBLISH OF CONTENT** - the ask in FOR THE SUPERVISOR is about the CDN, which is a different
+***   thing. LIVE PAGE LAST LOOKED AT: 11:39 CT today by the hub lane (10:4x end-to-end in a browser).
+***
+*** ===== THE DEAD-DATA AUDIT, 11:58 CT - THE UNREAD COUNT DID NOT MOVE =====
+***   Measured on the merged tree, off `scripts/*.gd` + `web/app.js` = **48 FILES / 2,402,175 chars**
+***   (not a recursive glob), and `data/*.json` one level = 12 files / **156 top-level keys**.
+***     - UNREAD LIVE DATA KEYS: **ZERO**.
+***     - UNREFERENCED ASSET DIRECTORIES: **ZERO** (35 directories with files, measured off assets/
+***       only; renders/ is evidence output and is not walked).
+***     - ZERO-HIT KEYS: **66 = 51 `_note_` + 15 NON-NOTE**, the same accounted-for fifteen.
+***   THE SERIES, NON-NOTE ONLY: 15 / 15 / 15 / 15 / **15**. UNMOVED.
+***   **AND I REPRODUCED THE STRUCK 39 ON TODAY'S BYTES, THEN CHECKED THE PLAN BEFORE CALLING IT A
+***   FINDING - WHICH IS THE ONLY REASON THIS IS A SENTENCE AND NOT A DISCOVERY.** My first matcher
+***   (quoted forms `"key"`/`'key'`) returned 92 = 53 notes + **39 non-note**: the struck 07:58
+***   number exactly. Four matchers on identical bytes give 39 / 23 / 14 / 15; the one that sits on
+***   the series is BARE literal substring with only `_note`-prefixed keys counted as notes. I had it
+***   written up as new and `grep -n -i matcher docs/WORK_PLAN.md` returned 28 hits - the plan has
+***   carried the full diagnosis since 04:5x (lines 986-991) and it is ALREADY owed correction 3.
+***   So: nothing new, owed correction 3 CONFIRMED STILL CORRECT AND STILL OWED, and the next seat
+***   should not spend a run on it either. SAY WHICH MATCHER YOU USED - that remains the whole point.
+***
+*** ===== LOCK DISCIPLINE AND THE CLEAN-HOUR COUNT: 1 =====
+***   Game build S134 claim 11:08:44, cap claim+25 = 11:33:44 COMPUTED FIRST, declared 11:30:44,
+***   released 11:18:47 - inside both. That is the game build's lock line carrying its cap computed
+***   before the declaration again; the old over-declaration pattern remains stopped.
+***   Chat bot B155 claim 11:46:59, cap 12:11:59, declared 11:51:30, released **11:48:24** - inside
+***   the declared finish AND clear of the HUD's :52 window. **THE ROW I WROTE TWO HOURS AGO (claim
+***   by :50 with a finish inside :52) HAS NOW HELD THREE FIRINGS RUNNING**, and the HUD took its own
+***   window unobstructed at 11:53. The schedule fault that cost the HUD two cycles on 21 Nov and the
+***   chat bot its slot at 10:45 is not recurring.
+***   HUD U177 is a written stand-down with no source change and took no lock. Art takes the lock
+***   only to prove fit. No overrun, no lock cleared on age, no future stamp, no two lanes holding at
+***   once, NO LANE CLAIMED OVER A LIVE HOLD, and no lane was starved.
+***   **THE COUNT ADVANCES TO 1.** It was reset to 0 at 10:58 by a prompt gap I own (the chat bot
+***   lost its :45 window to a live web fetch the proxy 403s). That gap did NOT bite this hour - the
+***   chat bot read published bytes off `origin/gh-pages` instead, exactly as owed correction 5 says.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
+***   Land ALL of these on the first LIVE turn, together. 1-5 are CARRIED from 10:58 (6 was
+***   withdrawn by the seat that wrote it and stays withdrawn); 7 is new this hour.
+***   1. (CARRIED) STRIKE the :58 prompt's standing note that the art fit register reads "RED /
+***      ok:false ... on two CARRIED unmeasured rows (snuffer_chibi, tallyman_chibi)". It reads
+***      ok:TRUE, errors [], blind_views [], unproved_cells [], and pass 15 measured 62 cells again.
+***   2. (CARRIED) EVERY MINIBOSS COUNT IN THE PROMPT IS STALE - "44/44/44", "46 rows / 44 live",
+***      and the :34 prompt's "THIRTY-THREE already exist". Write it as **62 LIVE BASE BODIES + 2
+***      RETIRED `_chibi` = 64 REGISTER ROWS; AN INVENTED MINIBOSS IS THE 63rd**, counted AT RUNTIME
+***      (`len(BUILDERS)` minus `_chibi`/`_tall`), never by regex - the regex is where 33 came from.
+***   3. (CARRIED, AND RE-CONFIRMED BY ME THIS HOUR ON TODAY'S BYTES) ADD THE DEAD-DATA MATCHER
+***      DIAGNOSTIC. Quoted-form matching plus counting `(file, key)` pairs yields 92 = 53 + **39**,
+***      the struck 07:58 number; bare literal substring de-duplicated by key name yields **15**,
+***      every time. I reproduced both today. Three seats have now spent part of a run on this.
+***   4. (CARRIED) ADD to the Blender-bridge paragraph: NEVER pass `-F -` or any stdin-reading flag
+***      to git through the bridge. It blocks forever and the hung git.exe wedges the bridge for
+***      EVERY lane. Write the commit message to a FILE. This cost one lane its whole cycle on 25 Nov.
+***   5. (CARRIED) ADD to ALL SEVEN prompts: **NEVER PUT A LIVE WEB FETCH IN THE HEAD OF A SCHEDULED
+***      SLOT.** The container proxy 403s the live site and the fetch agent returns
+***      PROVENANCE_REQUIRED, which needs an approval an unattended firing cannot give. Read
+***      published bytes from `origin/gh-pages` through the bridge. It cost the chat bot its 10:45
+***      window; it did NOT cost it the 11:45 window, because the lane adopted this before the
+***      prompt did.
+***   7. (NEW, MINE) ADD to the :58 prompt, beside the "a ruling in a chat log does not exist" rule,
+***      its missing other half: **READ THE SUPERVISOR'S RULING DOCS AT THE TOP OF YOUR RUN AND
+***      CARRY ANY NEW RULING INTO THE PLAN BEFORE YOU WRITE THE ROWS.** The rule as written tells
+***      you a chat-log ruling does not exist; it does not tell you whose job it is to make it
+***      exist, and the gap cost content a cycle today on a diff the supervisor had already approved
+***      (11:00 ruling, 10:58 block written at 11:1x, still carrying it as pending).
+***
+*** === TAKE THIS NEXT, ONE ROW PER LANE - THE 11:58 CT FIRING, 25 NOV 2026 ===
+
+GAME BUILD (:07) - S134 IS TICKED; TAKE **SYSTEM 12 STEP S110c-2b**, which is your own named next
+  step and nobody else's. Fix the Skin colour and THEN wire. THREE THINGS, AND TWO ARE YOUR OWN
+  WORDS. (1) **DO NOT INVENT A SKIN COLOUR** - you said that yourself and you were right; read it
+  off the pack source, or re-run the converter reading the right property. (2) **I LOOKED AT YOUR
+  lineup.png AND THE DEFECT IS WIDER THAN YOUR WRITE-UP SAYS**: it is not only the face plate -
+  HANDS AND LEGS ARE BLACK TOO on all 20, and because the eyes stay white the bodies read as
+  silhouettes with floating eyes. When you re-render, check hands and legs, not just the head, and
+  LOOK before you call it fixed. (3) Then wire per role in townsfolk.gd at **k 0.5728** (head-bone,
+  hat-free - NOT S133's 0.7249) with the clip-prefix strip ("CharacterArmature|...|Idle"), and
+  remember your own warning that `Gear.strip_props`/`dress_role` assume KayKit bone names while
+  UACP has Fist.L/Fist.R, so wiring must skip or remap gear for these bodies. The glbs stay off
+  `laptop` until the commit that wires them - S108's rule, which you have now obeyed twice.
+
+CONTENT (:22) - C-211 IS TICKED. **SHIP THE PREPARED COLLIER DIFF NOW. THE DECISION IS MADE AND YOU
+  ARE NOT WAITING ON ANYONE.** The supervisor ruled option (A) at 11:00 CT today, VERBATIM:
+  **"Content: ship the prepared diff. Do not hold for further approval."** The ruling is
+  `claude/sup-nov25-1100-RULING-collier-plug-count-text-change-not-silhouette-regression.md`. You
+  were right to hold at 11:24 - the ruling had not reached the plan, and that is MY fault, not
+  yours. It is in the plan now, so the hold is over: ship the one-line reword of "four pale plugs"
+  so the text matches what the body actually shows at 360p, touch only the data file the promise
+  lives in, and say in your entry which file and which string changed. The count IS the mechanic
+  (FAULT 10), so do not weaken the line into vagueness - make it agree with the body.
+
+ART (:34) - PASS 15 IS TICKED, and the silhouette XOR is ZERO so you did not pay for the face with
+  a silhouette. TAKE **THE ~48 px SIDE NUB** - your own shipped body, your own unestablished cause,
+  which is you auditing work you have just learned about and is NOT a new item. You have already
+  attributed the side-silhouette BREAK by ablation (brow ~41 px, rag ~36, eyes ~6); the nub is the
+  part that attribution did NOT explain, and three guesses have been disproved by render already,
+  so do not spend the hour on a fourth guess - ABLATE IT the way you ablated the break. If the nub
+  resolves cheaply, the second call is the OPERATOR BROWN-ON-BROWN with his clamp, which you raised
+  in pass 14 and no number in your lane reports. Keep doing what you did this hour: say what the
+  harness cannot see, and do not let a tool that cannot see a face decide a face.
+
+HUB (:37) - THE CDN RE-MEASURE IS TICKED and the finding is now in front of the supervisor. TAKE
+  **ONE MORE MEASUREMENT AND THEN STOP MEASURING**: at the head of your slot, read the live page
+  once (your own browser - NOT a container web fetch; see owed correction 5) and record
+  `document.lastModified` and whether the script tag carries `?v=8`. THREE OUTCOMES, ALL CHEAP.
+  (a) It has healed -> say so in one line and the item closes. (b) Still stale -> add the one data
+  point and DO NOT re-litigate it; it is with the supervisor and a re-push is a publish action that
+  is not yours and not mine. (c) **If you can do it safely, the measurement worth more than another
+  lastModified reading is a COLD-CACHE check**: load the live page in a fresh profile with no
+  cached app.js and confirm the Suggestion Box still works for a first-time viewer, which is the
+  case I claimed is fine and have NOT proved. You never publish. NOTES.md +30 is documentation and
+  needs no publish.
+
+HUD (:52) - U177 IS TICKED and you are right that no HUD-owned Phase 2 system is open. TAKE **THE
+  LOCK-WRITER NEWLINE BUG**, which is your own shipped writer and therefore not a new item. It was
+  written up in the plan's 05:1x addendum and offered to you then; I RE-MEASURED IT THIS HOUR AND
+  IT IS UNCHANGED: `)RUNNING` with no newline before it occurs **6 times in 1,397 lines** of R's
+  working `docs/RUN_LOCK.txt`, and ALL SIX follow an IDLE line ending in the `(HUD)` tag (16 Nov
+  13:06, 20 Nov 15:08, 20 Nov 22:08, 21 Nov 22:07, 24 Nov 15:08, 25 Nov 04:07). WHY IT MATTERS AND
+  WHY IT IS WORTH YOUR WINDOW: the yield rule says read the LAST LINE and if it is RUNNING the lock
+  is held. A glued pair is ONE line that BEGINS `IDLE` and ENDS with a live `RUNNING` claim, so a
+  lane doing literally what the rule says reads `IDLE` and takes a lock another lane is holding.
+  That is the two-lanes-at-once fault with the instrument at the root of it. It has not bitten -
+  every lane has read the text, not the line boundary - and it is a one-character fix (append "\n"
+  if the file does not already end with one). Fix it, then prove it: write a lock line yourself and
+  show the next line starts clean.
+
+CHAT BOT (:45) - B155 IS TICKED; the carried gates are paid and your Suggestion Box item stays
+  DROPPED. **CLAIM BY :50 WITH A DECLARED FINISH INSIDE :52 - that row has now held three firings
+  and it is the reason the HUD got its window.** Your lane is dry, so this is a WRITTEN STAND-DOWN
+  unless your own drift check finds something, and a stand-down written up IS the delivery. If you
+  want a real target: you have now found the same class of fault twice in two hours (a regex read
+  as a parser, in two different families). **AUDIT YOUR OWN REMAINING REGEX INSTRUMENTS** - the
+  ones in your gates that walk GDScript - and say for each whether it parses or pattern-matches,
+  and what it would mis-read if the code were written on one line. That is you auditing your own
+  shipped instruments, not new work. Read published web bytes off `origin/gh-pages`, never a live
+  fetch in the head of your slot.
+
+*** ===== FOR THE SUPERVISOR =====
+***   1. **THE PAGES CDN HAS BEEN SERVING PRE-CACHE-BUST HTML FOR ~1h45m AND IT IS NOT HEALING.**
+***      Published is correct: gh-pages 8d214d36 / tree 1d8bce63 / 09:55:03 CT, and I confirmed
+***      `index.html:519` carries `app.js?v=8`. The LIVE page, measured by the hub at 10:4x and
+***      again at 11:39, still reports `document.lastModified` 09:49:18 and `<script src="app.js">`
+***      with no version query. CONSEQUENCE, AND IT IS THE REASON I AM RAISING IT RATHER THAN
+***      WAITING: while that persists, a RETURNING viewer with app.js cached from before 09:43 runs
+***      old JS that has no Suggestion Box handler - which is the exact failure the cache-bust was
+***      pushed to prevent, on the surface the chat bot's `bug`/`suggest` commands point viewers to.
+***      Not reproduced in a cold browser; I am naming the mechanism, not claiming a sighting, and
+***      the hub is tasked to try the cold-cache check this hour.
+***      **RECOMMENDATION: give the CDN one more hour, and if 12:39 still reads 09:49:18, authorise
+***      a no-op re-push of gh-pages to force a Pages rebuild.** The push itself is mechanical and I
+***      will do it by the plumbing recipe with the four assertions the moment you say so - but
+***      republishing is yours, so I have not touched it and the hub never does.
+***   2. NOTHING ELSE IS WAITING ON YOU. The collier text ruling is landed in the plan and content
+***      is shipping it this cycle; the hub delta is one documentation file and needs no publish.
+
 ## TAKE THIS NEXT - Updated THE 10:58 CT FIRING, 25 NOV 2026 (team lead; written 11:1x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS 15585863. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
 *** PROGRESS.md took four conflicts (content, hub, hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT:

@@ -4820,7 +4820,7 @@ func _spawn_people() -> void:
         for k in range(int(row[6])):
             var v := Townsfolk.new()
             v.role = role
-            v.model = row[2]
+            v.model = Townsfolk.body_for(role, row[2], k)
             v.tint = Color(float(row[3]), float(row[4]), float(row[5]))
             v.person_name = "%s %s" % [FIRST[rng.randi() % FIRST.size()], LAST[rng.randi() % LAST.size()]]
             v.town = self
@@ -6314,7 +6314,7 @@ func arrive(role: String, blurb: String) -> Townsfolk:
     rng.randomize()
     var v := Townsfolk.new()
     v.role = role
-    v.model = row[2]
+    v.model = Townsfolk.body_for(role, row[2], rng.randi())
     v.tint = Color(float(row[3]), float(row[4]), float(row[5]))
     v.person_name = "%s %s" % [FIRST[rng.randi() % FIRST.size()], LAST[rng.randi() % LAST.size()]]
     v.town = self

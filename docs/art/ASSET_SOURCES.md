@@ -809,3 +809,19 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Styl
 - This closes the gap left by the 24 Nov licence-gate row for Graveyard Kit 5.0, which read "not measured this run - row written while the file was open". That row's CC0 claim now rests on the file read here, not on the earlier note.
 - Not share-alike, not non-commercial, not no-derivatives: none of the forbidden families applies.
 - Status: **CLEARED for use (CC0 1.0, commercial use permitted, no attribution required).** Licence gate satisfied for `kenney_graveyard-kit_5.0`. Nothing has been imported, converted or redistributed by this firing. Any file that enters `assets/` still needs its own row.
+
+
+## PACK CATALOGUE - medieval_pack_CC0 (24 Nov 2026, pack-catalogue firing)
+
+| Field | Value |
+|---|---|
+| Pack directory | `C:\hd adventure\_packs\medieval_pack_CC0\` (sibling `medieval_pack_CC0.zip` checked: identical 28 files, no extras) |
+| Author | Not stated in any file in the pack |
+| Licence | **NO LICENCE FILE FOUND** - no LICENSE / License.txt / README / credits / terms file in the directory or the zip; zip comment empty. The folder name `CC0` is NOT a licence. Nothing guessed. |
+| File count | 28 (`MedievalPack/Blends/`: 9 x .blend incl. `Katana.blend1` backup; `Blends/Textures/`: 5 x .png; `OBJ/`: 14 x .obj/.mtl) |
+| Contents | Club, Dagger, DoubleAxe, Katana, LongSword, ShortSword, SimpleAxe, Spear |
+| Commercial use | Not determinable from the pack |
+| Attribution | Not determinable from the pack |
+| Cleared for use | **NO.** Unlicensed and gated. Do not import, convert or redistribute any file from this pack until an author licence is found. |
+
+Method: directory listed recursively and zip central directory read with Python `zipfile` (not extracted); licence-like search (`*licen*`, `*readme*`, `*credit*`, `*terms*`, `*.txt`, `*.md`, `*.html`, `*.pdf`) returned nothing in either location. No `.blend` or `.obj` was opened.

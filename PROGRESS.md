@@ -1,3 +1,14 @@
+## HUB security-invariant re-run - 24 Nov 2026 23:4x CT (hub lane)
+TAKE THIS NEXT (22:58 block) HUB row: re-run the web/ security invariants on the CURRENT tree and log which greps. No web/ edit. READY TO PUBLISH NOT CLAIMED.
+Tree: origin/hub merged with origin/main (305d80ce); web/ is byte-identical to origin/hub (no web/ diff). node --check app.js rc=0 (5455 lines).
+Greps run on web/app.js + web/index.html:
+ 1. innerHTML -> code only at app.js:255 and :301 (both page-owned literals); remaining hits are comments (7, 93, 5137, 5178) and the index.html:49 comment, which still says "two page-owned sites" and is TRUE.
+ 2. outerHTML|insertAdjacentHTML|document.write|eval(|new Function -> zero in code (app.js:10-11 is a comment saying so).
+ 3. src/href/srcdoc/style assignment: app.js:70 svg use href = "#ic-"+whitelisted key; :2743 link.href only after a ^https://(www.)?twitch.tv/ test on Twitch's own device-code response (not snapshot data); :3783 img.src = path from ITEM_ICONS whitelist; cage.style.transform = matrix3d of numbers only. No snapshot string reaches a URL/src/href/style.
+ 4. CSP meta intact: default-src 'none'; connect-src supabase + id/api.twitch.tv + wss irc-ws.chat.twitch.tv; script-src/style-src/font-src 'self'; img-src 'self' data:; base-uri/form-action 'none'.
+ 5. Canaries present in code: <colour> canary (app.js:2126), hostile-name <img onerror> in ?mock=lore / crier / chronicle (4869, 3107, 2677). Not re-rendered - web/ did not change, so the render test is not owed.
+Zero-byte walk: 539 files, 3,251,058 bytes, ZERO at 0 bytes. Live-dot colour: unchanged (no UI change this run).
+
 ## HUB standing audit - 24 Nov 2026 21:38 CT (hub lane)
 TAKE THIS NEXT (20:58 block) HUB row: "NOTHING TO PUBLISH AND NOTHING TO CLAIM. Keep the standing audit." No row, no web/ edit.
 Measured fresh on origin/hub merged with origin/main: web/ walk = 539 files, 3,251,058 bytes, ZERO at 0 bytes.
@@ -18617,3 +18628,77 @@ TAKE THIS NEXT (22:58 CT) gave game build S124: name the 59th. Merged main 2d063
 - tools/_d96_fit.gd FIX (a lying instrument): single-key mode `key=pledgeman:treasury` came back D96_FIT FAIL 2 of 5 with "spawns with its own model (changer.glb)" - the floor's OWN miniboss roll was used as-is and named a sibling, so the shot was of the wrong body. Now pins sp["mb_key"] = k on that path. Re-run: D96_FIT OK 5 checks - pledgeman.glb, 2.57m = 1.05 x hero vs art 1.05, arrive line with the body present, fall line on the kill. LOOKED AT renders/cycles/d96/pledgeman.png: the body stands on the treasury floor beside the knight with the board and crossed lashings on its back, nameplate "Heldfast". The framing is poor (a wall block fills the right third and the hero's own label overprints the top) - harness camera, not the body; noted, not chased.
 VERDICTS (merged tree, R): parse --quit-after 300 rc 0, 0 SCRIPT ERROR in the whole battery log; S51_NAMES OK 176 checks; S107_GATE OK 12; S117_STRAKER OK 11; S124_PLEDGEMAN OK 13; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2051 samples off the floor; TOWNWALK in_solid=0/18307 raid_in_solid=0/5490 PASS; DELVE_TEST OK ran 9001 frames; D96_FIT OK 5 checks (pledgeman).
 CASCADE after this commit on laptop: 59 bodies / 59 feed / 59 engine / 58 published. The chat bot's 59 republish is the one step left. No live Twitch test, 0 bits.
+## C-202 (24 Nov 2026 23:2x CST, content) - AUDIT OF MY OWN 59 miniboss_feed.by_key ROWS; NO ROW WRITTEN (the feed is level at 59/59, there is no 60th body)
+TAKE THIS NEXT (22:58 CT block, 24 Nov) CONTENT row: audit your own 59 rows - four keys, no empty array, `{name}` only where the other rows put it. Written up, no data changed.
+MEASURED on merged content (origin/main merged in): by_key = 59 rows, last `pledgeman`; arrive x9 and fall x8 on ALL 59 (no empty array, every entry a non-blank string).
+FINDING 1 - THE ROW'S PREMISE IS SLIGHTLY OFF: it is not true that every row has all four keys. 34 rows carry arrive/act/broken/fall (drillmaster ... pledgeman era rows incl. the 14 oldest); 25 rows carry ARRIVE AND FALL ONLY (quartermaster, loader, hurdleman, jointer, tanner, reeve, tapster, pressman, strickler, dyer, greener, moulder, ratcatcher, drover, paviser, fenman, comfitmaker, leech, dauber, sealer, hooper, relief, scraper, ferryman, winder). That split is the standing shape, not a defect - the engine (delve.gd) reads only arrive and fall (setpieces miniboss_feed_arrive / miniboss_feed_fall). Nothing to fix; do NOT backfill act/broken (dead data).
+FINDING 2 - `{name}` CLEAN: appears in ZERO arrive and ZERO fall lines across all 59 rows; it appears only in `act` (22 rows) or `act`+`broken` (1 row), the 23 rows that use it at all. Matches the shape stated in earlier cycles.
+Shape counts of the 34 four-key rows (arrive/act/broken/fall): 26 x 9/7/4/8, 4 x 9/6/4/8, 4 x 9/8/4/8.
+VALIDATION OK: no data file edited (items, lore_lines, bosses, potions all byte-identical to the merge); PROGRESS.md only. Pending engine half: S124 names `pledgeman` Heldfast in Delve.MB_NAME (58 -> 59).
+CODE WIRING: none new.
+## B143 - 24 Nov 2026, 23:45 CT (chat bot) - THE 58 -> 59 REPUBLISH IS PAID AT THE FEED, THE COUNT ARM IS CLOSED, AND THE ONE RED LEFT IS THE GAME BUILD'S S124 SITTING ON `laptop`
+
+The 22:58 team-lead row said the republish was owed again at 59 and told me to measure it myself on
+merged main rather than take the number. I did, on 2d0638ed, and all three registers disagree in the
+way the row predicted:
+
+  `data/lore_lines.json` `miniboss_feed.by_key` = **59** keys, `pledgeman` last (content's C-201).
+  `scripts/delve.gd` `Delve.MB_NAME` = **58** keys, 0 duplicates, `harrowman` last - brace-matched
+  from the `{` that follows `MB_NAME`, counted on the dict body, not a whole-file regex.
+  `data/commands.json` `miniboss` published = **58** (my own B142 publish).
+
+`by_key - MB_NAME` = `['pledgeman']`. S124 named him Heldfast at 23:16 and pushed to `laptop`
+(2e913101); **`origin/main` does not carry it**, so the engine is one short of the feed at my claim
+and that gap is not mine to close.
+
+I PUBLISHED THE FEED NUMBER, 59, AND I SAY WHICH REGISTER THAT IS. `scripts/chatcmd.gd:2243` is
+`elif mb_said[0] != mb_live.size():` with `mb_live` = `miniboss_feed.by_key`, so the published count
+is answerable against the CONTENT FEED and nothing else. That is the same reading B142 arrived at by
+being wrong first and B140 arrived at by precedent; this cycle it was measured before the edit rather
+than after a red. `data/commands.json` 18,000 bytes on BOTH sides (58 and 59 are the same width),
+404 flattened leaves each side, key sets identical, and **exactly two leaves changed** -
+`/commands/miniboss/short` and `/commands/miniboss/what`. The whole file held exactly two occurrences
+of the string `58` before the edit and they were both those two.
+
+`docs/COMMANDS.md` was regenerated by the REAL `tools/_commands_doc.gd`, not emulated:
+COMMANDS_DOC OK wrote 32 commands, rc 0. The regenerated file contains **zero** occurrences of `58`
+anywhere, so no stale count survives in the doc a viewer is pointed at.
+
+GATES ON MERGED MAIN 2d0638ed (all four, in one battery, log deleted after):
+  COMMANDS_DOC OK wrote 32 commands - rc 0
+  TWITCH_PARSE OK (8 checks) - rc 0
+  `--headless --path W6 --quit-after 300` - rc 0, **0 SCRIPT ERROR**
+  L14_TEST **FAIL 1 (24 checks)** - and the failing check is `no COMMANDS_DATA guard arm fired on
+  the load (1 fired: ["MINIBOSS UNNAMED"])`
+
+THE ONE RED IS NOT MINE AND THE ARITHMETIC PROVES WHICH ARM I CLOSED. At published 58 against feed
+59 the guard would list TWO arms, MINIBOSS COUNT and MINIBOSS UNNAMED. At published 59 it lists ONE:
+`COMMANDS_DATA MINIBOSS UNNAMED ... ["pledgeman"]`. My edit closed the count arm; the UNNAMED arm is
+an `MB_NAME` row the game build already wrote at S124 and cannot be closed from this lane by any
+edit to the three files I own. It goes quiet the moment S124 reaches main.
+
+DRIFT CHECKED BOTH DIRECTIONS, by hand as well as by the gate: 32 entries in `commands.json`, every
+one of them carries a literal of its own name in `chatcmd.gd` (no entry with nothing to answer it),
+31 aliases with zero collisions against entry names, and L14's own 24 checks raised no drift arm -
+only the UNNAMED one.
+
+ONE THING I HAD TO MOVE THAT IS NOT MINE, AND I AM SAYING SO RATHER THAN LETTING IT READ AS CLEAN.
+`git merge origin/main` ABORTED: art's new `broodglut_T_Puglin_*.png` + `.import` commit collided
+with eight untracked copies of the same names already sitting in my worktree. I did not force it. I
+hashed all eight against `origin/main` first: the four PNGs are **byte-identical** (`git hash-object`
+matches the tree exactly), and the four `.import` sidecars DIFFER - mine were generated by this
+worktree's own import, main's by art's W5, which is the expected per-worktree UID churn and not a
+content disagreement. I moved all eight aside to a temp folder outside the repo (not deleted, not
+overwritten), merged clean as a fast-forward to 2d0638ed, and main's tracked versions are what the
+tree now holds. No asset of art's was destroyed and nothing of mine was published from them.
+
+L56 (the delve-heavy soak) NOT started - SPLIT, not crossed. The row told me to declare a finish
+inside :52 so the HUD keeps its window, and a soak does not fit in four minutes. It carries forward.
+
+
+## U163 - HUD STAND-DOWN, NO GODOT CLAIMED, NO .gd CHANGED, 2026-11-24T23:55:00-06:00 (23:52 firing)
+ITEM: R WORK_PLAN 22:58 TAKE THIS NEXT, HUD row: "DRY, AND THAT IS STILL THE CORRECT STATE. Stand down in writing again, or take the L56-class soak only if it fits :52-:07."
+Lock: R working RUN_LOCK last line = chat bot B143 IDLE 23:49:38 (art IDLE 23:47:13 before it); tasklist showed 0 Godot at 23:52 -> lock FREE. I claimed nothing: no run is owed, and a soak cannot be finished inside :52-:07. RUN_LOCK untouched.
+AUDIT (file-only, after git fetch): hud-ui is 353 commits behind origin/laptop, yet `git diff --stat HEAD origin/laptop -- <my 7 files>` is EMPTY (latest touch on main still 1a171424 U126). Nothing to re-gate. Worktree shows only modified render PNGs under renders/cycles (not committed).
+CHANGED: this note only. PARSE: n/a (no source change).
+NEXT: take whatever the 23:58 TAKE THIS NEXT names; otherwise re-audit the seven files against origin/laptop. Decision for Mr. E: none.

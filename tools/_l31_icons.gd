@@ -21,12 +21,15 @@ func _force(d: Delve) -> void:
 		for j in 5:
 			if i < keys.size():
 				var k := String(keys[i])
+				# S132: DISTINCT seeds (40, 38, 36 ...), not a uniform 30 - a render where every
+				# row reads 30s cannot show that the number belongs to the state
+				var secs := 40.0 - 2.0 * i
 				if k == "poisoned":
-					m["venom"] = 30.0
+					m["venom"] = secs
 				elif k == "slowed":
-					m["slow"] = 30.0
+					m["slow"] = secs
 				else:
-					m["st"][k] = 30.0
+					m["st"][k] = secs
 				i += 1
 func _count(n: Node, acc: Array) -> void:
 	if n.get_script() == preload("res://scripts/status_icon.gd"):
@@ -95,7 +98,47 @@ func _process(_d: float) -> bool:
 		print("L31_FIT chips_past_bar=%d" % over)
 		root.get_texture().get_image().save_png(ProjectSettings.globalize_path(OUT + "/l31_icons_1080.png"))
 		print("L31_ICONS party=%d states_wanted=%d icons=%d keyed_and_sized=%d" % [d.party.size(), want, icons.size(), keyed])
-		print("L31_ICONS %s %d" % ["OK" if want > 0 and keyed == want and over == 0 else "FAIL", keyed])
+		# S132 countdown arm: the qualifier the 18:58 tick left open - the render proved the
+		# duration is DRAWN, not that it COUNTS DOWN. Tick the engine's own m["st"] clock
+		# (Delve._status_tick, the call _fight_body makes every frame) by TICK seconds, rebuild
+		# the real PartyFrames._row, and require every m["st"] chip to read its seconds minus
+		# TICK. venom/slow are their own fields ticked inline in _fight_body, so they are
+		# counted separately and only required to be drawn. L31_REDPROOF=1 ticks by zero.
+		const TICK := 7.0
+		var dt := 0.0 if OS.get_environment("L31_REDPROOF") == "1" else TICK
+		var before := {}
+		for m in d.party:
+			for s in d.statuses(m):
+				before[String(m["uid"]) + ":" + String(s[2])] = float(s[4])
+		for m in d.party:
+			d._status_tick(m, dt)
+		var counted := 0
+		var stale := 0
+		var undrawn := 0
+		var distinct := {}
+		for m in d.party:
+			var row: Control = _eye.party_frames._row(m, false, d)
+			var texts: Array = []
+			if row.get_child_count() > 1:
+				for chip in row.get_child(1).get_children():
+					texts.append(String((chip.get_child(1) as Label).text))
+			for s in d.statuses(m):
+				var k := String(s[2])
+				var was := float(before.get(String(m["uid"]) + ":" + k, -1.0))
+				var want_txt := "%s %ds" % [String(s[0]), int(ceil(float(s[4])))]
+				if not texts.has(want_txt):
+					undrawn += 1
+				distinct[want_txt.get_slice(" ", want_txt.get_slice_count(" ") - 1)] = true
+				if k == "poisoned" or k == "slowed":
+					continue
+				if absf((was - float(s[4])) - TICK) < 0.001:
+					counted += 1
+				else:
+					stale += 1
+			row.free()
+		print("L31_COUNTDOWN tick=%.1f counted=%d stale=%d undrawn=%d distinct_secs=%d" % [dt, counted, stale, undrawn, distinct.size()])
+		var ok := want > 0 and keyed == want and over == 0 and counted > 0 and stale == 0 and undrawn == 0 and distinct.size() > 1
+		print("L31_ICONS %s %d" % ["OK" if ok else "FAIL", keyed])
 		return true
 	if _f > 9000:
 		print("L31_ICONS FAIL timeout")

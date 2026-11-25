@@ -1,0 +1,348 @@
+{
+ "key": "collier",
+ "span": "face_brow",
+ "arms": {
+  "_bh055": {
+   "tag": "_bh055",
+   "outdir": "C:\\hd adventure\\bellmire-art\\renders\\art\\minibosses\\_brow\\collier_bh055",
+   "info": {
+    "span": [
+     [
+      53,
+      54
+     ]
+    ],
+    "bounds_control": [
+     -1.05685,
+     -0.94188,
+     0.0,
+     0.97898,
+     1.21795,
+     2.1
+    ],
+    "bounds_split": [
+     -1.05685,
+     -0.94188,
+     0.0,
+     0.97898,
+     1.21795,
+     2.1
+    ],
+    "objs_control": 4,
+    "objs_split": 5,
+    "item_counts": {
+     "inside": 1,
+     "outside": 65,
+     "total": 66
+    },
+    "brow_objs": [
+     "collier_dark_brow"
+    ],
+    "brow_verts": 88
+   },
+   "views": {
+    "front": {
+     "guard": {
+      "B": {
+       "opaque_px": 223101,
+       "border_alpha": 0.0
+      },
+      "X": {
+       "opaque_px": 223101,
+       "border_alpha": 0.0
+      }
+     },
+     "moved_px_full": 621,
+     "moved_bbox": [
+      308,
+      129,
+      373,
+      142
+     ]
+    },
+    "side": {
+     "guard": {
+      "B": {
+       "opaque_px": 200724,
+       "border_alpha": 0.0
+      },
+      "X": {
+       "opaque_px": 200702,
+       "border_alpha": 0.0
+      }
+     },
+     "moved_px_full": 145,
+     "moved_bbox": [
+      161,
+      102,
+      176,
+      118
+     ]
+    }
+   }
+  },
+  "_bh075": {
+   "tag": "_bh075",
+   "outdir": "C:\\hd adventure\\bellmire-art\\renders\\art\\minibosses\\_brow\\collier_bh075",
+   "info": {
+    "span": [
+     [
+      53,
+      54
+     ]
+    ],
+    "bounds_control": [
+     -1.05685,
+     -0.94188,
+     0.0,
+     0.97898,
+     1.21795,
+     2.1
+    ],
+    "bounds_split": [
+     -1.05685,
+     -0.94188,
+     0.0,
+     0.97898,
+     1.21795,
+     2.1
+    ],
+    "objs_control": 4,
+    "objs_split": 5,
+    "item_counts": {
+     "inside": 1,
+     "outside": 65,
+     "total": 66
+    },
+    "brow_objs": [
+     "collier_dark_brow"
+    ],
+    "brow_verts": 88
+   },
+   "views": {
+    "front": {
+     "guard": {
+      "B": {
+       "opaque_px": 223101,
+       "border_alpha": 0.0
+      },
+      "X": {
+       "opaque_px": 223101,
+       "border_alpha": 0.0
+      }
+     },
+     "moved_px_full": 635,
+     "moved_bbox": [
+      308,
+      129,
+      373,
+      142
+     ]
+    },
+    "side": {
+     "guard": {
+      "B": {
+       "opaque_px": 200724,
+       "border_alpha": 0.0
+      },
+      "X": {
+       "opaque_px": 200702,
+       "border_alpha": 0.0
+      }
+     },
+     "moved_px_full": 148,
+     "moved_bbox": [
+      161,
+      102,
+      176,
+      118
+     ]
+    }
+   }
+  },
+  "_bh085": {
+   "tag": "_bh085",
+   "outdir": "C:\\hd adventure\\bellmire-art\\renders\\art\\minibosses\\_brow\\collier_bh085",
+   "info": {
+    "span": [
+     [
+      53,
+      54
+     ]
+    ],
+    "bounds_control": [
+     -1.05685,
+     -0.94188,
+     0.0,
+     0.97898,
+     1.21795,
+     2.1
+    ],
+    "bounds_split": [
+     -1.05685,
+     -0.94188,
+     0.0,
+     0.97898,
+     1.21795,
+     2.1
+    ],
+    "objs_control": 4,
+    "objs_split": 5,
+    "item_counts": {
+     "inside": 1,
+     "outside": 65,
+     "total": 66
+    },
+    "brow_objs": [
+     "collier_dark_brow"
+    ],
+    "brow_verts": 88
+   },
+   "views": {
+    "front": {
+     "guard": {
+      "B": {
+       "opaque_px": 223101,
+       "border_alpha": 0.0
+      },
+      "X": {
+       "opaque_px": 223101,
+       "border_alpha": 0.0
+      }
+     },
+     "moved_px_full": 633,
+     "moved_bbox": [
+      308,
+      129,
+      373,
+      142
+     ]
+    },
+    "side": {
+     "guard": {
+      "B": {
+       "opaque_px": 200724,
+       "border_alpha": 0.0
+      },
+      "X": {
+       "opaque_px": 200702,
+       "border_alpha": 0.0
+      }
+     },
+     "moved_px_full": 148,
+     "moved_bbox": [
+      161,
+      102,
+      176,
+      118
+     ]
+    }
+   }
+  },
+  "_bh100": {
+   "tag": "_bh100",
+   "outdir": "C:\\hd adventure\\bellmire-art\\renders\\art\\minibosses\\_brow\\collier_bh100",
+   "info": {
+    "span": [
+     [
+      53,
+      54
+     ]
+    ],
+    "bounds_control": [
+     -1.05685,
+     -0.94188,
+     0.0,
+     0.97898,
+     1.21795,
+     2.1
+    ],
+    "bounds_split": [
+     -1.05685,
+     -0.94188,
+     0.0,
+     0.97898,
+     1.21795,
+     2.1
+    ],
+    "objs_control": 4,
+    "objs_split": 5,
+    "item_counts": {
+     "inside": 1,
+     "outside": 65,
+     "total": 66
+    },
+    "brow_objs": [
+     "collier_dark_brow"
+    ],
+    "brow_verts": 88
+   },
+   "views": {
+    "front": {
+     "guard": {
+      "B": {
+       "opaque_px": 223101,
+       "border_alpha": 0.0
+      },
+      "X": {
+       "opaque_px": 223101,
+       "border_alpha": 0.0
+      }
+     },
+     "moved_px_full": 640,
+     "moved_bbox": [
+      308,
+      129,
+      373,
+      142
+     ]
+    },
+    "side": {
+     "guard": {
+      "B": {
+       "opaque_px": 200724,
+       "border_alpha": 0.0
+      },
+      "X": {
+       "opaque_px": 200702,
+       "border_alpha": 0.0
+      }
+     },
+     "moved_px_full": 149,
+     "moved_bbox": [
+      161,
+      102,
+      176,
+      118
+     ]
+    }
+   }
+  }
+ },
+ "errors": [],
+ "arm_env": {
+  "_bh055": {
+   "COLLIER_SOOT_HEAD": "0.55"
+  },
+  "_bh075": {
+   "COLLIER_SOOT_HEAD": "0.75"
+  },
+  "_bh085": {
+   "COLLIER_SOOT_HEAD": "0.85"
+  },
+  "_bh100": {
+   "COLLIER_SOOT_HEAD": "1.0"
+  }
+ },
+ "camera": {
+  "engine": "BLENDER_EEVEE",
+  "radius": 1.8179290622892157,
+  "cent": [
+   -0.038936734199523926,
+   0.1380351483821869,
+   1.0499999523162842
+  ],
+  "ortho": 2.4779998874664306
+ },
+ "ok": true
+}

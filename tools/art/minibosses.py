@@ -23463,7 +23463,19 @@ def collier():
                 _bp.append(_face(_ends * _t, 0.26,
                                  _fo * 0.012 - _r * _skin))
                 _br.append(_r)
+            # *** PASS 18 DECLARES THE BROW AS ITS OWN SPAN. *** It is not in
+            # `man_parts` and it does not change what the soot paints: it
+            # exists so an instrument can SPLIT the brow into its own object
+            # and HIDE it through a camera that was already locked, which is
+            # the only honest way to ask "can the viewer see this" (the trap-5
+            # lesson: `mask_of` answers how big a thing is, never whether it
+            # reads). Recorded by explicit index and NOT through `_open`/
+            # `_close`, because that helper keeps one cursor and calling it
+            # inside the enclosing `head` span would clobber it and corrupt
+            # `man_parts` - and `man_parts` is what the soot pass splits on.
+            _bi0 = len(P.items)
             P.raw(L.tube(_bp, _br, 8), 'dark')
+            P.spans["face_brow"] = (_bi0, len(P.items))
         # THE SOCKETS - set 0.010 INTO the surface so they read as holes in the
         # pot and not beads on it. Still DARK and never lit: FAULT 10 is that
         # the only glowing things on this body are the four vents, and two more
@@ -23615,25 +23627,81 @@ def _collier_soot(P):
     mis-paint `merge_objs` grew its `vcol_items` counter to catch.
     """
     f = float(os.environ.get("COLLIER_SOOT", "0.55") or 0.0)
+    # *** PASS 18 - THE HEAD COMES OUT OF THE SOOT, AND IT IS A FIX TO PASS 17,
+    # WHICH IS MINE. *** Pass 17 painted every `body` item of the figure 0.55x
+    # so the operator separates from the mound he stands on. The POT HEAD is
+    # `body` and the FACE - brow, sockets, rag - is `dark`, so the same stroke
+    # pulled the head down toward the face's own colour and took the face with
+    # it. Measured on the render at the 360p rung, brow-vs-head contrast:
+    # soot 0.55 = 15.0/255, 0.65 = 18.7, 0.75 = 22.5, 0.85 = 26.1, 1.00 = 30.5,
+    # and the PICTURE says 0.55 is a dark block with a hint of structure while
+    # 0.75 is the first rung where the brow is a bar.
+    #
+    # BUT RAISING THE WHOLE FIGURE'S SOOT UNDOES PASS 17. Same rung, the
+    # operator against his own mound on the SIDE view (the worst view, and the
+    # one pass 15 said has only silhouette doing the work), share of his
+    # on-mound pixels under the 8/255 threshold: 0.55 = 2.2%, 0.65 = 5.5%,
+    # 0.75 = 13.0%, 0.85 = 22.6%, 1.00 = 26.6%. That is the fault pass 17
+    # exists to fix, coming back.
+    #
+    # THE HEAD IS NOT ON THE MOUND. He STANDS on the clamp: the overlap that
+    # `_opshot` partitions as ON-MOUND is trunk and legs, and his head is up
+    # against air. So sooting the head buys the pass-17 fix NOTHING and costs
+    # the face everything - the two are separable, and this is not a point on
+    # a trade but a stroke that was landing in the wrong place. THE CLAIM IS
+    # MEASURED, NOT ARGUED: with the head exempted the on-mound numbers must
+    # be UNCHANGED from pass 17 on every view, and if they move, the claim is
+    # wrong and the exemption must not ship. See the pass-18 notes.
+    #
+    # COLLIER_SOOT_HEAD=<the same value as COLLIER_SOOT> reproduces pass 17
+    # byte for byte, which is the control arm and it is checked, not assumed.
+    # SHIPPED AT 0.85, AND THE PICTURE PICKED IT, NOT THE METRIC. The metric
+    # maximises at 1.00 (brow 30.5/255 against 26.1 at 0.85) and the gain from
+    # 0.85 to 1.00 is not visible at the rung, while two things are lost:
+    # rule 2 says wear is a variable and a charcoal burner's pot does not come
+    # out of the smoke clean, and at 1.00 the head sits on EXACTLY the clamp's
+    # own unpainted `body` colour, which leaves no margin if a game camera ever
+    # puts the head over the mound (this camera never does - the on-mound
+    # partition is trunk and legs, which is what made the exemption free).
+    # Rung brow-vs-head contrast by head factor: 0.55 = 15.0/255 (pass 17),
+    # 0.75 = 22.5, 0.85 = 26.1, 1.00 = 30.5.
+    fh = os.environ.get("COLLIER_SOOT_HEAD", "")
+    fh = float(fh) if fh.strip() else 0.85
     rng, src, errs = man_ranges(P)
     if errs:
         raise ValueError("collier soot: %s" % "; ".join(errs))
     if not src:
         raise ValueError("collier soot: no figure declared - nothing to paint")
+    spans = dict(getattr(P, "spans", {}) or {})
+    if "head" not in spans:
+        raise ValueError("collier soot: no `head` span - the head exemption "
+                         "cannot be applied to a head that is not declared")
+    hrng = [[int(spans["head"][0]), int(spans["head"][1])]]
     base = OVERRIDE["collier"]['body'][0]
     soot = tuple(c * f for c in base)
+    soot_h = tuple(c * fh for c in base)
     n = 0
+    nh = 0
     for i, it in enumerate(P.items):
         if not in_ranges(i, rng):
             continue
         if it[2] != 'body':
             continue
-        P.vcols[id(it)] = [soot] * len(it[0])
+        if in_ranges(i, hrng):
+            P.vcols[id(it)] = [soot_h] * len(it[0])
+            nh += 1
+        else:
+            P.vcols[id(it)] = [soot] * len(it[0])
         n += 1
+    if not nh:
+        raise ValueError("collier soot: the `head` span holds no `body` "
+                         "geometry - the exemption painted nothing, which "
+                         "would read as 'no change'")
     if not n:
         raise ValueError("collier soot: the figure holds no `body` geometry - "
                          "painted nothing, which would read as 'no change'")
-    P.soot = dict(factor=f, rgb=soot, items=n)
+    P.soot = dict(factor=f, rgb=soot, items=n,
+                  head_factor=fh, head_rgb=soot_h, head_items=nh)
 
 
 BUILDERS.update({"collier": collier})

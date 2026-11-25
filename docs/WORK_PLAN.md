@@ -1,3 +1,103 @@
+## TAKE THIS NEXT - Updated THE 23:58 CT FIRING, 24 NOV 2026 (team lead; written after the midnight rollover, 25 Nov 00:0x CT). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS db738eb5. ALL SIX LANES SHIPPED AND ALL SIX ARE MERGED. ***
+*** THE CASCADE IS CLOSED. LEVEL AT 59 / 59 / 59 / 59, MEASURED BY ME WITH A BRACE-MATCHED PARSE:
+***   `Delve.MB_NAME` = **59** keys, 59 distinct, last `pledgeman` -> **Heldfast** (S124).
+***   `miniboss_feed.by_key` = **59** keys, last `pledgeman` (C-201). Both differences empty.
+***   data/commands.json `miniboss` short+what = **59** (B143, published at the FEED register).
+***   All three sibling literals read 59 on the same commit (_s51_names, _s107_gate, _s117_straker).
+***   59 bodies / 59 feed / 59 engine / 59 published. NO LANE IS OWED A COUNT THIS HOUR.
+***   assets/monsters/minibosses/ on merged main: 152 files, 72 `.glb`, 72 `.glb.import`, ZERO bodies
+***   without an import sibling, 4 `.png` + 4 `.png.import` (broodglut's committed skin), zero orphans.
+***
+*** ===== A SUPERVISOR DIRECTIVE LANDED AT 23:54 CT AND I AM ROUTING IT, NOT INVENTING IT. =====
+*** claude/sup-nov24-2354-DIRECTIVE-suggestion-box-smart-bot-purchase-verification.md, authority
+*** Mr. E verbal 23:42-23:54 CT 24 Nov: "you can handle both of those issues", "you have decision
+*** making authority. disseminate if needed to team lead". Three of its five sections are work:
+*** §2 the ask table -> CONTENT. §3 the purchase-verification ledger -> GAME BUILD. §4 the HUD
+*** cadence -> implemented in the HUD row below. §1 is already committed on hub; §5 (the wand) is
+*** closed and no lane touches it. THESE ARE NOT FREEZE VIOLATIONS: they come down the reporting
+*** line with his words and a time, which is exactly the shape the freeze allows.
+***
+*** ===== ART'S LOCK WRITER IS FIXED AND THE SKINLESS FAULT IS CLOSED ACROSS ALL 72 BODIES. =====
+*** The 22:42 pair that went in as literal `%s` is the last of its kind: `tools/art/_lock.py`
+*** (263 lines) binds its stamps, selftest 8 pass / 0 fail, and its guard REFUSES that exact line.
+*** The extended `_tex_path_probe.gd` swept all 72 `.glb`: broodglut is the ONLY body whose skin
+*** lives in external `res://` PNGs, and both PNGs are now tracked. Weigher's register seam closed,
+*** `_report.json` rows 69 -> 70, pairs-minus-report now empty, `ok:true`, and `weigher.glb` came
+*** back BYTE-IDENTICAL (sha256 42606fe07450a6d8, 91,192 bytes) - I compared both refs myself.
+***
+*** ===== A MEASUREMENT TRAP I HIT AND WANT ON THE RECORD. =====
+*** `origin/art` is MISSING NINE `.glb.import` siblings that main has (almoner, changer, iceman,
+*** nightman, panner, roper, stiltman, stopper, straker). A TWO-DOT diff reports that as art
+*** deleting nine files. It is art's branch being BEHIND main, not art removing anything: the
+*** three-dot diff shows no deletion, and merged main still reads 72/72 with zero missing. ART:
+*** merge main before you run another import pass, or you will regenerate siblings that exist.
+
+- **GAME BUILD** - the cascade is closed; there is no 60th body to name. **Take the supervisor's
+  §3: the PURCHASE VERIFICATION RECEIPT LEDGER in `scripts/twitch_eventsub.gd`.** Before
+  `_settle(FULFILLED)`, log `{uid, action, timestamp, expected_state, redemption_id, settled:false}`;
+  mark `settled:true` after settle; a 5-10 s timer compares the hero's real state against
+  `expected_state`, marks `verified` on a match, RETRIES THE ACTION ONCE on a miss, and on a failed
+  retry tells the viewer via `_on_twitch_reply` ("your [action] didn't go through - the builders have
+  been told. Your points are safe.") and logs it. In-memory `_receipts: Array`, pruned after
+  verification, NOT persisted. **IT DOES NOT REFUND** - the ledger logs, a human or a later feature
+  refunds. **It ships with its own gate**: simulate a failed action and prove the retry fires, and
+  RED-PROVE that gate (a ledger that verifies nothing must still FAIL, not go quiet). Read the
+  directive doc for the full design before you start; do not improvise the expected-state map.
+- **CONTENT** - **take the supervisor's §2: 11 new `ask.topics` in `data/commands.json`**, keys
+  appended to `ask.order` AFTER `hub`, in this order: `bug, suggest, afk, died, howdelve, howbands,
+  standing, permadeath, creator, howoil, thanks`. The replies and phrase lists are given verbatim in
+  the directive doc - take them from there, do not rewrite them. Each topic is the existing shape
+  `{"reply": "...", "phrases": [...]}`; `+` means all words present, a bare phrase matches on a word
+  boundary. No code change is needed; the bot reads it at boot. **WATCH THE FILE COLLISION:** the
+  chat bot also edits `data/commands.json` (the `commands.miniboss` leaves). Touch NOTHING outside
+  `ask.topics` and `ask.order`, assert the file still parses and the leaf count is unchanged except
+  for your additions, and say the byte size both sides.
+- **ART** - the lock writer and the texture sweep are both ticked. You are the one lane allowed to
+  invent, so **build the 60th body**, and measure the current count off `tools/art/minibosses.py` or
+  the fit register rather than any number in a prompt. Commit the body, its `.glb.import` sibling and
+  its fit proof IN THE SAME PUSH, and if its skin lives in external PNGs commit those too - that is
+  now a standing rule and it is yours. Merge main first (see the nine-sibling note above).
+- **HUB** - **do not publish, and the Suggestion Box link needs a check before anything is
+  published.** `web/index.html` now links twice to
+  `https://docs.google.com/forms/d/e/19bMpRDF6awFj8fdCZiSARBj5byV3txgtww9PVlxEwhY/viewform`, but the
+  directive's own edit link for the same form is `/forms/d/19bMpRDF.../edit`. **`/forms/d/<id>/` and
+  `/forms/d/e/<id>/` take DIFFERENT id families** - a 44-character Drive file id in the `/d/e/` path
+  is normally a 404. I could not settle it: both URL shapes were refused by the fetch instrument I
+  have, so I am reporting a structural mismatch, not a proved break. OPEN THE HREF IN A BROWSER, say
+  what loaded, and if it does not reach the form change the path to `/forms/d/<id>/viewform` and say
+  so. The rest of the change is clean and I checked it myself: a plain `<a>`, `target="_blank"` with
+  `rel="noopener noreferrer"`, a literal href with no snapshot value in it, no `innerHTML`, no embed,
+  three CSS rules, and the CSP meta untouched with `form-action 'none'` intact.
+- **HUD** - **YOUR CADENCE IS NOW EVERY TWO HOURS** (supervisor §4, on the strength of eight correct
+  dry stand-downs). The trigger still fires hourly at :52; you work on ODD hours and STAND DOWN on
+  EVEN ones. **This hour (00:52) is an EVEN hour: stand down in writing, claim no lock, touch no
+  `.gd`.** Your next working window is **01:52**. This is a cadence change, not a freeze - the hour
+  something HUD-scoped reopens, it goes back to hourly and I will say so in this block. Your seven
+  owned files are byte-identical to `origin/laptop` and merged main; I diffed all seven myself and
+  every one came back empty. `party_frames.gd` is still NOT yours.
+- **CHAT BOT** - **nothing is owed on the count: you are level at 59 and I verified it** (feed 59,
+  engine 59, published 59 on merged main db738eb5). Do not republish. Two things instead, in order:
+  (1) **the L56 soak you have now split four times** - take it inside :45-to-:50 with a declared
+  finish before :52, and if it genuinely does not fit, split it AGAIN and say so rather than
+  declaring a crossing; (2) when content's 11 new `ask.topics` land, run the ask gate and report
+  `COMMANDS_DATA ASK` green or red, and check no new reply breaks the 453-character worst-case
+  help-line budget your own B141 red-proof established. Claim by :50.
+
+**FOR THE SUPERVISOR** - three things, all from your 23:54 directive, none of them urgent.
+1. **Your §1 commit may carry a dead link.** `8d874d99` links the Suggestion Box twice at
+   `/forms/d/e/19bMpRDF.../viewform` while your own edit URL uses `/forms/d/19bMpRDF.../edit`. Those
+   two paths take different id families. My fetch instrument refused both shapes, so this is a
+   structural mismatch and not a proved 404 - but it is pre-publish, so nothing live is affected.
+   **Recommendation: have the hub lane open the href in a browser before any publish** (row written),
+   and the form still needs its three questions configured before the button is worth shipping.
+2. **§2, §3 and §4 are accepted and routed**, with §4 implemented as an odd-hour/even-hour
+   stand-down rule in the HUD row above rather than as a trigger change, exactly as you specified.
+3. **The hub's merged-not-published delta is now 3 files** - `NOTES.md` +12, `web/index.html` +2/-1,
+   `web/style.css` +3 - so a viewer-visible change is waiting for the first time in days.
+   **Recommendation: still do not publish**, until the form link is verified and its questions exist.
+
+
 ## TAKE THIS NEXT - Updated THE 22:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS a643cfe7. ALL SIX LANES SHIPPED AND ALL SIX ARE MERGED. ***
 *** THE CASCADE, MEASURED BY ME ON a643cfe7 WITH A BRACE-MATCHED PARSE, NOT A REGEX:

@@ -18747,3 +18747,13 @@ MEASURED: `docs.google.com/forms/d/e/19bMpRDF.../viewform` (what the hub linked)
 `docs.google.com/forms/d/19bMpRDF.../viewform` -> HTTP 403 "This document is not published." So the form EXISTS and the /d/<id>/ shape is the right one, but it is NOT PUBLISHED / not accepting responses.
 CHANGED: both hrefs in web/index.html (:162 button, :455 footer) now use /forms/d/<id>/viewform. Still a dead end for viewers until Mr. E publishes the form (Responses tab -> accepting) - DO NOT PUBLISH THE HUB until it loads.
 GREPS RUN on the current tree: innerHTML only at app.js:255 and :301 (page-owned), zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code (only in comments); no snapshot value reaches href/src/style (href at :70 fixed literal, :2743 Twitch device-flow URI host-gated, :3783 whitelisted icon path); CSP meta intact incl. form-action 'none'; node --check web/app.js OK. Not run: headless render / hostile-name test (href-only change; not claiming READY TO PUBLISH).
+
+## C-202 (25 Nov 2026 01:3x CST, content) - WROTE miniboss_feed.by_key.crimp (ONESHORT, THE 60th); FEED 59 -> 60
+
+Plan row: 00:58 CT TAKE THIS NEXT, CONTENT, item (2). Body is committed on main (`assets/monsters/minibosses/crimp.glb` + `.glb.import`, fit GREEN), so the row was written against a real body.
+
+- `data/lore_lines.json` `miniboss_feed.by_key.crimp`: arrive 9, act 8, broken 4, fall 8 (same shape as pledgeman). Name in fall lines is Oneshort, taken from CRIMP_THE_60th.md. `_note_c202` added (expected zero-hit key). 60 keys, last `crimp`; all 59 prior rows byte-identical by json compare.
+- VALIDATION OK: lore_lines.json parses, every other top-level key and every prior miniboss_feed key unchanged.
+- CODE WIRING: none for the row. The feed is now level with the body at 60; `Delve.MB_NAME` (game build S126) and `data/commands.json` miniboss short+what (59 -> 60, chat bot) are the two registers still owed.
+
+**NOT DELIVERED - item (1), the 11 `ask.topics` in `data/commands.json`.** That file is not one of the four this lane owns, and the edit was refused by the session's permission check when attempted. Nothing in `data/commands.json` was touched (still 18,000 bytes). The topic text is ready from the supervisor directive (replies verbatim); it needs either Mr. E's okay for content to edit that file or the chat bot to take it.

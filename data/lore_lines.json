@@ -14764,6 +14764,45 @@
           "Heldfast is down. You are standing very still, the way he was.",
           "The board is down. Go on up."
         ]
+      },
+      "crimp": {
+        "arrive": [
+          "A man stood in the middle of the floor with a muster board slung off one shoulder and a hook in the other hand.",
+          "The board is dark wood with nine sockets cut in rows. Most are empty. One peg in it is pale.",
+          "Four old pegs sit grey in the board. They were taken before you came.",
+          "The pale peg has a tag hung off it. The tag is blank. It is waiting for a name.",
+          "A plain coat to the knee and a strap across the chest. His brow sits low and does not move.",
+          "The hook is bright where the rest of him is dull. It has been used often.",
+          "He keeps the board turned out to the side, in the open. He wants it seen.",
+          "Leather loops hang along the frame, one by every socket. A berth for each man signed.",
+          "He does not speak. He is looking along your line and counting, the way a sergeant counts."
+        ],
+        "act": [
+          "{name} is taken by the collar. The hook goes in and does not tear.",
+          "{name} is signed. The pale peg takes a name and the tag turns over.",
+          "{name} turns round and swings at the party. The blade is the same blade. It is on the other side.",
+          "{name} goes for the man. The hook comes up and puts the signed one between them.",
+          "{name} stops with the blow half thrown. It is one of your own on the other end of it.",
+          "{name} reaches the board. The pale peg is a hand's width off and the tag swings.",
+          "{name} strikes the peg. The tag goes slack and the name is blank again.",
+          "{name} is on the roll now. Nobody asked {name}."
+        ],
+        "broken": [
+          "The board takes a blow and rings. The pegs stay in.",
+          "He steps back with the board turned out. He does not hide it.",
+          "The hook comes up empty and goes down again.",
+          "A peg shifts in its socket. It is not the pale one."
+        ],
+        "fall": [
+          "Oneshort is down. The board leans on the wall, pegs and all.",
+          "The hook is on the flags. It is bright still.",
+          "He signed names. That was the whole of his trade.",
+          "A board, a hook and a coat. That was all he had.",
+          "He never said whose names were on the old pegs.",
+          "The tag hangs from the pale peg, blank.",
+          "Oneshort is down. You count the party twice and the count is right.",
+          "The roll is closed. Go on up."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -14809,7 +14848,8 @@
     "_note_c198": "C-198: weigher feed row (Trueweight, the 56th, beam and two pans). Canon from tools/art/minibosses.py CANON row: IT MUST COME DOWN EVEN - a weigh-beam across the shoulders with a pan at each end, already tipped; damage into the heavy pan is paid back out of the light one while the beam is out of true, so a party stacked on one flank moves nothing. No phase, no target choice, nothing to interrupt; the condition is on where the party STANDS. Lines name the tipped beam and the two bright pans and favour no tactic. 'broken' = the beam comes level, not a weakness hit. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Body weigher.glb is on origin/main (merged 24 Nov). Expected zero-hit key.",
     "_note_c199": "C-199: dredger feed row (Finepass, the 57th, a sieve held low in both hands). Canon from tools/art/minibosses.py CANON row: IT ONLY FEELS WHAT GETS THROUGH THE MESH - a heavy blow stops dead on the bars and is spent; only a light hand passes the mesh, so the weakest hero is the one who scores. No phase, no target choice, nothing summons or splits; the condition is on HOW HARD you swing. Lines name the pale sieve, the black bars and the flour and hint the mesh without favouring a tactic. 'broken' = a light blow passes the mesh, not a weakness hit. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. Body dredger.glb is on origin/main (merged 24 Nov). Expected zero-hit key.",
     "_note_c200": "C-200: harrowman feed row (Overturn, the 58th, a man hauling a spiked harrow on a fixed round). Canon from tools/art/minibosses.py CANON row on origin/art: IT IS NOT FIGHTING YOU AND IT WILL NOT TURN ASIDE - an unaimed, uninterruptible round that carries whatever is on it along to the end of the pass and lets it go out of position; no target choice, no phase, no speed-up. The fight is ground, not a target. Lines name the dark lattice, the bright tines, the two traces to his hands and the scored flags; act lines show the heroes being carried or missed, never a hit that changes the round. 'broken' makes no mechanical claim (nothing stops the round). Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. CODE WIRING: game build - MB_NAME needs \"harrowman\": \"Overturn\" in delve.gd (fall lines say 'Overturn is down'), and the tools/_s51_names.gd, _s107_gate.gd and _s117_straker.gd MB_NAME.size() literals move together in the same commit. Then the chat bot republishes the miniboss count in data/commands.json and docs/COMMANDS.md.",
-    "_note_c201": "C-201: pledgeman feed row (Heldfast, the 59th, a stooped man carrying a living pledge lashed to a board on his back). Canon from tools/art/minibosses.py CANON row (tag treasury): IT HAS SOMETHING OF YOURS THAT IS NOT YOURS TO SPEND - the pledge takes a share of every blow that lands on the man, so a party that fights it like everything else kills the pledge on the way to the kill and the room pays out nothing; nothing is taken from the party and nobody is chosen; three bright lashings cut free the board, and damage is a budget and not a goal. Lines name the raked board, the hooded figure head up and feet bound, the three new-rope lashings against old kit, and the two straps over the shoulders into his fists; act lines show the blow landing on both of them or a lashing being cut, never a mechanical number. 'broken' makes no claim (nothing about the pledge's state). Fall lines say 'Heldfast is down' and do not say whether the pledge lived - the engine pays that out, the feed does not. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. CODE WIRING: game build - MB_NAME needs \"pledgeman\": \"Heldfast\" in delve.gd and the MB_NAME.size() literals in tools/_s51_names.gd, _s107_gate.gd and _s117_straker.gd move together in the same commit; the 58th (harrowman, Overturn) is still ahead of it in the queue and pledgeman has no committed fit row yet. Then the chat bot republishes the miniboss count in data/commands.json and docs/COMMANDS.md. Expected zero-hit key - no lane is to wire it."
+    "_note_c201": "C-201: pledgeman feed row (Heldfast, the 59th, a stooped man carrying a living pledge lashed to a board on his back). Canon from tools/art/minibosses.py CANON row (tag treasury): IT HAS SOMETHING OF YOURS THAT IS NOT YOURS TO SPEND - the pledge takes a share of every blow that lands on the man, so a party that fights it like everything else kills the pledge on the way to the kill and the room pays out nothing; nothing is taken from the party and nobody is chosen; three bright lashings cut free the board, and damage is a budget and not a goal. Lines name the raked board, the hooded figure head up and feet bound, the three new-rope lashings against old kit, and the two straps over the shoulders into his fists; act lines show the blow landing on both of them or a lashing being cut, never a mechanical number. 'broken' makes no claim (nothing about the pledge's state). Fall lines say 'Heldfast is down' and do not say whether the pledge lived - the engine pays that out, the feed does not. Arrive x9, act x8, broken x4, fall x8; no {name} in arrive or fall. CODE WIRING: game build - MB_NAME needs \"pledgeman\": \"Heldfast\" in delve.gd and the MB_NAME.size() literals in tools/_s51_names.gd, _s107_gate.gd and _s117_straker.gd move together in the same commit; the 58th (harrowman, Overturn) is still ahead of it in the queue and pledgeman has no committed fit row yet. Then the chat bot republishes the miniboss count in data/commands.json and docs/COMMANDS.md. Expected zero-hit key - no lane is to wire it.",
+    "_note_c202": "C-202: crimp feed row (Oneshort, the 60th, a man with a hook in one hand and a nine-socket muster board slung off one shoulder). Canon from tools/art/minibosses.py CANON row (tag barracks) and docs/art/CRIMP_THE_60th.md: IT TAKES ONE OF YOU INTO ITS OWN CREW - the hook takes a hero by the collar, the name goes on the board, and that hero fights for the crimp at full strength; the answer is the one lit peg with the signed tag, and striking the peg strikes the name off. Lines name the board turned out on his off side in the open, the four old grey pegs, the one pale peg with a blank tag, the berth loops by every socket, and the hook that is bright where he is dull; act lines show the hero taken, signed, turned on the party and the peg being struck, never a mechanical number. 'broken' claims nothing about the signed hero. Fall lines use the name Oneshort (art doc, MB_NAME value) and end on 'Go on up.' Expected zero-hit key - no lane is to wire it."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

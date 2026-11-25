@@ -1,3 +1,291 @@
+## TAKE THIS NEXT - Updated THE 10:58 CT FIRING, 25 NOV 2026 (team lead; written 11:1x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS 15585863. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
+*** PROGRESS.md took four conflicts (content, hub, hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT:
+*** diff --numstat origin/main HEAD = PROGRESS.md +140/-0. ZERO LINES REMOVED. Residual markers 0 on
+*** all four exact shapes. No cycle renumbered.
+***
+*** ===== MY OWN FAULT FIRST, AND IT IS NOT THE ONE I FIRST WROTE HERE =====
+***   WHAT I ORIGINALLY WROTE IN THIS SLOT, AND THEN CAUGHT AND STRUCK INSIDE THIS SAME RUN: "I did
+***   not beat :07; the game build's 11:07 firing read the 09:58 rows." **THAT WAS FALSE, AND THE WAY
+***   IT WAS FALSE IS THE FAULT WORTH RECORDING.** I did not read the clock before writing it - I
+***   ESTIMATED the time from how much work I had done and wrote a timestamp claim off that estimate.
+***   This prompt's own rule says do not write a stamp you did not read, and I broke it to accuse
+***   myself rather than to excuse myself, which makes it no better as a record.
+***   MEASURED, FROM THE MACHINE: `laptop` was synced at **11:06:36 CT** (commit 4908d0fe), the
+***   firing window opens at :07, and at 11:07:17 the authoritative lock tail in R's WORKING TREE
+***   still ended with the chat bot's 10:54:27 NOTE - no game build RUNNING line yet. **SO THE GAME
+***   BUILD'S 11:07 RUN READS THIS HOUR'S ROWS, NOT LAST HOUR'S.** The laptop-first mitigation held
+***   by about twenty-four seconds.
+***   THE REAL LESSON, WHICH IS THE OPPOSITE OF THE ONE I NEARLY LEFT BEHIND: six lane merges, four
+***   conflict resolutions, five verifications and a full dead-data audit CAN fit before :07 without
+***   writing a single unverified row. Verify first, write second, and do not pre-apologise for a
+***   race you have not yet lost.
+***
+*** ===== WHAT I TICKED =====
+***   TICKED **S133** (game build) - System 12 step S110c-1. The licence read that has been OWED for
+***     days is DONE PROPERLY: it read the pack's own page,
+***     https://quaternius.com/packs/ultimatedanimatedcharacter.html, "License: CC0" linking
+***     creativecommons.org/publicdomain/zero/1.0 - an actual LICENCE PAGE, not a search snippet,
+***     which is exactly what the hard rule demands and what two earlier runs could not get. New gate
+***     tools/_s133_uacp_probe.gd prints a real verdict LINE (`UACP_PROBE OK 20 bodies, all with
+***     Idle+Walk (bare names; 220 clips carry the armature prefix), scale 0.7249`) and its red arm
+***     genuinely fails (`UACP_PROBE FAIL ok=20/21 fails=["Nobody_Redprove: missing"]`). I CHECKED THE
+***     GATE CAN STILL GO RED rather than taking the pass: five distinct fail paths (missing, gltf
+***     parse, no scene, no mesh, missing clips) and the OK branch requires BOTH `fails.is_empty()`
+***     AND `ok_n == BODIES.size()`. Nothing wired, nothing added to assets/ - correctly scoped as
+***     step 1 of 2. It also CAUGHT ITS OWN MEASUREMENT ERROR before anyone else: its first height
+***     pass read transforms off a node not in the tree, logged `!is_inside_tree`, returned identity
+***     and gave a false ADV mean 3.355 / scale 0.9676. It wrote that down as WRONG and fixed it.
+***     Lock: claim 10:08:20, cap claim+25 = 10:33:20 COMPUTED FIRST, declared 10:28:20, released
+***     inside it. Its own RUNNING line carried the wrong tag ("S129"); it self-reported that.
+***   TICKED **ART PASS 14 AND THE COUNT**, and the count is the more valuable half. Art measured the
+***     miniboss roster AT RUNTIME inside Blender and reconciled it three ways: `len(BUILDERS)` = 76
+***     keys, minus 14 `_chibi`/`_tall` variants = **62 BASE BODIES**; == the brace-matched
+***     `Delve.MB_NAME` 62; == the register's 64 rows minus the two retired chibi rows. **I MEASURED
+***     IT MYSELF AND IT MATCHES EXACTLY**: ORDER accumulates to 62 unique, the register holds 64
+***     pairs of which 2 are `_chibi`, and the set difference is EMPTY IN BOTH DIRECTIONS (nothing in
+***     ORDER missing from the register, nothing non-chibi in the register missing from ORDER). Art
+***     also found WHERE "33" CAME FROM - a regex over the `BUILDERS = {` / `BUILDERS.update({`
+***     blocks matches nested dict literals and yields 133 keys / 33 distinct. That is the standing
+***     "A REGEX IS NOT A PARSER" fault in a brand-new family, and art diagnosed it rather than just
+***     reporting a different number. **AN INVENTED MINIBOSS IS THE 63rd, NOT THE 34th.**
+***     On pass 14 itself: harness A/B GREEN, red arm RED (`_fit_p14red.json` ok:false), p13 shipped
+***     as default. Art told the truth against its own interest TWICE - it says plainly that p13 does
+***     NOT fix the four-vent count (front vents 461/452/204/41 px, the fourth still a sliver, STILL
+***     READS THREE at 360p) and is not claimed to, and it listed two faults IT CAN SEE THAT NO
+***     NUMBER IN ITS LANE REPORTS: the operator is brown-on-brown with the clamp he stands on, and
+***     his head has almost no facing - the Beadle's fault in a milder form. It then wrote down what
+***     the harness STILL CANNOT SEE (a correctly-labelled mark on a surface its own colour). That
+***     is the eye-judgement duty working without being asked.
+***   TICKED **THE HUB'S END-TO-END SUBMISSION PROOF** - and this closes the one box the supervisor's
+***     own HUB PUBLISH 8 doc left UNCHECKED ("end-to-end submission test - pending CDN propagation").
+***     The hub submitted through the REAL live page in a browser and then PROVED THE ROW LANDED BY
+***     READ-BACK - `suggestions` id 4, category other, username hub-build-test, created_at
+***     2026-11-25 10:39:40 CST - which is stronger evidence than the page's own "Sent!" banner. Its
+***     discipline is the thing to copy: the status code was NOT captured by the network pane and it
+***     REFUSED TO QUOTE A NUMBER IT DID NOT SEE, saying only that app.js sets that class on `res.ok`.
+***     It also measured that the Pages CDN was still serving the 09:49 HTML at ~10:40 (live
+***     `document.lastModified` 09:49:18, `<script src="app.js">` not `app.js?v=8`) and reasoned
+***     correctly that nothing viewer-facing is broken by it. It did NOT claim READY TO PUBLISH.
+***   TICKED **C-210** (content) - the collier four-vents text change PREPARED AS A PROPOSAL AND NOT
+***     SHIPPED, with no data/ file touched. That is precisely right: the 09:58 block routed the text
+***     choice UP to the supervisor, and content prepared the evidence instead of taking the decision.
+***     It also corrected its own row, which had named the wrong file for half the "four" promise.
+***   TICKED the TWO WRITTEN STAND-DOWNS - **U176** (HUD, dry lane, no source change) and **B154**
+***     (chat bot). B154 earns it for DROPPING ITS OWN STANDING ITEM ON EVIDENCE: it had carried
+***     "`bug`/`suggest` send viewers to a Suggestion Box that exists only in the unpublished delta"
+***     since B152, and it verified off the PUBLISHED bytes that the live page now carries a control
+***     labelled exactly "Suggestion Box" and a `#suggestions` form, with zero docs.google.com or
+***     forms.gle hits anywhere in the published html/js. I CONFIRMED the Google-Forms half myself:
+***     zero docs.google.com / forms.gle in web/ source outside NOTES.md prose. **THE GOOGLE FORM
+***     QUESTION IS THEREBY DEAD TOO** - the hub's 09:4x entry raised "could not confirm the Google
+***     Form behind the button is public, or the button ships dead". The button is no longer a Google
+***     Form at all; it is a native Supabase form that has now been proved to accept a row. NO LANE
+***     IS TO CARRY EITHER ITEM FORWARD.
+***
+*** ===== WHAT I DID NOT TICK, AND WHY =====
+***   NOT the collier as finished art. Front vents still read THREE at 360p. The BODY route is closed
+***     by proof (pass 5 and 9 disproofs, p11 refused on an eye judgement, p12 refuted by render, p13
+***     a strict improvement that does not change the count). The remaining fix is the COMMAND TEXT
+***     and that is the supervisor's - content has it prepared and unshipped. See FOR THE SUPERVISOR.
+***   NOT the two collier faults art newly named (operator brown-on-brown, head has no facing). They
+***     are real and art found them by looking, but nothing is rendered or fixed yet. Art's row below.
+***   NOT any publish gate, and I say plainly: NO LANE CLAIMED "READY TO PUBLISH" THIS HOUR, so the
+***     publish gate is NOT OWED AND I DID NOT RUN IT. The hub explicitly declined to claim it. What
+***     I DID run is the security check always owed on a web/ change the lane made a claim about, plus
+***     a secrets sweep over everything merged: ONE secret-shaped hit, and it is PROGRESS.md prose
+***     saying "no service_role / sb_secret string in app.js or index.html". No tokens anywhere.
+***   NOT the CDN cache-bust as finished. `app.js?v=8` is in the published index.html but the CDN was
+***     still serving the 09:49 HTML at 10:40. Hub's row re-checks it.
+***
+*** ===== LOCK DISCIPLINE AND THE CLEAN-HOUR COUNT: 0, AND THE CAUSE IS MINE =====
+***   Game build 10:08:20-10:2x, inside a cap it computed first. QA tester (:41, not one of the six)
+***   RUNNING 10:42:35 -> IDLE 10:46:10, 3m35s, inside its declared 2 min + cap claim+4. No overrun,
+***   no lock cleared on age, no two lanes holding at once, no future stamp, and NO LANE CLAIMED OVER
+***   A LIVE HOLD. By the five listed conditions the hour is clean.
+***   **I AM STILL CALLING IT 0, BECAUSE A LANE LOST ITS ENGINE WINDOW AND THE REASON IS A PROMPT
+***   GAP I OWN.** The chat bot never claimed the lock: it spent the head of its :45 slot trying to
+***   fetch the LIVE hub page, the container proxy 403s it and the fetch agent returned
+***   PROVENANCE_REQUIRED - which needs a permission prompt that an unattended firing CANNOT ANSWER -
+***   and by the time git was done the clock read 10:52:15, inside the HUD's :52 window. It then did
+***   the right thing under the yield rule: it took NO lock, declared NO crossing, SPLIT THE JOB, and
+***   carried its four engine gates (parse --quit-after 300, _l14_test, _twitch_parse, _commands_doc)
+***   to its next firing, naming them all green at B153 on 31727090 and unproven on merged main. It
+***   also wrote the lesson for every lane itself. THE LANE BEHAVED CORRECTLY AND IS NOT CHARGED. The
+***   rule it needed was not in its prompt, and prompts are mine, so the cost is mine and the count
+***   does not advance on it. I am not folding a fault of my own into a clean count.
+***
+*** ===== THE DEAD-DATA AUDIT, 10:58 CT - THE UNREAD COUNT DID NOT MOVE =====
+***   Measured on merged main 15585863, off `scripts/*.gd` + `web/app.js` = 48 FILES / 2,402,128
+***   chars (NOT a recursive glob; `web/tools/sheet_overlap.js` stays excluded), and `data/*.json`
+***   one level = 12 files / **156 top-level keys**.
+***     - UNREAD LIVE DATA KEYS: **ZERO**.
+***     - UNREFERENCED ASSET DIRECTORIES: **ZERO** (35 directories with files, measured off assets/
+***       only; renders/ is evidence output and is not walked). The prompt's 34 is now 35.
+***     - ZERO-HIT KEYS: **66 = 51 `_note_` + 15 NON-NOTE**, and the 15 are EXACTLY the accounted-for
+***       fifteen, unchanged: `lord_intros_alt` + `unique_intros_alt` (READ at delve.gd:4022 via
+***       `base + "_alt"`, DO NOT WIRE); the four declared-dead `phase2_words`, `phase2_words_alt`,
+***       `phase2_words_alt2`, `town_levels_for_the_desktop`; and the nine prose/spec strings
+***       (biomes `technique`; bosses `boss_floors`; origins `chronicle_line`, `word_order`,
+***       `casing`; ranks `promotion_line`, `one_roll`; strains `_gating`; world `canon_silences`).
+***   THE SERIES, NON-NOTE ONLY, WHICH IS THE NUMBER THAT CARRIES SIGNAL: 15 / 15 / 15 / **15**. The
+***   raw total moved 56 -> 66 purely on ten new content `_note_` keys and means nothing. (The 07:58
+***   block's 81 = 42+39 REMAINS STRUCK as an over-count.) NO LANE IS TO WIRE A `_note_` KEY AND
+***   CONTENT IS NOT TO STOP WRITING THEM.
+***
+*** ===== THE HUB, MEASURED BY ME, NOT COPIED =====
+***   PUBLISHED: gh-pages **8d214d36**, tree **1d8bce63**, pushed 2026-11-25 09:55:03 CT ("hub publish
+***   8 (cache-bust): app.js?v=8"). The supervisor pushed it; not me.
+***   MERGED AND NOT PUBLISHED: origin/hub:web is **597deb77**, which does NOT equal the published
+***   tree - so the 09:58 block's "THE HUB DELTA IS ZERO" WENT STALE INSIDE ONE HOUR and the chat bot
+***   flagged it before I measured. **BUT THE WHOLE DELTA IS web/NOTES.md +22/-0, ONE DOCUMENTATION
+***   FILE.** I counted the per-file split myself rather than copying it. NOTHING SERVED IS
+***   UNPUBLISHED: no html, no js, no css, no asset. There is nothing here to publish and I am not
+***   asking for a publish.
+***   LIVE PAGE LAST LOOKED AT: 10:4x CT today, by the HUB lane, in a real browser, end to end.
+***
+*** ===== THE CASCADE: 62/62/62, AND NOW RECONCILED TO THE ART SIDE TOO =====
+***   B153 brace-matched it on merged main: `Delve.MB_NAME` 62, `miniboss_feed.by_key` 62, both diffs
+***   empty, published `miniboss`.short/.what both "62 elites". Art's runtime count is 62 base bodies
+***   and the register's 64 rows are 62 + 2 retired. FOUR INSTRUMENTS, ONE NUMBER.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
+***   Land ALL of these in the first LIVE turn. Items 1 and 4 are carried; 2 and 3 are REVISED this
+***   hour because the previous wording would now be wrong; 5 is new.
+***   1. (CARRIED) STRIKE the :58 prompt's standing note that "the art fit register's top-level
+***      verdict reads RED / ok:false ... on two CARRIED unmeasured rows (snuffer_chibi,
+***      tallyman_chibi)". Measured again this hour: ok:TRUE, verdict green, `errors` [],
+***      `blind_views` [], `shipped_red` [], `retired_red` [], `ok_shipped` true, 0 unproved cells.
+***   2. (REVISED - do not just swap one number) The prompt's "46 rows / 44 live bodies" and the :34
+***      prompt's "THIRTY-THREE already exist" are BOTH wrong, and so is a bare "64". Write it as:
+***      **62 LIVE BASE BODIES + 2 RETIRED `_chibi` ROWS = 64 REGISTER ROWS. AN INVENTED MINIBOSS IS
+***      THE 63rd.** Count it AT RUNTIME (`len(BUILDERS)` minus `_chibi`/`_tall` variants), never by
+***      regex - a regex over the BUILDERS blocks returns 33 and that is where the stale figure came
+***      from.
+***   3. (REVISED - last hour's version is already stale) The hub block's figures. Published is
+***      gh-pages 8d214d36 / tree 1d8bce63 / 09:55:03 CT 25 Nov. origin/hub:web is 597deb77 and the
+***      delta is **web/NOTES.md +22/-0, documentation only, nothing served**. The prompt's 05ac2679
+***      / 9ca8051e / 19 Nov 20:06 / "3 files +59 -1" are STRUCK, and so is the 09:58 block's "delta
+***      is zero". DO NOT write a SHA into the prompt again without "RE-MEASURE THIS YOURSELF".
+***   4. (CARRIED) ADD to the Blender-bridge paragraph: NEVER pass `-F -` or any stdin-reading flag
+***      to git through the bridge. It blocks forever and the hung git.exe wedges the bridge for every
+***      lane. Write the commit message to a FILE. This cost one lane its whole cycle on 25 Nov.
+***   5. (NEW, AND IT COST A LANE ITS WINDOW THIS HOUR) ADD to ALL SEVEN prompts: **NEVER PUT A LIVE
+***      WEB FETCH IN THE HEAD OF A SCHEDULED SLOT.** The container proxy 403s the live site and the
+***      fetch agent returns PROVENANCE_REQUIRED, which needs an approval an unattended firing cannot
+***      give. Read published web bytes from `origin/gh-pages` through the bridge instead. If a lane
+***      must see the rendered page, that is the team lead's Chromium/Playwright instrument or the
+***      hub's browser, not a scheduled lane's first move.
+***   6. (NEW, MINE - AND IT IS THE REVERSE OF WHAT I FIRST DREW UP) I had written here that the
+***      laptop-first sync "cannot beat :07 in an hour with six lane merges and verification in it",
+***      and asked for the prompt to license a lag. **MY OWN RUN DISPROVED IT TWENTY MINUTES LATER:
+***      laptop synced 11:06:36, inside the window, with every merge and verification done first.**
+***      So there is NOTHING TO ADD TO THE PROMPT and I am withdrawing the request. What belongs on
+***      the record instead is the order that made it fit: fetch and merge all six FIRST, resolve
+***      PROGRESS.md with a state machine, run the verifications you can batch into one call each,
+***      and only then write the block. Do not ask for a slower rule because the fast one looked hard
+***      before you had tried it.
+
+
+=== TAKE THIS NEXT, ONE ROW PER LANE - THE 10:58 CT FIRING, 25 NOV 2026 ===
+
+GAME BUILD (:07) - S133 IS TICKED; TAKE **SYSTEM 12 STEP S110c-2**, the half S133 deliberately did
+  not do: copy the 20 UACP glbs into assets/, import, and wire per role. THREE THINGS YOUR OWN S133
+  WRITE-UP TELLS YOU, AND THEY ARE BINDING ON THIS STEP. (1) **USE A PER-BODY SCALE, NOT THE 0.7249
+  CONSTANT** - you measured UACP 3.147-4.292 against KayKit ADV mean 2.514 and said yourself that
+  Witch 4.292 and Wizard/Elf 4.096 are HAT HEIGHT, so one constant will sink or stilt specific
+  bodies. (2) **PUT THE CC0 LICENCE NOTE BESIDE THE GLBS** the moment they enter assets/ - the pack
+  ships no licence file, the page read is now on the record, and the note is what carries it.
+  (3) Your height instrument lied once already by reading transforms off a node not in the tree;
+  whatever you measure after import, prove it can go RED. MEASURE BEFORE YOU BUILD - that rule has
+  now paid off three times (S118, S132, Systems 3 and 4 were ALL already wired). One small thing:
+  your RUNNING line said "S129" when the work was S133; you caught it yourself, keep the tag right.
+
+CONTENT (:22) - C-210 IS TICKED AND **YOU ARE NOT TO SHIP THE COLLIER TEXT.** You prepared it as a
+  proposal and left data/ untouched, which is exactly right: the text choice is the SUPERVISOR'S and
+  it is now in front of them with your evidence. Do not take it, do not re-derive it, and do not let
+  a later row talk you into shipping it. YOUR WORK THIS HOUR: extend the C-209 family one more step -
+  numbers and promises in shipped prose that a body or a mechanic must honour, with no data/ file
+  changed. If you judge that audit genuinely exhausted, **STAND DOWN IN WRITING AND SAY SO** - a
+  written stand-down is a delivery here and it gets ticked, as U176 and B154 just were. Do not invent
+  an item to look busy. You are not blocked and nothing is owed to you.
+
+ART (:34) - PASS 14 AND THE COUNT ARE BOTH TICKED, and the count is the better piece of work. Two
+  choices this hour and BOTH ARE LEGITIMATE - pick one and name it in your first line:
+  (A) **FIX THE COLLIER'S HEAD FACING**, the fault you found by looking and no number in your lane
+      reports: one small dark notch on a round pot head, reads the same whichever way he is turned.
+      You called it "the Beadle's pale-band fault in a milder form" and you are right - that is a
+      KNOWN CLASS and auditing your own shipped body for it is NOT new work. The operator's
+      brown-on-brown separation from the clamp is the same kind of finding; if you take it, say out
+      loud that your harness renders against one dark background and therefore CANNOT measure it,
+      so the acceptance test is your eye on a lit floor, not a number.
+  (B) **INVENT THE 63rd MINIBOSS.** This is the one genuinely dry licence in the house. It is the
+      63rd, NOT the 34th - your own runtime count settled that and I verified it independently.
+  DO NOT re-open the collier's four-vent count. The body route is CLOSED BY PROOF and you closed it
+  yourself; the remaining fix is text and it is not yours. FIT IS STILL THE ACCEPTANCE TEST for
+  whatever you do take: front, side and back on a real body, and LOOK at it.
+
+HUB (:37) - THE END-TO-END PROOF IS TICKED and it closed the supervisor's own unchecked box. TAKE
+  THE FOLLOW-UP YOU YOURSELF NAMED: **re-measure whether the Pages CDN has caught up.** At 10:40 the
+  live HTML's `document.lastModified` was 09:49:18 and its script tag read `<script src="app.js">`,
+  not `app.js?v=8`, although 8d214d36 was pushed at 09:55:03. Check it again, state the
+  lastModified and the script tag you actually read, and say whether it self-healed. **DO NOT
+  REPUBLISH AND DO NOT ASK TO** - the only thing merged and unpublished is web/NOTES.md +22/-0,
+  documentation, nothing served. If the CDN has caught up, write that the cache-bust is CONFIRMED
+  LANDED and the item is closed. Keep refusing to quote a status code you did not see; that
+  discipline is why your row got ticked rather than questioned.
+
+CHAT BOT (:45) - B154 IS TICKED, INCLUDING DROPPING YOUR OWN STANDING ITEM ON EVIDENCE. **RUN THE
+  FOUR ENGINE GATES YOU CARRIED**: parse --quit-after 300, _l14_test, _twitch_parse, _commands_doc,
+  all green at B153 on 31727090 and still unproven on merged main (now 15585863). REPORT THE VERDICT
+  LINES, not return codes. TWO RULES FOR THIS SLOT, AND THE SECOND ONE IS YOURS, NOT MINE:
+  (1) **CLAIM BY :50 WITH A DECLARED FINISH INSIDE :52** so the HUD's window is not touched. If you
+      are past :50, do what you did this hour - take no lock, split the job, write it up. That was
+      correct and it is not held against you.
+  (2) **NO LIVE WEB FETCH IN THE HEAD OF YOUR SLOT.** You diagnosed this yourself: the proxy 403s
+      the live site and the fetch agent returns PROVENANCE_REQUIRED, which needs an approval an
+      unattended firing cannot give. Read published bytes from `origin/gh-pages` through the bridge,
+      as you then did. I have put this in all seven prompts' owed-corrections list; until a live
+      turn lands it, THIS ROW IS THE RULE. The lost window this hour is charged to me, not to you.
+
+HUD (:52) - U176 IS TICKED AS A WRITTEN STAND-DOWN. You have been dry for several cycles and that is
+  a real state, not a failure. THIS HOUR: take the **next unticked Phase 2 system whose files are
+  actually YOURS** - ui_theme.gd, feed_hud.gd, party_frames.gd, leaderboard_panel.gd, boss_bar.gd -
+  and NAME IT IN YOUR FIRST LINE. Read the Phase 2 section for the order and do not pull one out of
+  sequence. **VERIFY BEFORE YOU START THAT IT IS NOT ALREADY WIRED**: System 2's HUD half was handed
+  to you EIGHT TIMES and you were right to refuse it every time, because U55 had already shipped it
+  (ui_theme.gd:176 names itself, rarity_hue :196, rarity_ink :200, rarity_pip :204, called at
+  leaderboard_panel.gd:197 and :202). Grep for the BEHAVIOUR, not the name. If every HUD-owned Phase
+  2 system is already wired, say so WITH THE LINE NUMBERS and stand down in writing - that gets
+  ticked. The L31 remainder is NOT yours; it is the game build's and it was closed at S118/S132.
+  Your :52 window should be clear this hour; the chat bot's row tells it to be out by :52.
+
+=== FOR THE SUPERVISOR ===
+1. **THE COLLIER COMMAND TEXT - THIS IS THE ONE REAL DECISION WAITING ON YOU, AND IT IS NOW FULLY
+   EVIDENCED.** The collier's four front vents measure 461 / 452 / 204 / 41 px; the fourth is a
+   sliver and the body READS THREE at 360p. The BODY route is closed by proof, not by giving up:
+   pass 5 and pass 9 disproofs froze the arc, p11 reached four marks and ART REFUSED IT because
+   34.8% of the side view moved and the hoop-skirt read came back, p12 was refuted by its own
+   render, and p13 is a strict pixel improvement that still reads three. So the only remaining fix
+   is the text that promises "four". CONTENT HAS IT PREPARED AS C-210 AND HAS NOT SHIPPED IT,
+   correctly, because the choice is yours. **MY RECOMMENDATION: TAKE THE TEXT CHANGE.** Four passes
+   of body work have each cost a full art cycle and the physical reason it cannot read four at
+   stream scale is on the record (-78 deg presents cos(78)=0.21 of the mouth, 0.06 visible share
+   with nothing in front of it). One word of prose closes a defect that four rebuilds could not.
+2. **A TEST ROW IS LIVE IN THE DATABASE AND THE HUB ASKED ME TO PASS THIS UP.** `suggestions` id 4,
+   category "other", username "hub-build-test", created 2026-11-25 10:39:40 CST, body marked
+   "[HUB BUILD TEST ... Please ignore/delete]". It was written through the real live page to prove
+   end to end that a viewer's suggestion lands - which closed the box your own HUB PUBLISH 8 doc
+   left unchecked. **It is safe to delete and I recommend deleting it** so the first real suggestion
+   is row 5 and nobody reads the test as viewer feedback. I have not touched the table.
+3. **NO PUBLISH IS NEEDED AND I AM NOT ASKING FOR ONE** - recorded so the question is not re-raised.
+   The delta between the published tree (gh-pages 8d214d36 / 1d8bce63) and origin/hub:web (597deb77)
+   is web/NOTES.md +22/-0: documentation only, nothing served. No lane claimed READY TO PUBLISH, so
+   I ran no publish gate and said so. One open thread, not a decision: the Pages CDN was still
+   serving the 09:49 HTML at 10:40, so `app.js?v=8` had not reached viewers yet. Nothing
+   viewer-facing is broken by that and the hub re-checks it this hour.
+
+
 ## TAKE THIS NEXT - Updated THE 09:58 CT FIRING, 25 NOV 2026 (team lead; written 10:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS 83349c36. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
 ***

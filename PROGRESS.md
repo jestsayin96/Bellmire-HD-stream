@@ -19416,3 +19416,62 @@ is ticked." I took the stand-down and claimed NO lock. I measured the registers 
   IDLE 08:42:38 QA tester, `tasklist Godot*` alive=False checked live). Godot exited, `Godot*` = 0.
 - No live Twitch test. ZERO BITS. No cheer, no redemption, no reward read or written, no chat line posted
   as bellmirebro, no channel setting touched.
+- **THIS ENTRY WAS NOT COMMITTED BY THE RUN THAT WROTE IT, AND THE REASON IS MY OWN ERROR.** My commit
+  call carried a stray placeholder `git commit -F -`, which reads the message from STDIN; with no stdin
+  attached it blocked forever. That hung `git.exe` is a child of the Blender process, so it wedged
+  `execute_blender_code` - the only git route from this lane - and even a no-op call timed out after it.
+  PROGRESS.md was left `git add`-ed but uncommitted, against the 08:58 checkpoint ruling, and I recorded
+  that in `docs/RUN_LOCK.txt` as a NOTE rather than letting the next seat discover it. All verdicts above
+  were taken BEFORE the bridge died and stand. NEXT SEAT: commit the staged PROGRESS.md and push `chatbot`
+  first, and never pass `-F -` to git through the bridge - write the message to a file first.
+
+## B153 - 25 Nov 2026, 09:45 CT firing (chat bot)
+
+**WRITTEN STAND-DOWN, AND THE ONE THING MY DRIFT CHECK FOUND WAS MY OWN MISREADING - SO I CORRECTED
+IT INSTEAD OF REPORTING A BUG THAT IS NOT THERE.**
+
+- **FIRST ACT: B152's ORPHANED `PROGRESS.md` IS COMMITTED** - `d3ec4572`. B152 staged it and then
+  wedged the bridge on a stray `git commit -F -` with no stdin, wrote the fault into
+  `docs/RUN_LOCK.txt`, and told the next seat to commit it first. The bridge answered a no-op
+  immediately this hour, so the hung `git.exe` is gone. The entry text is B152's, unchanged; the 8
+  further self-report lines it wrote *after* staging were still uncommitted and are in this commit too.
+  **BOTH SIDES KEPT, nothing renumbered.** I did not pass `-F -` to git - the message went to a file.
+- **MY PUSH WAS REJECTED AND I DID NOT FORCE IT.** `origin/chatbot` was 3 ahead (the lead's plan
+  syncs) while HEAD was 30 ahead. Non-fast-forward. I merged `origin/chatbot` then `origin/main`
+  (already up to date) - merged HEAD **31727090** - and pushed normally.
+- **NO FILE OF MINE CHANGED.** `scripts/chatcmd.gd`, `data/commands.json` and `docs/COMMANDS.md` are
+  byte-identical after the REAL `tools/_commands_doc.gd` rewrote the doc (`COMMANDS_DOC OK wrote 32
+  commands`, RC 0, `git diff docs/COMMANDS.md` empty). Nothing to regenerate; I claim no doc change.
+
+### Gate results - headless on W6's own `project.godot` at 31727090, log kept at `_b153_run.log`
+| gate | result |
+|---|---|
+| `--headless --path W6 --quit-after 300` | RC 0, **ZERO SCRIPT ERROR**, ZERO `COMMANDS_DATA` lines on load |
+| `tools/_l14_test.gd` | RC 0, **L14_TEST OK (24 checks)**, "no COMMANDS_DATA guard arm fired on the load (0 fired: [])" |
+| `tools/_twitch_parse.gd` | RC 0, **TWITCH_PARSE OK (8 checks)** |
+| `tools/_commands_doc.gd` | RC 0, **COMMANDS_DOC OK wrote 32 commands** |
+
+### The ask gate's five arms - silent at the engine AND re-derived by hand
+`ASK NO TOPICS`, `ASK ORDER SHORT`, `ASK ORDER GHOST`, `ASK TOPIC NO PHRASES`, `ASK TOPIC MUTE` all
+**SILENT**. By hand: 21 `ask.order` entries = 21 `ask.topics` keys, no ghosts, no duplicates, zero
+empty phrase lists, zero mute topics; the four reply-less topics (`missed`->`catchup`,
+`myhero`->`hero`, `commands`->`help`, `hub`->`hub`) all route to commands that exist. Drift checked
+**both** ways: 32 entries, every one with a literal in `chatcmd.gd`, zero code literals unanswered.
+
+### MY OWN FAULT, WRITTEN DOWN BECAUSE IT NEARLY BECAME A FALSE BUG REPORT
+My drift pass flagged **six topic replies as over `ask.max_len = 140`** - `join` 154, `what` 154,
+`gold` 164, `bits` 148, `standing` 144, `real` 143 - and I was one step from reporting live
+truncation on a stream. Then I read the code instead of trusting my own number.
+`scripts/chatcmd.gd:3242` is `if a.is_empty() or msg.length() > int(a.get("max_len", 140)):` -
+**`max_len` caps the INCOMING VIEWER QUESTION, not the answer.** `ask._why` and the guard comment at
+:1167 both say so in words: "the length a question may reach". Nothing is truncated, no reply is
+affected, and the longest reply (164) is far under Twitch's own limit. **THERE IS NO FAULT. The
+finding was me measuring the wrong side of the comparison**, and it is recorded as a correction so
+the next seat does not re-derive it and "fix" six lines of good text.
+
+- Still true and still not mine: `bug` and `suggest` send viewers to a Suggestion Box that exists
+  only in the hub's **unpublished** delta.
+- Lock: claim 09:47:46, cap 10:12:46, declared finish 09:52:00, released 09:52:00 - inside the
+  declared finish, HUD's :52 window clear. Godot exited, `tasklist Godot*` = 0 checked live.
+- **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat
+  line posted as bellmirebro, no channel setting touched.

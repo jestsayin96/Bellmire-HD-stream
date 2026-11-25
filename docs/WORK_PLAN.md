@@ -1,3 +1,228 @@
+## TAKE THIS NEXT - Updated THE 17:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE CASCADE IS CLOSED AT 55 ENGINE / 55 FEED / 55 PUBLISHED. ZERO UNNAMED, ZERO GHOSTS.
+*** Measured by me on merged main, brace-matched, string-aware, comments stripped BEFORE splitting,
+*** anchored on `const MB_NAME :=` - not taken from any lane's claim:
+***   `Delve.MB_NAME` = **55** keys, 0 duplicates, `iceman` IN, `straker` IN ("Everyhand").
+***   `miniboss_feed.by_key` = **55** keys.
+***   `data/commands.json` publishes **55** at BOTH `miniboss` leaves (`.what` and `.short`).
+***   `by_key - MB_NAME` = **[]**. `MB_NAME - by_key` = **[]**. BOTH DIRECTIONS EMPTY.
+*** The chat bot's B137 row predicted its own L14 single FAIL (`MINIBOSS UNNAMED ["straker"]`) would
+*** clear at this merge. It is cleared: the arm fires on a name MB_NAME lacks, and MB_NAME now has
+*** it. I did NOT re-run L14 to say so - **the HUD held the Godot window from 17:53:57 and I took no
+*** lock** - so this is a measurement of the three halves, not a gate verdict, and I say which it is.
+***
+*** MY OWN FAULT FIRST, AND IT COST THE 18:07 GAME BUILD ITS ROW.
+*** I finished this block at 18:0x, AFTER the game build fired at 18:07, so that run read the 16:58
+*** GAME BUILD row - which asks for work S118 already shipped (name the 55th; the two L31 bits).
+*** The lane will find both already done. **The cause was my own verification depth running past
+*** :05, not a lane.** The fix is in my hands and is not a new item: next seat, write the GAME BUILD
+*** row FIRST and sync `laptop` BEFORE finishing the other five, exactly as the sync recipe already
+*** orders - the recipe says sync laptop first, and that has to mean WRITE its row first too.
+***
+*** WHAT I VERIFIED MYSELF AND TICKED THIS HOUR, SO NO LANE RE-PROVES IT:
+***  - **S118 TICKED WHOLE (game build).** `MB_NAME "straker": "Everyhand"` - 55 keys, 0 dupes, by my
+***    own parse. **L31 REMAINDER (a) AND (b) ARE BUILT AND I LOOKED AT THE PICTURE**, which is the
+***    acceptance test and not the log: `renders/cycles/l31/l31_icons_1080.png` at 1920x1080 shows
+***    icon + word + DURATION on every status row of three party frames (`poisoned 30s`,
+***    `emberward 30s`, `owl-eyed 30s` ...), left-to-right, nothing clipped at the 400 px frame.
+***    Code read, not inferred: `party_frames.gd:215` draws `m["st"]` seconds beside the word;
+***    `delve.gd:3903` is the seconds-left helper; `delve.gd:4046` extends the state tuple to
+***    `[word, colour, key, bad, secs]` and says in its own comment that callers reading [0]/[1] are
+***    unchanged; `delve.gd:3876` now READS `was` so an on-apply line fires from `_give`.
+***    ONE HONEST QUALIFIER: every row in that render reads `30s`, which is the fixture's uniform
+***    seed. The render proves the duration is DRAWN and fits; it does not prove varying seconds
+***    tick down. That does not hold the tick - the drawing was the open bit - but do not quote the
+***    render as proof of the countdown.
+***    **THE CLASS SHADOW IS THE FIND OF THE HOUR AND IT IS EVERY LANE'S PROBLEM.** An untracked
+***    scratch `_gb_l31c/pf_new.gd` carried `class_name PartyFrames`, so
+***    `.godot/global_script_class_cache.cfg` resolved PartyFrames to the SCRATCH copy and every
+***    Godot run in R - and an export from R - drew the stale frames. The lane found it only because
+***    its first render showed no durations at all. **EVERY LANE: before trusting a frame render,
+***    check your worktree for a `_<lane>_*` scratch dir holding a `class_name`.**
+***  - **C-196 TICKED (content), AND ONE SENTENCE OF ITS OWN ROW IS WRONG - THE DATA IS NOT.**
+***    I parsed `data/lore_lines.json` myself: `townsfolk.trades` holds **28** trades, **all 28**
+***    carry all four of `morning/midday/evening/night`, and the slot leaves total **336** lines =
+***    28 x 4 x 3, i.e. 2 -> 3 per leaf, **+112**, exactly as claimed. Additive only; the one new
+***    top-level key is `_note_c196`, an expected zero-hit key.
+***    **THE WRONG SENTENCE:** the lane's PROGRESS row says "CODE WIRING: none - trade lines are
+***    already read by townsfolk code; only the new zero-hit `_note_c196` is unread." Those two
+***    clauses contradict each other, and the first is false. I grepped `scripts/*.gd`: every
+***    `townsfolk` hit is PROSE in a comment, and the only live `trades` reads
+***    (`economy.gd:684`, `snapshot_pub.gd:408`) walk `trade_stock.trades`, a DIFFERENT structure.
+***    `townsfolk` is one of the SIX declared dead at D98 and it stays dead. The lane's own
+***    `_note_c196` says "EXPECTED ZERO-HIT KEY - no lane is to wire it", which is the correct
+***    reading, so the delivery is right and only the sentence is wrong. **NO LANE IS TO WIRE
+***    `townsfolk.trades` ON THE STRENGTH OF THAT SENTENCE.**
+***  - **ART'S S118 TICKED, AND I RE-MEASURED THE HEADLINE AND LOOKED AT THE SHEET.**
+***    `_selfseen_census.json` on main, measured 17:45:56: 69 rows, `not_measurable` =
+***    **['snuffer_chibi', 'tallyman_chibi']** and nothing else, `no_man` = ['panner'] (correct),
+***    `build_failed` = [], `ok` true. **THE SILENT LIST WENT 19 -> 2, and the 2 are the retired
+***    `_chibi` cells the row was told to leave alone.** INSERT-ONLY verified by numstat, not by
+***    claim: `tools/art/minibosses.py` **+330 / -0**, so no geometry can have moved.
+***    **I LOOKED AT `_s118_sheet_front.png`** - 17 rows, three columns (whole / figure-hidden /
+***    figure-alone). In every row the middle column is genuinely figure-free and the right column is
+***    one coherent body: the cone-shaped first body is itself the figure, the two-man saw body
+***    splits both men out together, the tripod row leaves the tripod standing alone. No row blank,
+***    no row with the figure in both columns, no limb left behind. That is the thing `man_seen`
+***    cannot see, because it only ever compares the two masks the declaration itself produced.
+***    **THE HARNESS THAT WOULD HAVE GONE RED ON A CORRECT CHANGE.** `_manparts_prove.py` asserted
+***    `parts == 6`, a hand-typed literal one day old. It now asserts that every builder DECLARING a
+***    figure RESOLVES from it, both sides measured off the same tree in the same pass (23 of 23).
+***    **I CHECKED THE LOOSENED TEST CAN STILL GO RED** and it can: arm B returns an ERROR and no
+***    ranges for a `man_parts` naming an undeclared span (so it CANNOT fall into the silent list)
+***    and names the missing span; arm C goes red on a body declaring both a `man` span and
+***    `man_parts`. Eight checks, all passing on real red arms.
+***  - **THE HUB'S STANDING AUDIT TICKED, AND IT CORRECTLY DID NOT ASK TO PUBLISH.** I compared the
+***    trees myself: `origin/gh-pages^{tree}` = `c03fa129`, `origin/hub:web` = `5a570056`, and the
+***    whole delta is **`NOTES.md +4 / -0`** - documentation, no code. The lane did NOT claim
+***    ready-to-publish, so **I ran no publish verification and none was owed.** The free greps on my
+***    merged tree: `innerHTML` at `app.js:255` and `:301` ONLY, both page-owned strings (the other
+***    four hits are comments); zero `insertAdjacentHTML`, `document.write`, `eval` or `new Function`
+***    in code; CSP meta intact with `default-src 'none'`, `script-src 'self'`, `style-src 'self'`,
+***    `base-uri 'none'`, `form-action 'none'`. Also ticked: `Stone_coffin` logged CC0 1.0 in
+***    `docs/art/ASSET_SOURCES.md`, read off the readme, cleared.
+***  - **U155, U156 AND U157 TICKED (HUD), AND THE LOGS ARE COMMITTED THIS TIME - ALL TEN OF THEM.**
+***    U157 is the one that matters to every lane: `_u40_pad_test.gd:41`, `_u88_worn.gd:46`,
+***    `_u90_feed_load.gd:50` and `_u91_long_names.gd:49` now each print
+***    `... NO VERDICT - capture %s is smaller than 1920x1080` and `quit(2)` instead of passing
+***    quietly on a 1152x648 window. **That is COORDINATION 15 implemented in four gates** - a gate
+***    that cannot see what it audits must say NO VERDICT, not OK. U155 closed U62 by disproof (the
+***    4th scroller was off-screen in the default window, measured=12 at 1920x1080) and U156 is the
+***    two-arm red-proof with a control arm at an identical element count.
+***  - **B137 TICKED (chat bot): THE 54 -> 55 REPUBLISH IS PAID, AND IT MEASURED OFF THE LANE REFS
+***    EXACTLY AS THE 17:45 ROW ORDERED.** It read `MB_NAME` from `origin/laptop d8951273` and
+***    `by_key` from `origin/content ba818212` - not from main, which was still behind at 38f2aa1a -
+***    found drift [] both ways, and paid. `commands.json` 54 -> 55 at BOTH leaves, 18,000 bytes
+***    before and after, 8 top keys, order==commands 32, gained [] lost [], `armoury.cost` intact,
+***    no `54` left in the file; `docs/COMMANDS.md` rewritten by the REAL `tools/_commands_doc.gd`.
+***    **THE FIX I SHIPPED LAST HOUR WORKED IN ONE HOUR.** It also red-proved its own single L14
+***    FAIL against a PRE-EDIT copy (3 fails -> 1), which is how you prove a residual red is not
+***    yours. Both of those are the habits this house wants.
+***
+*** WHAT I DELIBERATELY DID NOT TICK: **nothing is held this hour.** Every lane's delivery verified.
+*** I did not re-run a single Godot gate - the HUD held the window from 17:53:57 - so every verdict
+*** I quote above is either a file I parsed or a picture I opened, and I say which for each.
+***
+*** THE DEAD-DATA AUDIT, 17:5x CT, measured off `scripts/*.gd` (47) + `web/app.js` = **48 files**,
+*** 2,384,420 chars, and `data/*.json` (12 files, one level), **154 top-level keys**:
+***   UNREAD LIVE DATA KEYS: **ZERO**. UNREFERENCED ASSET DIRECTORIES: **ZERO** (16 top-level dirs
+***   under `assets/` that contain files; the prompt's "34" counts a deeper walk - either way, none).
+***   ZERO-HIT KEYS: **64 = 49 `_note_` + 15 NON-NOTE**, and the non-note 15 are the SAME 15 as
+***   every honest reading for days: the two runtime-built `_alt` pools (`lord_intros_alt`,
+***   `unique_intros_alt`, READ at `delve.gd:4022` via `base + "_alt"` - DO NOT WIRE), the four
+***   declared-dead (`phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+***   `town_levels_for_the_desktop`), and the nine prose/spec strings (`technique`, `boss_floors`,
+***   `chronicle_line`, `word_order`, `casing`, `promotion_line`, `one_roll`, `_gating`,
+***   `canon_silences`). **THE NON-NOTE COUNT DID NOT MOVE.** The series today: 52 (05:0x) -> 53 ->
+***   56 (08:58) -> **64 (17:5x)**; the whole rise is `_note_` keys and carries no signal, which is
+***   exactly why the non-note number is the one to watch.
+
+- **GAME BUILD (18:07, and this row is late for you - see MY OWN FAULT above) - THE CASCADE IS
+  CLOSED AND BOTH YOUR ITEMS ARE SHIPPED. DO NOT RE-DO S118.** `MB_NAME` is 55 and matches both
+  other halves; L31 remainder (a) and (b) are built, I read the code and looked at the 1080p render.
+  Take instead the defect the HUD just found, in YOUR gates, because it is the same hole:
+  **AUDIT YOUR OWN FRAME-COUNTING GATES FOR THE 1080p TRAP.** U157 found four HUD gates that
+  reported OK on a 1152x648 window where the thing they audit was off-screen. Your battery runs
+  `S51_NAMES`, `S107_GATE`, `S115_ICEMAN`, `S117_STRAKER`, `OFFFLOOR`, `TOWNWALK`, `DELVE_TEST` -
+  for each one that measures anything POSITIONAL or VISIBLE, make it print
+  `NO VERDICT - capture smaller than 1920x1080` and go red rather than pass quietly, the way
+  `_u40_pad_test.gd:41` now does. A gate that cannot see what it audits is RED - COORDINATION 15.
+  **This is fixing a broken instrument, not a new item.** Report which gates needed it and which
+  genuinely do not measure anything on screen; a gate correctly exempted is a full result.
+- **CONTENT (18:22) - C-197, AND CORRECT ONE SENTENCE OF YOUR OWN C-196 ROW.** The data you shipped
+  is right and is ticked: 28 trades, 4 slots each, +112, 336 slot lines, additive. But your PROGRESS
+  row says "trade lines are already read by townsfolk code" AND "only the new zero-hit `_note_c196`
+  is unread" in the same sentence, and the first clause is false - I grepped `scripts/*.gd` and
+  every `townsfolk` hit is prose; the live `trades` reads walk `trade_stock.trades`, a different
+  structure. **`townsfolk` is one of the six declared dead at D98.** Write the correction as a new
+  line in your next row (do not edit history), then take C-197 in the C-194/C-196 shape: deepen the
+  thinnest leaves the engine ACTUALLY reads, set-compare every leaf against main in BOTH directions
+  before you claim a count, and report arithmetic per leaf. **There is no 56th body on disk**, so do
+  not write a `by_key` row for one. Keep writing `_note_` keys.
+- **ART (18:34) - THE CENSUS IS CLOSED. TAKE THE 56th BODY, AND THE PIPELINE ORDER IS WHY.**
+  Your silent list is 2 and both are the retired `_chibi` cells; `_fit_report.json` reads
+  **GREEN / ok:true over 57 rows**; `_manparts_prove` is 8 checks on real red arms. There is no
+  census work left worth a pass. **Minibosses are this lane's one genuinely dry licence**, so build
+  the 56th: body, fit row at your usual bar, front/side/back - and **LOOK at the back view yourself
+  before you call it done**, which is the check that caught the Beadle. Push it EARLY in your window
+  if you can: content fires at :22, BEFORE you at :34, so a body you push at :34 cannot get its
+  `by_key` row until the next hour's :22 and its engine name until the :07 after that. That is the
+  pipeline, not a fault - but the earlier it lands the fewer hours the chain sits open. Say in one
+  line that the two `_chibi` rows are retired and leave them.
+- **HUB (18:37) - STANDING AUDIT, AND THERE IS STILL NOTHING TO PUBLISH.** I compared the trees
+  myself this hour: the whole gh-pages/hub delta is `NOTES.md +4 / -0`, documentation only, and the
+  `web/` CODE is byte-identical to publish 7. **Do not claim ready-to-publish for a notes-only
+  delta** - you have correctly declined to three times now. Your `Stone_coffin` CC0 1.0 entry is
+  ticked. Keep the licence gate exactly as you are running it: three packs gated on three
+  consecutive hours for a missing licence is the hard rule working, and a fourth negative result is
+  a full delivery you state plainly rather than reaching for something to import.
+- **CHAT BOT (18:45) - NOTHING IS OWED ON THE COUNT, AND I HAVE PROVED IT SO YOU NEED NOT.**
+  All three halves read **55** on merged main and both drift directions are empty. **Do not
+  republish.** Your own B137 red-proof predicted the residual L14 arm clears at my merge, and the
+  measurement says it does. Still check before claiming, the way you have now done three hours
+  running - that habit is the reason this house trusts the published number. Spend the window
+  instead on a defect in work you have already shipped, and if you find none, **say so plainly and
+  stand down; a stand-down written up IS the delivery.** Keep claiming by **:50** with a declared
+  finish inside **:52** so the HUD keeps its window - ten hours running now.
+- **HUD (18:52) - YOUR WINDOW, AND U157 IS THE BEST THING ANY LANE SHIPPED THIS HOUR.** Four gates
+  that could report OK while blind now print `NO VERDICT` and go red. **Your own row names the
+  next step and I agree with it: the U91 RED ARM, then sweep the remaining U-gates (U56 and the
+  rest) for the same trap.** I have put the same sweep on the game build for its own battery, and
+  credited it to you in that row. Keep the two habits that earned these ticks: a verdict LINE on
+  every arm, and `NO VERDICT` + `_bad` rather than a quiet pass. Claim at :52, cap claim+15, hard
+  release at :07, split any capture that will not finish.
+
+**LOCK DISCIPLINE AND THE RUNNING CLEAN-HOUR COUNT - 17:58 CT, 24 NOV 2026.**
+Three windows this hour, all read from R's WORKING copy of `docs/RUN_LOCK.txt` (the authoritative
+copy, and it is uncommitted between game-build runs):
+  game build S118  claim 17:08:13 / cap 17:33:13 / declared 17:30 / IDLE 17:24:33 - clean, early,
+    and the cap was computed BEFORE the declaration, as its own fix requires. Tenth hour running.
+  chat bot B137    claim 17:47:40 / cap 18:12:40 / declared 17:51:30 / IDLE 17:51:10 - clean, and
+    it claimed BEFORE :50 and released BEFORE :52, so the HUD kept its window. Tenth hour running.
+  HUD U157         claim 17:53:57 / cap 18:08:57 / declared 18:05 - STILL LIVE as I write. Not a
+    fault and not a count-breaker: it is inside its own :52 window and inside its cap.
+**No overrun, no claim over a live hold, no stale lock cleared, no starved lane, no future stamp in
+a lock line, no two lanes holding at once.** Every RUNNING is followed by an IDLE from the same lane
+before the next RUNNING. **I took no Godot lock and ran no gate this hour** - the HUD held the
+window - so every verdict above is a file I parsed or a picture I opened.
+**THE COUNT: 2.** It was re-anchored at 1 at the 16:58 firing; this hour is clean on every lane, so
+it advances to **2**. The 18:07 game-build row being late is a fault of MINE, not a lock fault, and
+I have not folded it into this count in either direction - it is written up above instead.
+
+**FOR THE SUPERVISOR:** Two things, neither urgent, neither mine.
+  1. **STILL NOTHING OWED ON THE HUB, AND PUBLISH 7 REMAINS THE LIVE PUBLISH.** `origin/gh-pages`
+     is `5ce35f33`, tree `c03fa129`, pushed 24 Nov **15:30:43 CT** ("fix 0-byte turbary_hood.webp +
+     zero-byte guard"). Re-measured by me this hour: the only merged-and-unpublished delta is
+     `web/NOTES.md +4 / -0`, documentation with no code. **My recommendation: no publish this
+     hour.** The lane did not claim ready-to-publish and I ran no publish gate. The older "fifth /
+     sixth hour owed" escalations in the blocks below are **SPENT** - publish 7 paid them.
+  2. **PROMPT CORRECTIONS ARE STILL OWED AND A FIRING CANNOT LAND THEM** (full list in FOR THE NEXT
+     TEAM LEAD). They are stale measurements in my own charter, not decisions, so I am recording
+     them rather than acting outside my seat. The plan carries every correction, and the plan is
+     what the lanes obey, so **nothing is blocked**.
+
+**FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, TO BE LANDED IN ONE LIVE TURN:**
+  - TEAM LEAD prompt, "A STANDING NOTE ON THE ART FIT REGISTER": it says the top-level verdict reads
+    `RED / ok:false` on two carried `_chibi` rows. **Now GREEN / ok:true over 57 rows**, re-measured
+    again this hour. Replace the note; keep the instruction not to charge a given hour's art with it.
+  - TEAM LEAD prompt, the hub publish block: it says gh-pages is `05ac2679` / 19 Nov 20:06 CT.
+    **Now `5ce35f33`, tree `c03fa129`, pushed 24 Nov 15:30:43 CT (publish 7).** The surrounding
+    instruction to re-measure both trees every hour rather than copy the SHAs stays as written.
+  - TEAM LEAD prompt, STEP 5 ID list: as of the 17:58 firing the live IDs are **B137, C-196, D100,
+    H32, L74, S118, T5, U157**, and the art fit register judges **57** rows. The prompt's "fit
+    register judges 46 rows, 44 live bodies" and "art is on paviser pass 8" sentences are stale.
+  - TEAM LEAD prompt, the miniboss example: it says `Delve.MB_NAME` is "WHOLE AT 44/44/44". It is
+    now **55/55/55**. The surrounding lesson - never quote a count from the prompt as current, parse
+    the braces or count nothing - is the point and stays exactly as written.
+  - CHAT BOT prompt: it should carry the measure-off-the-lane-refs rule (engine `MB_NAME` from
+    `origin/laptop`, feed `by_key` from `origin/content`, published count from its own merged HEAD),
+    because main cannot contain the same hour's :22 and :07 work at :45. It is in the plan and it
+    worked at B137 on the first hour, so nothing is blocked - but the prompt is its right home.
+  - TEAM LEAD prompt, STEP 4: add that the **GAME BUILD row is written FIRST**, before the other
+    five, because that lane fires at :07 and a row finished after :05 reaches it an hour late. That
+    is what went wrong this hour.
+
+
 ## TAKE THIS NEXT - Updated THE 16:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** THE CASCADE IS OPEN AT 54 ENGINE / 55 FEED / 54 PUBLISHED, AND IT IS ONE LINE FROM CLOSED.
 *** Measured by me on merged main `6ae10724`, brace-matched, string-aware, comments stripped BEFORE

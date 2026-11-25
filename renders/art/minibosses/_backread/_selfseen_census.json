@@ -273,6 +273,47 @@
    ],
    "man_span_empty": false
   },
+  "dredger": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arms",
+    "bars",
+    "head",
+    "legs",
+    "sieve",
+    "trunk"
+   ],
+   "items": 33,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     11
+    ],
+    [
+     11,
+     17
+    ],
+    [
+     31,
+     33
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "trunk",
+    "head",
+    "arms"
+   ],
+   "has_man_span": true,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "drillmaster": {
    "in_register": true,
    "in_builders": true,
@@ -1910,12 +1951,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-24T18:46:41-0600",
+ "measured_at": "2026-11-24T19:50:38-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795567601.6641471,
- "register_mtime_epoch": 1795567403.7594428,
- "register_mtime": "2026-11-24T18:43:23-0600",
- "register_pairs": 58,
+ "measured_at_epoch": 1795571438.4624975,
+ "register_mtime_epoch": 1795571370.8453896,
+ "register_mtime": "2026-11-24T19:49:30-0600",
+ "register_pairs": 59,
  "measurable": [
   "almoner",
   "beadle",
@@ -1926,6 +1967,7 @@
   "comfitmaker",
   "cook",
   "dauber",
+  "dredger",
   "drillmaster",
   "drover",
   "dyer",

@@ -1,0 +1,318 @@
+{
+ "ok": true,
+ "errors": [],
+ "pairs_compared": 30,
+ "thresh_255": 8,
+ "slot": "bone",
+ "arms": [
+  "_cueA",
+  "_cueD"
+ ],
+ "method": "A/B through one camera, pixels MOVED; glow->body swap",
+ "bodies": {
+  "collier": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 2695,
+     "body_px": 85742,
+     "cue_frac": 0.03143
+    },
+    "hero_side.png": {
+     "cue_px": 0,
+     "body_px": 75688,
+     "cue_frac": 0.0
+    },
+    "hero_back.png": {
+     "cue_px": 2393,
+     "body_px": 87688,
+     "cue_frac": 0.02729
+    }
+   },
+   "cue_blind_views": [
+    "hero_side.png"
+   ],
+   "verdict": "NOT A VERDICT (slot=bone): no bone cue from SIDE",
+   "cue_px_total": 5088,
+   "weakest_view": [
+    "hero_side.png",
+    0
+   ]
+  },
+  "timberman": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 11094,
+     "body_px": 93305,
+     "cue_frac": 0.1189
+    },
+    "hero_side.png": {
+     "cue_px": 6078,
+     "body_px": 72021,
+     "cue_frac": 0.08439
+    },
+    "hero_back.png": {
+     "cue_px": 13023,
+     "body_px": 93844,
+     "cue_frac": 0.13877
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "slot=bone present on all three views",
+   "cue_px_total": 30195,
+   "weakest_view": [
+    "hero_side.png",
+    6078
+   ]
+  },
+  "crimp": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 3581,
+     "body_px": 77576,
+     "cue_frac": 0.04616
+    },
+    "hero_side.png": {
+     "cue_px": 4466,
+     "body_px": 70265,
+     "cue_frac": 0.06356
+    },
+    "hero_back.png": {
+     "cue_px": 2413,
+     "body_px": 78020,
+     "cue_frac": 0.03093
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "slot=bone present on all three views",
+   "cue_px_total": 10460,
+   "weakest_view": [
+    "hero_back.png",
+    2413
+   ]
+  },
+  "pledgeman": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 1882,
+     "body_px": 80611,
+     "cue_frac": 0.02335
+    },
+    "hero_side.png": {
+     "cue_px": 2072,
+     "body_px": 61201,
+     "cue_frac": 0.03386
+    },
+    "hero_back.png": {
+     "cue_px": 834,
+     "body_px": 80979,
+     "cue_frac": 0.0103
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "slot=bone present on all three views",
+   "cue_px_total": 4788,
+   "weakest_view": [
+    "hero_back.png",
+    834
+   ]
+  },
+  "snuffer": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 2737,
+     "body_px": 64662,
+     "cue_frac": 0.04233
+    },
+    "hero_side.png": {
+     "cue_px": 1904,
+     "body_px": 53102,
+     "cue_frac": 0.03586
+    },
+    "hero_back.png": {
+     "cue_px": 2721,
+     "body_px": 65098,
+     "cue_frac": 0.0418
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "slot=bone present on all three views",
+   "cue_px_total": 7362,
+   "weakest_view": [
+    "hero_side.png",
+    1904
+   ]
+  },
+  "leech": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 6644,
+     "body_px": 101385,
+     "cue_frac": 0.06553
+    },
+    "hero_side.png": {
+     "cue_px": 4445,
+     "body_px": 80527,
+     "cue_frac": 0.0552
+    },
+    "hero_back.png": {
+     "cue_px": 5373,
+     "body_px": 103125,
+     "cue_frac": 0.0521
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "slot=bone present on all three views",
+   "cue_px_total": 16462,
+   "weakest_view": [
+    "hero_side.png",
+    4445
+   ]
+  },
+  "nightman": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 1615,
+     "body_px": 70218,
+     "cue_frac": 0.023
+    },
+    "hero_side.png": {
+     "cue_px": 1252,
+     "body_px": 55789,
+     "cue_frac": 0.02244
+    },
+    "hero_back.png": {
+     "cue_px": 753,
+     "body_px": 70881,
+     "cue_frac": 0.01062
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "slot=bone present on all three views",
+   "cue_px_total": 3620,
+   "weakest_view": [
+    "hero_back.png",
+    753
+   ]
+  },
+  "beadle": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 14148,
+     "body_px": 99590,
+     "cue_frac": 0.14206
+    },
+    "hero_side.png": {
+     "cue_px": 7338,
+     "body_px": 77920,
+     "cue_frac": 0.09417
+    },
+    "hero_back.png": {
+     "cue_px": 6836,
+     "body_px": 99818,
+     "cue_frac": 0.06848
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "slot=bone present on all three views",
+   "cue_px_total": 28322,
+   "weakest_view": [
+    "hero_back.png",
+    6836
+   ]
+  },
+  "blower": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 9440,
+     "body_px": 87161,
+     "cue_frac": 0.10831
+    },
+    "hero_side.png": {
+     "cue_px": 15543,
+     "body_px": 83024,
+     "cue_frac": 0.18721
+    },
+    "hero_back.png": {
+     "cue_px": 19040,
+     "body_px": 87790,
+     "cue_frac": 0.21688
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "slot=bone present on all three views",
+   "cue_px_total": 44023,
+   "weakest_view": [
+    "hero_front.png",
+    9440
+   ]
+  },
+  "stopper": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 13303,
+     "body_px": 91221,
+     "cue_frac": 0.14583
+    },
+    "hero_side.png": {
+     "cue_px": 24351,
+     "body_px": 79877,
+     "cue_frac": 0.30486
+    },
+    "hero_back.png": {
+     "cue_px": 11666,
+     "body_px": 91350,
+     "cue_frac": 0.12771
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "slot=bone present on all three views",
+   "cue_px_total": 49320,
+   "weakest_view": [
+    "hero_back.png",
+    11666
+   ]
+  }
+ },
+ "weakest_views_ranked": [
+  {
+   "key": "collier",
+   "cue_px": 0
+  },
+  {
+   "key": "nightman",
+   "cue_px": 753
+  },
+  {
+   "key": "pledgeman",
+   "cue_px": 834
+  },
+  {
+   "key": "snuffer",
+   "cue_px": 1904
+  },
+  {
+   "key": "crimp",
+   "cue_px": 2413
+  },
+  {
+   "key": "leech",
+   "cue_px": 4445
+  },
+  {
+   "key": "timberman",
+   "cue_px": 6078
+  },
+  {
+   "key": "beadle",
+   "cue_px": 6836
+  },
+  {
+   "key": "blower",
+   "cue_px": 9440
+  },
+  {
+   "key": "stopper",
+   "cue_px": 11666
+  }
+ ]
+}

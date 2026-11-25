@@ -114,6 +114,42 @@ def build_miniboss(key):
     assert not (set(M.OVERRIDE) & _LEGACY), \
         "OVERRIDE must not touch an already-shipped key: %s" % sorted(set(M.OVERRIDE) & _LEGACY)
     mats = M.apply_overrides(key, mats)
+    # *** THE CUE A/B SWITCH (MB_CUEOFF=1). ART, 25 Nov 04:5x CT. ***
+    # WHY. `seen: 1.0` in the fit register answers "is the CREATURE visible
+    # past the hero" and says NOTHING about whether the thing the fight is
+    # ABOUT can be seen. The collier is shut on a fire and its four vents are
+    # all on the -Y arc by construction, so from behind a party sees a mound of
+    # earth and no fire at all - and every number in the register was green.
+    # That is the pass-11 fault of 17 Nov in a new coat: an instrument that
+    # cannot see is not a pass.
+    # THE TEST IS THE VIEWER'S QUESTION, NOT A MEASUREMENT OF THE OBJECT.
+    # `mask_of` renders a group ALONE and answers how BIG the cue is; it reads
+    # a healthy number for a vent buried behind a shovel. So this switch does
+    # the one thing that cannot lie: it swaps the glow material for the BODY
+    # material, leaving every vertex exactly where it was, and the census
+    # renders both arms THROUGH THE SAME CAMERA and counts the pixels that
+    # MOVED. Occlusion, depth and the view transform are then the renderer's
+    # problem and not mine.
+    # Default OFF. With the variable unset this function is byte-for-byte what
+    # it was, which is why it is a swap here and not an edit to mat_glow.
+    # *** AND IT TAKES A SLOT, BECAUSE "1" WAS THE WRONG QUESTION. ***
+    # First run of this switch red-flagged pledgeman, blower and stopper. I
+    # went and read their CANON before believing it: pledgeman's count is
+    # "THREE BRIGHT LASHINGS ... the only pale on the whole body", blower's is
+    # a bag "pale and ribbed", stopper's is "five pale uprights". NONE of those
+    # is emissive. They are in the `bone` slot on purpose - the Dyer's pass-3
+    # lesson is that a near-white emissive is a hole and not a fire, so this
+    # file deliberately carries most COUNTABLE cues as pale geometry and keeps
+    # glow for things that are actually alight. An instrument that only swaps
+    # `glow` therefore reads ZERO on a correct body and calls it red.
+    # So the slot is named, and `both` is what a cue census must use.
+    _cue = os.environ.get("MB_CUEOFF", "")
+    if _cue:
+        _slots = {"1": ("glow",), "glow": ("glow",), "bone": ("bone",),
+                  "both": ("glow", "bone")}[_cue]
+        mats = dict(mats)
+        for _s in _slots:
+            mats[_s] = mats['body']
     P = M.BUILDERS[key]()
     # 17 Nov: the Quartermaster loads real pack geometry out of assets/gear and
     # falls back to procedural if it cannot. A silent fallback would be the same

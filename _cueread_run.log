@@ -1,0 +1,88 @@
+
+===== ARM A  MB_CUEOFF=0 =====
+ode Cube.126
+04:45:04 | INFO: Blender create Mesh node PrototypePete_body.020
+04:45:04 | INFO: Blender create Mesh node PrototypePete_head.001
+04:45:04 | INFO: Blender create Mesh node Cube.128
+04:45:04 | INFO: Blender create Mesh node Cube.127
+04:45:04 | INFO: Blender create Mesh node Cube.003
+04:45:04 | INFO: Blender create Mesh node Cylinder.280
+04:45:04 | INFO: Blender create Mesh node Cylinder.005
+04:45:04 | INFO: Blender create Mesh node Cylinder.010
+04:45:04 | INFO: Blender create Mesh node Cylinder.022
+04:45:04 | INFO: Blender create Mesh node Cube.11839
+04:45:04 | INFO: Blender create Mesh node Cube.12993
+04:45:04 | INFO: Blender create Mesh node Cube.124
+04:45:04 | INFO: Blender create Mesh node Plane.004
+04:45:05 | INFO: glTF import finished in 0.53s
+00:26.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stopper_cueA\hero_front.png'
+00:26.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:26.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:26.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:26.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:27.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stopper_cueA\hero_side.png'
+00:27.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:27.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:27.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:27.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:27.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stopper_cueA\hero_back.png'
+00:27.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:27.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:28.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:28.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+MINIBOSSFIT_REPORT {"verdict": "RED", "ok": false, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": ["self_seen: the census was taken over 64 register rows and is being read against 10 - it describes a different house. Re-run tools/art/_selfseen_census.py"], "blind_views": [], "proving": {"collier": 3, "timberman": 3, "crimp": 3, "pledgeman": 3, "snuffer": 3, "leech": 3, "nightman": 3, "beadle": 3, "blower": 3, "stopper": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[99, "leech", "back"], [100, "stopper", "front"], [102, "collier", "side"], [113, "timberman", "front"], [118, "blower", "side"], [124, "beadle", "front"]], "rows_judged": 10, "rendered": 10, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 30, "failures": [], "cells": 10, "expected_files": 30, "scope": "named_subset"}, "ratios": {"collier": [0.86, 3.9, true], "timberman": [1.24, 3.87, true], "crimp": [0.99, 3.53, true], "pledgeman": [1.05, 3.53, true], "snuffer": [1.06, 3.37, true], "leech": [0.95, 4.12, true], "nightman": [0.94, 3.49, true], "beadle": [1.2, 3.74, true], "blower": [1.01, 3.31, true], "stopper": [0.97, 4.1, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+RC=0
+STDERR:
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:552: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:426: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+
+===== ARM B  MB_CUEOFF=1 =====
+ode Cube.126
+04:45:34 | INFO: Blender create Mesh node PrototypePete_body.020
+04:45:34 | INFO: Blender create Mesh node PrototypePete_head.001
+04:45:34 | INFO: Blender create Mesh node Cube.128
+04:45:34 | INFO: Blender create Mesh node Cube.127
+04:45:34 | INFO: Blender create Mesh node Cube.003
+04:45:34 | INFO: Blender create Mesh node Cylinder.280
+04:45:34 | INFO: Blender create Mesh node Cylinder.005
+04:45:34 | INFO: Blender create Mesh node Cylinder.010
+04:45:34 | INFO: Blender create Mesh node Cylinder.022
+04:45:34 | INFO: Blender create Mesh node Cube.11839
+04:45:34 | INFO: Blender create Mesh node Cube.12993
+04:45:34 | INFO: Blender create Mesh node Cube.124
+04:45:34 | INFO: Blender create Mesh node Plane.004
+04:45:34 | INFO: glTF import finished in 0.56s
+00:26.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stopper_cueB\hero_front.png'
+00:27.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_front.png'
+00:27.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_front.png'
+00:27.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_front.png'
+00:27.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_front.png'
+00:27.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stopper_cueB\hero_side.png'
+00:27.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_side.png'
+00:27.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_side.png'
+00:27.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_side.png'
+00:28.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_side.png'
+00:28.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\stopper_cueB\hero_back.png'
+00:28.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcwith_back.png'
+00:28.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_gcfree_back.png'
+00:28.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_heroalone_back.png'
+00:28.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vis_tmp\_crealone_back.png'
+MINIBOSSFIT_REPORT {"verdict": "RED", "ok": false, "hero": {"h": 2.45, "w": 1.32, "d": 1.253, "posed": true, "parts": ["Knight_ArmLeft", "Knight_ArmRight", "Knight_Body", "Knight_Cape", "Knight_Head", "Knight_Helmet", "Knight_LegLeft", "Knight_LegRight"]}, "errors": ["self_seen: the census was taken over 64 register rows and is being read against 10 - it describes a different house. Re-run tools/art/_selfseen_census.py"], "blind_views": [], "proving": {"collier": 3, "timberman": 3, "crimp": 3, "pledgeman": 3, "snuffer": 3, "leech": 3, "nightman": 3, "beadle": 3, "blower": 3, "stopper": 3}, "unproved_cells": [], "stale_margin": [], "margin_derived": 0, "air_px_min": [[99, "leech", "back"], [100, "stopper", "front"], [102, "collier", "side"], [113, "timberman", "front"], [118, "blower", "side"], [124, "beadle", "front"]], "rows_judged": 10, "rendered": 10, "red_summary": {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}, "blank": {"files": 30, "failures": [], "cells": 10, "expected_files": 30, "scope": "named_subset"}, "ratios": {"collier": [0.86, 3.9, true], "timberman": [1.24, 3.87, true], "crimp": [0.99, 3.53, true], "pledgeman": [1.05, 3.53, true], "snuffer": [1.06, 3.37, true], "leech": [0.95, 4.12, true], "nightman": [0.94, 3.49, true], "beadle": [1.2, 3.74, true], "blower": [1.01, 3.31, true], "stopper": [0.97, 4.1, true]}}
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+RC=0
+STDERR:
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:552: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+C:\hd adventure\bellmire-art\tools\art\minibossfit.py:426: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+
+===== DONE =====

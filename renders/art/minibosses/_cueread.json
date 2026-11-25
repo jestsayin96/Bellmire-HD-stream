@@ -1,0 +1,316 @@
+{
+ "ok": true,
+ "errors": [],
+ "pairs_compared": 30,
+ "thresh_255": 8,
+ "slot": "both",
+ "arms": [
+  "_cueA",
+  "_cueC"
+ ],
+ "method": "A/B through one camera, pixels MOVED; glow->body swap",
+ "bodies": {
+  "collier": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 3784,
+     "body_px": 85742,
+     "cue_frac": 0.04413
+    },
+    "hero_side.png": {
+     "cue_px": 41,
+     "body_px": 75688,
+     "cue_frac": 0.00054
+    },
+    "hero_back.png": {
+     "cue_px": 2430,
+     "body_px": 87688,
+     "cue_frac": 0.02771
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "GREEN - cue reads on all three views",
+   "cue_px_total": 6255,
+   "weakest_view": [
+    "hero_side.png",
+    41
+   ]
+  },
+  "timberman": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 11794,
+     "body_px": 93305,
+     "cue_frac": 0.1264
+    },
+    "hero_side.png": {
+     "cue_px": 6708,
+     "body_px": 72021,
+     "cue_frac": 0.09314
+    },
+    "hero_back.png": {
+     "cue_px": 14117,
+     "body_px": 93844,
+     "cue_frac": 0.15043
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "GREEN - cue reads on all three views",
+   "cue_px_total": 32619,
+   "weakest_view": [
+    "hero_side.png",
+    6708
+   ]
+  },
+  "crimp": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 4074,
+     "body_px": 77576,
+     "cue_frac": 0.05252
+    },
+    "hero_side.png": {
+     "cue_px": 4986,
+     "body_px": 70265,
+     "cue_frac": 0.07096
+    },
+    "hero_back.png": {
+     "cue_px": 2649,
+     "body_px": 78020,
+     "cue_frac": 0.03395
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "GREEN - cue reads on all three views",
+   "cue_px_total": 11709,
+   "weakest_view": [
+    "hero_back.png",
+    2649
+   ]
+  },
+  "pledgeman": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 1882,
+     "body_px": 80611,
+     "cue_frac": 0.02335
+    },
+    "hero_side.png": {
+     "cue_px": 2072,
+     "body_px": 61201,
+     "cue_frac": 0.03386
+    },
+    "hero_back.png": {
+     "cue_px": 834,
+     "body_px": 80979,
+     "cue_frac": 0.0103
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "GREEN - cue reads on all three views",
+   "cue_px_total": 4788,
+   "weakest_view": [
+    "hero_back.png",
+    834
+   ]
+  },
+  "snuffer": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 2936,
+     "body_px": 64662,
+     "cue_frac": 0.04541
+    },
+    "hero_side.png": {
+     "cue_px": 2087,
+     "body_px": 53102,
+     "cue_frac": 0.0393
+    },
+    "hero_back.png": {
+     "cue_px": 2903,
+     "body_px": 65098,
+     "cue_frac": 0.04459
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "GREEN - cue reads on all three views",
+   "cue_px_total": 7926,
+   "weakest_view": [
+    "hero_side.png",
+    2087
+   ]
+  },
+  "leech": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 7550,
+     "body_px": 101385,
+     "cue_frac": 0.07447
+    },
+    "hero_side.png": {
+     "cue_px": 5017,
+     "body_px": 80527,
+     "cue_frac": 0.0623
+    },
+    "hero_back.png": {
+     "cue_px": 5872,
+     "body_px": 103125,
+     "cue_frac": 0.05694
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "GREEN - cue reads on all three views",
+   "cue_px_total": 18439,
+   "weakest_view": [
+    "hero_side.png",
+    5017
+   ]
+  },
+  "nightman": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 2468,
+     "body_px": 70218,
+     "cue_frac": 0.03515
+    },
+    "hero_side.png": {
+     "cue_px": 1589,
+     "body_px": 55789,
+     "cue_frac": 0.02848
+    },
+    "hero_back.png": {
+     "cue_px": 849,
+     "body_px": 70881,
+     "cue_frac": 0.01198
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "GREEN - cue reads on all three views",
+   "cue_px_total": 4906,
+   "weakest_view": [
+    "hero_back.png",
+    849
+   ]
+  },
+  "beadle": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 16822,
+     "body_px": 99590,
+     "cue_frac": 0.16891
+    },
+    "hero_side.png": {
+     "cue_px": 10042,
+     "body_px": 77920,
+     "cue_frac": 0.12888
+    },
+    "hero_back.png": {
+     "cue_px": 9005,
+     "body_px": 99818,
+     "cue_frac": 0.09021
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "GREEN - cue reads on all three views",
+   "cue_px_total": 35869,
+   "weakest_view": [
+    "hero_back.png",
+    9005
+   ]
+  },
+  "blower": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 9755,
+     "body_px": 87161,
+     "cue_frac": 0.11192
+    },
+    "hero_side.png": {
+     "cue_px": 15631,
+     "body_px": 83024,
+     "cue_frac": 0.18827
+    },
+    "hero_back.png": {
+     "cue_px": 19040,
+     "body_px": 87790,
+     "cue_frac": 0.21688
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "GREEN - cue reads on all three views",
+   "cue_px_total": 44426,
+   "weakest_view": [
+    "hero_front.png",
+    9755
+   ]
+  },
+  "stopper": {
+   "views": {
+    "hero_front.png": {
+     "cue_px": 13532,
+     "body_px": 91221,
+     "cue_frac": 0.14834
+    },
+    "hero_side.png": {
+     "cue_px": 24424,
+     "body_px": 79877,
+     "cue_frac": 0.30577
+    },
+    "hero_back.png": {
+     "cue_px": 11666,
+     "body_px": 91350,
+     "cue_frac": 0.12771
+    }
+   },
+   "cue_blind_views": [],
+   "verdict": "GREEN - cue reads on all three views",
+   "cue_px_total": 49622,
+   "weakest_view": [
+    "hero_back.png",
+    11666
+   ]
+  }
+ },
+ "weakest_views_ranked": [
+  {
+   "key": "collier",
+   "cue_px": 41
+  },
+  {
+   "key": "pledgeman",
+   "cue_px": 834
+  },
+  {
+   "key": "nightman",
+   "cue_px": 849
+  },
+  {
+   "key": "snuffer",
+   "cue_px": 2087
+  },
+  {
+   "key": "crimp",
+   "cue_px": 2649
+  },
+  {
+   "key": "leech",
+   "cue_px": 5017
+  },
+  {
+   "key": "timberman",
+   "cue_px": 6708
+  },
+  {
+   "key": "beadle",
+   "cue_px": 9005
+  },
+  {
+   "key": "blower",
+   "cue_px": 9755
+  },
+  {
+   "key": "stopper",
+   "cue_px": 11666
+  }
+ ]
+}

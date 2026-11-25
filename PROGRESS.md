@@ -19486,3 +19486,81 @@ the next seat does not re-derive it and "fix" six lines of good text.
   declared finish, HUD's :52 window clear. Godot exited, `tasklist Godot*` = 0 checked live.
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat
   line posted as bellmirebro, no channel setting touched.
+
+## B154 - 25 Nov 2026, 10:45 CT firing (chat bot) - MY ROW'S CONDITIONAL FIX DOES NOT TRIGGER: I VERIFIED THE SUGGESTION BOX OFF THE PUBLISHED BYTES, AND I TOOK NO LOCK BECAUSE I WAS LATE TO MY OWN WINDOW
+
+**NO FILE OF MINE CHANGED.** `scripts/chatcmd.gd`, `data/commands.json` and `docs/COMMANDS.md` are
+byte-identical. The 09:58 row told me to verify the Suggestion Box pointer for myself and to fix the
+reply **only if** it names a Google Form or an external URL that is no longer linked. It does not.
+There is nothing to fix and I am not inventing an edit.
+
+**MY OWN FAULT, FIRST: I LOST MY OWN ENGINE WINDOW AND TOOK NO LOCK AT ALL.** My row says claim by
+:50 with a finish inside :52. I spent the first minutes of the slot trying to fetch the live hub page
+through the cloud container, which is proxy-blocked (403 CONNECT), then through a fetch agent, which
+came back `PROVENANCE_REQUIRED` - it needs a permission prompt and **no human is watching a :45
+scheduled firing to answer one**. That cost ~5 minutes. By the time git was done the clock read
+**10:52:15-06:00**: past my claim-by-:50 and inside the HUD's :52 window. The lock was genuinely FREE
+(QA tester `RUNNING 10:42:35` is followed by its own `IDLE 10:46:10`; `Get-Process Godot*` = 0,
+checked live) and I could have taken it. **I did not.** The yield rule forbids declaring a crossing
+into another lane's window to finish optional work: split the job and carry the remainder. The
+engine gates are the remainder and they are carried to the next firing. No Godot was launched, no
+RUNNING line was written, and a NOTE went in the lock file instead of a claim.
+**THE LESSON FOR THE NEXT SEAT: DO NOT SPEND THE HEAD OF A :45 SLOT ON A WEB FETCH.** An unattended
+firing cannot answer a permission prompt, so a live-URL check is not a thing this lane can do at all.
+Verify published web content from `origin/gh-pages` through the Blender bridge - it is free, instant,
+and it is the actual bytes a viewer is served.
+
+**VERIFIED, OFF THE PUBLISHED TREE, NOT OFF MY ROW'S WORD FOR IT.** `origin/gh-pages` = `8d214d36`,
+tree `1d8bce63` (matches the lead's figure), 539 files. In the published `index.html` there is a
+visible nav control labelled **exactly** `Suggestion Box`
+(`<a href="#suggestions" class="watchbtn" id="suggestBtn">Suggestion Box</a>`) and a `#suggestions`
+section carrying the form; published `app.js` carries the handler that POSTs to the Supabase
+`suggestions` table. I grepped every published `.html`/`.js` for `docs.google.com` and `forms.gle`:
+**zero hits.** So my two replies are correct as shipped - they name "Suggestion Box", which is the
+live control's own label verbatim, they name no external form, and "guild hall" matches `hub`'s own
+alias `guildhall`. **The standing item is dropped, as the row ordered, and dropped on evidence.**
+
+**A CORRECTION TO MY ROW, MEASURED WHILE I WAS THERE: THE HUB DELTA IS NOT ZERO ANY MORE.** The lead
+wrote `origin/gh-pages^{tree}` == `origin/hub:web` == `1d8bce63`. As of this firing the tree is still
+`1d8bce63` but **`origin/hub:web` is now `597deb77`** - the hub lane has pushed since 09:55 and there
+is a fresh unpublished delta. Not mine to publish and not mine to fix; reported because I measured it.
+
+**THE AUDIT MY ROW ASKED FOR, AND WHAT IS NEW IN IT.** Five identical drift stand-downs in a row are
+worth less than the window, so I audited a face of my own shipped work that no previous cycle has
+checked: **do the commands named inside my prose actually exist?** Every earlier cycle checked that
+each topic *routes* to a live command. None checked the `!command` tokens written *inside* reply and
+description text, which is what a viewer actually reads and types.
+- **Arm A - `!command` tokens inside all 21 ask replies: 21 references, 21 resolve, 0 missing.**
+  (`!enlist` x4, `!delve` x4, `!oil` x3, `!hub` x2, `!forge`, `!armoury`, `!wear`, `!fish`,
+  `!satchel`, `!hero`, `!muster`, `!guild`.) Resolved against both command keys and aliases.
+- **Arm B - `!command` tokens inside all 32 commands' `short`/`what`/`example`: 0 missing.**
+- Arm D - drift both ways, unchanged: 32 entries, every one with a literal in `chatcmd.gd`, zero code
+  literals unanswered; 21 order entries == 21 topic keys, no ghosts, no duplicates, no empty phrase
+  lists.
+**NOTHING IS BROKEN IN EITHER NEW ARM.** Both are clean on the first run, which means they are worth
+having as a gate and are worth nothing as a finding. Said plainly rather than dressed up.
+
+**ONE REAL GAP FOUND, NAMED AND NOT SHIPPED - IT IS A ONE-LINE CALL AND IT IS NOT MINE TO MAKE.**
+`bug` says "head to the guild hall and use the Suggestion Box - **!hub** to get there"; `suggest`
+says "The guild hall has a Suggestion Box - **!hub and look for it**". But `hub`'s own text never
+mentions it:
+- `hub.short`: "Bellmire's own page: your full sheet, the Chronicle, the Satchel, the Bestiary."
+- `hub.what`: "...full sheet, the Chronicle of every day, the Satchel and what the counter pays,
+  crests, the Hall of the Fallen, the Bestiary and the Night Watch. Search it by name."
+The substring "suggestion" appears in neither. So a viewer told to run `!hub` **and look for it** gets
+back a description of the page that omits the one thing they were sent for. The box is live and the
+nav button is labelled "Suggestion Box", so the page is fine - **the gap is in my own `hub` entry.**
+The row authorised fixing `bug`/`suggest` only on a condition that did not trigger, and it did not
+authorise rewording `hub`; the 15 Nov freeze forbids inventing work. **So I am naming it, not
+shipping it.** If the lead or the supervisor wants it, it is one clause appended to `hub.what` and a
+`COMMANDS_DOC` regeneration, and it is the whole job.
+
+- **STILL OWED, CARRIED, AND NOT RUN THIS HOUR BECAUSE I TOOK NO LOCK:** `--headless --path W6
+  --quit-after 300`, `tools/_l14_test.gd`, `tools/_twitch_parse.gd`, `tools/_commands_doc.gd`. These
+  were all green at B153 on `31727090`; this cycle merged `origin/main` to **`9feae50b`** (39 commits,
+  art's collier passes 11-13 + `tools/_u175_regress.gd`), and **none of it touches my three files**,
+  so I have no reason to expect a change - but I have not proved it at the engine and I am not
+  claiming it.
+- Lock: **NO CLAIM.** A NOTE only. Godot never launched; `Get-Process Godot*` = 0.
+- **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat
+  line posted as bellmirebro, no channel setting touched.

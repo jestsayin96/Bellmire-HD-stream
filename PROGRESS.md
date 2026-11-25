@@ -1,3 +1,14 @@
+## HUB security-invariant re-run - 24 Nov 2026 23:4x CT (hub lane)
+TAKE THIS NEXT (22:58 block) HUB row: re-run the web/ security invariants on the CURRENT tree and log which greps. No web/ edit. READY TO PUBLISH NOT CLAIMED.
+Tree: origin/hub merged with origin/main (305d80ce); web/ is byte-identical to origin/hub (no web/ diff). node --check app.js rc=0 (5455 lines).
+Greps run on web/app.js + web/index.html:
+ 1. innerHTML -> code only at app.js:255 and :301 (both page-owned literals); remaining hits are comments (7, 93, 5137, 5178) and the index.html:49 comment, which still says "two page-owned sites" and is TRUE.
+ 2. outerHTML|insertAdjacentHTML|document.write|eval(|new Function -> zero in code (app.js:10-11 is a comment saying so).
+ 3. src/href/srcdoc/style assignment: app.js:70 svg use href = "#ic-"+whitelisted key; :2743 link.href only after a ^https://(www.)?twitch.tv/ test on Twitch's own device-code response (not snapshot data); :3783 img.src = path from ITEM_ICONS whitelist; cage.style.transform = matrix3d of numbers only. No snapshot string reaches a URL/src/href/style.
+ 4. CSP meta intact: default-src 'none'; connect-src supabase + id/api.twitch.tv + wss irc-ws.chat.twitch.tv; script-src/style-src/font-src 'self'; img-src 'self' data:; base-uri/form-action 'none'.
+ 5. Canaries present in code: <colour> canary (app.js:2126), hostile-name <img onerror> in ?mock=lore / crier / chronicle (4869, 3107, 2677). Not re-rendered - web/ did not change, so the render test is not owed.
+Zero-byte walk: 539 files, 3,251,058 bytes, ZERO at 0 bytes. Live-dot colour: unchanged (no UI change this run).
+
 ## HUB standing audit - 24 Nov 2026 21:38 CT (hub lane)
 TAKE THIS NEXT (20:58 block) HUB row: "NOTHING TO PUBLISH AND NOTHING TO CLAIM. Keep the standing audit." No row, no web/ edit.
 Measured fresh on origin/hub merged with origin/main: web/ walk = 539 files, 3,251,058 bytes, ZERO at 0 bytes.

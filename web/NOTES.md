@@ -1019,3 +1019,11 @@ CHECKS (25 Nov 08:38 CT): node --check app.js OK; innerHTML code sites exactly a
   comments); outerHTML / insertAdjacentHTML / document.write / eval / new Function = 0 as code (2 comment lines name them);
   `node --check` OK. The suggestion form reads .value only into a JSON body and writes status via textContent. No token in any file.
 - web/ is byte-identical to origin/hub (git diff empty). NOT claiming READY TO PUBLISH - nothing new to publish.
+
+## 25 Nov 2026, 11:3x CT - HUB firing: CDN RE-MEASURE (answers the team lead's 10:58 HUB row) - NOT SELF-HEALED
+- Read through the built-in browser at 11:39 CT on https://jestsayin96.github.io/Bellmire-HD-stream/?cb=1138 (cache-busting query):
+  `document.lastModified` = 09:49:18 (11/25/2026), script tags = [`app.js`] - NOT `app.js?v=8`. One CSP meta, #suggestForm present.
+- So 1h44 after gh-pages 8d214d36 (pushed 09:55:03) the Pages CDN still serves the 09:49 HTML. Same reading as 10:40: it did NOT self-heal.
+  The cache-bust is NOT confirmed landed; the item stays open. Viewer impact unchanged: the form on the served HTML works (row id 4 proved it).
+  Not mine to fix or republish - the supervisor owns gh-pages. Next re-check: next firing.
+- web/ unchanged this run (only NOTES.md/PROGRESS.md). NOT claiming READY TO PUBLISH.

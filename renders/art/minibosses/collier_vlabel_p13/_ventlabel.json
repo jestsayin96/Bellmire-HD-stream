@@ -1,0 +1,125 @@
+{
+ "key": "collier",
+ "camera": {
+  "az": 0.0,
+  "el": 6.0,
+  "ortho": 5.6,
+  "cell": [
+   760,
+   520
+  ],
+  "locked": true,
+  "target": [
+   -0.0389,
+   0.138,
+   1.05
+  ]
+ },
+ "not_a_pass": "no threshold; ZERO is the only verdict on its own (05:58 ruling, 25 Nov).",
+ "arms": {
+  "full": {
+   "opaque_px": 43087,
+   "border_alpha": 0.0
+  },
+  "glowoff": {
+   "opaque_px": 43087,
+   "border_alpha": 0.0
+  },
+  "seamoff": {
+   "opaque_px": 43077,
+   "border_alpha": 0.0
+  }
+ },
+ "labels": {
+  "all_lit__full_minus_glowoff": [
+   {
+    "px": 461,
+    "cx": 312.7,
+    "cy": 357.6
+   },
+   {
+    "px": 452,
+    "cx": 366.3,
+    "cy": 359.8
+   },
+   {
+    "px": 204,
+    "cx": 427.5,
+    "cy": 363.1
+   },
+   {
+    "px": 41,
+    "cx": 282.8,
+    "cy": 351.2
+   },
+   {
+    "px": 35,
+    "cx": 498.6,
+    "cy": 290.5
+   },
+   {
+    "px": 27,
+    "cx": 498.9,
+    "cy": 318.3
+   }
+  ],
+  "vents_only__seamoff_minus_glowoff": [
+   {
+    "px": 461,
+    "cx": 312.7,
+    "cy": 357.6
+   },
+   {
+    "px": 452,
+    "cx": 366.3,
+    "cy": 359.8
+   },
+   {
+    "px": 204,
+    "cx": 427.5,
+    "cy": 363.1
+   },
+   {
+    "px": 41,
+    "cx": 282.8,
+    "cy": 351.2
+   },
+   {
+    "px": 29,
+    "cx": 499.0,
+    "cy": 290.8
+   },
+   {
+    "px": 6,
+    "cx": 499.8,
+    "cy": 315.7
+   },
+   {
+    "px": 5,
+    "cx": 489.4,
+    "cy": 299.2
+   }
+  ],
+  "seams_only__full_minus_seamoff": [
+   {
+    "px": 35,
+    "cx": 498.6,
+    "cy": 290.5
+   },
+   {
+    "px": 26,
+    "cx": 498.9,
+    "cy": 318.2
+   },
+   {
+    "px": 5,
+    "cx": 489.4,
+    "cy": 299.2
+   }
+  ]
+ },
+ "errors": [],
+ "vent_mark_count": 7,
+ "seam_mark_count": 3,
+ "ok": true
+}

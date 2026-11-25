@@ -1,3 +1,35 @@
+## S135 - 25 Nov 2026, 12:08-12:2x CT (game build) - S110c-2b: THE BLACK SKIN IS NOT A CONVERTER FAULT. IT IS THE PACK'S OWN DESIGN, AND S134's FINDING 2 IS WITHDRAWN. WIRING NOW WAITS ON A STYLE DECISION THAT IS MR. E'S, NOT MINE
+
+TOOK: the 10:58 TAKE THIS NEXT game-build row (S110c-2), continuing at the step S134 named: S110c-2b,
+"fix Skin colour from the pack source". No newer game-build row exists on laptop or main at 12:08.
+
+MEASURED OFF THE PACK SOURCE (_packs/ultimate_animated_character_pack/.../Nov 2019/), read-only:
+- Blends/Worker_Male.blend, opened in a SEPARATE `blender --background --factory-startup` process (open
+  scene untouched): material "Skin" -> active EEVEE output <- Principled BSDF, Base Color UNLINKED,
+  (0.01341, 0.01341, 0.01341). The inactive CYCLES output's Diffuse BSDF carries the SAME value. No
+  texture, no vertex colour layer, no RGB node. "Skin" covers 52.1% of the body's surface area.
+- OBJ/*.mtl for all 20 bodies: Skin Kd = 0.010728 grey on 18; green (0.0799, 0.0885, 0.0191) on the 2
+  goblins. Face = 0.8/0.8/0.75 (the white eye plate).
+- The pack's own Preview.png (copied down to renders/cycles/s135/uacp_pack_preview_960.jpg): EVERY
+  human in Quaternius's own render has a BLACK head and hands with white slit eyes; goblins green.
+SO: the 0.0134 baseColor S134 saw in the converted glb is the source value carried EXACTLY. The
+converter did not read the wrong property; there is no "true skin colour" in the pack to recover.
+S134's FINDING 2 ("the converter reading the wrong colour") WAS WRONG and is withdrawn here, by the
+lane that wrote it. FINDING 1 (alpha 0 / MASK) stands - that one was a real conversion fault.
+
+WHY I STOPPED THERE: wiring these bodies as townsfolk means shipping black-silhouette faces beside
+KayKit's peach-skinned heroes (see renders/cycles/s134/lineup.png). Recolouring "Skin" would be
+INVENTING a colour the author did not choose - the same thing S134 correctly refused - and putting
+faceless black figures in the town is a look question. Both are Mr. E's call, not a game-build
+default. Nothing wired, nothing added to assets/ on laptop; the S134 checkpoint gamebuild-s134-wip
+stands as-is and is ready for either answer (keep the pack's look -> wire at k 0.5728; pick a skin
+tone -> one material override in the wiring, no re-conversion needed).
+
+GATES (HEAD 4e1c7418, no code changed this run, docs + one evidence jpg only): parse --quit-after 300 rc 0,
+0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks). offfloor/townwalk/delve NOT re-run - no script,
+scene or asset changed; S134 ran them green on this tree (OFFFLOOR_VERDICT OK 0 of 2112, TOWNWALK PASS, DELVE_TEST OK).
+No Twitch test, zero bits.
+
 ## S134 - 25 Nov 2026, 11:08-11:2x CT (game build) - SYSTEM 12 STEP S110c-2: THE 20 UACP BODIES IMPORT, BUT THEY SHIPPED INVISIBLE AND THEN BLACK-SKINNED, SO NOTHING IS WIRED AND NOTHING ENTERS assets/ ON laptop
 
 TOOK: the 10:58 TAKE THIS NEXT game-build row - S110c-2, copy the 20 UACP glbs into assets/, import,

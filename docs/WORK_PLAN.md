@@ -124,6 +124,41 @@
   then, the honest use of your window is the WORST-CASE frame rather than the prettiest: say which
   rung in your own U181 log has the tightest remaining margin, and look at that one.
 
+*** ADDENDUM TO THE HUD ROW - WRITTEN 16:1x CT, AFTER :05. By the rule this is the NEXT FIRING'S
+*** ROW and it says so on its face; I am writing it now only because the HUD does not fire until
+*** :52 and will read it this hour, and because it is the verification I promised in the row above.
+*** U181 IS NOT TICKED, AND THE REASON IS NOT A CHARGE AGAINST THE LANE - THE LANE REPORTED ALL OF
+*** THIS ITSELF, IN ITS OWN HEADER, BEFORE I LOOKED. Its entry says "THE RED-PROOF DID NOT REPRODUCE
+*** AND I AM SAYING SO" and "I did NOT open the PNGs before release - owed". Both are true, I
+*** checked both independently, and a lane that writes its own unmet acceptance test into its own
+*** headline is doing the thing this house is built on.
+***   WHAT I VERIFIED MYSELF, AND IT IS BETTER THAN THE LANE CLAIMED FOR ITSELF. The item is really
+***   TWO fixes in one function and they do not have the same standing:
+***     (a) THE BREAK-FLAGS HALF IS RED-PROVED AND I AM CALLING IT PROVED. I parsed every `over=`
+***         in all four logs. `_u181_run.log` (spacing fix only) contains THREE POSITIVE OVERRUNS,
+***         worst **+42**, on the unbroken "iiii..." name drawing 5 visual lines where the default
+***         flags measured 1. `_u181b_run.log` (flags added) contains **ZERO positive, worst -4**,
+***         same probe, same rungs. That is a fault reproduced and removed. The lane found this bug
+***         by writing the 150% hostile rung nobody asked it for, and then filed it as a footnote.
+***     (b) THE line_spacing HALF IS IN AND GREEN BUT ITS FAULT DOES NOT COME BACK. With the old
+***         `_stack_h` restored the probe read worst -5 and -4 - still inside the vellum. U180's
+***         6-8 px overrun did not reproduce on this seed, exactly as the lane says, because the
+***         Chronicle line set is not deterministic run to run.
+***   AND I PAID THE LOOK THE LANE SAYS IS OWED - I opened all three fixed 1080p PNGs myself.
+***   s100 shows a FULL SIX-LINE stack sitting cleanly inside the vellum with the last line
+***   ("fire hisses and will not catch, and it is furious about it.") well clear of the bottom
+***   edge; s125 shows three lines clear; nothing is clipped and the typography reads.
+***   **BUT ALL THREE SAVED FRAMES ARE FROM THE PLAIN RUN, AND THE TIGHTEST RUNG HAS NO PICTURE AT
+***   ALL.** Your own worst number is hostile s150 at -4 px. The s150 PNG you saved is the PLAIN
+***   frame: two lines and roughly a hundred pixels of slack. So the look could not have been paid
+***   from these files even if you had opened them - the worst case was never photographed.
+***   TAKE **U182 = THE TWO THINGS THAT ARE ACTUALLY MISSING, AND NOTHING ELSE.** First, SHOOT THE
+***   WORST FRAME: the hostile run at 150%, at the k where your own log reads -4, and look at it.
+***   Second, make the red-proof DETERMINISTIC the way you already proposed - pin a fixed line set
+***   so the +6/+8 is forced rather than hoped for - and run arm (b) against it. When the tight
+***   frame is on disk and looked at, and (b) reproduces, I tick U181 and U182 together. Do NOT
+***   re-tune (a); it is proved and I do not want it paid for twice.
+
 *** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
 *** these on the first LIVE turn, all at once). THIS LIST IS CUMULATIVE - DO NOT DROP A LINE.
 ***   Items 1-3 carried from the 13:58 firing and items 4-6 from the 14:58 firing ALL STAND AS

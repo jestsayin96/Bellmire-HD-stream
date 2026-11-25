@@ -19308,3 +19308,60 @@ claim would have re-measured a fresh result and spent a window four lanes share.
   posted as bellmirebro.
 - NEXT: at 07:45, whatever the plan's CHAT BOT row says. If it is silent, the honest state of this lane
   is still nothing owed, and the next real work is L56 (delve-heavy soak) when a window is actually free.
+
+## B151 - 25 Nov 2026, 07:45 CT firing (chat bot) - A SECOND WRITTEN STAND-DOWN, AND THE REGISTER COUNT I MEASURED FIRST WAS WRONG BY THIRTY BECAUSE MY REGEX READ LINES INSTEAD OF KEYS
+My row (team lead, 06:58 block): "**WRITTEN STAND-DOWN, AND CLAIM BY :50 IF YOU TAKE THE LOCK AT ALL.**
+B149 paid the republish at the feed, the COUNT arm is shut, the ask table is landed and proved silent on
+all five arms, and B150 measured nothing-owed rather than repeating it - that is the right shape and it
+is ticked." I took the stand-down and claimed NO lock. I measured the registers again anyway, because
+"nothing is owed" is a claim and this lane pays it with arithmetic, not with last hour's figure.
+
+- THE LOCK: free when I looked, and I DID NOT TAKE IT. Last line was
+  `IDLE 2026-11-25T07:15:10-06:00 - game build S131`, which closed `RUNNING 2026-11-25T07:08:16-06:00
+  (game build)`. An IDLE from the same lane follows the RUNNING, so the window was released - and I
+  still did not claim, because nothing this lane owns needed the engine. I wrote NO lock line at all:
+  no RUNNING, no IDLE. A lane that does not launch Godot has no business writing in the lock file, and
+  a stand-down is said here and in the summary, not in a file four lanes read for liveness.
+- WHY NO GATE RUN: the two gates this lane owns were run by the QA tester at 06:46:57 on R
+  (`L14_TEST OK (24 checks)`, `COMMANDS_DOC OK 32`, parse rc 0), and NOTHING OF MINE HAS CHANGED SINCE -
+  `scripts/chatcmd.gd`, `data/commands.json` and `docs/COMMANDS.md` are byte-identical to what those
+  gates judged. Re-running them would have spent a window four lanes share to re-measure an unchanged
+  file. I am recording another lane's verdict as another lane's.
+- SYNC STATE: `git merge origin/main` on `chatbot` returned rc 0 and W6 is now at merged main
+  **d704335e** (36 files, +1615/-55 came in; none of them mine). The merge brought in game build's S129
+  (the 62nd named) and S131 (the theme arm), plus art's collier logs and renders.
+- THE FOUR REGISTERS, RE-MEASURED BY ME ON THE MERGED TREE, AND THEY ARE LEVEL AT 62:
+  `data/commands.json` `commands.miniboss` short **62** and what **62** (the only 2-or-3 digit number in
+  either leaf); `miniboss_feed.by_key` in `data/lore_lines.json` **62**; `Delve.MB_NAME` **62**.
+  `by_key - MB_NAME` **[]** and `MB_NAME - by_key` **[]**. So the MINIBOSS UNNAMED arm that B147 and
+  B149 both red-proved "not mine" is GREEN, and it went green on game build's merge exactly as B149 said
+  it would. 32 command entries, `/ask/order` 21, `/ask/topics` 21. **NOTHING IS OWED ON THE COUNT.**
+- MY OWN MEASUREMENT WAS WRONG FIRST, BY THIRTY, AND THE CAUSE IS WORTH MORE THAN THE ANSWER.
+  My first pass read `MB_NAME` as **32** and `MB_FIT` as **50**. Both are wrong; the true figures are
+  **62** and **73** (73 - 11 `*_chibi` variants = 62, which is the reconciliation). The cause is NOT a
+  stale file and NOT another lane: my key pattern was anchored with `re.match` at line start, so it
+  counted LINES WHOSE FIRST TOKEN IS A KEY, not keys. Brace-matched, `MB_NAME` is 33 block lines holding
+  62 keys, of which only **32** lines begin with a key - exactly the figure I first printed. Six lines
+  hold 36 keys between them (`"drillmaster": "Karvok", "scrapwright": "Ironhyde", ...` six to a line);
+  32 line-first + the 30 keys riding behind them = 62. `MB_FIT` reconciles the same way: 50 line-first,
+  73 keys. **A LINE-ANCHORED REGEX CANNOT COUNT delve.gd's REGISTERS** and any lane that publishes a
+  number off one will publish it low. The honest tool is a character walk that skips `#` comments and
+  string bodies and takes a quoted literal followed by `:` - that is what produced 62/62/62 above.
+  I had a cross-check (the feed's own 62, and the published 62) that disagreed with my own parse, and
+  the disagreement is what caught it. B146's lesson restated in a new place: I nearly trusted my
+  measurement over the register it was measuring.
+- DRIFT CHECKED BOTH WAYS. Forward: 32 entries, every one with its literal in `chatcmd.gd`, **0
+  unanswered**. Backward: 35 dispatch arms against 32 entries + 31 published aliases (63 known names);
+  the only arms with no entry are **`testbits`, `testsub`, `testpoints`**, and that is CORRECT, not
+  drift - `chatcmd.gd:204` returns "" unless `user_id.begins_with("local_")`, so they are reachable only
+  from Mr. E's own keyboard and a Twitch viewer can never hit them. They are L17 test verbs for faking a
+  cheer / sub / redeem locally and they MUST NOT be published to viewers. B150's warning applied again:
+  my first backward pass also appeared to show 14 entries with "no arm", which was my regex catching one
+  dispatch shape out of several, not missing commands.
+- NO FILE OF MINE CHANGED. `scripts/chatcmd.gd` and `data/commands.json` byte-identical, `docs/COMMANDS.md`
+  byte-identical (8103 bytes, 32 rows). This cycle's only edit is this PROGRESS.md entry.
+- STILL NOT MINE, STILL CARRIED: `bug` and `suggest` send viewers to a Suggestion Box button that is in
+  the hub's UNPUBLISHED delta. My row says it is real, not mine, and with the supervisor. I did not
+  reword either line.
+- No live Twitch test. ZERO BITS. No cheer, no redemption, no reward read or written, no chat line
+  posted as bellmirebro, no channel setting touched.

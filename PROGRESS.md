@@ -19730,3 +19730,83 @@ shipping it.** If the lead or the supervisor wants it, it is one clause appended
 - Commit message written to a FILE, never `-F -` - B152's wedge is not repeated.
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat line
   posted as bellmirebro, no channel setting touched.
+
+## B156 - 25 Nov 2026, 12:45 CT firing (chat bot) - THE FOUR GATES ARE GREEN ON TODAY'S MAIN, AND THE ONE REGEX I SHIP IS NOT THE FAULT I FEARED - IT SURVIVES THE ONE-LINE FORM AND BREAKS ON A DICTIONARY
+- **Row taken as written: a stand-down plus the lead's named target.** The 11:58 CHAT BOT row says my
+  lane is dry, the stand-down IS the delivery, and if I want a real target to
+  **AUDIT MY OWN REMAINING REGEX INSTRUMENTS** - the ones in my gates that walk GDScript - and say for
+  each whether it parses or pattern-matches and what it would mis-read if the code were on one line.
+  I did both: the gates on today's main, then the audit.
+- Merged `origin/chatbot` (fast-forward, the lead's plan sync) and `origin/main` clean into W6, zero
+  conflicts, HEAD `c8b46527`, `origin/main` `08bf044c`.
+- **GATES, headless on W6's own `project.godot` at `c8b46527`:**
+  - `--headless --path W6 --quit-after 300` -> RC 0, **ZERO `SCRIPT ERROR`**, **ZERO `COMMANDS_DATA`
+    lines on the load**.
+  - `tools/_l14_test.gd` -> RC 0, **`L14_TEST OK (24 checks)`**, with
+    `ok  no COMMANDS_DATA guard arm fired on the load (0 fired: [])`.
+  - `tools/_twitch_parse.gd` -> RC 0, **`TWITCH_PARSE OK (8 checks)`**.
+  - `tools/_commands_doc.gd` -> RC 0, **`COMMANDS_DOC OK wrote 32 commands`**, and `git diff` AND
+    `git status` over `scripts/chatcmd.gd`, `data/commands.json` and `docs/COMMANDS.md` are **BOTH
+    EMPTY** afterwards. The REAL generator changed nothing; I claim no doc change.
+
+### THE REGEX AUDIT - MEASURED AGAINST SYNTHETIC LINES, NOT REASONED ABOUT
+- **The census first: I ship exactly ONE regex that walks GDScript.**
+  - `tools/_l14_test.gd:30` - `(?m)^        ((?:"[a-z]+", )*"[a-z]+"):` - harvests the command verbs
+    out of chatcmd.gd's `match` blocks by reading the source as text.
+  - `tools/_twitch_parse.gd` - **no pattern-matching of any kind**, and it walks no source. It drives
+    the parser through real packets and asserts on the replies.
+  - `tools/_commands_doc.gd` - walks **no GDScript**. It loads `data/commands.json` as JSON and
+    formats table rows. Its only `replace()` is `|` -> `/` so an arg string cannot break the table.
+- **VERDICT ON THE ONE: it PATTERN-MATCHES, it does not parse.** But the specific fault the lead
+  pointed at - the one-line form - **IS SAFE HERE, and I proved it rather than assuming either way.**
+  The pattern carries **no end anchor**, so `        "delve":    out = _delve(user_id)` matches and is
+  read correctly. That is the precise difference from the ad-hoc python regex I faulted on at B155,
+  which required the `match` label to END its line and so read 14 reachable commands as unreachable.
+  **36 of the 39 label-lines it matches in chatcmd.gd today carry their body on the same line, and all
+  36 are harvested correctly.** The shipped instrument never had the bug my scratch instrument had.
+- **WHAT IT WOULD MIS-READ.** Each probed against a synthetic line, result recorded:
+  - *Silent under-count (INVISIBLE, no failure, just less coverage):* a **tab** indent; **any depth but
+    exactly 8 spaces**; `"a","b":` with no space after the comma; `"a",  "b":` with two spaces; any verb
+    carrying an **underscore or a digit** (`buy_brew`, `test2`), because the class is `[a-z]+`.
+  - *False positive (a FAIL on correct code - the dangerous direction):* **a dictionary literal at the
+    same 8-space depth with a lowercase string key.** `        "gold": 140,` reads as a command verb
+    named `gold`, and the `missing` arm then demands an entry in `data/commands.json` for a key that is
+    not a command. **None exists in chatcmd.gd today** - all 39 matched label-lines are real `match`
+    labels - but nothing in the gate prevents one appearing, and the next lane to add an 8-space dict
+    to that file turns this gate red for a reason that has nothing to do with the change.
+  - *Structural looseness worth naming:* the 39 lines come from **three different `match` blocks** -
+    the dispatcher at 150-204, the local-only test block at 313-318, and the help/category block at
+    3353-3359 - and the instrument **has no idea which function it is reading.** It merges them. That
+    is harmless today because all three dispatch the same vocabulary.
+- **WHY THE GATE IS STILL SOUND DESPITE ALL OF THAT, and this is the part that matters:** its second
+  arm runs **the other direction** - every key in `data/commands.json` must appear among the harvested
+  verbs. A missed label cannot fool that arm, only a false one can. **The published command surface is
+  protected structurally, not by the regex's precision.** I am not recommending a change to
+  `tools/_l14_test.gd`: it is not my file, the gate is green, and the exposure is a latent false
+  positive, not a live hole. I am writing it down so the lane that trips it knows why.
+
+### DRIFT, RE-MEASURED BOTH WAYS ON `c8b46527` - BY BLOCK INDENTATION, NOT BY AN ANCHORED REGEX
+- 32 data commands, 31 aliases, **75 code label words at all depths**.
+- **PUBLISHED COMMANDS WITH NO CODE LABEL = ZERO.**
+- 19 code labels have no entry, and **all nineteen are correct**:
+  - **16 are nested argument sub-dispatch**, every one at a depth GREATER than the 8-space dispatcher:
+    `title`/`weapon`/`accessories`/`brews` at 12, `treasury`/`score` at 16, `seventy` at 17,
+    `kills`/`standing` at 18, `guild`/`mage_tower` at 21, `buy_brew` at 23, `seventh` at 27, and
+    `six`/`seven`/`eleven`/`thirteen`/`seventeen` deeper still. Arguments and number words, not
+    viewer-callable commands.
+  - **3 are `testbits`/`testsub`/`testpoints`**, gated on `local_` at `chatcmd.gd:204` and reachable
+    only from Mr. E's own chat box. Publishing them would advertise commands no viewer can run.
+  - **The trade, stated plainly:** widening the sweep to all depths buys completeness on the published
+    side and costs precision on the code side. That is why these 19 are one note and not nineteen
+    findings - which is the same lesson as B155's two corrections, taken forward instead of relearned.
+- **NO FILE OF MINE CHANGED.** `scripts/chatcmd.gd`, `data/commands.json` and `docs/COMMANDS.md` are
+  byte-identical; `PROGRESS.md` B156 is the only edit in this cycle.
+- **Suggestion Box item stays DROPPED**, as the lead's row orders and B154 proved off the published
+  `origin/gh-pages` bytes. I ran no live web fetch in the head of my slot.
+- Lock: claimed `RUNNING 12:47:04-06:00`, cap `13:12:04`, declared finish `12:51:30` (inside :52 as my
+  row orders), released `IDLE 12:48:54-06:00` - inside the declared finish and clear of the HUD's :52
+  window. Lock was free: last line was QA tester `IDLE 12:42:54`, `Get-Process Godot*` = 0 checked live
+  at 12:47:04. Godot exited, checked live. Log KEPT at `_b156_run.log`.
+- Commit message written to a FILE, never `-F -` - B152's wedge is not repeated.
+- **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat line
+  posted as bellmirebro, no channel setting touched.

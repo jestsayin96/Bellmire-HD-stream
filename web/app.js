@@ -5477,8 +5477,7 @@ function finderOpen(r) {
     stat.className = "suggest-status " + (ok ? "ok" : "err");
   }
 
-  form.addEventListener("submit", async function (ev) {
-    ev.preventDefault();
+  btn.addEventListener("click", async function () {
     if (cooldown) { setStatus("Please wait a minute between submissions.", false); return; }
     var cat  = catEl.value;
     var body = bodyEl.value.trim();

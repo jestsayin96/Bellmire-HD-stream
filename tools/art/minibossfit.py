@@ -46,6 +46,38 @@ import lordgen as G          # noqa: E402
 import minibosses as M       # noqa: E402
 import minibossgen as MG     # noqa: E402
 
+
+# *** WHEN WAS THIS ROW MEASURED? THE REGISTER COULD NOT SAY. ***
+# 25 Nov 2026 02:5x CT. `verdict_scope` has said "re-derived from stored
+# measurements" since 21 Nov, and NOT ONE of the 63 rows carried a stamp
+# saying when its stored measurement was taken or by what run. Only the keys
+# a run asks for are re-rendered (the loop below); every other row is carried
+# forward verbatim from the file on disk, so a row's numbers can be of any
+# age and the file was silent about it. The team lead asked this house, in
+# writing, when `snuffer_chibi` and `tallyman_chibi` were measured - and the
+# only way to answer was `git log -S` over the register. That is archaeology,
+# not a register. A row now says when it was measured, or says it does not
+# know; an absent stamp and an unknown stamp are not the same fact, which is
+# the distinction the `ground` note above was written for.
+# THIS IS PROVENANCE, NOT FITNESS: an unstamped row is NOT red. A row whose
+# numbers are right is right whoever took them. The count is published so the
+# gap shrinks visibly as rows are re-measured instead of being forgotten.
+_UNSTAMPED_FROM = ("unknown - this row was carried from before per-row "
+                   "stamping existed (added 25 Nov 2026 02:5x CT). Its "
+                   "numbers are not in doubt; their date is.")
+
+
+def _now_ct():
+    """Local wall time with its offset, the one stamp this house writes.
+
+    Blender runs on cruzader, whose clock IS Central, so `astimezone()` with
+    no argument is the machine's own offset - never a hand-written -06:00,
+    which is wrong for half the year and has already been written as a future
+    stamp by more than one lane.
+    """
+    import datetime
+    return datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+
 HERO_GLB = os.path.join("addons", "kaykit_character_pack_adventures",
                         "Characters", "gltf", "Knight.glb")
 
@@ -1465,6 +1497,10 @@ def main():
                                  ("carried - this run did not measure the ground"
                                   if prior_ground else None)),
                     proving_views=sum(1 for c in vis.values() if c["proves"]),
+                    # MEASURED BY THIS RUN, SO IT SAYS SO. See _now_ct().
+                    measured_at=_now_ct(),
+                    measured_by="tools/art/minibossfit.py%s" % (
+                        " --tag " + args.tag if args.tag else ""),
                     **_carry)
                 # *** NO VERDICT IS DRAWN HERE ANY MORE. *** Every per-key
                 # judgement now happens in audit_rows() below, over EVERY row
@@ -1514,6 +1550,21 @@ def main():
     # carried, and a GREEN verdict does not extend to them.
     rep["unproved_cells"] = sorted(k for k, v in rep["pairs"].items()
                                    if "visibility" not in v)
+    # Every row this run did not measure keeps its numbers and gains an
+    # explicit "I do not know when this was taken" - never a fabricated date,
+    # and never silence. See _UNSTAMPED_FROM.
+    for _k, _v in rep["pairs"].items():
+        if not _v.get("measured_at"):
+            _v["measured_at"] = None
+            _v["measured_at_from"] = _UNSTAMPED_FROM
+    rep["rows_unstamped"] = sorted(k for k, v in rep["pairs"].items()
+                                   if not v.get("measured_at"))
+    rep["provenance_note"] = (
+        "%d of %d rows carry a measured_at. An unstamped row is NOT red - "
+        "this block answers WHEN a stored measurement was taken, not whether "
+        "it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as "
+        "rows are re-measured."
+        % (len(rep["pairs"]) - len(rep["rows_unstamped"]), len(rep["pairs"])))
     measured = [k for k in keys if k in rep["pairs"]]
     missing = [k for k in keys if k not in rep["pairs"]]
     rep["measured"] = measured

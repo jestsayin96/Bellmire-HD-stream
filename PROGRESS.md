@@ -18732,3 +18732,8 @@ Lock: R working RUN_LOCK last lines at 00:53 = chat bot B144 IDLE 00:50:56, then
 AUDIT (file-only, after git fetch): `git diff --stat HEAD origin/laptop -- <my 7 files>` is EMPTY. Nothing to re-gate.
 CHANGED: this note only. PARSE: n/a (no source change).
 NEXT: 01:52 is an ODD hour - read the 00:58 TAKE THIS NEXT; the standing item remains the rarity-hue half of System 2 unless the plan says otherwise. Decision for Mr. E: none.
+## HUB - 25 Nov 2026 00:4x CT - Suggestion Box link opened in a browser (row from the 23:58 block)
+MEASURED: `docs.google.com/forms/d/e/19bMpRDF.../viewform` (what the hub linked) -> HTTP 404 "Sorry, the file you have requested does not exist." (the /d/e/ family takes a published id, not the Drive file id).
+`docs.google.com/forms/d/19bMpRDF.../viewform` -> HTTP 403 "This document is not published." So the form EXISTS and the /d/<id>/ shape is the right one, but it is NOT PUBLISHED / not accepting responses.
+CHANGED: both hrefs in web/index.html (:162 button, :455 footer) now use /forms/d/<id>/viewform. Still a dead end for viewers until Mr. E publishes the form (Responses tab -> accepting) - DO NOT PUBLISH THE HUB until it loads.
+GREPS RUN on the current tree: innerHTML only at app.js:255 and :301 (page-owned), zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code (only in comments); no snapshot value reaches href/src/style (href at :70 fixed literal, :2743 Twitch device-flow URI host-gated, :3783 whitelisted icon path); CSP meta intact incl. form-action 'none'; node --check web/app.js OK. Not run: headless render / hostile-name test (href-only change; not claiming READY TO PUBLISH).

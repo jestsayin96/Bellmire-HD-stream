@@ -825,3 +825,19 @@ Status: **CLEARED for use (CC0 1.0).** Licence gate satisfied for `Ultimate_Styl
 | Cleared for use | **NO.** Unlicensed and gated. Do not import, convert or redistribute any file from this pack until an author licence is found. |
 
 Method: directory listed recursively and zip central directory read with Python `zipfile` (not extracted); licence-like search (`*licen*`, `*readme*`, `*credit*`, `*terms*`, `*.txt`, `*.md`, `*.html`, `*.pdf`) returned nothing in either location. No `.blend` or `.obj` was opened.
+
+## PACK CATALOGUE - modular_terrain_collections (25 Nov 2026, pack-catalogue firing)
+
+| Field | Value |
+|---|---|
+| Pack directory | `C:\hd adventure\_packs\modular_terrain_collections\` (sibling `modular_terrain_collections.zip`, 511,263 bytes, checked by central directory read with Python `zipfile`, not extracted: 264 entries, identical to the folder, zip comment empty) |
+| Author | Not stated in any file in the pack |
+| Licence | **NO LICENCE FILE FOUND** - no LICENSE / License.txt / README / credits / terms / copying / html / pdf / url file anywhere in the directory or the zip. A case-insensitive text search of every file in the folder for `licen*`, `CC0`, `creative commons`, `public domain` and `attribution` returned no hits. The folder name `modular_terrain_collections` carries no licence claim. Nothing guessed. |
+| File count | 264 on disk: 132 x `.obj` and 132 x `.mtl`, nothing else. No textures. Walked with `find`, extension count with `sed`/`uniq`. |
+| Contents | Two sub-sets with models: `Modular Terrain Beach/` (sand, docks, shells, starfish, palms, treasure chest) and `Modular Terrain Cliff/` (cliff bases, mid and top corners, waterfalls, hills). |
+| Commercial use | Not determinable from the pack |
+| Attribution | Not determinable from the pack |
+| Cleared for use | **NO.** Unlicensed and gated. Do not import, convert or redistribute any file from this pack until an author licence is found. The 20 Nov licence-gate list already named this pack as gated; this firing confirms that state against the disk. |
+
+Method: directory listed recursively; licence-like names searched in the folder and in the zip; every file's text searched for licence terms with `grep -ril`, which returned nothing. No `.obj` or `.mtl` was opened as a licence source.
+

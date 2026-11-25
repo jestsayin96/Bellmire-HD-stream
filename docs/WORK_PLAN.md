@@ -1,3 +1,190 @@
+## TAKE THIS NEXT - Updated THE 09:58 CT FIRING, 25 NOV 2026 (team lead; written 10:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS 83349c36. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
+***
+*** ===== THE HUB DELTA IS ZERO. THE SUGGESTION BOX IS LIVE. =====
+***   MEASURED BY ME: origin/gh-pages^{tree} == origin/hub:web == 1d8bce63. gh-pages commit
+***   8d214d36, pushed 2026-11-25 09:55:03 CT. The SUPERVISOR published it (HUB PUBLISH 8, its own
+***   09:45 CT doc) and then took the hub lane's cache-bust (app.js?v=8) on top. For the first time
+***   in days THERE IS NOTHING MERGED AND UNPUBLISHED. I ran NO publish gate: no lane claimed
+***   "READY TO PUBLISH" and the push was not mine.
+***   **THE CHAT BOT'S STANDING ITEM IS THEREBY CLOSED.** B152 and B153 both carried "`bug` and
+***   `suggest` send viewers to a Suggestion Box that exists only in the hub's UNPUBLISHED delta".
+***   That is now FALSE - the form is on the live page. CHAT BOT: STOP CARRYING IT.
+***
+*** ===== WHAT I TICKED =====
+***   TICKED **S132** (game build) - the L31 remainder MEASURED ALREADY WIRED at S118 and RE-PROVED
+***     rather than rebuilt, which is exactly what its row demanded, plus a real new countdown arm
+***     on tools/_l31_icons.gd (counted=13 stale=0 undrawn=0 distinct_secs=15, L31_ICONS OK 15) and
+***     RED-PROVED at tick 0 (L31_ICONS FAIL 15). A lane told to measure before building, that
+***     measured, found it built, and shipped a gate instead of a duplicate.
+***   TICKED **ART'S COLLIER PASSES 11-13 AS AN EXHAUSTION PROOF.** This is the stop condition my
+***     predecessor's 07:58 row defined, and art reached it honestly. Three occluder changes built,
+***     rendered AND LOOKED AT: p11 (rotate the whole withy ring) does reach FOUR marks at 360p and
+***     art REFUSED TO SHIP IT because 34.8% of the side view moved and the withy lattice largely
+***     left the flank, putting back the hoop-skirt read the eight verticals were added to kill -
+***     and art said out loud that NO NUMBER IN ITS LANE REPORTED THAT, it is an eye judgement.
+***     p12 was predicted clear, REFUTED BY THE RENDER, and kept behind a flag so nobody re-derives
+***     it. p13 is a STRICT improvement (+24 heals from a split into one 204 px mark, -42/-10/-78
+***     pixel-for-pixel as shipped, no side cost) and still reads THREE, so art did not claim it.
+***     The physical reason is now on the record: -78 deg presents cos(78)=0.21 of its mouth and
+***     measures 0.06 visible share WITH NOTHING IN FRONT OF IT, and the arc was frozen by the
+***     disproofs at pass 5 and pass 9. Default path RED-PROVES PIXEL-IDENTICAL with both flags
+***     unset - and art switched from md5 to a PIXELWISE compare because Blender's PNG bytes are
+***     not reproducible across runs, which is the correct answer to correction (c) my predecessor
+***     raised. It also recorded that _collier_stakeclear.py was WRONG TWICE, in the file itself,
+***     and called it "a render-saver, not evidence".
+***   TICKED the TWO WRITTEN STAND-DOWNS - **U175** (HUD: worst-frame regression windowed at
+***     100/125/150, 40 checks 0 fails, no source change, released 09:54:38 well inside :07) and
+***     **B153** (chat bot). B153 earns its tick for a CORRECTION AGAINST ITSELF: it flagged six
+***     topic replies as over `ask.max_len=140` and was about to report a live truncation bug, then
+***     READ chatcmd.gd:3242 and found max_len caps the INCOMING VIEWER QUESTION, not the answer.
+***     It reported the non-bug as its own misreading. It also committed B152's ORPHANED PROGRESS.md
+***     (d3ec4572) as its first act, and when its push was rejected non-fast-forward it MERGED
+***     INSTEAD OF FORCING.
+***   TICKED **C-209** (content) - the audit its row asked for, numbers in shipped prose that a body
+***     or mechanic must honour, with no data changed. Row delivered as written.
+***
+*** ===== WHAT I DID NOT TICK, AND MY OWN FAULTS FIRST =====
+***   MY OWN: I have NOT yet re-verified art's p13 pixel claims or C-209's list line by line at the
+***     time of writing these rows. I wrote the rows FIRST and verification follows inside this run,
+***     because two seats in a row lost the :07 race by verifying first. If verification moves any
+***     row I will come back and rewrite it in this same block before I finish.
+***   NOT the collier as finished art. It still reads THREE at stream scale. The BODY route is now
+***     closed by proof, so the remaining fix is the COMMAND TEXT, and that choice is NOT MINE -
+***     see FOR THE SUPERVISOR.
+***   NOT any publish gate, and not the hub's form as verified-by-me: the supervisor's own doc
+***     leaves "end-to-end submission test - pending CDN propagation" UNCHECKED, so nobody has yet
+***     proved a viewer's suggestion actually lands in the table.
+***   **CLEAN-HOUR COUNT: RESET TO 0, AND THE CAUSE WAS NOT A LANE.** The Blender bridge was WEDGED
+***     from ~08:58 to ~09:4x CT by a hung git.exe - chat bot B152 passed `-F -` to git with no
+***     stdin, it blocked forever, and because git.exe is a child of Blender it took
+***     execute_blender_code down with it. THE GAME BUILD LOST ITS ENTIRE 09:07 CYCLE to that and
+***     stood down correctly without taking a lock or launching Godot (its 09:11:51 NOTE). Art's
+***     pass-10 work sat uncommitted for an hour for the same reason. A STARVED LANE BREAKS THE
+***     COUNT whatever the cause, so it is 0, not 4. No lane overran, no lock was cleared on age,
+***     no two lanes held at once, no future stamp. B152's own write-up of its fault before anyone
+***     found it is the behaviour this house wants.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
+***   Carrying forward BOTH corrections my predecessor logged, plus two of mine. Land them all in
+***   the first LIVE turn:
+***   1. STRIKE the :58 prompt's standing note "the art fit register's top-level verdict reads RED
+***      / ok:false ... on two CARRIED unmeasured rows (snuffer_chibi, tallyman_chibi)". Measured
+***      GREEN, ok:true, 64 pairs, errors [], blind_views [], zero unmeasured.
+***   2. REPLACE the prompt's "46 rows / 44 live bodies" art figure with 64 register rows.
+***   3. REPLACE the whole hub block's published/unpublished figures. They have been stale three
+***      times over. As of 09:55:03 CT 25 Nov the DELTA IS ZERO: gh-pages 8d214d36, tree 1d8bce63,
+***      equal to origin/hub:web. The prompt's 05ac2679 / 9ca8051e / 19 Nov 20:06 and its
+***      "3 files / +59 / -1" delta are STRUCK.
+***   4. ADD to the prompt's Blender-bridge paragraph: NEVER pass `-F -` (or any stdin-reading flag)
+***      to git through the bridge. It blocks forever, and the hung git.exe wedges the bridge itself
+***      for every lane. Write the commit message to a FILE. This cost one lane its whole cycle on
+***      25 Nov and stranded another's work for an hour.
+***
+*** ===== THE CASCADE REMAINS SHUT AT 62/62/62, RE-MEASURED BY THE CHAT BOT, NOT ASSUMED. =====
+***   B153 brace-matched Delve.MB_NAME on merged main: feed by_key 62, MB_NAME 62, both diffs [],
+***   and the published `miniboss`.short and .what both say "62 elites". 62/62/62.
+
+=== TAKE THIS NEXT, ONE ROW PER LANE ===
+
+GAME BUILD (:07) - YOUR 07:58 ROW IS DONE AND TICKED (S132); THIS IS A NEW ONE, AND YOU LOST YOUR
+  09:07 CYCLE TO A BRIDGE FAULT THAT WAS NOT YOURS. Take the **NEXT UNTICKED SYSTEM IN MR. E'S
+  APPROVED PHASE 2 ORDER** and NAME IT IN YOUR FIRST LINE so the plan records which you took.
+  Read the Phase 2 section of this file for the order; do not pull one out of sequence. THE RULE
+  THAT HAS PAID OFF TWICE NOW: measure before you build. Grep for the BEHAVIOUR, not for the name
+  you expect it to have - S118/S132 and System 3 and System 4 were ALL already wired and three
+  seats nearly built second copies. If you find it wired, SAY SO, RE-PROVE IT WITH A GATE, and
+  red-prove the gate. That is a full delivery and it gets ticked. One change, one gate, one
+  red-proof. And keep computing claim+25 BEFORE you write the declared finish - that has held
+  every hour since 02:08 on 21 Nov.
+
+CONTENT (:22) - **PREPARE THE COLLIER TEXT CHANGE, DO NOT SHIP IT.** Art has now PROVED the body
+  cannot be made to read four countable vents at stream scale without a worse cost elsewhere
+  (passes 5, 9, 10, 11, 12, 13 - the arc is frozen and the only change that reaches four strips the
+  withy lattice off the flank). So the `miniboss` collier text that promises **FOUR pale plugs** is
+  the side that has to move, and your C-209 audit is exactly the instrument for it. WRITE THE EXACT
+  ONE-LINE DIFF - file, line, old string, new string - and the honest replacement wording for a
+  body that reads THREE at the 360p rung and four only on inspection. **COMMIT IT AS A PROPOSAL,
+  NOT AS A CHANGE TO data/.** The choice to alter shipped viewer-facing text is the supervisor's and
+  I have routed it; your job is to make it a one-keystroke decision when the ruling comes. While you
+  wait, extend C-209 the same way: for each number you listed, say whether a BODY or a MECHANIC
+  currently honours it, measured, not assumed. A promise of four of anything is a gate on somebody
+  else's geometry.
+
+ART (:34) - **STOP CUTTING AT THE BODY. YOU CALLED IT AND I AGREE - THE COLLIER COUNT IS OFF YOUR
+  PLATE.** Do not open pass 14. Two things instead, both small and both yours.
+  (a) **SHIP p13.** By your own measurement it is a STRICT improvement at zero cost: +24 heals from
+      a split into one 204 px mark, -42/-10/-78 are pixel-for-pixel what ships, no side-view cost,
+      no ring risk. It does not close the count and you were right not to claim that it does - but
+      "does not fix the headline fault" is not a reason to leave a strict improvement behind a
+      flag. Make COLLIER_STAKENUDGE=13 the shipped default, render all three views, LOOK at them,
+      and red-prove that unsetting it puts the split back.
+  (b) **FIX THE LYING GATE, which is still open from my predecessor's row.** `_fit_p9A.json` and
+      `_fit_p9B.json` read RED for one reason only: "the census was taken over 64 register rows and
+      is being read against 1". blind_views, fits_frame:false and unmeasured are ALL EMPTY. A
+      single-body run CANNOT be green, and you run single-body constantly. Either make a one-body
+      run capable of green, or make it print NO VERDICT instead of RED. A gate that cannot be green
+      in a state you routinely run it in is a lying gate, and this one has now outlived two rows.
+  Then you are free: the ART LANE MAY INVENT MINIBOSSES and it is the only lane that may. Measure
+  the count off tools/art/minibosses.py or the fit register, NOT off any figure in a prompt.
+
+HUB (:37) - **YOUR FORM IS LIVE. THE DELTA IS ZERO.** The supervisor published it at 09:55:03 CT
+  (gh-pages 8d214d36, tree 1d8bce63, equal to origin/hub:web - I measured both). You were right to
+  keep not publishing and right not to claim READY TO PUBLISH; the push was never yours and it came
+  from the seat that owns it. ONE ROW: **PROVE A SUGGESTION ACTUALLY LANDS.** The supervisor's own
+  publish doc leaves "end-to-end submission test - pending CDN propagation of app.js" UNCHECKED, so
+  right now a viewer-facing form is live that NOBODY HAS PROVED WORKS. Fetch the LIVE page, confirm
+  it serves app.js?v=8 and not a cached v=7, and submit one clearly-marked test suggestion through
+  the real live page - then say whether it landed. If you cannot read the table back (anon has
+  INSERT only, by design), say exactly that and report the HTTP status the POST returned, which is
+  evidence either way. Keep the greps you always run: el() only, no innerHTML on a snapshot value,
+  no snapshot value as URL/src/href/style, CSP intact - the form added a fetch POST, so the
+  connect-src claim is now load-bearing and I will be checking it myself. NO TOKENS ANYWHERE.
+
+HUD (:52) - Your U175 stand-down is TICKED and your window was clean (claim 09:53:28, released
+  09:54:38, inside :07). The chat bot has stood down of its own accord at :47-:52 for three
+  consecutive hours now, so **YOUR :52 WINDOW IS GENUINELY YOURS** - the schedule fix is holding.
+  Take **ONE REAL HUD ITEM, NOT ANOTHER REGRESSION RUN.** You have now shipped three consecutive
+  cycles whose delivery was "seven files byte-identical" or "40 checks, no source change", and a
+  lane that only ever re-proves is a lane with no row. Read the plan for your own open half and
+  name it. If you genuinely have none open, say so IN THOSE WORDS and I will route it as a dry lane
+  rather than let you spend a fourth window proving nothing moved. Do NOT take the L31 remainder -
+  it is the game build's by the 16 Nov 18:02 re-route and it is now TICKED anyway. Do NOT take the
+  rarity-hue row - it SHIPPED as U55 (ui_theme.gd:176/196/200/204, leaderboard_panel.gd:197/202)
+  and lanes have been handed it eight times in error.
+
+CHAT BOT (:45) - **DROP THE STANDING ITEM YOU HAVE CARRIED FOR TWO CYCLES: THE SUGGESTION BOX IS
+  PUBLISHED AND LIVE.** `bug` and `suggest` now point viewers at a form that exists on the real
+  page. Verify that for yourself off the LIVE page rather than taking my word for it, and if the
+  reply text names a Google Form or an external URL that is no longer linked, THAT is your row -
+  fix the reply to match where viewers are actually sent. Otherwise your drift pass has now been
+  silent five hours running and a sixth identical stand-down is worth less than the window; take an
+  audit of your own shipped work instead and name what you audited. **KEEP CLAIMING BY :50 WITH A
+  FINISH INSIDE :52** - that row was mine to write and it has worked three hours straight; do not
+  drift back. And the lesson from B152 is now a house rule: **NEVER pass `-F -` to git through the
+  Blender bridge.** It blocks forever, and the hung git.exe takes the bridge down for every lane -
+  it cost the game build its whole 09:07 cycle. Write the message to a file.
+
+FOR THE SUPERVISOR - ONE DECISION, EVIDENCED, WITH MY RECOMMENDATION.
+  **THE COLLIER PROMISES FOUR PALE PLUGS AND THE BODY READS THREE AT STREAM SCALE. THE BODY ROUTE
+  IS NOW CLOSED BY PROOF, SO SOMETHING VIEWER-FACING HAS TO MOVE AND THE CHOICE IS YOURS.**
+  The evidence, all art's and all rendered-and-looked-at: six passes (5, 9, 10, 11, 12, 13) have
+  attacked this. The vent arc is frozen - pass 5 pushed a vent to -78 deg and pass 9 pushed one into
+  the centre stake. The -78 vent presents cos(78)=0.21 of its mouth to the front camera and measures
+  0.06 visible share WITH NOTHING IN FRONT OF IT, so no occluder change can heal it. The ONLY
+  variant that reaches four countable marks at 360p is p11, which rotates the whole eight-fold withy
+  ring: it moves 34.8% of the side view and strips the withy lattice off the flank, putting back the
+  hoop-skirt read those eight verticals were added to kill. ART REFUSED TO SHIP IT on an eye
+  judgement that none of its own numbers reported, which I think was the right call.
+  SO THE TWO OPTIONS ARE: (A) change the `miniboss` command text from FOUR pale plugs to a wording
+  the body honours at 360p - content has been told to PREPARE the exact one-line diff and NOT ship
+  it; or (B) ship p11 and accept the flank regression to keep the promise.
+  **MY RECOMMENDATION IS (A).** FAULT 10 holds that the count IS the mechanic, so the two must
+  agree - but agreement bought by regressing the silhouette on every view, for a count a viewer only
+  resolves on inspection, is the more expensive side of the trade. Text is cheap and reversible; a
+  silhouette read is neither. I have NOT taken this decision and content has NOT touched data/.
+  Awaiting your ruling.
+
 ## TAKE THIS NEXT - Updated THE 07:58 CT FIRING, 25 NOV 2026 (team lead; written 08:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS 856d8b0c. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
 ***

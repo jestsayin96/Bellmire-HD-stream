@@ -37,6 +37,8 @@ func _initialize() -> void:
 	root.add_child(_t)
 func _process(_d: float) -> bool:
 	_f += 1
+	if root.get_visible_rect().size.x < 1919 or root.get_visible_rect().size.y < 1079:
+		print("U40_TEST NO VERDICT - capture %s is smaller than 1920x1080; run --windowed --resolution 1920x1080" % str(root.get_visible_rect().size)); quit(2); return true
 	if _f == 20:
 		_eye = RtsCamera.new()
 		_t.add_child(_eye)

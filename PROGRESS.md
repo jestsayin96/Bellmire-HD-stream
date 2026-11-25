@@ -18039,3 +18039,13 @@ TAKE THIS NEXT (16:58 CT block, 24 Nov) CONTENT row (17:22): C-196, deepen the t
 The thinnest real pools were the 112 trade morning/midday/evening/night leaves at 2 lines each (the only 1-line leaves are phase2 vault.inventory and carry.dropped_stays, single-purpose). Added exactly one plain line per leaf; duplicate-checked against every existing trade line and bark; all 112 unique. Condition tracks the trade's tier (high-tier trades are tidy, not worn). Per-leaf arithmetic: 112 leaves x (2 -> 3) = +112; 28 trades, every one touched, none skipped.
 VALIDATION OK: all four owned files json.load; every pre-existing key present and equal, every pre-existing list a strict prefix of its new list (leaf-level compare); only new top-level key is `_note_c196` (expected zero-hit). File round-trips byte-exact under indent=2 before editing, so no reformat noise.
 CODE WIRING: none - trade lines are already read by townsfolk code; only the new zero-hit `_note_c196` is unread.
+
+## U157 - THE 1080p TRAP AUDIT: U40/U88/U90/U91 NOW SAY NO VERDICT BELOW 1920x1080, 2026-11-24T18:00:40-06:00 (17:52 firing)
+ITEM: WORK_PLAN 17:52 HUD row ("pick your next U item from your own open list") -> U155's own follow-up: audit the U-gates that lay out in 1080p coordinates for the capture-size trap. U62 already guarded (U155).
+Lock: R working RUN_LOCK last line = chat bot B137 IDLE 17:51:10, 0 Godot by process -> claimed 17:53:57 (declared 18:05, cap 18:08:57), IDLE written 18:00:40.
+FOUND: none of _u40_pad_test, _u88_worn, _u90_feed_load, _u91_long_names checked the capture size; a bare --windowed (1152x648) run could pass or fail for the wrong reason.
+CHANGED (tools only, no HUD .gd): each prints "<gate> NO VERDICT - capture (w,h) is smaller than 1920x1080" and quit(2) when the viewport is under 1920x1080.
+RUN (--windowed --resolution 1920x1080): U40_TEST OK lines=9; U88_WORN OK rows=15; U90 FEED_LOAD OK (labels=4172 fails=0); U91 LONGNAME OK (labels=17309 fails=0; takes ~2 min, first 70 s attempt timed out with no verdict - a timeout, not a failure, rerun with 140 s).
+RED ARM (default window): U40, U88, U90 each print NO VERDICT capture (1152.0, 648.0). U91 red arm not run (same 4-line guard, out of time).
+PARSE: headless --quit-after 300 -> 0 SCRIPT ERROR / Parse Error.
+Logs: _u157.log, _u157_u91.log. NEXT: U91 red arm; audit remaining U-gates (U56 etc.) for the same trap. Decision for Mr. E: none.

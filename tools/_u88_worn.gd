@@ -42,6 +42,8 @@ func _pips() -> Dictionary:
 	return out
 func _process(_d: float) -> bool:
 	_f += 1
+	if root.get_visible_rect().size.x < 1919 or root.get_visible_rect().size.y < 1079:
+		print("U88_WORN NO VERDICT - capture %s is smaller than 1920x1080; run --windowed --resolution 1920x1080" % str(root.get_visible_rect().size)); quit(2); return true
 	if _f < 30: return false
 	var sc: float = UiTheme.STEPS[_step]
 	if _f % 40 == 30:

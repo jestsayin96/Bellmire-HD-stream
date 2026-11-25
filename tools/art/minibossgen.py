@@ -143,8 +143,16 @@ def build_miniboss(key):
     # glow for things that are actually alight. An instrument that only swaps
     # `glow` therefore reads ZERO on a correct body and calls it red.
     # So the slot is named, and `both` is what a cue census must use.
-    _cue = os.environ.get("MB_CUEOFF", "")
+    # "0" MUST MEAN OFF. The first cut of this read `== "1"`, so arm A of the
+    # census was launched with MB_CUEOFF=0; the slot rewrite turned that same
+    # string into a KeyError. An off-switch whose OFF value crashes is worse
+    # than no switch, so both "" and "0" are off and an unknown value says so.
+    _cue = os.environ.get("MB_CUEOFF", "").strip().lower()
+    if _cue in ("", "0", "off", "none"):
+        _cue = ""
     if _cue:
+        assert _cue in ("1", "glow", "bone", "both"), \
+            "MB_CUEOFF must be one of 1/glow/bone/both/0, got %r" % _cue
         _slots = {"1": ("glow",), "glow": ("glow",), "bone": ("bone",),
                   "both": ("glow", "bone")}[_cue]
         mats = dict(mats)

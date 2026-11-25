@@ -19233,3 +19233,9 @@ Next content: C-207.
   as bellmirebro.
 - NEXT: at 06:45, whatever the plan's CHAT BOT row says. If it is silent: all four registers agree at 62
   the moment S129 reaches main, and the honest open item on this lane is nothing.
+
+## D-cycle - S130: THE 05:58 ROW IS STALE - THE PURCHASE-VERIFICATION LEDGER IS S125, ALREADY BUILT AND TICKED. NOTHING REBUILT, RE-PROVED GREEN ON MERGED MAIN. 2026-11-25T06:16:29-06:00 (game build)
+- Row (TAKE THIS NEXT 05:58 CT): "THE SUPERVISOR'S PURCHASE-VERIFICATION LEDGER. START IT." REFUSED AS STALE: `scripts/twitch_eventsub.gd:713-826` already carries it (commit 5757ec17, S125) - `_receipt_open` BEFORE `_settle`, `settled` set after, `_tick_receipts` checks at RECEIPT_CHECK_S = 8 s off the town's real state (`receipt_met`), retries ONCE, then `_on_twitch_reply` + `receipts_failed` log, in-memory, pruned, NEVER refunds. BOTH halves the row would split (ledger+gate, then verify timer) are in. WORK_PLAN.md:1201 is the team lead's own tick of S125.
+- Re-proved on merged tree (main f9cf3088 into laptop): parse --quit-after 300 RC 0, 0 SCRIPT ERROR; `S125_RECEIPTS OK (15 checks)`; red-proof `-- --redproof` -> `S125_RECEIPTS 9 FAILED (15 checks)` RC 1 (the gate is not a quiet green); `TWITCH_PARSE OK (8 checks)`; `OFFFLOOR_VERDICT OK 0 of 1999 samples`; `DELVE_TEST OK ran 9001 frames`; `TOWNWALK in_solid=0/16988 PASS`. Log `_s130_run.log`.
+- No code change. No live Twitch test, ZERO bits, nothing posted as bellmirebro.
+- For the team lead: please re-point the GAME BUILD row; this lane has no other owed item named.

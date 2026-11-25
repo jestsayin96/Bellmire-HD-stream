@@ -19911,3 +19911,28 @@ shipping it.** If the lead or the supervisor wants it, it is one clause appended
 - Commit message written to a FILE, never `-F -` - B152's wedge is not repeated.
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat line
   posted as bellmirebro, no channel setting touched.
+
+## C-213 (content, 25 Nov 2026 13:3x CST) - AUDIT STEP 3: THE OLDER A-ROW BODIES RE-READ OFF ART'S SOURCE. TWO DISAGREEMENTS, DIFFS PREPARED, NOT SHIPPED. NO data/ FILE CHANGED.
+ITEM: TAKE THIS NEXT (12:58 CT block, `>>> CONTENT (:22)`) gave CONTENT C-213: the older A-row bodies not re-measured at C-211. Method as C-211: count phrase read off data/lore_lines.json miniboss_feed.by_key (62 keys), body read off tools/art/minibosses.py BY LINE (builder comments and code). I do not run Blender: this is SOURCE agreement, not a 360p measurement.
+AGREE (text count = what the builder states):
+- pressman "Four collars hang off it": FOUR EMPTY COLLARS, 6975 and 7049 "Four names, four collars".
+- ratcatcher "Five tails" / "twelve bays": 9548 "TWELVE BAYS, FIVE FILLED", 9523 3x4 lattice. (C-210 listed it as not found by grep - that was my grep, the count is stated at 9548.)
+- fenman "Five small lights/lights hang off him/Five lights on the floor": FIVE weights on a diagonal outrigger at five heights, 10624, 10682-10693, 10900 "FIVE OF FIVE". (C-210 also called this unfound; it is stated. One old comment at 10718 says a render showed four blobs - history, later passes address it; not re-measured.)
+- leech "Five cupping horns": 11630 THE FIVE HORNS.   - beadle "Four brass pegs": 12176 FOUR PEGS, TWO SOCKETS.
+- rammer "Three timber legs": 12319-12321 three legs, one plane.   - stackman "three courses / Count the courses. Three.": 12986 THREE COURSES.
+- relief "Four notches": 14812 FOUR notches.   - scraper "Five on every face": 15172 FIVE cuts on EACH of the four faces.
+- winder "Three ropes" (x3 lines): 15973 THE THREE ROPES.   - blower "Three iron patches": 16810 THE THREE PATCHES.
+- stopper "Five pale pegs": 17586-17599, five pale pegs + seven spent dark (count carried by pale/dark, not size).   - jointer "three arms": 4674, 4683, 4710 ARM 1/2/3.
+- dyer "Three cloths hang to dry": three _cloth() calls on tenter hooks, 7819-7821.
+DISAGREE 1 - CHANGER (this one is the collier shape, and larger). Art deleted the arms on 21 Nov by Mr. E's ruling ("if its a big deal delete the bars"; 17239-17255: three bars, three paddles, three face straps, 33 objects, whole `arms` span). The body is now MAN + POST + COLLAR + PALE DRUM with three dark rungs. Art's own note: "There is now NO in-world object that stops the swap", left as an OPEN QUESTION. My feed still names objects that are not on the body: arrive.1 "three-armed turnstile"; arrive.2 "He works the arms, and the arms work the room"; arrive.7 "The bars ride at hip height. A body set against one holds it."; arrive.8 "clean plates on the bar ends"; act.0 "The arms come round"; act.6 "puts a shoulder to a bar. It will not go round."; broken.0-3 (body against the bar, arms stop, jammed arms); fall.0 "The arms hang still"; fall.3 "The bars are idle"; fall.6. The DRUM lines (arrive.6, act.2, fall.1) are honest and stay. Note: the jam counterplay lines (arrive.7, act.6, broken) promise a mechanic whose object is gone - that part is not a text fix, it is the open question, and the lead/Mr.E/code lane own it.
+  PREPARED, NOT SHIPPED (text only, additive-safe, arrays stay 9/7/4/8):
+  arrive.1  "A tall man standing inside a three-armed turnstile, and a pale drum on the post behind him."
+        ->  "A tall man standing at a turnstile post, and a pale drum on the top of it behind him."
+  arrive.2  "He does not chase anyone. He works the arms, and the arms work the room."
+        ->  "He does not chase anyone. He works the post, and the post works the room."
+  arrive.8  "Good wool, clean plates on the bar ends, and a man who has done this every day for years."
+        ->  "Good wool, a clean plate under the post, and a man who has done this every day for years."
+  (arrive.7, act.0, act.6, broken.*, fall.0/3/6 name bars or arms and should be reworded together once the lead rules whether the jam mechanic survives; I did not guess a replacement mechanic. Same trap as the collier: do not rewrite half.)
+DISAGREE 2 - DYER arrive.1 "A fourth is in the vat." The builder has three hung cloths and a woad apron (7967); the vat (7826-7843) is staves, hoops and an emissive surface - NO cloth in it. Prepared: "Three cloths hang to dry. A fourth is in the vat." -> "Three cloths hang to dry. The vat is steaming." (arrive.5 "The vat is full" stays true.) Minor; ship only on a row.
+NO CANON / NOT SOURCE-CHECKABLE: sealer "strip of lead blanks", drover "two iron bows", fuller "Two timber hammers", tither/scraper "two eyes" (face prose, singular states) - not counted; I did not grep builders for these. Nothing is claimed verified for them.
+NO CODE WIRING. No key added or removed; no data file touched (git diff on the four owned files is empty). Next content: C-214 - on a row; else the standing backlog (feed depth).

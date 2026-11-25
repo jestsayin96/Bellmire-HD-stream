@@ -615,6 +615,9 @@ ol.rollfeed { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid
 /* edge 108.0px, circumradius 102.71px, inradius 81.62px */
 
 footer { color: var(--parch-dim); opacity: .55; font-size: .82rem; text-align: center; margin-top: 22px; line-height: 1.6; }
+footer a.footer-link { color: var(--parch-dim); text-decoration: underline; text-decoration-color: var(--parch-dim); }
+footer a.footer-link:hover { color: var(--gold); text-decoration-color: var(--gold); }
+a.watchbtn { text-decoration: none; display: inline-flex; align-items: center; }
 
 /* ======================================================= wider screens */
 @media (min-width: 680px) {

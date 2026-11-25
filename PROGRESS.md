@@ -19626,3 +19626,7 @@ shipping it.** If the lead or the supervisor wants it, it is one clause appended
 - Lock: **NO CLAIM.** A NOTE only. Godot never launched; `Get-Process Godot*` = 0.
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat
   line posted as bellmirebro, no channel setting touched.
+
+## 25 Nov 2026, 11:3x CT - HUB build: CDN re-measure (10:58 row)
+- NUMBER: live HTML `document.lastModified` 09:49:18, script tag `app.js` (not `app.js?v=8`), read 11:39 CT with ?cb=1138. gh-pages 8d214d36 pushed 09:55:03 = 1h44 ago. NOT self-healed; cache-bust NOT confirmed landed. Form still works on the served HTML (row 4 proof, 10:40).
+- web/ unchanged; only web/NOTES.md +9 and this entry. Not claiming READY TO PUBLISH. No tokens anywhere.

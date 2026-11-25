@@ -4,13 +4,22 @@
 *** diff --numstat origin/main HEAD = PROGRESS.md +140/-0. ZERO LINES REMOVED. Residual markers 0 on
 *** all four exact shapes. No cycle renumbered.
 ***
-*** ===== MY OWN FAULT FIRST: THE GAME BUILD READ LAST HOUR'S ROWS AT 11:07 =====
-***   I did not beat :07 with this block. The merges and the verification ran first and the clock was
-***   11:06 before I had a measured row to write, so the game build's 11:07 firing read the 09:58
-***   rows. Those rows were not harmful - its 09:58 row said "take the next unticked Phase 2 system
-***   and name it", which is still the right instruction - but it is a one-hour lag and it is mine,
-***   not the lane's. The cause is that I verify before I write, which is the correct order; the fix
-***   is NOT to write unverified rows. See the carried note at the end of this block.
+*** ===== MY OWN FAULT FIRST, AND IT IS NOT THE ONE I FIRST WROTE HERE =====
+***   WHAT I ORIGINALLY WROTE IN THIS SLOT, AND THEN CAUGHT AND STRUCK INSIDE THIS SAME RUN: "I did
+***   not beat :07; the game build's 11:07 firing read the 09:58 rows." **THAT WAS FALSE, AND THE WAY
+***   IT WAS FALSE IS THE FAULT WORTH RECORDING.** I did not read the clock before writing it - I
+***   ESTIMATED the time from how much work I had done and wrote a timestamp claim off that estimate.
+***   This prompt's own rule says do not write a stamp you did not read, and I broke it to accuse
+***   myself rather than to excuse myself, which makes it no better as a record.
+***   MEASURED, FROM THE MACHINE: `laptop` was synced at **11:06:36 CT** (commit 4908d0fe), the
+***   firing window opens at :07, and at 11:07:17 the authoritative lock tail in R's WORKING TREE
+***   still ended with the chat bot's 10:54:27 NOTE - no game build RUNNING line yet. **SO THE GAME
+***   BUILD'S 11:07 RUN READS THIS HOUR'S ROWS, NOT LAST HOUR'S.** The laptop-first mitigation held
+***   by about twenty-four seconds.
+***   THE REAL LESSON, WHICH IS THE OPPOSITE OF THE ONE I NEARLY LEFT BEHIND: six lane merges, four
+***   conflict resolutions, five verifications and a full dead-data audit CAN fit before :07 without
+***   writing a single unverified row. Verify first, write second, and do not pre-apologise for a
+***   race you have not yet lost.
 ***
 *** ===== WHAT I TICKED =====
 ***   TICKED **S133** (game build) - System 12 step S110c-1. The licence read that has been OWED for
@@ -167,10 +176,15 @@
 ***      give. Read published web bytes from `origin/gh-pages` through the bridge instead. If a lane
 ***      must see the rendered page, that is the team lead's Chromium/Playwright instrument or the
 ***      hub's browser, not a scheduled lane's first move.
-***   6. (NEW, MINE) ADD to the :58 prompt: the laptop-first sync cannot beat :07 in an hour with six
-***      lane merges AND verification in it. Either sync `laptop` with the PREVIOUS hour's plan blob
-***      immediately after the merge and re-sync it after writing the block, or accept the lag and
-***      SAY SO. Do not write unverified rows to win the race.
+***   6. (NEW, MINE - AND IT IS THE REVERSE OF WHAT I FIRST DREW UP) I had written here that the
+***      laptop-first sync "cannot beat :07 in an hour with six lane merges and verification in it",
+***      and asked for the prompt to license a lag. **MY OWN RUN DISPROVED IT TWENTY MINUTES LATER:
+***      laptop synced 11:06:36, inside the window, with every merge and verification done first.**
+***      So there is NOTHING TO ADD TO THE PROMPT and I am withdrawing the request. What belongs on
+***      the record instead is the order that made it fit: fetch and merge all six FIRST, resolve
+***      PROGRESS.md with a state machine, run the verifications you can batch into one call each,
+***      and only then write the block. Do not ask for a slower rule because the fast one looked hard
+***      before you had tried it.
 
 
 === TAKE THIS NEXT, ONE ROW PER LANE - THE 10:58 CT FIRING, 25 NOV 2026 ===

@@ -19672,3 +19672,12 @@ shipping it.** If the lead or the supervisor wants it, it is one clause appended
 ## 25 Nov 2026, 11:3x CT - HUB build: CDN re-measure (10:58 row)
 - NUMBER: live HTML `document.lastModified` 09:49:18, script tag `app.js` (not `app.js?v=8`), read 11:39 CT with ?cb=1138. gh-pages 8d214d36 pushed 09:55:03 = 1h44 ago. NOT self-healed; cache-bust NOT confirmed landed. Form still works on the served HTML (row 4 proof, 10:40).
 - web/ unchanged; only web/NOTES.md +9 and this entry. Not claiming READY TO PUBLISH. No tokens anywhere.
+
+## U177 - 2026-11-25T11:56:00-06:00 - HUD: STAND-DOWN, NO HUD-OWNED PHASE 2 SYSTEM IS OPEN. No Godot claimed, no source change.
+- TAKE THIS NEXT (10:58 block, HUD (:52)): "next unticked Phase 2 system whose files are actually YOURS - NAME IT IN YOUR FIRST LINE; verify it is not already wired; if every HUD-owned one is wired, say so WITH LINE NUMBERS and stand down in writing".
+- Named: System 2 rarity-hue (the only HUD-owned Phase 2 system the plan names). It is WIRED by behaviour: ui_theme.gd:176 (U55 block), rarity_hue :196, rarity_ink :200, rarity_pip :204; called at leaderboard_panel.gd:197 (pip) and :202 (ink). Not re-opened, not rebuilt.
+- Not mine, not touched: boss_bar.gd / party_frames.gd / snapshot_pub.gd mana halves (listed in the 11:58 plan as the game build's); L31 remainder; L66 (H31).
+- Open candidate left unrouted: the "NOW FIGHTING" banner ghost behind the boss card at 150% (U108 docking, in auto_director/spotlight territory). Not started this window; would need a windowed 150% render, and I had under 14 min before :07 with the chat bot only just IDLE. Route it to HUD explicitly if wanted.
+- Lock: R working RUN_LOCK.txt last line = IDLE 11:48:24 chat bot B155; tasklist Godot* none at 11:52:47. Free, unclaimed by me; no RUNNING/IDLE line written.
+- Next firing 12:52: stand down unless the plan names a new HUD item; if the banner ghost is named, claim <=15 min with finish inside :07.
+- CHANGED: this note only. PARSE/RENDER: n/a. Decision for Mr. E: none.

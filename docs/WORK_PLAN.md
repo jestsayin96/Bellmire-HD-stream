@@ -1,3 +1,158 @@
+## TAKE THIS NEXT - Updated THE 07:58 CT FIRING, 25 NOV 2026 (team lead; written 08:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS 856d8b0c. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
+***
+*** ===== I BEAT :07 THIS HOUR, AND ONLY BECAUSE I CHANGED THE ORDER OF MY OWN RUN. =====
+***   My predecessor missed the game build by NINETEEN SECONDS and said so. I read the clock at
+***   08:01, saw I had five minutes, and wrote these rows BEFORE finishing art's verification
+***   instead of after. THAT IS THE FIX AND THE NEXT SEAT SHOULD DO IT EVERY HOUR: the merge and
+***   the game build's row come first, verification second. Verification can slip an hour with no
+***   cost; a stale row costs a lane its whole window. Two seats in a row have now lost that race.
+***
+*** ===== THE CASCADE REMAINS SHUT AT 62/62/62 AND THE FIFTH LINK IS GUARDED BY A GATE. =====
+***   S131 (game build, laptop 3fe3315a) added the theme arm to tools/_s51_names.gd: every MB_NAME
+***   key must be selectable from THEME_MINIBOSS/THEME_MINIBOSS_MORE. Both diffs [], drawable 62,
+***   and RED-PROVED by erasing collier from a deep copy - fires on [collier] only. S51_NAMES OK 179.
+***   The 06:58 row for the game build is DONE, which is why it has a new one below.
+***
+*** ===== WHAT I TICKED =====
+***   TICKED **S131** (game build) - the fifth link now has a gate and the gate can go red.
+***   TICKED **ART'S COLLIER PASS 9**, and the tick is for a DISPROOF plus a REFUSAL TO SHIP.
+***     Art measured the front vent row at STREAM scale, not inspection scale, and found the
+***     outermost vent is a SIXTEENTH of its neighbours - centroid bands 38 / 460 / 449 / 152 px -
+***     ONE PIXEL at the 360p rung. A viewer counts THREE. The `miniboss` command text promises
+***     "FOUR pale plugs", so the number the viewer is TOLD and the number on the BODY disagree,
+***     and FAULT 10 already holds that the count IS the mechanic. My predecessor TICKED pass 8
+***     having "counted four vents and four only" on the front view - that count was taken at full
+***     size and it was not wrong, it was taken at the wrong SIZE. Art built tools/art/_streamscale.py
+***     to make the rung explicit and it LABELS the marks.
+***     Art then tried the obvious fix - pull the arc from -78..+24 in to -48/-22/+4/+30 - rendered
+***     it, and IT GOT WORSE: the vent at +4 vanished to ZERO px behind the mound's centre stake.
+***     ART DID NOT SHIP IT. Shipped bearings are back at pass 8's, and art left
+***     `COLLIER_VENTARC=9` behind so nobody re-derives the disproof.
+***     **A LANE THAT FINDS THE FAULT ITS OWN GREEN GATE MISSED, TRIES THE FIX, AND THROWS THE FIX
+***     AWAY BECAUSE THE PICTURE GOT WORSE, IS DOING THIS JOB PROPERLY.** That is the tick.
+***   TICKED the four WRITTEN STAND-DOWNS - **C-208** (content, 62/62 feed rows re-verified),
+***     **B151** (chat bot, and it CORRECTED ITS OWN register count which was wrong by thirty),
+***     the **HUB** standing check (web/ unchanged, greps clean, explicitly NOT claiming ready to
+***     publish), and **U171** (HUD, odd hour, seven files byte-identical to laptop and main).
+***
+*** ===== FOR THE NEXT TEAM LEAD - A STANDING NOTE IN OUR OWN PROMPT IS NOW STALE. =====
+***   The :58 prompt carries: "the art fit register's top-level verdict reads RED / ok:false and has
+***   done for days, on two CARRIED unmeasured rows (snuffer_chibi, tallyman_chibi) that are
+***   RETIRED... Do not report 'the art gate is green'." MEASURED BY ME ON MERGED MAIN THIS HOUR,
+***   THAT IS NO LONGER TRUE: `_fit_report.json` is **ok:true, verdict GREEN, 64 pairs, errors [],
+***   blind_views [], zero unmeasured, zero fits_frame:false**. The register is GREEN and is 64 rows,
+***   not the 46 the baseline describes. A firing cannot edit a prompt, so it is recorded here:
+***   **OWED PROMPT CORRECTION - strike the "art fit register reads RED" standing note from the :58
+***   prompt and replace the 46-row/44-body figure with 64 register rows.** The first seat with a
+***   LIVE TURN should land this with the rest of the owed backlog.
+***   **A SECOND OWED PROMPT CORRECTION, MEASURED THE SAME WAY.** The :58 prompt's hub block states
+***   "gh-pages is 05ac2679, tree 9ca8051e, pushed 19 NOV 20:06 CT" and a delta of "3 files / +59 /
+***   -1 - NOTES.md +9, web/app.js +46/-1, web/style.css +4". ALL OF THOSE ARE STALE. MEASURED BY ME
+***   ON THIS HOUR'S FETCH: `gh-pages` is **5ce35f33**, tree **c03fa129**, pushed **24 NOV 15:30 CT**;
+***   `origin/hub:web` is **80795d06**; the delta is **3 files / +21 / -1 - NOTES.md +16,
+***   index.html +2/-1, style.css +3**. Note the delta MOVED INSIDE THIS HOUR - my predecessor
+***   measured +19/-1 against hub tree aaca1577 at 06:58 and the hub lane added two NOTES.md lines
+***   at 07:38. THAT IS WHY THE PROMPT SAYS COUNT IT YOURSELF EVERY HOUR; I did, and it had changed.
+***   **CLEAN-HOUR COUNT: 4.** It was 3 after 06:58. This hour: no overrun, no stale lock cleared,
+***   no starved lane, no future stamp, no two lanes holding at once. Game build 07:08:16 -> 07:15:10
+***   against a cap of 07:33:16, with the cap computed before the declaration as it has been since
+***   02:08 on 21 Nov. All six lanes delivered.
+***
+*** ===== WHAT I DID NOT TICK =====
+***   NOT the collier as finished art. The count still reads three at stream scale. Open, art's row.
+***   NOT any publish gate. NO LANE CLAIMED "READY TO PUBLISH" THIS HOUR, so the publish gate is not
+***     owed and I RAN NO PUBLISH VERIFICATION. Saying so plainly rather than reporting an unearned
+***     green.
+
+=== TAKE THIS NEXT, ONE ROW PER LANE ===
+
+GAME BUILD (:07) - YOUR 06:58 ROW IS DONE; THIS IS A NEW ONE. Take the **L31 REMAINDER - THE
+  STATUS-EFFECT ICONS**. It is YOURS, not HUD's: its open half lives in delve.gd, monster.gd,
+  party_frames.gd and boss_bar.gd, none of them HUD files, and the plan re-routed it on 16 Nov
+  18:02. D61.1 already landed the damage numbers, so do NOT rebuild those. MEASURE WHAT IS ALREADY
+  THERE BEFORE YOU BUILD - grep for the BEHAVIOUR, not for a name you expect, and if you find it
+  already wired, say so and re-prove it rather than building a second copy. One change, one gate,
+  red-proof it.
+
+CONTENT (:22) - Your row is an AUDIT OF YOUR OWN SHIPPED TEXT, which the freeze allows explicitly.
+  Art has just proved that the `miniboss` collier text promises **FOUR** pale plugs while the body
+  reads THREE at stream scale. DO NOT CHANGE THAT TEXT - art is fixing the BODY to match it, and a
+  text edit now would make the two chase each other. Instead sweep your shipped lore and command
+  text for OTHER places where a NUMBER in prose asserts a count the body or the mechanic has to
+  honour, and list them with file and line. A promise of four of anything is a gate on somebody
+  else's geometry. Report the list; change nothing without a row.
+
+ART (:34) - **COLLIER PASS 10, AND YOUR OWN NOTE NAMES THE CHANGE: MOVE THE OCCLUDER OR THE ROW,
+  NOT THE ARC.** You have already disproved the bearing sweep twice over - pass 5 pushed a vent to
+  -78 and pass 9 pushed one into the centre stake. So shift the centre stake, or drop the vent row
+  below the lashing ring where the flank is unobstructed. Render the GLOW-ONLY arm and LABEL THE
+  MARKS, as you told the next reader to. Accept it only if the stream-scale rung reads FOUR, and
+  red-prove it. If pass 10 also fails, STOP CUTTING AT THE BODY and say so - the fallback is a text
+  change that is content's, not yours, and I will route it.
+  **THREE CORRECTIONS TO YOUR OWN PASS-9 WRITE-UP, FOUND BY CHECKING IT RATHER THAN READING IT.**
+  Your FINDING is sound and I verified it two ways - your `_vent_marks_p9.json` front row has only
+  FIVE marks and the 38 px vent is GONE, so the arc really did make it worse; and I LOOKED at your
+  own rung ladders myself and counted FOUR vents at 1080p and THREE at 360p. The tick stands. But:
+  (a) `COLLIER_THE_62nd.md` tabulates the fourth front band as **152 px**; your committed
+      `_vent_marks.json` says **135**. One of the two is from a render that is no longer shipped.
+  (b) The doc says the outermost vent is **ONE PIXEL at the 360p rung**. Your own json's front row
+      at 360p is `[25, 25, 8, 5, 3, 1, 1]` - the fourth mark is **5 px**, and the 1 px entries are
+      the two SMALLEST marks, not the vent. If the outermost vent is FRAGMENTING into several small
+      marks then say that, because it changes what pass 10 must fix; if you simply read the wrong
+      row, correct it. Do not leave a number in the doc that your own evidence does not produce.
+  (c) The doc says the shipped render is **byte-identical to `collier_cueA` (md5, checked)**. I
+      md5'd every collier render directory on main: `collier_p7cA` equals `cueA` exactly, but
+      **`collier_p9A` and `collier_p9B` both differ from `cueA` on all three views**, and NO
+      directory you committed this hour equals it. The claim may well be true of a render you did
+      not commit - but as the tree stands there is no artefact behind it. COMMIT THE RENDER THAT
+      BACKS THE CLAIM, or drop the claim.
+  **AND A MECHANICAL FAULT THAT IS NOT YOUR BODY'S:** `_fit_p9A.json` and `_fit_p9B.json` both read
+  RED for one reason only - `"self_seen: the census was taken over 64 register rows and is being
+  read against 1 - it describes a different house. Re-run tools/art/_selfseen_census.py"`. Their
+  `blind_views`, `fits_frame:false` and unmeasured lists are ALL EMPTY. A single-body run is being
+  judged against a 64-row census, so the instrument is red, not the collier. Fix the instrument so
+  a one-body run can be green, or make it print NO VERDICT instead of RED - a gate that cannot be
+  green in a state you routinely run it in is a lying gate.
+
+HUB (:37) - Keep the standing check and KEEP NOT PUBLISHING. One addition this hour: the chat bot
+  reports that `bug` and `suggest` now send viewers to a **Suggestion Box button that exists only in
+  your UNPUBLISHED delta**. That is a live viewer-facing consequence of an unpublished tree, so
+  MEASURE IT PRECISELY and write it into web/NOTES.md: which element, which file, and what a viewer
+  sees today if they type `bug`. I am routing the publish decision up with that evidence. Do not
+  publish, do not claim ready to publish unless you mean it.
+
+CHAT BOT (:45) - **CLAIM BY :50 WITH A FINISH INSIDE :52** - that standing schedule row holds and it
+  has worked. Nothing is owed at the feed: 62/62 is paid and Section 2 landed. So your row is a
+  written stand-down UNLESS your own drift check finds something. If you do stand down, use the
+  window to re-run the ask gate's five arms on the 21 topics and say they are still silent - you
+  refused to fake those for three hours and they are worth keeping honest.
+
+HUD (:52) - Your window is yours; the chat bot is ordered out of it by :52. U171 was an honest odd-
+  hour stand-down. Take a REGRESSION PASS on your own shipped work at the WORST frame, not the
+  prettiest: pick the scale your own logs show the tightest margin at - on U124 that was 125%, not
+  150% - and prove the margin from the picture, not from the number beside it. If nothing is wrong,
+  a written stand-down with the worst-frame measurement IS the delivery.
+
+=== FOR THE SUPERVISOR ===
+1. **THE HUB PUBLISH DECISION NOW HAS A VIEWER-FACING COST, AND THAT IS NEW INFORMATION.**
+   origin/gh-pages^{tree} does not equal origin/hub:web and has not since 20 Nov. The chat bot
+   landed Section 2 this cycle, so `bug` and `suggest` are LIVE commands that point viewers at a
+   Suggestion Box button which exists ONLY in the unpublished delta. Until the hub is republished,
+   a viewer who types `bug` is directed to something that is not on the page they can open.
+   MY RECOMMENDATION: PUBLISH. The delta is small and I will run the full publish gate myself and
+   look at a screenshot before any push. I have NOT published and will not without your word.
+2. **WITHDRAWN BY ME, INSIDE MY OWN RUN, AND THE WITHDRAWAL IS THE POINT.** I first wrote here
+   that two retired `_chibi` rows still hold the art fit register at RED/ok:false. I took that from
+   my own standing baseline instead of measuring it, which is the exact fault my charter warns
+   against. I THEN MEASURED IT: `renders/art/minibosses/_fit_report.json` on merged main is
+   **ok:true, verdict GREEN, 64 pairs, errors [], blind_views [], zero unmeasured rows, zero
+   fits_frame:false**. The register is GREEN and has outgrown the 46-row shape the baseline
+   describes. THERE IS NOTHING HERE FOR YOU TO RULE ON. Nothing else is waiting on you but item 1.
+
+=== NEEDS MR. E ===
+nothing.
+
 ## TAKE THIS NEXT - Updated THE 06:58 CT FIRING, 25 NOV 2026 (team lead; written 07:2x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS 74e155dd. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
 ***

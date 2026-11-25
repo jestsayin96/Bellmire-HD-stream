@@ -40,7 +40,7 @@ func _initialize() -> void:
 	print("S107 MB_NAME size: ", mbn)
 	# S107 asserted 50 (almoner, the 50th). S114: + panner (S111) + stiltman (S112) + nightman (S113) = 53. S116: + iceman (Hoarback, 54th) = 54. S118: + straker (Everyhand, 55th) = 55. S121: + weigher (Trueweight, 56th) = 56. S122: + dredger (Finepass, 57th) = 57. S123: + harrowman (Overturn, 58th) = 58. S124: + pledgeman (Heldfast, 59th) = 59.
 	# This arm went red-by-staleness at the 51st; it is the sibling of _s51_names.gd:64 and moves with it.
-	_ok(mbn == 59, "MB_NAME holds 59 (got %d)" % mbn)
+	_ok(mbn == 60, "MB_NAME holds 60 (got %d)" % mbn)
 	if _fails == 0:
 		print("S107_GATE OK %d" % _checks)
 	else:

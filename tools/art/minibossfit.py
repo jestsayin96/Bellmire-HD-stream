@@ -46,6 +46,38 @@ import lordgen as G          # noqa: E402
 import minibosses as M       # noqa: E402
 import minibossgen as MG     # noqa: E402
 
+
+# *** WHEN WAS THIS ROW MEASURED? THE REGISTER COULD NOT SAY. ***
+# 25 Nov 2026 02:5x CT. `verdict_scope` has said "re-derived from stored
+# measurements" since 21 Nov, and NOT ONE of the 63 rows carried a stamp
+# saying when its stored measurement was taken or by what run. Only the keys
+# a run asks for are re-rendered (the loop below); every other row is carried
+# forward verbatim from the file on disk, so a row's numbers can be of any
+# age and the file was silent about it. The team lead asked this house, in
+# writing, when `snuffer_chibi` and `tallyman_chibi` were measured - and the
+# only way to answer was `git log -S` over the register. That is archaeology,
+# not a register. A row now says when it was measured, or says it does not
+# know; an absent stamp and an unknown stamp are not the same fact, which is
+# the distinction the `ground` note above was written for.
+# THIS IS PROVENANCE, NOT FITNESS: an unstamped row is NOT red. A row whose
+# numbers are right is right whoever took them. The count is published so the
+# gap shrinks visibly as rows are re-measured instead of being forgotten.
+_UNSTAMPED_FROM = ("unknown - this row was carried from before per-row "
+                   "stamping existed (added 25 Nov 2026 02:5x CT). Its "
+                   "numbers are not in doubt; their date is.")
+
+
+def _now_ct():
+    """Local wall time with its offset, the one stamp this house writes.
+
+    Blender runs on cruzader, whose clock IS Central, so `astimezone()` with
+    no argument is the machine's own offset - never a hand-written -06:00,
+    which is wrong for half the year and has already been written as a future
+    stamp by more than one lane.
+    """
+    import datetime
+    return datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+
 HERO_GLB = os.path.join("addons", "kaykit_character_pack_adventures",
                         "Characters", "gltf", "Knight.glb")
 
@@ -1354,7 +1386,20 @@ def main():
                   # over a house that had grown by nine bodies. It is now
                   # DERIVED every run by derive_self_seen(); carrying it is
                   # exactly the fault.
-                  "self_seen")
+                  "self_seen",
+                  # *** `visibility_scope` IS RUN-OWNED FROM 25 Nov 2026. ***
+                  # Same fault as `self_seen`, found the same way - by
+                  # measuring it. It was a hand-written 21 Nov snapshot,
+                  # carried over a house that has since grown from 44 rows to
+                  # 63, and BOTH its numbers had gone false: it said "264
+                  # cells" (44 x 3 views x 2 subjects) against 378, and it
+                  # justified itself with "air_px >= 8 in the tightest view of
+                  # EVERY row" when `ferryman/side` reads 0. Its CONCLUSION
+                  # survived the check - 378 of 378 cells still read vis ==
+                  # alone, ferryman included - but a block that argues from
+                  # stale figures is one edit away from arguing for a wrong
+                  # answer. It is DERIVED now, every run, from the rows.
+                  "visibility_scope")
     rep = {"ok": True, "hero": {}, "pairs": {}, "errors": [], "blind_views": [],
            "stale_margin": [], "margin_derived": [],
            "seen_min": SEEN_MIN, "vis_min": VIS_MIN, "min_proving": MIN_PROVING,
@@ -1465,6 +1510,10 @@ def main():
                                  ("carried - this run did not measure the ground"
                                   if prior_ground else None)),
                     proving_views=sum(1 for c in vis.values() if c["proves"]),
+                    # MEASURED BY THIS RUN, SO IT SAYS SO. See _now_ct().
+                    measured_at=_now_ct(),
+                    measured_by="tools/art/minibossfit.py%s" % (
+                        " --tag " + args.tag if args.tag else ""),
                     **_carry)
                 # *** NO VERDICT IS DRAWN HERE ANY MORE. *** Every per-key
                 # judgement now happens in audit_rows() below, over EVERY row
@@ -1514,6 +1563,68 @@ def main():
     # carried, and a GREEN verdict does not extend to them.
     rep["unproved_cells"] = sorted(k for k, v in rep["pairs"].items()
                                    if "visibility" not in v)
+    # Every row this run did not measure keeps its numbers and gains an
+    # explicit "I do not know when this was taken" - never a fabricated date,
+    # and never silence. See _UNSTAMPED_FROM.
+    for _k, _v in rep["pairs"].items():
+        if not _v.get("measured_at"):
+            _v["measured_at"] = None
+            _v["measured_at_from"] = _UNSTAMPED_FROM
+    rep["rows_unstamped"] = sorted(k for k, v in rep["pairs"].items()
+                                   if not v.get("measured_at"))
+    # *** THE PAIR-CELL OCCLUSION BLOCK, DERIVED - NEVER HAND-WRITTEN. ***
+    # See the note in _RUN_OWNED. Every figure below is counted off the rows
+    # in this file on this run; the prose is the standing lesson and the
+    # numbers are this run's.
+    _cells = _same = _one = 0
+    _floor = None
+    for _k, _v in rep["pairs"].items():
+        for _vn, _c in (_v.get("visibility") or {}).items():
+            for _who in ("creature", "hero"):
+                _o = _c.get(_who) or {}
+                if _o.get("alone") is None:
+                    continue
+                _cells += 1
+                if _o.get("vis") == _o.get("alone"):
+                    _same += 1
+                if _o.get("seen") == 1.0:
+                    _one += 1
+        _a = _v.get("air_px_min")
+        if _a is not None:
+            _floor = _a if _floor is None else min(_floor, _a)
+    _touch = sorted(k for k, v in rep["pairs"].items()
+                    if (v.get("air_px_min") or 0) <= 0)
+    rep["visibility_scope"] = {
+        "asks": "how much of each subject survives the OTHER subject, in the pair cell",
+        "cells": _cells,
+        "cells_reading_exactly_1_0": _one,
+        "cells_where_vis_differs_from_alone": _cells - _same,
+        "air_px_floor": _floor,
+        "rows_with_no_air": _touch,
+        "taken_by_construction": (_cells > 0 and _cells == _same),
+        "note": (
+            "DERIVED THIS RUN off the rows in this file, never carried. The "
+            "method is sound - with/without through one locked camera - but "
+            "place() holds air between the two bodies in almost every row, so "
+            "mostly the answer is settled before the render. THIS IS A "
+            "TAKEN-BY-CONSTRUCTION PASS WHEREVER IT PASSES, NOT A MEASUREMENT "
+            "THAT MOVED - trap 4, an instrument that cannot move is not a "
+            "pass. IT DOES NOT SAY THE BODY READS, and `seen: 1.0` must never "
+            "be cited as if it did; `self_seen` answers that question. What "
+            "it still earns: it goes red if a layout change ever puts the two "
+            "bodies in front of each other, and alone == 0 still catches a "
+            "blank or mis-aimed render. RED ON EMPTY: `taken_by_construction` "
+            "is false when there are no cells at all, so a run that measured "
+            "nothing cannot read as a pass. `rows_with_no_air` names the rows "
+            "where the construction argument does NOT hold and the cell is "
+            "therefore a real measurement - keep an eye on those."),
+    }
+    rep["provenance_note"] = (
+        "%d of %d rows carry a measured_at. An unstamped row is NOT red - "
+        "this block answers WHEN a stored measurement was taken, not whether "
+        "it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as "
+        "rows are re-measured."
+        % (len(rep["pairs"]) - len(rep["rows_unstamped"]), len(rep["pairs"])))
     measured = [k for k in keys if k in rep["pairs"]]
     missing = [k for k in keys if k not in rep["pairs"]]
     rep["measured"] = measured

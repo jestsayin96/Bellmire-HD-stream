@@ -10021,11 +10021,194 @@
     "pledgeman_dark_man"
    ],
    "engine": "BLENDER_EEVEE"
+  },
+  "timberman": {
+   "key": "timberman",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 59057,
+     "man_seen_px": 58218,
+     "man_seen": 0.9858,
+     "value_creature": {
+      "px": 127856,
+      "p5": 0.1429,
+      "p50": 0.3182,
+      "p95": 0.6604,
+      "spread": 0.5175,
+      "dark_frac": 0.0881,
+      "bands": [
+       0.037,
+       0.2455,
+       0.4481,
+       0.0921,
+       0.0757,
+       0.0899,
+       0.0117,
+       0.0
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 58218,
+      "p5": 0.1549,
+      "p50": 0.319,
+      "p95": 0.4019,
+      "spread": 0.247,
+      "dark_frac": 0.0854,
+      "bands": [
+       0.0246,
+       0.2487,
+       0.562,
+       0.1617,
+       0.0022,
+       0.0006,
+       0.0001,
+       0.0
+      ],
+      "bands_5pct": 3
+     }
+    },
+    "side": {
+     "man_alone_px": 42737,
+     "man_seen_px": 36594,
+     "man_seen": 0.8563,
+     "value_creature": {
+      "px": 88048,
+      "p5": 0.1051,
+      "p50": 0.3014,
+      "p95": 0.661,
+      "spread": 0.5559,
+      "dark_frac": 0.1789,
+      "bands": [
+       0.0708,
+       0.2379,
+       0.4708,
+       0.0732,
+       0.0465,
+       0.0857,
+       0.015,
+       0.0
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 36594,
+      "p5": 0.0894,
+      "p50": 0.2585,
+      "p95": 0.3862,
+      "spread": 0.2968,
+      "dark_frac": 0.334,
+      "bands": [
+       0.1103,
+       0.3307,
+       0.4811,
+       0.0757,
+       0.0022,
+       0.0,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "back": {
+     "man_alone_px": 58857,
+     "man_seen_px": 49772,
+     "man_seen": 0.8456,
+     "value_creature": {
+      "px": 128361,
+      "p5": 0.1199,
+      "p50": 0.3534,
+      "p95": 0.668,
+      "spread": 0.5481,
+      "dark_frac": 0.1279,
+      "bands": [
+       0.0534,
+       0.2094,
+       0.3225,
+       0.1386,
+       0.0455,
+       0.2117,
+       0.0189,
+       0.0
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 49772,
+      "p5": 0.0681,
+      "p50": 0.3046,
+      "p95": 0.4066,
+      "spread": 0.3386,
+      "dark_frac": 0.2082,
+      "bands": [
+       0.1043,
+       0.2509,
+       0.4789,
+       0.1593,
+       0.0048,
+       0.001,
+       0.0008,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    }
+   },
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     19,
+     23
+    ],
+    [
+     23,
+     29
+    ],
+    [
+     29,
+     35
+    ],
+    [
+     35,
+     39
+    ]
+   ],
+   "bounds_control": [
+    -1.09406,
+    -0.62685,
+    0.0,
+    0.91775,
+    0.68027,
+    3.05
+   ],
+   "bounds_split": [
+    -1.09406,
+    -0.62685,
+    0.0,
+    0.91775,
+    0.68027,
+    3.05
+   ],
+   "objs_control": 4,
+   "objs_split": 6,
+   "item_counts": {
+    "inside": 20,
+    "outside": 19,
+    "total": 39
+   },
+   "man_objs": [
+    "timberman_body_man",
+    "timberman_dark_man"
+   ],
+   "engine": "BLENDER_EEVEE",
+   "measured_at": "2026-11-25T02:01:12-0600"
   }
  },
  "errors": [
   "panner: the man span merged to no object"
  ],
  "ok": false,
- "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds. | 24 Nov 2026 19:5x CT for the DREDGER (57th), measured by tools/art/_backread.py --keys dredger and MERGED into this file row-by-row. NOT written with --out, which OVERWRITES and would have destroyed the other 56 rows - the same wholesale-wipe shape this file's own carry rule exists to prevent. 24 Nov 2026 21:0x CT for the 58th body (harrowman), measured by tools/art/_backread.py --keys harrowman in the same run that built it; its own row carries its measured_at. 24 Nov 2026 21:5x CT for the 59th body (pledgeman), measured by _backread.py and MERGED into this file - the other rows untouched."
+ "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds. | 24 Nov 2026 19:5x CT for the DREDGER (57th), measured by tools/art/_backread.py --keys dredger and MERGED into this file row-by-row. NOT written with --out, which OVERWRITES and would have destroyed the other 56 rows - the same wholesale-wipe shape this file's own carry rule exists to prevent. 24 Nov 2026 21:0x CT for the 58th body (harrowman), measured by tools/art/_backread.py --keys harrowman in the same run that built it; its own row carries its measured_at. 24 Nov 2026 21:5x CT for the 59th body (pledgeman), measured by _backread.py and MERGED into this file - the other rows untouched. 25 Nov 2026 02:0x CT for the 61st body (timberman), measured by tools/art/_backread.py --keys timberman in the run that built it and MERGED into this file - the other rows untouched."
 }

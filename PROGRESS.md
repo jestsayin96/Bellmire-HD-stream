@@ -14,6 +14,196 @@ TAKE THIS NEXT (00:58 block) GAME BUILD row: "name the 60th - add crimp to Delve
 - GATES: parse 0 SCRIPT ERROR / 0 Parse Error; S126_CRIMP OK (9 checks, floor 9; red-proved - with delve.gd reverted it prints S126_CRIMP FAILED (2 of 9)); S124_PLEDGEMAN OK 13; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2150; TOWNWALK in_solid=0/18407 PASS; DELVE_TEST OK 9001 frames; S51_NAMES OK 176; S107_GATE OK 12.
 - The idea (a hero signed into the crimp's crew, struck off at the lit peg) is NOT built yet - it needs its lines first.
 - No live Twitch test, ZERO bits.
+## THE REGISTER COULD NOT SAY WHEN A ROW WAS MEASURED, AND THE 01:34 FIRING WAS NEITHER DRY NOR A CRASH - 25 Nov 2026 02:3x-02:5x CT (art)
+
+TAKE THIS NEXT (01:58 block) ART row, both halves: "write the stand-down this firing, naming which
+it was", and "say in PROGRESS when and how those two [_chibi] rows were measured".
+
+### 1. THE ACCOUNTING. IT WAS NEITHER - THE RUN WAS STILL IN FLIGHT WHEN THE ROW WAS WRITTEN.
+The row reads "your 01:34 firing left NO commit and NO PROGRESS.md entry". That was true at the
+moment it was measured and false twelve minutes later, and the firing was not dry and did not
+crash: it was the Timberman, start to finish, inside its own window. MEASURED, in CT, not inferred:
+  reflog  41eb4333 merge origin/main  01:38:02   <- the firing starts
+  mtimes  _timberman_p1.log 01:43:44 | p2 01:47:02 | p3 01:50:27 | p4 01:52:26 | p5 01:54:07
+          _timberman_fit.log 01:55:42 | census 01:57:04 | fit2 01:58:03 | backread 02:00:00
+          _fit_report.json 02:01:38 | TIMBERMAN_THE_61st.md 02:04:49 | _timberman_load.gd 02:05:13
+  reflog  71df5c88 commit 02:10:09, merge 44d6e494 02:10:16, pushed the same minute
+The team lead's own block says it was written 02:0x CT and reports PROGRESS last touched 00:02:56.
+PROGRESS.md's mtime is 02:09:47. So the read landed between the fit report and the write-up, with
+twenty-six minutes of Blender already on disk and nothing yet in git. Nobody is at fault and I am
+not claiming one - but the charge is retired by measurement, not by my say-so.
+
+A TIMESTAMP TRAP THAT NEARLY MADE ME REPORT THE OPPOSITE, AND IT IS THE ONE THIS PROMPT WARNS ABOUT.
+My first pass ran `find -newermt "2026-11-25 01:00"` in the Linux bridge, whose shell TZ is UTC, and
+got back a dredger rebuild at "01:41" with p1/p2/p3/p4, fresh renders and a full fit sweep. I was
+one step from reporting that the 01:34 firing re-ran an already-shipped body. Those files are the
+24 Nov 19:4x dredger run: the logs' own internal stamps read 19:41 and the census line reads
+`at=2026-11-24T19:50:38-0600`. UTC minus six, exactly as the prompt says. EVERY `find` and `stat` in
+this entry is `TZ=America/Chicago`. The log's own clock is the check on the filesystem's.
+
+### 2. THE STRUCTURE BEHIND IT, WHICH WILL RECUR EVERY HOUR UNTIL A LANE CHANGES ITS ORDER.
+Art fires at :34. A miniboss is five Blender passes plus fit, census, backread, hero sheet, doc and
+a load gate - 27 minutes for the Timberman, 26 for the Crimp before it. The team lead reads at
+:58-:0x. So a miniboss hour's commit CANNOT exist at read time; it lands at ~:10 of the next hour
+and the branch reads empty at exactly the moment it is judged. This is the same inherent-order
+shape the team lead wrote up for the game build and content at 01:58, and it is not a lane fault.
+WHAT I CHANGED IN MY OWN CONDUCT, THIS FIRING: I committed this work BEFORE :58 instead of carrying
+everything to one commit at the end. A smaller thing in git beats a larger thing in a worktree.
+
+### 3. WHEN AND HOW THE TWO _chibi ROWS WERE MEASURED - AND WHY THE QUESTION WAS UNANSWERABLE.
+Asked plainly, the register could not answer it. `verdict_scope` has said "re-derived from stored
+measurements" since 21 Nov, and NOT ONE of the 63 rows carried a stamp saying when its stored
+measurement was taken. Only the keys a run asks for are re-rendered; every other row is carried
+forward verbatim. So a row's numbers can be of any age and the file was silent. The only way to
+answer the team lead was `git log -S` over the register. THAT IS ARCHAEOLOGY, NOT A REGISTER, AND
+IT IS A DEFECT IN MY OWN SHIPPED INSTRUMENT.
+  THE ARCHAEOLOGY, since it was owed: `tallyman_chibi` first entered `_fit_report.json` at c152270b
+  (17 Nov 05:55 CT, the Jointer firing) and its numbers were last moved by b4abebb1 (21 Nov 21:46,
+  "the fit register stops crying wolf"). `snuffer_chibi` has a dedicated register,
+  `_fit_snufferchibi_register.json`, added at ee11e186 (17 Nov 16:55 CT, the Tapster firing) -
+  `tallyman_chibi` has no such file and never had one, so the two rows do not share a provenance.
+  THE ANSWER THAT DOES NOT NEED GIT: I RE-MEASURED BOTH, ON A BODY, THIS FIRING.
+  snuffer_chibi 02:47:37 CT, tallyman_chibi 02:43:52 CT, `tools/art/minibossfit.py`, three proving
+  views each, rendered against the posed KayKit Knight (h 2.45, posed true).
+  BOTH REPRODUCED THEIR CARRIED NUMBERS EXACTLY - snuffer_chibi ratio 1.06 / pair_w 4.21,
+  tallyman_chibi 0.88 / 3.58, fits_frame true, frame_edge zero on all three views, air_px_min 89
+  and 136. STRONGER THAN THE NUMBERS: the six re-rendered hero views are BYTE-IDENTICAL to the
+  committed ones - `git add` on both directories staged nothing at all - so the generator and the
+  camera reproduce the shipped pictures exactly, not merely the ratios. The carried numbers were
+  never wrong. Only their date was unknown, and that is now the
+  distinction the file itself records.
+
+### 4. THE FIX, IN MY OWN FILE ONLY (tools/art/minibossfit.py).
+A row measured by a run now carries `measured_at` (local wall time with the machine's own offset via
+`astimezone()`, never a hand-written -06:00) and `measured_by`. A row this run did not measure keeps
+its numbers and gains `measured_at: null` plus `measured_at_from` saying in words that its date is
+unknown because it predates stamping - never a fabricated date and never silence, which is the same
+"an absent measurement and a measured absence are not the same fact" rule the `ground` block was
+written under. Top level gains `rows_unstamped` and `provenance_note`.
+IT IS PROVENANCE, NOT FITNESS, AND IT IS DELIBERATELY NOT A VERDICT CONDITION. An unstamped row is
+NOT red: a row whose numbers are right is right whoever took them, and a gate that turned 59 unknown
+dates into a red would be a gate that cries wolf - the exact fault b4abebb1 was written to remove.
+The count is published so the gap shrinks visibly instead of being forgotten.
+REGISTER AFTER THE CHANGE: verdict GREEN, ok true, 63 pairs, errors [], blind_views [],
+unproved_cells [], stale_margin [], red_summary.rows [], blank_check 183 files / 183 expected /
+0 failures / 61 cells. 4 of 63 rows stamped at that point (snuffer_chibi, tallyman_chibi,
+beadle, timberman) - and then I closed the rest of the gap in the same firing; see 8 below.
+
+### 5. A CORRECTION TO THE OWED-CORRECTIONS LIST, MEASURED BEFORE I WROTE IT.
+Item 1 of the 01:58 list says the note's evidence keys "`shipped_red` / `ok_shipped` DO NOT EXIST IN
+THE FILE ANY MORE - the schema changed". THEY EXIST. They are NESTED, under `red_summary`:
+`red_summary` = {"rows": [], "shipped_red": [], "retired_red": [], "ok_shipped": true}. A top-level
+`d.get("shipped_red")` returns None, which is almost certainly how the claim was made, and the
+practical warning it draws is still right - a seat checking a top-level key reads None and could
+call the gate red on a missing key. But the keys did not vanish and the schema did not drop them, so
+the correction as written would send the next seat looking for something that is in the file. The
+rest of item 1 is correct and I confirmed it independently: ok true, verdict GREEN, 63 rows (the
+list says 62 - the Timberman made it 63 at 02:01), zero failing `fits_frame`, zero without a ratio.
+
+### 6. AN INSTRUMENT I BUILT THIS FIRING AND DID NOT SHIP, BECAUSE IT FAILED ITS OWN CALIBRATION.
+Looking at the re-rendered chibi sheet I thought the snuffer_chibi reads the same from front and
+back - the Beadle fault the team lead found by eye. So I built the number: render the creature ALONE
+front and back through the same camera, mirror the back, align by bounding box, and measure
+silhouette IoU and mean RGB difference over the shared area. Then I CALIBRATED IT AGAINST A BODY A
+HUMAN HAD ALREADY JUDGED - the Beadle, which the team lead found has no facing - with the Timberman
+as the other arm. It cannot tell them apart, and it points the wrong way:
+    beadle  (known faceless)  IoU 0.9403  mean_rgb_diff 0.1250  frac px differing >0.06  0.614
+    timberman                 IoU 0.8794  mean_rgb_diff 0.1068                           0.627
+    snuffer_chibi             IoU 0.8896  mean_rgb_diff 0.1084                           0.547
+    tallyman_chibi            IoU 0.9378  mean_rgb_diff 0.1176                           0.552
+The Beadle scores a HIGHER surface difference than the Timberman. The reason is plain once the
+number is wrong: a whole-body mirror averages over torso and limbs that are symmetric in every body,
+and the facing cue is a small region - a face, a band. The mean drowns it. SO THERE IS NO FACING
+NUMBER IN THE FILE AND NO FACING GATE. The measurement is in this entry as evidence against itself,
+and the only facing judgement below is an eye judgement, labelled as one.
+
+### 7. WHAT I LOOKED AT, AND THE FAULTS I CAN SEE. (_look/_chibistamp_sheet.png, six hero views.)
+I composited the two bodies' hero front/side/back at half scale over mid grey and looked at it.
+Both rows are GREEN with seen 1.0, 3 proving views and zero frame clips, and these faults are all
+inside that green - which is the standing lesson, not a new one:
+  snuffer_chibi - the conical lamp-shade hat is as wide as the whole figure and eats the silhouette;
+    the body under it barely reads from the front. The two outstretched arms make a stiff symmetric
+    T, and the only facing cue is the candle flames, which look the same from behind. The candle on
+    the lit arm is pale against a pale grey arm - low contrast at hero scale. The legs read as four
+    stubs rather than two from the side.
+  tallyman_chibi - IT DOES NOT READ AS A PERSON. From the front it is a stack of olive-brown boxes,
+    pans and a round white disc; there is no head or face, only a dark box on top. The side view is
+    the worst of the six and reads as a heap of pots. Everything in it is one value.
+NEITHER IS AN ITEM AND I HAVE NOT TAKEN ONE. Both are shipped bodies, both are live (delve.gd:379
+walks [key + "_chibi", key]), and rebuilding either is a multi-pass job, not a tail-end fix. Named
+so the next seat can take it with its faults already written down.
+
+### 8. THE GAP IS NOT LEFT TO CLOSE ITSELF - 63 OF 63 ROWS NOW CARRY A DATE.
+A note that says "the gap closes as rows are re-measured" is a promise, and promises in a register
+are the thing this file exists to stop. So I re-measured the whole house in one sweep rather than
+shipping 59 undated rows: `minibossfit.py` over all 61 live bases, 02:5x CT, ~4 minutes.
+  RESULT: verdict GREEN, ok true, 63 pairs, errors [], blind_views [], unproved_cells [],
+  stale_margin [], red_summary.rows [], blank_check 183 files / 183 expected / 0 failures / 61
+  cells, 61 rendered, `rows_unstamped` **[]**, every row stamped 2026-11-25T02:5x-06:00.
+  AND IT IS A WHOLE-HOUSE REPRODUCIBILITY PROOF, NOT ONLY A STAMPING RUN: 61 bodies rebuilt and
+  re-rendered from scratch moved NO ratio, NO pair_w and NO `fits_frame` in any row. The only
+  staged pixels in the whole sweep were the contact sheet; every per-body render came back
+  byte-identical to what is committed.
+
+### 9. THE SWEEP FOUND A SECOND CARRIED BLOCK THAT HAD GONE STALE, AND I FIXED IT IN THE SAME SEAM.
+`visibility_scope` was a hand-written 21 Nov snapshot, carried forward ever since - the SAME fault
+the file's own `_RUN_OWNED` note records for `self_seen` ("carried for three days as a hand-written
+21 Nov snapshot over a house that had grown by nine bodies"). `self_seen` was made run-owned then;
+`visibility_scope` was not, and BOTH its figures had since gone false:
+  it said `cells: 264` - that is 44 rows x 3 views x 2 subjects. The house is 63 rows = **378**.
+  it argued "place() holds measured air between the two bodies (air_px >= 8 in the tightest view
+  of EVERY row), so neither can ever hide the other". **`ferryman/side` reads air_px 0** (2 at the
+  eps band). The air floor for the house is 0, not 8, and it has one row in it.
+I CHECKED THE CONCLUSION BEFORE CHANGING THE BLOCK, because a stale number does not by itself make
+an answer wrong: 378 of 378 cells still read `vis == alone`, ferryman included, so nothing occludes
+anything and "taken by construction" still holds. The defect was the ARGUMENT, not the verdict - and
+a block that argues from stale figures is one edit away from arguing for a wrong answer.
+`visibility_scope` is now DERIVED every run, like `self_seen`: cells, cells reading exactly 1.0,
+cells where vis differs from alone, the measured `air_px_floor`, and `rows_with_no_air`, which names
+the rows where the construction argument does NOT hold and the cell is therefore a real measurement.
+Today that list is exactly `["ferryman"]`. The standing lesson prose is kept verbatim in the block -
+it still does not say the body reads, and `seen: 1.0` still must not be cited as if it did.
+  RED ON EMPTY, PROVED AND NOT ASSERTED: `--name _vsredproof --sheet` builds a register with no rows
+  at all. It read `cells 0, taken_by_construction FALSE, air_px_floor null, verdict RED, ok false`.
+  A run that measured nothing cannot read as a pass. The two scratch files that proof left
+  (`_fit_vsredproof.json`, `_vsredproof.png`) are UNTRACKED and not in the commit; `rm` in a
+  connected folder returns "Operation not permitted" and I did not ask Mr. E to widen that for two
+  scratch files.
+
+### 10. TWO SHEETS THE 01:34 FIRING REGENERATED AND DID NOT COMMIT - PICKED UP HERE.
+`renders/art/minibosses/_contact_sheet.png` and `_silhouettes.png` were rewritten by that firing's
+generator pass at 01:54:07 CT, with the Timberman in them, and are not in 71df5c88 - so on
+`origin/art` both sheets have been showing a 60-body house since the 61st landed. They were sitting
+modified in the worktree when I opened it. I did not re-make them and I claim no work for them; I
+committed what that firing produced, which is the "a lane's worktree is not its branch" rule
+applied to somebody else's leftovers rather than only to my own.
+
+CENSUS, MEASURED WITH `ast` AND NOT REMEMBERED (tools/art/minibosses.py): ORDER = 61 distinct live
+bases, last `timberman`; BUILDERS = 75 keys = 61 bases + 12 `_chibi` + `drillmaster_tall` +
+`drillmaster_chibi_tall`. So the 62nd is the open one, not the 61st. The prompt's "THIRTY-THREE
+already exist" line is stale by 28.
+
+NO NEW BODY THIS FIRING, AND THE 62nd IS THE OPEN ONE - I chose the register over a new body
+deliberately: a stale instrument that reports an unearned pass costs more than a 62nd miniboss is
+worth, and this one had two. NO GODOT LOCK CLAIMED - nothing in this run needed the engine, so I did
+not take the lock and did not write to docs/RUN_LOCK.txt. No .gd outside tools/art/ touched.
+WIRING OWED TO THE GAME BUILD BY THIS ENTRY: NONE. The Timberman's wiring is still owed and is
+unchanged from the 02:0x entry below (bestiary.gd row, MB_NAME["timberman"] = "Deadfall", the feed
+line); nothing here adds to it. Not ticked - team lead ticks.
+
+## THE TIMBERMAN (Deadfall) - the 61st miniboss - 25 Nov 2026 02:0x CT (art)
+TAKE THIS NEXT (00:58 block) ART row: "build the 61st, and measure the count off tools/art/minibosses.py or the fit register, never off a number in a prompt."
+Measured with ast, not remembered: ORDER = 60 entries / 60 distinct, last `crimp`; BUILDERS = 74 keys (60 bases + 2 variants + 12 chibi). So this is the 61st base. Two prompt lines corrected by the measurement: "THIRTY-THREE already exist" is stale by 27, and `_packs` holds 49 packs / 10,172 files, not 40.
+THE IDEA - ITS DEATH IS THE DANGER. In all 60 other `idea` strings killing it ENDS the threat; this is the only body whose death IS the threat. It holds the one prop under a cracked roof: put it down before its three spares are set and the gallery comes down on the room. Answers on the model twice - set the three spares, or knock the two lit folding wedges at its foot. The Tither's docstring records a timberman design this file already KILLED (a roof on a count = the sluicekeeper's escalating clock); that judgement stands and does not reach this one, because nothing ticks here - the roof falls only on an event the PARTY causes. Named rather than quietly re-proposed.
+PACKS RULE APPLIED, NOT SKIPPED: the walk found 448 timber candidates (KayKit ResourceBits Wood_Plank/Wood_Log, Castle pillars). None used - every one is STRAIGHT and the one sentence this model must say is that the prop is BOWED under load; and a pit prop is a round trunk, not sawn stock.
+FIVE PASSES, every one GREEN with 0 blanks and 0 errors, every fault found by LOOKING: p1 the body had NO ARMS on either ortho (high fist 0.02 m from its own shoulder inside a 0.318 torso sphere), head tree read as a giant mallet, three spares as one leaning board, wedges as 4-pixel nubs. p2 six separable fixes, five worked. p3 rebuilt the low arm AND I HAD BLAMED THE WRONG ARM - the shape across his face survived untouched and was the HIGH arm's elbow, y -0.230 against a jaw at y -0.212. p4 face cleared; the four-point low arm came back a closed rectangle. p5 the left arm hangs, and that is the answer - three arrangements measured on the same two cameras and the readable one is the plain one.
+GEN: ok true, errors [], blank [], 4 meshes / 1,691 faces, span 2.01 m CORRIDOR-SAFE, UNDER-LID, 3.05 m (third tallest behind stiltman 3.20 and iceman 3.12).
+FIT: verdict GREEN, ok true, 63 rows, errors [], blind_views [], unproved_cells [], stale_margin [], red_summary.rows []. timberman: ratio 1.24 against a 2.45 m hero, pair_w 3.87, air_x 1.727, fits_frame true, 3 proving views, seen 1.0 both figures on all three, every frame_edge and frame_edge_disk ZERO on front/side/back, air_px_min 113 (front tightest).
+SELF-SEEN: _backread man_seen front 0.9858, side 0.8563, back 0.8456 against the 0.75 bar, errors []. TWO GATES WENT RED FIRST AND BOTH WERE RIGHT TO - the census described a 62-row house read against 63, then timberman was MEASURABLE with no cell. Neither worked around: census re-run (63 pairs, 0 in no list), measurement taken, row merged with its own measured_at. `_selfseen_all.json` ok stays false on `panner: the man span merged to no object` - verified against HEAD: that it was false BEFORE this run.
+LOCK: claim 02:07:23, cap 02:32:23, declared 02:19:23, released 02:09:02 inside the declared finish. Godot headless --import rc 0 then tools/art/_timberman_load.gd rc 0, 0 ERROR: timberman 4 meshes, controls crimp 4 / pledgeman 3, checked=3 fails=0, RED ON EMPTY. tasklist Godot* = 0. My RUNNING line's "Lock free" clause quoted a line from my worktree's STALE copy; the holder check that gated the claim read the live file and the IDLE says so.
+WHAT IS STILL WRONG, FROM LOOKING AT THE HERO SHEET: the wedges are the weak half of the answer (two small pale chips; from the back they read as a rag) - if only one affordance gets wired, wire the spares; the side view loses one spare behind the other two; the hanging left arm is nearly invisible from the side; the raised arm merges with the prop on the side; the bow is subtle at hero scale; the crown is one heavy dark mass. No clip, float or bad anchor I can see.
+WIRING OWED TO THE GAME BUILD - I touched none of it: bestiary.gd row with model res://assets/monsters/minibosses/timberman.glb and NO anims (static, no armature), h 3.05; delve.gd MB_NAME["timberman"] = "Deadfall"; lore_lines.json miniboss_feed.by_key.timberman = "Something in here is holding the roof up."; commands.json counts follow. NOT room-locked - corridor-safe and under-lid.
+Not ticked - team lead ticks.
 
 ## S125 - THE PURCHASE-VERIFICATION RECEIPT LEDGER (supervisor 23:54 directive §3) - 25 Nov 2026 00:1x CT (game build)
 TAKE THIS NEXT (23:58 block) GAME BUILD row: the receipt ledger in scripts/twitch_eventsub.gd. Built off the directive doc, expected-state map NOT improvised beyond it.

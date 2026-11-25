@@ -19989,3 +19989,88 @@ NO CODE WIRING. No key added or removed; no data file touched (git diff on the f
   finish I had already declared; I did not re-declare, extend or cross anything. Log `_b157_run.log`.
 - No live Twitch test: **ZERO BITS**, no cheer, no redemption, no reward read or written, no chat line
   posted as bellmirebro, no channel setting touched.
+
+## 13:58 CT FIRING, 25 NOV 2026 - TEAM LEAD: MERGE, VERIFY, TICK
+main 2aa92486 -> 252558b9 -> a7f1618b -> 239c154a. All six lanes shipped; nobody dry.
+THREE PROGRESS.md conflicts (hub, hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT by a state
+machine. Residual markers 0 on all FOUR exact shapes across every tracked text file.
+numstat vs old main on the conflicted file: PROGRESS.md +116/-0. ZERO LINES REMOVED.
+
+TICKED **S136b** (game build) - the wiring half of System 12 S110c-3. Verified on the ref, not on
+  the entry: 20 .glb bodies present under assets/characters/uacp/, `const UACP_SKIN` real in
+  townsfolk.gd with the override gated behind `if UACP_SKIN.a > 0.0:` (shipped at alpha 0, i.e.
+  OFF / pack-native, which is the honest default to ship while the call was still upstairs),
+  rig.gd +34, townsfolk.gd +63/-5, town.gd 2/2. Lock claim 13:10:10, cap 13:35:10, declared
+  13:33:10, released 13:20:41 - inside both.
+TICKED **U179** (HUD) - an item closed by DISPROVING it, which counts fully. Verified with a
+  THREE-DOT diff after I first measured it with two dots and got a false picture (see my own fault
+  below): `scripts/` is UNTOUCHED, the change is PROGRESS.md +8, tools/_u179_regress.gd +144 and
+  one render. The gate PRINTS A VERDICT (`U179_DONE checks=%d fails=%d`) and carries live fail
+  paths, so it is not a quiet test. Lock claim 13:53:40, cap 14:08:40, declared 13:59:40, released
+  13:54:38 - inside both.
+  ONE THING I COULD NOT CONFIRM AND AM NOT TICKING AS CONFIRMED: the lane reports rungs 100/125/150,
+  and I find the literals 100 and 125 in the gate source but NO literal 150. The render is named
+  `host_s150_1080.png`. That is a question, not a charge - the rung may be computed. HUD: say which.
+TICKED **B157** (chat bot) - and the reason is WHERE it wrote the warning. The B156 finding was a
+  latent false positive in tools/_l14_test.gd; B157 put the guard note above the DISPATCHER, where
+  a lane would author the trip, instead of in the gate where nobody would read it. Verified: the
+  chatcmd.gd change is +11/-0 and EVERY added line is a comment; tools/_l14_test.gd is UNTOUCHED.
+  It did not edit a gate to chase a fault with no instance today. Lock claim 13:47:22, declared
+  13:49:00, released 13:48:18 - inside both and clear of the HUD's :52.
+TICKED **THE HUB'S PACK-CATALOGUE ROW** - `_packs` walks to 49 = catalogue, no new pack. Verified
+  the lane's "web/ unchanged" claim myself: the only files it touched are PROGRESS.md,
+  docs/WORK_PLAN.md and web/NOTES.md. app.js, index.html and style.css are byte-identical. It did
+  NOT claim READY TO PUBLISH, so NO PUBLISH GATE WAS OWED AND I RAN NONE.
+TICKED **ART COLLIER PASS 17** - and I ticked it on the PICTURE, not on the register. I staged
+  `_brown/_p17_hero_sheet.png` and LOOKED at it: the operator is there, he is genuinely sooty, and
+  art's own honest title ("half my first number was a shadow") is the kind of report worth more
+  than a clean number. WHAT I CAN ADD THAT THE NUMBERS DID NOT SAY: he separates from the clamp
+  ONLY WHERE HE BREAKS THE DOME'S SILHOUETTE. Where his lower body overlaps the clamp dome he
+  merges into it in all three views - the value difference there is very small. That is my own
+  observation off the sheet and it is the reason the 360p row is worth running.
+  The fit register reads ok:true / verdict GREEN, 64 pairs, errors 0, blind_views 0,
+  unproved_cells 0, 64/64 rows stamped.
+
+NOT TICKED, DELIBERATELY:
+**C-213's DATA CHANGE** (content). The AUDIT is good work in the right order - it read the older
+  A-row bodies against the art source, found the changer's arms deleted and the dyer's vat, and
+  PREPARED the diffs instead of landing them unreviewed. But I verified `data/` and the change is
+  NONE: the only files touched are PROGRESS.md and the plan. A prepared diff is not a landed one,
+  so this is HALF DELIVERED / STILL OPEN and the other half is content's own next row.
+
+MY OWN FAULTS THIS HOUR, FIRST AND IN FULL:
+1. **I WROTE A TIMING CLAIM FROM AN ESTIMATED CLOCK INSTEAD OF A READ ONE - AGAIN.** My first
+   TAKE-THIS-NEXT block told the game build this hour's ruling would land "about 14:08 - ABOUT A
+   MINUTE AFTER THE GAME BUILD FIRES AT :07" and that it would probably miss the cycle. The commit
+   timestamps say otherwise: main pushed 14:03:01, `laptop` synced 14:03:04 - FOUR MINUTES BEFORE
+   the firing. I beat the clock and then wrote that I had not. I corrected it inside my own run
+   (main 239c154a) and re-synced all six rather than leaving a sentence standing that would teach
+   the game build to distrust a row it had actually received.
+2. **I WALKED INTO THE TWO-DOTS TRAP MY OWN PROMPT WARNS ABOUT.** Checking the HUD's "no source
+   change" claim I ran `2aa92486..origin/hud-ui` and got a diff attributing ~250 of MAIN'S OWN
+   newer files to the HUD, including 44 deleted lines in chatcmd.gd. `merge-base --is-ancestor`
+   returns 1 - old main is NOT an ancestor of hud-ui - so two dots was meaningless there. Re-run
+   with three dots the HUD touched no engine source at all. I caught it before it reached a row,
+   but I should not have run it that way in the first place.
+3. A temp-file write to /tmp was refused by the bridge and my own length assertion caught the empty
+   file BEFORE it reached the plan. The guard worked. Then my next assertion had wrong arithmetic
+   (I asserted 12 row markers when six rows carry six `>>>`), which blocked a correct block. Both
+   failures were safe-direction, and no bad write reached docs/WORK_PLAN.md.
+
+FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot edit a scheduled task; these are
+accumulating here for the first seat that gets a LIVE turn with Mr. E):
+  a. THE ART FIT REGISTER STANDING NOTE IS OUT OF DATE. The prompt says it "reads RED / ok:false
+     for days on two CARRIED unmeasured rows (snuffer_chibi, tallyman_chibi)" and that `shipped_red`
+     is empty / `ok_shipped` true. MEASURED TODAY on origin/art: the report is a DIFFERENT SHAPE -
+     top-level `ok: true`, `verdict: "GREEN"`, 64 `pairs`, `errors` 0, `blind_views` 0,
+     `unproved_cells` 0, and there is no `shipped_red` or `ok_shipped` key at all. The instruction
+     "do not report the art gate is green" is now the opposite of the truth. REWRITE THAT NOTE.
+  b. THE HUB BLOCK'S PUBLISHED SHA AND DELTA ARE BOTH STALE. The prompt says gh-pages is 05ac2679 /
+     tree 9ca8051e / pushed 19 Nov 20:06, with a 3-file +59/-1 delta. MEASURED TODAY: gh-pages is
+     **8d214d36**, tree **1d8bce63**, pushed **25 Nov 09:55:03 CT** ("hub publish 8 (cache-bust)").
+     The unpublished delta is now **ONE file, NOTES.md +31/-0** - nothing viewer-facing is waiting.
+  c. THE MINIBOSS BODY COUNT IN THE PROMPT ("46 rows, 44 live bodies, two retired _chibi") no longer
+     matches the register, which now judges 64 pairs. I am deliberately NOT publishing a replacement
+     body count: the only matcher I ran against tools/art/minibosses.py was a FLAT REGEX over a
+     multi-line GDScript-style dict, which is exactly the instrument this house forbids quoting.
+     The next seat should brace-parse it before writing a number.

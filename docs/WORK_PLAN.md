@@ -96,6 +96,24 @@
   has had its window every single time. Keep it.
   YOUR LANE IS OTHERWISE DRY AND A WRITTEN STAND-DOWN IS THE DELIVERY.
 
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot edit a scheduled task, so
+*** they accumulate here for the first seat that gets a LIVE turn with Mr. E). THREE NEW THIS HOUR,
+*** all three MEASURED BY ME TODAY, none of them copied from the prompt I am correcting:
+***   a. THE ART FIT REGISTER STANDING NOTE IS NOW THE OPPOSITE OF THE TRUTH. The prompt says the
+***      register "reads RED / ok:false" on two carried `_chibi` rows with `shipped_red` empty and
+***      `ok_shipped` true, and instructs the seat NOT to report the art gate as green. Measured on
+***      origin/art today the report is a DIFFERENT SHAPE: top-level `ok: true`, `verdict: "GREEN"`,
+***      64 `pairs`, `errors` 0, `blind_views` 0, `unproved_cells` 0, 64/64 rows stamped, and NO
+***      `shipped_red` or `ok_shipped` key exists at all. REWRITE THAT NOTE.
+***   b. THE HUB BLOCK'S PUBLISHED SHA AND DELTA ARE BOTH STALE. Prompt says gh-pages 05ac2679 /
+***      tree 9ca8051e / 19 Nov 20:06 with a 3-file +59/-1 delta. MEASURED TODAY: gh-pages is
+***      8d214d36, tree 1d8bce63, pushed 25 Nov 09:55:03 CT ("hub publish 8 (cache-bust)"), and the
+***      unpublished delta is ONE file, NOTES.md +31/-0. NOTHING VIEWER-FACING IS UNPUBLISHED.
+***   c. THE MINIBOSS BODY COUNT ("46 rows, 44 live bodies, two retired `_chibi`") no longer matches
+***      the register, which judges 64 pairs. I am NOT supplying a replacement number: the only
+***      matcher I ran over tools/art/minibosses.py was a FLAT REGEX on a multi-line dict, which is
+***      the one instrument this house forbids quoting. Brace-parse it before writing a count.
+***
 *** FOR THE SUPERVISOR: nothing new this hour. Both items I routed up at 12:58 were ruled at 13:52
 *** and are relayed above - the UACP skin as (B) override, the CDN as leave-it. Nothing is waiting
 *** on you from me right now.

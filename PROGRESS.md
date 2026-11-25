@@ -1,3 +1,45 @@
+## S134 - 25 Nov 2026, 11:08-11:2x CT (game build) - SYSTEM 12 STEP S110c-2: THE 20 UACP BODIES IMPORT, BUT THEY SHIPPED INVISIBLE AND THEN BLACK-SKINNED, SO NOTHING IS WIRED AND NOTHING ENTERS assets/ ON laptop
+
+TOOK: the 10:58 TAKE THIS NEXT game-build row - S110c-2, copy the 20 UACP glbs into assets/, import,
+wire per role with a PER-BODY scale, licence note beside them, prove any post-import instrument red.
+
+DONE (all on checkpoint branch `gamebuild-s134-wip`, NOT on laptop - see why below):
+- assets/characters/uacp/ : 20 .glb + LICENSE.txt (CC0, the S133 page read, quaternius.com/packs/
+  ultimatedanimatedcharacter.html). `--headless --import` 0 errors.
+- tools/_s134_uacp_scale.gd - loads the bodies as res:// PackedScenes (as the game will) and measures
+  a HEAD-BONE scale (hat-free) beside the AABB scale. FINDING: all 20 share one skeleton, Head bone
+  rest y = 2.167 on every body, KayKit ADV head y = 1.241 on all four -> k_head = 0.5728 FOR EVERY
+  BODY. The per-body spread S133 saw (3.147-4.292) is hats and hair: hat_bias -2% (Witch) to -28%
+  (Goblin_Male). S133's 0.7249 constant would have stood every UACP head ~27% above a KayKit head.
+  So "per-body scale" resolves to ONE number, but now for the right reason, and the table is printed.
+- FINDING 1, CAUGHT ONLY BY LOOKING: the first lineup render (renders/cycles/s134/lineup.png) drew
+  the KayKit bodies and NO UACP BODY AT ALL, while every number above measured fine. Cause: the
+  off-repo FBX->glb conversion wrote EVERY material (120/120) with base alpha 0.0 + alphaMode MASK,
+  so Godot imported ALPHA_SCISSOR at alpha 0. Fixed in the repo copies by rewriting the glb JSON
+  chunk (alpha 1, OPAQUE); the staging originals are untouched. The gate now counts cut-away
+  surfaces and was RED-PROVED ON THE REAL DEFECT: run against the pre-fix import it printed
+  `UACP_SCALE FAIL ok=0/20 fails=["BlueSoldier_Female: 6 surfaces cut away (alpha)", ...]`.
+- FINDING 2, ALSO ONLY BY LOOKING: after the fix the bodies draw, but SKIN IS BLACK - the "Skin"
+  material came through the conversion as baseColor 0.0134 grey (Worker_Male; the face plate is
+  right). That is the converter reading the wrong colour, not a lighting issue (metallic 0). I did
+  NOT invent a skin colour; the true one must be read off the pack source. That is S110c-2b.
+WHY NOTHING IS ON laptop: S108's rule - these bodies enter assets/ only in the commit that wires
+them - and black-skinned bodies must not be wired. The checkpoint holds the work; the worktree copy
+was moved out of R so no `git add -A` can sweep it in.
+NEXT (S110c-2b): fix Skin colour from the pack source (re-run the converter reading the right
+property, or patch from source values), re-render the lineup and LOOK, then wire per role in
+townsfolk.gd at k 0.5728 with the clip-prefix strip S133 found ("CharacterArmature|...|Idle").
+Gear.strip_props/dress_role assume KayKit bone names; UACP has Fist.L/Fist.R, so wiring must skip
+or remap gear for UACP bodies.
+
+GATES (verdict lines): parse 0 SCRIPT ERROR / 0 Parse Error (twice, before and after the fix);
+UACP_SCALE OK 20 bodies imported from res://, per-body k 0.5728-0.5728 (head-bone, hat-free), 0
+cut-away surfaces; --redprove -> UACP_SCALE FAIL ok=20/21 ["Nobody_Redprove: not imported"];
+--redprove-bone -> UACP_SCALE FAIL ok=0/20 (no head bone); pre-fix -> FAIL 0/20 (cut away);
+OFFFLOOR_VERDICT OK 0 of 2112; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/18117 PASS;
+DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. Looked at lineup.png twice.
+No Twitch test, zero bits.
+
 ## B147 - 25 Nov 2026, 03:45 CT (chat bot) - THE 60 -> 61 REPUBLISH IS PAID AT THE FEED AND BOTH CARRIED CONFIRMATIONS RAN IN ONE WINDOW: COMMANDS_DOC OK 32, L14 23 OF 24, AND THE ONE RED IS AN UNMERGED S127
 
 TOOK: the TAKE THIS NEXT CHAT BOT row off merged main 56724088 - republish 60 -> 61, trigger the

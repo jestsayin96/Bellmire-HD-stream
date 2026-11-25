@@ -184,6 +184,120 @@ so. **But the honest version is that what keeps it out of hero territory is now 
 the height and the hat - not the base.** If the team lead reads the bar more strictly than
 that, the fix is cheap (drop `HEM` back toward 0.50) and I would rather be told than guess.
 
+## PASS 5 - THE BACK VIEW. THE ONE VIEW NOBODY HAD EVER SHOT.
+
+The team lead's 16:58 row of 25 Nov: *"Render the back at the same 160 px rung, in colour
+and as pure silhouette, look at it, and say in your own words whether the facing reads."*
+Pass 3 and pass 4 both filed this against themselves and neither fixed it. **Nothing in
+this pass changed a vertex, a colour, a luma ratio, a wear value, the mechanic, the
+height, the theme or the gate.** It is a camera and two instruments.
+
+`tools/art/_ol_back.py` renders **front, side and back in ONE invocation through one
+camera rig**, because ortho scale, clip range and the lamp rig are all derived per run
+from measured bounds - a back.png shot in a different run from the front.png it is
+compared against is not a comparison. `lordgen.VIEWS` is patched FOR THAT PROCESS ONLY
+and restored in a `finally`: adding 180 to the shared tuple would re-render and re-report
+sixty-three bodies to answer one question about one of them.
+
+**BLANK AND BORDER, off the written bytes:** front / side / back all `border_alpha 0.000`,
+opaque 194,034 / 134,324 / 188,596 px, zero blanks, zero clips. Report:
+`renders/art/minibosses/_ol_back4/_back_report.json`. The body is unchanged at 4 meshes,
+850 faces, 1.545 x 1.075 x 2.40 m.
+
+### THE FACING TEST, AND IT IS A DIFFERENCE BETWEEN TWO PICTURES
+
+A body with no facing reads the same from front and back - that is the Beadle fault in one
+sentence. For a front/back-symmetric body the back view *is* the front view mirrored in X.
+So `tools/art/_ol_backsheet.py` scores the front silhouette against the **back silhouette
+mirrored**, at the rung, each normalised to its own bbox:
+
+| measure | value | what it means |
+|---|---|---|
+| front vs back, raw IoU | **0.136** | meaningless on its own - the arm simply swapped sides |
+| front vs back **MIRRORED**, IoU | **0.822** | **the OUTLINE carries almost no facing** |
+| w/h front · side · back | 0.650 · 0.453 · 0.653 | back and front are the same shape to three decimals |
+
+Both are printed so neither can be quietly swapped for the other, and the panels are drawn
+either way so the eye gets the last word.
+
+### IN MY OWN WORDS, LOOKING AT IT: THE FACING READS, AND IT IS NOT THE BEADLE FAULT - BUT THE OUTLINE DOES NONE OF THE WORK
+
+`renders/art/minibosses/_ol_back_facing.png` (rung, colour + silhouette, all three views),
+`_ol_back_head.png` (heads at full res) and `_ol_back_rungface.png` (heads AT the 160 px
+rung, 12x nearest - the decisive picture).
+
+**IN COLOUR, AT THE RUNG, YES.** The front head is unmistakably a face: two pale eyes as
+two separate dots, the snout block jutting left under the brim. The back head is the back
+of a head - no pair, no snout profile, a dark dome with the cap's lit crown on top and the
+neck block below. A viewer standing behind him is not looking at a face. **It reads as "he
+is looking off that way", which is the mechanic.**
+
+**IN PURE SILHOUETTE, NO, AND I AM NOT GOING TO DRESS THAT UP.** At 0.822 against the
+mirrored front, the outline from behind is the outline from in front. The 18 % that differs
+is the head: the front's squared snout-and-brim jut against the back's smoother dome. The
+hat, the horizontal pale arm, the waist, the hem and the two legs are identical both ways
+by construction. **Every bit of the facing is carried by shading. If this body is ever
+drawn as a flat silhouette - a map pip, a shadow, a UI stamp - IT HAS NO FACING AT ALL.**
+That is a real limitation of the body and it is named here rather than left to be found.
+
+### THE EYE FROM BEHIND, MEASURED THE ONLY WAY THAT MEANS ANYTHING
+
+There is a pale fleck at the skull's edge in the back view. The wrong way to price it is to
+measure how big the eye geometry is - that is the pass-11 fault of 17 Nov exactly, where
+`mask_of` rendered a group ALONE and answered how BIG while the honest answer to *can it be
+seen* was zero. So `tools/art/_ol_eyeablate.py` asks the **viewer's** question: one camera,
+the body with its eyes and the same body rebuilt with the eye mesh hidden, and the score is
+**the pixels that MOVED**. The renderer does the occlusion.
+
+| view | moved px (700x980) | % of body | ≈ px at the 160 rung |
+|---|---|---|---|
+| front | 2,652 | 1.37 % | ~139 |
+| side | 544 | 0.41 % | ~28 |
+| **back** | **599** | **0.32 %** | **~31** |
+
+**So the eyes are 4.5x weaker from behind than from in front, and the pair becomes a single
+fleck.** That is the measured answer to the question this body was invented to answer: the
+Beadle's pale band wrapped and read *identically* front and back; these do not wrap. **But
+they are also no weaker from behind than they are from the side** (31 vs 28 px), and a man
+seen from directly behind arguably should show no eye at all. I would rather state that
+than have it found.
+
+### THE HARNESS GOT IT WRONG TWICE BEFORE IT GOT IT RIGHT, AND BOTH GUARDS ARE KEPT
+
+1. **It scored nothing and refused to call that a pass.** My first selector matched the
+   MATERIAL name and found zero glow meshes. Had it fallen through, it would have ablated
+   nothing and reported *"the eyes move 0 pixels"* - a green-looking number meaning the
+   harness was broken. It refused and exited 2. The merged mesh is named for its slot.
+2. **It then reported that the eye pair moves 100.0 % OF THE BODY**, which is the
+   instrument measuring itself: `render_views` ADDS a key/fill/rim rig every call and I had
+   called it twice into one scene, so the second frame was double-lit and every lit pixel
+   changed. The scene is now torn down and rebuilt between the two renders, and a
+   **contamination guard** now REFUSES any result where more than 20 % of the body moved -
+   two 0.048 m spheres on a 2.40 m body cannot do that, so a number that large is never a
+   finding, it is a fault in the measurement.
+
+### WHAT I STILL SEE WRONG FROM THE BACK (looked at, not inferred)
+
+1. **The back is a blank coat.** Front and back torsos carry the same panel and the same
+   seam line. Nothing on his back says which way he is pointing except the arm, which is
+   mirror-ambiguous on its own.
+2. **The lamp rig is front-biased** (`lordgen.add_lights`: key SUN in front, the only lamp
+   behind is the aura rim), so the back view is darker and cooler than the front. That is
+   the rig, not the model - which is precisely why the facing verdict above is taken off
+   the silhouette row and the colour row is read only for what shading adds.
+3. **The pale mitt is the brightest thing in the back frame too.** From behind it is a
+   white bar at shoulder height with no hand-shape cue, same as the front.
+4. The three pass-4 faults stand unchanged: the neck closes at the rung in the side view,
+   the idle arm is still a bulge rather than an arm, and the thighs merge under the hem.
+
+### THE CHEAP FIX IF THE OUTLINE READ IS WANTED, NOT TAKEN THIS PASS
+
+One change would put the facing in the outline: **pitch the brim down along `F`** so the
+front silhouette gains a notch over the eyes that the back cannot have, or **give the coat
+a shoulder cape/yoke that stops at the shoulder blades**, which is a back-only horizontal.
+Either is a geometry change and the row asked for a camera, not a 64th and not a re-tune,
+so I did neither. **One change at a time, and this pass was the picture.**
+
 ## WHAT I CAN STILL SEE WRONG AFTER PASS 4 (looked at, at the rung, not inferred)
 
 1. **The neck closes at the rung in the side view.** FIX C in pass 3 opened a lit neck
@@ -194,9 +308,9 @@ that, the fix is cheap (drop `HEM` back toward 0.50) and I would rather be told 
    front and three-quarter. It was outside the brief for this pass. It is the next thing.
 3. **The two thighs still merge under the hem in the side view** - the gap opens lower
    down, at the shins. Better than one column, not two clean legs.
-4. **Still no back view rendered.** Pass 3 flagged this and it is still true: the driver
-   shoots front, three-quarter and side, and the view that would hardest test this body's
-   claim to have a facing is the one nobody has shot. **Not claimed as proved.**
+4. ~~**Still no back view rendered.**~~ **CLOSED AT PASS 5, 25 Nov 17:4x CT** - shot, looked
+   at and scored; see the pass-5 section above. The short answer: it reads in colour at the
+   rung and **not at all in silhouette**.
 5. **The skirt now reads a little like a jerkin over a kilt** from the front, because the
    chest is wider than the hip section above the flare. It reads as a man, which was the
    ask, but it is not unambiguously a long coat any more.

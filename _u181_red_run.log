@@ -1,0 +1,80 @@
+=== plain-RED rc=0
+ at bone bowman.
+FEED Plainname2 mouths bolt. Nothing comes of it (1 vs DC 12).
+FEED Plainname1's bolt flickers, thinks better of it, and quits (1 vs DC 12).
+RIG: no clip 'Idle_B' on Barbarian - playing its idle
+U180 plain=true k=160 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=572 over=-46 a=1.00 lines=2 "Washing hangs on a line, and i"
+   lbl bottom=603 over=-15 a=0.70 lines=1 "The Hollow King rises. Wreathe"
+FEED Plainname2 casts Bolt at hollowed bone bowman.
+U180 plain=true k=180 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=572 over=-46 a=1.00 lines=2 "Washing hangs on a line, and i"
+   lbl bottom=603 over=-15 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=true k=200 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=572 over=-46 a=1.00 lines=2 "Washing hangs on a line, and i"
+   lbl bottom=603 over=-15 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+FEED Plainname1 casts Bolt at hollowed bone bowman.
+U180 plain=true k=220 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=572 over=-46 a=1.00 lines=2 "Washing hangs on a line, and i"
+   lbl bottom=603 over=-15 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=true k=240 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=572 over=-46 a=1.00 lines=2 "Washing hangs on a line, and i"
+   lbl bottom=603 over=-15 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U175_LABEL s100 pane=director w=300 pane_w=960 text_w=274 trimmed=false "Now watching: Bellmire"
+U175_LABEL s100 pane=bits w=375 pane_w=960 text_w=349 trimmed=false "Now watching: a townsperson"
+U175_LABEL s100 pane=subs w=489 pane_w=960 text_w=463 trimmed=false "Now watching: Plainname1 the Elf Mage"
+U175_LABEL s100 pane=points w=350 pane_w=960 text_w=324 trimmed=false "Now watching: the livestock"
+U175_SHOT host_s100 (window (1920, 1080))
+U180 plain=true k=160 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=true k=180 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=true k=200 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=true k=220 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=true k=240 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+FEED Plainname1 casts Chain Bolt at hollowed bone bowman.
+U175_LABEL s125 pane=director w=376 pane_w=960 text_w=343 trimmed=false "Now watching: Bellmire"
+U175_LABEL s125 pane=bits w=469 pane_w=960 text_w=436 trimmed=false "Now watching: a townsperson"
+U175_LABEL s125 pane=subs w=550 pane_w=960 text_w=580 trimmed=true "Now watching: Plainname1 the Elf Mage"
+U175_LABEL s125 pane=points w=438 pane_w=960 text_w=405 trimmed=false "Now watching: the livestock"
+U175_SHOT host_s125 (window (1920, 1080))
+FEED Plainname2 casts Smite at hollowed bone bowman.
+U180 plain=true k=160 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=1.00 lines=2 "Plainname2 casts Smite at bone"
+U180 plain=true k=180 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=1.00 lines=2 "Plainname2 casts Smite at bone"
+U180 plain=true k=200 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=602
+   lbl bottom=556 over=-51 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=602 over=-5 a=0.43 lines=1 "Plain3 smites Plain0 for 21 (c"
+U180 plain=true k=220 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=602
+   lbl bottom=556 over=-51 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=602 over=-5 a=1.00 lines=1 "Plain3 smites Plain0 for 21 (c"
+U180 plain=true k=240 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=602
+   lbl bottom=556 over=-51 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=602 over=-5 a=1.00 lines=1 "Plain3 smites Plain0 for 21 (c"
+U175_LABEL s150 pane=director w=451 pane_w=960 text_w=412 trimmed=false "Now watching: Bellmire"
+U175_LABEL s150 pane=bits w=562 pane_w=960 text_w=523 trimmed=false "Now watching: a townsperson"
+U175_LABEL s150 pane=subs w=546 pane_w=960 text_w=696 trimmed=true "Now watching: Plainname1 the Elf Mage"
+U175_LABEL s150 pane=points w=525 pane_w=960 text_w=486 trimmed=false "Now watching: the livestock"
+U175_SHOT host_s150 (window (1920, 1080))
+U181_DONE checks=40 fails=0
+
+JOBDONE

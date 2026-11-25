@@ -1,0 +1,215 @@
+=== PARSE
+es://assets/gear/dungeon/shield_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5368)
+ERROR: Cannot open file 'res://.godot/imported/crossbow_common.glb-0f3cf24ecb96f4168fddd5cb8bfbbd39.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5368)
+ERROR: Failed loading resource: res://.godot/imported/crossbow_common.glb-0f3cf24ecb96f4168fddd5cb8bfbbd39.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5368)
+ERROR: Failed loading resource: res://assets/gear/dungeon/crossbow_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5368)
+
+=== hostile rc=0
+elf ma"
+   lbl bottom=556 over=-62 a=1.00 lines=1 "A washing-line of rags, drippi"
+   lbl bottom=587 over=-31 a=0.95 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=false k=200 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=587
+   lbl bottom=461 over=-157 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=525 over=-93 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=556 over=-62 a=1.00 lines=1 "A washing-line of rags, drippi"
+   lbl bottom=587 over=-31 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=false k=220 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=587
+   lbl bottom=461 over=-157 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=525 over=-93 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=556 over=-62 a=1.00 lines=1 "A washing-line of rags, drippi"
+   lbl bottom=587 over=-31 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=false k=240 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=587
+   lbl bottom=461 over=-157 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=525 over=-93 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=556 over=-62 a=1.00 lines=1 "A washing-line of rags, drippi"
+   lbl bottom=587 over=-31 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U175_LABEL s100 pane=director w=300 pane_w=960 text_w=274 trimmed=false "Now watching: Bellmire"
+U175_LABEL s100 pane=bits w=350 pane_w=960 text_w=324 trimmed=false "Now watching: the livestock"
+U175_LABEL s100 pane=subs w=556 pane_w=960 text_w=1262 trimmed=true "Now watching: ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイ"
+U175_LABEL s100 pane=points w=350 pane_w=960 text_w=324 trimmed=false "Now watching: the livestock"
+U175_SHOT host_s100 (window (1920, 1080))
+U180 plain=false k=160 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=false k=180 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=false k=200 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW's bolt fizzles in a cough of ash (10 vs DC 12).
+U180 plain=false k=220 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+U180 plain=false k=240 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "The Hollow King rises. Wreathe"
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ starts bolt and forgets the end (11 vs DC 12).
+U175_LABEL s125 pane=director w=376 pane_w=960 text_w=343 trimmed=false "Now watching: Bellmire"
+U175_LABEL s125 pane=bits w=438 pane_w=960 text_w=405 trimmed=false "Now watching: the livestock"
+U175_LABEL s125 pane=subs w=550 pane_w=960 text_w=1579 trimmed=true "Now watching: ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイ"
+U175_LABEL s125 pane=points w=438 pane_w=960 text_w=405 trimmed=false "Now watching: the livestock"
+U175_SHOT host_s125 (window (1920, 1080))
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW casts Bolt at skeleton warrior.
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ casts Bolt at skeleton warrior.
+U180 plain=false k=160 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=1.00 lines=2 "The Hollow King rises. Wreathe"
+U180 plain=false k=180 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=1.00 lines=2 "The Hollow King rises. Wreathe"
+U180 plain=false k=200 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=649
+   lbl bottom=649 over=42 a=0.63 lines=5 "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+U180 plain=false k=220 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=649
+   lbl bottom=649 over=42 a=1.00 lines=5 "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+U180 plain=false k=240 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=649
+   lbl bottom=649 over=42 a=1.00 lines=5 "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+U175_LABEL s150 pane=director w=451 pane_w=960 text_w=412 trimmed=false "Now watching: Bellmire"
+U175_LABEL s150 pane=bits w=525 pane_w=960 text_w=486 trimmed=false "Now watching: the livestock"
+U175_LABEL s150 pane=subs w=546 pane_w=960 text_w=1894 trimmed=true "Now watching: ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイ"
+U175_LABEL s150 pane=points w=525 pane_w=960 text_w=486 trimmed=false "Now watching: the livestock"
+U175_SHOT host_s150 (window (1920, 1080))
+U181_DONE checks=40 fails=0
+ (res://scripts/hero_body.gd:52)
+       [3] start (res://scripts/delve.gd:63)
+       [4] _process (res://tools/_u181_probe.gd:118)
+ERROR: Cannot open file 'res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://.godot/imported/staff_common.glb-21673bf074384c59bf20536d456f373a.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://assets/gear/dungeon/staff_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+
+=== plain rc=0
+P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=572 over=-46 a=1.00 lines=2 "Plainname1 and 3 others descen"
+   lbl bottom=603 over=-15 a=0.52 lines=1 "They carry 8 flasks of oil bet"
+U180 plain=true k=200 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=572 over=-46 a=1.00 lines=2 "Plainname1 and 3 others descen"
+   lbl bottom=603 over=-15 a=1.00 lines=1 "They carry 8 flasks of oil bet"
+U180 plain=true k=220 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=572 over=-46 a=1.00 lines=2 "Plainname1 and 3 others descen"
+   lbl bottom=603 over=-15 a=1.00 lines=1 "They carry 8 flasks of oil bet"
+U180 plain=true k=240 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=572 over=-46 a=1.00 lines=2 "Plainname1 and 3 others descen"
+   lbl bottom=603 over=-15 a=1.00 lines=1 "They carry 8 flasks of oil bet"
+U175_LABEL s100 pane=director w=300 pane_w=960 text_w=274 trimmed=false "Now watching: Bellmire"
+U175_LABEL s100 pane=bits w=350 pane_w=960 text_w=324 trimmed=false "Now watching: the livestock"
+U175_LABEL s100 pane=subs w=548 pane_w=960 text_w=522 trimmed=false "Now watching: Plainname2 the Human Cleric"
+U175_LABEL s100 pane=points w=489 pane_w=960 text_w=463 trimmed=false "Now watching: Plainname1 the Elf Mage"
+U175_SHOT host_s100 (window (1920, 1080))
+FEED Plainname2 casts Bolt at skeleton warrior.
+FEED Plainname1 casts Bolt at skeleton warrior.
+U180 plain=true k=160 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=565
+   lbl bottom=528 over=-83 a=1.00 lines=2 "Plainname1 and 3 others descen"
+   lbl bottom=565 over=-46 a=1.00 lines=1 "They carry 8 flasks of oil bet"
+U180 plain=true k=180 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=565
+   lbl bottom=528 over=-83 a=1.00 lines=2 "Plainname1 and 3 others descen"
+   lbl bottom=565 over=-46 a=1.00 lines=1 "They carry 8 flasks of oil bet"
+U180 plain=true k=200 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=565
+   lbl bottom=528 over=-83 a=1.00 lines=2 "Plainname1 and 3 others descen"
+   lbl bottom=565 over=-46 a=1.00 lines=1 "They carry 8 flasks of oil bet"
+U180 plain=true k=220 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=565
+   lbl bottom=528 over=-83 a=1.00 lines=2 "Plainname1 and 3 others descen"
+   lbl bottom=565 over=-46 a=1.00 lines=1 "They carry 8 flasks of oil bet"
+U180 plain=true k=240 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=565
+   lbl bottom=528 over=-83 a=1.00 lines=2 "Plainname1 and 3 others descen"
+   lbl bottom=565 over=-46 a=1.00 lines=1 "They carry 8 flasks of oil bet"
+U175_LABEL s125 pane=director w=376 pane_w=960 text_w=343 trimmed=false "Now watching: Bellmire"
+U175_LABEL s125 pane=bits w=438 pane_w=960 text_w=405 trimmed=false "Now watching: the livestock"
+U175_LABEL s125 pane=subs w=550 pane_w=960 text_w=653 trimmed=true "Now watching: Plainname2 the Human Cleric"
+U175_LABEL s125 pane=points w=550 pane_w=960 text_w=580 trimmed=true "Now watching: Plainname1 the Elf Mage"
+U175_SHOT host_s125 (window (1920, 1080))
+U180 plain=true k=160 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=1.00 lines=2 "They carry 8 flasks of oil bet"
+U180 plain=true k=180 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=0.29 lines=2 "'Whatever it is, it is a guest"
+U180 plain=true k=200 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=0.92 lines=2 "'Whatever it is, it is a guest"
+U180 plain=true k=220 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=1.00 lines=2 "'Whatever it is, it is a guest"
+U180 plain=true k=240 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=1.00 lines=2 "'Whatever it is, it is a guest"
+U175_LABEL s150 pane=director w=451 pane_w=960 text_w=412 trimmed=false "Now watching: Bellmire"
+U175_LABEL s150 pane=bits w=525 pane_w=960 text_w=486 trimmed=false "Now watching: the livestock"
+U175_LABEL s150 pane=subs w=546 pane_w=960 text_w=782 trimmed=true "Now watching: Plainname2 the Human Cleric"
+U175_LABEL s150 pane=points w=546 pane_w=960 text_w=696 trimmed=true "Now watching: Plainname1 the Elf Mage"
+U175_SHOT host_s150 (window (1920, 1080))
+U181_DONE checks=40 fails=0
+.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Cannot open file 'res://.godot/imported/crossbow_common.glb-0f3cf24ecb96f4168fddd5cb8bfbbd39.scn'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://.godot/imported/crossbow_common.glb-0f3cf24ecb96f4168fddd5cb8bfbbd39.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://assets/gear/dungeon/crossbow_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+
+JOBDONE

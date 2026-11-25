@@ -1,0 +1,201 @@
+=== PARSE
+ise (res://scripts/town.gd:5368)
+ERROR: Failed loading resource: res://.godot/imported/crossbow_common.glb-0f3cf24ecb96f4168fddd5cb8bfbbd39.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5368)
+ERROR: Failed loading resource: res://assets/gear/dungeon/crossbow_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _ready (res://scripts/hero_body.gd:52)
+       [3] _raise (res://scripts/town.gd:5368)
+
+=== hostile rc=0
+747710217014/shoulder=85.0(delve start hurt 0.00), chat_2104/follow=49.8(chat 1s ago), hero_2103/follow=34.3(town life), tour_0/push=10.0(quiet baseline)
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW casts Smite at skeleton warrior.
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ casts Bolt at skeleton warrior.
+U180 plain=false k=160 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=587
+   lbl bottom=461 over=-157 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=525 over=-93 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=556 over=-62 a=1.00 lines=1 "A sign reads TOLL, and the tol"
+   lbl bottom=587 over=-31 a=0.80 lines=1 "Nightwing rises. Too fast to s"
+U180 plain=false k=180 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=587
+   lbl bottom=461 over=-157 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=525 over=-93 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=556 over=-62 a=1.00 lines=1 "A sign reads TOLL, and the tol"
+   lbl bottom=587 over=-31 a=1.00 lines=1 "Nightwing rises. Too fast to s"
+U180 plain=false k=200 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=587
+   lbl bottom=461 over=-157 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=525 over=-93 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=556 over=-62 a=1.00 lines=1 "A sign reads TOLL, and the tol"
+   lbl bottom=587 over=-31 a=1.00 lines=1 "Nightwing rises. Too fast to s"
+U180 plain=false k=220 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=587
+   lbl bottom=461 over=-157 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=525 over=-93 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=556 over=-62 a=1.00 lines=1 "A sign reads TOLL, and the tol"
+   lbl bottom=587 over=-31 a=1.00 lines=1 "Nightwing rises. Too fast to s"
+U180 plain=false k=240 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=587
+   lbl bottom=461 over=-157 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=525 over=-93 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=556 over=-62 a=1.00 lines=1 "A sign reads TOLL, and the tol"
+   lbl bottom=587 over=-31 a=1.00 lines=1 "Nightwing rises. Too fast to s"
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+U175_LABEL s100 pane=director w=300 pane_w=960 text_w=274 trimmed=false "Now watching: Bellmire"
+U175_LABEL s100 pane=bits w=375 pane_w=960 text_w=349 trimmed=false "Now watching: a townsperson"
+U175_LABEL s100 pane=subs w=350 pane_w=960 text_w=324 trimmed=false "Now watching: the livestock"
+U175_LABEL s100 pane=points w=375 pane_w=960 text_w=349 trimmed=false "Now watching: a townsperson"
+U175_SHOT host_s100 (window (1920, 1080))
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW's bolt lands somewhere between a spell and a hiccup (7 vs DC 12).
+U180 plain=false k=160 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "Nightwing rises. Too fast to s"
+FEED ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ casts Bolt at hollowed cave spider.
+FEED ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW casts Bolt at hollowed cave spider.
+U180 plain=false k=180 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "Nightwing rises. Too fast to s"
+U180 plain=false k=200 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "Nightwing rises. Too fast to s"
+U180 plain=false k=220 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "Nightwing rises. Too fast to s"
+U180 plain=false k=240 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=584
+   lbl bottom=547 over=-64 a=1.00 lines=3 "V1 takes the oath as an elf ma"
+   lbl bottom=584 over=-27 a=1.00 lines=1 "Nightwing rises. Too fast to s"
+U175_LABEL s125 pane=director w=376 pane_w=960 text_w=343 trimmed=false "Now watching: Bellmire"
+U175_LABEL s125 pane=bits w=469 pane_w=960 text_w=436 trimmed=false "Now watching: a townsperson"
+U175_LABEL s125 pane=subs w=438 pane_w=960 text_w=405 trimmed=false "Now watching: the livestock"
+U175_LABEL s125 pane=points w=469 pane_w=960 text_w=436 trimmed=false "Now watching: a townsperson"
+U175_SHOT host_s125 (window (1920, 1080))
+U180 plain=false k=160 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=603
+   lbl bottom=603 over=-4 a=1.00 lines=4 "ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWW"
+U180 plain=false k=180 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=603
+   lbl bottom=603 over=-4 a=1.00 lines=4 "ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWW"
+U180 plain=false k=200 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=603
+   lbl bottom=603 over=-4 a=1.00 lines=4 "ВЕЛИКИЙ_МАГ_WWWWWWWWWWWWWWWWWW"
+U180 plain=false k=220 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=579
+   lbl bottom=579 over=-28 a=0.44 lines=3 "ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ"
+U180 plain=false k=240 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=579
+   lbl bottom=579 over=-28 a=1.00 lines=3 "ドラゴンスレイヤードラゴンスレイヤードラゴンスレイヤードラゴ"
+U175_LABEL s150 pane=director w=451 pane_w=960 text_w=412 trimmed=false "Now watching: Bellmire"
+U175_LABEL s150 pane=bits w=562 pane_w=960 text_w=523 trimmed=false "Now watching: a townsperson"
+U175_LABEL s150 pane=subs w=525 pane_w=960 text_w=486 trimmed=false "Now watching: the livestock"
+U175_LABEL s150 pane=points w=546 pane_w=960 text_w=523 trimmed=true "Now watching: a townsperson"
+U175_SHOT host_s150 (window (1920, 1080))
+U181_DONE checks=40 fails=0
+4.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://assets/gear/dungeon/shield_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:36)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+
+=== plain rc=0
+nel, 1 hollowed bone sentinel, 1 drowned skeleton warrior.
+FEED Market stalls laid, prices chalked in a hand too small.
+FEED The Hollow King, Sodden rises. Dragged up out of the fen; its fire hisses and will not catch, and it is furious about it.
+FEED The guild has put down The Hollow King before. Not this one.
+FEED Something seated takes the room's warmth for itself.
+DIRECTOR t=0.0 CUT lord_747156568898 shot=shoulder pri=101.0 why=start held_prev=0.0 pace=1.0 | lord_747156568898/shoulder=101.0(lord), fight_747156568898/shoulder=85.0(delve start hurt 0.00), chat_2104/follow=49.8(chat 1s ago), hero_2102/follow=34.5(town life), tour_0/push=10.0(quiet baseline)
+FEED Plainname2 casts Smite at skeleton warrior.
+FEED Plainname1 casts bolt and gets weather for it (10 vs DC 12).
+RIG: no clip 'Idle_B' on Rogue - playing its idle
+U180 plain=true k=160 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=587
+   lbl bottom=461 over=-157 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=525 over=-93 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=556 over=-62 a=1.00 lines=1 "They carry 8 flasks of oil bet"
+   lbl bottom=587 over=-31 a=1.00 lines=1 "Market stalls laid, prices cha"
+U180 plain=true k=180 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=539 over=-79 a=1.00 lines=1 "Market stalls laid, prices cha"
+   lbl bottom=603 over=-15 a=0.13 lines=2 "The Hollow King, Sodden rises."
+U180 plain=true k=200 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=539 over=-79 a=1.00 lines=1 "Market stalls laid, prices cha"
+   lbl bottom=603 over=-15 a=0.94 lines=2 "The Hollow King, Sodden rises."
+FEED Plainname1 casts Bolt at hollowed bone sentinel.
+U180 plain=true k=220 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=539 over=-79 a=1.00 lines=1 "Market stalls laid, prices cha"
+   lbl bottom=603 over=-15 a=1.00 lines=2 "The Hollow King, Sodden rises."
+FEED Plainname2 calls up bolt and gets a cold draught (6 vs DC 12).
+U180 plain=true k=240 panel=[P: (582.0, 366.0), S: (756.0, 283.0)] vellum_local=[P: (53.96, 34.6875), S: (648.08, 216.625)] vellum_bottom=617 boxbottom=603
+   lbl bottom=444 over=-174 a=1.00 lines=1 "Bellmire is a hamlet now - a w"
+   lbl bottom=508 over=-110 a=1.00 lines=2 "V1 takes the oath as an elf ma"
+   lbl bottom=539 over=-79 a=1.00 lines=1 "Market stalls laid, prices cha"
+   lbl bottom=603 over=-15 a=1.00 lines=2 "The Hollow King, Sodden rises."
+U175_LABEL s100 pane=director w=300 pane_w=960 text_w=274 trimmed=false "Now watching: Bellmire"
+U175_LABEL s100 pane=bits w=350 pane_w=960 text_w=324 trimmed=false "Now watching: the livestock"
+U175_LABEL s100 pane=subs w=375 pane_w=960 text_w=349 trimmed=false "Now watching: a townsperson"
+U175_LABEL s100 pane=points w=375 pane_w=960 text_w=349 trimmed=false "Now watching: a townsperson"
+U175_SHOT host_s100 (window (1920, 1080))
+FEED Plainname2 casts Smite at hollowed bone sentinel.
+U180 plain=true k=160 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=566
+   lbl bottom=566 over=-45 a=1.00 lines=3 "The Hollow King, Sodden rises."
+U180 plain=true k=180 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=566
+   lbl bottom=566 over=-45 a=1.00 lines=3 "The Hollow King, Sodden rises."
+U180 plain=true k=200 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=566
+   lbl bottom=566 over=-45 a=1.00 lines=3 "The Hollow King, Sodden rises."
+U180 plain=true k=220 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=566
+   lbl bottom=566 over=-45 a=1.00 lines=3 "The Hollow King, Sodden rises."
+U180 plain=true k=240 panel=[P: (584.0, 368.0), S: (752.0, 279.0)] vellum_local=[P: (59.48, 39.4375), S: (633.04, 204.125)] vellum_bottom=612 boxbottom=566
+   lbl bottom=566 over=-45 a=1.00 lines=3 "The Hollow King, Sodden rises."
+U175_LABEL s125 pane=director w=376 pane_w=960 text_w=343 trimmed=false "Now watching: Bellmire"
+U175_LABEL s125 pane=bits w=438 pane_w=960 text_w=405 trimmed=false "Now watching: the livestock"
+U175_LABEL s125 pane=subs w=469 pane_w=960 text_w=436 trimmed=false "Now watching: a townsperson"
+U175_LABEL s125 pane=points w=469 pane_w=960 text_w=436 trimmed=false "Now watching: a townsperson"
+U175_SHOT host_s125 (window (1920, 1080))
+FEED Plainname2 casts Smite at bone sentinel.
+U180 plain=true k=160 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=0.25 lines=2 "Plainname2 casts Smite at skel"
+U180 plain=true k=180 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=0.85 lines=2 "Plainname2 casts Smite at skel"
+U180 plain=true k=200 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=1.00 lines=2 "Plainname2 casts Smite at skel"
+U180 plain=true k=220 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=1.00 lines=2 "Plainname2 casts Smite at skel"
+U180 plain=true k=240 panel=[P: (585.0, 369.0), S: (750.0, 277.0)] vellum_local=[P: (64.24001, 43.3125), S: (621.52, 194.875)] vellum_bottom=607 boxbottom=555
+   lbl bottom=555 over=-52 a=0.42 lines=2 "Plainname1 casts bolt and gets"
+U175_LABEL s150 pane=director w=451 pane_w=960 text_w=412 trimmed=false "Now watching: Bellmire"
+U175_LABEL s150 pane=bits w=525 pane_w=960 text_w=486 trimmed=false "Now watching: the livestock"
+U175_LABEL s150 pane=subs w=546 pane_w=960 text_w=523 trimmed=true "Now watching: a townsperson"
+U175_LABEL s150 pane=points w=546 pane_w=960 text_w=523 trimmed=true "Now watching: a townsperson"
+U175_SHOT host_s150 (window (1920, 1080))
+U181_DONE checks=40 fails=0
+3a.scn.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+ERROR: Failed loading resource: res://assets/gear/dungeon/staff_common.glb.
+   at: _load (core/io/resource_loader.cpp:317)
+   GDScript backtrace (most recent call first):
+       [0] equip (res://scripts/gear.gd:104)
+       [1] refresh (res://scripts/hero_body.gd:30)
+       [2] _kit_up (res://scripts/adventurers.gd:177)
+       [3] _send_party (res://scripts/adventurers.gd:135)
+       [4] _process (res://scripts/adventurers.gd:117)
+
+JOBDONE

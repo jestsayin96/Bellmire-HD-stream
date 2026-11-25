@@ -417,9 +417,19 @@ func _chrome_h() -> float:
     return 200.0
 
 func _stack_h(lines: Array, font: Font, fs: int, w: float) -> float:
+    # U181: a Label adds its theme's line_spacing (3 px by default) under EVERY text line it draws,
+    # and Font.get_multiline_string_size does not. U180 measured the stack 6-8 px short of the
+    # real VBox at 100%, so the newest line overran the vellum bottom. Count the visual lines
+    # (height / font height) and charge the spacing for each, plus the VBox separation.
+    var ls := float(_box.get_theme_constant("line_spacing", "Label"))
+    var lh := maxf(font.get_height(fs), 1.0)
     var h := 0.0
     for t in lines:
-        h += font.get_multiline_string_size(String(t), HORIZONTAL_ALIGNMENT_LEFT, w, fs).y + 1.0
+        # AUTOWRAP_WORD_SMART also breaks INSIDE a word wider than the box (a 60-char unbroken name
+        # drew 5 lines at 150% while the default flags measured 1): measure with the same flags.
+        var sz := font.get_multiline_string_size(String(t), HORIZONTAL_ALIGNMENT_LEFT, w, fs, -1,
+                TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND | TextServer.BREAK_ADAPTIVE)
+        h += sz.y + ls * maxf(1.0, roundf(sz.y / lh)) + 1.0
     return h
 
 ## L71: the HUD's own tightening of the Chronicle's WORDING. Roll detail is kept ("Perception 20

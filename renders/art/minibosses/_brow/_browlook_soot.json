@@ -1,0 +1,111 @@
+{
+ "arms": {
+  "_bk055": {
+   "label": "soot 0.55  SHIPPED",
+   "moved_px_full": 624,
+   "moved_px_rung": 25,
+   "contrast_255": {
+    "mean": 14.96,
+    "max": 27.41
+   },
+   "marks": [
+    {
+     "px": 25,
+     "w": 13,
+     "h": 3
+    }
+   ],
+   "n_marks": 1,
+   "widest_mark_px": 25,
+   "widest_mark_w": 13,
+   "side_new_px_vs_shipped": 0,
+   "side_lost_px_vs_shipped": 0
+  },
+  "_bk065": {
+   "label": "soot 0.65",
+   "moved_px_full": 633,
+   "moved_px_rung": 27,
+   "contrast_255": {
+    "mean": 18.74,
+    "max": 32.34
+   },
+   "marks": [
+    {
+     "px": 27,
+     "w": 13,
+     "h": 3
+    }
+   ],
+   "n_marks": 1,
+   "widest_mark_px": 27,
+   "widest_mark_w": 13,
+   "side_new_px_vs_shipped": 0,
+   "side_lost_px_vs_shipped": 0
+  },
+  "_bk075": {
+   "label": "soot 0.75",
+   "moved_px_full": 635,
+   "moved_px_rung": 28,
+   "contrast_255": {
+    "mean": 22.47,
+    "max": 37.05
+   },
+   "marks": [
+    {
+     "px": 28,
+     "w": 14,
+     "h": 3
+    }
+   ],
+   "n_marks": 1,
+   "widest_mark_px": 28,
+   "widest_mark_w": 14,
+   "side_new_px_vs_shipped": 0,
+   "side_lost_px_vs_shipped": 0
+  },
+  "_bk085": {
+   "label": "soot 0.85",
+   "moved_px_full": 636,
+   "moved_px_rung": 28,
+   "contrast_255": {
+    "mean": 26.12,
+    "max": 41.05
+   },
+   "marks": [
+    {
+     "px": 28,
+     "w": 14,
+     "h": 3
+    }
+   ],
+   "n_marks": 1,
+   "widest_mark_px": 28,
+   "widest_mark_w": 14,
+   "side_new_px_vs_shipped": 0,
+   "side_lost_px_vs_shipped": 0
+  },
+  "_bk100": {
+   "label": "soot 1.00 (no soot - the pass-16 head)",
+   "moved_px_full": 641,
+   "moved_px_rung": 29,
+   "contrast_255": {
+    "mean": 30.53,
+    "max": 46.48
+   },
+   "marks": [
+    {
+     "px": 29,
+     "w": 14,
+     "h": 3
+    }
+   ],
+   "n_marks": 1,
+   "widest_mark_px": 29,
+   "widest_mark_w": 14,
+   "side_new_px_vs_shipped": 0,
+   "side_lost_px_vs_shipped": 0
+  }
+ },
+ "rung": 160,
+ "thresh_255": 8
+}

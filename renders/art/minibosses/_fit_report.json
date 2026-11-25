@@ -11304,7 +11304,7 @@
      "hero": {
       "alone": 43680,
       "vis": 43680,
-      "delta": 58532,
+      "delta": 58538,
       "seen": 1.0
      },
      "proves": true
@@ -11334,7 +11334,7 @@
      "hero": {
       "alone": 44002,
       "vis": 44002,
-      "delta": 50483,
+      "delta": 50484,
       "seen": 1.0
      },
      "proves": true
@@ -11406,7 +11406,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T13:50:41-06:00",
+   "measured_at": "2026-11-25T14:51:22-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {

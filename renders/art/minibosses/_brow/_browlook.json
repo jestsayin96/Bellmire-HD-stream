@@ -1,0 +1,132 @@
+{
+ "arms": {
+  "_bs00": {
+   "label": "skin 0.00",
+   "moved_px_full": 832,
+   "moved_px_rung": 33,
+   "contrast_255": {
+    "mean": 17.79,
+    "max": 38.62
+   },
+   "marks": [
+    {
+     "px": 33,
+     "w": 14,
+     "h": 4
+    }
+   ],
+   "n_marks": 1,
+   "widest_mark_px": 33,
+   "widest_mark_w": 14,
+   "side_new_px_vs_shipped": 134,
+   "side_lost_px_vs_shipped": 0
+  },
+  "_bs20": {
+   "label": "skin 0.20",
+   "moved_px_full": 773,
+   "moved_px_rung": 28,
+   "contrast_255": {
+    "mean": 17.74,
+    "max": 36.4
+   },
+   "marks": [
+    {
+     "px": 28,
+     "w": 13,
+     "h": 3
+    }
+   ],
+   "n_marks": 1,
+   "widest_mark_px": 28,
+   "widest_mark_w": 13,
+   "side_new_px_vs_shipped": 87,
+   "side_lost_px_vs_shipped": 0
+  },
+  "_bs40": {
+   "label": "skin 0.40",
+   "moved_px_full": 713,
+   "moved_px_rung": 26,
+   "contrast_255": {
+    "mean": 16.91,
+    "max": 33.34
+   },
+   "marks": [
+    {
+     "px": 26,
+     "w": 13,
+     "h": 3
+    }
+   ],
+   "n_marks": 1,
+   "widest_mark_px": 26,
+   "widest_mark_w": 13,
+   "side_new_px_vs_shipped": 40,
+   "side_lost_px_vs_shipped": 0
+  },
+  "_bs60": {
+   "label": "skin 0.60  SHIPPED",
+   "moved_px_full": 624,
+   "moved_px_rung": 25,
+   "contrast_255": {
+    "mean": 14.96,
+    "max": 27.41
+   },
+   "marks": [
+    {
+     "px": 25,
+     "w": 13,
+     "h": 3
+    }
+   ],
+   "n_marks": 1,
+   "widest_mark_px": 25,
+   "widest_mark_w": 13,
+   "side_new_px_vs_shipped": 0,
+   "side_lost_px_vs_shipped": 0
+  },
+  "_bs80": {
+   "label": "skin 0.80",
+   "moved_px_full": 522,
+   "moved_px_rung": 18,
+   "contrast_255": {
+    "mean": 14.64,
+    "max": 22.98
+   },
+   "marks": [
+    {
+     "px": 18,
+     "w": 13,
+     "h": 2
+    }
+   ],
+   "n_marks": 1,
+   "widest_mark_px": 18,
+   "widest_mark_w": 13,
+   "side_new_px_vs_shipped": 0,
+   "side_lost_px_vs_shipped": 35
+  },
+  "_bsoot100": {
+   "label": "soot 1.00 (pass-16 head), skin 0.60",
+   "moved_px_full": 641,
+   "moved_px_rung": 29,
+   "contrast_255": {
+    "mean": 30.53,
+    "max": 46.48
+   },
+   "marks": [
+    {
+     "px": 29,
+     "w": 14,
+     "h": 3
+    }
+   ],
+   "n_marks": 1,
+   "widest_mark_px": 29,
+   "widest_mark_w": 14,
+   "side_new_px_vs_shipped": 0,
+   "side_lost_px_vs_shipped": 0
+  }
+ },
+ "rung": 160,
+ "thresh_255": 8
+}

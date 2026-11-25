@@ -841,3 +841,18 @@ Method: directory listed recursively and zip central directory read with Python 
 
 Method: directory listed recursively; licence-like names searched in the folder and in the zip; every file's text searched for licence terms with `grep -ril`, which returned nothing. No `.obj` or `.mtl` was opened as a licence source.
 
+
+## PACK CATALOGUE - modular_village_collection (25 Nov 2026, pack-catalogue firing)
+
+| Field | Value |
+|---|---|
+| Pack directory | `C:\hd adventure\_packs\modular_village_collection\` (sibling `modular_village_collection.zip`, 648,523 bytes, checked by central-directory read with Python `zipfile`, not extracted: 143 entries, identical to the folder, zip comment empty) |
+| Author | Not stated in any file in the pack |
+| Licence | **NO LICENCE FILE FOUND** - no LICENSE / License.txt / README / credits / terms / EULA / html / pdf / url file in the directory or the zip. A case-insensitive text search of every file for `licen*`, `CC0`, `creative commons`, `public domain`, `attribution`, `copyright` and `credit` returned no hits. The folder name carries no licence claim. Nothing guessed. |
+| File count | 143 on disk: 142 x `.obj` and 1 x `.mtl` (`Materials_Modular_Village.mtl`), all under `Modular Village/`. No textures, no images. |
+| Contents | Modular village kit: stucco and stone walls, doorways, windows, roof pieces and eaves, canopies, wood and cobble floors, waterwheel and flume sections, and props (barrels, crates, wells, street lamp, ladder, broom, sign). |
+| Commercial use | Not determinable from the pack |
+| Attribution | Not determinable from the pack |
+| Cleared for use | **NO.** Unlicensed and gated. Do not import, convert or redistribute any file from this pack until an author licence is found. This entry confirms against the disk the 20 Nov licence-gate listing, which had named the pack without a read. |
+
+Method: directory listed recursively and extension-counted with `find`; the sibling zip read by central directory; a case-insensitive grep of every file's text for licence terms returned nothing. No `.obj` was opened as a licence source; the `.mtl` material values were checked and carry no terms.

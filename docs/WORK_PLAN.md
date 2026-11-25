@@ -1,3 +1,149 @@
+## TAKE THIS NEXT - Updated THE 06:58 CT FIRING, 25 NOV 2026 (team lead; written 07:2x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** MERGED MAIN THIS HOUR IS 74e155dd. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
+***
+*** ===== MY OWN FAULT FIRST: I DID NOT GET THESE ROWS OUT BEFORE :07 OR :22, AND THE GAME BUILD'S
+*** ===== OLD ROW WAS ALREADY KNOWN-STALE WHEN IT READ IT. =====
+***   The 05:58 row told the game build to START the purchase-verification ledger. S125 had already
+***   BUILT it and this seat had already TICKED it; S130 (06:08) spent its whole window proving the
+***   row stale and re-proving S125 instead of doing new work. That row should have been corrected
+***   at 06:58 and it was not - I spent the first half of this run verifying art's body instead of
+***   fixing the row the lane had already told me was wrong. The :07 game build and the :22 content
+***   firing both read the superseded block. THE COST IS MINE, NOT THEIRS, and a lane that reports
+***   its row stale must get a new row the very next hour.
+***
+*** ===== THE CASCADE IS STILL SHUT AT 62/62/62, AND THE FIFTH LINK IS SHUT TOO. =====
+***   Re-measured by ME on 74e155dd with a BRACE-MATCHED parse of `scripts/delve.gd`:
+***     `Delve.MB_NAME` = **62** keys (62 distinct), `collier` PRESENT. `miniboss_feed.by_key` = **62**.
+***     `by_key - MB_NAME` = **[]**.  `MB_NAME - by_key` = **[]**.  `MB_NAME - MB_FIT` = **[]**.
+***     `data/commands.json` `commands.miniboss` short AND what = **62**.
+***   AND THE LINK NO ARM CHECKS: `THEME_MINIBOSS_MORE` (`scripts/dungeon_hd.gd:252`) = **62** names,
+***   `collier` PRESENT. The 62nd is SELECTABLE, not merely named - S129 did the whole chain.
+***   ART'S FIT CHANGE DID NOT MOVE IT: `pairs.collier.ratio` is still **0.86**, so main's `MB_FIT`
+***   cell did not go stale under the new body. I checked that before anything else.
+***
+*** ===== WHAT I TICKED, AND WHAT I DELIBERATELY DID NOT. =====
+***   TICKED **ART'S COLLIER PASS 8** - and the row I gave it was WRONG, which art proved.
+***     My predecessor's row named the seam RADIUS as the single change. Art swept it over three arms
+***     and it **FAILED**: side 427 -> 329 -> 254 -> 196, monotone DOWN. Art traced that guess to its
+***     own eye-written `CUE_READ.md` pass 7 and struck it at the source. What answered the fault was
+***     GEOMETRY art chose itself - a proud earth ridge whose unlit underside puts dark over the light.
+***     Shipped at `COLLIER_BROWR` 0.044: side **413** (cue HELD, not paid for), front mid-height rim
+***     nicks **halved** 144 -> 70, vent row still **four blobs and exactly four, re-counted**.
+***     `COLLIER_BROW=0` renders byte-identical to the 7c body, which isolates the variable.
+***     I LOOKED AT BOTH VIEWS MYSELF rather than reading the numbers: on `hero_side.png` the embers
+***     read as light from under an earth lip, not as crescents lying on the flank; on `hero_front.png`
+***     I counted **four** vents and four only. `_fit_report` ratio 0.86, `fits_frame true`, errors [].
+***     **A LANE THAT DISPROVES ITS OWN ROW AND FIXES THE REAL FAULT IN THE SAME RUN IS DOING THIS
+***     JOB BETTER THAN THE ROW DID.** That is the tick.
+***   TICKED **U170 (HUD)** - the lock-writer RED PROOF, which was the missing half of U169.
+***     I COUNTED THE GLUED LINES MYSELF rather than reading the claim, and my first matcher was
+***     WRONG: a loose `.(RUNNING|IDLE) 20\d\d-` scan returns **22** hits, most of them the words
+***     "last line IDLE ..." inside ordinary prose. Counting only a real second claim opening after a
+***     lane tag (`\)\s*(RUNNING|IDLE) 20\d\d-`) gives **6**, every one `(HUD)`, newest at
+***     2026-11-25T04:07:58. HUD's "6, and no other lane" is exact, and the file now ends 0x0a.
+***   TICKED the four WRITTEN STAND-DOWNS - **C-207** (content), **B150** (chat bot), the **HUB**
+***     standing check, and **S130** (game build). S130 is a tick for REFUSING to rebuild a thing that
+***     was already built and ticked, and saying so with a re-proof. Closing by disproving counts fully.
+***   DID **NOT** TICK the collier as finished art. Art's own words: it "reads at inspection distance
+***     more than at stream distance, and the side is still the thinnest cue in the house." That is
+***     honest and it is the open half. Art's row below.
+***   DID **NOT** set a cue-read threshold, and I nearly raised the gate's 1-pixel bar as a new
+***     finding before grepping the plan. `tools/art/_cueread.py:98` calls a view blind only at
+***     `n_moved == 0`, so a 41-px side would have passed GREEN too - **THE HOUSE ALREADY KNOWS THIS**
+***     and the 05:58 block ruled NO LANE IS TO INVENT A `MIN_CUE_PX`. That ruling STANDS. Measuring
+***     the body at stream scale is a MEASUREMENT and is allowed; picking a px floor off ten bodies
+***     is not. Nobody is to confuse the two.
+***   DID **NOT** run any publish verification. No lane claimed "ready to publish" this hour, so the
+***     publish gate is not owed and I did not fake one.
+***
+*** ===== DEAD-DATA AUDIT, MEASURED THIS HOUR ON 74e155dd. THE NON-NOTE COUNT DID NOT MOVE. =====
+***   Corpus `scripts/*.gd` (47) + `web/app.js` = **48 files / 2,399,658 chars** (identical to 05:58 -
+***   no `.gd` and no `app.js` changed this hour); `data/*.json` = 12 files / **144 distinct** keys.
+***   UNREFERENCED ASSET DIRECTORIES (off `assets/` only): **ZERO** of 35 directories with files.
+***   UNREAD LIVE DATA KEYS: **ZERO**.
+***   Zero-hit keys **66 = 51 `_note_` + 15 NON-NOTE** - the same 15 set, key for key.
+***   Series: 52 / 53 / 56 / 66 / 66, non-note **15** throughout. (The struck 81 stays struck.)
+***
+*** ===== THE SIX ROWS. =====
+*** GAME BUILD (:07) - **GUARD THE FIFTH LINK. IT IS THE ONE THE CASCADE DOES NOT COVER.**
+***   Your three arms (`by_key - MB_NAME`, `MB_NAME - by_key`, `MB_NAME - MB_FIT`) were all green at
+***   61/62 while the body was unnamed, and they are all green now - but NONE of them reads
+***   `THEME_MINIBOSS_MORE` (`scripts/dungeon_hd.gd:252`), which is what actually decides whether a
+***   body can ever be SELECTED. `snarer_chibi` is the standing proof that a key can hold an `MB_FIT`
+***   cell and still be unreachable. A future body could land with a name, a feed row and a fit, pass
+***   every arm GREEN, and never once spawn. **ADD THE ARM** to your own miniboss gate: every
+***   `MB_NAME` key must have a `THEME_MINIBOSS_MORE` entry, and report both set differences.
+***   **RED-PROVE IT** by removing `collier` from the theme table on a COPY and showing the arm fires,
+***   then restore. Use a BRACE-MATCHED parse, never a flat regex. This is an arm on an existing gate
+***   for an existing item - it is instrument work and explicitly NOT a new item. If it does not fit
+***   one window, SPLIT IT and carry the remainder. Compute claim+25 FIRST, then declare your finish.
+*** CONTENT (:22) - **NOTHING IS OWED TO YOU AND I AM NOT INVENTING YOU A SYSTEM.** The cascade is
+***   shut at 62/62/62, the fifth link is shut, C-206 audited all 62 feed rows and found nothing, and
+***   `_note_c204` is spent. The 11 ask replies are the SUPERVISOR'S OWN WORDS and are NOT yours to
+***   reword, even though voice is your lane - leave them exactly as landed. So: a WRITTEN STAND-DOWN,
+***   or keep auditing your own shipped work. A stand-down written up IS the delivery and is ticked as
+***   one - C-207 was ticked as exactly that this hour.
+*** ART (:34) - **PASS 8 IS TICKED. FINISH THE COLLIER BY LOOKING AT IT AT STREAM SCALE.**
+***   You wrote that the brow "reads at inspection distance more than at stream distance". That is the
+***   open half and it is yours. Render the three hero views DOWN to the size the cue actually has to
+***   survive on stream and **LOOK AT THEM**, then say in words whether the four embers still read and
+***   whether the side still carries a cue at all. **DO NOT INVENT A `MIN_CUE_PX`** - the 05:58 ruling
+***   stands and you were right to refuse a floor picked off ten bodies. A downscaled render you LOOK
+***   at is a measurement; a number chosen to make a gate green is a lying instrument. If it reads,
+***   say so plainly and the collier is CLOSED and you are free to start the 63rd. If it does not,
+***   name the single change for pass 9 - and if your own evidence contradicts the row I just wrote,
+***   say so and follow your evidence, exactly as you did this hour.
+***   ONE THING YOUR OWN INSTRUMENT IS SAYING THAT NOBODY HAS ANSWERED: `_collier_p8ship.log`'s
+***   `MINIBOSSFIT_REPORT` came back `"verdict": "RED", "ok": false` with
+***   `self_seen: the census was taken over 64 register rows and is being read against 10 - it
+***   describes a different house. Re-run tools/art/_selfseen_census.py`. The COMMITTED
+***   `_fit_report.json` is GREEN with `errors: []`, so the RED is the named_subset arm only and NO
+***   SHIPPED BODY IS RED - but a gate that cries RED on every subset run is one read away from
+***   somebody chasing a fault that is not there. Re-run the census when you next have the window.
+*** HUB (:37) - **WRITTEN STAND-DOWN, AND DO NOT PUBLISH.** I RE-MEASURED YOUR DELTA MYSELF rather
+***   than copying last hour's figure, and it MOVED: it is now **3 files / +19 / -1** (NOTES.md +14,
+***   index.html +2/-1, style.css +3), `origin/gh-pages` **5ce35f33** tree **c03fa129** published
+***   24 Nov 15:30 CT, against `origin/hub:web` tree **aaca1577**. The 05:58 block said +17/-1; your
+***   own two NOTES.md lines this hour are the difference. Publishing is NOT yours and NOT mine - it
+***   is with the supervisor. If you want work: keep the standing re-verify honest, and do NOT claim
+***   "ready to publish" unless you mean it.
+*** CHAT BOT (:45) - **WRITTEN STAND-DOWN, AND CLAIM BY :50 IF YOU TAKE THE LOCK AT ALL.** B149 paid
+***   the republish at the feed, the COUNT arm is shut, the ask table is landed and proved silent on
+***   all five arms, and B150 measured nothing-owed rather than repeating it - that is the right shape
+***   and it is ticked. The Suggestion Box mismatch you flagged is REAL, is NOT yours to solve, and is
+***   still with the supervisor. Do NOT reword `bug` or `suggest`.
+*** HUD (:52) - **07:52 IS AN ODD HOUR: STAND DOWN IN WRITING.** That is the supervisor's cadence
+***   (directive item 4) and it is the rule, not a judgement about your work. U170 is TICKED. But your
+***   fix is **UNEXERCISED**: you wrote no lock line this firing, so the newest real glued line
+***   (04:07:58) still predates the newline-safe writer and the file ends 0x0a only because another
+***   lane wrote last. **THE ACCEPTANCE TEST IS YOUR NEXT LOCK WRITE** - when you next write a RUNNING
+***   or IDLE, check the last byte is 0x0a afterwards and say so in one line. Note honestly that the
+***   writer lives as a snippet in PROGRESS.md and not as code in the repo, so it is a convention each
+***   firing must follow; that is a real limitation and it is not yours to fix by inventing a file.
+***
+*** ===== FOR THE SUPERVISOR =====
+***   **1. YOUR DIRECTIVE `sup-nov24-2354` IS NOW SPENT IN ALL FOUR ITEMS, AND ONE THING I TOLD YOU
+***   LAST HOUR WAS WRONG.** The 05:58 block told you "purchase verification is NOW IN FRONT OF THE
+***   GAME BUILD" as item 3. That was STALE WHEN I WROTE IT: S125 had already built both halves
+***   (ledger + 8 s verify timer, retry once, tell the viewer, never refund) and this seat had already
+***   TICKED it. S130 re-proved it on merged main this hour - `S125_RECEIPTS OK (15 checks)`,
+***   red-proof `9 FAILED (15 checks)`. Item 1 (hub button) and item 2 (ask topics, B148) landed, item
+***   4 (HUD cadence) is implemented as even-work / odd-stand-down. **NOTHING OF YOURS IS OUTSTANDING
+***   WITH THE LANES.**
+***   **2. THE SUGGESTION BOX IS STILL LIVE IN THE BOT AND MISSING FROM THE PUBLISHED PAGE.** Carried
+***   forward, and the delta has MOVED since you last saw it: **3 files / +19 / -1** (NOTES.md +14,
+***   index.html +2/-1, style.css +3). `gh-pages` is **5ce35f33**, tree **c03fa129**, published
+***   **24 Nov 15:30 CT**; `origin/hub:web` is tree **aaca1577**. A viewer who types `!ask bug` today
+***   is still sent to a button that is not on the page. **MY RECOMMENDATION IS UNCHANGED: publish,
+***   but only after the Google Form has its three questions** - publishing now sends viewers to an
+***   empty form, which is worse than a missing button. The ordering is yours. I have NOT run a
+***   publish gate, because the hub has not claimed ready.
+***   **3. FOUR OF SIX LANES HAD NOTHING OWED THIS HOUR AND I DID NOT INVENT THEM WORK.** The backlog
+***   is genuinely drained: cascade shut at 62/62/62 including selection, your directive spent, the
+***   collier one look from closed. Under the freeze I will not write new items. If you want the house
+***   producing rather than standing down, the decision to open something - a 63rd body, or the next
+***   Phase 2 system - is yours, and I recommend you say which.
+
 ## TAKE THIS NEXT - Updated THE 05:58 CT FIRING, 25 NOV 2026 (team lead; written 06:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS f9cf3088. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
 *** ALL SIX LANES SHIPPED. NOBODY WAS STARVED, NOBODY OVERRAN A CAP, NOBODY CLAIMED OVER A LIVE HOLD.

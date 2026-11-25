@@ -19626,3 +19626,53 @@ shipping it.** If the lead or the supervisor wants it, it is one clause appended
 - Lock: **NO CLAIM.** A NOTE only. Godot never launched; `Get-Process Godot*` = 0.
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat
   line posted as bellmirebro, no channel setting touched.
+
+## B155 - 25 Nov 2026, 11:45 CT firing (chat bot) - THE FOUR GATES B154 SPLIT OFF ARE PAID ON MERGED MAIN, AND BOTH DRIFT FINDINGS I RAISED TURNED OUT TO BE MY OWN MEASUREMENT
+- **Took the item my predecessor carried, not a new one.** B154 split its job under the yield rule and
+  carried four engine gates to this firing, all green at B153 on `31727090` but UNPROVEN on merged
+  main. That is what this window paid, on `dd4ffbb1`.
+- Merged `origin/main` (28 commits) and `origin/chatbot` into W6 clean, no conflicts, HEAD `dd4ffbb1`.
+- **GATES, headless on W6's own `project.godot` at `dd4ffbb1`:**
+  - `--headless --path W6 --quit-after 300` -> RC 0, **ZERO `SCRIPT ERROR`**, **ZERO `COMMANDS_DATA`
+    lines on the load** - so every COMMANDS_DATA guard arm, including all five ask arms, is provably
+    silent at the engine and not merely in a log from an earlier tree.
+  - `tools/_l14_test.gd` -> RC 0, **`L14_TEST OK (24 checks)`**, with
+    `ok  no COMMANDS_DATA guard arm fired on the load (0 fired: [])`.
+  - `tools/_twitch_parse.gd` -> RC 0, **`TWITCH_PARSE OK (8 checks)`**.
+  - `tools/_commands_doc.gd` -> RC 0, **`COMMANDS_DOC OK wrote 32 commands`**, and `git diff` over
+    `scripts/chatcmd.gd`, `data/commands.json` and `docs/COMMANDS.md` is **EMPTY** afterwards. The REAL
+    generator rewrote the doc and changed nothing, so there is nothing to regenerate and I claim no
+    doc change.
+- **NO FILE OF MINE CHANGED.** `scripts/chatcmd.gd`, `data/commands.json` and `docs/COMMANDS.md` are
+  byte-identical. This entry is the only edit.
+- *** **MY OWN TWO FAULTS, AND BOTH WERE CAUGHT BY READING THE CODE INSTEAD OF STOPPING AT THE
+  NUMBER.** This is the same discipline B153 needed and it was needed twice here.
+  1. **"14 published commands are unreachable" - FALSE, AND THE REGEX WAS MINE.** My first
+     reverse-drift pass reported 14 entries that are never a `match verb:` case label: `armour`,
+     `deadliest`, `deepest`, `delve`, `enlist`, `fish`, `help`, `hero`, `look`, `memorial`, `reroll`,
+     `respec`, `richest`, `weapon`. I was one sentence from reporting fourteen dead commands. My
+     pattern required the case label to END its line; `chatcmd.gd` writes them with the body on the
+     SAME line - `"delve":    out = _delve(user_id)` at :156, `"help":     out = help_line(arg)` at
+     :186. Reparsed by block indentation: **59 case labels, and ENTRIES NEVER A LABEL = ZERO.**
+     **A REGEX IS NOT A PARSER** - the house fault, in a new family, and this time in my own lane.
+  2. **`testbits` / `testsub` / `testpoints` are not undocumented drift.** The same pass flagged them
+     as code literals with no entry. `chatcmd.gd:204` gates all three on
+     `if not user_id.begins_with("local_"): return ""` - they are the L17 test-only commands reachable
+     ONLY from Mr. E's local chat box, never by a Twitch viewer (whose ids are not `local_*`). Their
+     ABSENCE from `data/commands.json` and `docs/COMMANDS.md` is **CORRECT**: publishing them would
+     advertise three commands no viewer can run. **NOT DRIFT, AND NOT TO BE "FIXED" BY A LATER SEAT.**
+- **Drift, properly measured both ways on `dd4ffbb1`:** 32 entries, every one carrying a literal in
+  `chatcmd.gd`; 31 aliases; **zero published commands unreachable, zero reachable commands
+  unpublished.**
+- **DROPPED, as the lead's 10:58 block ordered:** the Suggestion Box item. B154 proved off the
+  PUBLISHED gh-pages bytes that the live page carries a `Suggestion Box` control and a `#suggestions`
+  form, the lead confirmed the Google-Forms half independently, and the row says STOP CARRYING IT. I am
+  not carrying it and my `bug` / `suggest` replies are correct as shipped.
+- Nothing is owed to the GAME BUILD lane: `twitch_eventsub.gd` was not touched and needs no new signal.
+- Lock: claim **11:46:59**, cap claim+25 = **12:11:59** computed first, declared finish **11:51:30**,
+  released **11:48:24** - inside the declared finish and clear of the HUD's :52 window. Lock was free
+  (last line game build `IDLE 11:18:47`; `Get-Process Godot*` = 0 checked live at 11:45:53). Godot
+  exited, checked live. Log KEPT at `_b155_run.log`.
+- Commit message written to a FILE, never `-F -` - B152's wedge is not repeated.
+- **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat line
+  posted as bellmirebro, no channel setting touched.

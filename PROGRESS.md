@@ -20149,3 +20149,210 @@ NOTHING for Mr. E to decide. The hub block named a row for me; it was a stand-do
   are untouched; this commit is PROGRESS.md alone.
 - Nothing owed to the GAME BUILD lane in `twitch_eventsub.gd`. **No Twitch activity of any kind: zero
   bits, no cheer, no redemption, no channel-point change, no chat line posted, no account touched.**
+
+## B159 - 25 Nov 2026, 15:45 CT firing (chat bot) - MY OWN INSTRUMENT IS FIXED AND PROVED ON ALL EIGHT SHAPES, AND I FOUND A NINTH FAULT IN MY OWN FIX; THE PATCH IS NOT COMMITTED BECAUSE tools/ IS NOT MINE
+
+TOOK: the 14:58 CHAT BOT row - finish the one regex instrument I named at B156. Make
+`tools/_l14_test.gd:30` brace-parse or depth-check instead of anchoring on 8 spaces, prove it on
+the five synthetic lines already written down, and keep the gate going RED on a real missing entry.
+
+MERGE: origin/main + origin/chatbot into W6 clean, zero conflicts, HEAD e58257e6.
+
+*** THE OWNERSHIP WALL, STATED FIRST BECAUSE IT CHANGES WHAT I DID AND DID NOT SHIP.
+My row orders an edit to `tools/_l14_test.gd`. MY PROMPT OWNS ME THREE FILES - scripts/chatcmd.gd,
+data/commands.json, docs/COMMANDS.md - and says in terms: "Running a tool that reads your own file
+is not owning tools/." That sentence was written to foreclose exactly the argument I would
+otherwise make here, so I am not making it on my own authority. I DID NOT EDIT tools/.
+THE EVIDENCE THAT SAYS I SHOULD, ROUTED UP RATHER THAN ACTED ON: `git log -- tools/_l14_test.gd`
+returns eight commits and EVERY ONE IS THIS LANE'S - B80, B78, B22 by B-number, and L14, L17, L21,
+plus two chat-command commits, by item. No other lane has ever touched the file. That is the SAME
+evidence that won docs/COMMANDS.md for this lane on 16 Nov 08:58, and one of the eight (B80) is
+recorded as "LANDED by the team lead". A LEAD'S ROW IS NOT THE THING THAT MOVED COMMANDS.md - A
+SUPERVISOR RULING WAS. So this needs the same ruling and I am asking for it, not assuming it.
+
+*** WHAT I BUILT AND PROVED. The replacement is structural, not a wider pattern: it removes the
+8-space anchor entirely and decides a line by (a) bracket depth computed over the line with string
+literals and comments removed, and (b) a stack of open `match` blocks with their first body indent
+learned from the file, tabs expanded to 4. A label is read only at bracket depth 0, only at the
+first body level of the OUTERMOST match. THE DICTIONARY FALSE POSITIVE DIES STRUCTURALLY, not by
+precision: a dict key sits inside an open brace, so its depth is never 0, so it is never a label.
+
+ALL EIGHT SHAPES READ CORRECTLY (8/8, run in python against the real tree this firing):
+  1 tab indent                            -> [delve, fish]     (old pattern: INVISIBLE)
+  2 depth that is not 8 spaces (12)       -> [delve, fish]     (old pattern: INVISIBLE)
+  3 `"inv","bag":` no space after comma    -> [inv, bag]        (old pattern: INVISIBLE)
+  4 `"inv",  "bag":` two spaces            -> [inv, bag]        (old pattern: INVISIBLE)
+  5 `buy_brew` / `test2` underscore+digit  -> [buy_brew, test2] (old pattern: INVISIBLE)
+  6 dict key at label depth               -> [delve, forge], NO `gold`  (old pattern: FALSE POSITIVE)
+  7 dict literal opened inside a body     -> [delve, forge], NO `gold`
+  8 nested `match arg:` sub-dispatch      -> [title, forge], NOT [title, seventh, eleven, forge]
+
+*** A FAULT IN MY OWN FIX, FOUND BY MY OWN TEST, AND I AM REPORTING IT RATHER THAN QUIETLY
+*** PATCHING IT OUT. Case 8 FAILED on my first version. Walking every match block meant a nested
+`match arg:` inside a label body had ITS labels harvested as viewer verbs - `seventh` and `eleven`
+would have been demanded as entries in data/commands.json, which is the B156 false positive back
+in a new shape. Fixed by harvesting only while the match stack is exactly one deep. THE REAL FILE
+NEVER TRIPPED THIS: chatcmd.gd has exactly THREE `match` statements (lines 160, 323, 3363) and all
+three sit at indent 4 in different functions, so none is nested. The fault was LATENT, not live,
+and the 16 nested argument sub-dispatches B156 counted are if/elif and deeper-indent forms, not
+nested match blocks. I would not have found it without writing case 8, and case 8 was not one of
+the five I was asked for.
+
+DRIFT, measured both ways on e58257e6 with the NEW harvester: 74 label words harvested, 59 unique,
+32 published commands, 31 aliases. missing [] and unanswered [] - ZERO both directions. The 74
+agrees with B157's own count of 74 code labels, so the new instrument does not move the number it
+replaces; it only stops lying about the shapes around it. `gold` is NOT harvested. testbits,
+testsub and testpoints ARE harvested and are then excluded by the existing `begins_with("test")`
+arm, which is correct - they are gated on `local_` at chatcmd.gd:204 and no viewer can call them.
+
+RED-PROVE, WRITTEN INTO THE HARNESS AND NOT YET RUN IN GODOT (see the split below). Three arms:
+inject a `"zzznew":` label and the missing arm must name it; strip the `"memorial":` label and the
+harvest must lose it AND the unanswered arm must report the orphaned data key; and a contrast arm
+that runs the OLD pattern and the NEW one over the same dict-literal source and asserts the old
+one harvests `gold` while the new one does not.
+
+*** THE SPLIT, AND IT IS A DELIBERATE STAND-DOWN ON THE ENGINE, NOT A MISS.
+I TOOK NO LOCK AND LAUNCHED NO GODOT. Lock read at 15:49:52 CT: last line was game build S138
+IDLE 2026-11-25T15:20:28-06:00, so the lock was genuinely FREE and I could have claimed it. I was
+at 15:51:30 by the time the harness was written - thirty seconds in front of the HUD's :52 firing.
+A claim there leaves a live RUNNING line in front of another lane's window for a sub-minute job,
+and the yield rule says to split and carry the remainder rather than declare a crossing to finish
+optional work. It IS optional this hour: the patch cannot land until the ownership question above
+is ruled on, so confirming it in the engine buys nothing that cannot be bought at B160. The time
+went into the analysis and that is my own pacing fault, named as such.
+CARRIED TO B160, in one launch: `_b159_harvest.gd` headless on W6's own project.godot, expecting
+B159_HARVEST OK over 8 synthetic + 4 real-tree + 4 red-prove checks. The harness was written at
+the worktree root and DELETED at the end of this run, per the _b2_ask.gd precedent - nothing of
+mine is left in the worktree, and the proved harvester is recorded verbatim below so nothing is
+lost by deleting it.
+
+NO FILE OF MINE CHANGED. scripts/chatcmd.gd, data/commands.json and docs/COMMANDS.md are
+byte-identical to e58257e6; data/commands.json re-validated with json.load, 32 commands, 8 top-level
+keys, every pre-existing key byte-identical. PROGRESS.md B159 only. docs/COMMANDS.md needs no
+regeneration - no command was added or renamed.
+
+NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or written, no chat line
+posted as bellmirebro, no channel setting touched, no sub or gift of any kind.
+
+FOR WHOEVER OWNS tools/_l14_test.gd - THE PATCH, VERBATIM AS PROVED. Replaces the `var rx :=
+RegEx.new()` / `rx.compile("(?m)^        ...")` / `search_all` block at tools/_l14_test.gd:29-35.
+Call site becomes `var verbs: Array = _harvest(src)`; the `missing` and `unanswered` arms below it
+are unchanged. The three helpers and the harvester:
+
+```gdscript
+func _strip_comment(line: String) -> String:
+	var i := 0
+	var n := line.length()
+	while i < n:
+		var c := line[i]
+		if c == "\"":
+			i += 1
+			while i < n:
+				if line[i] == "\\":
+					i += 2
+					continue
+				if line[i] == "\"":
+					i += 1
+					break
+				i += 1
+			continue
+		if c == "#":
+			return line.substr(0, i)
+		i += 1
+	return line
+
+func _strip_strings(line: String) -> String:
+	var out := ""
+	var i := 0
+	var n := line.length()
+	while i < n:
+		var c := line[i]
+		if c == "\"":
+			i += 1
+			while i < n:
+				if line[i] == "\\":
+					i += 2
+					continue
+				if line[i] == "\"":
+					i += 1
+					break
+				i += 1
+			out += "S"
+			continue
+		if c == "#":
+			break
+		out += c
+		i += 1
+	return out
+
+func _indent_of(line: String) -> int:
+	var col := 0
+	for ch in line:
+		if ch == " ":
+			col += 1
+		elif ch == "\t":
+			col += 4 - (col % 4)
+		else:
+			break
+	return col
+
+## The replacement harvester. No depth constant, no end anchor, no 8-space assumption.
+func _harvest(src: String) -> Array:
+	var verbs: Array = []
+	var depth := 0
+	var st_ind: Array = []
+	var st_lab: Array = []
+	var rx_match := RegEx.new()
+	rx_match.compile("^match\\b.*:$")
+	var rx_lab := RegEx.new()
+	rx_lab.compile("^((?:\"[^\"]*\"\\s*,\\s*)*\"[^\"]*\")\\s*:")
+	var rx_word := RegEx.new()
+	rx_word.compile("^\"([a-z][a-z0-9_]*)\"$")
+	for raw in src.split("\n"):
+		if raw.strip_edges() == "":
+			continue
+		var code := _strip_strings(raw)
+		if code.strip_edges() == "":
+			continue
+		var start_depth := depth
+		var ind := _indent_of(raw)
+		if start_depth == 0:
+			while st_ind.size() > 0 and ind <= int(st_ind[st_ind.size() - 1]):
+				st_ind.pop_back()
+				st_lab.pop_back()
+		var body := code.strip_edges()
+		var text := _strip_comment(raw).strip_edges()
+		if start_depth == 0 and rx_match.search(body) != null:
+			st_ind.append(ind)
+			st_lab.append(-1)
+		elif start_depth == 0 and st_ind.size() > 0:
+			var top_ind := int(st_ind[st_ind.size() - 1])
+			# only the OUTERMOST match dispatches viewer verbs; a nested `match arg:`
+			# inside a label body is argument sub-dispatch, not a command.
+			if ind > top_ind and st_ind.size() == 1:
+				if int(st_lab[st_lab.size() - 1]) == -1:
+					st_lab[st_lab.size() - 1] = ind
+				if ind == int(st_lab[st_lab.size() - 1]):
+					var m := rx_lab.search(text)
+					if m != null:
+						var parts := m.get_string(1).split(",")
+						var words: Array = []
+						var good := true
+						for p in parts:
+							var mm := rx_word.search(p.strip_edges())
+							if mm != null:
+								words.append(mm.get_string(1))
+							else:
+								good = false
+						if good:
+							for w in words:
+								verbs.append(w)
+		for ch in code:
+			if ch == "(" or ch == "[" or ch == "{":
+				depth += 1
+			elif ch == ")" or ch == "]" or ch == "}":
+				depth -= 1
+				if depth < 0:
+					depth = 0
+	return verbs
+```

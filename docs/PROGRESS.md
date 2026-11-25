@@ -4357,3 +4357,21 @@ BEFORE TOUCHING ANYTHING, and the shipped carry clears the floor in every pose. 
 - RED-PROOF on a COPY: `THEME_MINIBOSS_MORE.duplicate(true)` with collier erased from wood -> `MB_NAME - theme = ["collier"]`, asserted equal to exactly ["collier"]; a further check proves the live wood row still holds collier.
 - Battery (build/_s131_battery.log): parse --quit-after 300 rc 0, 0 SCRIPT ERROR / 0 Parse Error; S51_NAMES OK 179 checks (176 + 3); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2449 samples off the floor (home); DELVE_TEST OK ran 9001 frames, floor reached 2; TOWNWALK in_solid=0/17969 (0.000%) raid_in_solid=0/5031 (0.000%) PASS.
 - No game code changed. No live Twitch test: no account used, ZERO bits, nothing redeemed or cheered. Not ticked - the team lead ticks. Claim 07:08:16, cap claim+25 = 07:33:16 computed first, declared 07:30:16.
+
+## D-cycle - S132: L31 REMAINDER RE-PROVED, NOT REBUILT - AND THE ONE OPEN QUALIFIER (THE COUNTDOWN) NOW HAS A RED-PROVED ARM. 2026-11-25T08:17-06:00 (game build)
+- Row: TAKE THIS NEXT 07:58 CT 25 Nov - "L31 REMAINDER - THE STATUS-EFFECT ICONS ... if you find it already wired, say so and re-prove it."
+- MEASURED FIRST: IT IS ALREADY WIRED AND TICKED. S118 shipped (a) duration on the chip (party_frames.gd:215, delve.gd st_secs, statuses() 5-tuple) and
+  (b) `_give` reads `was` -> `_on_apply`; the 18:58 lead ticked it 24 Nov and the plan's own 9565 row says "L31 IS WHOLE". The monster half is
+  CLOSED BY DISPROOF (monster.gd holds no condition state). NOTHING REBUILT. This row handed back shipped work; I say so rather than build a copy.
+- THE ONE CHANGE: the tick's own written qualifier - "every row reads 30s ... it does not prove varying seconds tick down." tools/_l31_icons.gd
+  (backup .bak_s132) now seeds DISTINCT durations (40, 38 ... 12) and adds L31_COUNTDOWN: ticks the engine's own m["st"] clock
+  (Delve._status_tick, the call _fight_body makes each frame) by 7 s, rebuilds the REAL PartyFrames._row, and requires every m["st"] chip to read
+  its seconds minus 7, every state's "word Ns" text to be on the rebuilt row, and >1 distinct seconds value. venom/slow are their own fields
+  ticked inline in _fight_body, so they are required drawn but not counted (13 of 15 counted) - said, not hidden.
+- GREEN (1920x1080): `L31_FIT chips_past_bar=0` / `L31_COUNTDOWN tick=7.0 counted=13 stale=0 undrawn=0 distinct_secs=15` / `L31_ICONS OK 15`.
+- RED-PROVED: L31_REDPROOF=1 ticks by zero -> `L31_COUNTDOWN tick=0.0 counted=0 stale=13 undrawn=0 distinct_secs=15` / `L31_ICONS FAIL 15`.
+- LOOKED at renders/cycles/l31/l31_icons_1080.png (written by the red-proof run, which captures BEFORE the tick, so same picture): every chip
+  carries its own seconds - poisoned 40s, burning 38s ... scar-touched 12s - icon + word + seconds, wrapped inside the 400 px frame, none cut.
+- Battery (build/_s132_battery*.log): parse --quit-after 300 rc=0, 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks);
+  OFFFLOOR_VERDICT OK 0 of 2149; DELVE_TEST OK ran 9001 frames; TOWNWALK in_solid=0/17616 PASS. tasklist Godot* = 0 at release.
+- No Twitch test, ZERO bits. WORK_PLAN not ticked.

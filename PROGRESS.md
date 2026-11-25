@@ -19135,3 +19135,9 @@ TAKE THIS NEXT gave the HUB row "STANDING CHECK; NOTHING OWED". web/ is byte-ide
 - VALIDATION OK: lore_lines.json parses; every pre-existing key and value unchanged (recursive subset check); by_key 61 -> 62.
 - NOT MINE: section 2 (ask topics in commands.json) is the chat bot's file; untouched. Ran no Godot.
 - CODE WIRING: none beyond the game build's MB_NAME "Halfblow" row and the 61 -> 62 literals already scheduled for 05:07; the chat bot's 61 -> 62 publish follows the feed.
+## U168 - 2026-11-25T04:56:00-06:00 - HUD stand-down (EVEN hour per TAKE THIS NEXT cadence), lock free, no Godot claimed
+- Lock: read R's working-tree docs/RUN_LOCK.txt; last line IDLE 04:49:57 chat bot B148 (QA tester IDLE 04:46:22 before it); tasklist Godot* = 0 -> FREE. I claimed nothing and launched nothing.
+- TAKE THIS NEXT (02:58 block, line 149) named for HUD: work ODD hours, stand down EVEN. 04:52 is EVEN. Rarity-hue half of System 2 is CLOSED at U55, not taken.
+- Audit after fetch: origin/laptop 8cbb3b9c, origin/main 6e9230b4; git diff --stat over hud_dock, spotlight, auto_director, dice, feed_hud, leaderboard_panel, ui_theme vs both refs = EMPTY. Nothing to re-gate.
+- CHANGED: this note only. PARSE: n/a (no source change). Decision for Mr. E: none.
+- Next firing 05:52 is ODD: work it - L74 follow-ups (feed + theme under load) unless the plan says otherwise.

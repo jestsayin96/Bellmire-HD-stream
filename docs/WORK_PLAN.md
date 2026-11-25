@@ -1,3 +1,182 @@
+## TAKE THIS NEXT - Updated THE 18:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
+*** THE CASCADE HAS REOPENED AT THE TOP: 56 BODIES / 55 ENGINE / 55 FEED / 55 PUBLISHED.
+*** Art landed the **56th miniboss, the Weigher ("Trueweight")**, this hour. The three published
+*** halves are still LEVEL AT 55 and are therefore still CORRECT - 55 is not "behind", it is the
+*** true count of named bodies. What is open is the new body's name, feed and republish, in that
+*** order. Measured by me on the merged tree, brace-matched, string-aware, comments stripped BEFORE
+*** splitting, anchored on `const MB_NAME :=` - not taken from any lane's claim:
+***   `Delve.MB_NAME` (origin/laptop) = **55** keys, 0 duplicates, `straker` IN, `weigher` **OUT**.
+***   `miniboss_feed.by_key` (origin/content) = **55** keys, `weigher` **OUT**.
+***   `data/commands.json` publishes **55** at BOTH `miniboss` leaves (`.what` and `.short`).
+***   `by_key - MB_NAME` = **[]**. `MB_NAME - by_key` = **[]**. The published halves AGREE.
+***   Art's `_fit_report.json` `pairs` = **58** rows (56 live bodies + the 2 retired `_chibi` cells).
+*** SO THE ORDER IS: game build names it, content feeds it, chat bot republishes 55 -> 56. NOBODY
+*** SKIPS AHEAD: a republish to 56 before the engine names it would publish a count no half carries.
+***
+*** MY OWN FAULT FIRST, AND IT IS A FINDING I ALMOST PUBLISHED AS A DEFECT.
+*** I opened the Weigher's `hero_side.png`, read the body as a thin plank with no depth, and set out
+*** to charge art with it. I then measured it and **MY MEASUREMENT REFUTED MY OWN EYE**: the two
+*** renders are NOT at the same camera scale (`front.png` body top y=187, bottom 800; `side.png`
+*** top y=91, bottom 913), so a pixel-width comparison between those two views proves nothing, and
+*** every ratio I derived from it was meaningless. I dropped the charge. **ART IS NOT TO SPEND A
+*** CYCLE ON IT.** The lesson is the prompt's own: a number computed across two frames that were
+*** not taken the same way is not evidence, and an eyeball impression is not a defect until an
+*** instrument agrees with it.
+***
+*** WHAT I VERIFIED MYSELF AND TICKED THIS HOUR, SO NO LANE RE-PROVES IT:
+***  - **THE 56th MINIBOSS, THE WEIGHER, TICKED (art).** I did not take the lane's word and I did
+***    not stop at the numbers. **I LOOKED AT ALL THREE HERO RENDERS.** Front and back: the beam
+***    reads instantly - two bright pans, one up by the shoulder, one down by the knee, hung off a
+***    black bar plainly out of true, which is exactly the thing the docstring says the player must
+***    read. **The back reads as well as the front** (creature mask 42,758 px back vs 43,185 front),
+***    so the Beadle failure mode - no facing from behind - does NOT apply here. Register checked by
+***    KEY SET, not by line count, against the pre-merge main: `pairs` gained exactly `['weigher']`
+***    and lost **[]**, 57 -> 58. All three views `seen: 1.0` and `proves: true`; `fits_frame` true;
+***    `frame_edge` 0 on every side of every view; ground shadow measured in all three. Top-level
+***    `ok: true`, `verdict: GREEN`, `red_summary.shipped_red` **[]**, `retired_red` **[]**,
+***    `unproved_cells` **[]**, `stale_margin` **[]**.
+***    ONE HONEST QUALIFIER: `air_px_min` is **72** (tightest view front), against the straker's
+***    110. It clears the frame and the gate passes, but this is the tightest-framed body in the
+***    register. Not a defect and not work - a number for art to keep an eye on as bodies get wider.
+***  - **S119 TICKED (game build).** The 1080p-trap audit: 7 named gates exempt because they read no
+***    screen, `tools/_l31_icons.gd` guarded. **I READ THE GUARD RATHER THAN THE LOG**, because the
+***    thing to check when a lane touches a test is whether the test can still go RED. It can and it
+***    does: on a capture under 1920x1080 it PRINTS a verdict line
+***    (`L31_ICONS NO VERDICT - capture ... is smaller than 1920x1080`) and `quit(2)`. That is the
+***    COORDINATION 15 shape - a gate that prints no verdict is red - and it is a loud red, never a
+***    quiet pass. Red-proved by the lane at 1152x648, OK 15 at 1920x1080, full battery green.
+***  - **U158 TICKED (HUD).** The U91 red arm. The evidence is **COMMITTED this time** -
+***    `_u158_u91_red.log`, 413 lines on `origin/hud-ui`, not a working-tree file - and I read the
+***    verdict LINE out of it, not the return code: `U91 NO VERDICT - capture (1152.0, 648.0) is
+***    smaller than 1920x1080`. That is the red half of U157's green half from last hour, so the
+***    pair is complete across two firings. No `.gd` edited. The 1080p-trap audit found no further
+***    exposed gate.
+***  - **C-197 TICKED (content).** `e3po.tier_up` **+24 lines**, and the lane's "live pool" claim is
+***    TRUE - I grepped for the BEHAVIOUR, not the name: `scripts/notables.gd:726` calls
+***    `_e3po_say("tier_up")`, reached from `delve.gd:45` `_e3po()`. This is a live read, so these
+***    24 lines reach a player. The row also corrects the C-196 wiring sentence I flagged last hour.
+***    The one new top-level key is `_note_c197`, an expected zero-hit note. **Additive: +98 / -1.**
+***  - **THE PACK-CATALOGUE LICENCE ROW TICKED (carried on the hub branch).**
+***    `Ultimate_Stylized_Nature` (Quaternius, May 2022, 369 files) is **CC0 1.0**, and the row
+***    records the licence TEXT READ OFF DISK, not a search snippet - which is the hard rule, and is
+***    how the wrong ban got made once. Commercial use permitted, no attribution required. Nothing
+***    was imported, converted or redistributed by that firing.
+***  - **THE HUB'S STANDING AUDIT: CORRECT, AND IT CORRECTLY DID NOT ASK TO PUBLISH.** I compared
+***    the trees myself rather than copying its numbers: `origin/gh-pages` = `5ce35f33`, tree
+***    `c03fa129`; `origin/hub:web` = `5c618bba`; the whole delta is **`NOTES.md +6 / -0`**. I then
+***    checked the lane's actual claim - that `web/` CODE is byte-identical to publish 7 - with my
+***    own diff restricted to `app.js`, `index.html`, `style.css`: **EMPTY. The claim holds.**
+***    The lane did NOT claim ready-to-publish, so **I ran no publish verification and none was
+***    owed**, and I am not reporting a publish gate I did not run.
+***
+*** WHAT I DELIBERATELY DID NOT TICK:
+***  - **B138 (chat bot) - HALF DELIVERED, AND THE LANE SAYS SO ITSELF.** It added a real and
+***    well-argued arm (`COMMANDS_DATA HELP LINE CUT`, `scripts/chatcmd.gd` +44) guarding the one
+***    thing that file never measured - whether its own longest reply SURVIVES the 480-character cut
+***    `twitch_eventsub.gd` applies, the cut being the only drop in that function with no `_say_log`
+***    beside it. The argument is sound and the arm calls `help_line()` itself rather than emulating
+***    it. **But it has NEVER BEEN EXECUTED** - the lane ran no gate this cycle and wrote
+***    "checkpoint, gate owed" on its own row. An unrun guard is not a verified guard. NOT TICKED;
+***    the chat bot finishes it at :45 and it is that lane's row below.
+***  - **THE 56th's NAME, FEED AND REPUBLISH.** Three separate halves, three separate lanes, none of
+***    them started. Rows below.
+
+**GAME BUILD (:07) - NAME THE 56th. `MB_NAME["weigher"] = "Trueweight"`.**
+  Art shipped the body, the `.import`, six renders and a fit row this hour; `tools/art/minibosses.py`
+  carries `CANON["weigher"] = ("Trueweight", 2.55, ...)` and `ORDER + ["weigher"]`. Your half is the
+  engine name, plus the fit/theme rows the 55th needed (`MB_FIT`, the `dungeon_hd.gd` theme row) -
+  do exactly what S118 did for `straker`, no more. **DO NOT republish any count**; that is the chat
+  bot's at :45 and only after content feeds it.
+  **ONE THING LANDED ON MAIN THIS HOUR THAT IS NOT YOURS AND MAY SHOW UP IN YOUR BATTERY.** The chat
+  bot merged a NEW, NEVER-EXECUTED guard arm into `scripts/chatcmd.gd` (+44 lines, B138). Your :07
+  battery is the first thing that will parse it. **If PARSE or IMPORT goes red inside `chatcmd.gd`,
+  that is B138 and NOT your change** - say so, do not fix it, and do not let it cost you your row.
+  I did not run the parse myself on purpose: at 19:04 I was three minutes from your window and I was
+  not going to claim the lock on top of it to save myself one grep.
+
+**CONTENT (:22) - FEED THE 56th. `miniboss_feed.by_key["weigher"]`.**
+  Four lines - `arrive` / `act` / `broken` / `fall` - in the register's existing plain voice, same
+  shape as `straker`. The mechanic to write to, from art's own docstring: **IT MUST COME DOWN EVEN.**
+  It carries a weigh-beam with a pan on each end and the beam is already tipped; damage into the
+  heavy pan is paid back out of the light one while it is out of true, so a party stacked on one
+  flank moves the fight nowhere. It has no phase, chooses no target and there is nothing to
+  interrupt - the condition is on where the party STANDS. `{name}` marks a hero where you use one.
+  Add it ONLY if the game build has named it by your firing; if `MB_NAME` still lacks `weigher`,
+  write the four lines anyway (the feed may lead the engine - it did for `straker`) and say so.
+
+**ART (:34) - THE 57th IS YOURS IF YOU WANT IT, AND NOTHING IS OWED ON THE WEIGHER.**
+  The Weigher is TICKED - body, `.import`, six renders, fit row, register GREEN at 58. **Do not
+  spend a cycle on the side-depth question I raised and then withdrew above; my measurement was
+  invalid, not your body.** Minibosses are the one thing this lane may invent (STEP 5), so a 57th is
+  yours to take. If you would rather not, the standing alternative is unchanged: audit something you
+  have already shipped, and a stand-down written up IS the delivery.
+
+**CHAT BOT (:45) - RUN THE GATE YOU OWE ON B138. NOTHING ELSE.**
+  Your own row says checkpoint, gate owed, and I did not tick it for exactly that reason. Run the
+  battery over the new `HELP LINE CUT` arm and report the VERDICT LINES: does the arm fire, and if
+  it fires, WHICH reply is over the 453-character budget and by how much? **If it fires, that is a
+  find, not a failure** - it means a reply of yours is losing its tail on stream silently, and the
+  hub URL sits at that tail.
+  **THEN, AND ONLY IF THE ENGINE AND FEED BOTH CARRY `weigher` BY :45, REPUBLISH 55 -> 56.** Measure
+  the halves OFF THE LANE REFS as B137 did (`MB_NAME` from `origin/laptop`, `by_key` from
+  `origin/content`, published count from your own merged HEAD) - main cannot hold the same hour's
+  :07 and :22 work at :45. If either half still lacks it, **publishing 55 remains CORRECT** - say so
+  and republish nothing. Expect `L14 MINIBOSS UNNAMED ["weigher"]` until the engine names it; that
+  arm reading red is the cascade working, not your defect.
+  **CLAIM BY :50 WITH A FINISH INSIDE :52** - the HUD's window is :52 and you have cost it two
+  cycles before by sitting in it on a free lock.
+
+**HUD (:52) - YOUR CALL, AND THE U91 PAIR IS CLOSED.**
+  U157's green arm and U158's red arm together prove the 1080p guard both ways, and your audit found
+  no further exposed gate, so that thread is finished. Nothing is owed. Take the next item on your
+  own list, or audit something you have shipped. **Keep committing the log** - U158's was committed
+  and that is why I could judge it off your ref instead of a working-tree file; U124's was not.
+
+**HUB (:37) - STAND DOWN AGAIN, AND YOU ARE RIGHT TO.**
+  `web/` code is byte-identical to publish 7 - I checked it myself, not from your note. The only
+  merged-and-unpublished delta is `NOTES.md +6 / -0`, documentation with no code. **Do not claim
+  ready-to-publish for a NOTES.md change.** Keep the standing audit running; a stand-down written up
+  IS the delivery. If `assets/icons/items/` (D73) still has open work, that is yours and is real.
+
+**FOR THE SUPERVISOR:**
+  1. **NO PUBLISH RECOMMENDED THIS HOUR, AND NOTHING IS OWED.** Publish 7 landed 24 Nov 15:30:43 CT
+     (`5ce35f33`, tree `c03fa129`). The entire merged-and-unpublished delta is `web/NOTES.md +6 / -0`
+     - documentation, no code, no security surface. The hub lane did not claim ready-to-publish and
+     I ran no publish gate. **Recommendation: hold.** The older "hour owed" escalations below are
+     SPENT; publish 7 paid them.
+  2. **PROMPT CORRECTIONS ARE STILL OWED AND A FIRING CANNOT LAND THEM** (list below). They are
+     stale measurements in my own charter, not decisions, so I record them rather than act outside
+     my seat. The plan carries every one and the plan is what the lanes obey, so nothing is blocked.
+
+**FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, TO BE LANDED IN ONE LIVE TURN:**
+  - TEAM LEAD prompt, "A STANDING NOTE ON THE ART FIT REGISTER": it says the top-level verdict reads
+    `RED / ok:false` on two carried `_chibi` rows. **Now GREEN / ok:true over 58 rows**, and
+    `retired_red` is itself empty - the two `_chibi` cells are no longer red at all. Replace the
+    note; keep the instruction not to charge a given hour's art with it.
+  - TEAM LEAD prompt, the hub publish block: it says gh-pages is `05ac2679` / 19 Nov 20:06 CT.
+    **Now `5ce35f33`, tree `c03fa129`, pushed 24 Nov 15:30:43 CT (publish 7).** The surrounding
+    instruction to re-measure both trees every hour rather than copy the SHAs stays as written.
+  - TEAM LEAD prompt, STEP 5 ID list: as of the 18:58 firing the live IDs are **B138, C-197, D100,
+    H32, L74, S119, T5, U158**, and the art fit register judges **58** rows (56 live bodies + 2
+    retired `_chibi`). The prompt's "fit register judges 46 rows, 44 live bodies" and "art is on
+    paviser pass 8" sentences are stale.
+  - TEAM LEAD prompt, the miniboss example: it says `Delve.MB_NAME` is "WHOLE AT 44/44/44". It is
+    now **55/55/55 with a 56th body waiting**. The surrounding lesson - never quote a count from the
+    prompt as current, parse the braces or count nothing - is the point and stays exactly as written.
+  - TEAM LEAD prompt, the DEAD-DATA BASELINE: it cites 2,345,688 chars over 48 files and 146
+    top-level keys. **Now 2,388,015 chars over the same 48 files, 155 top-level keys, 65 zero-hit =
+    50 `_note_` + 15 NON-NOTE.** The NON-NOTE 15 are unchanged and still the same 15. The asset
+    count is now **35** directories with files, still ZERO unreferenced.
+  - CHAT BOT prompt: it should carry the measure-off-the-lane-refs rule (engine `MB_NAME` from
+    `origin/laptop`, feed `by_key` from `origin/content`, published count from its own merged HEAD),
+    because main cannot contain the same hour's :22 and :07 work at :45. It is in the plan and it
+    worked at B137 and again at B138, so nothing is blocked - but the prompt is its right home.
+  - CHAT BOT prompt: add the **claim-by-:50, finish-inside-:52** rule. It is in the plan and has
+    held for several hours, but the prompt is where it belongs.
+  - TEAM LEAD prompt, STEP 4: add that the **GAME BUILD row is written FIRST**, before the other
+    five, because that lane fires at :07 and a row finished after :05 reaches it an hour late.
+
+
 ## TAKE THIS NEXT - Updated THE 17:58 CT FIRING, 24 NOV 2026 (team lead). THIS SUPERSEDES EVERY ROW BELOW IT.
 *** THE CASCADE IS CLOSED AT 55 ENGINE / 55 FEED / 55 PUBLISHED. ZERO UNNAMED, ZERO GHOSTS.
 *** Measured by me on merged main, brace-matched, string-aware, comments stripped BEFORE splitting,

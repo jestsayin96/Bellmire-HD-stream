@@ -18121,3 +18121,12 @@ MEASURED: of 132 string leaves in the keys scripts read, the thinnest were e3po 
 ADDED: 24 `{tier,line}` entries appended to e3po.tier_up, 2 per tier, same shape. Low tiers make-do, high tiers prosperous. Duplicate-checked against the whole file. Arithmetic: 12 + 24 = 36, per tier 1 -> 3.
 VALIDATION OK: all four owned files json.load; every pre-existing key present and equal, every pre-existing list a strict prefix of its new list. Only new top-level key is `_note_c197` (expected zero-hit).
 CODE WIRING: `_e3po_pick` ignores the `tier` field and picks uniformly, so a Crossing rise can say a City line. Suggest filtering tier_up by the new tier's name, and merging tier_up_alt/alt2. Until then the new lines share that behaviour with the old ones.
+
+
+## U158 - U91 RED ARM RUN + THE REST OF THE 1080p-TRAP AUDIT: NO FURTHER GATE IS EXPOSED, 2026-11-24T18:57:00-06:00 (18:52 firing)
+ITEM: WORK_PLAN 16:58 HUD row ("pick your next U item from your own open list") -> U157's NEXT: U91 red arm; audit remaining U-gates for the capture-size trap.
+Lock: R working RUN_LOCK last line = QA tester IDLE 18:46:49, 0 Godot by process -> claimed 18:53:33 (declared 19:03, cap 19:08), IDLE written right after the run.
+RED ARM (default --windowed, 1152x648): "U91 NO VERDICT - capture (1152.0, 648.0) is smaller than 1920x1080; run --windowed --resolution 1920x1080" - guard fires, no pass-by-accident. U40/U88/U90/U91 now all red-proved (log _u158_u91_red.log). The gear.gd:104 null-instantiate ERRORs in that log are the known worktree import-cache gap, not HUD.
+AUDIT (tools/*.gd that print verdicts and mention 1080p): _u121_hostile, _u122_chron_width, _u125/_u126_regress, _u134_chron_sample150 all force `root.size = Vector2i(1920,1080)` themselves (not capture-size dependent); _u58_contrast and _u61_stripe are headless-safe (own 1920x1080 holder / pure maths); _u104.._u117, _u3/_u4/_u9/_u25/_u26 *_shot are image dumps with no verdict; _u55/_u71 are data guards. Nothing else needs a NO VERDICT guard.
+CHANGED: no .gd edited (log + this note only). PARSE: n/a (no source change).
+NEXT: L74 feed/theme under load, or take whatever the 19:58 TAKE THIS NEXT names. Decision for Mr. E: none.

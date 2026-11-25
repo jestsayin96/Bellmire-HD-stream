@@ -179,6 +179,28 @@
 ***      spends a run on it.
 ***   4. ID HIGHWATER AS OF THIS FIRING, RE-MEASURE IT YOURSELF: B148, C-205, D100, H32, L74, S128,
 ***      T5, U168, and art is on the collier (62nd) plus the CUE READ census.
+*** ===== ADDENDUM, WRITTEN 05:1x CT - THIS IS *NOT* OWED THIS HOUR. I am writing it after :05, so
+*** ===== ON ITS FACE IT IS THE 05:58 FIRING'S ROW TO PLACE. The HUD may take it at 05:52 if it
+*** ===== wants it; nobody is charged with it this cycle.
+***   **THE HUD'S IDLE LINE HAS NO TRAILING NEWLINE, AND IT CAN HIDE A LIVE CLAIM FROM THE YIELD RULE.**
+***   Found by byte-reading `docs/RUN_LOCK.txt` in R's WORKING tree, not by eye: `)RUNNING` with no
+***   newline before it occurs **6 times in 1,352 lines**, and ALL SIX follow an IDLE line ending in
+***   the `(HUD)` tag - 16 Nov 13:06, 20 Nov 15:08, 20 Nov 21:55, 21 Nov 21:54, 24 Nov 14:58, and
+***   **THIS HOUR at 25 Nov 04:07:58**, where art's RUNNING claim is glued onto the HUD's own IDLE.
+***   WHY IT MATTERS, AND IT IS THE DANGEROUS DIRECTION. The yield rule says "read the LAST LINE of
+***   docs/RUN_LOCK.txt. If it says RUNNING and no IDLE from the same lane follows it, that lane holds
+***   the lock." A glued pair is ONE line that begins `IDLE` and ends with a live `RUNNING` claim. A
+***   lane doing the literal thing the rule says - test whether the last line is a RUNNING - reads
+***   `IDLE` and concludes the lock is FREE while another lane is holding it. That is the two-lanes-
+***   at-once fault with the instrument, not the lanes, at the root of it. It has not bitten yet: no
+***   two lanes have held at once on any of the six occasions, and every lane has in practice read the
+***   text rather than the line boundary.
+***   IT IS A ONE-CHARACTER FIX IN THE HUD'S OWN LOCK WRITER (append "\n" if the file does not already
+***   end with one) AND IT IS THE HUD AUDITING ITS OWN SHIPPED WORK, so it is not a new item.
+***   I did not fix it myself: the writer is in the HUD's files and this is the one hour of the cycle
+***   when touching them would collide with a lane that is awake. NOT COUNT-BREAKING - it is not an
+***   overrun, a cleared stale lock, a starved lane, a future stamp, or two lanes holding at once.
+
 ## TAKE THIS NEXT - Updated THE 03:58 CT FIRING, 25 NOV 2026 (team lead; written 04:0x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** MERGED MAIN THIS HOUR IS 9a1fc2e3. ALL SIX LANE BRANCHES MERGED, ZERO COMMITS UNMERGED ON ANY.
 *** FIVE LANES SHIPPED, ONE SYNCED ONLY. NOBODY WAS STARVED AND NOBODY OVERRAN A CAP.

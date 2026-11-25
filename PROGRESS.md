@@ -1,3 +1,12 @@
+## S125 - THE PURCHASE-VERIFICATION RECEIPT LEDGER (supervisor 23:54 directive §3) - 25 Nov 2026 00:1x CT (game build)
+TAKE THIS NEXT (23:58 block) GAME BUILD row: the receipt ledger in scripts/twitch_eventsub.gd. Built off the directive doc, expected-state map NOT improvised beyond it.
+- handle_event points branch: `_receipt_open(uid, login, action, redemption_id, reward_id)` BEFORE the settle -> `{uid, login, action, timestamp, expected_state, redemption_id, reward_id, settled:false, verified:false, retries:0, due}`; `_settle_receipt` awaits `_settle(..., true)` then sets settled:true. Roll (town-wide, no hero) and the no-hero CANCELED path write no receipt.
+- `_tick_receipts(delta)` runs from _process (online AND offline), check at RECEIPT_CHECK_S = 8.0 s. `receipt_met` reads the TOWN, never the receipt: patch = hero potions >= before+1 (the directive's map); delve/join = chat.away / chat.delve_queue / _at_mouth has uid, or a live delve; fish = body errand "fish" or an Angler child; rally = rally_secs > 0 or a live delve (apply_rally takes it on the combatant, sets no flag); spotlight = a spotlights row for uid.
+- Miss -> RECEIPT RETRY logged, action re-dispatched ONCE via _do_reward. Second miss -> RECEIPT FAILED logged with redemption+reward id and "NOT refunded", kept in receipts_failed (cap 50), viewer told: "your <action> didn't go through - the builders have been told. Your points are safe." In memory only; pruned on verify/fail. IT DOES NOT REFUND.
+- GATE tools/_s125_receipts.gd (real handle_event, fake town whose actions fail on demand): `S125_RECEIPTS OK (15 checks)`. RED-PROOF `-- --redproof` (ledger emptied after each redemption = verifies nothing): `S125_RECEIPTS 9 FAILED (15 checks)` rc 1 - it goes RED, not quiet.
+- Battery: parse --quit-after 300 rc 0, 0 SCRIPT ERROR, 0 Parse Error; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2070; TOWNWALK in_solid=0/18559 PASS; DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+- Not a visual change: the proof is the gate log, no render applies. No live Twitch test, ZERO bits, no redemption, no chat line posted. Backup scripts/twitch_eventsub.gd.bak_s125 (untracked). Not ticked - team lead ticks.
+
 ## HUB security-invariant re-run - 24 Nov 2026 23:4x CT (hub lane)
 TAKE THIS NEXT (22:58 block) HUB row: re-run the web/ security invariants on the CURRENT tree and log which greps. No web/ edit. READY TO PUBLISH NOT CLAIMED.
 Tree: origin/hub merged with origin/main (305d80ce); web/ is byte-identical to origin/hub (no web/ diff). node --check app.js rc=0 (5455 lines).

@@ -1,3 +1,21 @@
+## S136 - 25 Nov 2026, 13:08-13:09 CT (game build) - WRITTEN STAND-DOWN: MY ROW (S110c-2b) WAS ALREADY ANSWERED AT S135 AND IS HELD FOR MR. E'S STYLE CALL; NO NEWER GAME-BUILD ROW EXISTS
+
+TOOK: the 11:58 TAKE THIS NEXT game-build row, S110c-2b (fix the UACP Skin colour, then wire). It is the
+newest block on merged main 1c71c922 at 13:08; no 12:58 block has landed. S135 (12:08) already did the
+measured half: the near-black Skin (0.0134 Principled, unlinked; MTL Kd 0.0107 on 18/20; the pack's own
+Preview.png shows black heads and hands) IS THE PACK'S DESIGN, so the row's own condition (1) "DO NOT
+INVENT A SKIN COLOUR" forbids the fix it asks for. Wiring (3) waits on Mr. E: keep the pack look and wire
+at k 0.5728, or name a skin tone and it becomes one material override in the wiring. I searched the project
+docs for a ruling after 12:08 and found none. Doing either myself would be choosing his look for him.
+The team lead's point (2) - hands and legs black too - is consistent with S135: Skin covers 52.1% of the
+surface, which is head, hands and the bare legs; it is one material, not a face-plate fault.
+ALSO RE-CHECKED, standing item in my prompt: gear.gd's equip() null guard is ALREADY IN (S35, gear.gd:107-109
+`if ps == null: _cache.erase(path); return null`, and :117 `if m == null: att.free()`). Nothing owed.
+NOTHING CHANGED except this entry and RUN_LOCK.txt. gamebuild-s134-wip untouched.
+GATES on merged 1c71c922: parse --quit-after 300 rc 0, 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks).
+offfloor/townwalk/delve not re-run - no script, scene or asset of mine changed.
+No Twitch test, zero bits.
+
 ## S135 - 25 Nov 2026, 12:08-12:2x CT (game build) - S110c-2b: THE BLACK SKIN IS NOT A CONVERTER FAULT. IT IS THE PACK'S OWN DESIGN, AND S134's FINDING 2 IS WITHDRAWN. WIRING NOW WAITS ON A STYLE DECISION THAT IS MR. E'S, NOT MINE
 
 TOOK: the 10:58 TAKE THIS NEXT game-build row (S110c-2), continuing at the step S134 named: S110c-2b,

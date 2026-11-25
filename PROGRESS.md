@@ -19486,3 +19486,6 @@ the next seat does not re-derive it and "fix" six lines of good text.
   declared finish, HUD's :52 window clear. Godot exited, `tasklist Godot*` = 0 checked live.
 - **No live Twitch test. ZERO BITS.** No cheer, no redemption, no reward read or written, no chat
   line posted as bellmirebro, no channel setting touched.
+
+## HUB 25 Nov 2026 10:4x CT - live suggestion POST proved
+Number: suggestions row id 4 landed at 16:39:40 UTC from the live page (1 test row, 0 failures); live HTML lastModified 09:49:18 vs gh-pages push 09:55:03 (CDN lag ~45 min at check). web/ unchanged. Detail in web/NOTES.md.

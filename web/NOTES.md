@@ -997,3 +997,25 @@ THE UNPUBLISHED DELTA (counted this hour, origin/hub:web 80795d06 vs gh-pages tr
 CHECKS (25 Nov 08:38 CT): node --check app.js OK; innerHTML code sites exactly app.js:255 and :301 (page-owned); the only other outerHTML/insertAdjacentHTML/document.write/eval/new Function hits are two comment lines (10, 11); one CSP meta. Untracked in the worktree and named: _hub_ready_shot.png, web/tools/__pycache__/ (delete refused on this machine; not committed).
 
 - 25 Nov 09:4x CT standing check (HUB build run): the TAKE THIS NEXT block (07:58) HUB row was the Suggestion Box measurement; it was already answered at 08:38 (entry above) and is not re-done. Re-counted: origin/hub:web (ad61693b) vs gh-pages tree c03fa129 (publish 7, 5ce35f33) = 3 files, +28/-1 - NOTES.md +23, index.html +2/-1 (the two Suggestion Box anchors), style.css +3. Still no suggestBtn/footer-link on the published page. NEW, UNRESOLVED: could not confirm the Google Form behind the button is public - a WebFetch of the /viewform URL failed client-side with no status, and the cloud shell has no route to docs.google.com. Commit c3fc81c4 recorded an earlier 403 (form not published); that is not re-measured. Someone with a signed-out browser should open the link before any publish, or the button ships dead. CHECKS: node --check app.js OK; innerHTML code sites exactly app.js:255 and :301 (page-owned; other hits are comments); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta; 0 zero-byte files in web/. web/ code unchanged, so no hostile-name rerun owed. Untracked and named: _hub_ready_shot.png, web/tools/__pycache__/. NOT claiming READY TO PUBLISH.
+
+## 25 Nov 2026, 10:4x CT - HUB firing: PROVED A SUGGESTION LANDS (answers the team lead's 09:58 HUB row)
+- Test done through the REAL live page (https://jestsayin96.github.io/Bellmire-HD-stream/, built-in browser):
+  category "other", username "hub-build-test", body marked "[HUB BUILD TEST ... Please ignore/delete]", clicked #sugSend.
+  The form showed "Sent! Thank you" with class `suggest-status ok` - app.js only does that when `res.ok`, i.e. the POST to
+  /rest/v1/suggestions returned a 2xx (Prefer: return=minimal, so the exact code is 201/204 and is not exposed to the page;
+  the browser pane's network log did not capture the request, so I do NOT quote a number I did not see).
+- READ BACK (stronger than the status): a SELECT with the project's own Supabase tool found the row - suggestions id 4,
+  category other, username hub-build-test, created_at 2026-11-25 16:39:40 UTC (10:39:40 CST). Anon has INSERT only by design;
+  the read-back used the owner's tool, not the page. **Mr. E / supervisor: row id 4 is a test row, safe to delete.**
+- WHAT THE LIVE PAGE IS SERVING, MEASURED: the live HTML has `document.lastModified` 09:49:18 and its script tag reads
+  `<script src="app.js">` - NOT `app.js?v=8`. origin/gh-pages (8d214d36, tree 1d8bce63 == origin/hub:web) has `app.js?v=8` at
+  index.html:519. So the Pages CDN was still serving the 09:49 HTML at ~10:40 although 8d214d36 was pushed 09:55:03.
+  The form WORKS on what is served (it has the click handler, not the broken submit), so nothing viewer-facing is broken,
+  but the cache-bust has not reached the HTML yet. Re-check later; it should self-heal as the CDN expires.
+  (The page's own fetch of app.js is blocked by CSP connect-src, which does not list 'self' - expected, not a fault.)
+- CSP: connect-src is exactly `https://paaukwaffaamazgrndbv.supabase.co https://id.twitch.tv https://api.twitch.tv wss://irc-ws.chat.twitch.tv`;
+  the form's POST goes to the supabase origin already listed, so no CSP change. form-action 'none' still holds (button is type=button).
+- GREPS on web/app.js (unchanged since origin/hub): `innerHTML` as code at exactly :255 and :301 (other hits :7 :93 :5137 :5178 are
+  comments); outerHTML / insertAdjacentHTML / document.write / eval / new Function = 0 as code (2 comment lines name them);
+  `node --check` OK. The suggestion form reads .value only into a JSON body and writes status via textContent. No token in any file.
+- web/ is byte-identical to origin/hub (git diff empty). NOT claiming READY TO PUBLISH - nothing new to publish.

@@ -19233,3 +19233,15 @@ Next content: C-207.
   as bellmirebro.
 - NEXT: at 06:45, whatever the plan's CHAT BOT row says. If it is silent: all four registers agree at 62
   the moment S129 reaches main, and the honest open item on this lane is nothing.
+
+
+## C-207 (25 Nov 2026 06:2x CST, content) - WRITTEN STAND-DOWN; NO ROW WRITTEN, NO DATA FILE TOUCHED
+- TAKE THIS NEXT (05:58 CT block) CONTENT (:22) row: "NOTHING IS OWED TO YOU" - cascade shut at 62/62/62,
+  C-206 audited all 62 rows, `_note_c204` spent. The 11 ask replies are the supervisor's words and were left
+  exactly as landed. A written stand-down is the delivery.
+- MEASURED, NOT TRUSTED: `miniboss_feed.by_key` = 62 keys on the merged tree, `collier` present. `origin/art`
+  carries no commit beyond main except the 05:58 plan sync, so there is no committed 63rd body to feed.
+  Nothing stood unfed, so the standing backlog was not opened out of habit.
+- FILES: data/items.json, lore_lines.json, bosses.json, potions.json all byte-identical to main. VALIDATION
+  not needed (no edit). No code wiring implied.
+- LOCK: Godot never run, lock not touched.

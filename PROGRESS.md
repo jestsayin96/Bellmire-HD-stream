@@ -20742,3 +20742,89 @@ NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or writt
 posted as bellmirebro, no channel setting touched, no sub or gift of any kind.
 
 FOR THE GAME BUILD LANE: nothing. twitch_eventsub.gd is untouched and needs no change for this.
+
+## B161 - 25 Nov 2026, 17:45 CT firing (chat bot) - THE SUPERVISOR'S GRANT CAME DOWN EIGHT MINUTES BEFORE MY FIRING AND THE PATCH IS LANDED, GREEN FIRST TRY, WITH THE FALSE POSITIVE PROVED ABSENT ON THE REAL TREE
+
+MY ROW SAID STAND-DOWN OR AUDIT. I DID NEITHER, AND I WANT THE REASON ON THE RECORD.
+The team lead's 16:58 row says "the ownership ruling on `tools/_l14_test.gd` is still with the
+supervisor and I have left it there unchanged - you were right to refuse the edit". That was true
+when it was written. The supervisor ruled at 17:37 CT - `sup-nov25-1737-RULING-chatbot-l14-test-
+ownership-and-pet-selection.md`, eight minutes before my :45 - and the ruling is **GRANTED**, scope
+`tools/_l14_test.gd` ONLY, with the sentence "Chat bot: land the patch. Do not hold for further
+approval." A newer supervisor ruling beats an older plan row on the same question, and the row's own
+reason for the stand-down had expired. So I landed it. I did NOT touch anything else in `tools/`.
+
+WHAT CHANGED - ONE FILE, AND IT IS A PASTE, NOT A REWRITE.
+`tools/_l14_test.gd:29-34` was:
+    var rx := RegEx.new()
+    rx.compile("(?m)^        ((?:\"[a-z]+\", )*\"[a-z]+\"):")
+    ... search_all loop ...
+and is now `var verbs: Array = _harvest(src)`, with `_strip_comment`, `_strip_strings`,
+`_indent_of` and `_harvest` inserted above `_initialize`. The four functions are the B159/B160
+source **extracted byte-for-byte out of PROGRESS.md by script, not retyped** - I asserted the
+starting and ending lines and asserted the six replaced lines matched the expected block exactly
+before writing. I also diffed the B159 copy (PROGRESS.md 20305-20419) against the B160 copy
+(20510-20624): IDENTICAL, md5 cf6ee9c6720f599326467f27c7b698ee both. The team lead's "the landing
+really is one paste" held up; it took one script and no judgement calls.
+
+THE ENGINE SAID THE THING THE WHOLE PATCH EXISTS FOR.
+_b161_run.log, one headless battery on W6, three runs, all green FIRST TRY:
+  - parse `--quit-after 300`  rc=0, 0 errors, 0 SCRIPT ERROR, 0 Parse Error
+  - `tools/_l14_test.gd`      rc=0, **L14_TEST OK (24 checks)**
+  - `tools/_commands_doc.gd`  rc=0, **COMMANDS_DOC OK wrote 32 commands**
+The two arms that matter, verbatim from the log:
+    ok  every verb ChatCmd answers is in the data (74 verbs; missing [])
+    ok  every command in the data is answered (unanswered [])
+**74 verbs. B160's python emulation predicted exactly 74 labels off the same tree, and the real
+engine agrees to the number** - the emulation was right and is now retired as an emulation. And
+`missing []` is the direct proof of the fix's purpose, not a side effect: if the dictionary key
+`"gold":` sitting at label depth had been harvested as a viewer verb - which is precisely what the
+old 8-space pattern did in shape case 6 - it would appear in `missing`, because `gold` is not a
+command in data/commands.json. It is not there. The false positive is gone on the real tree and not
+merely in the eight synthetic cases.
+
+WHAT I CHECKED THAT COULD HAVE MADE THIS HOLLOW, BECAUSE A GREEN GATE AFTER A GATE EDIT IS THE
+EXACT SHAPE THAT CAN BE TESTING ITSELF. The old instrument ALSO passed. So I asked what the patch
+actually buys, rather than reporting green and moving on. The old pattern's `"[a-z]+"` cannot match
+a verb with an underscore or a digit (`buy_brew`, `test2`), requires EXACTLY eight spaces, and
+anchors on a line-ending `:`. It passed anyway because its `unanswered` arm only requires that every
+of the 32 data keys be found, and the keys it could see covered them. The patch does not fix a red;
+it removes a LIE THE INSTRUMENT WAS FREE TO TELL - a non-command read as a verb, which would have
+charged data/commands.json with failing to answer a dictionary key, and a tab-indented or depth-12
+label going unseen. The gate is strictly stronger and the count went from the old pattern's narrow
+read to the full 74.
+
+NO DRIFT, BOTH DIRECTIONS, AND THE DOC IS A GENUINE NO-OP.
+`COMMANDS_DOC OK wrote 32 commands` and `git status docs/COMMANDS.md` is **empty** - the generator
+rewrote the file to the bytes already on disk. docs/COMMANDS.md, data/commands.json and
+scripts/chatcmd.gd are all UNMODIFIED this cycle; `tools/_l14_test.gd` is the only source file
+touched. The L14 doc arms (`unpublished` / `stale`, every published field verbatim) are green, which
+is the drift check in both directions at the published-bytes level.
+
+THE LOCK, AND AN ERROR IN MY OWN CLAIM LINE THAT I AM NOT GOING TO LET STAND QUIETLY.
+Last line before me: game build IDLE 17:27:55 (and its own 17:27:55 correction). Free. `tasklist
+/FI "IMAGENAME eq Godot*"` = no tasks, checked LIVE before launch and again after release. Claim
+stamp **17:48:26**, cap 18:03:26, declared finish 17:52, IDLE written **17:49:18** - 52 seconds of
+hold, inside the cap and clear of the HUD's :52 by over two minutes. That is the :50 discipline for
+a sixth day. **THE ERROR: the body of my RUNNING line reads "claim 17:48:51, cap claim+15 =
+18:03:51" while the line's own timestamp is 17:48:26.** I typed the figure instead of reading it
+back off the stamp I had just taken. It is 25 seconds in the direction that makes my window look
+LONGER than it was, so it cost no one their slot and I released 52 s in regardless - but it is the
+same class of fault as writing a time off an estimate, and the team lead burned its own seat on that
+twice today. The stamp governs: claim 17:48:26, cap 18:03:26. I said so in the IDLE line too rather
+than only here.
+
+NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward created, deleted, re-priced or
+read, no chat line posted as bellmirebro, no channel setting touched, no sub or gift of any kind.
+bellmirebro pays for bits and it spent nothing.
+
+FOR THE GAME BUILD LANE: nothing. `twitch_eventsub.gd` is untouched and needs no change for this.
+The `twitch_reply(user_login, text)` contract is unchanged - the L14 twitch_reply arms (plain answer,
+no `@`, the login when given, silence for `local_*` and for fightoverlay's words) are all green.
+
+FOR THE SUPERVISOR: the grant is used and closed, and I did not stray past its scope. Nothing is
+owed back on it. On my queue's older engine debt: parse, L14_TEST and COMMANDS_DOC are paid in this
+window. **TWITCH_PARSE I DID NOT RUN - I nearly wrote that I had.** It was green at the QA tester's
+16:42 battery and at the game build's 17:09, both on today's main, so I am not re-running a gate two
+other lanes paid within the hour inside a 52-second window; it is carried, not claimed. The "26
+commands" figure in my standing prompt is stale - the data carries 32.

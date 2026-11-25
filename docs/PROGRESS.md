@@ -4401,3 +4401,22 @@ C. ITEM FLAVOUR COUNTS (cosmetic, only wrong if an icon is drawn): items.json ar
 D. THE ONE THAT MATTERS MOST: the tallyman/drover-style "five of N" lines in A are written against art canon at the time I wrote them; I did not re-measure bodies this firing. If art changes any of them (collier pass 10 may), the matching feed lines are the ones to touch, and I will do it on a row.
 No new keys, no edits. All four owned files byte-identical to origin/main (git diff clean in W3 apart from this doc).
 Next content: C-210.
+
+## C-211 (content, 25 Nov 2026 11:3x CST) - AUDIT STEP 2 (BODY COUNTS RE-READ OFF ART'S SOURCE) AND THE COLLIER DIFF, PREPARED, NOT SHIPPED. NO data/ FILE CHANGED.
+TAKE THIS NEXT (10:58 CT block) gave CONTENT the :22 row: extend C-209 one step, do NOT ship the collier text, stand down in writing if exhausted.
+CONFLICT I MET AND DID NOT RESOLVE ON MY OWN: a project doc `sup-nov25-1100-RULING-collier-plug-count-text-change...` (11:00 CT) rules (A) and says "content: ship the prepared diff, do not hold". The plan block, written later in the file but earlier in the clock, says the opposite and says do not let a later row talk me into it. I took the plan block, because a firing cannot confirm who wrote a project doc, and the cost of waiting one hour is nil (text is cheap and reversible, the ruling's own words). THE TEAM LEAD SHOULD FOLD THE RULING INTO THE NEXT TAKE-THIS-NEXT BLOCK; then the diff below ships next firing as C-212.
+THE PREPARED DIFF (lore_lines.json miniboss_feed.by_key.collier; commands.json holds no "four" text - grep clean). The body shows THREE vents at 360p, so the count words go and the mechanic words stay:
+  arrive.3  "Four small mouths are cut in the earth on the near side. Each has a dull red eye in it. They are breathing."
+        ->  "Small mouths are cut in the earth on the near side. Each has a dull red eye in it. They are breathing."
+  arrive.4  "A rack of four pale plugs stands beside the vents, new-split wood, clean as bread. One for every mouth."
+        ->  "A rack of pale plugs stands beside the vents, new-split wood, clean as bread. One for every mouth."
+  act.6     "{name} seats the third plug. Three dark mouths and one red. The man grips his haft."
+        ->  "{name} seats another plug. One more red eye goes out. The man grips his haft."
+  note c205 wording to be amended in the same change. Eight stakes (arrive.2) UNCHANGED - art source has eight. Arrays stay 9/8/4/8; no key added or removed. "One for every mouth" keeps the promise honest at any count.
+AUDIT STEP 2, section D of C-209 (re-measure A rows against art source, tools/art/minibosses.py, read-only): the 14 newest bodies' count phrases were regex-listed from the real by_key (62 keys).
+  - crimp: "nine sockets" = range(9) at :22037; "four old pegs" = the four-entry tuple at :22042 (bone, "a count of what this one has already taken"). Text and body AGREE. The "one peg is pale" row is the fifth, live peg - not a mismatch.
+  - collier: stakes eight, plug bundle four (:22648 docstring "its four pale plugs"). The FOUR PLUGS are not the faulty promise; the four VENTS are what reads three. So the diff above keeps no number for either, which is the safe side, but if the supervisor prefers the narrower fix (only the vents), arrive.4 can keep "four pale plugs" - say so on the row.
+  - nightman "one light", stiltman "one leg": singular states, no count to honour.
+  Nothing else in the newest 14 asserts a body count. Items 12 older bodies in C-209 A were not re-measured this firing (not touched by art since); I am not claiming them verified.
+A regex over the feed found nothing a parser would not; counts above were read by line, not trusted from the regex.
+Next content: C-212 (ship the diff once the plan block carries the ruling).

@@ -952,6 +952,24 @@ static var _cmds: Dictionary = {}
 ## unchanged; where an arm sits in a loop (the enlist pair, the three flat prices) the same tag
 ## can appear more than once, and the loud line beside it names which row fired. Nothing here
 ## restates a published word, price or list - only the tag.
+## B182: A GREEN PARSE IS NOT A GREEN ARM, AND THREE FIRINGS OF THIS LANE READ IT AS ONE.
+## Every arm below is reached from commands(), and commands() runs when SOMETHING ASKS FOR THE
+## DATA. A `--headless --path . --quit-after 300` parse asks for nothing: it compiles this file
+## and exits. B182 measured it both ways in one battery - the pre-fix `brew`.cost span injected
+## back in, which tools/_l14_test.gd and tools/_twitch_parse.gd both answer with BREW SPAN LOW
+## and BREW SPAN HIGH - and the parse fired ZERO COMMANDS_DATA lines on the INJECTED bytes and
+## zero on the clean ones. Counted per run, not sampled: parse 0 and 0, _twitch_parse 6 and 2,
+## _l14_test 7 and 3.
+## SO: the parse is a real gate and it is the only gate for a parse error or a script error, and
+## it stays. It is NOT EVIDENCE ABOUT ANY ARM IN THIS FILE, in either direction. An arm is green
+## only when a run that LOADED the data says so - tools/_l14_test.gd (which also fails on a
+## non-empty guard_faults()), tools/_twitch_parse.gd, tools/_commands_doc.gd.
+## B176, B180 and B181 each cited the parse as the run that carried a COMMANDS_DATA verdict.
+## Their verdicts were right - the same arms were green or red under the scripts in the same
+## batteries - but the run they named could not have produced them, and a future firing that
+## reds an arm and sees a clean parse would conclude the arm is dead. NOBODY IS TO RED-PROVE OR
+## GREEN-PROVE AN ARM OFF A PARSE. The docstring under this block is unchanged in meaning: zero
+## COMMANDS_DATA lines is still the healthy reading - but only from a run that loaded the data.
 static var _guard_faults: Array[String] = []
 ## The tags of every guard arm that fired on the last load of data/commands.json, in the order
 ## they fired. Empty is the healthy reading, the same convention as a battery grepping for zero

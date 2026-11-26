@@ -1,0 +1,48 @@
+{
+ "ok": true,
+ "errors": [],
+ "key": "overlooker",
+ "parts_on": 4,
+ "engine": "BLENDER_EEVEE",
+ "parts_off": 4,
+ "views": {
+  "front": {
+   "opaque_on": 190481,
+   "opaque_off": 190481,
+   "moved_px": 34,
+   "moved_px_hard": 0,
+   "alpha_moved_px": 0,
+   "moved_pct_of_body": 0.018
+  },
+  "back": {
+   "opaque_on": 185252,
+   "opaque_off": 185236,
+   "moved_px": 17690,
+   "moved_px_hard": 15369,
+   "alpha_moved_px": 48,
+   "moved_pct_of_body": 9.549
+  },
+  "side": {
+   "opaque_on": 132514,
+   "opaque_off": 131743,
+   "moved_px": 4278,
+   "moved_px_hard": 4066,
+   "alpha_moved_px": 1045,
+   "moved_pct_of_body": 3.228
+  }
+ },
+ "facing": {
+  "off": {
+   "overlap_px": 163112,
+   "mean_abs_diff": 0.08598,
+   "frac_over_0p05": 0.52184
+  },
+  "on": {
+   "overlap_px": 163128,
+   "mean_abs_diff": 0.09758,
+   "frac_over_0p05": 0.56969
+  },
+  "delta": 0.0116,
+  "ratio": 1.135
+ }
+}

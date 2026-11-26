@@ -21845,3 +21845,92 @@ parse and has been for ten hours; my feed has published 63 since B166.
 **None at all.** No Godot was launched this hour, so not even the eventsub autostart join that every
 headless parse produces happened. No message sent, nothing redeemed, nothing cheered, **ZERO BITS**,
 no reward read or written, no account driven by me, and no channel setting touched.
+
+## B178 - 2026-11-26 10:45 CT - A NUMBER THIS LANE PUBLISHES TWICE AND GUARDS ONCE, AND I SPENT MY OWN ENGINE WINDOW FINDING IT
+
+**NO LOCK TAKEN, NO GODOT LAUNCHED, NOTHING COMMITTED BUT THIS ENTRY.** The lock was FREE when I
+read it (10:46:12 CT, last line my own B176 CORRECTION which is explicitly not a claim; `tasklist`
+Godot* = 0). I did not claim it. The reason is my own and it is below.
+
+### MY FAULT FIRST, BECAUSE LAST FIRING WROTE ME THE INSTRUCTION AND I DID NOT FOLLOW IT
+B177's entry, directly above this one, says in terms: **"Claim at :45 BEFORE reading the plan, run
+the NORMAL arm only, declare a finish for one arm."** I did the opposite. I read the lock, then the
+plan on disk, then the plan on `origin/main`, then the feed, then four more audit reads - and by the
+time I had a claim worth writing it was past 10:52 and **the engine window belongs to the HUD**. So
+I stood the lock down and did file-only work.
+**THE LOCK WAS NOT HELD. NOBODY STARVED ME. L56 IS UNPAID FOR A SECOND FIRING BECAUSE OF MY OWN
+ORDERING.** That is a different and worse thing than the five-slot starvation this lane logged
+earlier today, and I am not filing it under the same heading. The sizing lesson is B177's, unchanged
+and now proved twice: **the claim is the first write of the firing, not the last.**
+
+### THE FINDING - `look` PUBLISHES ITS PANE LENGTH IN TWO FIELDS AND ONE ARM READS ONE OF THEM
+Proved by reading the source, not by sampling, and the house has already armed this exact fault
+class once - which is what makes the gap a gap and not a design choice.
+- `look`.what  = "a **10-second** pane in the channel-points lane" -> guarded three ways
+  (LOOK ANCHOR / LOOK FRACTION / LOOK SECONDS, chatcmd.gd:1335-1356) against `Spotlight.LOOK_S`,
+  **10.0**, one declaration at spotlight.gd:33, one use site at line 120.
+- `look`.short = "A **10 s** spotlight pane on your hero, when the channel-points lane is free."
+  **NO ARM READS THIS FIELD.** The guard's only input is `cmd_d.get("look").get("what")` and its
+  anchor is the literal `"-second pane"`, which `short`'s "10 s" does not contain.
+- `short` is not an internal note: the doc arms (`_l14_test.gd:303-304`) require
+  docs/COMMANDS.md to carry **every field the data publishes, verbatim**, so "10 s" is printed to a
+  viewer-facing document.
+- **THE CONCRETE HOLE:** set `look`.short to "A 12 s spotlight pane" and every gate in this lane
+  stays green - parse 0, L14_TEST, COMMANDS_DOC, TWITCH_PARSE - while docs/COMMANDS.md prints 12
+  and the pane runs 10. Nothing in the house compares the two.
+- **THE HOUSE ALREADY KNOWS THIS FAULT CLASS.** `miniboss` is the only other command that publishes
+  a number in two fields, and it carries **MINIBOSS FIELDS** (chatcmd.gd:2271-2274) for precisely
+  this: it parses the "<number> elites" phrase out of BOTH `what` and `short` and fails when the two
+  disagree with *each other*, before either disagrees with the engine. `look` has no such arm.
+  Two double-publishers, one armed, one not.
+- **OWED, AND IT IS MINE:** a LOOK FIELDS arm mirroring MINIBOSS FIELDS. **I DID NOT WRITE IT THIS
+  HOUR** and I say why: a new guard arm is real code, it needs the parse and L14_TEST to earn its
+  keep, the engine window was not mine any more, and an ungated arm pushed to `chatbot` gets merged
+  to main at :58 by a team lead who has no gate result to read. It is carried to 11:45, where it is
+  the first thing after the claim.
+
+### AND B83'S OWN SWEEP SENTENCE IS FALSE AS WRITTEN - A CORRECTION TO THIS FILE'S RECORD
+chatcmd.gd:1792-1793 ends B40's price walk with **"No published number in this file is unwatched."**
+I re-walked it at today's byte count rather than taking it: **32 commands, 27 numeral occurrences**
+across `short`/`what`/`cost`/`args`/`example`. Ten commands publish a numeral - armoury, brew, dye,
+forge, look, miniboss, oil, reroll, respec, wear - and every one of those ten **commands** does sit
+under an arm. So the sentence is true **per command and false per field**, and `look`.short is the
+counterexample it walked past. B83 wrote the line at **31** commands and it has not been re-walked
+since; the 32nd command added after it publishes no numeral, so the count is not what aged - the
+*granularity* is. I am NOT editing that comment block this hour (a comment change moves the parse
+and I cannot run it); the correction is carried with the arm.
+
+### WHAT I VERIFIED GREEN WHILE I WAS IN THERE - ALL FREE, NO ENGINE
+- Every price still matches its live authority, read out of `scripts/roster.gd` this hour:
+  oil **12** = `OIL_COST`, reroll **120** = `REROLL_COST`, respec **200** = `RESPEC_COST`,
+  brew's Mending **35** = `POTION_COST`; forge **420/1100** and armoury **400/1000** are the
+  `runed`/`dragontooth` and `plate`/`warded plate` rows at roster.gd:175-188. No drift.
+- `data/commands.json` md5 **3a3baa59**, `docs/COMMANDS.md` md5 **7a030e15**, `scripts/chatcmd.gd`
+  md5 **ad7f06a1** - byte-unchanged from B176, and unchanged by me this hour.
+- `origin/main` is an **ancestor of `chatbot`** (merge-base = main tip `0c3a072d`), so the
+  start-of-run merge was a no-op and I ran none. main has not moved since 25 Nov 23:08.
+
+### THE PLAN'S CHAT BOT ROW IS PAID AND I RE-MEASURED IT RATHER THAN TAKING B177'S WORD
+The 22:58 row (25 Nov) asks for two things, both already done: the **62 -> 63 republish at the
+feed** - `miniboss`.short AND `.what` both read "The 63 elites" today, measured off the bytes - and
+the import-cache fix that took this lane's ERROR wall from 65 to 1 at B168. Nothing in that row is
+owed. **DO NOT RE-ISSUE IT.**
+
+### FOR THE GAME BUILD LANE - THE CASCADE'S FIRST LINK IS STILL OPEN, ELEVEN HOURS ON
+`Delve.MB_NAME` in `scripts/delve.gd` carries **62 keys and no `overlooker` row** - I counted them
+by bracket-matching the dict this hour, last three keys `crimp` / `timberman` / `collier`. The
+22:58 plan assigned you `"overlooker": "Velrick",` and listed every precondition as met. Until it
+lands, **COMMANDS_DATA MINIBOSS UNNAMED [overlooker]** is the one red on my parse - the tenth
+consecutive firing - and it is not mine to fix. My feed has published 63 since B166. Nothing is
+owed in `twitch_eventsub.gd` and nothing crossed the `twitch_reply` contract this hour.
+
+### TWITCH
+**None at all.** No Godot launched, so not even the eventsub autostart join that a headless parse
+produces. No message sent, nothing redeemed, nothing cheered, **ZERO BITS**, no reward read or
+written, no account driven by me, no channel setting touched.
+
+### CARRIED TO 11:45, IN THIS ORDER
+1. **Claim the lock as the first write of the firing.** Then the LOOK FIELDS arm + the B83 comment
+   correction, gated by parse and L14_TEST in the one battery.
+2. **L56**, the delve-heavy soak: the NORMAL arm only, one declared finish, `--nospring` and
+   `--redproof` carried on. Unchanged from B177's sizing and unpaid for a second firing.

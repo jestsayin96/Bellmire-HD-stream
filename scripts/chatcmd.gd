@@ -1331,28 +1331,72 @@ static func commands() -> Dictionary:
         # guard going blind); and LOOK_S becomes FRACTIONAL, where a whole-second sentence cannot
         # state it truthfully and an int compare would pass 10.5 as 10. Not fatal - a battery greps
         # COMMANDS_DATA; no line is the healthy reading.
-        var lw: String = String(((cmd_d.get("look", {}) as Dictionary)).get("what", ""))
-        var l_anchor := "-second pane"
-        var l_at: int = lw.find(l_anchor)
-        var l_said: int = -1
-        if l_at > 0:
-            var l_i: int = l_at
-            while l_i > 0 and "0123456789".contains(lw.substr(l_i - 1, 1)):
-                l_i -= 1
-            if l_i < l_at:
-                l_said = int(lw.substr(l_i, l_at - l_i))
+        # B179: THE SECOND FIELD, AND IT WENT UNREAD FOR 144 CYCLES. B178 proved this guard read
+        # ONE of the two places this lane publishes the pane length: `look`.short says "A 10 s
+        # spotlight pane" and NO ARM READ IT. docs/COMMANDS.md carries every published field
+        # verbatim (_l14_test.gd:303-304), so short could have said 12 while the pane ran 10 with
+        # every gate in this lane green. `miniboss` is the only other command that publishes a
+        # number in two fields and it has carried MINIBOSS FIELDS since B51; this is that arm for
+        # the other one, and the ordering is deliberately the same - FIELDS before the engine
+        # compare, because two of my own sentences disagreeing is a worse fault than either one
+        # disagreeing with LOOK_S and it must not be reported as the milder thing.
+        # WHY A SCANNER AND NOT A SECOND LITERAL ANCHOR: the two fields spell one number two ways
+        # today ("10-second pane" and "10 s"), so a literal per field goes blind the moment either
+        # is reworded into the other's spelling - which is a REWORD, the exact thing ANCHOR exists
+        # to catch, being allowed through. The scan takes a digit run followed by "second" or by a
+        # bare "s", and nothing else: both spellings today, a swap between them tomorrow, and
+        # "63 elites" or "(teal)" never.
+        # WHAT CHANGED IN ANCHOR, SAID PLAINLY: it fired when `look`.what lost the phrase; it now
+        # fires when NEITHER field states a length. That is weaker on `what` alone and stronger on
+        # the pair - the published number is unchecked only when no field carries one, and whichever
+        # field does carry one is still compared against LOOK_S below.
+        var l_d: Dictionary = (cmd_d.get("look", {}) as Dictionary)
+        var l_seen: Array[String] = []
+        var l_vals: Array[int] = []
+        for l_f in ["what", "short"]:
+            var l_s: String = String(l_d.get(l_f, "")).to_lower()
+            var l_v: int = -1
+            var l_i: int = 0
+            while l_i < l_s.length():
+                if not "0123456789".contains(l_s.substr(l_i, 1)):
+                    l_i += 1
+                    continue
+                var l_j: int = l_i
+                while l_j < l_s.length() and "0123456789".contains(l_s.substr(l_j, 1)):
+                    l_j += 1
+                var l_rest: String = l_s.substr(l_j)
+                if l_rest.begins_with("-") or l_rest.begins_with(" "):
+                    l_rest = l_rest.substr(1)
+                var l_hit := false
+                if l_rest.begins_with("second"):
+                    l_hit = true
+                elif l_rest.begins_with("s"):
+                    var l_c: String = l_rest.substr(1, 1)
+                    l_hit = l_c == "" or not "abcdefghijklmnopqrstuvwxyz".contains(l_c)
+                if l_hit:
+                    l_v = int(l_s.substr(l_i, l_j - l_i))
+                    break
+                l_i = l_j
+            if l_v >= 0:
+                l_seen.append(String(l_f))
+                l_vals.append(l_v)
+        var l_said: int = (l_vals[0] if not l_vals.is_empty() else -1)
         var l_real: float = float(Spotlight.LOOK_S)
         if l_said < 0:
             _guard_faults.append("LOOK ANCHOR")
-            push_error("COMMANDS_DATA LOOK ANCHOR: `look`.what no longer says \"<number>-second pane\" - the published length of the free look can no longer be checked against Spotlight.LOOK_S (%s)" % str(l_real))
-            printerr("COMMANDS_DATA LOOK ANCHOR - `look`.what lost its \"<number>-second pane\" phrase; the pane length is now unchecked")
+            push_error("COMMANDS_DATA LOOK ANCHOR: neither `look`.what nor `look`.short states a pane length any more (no \"<number> second\" or \"<number> s\" phrase in either) - the published length of the free look can no longer be checked against Spotlight.LOOK_S (%s)" % str(l_real))
+            printerr("COMMANDS_DATA LOOK ANCHOR - no `look` field states a pane length; the pane length is now unchecked")
+        elif l_vals.size() == 2 and l_vals[0] != l_vals[1]:
+            _guard_faults.append("LOOK FIELDS")
+            push_error("COMMANDS_DATA LOOK FIELDS: `look`.what publishes a %d-second pane and `look`.short publishes %d - my own two declarations disagree, so !look answers one length and docs/COMMANDS.md prints the other (fields carrying a length: %s)" % [l_vals[0], l_vals[1], l_seen])
+            printerr("COMMANDS_DATA LOOK FIELDS - what %d, short %d" % [l_vals[0], l_vals[1]])
         elif l_real != floorf(l_real):
             _guard_faults.append("LOOK FRACTION")
-            push_error("COMMANDS_DATA LOOK FRACTION: Spotlight.LOOK_S is %s, which no whole-second sentence can state - `look`.what publishes %d-second and the pane is neither" % [str(l_real), l_said])
+            push_error("COMMANDS_DATA LOOK FRACTION: Spotlight.LOOK_S is %s, which no whole-second sentence can state - `look`.%s publishes %d second and the pane is neither" % [str(l_real), l_seen[0], l_said])
             printerr("COMMANDS_DATA LOOK FRACTION - LOOK_S %s is not whole seconds; published %d" % [str(l_real), l_said])
         elif float(l_said) != l_real:
             _guard_faults.append("LOOK SECONDS")
-            push_error("COMMANDS_DATA LOOK SECONDS: `look`.what publishes a %d-second pane and Spotlight.LOOK_S holds it for %s - docs/COMMANDS.md promises a look the spotlight does not give" % [l_said, str(l_real)])
+            push_error("COMMANDS_DATA LOOK SECONDS: `look`.%s publishes a %d-second pane and Spotlight.LOOK_S holds it for %s - docs/COMMANDS.md promises a look the spotlight does not give" % [l_seen[0], l_said, str(l_real)])
             printerr("COMMANDS_DATA LOOK SECONDS - published %d, enforced %s" % [l_said, str(l_real)])
         # B36: THE NEXT NUMERIC CLAIM, AND THE FIRST ONE WITH TWO AUTHORITIES.
         # B35 took `look` because it had ONE declaration and named `satchel` as the obvious next
@@ -1791,6 +1835,16 @@ static func commands() -> Dictionary:
         ## wrote the line) - forge 60/160/420/1100, armoury 50/150/400/1000, brew 35 and 40-480,
         ## oil 12, wear 30-520, dye 25, reroll 120, respec 200, look 10, miniboss 36 - and every
         ## one of them already sits under an arm. No published number in this file is unwatched.
+        ## B179 CORRECTS THAT LAST SENTENCE, AND IT IS THIS FILE'S OWN SENTENCE ABOUT ITSELF.
+        ## It is TRUE PER COMMAND AND WAS FALSE PER FIELD. Re-walked at today's bytes: 32 commands,
+        ## 27 numeral occurrences across `short`/`what`/`cost`/`args`/`example`; ten commands
+        ## publish a numeral (armoury, brew, dye, forge, look, miniboss, oil, reroll, respec, wear)
+        ## and every one of those ten COMMANDS sat under an arm - while `look`.short, a second
+        ## field of an already-guarded command, sat under none until the LOOK FIELDS arm above.
+        ## What aged is the GRANULARITY, not the count: B83 wrote the walk at 31 commands and the
+        ## 32nd publishes no numeral. READ IT AS: no published number is unwatched IN THE FIELD THE
+        ## ARM READS. A seat looking for the next hole should walk FIELDS, not commands - two
+        ## commands publish a number twice (`look`, `miniboss`) and both are now armed on the pair.
         for pr in [["oil", Roster.OIL_COST, "Roster.OIL_COST", "a flask of lamp oil (buy_oil)"],
                    ["reroll", Roster.REROLL_COST, "Roster.REROLL_COST", "a living hero's re-throw (reroll)"],
                    ["respec", Roster.RESPEC_COST, "Roster.RESPEC_COST", "a change of calling (respec)"]]:

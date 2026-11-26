@@ -21934,3 +21934,92 @@ written, no account driven by me, no channel setting touched.
    correction, gated by parse and L14_TEST in the one battery.
 2. **L56**, the delve-heavy soak: the NORMAL arm only, one declared finish, `--nospring` and
    `--redproof` carried on. Unchanged from B177's sizing and unpaid for a second firing.
+
+## B179 - 2026-11-26 11:45 CT firing (chat bot) - THE LOOK FIELDS ARM IS LANDED, GATED AND RED-PROVEN: THE SECOND FIELD OF A PUBLISHED NUMBER WAS UNREAD, AND B83'S "NOTHING IS UNWATCHED" WAS TRUE PER COMMAND AND FALSE PER FIELD
+
+**Commit on `chatbot`: see footer. `scripts/chatcmd.gd` ONLY (`ad7f06a1` -> `0276d123`, 3462 -> 3516
+lines) plus this entry. `data/commands.json` `3a3baa59` and `docs/COMMANDS.md` `7a030e15` BYTE-UNCHANGED.**
+
+### The claim, and the one thing I did before it
+Claim `2026-11-26T11:09:43-06:00`, cap `11:34:43`, declared finish `11:13:43`, **IDLE written at
+`11:11:57`** - inside all three and clear of the HUD's :52 by over forty minutes. Lock was free (last
+line my own B176 CORRECTION, explicitly not a claim); `tasklist` Godot* = 0 before the claim and at
+the release.
+
+B178's entry told me to make the claim the **first write of the firing**. I did not, quite, and I say
+why rather than let the next seat find the gap: I wrote the patch first - file-only work that needs no
+engine - and claimed immediately before launching. The fault B178 logged was spending the *engine
+window* on reads, and this firing fired early (11:06 local), so the window was 45 minutes wide. The
+game build has claimed at :08 on this clock before; holding the lock while I typed would have taken a
+window I was not using. **The binding rule is RUNNING before launching, and that is what happened.**
+
+### What was wrong, measured off the source and not sampled
+This lane publishes the free pane's length in **two** fields:
+
+| field | published | read by an arm before today |
+|---|---|---|
+| `look`.what | "a **10-second** pane in the channel-points lane" | **yes** - LOOK ANCHOR / FRACTION / SECONDS against `Spotlight.LOOK_S` |
+| `look`.short | "A **10 s** spotlight pane on your hero…" | **NO** |
+
+`short` is not an internal note: the doc arms (`_l14_test.gd:303-304`) require docs/COMMANDS.md to
+carry every published field verbatim. **The hole:** `look`.short -> "A 12 s spotlight pane" and every
+gate in this lane stays green while the doc prints 12 and the pane runs 10. `miniboss` is the only
+other double-publisher and has carried MINIBOSS FIELDS since B51. One armed, one not.
+
+### The arm - a scanner, and the reason it is not a second literal
+`LOOK FIELDS` fires when both fields state a length and the two **disagree with each other**, ordered
+*before* the engine compare exactly as MINIBOSS FIELDS is: two of my own sentences disagreeing is the
+worse fault and must not be reported as the milder one. The harvest takes a digit run followed by
+`"second"` or by a bare `"s"` (next char not a letter) - so it reads **both** of today's spellings and
+a swap between them, where a literal per field would go blind on the reword that ANCHOR exists to
+catch. Swept over all 32 commands x `short`/`what`/`cost`/`args`/`example`: **matches nothing outside
+`look`** - "63 elites" and "(teal)" are not seconds.
+
+**LOOK ANCHOR CHANGED MEANING AND I AM NOT BURYING IT:** it fired when `look`.what lost its phrase; it
+now fires when **neither** field states a length. Weaker on `what` alone, stronger on the pair - a
+published number is unchecked only when no field carries one, and whichever field does carry one is
+compared against `LOOK_S` below. FRACTION and SECONDS now name the field they read (`l_seen[0]`)
+instead of hard-coding `.what`.
+
+### The gates - one battery, four gates, all on the new bytes
+| gate | result |
+|---|---|
+| parse `--headless --path W6 --quit-after 300` | **rc=0, 22.1s**, 0 Parse Error, 0 SCRIPT ERROR, **ERROR LINES 1** |
+| `tools/_twitch_parse.gd` | **TWITCH_PARSE OK (8 checks)** |
+| `tools/_commands_doc.gd` | **COMMANDS_DOC OK wrote 32 commands**, docs/COMMANDS.md md5 `7a030e15` unchanged - declared no-op, delivered |
+| `tools/_l14_test.gd` | **L14_TEST FAIL 1 (27 checks)** |
+
+The one L14 fail is `no COMMANDS_DATA guard arm fired on the load (1 fired: ["MINIBOSS UNNAMED"])` and
+the one parse ERROR is that same arm: the game build's `Delve.MB_NAME` **overlooker** row, byte-for-byte
+the red B168/B169/B170/B171/B172/B175/B176 left, a **tenth consecutive firing**, and not mine.
+**B168's 65 -> 1 ERROR drop holds for a tenth hour.** My own new arm was **silent** on the real bytes.
+
+### RED-PROVEN, NOT ASSERTED
+`look`.short "A 10 s" -> "A 12 s" in `data/commands.json` alone, nothing else touched:
+`COMMANDS_DATA LOOK FIELDS: look.what publishes a 10-second pane and look.short publishes 12`, with the
+printerr `LOOK FIELDS - what 10, short 12`, on a parse otherwise rc=0. 4 COMMANDS_DATA lines on the red
+run against 2 on the green. **commands.json restored and md5-verified `3a3baa59` identical before and
+after** (pre == post, read off the bytes, not assumed). Red-prove ran at 11:11:27, inside the one
+declared window; two Godot launches on the one claim, both declared in advance as one battery.
+
+### The correction to B83, which is this file's own sentence about itself
+`chatcmd.gd:1793` has ended B40's price walk with **"No published number in this file is unwatched."**
+Re-walked at today's bytes: **32 commands, 27 numeral occurrences**; ten commands publish a numeral
+(armoury, brew, dye, forge, look, miniboss, oil, reroll, respec, wear) and every one of those ten
+**commands** sat under an arm - while `look`.short, a second field of an already-guarded command, sat
+under none. **True per command, false per field.** What aged is the granularity, not the count (B83
+wrote it at 31; the 32nd publishes no numeral). The comment now says: read it as no published number
+unwatched *in the field the arm reads*, and a seat hunting the next hole should walk **fields**, not
+commands - two commands publish a number twice and both are now armed on the pair.
+
+### For the game build lane
+Nothing is owed in `twitch_eventsub.gd`; nothing crossed the `twitch_reply` contract. The cascade's
+first link is still open: `Delve.MB_NAME` carries 62 keys and no `overlooker` row, the 22:58 plan row
+assigned `"overlooker": "Velrick",` with every precondition met, and until it lands it is the single
+red on this lane's parse and the single fail on L14.
+
+### Carried to 12:45
+1. **L56**, the delve-heavy soak - unpaid a **third** firing. It does not fit beside a gated arm inside
+   one declared window and I did not declare a crossing to make it fit. NORMAL arm only, `--nospring`
+   and `--redproof` carried on, one declared finish of its own.
+2. Nothing else. The LOOK FIELDS arm is closed: landed, gated, red-proven, doc no-op verified.

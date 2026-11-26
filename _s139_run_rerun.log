@@ -1,0 +1,18 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+D3D12 12_0 - Forward+ - Using Device #0: AMD - AMD Radeon RX 9070 XT
+
+S139_PET_WIRING pass dress: real Gear.dress_cosmetics hung 1 HeroPet (pet_corgi) with a rig
+S139_STYLE knight(host) tris=6952 surfaces=15 textured=15 mean_albedo=(1.00,1.00,1.00) sat=0.00
+S139_STYLE pet_corgi(shipped) tris=508 surfaces=1 textured=1 mean_albedo=(0.91,0.91,0.91) sat=0.00
+S139_STYLE fox_uaa tris=1848 surfaces=5 textured=0 mean_albedo=(0.41,0.36,0.32) sat=0.23
+S139_PET_WIRING pass A heel: corgi 0.24 m off its spot after a 4 m walk
+S139_PET_WIRING pass A heel: uaa fox 0.24 m off its spot
+S139_PET_WIRING shot heel rc=0
+S139_PET_WIRING pass B floor: corgi at the new floor 3 frames after a 700 m / -400 m jump (0.00 m off, dy 0.00)
+S139_PET_WIRING pass B floor: uaa fox at the new floor
+S139_PET_WIRING pass C death: corgi stays, visible, beside the fallen body
+S139_PET_WIRING shot death rc=0
+S139_PET_WIRING pass D revive: re-dressed twice, 1 HeroPet on the host (want 1)
+S139_PET_WIRING pass D revive: the new pet starts at heel, not at the origin
+S139_PET_WIRING pass E re-roll: the freed body took its pet with it
+S139_PET_WIRING OK heel, floor change, death, revive re-dress and re-roll all hold

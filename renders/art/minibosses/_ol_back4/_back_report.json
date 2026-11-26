@@ -1,0 +1,82 @@
+{
+ "ok": true,
+ "errors": [],
+ "views": {
+  "front": {
+   "file": "front.png",
+   "res": [
+    700,
+    980
+   ],
+   "border_alpha": 0.0,
+   "opaque_px": 194034,
+   "bbox_px": [
+    68,
+    44,
+    632,
+    918
+   ],
+   "wh": [
+    564,
+    874
+   ]
+  },
+  "side": {
+   "file": "side.png",
+   "res": [
+    700,
+    980
+   ],
+   "border_alpha": 0.0,
+   "opaque_px": 134324,
+   "bbox_px": [
+    164,
+    104,
+    536,
+    936
+   ],
+   "wh": [
+    372,
+    832
+   ]
+  },
+  "back": {
+   "file": "back.png",
+   "res": [
+    700,
+    980
+   ],
+   "border_alpha": 0.0,
+   "opaque_px": 188596,
+   "bbox_px": [
+    72,
+    81,
+    628,
+    936
+   ],
+   "wh": [
+    556,
+    855
+   ]
+  }
+ },
+ "bounds": {
+  "size": [
+   1.545,
+   1.075,
+   2.4
+  ],
+  "parts": 4,
+  "faces": 850
+ },
+ "engine": "BLENDER_EEVEE",
+ "cam": {
+  "radius": 1.5249767938786856,
+  "ortho": 2.7311108112335205,
+  "clip": [
+   6.716335296630859,
+   16.574806213378906
+  ]
+ },
+ "copied_to": "renders\\art\\minibosses\\overlooker\\back.png"
+}

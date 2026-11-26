@@ -21750,3 +21750,98 @@ bits, and I drove no account.** Reported only because the join is a real touch o
 ### FOR THE GAME BUILD LANE
 Nothing new is needed in `twitch_eventsub.gd`. The 482-of-500 bound stands unchanged, and the `_cut`
 correction above changes no behaviour, so nothing crosses the `twitch_reply` contract.
+
+## B177 - 26 Nov 2026, 09:45 CT firing (chat bot) - WRITTEN STAND-DOWN: THE PLAN'S CHAT BOT ROW WAS ALREADY PAID, EVERY NUMBER I PUBLISH IS ENGINE-GUARDED, AND L56 IS CARRIED WHOLE BECAUSE A 4-DELVE SOAK DOES NOT FIT IN SEVEN MINUTES
+
+**Item taken:** none was owed, and I am saying so rather than inventing an edit. The live plan block
+(22:58 CT 25 Nov, which supersedes every lane row below it) gives the CHAT BOT row two items and
+BOTH ARE ALREADY PAID: (1) the 62 -> 63 republish at the feed - `data/commands.json` reads "The 63
+elites that hold a chamber alone" in BOTH `miniboss`.short and `.what`, and `docs/COMMANDS.md:39`
+carries it, landed at B166/B167; (2) the 61 ERROR lines, which the team lead correctly diagnosed as
+my own worktree's missing `.godot/imported/*.scn` cache - B168 paid the import build and the wall
+went 65 -> 1. Nothing in that row is open. So this hour went on an audit of my own shipped lines and
+an honest carry of L56.
+
+### THE AUDIT: EVERY NUMBER MY SURFACE PUBLISHES SITS BEHIND A NAMED ENGINE ARM
+The 62 -> 63 republish is the SECOND time this lane has had to chase a published count (B149 paid
+61 -> 62). That is a fault CLASS, not two incidents, so I went looking for the next one before it
+bit. **Measured over the real data, not sampled:** across all 32 entries, `short` and `.what`
+together contain exactly FOUR numeric mentions, which are TWO distinct claims:
+  - `miniboss` "The 63 elites" (in both fields) - guarded by **COMMANDS_DATA MINIBOSS COUNT**,
+    `scripts/chatcmd.gd:2276-2278`, which compares the published integer against the live feed rows
+    (`mb_said[0]` vs `mb_live.size()`). Silent at 63/63.
+  - `look` "a 10-second pane" - guarded by **COMMANDS_DATA LOOK SECONDS** (`:1355`), which compares
+    the published whole second against `Spotlight.LOOK_S`, with **LOOK FRACTION** (`:1351`) and
+    **LOOK ANCHOR** (`:1347`) closing the two ways the comparison could go unchecked. The same
+    sentence's three other claims carry their own arms: **LOOK LANE GHOST** (`:1997`), **LOOK
+    COLOUR** (`:2014`), **LOOK LONGER** (`:2035`).
+**So the class is shut:** there is no published number on my surface that is not compared to its
+live source by an arm that fires on the headless load. All of these were silent on B176's parse,
+whose only red was foreign. I added no arm, because none is owed.
+
+### THE DISTINCTION THAT MATTERS, AND IT SAYS MY FEED IS THE CORRECT SIDE
+COUNT compares published -> **by_key** (63 vs 63, silent). The standing red, **MINIBOSS UNNAMED
+["overlooker"]**, compares by_key -> **`Delve.MB_NAME`** (63 vs 62). Those are different
+comparisons against different sources, and read together they say precisely this: *my feed is right
+and the engine's title dict is the side that is behind.* The red is the game build's
+`scripts/delve.gd` row, a file I cannot write, and it is byte-for-byte the one B168, B169, B170,
+B171, B172, B175 and B176 left. **Tenth hour.**
+
+### DRIFT, BOTH DIRECTIONS, AS THE PROMPT REQUIRES
+`json.load` clean. 32 entries; every one has a literal in `scripts/chatcmd.gd` (entry with no code
+literal: `[]`); 18 dispatch literals, and every one has an entry or is a declared alias (code
+literal with no entry: `[]`). `order` is 32 long and its key SET equals the command key set.
+**No file changed this hour and I am not claiming one:** `data/commands.json` md5 `3a3baa59`,
+`docs/COMMANDS.md` `7a030e15`, `scripts/chatcmd.gd` `ad7f06a1` - all three byte-identical to what
+B176 reported.
+
+### NO LOCK CLAIM AND NO ENGINE, AND THE REASON IS THE WINDOW, NOT THE LOCK
+**The lock was FREE and I still did not take it.** Checked live: last line is my own B176
+`CORRECTION 2026-11-26T08:50:08-06:00` which is explicitly NOT a claim, last claim/release pair is
+my own `IDLE 2026-11-26T08:50:08-06:00`; `tasklist Godot*` = 0 at 09:45:51 and again at 09:49:53.
+Two reasons, and they are different reasons:
+  1. **No battery was owed.** All three of my files are byte-unchanged since B175 paid all four
+     gates green at 07:50 and B176 paid the parse at 08:49. A third identical battery re-proves an
+     identical tree and spends the engine for nothing. That is B158's reasoning, and B158's written
+     stand-down on it was TICKED.
+  2. **L56 does not fit and I will not start what I cannot finish.** The engine window ruling gives
+     this lane :45, and the HUD's window opens at :52 - seven minutes. `tools/_l56_test.gd` is
+     `RUNS := 4` full delves, and the gate has THREE arms (normal, `--nospring`, `--redproof`) which
+     are three separate launches. **No committed L56 log carries a duration line** - I checked all
+     five (`_b145_l56.log`, `_s128_l56.log`, `_s128_l56_red.log`, `_s128_l56_nospring.log`,
+     `_l56_soak.log`) - so I cannot size it from evidence, and B145's own log shows 3 of 4 runs
+     hitting the frame CAP, which is the long end, not the short one. The yield rule says do not
+     start a battery that would still be running inside the next lane's claim, and SPLIT THE JOB
+     INSTEAD. So L56 is carried whole, no lock line was written, and no Godot was launched.
+
+### HOW L56 GETS PAID NEXT FIRING - SIZED, NOT HOPED
+Claim at :45 **before** reading the plan, run the NORMAL arm only, declare a finish for one arm, and
+carry `--nospring` and `--redproof` to the firing after. And read the plan by slicing the HEAD of
+the file, not by scanning it - see the fault below.
+
+### MY OWN FAULT THIS HOUR, AND IT NEARLY MADE ME REPORT THAT MY ROW DID NOT EXIST
+My bridge helper truncated every `git show` to the **last 6000 characters**, and I then searched that
+tail and concluded `docs/WORK_PLAN.md` contained **ZERO** "CHAT BOT" rows and ONE "TAKE THIS NEXT"
+block. The file is **3,248,752 characters with 277 CHAT BOT mentions and 177 TAKE THIS NEXT
+blocks**, and it is ordered **NEWEST-FIRST** - so the live row sits at the HEAD, which is the exact
+region my own slice threw away. I caught it, dumped the file unsliced, and found the row at offset
+7625. **Three bridge calls lost to a truncation I wrote myself**, and the failure mode was not a
+missing answer but a confident wrong one. A tail slice on a newest-first file reads the oldest
+content and looks like a clean miss.
+
+Second, smaller: this session mounts the worktree at `$HOME/mnt/bellmire-bot`, NOT at
+`$HOME/mnt/hd adventure/bellmire-bot` as my prompt states - the connected folders came through as
+per-folder mounts this run. Cost one call to discover. **I did not call
+`device_request_folder_access`** and nothing was blocked; the folder was reachable all along, which
+is what the STRUCK item in the plan says.
+
+### FOR THE GAME BUILD LANE
+Nothing new is needed in `twitch_eventsub.gd`. Nothing crossed the `twitch_reply` contract this
+hour. The one thing outstanding is yours and it is the plan's own 22:58 GAME BUILD row: the
+`"overlooker": "Velrick",` row in `Delve.MB_NAME` in `scripts/delve.gd`. It is the sole red on my
+parse and has been for ten hours; my feed has published 63 since B166.
+
+### TWITCH
+**None at all.** No Godot was launched this hour, so not even the eventsub autostart join that every
+headless parse produces happened. No message sent, nothing redeemed, nothing cheered, **ZERO BITS**,
+no reward read or written, no account driven by me, and no channel setting touched.

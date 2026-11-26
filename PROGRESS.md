@@ -17561,3 +17561,33 @@ STAND-DOWN, NO GODOT CLAIM. The Blender bridge (cruzader) timed out twice (140s 
 - Lock: R working RUN_LOCK last line before me IDLE 17:49:18 (chat bot B161); tasklist Godot* = 0 live. Claim 17:53:59, declared 17:59:59, cap 18:08:59. IDLE written 17:55:59 (released ~4 min after claim, well before :07).
 - Not done / owed: deterministic red-proof was dropped by the team lead as a tick condition; L74 (feed + theme under load) and System 2's rarity-hue half remain the standing items - next window.
 - Decision for Mr. E: none.
+
+## U184 (HUD, 25 Nov 18:52 CT) - STAND-DOWN: THE WINDOWS BRIDGE (Blender MCP) DID NOT RESPOND, SO NO LOCK READ, NO GODOT, NO GIT
+- Checked: clock 18:52 CST (device_bash). R is not mounted in device_bash (only bellmire-hud), so R's working RUN_LOCK.txt could not be read that way. Two Blender-MCP execute_blender_code calls (a read-only lock/tasklist/plan read, then a trivial `result={"ok":1}`) both timed out at 140s: device 'cruzader' not responding. Without it I cannot read the lock, check for a live Godot process, launch Godot, or run git.
+- Did NOT claim the lock, did NOT launch Godot, touched no owned .gd file. Rule: no claim over an unread lock.
+- Written by file edit only; NOT committed (git via device_bash leaves .lock files). The note is uncommitted in W2 until the bridge is back.
+- Next firing (19:52): re-read R's RUN_LOCK, take the 16:58 block's HUD item or System 2's rarity-hue half, and commit this note with the work.
+- Decision for Mr. E: the Blender addon/bridge on cruzader needs a look (not listening, as on 18 Nov 08:58).
+
+## U-standdown 2026-11-25T19:55-06:00 (HUD, :52 firing) - STAND-DOWN, bridge still down
+- Clock 19:53 CST. Blender MCP (localhost:9876) refused connection on 2 calls; R not mounted in device_bash, so RUN_LOCK.txt unreadable. No claim, no Godot, no owned .gd touched.
+- Second consecutive firing with the bridge down (18:52 note above). Uncommitted: git needs the Blender bridge.
+- Next firing (20:52): re-read R's RUN_LOCK, take System 2 rarity-hue half, commit both notes.
+
+## U-standdown 2026-11-25T20:55-06:00 (HUD, :52 firing) - STAND-DOWN, bridge down for the THIRD consecutive firing
+- Clock 20:52 CST. Blender MCP (localhost:9876) refused connection on 2 calls; R not mounted in device_bash, so RUN_LOCK.txt and WORK_PLAN's TAKE THIS NEXT block were unreadable. No claim, no Godot, no owned .gd touched.
+- Uncommitted: git needs the Blender bridge. Three stand-down notes (18:52, 19:55, 20:55) wait in W2.
+- Next firing (21:52): re-read R's RUN_LOCK, take System 2 rarity-hue half, commit all notes.
+
+## U-standdown 2026-11-25T21:55-06:00 (HUD, :52 firing) - STAND-DOWN, bridge down for the FOURTH consecutive firing
+- Clock 21:52 CST. Blender MCP (localhost:9876) refused connection; R not mounted in device_bash, so RUN_LOCK.txt and WORK_PLAN's TAKE THIS NEXT block were unreadable. No claim, no Godot, no owned .gd touched.
+- Uncommitted: git needs the Blender bridge (device_bash cannot delete, so it would leave .lock files). Four stand-down notes (18:52, 19:55, 20:55, 21:55) wait in W2.
+- Next firing (22:52): re-read R's RUN_LOCK, take System 2 rarity-hue half, commit all notes.
+
+## U185 (HUD, 25 Nov 22:5x CT) - ANSWER TO THE 17:58 ROW: WHICH k THE s150 worst_over -13.875 BELONGS TO (READ FROM _u183_run.log; NO GODOT, NO LOCK CLAIM)
+- TAKE THIS NEXT (17:58 block, `>>> HUD (:52) <<<`): "say which k the s150 worst_over belongs to, in one line." Answered from the committed log, not from memory.
+- ANSWER: **s150 worst_over -13.875 is k=180.** At k=160 the newest visible label was a 2-line one (bottom 555, over -52 -> frame `tight_s150_vb607_over-51_k160`); at k=180 the hostile 4-line Wolfgang_Amadeus... label appeared (bottom 593, over -14 -> frame `tight_s150_vb607_over-13_k180`). k=200/220/240 repeat the same bottom=593, so -13.875 is a PLATEAU from k=180 on, and `_probe_chron` saves only on a NEW worst, so k=180 is the first and only frame at that value. The `-51_k160` frame is the probe's running-max starting point (any first sample is a "new worst"), NOT a second tightest frame - it is looser by 38 px and is just an earlier save.
+- Same pattern at s100 (-13.6, saved at k=160) and s125 (-45, saved at k=160). Filename note: the s125 frame is named vb611 while the log line says vb612 (rounding in the filename), harmless.
+- Not done / owed: nothing opened or changed in owned .gd files; L74 and any new rarity-hue work remain the standing items (U177 tick says the rarity-hue half is wired). Fix for the filename ambiguity, if wanted: have the probe save only the final worst per rung after the sweep, so one rung = one tight frame; I did not change the probe because a Godot run does not fit cleanly before :07 for a naming nicety.
+- Lock: R working RUN_LOCK last line was IDLE 22:50:21 (chat bot B166), tasklist Godot* = 0; I took no claim.
+- Decision for Mr. E: none.

@@ -1,3 +1,120 @@
+## TAKE THIS NEXT - Updated THE 17:58 CT FIRING, 25 NOV 2026 (team lead). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** ALL SIX BRANCHES MERGED, main c27bc167 -> 932a9d04. ALL SIX SHIPPED - no silent lane this hour,
+*** the first time that has been true today.
+*** PROGRESS.md took FOUR conflicts (art, hub, hud-ui, chatbot), 3 markers each, BOTH SIDES KEPT.
+*** Strong assertion: root PROGRESS.md is +135/-0 against c27bc167 - ZERO LINES REMOVED - and a marker
+*** audit at HEAD with all four exact shapes (`^<<<<<<< `, `^=======$`, `^>>>>>>> `, `^|||||||`)
+*** returns nothing on *.md *.json *.gd *.js *.txt *.py.
+*** THE ARITHMETIC, AND I NEARLY PUBLISHED IT WRONG. The lane numstats sum to 137 and the merge shows
+*** 135, so I went looking for a two-line loss. There is no two-line loss. hud-ui's numstat says +10
+*** but its actual added-line enumeration is 9 - the extra unit is a no-newline-at-EOF artefact, not a
+*** line. The true lane sum is 136 and the true gap is ONE line, and that line is EMPTY: four lanes
+*** append a blank separator at the same end-of-file anchor and ort collapsed two identical blanks.
+*** I diffed the added-line MULTISETS: missing non-empty lines ZERO, extra lines ZERO. Nothing lost.
+*** I am writing this out because the 16:58 seat chased the same gap and the lesson is that NUMSTAT IS
+*** NOT A LINE COUNT. Enumerate before you charge a loss.
+*** CLOCK: read off the machine at 18:01:35 CT with `TZ=America/Chicago date` before any sentence in
+*** this block that names a time. I did not estimate one.
+***
+*** THE SUPERVISOR ANSWERED BOTH OF LAST HOUR'S ESCALATIONS AT 17:37 CT, AND BOTH RULINGS ARE BELOW
+*** IN THE ROWS THAT OWN THEM. (1) The chat bot's `tools/_l14_test.gd` ownership: GRANTED, that file
+*** only, not `tools/` generally. (2) System 13 pet art: TAKE THE SELECTION, NOT A RESKIN.
+*** NEITHER IS WAITING ON ME OR ON THE SUPERVISOR ANY MORE. Do not re-raise either.
+
+>>> GAME BUILD (:07) <<<
+  **S139b TICKED, AND THE EVIDENCE ROW I CHARGED YOU WITH LAST HOUR IS PAID.** You committed all of
+  it: `_s139b_run.log` carries `S139_PET_WIRE OK checks=25 fails=0 floors=3 state=search frames=24001`
+  on its own line in the ref, plus the four gate logs and a LABELLED re-run of the original harness.
+  I read the verdict line at HEAD rather than in a working tree, which is the whole point of the
+  charge. And the pet now rides a LIVE delve - three floors, death-save revive, real death - which is
+  a materially stronger test than S139's bench harness, with no game source changed.
+  **AND YOU CORRECTED YOUR OWN LOCK LINE TWICE IN FOUR MINUTES** (the 17:27:44 "over the relaunch
+  declaration" sentence, then the 17:27:55 line striking it because 17:27:44 is INSIDE 17:29). The
+  second line is right and the first was wrong for exactly the reason my own seat was wrong at 17:0x:
+  a sentence about a time written before reading the clock. You caught yours in eleven seconds.
+  **THE SUPERVISOR RULED ON THE PET LOOK AT 17:37 AND YOU ARE NOT BLOCKED: "take the selection, not a
+  reskin."** Three of five clash, two already match. SO, IN THIS ORDER:
+  (a) **PROCEED WITH THE TWO THAT MATCH** - the corgi and the red panda, the two with chibi head
+      proportion - and drop the three naturalistic bodies (fox, husky, shiba) from the live pool.
+      Dropping is a data/selection change, not a remodel.
+  (b) **PROPOSE REPLACEMENTS for the three you dropped**, named, from a pack whose licence you have
+      checked on its own page. The supervisor asked for proposals, not for you to pick unilaterally.
+  (c) **PROPOSE THE FOX SCALE NUMBER.** The supervisor has explicitly reserved that ruling and asked
+      you for a number. S139 names 0.40 m as the probe scale and the picture says ankle-height. Give
+      one number and your reasoning in one line, and route it up in your entry.
+  THEN, AND ONLY WITH TIME LEFT: **NAME THE NEXT UNSTARTED SYSTEM BY NUMBER IN MR. E'S 5-80 ORDER.**
+  That part of the 16:58 row is still unpaid - two hours running you have stayed inside System 13 -
+  but the ruling above is System 13 work the supervisor just asked for, so it comes first and I am
+  not charging you for the order.
+
+>>> CONTENT (:22) <<<
+  **YOU BROKE THE SILENCE AND C-215 IS EXACTLY THE ROW I WROTE.** `data/lore_lines.json` moved 9/9 -
+  the `_note_c214` held list corrected AND the eight cells reworded to post and drum. I am VERIFYING
+  IT CELL BY CELL THIS RUN and the tick follows in my next sync; I am not ticking a reword off its
+  commit message, because the one thing a reword can do wrong is keep the mechanic while changing the
+  noun. Nothing is asked of you for that - the verification is mine.
+  **NEXT: THE TWO CELLS MY OWN 16:58 ROW TOLD YOU WERE ALREADY CLEAN - `broken.1` and `fall.6`.**
+  I measured them as post-shaped and told you to leave them. RE-READ THEM ONCE against Mr. E's
+  "delete the bars" ruling and say in one line whether you agree. If my measurement was wrong, that
+  is two cells shipping a mechanic nobody approved, and you are the lane that can see it.
+  If they are clean, say so and take the next unstarted content item.
+
+>>> ART (:34) <<<
+  **PASS 5 LANDED THE OVERLOOKER'S BACK VIEW AND YOU FOUND TWO FAULTS IN YOUR OWN ENTRY AFTER WRITING
+  IT.** That second commit - "two corrections to my own pass-5 entry, both found by measuring after
+  writing it" - is the behaviour this house runs on, and it is the third lane this hour to correct
+  itself unprompted. I am LOOKING AT `renders/art/minibosses/overlooker/back.png` AND THE
+  `_back_report.json` FACING SCORE MYSELF before I tick, because a back view is precisely where a
+  number said `seen: 1.0` on the Beadle while the picture had no face at all.
+  **NEXT: NOTHING NEW FROM ME UNTIL I HAVE LOOKED.** If you are dry before my next row lands, the
+  standing permission holds - the art lane may invent minibosses - and the fit register is the count,
+  not any line in a prompt.
+
+>>> HUB (:37) <<<
+  **YOUR STAND-DOWN IS WRITTEN AND I CHECKED ITS ONE CHECKABLE CLAIM.** You said `web/` is
+  byte-identical to main and hub: `git diff --numstat HEAD origin/hub -- web/` returns EMPTY at
+  932a9d04, so that is TRUE and measured, not taken. You did not claim READY TO PUBLISH, so the
+  publish gate is NOT owed and I ran none - I am saying that plainly rather than reporting a gate I
+  did not run.
+  **THE MERGED-AND-UNPUBLISHED DELTA IS STILL WITH THE SUPERVISOR AND IT IS STILL NOT YOURS.**
+  Measured by me this hour, not copied: `origin/gh-pages^{tree}` = 1d8bce63, `origin/hub:web` =
+  51a3f8b3, and `HEAD:web` = 51a3f8b3 (main and hub agree). The per-file split is in my report.
+  **NEXT: a written stand-down ticks, so take a defect in what you have already shipped** - your own
+  choice, in `web/` - or stand down again in writing. Do not touch gh-pages.
+
+>>> HUD (:52) <<<
+  **U183 SAVED THE FRAME AT THE TIGHTEST RUNG, WHICH IS WHAT I ASKED THE HOUSE FOR ON 21 NOV.**
+  `U183_PROBE_DONE checks=40 fails=0 worst_over={s100 -13.625, s125 -45.125, s150 -13.875}` at HEAD,
+  and you photographed the tight frame per rung rather than the prettiest one. **THE TIGHTEST MARGIN
+  IS s100 AT -13.6 px, NOT s150** - negative is clearance, so the smallest absolute number is the
+  worst case - and that is the frame I am opening:
+  `renders/cycles/20261125_u183/tight_s100_vb617_over-13_k160_1080.png`. Tick follows my look.
+  **ONE THING TO FIX IN YOUR OWN EVIDENCE, AND IT IS SMALL:** you shipped BOTH
+  `tight_s150_vb607_over-13_k180` and `tight_s150_vb607_over-51_k160` for the same rung. Two "tightest
+  at s150" frames at different k is not a contradiction, but nothing in the filenames says which k the
+  -13.875 verdict came from. **Say which k the s150 worst_over belongs to**, in one line.
+
+>>> CHAT BOT (:45) <<<
+  **B161 TICKED. THE SUPERVISOR GRANTED YOUR FILE AT 17:37 AND YOU LANDED IT THE SAME HOUR.**
+  `tools/_l14_test.gd` 125/-6, `L14_TEST OK (24 checks)` at line 531 of `_b161_run.log` in the ref,
+  COMMANDS_DOC OK 32 with the doc unchanged, parse 0. **THE GRANT IS `tools/_l14_test.gd` ONLY AND NOT
+  `tools/` GENERALLY** - the supervisor wrote that scope in terms, so do not read it wider.
+  **AND YOU CAUGHT A WRONG STAMP IN YOUR OWN RUNNING LINE** - the text said "claim 17:48:51" when the
+  stamp was 17:48:26 - and you reported that the error made your window look LONGER, not shorter.
+  That direction matters and you were right to name it. It is a transcription fault inside the prose,
+  not a claim over a live hold, and I am not resetting the clean-hour count on it. See my report.
+  **NEXT: you replaced a regex harvester with a depth-and-bracket parse, so RED-PROVE THE THING THE
+  OLD ONE GOT WRONG.** B159 found the 8-space dictionary-literal false positive. Add one arm that
+  feeds the NEW parse the exact dictionary shape that fooled the OLD one, assert it is not harvested,
+  and keep it in the committed log. A replacement instrument earns its keep by failing where its
+  predecessor lied.
+
+FOR THE SUPERVISOR (17:58 CT, 25 Nov): **nothing is waiting on you.** Both 17:37 rulings are landed -
+the chat bot's grant shipped as B161 this hour and the pet-selection ruling is written into the game
+build's row above, including your reserved fox-scale question, which the lane will bring you a number
+for. The hub's merged-and-unpublished `web/` delta (gh-pages tree 1d8bce63 vs hub:web 51a3f8b3) is
+still with you from 20 Nov and I am not pressing it; the lane has not claimed READY TO PUBLISH.
+
 ## TAKE THIS NEXT - Updated THE 16:58 CT FIRING, 25 NOV 2026 (team lead; written 17:0x CT, corrected 17:1x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** ALL SIX BRANCHES MERGED, main 536e5982 -> 33e4f3e9. FOUR SHIPPED, ONE STOOD DOWN IN WRITING, ONE SILENT.
 *** PROGRESS.md took THREE conflicts (hud-ui, art, chatbot), 3 markers each, BOTH SIDES KEPT. Strong

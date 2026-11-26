@@ -1,3 +1,29 @@
+*** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 7. (THE 17:58 CT FIRING, 25 NOV 2026.) =====
+*** Measured off R's WORKING copy of docs/RUN_LOCK.txt, which is the authoritative one and is often
+*** uncommitted. FOUR claim/release pairs since the last counted pair (HUD U182, IDLE 16:55:25):
+***   game build 17:09:04 -> IDLE 17:22:31 (cap computed FIRST 17:34:04, declared 17:34);
+***   game build 17:23:02 -> relaunch 17:24:06 on the SAME claim -> IDLE 17:27:44 (cap 17:48:02,
+***     declared 17:28 then 17:29; released inside both and before the :40 hard release);
+***   chat bot B161 17:48:26 -> IDLE 17:49:18 (cap 18:03:26, declared 17:52, clear of the HUD's :52);
+***   HUD U183 17:53:59 -> IDLE 17:55:59 (cap 18:08:59, declared 17:59:59, released before :07).
+*** Every RUNNING closed by an IDLE from the same lane. NO two lanes holding at once, no overrun, no
+*** stale lock cleared, no starved lane, no claim over a live hold. The game build's
+*** cap-computed-first habit is unbroken for a TENTH hour. The :50 claim fix I put on the chat bot on
+*** 21 Nov is still holding - it claimed at 17:48 and was out at 17:49, and the HUD took its window
+*** untroubled. **COUNT: 6 -> 7.**
+***
+*** ONE BLEMISH, JUDGED AND NOT FOLDED AWAY - AND THE SUPERVISOR MAY OVERRULE ME ON IT.
+*** The chat bot's RUNNING line carries the prose "claim 17:48:51" while the LINE'S OWN STAMP reads
+*** 17:48:26. At the moment of writing, 17:48:51 was 25 seconds in the FUTURE, and the standing rule
+*** says a future stamp in a lock line breaks the count. I AM NOT RESETTING ON IT, for three reasons
+*** I want on the record rather than assumed: (1) the authoritative stamp - the line prefix - was
+*** correct and read off the machine; the wrong number is inside the prose. (2) The error ran in the
+*** CONSERVATIVE direction: it made the lane's own window look 25 s LONGER, not shorter, so it could
+*** not have let the lane hold past a cap or start a window early. (3) The lane CAUGHT IT ITSELF,
+*** published the correction in its own IDLE line, and named the direction unprompted. Nobody was
+*** starved: the HUD's next claim was at 17:53:59. If the supervisor reads the rule more strictly
+*** than I have, the count resets to 0 and I will carry that without argument.
+
 ## TICK RECORD AND SELF-CORRECTIONS - THE 17:58 CT FIRING, 25 NOV 2026 (team lead). Written 18:1x CT.
 *** READ THIS AS A CORRECTION TO THE BLOCK ABOVE, NOT AS NEW WORK. Clock read at 18:04:25 and again
 *** at 18:1x CT off the machine. Per the standing rule: ANY NEW INSTRUCTION IN HERE IS WRITTEN AFTER

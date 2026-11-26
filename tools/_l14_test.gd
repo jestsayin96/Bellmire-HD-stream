@@ -12,6 +12,130 @@ func _ok(c: bool, what: String) -> void:
 	if not c:
 		_fail += 1
 
+# B161: the 8-space regex harvester is GONE. The supervisor granted this lane
+# `tools/_l14_test.gd` at 17:37 CT on 25 Nov 2026 (scope: THIS FILE ONLY). The old
+# `rx.compile("(?m)^        ...")` could not see a tab-indented or depth-12 match
+# label, and it READ A DICTIONARY KEY SITTING AT LABEL DEPTH AS A VIEWER VERB -
+# a false positive that would have put a non-command into `verbs` and then charged
+# data/commands.json with not answering it. Proved by B159_HARVEST OK 15/15:
+# 8 shape cases, 4 real-tree arms, 3 red-prove arms. No depth constant, no end
+# anchor, no 8-space assumption - brackets and indentation decide.
+func _strip_comment(line: String) -> String:
+	var i := 0
+	var n := line.length()
+	while i < n:
+		var c := line[i]
+		if c == "\"":
+			i += 1
+			while i < n:
+				if line[i] == "\\":
+					i += 2
+					continue
+				if line[i] == "\"":
+					i += 1
+					break
+				i += 1
+			continue
+		if c == "#":
+			return line.substr(0, i)
+		i += 1
+	return line
+
+func _strip_strings(line: String) -> String:
+	var out := ""
+	var i := 0
+	var n := line.length()
+	while i < n:
+		var c := line[i]
+		if c == "\"":
+			i += 1
+			while i < n:
+				if line[i] == "\\":
+					i += 2
+					continue
+				if line[i] == "\"":
+					i += 1
+					break
+				i += 1
+			out += "S"
+			continue
+		if c == "#":
+			break
+		out += c
+		i += 1
+	return out
+
+func _indent_of(line: String) -> int:
+	var col := 0
+	for ch in line:
+		if ch == " ":
+			col += 1
+		elif ch == "\t":
+			col += 4 - (col % 4)
+		else:
+			break
+	return col
+
+## The replacement harvester. No depth constant, no end anchor, no 8-space assumption.
+func _harvest(src: String) -> Array:
+	var verbs: Array = []
+	var depth := 0
+	var st_ind: Array = []
+	var st_lab: Array = []
+	var rx_match := RegEx.new()
+	rx_match.compile("^match\\b.*:$")
+	var rx_lab := RegEx.new()
+	rx_lab.compile("^((?:\"[^\"]*\"\\s*,\\s*)*\"[^\"]*\")\\s*:")
+	var rx_word := RegEx.new()
+	rx_word.compile("^\"([a-z][a-z0-9_]*)\"$")
+	for raw in src.split("\n"):
+		if raw.strip_edges() == "":
+			continue
+		var code := _strip_strings(raw)
+		if code.strip_edges() == "":
+			continue
+		var start_depth := depth
+		var ind := _indent_of(raw)
+		if start_depth == 0:
+			while st_ind.size() > 0 and ind <= int(st_ind[st_ind.size() - 1]):
+				st_ind.pop_back()
+				st_lab.pop_back()
+		var body := code.strip_edges()
+		var text := _strip_comment(raw).strip_edges()
+		if start_depth == 0 and rx_match.search(body) != null:
+			st_ind.append(ind)
+			st_lab.append(-1)
+		elif start_depth == 0 and st_ind.size() > 0:
+			var top_ind := int(st_ind[st_ind.size() - 1])
+			# only the OUTERMOST match dispatches viewer verbs; a nested `match arg:`
+			# inside a label body is argument sub-dispatch, not a command.
+			if ind > top_ind and st_ind.size() == 1:
+				if int(st_lab[st_lab.size() - 1]) == -1:
+					st_lab[st_lab.size() - 1] = ind
+				if ind == int(st_lab[st_lab.size() - 1]):
+					var m := rx_lab.search(text)
+					if m != null:
+						var parts := m.get_string(1).split(",")
+						var words: Array = []
+						var good := true
+						for p in parts:
+							var mm := rx_word.search(p.strip_edges())
+							if mm != null:
+								words.append(mm.get_string(1))
+							else:
+								good = false
+						if good:
+							for w in words:
+								verbs.append(w)
+		for ch in code:
+			if ch == "(" or ch == "[" or ch == "{":
+				depth += 1
+			elif ch == ")" or ch == "]" or ch == "}":
+				depth -= 1
+				if depth < 0:
+					depth = 0
+	return verbs
+
 func _initialize() -> void:
 	# B80: ONE load, held whole - the doc check below needs `order` too, and a second
 	# commands() call would not re-clear _guard_faults (see the note just under this).
@@ -26,12 +150,7 @@ func _initialize() -> void:
 	_ok(faults.is_empty(), "no COMMANDS_DATA guard arm fired on the load (%d fired: %s)" % [faults.size(), faults])
 	# the verbs in ChatCmd's match block, read from its source
 	var src := FileAccess.get_file_as_string("res://scripts/chatcmd.gd")
-	var rx := RegEx.new()
-	rx.compile("(?m)^        ((?:\"[a-z]+\", )*\"[a-z]+\"):")
-	var verbs: Array = []
-	for mt in rx.search_all(src):
-		for w in mt.get_string(1).split(", "):
-			verbs.append(w.replace("\"", ""))
+	var verbs: Array = _harvest(src)
 	var missing: Array = []
 	for v in verbs:
 		if not cs.has(ChatCmd.canonical(v)) and not v.begins_with("test"):   # L17: !test* are local-only, never documented

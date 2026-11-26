@@ -1804,6 +1804,75 @@ static func commands() -> Dictionary:
             _guard_faults.append("BREW COST")
             push_error("COMMANDS_DATA BREW COST: `brew`.cost publishes %d gold for the no-name buy and Roster.POTION_COST charges %d - docs/COMMANDS.md prices a brew at money the apothecary does not take" % [b_said_cost, Roster.POTION_COST])
             printerr("COMMANDS_DATA BREW COST - published %d, charged %d" % [b_said_cost, Roster.POTION_COST])
+        # B181: THE SECOND HALF OF `brew`.cost HAS NEVER BEEN READ BY ANYTHING, AND IT IS WRONG
+        # AT BOTH ENDS TODAY. `brew`.cost publishes TWO prices in one string - "Mending 35;
+        # others <low>-<high> gold" - and every arm above it reads only the FIRST, the number
+        # beside BREW_DEFAULT, against Roster.POTION_COST. The `others` SPAN had no arm at all.
+        # B83's own walk in this file says "brew 35 and 40-480 ... every one of them already sits
+        # under an arm". THAT IS FALSE ON THE SPAN, and I am correcting that sentence by closing
+        # the hole rather than by rewording it. B179 found the same per-field blindness on `look`
+        # and wrote the lesson out: WALK FIELDS, NOT COMMANDS. This is one step deeper again - the
+        # second CLAUSE of a field whose first clause was guarded, which is how eleven arms on
+        # `brew` all stayed green over a span wrong by 28 gold at the floor and 20 at the top.
+        # WHAT IT COSTS A VIEWER, MEASURED OFF buy_brew (roster.gd:1201) AND NOT GUESSED: that
+        # function accepts ANY key in data/potions.json and charges that row's `cost`. A row's
+        # `tier` only DELAYS a brew until the town rises, it never makes one unsellable, and no
+        # row carries a found-only flag - so the shop's real span is the cheapest and dearest of
+        # every row but the default. A viewer who reads the published top, saves it and walks to
+        # the counter for the dearest brew is short by the difference and is refused at the till.
+        # That is the fault WEAR SPAN HIGH was written for, in a different shop, and this arm is
+        # modelled on that one deliberately.
+        # THE ANCHOR IS "others ", NOT " gold". `wear`.cost is a bare span, so WEAR SPAN can read
+        # backwards from " gold"; `brew`.cost carries a number BEFORE its span, so reading back
+        # from " gold" yields "mending 35; others 40", which is not an int, and the arm would have
+        # reported an ANCHOR fault forever instead of a span. Read forward from "others ".
+        var b_sp_low := -1
+        var b_sp_high := -1
+        var b_oat: int = b_cost_s.find("others ")
+        if b_oat >= 0:
+            var b_tail: String = b_cost_s.substr(b_oat + 7)
+            var b_gat: int = b_tail.find(" gold")
+            if b_gat > 0:
+                var b_pair: PackedStringArray = b_tail.substr(0, b_gat).split("-", false)
+                if b_pair.size() == 2 and b_pair[0].strip_edges().is_valid_int() and b_pair[1].strip_edges().is_valid_int():
+                    b_sp_low = int(b_pair[0].strip_edges())
+                    b_sp_high = int(b_pair[1].strip_edges())
+        # the span the APOTHECARY actually charges, over every row but the no-name default
+        var b_min := -1
+        var b_max := -1
+        var b_cheap := ""
+        var b_dear := ""
+        for b_k2 in b_rows:
+            if String(b_k2) == BREW_DEFAULT:
+                continue
+            var b_r2: Dictionary = b_rows[b_k2] as Dictionary
+            if not b_r2.has("cost"):
+                continue
+            var b_c2: int = int(b_r2["cost"])
+            if b_min < 0 or b_c2 < b_min:
+                b_min = b_c2
+                b_cheap = String(b_k2)
+            if b_c2 > b_max:
+                b_max = b_c2
+                b_dear = String(b_k2)
+        if b_rows.size() < 2:
+            # no span exists to publish, and an apothecary with one brew is the bigger fault
+            _guard_faults.append("BREW SPAN AUTHORITY")
+            push_error("COMMANDS_DATA BREW SPAN AUTHORITY: data/potions.json carries %d brew row(s), so `brew`.cost publishes an `others` span over a shelf holding nothing but the no-name default" % [b_rows.size()])
+            printerr("COMMANDS_DATA BREW SPAN AUTHORITY - %d brew row(s); the published span is unanchored" % b_rows.size())
+        elif b_sp_low < 0:
+            _guard_faults.append("BREW SPAN ANCHOR")
+            push_error("COMMANDS_DATA BREW SPAN ANCHOR: `brew`.cost no longer carries an \"others <low>-<high> gold\" span in words this guard can read (it reads \"%s\") - the cheapest and dearest brew the apothecary sells can no longer be checked against data/potions.json, and that span is what a viewer budgets from" % b_cost_s)
+            printerr("COMMANDS_DATA BREW SPAN ANCHOR - `brew`.cost lost its \"others <low>-<high> gold\" span; the published range is now unchecked")
+        else:
+            if b_sp_low != b_min:
+                _guard_faults.append("BREW SPAN LOW")
+                push_error("COMMANDS_DATA BREW SPAN LOW: `brew`.cost publishes %d gold as the cheapest brew beside the no-name default and the cheapest row in data/potions.json is `%s` at %d - docs/COMMANDS.md states the floor of the apothecary's counter and it is the wrong floor" % [b_sp_low, b_cheap, b_min])
+                printerr("COMMANDS_DATA BREW SPAN LOW - published %d, cheapest row `%s` %d" % [b_sp_low, b_cheap, b_min])
+            if b_sp_high != b_max:
+                _guard_faults.append("BREW SPAN HIGH")
+                push_error("COMMANDS_DATA BREW SPAN HIGH: `brew`.cost publishes %d gold as the dearest brew the apothecary sells and `%s` in data/potions.json costs %d - a viewer who saves the published top and walks to the counter is %d gold short, and buy_brew refuses them at the till" % [b_sp_high, b_dear, b_max, b_max - b_sp_high])
+                printerr("COMMANDS_DATA BREW SPAN HIGH - published %d, dearest row `%s` %d" % [b_sp_high, b_dear, b_max])
         if not b_ghost.is_empty():
             _guard_faults.append("BREW GHOST")
             push_error("COMMANDS_DATA BREW GHOST: `brew`.what names %d brew(s) the apothecary does not accept, so the doc invites a refusal: %s" % [b_ghost.size(), b_ghost])

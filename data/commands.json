@@ -39,7 +39,7 @@
     "armoury":   {"aliases": ["armory"], "args": "", "short": "Next armour tier: leather, chainmail, plate, warded plate.", "cost": "50 / 150 / 400 / 1000 gold by tier", "needs_hero": true,
                   "what": "Buy the next armour tier: leather, chainmail, plate, warded plate. It shows: boots, pauldrons, a helm. Scarwoven mail is only found below. The smithy carries a level and the level is the ceiling: level 1 stocks common, level 4 stocks very rare, and no counter in Bellmire stocks higher.",
                   "example": "!armoury"},
-    "brew":      {"aliases": [], "args": "[potion] [n]", "short": "Brews at the apothecary; no name buys Mending.", "cost": "Mending 35; others 40-480 gold", "needs_hero": true,
+    "brew":      {"aliases": [], "args": "[potion] [n]", "short": "Brews at the apothecary; no name buys Mending.", "cost": "Mending 35; others 12-500 gold", "needs_hero": true,
                   "what": "Buy brews at the apothecary. No name buys Draughts of Mending. Names: mending, greater, superior, supreme, antidote, emberward, hearthwarm, quickwater (haste), ogre (strength), shadow (unseen), bravecup (heroism), owl (darkvision). Heroes drink them below when they need to.",
                   "example": "!brew quickwater 2"},
     "oil":       {"aliases": ["lamp", "torch"], "args": "[n]", "cost": "12 gold a flask", "needs_hero": true,

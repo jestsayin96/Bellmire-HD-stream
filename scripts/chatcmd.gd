@@ -970,6 +970,26 @@ static var _cmds: Dictionary = {}
 ## reds an arm and sees a clean parse would conclude the arm is dead. NOBODY IS TO RED-PROVE OR
 ## GREEN-PROVE AN ARM OFF A PARSE. The docstring under this block is unchanged in meaning: zero
 ## COMMANDS_DATA lines is still the healthy reading - but only from a run that loaded the data.
+## B183 CORRECTION, AND THE SENTENCE BEING CORRECTED IS MY OWN LANE'S, COMMITTED ONE FIRING AGO
+## AT 7418fa3a. B182's block above said a `--headless --quit-after 300` parse fires ZERO
+## COMMANDS_DATA lines, that it is "NOT EVIDENCE ABOUT ANY ARM IN THIS FILE, in either
+## direction", and that nobody is to red- or green-prove an arm off a parse. THAT IS FALSE AND
+## IT IS STRUCK. The parse DOES load this data and DOES fire these arms.
+## MEASURED, PER SECTION, B183: a CLEAN parse fired 2 COMMANDS_DATA lines (the MINIBOSS UNNAMED
+## pair) in 25.6s rc=0, and the SAME parse on one injected field - `forge`.example "!forge spear"
+## -> "!forge fnord" - fired 4 in 24.2s rc=0, INCLUDING EXAMPLE GHOST. An arm was red-proven on a
+## parse, which B182's block says cannot happen. Two archived pure-parse logs in this worktree
+## said the same before anything was re-run: _b172_parse.log and _b176_parse.log, 2 COMMANDS_DATA
+## lines each and zero gate verdicts in either.
+## SO B176's AND B180's VERDICTS READ OFF THE PARSE WERE RIGHT, and B182's retraction of them was
+## the error, not the readings. WHAT B182 ACTUALLY SAW IS NOT BEING DISMISSED: its BREW SPAN
+## inject genuinely printed no BREW SPAN line on its two parses. That is a narrow, open question
+## about that one arm's path - the likeliest cause is its per-section slicing of one combined log,
+## not the engine - and it is NOT a property of the parse. Nobody is to widen it back out.
+## WHAT STANDS FROM B182's BLOCK: the three scripts load the data deliberately and are the
+## cheapest place to prove an arm (1.6s against 25s), and tools/_l14_test.gd is the only gate that
+## FAILS on a non-empty guard_faults(), so it is the one that turns a fired arm into an exit code.
+## Prove an arm under whichever gate you ran; do not discard a parse's COMMANDS_DATA lines.
 static var _guard_faults: Array[String] = []
 ## The tags of every guard arm that fired on the last load of data/commands.json, in the order
 ## they fired. Empty is the healthy reading, the same convention as a battery grepping for zero
@@ -3196,6 +3216,120 @@ static func commands() -> Dictionary:
                     _guard_faults.append("SHOP CAP CEILING")
                     push_error("COMMANDS_DATA SHOP CAP CEILING: `%s`.what publishes level %d as the best a smithy reaches and economy.gd's SHOP_MAX_LEVEL is %d (\"%s\") - the doc either promises a tier no building can stock or hides one a grown town can, and D66's raise_shop() moves this number" % [sc_key, sc_top, sc_max, String(sc_rar[sc_max])])
                     printerr("COMMANDS_DATA SHOP CAP CEILING - `%s`.what tops out at level %d, SHOP_MAX_LEVEL is %d" % [sc_key, sc_top, sc_max])
+        # ---- B183: THE EXAMPLE IS THE ONE PUBLISHED FIELD A VIEWER TYPES VERBATIM, AND SEVEN OF
+        # THE EIGHT THAT CARRY AN ARGUMENT WERE WATCHED BY NOTHING. Every arm above this one asks
+        # whether a published WORD is true. `example` is stronger than a word: `help_line()` puts
+        # it on the end of the !help <command> detail line as "e.g. !wear corgi", so it is an
+        # INSTRUCTION, and a viewer reading it types it. If its argument no longer resolves, the
+        # bot answers its own published example with a refusal - and `wear`'s refusal is literally
+        # "No such thing for sale in Bellmire. !help wear lists them", which sends the viewer back
+        # to the line that just lied to them. A loop with no log anywhere.
+        # I MEASURED THE COVERAGE BEFORE WRITING THIS AND IT WAS 1 OF 8: `get("example")` is read
+        # in exactly two places in this file - the DYE EXAMPLE GHOST arm, and help_line() itself,
+        # which publishes it. So `dye teal` was checked and `forge spear`, `enlist knight dwarf`,
+        # `respec cleric`, `brew quickwater 2`, `wear corgi`, `miniboss Ordrik` and `help forge`
+        # were not. The other 24 examples are a bare `!<verb>` with no argument; those are covered
+        # by the VERB arm below and have nothing else to check.
+        # EVERY ONE OF THE SEVEN IS CORRECT TODAY - I resolved all seven by hand against their
+        # authorities this hour before writing a line of this, so this arm lands GREEN and is not
+        # a bug report dressed as a guard. Two were nearly a fault and the reason both pass is
+        # worth writing down, because it is thin:
+        #   `wear corgi` resolves ONLY through item_key's name path - items.json has NO `corgi`
+        #   key, it has `pet_corgi` ("a corgi") and `pet_corgi_pup` ("a corgi pup"), and item_key
+        #   trims a leading "a " off the NAME and matches. If that row's name ever stops being
+        #   exactly "a corgi", the word falls through to the substring branch, BOTH pet rows
+        #   contain "corgi", two hits is no hit, and the example dies. The live pet pool is being
+        #   changed by another lane THIS DAY (the pet selection ruling), so this is not a
+        #   hypothetical.
+        #   `miniboss Ordrik` resolves only because Ordrik is an MB_NAME *value* on `beadle`, and
+        #   the C-130 rename that put it there is still pending Mr. E's final say.
+        # THE ARM RESOLVES, IT DOES NOT PATTERN-MATCH. Each of the seven is handed to THE SAME
+        # FUNCTION THE LIVE COMMAND USES - Gear.KINDS, Roster.CLASSES/SPECIES, Roster.potions(),
+        # Roster.item_key(), _miniboss_find(), the command table itself - so the arm cannot drift
+        # from the behaviour it is guarding. It restates no published word: every word it tests is
+        # read out of data/commands.json at load.
+        # NOT FATAL, like every arm here: the commands answer either way and killing the bot over
+        # a stale example would be the larger fault. A battery greps COMMANDS_DATA; no line is the
+        # healthy reading. AND IT IS NOT EVIDENCE FROM A PARSE - see B182's block above: this arm
+        # only fires on a run that LOADS the data (_l14_test, _twitch_parse, _commands_doc).
+        var ex_verb: Array[String] = []
+        var ex_ghost: Array[String] = []
+        var ex_missing: Array[String] = []
+        var ex_checked: int = 0
+        for ex_k_v in cmd_d.keys():
+            var ex_k: String = String(ex_k_v)
+            if typeof(cmd_d[ex_k_v]) != TYPE_DICTIONARY:
+                continue
+            var ex_c: Dictionary = cmd_d[ex_k_v] as Dictionary
+            var ex_s: String = String(ex_c.get("example", "")).strip_edges()
+            if ex_s == "":
+                ex_missing.append(ex_k)
+                continue
+            if not ex_s.begins_with("!"):
+                ex_verb.append("`%s`.example \"%s\" does not open with a !, so a viewer copying it types a line the bot never sees" % [ex_k, ex_s])
+                continue
+            var ex_w: PackedStringArray = ex_s.substr(1).split(" ", false)
+            if ex_w.is_empty():
+                ex_verb.append("`%s`.example is a bare ! with no verb" % ex_k)
+                continue
+            var ex_v: String = String(ex_w[0]).to_lower()
+            var ex_al_v: Variant = ex_c.get("aliases", [])
+            var ex_al: Array = (ex_al_v as Array) if typeof(ex_al_v) == TYPE_ARRAY else []
+            if ex_v != ex_k.to_lower() and not ex_al.has(ex_v):
+                ex_verb.append("`%s`.example types !%s, which is neither the key nor one of its published aliases %s" % [ex_k, ex_v, str(ex_al)])
+            var ex_rest: String = ""
+            if ex_w.size() > 1:
+                ex_rest = " ".join(Array(ex_w).slice(1)).strip_edges()
+            if ex_rest == "":
+                continue
+            var ex_one: String = String(ex_w[1]).to_lower()
+            match ex_k:
+                "forge":
+                    ex_checked += 1
+                    if not Gear.KINDS.has(ex_one):
+                        ex_ghost.append("`forge`.example asks the smith for \"%s\" and Gear.KINDS does not accept it, so roster.gd refuses the line this file published" % ex_one)
+                "respec":
+                    ex_checked += 1
+                    if not Roster.CLASSES.has(ex_one):
+                        ex_ghost.append("`respec`.example names the calling \"%s\" and Roster.CLASSES has no such row, so the respec is refused" % ex_one)
+                "enlist":
+                    ex_checked += 1
+                    if not Roster.CLASSES.has(ex_one):
+                        ex_ghost.append("`enlist`.example names the calling \"%s\" and Roster.CLASSES has no such row" % ex_one)
+                    if ex_w.size() > 2 and not Roster.SPECIES.has(String(ex_w[2]).to_lower()):
+                        ex_ghost.append("`enlist`.example names the people \"%s\" and Roster.SPECIES has no such row" % String(ex_w[2]).to_lower())
+                "brew":
+                    ex_checked += 1
+                    if not (Roster.potions().get("potions", {}) as Dictionary).has(ex_one):
+                        ex_ghost.append("`brew`.example names the brew \"%s\" and data/potions.json carries no such row, so buy_brew has nothing to sell" % ex_one)
+                    if ex_w.size() > 2 and not String(ex_w[2]).is_valid_int():
+                        ex_ghost.append("`brew`.example trails \"%s\" where buy_brew reads a count" % String(ex_w[2]))
+                "wear":
+                    ex_checked += 1
+                    if Roster.item_key(ex_rest) == "":
+                        ex_ghost.append("`wear`.example asks for \"%s\" and Roster.item_key() resolves it to nothing - the counter answers \"No such thing for sale in Bellmire. !help wear lists them\" to the viewer who read it off !help wear" % ex_rest)
+                "miniboss":
+                    ex_checked += 1
+                    if _miniboss_find(ex_rest) == "":
+                        ex_ghost.append("`miniboss`.example asks for \"%s\" and _miniboss_find() resolves it to no body, so the answer is \"No such one holds a chamber\"" % ex_rest)
+                "help":
+                    ex_checked += 1
+                    if not cmd_d.has(ex_one):
+                        ex_ghost.append("`help`.example asks for !help %s and no command answers that word, so the detail line a viewer is pointed at does not exist" % ex_one)
+                _:
+                    pass
+        if not ex_missing.is_empty():
+            _guard_faults.append("EXAMPLE MISSING")
+            push_error("COMMANDS_DATA EXAMPLE MISSING: %d command(s) publish no `example`, so help_line() falls back to a bare \"!<key>\" and the !help detail line stops showing a viewer how to type the arguments it just named: %s" % [ex_missing.size(), ex_missing])
+            printerr("COMMANDS_DATA EXAMPLE MISSING - %d command(s) carry no `example`: %s" % [ex_missing.size(), ex_missing])
+        if not ex_verb.is_empty():
+            _guard_faults.append("EXAMPLE VERB")
+            push_error("COMMANDS_DATA EXAMPLE VERB: %d published example(s) open with a word this bot does not route, so a viewer copying the line gets the typo nudge or silence: %s" % [ex_verb.size(), ex_verb])
+            printerr("COMMANDS_DATA EXAMPLE VERB - %d example(s) name an unroutable verb: %s" % [ex_verb.size(), ex_verb])
+        if not ex_ghost.is_empty():
+            _guard_faults.append("EXAMPLE GHOST")
+            push_error("COMMANDS_DATA EXAMPLE GHOST: %d published example(s) carry an argument the live command refuses - the bot answers its own instruction with a refusal and logs nothing: %s" % [ex_ghost.size(), ex_ghost])
+            printerr("COMMANDS_DATA EXAMPLE GHOST - %d example(s) the command refuses: %s" % [ex_ghost.size(), ex_ghost])
         _cmds = parsed
         # ---- B138: THE ONE THING THIS FILE PUBLISHES THAT IT NEVER MEASURED - THE LENGTH OF ITS
         # OWN ANSWER. Every arm above checks whether a published WORD is true. None checks whether

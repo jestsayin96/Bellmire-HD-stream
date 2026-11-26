@@ -22224,3 +22224,104 @@ RUNNING line of my second claim.
 2. Still unaudited in my own files: the `ask` topic phrase table against a real question sweep, and
    `CATCHUP_MAX` (320) against the two-cliff question B180 answered for `REPLY_MAX`.
 3. Nothing for the supervisor. The `overlooker` MB_NAME row is the game build's and needs no ruling.
+
+## B183 - 26 Nov 2026, 17:45 CT firing. THE `example` IS THE ONE FIELD A VIEWER TYPES VERBATIM AND SEVEN OF EIGHT WERE UNWATCHED - AND THE SAME INJECT PROVED MY OWN LANE'S COMMITTED NOTE FALSE.
+
+**Two claims, seven launches, never two Godots at once, every launch declared in advance.**
+
+### 1. The hole, measured before a line was written
+`get("example")` is read in exactly **two** places in `scripts/chatcmd.gd`: the `DYE EXAMPLE GHOST`
+arm, and `help_line()` - which **publishes** it, as `e.g. !wear corgi`, on the `!help <command>`
+detail line. So of the **eight** examples that carry an argument, **one** was watched:
+
+| example | authority | watched before B183 |
+|---|---|---|
+| `!dye teal` | items.json dyes | YES (`DYE EXAMPLE GHOST`) |
+| `!forge spear` | `Gear.KINDS` | no |
+| `!enlist knight dwarf` | `Roster.CLASSES` / `SPECIES` | no |
+| `!respec cleric` | `Roster.CLASSES` | no |
+| `!brew quickwater 2` | `data/potions.json` | no |
+| `!wear corgi` | `Roster.item_key()` | no |
+| `!miniboss Ordrik` | `_miniboss_find()` | no |
+| `!help forge` | the command table | no |
+
+An example is not a published *word*, it is a published **instruction**. `wear`'s own refusal is
+`"No such thing for sale in Bellmire. !help wear lists them."` - it sends the viewer back to the
+line that just lied to them, and nothing logs anywhere.
+
+### 2. Three arms, and they resolve rather than pattern-match
+`EXAMPLE MISSING` (no `example` at all - `help_line()` falls back to a bare `!<key>`),
+`EXAMPLE VERB` (the example's own `!verb` is neither the key nor a published alias - this one
+covers all 32), `EXAMPLE GHOST` (the argument resolves to nothing). Every word tested is read out
+of `data/commands.json` at load and handed to **the same function the live command uses**, so the
+arm cannot drift from the behaviour it guards and it restates no published word.
+
+**All seven resolve today and I measured all seven by hand first**, so this landed green. Two are
+thin and the thinness is the point:
+- `!wear corgi` resolves **only** through `item_key`'s NAME path. items.json has no `corgi` key -
+  it has `pet_corgi` ("a corgi") and `pet_corgi_pup` ("a corgi pup"), and `item_key` trims a
+  leading `"a "` off the name. If that name stops being exactly "a corgi", the word falls to the
+  substring branch, **both** pet rows contain "corgi", two hits is no hit, and the example dies.
+  The live pet pool is being changed by the game build **this day**.
+- `!miniboss Ordrik` resolves only because `Ordrik` is an `MB_NAME` **value** on `beadle`, from the
+  C-130 rename still pending Mr. E's final say.
+
+### 3. Red-proven, not asserted
+`forge`.example `"!forge spear"` -> `"!forge fnord"`, one field, nothing else touched:
+
+| run | verdict |
+|---|---|
+| `tools/_l14_test.gd` clean | **FAIL 1** (27 checks) - the overlooker row |
+| `tools/_l14_test.gd` injected | **FAIL 3** (27 checks), `EXAMPLE GHOST` printing "Gear.KINDS does not accept it" |
+
+`data/commands.json` restored in a `finally` block, md5 verified **pre == post ==
+d2ae3b813c4e7ce692197949297a82fb**; `docs/COMMANDS.md` `e9ce025b` byte-unchanged all hour.
+
+### 4. THE FINDING: B182's COMMITTED SENTENCE IN MY OWN FILE IS FALSE
+B182 landed `7418fa3a` with 18 lines of comment stating that a `--headless --quit-after 300` parse
+fires **zero** `COMMANDS_DATA` lines, that it "is NOT EVIDENCE ABOUT ANY ARM IN THIS FILE, in
+either direction", and that nobody is to red- or green-prove an arm off a parse. **Counted per
+section this hour:**
+
+| run | COMMANDS_DATA lines | tags |
+|---|---|---|
+| CLEAN parse, rc=0 25.6s | **2** | MINIBOSS UNNAMED pair |
+| INJECTED parse, rc=0 24.2s | **4** | MINIBOSS UNNAMED + **EXAMPLE GHOST** |
+| `_l14_test` injected, rc=1 1.6s | 5 | same two |
+| `_l14_test` clean, rc=1 1.6s | 3 | MINIBOSS UNNAMED |
+| `_twitch_parse`, rc=0 1.6s | 2 | MINIBOSS UNNAMED |
+| `_commands_doc`, rc=0 1.6s | 2 | MINIBOSS UNNAMED |
+| SECOND CLAIM parse, rc=0 24.5s | 2 | MINIBOSS UNNAMED |
+
+**An arm was red-proven on a parse, which B182's block says cannot happen.** Two archived
+pure-parse logs in this worktree said so before I ran anything - `_b172_parse.log` and
+`_b176_parse.log`, 148 and 143 lines, **2** `COMMANDS_DATA` lines each and **zero** gate verdicts
+in either - which is why I tested the comment instead of trusting it.
+
+So **B176's and B180's verdicts read off the parse were right**, and B182's retraction of them was
+the error. I am **not** dismissing what B182 saw: its BREW SPAN inject genuinely printed no BREW
+SPAN line on its two parses. That stays an **open question about that one arm's path** - likeliest
+cause its per-section slicing of one combined log, not the engine - and the file now says nobody is
+to widen it back out. What stands from B182's block is kept: the 1.6s scripts are the cheap place to
+prove an arm, and `_l14_test` is the only gate that turns a fired arm into an exit code.
+
+The correction went into the file on a **second short claim** with its own parse (rc=0 24.5s, 0
+Parse Error, 0 SCRIPT ERROR) rather than crossing the first declaration.
+
+### 5. My own fault this hour
+**My first IDLE landed 25 seconds past my own declared finish** (17:54:26 against 17:54:01). Inside
+the cap by 23 minutes, no lane crossed, engine dead from 17:53:17 - but B175's 07:52:05 CORRECTION,
+B181's six seconds and B182's five are on record for exactly this, and the cause is the same every
+time: the gap went on reading verdicts and composing prose instead of releasing on a stamp I could
+still meet. It is written into my SECOND CLAIM's RUNNING line. The second release had margin.
+
+`scripts/chatcmd.gd` only: 3616 -> 3730 -> 3750 lines. B168's 65 -> 1 ERROR drop holds for a
+fourteenth hour; the one ERROR is the game build's `Delve.MB_NAME` overlooker row, a fourteenth
+consecutive firing, and not mine.
+
+**Carried to B184:**
+1. The open question above - why BREW SPAN printed nothing on B182's parses when EXAMPLE GHOST
+   prints on mine. It is a question about one arm's path, not about the parse.
+2. Still unaudited in my own files: the `ask` topic phrase table against a real question sweep, and
+   `CATCHUP_MAX` (320) against the two-cliff question B180 answered for `REPLY_MAX`.
+3. Nothing for the supervisor. No Twitch action of any kind this hour: zero bits, no account driven.

@@ -3132,9 +3132,23 @@ static func commands() -> Dictionary:
         # neither `short` nor `what` is SKIPPED, not measured - help_line() would fault on it and
         # the NO WHAT arm above already names it; crashing the loader here would turn a reported
         # fault into a dead bot.
-        var hl_cap := 480            # mirror of twitch_eventsub.gd CHAT_MAX_LEN
+        # B180: THE CLIFF THIS ARM WATCHED WAS THE WRONG ONE, AND IT COULD NEVER BE REACHED.
+        # safe_line() above caps EVERY answer at REPLY_MAX through _cut before it is emitted
+        # (line 303: `var line := safe_line(out)`, then twitch_reply.emit on the next line), and
+        # _cut does NOT append "..." - it backs up to the last space past n/2 and strips a
+        # trailing comma or dash, so the tail goes with no marker and no log, and the line still
+        # reads as a finished sentence. The game build's cut is therefore UNREACHABLE: the worst
+        # message that file can be handed is 27 + 440 = 467, under its 480. So the old budget of
+        # 453 (480 - 27) sat THIRTEEN CHARACTERS ABOVE the cut that actually happens, and a reply
+        # of 441..453 characters was truncated in THIS file, silently, while this arm reported
+        # nothing over budget - the exact fault it was written to catch, one cliff too late.
+        # THE THRESHOLD IS NOW THE SMALLER OF THE TWO, so the arm fires on whichever cut comes
+        # first and no longer needs another lane's number to be right. The mirror is kept as the
+        # SECOND cliff and is dead while REPLY_MAX <= 453; if the game build ever lowers
+        # CHAT_MAX_LEN below 467 it becomes the tighter one again and mini() picks it up.
+        var hl_cap := 480            # mirror of twitch_eventsub.gd CHAT_MAX_LEN (the second cliff)
         var hl_pre := 1 + 25 + 1     # "@" + the longest login Twitch issues + " "
-        var hl_budget: int = hl_cap - hl_pre
+        var hl_budget: int = mini(REPLY_MAX, hl_cap - hl_pre)
         var hl_over: Array[String] = []
         var hl_rows: Array = [["!help", help_line("")]]
         var hl_cs: Dictionary = (parsed as Dictionary).get("commands", {})
@@ -3152,8 +3166,8 @@ static func commands() -> Dictionary:
                 hl_over.append("%s is %d chars, %d over" % [String(hl_r[0]), hl_len, hl_len - hl_budget])
         if not hl_over.is_empty():
             _guard_faults.append("HELP LINE CUT")
-            push_error("COMMANDS_DATA HELP LINE CUT: %d reply(s) this file publishes are longer than the %d characters that survive a worst-case \"@<login> \" prefix under a %d-char cap, so chat cuts the tail and appends \"...\" with nothing logged anywhere - the hub URL is what sits at that tail: %s" % [hl_over.size(), hl_budget, hl_cap, hl_over])
-            printerr("COMMANDS_DATA HELP LINE CUT - %d reply(s) over the %d-char budget and silently truncated on stream: %s" % [hl_over.size(), hl_budget, hl_over])
+            push_error("COMMANDS_DATA HELP LINE CUT: %d reply(s) this file publishes are longer than %d characters, which is the FIRST cut on the way to chat - safe_line() caps at REPLY_MAX %d with no \"...\" and nothing logged anywhere, and the game build's %d-char cap would leave %d after a worst-case \"@<login> \" prefix - so chat loses the tail, and the hub URL is what sits at that tail: %s" % [hl_over.size(), hl_budget, REPLY_MAX, hl_cap, hl_cap - hl_pre, hl_over])
+            printerr("COMMANDS_DATA HELP LINE CUT - %d reply(s) over the %d-char first cut (REPLY_MAX %d, prefix-adjusted cap %d) and silently truncated on stream: %s" % [hl_over.size(), hl_budget, REPLY_MAX, hl_cap - hl_pre, hl_over])
     return _cmds
 
 ## B101: a whole number written out in words, or -1 when this guard cannot read it. The satchel

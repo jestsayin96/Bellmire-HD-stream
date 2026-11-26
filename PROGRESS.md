@@ -22023,3 +22023,79 @@ red on this lane's parse and the single fail on L14.
    one declared window and I did not declare a crossing to make it fit. NORMAL arm only, `--nospring`
    and `--redproof` carried on, one declared finish of its own.
 2. Nothing else. The LOOK FIELDS arm is closed: landed, gated, red-proven, doc no-op verified.
+
+## B180 - 2026-11-26 11:45 CT firing (chat bot) - THE HELP-LINE ARM WAS WATCHING A CLIFF THAT COULD NEVER BE REACHED, AND THE CUT THAT ACTUALLY HAPPENS IS IN MY OWN FILE, THIRTEEN CHARACTERS LOWER
+
+**A NOTE ON THE LABEL, SO THE LEDGER IS NOT READ WRONG:** B179 titled itself the *11:45* firing but
+its lock claim was **11:09:43** and its release **11:11:57**. My own session read the machine clock at
+**11:46:29** and claimed at **11:53:42**, so this is the 11:45 slot and B179 was the one before it.
+I am not renumbering B179 - the cycle stands as written; only the hour in its title is off.
+
+### WHAT I FOUND, AND IT IS A DEFECT IN MY OWN B138 ARM
+The `COMMANDS_DATA HELP LINE CUT` arm existed to catch one thing: a reply of mine growing long
+enough that chat loses its tail with nothing logged anywhere. Its budget was **453** = the game
+build's `CHAT_MAX_LEN` (480) minus a worst-case `"@<login> "` prefix (27). **That cut can never
+happen.** Every answer leaves through `safe_line()` (chatcmd.gd:293), which caps at
+`REPLY_MAX` **440** via `_cut`, and `twitch_reply.emit` is handed that capped line
+(chatcmd.gd:303-305). The worst message `twitch_eventsub.gd:1248` can be built from it is
+`27 + 440 = 467` - **under its own 480**, so its truncation branch is dead code from this lane's side.
+
+**So the arm sat THIRTEEN CHARACTERS ABOVE the real cliff.** A reply of **441..453** characters was
+truncated *in my own file*, silently, while the arm reported nothing over budget - the exact fault it
+was written to catch, one cliff too late. And `_cut` is the *worse* of the two cuts to be blind to:
+the game build's appends `"..."`, while `_cut` backs up to the last space past `n/2` and strips a
+trailing comma or dash, so **the tail goes with no marker at all** and the line still reads as a
+finished sentence. What sits at that tail on the longest line this file emits is the hub URL.
+
+### THE FIX, AND WHY IT ALSO REMOVES A DEPENDENCY
+`var hl_budget: int = mini(REPLY_MAX, hl_cap - hl_pre)` - the arm now fires on **whichever cut comes
+first**. The 480 mirror is kept and labelled the *second* cliff: it is dead while `REPLY_MAX <= 453`,
+and if the game build ever lowers `CHAT_MAX_LEN` below 467 `mini()` picks it up without my touching
+this file. The old comment's worry - "if the game build moves CHAT_MAX_LEN, this arm's number has to
+follow it" - no longer decides when the arm fires. Both fault messages now name which cliff bound the
+budget, `REPLY_MAX`, and the prefix-adjusted cap, so the printed line says what it measured against.
+
+### GATE RESULTS - VERDICT LINES, NOT RETURN CODES
+- **Parse on the landed fix:** rc=0, **0 Parse Error, 0 SCRIPT ERROR**. The only `COMMANDS_DATA`
+  lines are `COMMANDS_DATA MINIBOSS UNNAMED - 1 bodies ... ["overlooker"]` - **the game build's row,
+  not mine, an ELEVENTH consecutive firing.** B168's 65 -> 1 ERROR drop holds.
+- **RED-PROVE (the arm is not asserted):** padding `forge`.short alone to put its help line at **446**
+  characters fired `COMMANDS_DATA HELP LINE CUT - 1 reply(s) over the 440-char first cut (REPLY_MAX
+  440, prefix-adjusted cap 453) ... ["!help forge is 446 chars, 6 over"]`. **446 is UNDER the old 453,
+  so the arm as it stood this morning would have printed NOTHING.** That is the blind band proved at
+  a real value, not argued.
+- `data/commands.json` **RESTORED and md5-verified `3a3baa59` identical before and after (pre == post)**,
+  32 commands; `docs/COMMANDS.md` `7a030e15` **byte-unchanged**. No data change, so no regeneration was
+  owed and I ran none.
+- **`CHAT_MAX_LEN` re-read off `twitch_eventsub.gd` this hour: still 480.** The mirror has not drifted.
+- `scripts/chatcmd.gd` only, **3515 -> 3529 lines**. The longest help line today is **180** (`!help forge`),
+  260 under the 440 cut, so the new threshold is a **no-op on today's data** - it closes a window, it
+  does not move a published number.
+
+### L56 IS NOT OWED, AND I CHECKED THE FILE INSTEAD OF THE CARRY
+`- [x] L56.` at **docs/WORK_PLAN.md:36658**. L68, L69 and L70 are `[x]` at 34200/34313/34422.
+**B177, B178 and B179 all carried L56 as "unpaid" - a first, second and third firing - and that was
+wrong**; B169-era cycles had it right ("L56 IS NOT MINE", S128 made it the game build's instrument).
+My standing prompt's queue line is stale and a firing cannot edit its own prompt, so it will keep
+naming L56; this entry is the correction. The plan's live CHAT BOT row is also **paid**: the feed
+already reads **63** in both `miniboss`.short and `.what`, and B168 paid the `--editor --quit` half.
+
+### MY OWN FAULT THIS HOUR, NAMED
+My `RUNNING` line wrote **cap 12:19:00** when claim+25 off an 11:53:42 claim is **12:18:42** -
+eighteen seconds **longer** than the true cap. The direction matters: it makes my window look longer,
+not shorter. The `IDLE` line carries the correction. I released at **11:56:24**, inside the declared
+11:59:00 and inside the true cap.
+
+### FOR THE GAME BUILD LANE
+Nothing is owed in `twitch_eventsub.gd` and I changed nothing in it. One thing worth knowing, no
+action asked: **your truncation branch at `twitch_eventsub.gd:1249-1250` is unreachable from this
+lane** - 440 + a 27-char worst-case prefix is 467, under `CHAT_MAX_LEN` 480. It is the one drop in
+that function with no `_say_log` beside it, so if a line ever *did* reach it the cut would be silent;
+it just cannot be reached while `REPLY_MAX` is 440. If you ever lower `CHAT_MAX_LEN` below 467, my
+arm now follows you down on its own.
+
+### NEXT
+1. The lane's queue (L56/L68/L69/L70) is `[x]` in the plan and the live CHAT BOT row is paid, so the
+   honest open item is **nothing** - and the freeze says audit shipped work rather than invent any.
+2. Still unaudited in my own files, in order: the `ask` topic phrase table against a real question
+   sweep, and `CATCHUP_MAX` (320) against the same two-cliff question this hour answered for `REPLY_MAX`.

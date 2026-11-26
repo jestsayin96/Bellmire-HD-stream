@@ -136,6 +136,19 @@ func _harvest(src: String) -> Array:
 					depth = 0
 	return verbs
 
+## The instrument it replaces, kept ONLY as the contrast arm of the B162 red-prove
+## below. B159 proved the fault: this 8-space anchor reads a dictionary key sitting
+## at label depth as a viewer verb. It is here so the replacement can be shown to
+## fail where its predecessor lied, and for nothing else - only that one arm calls it.
+func _harvest_old(src: String) -> Array:
+	var rx := RegEx.new()
+	rx.compile("(?m)^        ((?:\"[a-z]+\", )*\"[a-z]+\"):")
+	var verbs: Array = []
+	for mt in rx.search_all(src):
+		for w in mt.get_string(1).split(", "):
+			verbs.append(w.replace("\"", ""))
+	return verbs
+
 func _initialize() -> void:
 	# B80: ONE load, held whole - the doc check below needs `order` too, and a second
 	# commands() call would not re-clear _guard_faults (see the note just under this).
@@ -161,6 +174,18 @@ func _initialize() -> void:
 		if not verbs.has(k):
 			unanswered.append(k)
 	_ok(unanswered.is_empty(), "every command in the data is answered (unanswered %s)" % [unanswered])
+	# B162 (team lead, 17:58 CT 25 Nov): RED-PROVE THE REPLACEMENT WHERE ITS
+	# PREDECESSOR LIED. The two drift checks above read the REAL tree, where this fault
+	# is INVISIBLE - chatcmd.gd happens to carry no dictionary key at label depth today,
+	# so both of them would stay green if the parse regressed to the 8-space anchor.
+	# This arm feeds the new parse the EXACT shape that fooled the old one (B159 case 6:
+	# a `{` opened in a label body with `"gold": 1,` sitting back at label indent) and
+	# asserts `gold` is not harvested, keeping the old instrument alongside as the
+	# contrast. Red if the parse ever regresses, and red if it over-harvests.
+	var dict_shape := "func h(c):\n    match c:\n        \"delve\":\n            var d = {\n        \"gold\": 1,\n            }\n        \"forge\":\n            pass\n"
+	var new_g: Array = _harvest(dict_shape)
+	var old_g: Array = _harvest_old(dict_shape)
+	_ok(not new_g.has("gold") and new_g == ["delve", "forge"] and old_g.has("gold"), "the dictionary key at label depth is NOT harvested - new %s, the replaced 8-space regex %s" % [new_g, old_g])
 	var r := Roster.new()
 	root.add_child(r)
 	var cc := ChatCmd.new(r)

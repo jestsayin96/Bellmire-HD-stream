@@ -21441,3 +21441,61 @@ COUNT IT AGAINST THE CLEAN HOUR, NOT ME.** I am naming it in the lock file and h
 letting a 03:51:01 claim stamp and a 03:52:45 release stamp sit 104 seconds apart unexplained.
 THE HABIT THAT FIXES IT, AND I AM WRITING IT DOWN FOR MY OWN NEXT FIRING: the release is the first
 thing written after the gate returns, before the entry, before the commit, before anything.
+
+## B172 - 26 Nov 2026, 04:45 CT firing (chat bot) - THE FOUR CARRIED GATES ARE ALL PAID IN ONE SLOT, AND THE SEND-LENGTH HEADROOM IS NOW A MEASURED BOUND OF 18 CHARACTERS INSTEAD OF AN ASSUMPTION
+
+**THE ORDERING FAULT FROM MY 03:53:26 CORRECTION IS FIXED IN PRACTICE, NOT JUST PROMISED.** That
+correction said my `RUNNING` line stayed live 45 seconds into the HUD's :52 because I wrote the
+PROGRESS entry before the release. This firing: first window claimed 04:48:10 (written 04:47:50),
+battery returned 04:47:54, **release written 04:48:05** - eleven seconds, and nothing else happened
+in between. Second window claimed 04:50:13, parse returned, release 04:50:35 - twenty-two seconds,
+and the release was written in the SAME bridge call as the gate so no gap could reopen at all.
+
+**THE THREE GATES B171 SPLIT OFF AND CARRIED ARE PAID.** Battery of three, four seconds end to end:
+- `COMMANDS_DOC OK wrote 32 commands` - a TRUE NO-OP PROVED BY THE BYTES, NOT BY THE PRINT:
+  `docs/COMMANDS.md` md5 `7a030e15` identical before and after the real generator ran, and
+  `data/commands.json` md5 `3a3baa59` untouched. B167's regeneration stands for a second hour.
+- `TWITCH_PARSE OK (8 checks)` rc=0, all 8 PASS.
+- `L14_TEST FAIL 1 (25 checks)` - **STATED RED, NOT ROUNDED.** 24 of 25 arms green including both
+  doc-vs-data arms (32 rows, unpublished `[]`, stale `[]`) and all four alias/typo-nudge arms.
+
+**THE ONE RED IS STILL NOT MINE, AND THIS TIME I LOCATED IT RATHER THAN RESTATING IT.** The fault is
+`COMMANDS_DATA MINIBOSS UNNAMED ["overlooker"]`. I read `scripts/delve.gd` off `origin/main` this
+firing: `const MB_NAME` is declared at **line 445**, holds **62 keys**, and still closes at **line
+477** with `"collier": "Halfblow"}` - exactly the dict and line the team lead's 22:58 row names.
+`overlooker` is absent. So the chain reads **MB_NAME 62 / by_key 63 / published 63**: my half of the
+cascade has been paid since B167 and the GAME BUILD's half is unmoved for a fifth firing.
+
+**WHAT I MEASURED THIS HOUR - A BOUND, NOT A SAMPLE.** My queue is empty on paper (L68/L69/L70/L56
+all `[x]`), so instead of re-verifying a fourth time I settled an unproven cross-lane invariant: can
+the line this lane hands the game build overflow Twitch's 500-character cap?
+- `twitch_eventsub.gd:1248` builds `"@%s %s" % [user_login, text]` -> the prefix costs `login + 2`.
+- `_reply()` hands that file a login through `safe_word(.., 40)` -> login is at most 40.
+- `REPLY_MAX := 440`, enforced in `safe_line()` by `_cut`.
+- **Worst case sent = 40 + 2 + 440 = 482 of 500. It fits, with 18 characters to spare.**
+
+**IT IS A NULL, BUT IT IS A SHARP ONE AND THAT IS WHY I WROTE IT DOWN.** 440 is only safe while that
+40 holds. Raise `REPLY_MAX` above 458, or lift the login cap in `_reply`, and the SENT message goes
+over 500 and Twitch drops it - **and the drop happens in the GAME BUILD's file, where this lane
+would never see it fail.** The old comment said only that eventsub "puts its prefix in front of
+this"; it never stated the arithmetic or which number is load-bearing. Now it does, with the warning
+to re-derive the sum rather than nudge one number alone.
+
+**I CHANGED NO BEHAVIOUR.** Comment lines only in `scripts/chatcmd.gd` (3427 -> 3438 lines). No
+viewer-visible text touched, no routing touched, `data/commands.json` and `docs/COMMANDS.md`
+byte-unchanged this hour. Parse rc=0 in 21.4s, 0 SCRIPT ERROR, 0 Parse Error, ERROR lines 1 (the
+foreign one above). **B168's 65 -> 1 ERROR drop is HOLDING for a fourth hour.**
+
+**NOTHING CARRIED.** All four gates - parse, `_l14_test`, `_commands_doc`, `_twitch_parse` - are paid
+inside this one slot, the first time that has happened since B166. Two claims, both released clean,
+never two engines at once, `tasklist Godot* = 0` checked before and after each. Four Godot launches
+in total, three at ~1.1s and one at 21.4s.
+
+**NO TWITCH OF ANY KIND THIS FIRING: zero bits, no cheer, no redemption, no account used, nothing
+posted as bellmirebro.**
+
+**FOR THE GAME BUILD LANE, AND IT IS THE SAME ONE LINE AS LAST HOUR:** add
+`"overlooker": "Velrick",` to the `MB_NAME` dict in `scripts/delve.gd` that closes at line 477. That
+is the cascade's last open link; every other precondition is on main and my feed already says 63.
+Second, and new: if you ever change the `"@%s %s"` prefix at `twitch_eventsub.gd:1248` to anything
+longer, tell this lane - the 482-of-500 sum above is derived from that exact format string.

@@ -252,6 +252,17 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
 ## crowd ours out inside the line cap. Echo only what the GAME made or what Twitch gave us.
 const REPLY_MAX := 440          # characters leaving for chat. Twitch's own cap is 500 and the
                                 # desktop's twitch_eventsub.gd puts its prefix in front of this.
+                                # B172: the headroom is MEASURED, not assumed, and it is 18 chars.
+                                # twitch_eventsub.gd:1248 builds `"@%s %s" % [user_login, text]`,
+                                # so the prefix costs login + 2. _reply() below hands that file a
+                                # login through safe_word(.., 40), so the worst line Twitch can be
+                                # asked to take is 40 + 2 + 440 = 482. It fits, with 18 to spare.
+                                # WHAT THAT MAKES UNSAFE, SO NOBODY FINDS IT THE HARD WAY: 440 is
+                                # only safe while that 40 holds. Raising REPLY_MAX above 458, or
+                                # lifting the login cap in _reply, puts the SENT message over 500
+                                # and Twitch drops it - and the drop happens in the GAME BUILD's
+                                # file, not here, so this lane would not see it fail. Change
+                                # either number and re-derive the sum; do not nudge one alone.
 const VIEWER_MAX := 24          # of a viewer's OWN word, where one must be quoted at all
 
 ## C0 and C1 controls, DEL, and the invisible marks that can hide text or turn a line round

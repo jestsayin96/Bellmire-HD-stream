@@ -24095,14 +24095,34 @@ def overlooker():
         for _x, _w, _y in ((0.000, 0.130, 0.246),
                            (0.115, 0.115, 0.223), (-0.115, 0.115, 0.223),
                            (0.200, 0.100, 0.155), (-0.200, 0.100, 0.155)):
-            P.add(L.box(_w, 0.050, 0.120), 'dark', loc=(_x, _y, 1.700))
+            P.add(L.box(_w, 0.050, 0.165), 'dark', loc=(_x, _y, 1.680))
+        # PASS 3 CHANGES ONE THING AND ONE ONLY: THE HEIGHT OF BOTH BANDS.
+        # Pass 2 was green and I shipped it, then looked at the hero cell -
+        # the Overlooker beside a KayKit adventurer at true scale - and the
+        # two bands were FAINT there in a way they are not on the big flat
+        # render. They were 0.120 and 0.085 on a 2.40 m body: 5.0% and 3.5%
+        # of his height. So the lever is HEIGHT IN Z (0.165 and 0.115, 6.9%
+        # and 4.8%) and deliberately NOT thickness in y, which is unchanged
+        # at 0.050 and 0.048. Standing further off the coat is what made
+        # pass 1 read as a plate bolted on from the side; being TALLER costs
+        # nothing from the side and is the whole of what reads at distance.
+        # AND THE YOKE DROPS 0.020 TO PAY FOR ITS OWN HEIGHT. Growing it
+        # about z=1.700 put its top edge at 1.7825 against the dark collar's
+        # underside at 1.790 - a SEVEN MILLIMETRE gap where pass 2 had
+        # thirty, and two darks that close go flat against each other at
+        # stream distance. That is the Beadle's pale-on-pale fault with the
+        # values inverted, and it is named in my own prompt. I saw it in the
+        # hero cell: head, collar and yoke tending to one dark column. The
+        # centre drops to 1.680 so the top is back at 1.7625 and the lit
+        # trunk strip between collar and yoke survives; the extra height is
+        # all taken downward, where there is nothing to collide with.
         # THE HALF-BELT. z 1.300, just clear of his own belt at 1.246, where
         # the trunk's radius is about 0.231. Same construction, same reason,
         # and the outermost pair ends at x 0.225 inside that 0.231.
         for _x, _w, _y in ((0.000, 0.150, 0.228),
                            (0.120, 0.110, 0.197), (-0.120, 0.110, 0.197),
                            (0.185, 0.080, 0.138), (-0.185, 0.080, 0.138)):
-            P.add(L.box(_w, 0.048, 0.085), 'dark', loc=(_x, _y, 1.300))
+            P.add(L.box(_w, 0.048, 0.115), 'dark', loc=(_x, _y, 1.300))
     _close("back")
 
     # ---- THE HEAD, TURNED. NO PALE ANYWHERE ON IT. ------------------------

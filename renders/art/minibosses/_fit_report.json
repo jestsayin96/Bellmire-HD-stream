@@ -11481,15 +11481,15 @@
     },
     "side": {
      "creature": {
-      "alone": 21354,
-      "vis": 21354,
-      "delta": 29025,
+      "alone": 21367,
+      "vis": 21367,
+      "delta": 29050,
       "seen": 1.0
      },
      "hero": {
       "alone": 37770,
       "vis": 37770,
-      "delta": 42165,
+      "delta": 42168,
       "seen": 1.0
      },
      "proves": true
@@ -11498,13 +11498,13 @@
      "creature": {
       "alone": 27573,
       "vis": 27573,
-      "delta": 37357,
+      "delta": 37369,
       "seen": 1.0
      },
      "hero": {
       "alone": 44018,
       "vis": 44018,
-      "delta": 48822,
+      "delta": 48816,
       "seen": 1.0
      },
      "proves": true
@@ -11537,7 +11537,7 @@
      "mean": 0.4476,
      "max": 0.7103,
      "error": null,
-     "rim_filled_px": 2110,
+     "rim_filled_px": 2109,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -11551,7 +11551,7 @@
      "mean": 0.4326,
      "max": 0.7077,
      "error": null,
-     "rim_filled_px": 2094,
+     "rim_filled_px": 2096,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -11565,7 +11565,7 @@
      "mean": 0.4515,
      "max": 0.7077,
      "error": null,
-     "rim_filled_px": 2245,
+     "rim_filled_px": 2247,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -11576,7 +11576,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-26T17:47:51-06:00",
+   "measured_at": "2026-11-26T17:52:10-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {

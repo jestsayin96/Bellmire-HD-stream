@@ -24,7 +24,7 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "8eab9998c70f16d5459146c2699df470ef37254a",
+   "head": "1a309b659ec20f826d93efcd97b9debdbaf6c209",
    "ref": "origin/main",
    "ref_commit": "0c3a072db74918d9799623db40f6c481b4879c68",
    "ref_gd_sha256_8": "bc3a603f",

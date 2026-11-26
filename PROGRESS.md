@@ -20769,3 +20769,16 @@ GODOT LOCK: NOT CLAIMED. This run rendered only and never read or wrote docs/RUN
 CORRECTION 1, MY OWN ERROR: the entry above says the missing overlooker .import is "the same shape as the snarer_chibi.glb item already on the books." IT IS NOT - assets/monsters/minibosses/snarer_chibi.glb.import EXISTS (1,178 bytes, 17 Nov 18:53) and has for eight days. THAT ITEM IS CLOSED and the version of my own prompt that still carries it as "STILL OWED, SMALL" is stale. I listed all 76 glb files against their siblings: overlooker.glb is the ONLY one with no .import, and it is the only one of the two that was ever real. Nothing is owed on snarer_chibi.
 VERIFIED, NOT ASSERTED: I claimed "ORDER = 63 keys" above off a loose regex that actually returned 77 (it was matching CANON and OVERRIDE keys together, not ORDER). Re-measured properly with ast over the real assignments: ORDER is 63 entries, 63 unique, `overlooker` at index 63. The claim stands but the first number I had in hand did not support it, and I am not going to let a right answer rest on a wrong measurement.
 THE GODOT LOCK: NOT CLAIMED, AND THE REASON IS THE YIELD RULE, NOT AN OVERSIGHT. The lock was FREE when I read it (R docs/RUN_LOCK.txt last line IDLE 17:27:55 game build; tasklist Godot* = 0 checked live at 17:47:17). Generating overlooker.glb.import needs a Godot import run, and from a ~17:48 claim an honest declared finish lands at 17:53+ - INSIDE THE HUD'S :52 WINDOW. The rule says split the job and carry the remainder rather than declare a crossing to finish optional work, so I carried it. I will take it at my own :34 firing. The game build lane may well generate it first on any Godot run against a tree carrying the file; if it does, nothing is lost.
+## HUB 25 Nov 17:3x CT - 15:58 ROW: WRITTEN STAND-DOWN. DRY. NO web/ CHANGE. NOT CLAIMING READY TO PUBLISH.
+
+TOOK: the 15:58 TAKE THIS NEXT hub row ("write the stand-down, in one short entry, and say plainly that you are dry").
+I AM DRY. CDN item NOT touched (ruled closed from above). gh-pages NOT touched (still 8d214d36).
+MEASURED (machine clock 17:38 CT, after merging origin/main c27bc167 into hub, merge clean):
+- web/ tree 51a3f8b382c3 is IDENTICAL on HEAD, origin/main and origin/hub; `git diff --stat` over web/ and docs/HUB_SECURITY.md = EMPTY.
+- `node --check web/app.js` = OK.
+- innerHTML ASSIGNMENTS in app.js = 2, at app.js:255 and :301, page-owned literals; other hits are comments. index.html:49 "two page-owned sites" still TRUE.
+- outerHTML / insertAdjacentHTML / document.write / eval( / new Function in code = 0 (the 2 grep hits at app.js:10-11 are the comment saying so).
+- CSP meta present (1); index.html has no external host beyond og: display metas and supabase.
+- Not re-run: ?state=/?mock= pages and hostile-name render - web/ did not change, so not owed. No screenshot: nothing changed to look at. Live-dot colour untouched.
+- Untracked web/tools/__pycache__/ is a stray of mine from an earlier tool run; the delete is refused on this machine, so it is named here.
+NOTHING for Mr. E to decide.

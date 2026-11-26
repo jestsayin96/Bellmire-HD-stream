@@ -1,3 +1,84 @@
+## THE OVERLOOKER'S BACK NOW SAYS IT IS A BACK - A YOKE AND A HALF-BELT, AND THE FRONT OUTLINE IS PROVEN UNTOUCHED - 26 Nov 2026 17:3x-17:54 CT (art)
+
+TAKE THIS NEXT (22:58 CT 25 Nov block) ART row: "Put something on the BACK of the coat that reads
+as a back." Done, in three passes, each one judged by looking. The turned head is NOT touched - it
+is canon and C-216 names it as the one readable thing.
+
+### 1. WHAT I CHECKED FOR FIRST, MEASURED AND NOT REMEMBERED.
+  - The plan's own TAKE THIS NEXT block, read off origin/main, not off this prompt's stale list.
+  - origin/art vs my worktree: I was ONE COMMIT BEHIND (3a99ce99 vs 8eab9998, a plan sync).
+    Fast-forwarded before touching anything, per the standing instruction.
+  - The fault itself: I staged hero_front.png and hero_back.png and LOOKED before a vertex moved.
+    The team lead is right - head in profile and one level pale arm in BOTH views, mirrored.
+  - THE PROMPT'S "STILL OWED, SMALL" ITEM IS ALREADY CLOSED. snarer_chibi.glb.import EXISTS
+    (dated 17 Nov 18:53), and the whole directory is 76 .glb / 76 .glb.import. Nothing owed.
+
+### 2. WHY THE CUE COULD NOT BE A SILHOUETTE, AND THE LIMIT THAT LEAVES.
+A back ortho and a front ortho of a near-bilateral figure return the SAME OUTLINE by construction:
+an outline does not know what occludes what. So it is a VALUE cue - which is exactly the four
+things the team lead listed - and DARK, not pale, because the Beadle's shipped fault was
+pale-on-pale: dark luma 0.068 against body 0.251, a ratio of 3.67.
+THE LIMIT, SAID PLAINLY: the back OUTLINE is essentially unchanged (66 alpha px), so a pure
+silhouette read still cannot tell his front from his back. _silhouettes.png will show them alike.
+
+### 3. THREE PASSES, AND I THREW THE FIRST ONE AWAY WHILE IT WAS GREEN.
+PASS 1 - a straight yoke box plus a vertical centre seam. 17,301 px moved on the back, ZERO alpha
+on the front: green on every number. The PICTURE failed three ways the numbers could not see. It
+read as a painted "T", not tailoring (a heraldic mark is the one thing Bellmire's voice does not
+do); the straight box on a barrelled back stood a centimetre off the coat at its corners; and from
+the side it read as a plate bolted on, with an air gap under it. One cause: a flat thing on a
+round thing.
+PASS 2 - both bands rebuilt as five short segments following y=sqrt(r^2-x^2), each standing about
+a centimetre proud at its own x and dying into the curve instead of ending in air. The second band
+became a HALF-BELT, not a seam: how a working coat is actually cut, and two horizontal bands
+cannot read as a symbol the way a cross does. Shipped at 1a309b65.
+PASS 3 - I then looked at the HERO CELL, and the bands were FAINT at true scale. Raised height in
+z only (0.120 -> 0.165, 0.085 -> 0.115), NOT thickness in y: standing further off the coat is what
+made pass 1 a plate; being taller costs nothing from the side.
+PASS 3b - a fault pass 3 introduced, caught in the same cell. The taller yoke's top edge came to
+1.7825 against the dark collar at 1.790: a SEVEN MILLIMETRE gap where pass 2 had thirty, and head,
+collar and yoke were tending to one dark column. That is the Beadle fault with the values
+inverted. The yoke dropped 1.700 -> 1.680; the gap is back to 20 mm and the extra height is all
+taken downward. Shipped at 17d94dad.
+
+### 4. THE INSTRUMENT, AND WHY IT HAD TO BE AN ABLATION (TRAP 5, MY OWN).
+tools/art/_ovl_backread.py builds the body with and without the span (OVL_BACK=0) and renders both
+THROUGH ONE PINNED CAMERA. The pinning is the whole reason the file exists: lordgen.render_views
+derives centre, radius AND ortho_scale from the built objects' bounds, and this span MOVES the
+bounds - so two generator runs would be framed differently and a pixel diff between them would
+report a huge moved count for the wrong reason entirely.
+                 back moved        facing ratio    front alpha / hard
+  pass 2      17,690 (9.55 pct)       1.135             0 / 0
+  pass 3      22,744 (12.28 pct)      1.171             0 / 0
+  pass 3b     22,581 (12.19 pct)      1.166             0 / 0   <- shipped
+"facing ratio" is the team lead's own test as arithmetic: FRONT vs MIRRORED BACK mean distance,
+0.08598 -> 0.10025. He staged the two views and said they were the same slab; a figure with no
+facing scores near zero there.
+
+### 5. THE GATE WAS WRONG AND PASS 1 IS HOW I FOUND OUT.
+Pass 1 FAILED its own front gate: nine front pixels moved, worst delta 5/255. I went to narrow the
+yoke and checked the cause first instead - and the front view's ALPHA was untouched on every one
+of 686,000 pixels, so NO geometry entered the front outline at all. Those pixels are the LIGHTING
+SOLUTION: new dark geometry behind him changes what bounces. A gate demanding that no photon
+anywhere changed is not testing the claim; the claim is that the front CAMERA CANNOT SEE IT, and
+ALPHA is the channel that answers it. The bar is now zero alpha AND zero hard pixels, with the
+soft count published rather than hidden. That is a stronger test than the one it replaced.
+
+### 6. A RED I FOUND THAT PRE-DATES THIS RUN.
+minibossfit went RED: "overlooker: MEASURABLE by the self_seen census and carrying NO self_seen
+cell". The census of 25 Nov 22:46 CT lists him measurable and _selfseen_all.json had 61 rows and
+NO overlooker row - he was born at pass 5 and was never fed to the instrument. Measured and merged
+with its own CT stamp. His cells are man_seen 1.0 on all three views, and THAT 1.0 SAYS NOTHING
+GOOD: he carries no gear (34 items inside the man span, 0 outside), so nothing can occlude him.
+Per derive_self_seen's own docstring a high self_seen says UNOBSTRUCTED, never that a body READS.
+
+### 7. WHAT I CAN STILL SEE AND AM NOT HIDING.
+The five boxes read as STEPPED TABS rather than one curved yoke, worst on the outer pair - the
+honest cost of a curve built from axis-aligned boxes. From the side both bands still present as
+rectangular stubs off his back, not as seams. The half-belt is the fainter of the two at hero
+scale. His eye still catches a little light from directly behind, which softens the facing read -
+that is the canon turned head and I left it alone.
+
 ## THE REGISTER COULD NOT SAY WHEN A ROW WAS MEASURED, AND THE 01:34 FIRING WAS NEITHER DRY NOR A CRASH - 25 Nov 2026 02:3x-02:5x CT (art)
 
 TAKE THIS NEXT (01:58 block) ART row, both halves: "write the stand-down this firing, naming which

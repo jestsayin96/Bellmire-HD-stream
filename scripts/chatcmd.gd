@@ -3168,6 +3168,23 @@ static func cooldown() -> float:
     var v: float = float(commands().get("cooldown_s", COOLDOWN))
     return v if v > 0.0 else COOLDOWN
 
+## B169: READ THIS BEFORE YOU WRITE A PLURAL GUARD ARM - THERE IS NOTHING TO GUARD.
+## The alias column has FOUR loader arms (ALIAS UNUSABLE / SHADOW / CLASH / DEAD, :1044-1060,
+## B108) and `guard_faults()` is read by tools/_l14_test.gd:163, so any alias fault fails a
+## gate. The PLURAL fallback below (L69) has no arm, and I went looking for the fault that
+## would earn it. There is none, and this is a PROOF rather than a sample, which is why no arm
+## is owed: the plural path is only reached for a word `commands` does not hold and no
+## `aliases` list holds, and its FIRST cut is one character, so for any published word w the
+## form w+"s" cuts back to w itself and resolves to w's OWN command before any other key is
+## walked. A published word's plural therefore cannot land on another command. I measured it
+## too, both directions over all 63 published words (32 keys + 31 aliases): plurals routing to
+## the wrong command ZERO. The one shape the cuts CAN differ on is w+"es", whose cut-1 stem is
+## w+"e" - that needs two published words one trailing "e" apart on different commands, which
+## the namespace does not hold and which would be an ALIAS SHADOW the moment it did.
+## NOT A DEFECT EITHER, recorded in the `max_len` precedent so nobody "fixes" it: 13 of the 32
+## commands carry no `short` field. That is BY DESIGN - help_line() (:3205) falls back to the
+## first sentence of `what`, and the fallback fires only on an ABSENT key, never an empty one
+## (no command carries an empty `short`; checked). Do not backfill `short` to silence it.
 ## an alias -> its command ("inv" -> "inventory"); anything else unchanged
 static func canonical(word: String) -> String:
     var cs: Dictionary = commands().get("commands", {})

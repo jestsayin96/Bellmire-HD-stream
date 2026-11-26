@@ -21248,3 +21248,73 @@ for seven files. Check your own count before you charge it to art.
 
 Nothing is waiting on you. No ownership question this cycle - I edited only `PROGRESS.md` and
 committed my two gate logs.
+
+## B169 - 26 Nov 2026, 01:45 CT firing (chat bot) - I WENT LOOKING FOR AN UNGATED ROUTING PATH IN MY OWN FILE AND PROVED IT NEEDS NO GUARD, SO I ADDED NO ARM AND WROTE THE PROOF DOWN INSTEAD
+
+**NOTHING WAS OWED TO ME ON THE PLAN AND I SAY SO BEFORE I SAY ANYTHING ELSE.** The 22:58 CHAT BOT
+row asked for two things and both were paid before this firing: the 62 -> 63 feed republish (B167)
+and the `--editor --quit` import-cache build (B168). `origin/main` is still `0c3a072d`, the same
+commit the team lead merged at 23:10 - `git merge origin/main` in W6 answered `Already up to date`.
+So this hour was mine to spend on my own three files, and I spent it reading rather than re-running
+gates that passed twenty minutes ago on an unchanged tree.
+
+**MY PROMPT'S QUEUE LINE IS STALE AND I AM NOT GOING TO TAKE IT. L56 IS NOT MINE.** My standing
+prompt still ends "Then L56 (delve-heavy soak - engine and lock)". The plan says otherwise in terms:
+`tools/_l56_test.gd` is the GAME BUILD's file by four commits, the 03:34 block hands the lying-gate
+fix to that lane ("GAME BUILD - THE CASCADE IS CLOSED, SO TAKE THE LYING GATE INSTEAD"), and the
+supervisor TICKED **S128** for it - the trap half made deterministic, red-proved three independent
+ways (`CHECKS 4 UNMET 0 FAILS 0` normal, `FAILS 2` on `--nospring`, `FAILS 3` on `--redproof`).
+Taking it would have been one lane redoing another's ticked work. Read the plan, not the prompt.
+
+**THE AUDIT, FOUR NULL RESULTS, EACH MEASURED AND NOT ASSERTED.** `data/commands.json` parses,
+32 commands, `set(order) == set(commands)`, no key changed this hour.
+  1. **Drift, both directions: clean.** Every command key is answered and every verb is in the data.
+  2. **The namespace is internally unique** - no alias collides with a command name or another
+     alias. I was about to write an arm for this and then found B108 had already written FOUR
+     (`ALIAS UNUSABLE` / `SHADOW` / `CLASH` / `DEAD`, chatcmd.gd:1044-1060), and `_l14_test.gd:163`
+     reads `guard_faults()`, so the whole column is gated transitively. **Verify before you act cuts
+     both ways: the arm I did not write is the find.**
+  3. **Four published words never appear as a literal in `chatcmd.gd`** - `armor`, `sheet`,
+     `spotlight`, `watch`. NOT drift. They are aliases of `armour`, `hero`, `look`, `look`, and
+     `canonical()` (:3188) resolves aliases generically out of the data, so a literal is not owed.
+  4. **The PLURAL fallback (L69) has no guard arm, and I am recording that it needs none.** This is
+     the one routing path in `canonical()` the alias arms do not cover, so it is where I looked
+     hardest. It is safe BY CONSTRUCTION and that is a proof, not a sample: the plural path is
+     reached only for a word no key and no alias list holds, and its FIRST cut is one character, so
+     for any published word w the form w+"s" cuts straight back to w and resolves to w's OWN command
+     before another key is walked. Measured too, over all 63 published words (32 keys + 31 aliases):
+     plurals routing to the wrong command **ZERO**. The only shape the two cuts can disagree on is
+     w+"es", whose cut-1 stem is w+"e" - that needs two published words one trailing "e" apart on
+     different commands, which the namespace does not hold and which would fire `ALIAS SHADOW` the
+     moment it did.
+
+**WHAT I COMMITTED IS A COMMENT AND I AM NOT DRESSING IT UP AS MORE.** Seventeen lines above
+`canonical()` carrying the proof in (4), the pointer to B108's four arms, and one more
+"do-not-fix" record in the `max_len` precedent: **13 of the 32 commands carry no `short` field and
+that is BY DESIGN** - `help_line()` (:3205) falls back to the first sentence of `what`, and
+`Dictionary.get` fires that fallback only on an ABSENT key, never an empty one (no command carries
+an empty `short`; checked). Without that note the next lane reads 19/32 as a 13-row hole and
+backfills it. Zero behaviour changed; no data file and no doc touched.
+
+**THE GATE, AND THE SPLIT, WITH THE REASON AND NOT THE CONVENIENCE.** Parse `rc=0` in 21.8s,
+**0 SCRIPT ERROR, 0 Parse Error, ERROR LINES 1** (`_b169_parse.log`) - and B168's 65 -> 1 drop is
+HOLDING. The one red is `COMMANDS_DATA MINIBOSS UNNAMED`, the game build's `Delve.MB_NAME`
+`overlooker` row, byte-for-byte the red B168 left and still a file I cannot write. I ran parse and
+**only** parse: a comment-only `.gd` change can move no other gate, `_commands_doc` and the
+doc-vs-data arms read `data/commands.json` and `docs/COMMANDS.md` and I touched neither, and
+`_l14_test` is red on that same foreign row whatever I do. I SPLIT the other three off and carried
+them rather than declare a crossing, because my slot opened at :50 and the HUD's is :52.
+Claim 01:50:30, cap 02:15:30, declared 01:51:50, released **01:51:20** - inside all three.
+
+**THE CASCADE, STATED PLAINLY: ONE LINK OPEN AND IT IS NOT MINE.** Published feed 63, content
+`by_key` 63, `Delve.MB_NAME` **62**. I checked for the row on every ref, not just main -
+`git grep overlooker` is rc=1 on `origin/main`, `origin/laptop` and `scripts/delve.gd` in the R
+working tree. There is no `origin/gamebuild` branch at all; that lane lands on `laptop`.
+
+## FOR THE SUPERVISOR
+
+Nothing is waiting on you from this lane. One thing worth a line in the record, no ruling asked:
+**my scheduled prompt's queue still names L56, which the plan reassigned and you ticked as S128.**
+A firing cannot edit its own prompt, so it will keep saying that until Mr. E takes one live turn -
+it is already item-shaped for the cumulative prompt-correction list the team lead is carrying.
+No Twitch of any kind this hour, zero bits, no account used.

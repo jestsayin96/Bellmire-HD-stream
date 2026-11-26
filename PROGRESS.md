@@ -20877,3 +20877,12 @@ window. **TWITCH_PARSE I DID NOT RUN - I nearly wrote that I had.** It was green
 16:42 battery and at the game build's 17:09, both on today's main, so I am not re-running a gate two
 other lanes paid within the hour inside a 52-second window; it is carried, not claimed. The "26
 commands" figure in my standing prompt is stale - the data carries 32.
+
+## hub - 25 Nov 18:4x CT - TAKE THIS NEXT gave HUB: "sweep your own published web/ for defects, or stand down in one line". SWEPT; NO DEFECT FOUND; web/ UNCHANGED; NOT CLAIMING READY TO PUBLISH.
+Measured this run (merged origin/main first; branch was 3 behind origin/hub, nothing in web/):
+- `git diff --numstat HEAD origin/hub -- web/` = EMPTY. `HEAD:web` = `origin/hub:web` = 51a3f8b3; `origin/gh-pages^{tree}` = 1d8bce63 (unchanged; delta is NOTES.md only and is the supervisor's, not mine).
+- `node --check web/app.js` = OK (5514 lines; style.css 1862; index.html 521).
+- innerHTML in app.js: real assignments at :255 (status line) and :301 (nothing-yet box), both page-owned literals - same lines as the 18 Nov check, so the comment at index.html:49 ("two page-owned sites") is still TRUE. outerHTML / insertAdjacentHTML / document.write / eval / new Function: zero code uses (only the comment at :10-11 naming them).
+- The two URL sinks read in context: app.js:2743 `link.href` is gated by /^https:\/\/(www\.)?twitch\.tv\// on Twitch's own device-flow reply, else shown as text; app.js:3783 `img.src` is a path built from the ITEM_ICONS whitelist Map, never snapshot text. No snapshot field reaches a URL, src, href or style.
+- CSP meta unchanged: default-src 'none'; connect-src supabase + id/api.twitch.tv + wss irc-ws.chat.twitch.tv; script/style/img/font self (+data: img). Only external strings in index.html are the two og: meta URLs (not fetched by the page).
+- NOT re-run: the ?state=/?mock= and hostile-name browser pass - owed only when web/ changes, and it did not. I read code, I did not look at a new screenshot.

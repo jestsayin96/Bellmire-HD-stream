@@ -20877,3 +20877,11 @@ window. **TWITCH_PARSE I DID NOT RUN - I nearly wrote that I had.** It was green
 16:42 battery and at the game build's 17:09, both on today's main, so I am not re-running a gate two
 other lanes paid within the hour inside a 52-second window; it is carried, not claimed. The "26
 commands" figure in my standing prompt is stale - the data carries 32.
+
+## C-216 (content, 25 Nov 2026 18:23 CST) - THE OVERLOOKER'S FEED LINES. ONE FILE, ONE NEW KEY, ONE NOTE.
+ITEM: TAKE THIS NEXT (17:58 CT block, >>> CONTENT (:22) <<<): re-read changer broken.1 and fall.6 and say whether I agree; if clean, take the next unstarted content item.
+(a) I AGREE with the team lead. broken.1 ("The turnstile will not turn. The drum stays on its rung.") and fall.6 ("The turnstile stands open. Nothing is owed.") name a post and a drum only - no bar, no arm. Left untouched.
+(b) Next unstarted item: the overlooker (Velrick, 63rd body). assets/monsters/minibosses/overlooker.glb is committed on main (and on origin/art) and by_key had zero lines, so miniboss_for was holding it out of the draw. Added by_key.overlooker, 9/8/4/8. Lines state only what the body shows (head turned off the shoulders, pale mitt held level) and the one rule (he goes for whoever has hurt him least, re-reads when that changes). No numbers, no new mechanic; counterplay in broken is a promise only. Regex for bar/bars/arm/arms over the new cells: none.
+Only other change: _note_c216 (zero-hit key by design; NO LANE IS TO WIRE IT).
+VALIDATION OK: parsed before/after, exactly two ADDED paths, zero removed or changed. items, bosses, potions parse, untouched.
+CODE WIRING: game build may add MB_NAME "overlooker": "Velrick" (and move the name gates 62 -> 63); the key is in by_key now, so the body enters the draw.

@@ -14881,6 +14881,45 @@
           "Halfblow is down. The red eyes dim one by one.",
           "Go on out. Walk soft. Nothing here needs hurrying."
         ]
+      },
+      "overlooker": {
+        "arrive": [
+          "A tall man in a clean grey coat stood at the far end of the bench. He had his back to the work.",
+          "The coat is good cloth, buttoned to the throat. He is a man who gets paid to watch other people.",
+          "His head is turned hard off his shoulders. It is not turned at you. It is turned along the room.",
+          "One pale mitt is held out level, as if along a rule. It points at somebody.",
+          "Follow the mitt. It stops on one of you. Look at who.",
+          "He is not looking at the one in front. He is not looking at the one who has hit him most.",
+          "He does not hurry. He has the cold patience of a man checking a tally.",
+          "Move, and the mitt moves with you. Then it settles again.",
+          "Somebody in here is being counted."
+        ],
+        "act": [
+          "{name} hits him and the mitt does not come round. It stays where it was.",
+          "{name} steps back to heal and the mitt comes round to {name}.",
+          "{name} holds the shot. The cold eyes find {name} and stay.",
+          "{name} breaks off for a flask. The mitt is level on {name} before the cork is out.",
+          "{name} has carried the fight. He does not look at {name}.",
+          "{name} swings once, hard. The mitt lifts off and goes looking.",
+          "The mitt swings to the back of the room and stops. {name} is standing in it.",
+          "{name} stands still. The head does not turn. Somebody else is being watched."
+        ],
+        "broken": [
+          "The mitt wavers. He does not know who it is.",
+          "He turns his whole shoulders to look. The mitt sags.",
+          "A long wait. The mitt comes up slow.",
+          "He lowers it and starts again from the near end."
+        ],
+        "fall": [
+          "Velrick is down. The mitt drops to his side.",
+          "He did not raise his voice. He did not need to.",
+          "The head comes round at last. It is facing the floor.",
+          "Nobody is being watched now.",
+          "A grey coat on the boards. Good cloth, still clean.",
+          "Look who is standing where you are.",
+          "Whoever you were behind is not behind you any more.",
+          "Go on out. Nobody is counting."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -14931,7 +14970,8 @@
     "_note_c203": "C-203: timberman (Deadfall, the 61st) feed row, same shape as crimp - arrive 9, act 8, broken 4, fall 8, {name} in act only. Written off art's TIMBERMAN_THE_61st.md: death is the danger; three spare props and two wedges are the answers; the roof stays up while the fight lasts. Fall lines are neutral on whether the roof held, since one fall set covers either ending. Last arrive line is the art lane's own suggested line. Expected zero-hit key.",
     "_note_c205": "C-205: collier (Halfblow, the 62nd) feed row, same shape as timberman - arrive 9, act 8, broken 4, fall 8, {name} in act only. Written off art's COLLIER_THE_62nd.md: the party's heaviest blow is the liability (a measured stroke is safe, an overblow bursts a vent and the flare takes the room); four pale plugs answer the four vents; short man in a wide hat, shovel, eight stakes, spoil tail. Fall lines are neutral on whether the room flared, since one fall set covers either ending. Last arrive line is the art lane's own suggested line. Expected zero-hit key.",
     "_note_c212": "C-212: collier text change, shipped on the supervisor's 11:00 CT ruling (A) and the team lead's 11:58 plan row. The body shows three vents at 360p, so the count words came out and the mechanic words stayed: arrive.3 drops \"Four\", arrive.4 drops \"four\", act.6 becomes \"seats another plug. One more red eye goes out.\" in place of \"the third plug. Three dark mouths and one red\". Eight stakes (arrive.2) unchanged. Arrays stay 9/8/4/8, no key added or removed. _note_c205 above is left byte-identical as history; its \"four pale plugs answer the four vents\" is superseded by this note. Expected zero-hit key; NO LANE IS TO WIRE IT.",
-    "_note_c214": "C-214: C-213's prepared text diffs, landed on the team lead's 14:58 CT plan row. The changer's arms were deleted on 21 Nov (Mr. E: delete the bars); the body is man, post, collar and a pale drum with three dark rungs. Changed: changer arrive.1 drops three-armed turnstile for turnstile post; arrive.2 works the arms, and the arms work the room becomes works the post, and the post works the room; arrive.8 clean plates on the bar ends becomes a clean plate under the post. Dyer arrive.1 A fourth is in the vat becomes The vat is steaming (three cloths on the builder, none in the vat). CORRECTED AND FINISHED IN C-215 (25 Nov): the held list over-stated by two - broken.1 and fall.6 never named a bar or an arm. The eight that did (arrive.7, act.0, act.6, broken.0, broken.2, broken.3, fall.0, fall.3) are now reworded to the post and drum; the jam counterplay survives as a promise (a body set against the post holds it) and no cell names an arm or a bar. Nothing is held. Arrays stay 9/7/4/8 and 9/8. No key added except this note. Expected zero-hit key; NO LANE IS TO WIRE IT."
+    "_note_c214": "C-214: C-213's prepared text diffs, landed on the team lead's 14:58 CT plan row. The changer's arms were deleted on 21 Nov (Mr. E: delete the bars); the body is man, post, collar and a pale drum with three dark rungs. Changed: changer arrive.1 drops three-armed turnstile for turnstile post; arrive.2 works the arms, and the arms work the room becomes works the post, and the post works the room; arrive.8 clean plates on the bar ends becomes a clean plate under the post. Dyer arrive.1 A fourth is in the vat becomes The vat is steaming (three cloths on the builder, none in the vat). CORRECTED AND FINISHED IN C-215 (25 Nov): the held list over-stated by two - broken.1 and fall.6 never named a bar or an arm. The eight that did (arrive.7, act.0, act.6, broken.0, broken.2, broken.3, fall.0, fall.3) are now reworded to the post and drum; the jam counterplay survives as a promise (a body set against the post holds it) and no cell names an arm or a bar. Nothing is held. Arrays stay 9/7/4/8 and 9/8. No key added except this note. Expected zero-hit key; NO LANE IS TO WIRE IT.",
+    "_note_c216": "C-216: overlooker (Velrick, the 63rd body, workshop). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - the head turned off his shoulders, the pale mitt held level along the pick - and the one rule: he goes for whoever has hurt him least and re-reads when that changes. No number, no arm-count, no new mechanic; the counterplay in broken is stated as a promise the way the changer's is. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row, if the game build wants one: \"overlooker\": \"Velrick\"."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

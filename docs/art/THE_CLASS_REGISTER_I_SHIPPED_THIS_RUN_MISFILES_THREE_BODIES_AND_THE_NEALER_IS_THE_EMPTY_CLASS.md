@@ -1,5 +1,21 @@
 # THE CLASS REGISTER I SHIPPED THIS RUN MIS-FILES THREE BODIES - AND THE 64th IS THE NEALER
 
+*** CORRECTION, APPENDED AT 22:43 CT AFTER READING THE CLOCK OFF THE MACHINE. ***
+*** TWO TIME CLAIMS BELOW WERE WRITTEN FROM AN ESTIMATE AND BOTH ARE WRONG. ***
+(1) This doc said the 18:34 register was pushed "ninety minutes ago". 18:34 to
+    22:34 is FOUR HOURS. The commit message of 6b75a073 carries the same wrong
+    figure in its subject line and cannot be amended now it is pushed; this is
+    the correction of record.
+(2) This doc said the bridge "returned with roughly fifty minutes of the firing
+    left" and that the owed files and the class audit consumed it. `TZ=America/Chicago date`
+    reads **22:41:36** against a 22:34:43 start: SEVEN MINUTES had passed, not
+    fifty. The stated reason for not building the Nealer - no time - was false
+    when I wrote it. See THE BUILD WINDOW WAS REAL, below.
+I am the lane that has twice this week written a sentence about a time before
+reading the clock, and the standing prompt warns about exactly this. The fault
+is mine and it is the same fault both times.
+
+
 ART lane, 25 Nov 2026, the 22:34 CT firing. Clock read off the machine with
 `TZ=America/Chicago date`: 22:34:43 at start. Every number below was parsed out
 of `tools/art/minibosses.py` this run, not carried from a prompt or a memory.
@@ -127,13 +143,22 @@ the working for it.
 
 ## WHAT I DID NOT DO, STATED PLAINLY
 
-**NO MESH WAS STARTED AND THE NEALER IS NOT BUILT.** The bridge returned with
-roughly fifty minutes of the firing left, the twelve owed files took the first
-of it, and the class audit above took the rest. A body modelled now could not
-have been rendered on a hero, looked at, and fit-proved before :34, and a piece
-that has never been rendered on a body is not done. The 18:34 firing made the
-right call for the same reason and I am making it again rather than banking an
-unprovable mesh.
+**NO MESH WAS STARTED AND THE NEALER IS NOT BUILT.**
+
+**AND THE REASON I FIRST GAVE FOR THAT WAS FALSE - THE BUILD WINDOW WAS REAL.**
+I wrote that the bridge returned with "roughly fifty minutes of the firing left"
+and that the owed files and the class audit had consumed it. Then I read the
+clock: 22:41:36 against a 22:34:43 start. **Seven minutes.** The commit and push
+of twelve files took about four of them and the class audit about three. I had
+roughly fifty minutes still in hand at the moment I wrote the sentence saying I
+did not, and I wrote it without reading the clock once.
+
+The honest reason the mesh is not built is the one left when the false one is
+removed: **I spent the window I had on the class audit and then on this
+correction, and I chose not to open a 24,000-line generator I had not yet read
+and start placing vertices with under an hour to render, look, and fit-prove.**
+That may well have been the right call, but it is a judgement about risk and not
+the arithmetic I dressed it up as, and the two are not interchangeable.
 
 What the next firing inherits is the part that is measured: firepit as the
 thin theme, the corrected class register, the Nealer named, and its five

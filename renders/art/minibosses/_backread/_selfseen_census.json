@@ -183,31 +183,33 @@
    "spans": [
     "arms_r",
     "clamp",
+    "face_brow",
     "hand",
     "head",
     "plugs",
+    "seams",
     "shovel",
     "trunk",
     "vents"
    ],
-   "items": 60,
+   "items": 66,
    "man_from": "parts",
    "man_ranges": [
     [
-     42,
-     46
+     48,
+     52
     ],
     [
-     46,
-     53
+     52,
+     59
     ],
     [
-     53,
-     55
+     59,
+     61
     ],
     [
-     58,
-     60
+     64,
+     66
     ]
    ],
    "man_parts": [
@@ -1001,6 +1003,63 @@
     "trunk",
     "head",
     "arms"
+   ],
+   "has_man_span": true,
+   "man_span": null,
+   "man_span_empty": false
+  },
+  "overlooker": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arm",
+    "coat",
+    "collar",
+    "head",
+    "legs",
+    "point",
+    "trunk"
+   ],
+   "items": 24,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     4
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     7,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     20
+    ],
+    [
+     20,
+     23
+    ],
+    [
+     23,
+     24
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "coat",
+    "trunk",
+    "collar",
+    "head",
+    "point",
+    "arm"
    ],
    "has_man_span": true,
    "man_span": null,
@@ -2143,12 +2202,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-25T04:02:20-0600",
+ "measured_at": "2026-11-25T22:46:05-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795600940.4583597,
- "register_mtime_epoch": 1795600746.252936,
- "register_mtime": "2026-11-25T03:59:06-0600",
- "register_pairs": 64,
+ "measured_at_epoch": 1795668365.9355476,
+ "register_mtime_epoch": 1795668323.2312226,
+ "register_mtime": "2026-11-25T22:45:23-0600",
+ "register_pairs": 65,
  "measurable": [
   "almoner",
   "beadle",
@@ -2178,6 +2237,7 @@
   "loader",
   "moulder",
   "nightman",
+  "overlooker",
   "paviser",
   "pitman",
   "pledgeman",

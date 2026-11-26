@@ -1,3 +1,157 @@
+*** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 0. (THE 22:58 CT FIRING, 25 NOV 2026.) =====
+*** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE "CLEAN-HOUR COUNT 7 (THE 17:58 CT
+*** FIRING)" LINE THAT FOLLOWS IT. That line is NOT deleted - it is history and it was true when it
+*** was written - but it has advertised 7 for five hours while the true count has been 0 since I
+*** reset it 7 -> 0 at 20:58 over the stranded QA claim. THE COUNT IS 0. Clock read off the machine
+*** at 22:59:13 CST and again while writing.
+***
+*** THE BRIDGE CAME BACK AT ~22:42 CT AFTER A FOUR-HOUR OUTAGE (18:39 -> 22:42), AND THIS RUN
+*** LANDED THE WHOLE BACKLOG. Four team-lead firings (18:58, 19:58, 20:58, 21:58) could not merge,
+*** tick or sync. origin/main moved 59c885b2 -> b5f7f856: all six lanes merged, 34 commits.
+*** Four PROGRESS.md conflicts, all resolved keeping BOTH sides - `diff --numstat origin/main HEAD`
+*** reads +183/-0 on PROGRESS.md and +44/-0 on docs/PROGRESS.md (ZERO lines removed), and all FOUR
+*** marker shapes return no hits in WORK_PLAN.md, PROGRESS.md, docs/PROGRESS.md and COORDINATION.md.
+***
+*** LOCK DISCIPLINE THIS HOUR, and the count stays 0 for one honest reason. QA cleared its own
+*** stranded 18:41 RUNNING itself at 22:42 under my 20:58 standing authorisation, with the live
+*** tasklist check - exactly as written, and my authorisation is now SPENT. The chat bot then took
+*** two short claims (22:47:05 -> IDLE 22:49:30, cap 23:12:05, declared 22:54:05; and 22:50:05 ->
+*** IDLE 22:50:21), both released early, both clear of the HUD's :52, cap computed FIRST on both.
+*** That is clean behaviour and I say so. BUT the stranded claim was open until 22:42, which is
+*** INSIDE this hour, and lanes yielded to it. An hour that contains a 4h-stale lock is not a clean
+*** hour. COUNT STAYS 0. It can start counting at 23:58 if the next hour is clean. QA IS STILL NOT
+*** CHARGED - its claim was exemplary and the outage killed its session; the strand is the outage's.
+***
+*** ===== A FAULT OF MY OWN, DECLARED FIRST: MY MERGE OPENED THE MINIBOSS CASCADE TWO STEPS. =====
+*** The 19:58 seat left an explicit warning: merge C-216 and land both rows IN THE SAME PASS or the
+*** house goes red in between. I merged C-216. I cannot write either row myself - one is the game
+*** build's file and one is the chat bot's - so the house IS red in between, for one hour, and that
+*** is mine, not content's. C-216 is correct work and is TICKED.
+*** MEASURED BY ME, BRACE-MATCHED, ON MERGED MAIN b5f7f856 (never a flat regex on a GDScript dict):
+***     Delve.MB_NAME  62   |   miniboss_feed.by_key  63   |   published short/what  62 and 62
+***     GHOST (in MB_NAME, not in by_key) = []        UNNAMED (in by_key, not in MB_NAME) = ['overlooker']
+*** Both open links are named in the rows below and both are owed NOW.
+
+## TICK RECORD - THE 22:58 CT FIRING, 25 NOV 2026 (team lead). Written 23:1x-23:2x CT.
+*** Everything here I checked against the file, the ref, the log or the picture - not the commit
+*** message. Written after :05, so any NEW instruction in here is the NEXT firing's row; the ticks
+*** and corrections are not instructions.
+***
+***   - **S140 TICKED** (game build). All five gates green at HEAD, read as verdict LINES: parse
+***     `#RC 0` with zero ERROR lines; `DELVE_TEST OK` 9001 frames, floor 2; `OFFFLOOR_VERDICT OK`
+***     0 of 1975 samples off the floor; `TOWNWALK ... in_solid=0/16017 (0.000%) raid_in_solid=
+***     0/6735 PASS` with BAD [] and STUCK_EX []; `TWITCH_PARSE OK (8 checks)`. My first grep found
+***     no verdict in two of the five and I did NOT charge them on that - I opened both logs and
+***     found the verdicts in a format my pattern missed. A gate that prints no verdict is red; a
+***     gate whose verdict my own regex missed is MY fault, not the lane's.
+***   - **C-216 TICKED** (content). by_key.overlooker is a real row of prose, not a stub - arrive/
+***     act/broken/fall 9/8/4/8, `_note_c216` names Velrick, the 63rd, workshop. by_key 62 -> 63.
+***   - **B166 TICKED** (chat bot). The five-firing-old B162 red-prove arm is landed AND gated:
+***     `L14_TEST OK (25 checks)`, `COMMANDS_DOC OK wrote 32 commands`, `TWITCH_PARSE OK (8 checks)`.
+***     I re-derived the no-op claim INDEPENDENTLY rather than taking it: docs/COMMANDS.md md5 is
+***     979db9f83aacd7afccedf7825f04e81a, which matches the 979db9f8 the lane published. True no-op.
+***   - **ART'S LOADER-INTEGRITY AUDIT AND FIT-COVERAGE AUDIT TICKED**, the Overlooker hero cell
+***     NOT (see the art row). Integrity: verdict GREEN, 2342 importable assets / 2342 .import
+***     files, accounting parsed 2342 accounted 2342 conform 2341 mismatch 0, A_missing 0,
+***     B_orphans 0, C_uid 2342 distinct with 0 collisions, D_pathhash conform_rate 1.0. The one
+***     `notimported` is the STALE `web/icons/items/hat/turbary_hood.webp.import` the lane itself
+***     published - a real one-file defect inside a GREEN verdict, already named in art's own
+***     21:34 write-up, so NOT a new finding. Coverage: bodies 76, with_register_entry 37,
+***     without_register_entry 39, three hero views on disk 76/76 - and independently re-measured
+***     by a SECOND, separately written glTF AABB reader agreeing 76/76 on every field.
+***   - **U185 TICKED** (HUD). It answered my own 17:58 row off the committed log, which is a
+***     question closed by measurement and counts fully: `U183_PROBE_DONE checks=40 fails=0
+***     worst_over={ "s100": -13.625, "s125": -45.125, "s150": -13.875 }`, and the s150 figure sits
+***     on a k=180 line. Negative is CLEARANCE, not overflow.
+***   - **THE HUB'S STAND-DOWN VERIFIED AND TICKED AS A STAND-DOWN.** I did not take its word:
+***     `origin/main:web` and `origin/hub:web` are the SAME TREE (51a3f8b3), and the delta to what
+***     is actually published (gh-pages tree 1d8bce63) is NOTES.md +31/-0 and NOTHING ELSE -
+***     index.html, app.js and style.css are byte-identical to the live page. It made no READY TO
+***     PUBLISH claim, so I ran NO publish gate and none was owed.
+***
+*** TWO INSTRUMENTS DISAGREED AND BOTH TURNED OUT HONEST - WORTH WRITING DOWN SO NOBODY RE-FIGHTS IT.
+*** Art's audit says GREEN while the chat bot's 22:49 parse printed 61 ERROR lines over 7 uacp
+*** bodies. They measure DIFFERENT LAYERS. Art audits the COMMITTED `.import` metadata, and all 20
+*** `assets/characters/uacp/*.glb` have one (20/20). The chat bot's errors are missing
+*** `.godot/imported/*.scn` - the generated import CACHE, which is per-worktree and is not
+*** committed. Neither lane is at fault and neither instrument is lying. See the chat bot row.
+
+## TAKE THIS NEXT - Updated THE 22:58 CT FIRING, 25 NOV 2026 (team lead; written 23:2x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+
+**GAME BUILD** - WRITE THE `overlooker` MB_NAME ROW, THE 63rd. This is the cascade's first open
+link and my own merge opened it. Add `"overlooker": "Velrick",` to the MB_NAME title dict in
+scripts/delve.gd - the dict that currently CLOSES at line 477 with `"collier": "Halfblow"}`. Every
+precondition the S115/S126b/S129 precedent asks for is met and I checked each myself: art's CANON
+title is "Velrick" (tools/art/minibosses.py:23819), content's C-216 by_key.overlooker has landed
+(9/8/4/8, `_note_c216`), and `assets/monsters/minibosses/overlooker.glb` AND its `.import` are both
+on main. After it lands the chain reads MB_NAME 63 / by_key 63, and the published 63 is the chat
+bot's half, below. NOTE the path: the body is under `assets/monsters/minibosses/`, NOT
+`assets/characters/minibosses/` - I checked, the latter does not exist.
+
+**CHAT BOT** - REPUBLISH 62 -> 63 AT THE FEED, the cascade's second open link: `miniboss`.short AND
+`.what` in data/commands.json both read "The 62 elites that hold a chamber alone" and by_key is now
+63. Regenerate docs/COMMANDS.md after. This is the B149 precedent exactly (the 61 -> 62 republish
+paid at the feed), and it is owed NOW - it does not wait on the game build's row.
+SECOND, AND IT SAVES TWO LANES A WASTED CYCLE: your 61 ERROR lines are NOT art's and NOT the game
+build's, and I am taking them back off both. They are YOUR OWN worktree's missing
+`.godot/imported/*.scn` import cache. All 20 uacp `.glb` carry a committed `.import` (20/20) and
+art's integrity audit is GREEN at 2342/2342 with mismatch 0 - nothing is missing from the repo.
+QA's 22:43 `--editor --quit` in R printed ZERO error lines on the same commit, because that command
+BUILDS the cache and R has it; W6 does not. Run one `--editor --quit` in your own worktree and they
+go to 0. Do not route them out again.
+
+**ART** - THE OVERLOOKER'S BACK VIEW. The hero cell now EXISTS where there was none at all, and
+that is real progress - but I staged `hero_back.png` and `hero_front.png` and LOOKED at them side
+by side, and your own call is right: it is the Beadle fault again. The two reads are the same grey
+slab. Head in profile and one arm held out level in BOTH views, and the back carries no marker -
+no collar, no coat seam, no shoulder yoke, no belt line - that tells a player which way the body
+faces. THE TURNED HEAD IS NOT THE FAULT and do not "fix" it: it is canon, C-216 names it as the one
+readable thing ("turned along the room"). Put something on the BACK of the coat that reads as a
+back. NOT TICKED for that reason alone; your two audits ARE ticked and the Overlooker's missing
+`.glb.import`, the firepit theme and the two `.gdignore` files all landed clean.
+
+**CONTENT** - C-217 was a clean re-read with no data change, and a stand-down written up is the
+delivery, so that is a fine hour. NOW HOLD THE BODY COUNT AT 63: do NOT write a 64th body's feed
+lines until the cascade is SHUT (MB_NAME 63 AND published 63). Opening a 64th while two links are
+already open would put the house three steps red, and the 63rd is only open because of my merge.
+Prose and spec work that touches no `by_key` row is unaffected - take that instead.
+
+**HUB** - STAY STOOD DOWN, and I verified the stand-down myself rather than taking it (see the tick
+record): main:web and hub:web are the same tree, and the only thing merged-and-unpublished is
+NOTES.md +31/-0. No code, no asset, nothing a visitor could see. Publishing is the SUPERVISOR'S
+call and it is with them with my recommendation below. Do not claim READY TO PUBLISH for a
+NOTES.md-only delta.
+
+**HUD** - U185 is TICKED. Your lane's real blocker is NOT YOURS and you are not charged for it:
+device_bash in your session mounts only bellmire-hud and NOT R, so you cannot read R's
+authoritative `docs/RUN_LOCK.txt` at all, and standing down rather than claiming over a lock you
+cannot read is CORRECT. The mount set is per scheduled task and cannot be changed from a firing;
+it is listed for Mr. E below. Until it is fixed: write your claim and release lines as you always
+have, keep to your :52-:07 window, and say in your summary that you could not read R's lock. The
+chat bot has now cleared its :52 window two hours running, so the window should be yours.
+
+**FOR THE SUPERVISOR** - three things, two of them reports and one a standing decision.
+  1. THE HUB PUBLISH DELTA IS NOTES.md +31/-0 AND NOTHING ELSE. gh-pages tree 1d8bce63 vs
+     origin/hub:web 51a3f8b3; index.html, app.js and style.css byte-identical to the live page.
+     MY RECOMMENDATION: LEAVE IT UNPUBLISHED. There is no visitor-visible change to ship and a
+     publish would buy a documentation diff. Note for the record that publish 8 DID land on 25 Nov
+     at 09:55 CT (gh-pages 8d214d36, the app.js?v=8 cache-bust), so the "last published 19 Nov"
+     figure carried in my own prompt is stale and struck.
+  2. REPORT, NOT A DECISION: the house was FULLY STOPPED for 4h03m, 18:39 -> 22:42 CT, on the
+     Blender MCP bridge - six lanes plus QA, no git, no Godot, no ticks, no plan sync. It recovered
+     with no intervention and this run landed the entire backlog. Nothing of yours is blocked.
+  3. REPORT: the cumulative prompt-correction list (items 1-16) carried in the 20:58 block is still
+     unlanded. A firing cannot write a scheduled task; it needs one live turn from Mr. E.
+
+**NEEDS MR. E** - two, both mechanical and both genuinely his.
+  1. THE BLENDER MCP BRIDGE DIED 18:39 -> 22:42 CT and stopped every lane for four hours. It came
+     back on its own, so there is nothing to fix right now - but that is the second long outage and
+     it is the single point of failure for all git and all Godot in this house.
+  2. THE HUD'S SCHEDULED TASK MOUNTS ONLY `bellmire-hud`, NOT R, so that lane cannot read the
+     authoritative lock file and has stood down partly for that reason several times. The mount set
+     cannot be changed from a firing. Adding `C:\hd adventure\jests-hd-medieval-adventure` to the
+     HUD task's folders would give the lane its window back.
+
 *** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 7. (THE 17:58 CT FIRING, 25 NOV 2026.) =====
 *** Measured off R's WORKING copy of docs/RUN_LOCK.txt, which is the authoritative one and is often
 *** uncommitted. FOUR claim/release pairs since the last counted pair (HUD U182, IDLE 16:55:25):
@@ -115,6 +269,127 @@
 *** live page was last looked at by a seat of mine at **12:45 CT today**, after publish 8 at 09:55,
 *** so the looked-at build and the published build agree. The one thing you reserved and will still
 *** want is the fox SCALE number, and the game build's row asks it for one.
+
+## TAKE THIS NEXT - Updated THE 20:58 CT FIRING, 25 NOV 2026 (team lead; written 21:1x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+*** CLOCK read off the machine at 20:58:58 and again at 21:12:38 CT before any sentence here naming a time.
+*** NOTHING WAS MERGED, TICKED OR SYNCED THIS HOUR, AND NOTHING COULD BE. The Blender MCP addon on
+*** cruzader is REFUSING localhost:9876 instantly (not timing out - it is not listening). That bridge
+*** is the only route to Godot AND to git's index, so there is no merge, no tick, no plan sync and no
+*** gate this hour. This block is therefore written to main's working copy ONLY and CANNOT be synced
+*** to the six lane branches. A lane reading its own branch will still see the 17:58 block.
+*** I DID NOT STAND IDLE. Everything below is measured off the REFS with read-only plumbing.
+***
+*** THE ONE DISCOVERY THAT CHANGES WHAT THIS SEAT CAN DO IN AN OUTAGE, AND IT IS A PROMPT FAULT:
+*** MY PROMPT SAYS device_bash "CANNOT RUN GIT IN A WORKTREE AT ALL". THAT IS WRONG AND IT HAS COST
+*** FOUR FIRINGS. With an explicit `--git-dir=<R>/.git`, device_bash runs every read-only git command
+*** fine: for-each-ref, log, cat-file, ls-tree, grep, rev-list, merge-base, diff-tree. What it must
+*** NEVER run is anything touching the INDEX - diff, status, add, commit, stash - which is exactly
+*** how the chat bot wedged the shared .git for all seven worktrees at 20:48 (it cleared it itself).
+*** USE `diff-tree` (plumbing, no index) IN PLACE OF `diff`, AND SET GIT_OPTIONAL_LOCKS=0.
+*** I verified I left git clean: the only lock under .git is `objects/maintenance.lock` from 20 Nov
+*** (gc only, not commits), and .git/index is untouched at 18:43:05 CT / 1203554 bytes.
+***
+*** A TRAP I FELL INTO AND CAUGHT, WRITTEN OUT BECAUSE THE OUTPUT LOOKED LIKE A FINDING:
+*** the path "hd adventure" HAS A SPACE. An unquoted git-dir variable made `merge-base --is-ancestor`
+*** FAIL TO RUN, and a failed --is-ancestor is indistinguishable from "not an ancestor". My first pass
+*** printed "all six lanes UNMERGED" off commands that never executed. The tell was the empty commit
+*** count beside each one. A COMMAND THAT PRODUCES NO VALUE IS RED, NOT EMPTY - quote the variable and
+*** re-run with a sanity line that proves the command ran.
+***
+*** THE CASCADE IS OPEN TWO STEPS ON THE 63rd, AND IT OPENED AFTER THE 17:58 BLOCK WAS WRITTEN.
+*** Measured, not remembered: content's C-216 (87509d65, 18:23 CT) took `miniboss_feed.by_key` from
+*** **62 to 63**, adding exactly `overlooker` and dropping nothing. Art has shipped the body in full -
+*** `assets/monsters/minibosses/overlooker.glb`, `docs/art/OVERLOOKER_THE_63rd.md`, and front/side/
+*** back/three_quarter renders - canon name **Velrick**, 2.40 m, theme workshop.
+*** BUT: `overlooker` appears NOWHERE in `scripts/delve.gd`, and it is NOT among the 64 `pairs` in
+*** `renders/art/minibosses/_fit_report.json`. The live guard in `scripts/chatcmd.gd` (~2235-2264) has
+*** two arms, and the one that fires here is **MINIBOSS UNNAMED** - a body content writes a feed for
+*** with no `Delve.MB_NAME` row - which is a push_error, not a warning. It fires the moment content is
+*** merged. Nothing is broken on main right now BECAUSE the merge could not happen.
+*** THE HOUSE'S PROVEN ORDER IS WRITTEN IN delve.gd'S OWN COMMENTS: the MB_NAME row is added "once
+*** content wrote the feed" (S70/C-147, S72/C-149, S75/C-151, S94/C-169, S116/C-193). The ratio is
+*** "copied not re-derived" from art's register - so art's missing pairs row is the FIRST step, and
+*** the game build's MB_NAME row is the SECOND. THIS IS NOT A NEW ITEM: it is the next step of a
+*** sequence this house has executed five times, and each lane is auditing its own shipped work.
+***
+*** GAME BUILD - **THE 63rd's MB_NAME ROW - BUT IT IS BLOCKED ON ART AND YOU MUST NOT UNBLOCK IT BY
+***   DERIVING THE NUMBER.** `overlooker` / canon **Velrick** needs its row in `scripts/delve.gd`
+***   beside scraper/ferryman/winder/blower/iceman. The ratio is COPIED from
+***   `_fit_report.json pairs.overlooker.ratio` and that row DOES NOT EXIST YET (64 pairs, no
+***   overlooker). The doc states h 2.40 against hero 2.45; **do not paste 2.40/2.45 as a ratio** -
+***   five precedents say copied, not re-derived, and I am not relaxing that. HOLD until art's row
+***   lands, then it is yours in one commit with the gate. While the bridge is down there is no engine
+***   work here at all: read and prepare only, and do not claim the lock.
+*** ART - **FOLD `pairs.overlooker` INTO `renders/art/minibosses/_fit_report.json`. THIS IS THE ROW,
+***   AND IT IS THE ONE THING BLOCKING THE GAME BUILD.** You shipped the body, the doc and all three
+***   proving views at pass 5; the aggregate register never gained the pair. That is your own shipped
+***   work carrying a gap, not new work, and it needs no re-render and no Godot - so **this is the one
+***   lane row that is fully doable with the bridge down.** Do it off the renders you already have.
+***   I LOOKED AT front.png AND back.png MYSELF rather than taking the register's word: the body reads
+***   from behind - cap crown, collar, smock pleats, the legs below the hem - and it is NOT the Beadle
+***   fault, where every number read green and the body had no facing from behind. Fit is proven.
+*** CONTENT - **C-216 IS VERIFIED AND I WOULD HAVE TICKED IT - THE MERGE IS WHAT IS MISSING, NOT THE
+***   WORK.** I parsed both sides of `data/lore_lines.json`: 67 top-level keys before AND after, ZERO
+***   dropped, ZERO added, and the only change is `miniboss_feed` gaining `_note_c216` and `by_key`
+***   gaining `overlooker`. **The `-2` in the hunk is brace reflow, not deleted content** - I compared
+***   key SETS rather than reading the hunk, which is the trap that nearly cost art a false charge.
+***   You are now DRY on the cascade: there is no 64th body to write a feed for. Stand down in writing
+***   or audit your own shipped lines. Do NOT wire `phase2_words_alt2` - it is dead by ruling.
+*** CHAT BOT - **THE L14 ARM IS FIRST IN THE QUEUE THE MOMENT THE BRIDGE ANSWERS, AND I AM NOT ASKING
+***   FOR A FOURTH PROOF OF IT.** B162 built it, B163 re-derived it with an independent port, B164
+***   derived the 25 from the file's loop structure and validated the model against B161's printed 24.
+***   It is built, triple-checked, ungated and uncommitted across four firings for bridge reasons
+***   alone. Gate it, commit it, delete the two scratch files, THEN L56. **Your wedge of the shared
+***   .git at 20:48 is noted and NOT charged against your lane:** you caused roughly three minutes of
+***   exposure, you found it yourself, you cleared it by the sanctioned rename, and you published the
+***   mechanism so the next seat would not repeat it. I used your lesson this hour and it held.
+*** HUD - **DRY, AND THAT IS THE CORRECT STATE.** U183 landed at 17:55 (checks=40 fails=0) and is
+***   already in main. Nothing is owed. Stand down in writing, or audit your own shipped work. Do not
+***   claim the lock while the bridge is refusing - you cannot launch Godot and the claim would strand.
+*** HUB - **NOTHING TO PUBLISH AND NOTHING TO CLAIM.** I re-measured both trees myself rather than
+***   copying item 11, and I AGREE WITH IT EXACTLY: gh-pages tree **1d8bce63**, `origin/hub:web`
+***   **51a3f8b3**, delta **web/NOTES.md +31/-0 and nothing else**. No web asset and no code differs,
+***   so the live page is current. Your 18:38 sweep explicitly did NOT claim READY TO PUBLISH, so the
+***   publish gate is NOT owed and **I ran no publish verification this hour** - saying so plainly,
+***   because an unearned gate report is the same fault class as a lying gate.
+***
+*** LOCK: I took no lock and ran no Godot. The QA tester's RUNNING 18:41:59 is still unreleased,
+*** 2h27m past its cap+9. I could NOT clear it - the stale test needs a live-process check and the
+*** check runs through the dead bridge - so I left it and wrote a STANDING AUTHORISATION into R's
+*** working `docs/RUN_LOCK.txt` instead: the first lane to find the bridge answering may clear the
+*** strand itself after `tasklist Godot* = 0`, without waiting for me. QA IS NOT CHARGED; its claim
+*** was exemplary and its session was killed mid-run. **CLEAN-HOUR COUNT 7 -> 0** - an unreleased
+*** claim 2h27m past a 9-minute cap, with four lanes yielding to it, is not a clean hour. That is a
+*** fact about the hour, not a fault of QA's, and I am not folding it away.
+***
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+*** these on the first LIVE turn, all at once). THIS LIST IS CUMULATIVE - DO NOT DROP A LINE.
+***   Items 1-8 stand as written in the earlier blocks; 9-REVISED, 11 and 12 (17:58 block) stand too,
+***   and item 11's figures I have now INDEPENDENTLY RE-MEASURED AND CONFIRMED. ADDED THIS HOUR:
+***  13. **THE CHAT BOT PROMPT'S LOCK-SHARER LIST IS STALE AND THREE FIRINGS HAVE RAISED IT.** It
+***      names FOUR sharers (game build, HUD, art, chat bot). There are SIX: the QA tester (:41, every
+***      two hours) and the pack catalogue worker (:15) both take the lock. It is QA's stranded
+***      RUNNING that four firings have yielded to, against a prompt that says QA cannot hold it.
+***  14. **THE TEAM LEAD PROMPT (THIS SEAT) SAYS device_bash CANNOT RUN GIT IN A WORKTREE. IT IS
+***      WRONG** - see the block at the top of this entry. With `--git-dir` every read-only git
+***      command works, and that is the difference between a bridge outage costing this seat its whole
+***      cycle and costing it only the merge. Replace the sentence with the read/write split and the
+***      `diff-tree` instruction. **This is the highest-value correction in the list.**
+***  15. The prompt's "44/44/44" line for `Delve.MB_NAME` / `miniboss_feed.by_key` is long stale -
+***      by_key measured **63** this hour. The prompt already says never to quote its own counts as
+***      current, which is why I measured; the figure should still be struck rather than left to
+***      mislead a fresh seat.
+***  16. The prompt's standing note that the art fit register reads "RED / ok:false" on two retired
+***      `_chibi` rows no longer matches: `_fit_report.json` top-level reads **ok: true** (64 pairs).
+***      Re-derive that note before repeating it - I did not have the budget to confirm the schema.
+***
+*** FOR THE SUPERVISOR: **one thing, and it is not a decision - it is a report.** Nothing of yours is
+*** blocked and the hub stays stood down (NOTES.md only, no asset, no code). The report is that the
+*** house has been FULLY STOPPED for 2h27m on the Blender bridge: six lanes plus QA, nothing committed
+*** since 18:38 CT, no gate since 18:19 CT. It is Mr. E's to fix (start the MCP server in his open
+*** Blender scene) and I have notified him directly rather than only writing it into a doc, which is
+*** what the last four firings did. If you want a different escalation path for a total outage, say so
+*** and I will put it in the prompts on the next live turn.
 
 ## TAKE THIS NEXT - Updated THE 17:58 CT FIRING, 25 NOV 2026 (team lead). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** ALL SIX BRANCHES MERGED, main c27bc167 -> 932a9d04. ALL SIX SHIPPED - no silent lane this hour,

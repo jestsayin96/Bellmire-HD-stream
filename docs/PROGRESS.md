@@ -4557,3 +4557,14 @@ live delve through _next_floor ... inference from the code, not a run". This cyc
   (cap reached on floor 3, after every arm). Floor 1 A 1.24 / B 1.26 m, floor 2 A 1.25 / B 1.17 m, floor 3 A 1.30 m, dy 0.00
   throughout; revive by natural-20 death save; B's pet 0.93 m from its corpse. 0 SCRIPT ERROR / 0 Parse Error / 0 ERROR.
   floor2_pet.png restored to the committed 17:18 shot (the one I looked at).
+
+## C-217 (content, 25 Nov 2026 22:4x CST) - THE TWO "ALREADY CLEAN" CELLS RE-READ, AND THE BODY LIST CHECKED. NO data/ FILE CHANGED.
+ITEM: TAKE THIS NEXT (17:58 CT block, `>>> CONTENT (:22)`): re-read changer `broken.1` and `fall.6` against Mr. E's 21 Nov "delete the bars" ruling and say whether I agree with the lead's measurement.
+ANSWER: I AGREE. Both are clean.
+  broken.1  "The turnstile will not turn. The drum stays on its rung."  - names the turnstile and the drum's own dark rung (part of the shipped body); no bar, no arm.
+  fall.6    "The turnstile stands open. Nothing is owed."             - "open" is the post idle, not a gate of bars; no bar, no arm.
+  Measured: a regex for bar/bars/arm/arms/spoke/sweep over all 28 changer cells returns ZERO hits. The jam counterplay survives only as the promise in arrive.7 / broken.0 (a body set against the post holds it). No cell invents a mechanic. Nothing to reword.
+NEXT UNSTARTED ITEM: backlog 1 (miniboss feed lines). origin/art at 22:2x CT: newest body work is Overlooker pass 5 (back view); no committed body lacks lines. by_key holds 63 keys (the prompt's "32" is stale). Nothing to write against, so I STAND DOWN on lines; the stand-down is the delivery.
+VALIDATION OK: items, lore_lines, bosses, potions all json.load; no file edited.
+Lock: none taken, I never run Godot. Git via the Blender bridge.
+NO CODE WIRING. No key added.

@@ -21666,3 +21666,87 @@ bits, and I drove no account.** Reported only because the join is a real touch o
 
 ### FOR THE GAME BUILD LANE
 Nothing new is needed in `twitch_eventsub.gd`. The 482-of-500 bound stands and is unchanged.
+
+## B176 - 26 Nov 2026, 08:45 CT firing (chat bot) - I CORRECTED A PROMISE MY OWN DOCSTRING HAS BEEN MAKING FALSELY SINCE IT WAS WRITTEN, AND MEASURED THE !help SIBLING THAT TURNED OUT TO BE A NULL
+
+**Item taken:** no plan item was owed. The 17:58 CHAT BOT row's one NEXT (red-prove the dictionary
+shape that fooled the old 8-space harvester) was paid at `tools/_l14_test.gd:177-188` by B162, and
+B175 landed the carried !help-cliff arms and gated all four green at 07:50. So this hour went on two
+things nobody had measured, both inside my own file.
+
+### WHAT I DID NOT DO, AND WHY - BECAUSE A SKIPPED GATE NEEDS A REASON IN WRITING
+I ran the headless parse and **I did not re-run `_l14_test`, `_commands_doc` or `_twitch_parse`.**
+B175 paid all four green at 07:50 and since then `data/commands.json` is md5 `3a3baa59` and
+`docs/COMMANDS.md` is md5 `7a030e15` - **not one byte changed.** Those three read exactly those two
+files. A third identical battery would have reported the same three verdicts and spent an engine slot
+to do it. B158's written stand-down on this reasoning was TICKED, so I am following the precedent
+rather than inventing one. They are **split and carried, not skipped**, and my change this hour is
+comment-only, so the parse is the single gate it can move.
+
+### (1) THE CORRECTION - `_cut` HAS BEEN PROMISING SOMETHING IT DOES NOT DO
+`_cut`'s docstring read *"cut to n characters on a word, never mid-word"*. **That is false, and it
+was false when it was written.** The guard is `if sp > int(n / 2)`: it only steps back to a space when
+that space sits in the head's **second half**. A head whose last space is at or before n/2 keeps all
+n characters and cuts mid-word.
+
+- For `REPLY_MAX` = 440 that needs a 220-character unbroken run. It never fires. Harmless.
+- **For `safe_word` it fires every single time.** `safe_word`'s input is one viewer token with no
+  space in it at all, so `rfind(" ")` returns -1, -1 is not > 12, and a 25-character word is cut to a
+  bare 24 characters mid-word.
+
+**The behaviour is correct and I changed none of it.** There is no word boundary inside a single
+token to cut on, and half a nonsense word is the right answer for a 30-character viewer handle. What
+was wrong is the comment. I rewrote it to say what the code does, named the `safe_word` case
+explicitly, and wrote **NOBODY IS TO "FIX" THE GUARD** into the file - because the next lane to read
+"never mid-word" next to a mid-word cut would go hunting a defect that is not there, and that is an
+hour the house does not get back.
+
+### (2) THE NULL, AND I AM REPORTING IT AS A NULL
+B173, B174 and B175 spent three firings on the **bare** `!help` line, correctly: it is the widest
+thing this lane sends and it grows by `len(name)+2` with every command added. Its **sibling** - the
+`!help <command>` detail line built in `help_line()` - had never been measured, and the obvious guess
+is that the longest of them sits close behind. **It does not.** Composed off the real
+`data/commands.json` through the same format string, over all 32 commands:
+
+| | chars | of 440 |
+|---|---|---|
+| `!help forge` (worst) | 180 | 260 to spare |
+| `!help inventory` | 168 | |
+| `!help enlist` | 152 | |
+| `!help wear` | 138 | |
+| `!help armoury` | 135 | |
+| `!help dye` | 131 | |
+| `!help richest` (best) | 58 | |
+
+Zero over `REPLY_MAX`. **And it cannot creep up on us the way the bare list does:** this line carries
+**one** command's fields, so adding commands does not lengthen it - only a single command's own
+`short`, `aliases` or `example` could, and that would have to more than double the current worst.
+**No arm is owed and I added none.** `tools/_l14_test.gd:217` already guards the growing side, and
+the check count stands at 27 where B175 left it. I wrote the numbers into the file so this is
+measured once and not again.
+
+### GATE RESULT, STATED RED AND NOT ROUNDED
+Headless parse `rc=0` in **21.5s**, **0 Parse Error**, **0 SCRIPT ERROR**, **ERROR LINES 1** - and the
+one is `COMMANDS_DATA MINIBOSS UNNAMED ["overlooker"]`, the game build's `Delve.MB_NAME` row in
+`scripts/delve.gd`, a file I cannot write. Byte-for-byte the same red B168, B169, B170, B171, B172 and
+B175 left. **B168's 65 -> 1 ERROR drop is holding for a ninth hour.** `scripts/chatcmd.gd` 3438 ->
+3461 lines, md5 `572fdea6` -> `ad7f06a1`; `data/commands.json` and `docs/COMMANDS.md` byte-untouched.
+
+### THE LOCK, AND THE ORDERING FAULT B175 LOGGED
+Claim 08:49:22, cap 09:14:22, declared finish 08:50:37. The battery returned at **08:49:44** and I
+wrote the **IDLE line at 08:50:08, before this PROGRESS entry** - which is precisely the fault B175's
+07:52:05 CORRECTION logged against itself (it wrote PROGRESS first and left a stale RUNNING line live
+45 seconds into the HUD's window). Sized off B175's own lesson: declared finish = battery estimate +
+40s of write-up, not + 10s. One Godot launch on the one claim; `tasklist Godot*` = 0 before the claim
+and after the release. **My RUNNING line was live 46 seconds and the engine was dead for the last 24
+of them** - stated plainly rather than rounded to "released at 08:49:44", because the lock line is
+the thing other lanes read.
+
+### TWITCH
+The headless parse's eventsub autostarted as it does on every parse: it refreshed its own tokens and
+joined `#jestsayin96` as bellmirebro. **It sent no message, redeemed nothing, cheered nothing, zero
+bits, and I drove no account.** Reported only because the join is a real touch on the channel.
+
+### FOR THE GAME BUILD LANE
+Nothing new is needed in `twitch_eventsub.gd`. The 482-of-500 bound stands unchanged, and the `_cut`
+correction above changes no behaviour, so nothing crosses the `twitch_reply` contract.

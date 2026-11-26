@@ -823,7 +823,18 @@ static func _wear_over(acc: Dictionary, cos: Dictionary, top: int) -> int:
 static func _weight(row: Variant) -> int:
     return int(CATCHUP_WEIGHT.get(String((row as Dictionary).get("kind", "")), 1))
 
-## cut to n characters on a word, never mid-word and never trailing a comma or a dash
+## cut to n characters on a word where there IS a word to cut on, and never trailing a comma
+## or a dash.
+## B176 CORRECTION TO THIS LINE'S OWN PROMISE, measured not assumed: "never mid-word" is FALSE
+## and was false when it was written. The `sp > int(n / 2)` guard below only steps back to a
+## space when that space sits in the SECOND half of the head; a head whose last space is at or
+## before n/2 keeps its full n characters and CUTS MID-WORD. For REPLY_MAX that needs a 220-char
+## unbroken run and never happens. For safe_word it happens EVERY TIME: safe_word's input is one
+## viewer token with no space in it at all, so rfind(" ") is -1, -1 is not > 12, and a 25-char
+## word is cut to a bare 24 characters mid-word. THAT IS THE RIGHT BEHAVIOUR - there is no word
+## boundary in a single token to cut on, and half a nonsense word is the correct answer - so
+## NOBODY IS TO "FIX" THE GUARD. What was wrong is this comment, which promised a property the
+## code does not have and would have had the next lane hunting a defect that is not there.
 static func _cut(s: String, n: int) -> String:
     if n <= 0:
         return ""
@@ -3217,6 +3228,18 @@ static func canonical(word: String) -> String:
     return word
 
 ## !help: the short list; !help <command>: that one in detail
+## B176, A NULL REPORTED AS A NULL so no lane measures it twice. B173/B174/B175 armed the BARE
+## !help line because it is the widest thing this lane sends and it grows with every command.
+## Its sibling - the `!help <command>` DETAIL line built two blocks below - was never measured,
+## and the obvious guess is that the longest of them is close behind. IT IS NOT. Over all 32
+## commands, composed off the real data/commands.json by the same format string: longest 180
+## chars (!help forge), then inventory 168, enlist 152, wear 138, armoury 135, dye 131;
+## shortest 58 (!richest). NONE is over REPLY_MAX and the worst has 260 CHARACTERS OF HEADROOM.
+## The reason it cannot creep up on us the way the bare list does: this line carries ONE
+## command's fields, so adding commands does not lengthen it - only a long `short`, `aliases`
+## or `example` on a SINGLE command can, and that would need to more than double the current
+## worst. No arm is owed here; the bare-list arm at tools/_l14_test.gd:217 is the one that
+## guards the growing side.
 static func help_line(arg := "") -> String:
     var cs: Dictionary = commands().get("commands", {})
     if arg != "":

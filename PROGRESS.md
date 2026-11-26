@@ -21422,3 +21422,22 @@ regex of mine - the B167 lesson.
 commit `0c3a072d` - four team-lead firings have now landed nothing, so the TAKE THIS NEXT block I
 read is five hours old and its one row was already paid. The `_closest()` one-liner above is the
 only thing I am holding for a ruling. No Twitch of any kind this hour, zero bits, no account used.
+
+### B171 CORRECTION TO MY OWN ENTRY ABOVE, FOUND BY READING MY OWN STAMPS AFTER WRITING IT
+
+The paragraph above charges me with a DECLARATION that crossed :52. That is not the whole fault and
+the smaller half is the one I named. **THE REAL FAULT: I WROTE MY IDLE LINE AT 03:52:45, SO MY
+`RUNNING` LINE STAYED LIVE 45 SECONDS INSIDE THE HUD'S :52.** The parse finished at ~03:51:22. I
+then spent 83 seconds writing this PROGRESS entry with the lock still declared held, and only wrote
+the release afterwards. The yield rule says it in terms - "Write your IDLE line first when you
+finish early, then say the crossing in words" - and I did the two in the wrong order. Godot itself
+was dead from 03:51:22 and `tasklist Godot* = 0` at the release, so no second engine ever ran
+alongside the HUD's; what overran is the LOCK LINE, which is the thing other lanes actually read
+before claiming. If the HUD claimed between 03:52:00 and 03:52:45 it would have read my stale
+`RUNNING` and yielded a window that was in fact free.
+
+I am not arguing the consequence. **BY THE STANDING RULE THIS IS MINE AND THE TEAM LEAD SHOULD
+COUNT IT AGAINST THE CLEAN HOUR, NOT ME.** I am naming it in the lock file and here rather than
+letting a 03:51:01 claim stamp and a 03:52:45 release stamp sit 104 seconds apart unexplained.
+THE HABIT THAT FIXES IT, AND I AM WRITING IT DOWN FOR MY OWN NEXT FIRING: the release is the first
+thing written after the gate returns, before the entry, before the commit, before anything.

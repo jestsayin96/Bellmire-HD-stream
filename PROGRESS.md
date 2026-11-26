@@ -21179,3 +21179,72 @@ is owed to me in `twitch_eventsub.gd` this cycle.
 Nothing is waiting on you. No ownership question this cycle - I edited only
 `data/commands.json`, `docs/COMMANDS.md` and `PROGRESS.md`, and the doc was written by its generator
 rather than by hand.
+
+## B168 - 26 Nov 2026, 00:45 CT firing (chat bot)
+
+**THE ITEM: the `--editor --quit` import-cache build that B167 SPLIT OFF AND CARRIED.** Not a new
+item and not invented work - B167 declared a 00:32 finish, chose not to cross art's :34 for an
+optional battery, and carried this one thing. This is the carry being paid, one firing later.
+
+**SIZED BEFORE CLAIMING, BECAUSE A WARM CACHE AND A COLD ONE ARE NOT THE SAME BATTERY.** My firing
+sits five minutes before the HUD's :52, so the question was not "is the lock free" (it was - last
+pair was my own `IDLE 00:30:40`, tasklist `Godot*` = 0 live at 00:46:32) but "does this fit". I
+measured instead of guessing: `.godot/imported` already held **4667** files and exactly **SEVEN**
+distinct `.glb` were missing a `.scn` - `Chef_Male`, `OldClassy_Female/Male`, `Viking_Female/Male`,
+`Worker_Female/Male`. A seven-file top-up, not a cold import of 215 `.glb`. So I claimed at
+**00:47:27** with a deliberately tight declared finish of **00:51:00**, and wrote into the claim that
+if it was not done by 00:50:30 I would kill it and carry it a second time rather than cross.
+
+**IT TOOK ELEVEN SECONDS.** `--headless --editor --quit --path W6` rc=0, `_b168_import.log`, **0
+ERROR lines**. All seven `.scn` present afterwards, `.godot/imported` **4667 -> 4721**.
+
+**THEN THE GATE, WHICH IS THE WHOLE POINT:** parse `--headless --path W6 --quit-after 300` rc=0,
+**0 SCRIPT ERROR, 0 Parse Error, and ERROR lines 65 -> 1** (`_b168_parse.log`).
+
+**THE TEAM LEAD'S 23:10 DIAGNOSIS WAS RIGHT AND I AM SAYING SO PLAINLY.** They ruled my 61 ERROR
+lines were neither art's `.glb` nor the game build's code but my own worktree's missing
+`.godot/imported/*.scn`, and told me to run one in W6. That is now proved by measurement rather than
+by argument: the errors are gone and nothing in any other lane's files changed to make them go.
+
+**THE ONE SURVIVING ERROR IS NOT MINE AND IS CORRECTLY RED.** `COMMANDS_DATA MINIBOSS UNNAMED
+["overlooker"]` - content writes the feed row, `Delve.MB_NAME` has none, and `scripts/delve.gd` is
+the GAME BUILD's file. My feed half went to 63 at B167. Their row is the last thing between the
+house and green, and `origin/main` still has no `overlooker` in `delve.gd` as of this firing.
+
+**MY OWN FAULT THIS CYCLE, AND IT IS THE FAULT THIS LANE HAS BEEN WARNED ABOUT TWICE.** With the
+lock released I ran a quick python drift check over my own files and it reported **33 phantom
+faults** - 30 data entries "no command answers" and 3 code literals "no entry". I did not publish
+them. I checked which instrument was lying first, and it was mine: `chatcmd.gd` dispatches on
+`match verb:` with BARE verbs, so a `"!cmd"` quoted-literal regex only ever catches prose and help
+text. That is precisely the false-positive class B159 found and B165 red-proved, and `chatcmd.gd`
+line 152 warns about it in terms. **THE REAL GATE IS RIGHT AND MY EMULATION WAS WRONG: drift is
+clean in BOTH directions, one miniboss fault only.** An emulation is worth nothing until it is
+proved byte-identical, and I had proved nothing.
+
+**NO EDIT to `scripts/chatcmd.gd`, `data/commands.json` or `docs/COMMANDS.md` this cycle** - B167
+paid the cascade row last hour and nothing is owed on the feed. Integrity confirmed at HEAD anyway:
+`json.load` OK, **32 commands**, `COMMANDS.md` 8103 bytes md5 `7a030e15`, carrying `63 elites` and
+no `62 elites`.
+
+**L56 (delve-heavy soak) IS STILL UNSTARTED AND I AM NOT PRETENDING OTHERWISE.** It needs a long
+window and my :45 firing butts into the HUD's :52. It is the next engine item and it wants a slot
+where a soak can actually run to its end.
+
+**NO TWITCH OF ANY KIND THIS CYCLE. ZERO BITS. NO ACCOUNT USED** - bellmirebro did not post, nothing
+was cheered or redeemed, no reward read or written, no channel setting touched, no sub, no gift.
+
+## FOR THE GAME BUILD
+
+Unchanged and now the only red: `"overlooker": "Velrick"` into `Delve.MB_NAME` in `scripts/delve.gd`.
+Nothing is owed to me in `twitch_eventsub.gd` this cycle - the reply contract is untouched.
+
+## FOR THE OTHER FIVE LANES
+
+If your worktree prints a wall of `Cannot open file 'res://.godot/imported/*.scn'`, it is your own
+cache and one `--headless --editor --quit --path <your worktree>` clears it. Mine was eleven seconds
+for seven files. Check your own count before you charge it to art.
+
+## FOR THE SUPERVISOR
+
+Nothing is waiting on you. No ownership question this cycle - I edited only `PROGRESS.md` and
+committed my two gate logs.

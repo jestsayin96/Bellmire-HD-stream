@@ -21353,3 +21353,72 @@ commit `0c3a072d` - three team-lead firings have landed nothing, so the TAKE THI
 read is four hours old. I followed it anyway and it was already paid. My scheduled prompt still
 names L56, which you ticked as S128; a firing cannot edit its own prompt, so that line stays until
 Mr. E takes a live turn. No Twitch of any kind this hour, zero bits, no account used.
+
+## B171 - 26 Nov 2026, 03:45 CT firing (chat bot) - THE SILENCE RULE SWALLOWS `!command`, AND I MEASURED IT INSTEAD OF SAMPLING IT - BUT THE RULE IS MR. E'S AND I DID NOT TOUCH IT
+
+**MY QUEUE IS EMPTY ON PAPER, SO I SAY SO FIRST.** L68, L69, L70 and L56 are ALL `[x]` in the plan
+(L56 ticked by the supervisor 16 Nov 12:58 as the split's run 2). My scheduled prompt still names
+them as owed; the plan wins and I am not re-running closed items. The 17:58 CHAT BOT row's one
+`NEXT` - red-prove the dictionary-literal false positive against the new depth-and-bracket parse -
+is ALREADY PAID and in the file at `tools/_l14_test.gd:177-188` (B162), contrast arm and all. So I
+went looking for an unproven property in my own files rather than re-verifying a third time.
+
+**WHAT I FOUND, AND IT IS A FINDING, NOT A NULL.** `_l14_test` pins the fightoverlay silence on 18
+hand-picked words. That is a sample. Over the FULL one-edit neighbourhood of all 63 published words
+(32 keys + 31 aliases) - 648 realistic typos, single-character DELETIONS and ADJACENT
+TRANSPOSITIONS, the two things a viewer actually does - **TWELVE are strictly NEARER to a Bellmire
+command than to the foreign word that silences them**, so the farther claim wins:
+  - `basts` `beass` `bests` `easts` - 1 edit from `!beasts`, silenced 2 from boss/class/mass
+  - `cmmands` `comands` `commads` `command` `commans` `commnds` `ommands` - 1 edit from
+    `!commands`, silenced 2 from fightoverlay's `vcommands`
+  - `rerll` - 1 edit from `!reroll`, silenced 2 from `roll`
+`!command` is the one that matters: the singular of the most-typed command in the set, and
+Bellmire says NOTHING to it. On a live stream that reads as a broken bot - exactly the harm
+`foreign._why` was written to prevent, now produced by the same rule.
+
+**THE CAUSE, AND I CHECKED THE REAL ROUTER INSTEAD OF AN EMULATION OF IT.** `foreign()` takes its
+radius `near` from the TYPO's own length, so a 7-char word is claimed at edit distance 2 while the
+command it is 1 edit from never gets to answer. `canonical()` (`:133`) runs BEFORE the match block
+and `_closest()` only in the fallback (`:227`), so I confirmed the rescue order rather than assume
+it - and **the L69 plural cut rescues NONE of the twelve**, because no stem of theirs resolves
+(`comands` -> `comand`/`coman`, both absent; `command` does not even end in `s`).
+
+**MY OWN GENERATOR INFLATED THIS FIRST AND I AM NOT QUOTING THAT NUMBER AS THE FAULT.** My first
+pass substituted every letter of the alphabet at every position and reported 1742 swallowed typos
+across all 63 words, then 1609 inversions. Most of that is `cargb`/`cargc`/`cargd` - garbage nobody
+types - and the leading-`v` insertions, which are fightoverlay's deliberate namespace and are
+CORRECT to silence. The twelve above are the measurement; the 1609 was me inflating my own space,
+the same fault as B167's battery order.
+
+**I DID NOT CHANGE IT, AND THAT IS DELIBERATE.** The silence is Mr. E's rule of 11 Nov, written
+into `foreign._why` in `data/commands.json` in terms - "never nudges a word that is ... a near miss
+of one of theirs". A viewer-visible rule is not this lane's to re-cut, and the freeze forbids
+inventing the work. The note went into `scripts/chatcmd.gd` above `foreign()` as a comment so no
+lane spends an hour re-finding it, exactly as B169 did with its null.
+
+**THE DECISION, IN ONE LINE, FOR WHOEVER OWNS IT:** in `_closest()`, silence only when the foreign
+match is at least as near as the best Bellmire match. That answers no foreign word and stays silent
+on every word nearer to theirs - it only stops the farther claim from winning. It is one
+comparison. I will land it the hour it is ruled and not before.
+
+**GATE, AND ONE FAULT OF MINE DECLARED.** Parse rc=0 in 21.4s, 0 SCRIPT ERROR, 0 Parse Error, ERROR
+LINES 1 - and the one is `COMMANDS_DATA MINIBOSS UNNAMED`, the game build's `Delve.MB_NAME`
+overlooker row, byte-for-byte the red B168/B169/B170 left and still not mine. I re-checked it is
+absent on `origin/main` this firing. The 65 -> 1 drop B168 bought is HOLDING for a third hour.
+SPLIT AND CARRIED: `_l14_test`, `_commands_doc`, `_twitch_parse` - they read `data/commands.json`
+and `docs/COMMANDS.md`, both byte-unchanged this hour (doc md5 `7a030e15`, data `3a3baa59`).
+**MY FAULT: MY DECLARED FINISH WAS 03:52:11, ELEVEN SECONDS PAST THE HUD'S :52.** I released at
+03:51:2x, inside my cap and clear of :52 in fact - but the DECLARATION crossed, and a declared
+finish is supposed to be one I mean. The arithmetic was mine: I added 70s to a 03:51:01 claim
+without checking which minute that landed in. Nobody was starved and the error ran in the
+conservative direction for everyone but me, and I am naming it rather than letting the stamp speak.
+
+**DATA DISCIPLINE, BOTH DIRECTIONS, THOUGH I CHANGED NO DATA.** `json.load` OK, 32 commands, every
+pre-existing key byte-identical (data md5 `3a3baa59` unchanged), doc md5 `7a030e15` unchanged. The
+code-side drift direction is covered by L14's own `missing []` / `unanswered []` arms rather than a
+regex of mine - the B167 lesson.
+
+**FOR THE SUPERVISOR / TEAM LEAD, SHORT.** `origin/main` has not moved since the 22:58 CT plan
+commit `0c3a072d` - four team-lead firings have now landed nothing, so the TAKE THIS NEXT block I
+read is five hours old and its one row was already paid. The `_closest()` one-liner above is the
+only thing I am holding for a ruling. No Twitch of any kind this hour, zero bits, no account used.

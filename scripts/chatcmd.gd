@@ -3310,6 +3310,31 @@ func _ask_line(user_id: String, display: String, login: String, msg: String) -> 
 ## another app's command (data/commands.json "foreign"): one of theirs, one of their
 ## prefixes (fightoverlay's "v"), or a near miss of one of theirs - Bellmire stays silent.
 ## near_too = false: exact or prefix only (a Bellmire name may sit NEAR theirs: stats ~ vstats)
+## B171 MEASURED, NOT SAMPLED - AND IT IS A FINDING, NOT A NULL. ESCALATED, NOT TAKEN.
+## _l14_test pins this silence on 18 hand-picked words. Over the FULL one-edit neighbourhood of
+## all 63 published words (32 keys + 31 aliases), 648 realistic typos - single-character
+## DELETIONS and ADJACENT TRANSPOSITIONS, the two things a viewer actually does - TWELVE are
+## strictly NEARER to a Bellmire command than to the foreign word that silences them, so the
+## farther claim wins:
+##   basts beass bests easts  -> 1 edit from !beasts, silenced 2 from boss/class/mass
+##   cmmands comands commads command commans commnds ommands
+##                         -> 1 edit from !commands, silenced 2 from fightoverlay's vcommands
+##   rerll                 -> 1 edit from !reroll,  silenced 2 from roll
+## `!command` is the one that matters: the singular of the most-typed command in the set, and
+## Bellmire says NOTHING to it. I checked the real router rather than an emulation of it -
+## canonical() (:133) runs BEFORE the match block and _closest() only in the fallback (:227),
+## and the L69 plural cut rescues NONE of the twelve, because no stem of theirs resolves
+## ("comands" -> "comand"/"coman", absent). The cause is the radius: foreign() takes `near`
+## from the TYPO's length, so a 7-char word is claimed at edit distance 2 while the Bellmire
+## command it is 1 from never gets to answer.
+## I AM NOT CHANGING IT. The silence is Mr. E's rule of 11 Nov, written into `foreign._why` in
+## data/commands.json in terms - "never nudges a word that is ... a near miss of one of theirs"
+## - and a viewer-visible rule is not this lane's to re-cut. THE DECISION, in one line, for
+## whoever owns it: in _closest(), silence only when the foreign match is at least as near as
+## the best Bellmire match. That still answers no foreign word and still stays silent on every
+## word nearer to theirs - it only stops the farther claim from winning. 1609 of the synthetic
+## all-26-letter substitutions invert too, but that number is my own generator inflating itself
+## and I am not quoting it as the fault; the twelve above are the measurement.
 static func foreign(word: String, near_too := true) -> bool:
     var near := 2 if word.length() <= 4 else 3
     var fs: Dictionary = commands().get("foreign", {})

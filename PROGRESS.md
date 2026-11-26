@@ -21578,3 +21578,91 @@ every emit path both stand unchanged - I touched nothing. Still the same one lin
 `_to_delete/.b174_writetest` (17 bytes) - the probe that established that creating files is allowed.
 `rm` is denied by the sandbox, so I moved it to `_to_delete/` per the documented fallback rather
 than leaving it at the worktree root. Untracked; not in this commit.
+
+## B175 - 26 Nov 2026, 07:45 CT firing (chat bot) - THE WRITE BLOCK WAS TRANSIENT AFTER ALL: B173'S PATCH IS LANDED, GATED GREEN FIRST TRY, AND IT TURNS B174'S ARITHMETIC INTO ENGINE NUMBERS
+
+**THE LANE IS WRITABLE.** B173 could not edit an existing repo file; B174 tried four distinct
+methods across two firings, had every one refused, and concluded "the lane is read-only". This
+firing the FIRST attempt succeeded - the same shape of edit B174 listed as DENIED (a python rewrite
+of an existing repo file through device_bash). `tools/_l14_test.gd` 283 -> 311 lines, md5
+`5ec6fe43` -> `e0c9fa8a`. **So the block was transient and B174's "not transient" call was wrong** -
+honestly reached on two firings of evidence, but wrong. Worth recording which way the error ran: the
+lane under-claimed its own capability for one firing, it did not over-claim it.
+
+### WHAT LANDED - THE CARRIED PATCH, WITH B174'S CORRECTED NUMBERS FOLDED IN
+The two arms are B173's, verbatim in structure, inserted after `tools/_l14_test.gd:204`
+(`_ok(all_in, "!help names every command")`), under the supervisor's 17:37 grant of that file and
+that file only. I changed only the COMMENT: B173's prose carried its own 361/79/59 figures, which
+B174 proved were read off a `hub_url` that is not in the data. The comment now carries B174's
+measured 352/88/11 and says so, and I added one line B174's critique earned:
+
+> NOTE the padding here is a PROXY: the real line overflows in the MIDDLE, by a command being
+> added, not at the end.
+
+**MY THREE OWN FILES ARE BYTE-UNCHANGED THIS HOUR** - `chatcmd.gd` 572fdea6, `data/commands.json`
+3a3baa59, `docs/COMMANDS.md` 7a030e15. No viewer-visible text moved. The only changed file is the
+instrument.
+
+### THE GATES - ALL FOUR ON ONE CLAIM, AND THE PATCH IS PROVED
+- **L14_TEST FAIL 1 (27 CHECKS)** rc=1, 1.5s. Was 25 checks. **Both new arms PASSED**, and the
+  single fail is the same FOREIGN one for an EIGHTH firing (below).
+- **TWITCH_PARSE OK (8 checks)** rc=0, 1.1s.
+- **COMMANDS_DOC OK wrote 32 commands** rc=0, 1.1s - a TRUE NO-OP PROVED BY THE BYTES, not by the
+  print: `docs/COMMANDS.md` md5 `7a030e15` identical before and after. B167's regeneration stands a
+  third hour.
+- **Headless parse** rc=0 in 23.7s, 0 Parse Error, 0 SCRIPT ERROR.
+
+**B173 PREDICTED 26 CHECKS AND THAT WAS ONE SHORT** - two arms on 25 is 27. A small slip, but it is
+the kind that gets a green read as a half-failure next hour, so it is struck here.
+
+### THE ENGINE NUMBERS, AND THEY SETTLE B173 vs B174
+What the arms actually printed on the real router:
+
+```
+ok  the bare !help line fits REPLY_MAX uncut: 352 of 440, headroom 88 chars (~11 more 6-char commands)
+ok  one char over the cap costs 139 chars, not 1 - the cut falls back to a word boundary (441 -> 302)
+```
+
+**352, 88 and 11 are B174's three figures exactly.** B174 derived them as string arithmetic and
+labelled them "NOT ENGINE-VERIFIED". They are now engine-verified, unchanged, and B173's 361/79/9
+are struck for good.
+
+**THE 139 NEEDS ITS CAVEAT STATED OR IT WILL MISLEAD SOMEBODY.** B174 said the overflow costs 50
+chars; the engine says 139. Both are right about different models and the mechanism is identical:
+- The arm pads `x` onto the END, so the run of x's holds no space, `_cut` backtracks all the way to
+  **index 302** and drops 139.
+- A real 12th 6-char command lengthens the MIDDLE to 448, `_cut` backtracks to the same index 302
+  and returns 398 - **50 lost**.
+- **Index 302 is the same number in both**, and B174 named it from the string alone. It sits
+  immediately before the hub URL. That is the finding, and the engine confirms it.
+So the realistic cost of crossing the cliff is 50 chars - the whole 49-char hub URL plus its space -
+and the arm's job is only to assert "more than 1", which it does in either model.
+
+### THE CASCADE'S REMAINING LINK IS STILL NOT MINE - EIGHTH FIRING
+`COMMANDS_DATA MINIBOSS UNNAMED ["overlooker"]`. Measured again on `origin/main` this hour, not
+recalled: `const MB_NAME` holds **62 keys**, still closing on `"collier": "Halfblow"}`, and
+`"overlooker"` is absent. My feed publishes 63. Nothing I own can close it.
+
+### THE PLAN'S CHAT BOT ROW IS PAID ON BOTH ARMS AND IS NINE HOURS STALE
+The 22:58 CT row asks for the 62 -> 63 feed republish and one `--editor --quit` import build. Both
+were already paid - **the republish at B167** (`eb0f8a1a`, and `data/commands.json` on `chatbot`
+reads "The 63 elites" in both `.short` and `.what`; `origin/main` still reads 62 because **chatbot
+is 10 commits ahead of main and 0 behind**, so the team lead was reading an unmerged file, not an
+undone job) and **the import build at B168** (65 -> 1 error lines, holding a fifth hour). No fault
+in the row: it was written at 23:2x and B167 paid it at 00:27. But `origin/main` has had no plan
+commit since the 22:58 firing, so the plan is nine hours old.
+
+### MY OWN FAULT THIS HOUR
+I released at 07:51:33 against a DECLARED FINISH of 07:51:26 - **seven seconds over my own
+declaration**, corrected in `docs/RUN_LOCK.txt` rather than left to be found. Inside the cap by
+23m43s, clear of the HUD's :52 by 27s, engine idle from 07:50:46, no lane crossed. Cause: I wrote
+the release only after extracting verdicts and composing the prose - the B171 ordering fault in a
+smaller size. Next firing: declare finish = battery estimate + 40s of write-up, not + 10s.
+
+### TWITCH - NO SPEND, NO SEND
+The headless parse's eventsub autostarted as it does every parse: it refreshed its own tokens and
+printed `TWITCH joined #jestsayin96`. **It sent no message, redeemed nothing, cheered nothing, zero
+bits, and I drove no account.** Reported only because the join is a real touch on the channel.
+
+### FOR THE GAME BUILD LANE
+Nothing new is needed in `twitch_eventsub.gd`. The 482-of-500 bound stands and is unchanged.

@@ -1,0 +1,33 @@
+{
+ "ok": true,
+ "errors": [],
+ "views": {
+  "front": {
+   "moved_px": 2652,
+   "body_px": 194034,
+   "moved_pct_of_body": 1.367,
+   "moved_px_at_160_rung_est": 138.6
+  },
+  "side": {
+   "moved_px": 544,
+   "body_px": 134324,
+   "moved_pct_of_body": 0.405,
+   "moved_px_at_160_rung_est": 28.4
+  },
+  "back": {
+   "moved_px": 599,
+   "body_px": 188596,
+   "moved_pct_of_body": 0.318,
+   "moved_px_at_160_rung_est": 31.3
+  }
+ },
+ "eye_objs": [
+  "overlooker_glow"
+ ],
+ "all_objs": [
+  "overlooker_body",
+  "overlooker_dark",
+  "overlooker_bone",
+  "overlooker_glow"
+ ]
+}

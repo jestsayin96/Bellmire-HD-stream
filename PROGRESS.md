@@ -20885,3 +20885,13 @@ ITEM: TAKE THIS NEXT (17:58 CT block, >>> CONTENT (:22) <<<): re-read changer br
 Only other change: _note_c216 (zero-hit key by design; NO LANE IS TO WIRE IT).
 VALIDATION OK: parsed before/after, exactly two ADDED paths, zero removed or changed. items, bosses, potions parse, untouched.
 CODE WIRING: game build may add MB_NAME "overlooker": "Velrick" (and move the name gates 62 -> 63); the key is in by_key now, so the body enters the draw.
+## hub - 25 Nov 18:4x CT - TAKE THIS NEXT gave HUB: "sweep your own published web/ for defects, or stand down in one line". SWEPT; NO DEFECT FOUND; web/ UNCHANGED; NOT CLAIMING READY TO PUBLISH.
+Measured this run (merged origin/main first; branch was 3 behind origin/hub, nothing in web/):
+- `git diff --numstat HEAD origin/hub -- web/` = EMPTY. `HEAD:web` = `origin/hub:web` = 51a3f8b3; `origin/gh-pages^{tree}` = 1d8bce63 (unchanged; delta is NOTES.md only and is the supervisor's, not mine).
+- `node --check web/app.js` = OK (5514 lines; style.css 1862; index.html 521).
+- innerHTML in app.js: real assignments at :255 (status line) and :301 (nothing-yet box), both page-owned literals - same lines as the 18 Nov check, so the comment at index.html:49 ("two page-owned sites") is still TRUE. outerHTML / insertAdjacentHTML / document.write / eval / new Function: zero code uses (only the comment at :10-11 naming them).
+- The two URL sinks read in context: app.js:2743 `link.href` is gated by /^https:\/\/(www\.)?twitch\.tv\// on Twitch's own device-flow reply, else shown as text; app.js:3783 `img.src` is a path built from the ITEM_ICONS whitelist Map, never snapshot text. No snapshot field reaches a URL, src, href or style.
+- CSP meta unchanged: default-src 'none'; connect-src supabase + id/api.twitch.tv + wss irc-ws.chat.twitch.tv; script/style/img/font self (+data: img). Only external strings in index.html are the two og: meta URLs (not fetched by the page).
+- NOT re-run: the ?state=/?mock= and hostile-name browser pass - owed only when web/ changes, and it did not. I read code, I did not look at a new screenshot.
+
+- HUB 25 Nov 22:4x CT (hub build): TAKE THIS NEXT (17:58 block) HUB row = take a defect in shipped web/ or stand down in writing. No new row; STOOD DOWN IN WRITING. Measured: `git diff --numstat HEAD origin/hub -- web/` EMPTY at 27f8eb72; node --check app.js OK; innerHTML appears as code at exactly app.js:255 and :301 (other hits are comments), zero outerHTML/insertAdjacentHTML/document.write/eval/new Function; CSP meta intact; index.html:49 comment still true. web/ unchanged, so no render/hostile-name rerun owed; no screenshot taken this run. NOT claiming READY TO PUBLISH. Merged-and-unpublished delta remains with the supervisor, not mine. Live-dot colour: unchanged (no edit).

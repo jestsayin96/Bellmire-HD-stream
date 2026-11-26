@@ -1,0 +1,74 @@
+{
+  "root": "/sessions/rcw-01yykh9jlj7u9erz8uatlgsd/mnt/bellmire-art",
+  "gdignored_roots": [
+    "_scratch",
+    "_sup_shot",
+    "renders"
+  ],
+  "counts": {
+    "importable_assets": 2342,
+    "import_files": 2342
+  },
+  "A_missing": {
+    "denominator": 2342,
+    "missing": 0,
+    "by_dir": {},
+    "files": []
+  },
+  "unreadable_imports": [],
+  "empty_imports": [],
+  "B_orphans": {
+    "denominator": 2342,
+    "orphans": 0,
+    "by_dir": {},
+    "files": []
+  },
+  "C_uid": {
+    "denominator": 2342,
+    "distinct_uids": 2342,
+    "without_uid": 0,
+    "without_uid_files": [],
+    "collision_count": 0,
+    "collisions": {}
+  },
+  "D_pathhash": {
+    "denominator": 2341,
+    "conform": 2341,
+    "mismatch": 0,
+    "conform_rate": 1.0,
+    "mismatches": []
+  },
+  "E_notimported": {
+    "denominator": 2342,
+    "notimported": 1,
+    "live": 0,
+    "stale": 1,
+    "exempt_keep_or_skip": 0,
+    "live_files": [],
+    "stale_files": [
+      {
+        "rel": "web/icons/items/hat/turbary_hood.webp.import",
+        "why": "importer='texture' names a cache-producing importer but the .import carries no path=/dest_files= and valid=false",
+        "importer": "texture",
+        "valid": "false",
+        "source_file": "res://web/icons/items/hat/turbary_hood.webp",
+        "source_exists": true,
+        "sidecar": ".godot/imported/turbary_hood.webp-1c9fe4bda3cbfb0de3039c6a6a9b13c1.md5",
+        "recorded_source_md5": "d41d8cd98f00b204e9800998ecf8427e",
+        "current_source_md5": "148cf7b15edaad94a106c789e90ff2cb",
+        "state": "E-STALE",
+        "note": "the cache sidecar records source_md5='d41d8cd98f00b204e9800998ecf8427e' but the file now hashes to '148cf7b15edaad94a106c789e90ff2cb', so the source changed after the failure and Godot's re-import trigger is armed (the recorded hash is the md5 of a ZERO-BYTE file)"
+      }
+    ]
+  },
+  "accounting": {
+    "parsed": 2342,
+    "accounted": 2342,
+    "conform": 2341,
+    "mismatch": 0,
+    "notimported": 1,
+    "exempt": 0
+  },
+  "verdict": "GREEN",
+  "fails": []
+}

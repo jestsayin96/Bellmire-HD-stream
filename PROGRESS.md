@@ -20878,6 +20878,13 @@ window. **TWITCH_PARSE I DID NOT RUN - I nearly wrote that I had.** It was green
 other lanes paid within the hour inside a 52-second window; it is carried, not claimed. The "26
 commands" figure in my standing prompt is stale - the data carries 32.
 
+## C-216 (content, 25 Nov 2026 18:23 CST) - THE OVERLOOKER'S FEED LINES. ONE FILE, ONE NEW KEY, ONE NOTE.
+ITEM: TAKE THIS NEXT (17:58 CT block, >>> CONTENT (:22) <<<): re-read changer broken.1 and fall.6 and say whether I agree; if clean, take the next unstarted content item.
+(a) I AGREE with the team lead. broken.1 ("The turnstile will not turn. The drum stays on its rung.") and fall.6 ("The turnstile stands open. Nothing is owed.") name a post and a drum only - no bar, no arm. Left untouched.
+(b) Next unstarted item: the overlooker (Velrick, 63rd body). assets/monsters/minibosses/overlooker.glb is committed on main (and on origin/art) and by_key had zero lines, so miniboss_for was holding it out of the draw. Added by_key.overlooker, 9/8/4/8. Lines state only what the body shows (head turned off the shoulders, pale mitt held level) and the one rule (he goes for whoever has hurt him least, re-reads when that changes). No numbers, no new mechanic; counterplay in broken is a promise only. Regex for bar/bars/arm/arms over the new cells: none.
+Only other change: _note_c216 (zero-hit key by design; NO LANE IS TO WIRE IT).
+VALIDATION OK: parsed before/after, exactly two ADDED paths, zero removed or changed. items, bosses, potions parse, untouched.
+CODE WIRING: game build may add MB_NAME "overlooker": "Velrick" (and move the name gates 62 -> 63); the key is in by_key now, so the body enters the draw.
 ## hub - 25 Nov 18:4x CT - TAKE THIS NEXT gave HUB: "sweep your own published web/ for defects, or stand down in one line". SWEPT; NO DEFECT FOUND; web/ UNCHANGED; NOT CLAIMING READY TO PUBLISH.
 Measured this run (merged origin/main first; branch was 3 behind origin/hub, nothing in web/):
 - `git diff --numstat HEAD origin/hub -- web/` = EMPTY. `HEAD:web` = `origin/hub:web` = 51a3f8b3; `origin/gh-pages^{tree}` = 1d8bce63 (unchanged; delta is NOTES.md only and is the supervisor's, not mine).
@@ -20888,3 +20895,168 @@ Measured this run (merged origin/main first; branch was 3 behind origin/hub, not
 - NOT re-run: the ?state=/?mock= and hostile-name browser pass - owed only when web/ changes, and it did not. I read code, I did not look at a new screenshot.
 
 - HUB 25 Nov 22:4x CT (hub build): TAKE THIS NEXT (17:58 block) HUB row = take a defect in shipped web/ or stand down in writing. No new row; STOOD DOWN IN WRITING. Measured: `git diff --numstat HEAD origin/hub -- web/` EMPTY at 27f8eb72; node --check app.js OK; innerHTML appears as code at exactly app.js:255 and :301 (other hits are comments), zero outerHTML/insertAdjacentHTML/document.write/eval/new Function; CSP meta intact; index.html:49 comment still true. web/ unchanged, so no render/hostile-name rerun owed; no screenshot taken this run. NOT claiming READY TO PUBLISH. Merged-and-unpublished delta remains with the supervisor, not mine. Live-dot colour: unchanged (no edit).
+
+## U184 (HUD, 25 Nov 18:52 CT) - STAND-DOWN: THE WINDOWS BRIDGE (Blender MCP) DID NOT RESPOND, SO NO LOCK READ, NO GODOT, NO GIT
+- Checked: clock 18:52 CST (device_bash). R is not mounted in device_bash (only bellmire-hud), so R's working RUN_LOCK.txt could not be read that way. Two Blender-MCP execute_blender_code calls (a read-only lock/tasklist/plan read, then a trivial `result={"ok":1}`) both timed out at 140s: device 'cruzader' not responding. Without it I cannot read the lock, check for a live Godot process, launch Godot, or run git.
+- Did NOT claim the lock, did NOT launch Godot, touched no owned .gd file. Rule: no claim over an unread lock.
+- Written by file edit only; NOT committed (git via device_bash leaves .lock files). The note is uncommitted in W2 until the bridge is back.
+- Next firing (19:52): re-read R's RUN_LOCK, take the 16:58 block's HUD item or System 2's rarity-hue half, and commit this note with the work.
+- Decision for Mr. E: the Blender addon/bridge on cruzader needs a look (not listening, as on 18 Nov 08:58).
+
+## U-standdown 2026-11-25T19:55-06:00 (HUD, :52 firing) - STAND-DOWN, bridge still down
+- Clock 19:53 CST. Blender MCP (localhost:9876) refused connection on 2 calls; R not mounted in device_bash, so RUN_LOCK.txt unreadable. No claim, no Godot, no owned .gd touched.
+- Second consecutive firing with the bridge down (18:52 note above). Uncommitted: git needs the Blender bridge.
+- Next firing (20:52): re-read R's RUN_LOCK, take System 2 rarity-hue half, commit both notes.
+
+## U-standdown 2026-11-25T20:55-06:00 (HUD, :52 firing) - STAND-DOWN, bridge down for the THIRD consecutive firing
+- Clock 20:52 CST. Blender MCP (localhost:9876) refused connection on 2 calls; R not mounted in device_bash, so RUN_LOCK.txt and WORK_PLAN's TAKE THIS NEXT block were unreadable. No claim, no Godot, no owned .gd touched.
+- Uncommitted: git needs the Blender bridge. Three stand-down notes (18:52, 19:55, 20:55) wait in W2.
+- Next firing (21:52): re-read R's RUN_LOCK, take System 2 rarity-hue half, commit all notes.
+
+## U-standdown 2026-11-25T21:55-06:00 (HUD, :52 firing) - STAND-DOWN, bridge down for the FOURTH consecutive firing
+- Clock 21:52 CST. Blender MCP (localhost:9876) refused connection; R not mounted in device_bash, so RUN_LOCK.txt and WORK_PLAN's TAKE THIS NEXT block were unreadable. No claim, no Godot, no owned .gd touched.
+- Uncommitted: git needs the Blender bridge (device_bash cannot delete, so it would leave .lock files). Four stand-down notes (18:52, 19:55, 20:55, 21:55) wait in W2.
+- Next firing (22:52): re-read R's RUN_LOCK, take System 2 rarity-hue half, commit all notes.
+
+## U185 (HUD, 25 Nov 22:5x CT) - ANSWER TO THE 17:58 ROW: WHICH k THE s150 worst_over -13.875 BELONGS TO (READ FROM _u183_run.log; NO GODOT, NO LOCK CLAIM)
+- TAKE THIS NEXT (17:58 block, `>>> HUD (:52) <<<`): "say which k the s150 worst_over belongs to, in one line." Answered from the committed log, not from memory.
+- ANSWER: **s150 worst_over -13.875 is k=180.** At k=160 the newest visible label was a 2-line one (bottom 555, over -52 -> frame `tight_s150_vb607_over-51_k160`); at k=180 the hostile 4-line Wolfgang_Amadeus... label appeared (bottom 593, over -14 -> frame `tight_s150_vb607_over-13_k180`). k=200/220/240 repeat the same bottom=593, so -13.875 is a PLATEAU from k=180 on, and `_probe_chron` saves only on a NEW worst, so k=180 is the first and only frame at that value. The `-51_k160` frame is the probe's running-max starting point (any first sample is a "new worst"), NOT a second tightest frame - it is looser by 38 px and is just an earlier save.
+- Same pattern at s100 (-13.6, saved at k=160) and s125 (-45, saved at k=160). Filename note: the s125 frame is named vb611 while the log line says vb612 (rounding in the filename), harmless.
+- Not done / owed: nothing opened or changed in owned .gd files; L74 and any new rarity-hue work remain the standing items (U177 tick says the rarity-hue half is wired). Fix for the filename ambiguity, if wanted: have the probe save only the final worst per rung after the sweep, so one rung = one tight frame; I did not change the probe because a Godot run does not fit cleanly before :07 for a naming nicety.
+- Lock: R working RUN_LOCK last line was IDLE 22:50:21 (chat bot B166), tasklist Godot* = 0; I took no claim.
+- Decision for Mr. E: none.
+## B166 - 25 Nov 2026, 22:45 CT firing (chat bot) - THE BRIDGE CAME BACK AND THE FIVE-FIRING-OLD ARM IS LANDED AND GATED GREEN FIRST TRY, AND ALL FOUR GATES ARE PAID IN MY OWN WINDOW
+
+TOOK: the 17:58 CHAT BOT row - the B159 red-prove arm on `tools/_l14_test.gd`. **SIXTH consecutive
+firing on this row, and the first one that could reach an engine.** The Blender bridge is ANSWERING
+again. B162 built the arm, B163 re-derived it, B164 derived the 25-check number from the file, B165
+quadruple-checked it and red-proved the new parse instead. **This run landed it, gated it and
+committed it.** Four seats stood behind it; none of them could run it.
+
+Clock read off the machine with `TZ=America/Chicago date` before every sentence below that names a
+time: **22:47:05 CT** at the claim, **22:50:21 CT** at the final release.
+
+## THE LOCK WAS FREE, AND I DID NOT HAVE TO INVOKE THE STANDING AUTHORISATION
+
+The team lead's 21:10 NOTE gave the first lane to find the bridge answering a standing authorisation
+to clear the stranded `RUNNING 18:41:59` (QA tester) itself after a live process check. **I invoked
+nothing, because QA cleared its own strand before me.** Read off the file: QA claimed again at
+`22:42:26` naming its own stale line ("stale 4h, no Godot process, tasklist checked live") and wrote
+`IDLE 2026-11-25T22:43:08-06:00` after a 39s parse. So the last line was a same-lane IDLE and the
+lock was genuinely free under the yield rule. I verified it independently anyway: `tasklist Godot* =
+0` live through the bridge. **The authorisation is spent, not used. The strand is closed by the lane
+that made it, which is the right lane to close it.**
+
+## WHAT I LANDED, AND WHAT I CHECKED BEFORE I TOUCHED IT
+
+B165 recorded md5s for five paths. **All five still matched, so nothing drifted across the outage**:
+`scripts/chatcmd.gd` `6d12b416`, `data/commands.json` `a06234cb`, `docs/COMMANDS.md` `979db9f8`,
+`tools/_l14_test.gd` `672c1e37`, `PROGRESS.md` `fb3ed418`.
+
+Against `tools/_l14_test.gd` at HEAD the patched file is **the two B162 pastes and nothing else** -
+plain `diff` (NOT `git diff`, which is what wedged the shared `.git` at B164), 258 -> 283 lines
+(+25), `_harvest_old` defined once and called once, **zero space-indented lines** (tabs throughout),
+`_checks < 20` floor and the verdict print untouched. Then `672c1e37` -> `5ec6fe43`, 283 lines.
+
+## THE GATES - FOUR, ALL GREEN, ALL IN MY OWN WINDOW, 36 SECONDS OF ENGINE TIME
+
+| gate | result |
+|---|---|
+| headless parse | rc=0, 30.5s, **0 SCRIPT ERROR / 0 Parse Error / 0 compile-class errors** |
+| `tools/_l14_test.gd` | **`L14_TEST OK (25 checks)`** - the number B164 derived from the file |
+| `tools/_commands_doc.gd` | **`COMMANDS_DOC OK wrote 32 commands`**, doc md5 `979db9f8` UNCHANGED |
+| `tools/_twitch_parse.gd` | **`TWITCH_PARSE OK (8 checks)`**, 8/8 PASS, 2.1s |
+
+**THE ARM'S OWN LINE, OUT OF THE ENGINE AND NOT OUT OF A PORT** (line 513 of `_b166_run.log`):
+
+```
+ok  the dictionary key at label depth is NOT harvested - new ["delve", "forge"],
+    the replaced 8-space regex ["delve", "gold", "forge"]
+```
+
+**Three independent Python ports (B162, B163, B165) predicted exactly this, and the engine agrees
+with all three.** The emulations were right. The replacement passes where its predecessor lied.
+
+`COMMANDS_DOC` is a **true no-op confirmation**: the generator ran and `docs/COMMANDS.md` came back
+byte-identical at `979db9f8`. No command was added or renamed, so no regeneration was owed. **The
+figure is 32, not the 26 my standing prompt still names** - that number has been stale for days.
+
+## I DID NOT WRITE "PARSE, 0 ERRORS", BECAUSE THAT WOULD HAVE BEEN FALSE
+
+The parse printed **60 `ERROR` lines**. I classified every one rather than reporting a clean gate:
+**all 60 are missing-import failures on `assets/characters/uacp/*.glb`** - `Cannot open file
+res://.godot/imported/<body>.glb-<hash>.scn` and the two `Failed loading resource` lines that follow
+each. Seven bodies: `Worker_Male` (6), `Viking_Male` (4), `OldClassy_Male` (3), `Worker_Female`,
+`OldClassy_Female`, `Chef_Male` (2 each) and the remainder. **Zero are GDScript, parse, compile or
+`SCRIPT ERROR` class** - I grepped that class explicitly and it returned 0.
+
+**WHY MY PARSE SAW THEM AND THE QA TESTER'S DID NOT, measured not guessed.** QA ran `--editor
+--quit`, which performs the asset import and so reported 0. My standing prompt's gate is `--headless
+--path W6 --quit-after 300`, which **runs the game for 300 frames without importing**, so an
+un-imported `.glb` fails at load. **This is a worktree import-cache condition, not a code fault and
+not a file of mine** - `assets/` belongs to art and the game build. Routed, not taken, and not
+charged to anyone: an un-imported cache in one worktree is normal after a long outage.
+
+## STATE
+
+- `_b166_run.log` and `_b166_twitch.log` committed as the evidence.
+- `data/commands.json`: json.load OK, **8 top-level keys**, **32 commands, order 32** - identical to
+  B163/B164/B165, every pre-existing key byte-identical. Drift checked BOTH directions by the
+  engine's own arms this time rather than by a port: `unpublished []`, `stale []`, `missing []`,
+  `unanswered []` - **zero either way, out of the gate and not out of an emulation.**
+- `scripts/chatcmd.gd` and `data/commands.json` NOT edited this run - no command was added. `6d12b416`
+  and `a06234cb` unchanged.
+- **No Twitch of any kind. No chat line posted as bellmirebro, no redemption, no cheer, ZERO BITS, no
+  reward read or written, no channel setting touched, no sub, no gift. No account used.**
+
+## A FAULT OF MY OWN, CAUGHT AND PAID INSIDE THE SAME HOUR
+
+**I left `tools/_twitch_parse.gd` out of my 22:47 battery** - it is item 3 of the five-item list B165
+handed me, and I had used **34 seconds of a seven-minute window**. B161 carried that same gate on a
+52-second window, which was defensible; carrying it on a seven-minute one would not have been. I
+caught it after releasing at 22:49:30, so I took a **second, short, well-formed claim** (22:50:05,
+one ~2s script, declared clear of the HUD's :52) and released it **16 seconds later at 22:50:21**.
+The gate is paid. **The lesson is to build the battery from the owed list, not from memory** - I had
+the list in front of me and still ran three of four.
+
+## OWED TO THE NEXT CHAT BOT FIRING
+
+1. **B165's single-quote fix, now unblocked.** `_strip_comment` and `_strip_strings` recognise only
+   the double quote; GDScript accepts `'...'` too, so a single-quoted literal with an unbalanced
+   `(`/`[` is never stripped, `depth` never returns to 0 and **harvesting stops dead for the rest of
+   the file** (measured: 74 label words -> 0). LATENT today - `chatcmd.gd` has 185 single quotes and
+   all 185 are apostrophes in comments - and it **fails loud** via the `verbs.size() >= 20` floor.
+   B165 measured a one-concept fix in two places, 21/21 hostile shapes green, real tree identical.
+   **The arm it was sequenced behind is now green and committed, so the reason for holding it is
+   gone.** It needs the team lead's or supervisor's word, as B165 asked.
+2. **L56** (delve-heavy soak - engine and lock), untouchable for six firings.
+3. The three stray files B165 listed still cannot be removed by a worker (`rm` refused in a connected
+   folder): `_to_delete/b164_stale_index.lock_2026-11-25T2048CT`, `_to_delete/_b165_stray/.wtest`.
+   I moved `_b162_HANDOFF.md` and `_b162_l14_test_PATCHED.gd.unproved` into `_to_delete/` now that
+   they are spent.
+
+## FOR THE TEAM LEAD
+
+- **The 17:58 row is PAID.** Arm landed, gated, committed. Six firings, five of them bridge-blocked.
+- **The bridge came back between 22:06 and 22:42** - the team lead's 21:58 note had it refusing, QA
+  reached Godot at 22:42. Nothing needs escalating to Mr. E on it any more.
+- **Your 21:10 standing authorisation is spent unused** - QA closed its own strand. Worth striking
+  from the plan so a later seat does not go looking for a strand that is gone.
+- **The plan's first line is still stale**: `docs/WORK_PLAN.md` line 1 reads "CLEAN-HOUR COUNT 7"
+  on every ref; your 22:06 note resets it to 0. It needs your sync, which needs the bridge you
+  now have.
+- **QA tester is a FIFTH lane on the lock** while my prompt names four sharers. B162-B165 all raised
+  it; this is the fifth time. QA's lines are well-formed - the sharer list is simply stale.
+- `verbs.size() >= 20` is the loud-failure guard for the whole bracket-walker fault class, per B165.
+  Worth keeping in mind before anyone tidies it.
+
+## FOR THE GAME BUILD LANE
+
+Nothing. `twitch_eventsub.gd` is untouched and needs no change for this. The
+`twitch_reply(user_login, text)` contract is unchanged and all its L14 arms are green.
+
+## FOR THE SUPERVISOR
+
+Nothing is waiting on you. Your 17:37 grant of `tools/_l14_test.gd` is used, in scope, and now
+closed with an engine gate behind it - I did not read it wider than the one file. The only thing
+routed up is B165's single-quote fix, which is a proposal and not a request.

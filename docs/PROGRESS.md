@@ -4557,3 +4557,47 @@ live delve through _next_floor ... inference from the code, not a run". This cyc
   (cap reached on floor 3, after every arm). Floor 1 A 1.24 / B 1.26 m, floor 2 A 1.25 / B 1.17 m, floor 3 A 1.30 m, dy 0.00
   throughout; revive by natural-20 death save; B's pet 0.93 m from its corpse. 0 SCRIPT ERROR / 0 Parse Error / 0 ERROR.
   floor2_pet.png restored to the committed 17:18 shot (the one I looked at).
+
+## D-cycle - S140: SYSTEM 13, THE SUPERVISOR'S 17:37 PET RULING. THE THREE CLASHING BODIES WERE NEVER IN THE LIVE POOL - (a) NEEDS NO CHANGE, MEASURED. 2026-11-25T18:08-06:00 (game build)
+ITEM: TAKE THIS NEXT (17:58 CT block, `>>> GAME BUILD (:07)`): (a) keep the two pets that match, drop fox/husky/shiba from the
+live pool; (b) propose replacements from a licence-checked pack; (c) propose the fox scale number.
+- NO GAME SOURCE AND NO DATA CHANGED. Measured off the merged tree (python over data/items.json, every dict with kind=pet):
+  36 pet rows, 9 bodies x 4 rows each - Corgi, Pug, Duck, Red, Pig, Sheep, Horse, Cow, Llama (all assets/animals/*.glb).
+  ROWS ON assets/animals/uaa/: ZERO. The UAA Fox, Husky and ShibaInu were only ever bodies in MY probes (tools/_s138_pet_probe.gd,
+  tools/_s139_pet_wiring.gd); no items.json row, so no !wear, ever reached them. (a) is ALREADY TRUE in the live pool. The pool
+  is content's file (items.json); nothing for this lane to drop. The ruling is now a standing constraint: no pet row on /uaa/.
+- A CORRECTION TO MY OWN S138/S139 WORDS, OFF THE PICTURE (renders/cycles/s138/pets.png, looked at this firing): GobKit Red.glb
+  is a RED PANDA, not a red fox - the lead's row names it correctly. I wrote "red fox" in S138/S139. Consequence for content,
+  NOT mine to fix: the four Red.glb rows are named as foxes - pet_fox "a fox", pet_vixen, pet_cub "a fox cub", pet_dogfox - and
+  a viewer who buys "a fox" gets a red panda. Routed to content (items.json): rename to red-panda words, or leave and own it.
+- (b) REPLACEMENTS - PROPOSAL, NOT A PICK: NO NEW PACK. The pool already covers the three dropped kinds with chibi bodies:
+  fox -> Red.glb (red panda; or rename per above), husky/shiba (dogs) -> Corgi.glb and Pug.glb, both shipped. Two outside packs
+  checked on their own pages this firing and REJECTED: jwillow56 "Low Poly Dog Pack - 6 Breeds" - no licence on the page
+  ("Not for resale or redistribution. See included license", licence only after purchase), unrigged, FBX/OBJ only, $10;
+  maxed-dev "Cute Low Poly Pets" - page could not be read, so not checked, so not proposed.
+  ONE GAP THIS TURNED UP: assets/animals/LICENSE.txt says GobKit Duck/Corgi/Red are "as listed in docs/PLAN.md", and PLAN.md
+  (`itch_gobkit_animals`) records NO licence and NO URL. The two pets the ruling keeps sit on a pack whose licence this repo
+  has never written down. Routed UP; Quaternius Farm (Pig/Sheep/Horse/Cow/Llama) is CC0 and recorded; Pug's pack is unrecorded too.
+- (c) FOX SCALE - ONE NUMBER: 0.28 on uaa/Fox.gltf. Reasoning: height is linear in scale, S138 measured 0.40 m at 0.15, so 0.28
+  gives 0.75 m = the shipped corgi's height. It is moot while the UAA fox stays out of the pet pool; the live "fox" (Red.glb
+  0.002 = 0.94 m) needs no change.
+- NOT RULED, FLAGGED: town.gd:3283 still walks UAA Husky/Shiba in the square (S108) and :3139 the UAA Fox as the town fox -
+  ambient animals, not pets, so outside the 17:37 ruling. If the supervisor means the ruling for the whole town, it is a
+  one-line change in my file; I have not made it.
+- NEXT UNSTARTED SYSTEM BY NUMBER: not named - I could not find Mr. E's 5-80 list in WORK_PLAN/COORDINATION by search inside
+  this window and will not guess a number.
+- No Twitch test, zero bits, no cheer, no redemption, no chat line.
+- GATES (merged tree, no source changed; logs committed as _s140_*.log): parse rc=0, 0 SCRIPT ERROR / 0 Parse Error.
+  TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 1975 samples off the floor. TOWNWALK in_solid=0/16017 raid_in_solid=0/6735
+  PASS. DELVE_TEST OK ran 9001 frames, floor reached 2, 0 SCRIPT ERROR / 0 ERROR lines. Battery 18:10:06-18:17:51 CT.
+- LOCK: claim 18:08:26, cap claim+25 = 18:33:26 computed first, declared 18:30:26; IDLE written below on release.
+## C-217 (content, 25 Nov 2026 22:4x CST) - THE TWO "ALREADY CLEAN" CELLS RE-READ, AND THE BODY LIST CHECKED. NO data/ FILE CHANGED.
+ITEM: TAKE THIS NEXT (17:58 CT block, `>>> CONTENT (:22)`): re-read changer `broken.1` and `fall.6` against Mr. E's 21 Nov "delete the bars" ruling and say whether I agree with the lead's measurement.
+ANSWER: I AGREE. Both are clean.
+  broken.1  "The turnstile will not turn. The drum stays on its rung."  - names the turnstile and the drum's own dark rung (part of the shipped body); no bar, no arm.
+  fall.6    "The turnstile stands open. Nothing is owed."             - "open" is the post idle, not a gate of bars; no bar, no arm.
+  Measured: a regex for bar/bars/arm/arms/spoke/sweep over all 28 changer cells returns ZERO hits. The jam counterplay survives only as the promise in arrive.7 / broken.0 (a body set against the post holds it). No cell invents a mechanic. Nothing to reword.
+NEXT UNSTARTED ITEM: backlog 1 (miniboss feed lines). origin/art at 22:2x CT: newest body work is Overlooker pass 5 (back view); no committed body lacks lines. by_key holds 63 keys (the prompt's "32" is stale). Nothing to write against, so I STAND DOWN on lines; the stand-down is the delivery.
+VALIDATION OK: items, lore_lines, bosses, potions all json.load; no file edited.
+Lock: none taken, I never run Godot. Git via the Blender bridge.
+NO CODE WIRING. No key added.

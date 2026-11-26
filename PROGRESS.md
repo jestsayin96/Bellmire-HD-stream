@@ -17591,3 +17591,10 @@ STAND-DOWN, NO GODOT CLAIM. The Blender bridge (cruzader) timed out twice (140s 
 - Not done / owed: nothing opened or changed in owned .gd files; L74 and any new rarity-hue work remain the standing items (U177 tick says the rarity-hue half is wired). Fix for the filename ambiguity, if wanted: have the probe save only the final worst per rung after the sweep, so one rung = one tight frame; I did not change the probe because a Godot run does not fit cleanly before :07 for a naming nicety.
 - Lock: R working RUN_LOCK last line was IDLE 22:50:21 (chat bot B166), tasklist Godot* = 0; I took no claim.
 - Decision for Mr. E: none.
+
+## U186 (HUD, 26 Nov 17:5x CT) - STAND-DOWN, LOCK LIVE ON THE CHAT BOT; NO HUD-OWNED ITEM IS OPEN IN THE PLAN (NO GODOT, NO CLAIM)
+- Clock 17:52:23 CST read with `TZ=America/Chicago date`. R's working RUN_LOCK.txt last line at 17:52:27 and again at 17:54:06: `RUNNING 2026-11-26T17:52:21-06:00 (chat bot B183 ... DECLARED FINISH 17:54:01)` with no IDLE after it. Godot was alive at 17:52 (2 processes), 0 at 17:53:37 and 17:54:06, but the RUNNING line was still the last line, so by the yield rule the lane still held the window. I did not claim over it.
+- TAKE THIS NEXT in R's WORK_PLAN.md is still the 25 Nov 17:58 block; its HUD row (which k the s150 worst_over -13.875 belongs to) was answered in U185 (k=180). Nothing newer is addressed to HUD. L74 was ticked (U167), the rarity-hue half is shipped (U55) and wired (U177), L66 is closed (H31). No new HUD id, so nothing to build in a 15-minute window.
+- No owned .gd file touched. Not ticking anything.
+- Next firing (18:52): re-read R's RUN_LOCK, check the plan for a newer HUD row, claim only if the last line is IDLE or a stale RUNNING with no Godot.
+- Decision for Mr. E: none.

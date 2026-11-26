@@ -1,3 +1,95 @@
+## TICK RECORD AND SELF-CORRECTIONS - THE 17:58 CT FIRING, 25 NOV 2026 (team lead). Written 18:1x CT.
+*** READ THIS AS A CORRECTION TO THE BLOCK ABOVE, NOT AS NEW WORK. Clock read at 18:04:25 and again
+*** at 18:1x CT off the machine. Per the standing rule: ANY NEW INSTRUCTION IN HERE IS WRITTEN AFTER
+*** :05 AND IS THEREFORE THE NEXT FIRING'S ROW, NOT OWED THIS HOUR. The ticks and the two corrections
+*** below are not instructions - they are me fixing my own rows and paying what I verified.
+
+*** TICKED THIS HOUR, each against the file, the ref and (where it is a picture) my own look:
+***   - **S139b TICKED** (game build). `S139_PET_WIRE OK checks=25 fails=0 floors=3 frames=24001` read
+***     at HEAD, not in a working tree. The pet rides a live delve across three floors with a
+***     death-save revive and a real death; no game source changed. The evidence row I charged last
+***     hour is PAID - all four gate logs and a labelled re-run are committed.
+***   - **C-215 TICKED** (content). I verified it CELL BY CELL off the diff rather than the commit
+***     message, because the one thing a reword can get wrong is keeping the mechanic and changing
+***     the noun. Exactly eight cells moved - arrive.7, act.0, act.6, broken.0, broken.2, broken.3,
+***     fall.0, fall.3 - which is the eight my own 16:58 row named. My own regex over every changer
+***     cell returns ZERO naming a bar or an arm. Array lengths are unchanged (9 added / 9 removed,
+***     balanced). The jam counterplay survives as a promise ("A body against the post. Everything
+***     stops where it stands.") and no cell invents a mechanic.
+***   - **OVERLOOKER PASS 5 TICKED** (art). I opened `renders/art/minibosses/overlooker/back.png`
+***     myself and the picture agrees with the numbers: the back reads as a back, the eye survives as
+***     a single pale fleck at the temple, the pale mitt is the brightest thing in the frame and the
+***     coat back is blank. The eye-ablation method is sound - render with the eyes, render with the
+***     eye mesh hidden, score the pixels that MOVED, and let the renderer do the occlusion.
+***     **AND THE LANE CAUGHT TWO FAULTS IN ITS OWN HARNESS BEFORE I COULD.** Its first selector
+***     matched the MATERIAL name, found no glow mesh, and would have reported "the eyes move 0
+***     pixels" - a green-looking number meaning a broken instrument - so it REFUSED and exited 2.
+***     Its second run reported the eye pair moving 100.0% of the body, which was the instrument
+***     measuring itself (the light rig was added twice into one scene). It now tears the scene down
+***     between renders and REFUSES any result over 20% as a fault rather than a finding. That is the
+***     "a gate that prints no verdict is RED" rule applied by a lane to itself, unprompted.
+***   - **U183 TICKED** (HUD). `U183_PROBE_DONE checks=40 fails=0 worst_over={s100 -13.625,
+***     s125 -45.125, s150 -13.875}` at HEAD. I opened the TIGHTEST rung myself -
+***     `tight_s100_vb617_over-13_k160_1080.png` - and the Chronicle text sits inside the vellum with
+***     visible margin under the last line, with a hostile Cyrillic+W name wrapping as literal text
+***     and not breaking the panel. The picture agrees with -13.6 px.
+***   - **B161 TICKED** (chat bot). The supervisor GRANTED `tools/_l14_test.gd` at 17:37 and the lane
+***     landed it the same hour: `L14_TEST OK (24 checks)` at line 531 of `_b161_run.log` in the ref,
+***     COMMANDS_DOC OK 32 with the doc unchanged, parse 0.
+***   - **THE HUB'S WRITTEN STAND-DOWN TICKS.** A stand-down written up IS the delivery, and its one
+***     checkable claim is TRUE by my own measurement (`git diff --numstat HEAD origin/hub -- web/`
+***     is empty).
+*** NOT TICKED, DELIBERATELY: nothing is being withheld this hour. All six lanes delivered and all
+*** six are ticked. I want that said plainly rather than left to be inferred, because an hour with no
+*** withheld tick is rare and the next seat should not go looking for one.
+
+*** MY OWN FAULT, AND IT IS THE SECOND HOUR RUNNING THIS SEAT HAS MADE THE SAME CLASS OF ERROR.
+*** **I WROTE THE HUB ROW ABOVE FROM THE PROMPT'S FRAMING INSTEAD OF FROM A MEASUREMENT, AND IT IS
+*** WRONG.** My row says the delta is "still with the supervisor from 20 Nov". IT IS NOT. Measured by
+*** me at 18:04: `origin/gh-pages` is **8d214d36, tree 1d8bce63, pushed 25 NOV 09:55:03 CT** as hub
+*** publish 8. `origin/hub:web` is tree 51a3f8b3. The ENTIRE remaining delta is **NOTES.md, +31/-0,
+*** ONE FILE, DOCUMENTATION ONLY** - `web/app.js`, `web/style.css` and `web/index.html` are all
+*** PUBLISHED AND CURRENT. The 20 Nov escalation (3 files / +59 / -1) was RESOLVED BY THAT PUBLISH.
+*** Nothing web-facing is waiting on anyone. **HUB LANE: the sentence in your row about a delta
+*** sitting with the supervisor since 20 Nov is struck. The rest of your row stands.**
+*** **AND I NEARLY PUBLISHED THAT MEASUREMENT AS A FRESH FINDING.** It is not. The 16:58 seat had
+*** already measured and written the identical figures into this plan. I caught it by grepping the
+*** plan before writing it up, which is the standing rule, and it is the second time in two hours
+*** that rule has saved this seat from announcing the house's own knowledge as news.
+*** **SECOND CORRECTION, TO MY CONTENT ROW.** I told content to re-read `broken.1` and `fall.6` and
+*** say whether they agree with my measurement. **THEY ALREADY DID, IN THE SHIPMENT I WAS JUDGING.**
+*** The corrected `_note_c214` says in terms: "the held list over-stated by two - broken.1 and fall.6
+*** never named a bar or an arm." They agree with me and said so before I asked. **CONTENT: that
+*** instruction is withdrawn as already answered; do not spend a cycle on it.** Take the next
+*** unstarted content item instead, and that is a NEXT-FIRING row, not one owed at :22.
+
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a scheduled task; land
+*** these on the first LIVE turn, all at once). THIS LIST IS CUMULATIVE - DO NOT DROP A LINE.
+***   Items 1-8 stand as written in the earlier blocks; items 9 and 10 (16:58 firing) stand too.
+***   Re-read those blocks rather than trusting any paraphrase. REVISED AND ADDED THIS HOUR:
+***   9-REVISED. THE "ID" LINE, MEASURED OFF THE MERGED TREE 7ae21702 THIS HOUR: **B161, C-215, D100,
+***      H32, L74, S139b, T5, U183, and art is on OVERLOOKER (the 63rd) PASS 5.** The prompt still
+***      names B104/C-163/S85/U124/paviser pass 8; the 16:58 list said S139/U182/C-214/B160/pass 4.
+***      These move every hour - the next seat must re-measure rather than paste this line.
+***  11. **THE PROMPT'S PUBLISHED-HUB BLOCK IS TWO GENERATIONS STALE AND IT IS THE BLOCK THAT WARNS
+***      AGAINST COPYING FIGURES.** It states gh-pages = 05ac2679, tree 9ca8051e, pushed 19 Nov 20:06,
+***      with a delta of "3 files / +59 / -1 - NOTES.md +9, web/app.js +46/-1, web/style.css +4".
+***      MEASURED TODAY: gh-pages = **8d214d36**, tree **1d8bce63**, pushed **25 Nov 09:55:03 CT**
+***      (hub publish 8); hub:web = **51a3f8b3**; delta = **NOTES.md +31/-0 only**. The app.js and
+***      style.css half of that sentence is simply no longer true - it shipped. The prompt's own
+***      instruction to re-measure both trees every hour is what caught it, and it should be kept.
+***  12. **THE PROMPT'S "ANSWERED / DO NOT RE-RAISE" LIST SHOULD GAIN THE TWO 17:37 RULINGS** - the
+***      chat bot's `tools/_l14_test.gd` grant (scope: that file only) and the System 13 pet
+***      direction ("take the selection, not a reskin"). Both are settled and both are the kind of
+***      thing a fresh seat re-escalates for want of a line.
+
+*** FOR THE SUPERVISOR (17:58 CT addendum): **still nothing waiting on you.** Both 17:37 rulings are
+*** landed and ticked this hour. The hub item is NOT an escalation and I am explicitly standing it
+*** down: the only unpublished difference is NOTES.md, documentation, no web asset and no code. The
+*** live page was last looked at by a seat of mine at **12:45 CT today**, after publish 8 at 09:55,
+*** so the looked-at build and the published build agree. The one thing you reserved and will still
+*** want is the fox SCALE number, and the game build's row asks it for one.
+
 ## TAKE THIS NEXT - Updated THE 17:58 CT FIRING, 25 NOV 2026 (team lead). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
 *** ALL SIX BRANCHES MERGED, main c27bc167 -> 932a9d04. ALL SIX SHIPPED - no silent lane this hour,
 *** the first time that has been true today.

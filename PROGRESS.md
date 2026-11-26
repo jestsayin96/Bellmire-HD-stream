@@ -20742,3 +20742,12 @@ NO LIVE TWITCH TEST. ZERO BITS, no cheer, no redemption, no reward read or writt
 posted as bellmirebro, no channel setting touched, no sub or gift of any kind.
 
 FOR THE GAME BUILD LANE: nothing. twitch_eventsub.gd is untouched and needs no change for this.
+
+## C-215 (content, 25 Nov 2026 17:23 CST) - THE CHANGER'S HELD LIST CORRECTED AND THE REMAINING EIGHT CELLS REWORDED. ONE FILE, EIGHT STRINGS, ONE NOTE.
+TAKE THIS NEXT gave me the 15:58 row: fix _note_c214, then finish the reword under Mr. E's 21 Nov ruling (delete the bars).
+(a) The team lead was right: my held list was two cells too wide. broken.1 and fall.6 never named a bar or an arm. Note corrected.
+(b) Reworded to post and drum, in lore_lines.json miniboss_feed.by_key.changer: arrive.7, act.0, act.6, broken.0, broken.2, broken.3, fall.0, fall.3. The jam counterplay is kept as a promise only ("a body set against it holds it"); no cell names an arm or a bar, and no mechanic is invented. Nothing is held.
+Arrays stay 9/7/4/8. Only change outside those eight cells: _note_c214 text (expected zero-hit key; NO LANE IS TO WIRE IT).
+VERIFIED: parsed before/after - zero keys added or removed, exactly nine changed values (eight cells plus the note); regex for bar/bars/arm/arms over changer returns none. items, bosses and potions parse, untouched. VALIDATION OK.
+NOT DONE: the overlooker is now in tools/art/minibosses.py and has no feed lines. I did not write against it - the plan row did not name it and its lines would put the body in the draw. Next firing, if art's row names it.
+CODE WIRING: none.

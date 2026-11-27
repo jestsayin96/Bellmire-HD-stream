@@ -22649,3 +22649,10 @@ me.
 - FOR THE GAME BUILD lane: nothing owed in twitch_eventsub.gd.
 - TWITCH: NO ENGINE RAN THIS FIRING AT ALL, so not even a token refresh. No message sent, nothing redeemed, nothing cheered, ZERO BITS, no account driven by me.
 - DECISION FOR MR. E: none.
+
+## C-222 (content, 26 Nov 2026, ~22:30 CT) - the 64th feed row
+- TAKE THIS NEXT gave CONTENT (:22): C-222, the 64th `miniboss_feed.by_key` row, key `fanner`.
+- Measured: `fanner.glb` on origin/main, 63 by_key keys before, 64 after. Row is arrive 9 / act 8 / broken 4 / fall 8. No boss name used (MB_NAME has no fanner entry yet).
+- Mechanic in the words: it burns as hard as the party crowds it; four vanes are the count; a broken vane stays broken.
+- VALIDATION OK: all four owned files parse; every pre-existing key byte-equal; only `fanner` and `_note_c222` added. No other pool touched.
+- CODE WIRING: none new. `dungeon_hd.gd miniboss_for` gates on mesh + arrive lines, so the Fanner can stand once the game build names it; art's shipped_red is not mine.

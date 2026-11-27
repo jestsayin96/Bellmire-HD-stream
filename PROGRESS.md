@@ -23519,3 +23519,13 @@ Next content: C-228.
 - VALIDATION OK: four owned files json.load; leaf compare 0 removed, 0 changed, 41 added.
 - CODE WIRING: none; pools already read.
 - Next content: C-233.
+
+
+## U201 - System 38 tavern feed-line audit (27 Nov 08:52 CT firing) - NO DEFECT FOUND, one finding for the team lead
+Item: HUD row of the 07:58 TAKE THIS NEXT block - measure the longest economy.gd tavern_dice/tavern_duel/_dice_refusal line through feed_hud.gd at the tightest scale. No owned .gd touched.
+- Longest realistic lines (computed from the format strings, 25-char Twitch name, longest town "a city in all but charter", dice_max_bet 300 at level 12): duel result 137 chars, `max` refusal 115, dare 114, house-tie loss 101, `gold` refusal 85. Stress case with the 60-char hostile name: 243 chars.
+- Windowed 1920x1080 at 150% (fs 32, vellum 621 wide): the `max` refusal wraps to THREE rows, fully inside the vellum (over_vellum -17.5, over_panel -81.8, bottom_over -72.7), no ellipsis, no clip. The dare line (two 25-char names) also admitted and drawn whole. 28 checks, 0 fails (_u201_run4.log). Render: renders/cycles/20261127_u201b/tav_line5_s150_1080.png.
+- FINDING (not mine to fix, feed_hud classify): every tavern line is admitted at pri=1, the LOWEST class (log: `ADMIT pri=1`). In a busy scene (lord fight, delve chatter - run 1/2 logs) the same lines were `DROP overflow pri=1` and never reached the screen. A dice result is the outcome the viewer who typed !dice is waiting for. classify() in feed_hud.gd (HUD-owned) needs a dice/tavern pattern at a higher pri - proposed next HUD item, one line plus a probe.
+- NOT MEASURED: the 243-char hostile-name lines were not admitted in the quiet run (log shows only the 25-char lines), so the 60-char-name wrap is unproven; Twitch caps logins at 25 so the realistic worst case is covered.
+- Probe: tools/_u201_tavern_feed.gd. Runs 1-3 were not valid for the fit (run 3 was at 100% because my edit removed the _scales init - SCRIPT ERROR at probe line 138); run 4 is the measurement.
+- Lock: claimed 08:53:47, four captures, last IDLE 08:58:33, all inside claim+15 and before :07.

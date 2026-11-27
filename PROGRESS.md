@@ -24035,3 +24035,10 @@ The real drift check is GATE 1: the generator wrote 36 commands over 36 JSON ent
 NO TWITCH MESSAGE. REDEEMED NOTHING. CHEERED NOTHING. **ZERO BITS.** Headless only.
 Lock: claim 15:48:10, cap 16:13, declared finish 15:51:30, **released 15:49:43** - early, and the
 HUD's :52 slot was clear before it opened. `tasklist Godot*` = 0 after.
+
+## HUB 27 Nov 16:39 CT - System 40 spec row, SHEET SIDE exercised (no web/ change)
+TAKE THIS NEXT (14:58 block) HUB row: confirm `.sspec` on heroSheet(). Rendered headless Chromium at 320 and 390 px, mock=satchel1&open=all (copies in scratch; web/ byte-identical to origin/hub).
+- Unspecialized hero (spec/spec_name removed from the mock): .charsheet=1, .sspec=0, .hspec=0 at 320 and 390 -> no empty gap, nothing drawn.
+- Hostile spec_name (Guardian <img src=x onerror=alert(1)>): .sspec=1, text literal, height 37 px at 320 and 390, no overflow, no horizontal page scroll.
+- Long path ("Guardian of the Unbroken Bastion and Seventh Gate Wardens", 58 chars): at 320 px wraps to 3 lines, .sspec height 56 px, over=false, scrollWidth<=clientWidth; at 390 px 37 px. Screenshot viewed: clean wrap, no clip, no overlap with Pin button.
+Number: .sspec 56 px / 3 lines at 320 px worst case. Nothing to fix. NOT claiming READY TO PUBLISH as a new claim: web/ unchanged this run.

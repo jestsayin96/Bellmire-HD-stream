@@ -1,0 +1,4 @@
+S141 overlooker model: 'res://assets/monsters/minibosses/overlooker.glb'
+S141 overlooker fed: true
+S141 workshop draw: ["overlooker", "scrapwright", "jointer", "greener", "dyer"]
+S141_OVERLOOKER OK (11 checks)

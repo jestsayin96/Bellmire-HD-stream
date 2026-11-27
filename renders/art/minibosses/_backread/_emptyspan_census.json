@@ -1,0 +1,983 @@
+{
+ "no_man": [
+  "panner"
+ ],
+ "empty_mid": [],
+ "nonempty": [
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman",
+  "tither",
+  "blower",
+  "changer",
+  "stopper",
+  "roper",
+  "almoner",
+  "stiltman",
+  "nightman",
+  "iceman",
+  "straker",
+  "weigher",
+  "dredger",
+  "harrowman",
+  "pledgeman",
+  "timberman",
+  "collier",
+  "overlooker"
+ ],
+ "no_declaration": [
+  "crimp"
+ ],
+ "declaration_errors": {},
+ "build_failed": {},
+ "rows": {
+  "drillmaster": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     13
+    ],
+    [
+     25,
+     26
+    ],
+    [
+     29,
+     30
+    ]
+   ],
+   "items": 31
+  },
+  "scrapwright": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     8
+    ],
+    [
+     38,
+     44
+    ]
+   ],
+   "items": 46
+  },
+  "gaoler": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     17,
+     18
+    ]
+   ],
+   "items": 33
+  },
+  "snuffer": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     15
+    ],
+    [
+     53,
+     62
+    ],
+    [
+     62,
+     63
+    ]
+   ],
+   "items": 66
+  },
+  "sexton": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     12
+    ],
+    [
+     67,
+     69
+    ]
+   ],
+   "items": 75
+  },
+  "porter": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     14
+    ],
+    [
+     39,
+     43
+    ]
+   ],
+   "items": 45
+  },
+  "tallyman": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     10
+    ],
+    [
+     39,
+     42
+    ],
+    [
+     43,
+     51
+    ]
+   ],
+   "items": 70
+  },
+  "cook": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     12
+    ],
+    [
+     23,
+     24
+    ]
+   ],
+   "items": 31
+  },
+  "sluicekeeper": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     12
+    ],
+    [
+     36,
+     37
+    ],
+    [
+     38,
+     39
+    ]
+   ],
+   "items": 39
+  },
+  "sower": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     12
+    ],
+    [
+     16,
+     18
+    ],
+    [
+     22,
+     23
+    ]
+   ],
+   "items": 41
+  },
+  "snarer": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     11
+    ],
+    [
+     27,
+     28
+    ]
+   ],
+   "items": 32
+  },
+  "stoker": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     19
+    ],
+    [
+     31,
+     32
+    ]
+   ],
+   "items": 37
+  },
+  "bellman": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     7
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     12,
+     13
+    ]
+   ],
+   "items": 22
+  },
+  "boiler": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     16
+    ]
+   ],
+   "items": 33
+  },
+  "jointer": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     24
+    ],
+    [
+     36,
+     37
+    ],
+    [
+     40,
+     41
+    ],
+    [
+     56,
+     58
+    ]
+   ],
+   "items": 58
+  },
+  "quartermaster": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     13
+    ],
+    [
+     22,
+     23
+    ],
+    [
+     24,
+     28
+    ],
+    [
+     29,
+     30
+    ]
+   ],
+   "items": 35
+  },
+  "loader": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     13
+    ],
+    [
+     33,
+     35
+    ]
+   ],
+   "items": 40
+  },
+  "hurdleman": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     9
+    ],
+    [
+     9,
+     19
+    ],
+    [
+     19,
+     25
+    ]
+   ],
+   "items": 78
+  },
+  "tanner": {
+   "source": "parts",
+   "ranges": [
+    [
+     29,
+     36
+    ],
+    [
+     36,
+     41
+    ],
+    [
+     42,
+     44
+    ]
+   ],
+   "items": 52
+  },
+  "reeve": {
+   "source": "span",
+   "ranges": [
+    [
+     33,
+     41
+    ]
+   ],
+   "items": 60
+  },
+  "tapster": {
+   "source": "span",
+   "ranges": [
+    [
+     30,
+     41
+    ]
+   ],
+   "items": 64
+  },
+  "pressman": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "items": 41
+  },
+  "strickler": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "items": 47
+  },
+  "dyer": {
+   "source": "span",
+   "ranges": [
+    [
+     38,
+     63
+    ]
+   ],
+   "items": 77
+  },
+  "greener": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     18
+    ]
+   ],
+   "items": 130
+  },
+  "moulder": {
+   "source": "span",
+   "ranges": [
+    [
+     39,
+     61
+    ]
+   ],
+   "items": 79
+  },
+  "ratcatcher": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "items": 73
+  },
+  "drover": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     14
+    ]
+   ],
+   "items": 127
+  },
+  "paviser": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "items": 32
+  },
+  "fenman": {
+   "source": "span",
+   "ranges": [
+    [
+     4,
+     9
+    ]
+   ],
+   "items": 35
+  },
+  "comfitmaker": {
+   "source": "span",
+   "ranges": [
+    [
+     6,
+     14
+    ]
+   ],
+   "items": 38
+  },
+  "leech": {
+   "source": "span",
+   "ranges": [
+    [
+     6,
+     15
+    ]
+   ],
+   "items": 36
+  },
+  "beadle": {
+   "source": "span",
+   "ranges": [
+    [
+     6,
+     10
+    ]
+   ],
+   "items": 41
+  },
+  "rammer": {
+   "source": "span",
+   "ranges": [
+    [
+     21,
+     35
+    ]
+   ],
+   "items": 35
+  },
+  "fuller": {
+   "source": "span",
+   "ranges": [
+    [
+     32,
+     50
+    ]
+   ],
+   "items": 67
+  },
+  "stackman": {
+   "source": "span",
+   "ranges": [
+    [
+     45,
+     58
+    ]
+   ],
+   "items": 72
+  },
+  "dauber": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     14
+    ]
+   ],
+   "items": 46
+  },
+  "sealer": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "items": 43
+  },
+  "hooper": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     15
+    ]
+   ],
+   "items": 50
+  },
+  "relief": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     13
+    ]
+   ],
+   "items": 36
+  },
+  "scraper": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     14
+    ]
+   ],
+   "items": 81
+  },
+  "ferryman": {
+   "source": "span",
+   "ranges": [
+    [
+     42,
+     62
+    ]
+   ],
+   "items": 75
+  },
+  "winder": {
+   "source": "span",
+   "ranges": [
+    [
+     32,
+     49
+    ]
+   ],
+   "items": 61
+  },
+  "pitman": {
+   "source": "span",
+   "ranges": [
+    [
+     35,
+     51
+    ]
+   ],
+   "items": 51
+  },
+  "tither": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     16
+    ]
+   ],
+   "items": 31
+  },
+  "blower": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     12
+    ]
+   ],
+   "items": 59
+  },
+  "changer": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     14
+    ]
+   ],
+   "items": 27
+  },
+  "stopper": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     9
+    ]
+   ],
+   "items": 39
+  },
+  "roper": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     11
+    ]
+   ],
+   "items": 45
+  },
+  "almoner": {
+   "source": "span",
+   "ranges": [
+    [
+     0,
+     15
+    ]
+   ],
+   "items": 37
+  },
+  "panner": {
+   "source": "span",
+   "ranges": [
+    [
+     24,
+     24
+    ]
+   ],
+   "items": 24,
+   "items_after_span": 0
+  },
+  "stiltman": {
+   "source": "parts",
+   "ranges": [
+    [
+     9,
+     12
+    ],
+    [
+     12,
+     17
+    ],
+    [
+     17,
+     23
+    ],
+    [
+     23,
+     27
+    ]
+   ],
+   "items": 27
+  },
+  "nightman": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     11
+    ],
+    [
+     11,
+     17
+    ],
+    [
+     24,
+     26
+    ]
+   ],
+   "items": 33
+  },
+  "iceman": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     11
+    ],
+    [
+     11,
+     17
+    ],
+    [
+     33,
+     35
+    ]
+   ],
+   "items": 35
+  },
+  "straker": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     12,
+     18
+    ],
+    [
+     34,
+     36
+    ]
+   ],
+   "items": 36
+  },
+  "weigher": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     12,
+     18
+    ],
+    [
+     27,
+     29
+    ]
+   ],
+   "items": 29
+  },
+  "dredger": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     11
+    ],
+    [
+     11,
+     17
+    ],
+    [
+     31,
+     33
+    ]
+   ],
+   "items": 33
+  },
+  "harrowman": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     5
+    ],
+    [
+     5,
+     12
+    ],
+    [
+     12,
+     18
+    ],
+    [
+     46,
+     50
+    ]
+   ],
+   "items": 50
+  },
+  "pledgeman": {
+   "source": "parts",
+   "ranges": [
+    [
+     20,
+     24
+    ],
+    [
+     24,
+     34
+    ],
+    [
+     34,
+     37
+    ],
+    [
+     37,
+     41
+    ]
+   ],
+   "items": 41
+  },
+  "crimp": {
+   "source": "",
+   "ranges": [],
+   "items": 51
+  },
+  "timberman": {
+   "source": "parts",
+   "ranges": [
+    [
+     19,
+     23
+    ],
+    [
+     23,
+     29
+    ],
+    [
+     29,
+     35
+    ],
+    [
+     35,
+     39
+    ]
+   ],
+   "items": 39
+  },
+  "collier": {
+   "source": "parts",
+   "ranges": [
+    [
+     48,
+     52
+    ],
+    [
+     52,
+     59
+    ],
+    [
+     59,
+     61
+    ],
+    [
+     64,
+     66
+    ]
+   ],
+   "items": 66
+  },
+  "overlooker": {
+   "source": "parts",
+   "ranges": [
+    [
+     0,
+     4
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     7,
+     12
+    ],
+    [
+     12,
+     13
+    ],
+    [
+     13,
+     23
+    ],
+    [
+     23,
+     30
+    ],
+    [
+     30,
+     33
+    ],
+    [
+     33,
+     34
+    ]
+   ],
+   "items": 34
+  }
+ },
+ "counts": {
+  "no_man": 1,
+  "empty_mid": 0,
+  "nonempty": 61,
+  "no_declaration": 1,
+  "declaration_errors": 0,
+  "build_failed": 0,
+  "bodies": 63
+ }
+}

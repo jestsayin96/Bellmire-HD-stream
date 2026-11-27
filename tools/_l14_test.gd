@@ -202,6 +202,34 @@ func _initialize() -> void:
 		if not hs.contains("!" + k):
 			all_in = false
 	_ok(all_in, "!help names every command")
+	# B173/B174: THE BARE !help LINE IS THE WIDEST THING THIS LANE SENDS, AND IT GROWS WITH
+	# THE COMMAND SET. It is built from `order`, so every command added to data/commands.json
+	# makes it len(name)+2 chars longer, and when it passes REPLY_MAX safe_line CUTS IT - in
+	# the most-typed answer in the set, with no gate anywhere saying so. Measured off the real
+	# source and the real data at B174: 352 of 440 with the hub URL on the end, headroom 88,
+	# so ELEVEN more mean-length (6-char) commands fit and the TWELFTH overflows - EIGHT at
+	# the longest existing name. (B173 first found this cliff and its mechanism holds, but it
+	# read a 59-char hub_url that is not in the data; the real one is 49, and every headline
+	# number moved. The figures above are B174's, off the real string.) This arm turns the
+	# cliff from a silent truncation on stream into a RED here, at the moment the command
+	# that crosses it is added.
+	var hs_sent := ChatCmd.safe_line(hs)
+	_ok(hs.length() <= ChatCmd.REPLY_MAX and hs_sent == hs, "the bare !help line fits REPLY_MAX uncut: %d of %d, headroom %d chars (~%d more 6-char commands)" % [hs.length(), ChatCmd.REPLY_MAX, ChatCmd.REPLY_MAX - hs.length(), int((ChatCmd.REPLY_MAX - hs.length()) / 8)])
+	# AND THE RED-PROVE, because an arm that only ever reads a green number is not an
+	# instrument. ONE character over the cap does NOT cost one character: _cut backtracks to
+	# the last space, so the overflow takes the whole final word with it - on the real line
+	# that is the 49-char hub URL, and the viewer is left with "All of it:" and no link. Fed a
+	# line exactly ONE over, this asserts the real safe_line both caps it AND loses more than
+	# it overflowed by, which is the fault worth knowing about rather than the cap itself.
+	# NOTE the padding here is a PROXY: the real line overflows in the MIDDLE, by a command
+	# being added, not at the end. The assertion is deliberately environment-independent -
+	# "one over costs more than one" - so it holds whether or not hub_url() is set here.
+	var over := hs
+	while over.length() < ChatCmd.REPLY_MAX + 1:
+		over += "x"
+	var over_sent := ChatCmd.safe_line(over)
+	var lost := over.length() - over_sent.length()
+	_ok(over_sent.length() <= ChatCmd.REPLY_MAX and lost > 1, "one char over the cap costs %d chars, not 1 - the cut falls back to a word boundary (%d -> %d)" % [lost, over.length(), over_sent.length()])
 	cc._last.clear()
 	var out := cc.handle("u1", "Ash", "!forg")
 	_ok(out.contains("did you mean !forge"), "a typo is nudged: %s" % out)

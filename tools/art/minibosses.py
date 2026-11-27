@@ -24024,6 +24024,107 @@ def overlooker():
               (0.0, 0.0, 1.0)), 'dark')
     _close("collar")
 
+    # ---- THE BACK OF THE COAT. THE ONLY THING ON THIS BODY THAT THE FRONT
+    # CAMERA CANNOT SEE, AND THAT IS THE ENTIRE POINT OF IT. ----------------
+    # THE FAULT IT ANSWERS, NAMED BY THE TEAM LEAD AFTER HE STAGED hero_front
+    # AND hero_back AND LOOKED AT THEM SIDE BY SIDE: "the two reads are the
+    # same grey slab ... the back carries no marker - no collar, no coat seam,
+    # no shoulder yoke, no belt line - that tells a player which way the body
+    # faces." He is right, and I staged both PNGs and looked before touching a
+    # vertex: head in profile and one level pale arm in BOTH views, mirrored.
+    # THE TURNED HEAD IS NOT THE FAULT AND IS NOT TOUCHED HERE - it is canon
+    # and C-216 names it as the one readable thing.
+    #
+    # WHY THIS CANNOT BE A SILHOUETTE CUE, SAID PLAINLY INSTEAD OF DODGED.
+    # A back ortho and a front ortho of a near-bilateral figure return the
+    # SAME OUTLINE by construction: an outline does not know what occludes
+    # what, so anything I hang off his back that widens the back outline
+    # widens the front one by exactly as much. The cue therefore HAS to be an
+    # internal one - which is precisely the four things the team lead listed.
+    # It is a VALUE cue, and the BEADLE'S SHIPPED FAULT is the reason it is
+    # dark and not pale: dark luma 0.068 against body 0.251 is a ratio of
+    # 3.67, the same margin the pointing mitt is built on, and a value that
+    # far apart cannot go flat against the coat on any view or any light.
+    #
+    # PLAINNESS IS THE VOICE (Mr. E's first rule). A YOKE AND A CENTRE SEAM
+    # ARE HOW A WORKING COAT IS ACTUALLY CUT - they are not ornament, they
+    # are the two seams that carry a coat's weight off the shoulders - and
+    # they are in the SAME dark as his belt and his boots, so his back reads
+    # as one garment and not as a decorated panel. HE STILL CARRIES NOTHING:
+    # this adds no object, and the span is part of the man.
+    #
+    # ABLATION HOOK: `OVL_BACK=0` builds this body without the span, so the
+    # pixels it moves can be COUNTED through one camera rather than asserted.
+    # That is trap 5 from my own prompt: `mask_of` answers how big a thing is
+    # and says nothing about whether it can be SEEN, and the honest test is
+    # to render with and without through one camera and let the renderer do
+    # the depth. The front view's moved count is the half that matters most -
+    # it must be ZERO, or this is not a facing cue at all.
+    # PASS 2, AND PASS 1 IS WHY. Pass 1 was a straight yoke box plus a
+    # vertical centre seam, and every number it produced was green: 17,301 px
+    # moved on the back view, ZERO alpha moved on the front. I rendered it and
+    # LOOKED, and the picture failed three ways the numbers could not see.
+    #   1. IT READ AS A PAINTED "T", NOT AS TAILORING. A crisp centred cross
+    #      on a man's back is a heraldic mark, and Bellmire's register is
+    #      "Measured the grain. Counted the flasks. Kept the door." A symbol
+    #      is the one thing this voice does not do. THE CROSS IS GONE.
+    #   2. THE YOKE'S ENDS WERE SQUARE AND FLOATED. One straight box laid
+    #      across a barrelled back touches it only at the spine: by x 0.205
+    #      the back has fallen away to y 0.148 and the box was still at
+    #      0.245, so its corners stood a centimetre off the coat in mid-air.
+    #   3. FROM THE SIDE IT READ AS A PLATE BOLTED ON - a dark slab standing
+    #      clear of his back with an air gap under it, like a board strapped
+    #      to him rather than seams in his coat. A box on a curve, seen
+    #      edge-on, is a box.
+    # ALL THREE HAVE ONE CAUSE: a flat thing on a round thing. So both bands
+    # are now built in five short segments that FOLLOW y = sqrt(r^2 - x^2)
+    # across the back, each one standing about a centimetre proud of the
+    # surface at its own x and dying into the curve at the ends instead of
+    # ending in air.
+    # AND THE SECOND BAND IS A HALF-BELT, NOT A SEAM. A half-belt - a strap
+    # across the back of the waist only - is how a working coat is actually
+    # cut, it is the plainest possible answer, and two horizontal bands
+    # cannot read as a symbol the way a cross does.
+    _open()
+    if os.environ.get("OVL_BACK", "1").strip() != "0":
+        # THE YOKE. z 1.700, where the trunk's radius is about 0.253. The
+        # segments overlap in x so the band is continuous, and the outermost
+        # pair ends at x 0.250 - INSIDE that 0.253 - so no part of it can
+        # enter the front ortho's outline. The ablation proves that; it is
+        # not asserted here.
+        for _x, _w, _y in ((0.000, 0.130, 0.246),
+                           (0.115, 0.115, 0.223), (-0.115, 0.115, 0.223),
+                           (0.200, 0.100, 0.155), (-0.200, 0.100, 0.155)):
+            P.add(L.box(_w, 0.050, 0.165), 'dark', loc=(_x, _y, 1.680))
+        # PASS 3 CHANGES ONE THING AND ONE ONLY: THE HEIGHT OF BOTH BANDS.
+        # Pass 2 was green and I shipped it, then looked at the hero cell -
+        # the Overlooker beside a KayKit adventurer at true scale - and the
+        # two bands were FAINT there in a way they are not on the big flat
+        # render. They were 0.120 and 0.085 on a 2.40 m body: 5.0% and 3.5%
+        # of his height. So the lever is HEIGHT IN Z (0.165 and 0.115, 6.9%
+        # and 4.8%) and deliberately NOT thickness in y, which is unchanged
+        # at 0.050 and 0.048. Standing further off the coat is what made
+        # pass 1 read as a plate bolted on from the side; being TALLER costs
+        # nothing from the side and is the whole of what reads at distance.
+        # AND THE YOKE DROPS 0.020 TO PAY FOR ITS OWN HEIGHT. Growing it
+        # about z=1.700 put its top edge at 1.7825 against the dark collar's
+        # underside at 1.790 - a SEVEN MILLIMETRE gap where pass 2 had
+        # thirty, and two darks that close go flat against each other at
+        # stream distance. That is the Beadle's pale-on-pale fault with the
+        # values inverted, and it is named in my own prompt. I saw it in the
+        # hero cell: head, collar and yoke tending to one dark column. The
+        # centre drops to 1.680 so the top is back at 1.7625 and the lit
+        # trunk strip between collar and yoke survives; the extra height is
+        # all taken downward, where there is nothing to collide with.
+        # THE HALF-BELT. z 1.300, just clear of his own belt at 1.246, where
+        # the trunk's radius is about 0.231. Same construction, same reason,
+        # and the outermost pair ends at x 0.225 inside that 0.231.
+        for _x, _w, _y in ((0.000, 0.150, 0.228),
+                           (0.120, 0.110, 0.197), (-0.120, 0.110, 0.197),
+                           (0.185, 0.080, 0.138), (-0.185, 0.080, 0.138)):
+            P.add(L.box(_w, 0.048, 0.115), 'dark', loc=(_x, _y, 1.300))
+    _close("back")
+
     # ---- THE HEAD, TURNED. NO PALE ANYWHERE ON IT. ------------------------
     # The yaw is applied to the cap, the brim and the jaw, so the profile the
     # front camera gets is a real profile and not a sphere with eyes moved.
@@ -24095,7 +24196,7 @@ def overlooker():
     # THE FIGURE, STATED BY THIS BUILDER - see man_ranges(). He carries no
     # gear, so every span IS the man. That is a declaration, not an omission:
     # the one body in this file whose silhouette is entirely his own.
-    P.man_parts = ("legs", "coat", "trunk", "collar", "head", "point", "arm")
+    P.man_parts = ("legs", "coat", "trunk", "collar", "back", "head", "point", "arm")
     return P
 
 

@@ -1,0 +1,32 @@
+{
+ "rows": {
+  "panner": {
+   "key": "panner",
+   "errors": [
+    "panner: an EMPTY `man` span at [[24, 24]] in a builder of 24 items, with 0 authored after it - a `_close(\"man\")` that wrapped zero items, not the end-of-build no-operator marker"
+   ],
+   "views": {},
+   "man_from": "span",
+   "man_ranges": [
+    [
+     24,
+     24
+    ]
+   ],
+   "prove_empty_mid": true,
+   "items": 24,
+   "empty_ranges": [
+    [
+     24,
+     24
+    ]
+   ],
+   "items_after_span": 0,
+   "verdict": "RED"
+  }
+ },
+ "errors": [
+  "panner: an EMPTY `man` span at [[24, 24]] in a builder of 24 items, with 0 authored after it - a `_close(\"man\")` that wrapped zero items, not the end-of-build no-operator marker"
+ ],
+ "ok": false
+}

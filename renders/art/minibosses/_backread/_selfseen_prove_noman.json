@@ -1,0 +1,28 @@
+{
+ "rows": {
+  "panner": {
+   "key": "panner",
+   "errors": [],
+   "views": {},
+   "man_from": "span",
+   "man_ranges": [
+    [
+     24,
+     24
+    ]
+   ],
+   "items": 24,
+   "empty_ranges": [
+    [
+     24,
+     24
+    ]
+   ],
+   "no_man": true,
+   "verdict": "NO_MAN",
+   "no_man_reason": "the builder declares an EMPTY `man` span as its last statement - a deliberate marker that this body has no operator at all. A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED: no view is rendered and no cell is written, so this row is an honest absence and NOT a pass. Matches `minibosses.man_ranges` and the register census's `no_man` state (docs/art/SELFSEEN_AUDIT_24NOV.md section 6)."
+  }
+ },
+ "errors": [],
+ "ok": true
+}

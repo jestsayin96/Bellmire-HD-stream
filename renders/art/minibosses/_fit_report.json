@@ -146,7 +146,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:21-06:00",
+   "measured_at": "2026-11-26T18:40:45-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -316,7 +316,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:26-06:00",
+   "measured_at": "2026-11-26T18:40:49-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -486,7 +486,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:24-06:00",
+   "measured_at": "2026-11-26T18:40:47-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -656,7 +656,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:29-06:00",
+   "measured_at": "2026-11-26T18:40:52-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -826,7 +826,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:31-06:00",
+   "measured_at": "2026-11-26T18:40:54-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -996,7 +996,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:34-06:00",
+   "measured_at": "2026-11-26T18:40:56-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -1166,7 +1166,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:36-06:00",
+   "measured_at": "2026-11-26T18:40:58-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -1336,7 +1336,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:39-06:00",
+   "measured_at": "2026-11-26T18:41:00-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -1506,7 +1506,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:41-06:00",
+   "measured_at": "2026-11-26T18:41:03-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -1676,7 +1676,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:44-06:00",
+   "measured_at": "2026-11-26T18:41:05-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -1846,7 +1846,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:46-06:00",
+   "measured_at": "2026-11-26T18:41:07-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -2016,7 +2016,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:49-06:00",
+   "measured_at": "2026-11-26T18:41:10-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -2186,7 +2186,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:52-06:00",
+   "measured_at": "2026-11-26T18:41:12-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -2356,7 +2356,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:54-06:00",
+   "measured_at": "2026-11-26T18:41:14-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -2888,7 +2888,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:57-06:00",
+   "measured_at": "2026-11-26T18:41:16-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -3058,7 +3058,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:51:59-06:00",
+   "measured_at": "2026-11-26T18:41:19-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -3228,7 +3228,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:02-06:00",
+   "measured_at": "2026-11-26T18:41:21-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -3398,7 +3398,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:05-06:00",
+   "measured_at": "2026-11-26T18:41:23-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -3568,7 +3568,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:07-06:00",
+   "measured_at": "2026-11-26T18:41:26-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -3738,7 +3738,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:10-06:00",
+   "measured_at": "2026-11-26T18:41:28-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -3930,7 +3930,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:15-06:00",
+   "measured_at": "2026-11-26T18:41:33-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -4122,7 +4122,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:18-06:00",
+   "measured_at": "2026-11-26T18:41:35-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -4314,7 +4314,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:23-06:00",
+   "measured_at": "2026-11-26T18:41:40-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -4506,7 +4506,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:32-06:00",
+   "measured_at": "2026-11-26T18:41:47-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -4698,7 +4698,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:34-06:00",
+   "measured_at": "2026-11-26T18:41:50-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -4890,7 +4890,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:37-06:00",
+   "measured_at": "2026-11-26T18:41:52-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -5082,7 +5082,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:42-06:00",
+   "measured_at": "2026-11-26T18:41:58-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -5274,7 +5274,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:44-06:00",
+   "measured_at": "2026-11-26T18:42:01-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -5466,7 +5466,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:47-06:00",
+   "measured_at": "2026-11-26T18:42:03-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -5636,7 +5636,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:26-06:00",
+   "measured_at": "2026-11-26T18:41:42-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -5828,7 +5828,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:50-06:00",
+   "measured_at": "2026-11-26T18:42:06-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -6020,7 +6020,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:53-06:00",
+   "measured_at": "2026-11-26T18:42:08-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -6212,7 +6212,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:55-06:00",
+   "measured_at": "2026-11-26T18:42:10-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -6404,7 +6404,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:00-06:00",
+   "measured_at": "2026-11-26T18:42:15-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -6596,7 +6596,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:05-06:00",
+   "measured_at": "2026-11-26T18:42:19-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -6788,7 +6788,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:11-06:00",
+   "measured_at": "2026-11-26T18:42:24-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -6980,7 +6980,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:13-06:00",
+   "measured_at": "2026-11-26T18:42:26-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -7172,7 +7172,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:39-06:00",
+   "measured_at": "2026-11-26T18:41:55-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -7364,7 +7364,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:21-06:00",
+   "measured_at": "2026-11-26T18:41:37-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -7556,7 +7556,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:08-06:00",
+   "measured_at": "2026-11-26T18:42:22-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -7748,7 +7748,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:29-06:00",
+   "measured_at": "2026-11-26T18:41:44-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -7940,7 +7940,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:03-06:00",
+   "measured_at": "2026-11-26T18:42:17-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -8132,7 +8132,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:58-06:00",
+   "measured_at": "2026-11-26T18:42:12-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -8324,7 +8324,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:52:13-06:00",
+   "measured_at": "2026-11-26T18:41:30-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "self_seen": {
     "front": {
@@ -8516,7 +8516,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:16-06:00",
+   "measured_at": "2026-11-26T18:42:29-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -8686,7 +8686,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:19-06:00",
+   "measured_at": "2026-11-26T18:42:31-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -8856,7 +8856,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:21-06:00",
+   "measured_at": "2026-11-26T18:42:33-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -9026,7 +9026,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:24-06:00",
+   "measured_at": "2026-11-26T18:42:35-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -9196,7 +9196,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:27-06:00",
+   "measured_at": "2026-11-26T18:42:38-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -9366,7 +9366,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:29-06:00",
+   "measured_at": "2026-11-26T18:42:40-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -9536,7 +9536,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:32-06:00",
+   "measured_at": "2026-11-26T18:42:42-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -9706,7 +9706,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:35-06:00",
+   "measured_at": "2026-11-26T18:42:44-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -9876,7 +9876,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:37-06:00",
+   "measured_at": "2026-11-26T18:42:46-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -10046,7 +10046,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:39-06:00",
+   "measured_at": "2026-11-26T18:42:48-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -10216,7 +10216,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:42-06:00",
+   "measured_at": "2026-11-26T18:42:51-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -10386,7 +10386,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:45-06:00",
+   "measured_at": "2026-11-26T18:42:53-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -10556,7 +10556,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:47-06:00",
+   "measured_at": "2026-11-26T18:42:55-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -10726,7 +10726,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:50-06:00",
+   "measured_at": "2026-11-26T18:42:58-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -10896,7 +10896,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:52-06:00",
+   "measured_at": "2026-11-26T18:43:00-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -11066,7 +11066,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:53:55-06:00",
+   "measured_at": "2026-11-26T18:43:02-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -11236,7 +11236,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T02:55:50-06:00",
+   "measured_at": "2026-11-26T18:43:04-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -11406,7 +11406,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-25T14:51:22-06:00",
+   "measured_at": "2026-11-26T18:43:07-06:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -11446,6 +11446,176 @@
    "air_px_eps": 0.02,
    "air_px_min": 102,
    "air_px_tightest_view": "side"
+  },
+  "overlooker": {
+   "creature_h": 2.4,
+   "hero_h": 2.45,
+   "ratio": 0.98,
+   "pair_w": 3.41,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.194,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "overlooker",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 27557,
+      "vis": 27557,
+      "delta": 32583,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43672,
+      "vis": 43672,
+      "delta": 55081,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 21367,
+      "vis": 21367,
+      "delta": 29050,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37770,
+      "vis": 37770,
+      "delta": 42168,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 27573,
+      "vis": 27573,
+      "delta": 37369,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44018,
+      "vis": 44018,
+      "delta": 48816,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 196840,
+     "shadow_px": 3170,
+     "mean": 0.4476,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 2109,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 199120,
+     "shadow_px": 2803,
+     "mean": 0.4326,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 2096,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 196840,
+     "shadow_px": 3007,
+     "mean": 0.4515,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 2247,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "measured_at": "2026-11-26T18:43:09-06:00",
+   "measured_by": "tools/art/minibossfit.py",
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     148,
+     146
+    ],
+    "side": [
+     175,
+     178
+    ],
+    "back": [
+     146,
+     148
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 146,
+   "air_px_tightest_view": "front"
   }
  },
  "errors": [],
@@ -11458,26 +11628,24 @@
  "frame_w": 5.6,
  "margin_x": 0.12,
  "rows_unstamped": [],
- "provenance_note": "64 of 64 rows carry a measured_at. An unstamped row is NOT red - this block answers WHEN a stored measurement was taken, not whether it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as rows are re-measured.",
+ "provenance_note": "65 of 65 rows carry a measured_at. An unstamped row is NOT red - this block answers WHEN a stored measurement was taken, not whether it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as rows are re-measured.",
  "self_seen": {
   "asks": "how much of THE MAN survives HIS OWN GEAR, per view - an OCCLUSION measure, NOT a readability score (see the docstring of derive_self_seen and the top-end tile).",
   "instrument": "tools/art/_backread.py",
   "census": "tools/art/_selfseen_census.py",
   "bar": 0.75,
   "derived": "recomputed this run - this block is RUN-OWNED and is never carried forward",
-  "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds. | 24 Nov 2026 19:5x CT for the DREDGER (57th), measured by tools/art/_backread.py --keys dredger and MERGED into this file row-by-row. NOT written with --out, which OVERWRITES and would have destroyed the other 56 rows - the same wholesale-wipe shape this file's own carry rule exists to prevent. 24 Nov 2026 21:0x CT for the 58th body (harrowman), measured by tools/art/_backread.py --keys harrowman in the same run that built it; its own row carries its measured_at. 24 Nov 2026 21:5x CT for the 59th body (pledgeman), measured by _backread.py and MERGED into this file - the other rows untouched. 25 Nov 2026 02:0x CT for the 61st body (timberman), measured by tools/art/_backread.py --keys timberman in the run that built it and MERGED into this file - the other rows untouched.",
-  "instrument_errors": [
-   "panner: the man span merged to no object"
-  ],
-  "measured_cells": 180,
-  "measured_bodies": 60,
+  "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds. | 24 Nov 2026 19:5x CT for the DREDGER (57th), measured by tools/art/_backread.py --keys dredger and MERGED into this file row-by-row. NOT written with --out, which OVERWRITES and would have destroyed the other 56 rows - the same wholesale-wipe shape this file's own carry rule exists to prevent. 24 Nov 2026 21:0x CT for the 58th body (harrowman), measured by tools/art/_backread.py --keys harrowman in the same run that built it; its own row carries its measured_at. 24 Nov 2026 21:5x CT for the 59th body (pledgeman), measured by _backread.py and MERGED into this file - the other rows untouched. 25 Nov 2026 02:0x CT for the 61st body (timberman), measured by tools/art/_backread.py --keys timberman in the run that built it and MERGED into this file - the other rows untouched. ; 2026-11-26T17:47:38-0600 CT (26 Nov 2026 art firing) for the OVERLOOKER (63rd), which the 25 Nov 22:46 census listed as MEASURABLE and which had NO row here at all - minibossfit went RED on it this run and the red PRE-DATES this run's edit: the body was born at pass 5 and was never fed to the instrument. Its cells are man_seen 1.0 on all three views, and that is an HONEST 1.0 that says nothing good: he carries NO GEAR (34 items inside the man span, 0 outside), so there is nothing that could occlude him. Per derive_self_seen's own docstring a high self_seen says UNOBSTRUCTED, never that the body READS - his facing is measured by tools/art/_ovl_backread.py, not by this. | 2026-11-26T18:40:20-0600 CT (26 Nov 2026 art firing) for the PANNER row, REPLACED not added: the one error that held this file at ok:false for two days was a HARNESS fault and is fixed in tools/art/_backread.py, which now reports a declared-empty `man` span as NO_MAN - an honest absence that claims NOTHING and is not a pass - and goes RED on an empty span that is not the end-of-build marker. No view was rendered for this row because there is no man to render; `views` is {} on purpose. The other 61 rows were verified byte-identical across the merge.",
+  "instrument_errors": [],
+  "measured_cells": 183,
+  "measured_bodies": 61,
   "no_man": [
    "panner"
   ],
   "no_man_reason": "the builder declares an EMPTY `man` span - a deliberate marker that this body has no operator at all (panner pass 4 removed his, by A/B, and left the empty span to say so). A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED and this is NOT red - the first cut of this rule called panner MEASURABLE and turned the register red on a correct body, which is an unearned FAIL and the same fault as an unearned pass.",
-  "census_measured_at": "2026-11-25T04:02:20-0600",
-  "census_register_mtime": "2026-11-25T03:59:06-0600",
-  "census_register_pairs": 64,
+  "census_measured_at": "2026-11-25T22:46:05-0600",
+  "census_register_mtime": "2026-11-25T22:45:23-0600",
+  "census_register_pairs": 65,
   "census_errors": [],
   "build_failed": [],
   "build_failed_reason": "the builder RAISED, so nothing was measurable and nothing is claimed - that is RED, never an honest absence. This list and the census's own `errors` were both unread until 24 Nov 12:3x.",
@@ -11676,7 +11844,7 @@
   ],
   "under_bar_count": 30,
   "top_end": {
-   "key": "straker",
+   "key": "overlooker",
    "view": "back",
    "man_seen": 1.0
   },
@@ -11685,8 +11853,8 @@
  "unproved_cells": [],
  "visibility_scope": {
   "asks": "how much of each subject survives the OTHER subject, in the pair cell",
-  "cells": 384,
-  "cells_reading_exactly_1_0": 384,
+  "cells": 390,
+  "cells_reading_exactly_1_0": 390,
   "cells_where_vis_differs_from_alone": 0,
   "air_px_floor": 0,
   "rows_with_no_air": [
@@ -11696,16 +11864,140 @@
   "note": "DERIVED THIS RUN off the rows in this file, never carried. The method is sound - with/without through one locked camera - but place() holds air between the two bodies in almost every row, so mostly the answer is settled before the render. THIS IS A TAKEN-BY-CONSTRUCTION PASS WHEREVER IT PASSES, NOT A MEASUREMENT THAT MOVED - trap 4, an instrument that cannot move is not a pass. IT DOES NOT SAY THE BODY READS, and `seen: 1.0` must never be cited as if it did; `self_seen` answers that question. What it still earns: it goes red if a layout change ever puts the two bodies in front of each other, and alone == 0 still catches a blank or mis-aimed render. RED ON EMPTY: `taken_by_construction` is false when there are no cells at all, so a run that measured nothing cannot read as a pass. `rows_with_no_air` names the rows where the construction argument does NOT hold and the cell is therefore a real measurement - keep an eye on those."
  },
  "measured": [
-  "collier"
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman",
+  "tither",
+  "blower",
+  "changer",
+  "stopper",
+  "roper",
+  "almoner",
+  "panner",
+  "stiltman",
+  "nightman",
+  "iceman",
+  "straker",
+  "weigher",
+  "dredger",
+  "harrowman",
+  "pledgeman",
+  "crimp",
+  "timberman",
+  "collier",
+  "overlooker"
  ],
  "asked": [
-  "collier"
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman",
+  "tither",
+  "blower",
+  "changer",
+  "stopper",
+  "roper",
+  "almoner",
+  "panner",
+  "stiltman",
+  "nightman",
+  "iceman",
+  "straker",
+  "weigher",
+  "dredger",
+  "harrowman",
+  "pledgeman",
+  "crimp",
+  "timberman",
+  "collier",
+  "overlooker"
  ],
  "blank_check": {
-  "files": 186,
+  "files": 189,
   "failures": [],
-  "cells": 62,
-  "expected_files": 186,
+  "cells": 63,
+  "expected_files": 189,
   "scope": "whole_house"
  },
  "red_summary": {
@@ -11715,6 +12007,6 @@
   "ok_shipped": true
  },
  "verdict": "GREEN",
- "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (64), re-derived from stored measurements; 1 of them rendered this run"
+ "rendered_this_run": 63,
+ "verdict_scope": "every row in pairs (65), re-derived from stored measurements; 63 of them rendered this run"
 }

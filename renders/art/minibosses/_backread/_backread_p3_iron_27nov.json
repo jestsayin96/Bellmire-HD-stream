@@ -1,0 +1,182 @@
+{
+ "rows": {
+  "porter": {
+   "key": "porter",
+   "errors": [],
+   "views": {
+    "front": {
+     "man_alone_px": 42135,
+     "man_seen_px": 37007,
+     "man_seen": 0.8783,
+     "value_creature": {
+      "px": 100697,
+      "p5": 0.1308,
+      "p50": 0.4755,
+      "p95": 0.6265,
+      "spread": 0.4958,
+      "dark_frac": 0.1206,
+      "bands": [
+       0.0461,
+       0.1527,
+       0.225,
+       0.122,
+       0.4028,
+       0.0503,
+       0.001,
+       0.0
+      ],
+      "bands_5pct": 5
+     },
+     "value_man_visible": {
+      "px": 37007,
+      "p5": 0.1608,
+      "p50": 0.4272,
+      "p95": 0.6117,
+      "spread": 0.4509,
+      "dark_frac": 0.1043,
+      "bands": [
+       0.0181,
+       0.1548,
+       0.2598,
+       0.1869,
+       0.3592,
+       0.0185,
+       0.0028,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "side": {
+     "man_alone_px": 32074,
+     "man_seen_px": 28737,
+     "man_seen": 0.896,
+     "value_creature": {
+      "px": 60982,
+      "p5": 0.1488,
+      "p50": 0.282,
+      "p95": 0.6287,
+      "spread": 0.48,
+      "dark_frac": 0.1497,
+      "bands": [
+       0.0259,
+       0.2931,
+       0.2774,
+       0.1695,
+       0.182,
+       0.049,
+       0.0031,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 28737,
+      "p5": 0.1428,
+      "p50": 0.3759,
+      "p95": 0.598,
+      "spread": 0.4552,
+      "dark_frac": 0.2049,
+      "bands": [
+       0.0332,
+       0.2472,
+       0.2178,
+       0.1507,
+       0.3143,
+       0.0342,
+       0.0025,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    },
+    "back": {
+     "man_alone_px": 40295,
+     "man_seen_px": 9458,
+     "man_seen": 0.2347,
+     "value_creature": {
+      "px": 97297,
+      "p5": 0.1988,
+      "p50": 0.4152,
+      "p95": 0.5464,
+      "spread": 0.3476,
+      "dark_frac": 0.0507,
+      "bands": [
+       0.0082,
+       0.107,
+       0.3528,
+       0.1392,
+       0.3737,
+       0.0155,
+       0.0037,
+       0.0
+      ],
+      "bands_5pct": 4
+     },
+     "value_man_visible": {
+      "px": 9458,
+      "p5": 0.142,
+      "p50": 0.2484,
+      "p95": 0.5185,
+      "spread": 0.3765,
+      "dark_frac": 0.2405,
+      "bands": [
+       0.02,
+       0.4894,
+       0.1254,
+       0.2895,
+       0.0736,
+       0.0021,
+       0.0,
+       0.0
+      ],
+      "bands_5pct": 4
+     }
+    }
+   },
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     14
+    ],
+    [
+     54,
+     58
+    ]
+   ],
+   "bounds_control": [
+    -1.7621,
+    -1.11307,
+    0.0,
+    1.7621,
+    0.61818,
+    2.3
+   ],
+   "bounds_split": [
+    -1.7621,
+    -1.11307,
+    0.0,
+    1.7621,
+    0.61818,
+    2.3
+   ],
+   "objs_control": 4,
+   "objs_split": 7,
+   "item_counts": {
+    "inside": 18,
+    "outside": 42,
+    "total": 60
+   },
+   "man_objs": [
+    "porter_body_man",
+    "porter_dark_man",
+    "porter_bone_man",
+    "porter_glow_man"
+   ],
+   "engine": "BLENDER_EEVEE"
+  }
+ },
+ "errors": [],
+ "ok": true
+}

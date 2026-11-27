@@ -25,6 +25,26 @@ ask how much of the picture changed.
               screen luma differs by more than 0.08. This is the interior
               read: a face, an open coat, a tool on one hip.
   in_mean_abs the mean absolute luma difference over that intersection.
+  in_diff_thirds
+              THE SAME in_diff_frac COMPUTED SEPARATELY OVER THE TOP, MIDDLE
+              AND BOTTOM THIRD of the body's own vertical extent, plus their
+              spread (max - min). ADDED 27 NOV 2026 AND HERE IS WHY, because
+              the whole-body number ALONE WAS WRONG ONCE AND IT WAS WRONG IN
+              MY FAVOUR. The census of all 70 bodies put `stopper` worst at
+              0.1794; the picture said stopper is FINE - it has a pale face
+              mask with two eyes - and its score is low only because an
+              enormous symmetric hexagonal vat rim is most of its pixels and
+              DILUTES THE FRACTION. A body that is mostly gear scores as
+              facing-less however good its face is. The thirds separate the
+              two causes because DILUTION IS UNIFORM AND A DEAD REGION IS NOT:
+                  stopper  top 0.186 / mid 0.202 / bot 0.110  spread 0.092
+                           -> flat, so the low score is dilution, not a fault
+                  bellman  top 0.482 / mid 0.119 / bot 0.033  spread 0.449
+                           -> the bottom 44% of the body was genuinely DEAD
+              THIS IS STILL NOT A PASS MARK and no bar is set on the spread
+              either. It splits a low score into "mostly prop" and "has a
+              dead region"; WHICH REGION AND WHETHER THE DIFFERENCE IS A
+              FACING is a question only the picture answers.
 
 THERE IS NO PASS MARK IN THIS FILE AND THAT IS DELIBERATE. A bare threshold
 invented here would be exactly the kind of unearned number this lane has
@@ -71,6 +91,16 @@ def _clear():
 
 def _luma(a):
     return 0.2126 * a[:, :, 0] + 0.7152 * a[:, :, 1] + 0.0722 * a[:, :, 2]
+
+
+def _band(inter, y0, y1, i):
+    """The i-th of three horizontal bands over the body's own vertical extent."""
+    h = (y1 - y0 + 1) / 3.0
+    a = y0 + int(round(i * h))
+    b = y0 + int(round((i + 1) * h)) if i < 2 else y1 + 1
+    m = np.zeros_like(inter)
+    m[a:b, :] = True
+    return m
 
 
 def _one(key, outdir, errs):
@@ -137,6 +167,40 @@ def _one(key, outdir, errs):
     cell["sil_iou"] = round(ni / float(nu), 4)
     cell["in_diff_frac"] = round(float((d[inter] > 0.08).mean()), 4)
     cell["in_mean_abs"] = round(float(d[inter].mean()), 4)
+    # ---- PER-THIRD BREAKDOWN, over the BODY's own vertical extent (not the
+    # frame's): a body that does not fill the frame would otherwise get empty
+    # bands at top and bottom and read as dead where there is simply nothing.
+    rows = np.flatnonzero(union.any(axis=1))
+    if rows.size < 3:
+        cell["thirds_red"] = ("the union spans %d image rows - NOTHING WAS "
+                              "MEASURED per third" % int(rows.size))
+        return cell
+    y0, y1 = int(rows[0]), int(rows[-1])
+    h = (y1 - y0 + 1) / 3.0
+    names = ("top", "mid", "bot")
+    th, reds = {}, []
+    for i, nm in enumerate(names):
+        a = y0 + int(round(i * h))
+        b = y0 + int(round((i + 1) * h)) if i < 2 else y1 + 1
+        band = np.zeros_like(inter)
+        band[a:b, :] = True
+        sel = inter & band
+        n = int(sel.sum())
+        # RED ON EMPTY: a fraction over a handful of pixels is not a reading.
+        if n < MIN_PX // 3:
+            th[nm] = None
+            reds.append("%s band has %d intersection px (floor %d)"
+                        % (nm, n, MIN_PX // 3))
+        else:
+            th[nm] = round(float((d[sel] > 0.08).mean()), 4)
+    cell["in_diff_thirds"] = th
+    cell["thirds_px"] = {nm: int((inter & _band(inter, y0, y1, i)).sum())
+                         for i, nm in enumerate(names)}
+    vals = [v for v in th.values() if v is not None]
+    if len(vals) == 3:
+        cell["thirds_spread"] = round(max(vals) - min(vals), 4)
+    else:
+        cell["thirds_red"] = "; ".join(reds)
     return cell
 
 

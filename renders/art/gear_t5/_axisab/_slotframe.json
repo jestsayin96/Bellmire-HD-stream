@@ -1,0 +1,69 @@
+{
+ "hero_h": 2.45,
+ "slot_axes_world": {
+  "slot+X": [
+   0.0,
+   0.001,
+   -1.0
+  ],
+  "slot+Y": [
+   -0.151,
+   -0.989,
+   -0.001
+  ],
+  "slot+Z": [
+   -0.989,
+   0.151,
+   -0.0
+  ]
+ },
+ "dots": {
+  "slot+X": {
+   "world_forward(-Y)": -0.001,
+   "world_up(+Z)": -1.0,
+   "world_down(-Z)": 1.0,
+   "world_across(+X)": 0.0
+  },
+  "slot+Y": {
+   "world_forward(-Y)": 0.989,
+   "world_up(+Z)": -0.001,
+   "world_down(-Z)": 0.001,
+   "world_across(+X)": -0.151
+  },
+  "slot+Z": {
+   "world_forward(-Y)": -0.151,
+   "world_up(+Z)": -0.0,
+   "world_down(-Z)": 0.0,
+   "world_across(+X)": -0.989
+  }
+ },
+ "meshes": {
+  "crossbow_common.glb": {
+   "dim_blender": [
+    0.691,
+    0.6478,
+    0.2284
+   ],
+   "long_axis": "X",
+   "thin_axis": "Z"
+  },
+  "staff_common.glb": {
+   "dim_blender": [
+    0.2111,
+    0.2062,
+    0.9065
+   ],
+   "long_axis": "Z",
+   "thin_axis": "Y"
+  },
+  "sword_golden.glb": {
+   "dim_blender": [
+    0.5344,
+    0.1222,
+    2.3021
+   ],
+   "long_axis": "Z",
+   "thin_axis": "Y"
+  }
+ }
+}

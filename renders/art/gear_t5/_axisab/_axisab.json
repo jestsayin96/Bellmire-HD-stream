@@ -1,0 +1,158 @@
+{
+ "crossbow_A_conjugated": {
+  "meshX_prod": [
+   -0.151,
+   -0.989,
+   -0.001
+  ],
+  "meshY_stock": [
+   0.989,
+   -0.151,
+   0.0
+  ],
+  "meshZ_thin": [
+   -0.0,
+   -0.001,
+   1.0
+  ],
+  "stock_vs_forward_deg": 81.3,
+  "thin_vs_up_deg": 0.1,
+  "prod_vs_across_deg": 81.3,
+  "held_rot_deg": [
+   -90.0,
+   35.0,
+   90.0
+  ],
+  "scored_at_cal": [
+   -90.0,
+   0.0,
+   90.0
+  ],
+  "hand_scale": 1.0,
+  "opaque": {
+   "front": 96666,
+   "side": 81459
+  },
+  "border": {
+   "front": 0.0,
+   "side": 0.0
+  }
+ },
+ "crossbow_B_half": {
+  "meshX_prod": [
+   0.989,
+   -0.151,
+   0.0
+  ],
+  "meshY_stock": [
+   0.151,
+   0.989,
+   0.001
+  ],
+  "meshZ_thin": [
+   -0.0,
+   -0.001,
+   1.0
+  ],
+  "stock_vs_forward_deg": 8.7,
+  "thin_vs_up_deg": 0.1,
+  "prod_vs_across_deg": 8.7,
+  "held_rot_deg": [
+   -90.0,
+   35.0,
+   90.0
+  ],
+  "scored_at_cal": [
+   -90.0,
+   0.0,
+   90.0
+  ],
+  "hand_scale": 1.0,
+  "opaque": {
+   "front": 95412,
+   "side": 83388
+  },
+  "border": {
+   "front": 0.0,
+   "side": 0.0
+  }
+ },
+ "staff_A_conjugated": {
+  "meshX_prod": [
+   -0.989,
+   0.151,
+   -0.0
+  ],
+  "meshY_stock": [
+   -0.151,
+   -0.989,
+   -0.001
+  ],
+  "meshZ_thin": [
+   -0.0,
+   -0.001,
+   1.0
+  ],
+  "stock_vs_forward_deg": 8.7,
+  "thin_vs_up_deg": 0.1,
+  "prod_vs_across_deg": 8.7,
+  "held_rot_deg": [
+   0.0,
+   0.0,
+   90.0
+  ],
+  "scored_at_cal": [
+   0.0,
+   0.0,
+   90.0
+  ],
+  "hand_scale": 1.9,
+  "opaque": {
+   "front": 100814,
+   "side": 82329
+  },
+  "border": {
+   "front": 0.0,
+   "side": 0.0
+  }
+ },
+ "staff_B_half": {
+  "meshX_prod": [
+   -0.151,
+   -0.989,
+   -0.001
+  ],
+  "meshY_stock": [
+   0.989,
+   -0.151,
+   0.0
+  ],
+  "meshZ_thin": [
+   -0.0,
+   -0.001,
+   1.0
+  ],
+  "stock_vs_forward_deg": 81.3,
+  "thin_vs_up_deg": 0.1,
+  "prod_vs_across_deg": 81.3,
+  "held_rot_deg": [
+   0.0,
+   0.0,
+   90.0
+  ],
+  "scored_at_cal": [
+   0.0,
+   0.0,
+   90.0
+  ],
+  "hand_scale": 1.9,
+  "opaque": {
+   "front": 101024,
+   "side": 82323
+  },
+  "border": {
+   "front": 0.0,
+   "side": 0.0
+  }
+ }
+}

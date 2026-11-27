@@ -1,0 +1,63 @@
+{
+ "tag": "_p4c",
+ "bodies": {
+  "badger": {
+   "front_px": 123055,
+   "back_px": 122877,
+   "inter_px": 111014,
+   "union_px": 134918,
+   "sil_iou": 0.8228,
+   "in_diff_frac": 0.5158,
+   "in_mean_abs": 0.1183
+  },
+  "thatcher": {
+   "front_px": 112115,
+   "back_px": 111311,
+   "inter_px": 109010,
+   "union_px": 114416,
+   "sil_iou": 0.9528,
+   "in_diff_frac": 0.4411,
+   "in_mean_abs": 0.1073
+  },
+  "mealman": {
+   "front_px": 114891,
+   "back_px": 112257,
+   "inter_px": 108150,
+   "union_px": 118998,
+   "sil_iou": 0.9088,
+   "in_diff_frac": 0.455,
+   "in_mean_abs": 0.1246
+  },
+  "bellman": {
+   "front_px": 124121,
+   "back_px": 123151,
+   "inter_px": 112425,
+   "union_px": 134847,
+   "sil_iou": 0.8337,
+   "in_diff_frac": 0.1832,
+   "in_mean_abs": 0.0608
+  },
+  "beadle": {
+   "front_px": 146775,
+   "back_px": 146386,
+   "inter_px": 142088,
+   "union_px": 151073,
+   "sil_iou": 0.9405,
+   "in_diff_frac": 0.3233,
+   "in_mean_abs": 0.1174
+  },
+  "fanner": {
+   "front_px": 105586,
+   "back_px": 107724,
+   "inter_px": 100734,
+   "union_px": 112576,
+   "sil_iou": 0.8948,
+   "in_diff_frac": 0.3927,
+   "in_mean_abs": 0.0996
+  }
+ },
+ "errors": [],
+ "asks": "are the FRONT and the MIRRORED BACK of this body tellable apart, in outline (sil_iou) and inside it (in_diff_frac)",
+ "cannot_see": "WHETHER THE DIFFERENCE IS A FACING. Posture, stride and one-sided gear all score here. No pass mark is set in this file on purpose - read the bodies against each other and then look at the pictures.",
+ "ok": true
+}

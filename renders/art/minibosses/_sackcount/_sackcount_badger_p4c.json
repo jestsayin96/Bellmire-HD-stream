@@ -1,0 +1,127 @@
+{
+ "key": "badger",
+ "tag": "_p4c",
+ "slot": "bone",
+ "expect": 4,
+ "min_area": 120,
+ "views": {
+  "front": {
+   "visible_px": 24891,
+   "solo_sil_px": 33252,
+   "moved_px": 41081,
+   "shadow_px_excluded": 16190,
+   "masses": 3,
+   "areas": [
+    8304,
+    8295,
+    8278
+   ],
+   "dropped_areas": [
+    7,
+    3,
+    1,
+    1,
+    1,
+    1
+   ],
+   "occluded_frac": 0.2514,
+   "countable": 3,
+   "peek_areas": [],
+   "counts": false,
+   "note": "3 countable masses (3 separable) against 4 on the yoke - a viewer on this camera CANNOT COUNT THE LOAD"
+  },
+  "side": {
+   "visible_px": 26624,
+   "solo_sil_px": 27876,
+   "moved_px": 34840,
+   "shadow_px_excluded": 8216,
+   "masses": 3,
+   "areas": [
+    12558,
+    7032,
+    7031
+   ],
+   "dropped_areas": [
+    2,
+    1
+   ],
+   "occluded_frac": 0.0449,
+   "countable": 3,
+   "peek_areas": [],
+   "counts": false,
+   "note": "3 countable masses (3 separable) against 4 on the yoke - a viewer on this camera CANNOT COUNT THE LOAD"
+  },
+  "back": {
+   "visible_px": 25512,
+   "solo_sil_px": 33260,
+   "moved_px": 45388,
+   "shadow_px_excluded": 19876,
+   "masses": 4,
+   "areas": [
+    8300,
+    8299,
+    8282,
+    451
+   ],
+   "dropped_areas": [
+    75,
+    41,
+    9,
+    5,
+    5,
+    4,
+    3,
+    3,
+    3,
+    3,
+    3,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "occluded_frac": 0.233,
+   "countable": 3,
+   "peek_areas": [
+    451
+   ],
+   "counts": false,
+   "note": "3 countable masses (4 separable) against 4 on the yoke - a viewer on this camera CANNOT COUNT THE LOAD"
+  }
+ },
+ "errors": [],
+ "asks": "how many SEPARABLE masses of the `bone` slot reach each camera, by with/without through one locked camera, intersected with the slot's own silhouette so shadows do not count as mass",
+ "cannot_see": "whether a separable mass is a COUNTABLE one at stream distance, whether it reads as a sack rather than a gourd, and whether the slot holds only sacks",
+ "countable_per_view": [
+  3,
+  3,
+  3
+ ],
+ "separable_per_view": [
+  3,
+  3,
+  4
+ ],
+ "all_views_count": false,
+ "ok": true
+}

@@ -26001,18 +26001,55 @@ def badger():
     #      living is the plainest possible reading of that value.
     # WHAT THIS STILL CANNOT SEE: whether the face reads AS A FACE rather than
     # as a pale patch. No number here answers that. It is answered by looking.
+    # *** PASS 4 - FAULT 1, AND THE CAUSE WAS NOT THE BRIM ALONE. ***
+    # Pass 3 blamed the brim for hiding the face and tucking the brim back
+    # would NOT have fixed it. I measured the hood CONE against the face oval
+    # in the model's own axes before touching either:
+    #   cone base r 0.250 at y -0.180, aimed (0,-0.120,1). At the face oval's
+    #   own height (z 1.812, h 0.052 up the axis) the cone's front edge stands
+    #   at y -0.407. The face oval's front surface stood at y -0.376.
+    #   THE HOOD WAS 3.1 cm IN FRONT OF THE FACE. The brim made it worse; the
+    #   cone made it impossible. A fix that moved only the brim would have
+    #   rendered the same black void and I would have shipped a second wrong
+    #   cause on top of the first.
+    # THREE MOVES, AND THEY ARE ONE MOVE - PUT THE FACE IN FRONT OF THE HOOD:
+    #   1. The cone is NARROWER AT THE BASE (0.218, not 0.250) and TUCKED BACK
+    #      (y -0.150, not -0.180). Its aim is UNCHANGED, so the forward rake -
+    #      the thing that gives the SIDE view its character, and the side view
+    #      is the one that works - survives exactly as it was.
+    #   2. The brim is TUCKED BACK to y -0.165 and narrowed in y to 0.145, so
+    #      its front edge stands BEHIND the face instead of over it. It is
+    #      still a brim and still overhangs on -y only.
+    #   3. The face oval is PUSHED PROUD and RAISED: y -0.330 (was -0.318),
+    #      z 1.826 (was 1.812), and slightly larger. Its front surface is now
+    #      y -0.392 against a hood edge at about y -0.351 - the face stands
+    #      4 cm CLEAR of the hood instead of 3 cm behind it.
+    #   The eyes move with the oval or they sink into it.
+    # WHAT THIS STILL CANNOT SEE: whether the plate reads AS A FACE. The eyes
+    # are `dark` on a `dark` hood once _faceseen repaints the oval, so that
+    # instrument is blind to them BY CONSTRUCTION. It is answered by looking.
     limb(P, [(0.0, -0.150, 1.580), (0.0, -0.205, 1.730)], 0.092, 0.080, 'body')
     P.add(L.sphere(0.145, 0.155, 0.168, 14, 9), 'dark', loc=(0.0, -0.215, 1.845))
-    P.raw(aim(L.cone(0.250, 0.105, 0.300, 16), (0.0, -0.180, 1.760),
+    P.raw(aim(L.cone(0.218, 0.105, 0.300, 16), (0.0, -0.150, 1.760),
               (0.0, -0.120, 1.0)), 'dark')
-    # the brim: a flattened disc pushed forward of the head, -y only
-    P.add(L.sphere(0.215, 0.185, 0.045, 14, 7), 'dark', loc=(0.0, -0.268, 1.905))
-    _face = L.sphere(0.092, 0.058, 0.108, 12, 8)
-    P.add(_face, 'body', loc=(0.0, -0.318, 1.812), vcol=[CAPE] * len(_face[0]))
+    # the brim: a flattened disc, -y only, TUCKED BEHIND THE FACE
+    P.add(L.sphere(0.205, 0.145, 0.045, 14, 7), 'dark', loc=(0.0, -0.165, 1.902))
     for _s in (-1, 1):
         P.add(L.sphere(0.027, 0.020, 0.023, 8, 6), 'dark',
-              loc=(_s * 0.043, -0.360, 1.838))
+              loc=(_s * 0.045, -0.386, 1.852))
     _seg("head")
+
+    # THE FACE OVAL IS ITS OWN SPAN, AND THAT IS A PASS-4 REFACTOR WITH A
+    # REASON. `_faceseen.py` isolates the face by repainting THE ONE `body`
+    # item inside a named span, and the `head` span held TWO - the neck limb
+    # and the oval - so the instrument would have refused to measure this body
+    # at all. It errors rather than guessing, which is why I found this before
+    # trusting a number. `face` is added to `man_parts` below; a `man_parts`
+    # naming an undeclared span is a RED in _backread and _opshot, not an
+    # absence, so the two must move together.
+    _face = L.sphere(0.098, 0.062, 0.118, 12, 8)
+    P.add(_face, 'body', loc=(0.0, -0.330, 1.826), vcol=[CAPE] * len(_face[0]))
+    _seg("face")
 
     # THE ARMS. One hand up ON the yoke bar - that is what a man under a yoke
     # does with his hands, and it ties the load to the body so the two do not
@@ -26041,26 +26078,133 @@ def badger():
     # ortho four separable masses and no camera a degenerate view. THE COUNT IS
     # THE MECHANIC, so a camera that cannot count is a camera that cannot read
     # the fight.
-    SACKS = ((-0.345, -0.330, 1.145), (0.330, -0.315, 1.185),
-             (-0.300, 0.275, 1.265), (0.285, 0.290, 1.225))
+    # *** PASS 4 - FAULT 3, THE WORST FAULT IN SUBSTANCE. THE COUNT DID NOT
+    # *** COUNT, AND THE COMMENT ABOVE THIS LINE PREDICTED THAT IT WOULD.
+    # Pass 3's hang was a LEVEL SQUARE: fore pair at z 1.145/1.185, aft pair at
+    # z 1.265/1.225 - four sacks within 12 cm of one height, offset mainly in
+    # y. I claimed that gave "every ortho four separable masses". The picture
+    # refutes it, and the geometry says why:
+    #   FRONT (project to x,z): the aft pair sits almost directly above the
+    #     fore pair in the same two x columns, 8-12 cm apart in z against a
+    #     sack z-radius of 0.225. They cannot separate - they merge into two
+    #     lumps, which is exactly the "boxing gloves" of fault 5.
+    #   SIDE (project to y,z): left and right are at the SAME y and z, so the
+    #     fore pair lands on one blob and the aft pair on another. TWO.
+    #   BACK: the front case again. TWO.
+    # PASS 4 ATTEMPT 1 - A ZIGZAG HANG - WAS BUILT, MEASURED AND THROWN AWAY,
+    # AND IT IS RECORDED HERE BECAUSE THE MEASUREMENT IS THE USEFUL PART.
+    # It kept two x columns and alternated height inside each: z 1.020/1.400
+    # on the left, 1.030/1.400 on the right, sacks 12% smaller.
+    # `_sackcount.py` on that build: front 3 masses, side 2, back 3 - against
+    # pass 3's 4 / 2 / 2. NO BETTER, AND THE PASS-3 "4" WAS NEVER A FOUR: its
+    # areas were 16499, 15345, 570, 123 px - two real masses and two slivers
+    # of a third peeking past them. My own file prints `areas` and warns to
+    # read the spread and not the count, and the spread is what caught this.
+    # WHY IT FAILED, IN THE GEOMETRY AND NOT IN HINDSIGHT: a sack is about
+    # 0.52 tall over its lobe, body and neck, and a 0.38 pitch inside one x
+    # column OVERLAPS BY 0.14. Two sacks that overlap are one component.
+    #
+    # THE HANG THAT WORKS IS A ROW, NOT A STACK, AND IT IS WHAT A LOADED YOKE
+    # ACTUALLY LOOKS LIKE: four ropes of two lengths spaced along the bar, so
+    # no two sacks can swing into each other. Two long ropes at the bar's ENDS
+    # and two short ropes INBOARD, fore and aft alternating:
+    #   S1 outer-left  fore  LOW      S2 inner-left  aft   HIGH
+    #   S3 inner-right fore  HIGH     S4 outer-right aft   LOW
+    # The separability of that set is a projection question and it was checked
+    # as one, pair by pair, BEFORE the mesh was built:
+    #   FRONT/BACK project to (x,z): four distinct columns, the two inboard
+    #     sacks 0.33 apart against a 0.288 width, the outboard pair held off
+    #     by 0.52 of height as well as 0.27 of x.
+    #   SIDE projects to (y,z): the rectangle (fore,low) (aft,high)
+    #     (fore,high) (aft,low) - all six pairs clear, because the fore/aft
+    #     split is 0.60 against a 0.238 depth and the high/low split is 0.52
+    #     against a 0.443 height.
+    # The sacks come in to 75% of the pass-3 size, which is what buys the
+    # 0.077 vertical gap and the inboard clearance. Smaller sacks are a real
+    # cost - a pale mass is the thing a viewer counts - and the areas in the
+    # register are how that cost is checked, not this sentence.
+    # THE ARITHMETIC ABOVE IS NOT THE PROOF AND MUST NOT BE READ AS ONE. It is
+    # a reason to build this and not something else. `_sackcount.py` renders
+    # the body with and without the `bone` mesh through the SAME locked camera
+    # and labels the connected components of the pixels that MOVED, so
+    # occlusion by the coat, the yoke and each other is the renderer's problem
+    # and never my estimate; it intersects with the slot's solo silhouette so
+    # a shadow lifting off the coat cannot be counted as a mass; and it goes
+    # RED ON EMPTY, because a component count over an empty mask is 0 and 0 is
+    # a tidy number that would sit in a register looking like a result.
+    # AND THE ROW ALONE WAS NOT ENOUGH EITHER, TWICE OVER. THREE HANGS WERE
+    # BUILT AND MEASURED FOR THIS ONE FAULT AND THE FIRST TWO ARE RECORDED
+    # BECAUSE EACH FAILURE NAMED THE NEXT CAUSE.
+    #   HANG 1, a zigzag in two x columns: front 3 / side 2 / back 3 separable.
+    #     Cause: a sack is 0.52 tall and a 0.38 pitch inside one column
+    #     OVERLAPS BY 0.14. Two overlapping sacks are one component.
+    #   HANG 2, a row of four along the bar at x -0.425 / -0.160 / 0.170 /
+    #     0.435: front 4 / side 5 / back 5 separable, 23-36% of the slot
+    #     occluded. FIVE IS NOT BETTER THAN FOUR - it is one sack cut in two
+    #     by the coat edge and counted twice. Cause: at y -0.330 the fore
+    #     sacks sat INSIDE the coat skirt (front surface y -0.373) and the
+    #     high pair's back halves sat inside the TRUNK (front y -0.365 at
+    #     z 1.45). The sacks were hanging THROUGH the man.
+    #   HANG 2b, the same row pushed out to y -0.455 / +0.415 and the low pair
+    #     lifted to z 1.000: front 3 / side 3 / back 3 COUNTABLE, with three
+    #     equal areas of 8304 / 8295 / 8278 px and occlusion at exactly 0.25.
+    #     Three equal masses and a quarter of the slot missing is not a near
+    #     miss, it is a clean statement: ONE WHOLE SACK WAS BEHIND THE MAN.
+    #     Cause: the two INBOARD sacks sat at x +-0.16 and the trunk is 0.22
+    #     wide at that height, so the body ate one from the front and one from
+    #     the back.
+    # SO EVERY SACK MUST CLEAR THE TRUNK IN X, which needs |x| > 0.22 + 0.144
+    # = 0.364, and four sacks outboard of that cannot be a row - they must be
+    # TWO COLUMNS OF TWO, separated by HEIGHT. That is hang 1 again, and it
+    # works now only because hang 1's own measurement bought the thing it
+    # needed: the sacks are at 75% size, 0.443 tall, so a 0.530 pitch leaves a
+    # 0.087 gap where 0.38 against 0.52 left an overlap.
+    #   left  x -0.420   fore LOW  z 0.930   aft HIGH z 1.460
+    #   right x  0.430   fore HIGH z 1.460   aft LOW  z 0.930
+    # FRONT and BACK project to (x,z): four corners, 0.85 apart in x and 0.53
+    # in z. SIDE projects to (y,z): four corners, 0.87 apart in y and 0.53 in
+    # z. The high pair's MAIN SPHERE tops out at z 1.629, under the yoke bar's
+    # underside at 1.654, so the bar crosses only the neck and the rope -
+    # which is what a rope over a bar does.
+    # NONE OF THAT IS THE PROOF. `_sackcount.py` is, and it reports COUNTABLE
+    # beside SEPARABLE precisely because this fault has now flattered itself
+    # in both directions - a 4 that was two sacks and two slivers, and a 5
+    # that was one sack cut in half.
+    # HANG 3 AT A 0.530 PITCH MEASURED front 2 / side 3 / back 2 COUNTABLE with
+    # a 16588 px component - two sacks merged - AND THE PICTURE DISAGREED WITH
+    # THE NUMBER. I looked at the front render: four sacks, plainly countable
+    # by eye, but the two in the right-hand column TOUCH, and a flood fill
+    # cannot see the shading seam a viewer reads them apart by. That is the
+    # instrument being STRICTER than the eye, which is the rarer direction and
+    # still a disagreement - so the geometry gives way rather than the test.
+    # The pitch opens from 0.530 to 0.600 against a 0.443 sack, which puts a
+    # clear 0.157 of air between the two in a column. The low pair's bottom
+    # sits at z 0.677, above the coat hem at 0.620; the high pair's MAIN
+    # SPHERE tops at 1.649, under the yoke bar's underside at 1.654.
+    SACKS = ((-0.420, -0.455, 0.880), (-0.420, 0.415, 1.480),
+             (0.430, -0.455, 1.480), (0.430, 0.415, 0.880))
     for i, (sx, sy, sz) in enumerate(SACKS):
         # a sack is a fat squashed bag, a gathered neck and a tie. Not a
         # sphere: a smooth ball of pale reads as a stone, and this has to read
         # as GRAIN - heavy, slumped and tied at the top.
-        P.add(L.sphere(0.192, 0.158, 0.225, 13, 9), 'bone', loc=(sx, sy, sz))
-        P.add(L.sphere(0.150, 0.130, 0.095, 12, 7), 'bone',
-              loc=(sx, sy, sz - 0.175))
-        P.raw(aim(L.cone(0.082, 0.040, 0.135, 10), (sx, sy, sz + 0.185),
+        P.add(L.sphere(0.144, 0.119, 0.169, 13, 9), 'bone', loc=(sx, sy, sz))
+        P.add(L.sphere(0.113, 0.098, 0.072, 12, 7), 'bone',
+              loc=(sx, sy, sz - 0.131))
+        P.raw(aim(L.cone(0.062, 0.030, 0.101, 10), (sx, sy, sz + 0.139),
                   (0.0, 0.0, 1.0)), 'bone')
-        _ring(P, (sx, sy, sz + 0.225), 0.052, 'z', 'dark', 0.018, 12)
+        _ring(P, (sx, sy, sz + 0.169), 0.039, 'z', 'dark', 0.014, 12)
         # the rope from the yoke end down to the neck of the sack
-        yx = -0.495 if sx < 0 else 0.495
-        limb(P, [(yx * 0.92, -0.075, 1.690), (sx, sy, sz + 0.300)],
+        # the rope leaves the bar DIRECTLY ABOVE ITS OWN SACK. Pass 3 ran
+        # every rope from one of the two bar ENDS, which crossed them over
+        # each other and pulled the eye into a single dark fan; four vertical
+        # ropes at four x read as four hangers and help the count instead of
+        # arguing with it.
+        limb(P, [(sx * 0.97, -0.100, 1.716), (sx, sy, sz + 0.225)],
              0.021, 0.018, 'dark')
     _seg("gear_sacks")
 
     # THE FIGURE, for the man-value census: everything else is his gear.
-    P.man_parts = ("body", "cape", "head", "arm_yoke", "arm_free")
+    P.man_parts = ("body", "cape", "head", "face", "arm_yoke", "arm_free")
     return P
 
 

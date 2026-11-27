@@ -16081,5 +16081,128 @@
   "_note_c230": "C-230 (27 Nov 2026 CST): no committed art body lacks feed lines (66 bodies, 66 keys); backlog 3 top-up. epitaphs +20, descend +8, cleared +8 (floor-number %d lines only), barks enter/lord/trap/hurt/drink/misfire +4 each. Additive, plain register, no mechanics, no floor counts. Expected zero-hit key; wire nothing.",
   "_note_c231": "C-231 (content, 27 Nov 2026): townsfolk.react raid/festival/caravan/growth/hero_falls/hero_rich +5 each (30 lines). No new body, 66=66 feed keys. Plain register, no mechanics. data/drops.json NOT created: the four-file rule bars new data files; awaiting Mr. E's licence. Expected zero-hit key; wire nothing.",
   "_note_c232": "C-232: epitaphs +20, descend +10, cleared +10 (10 lines carry the floor placeholder). Pools already read by the engine; no wiring.",
-  "_note_c233": "C-233: epitaphs +15, descend +8, cleared +8 (8 lines carry the floor placeholder). Pools already read by the engine; no wiring."
+  "_note_c233": "C-233: epitaphs +15, descend +8, cleared +8 (8 lines carry the floor placeholder). Pools already read by the engine; no wiring.",
+  "spec_text": {
+    "_note_c237": "C-237 SPECIALIZATION BLURBS, TEXT ONLY. 15 callings x 2 paths = 30, keyed exactly as roster.gd SPECS (calling -> path stem). Names are unchanged from SPECS and are NOT carried here; only `blurb`. Offered for the game build to read in place of the S155 placeholder blurbs. Where a path has a way in SPEC_WAYS (taunt, trapsense, mend_party, death_ward, aura) the blurb says so plainly; the other paths fight through their gifts alone and promise nothing more. Zero-hit key until wired, expected.",
+    "knight": {
+      "guardian": {
+        "blurb": "Plants the shield. The blows come to the shield."
+      },
+      "crusader": {
+        "blurb": "Walks forward. The dead take it worst."
+      }
+    },
+    "warden": {
+      "bastion": {
+        "blurb": "Holds the line, and the dark learns to come at the Bastion first."
+      },
+      "reaver": {
+        "blurb": "Quit holding the line. Breaks theirs now."
+      }
+    },
+    "barbarian": {
+      "berserker": {
+        "blurb": "Hits harder for every wound taken."
+      },
+      "chieftain": {
+        "blurb": "While the Chieftain stands, the whole party hits harder."
+      }
+    },
+    "rogue": {
+      "shadow": {
+        "blurb": "Not there when the blow lands. There when it lifts."
+      },
+      "tracker": {
+        "blurb": "Reads the floor. The first trap is seen before it is stepped on."
+      }
+    },
+    "duelist": {
+      "blademaster": {
+        "blurb": "Two blades, no gaps."
+      },
+      "swashbuckler": {
+        "blurb": "Never where the blow was aimed."
+      }
+    },
+    "ranger": {
+      "sharpshooter": {
+        "blurb": "One arrow, chosen well."
+      },
+      "strider": {
+        "blurb": "Knows the ground. The first trap on a floor is read in time."
+      }
+    },
+    "mage": {
+      "evoker": {
+        "blurb": "Spells that go through the first one and on to the next."
+      },
+      "abjurer": {
+        "blurb": "Wards first, spells after. Lets a hero cheat death once more per delve."
+      }
+    },
+    "sage": {
+      "healer": {
+        "blurb": "When a delver falls low, the party is mended. Once a floor."
+      },
+      "battlemage": {
+        "blurb": "Learned the mending, then the opposite."
+      }
+    },
+    "cleric": {
+      "templar": {
+        "blurb": "Prayer with an edge on it."
+      },
+      "hospitaller": {
+        "blurb": "Stands over the fallen. Mends the party when one runs low, once a floor."
+      }
+    },
+    "paladin": {
+      "oathkeeper": {
+        "blurb": "Keeps the oath. Draws the blows meant for the others."
+      },
+      "avenger": {
+        "blurb": "Hits hardest when it is nearly over."
+      }
+    },
+    "necromancer": {
+      "deathcaller": {
+        "blurb": "Speaks, and the floor answers."
+      },
+      "bonewright": {
+        "blurb": "Builds a wall from what fell last. Death is turned aside once more per delve."
+      }
+    },
+    "monk": {
+      "ironfist": {
+        "blurb": "Every strike is a hammer now."
+      },
+      "stillwater": {
+        "blurb": "Stands so still the blows slide off. Death is turned aside once more per delve."
+      }
+    },
+    "druid": {
+      "wildheart": {
+        "blurb": "Lets the meadow's teeth out."
+      },
+      "grovekeeper": {
+        "blurb": "Roots go down. Mends the party when one runs low, once a floor."
+      }
+    },
+    "warlock": {
+      "hexblade": {
+        "blurb": "Took the bargain into the hand that holds the blade."
+      },
+      "pactbinder": {
+        "blurb": "Asked the thing below for more, and got it."
+      }
+    },
+    "bard": {
+      "skald": {
+        "blurb": "Sings the war-song. While the Skald stands, the party hits harder."
+      },
+      "loremaster": {
+        "blurb": "Knows the name of everything down there. Reads the first trap on a floor."
+      }
+    }
+  }
 }

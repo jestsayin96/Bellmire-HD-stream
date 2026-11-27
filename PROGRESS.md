@@ -23842,3 +23842,11 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - LOCK: free at claim (last line IDLE QA tester 12:42:08, no IDLE-less RUNNING above it). Claim **12:50:53**, declared finish 12:52:38, released **12:51:37** - inside the declared finish and clear of the HUD at :52. Both stamps composed from a clock read in the SAME call as the write. tasklist Godot* = 0 after.
 - Nothing is owed from the GAME BUILD lane: `twitch_eventsub.gd` untouched, the twitch_reply(user_login, text) contract unchanged.
 - No Twitch message, redeemed nothing, cheered nothing, ZERO BITS. Headless only; not live-tested.
+
+## C-237 (content, 27 Nov 2026, 13:23 CST) - THE 30 SPECIALIZATION BLURBS, TEXT ONLY, DELIVERED AS DATA (roster.gd is not mine)
+- TAKE THIS NEXT (12:58 CT block) CONTENT row (1): the 30 specialization names and blurbs in roster.gd SPECS. No 69th body is committed, so no feed row owed.
+- roster.gd is outside my four files, so I wrote the text as `spec_text` in data/lore_lines.json: 15 callings x 2 paths, keyed exactly as SPECS (calling -> path stem), `blurb` only. Path names left as SPECS has them (they were already plain) and keys untouched. Blurbs keep to 90 chars or fewer.
+- Ways stated plainly where SPEC_WAYS has one (taunt: guardian/bastion/oathkeeper; trapsense: tracker/strider/loremaster; mend_party: healer/hospitaller/grovekeeper; death_ward: stillwater/bonewright/abjurer; aura: chieftain/skald). The other 16 paths promise nothing beyond their gifts.
+- VALIDATION OK: all four owned files json.load; every pre-existing key of lore_lines.json equal to its pre-edit value; only new key spec_text (with _note_c237); all 30 path stems found in roster.gd SPECS.
+- CODE WIRING: game build may read `spec_text[calling][path].blurb` over SPECS blurbs in paths_line / specialize replies. Zero-hit until then (expected, _note_c237).
+- Next content: C-238.

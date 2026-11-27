@@ -4751,3 +4751,27 @@ that way) but `scripts/bestiary.gd` and `Delve.MB_NAME` must NOT take it yet.
 See docs/art/STILTMAN_THE_52ND.md - the fault list is five long and the next
 change is named: a fen cloak that makes the trunk read as a person, because the
 tripod read is fault 1 and everything else is smaller than it.
+
+
+| key | title | h | theme | THE IDEA | wear | span |
+|---|---|---|---|---|---|---|
+| `shearman` | Cutloose | 2.51 | workshop | **IT CUTS WHAT JOINS YOU** - it does not pick a hero and takes nothing off anybody. It cuts the lines BETWEEN them: no heal, no shield thrown over a neighbour, no covering a man who is down, no aura, no shared guard. Every one of you is at full strength and completely alone, four people fighting in the same room instead of one party | 0.30 | 1.60 |
+
+**THE 69th READS AS A PAIR OF OPEN SHEARS AT HERO SCALE - PASS 3 CLOSED IT.**
+Three passes, 27 Nov 12:35-13:08 CT. Gate GREEN, ratio **1.02** (2.51 m against
+a hero at 2.45), 3 proving views, `seen` 1.0 on all three, `fits_frame` true,
+`frame_edge` zero on all four sides of all three views, blank check 0 failures
+over 207 files, 811 faces, 4 meshes, span 1.50, CORRIDOR-SAFE and UNDER-LID.
+**THAT SAME GREEN SHEET WAS TRUE OF PASS 1 AND PASS 2 AND BOTH OF THOSE WERE
+WRONG** - pass 1 read as two parallel poles, pass 2 as a sword with an ornate
+guard. The register cannot see what a thing looks like; the pictures decided
+all three times. Pass 3 put the whole instrument above the shoulder line so
+BOTH blades are drawn against air instead of one against the torso, and at hero
+scale it is now plainly a pair of open shears.
+The **Beadle test passes** - front carries the face oval and a 0.42 x 0.74 MID
+apron mass, the back has neither plus the cord bundle on the right hip.
+**ONE STANDING FAULT AND IT IS THE WORST KIND:** the cord in the jaws reads as
+a HOOK, which is the Gaoler's cue. Next change is one thing - straighten both
+cord pieces across the jaw so the GAP is what the eye lands on, or take the jaw
+cord off entirely (the two pieces on the floor already say it and they read).
+See docs/art/SHEARMAN_THE_69th.md.

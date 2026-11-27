@@ -75,20 +75,36 @@ SEP_DILATE = 2            # px: footprints this close read as one shape
 
 
 def _builder():
-    """Re-slot ONE vane's item to 'probe'. Geometry is untouched."""
+    """Re-slot ONE VANE - every item that vane is built from - to 'probe'.
+    Geometry is untouched.
+
+    PASS 5 MADE A VANE MORE THAN ONE ITEM. It is a narrow STEM plus a broad
+    BLADE now, so the span holds NVANE * k items and probing a single item
+    would have measured a vane's TOP HALF and called it the vane. The count is
+    derived from the span and asserted to divide exactly, so a body that grows
+    a third piece per vane goes RED here instead of quietly reporting a
+    fraction of each footprint.
+    """
     P = _REAL_BUILDER()
     which = PROBE[0]
     PROBE_N[0] = 0
     a, b = P.spans[SPAN]
-    if (b - a) != NVANE:
-        raise ValueError("%s: span %r holds %d items, expected %d - the body "
-                         "changed under this harness" % (KEY, SPAN, b - a, NVANE))
+    n = b - a
+    if n <= 0 or n % NVANE:
+        raise ValueError("%s: span %r holds %d items, which is not a whole "
+                         "number of %d vanes - the body changed under this "
+                         "harness" % (KEY, SPAN, n, NVANE))
+    per = n // NVANE
     if which is not None:
-        i = a + which
-        verts, faces, _slot = P.items[i]
-        P.items[i] = (verts, faces, 'probe')
-        PROBE_N[0] += 1
+        for j in range(per):
+            i = a + which * per + j
+            verts, faces, _slot = P.items[i]
+            P.items[i] = (verts, faces, 'probe')
+            PROBE_N[0] += 1
     return P
+
+
+ITEMS_PER_VANE = [1]
 
 
 def _merge(key, items, mats, suffix=None, vcols=None):
@@ -234,9 +250,18 @@ def main():
         masks, raw = {}, {}
         for i in range(NVANE):
             objs2, info2, pb = build(i)
-            if PROBE_N[0] != 1:
-                errors.append("%s/%s vane %d: probe took %d items, expected 1"
+            if PROBE_N[0] < 1:
+                errors.append("%s/%s vane %d: probe took %d items, expected at "
+                              "least 1 - the vane was never re-slotted and the "
+                              "diff below is about nothing"
                               % (KEY, vname, i, PROBE_N[0]))
+            elif ITEMS_PER_VANE[0] in (1, PROBE_N[0]):
+                ITEMS_PER_VANE[0] = PROBE_N[0]
+            else:
+                errors.append("%s/%s vane %d: probe took %d items but a "
+                              "previous vane took %d - the vanes are not built "
+                              "alike and their footprints are not comparable"
+                              % (KEY, vname, i, PROBE_N[0], ITEMS_PER_VANE[0]))
             if pb != bb:
                 errors.append("%s/%s vane %d: BOUNDS MOVED %r -> %r - the "
                               "locked camera is a lie and every moved pixel "

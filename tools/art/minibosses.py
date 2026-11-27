@@ -24527,6 +24527,36 @@ def fanner():
         _sx, _cy = math.sin(ang) / _RIM_A, math.cos(ang) / _RIM_B
         return 1.0 / math.sqrt(_sx * _sx + _cy * _cy)
 
+    def _aim_roll(vf, loc, zdir, ydir):
+        """Place a +Z-built primitive with its axis along `zdir` AND ITS ROLL
+        PINNED, local +Y along `ydir`.
+
+        `aim` cannot do this and that is a real defect, not a style note: it
+        builds its rotation with `to_track_quat('Z', 'Y')`, which aligns the
+        primitive's axis and then takes whatever roll keeps local +Y nearest
+        WORLD +Y. For a ring of blades that means every blade's wide face is
+        pinned to the world instead of to its own radius, so the 0.090 width
+        points radially at some azimuths and tangentially at others. Pass 4
+        named that as the cause of two faults and could not fix it with `aim`.
+        """
+        v, f = vf
+        _z = Vector(zdir).normalized()
+        _y = Vector(ydir).normalized()
+        _y = (_y - _z * _y.dot(_z)).normalized()      # exact orthogonality
+        _x = _y.cross(_z).normalized()
+        _m = Matrix(((_x.x, _y.x, _z.x, loc[0]),
+                     (_x.y, _y.y, _z.y, loc[1]),
+                     (_x.z, _y.z, _z.z, loc[2]),
+                     (0.0, 0.0, 0.0, 1.0)))
+        return [_m @ Vector(pt) for pt in v], f
+
+    # PASS 5 - WHERE THE BLADE IS BROAD, AND IT IS NOT WHERE PASS 4 SAID.
+    # The dome's own top, so the stem can be solved against it rather than
+    # tuned: the hearth sphere sits at _BC + 0.126 with a z-radius of 0.118.
+    _DOME_TOP = _BC.z + 0.126 + 0.118
+    _STEM_CLEAR = 0.018          # how far above the fire the broad blade starts
+    _STEM_W = 0.030              # the stem's tangential width
+
     for _vane in _FANNER_VANES:
         # (angle_deg, length_m[, width_m]) - width is a parameter because the
         # measurement made it one. With four 0.168-wide blades the PROJECTED
@@ -24555,8 +24585,56 @@ def fanner():
                  + Vector((0.0, 0.0, 0.196)))
         _tilt = (_dir * math.sin(math.radians(13.0)) +
                  Vector((0.0, 0.0, math.cos(math.radians(13.0))))).normalized()
-        P.raw(aim(L.box(0.052, _wid, _len),
-                  tuple(_foot + _tilt * (_len * 0.5)), tuple(_tilt)), 'bone')
+        # the blade's own tangent: horizontal, square to its radius. The wide
+        # face now follows the ring instead of following the world.
+        _tan = Vector((math.cos(_a), math.sin(_a), 0.0)).normalized()
+        # PASS 5 - THE STEM, AND IT IS NOT THE FIX PASS 4 PRESCRIBED. Pass 4
+        # wrote that fault 3 - a vane across the bowl mouth - would be cured by
+        # orienting each blade tangentially so its radial reach is always the
+        # 0.052 thickness. I BUILT THE INSTRUMENT FIRST AND IT KILLED THAT
+        # PLAN. `tools/art/_fanner_mouth_ab.py` measures the pixels of fire a
+        # viewer LOSES to the vanes, and on the shipped pass-4 body the loss is
+        # FRONT 0.0%, THREE-QUARTER 0.8%, SIDE 22.0%. So it was never a front
+        # fault at all - pass 3 said "front and side" by eye and was wrong -
+        # and the side loss is not about blade WIDTH. From the side the camera
+        # looks down world +X, so a vane's screen position is its y, and the
+        # vane at 79 degrees sits at y = -0.078, almost exactly over the bowl's
+        # centre line, with its foot at z 0.196 while the proud dome reaches
+        # 0.244. It crosses the fire because of WHERE IT STANDS AND HOW LOW IT
+        # STARTS, and a tangential roll moves it not at all: at 79 degrees the
+        # tangent is (0.19, 0.98, 0) and world +Y is (0, 1, 0), so the roll
+        # `aim` already gave it is the roll the fix would have given it. A
+        # width fix for a depth fault would have measured as "no change" and
+        # read as "the fix is not there".
+        #
+        # SO THE CHANGE IS WHERE THE BLADE IS BROAD. Each vane leaves its foot
+        # as a NARROW STEM and only widens once it is clear of the fire, which
+        # is solved against the dome's own top rather than dialled in. What
+        # crosses the hearth is 0.030 of stem instead of 0.090 of blade.
+        # THE TIP DOES NOT MOVE: the blade is shortened by exactly the stem it
+        # gains, so the body's bounds, its height and its hero ratio are
+        # unchanged and the count gauge's numbers stay comparable with pass 4's.
+        # IT DOES NOT PAY FAULT 2, AND I WROTE THAT IT WOULD BEFORE I LOOKED.
+        # The guess was that a visible stalk standing out of the rim is the
+        # join being SEEN instead of implied. The front and three-quarter
+        # renders say the opposite: with less blade to bridge it, the gap
+        # between a vane and the bowl reads MORE clearly, not less, and the
+        # float is now the loudest fault on this body by eye. The gap is the
+        # projection fault pass 4 already named - a vane planted on the FAR
+        # rim projects above the bowl's NEAR silhouette - so no change to the
+        # blade can close it; only dropping the feet behind the near
+        # silhouette can, and that costs visible vane px and must be re-run
+        # through the count gauge. LEFT OPEN AND NAMED, not tidied away.
+        _stem_rise = max(0.0, (_DOME_TOP + _STEM_CLEAR) - _foot.z)
+        _stem_len = min(_stem_rise / max(1e-6, _tilt.z), _len * 0.5)
+        _blade_len = _len - _stem_len
+        if _stem_len > 0.0:
+            P.raw(_aim_roll(L.box(0.052, _STEM_W, _stem_len),
+                            tuple(_foot + _tilt * (_stem_len * 0.5)),
+                            tuple(_tilt), tuple(_tan)), 'bone')
+        P.raw(_aim_roll(L.box(0.052, _wid, _blade_len),
+                        tuple(_foot + _tilt * (_stem_len + _blade_len * 0.5)),
+                        tuple(_tilt), tuple(_tan)), 'bone')
     _close("vanes")
 
     # THE FIGURE. The basket and the vanes are the LOAD, not the man, and that

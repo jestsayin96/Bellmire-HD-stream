@@ -1,5 +1,5 @@
 {
- "ok": true,
+ "ok": false,
  "floor_geom": {
   "gd": "scripts\\floorgen.gd",
   "cell_m": 4.0,
@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "1a309b659ec20f826d93efcd97b9debdbaf6c209",
+   "head": "df1a970deefca36769db546a3c330534141aa1d8",
    "ref": "origin/main",
-   "ref_commit": "0c3a072db74918d9799623db40f6c481b4879c68",
+   "ref_commit": "87d8f97b7f4c103a710ffad15a813281dfd469a7",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3467,7 +3467,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.455,
+   "corridor_margin_m": 9.46,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.1,
    "read_from": {
@@ -3493,13 +3493,62 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "fanner": {
+   "title": "Blastmere",
+   "theme": "firepit",
+   "idea": "IT BURNS AS HARD AS YOU CROWD IT - it carries its own hearth on its chest and every delver inside its reach is one more draught on it. One hero alone fights a low red and takes all day about it; the whole line on it at once fights a white heat that answers every one of them. It does not choose a target, it has no phase, nothing summons and nothing splits - the condition is on HOW MANY OF YOU ARE ON IT, which no other body in this file asks about, and it is the one number a party never thinks of as a cost. So the habit that fails here is the first habit a party has: everybody in. THE COUNT IS THE FOUR VANES standing out of the basket rim - one vane is one draught it can still take, they are the only pale on the whole body, and a vane that is broken off stays broken. So the party has two honest answers and both cost: send one hand in and win slowly with the rest of the line standing idle, or spend the early fight breaking vanes off the rim while it is at its hottest and crowd it once they are gone.",
+   "wear": 0.64,
+   "feed_line": "Something ahead is being fanned, and it is not a forge.",
+   "pack_used": null,
+   "parts": 5,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1038,
+   "size": [
+    1.11,
+    1.13,
+    2.33
+   ],
+   "footprint_span": 1.13,
+   "height_m": 2.33,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.87,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.17,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.4079420294748703,
+    "ortho": 2.6457769870758057,
+    "clip": [
+     6.179640769958496,
+     15.977293968200684
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
- "errors": [],
+ "errors": [
+  "fanner: 5 meshes, the bar is four"
+ ],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 0c3a072db74918d9799623db40f6c481b4879c68 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 87d8f97b7f4c103a710ffad15a813281dfd469a7 sha bc3a603f",
  "blank_check": {
-  "files": 189,
+  "files": 192,
   "failures": []
  }
 }

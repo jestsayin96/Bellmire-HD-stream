@@ -151,6 +151,66 @@ The first run of this harness died inside `lordgen.add_lights` - `aura` is the
 rim light's rgb triple and I passed a float - and the subprocess still returned
 **RC=0**. A `.done` file holding 0 is not a pass. Trust the json or nothing.
 
+## PASS 5 - THE INSTRUMENT KILLED MY OWN PRESCRIPTION BEFORE IT SHIPPED
+
+Pass 4 left fault 3 - a vane across the bowl mouth - with a named fix: orient
+each blade TANGENTIALLY so its radial reach is always the 0.052 thickness.
+**That fix was wrong, and the instrument said so before a single blade moved.**
+
+`tools/art/_fanner_mouth_ab.py` asks the viewer's question and nothing else:
+HOW MANY PIXELS OF FIRE DOES A VIEWER LOSE TO THE VANES. The hearth dome is
+re-slotted to a probe material and the body rendered through ONE locked camera
+twice - vane object SHOWN, then HIDDEN - and the fire visible without the vanes
+and not with them is fire the vanes take. Geometry is never dropped, so the
+bounds cannot move; the rim occludes the recessed fire in both conditions and
+cancels out. On the shipped pass-4 body:
+
+    front          fire 1531 px, lost    0   (0.0%)
+    side           fire 1209 px, lost  266  (22.0%)
+    three_quarter  fire 1370 px, lost   11   (0.8%)
+
+**TWO THINGS THERE ARE NOT WHAT I HAD WRITTEN.** Pass 3 recorded fault 3 as
+visible "on front and side". The front loses ZERO pixels of fire and always
+did - that half of the fault never existed and three passes of looking never
+caught it. And the side fault is not about blade WIDTH at all. From the side
+the camera looks down world +X, so a vane's screen position is its `y`; the
+vane at 79 degrees sits at y = -0.078, almost exactly over the bowl's centre
+line, with its foot at z 0.196 while the proud dome reaches 0.244. It crosses
+the fire because of WHERE IT STANDS AND HOW LOW IT STARTS. At 79 degrees the
+tangent is (0.19, 0.98, 0) and world +Y is (0, 1, 0) - so the roll `aim`
+already gave that blade is the roll my fix would have given it. **A width fix
+for a depth fault would have measured as "no change" and read as "the fix is
+not there".**
+
+**THE CHANGE THAT SHIPPED: WHERE THE BLADE IS BROAD.** Each vane leaves its
+foot as a narrow 0.030 stem and widens to the full 0.090 blade only once it is
+clear of the fire, solved against the dome's own top rather than dialled in.
+The tip does not move - the blade is shortened by exactly the stem it gains -
+so bounds, height and the 0.95 hero ratio are unchanged and pass 4's numbers
+stay comparable. `aim` cannot pin a roll, so `_aim_roll` was added beside it;
+the blades are tangential now too, which is correct even though it is not what
+fixed anything.
+
+    AFTER          front 0.0%   side 12.6%   three_quarter 0.0%
+    (before        front 0.0%   side 22.0%   three_quarter  0.8%)
+
+**IMPROVED, NOT CLOSED, AND THE BAR IS 2%.** The side still loses 156 px of
+fire and the instrument still says RED. What remains is the STEM itself
+crossing the dome - the broad blade is now entirely above it - so the next
+move is a thinner stem or an azimuth that does not sit on the bowl's centre
+line, and an azimuth change has to go back through the count gauge, which is
+what makes it a pass 6 rather than a tweak.
+
+**AND THE PICTURE CONTRADICTED ME A SECOND TIME, IN MY OWN CODE COMMENT.** I
+wrote into the builder that the stem "pays fault 2 rather than fighting it",
+reasoning that a visible stalk out of the rim is the join being seen instead of
+implied. Then I looked at the front and three-quarter renders: with less blade
+to bridge it, the gap between vane and bowl reads MORE clearly, not less, and
+the float is now the loudest fault on this body by eye. The claim is struck in
+the source. The gap is the projection fault pass 4 already named - a vane
+planted on the FAR rim projects above the bowl's NEAR silhouette - so no change
+to the blade can close it.
+
 ## THE FIT PROOF - WHAT I LOOKED AT, AND WHAT IS STILL WRONG
 
 Rendered and LOOKED AT: `renders/art/minibosses/fanner/{front,side,three_quarter}.png`
@@ -166,7 +226,13 @@ to look modest until the party crowds it.
 and measured; 2 is IMPROVED BUT NOT CLOSED; 3 and 5 are STILL OPEN AND I LOOKED
 AT THEM. The pass-3 text is kept below verbatim so the record is not tidied.
 
+**PASS 5 UPDATED THIS LIST. Where pass 4 and pass 5 disagree, pass 5 measured
+it and pass 4 guessed it, and the disagreement is kept on the page.**
+
   1. THE COUNT - **CLOSED.** 4/4/4/4, no fused pair, weakest vane 1588 px.
+     RE-PROVEN AT PASS 5 after the geometry moved: `_vane_ab_p5.json` is GREEN,
+     `count_min` 4, errors 0. That was the risk the stem change ran and it is
+     the reason the gauge was re-run rather than assumed.
   2. THE FEET - **NOT CLOSED, AND I CAN SEE IT IN THE FRONT RENDER.** The
      ellipse fix removed the dead-forward float, and on the SIDE the vanes
      plainly meet the rim. On the FRONT there is still background visible
@@ -202,19 +268,27 @@ AT THEM. The pass-3 text is kept below verbatim so the record is not tidied.
 5. On the side the far vane sits behind the head and reads as attached to the
    skull rather than to the basket.
 
-## WHAT IS RED AND MUST NOT BE READ AS SHIPPED
+## WHAT IS GREEN, AND WHAT IS STILL OPEN
 
-`minibossfit` verdict is **RED** and that is CORRECT, not a nuisance:
+`minibossfit` verdict is **GREEN**: `ok: true`, `errors: []`,
+`red_summary.shipped_red: []`, `ok_shipped: true`, 66 rows judged, blank-and-
+border 192 files / 0 failures / 64 cells. The body is self-seen-proven -
+`man_seen` front 0.8502, side 0.9394, back 0.9996 against a 0.75 bar.
 
-    fanner: MEASURABLE by the self_seen census and carrying NO self_seen cell
-            - an unasked instrument is RED, not green
+**THIS SECTION USED TO SAY THE OPPOSITE AND THE WRONG VERSION OUTLIVED THE
+FAULT BY A WHOLE PASS.** Up to pass 5 it read "`minibossfit` verdict is RED and
+that is CORRECT", and it handed the next firing a bug to go and find in
+`_backread.py`. Pass 4 closed the cell and pass 4's own FIX D section, higher
+up this same file, says plainly that there was never a bug to find. The tail
+was simply not re-read. A document that declares a body RED after its register
+has gone GREEN costs a seat a cycle chasing closed work, which is the exact
+failure this house keeps paying for in stale prompt lines - so it is struck
+here rather than left for someone to discover.
 
-`_selfseen_census.py` was re-run (fanner is now in the census, 78 rows) and
-`_backread.py --keys fanner` returned RC=0, but `_selfseen_all.json` still
-holds 62 rows and no `fanner`. **The next ART firing owns this**: find why a
-`--keys` backread does not land its row in `_selfseen_all.json` and re-run
-`minibossfit --only fanner` until the verdict is GREEN. Until then this body
-is BUILT AND PROVEN FOR FIT AND SPAN, and NOT self-seen-proven.
+STILL OPEN, and named in full in the fault list above: the feet do not read as
+planted (fault 2), the stems still cross the fire on the side view at 12.6%
+(fault 3, improved from 22.0%), and the far vane still reads off the skull on
+the side (fault 5).
 
 ## WIRING - THE GAME BUILD LANE, NOT ME
 

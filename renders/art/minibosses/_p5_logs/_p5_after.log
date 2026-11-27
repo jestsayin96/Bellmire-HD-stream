@@ -1,0 +1,59 @@
+=== MOUTH AB (after) ===
+00:00.047  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+C:\hd adventure\bellmire-art\tools\art\_fanner_mouth_ab.py:169: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+00:06.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_front_with_base_p5.png'
+00:07.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_front_with_probe_p5.png'
+00:08.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_front_without_base_p5.png'
+00:10.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_front_without_probe_p5.png'
+00:12.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_side_with_base_p5.png'
+00:14.359  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_side_with_probe_p5.png'
+00:16.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_side_without_base_p5.png'
+00:18.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_side_without_probe_p5.png'
+00:19.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_three_quarter_with_base_p5.png'
+00:20.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_three_quarter_with_probe_p5.png'
+00:22.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_three_quarter_without_base_p5.png'
+00:24.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\fanner_three_quarter_without_probe_p5.png'
+[mouth_ab] wrote C:\hd adventure\bellmire-art\renders\art\minibosses\_mouth_ab\_mouth_ab_p5.json verdict=RED worst_lost=0.1261 errors=0
+[mouth_ab] front          fire 1558 -> 1558, lost 0 (0.00%)
+[mouth_ab] side           fire 1237 -> 1085, lost 156 (12.61%)
+[mouth_ab] three_quarter  fire 1394 -> 1394, lost 0 (0.00%)
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+MOUTH RC=0
+=== VANE AB (after) ===
+00:00.031  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+C:\hd adventure\bellmire-art\tools\art\_fanner_vane_ab.py:161: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+00:05.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_base_front_p5.png'
+00:07.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v0_front_p5.png'
+00:09.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v1_front_p5.png'
+00:10.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v2_front_p5.png'
+00:12.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v3_front_p5.png'
+00:13.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_base_side_p5.png'
+00:15.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v0_side_p5.png'
+00:16.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v1_side_p5.png'
+00:18.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v2_side_p5.png'
+00:19.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v3_side_p5.png'
+00:21.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_base_three_quarter_p5.png'
+00:23.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v0_three_quarter_p5.png'
+00:25.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v1_three_quarter_p5.png'
+00:27.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v2_three_quarter_p5.png'
+00:29.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v3_three_quarter_p5.png'
+00:30.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_base_back_p5.png'
+00:32.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v0_back_p5.png'
+00:33.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v1_back_p5.png'
+00:35.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v2_back_p5.png'
+00:37.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\fanner_v3_back_p5.png'
+[vane_ab] wrote C:\hd adventure\bellmire-art\renders\art\minibosses\_vane_ab\_vane_ab_p5.json verdict=GREEN count_min=4 errors=0
+[vane_ab] front          count=4 px={0: 2631, 1: 3595, 2: 2334, 3: 3527} fused=[]
+[vane_ab] side           count=4 px={0: 3528, 1: 3933, 2: 2506, 3: 3658} fused=[]
+[vane_ab] three_quarter  count=4 px={0: 2751, 1: 2160, 2: 2421, 3: 2362} fused=[]
+[vane_ab] back           count=4 px={0: 2641, 1: 3722, 2: 2516, 3: 3527} fused=[]
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+VANE RC=0

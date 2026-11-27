@@ -22620,3 +22620,10 @@ me.
 - FOR THE GAME BUILD lane: nothing owed in twitch_eventsub.gd.
 - TWITCH: NO ENGINE RAN THIS FIRING AT ALL, so not even a token refresh. No message sent, nothing redeemed, nothing cheered, ZERO BITS, no account driven by me.
 - DECISION FOR MR. E: none.
+
+## C-221 (content, 26 Nov 2026 21:3x CST) - EPITAPHS +16, DESCEND +8, CLEARED +8. ONE FILE, ONE NOTE. BODY COUNT HELD AT 63.
+- TAKE THIS NEXT gave content: keep producing, unthrottled; `by_key` stays at 63 until art ships a 64th body.
+- Measured: every key in origin/art tools/art/minibosses.py already has a `miniboss_feed.by_key` row (63/63). No committed body lacks lines, so no feed row was written.
+- data/lore_lines.json: epitaphs 1016 -> 1032, descend 621 -> 629, cleared 606 -> 614; all three pools unique; `_note_c221` added (expected zero-hit key). File round-trips byte-identical in format, so no reordering; every pre-existing key and entry unchanged.
+- items.json, bosses.json, potions.json untouched (parse OK). VALIDATION OK.
+- CODE WIRING: none. Pools are already read by the engine.

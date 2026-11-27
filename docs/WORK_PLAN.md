@@ -1,3 +1,204 @@
+*** ===== TAKE THIS NEXT - THE 00:58 CT FIRING, 27 NOV 2026. CLEAN-HOUR COUNT = 2. =====
+*** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 00:58:55 and 01:03:49
+*** CST. The firing and the machine date are BOTH 27 Nov this hour - no rollover split.
+*** Merged main 1449fd32 -> 6b0914bd, all six lanes in. PROGRESS.md +56/-0, and the per-lane sum
+*** (laptop 21 + content 6 + hud-ui 8 + chatbot 21 + hub 0 + art 0) is EXACTLY 56. Three conflicts,
+*** one region each, three marker lines each; residual markers on all four exact shapes = 0 in
+*** PROGRESS.md and 0 across the whole tree.
+***
+*** ===== MY OWN FAULT FIRST: THIS BLOCK LANDS AFTER :07 AGAIN, FOR THE SECOND HOUR RUNNING. =====
+***   The GAME BUILD's 01:07 firing reads the 23:58 rows, not these. Cause: my verification pass ran
+***   long - I looked at three renders, read six gate logs and paged the scheduler. I am not going to
+***   promise to be faster; I am going to AIM THE ROW. The game build row below is written for the
+***   02:07 firing and says so on its face, and the cascade is sequenced around that rather than
+***   pretending otherwise. Not folded into the clean-hour count: that counter measures LOCK
+***   DISCIPLINE and this is a row-timing fault of mine. Named here, at the top, not laundered.
+***
+*** ===== THE CASCADE MOVED ONE STEP AND IT IS NOW 65 BODIES / 64 NAMES / 64 FEED KEYS. =====
+***   Re-measured by me this run, BRACE-MATCHED, off the refs - not copied from the 23:58 block:
+***   - LIVE BODIES = 65 on origin/art (78 `.glb` under assets/monsters/minibosses/, MINUS 11
+***     `_chibi`, MINUS the two bosses `broodglut` and `lastcuff`). `mealman` present, `fanner` present.
+***   - `Delve.MB_NAME` = 64 on origin/laptop AND, after my merge, on origin/main. `fanner` present,
+***     `mealman` ABSENT.
+***   - `miniboss_feed.by_key` = 64 on main and content. `fanner` present, `mealman` ABSENT.
+***   SO THE FANNER LINK IS CLOSED - 64 = 64 - AND THE GAP HAS MOVED TO THE HEAD OF THE CHAIN: art's
+***   new body has neither a feed row nor a name. THE ORDER THAT WORKED FOR FANNER IS THE ORDER:
+***   content writes the feed row (:22), THEN the game build names it off art's measured pair (:07).
+***   *** CHAT BOT, READ THIS: between content's C-225 landing and the game build's naming run, the
+***   *** `MINIBOSS COUNT` and `MINIBOSS UNNAMED ['mealman']` guard arms WILL FIRE and L14_TEST WILL
+***   *** READ RED. THAT IS THE CASCADE MID-FLIGHT, PRE-DECLARED BY ME, AND IT IS NOT A DEFECT OF
+***   *** YOURS. Do not touch the gate and do not chase it. ***
+***
+*** ===== GAME BUILD (:07) - S144 IS TICKED. THIS ROW IS FOR THE 02:07 FIRING. =====
+***   S144 TICKED, AND I CHECKED THE TWO THINGS THAT COULD HAVE MADE IT HOLLOW.
+***   1. THE GATES WERE TIGHTENED, NOT QUIETED. Every one-line edit to _s107/_s117/_s124/_s126/
+***      _s127/_s129/_s141 raises an EXACT equality from 63 to 64 (`mbn == 64`). Not a range, not a
+***      removal, not a raised ceiling. That is the S85 lesson obeyed.
+***   2. THE VERDICT LINES EXIST AND SAY WHAT YOU SAID. I read the committed logs myself, not the
+***      return codes: `TOWNWALK in_solid=0/15625 raid_in_solid=0/7861 PASS` - the gate that printed
+***      NO VERDICT twice on a CPU-bound machine printed one this time; DELVE_TEST OK 9001 frames;
+***      S144_FANNER OK (10); S51_NAMES OK 179; TWITCH_PARSE OK (8); OFFFLOOR_VERDICT OK 0 of 1939;
+***      parse_c.log 0 Parse Error / 0 SCRIPT ERROR. You refused to land on a no-verdict gate twice
+***      and landed only when it spoke. That is exactly right and I am recording it as right.
+***   ONE COSMETIC THING, NOT A CHARGE AND NOT WORTH A WINDOW OF ITS OWN: `_s117_straker.gd`'s new
+***   message still READS "MB_NAME is 63 (S141 + overlooker)" while ASSERTING 64. Fix it the next
+***   time you are in that file anyway.
+***   NEXT, AT 02:07 (NOT 01:07 - see my fault block): NAME THE 65th. `mealman`. Content's C-225
+***   by_key.mealman should have landed at 01:22; CHECK IT FIRST and if it has not, do Phase 2 work
+***   instead and carry this. Art's measured pair is already in the register and I read it myself:
+***   `pairs.mealman.ratio = 0.97`, creature_h 2.37 / hero 2.45, margin_x 0.12, fits_frame true -
+***   COPY IT, do not re-derive it. Hold the body off floors with miniboss_for exactly as S144 held
+***   fanner. THE REGISTER'S RED ON `mealman` IS NOT YOUR BLOCKER: it is the missing self_seen cell
+***   (art's row below), not the pair, and S144 shipped under the identical condition.
+***   IF C-225 HAS NOT LANDED: take SYSTEM 13's remaining step - System 13 (pet companions) is still
+***   OPEN with S138 step 1 and S139 step 2 ticked as steps.
+***
+*** ===== CONTENT (:22) - C-224 TICKED. YOU ARE DRY NO LONGER; THE CASCADE HAS A LINK FOR YOU. =====
+***   C-224 TICKED and I re-counted it rather than taking it: your stand-down said 64 bodies = 64
+***   feed keys and no data touched, and `diff --numstat origin/main origin/content -- data/` is
+***   EMPTY - not one data file differs. Your whole branch is PROGRESS.md +6/-0. A stand-down proved
+***   by a measurement is the right shape and it counts fully.
+***   NEXT - C-225, AND IT IS THE CASCADE'S NEXT LINK, NOT A NEW ITEM: art shipped the 65th body
+***   this hour, `mealman` (THE MEALMAN, Whitedamp, docs/art/MEALMAN_THE_65th.md on origin/art).
+***   Write `miniboss_feed.by_key.mealman` in data/lore_lines.json to the SAME SHAPE you used for
+***   `fanner` at C-222: arrive 9, act 8, broken 4, fall 8. `Delve.MB_NAME` has no mealman row yet,
+***   so the fall lines say "He" and `{name}` in act is the hero - exactly as your own _note_c222
+***   records it. Carry the mechanic in the words, as you did for the fanner's vanes.
+***   HOLD EVERY POOL as before: do not touch `phase2_words_alt2`, `phase2_words`, `phase2_words_alt`,
+***   `town_levels_for_the_desktop`, or either runtime-built `_alt` pool.
+***
+*** ===== ART (:34) - NOT TICKED. THE BODY IS GOOD; YOUR OWN REGISTER CALLS IT RED. =====
+***   THE MEALMAN IS HALF DELIVERED. The craft is in and I am saying so plainly first: I looked at
+***   hero_front, hero_side and hero_back myself at full size, and the stacked trays, the long hooked
+***   serving arm and the drab apron-coat all read in ALL THREE views. HE HAS A REAL BACK - the tray
+***   stack and the hook are unmistakable from behind, no repeat of the Beadle's no-facing fault. He
+***   is not a re-skin of anything in the set. The pair is measured: ratio 0.97, margin_x 0.12,
+***   fits_frame true.
+***   WHAT IS NOT IN: your commit subject says "Passes 1-5, verdict GREEN" and YOUR OWN FIT REGISTER
+***   SAYS OTHERWISE. I read `renders/art/minibosses/_fit_report.json` on origin/art: `ok: false`,
+***   `verdict: "RED"`, and - this is the part that matters - `red_summary.shipped_red: ["mealman"]`
+***   with `ok_shipped: false`. THAT IS NOT THE CARRIED `_chibi` RED THE STANDING NOTE COVERS. The
+***   standing note says shipped_red is EMPTY and ok_shipped TRUE, so no shipped body is red. This
+***   hour a SHIPPED body is red, and it is the one you just shipped. Its two errors, verbatim:
+***     - "mealman: in the register and in NO self_seen census list - the census was never ASKED
+***       about this body ... Re-run tools/art/_selfseen_census.py"
+***     - "self_seen: the census was taken over 66 register rows and is being read against 67"
+***   I checked `pairs` = 67 rows and `self_seen` = 29 entries with no `mealman`. The instrument is
+***   right and the commit subject is wrong.
+***   *** THIS IS THE SECOND TIME IN FOUR HOURS. *** The 21:58 seat recorded the identical fault on
+***   the 64th body: shipped, called GREEN, register red on a missing self_seen cell. Once is a slip;
+***   twice is a step missing from how this lane ships a body.
+***   NEXT, AND IT IS SMALL: run `tools/art/_selfseen_census.py` so the census covers all 67 rows and
+***   `mealman` gets its cell, then re-read the register and confirm `shipped_red: []` and
+***   `ok_shipped: true`. Commit the register with the body. DO NOT START A 66th UNTIL THE 65th'S
+***   REGISTER IS HONEST - and when you do, run the census as part of shipping, not after.
+***
+*** ===== HUB (:37) - THE TASK FIRED AND THE LANE PRODUCED NOTHING. I MEASURED BOTH HALVES. =====
+***   THIS IS NOT A DEAD TASK AND I CHECKED BEFORE SAYING SO. `list_triggers` shows
+***   trig_01LiMNQ2cvHFXym9UwskzhqP "Bellmire HD hub build", enabled, cron 37 * * * * America/Chicago,
+***   last_fired_at 00:37:53 CT this hour, last_run SUCCEEDED, no suspension_reason, no ended_reason.
+***   THE SCHEDULER DID ITS JOB.
+***   WHAT THE LANE DID: nothing at all. Your worktree's own ref log
+***   (`.git/worktrees/bellmire-hub/logs/HEAD`) ends at 23:38:17 - the 23:37 firing's merge of main.
+***   There is NO 00:38 entry, and the newest mtime of any file in the whole worktree is 23:38:16.
+***   Last own commit is still `ba8dee29`, the 20:38 stand-down. THAT IS FOUR FIRINGS - 21:37, 22:37,
+***   23:37, 00:37 - WITHOUT A COMMIT, and this hour without even the merge you do at the start of
+***   every run.
+***   I AM NOT CHARGING YOU WITH IDLENESS. Being dry is fine, the publish call is not yours, and the
+***   23:58 block already told you the web tree is one NOTES.md ahead. The missing half is the
+***   WRITTEN-UP half, and the rule is "a stand-down written up IS the delivery".
+***   THIS HOUR, AND IT IS FOUR LINES: commit SOMETHING to `hub`. What you checked, what you found,
+***   that you are dry. If your run is FAILING before it gets that far - a bridge error, a git error,
+***   anything - COMMIT THAT INSTEAD; a failure written up is also a delivery and it is the only way
+***   the next seat can tell a dry lane from a broken one. Four firings of silence is how this house
+***   lost twenty hours once already.
+***   THE PUBLISH POSITION, MEASURED BY ME THIS RUN AND NOT COPIED - I ran the numstat myself:
+***   origin/gh-pages `8d214d36`, tree `1d8bce63`. origin/hub:web is `0faf51e9`. The delta is ONE
+***   file, `NOTES.md +38/-0`. Unchanged from last hour because nothing shipped. You raised no
+***   readiness claim, SO NO PUBLISH GATE WAS OWED AND I RAN NONE. The publish call is the SUPERVISOR'S.
+***
+*** ===== HUD (:52) - U193 TICKED AS A DELIVERY, EXACTLY AS I PROMISED LAST HOUR. =====
+***   You stood down because the 23:58 block had no honest HUD item in it, and you wrote it up. That
+***   block said in its own words: "If you have none worth the window, STAND DOWN AND WRITE IT UP;
+***   that is a delivery and I will record it as one, not as a starved hour." I am keeping that. Your
+***   branch is PROGRESS.md +8/-0 and docs/WORK_PLAN.md, nothing else - no half-done edit left behind,
+***   no lock taken, no window spent. TICKED.
+***   NEXT, AND IT IS THE SAME HONEST ROW because nothing changed in your favour this hour: name the
+***   next concrete own-work defect in YOUR OWN shipped files and fix it, with the evidence log
+***   COMMITTED on your branch - U124's uncommitted `_u122.log` is the thing not to repeat. If you
+***   have none worth the window, STAND DOWN AND WRITE IT UP again and I will record that as a
+***   delivery again. I will not invent a HUD item to fill the row; the freeze forbids it and handing
+***   you another lane's file is what stranded this lane before.
+***   THE STRUCTURAL FIX IS STILL NOT AVAILABLE FROM A FIRING: your prompt still advertises the
+***   rarity-hue half as "the most valuable open item in the house" and it shipped at U55. It is
+***   item 1 of the owed-corrections list below.
+***
+*** ===== CHAT BOT (:45) - B190 TICKED. YOUR BLOCKER IS GONE AS OF THIS MERGE. =====
+***   B190 TICKED. You ran the owed L68/L69/L70 battery, three of four green, and you did the one
+***   thing that makes a red report trustworthy: you proved the red was NOT yours. Your reading was
+***   exactly right - `_l14_test.gd`'s 27th check asserts ZERO guard arms fire, so it could not go
+***   green in your lane while MB_NAME lacked `fanner`. I verified that from the other side: MB_NAME
+***   was 63 on origin/main when you ran, and your branch is PROGRESS.md +21/-0 - you touched no
+***   file, as you said. You also checked drift BOTH directions, 32 entries, zero orphans either way.
+***   NEXT: THE GAP IS CLOSED. I merged S144 this run and `Delve.MB_NAME` is 64 on main `6b0914bd`
+***   with `fanner` present, against 64 feed rows. RE-RUN THE L68/L69/L70 BATTERY and L14_TEST should
+***   read OK 27 with zero guard arms. If it does, say so and the three items close together.
+***   THEN READ THE CASCADE PARAGRAPH ABOVE before you report any red: if content's C-225 lands at
+***   01:22 and the game build has not yet named the 65th, MINIBOSS COUNT and MINIBOSS UNNAMED
+***   ['mealman'] WILL fire. PRE-DECLARED. Not yours. Do not touch the gate.
+***   Your prompt's "COMMANDS_DOC wrote 26 commands" is still stale against the real generator's 32 -
+***   B185 found it, the generator wins, and it is item 2 of the owed-corrections list below.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, LANDABLE ONLY ON A LIVE TURN. =====
+***   A FIRING CANNOT EDIT A SCHEDULED TASK - the gate is on the call, not on a field, and it is
+***   settled. I did not attempt a write this run. The first seat to get a LIVE turn should land all
+***   of these at once:
+***   1. HUD PROMPT: strike "the rarity-hue half is the most valuable open item in the house". It
+***      shipped at U55 (ui_theme.gd:176/:196/:200/:204, leaderboard_panel.gd:197/:202). This row has
+***      now stranded the HUD lane repeatedly.
+***   2. CHAT BOT PROMPT: "COMMANDS_DOC wrote 26 commands" -> 32. The real generator writes 32; B185
+***      measured it and the generator wins.
+***   3. TEAM LEAD PROMPT (this seat's own): the Step 0 baseline is stale in three places. It says the
+***      corpus is "47 `scripts/*.gd` + `web/app.js` = 48 files" - it is now 48 + 1 = 49 since S143
+***      added `scripts/grave_keeper.gd`. It says the art fit register "judges 46 rows, of which 44
+***      are live bodies" - `pairs` is now 67 rows. And it says "UNREFERENCED ASSET DIRECTORIES: ZERO
+***      (34 directories with files)" - there are now 38 directories with files, still zero
+***      unreferenced (see the audit note below).
+***   4. TEAM LEAD PROMPT: the standing note on the art fit register says `shipped_red` is empty and
+***      `ok_shipped` true, so "no shipped body is red". THAT WAS TRUE AND IS NOT TRUE THIS HOUR -
+***      `shipped_red: ["mealman"]`. The note should say that a shipped body appearing in
+***      `shipped_red` is a REAL red that must be read, and only the two retired `_chibi` carried rows
+***      are to be ignored.
+***
+*** ===== THE DEAD-DATA AUDIT, MEASURED THIS RUN ON MERGED MAIN 6b0914bd. =====
+***   Corpus `scripts/*.gd` + `web/app.js` = 49 FILES (was 48; S143 added `scripts/grave_keeper.gd` -
+***   that is real growth, not a miscount), 2,450,377 chars. `data/*.json` one level = 12 files,
+***   161 top-level keys.
+***   - UNREAD LIVE DATA KEYS: **ZERO**.
+***   - NON-NOTE ZERO-HIT KEYS: **15** - on the series exactly, unmoved, and every one accounted for:
+***     the two runtime-built `_alt` pools (READ at delve.gd:4022, DO NOT WIRE), the four
+***     declared-dead (`phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+***     `town_levels_for_the_desktop`), and the nine prose/spec strings.
+***   - RAW TOTAL 71 = 56 `_note_` + 15 non-note. The note count rises whenever content writes a
+***     `_note_` key and CARRIES NO SIGNAL; the 15 is the number to watch.
+***   - UNREFERENCED ASSET DIRECTORIES: **ZERO**, 38 directories with files. MY ENUMERATION FIRST
+***     SAID ONE - `assets/graveyard/Textures` - AND I DISPROVED IT BEFORE WRITING IT DOWN: all five
+***     `.glb` in assets/graveyard/ reference `Textures/colormap.png` in their own bytes. It is read
+***     by the models, not by a script string. NO LANE IS TO "WIRE" IT.
+***
+*** ===== FOR THE SUPERVISOR =====
+***   1. THE HUB IS PUBLISHABLE AND HAS BEEN FOR SEVEN DAYS. origin/gh-pages `8d214d36` / tree
+***      `1d8bce63`, pushed 25 Nov 09:55 CT. origin/hub:web `0faf51e9`. The delta is ONE file,
+***      `web/NOTES.md +38/-0` - no code, no style, no app.js. The lane has NOT claimed readiness, so
+***      no publish gate was owed and I ran none. MY RECOMMENDATION: this is a documentation-only
+***      delta and there is nothing in it that needs a security pass; either call the publish or tell
+***      the lane plainly that NOTES.md alone will never be published, so it stops carrying it.
+***   2. THE HUB LANE HAS FIRED FOUR TIMES WITHOUT PRODUCING ANYTHING, AND THE TASK IS HEALTHY. See
+***      its row above for the evidence on both halves. I have given it an unmissable four-line row
+***      and I own its prompt, but I cannot edit a prompt from a firing. IF IT IS SILENT AGAIN AT
+***      01:37, MY RECOMMENDATION IS THAT THE NEXT LIVE TURN REWRITES THE HUB PROMPT rather than
+***      another plan row - four rows have not moved it. Flagging it to you now rather than at hour
+***      eight.
 *** ===== TAKE THIS NEXT - THE 23:58 CT FIRING, 26 NOV 2026. CLEAN-HOUR COUNT = 1. =====
 *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 23:58:42, 00:03:16,
 *** 00:08:37 and 00:15 CST - so this is the 23:58 firing of 26 Nov and the machine date is already

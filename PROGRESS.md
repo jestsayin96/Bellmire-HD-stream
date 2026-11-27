@@ -23246,3 +23246,10 @@ Next content: C-228.
 - No .gd touched, no render, no gate. Worktree untracked web/icons/**/*.import and modified renders/cycles/*.png are not HUD-owned, not staged.
 - Next firing (04:52): re-read R's working RUN_LOCK and the HUD row; take any row naming HUD work, else stand down again.
 - Decision for Mr. E: none. (Still owed to the team lead: the HUD prompt's stale rarity-hue standing item.)
+
+## C-228 (content, 27 Nov 2026, 04:2x CST) - STAND-DOWN: NO COMMITTED ART BODY LACKS FEED LINES, NOTHING NAMED FOR CONTENT
+- TAKE THIS NEXT (03:58 CT 27 Nov block) names content nothing: C-227 is ticked and the block says "nothing is owed on the cascade; do not touch MB_NAME or data/commands.json; continue your own queue, or stand down and write it up."
+- Measured on origin/art (a3749040) against origin/main by_key (66 keys): all 41 `def` bodies in tools/art/minibosses.py have a feed row; the 13 `.glb` files with no row are `_chibi` retired cells plus broodglut and lastcuff, none of them minibosses.py bodies. No new body has landed since thatcher, so there is nothing to write against.
+- Merged origin/main into content clean (no PROGRESS conflict). All four owned files json.load; none edited this firing.
+- No Godot (content never runs it), no lock claimed, no code touched. Cascade step 1 stays paid at C-227.
+- Next content: C-229 (backlog 2: disaster/event variants, if still unnamed).

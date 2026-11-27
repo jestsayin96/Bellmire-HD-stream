@@ -1,3 +1,215 @@
+*** ===== TAKE THIS NEXT - THE 02:58 CT FIRING, 27 NOV 2026. CLEAN-HOUR COUNT = 4. =====
+*** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 02:58:33 CST. The
+*** firing and the machine date are BOTH 27 Nov this hour - no rollover split.
+*** Merged main c5d297af -> ALL SIX LANES IN. PROGRESS.md +111/-0 and the arithmetic is EXACT this
+*** hour: laptop 11 + hud-ui 8 + chatbot 92 = 111, which is what the merged file gained, and the
+*** stronger assertion is the one I actually relied on - `diff --numstat origin/main HEAD` on the
+*** file that CONFLICTED reads +111/-0, ZERO lines removed. One conflict, one region, resolved with
+*** a state machine that keeps both sides and drops only the common ancestor: 11 ours + 8 theirs
+*** kept. Residual markers on ALL FOUR exact shapes = 0 in root PROGRESS.md, the file that actually
+*** conflicted - not in docs/PROGRESS.md, which is a different file and was not the one in dispute.
+***
+*** ===== THE CASCADE IS SHUT ENGINE-SIDE AT 65/65 AND OPEN EXACTLY ONE STEP AT THE CHAT BOT. =====
+***   Re-measured by me on the MERGED tree this run, BRACE-MATCHED, not copied from any prompt:
+***   - `Delve.MB_NAME` = 65 keys (brace-matched parse of the dict, never a flat regex).
+***   - `miniboss_feed.by_key` = 65 keys, parsed as JSON out of data/lore_lines.json.
+***   - THE SET DIFFERENCE BOTH WAYS IS EMPTY. MB_NAME minus by_key = [], by_key minus MB_NAME = [].
+***     Nothing unnamed, nothing dangling. That is the chain whole for the first time since S144.
+***   - `data/commands.json` STILL PUBLISHES 64 - I read the literal, twice over, and both sites say
+***     64. THAT IS THE ONE OPEN STEP AND IT IS THE CHAT BOT'S.
+***   WHERE `miniboss_feed` ACTUALLY LIVES, SO THE NEXT SEAT DOES NOT HUNT FOR IT: it is NOT a
+***   data/miniboss_feed.json - there is no such file. It is a top-level key INSIDE content's
+***   data/lore_lines.json. I looked for the file first, found nothing, and grepped for the
+***   BEHAVIOUR instead of the name I expected (chatcmd.gd:653 reads it off `Delve.lore()`).
+***
+*** ===== GAME BUILD (:07) - S146 TICKED. THE 65th IS NAMED AND THE CHAIN IS WHOLE AT YOUR END. =====
+***   S146 TICKED. I did not take the claim - I re-derived the number myself (MB_NAME = 65,
+***   brace-matched) and read the committed verdict LINES out of renders/cycles/s146_gates.log, not
+***   the return codes: parse rc=0 with ZERO SCRIPT ERROR and ZERO Parse Error, S145_MEALMAN OK 14,
+***   S144_FANNER OK 10, S107_GATE OK 12, S51_NAMES OK 179, S124/S126/S127/S129/S141 all OK,
+***   TWITCH_PARSE OK 8, OFFFLOOR_VERDICT OK 0 of 2008, DELVE_TEST OK 9001 frames, and TOWNWALK
+***   PASS in_solid 0/18218 raid 0/5349 with a REAL verdict line - not a NO VERDICT, which is what
+***   this gate gave you for three straight firings on a CPU-bound machine. The log is 439 lines and
+***   whole; I did not judge you by a clipped one.
+***   AND THE PART I AM TICKING HARDEST IS THE PATIENCE: S144 held fanner, S145 held mealman, and
+***   both holds were written into the lock line with the reason. You shipped bodies and refused to
+***   name them until the feed rows existed. Two hours later the chain reads 65/65 with an empty set
+***   difference in both directions. That is what the discipline bought.
+***   NEXT, AT 03:07: THE CARRIED COSMETIC, AND IT IS NOW THE ONLY THING I HAVE FOR YOU - the 01:58
+***   row asked for it and it is still unpaid: `tools/_s117_straker.gd`'s message READS
+***   "MB_NAME is 63 (S141 + overlooker)" while now ASSERTING 65. A gate whose message contradicts
+***   its own assertion is a lying instrument in waiting. Fix the MESSAGE only, in that file, and do
+***   NOT take a Godot window for it - it is a string, not a behaviour. If you have a 66th-body row
+***   from art, that outranks this.
+***   DO NOT invent a 66th body yourself and do not re-wire the three `_alt` pools.
+***
+*** ===== CONTENT (:22) - C-226 TICKED. NOTHING OWED, AND I CHECKED FOR THE SIBLING TRAP. =====
+***   C-226 TICKED. I parsed BOTH versions of data/lore_lines.json as JSON and compared KEY SETS
+***   rather than reading a hunk, because a reordered JSON block reads as deleted keys in a diff and
+***   a seat has nearly charged a lane with a gutted file over exactly that:
+***   - top-level keys lost: NONE. Gained: `_note_c226` alone. 73 -> 74 keys.
+***   - NO list-valued key SHRANK anywhere in the file. The three that grew are the three you
+***     claimed and the counts match your own commit message: epitaphs 1032 -> 1044 (+12),
+***     descend 629 -> 639 (+10), cleared 614 -> 624 (+10).
+***   - `miniboss_feed.by_key` unchanged at 65, ZERO keys lost from it.
+***   The -4 lines in your numstat are rewrites inside those lists, not removals; the key sets prove
+***   it and the line count alone would not have.
+***   NEXT: THERE IS STILL NO 66th BODY, so there is no `by_key` row to write and I am not inventing
+***   one. Keep producing unthrottled - epitaphs, descend, cleared - hold the body count at 65, and
+***   write no new `by_key` row until art ships a 66th. Your `_note_` keys are EXPECTED zero-hit
+***   keys, they are 58 of my 73 zero-hit total this hour, and NOBODY is to stop you writing them.
+***   DO NOT WIRE `phase2_words_alt2`. Still dead for the reason its two siblings are: no `alt2`
+***   anywhere in scripts/, web/ or tools/, and delve.gd composes `base + "_alt"` only.
+***
+*** ===== ART (:34) - NOT TICKED. THE 02:34 FIRING PRODUCED NOTHING AT ALL. =====
+***   NO TICK, AND THIS IS A MEASUREMENT, NOT A CHARGE. origin/art carries TWO commits ahead of
+***   main and both of them are MY OWN plan syncs. Your last real work is `823bd838` - the 65th's
+***   register made honest - which landed between the 00:58 and 01:58 syncs and WAS TICKED last
+***   hour. So the 02:34 firing left no commit, no render and no stand-down.
+***   I CHECKED THE THINGS THAT WOULD MAKE THAT SOMEBODY ELSE'S FAULT BEFORE WRITING THIS ROW:
+***   - You were NOT starved by the lock. It was free from the game build's IDLE 02:17:01 until the
+***     QA tester claimed at 02:42:42 - your whole :34 window was open, and you take the lock only
+***     to prove fit anyway.
+***   - I read your WORKING TREE, not just the ref, because a worktree is not a branch and this seat
+***     has nearly charged you on that exact mistake before. There is no uncommitted body in it -
+***     what IS uncommitted is a long tail of untracked `web/icons/items/ring/*.webp.import` sidecar
+***     files. Those are generated siblings, not work in progress.
+***   SO ONE CYCLE IS SIMPLY MISSING. I cannot tell a firing that did not happen from a firing that
+***   produced nothing, and I am not going to guess: a scheduled task in this house has silently
+***   stopped before while reporting itself healthy, and a firing cannot read the task list cheaply.
+***   NEXT: you are the one GENUINELY DRY lane allowed to invent - the 66th miniboss, or pass work on
+***   what is shipped. Measure the live count off tools/art/minibosses.py or the fit register, NEVER
+***   off a line in any prompt (mine says 46 rows / 44 bodies and that is stale - it is 65 bodies and
+***   67 register pairs). AND COMMIT SOMETHING EVERY FIRING even when dry: a stand-down written up
+***   IS the delivery, and it is the only way I can tell a quiet lane from a dead task.
+***
+*** ===== HUB (:37) - TICKED AS A DELIVERY. SECOND HONEST STAND-DOWN IN A ROW. =====
+***   TICKED. `7f0988b3`, web/NOTES.md +6, the stand-down written up, and web/ CODE UNCHANGED - I
+***   verified that last part off the numstat rather than taking the sentence: the ONLY file your
+***   branch touches is web/NOTES.md. No app.js, no style.css, no index.html.
+***   I RAN NO PUBLISH VERIFICATION THIS HOUR AND IT WAS NOT OWED. You did not claim READY TO
+***   PUBLISH and you were right not to. An unearned gate report is the same fault class as a lying
+***   gate, so I am saying plainly that I ran none rather than listing greens I did not earn.
+***   NEXT: same row. Keep the web tree honest, never publish - that call is the supervisor's, not
+***   mine and not yours - and if you are dry, commit the stand-down as you did this hour.
+***
+*** ===== HUD (:52) - U195 TICKED AS A DELIVERY, UNDER MY OWN ROW'S OWN TERMS, AGAIN. =====
+***   The 01:58 row said in its own words that if you had no item worth the window you should stand
+***   down and write it up and I would record it as a delivery AGAIN. You did exactly that. I am
+***   keeping my word for the second hour running. TICKED.
+***   AND THIS WAS NOT A STARVED HOUR - I CHECKED BEFORE DECIDING IT, because a starved lane breaks
+***   the clean-hour count and I own the schedule. Your :52 window was genuinely FREE: the QA tester
+***   held 02:42:42 - 02:49:44 and cleared :52 with over two minutes to spare, and the chat bot kept
+***   to :48 with a finish inside :52 for the THIRD hour running. Nobody sat in your window.
+***   NEXT: same honest row - name the next concrete own-work defect in YOUR OWN shipped files and
+***   fix it, with the evidence log COMMITTED on your branch. If you have none worth the window,
+***   stand down and write it up and I will record it as a delivery AGAIN. I will not invent a HUD
+***   item to fill this row; the freeze forbids it, and handing you another lane's file is what
+***   stranded this lane before.
+***
+*** ===== CHAT BOT (:45) - B192 TICKED, AND IT IS THE STAND-DOWN I AM TICKING. =====
+***   B192 TICKED. The 01:58 row was an order with a condition on it: do not bump 64 -> 65 until
+***   `MB_NAME` actually reads 65 ON MAIN, check it with a brace-matched parse, and if it still
+***   reads 64 STAND DOWN AND SAY SO. You checked, the condition was NOT met - S146 was still on the
+***   game build's own branch and had not reached main - and you stood down and wrote the reason.
+***   THAT IS THE ORDER OBEYED EXACTLY, including the half most lanes skip: you did not bump a
+***   published count that no name backed. A published count ahead of the names is the same fault as
+***   one behind them, pointing the other way, and you refused it in both directions in two hours.
+***   You also pulled the QA tester's independent 02:49:44 gate in as corroboration from OUTSIDE your
+***   own lane. That is better evidence than your own battery and I am recording that it was offered.
+***   *** NEXT, AND THE CONDITION IS NOW MET - I CHECKED IT SO YOU DO NOT HAVE TO, BUT CHECK IT
+***   *** ANYWAY: `MB_NAME` READS 65 ON MAIN AS OF THIS MERGE, and `by_key` reads 65, set difference
+***   *** empty both ways. `data/commands.json` still publishes 64 at both sites. SO BUMP THE
+***   *** PUBLISHED COUNT 64 -> 65 and let the REAL generator rewrite docs/COMMANDS.md - never a
+***   *** hand edit to the doc. Then run the L68/L69/L70 battery. THE ROW IS UNCONDITIONAL. ***
+***   AND PRE-DECLARED SO YOU DO NOT CHASE IT: until that bump lands, `MINIBOSS COUNT` (published 64
+***   vs feed rows 65) WILL fire and L14_TEST WILL READ 1-of-27 RED. The QA tester already caught it
+***   at 02:49:44 and named it correctly as a cascade step owed by your lane. THAT IS THE CASCADE
+***   MID-FLIGHT, DECLARED BY ME, NOT A DEFECT OF YOURS. Do not touch the gate.
+***
+*** ===== THE DEAD-DATA AUDIT THIS HOUR - UNREAD COUNT DID NOT MOVE. =====
+***   Measured off the merged tree, corpus `scripts/*.gd` + `web/app.js` ONLY - one level, not a
+***   recursive glob, so `web/tools/sheet_overlap.js` is correctly EXCLUDED as tools/ test code.
+***   - UNREAD LIVE DATA KEYS: **ZERO**. UNREFERENCED ASSET DIRECTORIES: **ZERO**.
+***   - 73 keys return zero literal hits: 58 `_note_` + 15 NON-NOTE, and the NON-NOTE 15 are
+***     EXACTLY the accounted-for list, not a new finding: two runtime-built `_alt` pools
+***     (lord_intros_alt, unique_intros_alt - READ at delve.gd:4022 via `base + "_alt"`, DO NOT
+***     WIRE), four declared-dead (phase2_words, phase2_words_alt, phase2_words_alt2,
+***     town_levels_for_the_desktop), and nine prose/spec strings (_gating, boss_floors,
+***     canon_silences, casing, chronicle_line, one_roll, promotion_line, technique, word_order).
+***   - THE SERIES, NON-NOTE ONLY, WHICH IS THE NUMBER THAT CARRIES SIGNAL: 15 / 15 / 15 / 15 -
+***     unmoved. The RAW total rose 56 -> 73 purely because content wrote 17 more `_note_` keys,
+***     which is exactly why the raw total is not the number to watch.
+***   - I SUSPECTED MY OWN ENUMERATION FIRST AND IT PAID: my matcher flagged ONE unreferenced asset
+***     directory, `assets/graveyard/Textures/`. It holds `colormap.png` alone - a texture pulled in
+***     by its .glb's material and never named in GDScript. That is a FALSE POSITIVE of a
+***     name-matcher, not a finding, so the count is ZERO and stays on the series.
+***   - BASELINE MOVED, STATED SO THE NEXT SEAT DOES NOT READ IT AS A MISCOUNT: `scripts/*.gd` is now
+***     48 files, so the corpus is 49 files / 2,451,168 chars, and data/ is 12 files / 163 top-level
+***     keys. My own prompt says 47 + app.js = 48 files and 146 keys. Both are simply older.
+***
+*** ===== LOCK DISCIPLINE THIS HOUR - CLEAN, WITH ONE DISCIPLINE NOTE NAMED. =====
+***   Read off R's WORKING copy of docs/RUN_LOCK.txt, which is the authoritative one and is often
+***   UNCOMMITTED - a `git show origin/laptop:...` would have missed a live claim.
+***   - chat bot B191: claim 01:48:21, cap 02:13:21 computed FIRST, declared 01:51:00, IDLE 01:49:18.
+***   - game build S146: claim 02:09:12, cap 02:34:12 computed FIRST, declared 02:29:12, IDLE 02:17:01.
+***   - QA tester (:41, NOT one of the six, judged by the same rule): claim 02:42:42, cap claim+9 =
+***     02:51:42, declared claim+3 = 02:45:42, IDLE 02:49:44.
+***   - HUD and art: took NO lock. Hub never needs it.
+***   ZERO claims over a live hold. No two lanes holding at once. No stale lock cleared. Every stamp
+***   carries -06:00 and every one is in the PAST - no future stamps.
+***   THE ONE NOTE, NAMED RATHER THAN FOLDED AWAY: the QA tester released 4 minutes AFTER its own
+***   declared finish, though comfortably inside its cap and clear of the HUD's :52. I am NOT
+***   counting that as an overrun - the cap is the enforced number, it never came near it, and no
+***   lane stood down because of it - but "declare a finish you actually mean" is the rule and a
+***   claim+3 that takes 7 minutes misses it. If it recurs it is a pattern and I will say so.
+***   The game build's cap-computed-first fix is unbroken since 02:08 on 21 Nov. The chat bot's
+***   :48-claim fix held a THIRD hour and the HUD's window was free.
+***   CLEAN-HOUR COUNT = 4 (was 3 at 01:58). Nothing of mine folded into it.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS. A FIRING CANNOT WRITE A PROMPT. =====
+***   I attempted no write this hour: the gate is on the CALL, not on a field, and that was settled
+***   at 09:07 on 18 Nov with an `enabled=true` no-op that was refused identically. The list below
+***   this block STANDS and I am ADDING to it, not replacing it. Land them all in one live turn.
+***   CARRIED FROM 01:58, STILL OWED:
+***   - THIS SEAT'S PROMPT, STANDING NOTE ON THE ART FIT REGISTER: it says the verdict "reads RED /
+***     ok:false and has done for days" on two carried `_chibi` rows and warns the next seat not to
+***     report the art gate as green. STALE - `ok` is TRUE and `red_summary.rows` is EMPTY. A seat
+***     that obeys it will UNDER-report art.
+***   NEW THIS HOUR, ALL IN THIS SEAT'S OWN PROMPT, ALL MECHANICAL:
+***   - THE HUB PUBLISH BLOCK IS STALE IN BOTH HALVES. It says gh-pages is 05ac2679 / tree 9ca8051e
+***     pushed 19 Nov 20:06. MEASURED BY ME THIS RUN: gh-pages is 8d214d36, tree 1d8bce63, pushed
+***     25 NOV 09:55:03 CT. And it says the unpublished delta is "3 files / +59 / -1 - NOTES.md +9,
+***     app.js +46/-1, style.css +4". MEASURED: the delta is `NOTES.md +50/-0` ALONE. app.js and
+***     style.css went out in publish 8 on 25 Nov. A seat that copies that split will report a
+***     user-visible change queued when there is none - which is exactly the fault the 01:58 seat
+***     caught itself making from the same paragraph.
+***   - THE `Delve.MB_NAME` STANDING EXAMPLE says the chain is "WHOLE AT 44/44/44". It is 65/65.
+***     The LESSON (parse the braces, never a flat regex) is sound and must stay; only the numbers
+***     are stale, and the prompt itself says never to quote its counts as current.
+***   - THE STEP 0 BASELINE says the corpus is 48 files (47 `.gd` + app.js), 146 top-level keys, and
+***     that "The right count is 48". `scripts/*.gd` is now 48 files, so the corpus is 49, and data/
+***     carries 163 top-level keys. The ONE-LEVEL rule and the tools/-exclusion rule are sound and
+***     must stay; the three figures are older.
+***   - THE FIT REGISTER FIGURE in the freeze section says "46 rows, of which 44 are live bodies and
+***     two are retired `_chibi` cells". It is 65 live bodies and 67 register pairs.
+***   - THE FROZEN-ID LIST says "B104, C-163, D100, H32, L74, S85, T5, U124, art paviser pass 8".
+***     Current as of this firing: B192, C-226, D100, H32, L74, S146, T5, U195.
+***
+*** ===== FOR THE SUPERVISOR =====
+***   ONE ITEM, AND MY RECOMMENDATION IS UNCHANGED FROM 01:58: **NO PUBLISH.**
+***   MEASURED BY ME THIS RUN, ON THE REFS, COUNTED NOT COPIED - and I counted the per-file split
+***   myself precisely because my own prompt warns that copying a figure from that paragraph has
+***   now happened three times:
+***     - origin/gh-pages = 8d214d36, tree 1d8bce63, pushed 25 NOV 09:55:03 CT.
+***     - origin/hub:web = tree 7264c945. The two trees are NOT equal.
+***     - THE WHOLE DELTA IS ONE FILE: `NOTES.md +50/-0`. Nothing else differs at all.
+***   So there is NO user-visible change queued - not "not yet ready", but nothing a viewer could
+***   see. The app.js and style.css work went out in publish 8 on 25 Nov. The hub lane has NOT
+***   claimed READY TO PUBLISH, so I ran no publish gate and I am not asking you to act on a lane
+***   claim that does not exist.
+***   RECOMMENDATION: NO PUBLISH. Nothing is waiting on you that a push would deliver.
+***
 *** ===== TAKE THIS NEXT - THE 01:58 CT FIRING, 27 NOV 2026. CLEAN-HOUR COUNT = 3. =====
 *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 01:58:52 and 02:01:52
 *** CST. The firing and the machine date are BOTH 27 Nov this hour - no rollover split.

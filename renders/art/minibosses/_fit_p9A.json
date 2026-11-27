@@ -1,5 +1,5 @@
 {
- "ok": false,
+ "ok": true,
  "hero": {
   "h": 2.45,
   "w": 1.32,
@@ -186,11 +186,179 @@
    "air_px_eps": 0.02,
    "air_px_min": 102,
    "air_px_tightest_view": "side"
+  },
+  "thatcher": {
+   "creature_h": 2.54,
+   "hero_h": 2.45,
+   "ratio": 1.04,
+   "pair_w": 3.34,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.255,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "thatcher_p9a",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 32538,
+      "vis": 32538,
+      "delta": 37829,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43678,
+      "vis": 43678,
+      "delta": 57369,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 22744,
+      "vis": 22744,
+      "delta": 32843,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37789,
+      "vis": 37789,
+      "delta": 42451,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 32420,
+      "vis": 32420,
+      "delta": 43499,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44026,
+      "vis": 44026,
+      "delta": 48979,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 191520,
+     "shadow_px": 3392,
+     "mean": 0.4651,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 2257,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 195320,
+     "shadow_px": 3130,
+     "mean": 0.4459,
+     "max": 0.7077,
+     "error": null,
+     "rim_filled_px": 2036,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 191520,
+     "shadow_px": 3179,
+     "mean": 0.4631,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2204,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "measured_at": "2026-11-27T11:38:58+00:00",
+   "measured_by": "tools/art/minibossfit.py --tag _p9a",
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     152,
+     150
+    ],
+    "side": [
+     191,
+     190
+    ],
+    "back": [
+     150,
+     152
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 150,
+   "air_px_tightest_view": "front"
   }
  },
- "errors": [
-  "self_seen: the census was taken over 64 register rows and is being read against 1 - it describes a different house. Re-run tools/art/_selfseen_census.py"
- ],
+ "errors": [],
  "blind_views": [],
  "stale_margin": [],
  "margin_derived": [],
@@ -199,23 +367,23 @@
  "min_proving": 2,
  "frame_w": 5.6,
  "margin_x": 0.12,
+ "rows_unstamped": [],
+ "provenance_note": "2 of 2 rows carry a measured_at. An unstamped row is NOT red - this block answers WHEN a stored measurement was taken, not whether it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as rows are re-measured.",
  "self_seen": {
   "asks": "how much of THE MAN survives HIS OWN GEAR, per view - an OCCLUSION measure, NOT a readability score (see the docstring of derive_self_seen and the top-end tile).",
   "instrument": "tools/art/_backread.py",
   "census": "tools/art/_selfseen_census.py",
   "bar": 0.75,
   "derived": "recomputed this run - this block is RUN-OWNED and is never carried forward",
-  "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds. | 24 Nov 2026 19:5x CT for the DREDGER (57th), measured by tools/art/_backread.py --keys dredger and MERGED into this file row-by-row. NOT written with --out, which OVERWRITES and would have destroyed the other 56 rows - the same wholesale-wipe shape this file's own carry rule exists to prevent. 24 Nov 2026 21:0x CT for the 58th body (harrowman), measured by tools/art/_backread.py --keys harrowman in the same run that built it; its own row carries its measured_at. 24 Nov 2026 21:5x CT for the 59th body (pledgeman), measured by _backread.py and MERGED into this file - the other rows untouched. 25 Nov 2026 02:0x CT for the 61st body (timberman), measured by tools/art/_backread.py --keys timberman in the run that built it and MERGED into this file - the other rows untouched.",
-  "instrument_errors": [
-   "panner: the man span merged to no object"
-  ],
-  "measured_cells": 180,
-  "measured_bodies": 60,
+  "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds. | 24 Nov 2026 19:5x CT for the DREDGER (57th), measured by tools/art/_backread.py --keys dredger and MERGED into this file row-by-row. NOT written with --out, which OVERWRITES and would have destroyed the other 56 rows - the same wholesale-wipe shape this file's own carry rule exists to prevent. 24 Nov 2026 21:0x CT for the 58th body (harrowman), measured by tools/art/_backread.py --keys harrowman in the same run that built it; its own row carries its measured_at. 24 Nov 2026 21:5x CT for the 59th body (pledgeman), measured by _backread.py and MERGED into this file - the other rows untouched. 25 Nov 2026 02:0x CT for the 61st body (timberman), measured by tools/art/_backread.py --keys timberman in the run that built it and MERGED into this file - the other rows untouched. ; 2026-11-26T17:47:38-0600 CT (26 Nov 2026 art firing) for the OVERLOOKER (63rd), which the 25 Nov 22:46 census listed as MEASURABLE and which had NO row here at all - minibossfit went RED on it this run and the red PRE-DATES this run's edit: the body was born at pass 5 and was never fed to the instrument. Its cells are man_seen 1.0 on all three views, and that is an HONEST 1.0 that says nothing good: he carries NO GEAR (34 items inside the man span, 0 outside), so there is nothing that could occlude him. Per derive_self_seen's own docstring a high self_seen says UNOBSTRUCTED, never that the body READS - his facing is measured by tools/art/_ovl_backread.py, not by this. | 2026-11-26T18:40:20-0600 CT (26 Nov 2026 art firing) for the PANNER row, REPLACED not added: the one error that held this file at ok:false for two days was a HARNESS fault and is fixed in tools/art/_backread.py, which now reports a declared-empty `man` span as NO_MAN - an honest absence that claims NOTHING and is not a pass - and goes RED on an empty span that is not the end-of-build marker. No view was rendered for this row because there is no man to render; `views` is {} on purpose. The other 61 rows were verified byte-identical across the merge. | 2026-11-26T23:05:31-0600 CT (26 Nov pass 4) for the FANNER (64th), measured by tools/art/_backread.py --keys fanner on the PASS-4 geometry and MERGED into this file row-by-row - the other 62 rows untouched. The cell was never missing because of a bug: `_backread.py` writes `_backread<tag>.json` and HAS NEVER WRITTEN THIS FILE, so the merge was always a separate hand step and pass 3 was waiting for something that could not happen. Measured AFTER the vane relayout and the eye re-slot, not before, because self_seen is an OCCLUSION measure and both changes move occlusion. ; 2026-11-27T01:41:21-0600 Central Standard Time mealman, the 65th body - the cell the register was RED for: mealman (back 0.7010, front 0.8265, side 0.9195) ; 2026-11-27T02:59:48-0600 Central Standard Time thatcher, the 66th - measured 27 Nov 2026 CT: thatcher (back 0.9756, front 0.9074, side 0.7408) ; 2026-11-27T03:45:03-0600 Central Standard Time thatcher pass 7 - the leather lap: thatcher (back 0.9758, front 0.9074, side 0.7408) ; 2026-11-27T10:44:36+0000 Ame pass 8 thatcher: yealm bind twist 180 deg: thatcher (back 0.9750, front 0.9018, side 0.7472)",
+  "instrument_errors": [],
+  "measured_cells": 192,
+  "measured_bodies": 64,
   "no_man": [],
   "no_man_reason": "the builder declares an EMPTY `man` span - a deliberate marker that this body has no operator at all (panner pass 4 removed his, by A/B, and left the empty span to say so). A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED and this is NOT red - the first cut of this rule called panner MEASURABLE and turned the register red on a correct body, which is an unearned FAIL and the same fault as an unearned pass.",
-  "census_measured_at": "2026-11-25T04:02:20-0600",
-  "census_register_mtime": "2026-11-25T03:59:06-0600",
-  "census_register_pairs": 64,
+  "census_measured_at": "2026-11-27T10:44:39+0000",
+  "census_register_mtime": "2026-11-27T09:45:13+0000",
+  "census_register_pairs": 68,
   "census_errors": [],
   "build_failed": [],
   "build_failed_reason": "the builder RAISED, so nothing was measurable and nothing is claimed - that is RED, never an honest absence. This list and the census's own `errors` were both unread until 24 Nov 12:3x.",
@@ -379,61 +547,72 @@
    },
    {
     "rank": 26,
+    "key": "mealman",
+    "view": "back",
+    "man_seen": 0.701
+   },
+   {
+    "rank": 27,
     "key": "boiler",
     "view": "side",
     "man_seen": 0.7057
    },
    {
-    "rank": 27,
+    "rank": 28,
     "key": "winder",
     "view": "front",
     "man_seen": 0.7102
    },
    {
-    "rank": 28,
+    "rank": 29,
     "key": "fenman",
     "view": "side",
     "man_seen": 0.7301
    },
    {
-    "rank": 29,
+    "rank": 30,
     "key": "scrapwright",
     "view": "front",
     "man_seen": 0.7412
    },
    {
-    "rank": 30,
+    "rank": 31,
     "key": "blower",
     "view": "side",
     "man_seen": 0.7469
+   },
+   {
+    "rank": 32,
+    "key": "thatcher",
+    "view": "side",
+    "man_seen": 0.7472
    }
   ],
-  "under_bar_count": 30,
+  "under_bar_count": 32,
   "top_end": {
-   "key": "straker",
+   "key": "overlooker",
    "view": "back",
    "man_seen": 1.0
   },
-  "verdict": "RED"
+  "census_count_scope": "NOT A VERDICT: this run carries 2 of the census's 68 rows and every one of them is censused - a subset run, not a different house",
+  "verdict": "GREEN"
  },
  "unproved_cells": [],
- "rows_unstamped": [],
  "visibility_scope": {
   "asks": "how much of each subject survives the OTHER subject, in the pair cell",
-  "cells": 6,
-  "cells_reading_exactly_1_0": 6,
+  "cells": 12,
+  "cells_reading_exactly_1_0": 12,
   "cells_where_vis_differs_from_alone": 0,
   "air_px_floor": 102,
   "rows_with_no_air": [],
   "taken_by_construction": true,
   "note": "DERIVED THIS RUN off the rows in this file, never carried. The method is sound - with/without through one locked camera - but place() holds air between the two bodies in almost every row, so mostly the answer is settled before the render. THIS IS A TAKEN-BY-CONSTRUCTION PASS WHEREVER IT PASSES, NOT A MEASUREMENT THAT MOVED - trap 4, an instrument that cannot move is not a pass. IT DOES NOT SAY THE BODY READS, and `seen: 1.0` must never be cited as if it did; `self_seen` answers that question. What it still earns: it goes red if a layout change ever puts the two bodies in front of each other, and alone == 0 still catches a blank or mis-aimed render. RED ON EMPTY: `taken_by_construction` is false when there are no cells at all, so a run that measured nothing cannot read as a pass. `rows_with_no_air` names the rows where the construction argument does NOT hold and the cell is therefore a real measurement - keep an eye on those."
  },
- "provenance_note": "1 of 1 rows carry a measured_at. An unstamped row is NOT red - this block answers WHEN a stored measurement was taken, not whether it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as rows are re-measured.",
  "measured": [
-  "collier"
+  "thatcher"
  ],
  "asked": [
-  "collier"
+  "thatcher"
  ],
  "blank_check": {
   "files": 3,
@@ -448,7 +627,7 @@
   "retired_red": [],
   "ok_shipped": true
  },
- "verdict": "RED",
+ "verdict": "GREEN",
  "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (1), re-derived from stored measurements; 1 of them rendered this run"
+ "verdict_scope": "every row in pairs (2), re-derived from stored measurements; 1 of them rendered this run"
 }

@@ -23711,3 +23711,11 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
   build has actually named the badger. Carried for the supervisor, not for me to take: the `!bestiary`
   HARD COLLISION (System 41 re-specs a shipped verb) was routed up at 07:58 and no block newer than
   08:09 has answered it. I am not guessing at it.
+
+## C-234 (content, 27 Nov 2026, 10:3x CST) - THE 67th FEED ROW: `badger` (Forestall). 67 BODIES, 67 FEED KEYS.
+- TAKE THIS NEXT (09:58 CT block) CONTENT row: "WRITE THE badger FEED ROW", bar lifted, by_key 66 -> 67; drops.json stand-down upheld (not created).
+- Body is committed on main (assets/monsters/minibosses/badger.glb, tools/art/minibosses.py CANON "badger"/"Forestall").
+- Added `miniboss_feed.by_key.badger` in data/lore_lines.json: arrive 9, act 8, broken 4, fall 8 (thatcher shape), plus `_note_c234`. Names the four pale sacks on a yoke and the one rule: he is leaving and every sack that leaves the floor is gone from the granary. No new mechanic, no floor count.
+- VALIDATION OK: four owned files json.load; leaf compare on lore_lines.json 0 removed, 0 changed, 30 added (29 lines + note); by_key 67.
+- CODE WIRING: game build's `Delve.MB_NAME` row `"badger": "Forestall"` (chat bot's count bump follows once main holds 67/67). Lines are a gate: `miniboss_for` can now draw the body.
+- Next content: C-235.

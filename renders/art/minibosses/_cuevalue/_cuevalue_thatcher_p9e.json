@@ -1,0 +1,80 @@
+{
+ "key": "thatcher",
+ "tag": "_p9e",
+ "cue_slot": "bone",
+ "views": {
+  "front": {
+   "cue": {
+    "px": 36414,
+    "p50": 0.6632,
+    "p90": 0.7137,
+    "p5": 0.1877,
+    "p95": 0.7213,
+    "spread": 0.5335,
+    "mean": 0.5855
+   },
+   "lap": {
+    "px": 18060,
+    "p50": 0.5646,
+    "p90": 0.5831,
+    "p5": 0.431,
+    "p95": 0.5834,
+    "spread": 0.1524,
+    "mean": 0.5449
+   },
+   "screen_margin": 0.0986,
+   "screen_ratio": 1.175
+  },
+  "side": {
+   "cue": {
+    "px": 33660,
+    "p50": 0.5633,
+    "p90": 0.6574,
+    "p5": 0.2681,
+    "p95": 0.6653,
+    "spread": 0.3971,
+    "mean": 0.5232
+   },
+   "lap": {
+    "px": 13987,
+    "p50": 0.5413,
+    "p90": 0.5786,
+    "p5": 0.4722,
+    "p95": 0.5797,
+    "spread": 0.1075,
+    "mean": 0.5345
+   },
+   "screen_margin": 0.022,
+   "screen_ratio": 1.041
+  },
+  "back": {
+   "cue": {
+    "px": 30179,
+    "p50": 0.5924,
+    "p90": 0.6941,
+    "p5": 0.1765,
+    "p95": 0.7025,
+    "spread": 0.526,
+    "mean": 0.5423
+   },
+   "lap": {
+    "px": 19608,
+    "p50": 0.5599,
+    "p90": 0.568,
+    "p5": 0.4918,
+    "p95": 0.5682,
+    "spread": 0.0764,
+    "mean": 0.5462
+   },
+   "screen_margin": 0.0325,
+   "screen_ratio": 1.058
+  }
+ },
+ "errors": [],
+ "asks": "the SHIPPED screen luma of the pale cue against the lap, per view, measured by with/without through one locked camera - NOT an albedo ratio",
+ "cannot_see": "hue, touching silhouettes, and whether either mass reads as what it IS. Those are answered by looking.",
+ "engine": "BLENDER_EEVEE",
+ "engine2": "BLENDER_EEVEE",
+ "thatcher_twist_env": "(unset)",
+ "ok": true
+}

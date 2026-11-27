@@ -11961,10 +11961,10 @@
    "creature_h": 2.54,
    "hero_h": 2.45,
    "ratio": 1.04,
-   "pair_w": 3.37,
+   "pair_w": 3.36,
    "gap_x": 0.45,
    "margin_x": 0.12,
-   "air_x": 2.231,
+   "air_x": 2.244,
    "fits_frame": true,
    "engine": "BLENDER_EEVEE",
    "views": [
@@ -11976,45 +11976,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 33722,
-      "vis": 33722,
-      "delta": 39094,
+      "alone": 33470,
+      "vis": 33470,
+      "delta": 38814,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43668,
-      "vis": 43668,
-      "delta": 57680,
+      "alone": 43672,
+      "vis": 43672,
+      "delta": 57137,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 23359,
-      "vis": 23359,
-      "delta": 33846,
+      "alone": 23104,
+      "vis": 23104,
+      "delta": 33309,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37756,
-      "vis": 37756,
-      "delta": 42470,
+      "alone": 37776,
+      "vis": 37776,
+      "delta": 42451,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 33581,
-      "vis": 33581,
-      "delta": 44850,
+      "alone": 33232,
+      "vis": 33232,
+      "delta": 44526,
       "seen": 1.0
      },
      "hero": {
-      "alone": 44030,
-      "vis": 44030,
-      "delta": 49048,
+      "alone": 44031,
+      "vis": 44031,
+      "delta": 48979,
       "seen": 1.0
      },
      "proves": true
@@ -12042,12 +12042,12 @@
    },
    "ground": {
     "front": {
-     "plane_px": 192280,
-     "shadow_px": 3441,
-     "mean": 0.4645,
+     "plane_px": 191520,
+     "shadow_px": 3382,
+     "mean": 0.4647,
      "max": 0.708,
      "error": null,
-     "rim_filled_px": 2252,
+     "rim_filled_px": 2257,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -12056,12 +12056,12 @@
      }
     },
     "side": {
-     "plane_px": 196080,
-     "shadow_px": 3171,
-     "mean": 0.4457,
+     "plane_px": 195320,
+     "shadow_px": 3130,
+     "mean": 0.4459,
      "max": 0.708,
      "error": null,
-     "rim_filled_px": 2101,
+     "rim_filled_px": 2190,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -12070,12 +12070,12 @@
      }
     },
     "back": {
-     "plane_px": 193040,
-     "shadow_px": 3215,
-     "mean": 0.4641,
-     "max": 0.708,
+     "plane_px": 191520,
+     "shadow_px": 3198,
+     "mean": 0.4617,
+     "max": 0.7103,
      "error": null,
-     "rim_filled_px": 2207,
+     "rim_filled_px": 2176,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -12086,21 +12086,21 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-27T10:44:43+00:00",
+   "measured_at": "2026-11-27T11:49:15+00:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
     "front": [
      151,
-     148
+     152
     ],
     "side": [
-     191,
-     190
+     192,
+     191
     ],
     "back": [
-     147,
-     150
+     152,
+     151
     ]
    },
    "frame_edge_disk": {
@@ -12124,8 +12124,8 @@
     }
    },
    "air_px_eps": 0.02,
-   "air_px_min": 147,
-   "air_px_tightest_view": "back"
+   "air_px_min": 151,
+   "air_px_tightest_view": "front"
   }
  },
  "errors": [],

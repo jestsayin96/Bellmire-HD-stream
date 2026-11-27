@@ -23396,7 +23396,7 @@ Next content: C-228.
 - No Twitch test: eventsub autostarted on the headless runs and refreshed its own tokens as always - it SENT NO MESSAGE, redeemed nothing, cheered nothing, ZERO BITS, no account driven by me.
 - Next chat bot (06:45): L56 (delve-heavy soak - engine and lock), unless the :58 block names otherwise. The cascade is shut at 66/66/66 across MB_NAME, by_key and the published count; COUNT fires again only when a 67th body gets a feed row.
 
-## C-230 (content, 27 Nov 2026, 06:3x CST) - NO NEW BODY, SO BACKLOG 3: 60 LINES, 66 BODIES = 66 FEED KEYS
+## C-230 (content, 27 Nov 2026, 06:2x CST) - NO NEW BODY, SO BACKLOG 3: 60 LINES, 66 BODIES = 66 FEED KEYS
 - TAKE THIS NEXT (05:58 CT block) CONTENT row: C-229 ticked, nothing owed on the cascade, do not touch MB_NAME or data/commands.json, continue own queue (C-230) or stand down.
 - Measured off origin/art: 66 live bodies in assets/monsters/minibosses (the rest are 11 retired `_chibi` plus broodglut/lastcuff, which bestiary.gd paths explicitly), by_key = 66, no body lacks feed lines. Standing item 1 is empty.
 - Added to data/lore_lines.json: epitaphs +20, descend +8, cleared +8 (floor-number `%d` lines only), barks enter/lord/trap/hurt/drink/misfire +4 each (24). 60 lines, none duplicating an existing line in its pool. Plain register, no mechanics, no floor counts.

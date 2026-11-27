@@ -17757,3 +17757,13 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - OPEN, SMALL: the vellum overflow is still UNMEASURED in split mode (panes up) at 150%. That needs a probe that raises HudDock mode, then samples `_content`. Not done this firing.
 - Rarity-hue half of System 2 was recorded shipped (U193/U55/U76); not retaken.
 - Next firing (13:52): re-read R's RUN_LOCK and the HUD row; then either the split-mode vellum probe or L74 (feed/theme under load).
+
+## U206 (HUD, 27 Nov 13:5x CT) - THE VELLUM CHECK NOW EXECUTES AND IS GREEN (ENGINE CLAIM 13:54:01 -> IDLE 13:55:25, DECLARED 13:60, CAP 14:07)
+- Clock read first (13:53 CST). R's WORKING-COPY RUN_LOCK last line was IDLE chat bot B203 13:51:10; tasklist Godot* = 0. Claim written after both checks.
+- ITEM: the 12:58 plan's HUD row - run the probe with the panes up so the vellum assertion can execute. Standing item (rarity-hue half of System 2) is recorded shipped (U193/U55/U76); not retaken.
+- CHANGE (tools/_u202_busy.gd only, my own probe; no seven-file edit): after the busy stage it queues bits/sub/points lanes, waits for split mode, feeds 40 lines, saves busy_split_s150, probes again, and asserts HudDock.split true AND `_vel_runs > 0`, so the vellum check can never silently run nowhere again.
+- GATES: parse 0 Parse Error / 0 SCRIPT ERROR (_u206_parse.log); windowed 1920x1080 @150% _u206_after.log 0 SCRIPT ERROR, U203_SET 4 of 4, U206_VELLUM runs=3 mode=grid, U202_DONE checks=17 fails=0.
+- NOTE, CORRECTS U205's PREMISE: in this run the FIRST probe (k=330, before I raised anything) already had a vellum (has_vel true, vellum rect 621x195 inside panel 750x277) - the town is already in grid mode there. So `_content` Nil in U205 was a different state than I described; both probes now measure the vellum and neither overflows. Not chased further.
+- Render looked at: renders/cycles/20261127_u202/busy_split_s150_1080.png - 2x2 panes, Chronicle box at the cross, two lines whole inside the vellum.
+- SEEN, NOT MINE: in the Director pane a hostile-length viewer name tag (MAR_WWWW...) runs off the pane's left/right edge. It is a Label3D name tag (HeroBody/Townsfolk), not a HUD file.
+- Next firing (14:52): re-read R's RUN_LOCK; take L74 (feed + theme under load at 100/125/150%).

@@ -19,6 +19,7 @@ var _d: Delve
 var _f := 0
 var _fails: Array = []
 var _checks := 0
+var _vel_runs := 0   # U206: how many times the vellum check really executed
 var _stage := "boot"
 var _at := 0
 var _scales: Array = []
@@ -100,6 +101,7 @@ func _probe(tag: String) -> void:
 		print("U134_LINE %s a=%.2f vis_clip=%s lblw=%.0f textw=%.0f over_vellum=%.1f over_panel=%.1f bottom_over=%.1f fs=%d \"%s\"" % [tag, l.modulate.a, vis_clip, l.size.x, sz.x, over_v, over_p, bottom - pr.end.y, fs, l.text.left(40)])
 		_ok(over_p <= 0.5, "%s line drawn %.1f px past the Chronicle panel: %s" % [tag, over_p, l.text.left(30)])
 		if has_vel:
+			_vel_runs += 1
 			_ok(over_v <= 0.5, "%s line drawn %.1f px past the vellum: %s" % [tag, over_v, l.text.left(30)])
 		_ok(bottom <= pr.end.y + 0.5, "%s line bottom %.1f px past the panel: %s" % [tag, bottom - pr.end.y, l.text.left(30)])
 	print("U134_PANE %s lines=%d panel=%s vellum=%s card=%s" % [tag, n, pr, (str(vel) if has_vel else "NONE(split off: _content is only built by _build_chrome)"), fh.card_showing()])
@@ -188,6 +190,22 @@ func _process(_dt: float) -> bool:
 						seen += 1
 				print("U203_SET seen=%d of %d (sum was %d)" % [seen, AMB.size(), admitted + alive])
 				_ok(seen == AMB.size(), "every tavern line admitted or still waiting (set, not sum)")
+				# U206: now raise the panes (split mode), so FeedHUD builds _content and the vellum check executes.
+				_say("local_mre", "MrE", "!testbits 500 bigaxe")
+				_say("local_mre", "MrE", "!testsub mossymage")
+				_say("local_mre", "MrE", "!testpoints dawncleric")
+				_stage = "split"
+				_at = _f
+		"split":
+			var k2 := _f - _at
+			if k2 >= 60 and k2 < 60 + 2 * 40 and k2 % 2 == 0:
+				_t.feed.append("Villager%d hums a tune near the well" % k2)
+			if k2 == 240:
+				_ok(HudDock.split(_t), "U206 panes are up (HudDock.split true)")
+				_save("busy_split_s150")
+				_probe("split")
+				_ok(_vel_runs > 0, "U206 the vellum check executed at least once (runs=%d)" % _vel_runs)
+				print("U206_VELLUM runs=%d mode=%s" % [_vel_runs, HudDock.mode(_t)])
 				UiTheme.set_scale(1.0)
 				print("U202_DONE checks=%d fails=%d" % [_checks, _fails.size()])
 				return true

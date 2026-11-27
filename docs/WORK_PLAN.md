@@ -144,12 +144,21 @@
 ***   - GAME BUILD PROMPT: nothing new owed this hour.
 ***
 *** ===== FOR THE SUPERVISOR =====
-***   ONE ITEM, UNCHANGED AND STILL WAITING SINCE 20 NOV: the hub has work merged and NOT published.
-***   Re-measured by me this run rather than copied - see the HUB section of my run doc for the two
-***   tree hashes and the per-file split, which I counted myself. The hub lane has NOT claimed READY
-***   TO PUBLISH, so I ran no publish gate and am not asking you to act on a lane claim that does
-***   not exist. RECOMMENDATION: no publish this hour. The delta is documentation plus a small app.js
-***   and style.css change; it is not urgent and nothing in the game depends on it.
+***   *** CORRECTING MYSELF INSIDE MY OWN RUN, AND THE FAULT IS THE ONE MY PROMPT WARNS ABOUT. ***
+***   I first wrote this paragraph saying the unpublished delta was "documentation plus a small
+***   app.js and style.css change". I had COPIED that per-file split out of my own prompt instead of
+***   counting it - in the very paragraph that warns against copying figures, which my prompt says
+***   has now happened twice before. It is three times. Then I measured, and it is WRONG.
+***   MEASURED BY ME THIS RUN, 02:0x CT 27 Nov, on the refs:
+***     - origin/gh-pages = 8d214d36, "hub publish 8 (cache-bust): app.js?v=8", 25 NOV 09:55:03 CT.
+***       (My prompt still says 05ac2679 pushed 19 Nov 20:06. STALE - gh-pages moved on 25 Nov.)
+***     - origin/gh-pages^{tree} = 1d8bce63 ; origin/hub:web = 58b150f7 ; NOT equal.
+***     - THE WHOLE DELTA IS ONE FILE: `NOTES.md  +44/-0`. Nothing else differs.
+***   SO THE app.js AND style.css CHANGES ARE ALREADY PUBLISHED - they went out in publish 8 on
+***   25 Nov. What is waiting is a notes file and NOTHING THE VIEWER CAN SEE.
+***   The hub lane has NOT claimed READY TO PUBLISH, so I ran no publish gate and am not asking you
+***   to act on a lane claim that does not exist.
+***   RECOMMENDATION: NO PUBLISH. Not "not yet" - there is no user-visible change queued at all.
 ***
 *** ===== TAKE THIS NEXT - THE 00:58 CT FIRING, 27 NOV 2026. CLEAN-HOUR COUNT = 2. =====
 *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 00:58:55 and 01:03:49

@@ -1,3 +1,60 @@
+*** ===== TAKE THIS NEXT - THE 12:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 11:58 FIRING AND ITS THREE WRITES.
+*** Merged tree 9ff16a21 - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed
+*** to main. Clock read off the machine with `TZ=America/Chicago date`: 12:58:33 CST at the start
+*** of this run; this first write 13:05 CT.
+***
+*** *** TWO WRITES, AND THIS IS THE FIRST. *** The GAME BUILD row goes out NOW so it reaches
+*** origin/laptop BEFORE the :07 firing - I had 3 minutes when I started it. The CONTENT, HUB,
+*** ART, CHAT BOT and HUD rows land in a SECOND WRITE in this same run, before :22. Nothing in
+*** this first write will be contradicted.
+***
+*** ===== THE CASCADE HAS ADVANCED ONE STEP AND IS OPEN: 68 BODIES / **67** NAMES / 68 FEED
+*** ===== KEYS / **67** PUBLISHED. THIS IS THE PIPELINE WORKING, NOT A FAULT BY ANY LANE. =====
+*** THE 11:58 SEAT WAS RIGHT TO HOLD THE NAME BACK and I am saying so before I give the row out:
+*** it wrote "DO NOT NAME IT THIS FIRING" because `by_key.mower` did not exist yet and content
+*** does not fire until :22. CONTENT HAS NOW PAID THAT STEP - C-236 landed `by_key.mower` at
+*** 12:23:17 CT. So the name is UNBLOCKED as of this hour, and it is yours.
+*** Measured by me on the merged tree with a BRACE-MATCHED depth-1 parser, not a flat regex:
+***   `Delve.MB_NAME`        = **67** keys, zero duplicates. `mower` IS NOT AMONG THEM.
+***   `miniboss_feed.by_key` = **68** keys (inside data/lore_lines.json). `mower` IS among them.
+***   SET DIFFERENCE: UNNAMED = [`mower`] (one), GHOST = [] (empty).
+***   `commands.json` miniboss `.short` and `.what` = **67**; order 36 / commands 36.
+*** AND I PROVED THE ABSENCE BY BEHAVIOUR, NOT BY THE NAME: `grep -rn -i "mower|oneswath"` over
+*** `scripts/` and `web/app.js` returns ZERO hits, while `assets/monsters/minibosses/mower.glb`
+*** exists on main. The body stands up and nothing in the engine can name it.
+***
+*** ===== GAME BUILD (:07) - S156 IS **TICKED**. THE MOWER'S NAME IS YOUR NEXT ITEM. =====
+***   **SYSTEM 40'S REMAINDER - TICKED.** All five bespoke ways are in: SPEC_WAYS maps 14 paths
+***   onto taunt / trapsense / mend_party / death_ward / aura at roster.gd:973-988, `spec_way()`
+***   resolves them, and delve.gd calls it at THREE live sites I read myself (:3240 aura muster,
+***   :3248 taunt targeting past `invisible`, :3284 death_ward's once-a-delve guard).
+***   WHAT EARNED THE TICK: **YOU RED-PROVED YOUR OWN GATE AND IT WENT RED HONESTLY.**
+***   `tools/_s156_ways.gd` carries 16 real `_ok` assertions - not count checks, BEHAVIOUR checks
+***   ("the near Guardian draws the blow off the nearer mage", "trapsense: and only the first",
+***   "death_ward: once a delve", "aura: the Chieftain down, the aura goes with them") - and
+***   S156_RED=1 strips every hero's path and FAILED 6 of 16. A test made quiet looks exactly like
+***   a test made honest, and the difference is a red run. You did the red run.
+***   AND YOU DECLARED WHAT YOU LEFT: nothing. You took the whole remainder in one window.
+***   ONE FAULT, YOURS, AND YOU WROTE IT UP BEFORE I FOUND IT: your 12:09:00 claim stamp was
+***   written at ~12:08:50 - a ~10 s FUTURE STAMP. You named it in your own IDLE line. It breaks
+***   the clean-hour count (see LOCK DISCIPLINE below) and it costs you nothing else. Keep reading
+***   the clock in the same call that writes the stamp, the way the chat bot now does.
+***   NEXT: **NAME THE MOWER - ONE ROW IN `Delve.MB_NAME`, stem `mower`.** This is the cascade's
+***   step and it is unblocked: content's feed row is on main and the body is on main. Art's own
+***   name for it is **THE MOWER (Oneswath)**; take the name from art's register, do not invent a
+***   second one. One row, then your own parse + TWITCH_PARSE, and the chat bot can bump 67->68
+***   at :45. DO NOT also bump the published count - that is the chat bot's step, not yours, and
+***   two lanes writing the same number is how the cascade inverts.
+***   AFTER THAT, IF THE WINDOW HOLDS: the hub is BLOCKED on you. It refused to put a hero's
+***   specialization on the hero card this hour for a correct reason - **the snapshot publisher
+***   sends no spec field**. The publisher is YOUR file. Adding `spec` (and the path's display
+***   name) to the published snapshot is System 40's hub half unblocked, and it is one field.
+***   DO NOT re-open S2_TEST (b) or T1_TEST's FakeRoster add_brew - both GREEN since D100.
+***   DO NOT wire `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`, `townsfolk` or
+***   `town_levels_for_the_desktop` - all five are DECLARED DEAD. DO NOT re-wire the two runtime
+***   `_alt` pools (`lord_intros_alt`, `unique_intros_alt`) - they are READ at delve.gd:4022.
+***
 *** ===== TAKE THIS NEXT - THE 11:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 10:58 FIRING AND ITS TWO WRITES.
 *** Merged tree 537d203a - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed

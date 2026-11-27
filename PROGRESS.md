@@ -22942,3 +22942,12 @@ correction backlog, and a future firing MUST NOT read 32 as a fault.
 - CARRIED: nothing of mine. L14_TEST's one red is held on S144's MB_NAME row reaching main.
 - FOR THE GAME BUILD lane: nothing owed in twitch_eventsub.gd.
 - DECISION FOR MR. E: none.
+
+## C-225 (content, 27 Nov 2026, 01:3x CST) - THE 65th FEED ROW: `mealman`. 65 BODIES, 65 FEED KEYS.
+- TAKE THIS NEXT (00:58 CT 27 Nov block) gave CONTENT (:22): C-225, the cascade's next link - write `miniboss_feed.by_key.mealman` to the fanner shape, hold every pool.
+- Body checked committed on origin/art, not a worktree: `assets/monsters/minibosses/mealman.glb` in the tree and `def mealman` in tools/art/minibosses.py.
+- Added: `by_key.mealman` arrive 9, act 8, broken 4, fall 8. No boss name (Delve.MB_NAME has no mealman row), so fall lines say "He" and `{name}` in act is the hero. Mechanic carried in the words: burning lands on everyone in the room, him included; nothing on him is alight; the dust does not escalate; steel is the slow safe way.
+- Added top-level `_note_c225` (expected zero-hit key).
+- Validation: all four owned files json.load OK; every pre-existing key compared equal to the pre-edit parse; file round-trips at indent 2. VALIDATION OK.
+- Held: phase2_words, phase2_words_alt, phase2_words_alt2, town_levels_for_the_desktop, both runtime-built _alt pools.
+- CODE WIRING for the game build lane: `scripts/delve.gd` MB_NAME `"mealman": "Whitedamp"` and a `scripts/bestiary.gd` mealman entry (model res://assets/monsters/minibosses/mealman.glb, h 2.37, no anims), per art's doc. Until then the MINIBOSS UNNAMED ['mealman'] guard arm fires - the cascade mid-flight, pre-declared.

@@ -1,0 +1,89 @@
+{
+ "key": "badger",
+ "tag": "_p4e",
+ "slot": "bone",
+ "expect": 4,
+ "min_area": 120,
+ "views": {
+  "front": {
+   "visible_px": 29998,
+   "solo_sil_px": 33293,
+   "moved_px": 46090,
+   "shadow_px_excluded": 16092,
+   "masses": 6,
+   "areas": [
+    8313,
+    8306,
+    8295,
+    3305,
+    1549,
+    172
+   ],
+   "dropped_areas": [
+    58
+   ],
+   "occluded_frac": 0.099,
+   "countable": 4,
+   "peek_areas": [
+    1549,
+    172
+   ],
+   "counts": true
+  },
+  "side": {
+   "visible_px": 27389,
+   "solo_sil_px": 28234,
+   "moved_px": 47306,
+   "shadow_px_excluded": 19917,
+   "masses": 4,
+   "areas": [
+    7047,
+    7031,
+    7029,
+    6282
+   ],
+   "dropped_areas": [],
+   "occluded_frac": 0.0299,
+   "countable": 4,
+   "peek_areas": [],
+   "counts": true
+  },
+  "back": {
+   "visible_px": 30410,
+   "solo_sil_px": 33287,
+   "moved_px": 49303,
+   "shadow_px_excluded": 18893,
+   "masses": 5,
+   "areas": [
+    8309,
+    8308,
+    8224,
+    3453,
+    2101
+   ],
+   "dropped_areas": [
+    15
+   ],
+   "occluded_frac": 0.0864,
+   "countable": 5,
+   "peek_areas": [],
+   "counts": false,
+   "note": "5 countable masses (5 separable) against 4 on the yoke - a viewer on this camera CANNOT COUNT THE LOAD"
+  }
+ },
+ "errors": [],
+ "asks": "how many SEPARABLE masses of the `bone` slot reach each camera, by with/without through one locked camera, intersected with the slot's own silhouette so shadows do not count as mass",
+ "cannot_see": "whether a separable mass is a COUNTABLE one at stream distance, whether it reads as a sack rather than a gourd, and whether the slot holds only sacks",
+ "countable_per_view": [
+  4,
+  4,
+  5
+ ],
+ "separable_per_view": [
+  6,
+  4,
+  5
+ ],
+ "all_views_count": false,
+ "ok": true
+}

@@ -1,248 +1,175 @@
-#!/usr/bin/env python3
-"""_facingread.py - CAN A VIEWER TELL WHICH WAY THIS BODY IS FACING?
+"""_facingread.py - DOES THIS BODY HAVE A FRONT, OR IS THE BACK THE SAME PICTURE?
 
-*** THIS IS A LINUX-BRIDGE TOOL. It needs PIL, which cruzader's Blender does
-not have. Do not run it with `blender -P`. Same split as _streamscale.py. ***
+  blender -b -noaudio -P tools/art/_facingread.py -- --repo <repo> \
+      --keys badger,thatcher,mealman,bellman,beadle
 
-    MB_KEY=collier MB_TAG=_p15 python3 -I tools/art/_facingread.py
+WHY THIS EXISTS. The Beadle shipped with a pale band that wrapped its head, so
+the figure read identically from front and back and had NO FACING, and every
+number in its register passed. The badger reproduced that fault at passes 2
+and 3 while its own builder comment claimed the facing was "geometric by
+construction". Twice now a comment predicted a MECHANISM and no one measured
+the OUTCOME. This file measures the outcome.
 
-WHY IT EXISTS. FAULT 7 is a standing class in this file and it has now shipped
-twice. The Beadle shipped a pale band that WRAPPED the head, so the figure read
-the same from the front and the back. The collier shipped a face whose every
-piece - brow, sockets, mouth cloth - sat about 0.03 m INSIDE the head sphere,
-so almost nothing rendered on the front at all. Both passed every number in
-their fit registers, because a register asks `is this piece visible` and this
-question is a different one:
+THE VIEWER'S QUESTION, AND IT IS A COMPARISON, NOT A PROPERTY. A viewer behind
+a body sees its back; a viewer in front sees its front. They have a facing if
+those two pictures are TELLABLE APART. So: render front and back through ONE
+camera framing, MIRROR THE BACK IN X (a back view is the front's mirror - not
+mirroring it would score every left/right asymmetry as facing twice over), and
+ask how much of the picture changed.
 
-    PUT THE FRONT BESIDE THE MIRRORED BACK. IF THEY LOOK THE SAME, THE BODY HAS
-    NO FACING, AND NO AMOUNT OF DETAIL ON THE FRONT CHANGES THAT.
+  sil_iou     intersection over union of the two alpha silhouettes. 1.000
+              means the OUTLINE is the same shape from both sides - whatever
+              facing exists is carried inside the outline and will not survive
+              being small on screen.
+  in_diff_frac over the silhouette INTERSECTION, the fraction of pixels whose
+              screen luma differs by more than 0.08. This is the interior
+              read: a face, an open coat, a tool on one hip.
+  in_mean_abs the mean absolute luma difference over that intersection.
 
-That is the viewer's question and it is why this compares two VIEWS of one arm,
-where _streamscale.py compares two ARMS of one view. The two are not
-substitutes and both are cheap.
+THERE IS NO PASS MARK IN THIS FILE AND THAT IS DELIBERATE. A bare threshold
+invented here would be exactly the kind of unearned number this lane has
+shipped before. It runs over a LIST of keys so the body under test is read
+against bodies already in the game, and the comparison is the result. Read the
+spread, then look at the two pictures it wrote.
 
-WHAT IT REFUSES TO DO. There is no MIN_FACING_PX and there must not be one -
-the 05:58 ruling of 25 Nov applies here exactly as it does to _streamscale.
-ONLY ZERO IS A VERDICT ON ITS OWN: it says the head is literally
-indistinguishable front from back at that size. A non-zero count IS NOT A PASS.
-
-WHAT THIS INSTRUMENT CANNOT SEE, AND IT IS A LOT:
-  - It cannot tell a FACE from a SMUDGE. A dark blob in the right place and a
-    face score the same. Only an eye on the picture settles that.
-  - A body with different marks on the front and the back scores well here
-    while still leaving a viewer unsure which way it points.
-  - It compares the head window only. A facing carried by a shoulder, a tool
-    or a stance is invisible to it and is not thereby absent.
-  - It renders nothing. It reads PNGs another pass wrote, so a stale arm
-    attributes the finding to the wrong pass. Check the mtimes.
+WHAT IT CANNOT SEE, SAID PLAINLY:
+ 1. IT CANNOT ATTRIBUTE. A body that is left/right asymmetric - the badger is
+    mid-stride with one hand up on the yoke - scores a difference that is
+    POSTURE, not facing. The number answers "are the two pictures different";
+    it does not answer "is the difference a face". Looking at the pair does.
+ 2. It measures VALUE, not hue or shape semantics.
+ 3. A high in_diff_frac on a body whose silhouettes barely overlap is about a
+    small intersection. `inter_px` is printed so that can be seen.
+ 4. RED ON EMPTY: if either silhouette or the intersection is under MIN_PX,
+    nothing here was measured and the cell says so rather than reporting a
+    tidy ratio over nothing.
 """
-import os, sys, json
-from collections import deque
+import os
+import sys
+import json
+import math
+import argparse
+
+import bpy
 import numpy as np
-from PIL import Image
+from mathutils import Vector
 
-W5   = os.environ.get("W5", os.path.expanduser("~/mnt/bellmire-art"))
-KEY  = os.environ.get("MB_KEY", "collier")
-TAG  = os.environ.get("MB_TAG", "")
-ROOT = os.path.join(W5, "renders", "art", "minibosses")
-THRESH = 8.0 / 255.0
-RUNGS = [("full", 760), ("1080p", 480), ("720p", 320), ("480p", 213), ("360p", 160)]
-HEAD_W, HEAD_H, HEAD_UP = 124, 124, 6
-MIN_HEAD_PX = 200
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+import lordlib as L          # noqa: E402,F401
+import lordgen as G          # noqa: E402
+import minibosses as M       # noqa: E402,F401
+import minibossgen as MG     # noqa: E402
+import minibossfit as F      # noqa: E402
 
-
-def load(p):
-    im = Image.open(p).convert("RGBA")
-    bg = Image.new("RGBA", im.size, (255, 255, 255, 255))
-    return Image.alpha_composite(bg, im).convert("RGB"), np.asarray(im)[:, :, 3] > 40
+MIN_PX = 2000
 
 
-def marks(m):
-    h, w = m.shape
-    seen = np.zeros_like(m, bool)
-    out = []
-    for y in range(h):
-        for x in range(w):
-            if m[y, x] and not seen[y, x]:
-                q = deque([(y, x)]); seen[y, x] = True; n = 0
-                while q:
-                    cy, cx = q.popleft(); n += 1
-                    for dy, dx in ((1,0),(-1,0),(0,1),(0,-1),(1,1),(1,-1),(-1,1),(-1,-1)):
-                        ny, nx = cy+dy, cx+dx
-                        if 0 <= ny < h and 0 <= nx < w and m[ny, nx] and not seen[ny, nx]:
-                            seen[ny, nx] = True; q.append((ny, nx))
-                out.append(n)
-    return sorted(out, reverse=True)
+def _clear():
+    for ob in list(bpy.data.objects):
+        bpy.data.objects.remove(ob, do_unlink=True)
 
 
-CAPE_RG, CAPE_MIN = 90.0, 200
+def _luma(a):
+    return 0.2126 * a[:, :, 0] + 0.7152 * a[:, :, 1] + 0.0722 * a[:, :, 2]
 
 
-def subject_half(rgb, fg):
-    """Which half holds the miniboss. The KayKit hero wears a SATURATED RED
-    cape; the minibosses are earth brown.
-
-    *** THE FIRST VERSION OF THIS FUNCTION USED mean(R-G) AND IT WAS WRONG. ***
-    It put the head window on the HERO in all four arms, and the only reason
-    that did not become a shipped number is the `both views picked the same
-    half` guard below, which fired and voided the comparison. Earth brown is
-    warm EVERYWHERE (R-G around +33 over the whole body), so a mean over a
-    mostly-grey knight came out LOWER than a mean over a brown clamp. The cape
-    is not brighter on average, it is SATURATED - so count the pixels that are
-    strongly red instead of averaging the ones that are faintly warm."""
-    a = np.asarray(rgb).astype(np.float32)
-    W = a.shape[1]
-    out = {}
-    for name, sl in (("left", slice(0, W // 2)), ("right", slice(W // 2, W))):
-        m = fg[:, sl]
-        if m.sum() < 50:
-            out[name] = -1; continue
-        out[name] = int((((a[:, sl, 0] - a[:, sl, 1]) > CAPE_RG) & m).sum())
-    hero = max(out, key=out.get)
-    other = "right" if hero == "left" else "left"
-    if out[hero] < CAPE_MIN or out[hero] < 3 * max(1, out[other]):
-        return None, out
-    return other, out
-
-
-def head_only(mask):
-    """Rows of the window that are the HEAD, not the shoulders.
-
-    *** THE FIRST VERSION OF THIS TOOL COMPARED THE WHOLE WINDOW AND THE
-    NUMBER WAS MEANINGLESS. *** It reported 8170 differing pixels of 15376 on
-    the CONTROL arm - 53% - because a head window also holds the shoulders,
-    the shovel arm and the hat brim, and all of those differ front-to-back on
-    any body with a tool in its hand. A metric that reads 53% before the fix
-    and 55% after it cannot see a face. The head is the blob ABOVE THE NECK:
-    scan down from the top, take the widest row of the skull, then the
-    narrowest row below it, and stop there."""
-    widths = mask.sum(axis=1)
-    if widths.max() < 4:
-        return None
-    top = int(np.argmax(widths[:60])) if widths[:60].max() > 0 else 0
-    lo = widths[top:top + 46]
-    if lo.size < 4:
-        return None
-    neck = top + int(np.argmin(lo[2:])) + 2
-    out = np.zeros_like(mask)
-    out[:neck + 1] = mask[:neck + 1]
-    return out
-
-
-def head_window(rgb, fg, half):
-    W = fg.shape[1]
-    m = fg.copy()
-    if half == "right":
-        m[:, :W // 2] = False
-    else:
-        m[:, W // 2:] = False
-    rows = np.where(m.sum(axis=1) >= 2)[0]
-    if rows.size == 0:
-        return None, 0, None
-    ytop = int(rows.min())
-    band = m[ytop:ytop + 40]
-    cols = np.where(band.any(axis=0))[0]
-    cx = int((cols.min() + cols.max()) / 2)
-    x0, y0 = cx - HEAD_W // 2, ytop - HEAD_UP
-    box = (max(0, x0), max(0, y0), max(0, x0) + HEAD_W, max(0, y0) + HEAD_H)
-    sub = m[box[1]:box[3], box[0]:box[2]]
-    npx = int(sub.sum())
-    return rgb.crop(box), npx, sub
+def _one(key, outdir, errs):
+    _clear()
+    objs, meta = MG.build_miniboss(key)
+    mn, mx, pts = G.world_bounds(objs)
+    radius = max(0.5, (mx - mn).length / 2.0)
+    cent = Vector(((mn.x + mx.x) / 2.0, (mn.y + mx.y) / 2.0, (mn.z + mx.z) / 2.0))
+    sc = bpy.context.scene
+    G.set_engine(sc)
+    sc.render.resolution_x = sc.render.resolution_y = 760
+    sc.render.resolution_percentage = 100
+    sc.render.film_transparent = True
+    sc.render.image_settings.file_format = 'PNG'
+    sc.render.image_settings.color_mode = 'RGBA'
+    if sc.world is None:
+        sc.world = bpy.data.worlds.new("w")
+    sc.world.use_nodes = True
+    bg = next((n for n in sc.world.node_tree.nodes if n.type == 'BACKGROUND'), None)
+    if bg:
+        bg.inputs['Color'].default_value = (0.045, 0.05, 0.065, 1.0)
+        bg.inputs['Strength'].default_value = 1.0
+    rig = F.even_lights(cent, radius, meta["aura"])
+    cam_d = bpy.data.cameras.new("cam")
+    cam_d.type = 'ORTHO'
+    cam_d.ortho_scale = max(mx.x - mn.x, mx.z - mn.z) * 1.18
+    cam = bpy.data.objects.new("cam", cam_d)
+    bpy.context.collection.objects.link(cam)
+    sc.camera = cam
+    got = {}
+    for vname, az in (("front", 0.0), ("back", 180.0)):
+        # THE LIGHTS FOLLOW THE CAMERA, exactly as the shipped hero sheet does.
+        # If they did not, the back would be measured in the front's lighting
+        # and the difference would partly be a lighting difference.
+        F.aim_lights(rig, cent, radius, az)
+        a, e = math.radians(az), math.radians(6.0)
+        dirv = Vector((math.sin(a) * math.cos(e), -math.cos(a) * math.cos(e),
+                       math.sin(e))).normalized()
+        cam.location = cent + dirv * (radius * 4.0 + 4.0)
+        cam.rotation_euler = dirv.to_track_quat('Z', 'Y').to_euler()
+        bpy.context.view_layer.update()
+        fwd = (cam.matrix_world.to_3x3() @ Vector((0, 0, -1))).normalized()
+        depth = [(p - cam.location).dot(fwd) for p in pts]
+        cam_d.clip_start = max(0.01, min(depth) - radius * 0.5)
+        cam_d.clip_end = max(depth) + radius * 2.0 + 8.0
+        path = os.path.join(outdir, "%s_%s.png" % (key, vname))
+        sc.render.filepath = path
+        bpy.ops.render.render(write_still=True)
+        got[vname] = G.read_png(path)
+    Ff, Bb = got["front"], got["back"][:, ::-1, :]      # mirror the back in x
+    af = Ff[:, :, 3] > 0.5
+    ab = Bb[:, :, 3] > 0.5
+    inter = af & ab
+    union = af | ab
+    nf, nb, ni, nu = int(af.sum()), int(ab.sum()), int(inter.sum()), int(union.sum())
+    cell = {"front_px": nf, "back_px": nb, "inter_px": ni, "union_px": nu}
+    if nf < MIN_PX or nb < MIN_PX or ni < MIN_PX:
+        cell["red"] = ("a silhouette or the intersection is under %d px - "
+                       "NOTHING WAS MEASURED for this body" % MIN_PX)
+        errs.append("%s: silhouettes too small (f %d b %d i %d)"
+                    % (key, nf, nb, ni))
+        return cell
+    d = np.abs(_luma(Ff) - _luma(Bb))
+    cell["sil_iou"] = round(ni / float(nu), 4)
+    cell["in_diff_frac"] = round(float((d[inter] > 0.08).mean()), 4)
+    cell["in_mean_abs"] = round(float(d[inter].mean()), 4)
+    return cell
 
 
 def main():
-    rep = {"key": KEY, "tag": TAG, "thresh_255": 8,
-           "question": "front vs MIRRORED back, head window only - if they "
-                       "match, the body has no facing",
-           "not_a_pass": "a non-zero count is NOT a pass; only ZERO is a "
-                         "verdict on its own. No MIN_FACING_PX - 05:58 ruling.",
-           "cannot_see": ["a face vs a smudge", "facing carried outside the "
-                          "head window", "whether the arm is stale"],
-           "rungs": {}, "errors": []}
-    base = os.path.join(ROOT, KEY + TAG)
-    paths = {v: os.path.join(base, "hero_%s.png" % v) for v in ("front", "back")}
-    for v, p in paths.items():
-        if not os.path.exists(p):
-            rep["errors"].append("%s missing: %s" % (v, p))
-    if rep["errors"]:
-        rep["ok"] = False
-        print(json.dumps(rep, indent=1)); return 1
-    crops, halves, inks, masks = {}, {}, {}, {}
-    for v, p in paths.items():
-        rgb, fg = load(p)
-        half, scores = subject_half(rgb, fg)
-        halves[v] = half
-        if half is None:
-            rep["errors"].append("%s: could not locate the hero's cape "
-                                 "(red-pixel counts %r) - RED, not a guess"
-                                 % (v, scores))
+    argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--repo", required=True)
+    ap.add_argument("--keys", required=True)
+    ap.add_argument("--tag", default="")
+    args = ap.parse_args(argv)
+    outdir = os.path.join(args.repo, "renders", "art", "minibosses", "_facingread")
+    os.makedirs(outdir, exist_ok=True)
+    errs = []
+    rep = {"tag": args.tag, "bodies": {}, "errors": errs,
+           "asks": "are the FRONT and the MIRRORED BACK of this body tellable "
+                   "apart, in outline (sil_iou) and inside it (in_diff_frac)",
+           "cannot_see": "WHETHER THE DIFFERENCE IS A FACING. Posture, stride "
+                         "and one-sided gear all score here. No pass mark is "
+                         "set in this file on purpose - read the bodies "
+                         "against each other and then look at the pictures."}
+    for key in [k.strip() for k in args.keys.split(",") if k.strip()]:
+        if key not in M.BUILDERS:
+            errs.append("%s: no builder" % key)
             continue
-        rep.setdefault("half_scores", {})[v] = {"subject": half,
-                                                "cape_px": scores}
-        crop, npx, sub = head_window(rgb, fg, half)
-        if crop is None or npx < MIN_HEAD_PX:
-            rep["errors"].append("%s: head window holds %d px (<%d) - RED ON "
-                                 "EMPTY, nothing was compared" % (v, npx, MIN_HEAD_PX))
-            continue
-        hm = head_only(sub)
-        if hm is None or hm.sum() < MIN_HEAD_PX:
-            rep["errors"].append("%s: head-only mask holds %s px (<%d) - RED "
-                                 "ON EMPTY" % (v, None if hm is None else int(hm.sum()),
-                                               MIN_HEAD_PX))
-            continue
-        rep.setdefault("head_px", {})[v] = int(hm.sum())
-        crops[v] = crop
-        masks[v] = hm
-        g = np.asarray(crop.convert("L")).astype(np.float32) / 255.
-        med = float(np.median(g[hm]))
-        inks[v] = round(float((g[hm] < med - 0.08).mean()), 4)
-    rep["face_ink_frac"] = inks
-    if halves.get("front") == halves.get("back"):
-        rep["errors"].append("both views picked the same half (%s) - the "
-                             "subject was not located, the comparison is void"
-                             % halves.get("front"))
-    if len(crops) == 2 and not rep["errors"]:
-        a0 = crops["front"]
-        b0 = crops["back"].transpose(Image.FLIP_LEFT_RIGHT)
-        # ONLY WHERE BOTH VIEWS HOLD HEAD. Outside that intersection the two
-        # pictures are not comparable and a difference there says nothing
-        # about facing.
-        ma = masks["front"]
-        mb = masks["back"][:, ::-1]
-        inter = ma & mb
-        rep["compared_px_full"] = int(inter.sum())
-        if inter.sum() < MIN_HEAD_PX:
-            rep["errors"].append("head masks overlap in %d px (<%d) - RED ON "
-                                 "EMPTY, nothing comparable"
-                                 % (int(inter.sum()), MIN_HEAD_PX))
-            rep["ok"] = False
-            print(json.dumps(rep, indent=1)); return 1
-        w0, h0 = a0.size
-        mi = Image.fromarray((inter * 255).astype(np.uint8))
-        for lab, Wr in RUNGS:
-            sc = Wr / 760.0
-            W, H = max(1, int(round(w0 * sc))), max(1, int(round(h0 * sc)))
-            a = np.asarray(a0.resize((W, H), Image.BOX), np.float32) / 255.
-            b = np.asarray(b0.resize((W, H), Image.BOX), np.float32) / 255.
-            k = np.asarray(mi.resize((W, H), Image.BOX)) > 160
-            if k.sum() == 0:
-                rep["rungs"][lab] = {"px": 0, "differ_px": 0, "marks": 0,
-                                     "sizes_px": [], "note": "head vanishes at "
-                                     "this size - RED ON EMPTY for this rung"}
-                continue
-            mk = marks((np.abs(a - b).max(axis=2) > THRESH) & k)
-            rep["rungs"][lab] = {"px": int(k.sum()), "differ_px": int(sum(mk)),
-                                 "marks": len(mk), "sizes_px": mk[:8],
-                                 "differ_frac": round(sum(mk) / float(k.sum()), 4)}
-        if rep["rungs"]["full"]["differ_px"] == 0:
-            rep["errors"].append("front and mirrored back are IDENTICAL at full "
-                                 "size - this body has NO FACING")
-    elif not rep["errors"]:
-        rep["errors"].append("fewer than two crops - RED ON EMPTY")
-    rep["ok"] = not rep["errors"]
+        try:
+            rep["bodies"][key] = _one(key, outdir, errs)
+        except Exception as e:
+            errs.append("%s: %r" % (key, e))
+    rep["ok"] = not errs
+    out = os.path.join(outdir, "_facingread%s.json" % args.tag)
+    with open(out, "w") as fh:
+        json.dump(rep, fh, indent=1)
     print(json.dumps(rep, indent=1))
-    return 0 if rep["ok"] else 1
 
 
-if __name__ == "__main__":
-    sys.exit(main())
+main()

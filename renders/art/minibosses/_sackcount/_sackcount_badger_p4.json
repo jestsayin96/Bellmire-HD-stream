@@ -1,0 +1,119 @@
+{
+ "key": "badger",
+ "tag": "_p4",
+ "slot": "bone",
+ "expect": 4,
+ "min_area": 120,
+ "views": {
+  "front": {
+   "visible_px": 31610,
+   "solo_sil_px": 42429,
+   "moved_px": 39457,
+   "shadow_px_excluded": 7847,
+   "masses": 3,
+   "areas": [
+    16550,
+    13363,
+    1691
+   ],
+   "dropped_areas": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "occluded_frac": 0.255,
+   "counts": false,
+   "note": "3 separable masses against 4 on the yoke - a viewer on this camera CANNOT COUNT THE LOAD"
+  },
+  "side": {
+   "visible_px": 29197,
+   "solo_sil_px": 35422,
+   "moved_px": 44419,
+   "shadow_px_excluded": 15222,
+   "masses": 2,
+   "areas": [
+    17049,
+    12134
+   ],
+   "dropped_areas": [
+    6,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "occluded_frac": 0.1757,
+   "counts": false,
+   "note": "2 separable masses against 4 on the yoke - a viewer on this camera CANNOT COUNT THE LOAD"
+  },
+  "back": {
+   "visible_px": 36288,
+   "solo_sil_px": 42273,
+   "moved_px": 54430,
+   "shadow_px_excluded": 18142,
+   "masses": 3,
+   "areas": [
+    18778,
+    16355,
+    1071
+   ],
+   "dropped_areas": [
+    29,
+    12,
+    4,
+    3,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "occluded_frac": 0.1416,
+   "counts": false,
+   "note": "3 separable masses against 4 on the yoke - a viewer on this camera CANNOT COUNT THE LOAD"
+  }
+ },
+ "errors": [],
+ "asks": "how many SEPARABLE masses of the `bone` slot reach each camera, by with/without through one locked camera, intersected with the slot's own silhouette so shadows do not count as mass",
+ "cannot_see": "whether a separable mass is a COUNTABLE one at stream distance, whether it reads as a sack rather than a gourd, and whether the slot holds only sacks",
+ "masses_per_view": [
+  3,
+  2,
+  3
+ ],
+ "all_views_count": false,
+ "ok": true
+}

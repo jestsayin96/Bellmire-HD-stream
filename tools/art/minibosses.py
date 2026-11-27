@@ -7584,7 +7584,14 @@ def merge_objs(key, items, mats, suffix=None, vcols=None):
                                      % (key, i, len(c), len(verts)))
             gc.extend(c)
     out = []
-    for slot in ('body', 'dark', 'bone', 'glow'):
+    # 'ember' IS A FIFTH SLOT AND IT IS A SECOND EMISSIVE ONE. Added 26 Nov for
+    # the FANNER, whose eyes and whose hearth were the SAME 'glow' material and
+    # therefore tied in value BY CONSTRUCTION - "face and fire read as one
+    # material" was not a taste note, it was one material. A body that does not
+    # declare 'ember' has no 'ember' group, so this loop `continue`s exactly as
+    # before and every other body in the register is untouched by construction,
+    # not by hope. Proven: see renders/art/minibosses/_ember_regression.json.
+    for slot in ('body', 'dark', 'bone', 'glow', 'ember'):
         if slot not in groups:
             continue
         gv, gf, gc = groups[slot]
@@ -7615,9 +7622,13 @@ def apply_overrides(key, mats):
     if not ov:
         return mats
     for slot, spec in ov.items():
-        if slot == 'glow':
+        if slot in ('glow', 'ember'):
+            # BOTH emissive slots take (rgb, strength). 'ember' is the second
+            # one: a body with two lit features that must NOT tie in value
+            # cannot express that through a single shared material.
             rgb, strength = spec
-            mats[slot] = L.mat_glow(key + "_glow_ov", tuple(rgb), strength)
+            mats[slot] = L.mat_glow(key + "_" + slot + "_ov", tuple(rgb),
+                                    strength)
         else:
             rgb, rough, metal = spec[0], spec[1], spec[2]
             # an optional FOURTH element is the dielectric specular level. A
@@ -24279,8 +24290,44 @@ OVERRIDE.update({
         'dark': ((0.070, 0.066, 0.062), 0.74, 0.10),   # basket, hood, boots
         'bone': ((0.940, 0.930, 0.890), 0.36, 0.20),   # THE FOUR VANES ONLY
         'glow': ((1.000, 0.520, 0.180), 0.90),         # the hearth, recessed
+        # PASS 4 - THE EYES AND THE HEARTH WERE ONE MATERIAL. "The eyes are
+        # the same warm tone as the hearth, so face and fire read as one" was
+        # not a near-miss: both features were slotted 'glow' and were
+        # therefore THE SAME COLOUR AND THE SAME EMISSION, so no render could
+        # ever have separated them. The hearth is the mechanic and must
+        # out-read the face, so the eyes move to their own emissive slot: a
+        # DEEP red at under half the hearth's strength. Measured rec709 luma
+        # of the two albedos: hearth 0.598, eyes 0.294 - a 2.03x value step,
+        # against 1.00x before - and the hue moves orange -> red as well, so
+        # the separation survives a stream throwing chroma away.
+        'ember': ((0.780, 0.170, 0.090), 0.42),        # THE EYES ONLY
     },
 })
+
+
+# THE VANE LAYOUT - (angle_deg off his own forward, length_m). Four vanes on
+# the FORWARD arc with STAGGERED LENGTHS, chosen by measurement: see
+# tools/art/_fanner_vane_search.py, which ran candidate layouts through the
+# per-vane visible-footprint probe and kept the one that reads FOUR from
+# front, side, three-quarter AND back with no fused pair. A module-level hook
+# so that search can drive the real builder instead of a copy of it - a
+# layout measured through a different builder than the one that ships is a
+# number about nothing.
+# (angle_deg off his own forward, length_m, width_m). CHOSEN BY MEASUREMENT,
+# round 3 of tools/art/_fanner_vane_search.py, verdict `ring_a_w090`: it is the
+# only family that read FOUR from front, side, three-quarter AND back with no
+# fused pair, and its weakest vane is 1588 visible px against the ONE PIXEL
+# pass 3 shipped. Two separate faults had to be beaten and they pull opposite
+# ways, which is why three passes of eyeballing could not find a layout:
+#   OCCLUSION - a vane on the ring's back is eaten by the glow dome and by the
+#     man's own skull. 134 and 262 straddle dead-aft so nothing sits behind him.
+#   FUSION - four 0.168-wide blades fill 0.67 m of a projected ring only 0.74 m
+#     across, so neighbours MUST touch and the count collapses. The blade is
+#     0.090 now. 0.110 still fused (front 3, back 3); 0.075 also read 4/4/4/4
+#     and lost the tie on weakest-vane margin, so the WIDER blade shipped.
+# A ring that spreads laterally and a body that cannot eat it: both, measured.
+_FANNER_VANES = ((79.0, 0.300, 0.090), (134.0, 0.300, 0.090),
+                 (262.0, 0.300, 0.090), (310.0, 0.300, 0.090))
 
 
 def fanner():
@@ -24397,8 +24444,12 @@ def fanner():
           loc=(0.0, -LEAN - 0.048, HEAD - 0.070))
     # eyes. 0.046 - the collier's 360p lesson: 0.025 does not exist at the
     # bottom rung. Pushed PROUD of the hood so the brim cannot shade them.
+    # PASS 4: slotted 'ember', NOT 'glow'. They were the hearth's own material
+    # and tied with it in value; the hearth is the mechanic and now out-reads
+    # the face by 2.03x in luma. Size is unchanged at 0.046 - the collier's
+    # 360p lesson stands and this pass changes VALUE, not size.
     for _s in (-1.0, 1.0):
-        P.add(L.sphere(0.046, 0.046, 0.046, 9, 7), 'glow',
+        P.add(L.sphere(0.046, 0.046, 0.046, 9, 7), 'ember',
               loc=(0.062 * _s, -LEAN - 0.196, HEAD - 0.086))
     _close("head")
 
@@ -24444,8 +24495,77 @@ def fanner():
     # both times the number was green: a vane hidden behind another vane is
     # not a blank, not a clip and not a hairline, and the only instrument
     # that has ever caught it is looking at the picture.
-    for _a in (math.radians(25.0), math.radians(100.0),
-               math.radians(185.0), math.radians(290.0)):
+    # PASS 4 - THE GAUGE IS NOW MEASURED, NOT EYEBALLED, AND THE MEASUREMENT
+    # SAID SOMETHING NO EYE HAD: of the four vanes, THREE read 4200-6600 px in
+    # every view and ONE read **1 PIXEL** from the front. The vane at 185 deg
+    # sat on the ring's BACK, which on this body is the half that holds the
+    # man: the glow dome eats its lower band and HIS OWN SKULL eats the upper.
+    # It was never a near-miss to be nudged; it was absent. See
+    # tools/art/_fanner_vane_ab.py, which re-slots ONE vane to a probe
+    # material and re-renders through the SAME camera, so a vane's number is
+    # the pixels where it is the FRONT-MOST thing.
+    #
+    # SO THE RING IS GONE. All four stand on the FORWARD arc, the half with no
+    # body behind it, which makes occlusion-by-the-man structurally impossible
+    # rather than tuned away. Lateral crowding is answered by STAGGERED
+    # LENGTHS: elevation is the one coordinate a horizontal camera cannot
+    # collapse, so two vanes that nearly share a lateral position still read
+    # as two because their tips are at different heights.
+    #
+    # AND THE FEET: a single radius CANNOT sit on this rim. The bowl is
+    # squashed 0.82 in y, so the rim is an ELLIPSE - 0.392 across, 0.321 deep.
+    # The old 0.405 was outside the rim at the sides and 0.084 CLEAR OF IT
+    # dead forward, which is the whole of "the feet are not visibly planted":
+    # forward vanes were standing in mid-air. Each foot now solves the
+    # ellipse for its own angle and sits 0.014 proud of it, with the foot
+    # 0.013 BELOW the rim top so the vane visibly overlaps the rim band it
+    # stands out of.
+    _RIM_A, _RIM_B = 0.392, 0.392 * 0.82
+
+    def _rim_r(ang):
+        """Where this angle's ray meets the rim ellipse."""
+        _sx, _cy = math.sin(ang) / _RIM_A, math.cos(ang) / _RIM_B
+        return 1.0 / math.sqrt(_sx * _sx + _cy * _cy)
+
+    def _aim_roll(vf, loc, zdir, ydir):
+        """Place a +Z-built primitive with its axis along `zdir` AND ITS ROLL
+        PINNED, local +Y along `ydir`.
+
+        `aim` cannot do this and that is a real defect, not a style note: it
+        builds its rotation with `to_track_quat('Z', 'Y')`, which aligns the
+        primitive's axis and then takes whatever roll keeps local +Y nearest
+        WORLD +Y. For a ring of blades that means every blade's wide face is
+        pinned to the world instead of to its own radius, so the 0.090 width
+        points radially at some azimuths and tangentially at others. Pass 4
+        named that as the cause of two faults and could not fix it with `aim`.
+        """
+        v, f = vf
+        _z = Vector(zdir).normalized()
+        _y = Vector(ydir).normalized()
+        _y = (_y - _z * _y.dot(_z)).normalized()      # exact orthogonality
+        _x = _y.cross(_z).normalized()
+        _m = Matrix(((_x.x, _y.x, _z.x, loc[0]),
+                     (_x.y, _y.y, _z.y, loc[1]),
+                     (_x.z, _y.z, _z.z, loc[2]),
+                     (0.0, 0.0, 0.0, 1.0)))
+        return [_m @ Vector(pt) for pt in v], f
+
+    # PASS 5 - WHERE THE BLADE IS BROAD, AND IT IS NOT WHERE PASS 4 SAID.
+    # The dome's own top, so the stem can be solved against it rather than
+    # tuned: the hearth sphere sits at _BC + 0.126 with a z-radius of 0.118.
+    _DOME_TOP = _BC.z + 0.126 + 0.118
+    _STEM_CLEAR = 0.018          # how far above the fire the broad blade starts
+    _STEM_W = 0.030              # the stem's tangential width
+
+    for _vane in _FANNER_VANES:
+        # (angle_deg, length_m[, width_m]) - width is a parameter because the
+        # measurement made it one. With four 0.168-wide blades the PROJECTED
+        # ring is only ~0.74 m across and four blades fill 0.67 m of it, so
+        # lateral separation was arithmetically impossible and every layout
+        # fused somewhere. Narrowing the blade is what buys the gap.
+        _a_deg, _len = _vane[0], _vane[1]
+        _wid = _vane[2] if len(_vane) > 2 else 0.168
+        _a = math.radians(_a_deg)
         _dir = Vector((math.sin(_a), -math.cos(_a), 0.0)).normalized()
         # PASS 2, FIX B - TWO FAULTS, BOTH VISIBLE AND NEITHER MEASURED.
         # (1) FLOAT: a 0.150 foot on a 0.175 wall left the vane hanging with
@@ -24461,11 +24581,60 @@ def fanner():
         #     far pairs in the side ortho instead of stacking them, and the
         #     wider ring also walks the inner vanes off the skull, which is
         #     what put a vane across his own eye in the three-quarter.
-        _foot = _BC + _dir * 0.405 + Vector((0.0, 0.0, 0.088))
-        _tilt = (_dir * math.sin(math.radians(11.0)) +
-                 Vector((0.0, 0.0, math.cos(math.radians(11.0))))).normalized()
-        P.raw(aim(L.box(0.052, 0.168, 0.300), tuple(_foot + _tilt * 0.150),
-                  tuple(_tilt)), 'bone')
+        _foot = (_BC + _dir * (_rim_r(_a) + 0.014)
+                 + Vector((0.0, 0.0, 0.196)))
+        _tilt = (_dir * math.sin(math.radians(13.0)) +
+                 Vector((0.0, 0.0, math.cos(math.radians(13.0))))).normalized()
+        # the blade's own tangent: horizontal, square to its radius. The wide
+        # face now follows the ring instead of following the world.
+        _tan = Vector((math.cos(_a), math.sin(_a), 0.0)).normalized()
+        # PASS 5 - THE STEM, AND IT IS NOT THE FIX PASS 4 PRESCRIBED. Pass 4
+        # wrote that fault 3 - a vane across the bowl mouth - would be cured by
+        # orienting each blade tangentially so its radial reach is always the
+        # 0.052 thickness. I BUILT THE INSTRUMENT FIRST AND IT KILLED THAT
+        # PLAN. `tools/art/_fanner_mouth_ab.py` measures the pixels of fire a
+        # viewer LOSES to the vanes, and on the shipped pass-4 body the loss is
+        # FRONT 0.0%, THREE-QUARTER 0.8%, SIDE 22.0%. So it was never a front
+        # fault at all - pass 3 said "front and side" by eye and was wrong -
+        # and the side loss is not about blade WIDTH. From the side the camera
+        # looks down world +X, so a vane's screen position is its y, and the
+        # vane at 79 degrees sits at y = -0.078, almost exactly over the bowl's
+        # centre line, with its foot at z 0.196 while the proud dome reaches
+        # 0.244. It crosses the fire because of WHERE IT STANDS AND HOW LOW IT
+        # STARTS, and a tangential roll moves it not at all: at 79 degrees the
+        # tangent is (0.19, 0.98, 0) and world +Y is (0, 1, 0), so the roll
+        # `aim` already gave it is the roll the fix would have given it. A
+        # width fix for a depth fault would have measured as "no change" and
+        # read as "the fix is not there".
+        #
+        # SO THE CHANGE IS WHERE THE BLADE IS BROAD. Each vane leaves its foot
+        # as a NARROW STEM and only widens once it is clear of the fire, which
+        # is solved against the dome's own top rather than dialled in. What
+        # crosses the hearth is 0.030 of stem instead of 0.090 of blade.
+        # THE TIP DOES NOT MOVE: the blade is shortened by exactly the stem it
+        # gains, so the body's bounds, its height and its hero ratio are
+        # unchanged and the count gauge's numbers stay comparable with pass 4's.
+        # IT DOES NOT PAY FAULT 2, AND I WROTE THAT IT WOULD BEFORE I LOOKED.
+        # The guess was that a visible stalk standing out of the rim is the
+        # join being SEEN instead of implied. The front and three-quarter
+        # renders say the opposite: with less blade to bridge it, the gap
+        # between a vane and the bowl reads MORE clearly, not less, and the
+        # float is now the loudest fault on this body by eye. The gap is the
+        # projection fault pass 4 already named - a vane planted on the FAR
+        # rim projects above the bowl's NEAR silhouette - so no change to the
+        # blade can close it; only dropping the feet behind the near
+        # silhouette can, and that costs visible vane px and must be re-run
+        # through the count gauge. LEFT OPEN AND NAMED, not tidied away.
+        _stem_rise = max(0.0, (_DOME_TOP + _STEM_CLEAR) - _foot.z)
+        _stem_len = min(_stem_rise / max(1e-6, _tilt.z), _len * 0.5)
+        _blade_len = _len - _stem_len
+        if _stem_len > 0.0:
+            P.raw(_aim_roll(L.box(0.052, _STEM_W, _stem_len),
+                            tuple(_foot + _tilt * (_stem_len * 0.5)),
+                            tuple(_tilt), tuple(_tan)), 'bone')
+        P.raw(_aim_roll(L.box(0.052, _wid, _blade_len),
+                        tuple(_foot + _tilt * (_stem_len + _blade_len * 0.5)),
+                        tuple(_tilt), tuple(_tan)), 'bone')
     _close("vanes")
 
     # THE FIGURE. The basket and the vanes are the LOAD, not the man, and that

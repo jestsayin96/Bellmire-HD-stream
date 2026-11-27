@@ -1,0 +1,42 @@
+{
+ "key": "fanner",
+ "asks": "does the HEARTH out-read the FACE in rendered luma, inside each feature's OWN visible footprint - the viewer's question, not the albedo on paper.",
+ "instrument": "tools/art/_fanner_value_ab.py",
+ "slots": {
+  "hearth": "glow",
+  "eyes": "ember"
+ },
+ "views": {
+  "front": {
+   "eyes": {
+    "px": 1597,
+    "luma": 0.3337,
+    "luma_p90": 0.3459
+   },
+   "hearth": {
+    "px": 1532,
+    "luma": 0.6138,
+    "luma_p90": 0.6582
+   },
+   "hearth_minus_eyes": 0.2801,
+   "ratio": 1.839
+  },
+  "three_quarter": {
+   "eyes": {
+    "px": 1301,
+    "luma": 0.3358,
+    "luma_p90": 0.3459
+   },
+   "hearth": {
+    "px": 1359,
+    "luma": 0.6203,
+    "luma_p90": 0.6582
+   },
+   "hearth_minus_eyes": 0.2845,
+   "ratio": 1.847
+  }
+ },
+ "errors": {},
+ "ok": true,
+ "verdict": "GREEN"
+}

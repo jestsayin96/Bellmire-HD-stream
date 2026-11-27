@@ -1,0 +1,44 @@
+{
+ "key": "fanner",
+ "asks": "HOW MANY PIXELS OF FIRE DOES A VIEWER LOSE TO THE VANES, per view - an OCCLUSION measure of the creature's own mechanic. NOT whether a blade intersects the mouth in 3D.",
+ "instrument": "tools/art/_fanner_mouth_ab.py",
+ "method": "the hearth dome is re-slotted to a probe material and the body re-rendered through ONE locked camera, twice: with the vane object shown and with it hidden. Fire visible without the vanes AND NOT with them is fire the vanes take. Geometry is never dropped, so bounds cannot move.",
+ "bars": {
+  "max_lost_frac": 0.02,
+  "min_fire_px": 200
+ },
+ "res": [
+  760,
+  1040
+ ],
+ "views": {
+  "front": {
+   "fire_px_vanes_hidden": 1531,
+   "fire_px_vanes_shown": 1532,
+   "fire_px_lost_to_vanes": 0,
+   "lost_frac": 0.0,
+   "bar_frac": 0.02,
+   "ok": true
+  },
+  "side": {
+   "fire_px_vanes_hidden": 1209,
+   "fire_px_vanes_shown": 948,
+   "fire_px_lost_to_vanes": 266,
+   "lost_frac": 0.22,
+   "bar_frac": 0.02,
+   "ok": false
+  },
+  "three_quarter": {
+   "fire_px_vanes_hidden": 1370,
+   "fire_px_vanes_shown": 1359,
+   "fire_px_lost_to_vanes": 11,
+   "lost_frac": 0.008,
+   "bar_frac": 0.02,
+   "ok": true
+  }
+ },
+ "worst_lost_frac": 0.22,
+ "errors": [],
+ "ok": false,
+ "verdict": "RED"
+}

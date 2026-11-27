@@ -1,0 +1,109 @@
+{
+ "key": "fanner",
+ "asks": "HOW MANY VANES CAN A VIEWER COUNT, per view - a VISIBLE-FOOTPRINT measure through one locked camera, with fused footprints collapsed. NOT how big a vane is.",
+ "instrument": "tools/art/_fanner_vane_ab.py",
+ "method": "re-slot ONE vane to a probe material, re-render through the SAME camera, changed pixels = that vane's front-most footprint. Geometry never dropped, so bounds cannot move.",
+ "bars": {
+  "min_px": 60,
+  "min_frac_of_median": 0.22,
+  "sep_dilate_px": 2
+ },
+ "res": [
+  760,
+  1040
+ ],
+ "views": {
+  "front": {
+   "body_px": 151753,
+   "vane_px": {
+    "0": 3923,
+    "1": 3920,
+    "2": 3752,
+    "3": 4087
+   },
+   "median_px": 3921.5,
+   "bar_px": 862.7,
+   "countable": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "too_small": [],
+   "invisible": [],
+   "fused_pairs": [],
+   "count_read": 4,
+   "ok": true
+  },
+  "side": {
+   "body_px": 123762,
+   "vane_px": {
+    "0": 2859,
+    "1": 4282,
+    "2": 1880,
+    "3": 3800
+   },
+   "median_px": 3329.5,
+   "bar_px": 732.5,
+   "countable": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "too_small": [],
+   "invisible": [],
+   "fused_pairs": [],
+   "count_read": 4,
+   "ok": true
+  },
+  "three_quarter": {
+   "body_px": 140703,
+   "vane_px": {
+    "0": 1926,
+    "1": 3650,
+    "2": 1588,
+    "3": 3776
+   },
+   "median_px": 2788.0,
+   "bar_px": 613.4,
+   "countable": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "too_small": [],
+   "invisible": [],
+   "fused_pairs": [],
+   "count_read": 4,
+   "ok": true
+  },
+  "back": {
+   "body_px": 151761,
+   "vane_px": {
+    "0": 3932,
+    "1": 4132,
+    "2": 3875,
+    "3": 3977
+   },
+   "median_px": 3954.5,
+   "bar_px": 870.0,
+   "countable": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "too_small": [],
+   "invisible": [],
+   "fused_pairs": [],
+   "count_read": 4,
+   "ok": true
+  }
+ },
+ "count_min": 4,
+ "errors": [],
+ "ok": true,
+ "verdict": "GREEN"
+}

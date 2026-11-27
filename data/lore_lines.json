@@ -4052,7 +4052,37 @@
     "%s reaches for %s and loses the thread (%d vs DC %d).",
     "%s tries %s with a shaking hand (%d vs DC %d).",
     "%s breathes out %s and nothing follows (%d vs DC %d).",
-    "%s starts %s and forgets the end of it (%d vs DC %d)."
+    "%s starts %s and forgets the end of it (%d vs DC %d).",
+    "%s speaks %s and the room does not hear it (%d vs DC %d).",
+    "%s reaches for %s and closes on nothing (%d vs DC %d).",
+    "%s's %s comes out as a cough and a bad smell (%d vs DC %d).",
+    "%s holds %s a breath too long and it spoils (%d vs DC %d).",
+    "%s tries %s. The scar takes the first half (%d vs DC %d).",
+    "%s says %s right and it is still wrong here (%d vs DC %d).",
+    "%s's %s sputters out in the hand (%d vs DC %d).",
+    "%s pulls on %s and the thread comes away loose (%d vs DC %d).",
+    "%s casts %s and the dark drinks it (%d vs DC %d).",
+    "%s's %s turns over once and lies still (%d vs DC %d).",
+    "%s begins %s and the words will not sit (%d vs DC %d).",
+    "%s lifts %s and it is heavier than it was (%d vs DC %d).",
+    "%s's %s is answered by the wrong voice (%d vs DC %d).",
+    "%s works %s through and nothing comes of it (%d vs DC %d).",
+    "%s lets %s go and it goes sideways (%d vs DC %d).",
+    "%s mouths %s and the scar mouths it back (%d vs DC %d).",
+    "%s's %s fizzles at the fingertips (%d vs DC %d).",
+    "%s gives %s everything and gets a flicker (%d vs DC %d).",
+    "%s calls %s and the stone stays quiet (%d vs DC %d).",
+    "%s's %s runs thin and stops (%d vs DC %d).",
+    "%s sets %s going and cannot finish it (%d vs DC %d).",
+    "%s trips on the middle of %s (%d vs DC %d).",
+    "%s's %s hangs a moment and falls (%d vs DC %d).",
+    "%s tries %s again in a lower voice. No use (%d vs DC %d).",
+    "%s's %s lands on the floor and stays there (%d vs DC %d).",
+    "%s draws %s and it comes up empty (%d vs DC %d).",
+    "%s reads %s off the wrong line (%d vs DC %d).",
+    "%s's %s dies in the mouth (%d vs DC %d).",
+    "%s tries %s and the scar shrugs (%d vs DC %d).",
+    "%s's %s goes out like a wet wick (%d vs DC %d)."
   ],
   "epitaphs": [
     "Measured the grain. Counted the flasks. Kept the door.",
@@ -16316,5 +16346,6 @@
       }
     }
   },
-  "_note_c239": "C-239: epitaphs +15, descend +9, cleared +8 (2 cleared lines carry the floor placeholder). Pools already read by the engine; zero-hit by design, no lane is to wire this key. System 41's drops.json NOT written - not one of the four owned files; stood down a sixth time."
+  "_note_c239": "C-239: epitaphs +15, descend +9, cleared +8 (2 cleared lines carry the floor placeholder). Pools already read by the engine; zero-hit by design, no lane is to wire this key. System 41's drops.json NOT written - not one of the four owned files; stood down a sixth time.",
+  "_note_c240": "C-240 (27 Nov 2026 16:23 CST): top-up by draw pressure. Pools read by delve.gd _pick_line, one draw per call: descend 674 (once a delve), cleared 658 (once a floor cleared), epitaphs 1114 (once a death), misfire 167 (once per caster per floor - the Chronicle line, not the bark). Misfire carries the fewest lines against the most draws, so it took the +30. Frame kept: name, spell, roll, DC (%s %s %d %d). No floor count. Expected zero-hit key; no lane is to wire it."
 }

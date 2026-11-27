@@ -21,6 +21,14 @@ var _body: Node3D = null
 var _clip := ""
 var _rng := RandomNumberGenerator.new()
 var height_m := 0.0             # measured, for the gate
+const HAND_LOCAL := Vector3(-0.27, 0.0, 0.0)   # the fist, in arm-right's own space
+const LANTERN_S := 1.3          # world scale of the lantern (0.39 m model -> ~0.5 m)
+const LANTERN_TOP := 0.36       # handle ring height in the lantern's own space
+var lantern: Node3D = null
+var _hand: Marker3D = null
+var _arm_r: Node3D = null
+var _hold_q := Quaternion.IDENTITY
+var _has_hold := false
 
 func _ready() -> void:
 	_rng.seed = 1414
@@ -41,19 +49,32 @@ func _ready() -> void:
 		_body.position.y = -bb.position.y * k
 		height_m = bb.size.y * k
 	_ap = _find_ap(_body)
-	if ResourceLoader.exists(LANTERN):
+	# S143b: the lantern rides the RIGHT HAND, not the keeper root. The Kenney rig is
+	# node-animated: `arm-right` is a mesh node whose arm runs along local -X to the
+	# fist at x=-0.28 (measured off the glb accessor). A marker sits at that fist and
+	# the lantern's handle is hung from it every frame, kept plumb (yaw only) so it
+	# hangs like a lantern instead of tilting with the forearm. Walking and idling
+	# hold the arm in the kit's own `holding-right` pose; tending plays interact-right
+	# and the lantern follows the hand down to the grave.
+	_arm_r = _find(_body, "arm-right") as Node3D
+	if _arm_r:
+		_hand = Marker3D.new()
+		_hand.position = HAND_LOCAL
+		_arm_r.add_child(_hand)
+	if _ap:
+		_hold_q = _pose_of("holding-right", "arm-right")
+		_ap.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL
+	if ResourceLoader.exists(LANTERN) and _hand:
 		var lp := load(LANTERN) as PackedScene
 		if lp:
-			var lan := lp.instantiate() as Node3D
-			lan.scale = Vector3.ONE * 1.3
-			lan.position = Vector3(0.38, 0.55, 0.22)
-			add_child(lan)
+			lantern = lp.instantiate() as Node3D
+			add_child(lantern)
 			var om := OmniLight3D.new()
 			om.light_color = Color(1.0, 0.78, 0.45)
 			om.light_energy = 0.9
 			om.omni_range = 5.0
-			om.position = Vector3(0, 0.3, 0)
-			lan.add_child(om)
+			om.position = Vector3(0, 0.2, 0)
+			lantern.add_child(om)
 	_play("idle")
 	_wait = 2.0
 
@@ -73,6 +94,36 @@ func _aabb(n: Node, xf: Transform3D) -> AABB:
 			out = ca if not have else out.merge(ca)
 			have = true
 	return out
+
+func _find(n: Node, nm: String) -> Node:
+	if String(n.name) == nm:
+		return n
+	for c in n.get_children():
+		var f := _find(c, nm)
+		if f:
+			return f
+	return null
+
+# The arm-right rotation of a clip at t=0 (holding-right is a held pose).
+func _pose_of(clip: String, node: String) -> Quaternion:
+	if not _ap.has_animation(clip):
+		return Quaternion.IDENTITY
+	var a := _ap.get_animation(clip)
+	for t in a.get_track_count():
+		if a.track_get_type(t) == Animation.TYPE_ROTATION_3D and String(a.track_get_path(t)).ends_with(node):
+			_has_hold = true
+			return a.rotation_track_interpolate(t, 0.0)
+	return Quaternion.IDENTITY
+
+# Advance the rig by hand, then pin the arm and hang the lantern from the fist.
+func _pose(delta: float) -> void:
+	if _ap:
+		_ap.advance(delta)
+	if _arm_r and _has_hold and (_clip == "walk" or _clip == "idle"):
+		_arm_r.quaternion = _hold_q
+	if lantern and _hand:
+		lantern.global_basis = Basis(Vector3.UP, global_rotation.y).scaled(Vector3.ONE * LANTERN_S)
+		lantern.global_position = _hand.global_position - Vector3(0, LANTERN_TOP * LANTERN_S, 0)
 
 func _find_ap(n: Node) -> AnimationPlayer:
 	if n is AnimationPlayer:
@@ -99,6 +150,7 @@ func _ground(p: Vector3) -> float:
 	return p.y
 
 func _process(delta: float) -> void:
+	_pose(delta)
 	if spots.size() < 2:
 		return
 	if _wait > 0.0:

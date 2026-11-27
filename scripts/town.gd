@@ -1974,6 +1974,13 @@ func _dress_landmarks() -> void:
                             break
                         var gsf: float = float(gsd)
                         var gp: Vector3 = p - side * gsf * (_width_of(key) * 0.5 + 3.0) + f * (float(i % 3) * 2.6 - 2.6) - side * gsf * (float(i / 3) * 2.2)
+                        var gk := "%+d" % int(gsf)
+                        if not is_clear(gp, 0.6, true):
+                            _grave_census[gk + " blocked"] = int(_grave_census.get(gk + " blocked", 0)) + 1
+                        elif road_dist(gp) <= 1.2:
+                            _grave_census[gk + " road"] = int(_grave_census.get(gk + " road", 0)) + 1
+                        else:
+                            _grave_census[gk + " placed"] = int(_grave_census.get(gk + " placed", 0)) + 1
                         if is_clear(gp, 0.6, true) and road_dist(gp) > 1.2:
                             _box(Vector3(0.7, 1.0, 0.18), Vector3(gp.x, height_at(gp.x, gp.z) + 0.45, gp.z), _stone(), yaw)
                             _objs.append([gp, 0.8])
@@ -5023,6 +5030,7 @@ func _near_market(rng: RandomNumberGenerator, r := 9.0) -> Vector3:
 ## S143 / System 14: the graveyard keeper tends the chapel's kept graves.
 ## Driven by its own script (scripts/grave_keeper.gd) - Kenney rig, own clips.
 var _grave_spots: Array = []
+var _grave_census := {}         # S143b: per-side tally of the garden's 18 tries, for the gate
 var grave_keeper: Node3D = null
 const GRAVE_KEEPER := preload("res://scripts/grave_keeper.gd")
 

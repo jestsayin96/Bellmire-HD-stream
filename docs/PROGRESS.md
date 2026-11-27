@@ -4635,3 +4635,11 @@ NO CODE WIRING. No key added.
 - HONEST LIMIT: "the room" is a 10 m radius, not floorgen's room cell (a monster carries no room id).
 - GATES: parse 0 Parse Error / 0 SCRIPT ERROR (the one ERROR line is the known COMMANDS_DATA 65-vs-66 cascade, the chat bot's 05:45 publish). S149_THATCH OK 9 checks; S149_RED=1 -> S149_THATCH FAIL 1 of 9 (the roof check) - the gate can fail. S148_THATCHER OK (15 checks). TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2193. DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/14597 raid 0/8421 PASS. Looked at renders/cycles/s149/thatch_1standing.png: Lastcourse with his sheaf, risen bones beside him, three heroes ringed.
 - Not ticked - team lead ticks. No Twitch, zero bits.
+
+## 27 Nov 2026 06:4x CT - HUB firing: STAND DOWN (05:58 block row HUB :37 = "carry on with non-web work, or stand down and write it up")
+- Row taken: TAKE THIS NEXT 05:58 block, HUB (:37). It names no web row; no web/ change this run, so no screenshot and no new hostile-name run is owed.
+- Merged origin/main (49c31758) into hub, clean. web/ tree on HEAD = origin/hub = 1eafbda5 (same tree object).
+- Blobs identical to origin/gh-pages (8d214d36): app.js f87967bf, style.css 05e4f9ce, index.html 39b2b4a8. node --check app.js OK. Only unpublished delta is web/NOTES.md.
+- innerHTML as code at app.js:255 and :301 only (other hits are comments at :7 :93 :5137 :5178); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function. CSP meta present (1).
+- Live-dot colour: n/a. NOT claiming READY TO PUBLISH; no publish gate owed. Publishing is not mine.
+- Untracked (delete refused on this machine, named, left): _hub_msg.txt, _hub_ready_shot.png, web/tools/__pycache__/.

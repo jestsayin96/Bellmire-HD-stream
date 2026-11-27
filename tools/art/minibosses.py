@@ -25741,3 +25741,295 @@ def thatcher():
 
 
 BUILDERS.update({"thatcher": thatcher})
+
+
+# =============================================================================
+# THE BADGER - THE 67th. Invented 27 Nov 2026 at the 07:34 CT ART firing under
+# Mr. E's standing permission for a dry art lane (17:43, 18 Nov), and under the
+# 06:58 plan row that names the 67th as this lane's item. COUNT MEASURED, NOT
+# REMEMBERED: `ORDER` read 66 live keys off this file (comment- and string-aware
+# parse, not a per-line regex - the team lead's and the chat bot's matchers were
+# both wrong this same morning on exactly that), and the fit register judged
+# 77 rows = 66 live + 11 retired `_chibi`. So this is the 67th.
+#
+# *** WHAT I CHECKED FOR FIRST, AND THE FIRST IDEA I THREW AWAY. ***
+# I read every one of the 66 mechanics out of CANON in full before designing.
+# My first design was a FOWLER working from behind a line of wicker decoys, so
+# that the party spends blows on the wrong body. I dropped it unbuilt: the
+# BELLMAN (Tolburn) already owns that fight - "two bells on two long arms and a
+# third on a pole behind it ... the party swings at a bell. Only one of the
+# three is ever on it" - and its own builder calls that third bell "the decoy".
+# A decoy in wicker instead of bronze is a re-skin, which is the one thing the
+# bar forbids. It cost a pass of design time and nothing else, because I
+# checked before I modelled instead of after.
+#
+# THE HOLE IN A SET OF 66, AND IT IS THE ONLY STRUCTURAL ONE LEFT. Every one of
+# the 66 spends its whole effect INSIDE THE ROOM IT STANDS IN. They act on the
+# party (hook, mark, yoke, sign, press), on the room (pits, hurdles, water,
+# thorn, walls), on the other monsters (thatcher, quartermaster, drillmaster),
+# on the party's kit and haul (tallyman, reeve, sealer, almoner) or on the rules
+# of the beat (straker, panner, nightman, harrowman). NOT ONE of them costs the
+# party anything that is still gone when the delve ends. This body does, and
+# that is its whole reason to exist: it is the first miniboss whose consequence
+# is OUTSIDE the fight, in the town the viewers have been levelling for weeks.
+#
+# THE TWO BODIES IT IS NEAREST, NAMED HERE RATHER THAN HOPED AWAY:
+#  - TALLYMAN (Velmok) "IT TAKES AND LEAVES - it lifts your gear, wears it and
+#    withdraws." Velmok's theft is RECOVERABLE INSIDE THE FIGHT - it is wearing
+#    the gear, so killing it gets the gear back. This one's is not: what leaves
+#    the floor is gone from the granary and nothing in the delve returns it.
+#  - REEVE (Lockwarden) "IT TAKES THE HAUL - while it stands the floor pays its
+#    box and not you." Lockwarden denies the party the room's OWN takings while
+#    it lives, and dies with its box in the room. This one is not denying a
+#    haul, it is REMOVING STOCK THAT WAS ALREADY THE TOWN'S.
+# If Mr. E reads either of those as the same fight, this body is a re-skin and I
+# would rather be told so than carry it.
+#
+# A BADGER IS A REAL TRADE AND A REAL OFFENCE. A badger (also a lader or
+# kidder) bought up corn in one parish and carried it off to sell in another,
+# and badgering, forestalling and regrating were prosecuted precisely because
+# the parish went short. Nothing theatrical, no gothic flourish: he is a man
+# with a yoke and four sacks, going the other way. Things look like what they
+# are FOR. The name is the offence: FORESTALL.
+#
+# WEAR IS A VARIABLE AND IT DOES REAL WORK HERE. wear 0.55 - the coat, hood,
+# yoke and boots are road-worn, because he walks for a living. THE SACKS ARE
+# NOT: they are the one new, full, pale thing on the body, because they are
+# this morning's stock out of Bellmire's own store. The condition is the
+# receipt, which is Mr. E's rule read literally - a viewer must be able to see
+# that what he is carrying is worth saving.
+#
+# STATIC: no `anims` entry, so bestiary.gd needs a `model` path and NO `anims`
+# entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+# =============================================================================
+CANON.update({
+    "badger": ("Forestall", 2.43, (0.126, 0.118, 0.104), (0.890, 0.845, 0.690),
+               "mess",
+               "IT IS LEAVING, AND WHAT GETS OUT WITH IT COMES OFF THE TOWN - "
+               "it has been into Bellmire's own store and it is carrying the "
+               "sacks out. It does not strike, it summons nothing, it holds "
+               "nothing of yours and it has no phase: it walks for the stair "
+               "under a shoulder yoke with four sacks on it, and the room's "
+               "other monsters stand between you and it. EVERY SACK THAT "
+               "LEAVES THE FLOOR IS GONE FROM THE TOWN. Not from your haul - "
+               "from the granary, when the party gets home, and nothing "
+               "further down the delve gives it back. So this is the first "
+               "body in this file you can beat and still be poorer for: clear "
+               "the room at your own pace and the fight is won and Bellmire "
+               "is short, or go through what is hitting you to reach the one "
+               "thing in here that is not fighting at all. Put it down and "
+               "every sack still on the yoke stays on the floor to be carried "
+               "up. THE COUNT IS THE SACKS: four, pale and full against a "
+               "coat that is neither, so a viewer can see at a glance how "
+               "much is still worth going in for - and one fewer on the yoke "
+               "is one already gone.",
+               0.55, "Something ahead is carrying sacks the wrong way."),
+})
+ORDER = ORDER + ["badger"]
+
+# PER-SLOT MATERIALS. `bone` IS THE FOUR SACKS AND NOTHING ELSE. The Mealman's
+# rule: a second pale mass anywhere competes with the count, and the count IS
+# the mechanic here - a viewer who miscounts the sacks cannot judge whether to
+# go in. The coat, hood, yoke, ropes, ties and boots are therefore all dark or
+# mid, and the builder ASSERTS the three luma ratios so a later colour edit
+# dies at build time instead of in a render nobody re-reads.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"badger"}
+
+OVERRIDE.update({
+    "badger": {
+        # VERTEX-DRIVEN, and the rgb is the FILL: every `body` item that
+        # declares no colour of its own renders this exact value, so the
+        # trunk, arms, legs, coat and face oval are unaffected by the one
+        # painted item below. The 5th element True is the flag
+        # apply_overrides reads.
+        'body': ((0.126, 0.118, 0.104), 0.78, 0.03, None, True),   # coat (FILL)
+        'dark': ((0.044, 0.042, 0.038), 0.80, 0.05),  # hood, yoke, rope, boots
+        'bone': ((0.890, 0.845, 0.690), 0.58, 0.00),  # THE FOUR SACKS ONLY
+    },
+})
+
+
+def badger():
+    """THE BADGER - the 67th. He is not fighting; he is going, and he is taking
+    the town's own stock with him.
+
+    THE THREE NUMBERS THIS BUILDER ASSERTS, AND WHY THEY ARE THESE NUMBERS.
+    They are not invented here - they are the two ratios this rig has already
+    had proven on it, re-used because a new body is the wrong place to invent
+    an instrument:
+      bone/body >= 1.30   the Beadle shipped a pale cue at 1.07 and it went
+                          flat against its own pale panel while every number
+                          in its register passed.
+      bone/cape >= 2.00   the Thatcher's bar, so the one mid-value on the man
+                          cannot climb up and argue with the count.
+      cape/body >= 1.80   the Thatcher's pass-6 finding: in this rig a ONE-BAND
+                          albedo separation does not move `bands_5pct` at all,
+                          so a second value has to be a real one or it is not a
+                          second value.
+
+    *** AND SAID PLAINLY, BECAUSE THIS LANE HAS SHIPPED A NUMBER THAT ANSWERED
+    *** THE WRONG QUESTION: ALL THREE ARE ALBEDO GUARDS AND ALBEDO IS NOT VALUE
+    *** IN THIS RIG. The Thatcher proved that - its lap passed an albedo guard
+    *** at 2.29 while the shipped SIDE view measured 1.001, dead level. These
+    *** three are monotone tripwires against a later edit and nothing more.
+    *** Whether the four sacks actually READ, and whether they can be COUNTED
+    *** at stream distance, is answered by looking at the hero sheet and by
+    *** nothing in this function.
+    """
+    bone_l = _luma(OVERRIDE["badger"]['bone'][0])
+    body_l = _luma(OVERRIDE["badger"]['body'][0])
+    if bone_l / max(1e-6, body_l) < 1.30:
+        raise ValueError(
+            "badger: bone/body luma ratio %.2f is under 1.30 - the four sacks "
+            "ARE the count and a count that goes flat against the coat cannot "
+            "be read (bone %.3f, body %.3f)"
+            % (bone_l / max(1e-6, body_l), bone_l, body_l))
+
+    # THE ONE MID VALUE ON THE MAN: a leather yoke-cape over the shoulders.
+    # The Thatcher's open fault 1 was "THE MAN IS ONE VALUE" and the cause was
+    # that coat, trunk, arms and legs were all the single `body` slot. This
+    # body carries the answer FROM THE START rather than at pass 7, and it is
+    # what the trade requires: a yoke bears on the shoulders all day and a
+    # badger wears a leather pad under it. It is a VERTEX COLOUR, not a fourth
+    # slot - the two free slots are `glow` and `ember` and both are emissive,
+    # and a lit shoulder pad is a lantern, not leather.
+    CAPE = (0.400, 0.340, 0.250)
+    cape_l = _luma(CAPE)
+    if bone_l / max(1e-6, cape_l) < 2.00:
+        raise ValueError(
+            "badger: bone/cape luma ratio %.2f is under 2.00 - the leather "
+            "cape is close enough to the sacks to argue with the count "
+            "(bone %.3f, cape %.3f)"
+            % (bone_l / max(1e-6, cape_l), bone_l, cape_l))
+    if cape_l / max(1e-6, body_l) < 1.80:
+        raise ValueError(
+            "badger: cape/body luma ratio %.2f is under 1.80 - the Thatcher's "
+            "pass 6 proved a one-band separation does not move `bands_5pct` "
+            "(cape %.3f, body %.3f)" % (cape_l / max(1e-6, body_l), cape_l, body_l))
+
+    P = Parts("badger")
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
+    # *** PASS 2, AND IT IS A DEFECT MY OWN ASSERTION COULD NOT SEE. ***
+    # Every `limb()` call below passes slot='body' EXPLICITLY. `creatures.limb`
+    # defaults to slot='bone' - the BELLMAN depends on that, its shroud is
+    # meant to be pale - and pass 1 of this body therefore put the legs, the
+    # trunk, the neck and BOTH ARMS into the pale slot. The render showed a
+    # figure with white stick legs and the four sacks lost among five other
+    # pale masses, which is the Mealman's rule broken on the one body whose
+    # whole mechanic is COUNTING the pale things. The three luma assertions
+    # above passed clean through it: they compare DECLARED COLOURS and cannot
+    # see which slot a call actually landed in. An instrument that cannot see
+    # is not a pass, and the only reason this is fixed is that I looked at the
+    # picture. Do not drop the explicit slot from any of these calls.
+    HIP = 0.920
+    SHO = 1.620
+    # HE IS MID-STRIDE AND EVERY OTHER BODY IN THIS FILE IS PLANTED. `_legs`
+    # exists precisely to give the set a shared PLANTED base - "a stance that
+    # reads PLANTED is worth more than feet" - and this is the one body that
+    # must not use it, because the whole mechanic is that he is GOING. So the
+    # legs are built here: near leg forward and loaded, off leg trailing with
+    # the heel up. If a later pass makes him plant, the mechanic has been
+    # thrown away and this comment is the warning.
+    # FRONT IS -Y throughout, as everywhere in this file.
+    limb(P, [(-0.165, -0.040, HIP), (-0.205, -0.270, 0.520),
+             (-0.225, -0.330, 0.115)], 0.105, 0.085, 'body')
+    P.add(L.box(0.250, 0.420, 0.110), 'dark', loc=(-0.230, -0.420, 0.055))
+    limb(P, [(0.165, 0.030, HIP), (0.200, 0.215, 0.505),
+             (0.220, 0.400, 0.165)], 0.105, 0.082, 'body')
+    # the trailing boot is TOED DOWN - the heel is off the floor. It is one
+    # rotation and it is the difference between a man walking and a man standing
+    # with his feet apart.
+    P.add(L.box(0.240, 0.400, 0.105), 'dark', loc=(0.225, 0.470, 0.095),
+          rot=(-0.42, 0.0, 0.0))
+
+    # THE TRUNK, STOOPED INTO THE WALK. The upper mass runs forward in -y: he
+    # is carrying, not posing. The Mealman is pulled BACK by a hopper and leans
+    # into the pull; this body's load hangs level off a yoke and he leans
+    # forward against nothing but the distance left to go.
+    limb(P, [(0.0, -0.010, 0.860), (0.0, -0.090, 1.280), (0.0, -0.150, SHO)],
+         0.265, 0.215, 'body')
+    # the coat skirt, open and short - a man who walks does not wear it long
+    P.raw(aim(L.cone(0.330, 0.255, 0.540, 16), (0.0, -0.050, 0.620),
+              (0.0, -0.120, 1.0)), 'body')
+    _seg("body")
+
+    # THE LEATHER YOKE-CAPE - the mid value, painted per-vertex.
+    _cape = aim(L.cone(0.400, 0.235, 0.300, 16), (0.0, -0.110, 1.400),
+                (0.0, -0.130, 1.0))
+    P.raw(_cape, 'body', vcol=[CAPE] * len(_cape[0]))
+    _seg("cape")
+
+    # THE HEAD. A DEEP HOOD, DARK FRONT AND BACK, with a BODY-COLOURED face
+    # oval inside it. This is the Thatcher's answer to the Beadle's fault and
+    # it is used here BY CONSTRUCTION rather than discovered at pass 11: the
+    # Beadle's pale eye band wrapped its head, so the figure read the same from
+    # front and back and had no facing at all. A dark hood that is dark on
+    # BOTH sides, with the only face-coloured thing on the -y face, makes the
+    # facing geometric. The hood brim also rakes forward, which the walk wants.
+    limb(P, [(0.0, -0.150, 1.580), (0.0, -0.205, 1.730)], 0.092, 0.080, 'body')
+    P.add(L.sphere(0.145, 0.155, 0.168, 14, 9), 'dark', loc=(0.0, -0.215, 1.845))
+    P.raw(aim(L.cone(0.255, 0.060, 0.430, 16), (0.0, -0.165, 1.690),
+              (0.0, -0.150, 1.0)), 'dark')
+    P.add(L.sphere(0.086, 0.052, 0.104, 12, 8), 'body', loc=(0.0, -0.300, 1.838))
+    for s in (-1, 1):
+        P.add(L.sphere(0.026, 0.020, 0.022, 8, 6), 'dark',
+              loc=(s * 0.042, -0.342, 1.862))
+    _seg("head")
+
+    # THE ARMS. One hand up ON the yoke bar - that is what a man under a yoke
+    # does with his hands, and it ties the load to the body so the two do not
+    # read as a figure standing next to some sacks. The other hangs forward and
+    # low, swinging with the stride.
+    limb(P, [(0.175, -0.120, 1.565), (0.300, -0.145, 1.690),
+             (0.370, -0.135, 1.735)], 0.072, 0.054, 'body')
+    _seg("arm_yoke")
+    limb(P, [(-0.180, -0.120, 1.545), (-0.255, -0.290, 1.215),
+             (-0.215, -0.395, 0.995)], 0.072, 0.050, 'body')
+    _seg("arm_free")
+
+    # THE YOKE. One bar across the shoulders, dipped at the centre where it
+    # bears, dark so it cannot be mistaken for a fifth sack.
+    P.raw(L.tube([(-0.495, -0.060, 1.700), (0.0, -0.140, 1.762),
+                  (0.495, -0.060, 1.700)], 0.055, 8), 'dark')
+    _seg("gear_yoke")
+
+    # ------------------------------------------------------------- THE COUNT
+    # FOUR SACKS, AND THE AIM OF EACH ONE IS DELIBERATE. The Mealman's 34
+    # degree lesson, applied to a GROUP instead of to one arch: four sacks hung
+    # in a square would give the FRONT camera two silhouettes and hide two, and
+    # the SIDE camera a single pale slab with no countable gaps in it. So the
+    # pairs are offset in all three axes - the fore pair lower, wider and
+    # further out; the aft pair higher, narrower and tucked - which gives every
+    # ortho four separable masses and no camera a degenerate view. THE COUNT IS
+    # THE MECHANIC, so a camera that cannot count is a camera that cannot read
+    # the fight.
+    SACKS = ((-0.345, -0.330, 1.145), (0.330, -0.315, 1.185),
+             (-0.300, 0.275, 1.265), (0.285, 0.290, 1.225))
+    for i, (sx, sy, sz) in enumerate(SACKS):
+        # a sack is a fat squashed bag, a gathered neck and a tie. Not a
+        # sphere: a smooth ball of pale reads as a stone, and this has to read
+        # as GRAIN - heavy, slumped and tied at the top.
+        P.add(L.sphere(0.192, 0.158, 0.225, 13, 9), 'bone', loc=(sx, sy, sz))
+        P.add(L.sphere(0.150, 0.130, 0.095, 12, 7), 'bone',
+              loc=(sx, sy, sz - 0.175))
+        P.raw(aim(L.cone(0.082, 0.040, 0.135, 10), (sx, sy, sz + 0.185),
+                  (0.0, 0.0, 1.0)), 'bone')
+        _ring(P, (sx, sy, sz + 0.225), 0.052, 'z', 'dark', 0.018, 12)
+        # the rope from the yoke end down to the neck of the sack
+        yx = -0.495 if sx < 0 else 0.495
+        limb(P, [(yx * 0.92, -0.075, 1.690), (sx, sy, sz + 0.300)],
+             0.021, 0.018, 'dark')
+    _seg("gear_sacks")
+
+    # THE FIGURE, for the man-value census: everything else is his gear.
+    P.man_parts = ("body", "cape", "head", "arm_yoke", "arm_free")
+    return P
+
+
+BUILDERS.update({"badger": badger})

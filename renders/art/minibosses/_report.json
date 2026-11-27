@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "7ca7185d7119f8d4d204cb0d0a68a73aed794691",
+   "head": "b286998c30211127b8fc9b20da4847da13362cc3",
    "ref": "origin/main",
-   "ref_commit": "49c317588ccdf418e3383a3f7c77f64c9a5d86cf",
+   "ref_commit": "82384c337744887091a51b90147ae434ebb31992",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3608,7 +3608,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.505,
+   "corridor_margin_m": 9.51,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.96,
    "read_from": {
@@ -3634,13 +3634,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "badger": {
+   "title": "Forestall",
+   "theme": "mess",
+   "idea": "IT IS LEAVING, AND WHAT GETS OUT WITH IT COMES OFF THE TOWN - it has been into Bellmire's own store and it is carrying the sacks out. It does not strike, it summons nothing, it holds nothing of yours and it has no phase: it walks for the stair under a shoulder yoke with four sacks on it, and the room's other monsters stand between you and it. EVERY SACK THAT LEAVES THE FLOOR IS GONE FROM THE TOWN. Not from your haul - from the granary, when the party gets home, and nothing further down the delve gives it back. So this is the first body in this file you can beat and still be poorer for: clear the room at your own pace and the fight is won and Bellmire is short, or go through what is hitting you to reach the one thing in here that is not fighting at all. Put it down and every sack still on the yoke stays on the floor to be carried up. THE COUNT IS THE SACKS: four, pale and full against a coat that is neither, so a viewer can see at a glance how much is still worth going in for - and one fewer on the yoke is one already gone.",
+   "wear": 0.55,
+   "feed_line": "Something ahead is carrying sacks the wrong way.",
+   "pack_used": null,
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1738,
+   "size": [
+    1.18,
+    1.47,
+    2.43
+   ],
+   "footprint_span": 1.47,
+   "height_m": 2.43,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.532,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.07,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.537102104276453,
+    "ortho": 2.789165735244751,
+    "clip": [
+     6.666669845581055,
+     16.83407211303711
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 49c317588ccdf418e3383a3f7c77f64c9a5d86cf sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 82384c337744887091a51b90147ae434ebb31992 sha bc3a603f",
  "blank_check": {
-  "files": 198,
+  "files": 201,
   "failures": []
  }
 }

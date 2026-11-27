@@ -240,6 +240,67 @@
 ***   (e) **THE ID LIST IS STALE EVERY HOUR BY DESIGN** - as of 13:1x CT 27 Nov: B202, C-236,
 ***       D100, H32, L74, **S156**, T5, **U205**, and art on the 68th body (THE MOWER).
 ***
+*** ===== THIRD WRITE OF THE 12:58 CT FIRING, 27 NOV 2026 - I AM CORRECTING TWO OF MY OWN ROWS
+*** ===== BECAUSE ART SHIPPED THE 69th WHILE I WAS WRITING THE SECOND WRITE. =====
+*** Written 13:15 CT. THE ART AND CONTENT ROWS IN THE SECOND WRITE ABOVE ARE SUPERSEDED BY THIS
+*** BLOCK AND BY NOTHING ELSE. The GAME BUILD, HUB, CHAT BOT and HUD rows stand UNCHANGED.
+*** MY FAULT, AND IT IS THE SAME FAULT THE PROMPT WARNS ABOUT BY NAME: I measured art's branch at
+*** 13:0x, found only a plan sync, and wrote "ART - DRY THIS HOUR" and told content "a feed row is
+*** NOT owed for the 69th until art ships it". Art pushed `7a4ce41a` at **13:00:32 CT** and
+*** `85e4fb82` at **13:03:54 CT** - between my merge and my sync. I caught it by RE-READING EVERY
+*** LANE REF AT SYNC TIME, which is in the recipe for exactly this reason, and I merged the new
+*** commits into main before finishing (main a3869882). A stale instruction left standing is a
+*** lane's wasted cycle, so I am fixing it in the same run rather than leaving it for 13:58.
+***
+*** ===== THE CASCADE IS NOW TWO STEPS DEEP: 69 BODIES / 67 NAMES / 68 FEED KEYS / 67 PUBLISHED.
+*** Nobody is behind. Each lane owes exactly one step and they must land IN ORDER:
+***   `mower`    - body YES (11:56), feed YES (12:23), MB_NAME **NO**, published **NO**
+***   `shearman` - body YES (13:00), feed **NO**,      MB_NAME **NO**, published **NO**
+*** SO: game build names `mower` (:07, already its row) -> chat bot publishes 68 (:45, already its
+*** row). Content writes `by_key.shearman` (:22, below) -> game build names it NEXT hour -> chat
+*** bot publishes 69 the hour after. DO NOT TRY TO SHORTCUT THAT. It is a one-hour pipeline per
+*** step and B194 settled structurally that it is not a round trip.
+*** THE CHAT BOT'S ROW ABOVE IS STILL CORRECT AS WRITTEN - it bumps to match `Delve.MB_NAME`, NOT
+*** to match the body count. 68 is the right number for it this hour even though 69 bodies stand.
+***
+*** ===== ART (:34) - **THE 69th IS TICKED. STRIKE "DRY THIS HOUR" ABOVE - IT WAS WRONG.** =====
+***   **THE SHEARMAN (Cutloose), the 69th - TICKED**, and it earned it on the thing this house
+***   actually asks for rather than on the count.
+***   FIT IS THE ACCEPTANCE TEST AND YOU SHOT ALL THREE FACINGS PLUS TWO MORE: `front.png`,
+***   `side.png`, `three_quarter.png`, `hero_front.png`, `hero_side.png` and - the one that
+***   matters - **`hero_back.png`**. The Beadle shipped with no facing from behind while every
+***   number in its register read `seen: 1.0`, and a back shot is the only thing that catches it.
+***   You shot the back. 161 lines of writeup in `docs/art/SHEARMAN_THE_69th.md`, `_fit_report.json`
+***   +183/-12 and `_report.json` +99/-5.
+***   **AND PASS 4 IS WHY THIS IS A TICK AND NOT A HALF.** You found your own cord reading as a
+***   HOOK at silhouette, recognised that a hook is **the Gaoler's cue**, and changed it - a
+***   SILHOUETTE COLLISION WITH AN ALREADY-SHIPPED BODY, caught by you, in your own fourth pass,
+***   with no one asking. That is the single most valuable kind of art fault to catch, because two
+***   bodies that read as one are invisible to every number in a fit register. You also recorded
+***   that "the green sheet was identical on two bodies that did not read" - keep that note.
+***   NEXT: **THE 70th IS YOURS.** Unchanged licence, unchanged exception: minibosses are the one
+***   thing this lane may invent. MEASURE YOUR OWN COUNT off `tools/art/minibosses.py` or your fit
+***   register - NOT off the number 69 in this row and not off any number in any prompt. My own
+***   flat regex returned 43 on your roster this run and I refused to publish it as your count; a
+***   regex is not a parser.
+***   AND DO NOT SPEND A FIFTH PASS ON THE SHEARMAN - it is fitted, it reads, and it is ticked.
+***
+*** ===== CONTENT (:22) - **A SECOND QUEUED ROW, AND IT NOW OUTRANKS THE BLURBS.** =====
+***   **STRIKE "a feed row is NOT owed for the 69th until art ships it. Do not pre-write one."**
+***   Art HAS shipped it - 13:00:32 CT, THE SHEARMAN (Cutloose), stem `shearman`, body on main.
+***   **(1) `by_key.shearman` - THE 69th FEED ROW. THIS IS NOW YOUR FIRST ITEM.** It is the
+***   blocking step for the whole 69th, exactly as `by_key.mower` was for the 68th, and you are
+***   the only lane that can pay it. The game build cannot name a body you have not fed.
+***   THE SUBJECT, so the voice has something true to hold: read art's own
+***   `docs/art/SHEARMAN_THE_69th.md` before you write a line of it - art recorded what this body
+***   IS and, in pass 4, what it must not be mistaken for (the Gaoler). Shears, and a cord that is
+***   deliberately NOT a hook. Plain voice; the horror is the cutting loose, not gore.
+***   **(2) THE 30 SPECIALIZATION NAMES AND BLURBS** - demoted to second, not dropped. Still in
+***   `roster.gd` SPECS, still text-only, and the warning from the second write stands and has
+***   teeth now: **S156 wired five bespoke ways onto those same keys, so a key you rename breaks
+***   live behaviour.** Text in, keys untouched.
+***   If the clock only holds one of the two, **TAKE (1)** - it unblocks two other lanes.
+***
 *** ===== TAKE THIS NEXT - THE 11:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 10:58 FIRING AND ITS TWO WRITES.
 *** Merged tree 537d203a - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed

@@ -22541,3 +22541,10 @@ me.
 - Evidence-log rule noted: if I ship, the evidence log is committed with it. Nothing shipped, so nothing to commit but this note.
 - Next firing (20:52): re-read R's RUN_LOCK via the Windows bridge and the HUD row. Optional, only if the window is free and a row asks: parse_fish end-finder hardening (nested braces) in the RARITY_COLOR guard.
 - Decision for Mr. E: none.
+
+## C-220 (content, 26 Nov 2026 20:2x CST) - EPITAPHS +16, DESCEND +8, CLEARED +8. ONE FILE, ONE NOTE. BODY COUNT HELD AT 63.
+- Clock via `TZ=America/Chicago date`: 20:22 CST. TAKE THIS NEXT (19:58 block) gave content: keep producing, C-219 ticked, no wiring of `_note_` keys or `phase2_words_alt2`.
+- Checked origin/art tools/art/minibosses.py against by_key: no committed body outside the 63. No by_key row written.
+- Added to data/lore_lines.json: epitaphs 1000 -> 1016, descend 613 -> 621, cleared 598 -> 606. Deduped, no floor count, no placeholders. `_note_c220` added (expected zero-hit key).
+- VALIDATION OK: json.load passes on all four owned files; every pre-existing key identical, list pools prefix-identical.
+- CODE WIRING: none (existing pools).

@@ -1028,3 +1028,6 @@ CHECKS (25 Nov 08:38 CT): node --check app.js OK; innerHTML code sites exactly a
   Not mine to fix or republish - the supervisor owns gh-pages. Next re-check: next firing.
 - web/ unchanged this run (only NOTES.md/PROGRESS.md). NOT claiming READY TO PUBLISH.
 - 25 Nov 13:39 CT hub standing audit (row HUB :37, pack catalogue): web/ unchanged; vs gh-pages tree delta = NOTES.md only. innerHTML only app.js:255, :301. _packs walk = 49 folders = catalogue's 49, none new.
+
+## Stand-down, 26 Nov 2026 18:40 CT (hub firing)
+TAKE THIS NEXT (17:58 CT block, 26 Nov) gave HUB the row "STAY STOOD DOWN". Re-measured: local hub HEAD 2ac8cb98, tree of web/ = 51a3f8b3 = origin/hub:web = origin/main:web; git status clean. No web/ code changed this run (only this note), so no screenshot, no new hostile-name run is owed. No READY TO PUBLISH claim; no publish gate owed. Live-dot colour: n/a (no change).

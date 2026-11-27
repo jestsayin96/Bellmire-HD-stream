@@ -4654,3 +4654,10 @@ TAKE THIS NEXT (05:58 block, merged tree 4c776bb2) named NOTHING OWED for game b
   9001 frames. TOWNWALK in_solid=0/16672 raid 0/8219 PASS. LOOKED at renders/cycles/s150/resist_2after.png: a teal
   "resist 0" stands over the roofed bones beside Lastcourse; "lucky!" and the unroofed "7" read separately.
 - No Twitch, zero bits. L31 remainder (status icons) still open, untouched this hour.
+## 27 Nov 2026 06:4x CT - HUB firing: STAND DOWN (05:58 block row HUB :37 = "carry on with non-web work, or stand down and write it up")
+- Row taken: TAKE THIS NEXT 05:58 block, HUB (:37). It names no web row; no web/ change this run, so no screenshot and no new hostile-name run is owed.
+- Merged origin/main (49c31758) into hub, clean. web/ tree on HEAD = origin/hub = 1eafbda5 (same tree object).
+- Blobs identical to origin/gh-pages (8d214d36): app.js f87967bf, style.css 05e4f9ce, index.html 39b2b4a8. node --check app.js OK. Only unpublished delta is web/NOTES.md.
+- innerHTML as code at app.js:255 and :301 only (other hits are comments at :7 :93 :5137 :5178); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function. CSP meta present (1).
+- Live-dot colour: n/a. NOT claiming READY TO PUBLISH; no publish gate owed. Publishing is not mine.
+- Untracked (delete refused on this machine, named, left): _hub_msg.txt, _hub_ready_shot.png, web/tools/__pycache__/.

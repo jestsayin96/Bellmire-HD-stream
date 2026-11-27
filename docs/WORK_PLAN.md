@@ -1,3 +1,92 @@
+*** ===== TAKE THIS NEXT - THE 09:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 08:58 FIRING.
+*** Merged tree d04691fd (five lanes in: content, hub, hud-ui, art, chatbot; laptop was already
+*** in at 015ba646 and read 0 ahead). Clock read off the machine with `TZ=America/Chicago date`:
+*** 09:58:24 CST at the start of this run; this block written 10:0x CT.
+***
+*** *** THIS BLOCK IS BEING PUBLISHED IN TWO WRITES AND THIS IS THE FIRST. *** The GAME BUILD row
+*** and the cascade ruling below are COMPLETE and FINAL and are going out now so they reach
+*** origin/laptop before the :07 firing. The CONTENT, HUB, CHAT BOT and HUD rows land in a second
+*** write in this same run, marked "SECOND WRITE", before :22. Nothing in this first write will be
+*** contradicted by the second. If you are the :07 lane, everything you need is here.
+***
+*** ===== MY OWN FAULT FIRST, AND IT IS THE REASON FOR THE SPLIT WRITE. =====
+*** THE GAME BUILD STARVED A WHOLE CYCLE AT 09:08 AND IT WAS THIS SEAT'S DOING. The 08:58 block
+*** did not reach origin/laptop until 09:10:19 CT. The game build claimed at 09:08:54, read its own
+*** branch, found "no lead block newer than 07:58/08:09", correctly judged both items in that row
+*** spent, and stood down at 09:09:30 with no Godot launched. THE LANE DID EVERYTHING RIGHT. The
+*** plan arrived 85 seconds after it looked. The standing rule says SYNC `laptop` FIRST, EVERY
+*** HOUR, for exactly this reason, and an hour's work was lost because a seat finished its block
+*** before it served the lane that fires first. THE CLEAN-HOUR COUNT RESETS TO 0 ON THIS.
+***
+*** ===== THE BADGER'S FIT IS CLOSED. I LOOKED AT IT MYSELF. THE CASCADE IS RELEASED. =====
+*** ART'S HALF OF THE 67th IS **TICKED** AT PASS 5 (1be9c053). I did not take the register's word
+*** and I did not take the lane's word. I staged all four renders into my own container and looked
+*** at them at 4x, front and back cropped and set side by side - which is the exact check the
+*** 07:58 seat skipped when it ticked this body on pass 2 and had to withdraw it at 08:09.
+***   FAULT 2 (NO FACING) - **CLOSED, BY MY EYES.** Front: pale face oval with two dark eyes under
+***     the brim, pale trapezoid cape, and below the cape two pale strap bands running down the
+***     chest crossed by one dark bar. Back: plain pale trapezoid, clean hem, dark coat, nothing
+***     else. THEY ARE NOT THE SAME FIGURE ANY MORE. The Beadle failure is not reproduced here.
+***     And the facing is carried by the largest pale mass, which is what the 08:58 row asked for.
+***   THE ROPE STRUTS - **GONE, BY MY EYES.** In hero_side.png every rope now drops dead vertical;
+***     there is no diagonal left for any camera to read as a sawhorse. The cross-yoke spars read
+***     as frame, horizontal and continuous with the bar, not as hanging mass. I counted four sacks
+***     by eye in front, side and back. THE STRIDE SURVIVED - the forward and trailing legs are
+***     still plainly different.
+***   THE THREE-QUARTER, WHICH IS THE WORST FRAME AND I WENT TO IT BECAUSE ART SAID SO. The fore
+***     sack does hang across the chest and does partly cover the new harness. The face oval, the
+***     visible left-hand straps, the cape and the stride still carry the facing there without
+***     ambiguity. I agree with art's own words: a WEAKENING, not a return of fault 2.
+***   THE REGISTER AGREES WITH THE PICTURE RATHER THAN CONTRADICTING IT, which is the new thing:
+***     verdict GREEN, ok true, errors [], blind_views [], stale_margin [], 69 rows judged,
+***     red_summary.rows [], ok_shipped true, seen 1.0 and proves true on all three views,
+***     frame_edge 0 on all four sides of all three views, air_px_min 146 (side, tightest),
+***     ratio 0.99, pair_w 3.17, fits_frame true, BLANK 201 files 0 failures.
+***   WHAT IS **NOT** TICKED: the five cosmetic items art lists itself (stubby straps, half-buried
+***     belt, the 3/4 weakening, spar overhang, stepped cape hem). Those are polish, not fit, and
+***     NONE of them blocks the wiring. FIT IS THE ACCEPTANCE TEST and the fit is passed.
+***
+*** *** THE 67th ITSELF IS STILL OPEN - ART'S HALF IS DELIVERED, THE WIRING HALVES ARE NOT. ***
+*** THE CASCADE IS A ONE-HOUR PIPELINE, NOT A ROUND TRIP, AND I AM SEQUENCING IT ON PURPOSE:
+***   10:07 GAME BUILD names it in Delve.MB_NAME  -> 66 names become 67.
+***   10:22 CONTENT writes the badger feed row    -> 66 by_key become 67.
+***   10:58 I MERGE BOTH INTO main.
+***   11:45 CHAT BOT bumps the count on a main that actually holds 67/67.
+*** THE CHAT BOT CANNOT PAY THIS AT 10:45 and must not be asked to: my merge is at :58, after its
+*** :45, so at 10:45 main will still read 66/66 and a bump would make its own files assert a name
+*** MB_NAME does not hold. I AM MAKING NO PRE-DECLARATION OF A PUBLISH HOUR. The 07:58 seat set
+*** that trap and the 08:58 seat had to withdraw it; I am not setting a third one.
+*** L14_TEST MINIBOSS MAY READ RED BETWEEN THE GAME BUILD'S PUSH AND THE CHAT BOT'S BUMP. THAT IS
+*** THIS PIPELINE, NOT A FAULT, AND NO LANE IS TO "FIX" IT BY EDITING A COUNT OUT OF ORDER.
+***
+*** ===== GAME BUILD (:07) - TWO ITEMS, IN THIS ORDER. BOTH ARE YOURS AND BOTH ARE UNBLOCKED. =====
+***   (1) **NAME THE BADGER.** The bar is lifted. Art's fit is closed and I have ticked it on my own
+***       look, not on the register. Add the 67th to `Delve.MB_NAME` (delve.gd:449-485) and do the
+***       usual wiring that a named body needs on your side. The body is on main as of this merge:
+***       assets/monsters/minibosses/badger.glb, 218,252 bytes, rebuilt this pass - minibossgen
+***       reports span 1.51 m, CORRIDOR-SAFE, UNDER-LID, 3 components, NOT room-locked.
+***       DO NOT TAKE A FIT NUMBER OUT OF THIS BLOCK. air_px_min is 146 and pair_w is 3.17 as I
+***       read them at 10:0x, but read them off renders/art/minibosses/_fit_report.json yourself -
+***       this row has been stale by one pass twice already.
+***       AND DO NOT COUNT MB_NAME BY LINES. The dict puts several entries on one line; a
+***       line-anchored regex reads 36 and a comma-splitter reads 37. chatcmd.gd:3173 says so in
+***       its own words. Scan at depth 1. The correct answer before your edit is 66.
+***   (2) **SYSTEM 40'S ENGINE HALF** - the hero specialization/subclass in roster.gd. This is the
+***       item the 08:58 row gave you that you never got to see, and it is unchanged and still
+***       yours: the last of the supervisor's 38-40 wave, unblocked because 38 is WHOLE and 39's
+***       engine half is your S152, which I ticked last hour.
+***   IF THE LOCK OR THE CLOCK ONLY ALLOWS ONE, TAKE (1). It unblocks three other lanes; (2)
+***   blocks nobody.
+***
+*** ===== CONTENT, HUB, CHAT BOT AND HUD - SEE THE SECOND WRITE OF THIS BLOCK, BELOW THIS LINE =====
+*** (Written later in this same run, before :22. Until it appears, the 08:58 rows still stand for
+*** those four lanes, with ONE change that is final and stated here: CONTENT, the badger feed row
+*** is RELEASED - see the cascade ruling above - and it is your first item this hour, ahead of
+*** System 41's drops.json. The 08:58 licence making `data/drops.json` your fifth owned file
+*** STANDS and is not withdrawn.)
+
+
 *** ===== TAKE THIS NEXT - THE 08:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 07:58 FIRING AND ITS 08:09 CORRECTION.
 *** Merged tree e71949db (all six lanes in, pushed to main). Clock read off the machine with

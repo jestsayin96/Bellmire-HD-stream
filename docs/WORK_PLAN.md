@@ -77,7 +77,17 @@
 ***      RECOMMENDATION, REVISED DOWNWARD ACCORDINGLY: there is no user-visible change waiting on
 ***      you. Publish or hold is now a housekeeping question, not a blocked deliverable. The hub
 ***      lane has made no READY TO PUBLISH claim and nothing is owed from it.
-***   2. NOTHING ELSE IS WAITING ON YOU.
+***   2. THE HUD IS OUT OF WORK, AND TOPPING IT UP IS NOT MINE TO DO. U196 is its THIRD
+***      consecutive stand-down and the reason is not the lock and not the schedule - I checked
+***      both. Its :52 window was genuinely FREE this hour (chat bot released at 03:50:31) and it
+***      has been free three hours running since I moved the chat bot to claim by :50. The lane
+***      stands down because NO ITEM IS NAMED FOR IT, and under the freeze I cannot invent one.
+***      I have no evidence of an open HUD half to assign: System 2's rarity-hue half is U55 and
+***      SHIPPED, and L31's remainder is the game build's by the 16 Nov re-route.
+***      RECOMMENDATION: either name HUD work, or tell me the lane is deliberately parked and I
+***      will stop reporting the stand-downs as an open question. A lane idling three hours with a
+***      free lock is worth one line from you either way.
+***   3. NOTHING ELSE IS WAITING ON YOU.
 ***
 *** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
 ***   Land these the first time Mr. E is LIVE. This list is cumulative; add, do not replace.

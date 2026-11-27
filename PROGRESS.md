@@ -22664,3 +22664,110 @@ me.
 - Mechanic in the words: it burns as hard as the party crowds it; four vanes are the count; a broken vane stays broken.
 - VALIDATION OK: all four owned files parse; every pre-existing key byte-equal; only `fanner` and `_note_c222` added. No other pool touched.
 - CODE WIRING: none new. `dungeon_hd.gd miniboss_for` gates on mesh + arrive lines, so the Fanner can stand once the game build names it; art's shipped_red is not mine.
+## B188 - 26 Nov 2026, 22:46 CT firing (fired late into its own slot). I TOOK THE TEAM LEAD'S SPLIT ORDER AND THE SPLIT THEY ORDERED DOES NOT FIT EITHER - THE AXIS IS A `const` IN A FILE THIS LANE MAY NOT EDIT, AND HERE IS THE ARITHMETIC INSTEAD OF A THIRD ESTIMATE
+
+NO CLAIM, NO ENGINE, NO GATE. The window was gone before my firing could use it and I say the
+times plainly: my prompt's slot is :45, my firing came in at 22:46, and the lock's last line at
+22:47:57 and again at 22:51:12 was `RUNNING 2026-11-26T22:41:48-06:00 (QA tester, ... cap
+2026-11-26T22:51:48-06:00)` with NO IDLE from that lane after it. Under Mr. E's yield rule
+liveness is decided by a following IDLE and nothing else, so QA held the lock through the whole of
+my usable window, and the HUD claims at :52. tasklist Godot* = 0 at 22:51:12 and the engine was
+down - I am recording that and NOT treating it as a clear-and-claim, because an absent process
+does not end another lane's hold under the rule as written. I did not claim. I did not launch.
+
+### THE ORDER I WAS GIVEN, AND WHY IT CANNOT BE OBEYED AS WRITTEN
+The 21:58 plan's CHAT BOT row: "cut L56 into arms that each finish inside :52 and land ONE ARM PER
+FIRING with running totals in PROGRESS.md." I went looking for the axis to cut on. There is one
+axis and it is not available to me:
+- `tools/_l56_test.gd` reads EXACTLY TWO user args, measured by grep, lines 86-87:
+  `--redproof` and `--nospring`. There is no `--runs`, no `--floors`, no start-floor arg.
+- The soak's size is three `const`/fixed declarations at lines 47-49: `RUNS := 4`,
+  `FLOORS_PER := 2`, `START_FLOORS := [5, 10, 5, 10]`.
+- `tools/` IS NOT MINE. I own scripts/chatcmd.gd, data/commands.json, docs/COMMANDS.md. Running a
+  tool is allowed; editing one is not. So the run count cannot be cut by me at all.
+SO THE ONLY SPLIT AXIS I HAVE IS THE THREE MODES - normal, `--nospring`, `--redproof`. AND THAT
+SPLIT DOES NOT FIT THE WINDOW, WHICH IS THE POINT OF THIS ENTRY: each mode arm is STILL A FULL
+FOUR-RUN SOAK. Splitting by mode divides the number of LAUNCHES, not the length of one launch.
+
+### THE ARITHMETIC, SO THE HOUSE STOPS ARGUING THIS FROM ESTIMATES
+`RUN_CAP_FRAMES := 60 * 120` = 7200 ticks per run (line 70). `RUNS := 4`. The per-run cap is
+counted in PHYSICS TICKS - `_f += 1` at line 204, polled once per physics tick, tested at line 208
+- NOT in seconds. So:
+  worst case per arm = 4 runs x 7200 ticks = 28,800 ticks.
+  At the nominal 60 ticks/s that is 480 s = EIGHT MINUTES, against a SEVEN-MINUTE window.
+THAT IS TRUE OF EVERY ARM INCLUDING A MODE-SPLIT ONE, so no mode arm can be DECLARED to fit, and a
+declared finish is the thing the yield rule actually binds me to. B187 asserted this lane cannot
+fit L56 and was called structural; it now has the arithmetic under it rather than a third estimate.
+AND THE SCRIPT'S OWN COMMENT IS WHERE THE HOUSE'S "4 MINUTES" CAME FROM: line 70 says "2 min per
+run" - that is the 60-ticks/s READING OF THE CAP, i.e. an assumption about realtime, not a
+measurement of this machine. In headless Godot the physics tick is not pinned to 60/s, so the real
+cost of 7200 ticks on cruzader is UNKNOWN AND HAS NEVER BEEN LOGGED. The house has been carrying
+"about four minutes" (and before that "40 minutes", struck 24 Nov) with nobody having timed one.
+I DID NOT TIME ONE THIS FIRING EITHER, BECAUSE I HAD NO ENGINE. I am not substituting a guess.
+
+### THE SPLIT, WRITTEN DOWN, WITH ARM 1 CARRYING THE MEASUREMENT THAT MAKES ARMS 2-3 DECLARABLE
+L56 cannot tick on one green run - the plan is explicit ("Nobody is to tick L56 on a single green
+run", and B144's single `L56_TEST OK` was retired as one sample). S128's own tick needed all three
+modes. So the verdict needs three arms, and they land one per firing:
+  ARM 1 - NORMAL. `--headless --path W6 -s tools/_l56_test.gd` to its own log. Expect
+          `L56_TEST OK`, CHECKS 4 / UNMET 0 / FAILS 0. WRAPPED IN A WALL-CLOCK STOPWATCH and a
+          HARD KILL at the declared finish. Either it completes - and then I have the verdict AND
+          the first real seconds-per-arm number this house has ever had, which makes arms 2 and 3
+          declarable instead of hoped-for - or the kill fires and the lower bound PROVES the
+          ceiling with a measured number. EITHER OUTCOME IS A DELIVERY. Claim at :45:15, declared
+          finish :51:30, kill at :51:40, clear of the HUD's :52.
+  ARM 2 - `--nospring` (force_trap_spot = 1: every trap spotted and stepped round). MUST print
+          `L56_TEST FAIL`. S128's reference: FAILS 2.
+  ARM 3 - `--redproof` (observer blinded). MUST print `L56_TEST FAIL`. S128's reference: FAILS 3.
+RUNNING TOTALS - ARMS LANDED 0 of 3. Nothing is claimed as done here; this row is the ledger.
+  ARM 1 normal    : NOT RUN. carried to B189.
+  ARM 2 nospring  : NOT RUN.
+  ARM 3 redproof  : NOT RUN.
+A green arm 1 alone does NOT tick L56 and I will not ask for that.
+
+### ONE THING I READ OFF THE OLD LOGS THAT THE NEXT READER SHOULD HAVE
+Every committed L56 log - the green `_s128_l56.log` included - carries `ceiling reached in 0 of 4
+runs`. The GREEN verdict was earned with the ceiling reached in ZERO runs, and the red-proof
+requirement is written as "must print FAIL AT THE CEILING" (line 31). The reds did print FAIL, so
+nothing here is broken, and I am NOT raising it as a defect or a new item. I am recording that the
+three S128 arms all sit at ceiling_runs=0 so that a future firing that finally reaches a ceiling
+does not read a changed number as a regression.
+Also, mtimes are useless for timing this: `_s128_l56.log`, `_s128_l56_nospring.log` and
+`_s128_l56_red.log` all carry 2026-11-25 11:46:22.015 to the millisecond - that is the checkout,
+not the run. I checked, so the next reader does not.
+
+### THE STALE "26" IN MY OWN PROMPT, NOW MEASURED OFF THE FILE AND NOT OFF A LOG
+My prompt tells this lane to expect `COMMANDS_DOC wrote 26 commands`. B185 found the real generator
+writes 32 and read it off a gate log. I corroborated it INDEPENDENTLY AND WITH NO ENGINE, straight
+out of the data: `json.load(data/commands.json)` -> `commands` = 32 entries, `order` = 32 entries,
+the two agree. So 32 is the file's own number, not just the generator's, and it is the generator's
+32 that is right. It is item 2 of the team lead's prompt-correction backlog; a future firing of
+this lane MUST NOT read 32 as a fault.
+
+### WHAT I DID NOT DO, ON PURPOSE
+I did NOT repeat the four-direction drift audit. B186 ran it, B187 ran it again and reported its
+own as a duplicate of B186's. A third would be a triplicate and I am not spending the firing on it.
+My three files are UNCHANGED this firing and byte-stamped: scripts/chatcmd.gd 36563136 (3767
+lines), data/commands.json d2ae3b81, docs/COMMANDS.md e9ce025b - all three identical to B185's
+stamps, so the three data-loading gates are a DECLARED NO-OP on unchanged bytes and were not run
+(the B158 stand-down precedent). Only PROGRESS.md changes in this commit.
+
+- `git merge origin/main` ran clean in W6 this firing and brought the game build's S143/S143b
+  keeper work in. The game build's S144 notes the chat bot's `MINIBOSS GHOST` arm fires on
+  `fanner` until content's C-222 lands - THAT IS CORRECT AND IS NOT A DEFECT OF MINE, the same way
+  the fifteen-firing `MINIBOSS UNNAMED` row was correct until S141 named Velrick. I did not touch
+  the gate and nobody should widen it.
+- FOR THE GAME BUILD lane, WHO AUTHORED THE S128 DETERMINISM FIX IN `tools/_l56_test.gd`: the one
+  change that would let this lane actually obey the split order is a user arg for the run count -
+  `--runs N` (and optionally `--floors N`) overriding the `const RUNS := 4` at line 47, defaulting
+  to 4 so every existing invocation and every committed reference stays exactly as it is. With
+  `--runs 1` this lane lands a four-firing ledger of single-delve arms that each fit seven minutes
+  by arithmetic rather than by hope. It is one line in your file; I am naming the dependency, not
+  reaching into it. Nothing owed in twitch_eventsub.gd.
+- FOR THE TEAM LEAD: the untracked `web/icons/items/*/*.import` sidecars are STILL in my worktree,
+  Godot-generated by headless runs. `web/` is the hub lane's; none is mine to add or remove. Third
+  firing naming them so they are not mistaken for this lane's leavings.
+- CARRIED TO B189: ARM 1 of the split above, claimed at :45:15 with the stopwatch and the hard kill.
+- TWITCH: NO ENGINE RAN THIS FIRING AT ALL, so not even a token refresh. No message sent, nothing
+  redeemed, nothing cheered, ZERO BITS, no account driven by me.
+- DECISION FOR MR. E: none.

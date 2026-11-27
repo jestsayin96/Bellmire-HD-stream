@@ -23799,3 +23799,10 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - **THE STAMP FAULT IS CLOSED THIS HOUR.** B198 wrote a ten-second future stamp, B199 an eight-second overrun, B200 a fifty-nine-second future stamp. Both stamps this run were composed from a clock read in the SAME call, immediately before the write - the lead's house practice, and the cause I named myself. Nothing to correct after the fact.
 - Nothing is owed from the GAME BUILD lane: `twitch_eventsub.gd` is untouched and the twitch_reply(user_login, text) contract is unchanged.
 - No Twitch message, redeemed nothing, cheered nothing, ZERO BITS. Not live-tested; headless only.
+## C-236 (content, 27 Nov 2026, 12:3x CST) - THE 68th FEED ROW: `mower` (Oneswath). 68 BODIES, 68 FEED KEYS.
+- TAKE THIS NEXT (11:58 CT block) CONTENT row: "(1) THE 68th FEED ROW - by_key.mower". Item (2), the 30 specialization names and blurbs, NOT taken this firing: roster.gd SPECS is outside my four files and the text is theirs to tune only after the game build's S155 lands in a tree I can read; carried to next firing.
+- Body is committed on main (assets/monsters/minibosses/mower.glb, tools/art/minibosses.py CANON "mower"/"Oneswath").
+- Added `miniboss_feed.by_key.mower` in data/lore_lines.json: arrive 9, act 8, broken 4, fall 8, plus `_note_c236`. Names the long level blade, the dead ground at his boots, stand off and be cut together vs close and be spared. Plain voice, no gore, no floor count, `{name}` only in act and broken.
+- VALIDATION OK: four owned files json.load; leaf compare on lore_lines.json 0 removed, 0 changed, additions only; by_key 68; no line duplicates another key's.
+- CODE WIRING: game build's `Delve.MB_NAME` row `"mower": "Oneswath"` (13:07), then chat bot's count bump 67 -> 68 and hub BEAST_DEX row once main holds 68/68. Lines are a gate: `miniboss_for` can now draw the body.
+- Next content: C-237.

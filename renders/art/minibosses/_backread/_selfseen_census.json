@@ -792,6 +792,29 @@
    ],
    "man_span_empty": false
   },
+  "hammerman": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "apron",
+    "arms",
+    "head",
+    "legs",
+    "pits",
+    "plate",
+    "sledge",
+    "straps",
+    "tongs",
+    "trunk"
+   ],
+   "items": 33,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "harrowman": {
    "in_register": true,
    "in_builders": true,
@@ -1779,6 +1802,29 @@
    "man_span": null,
    "man_span_empty": false
   },
+  "shearman": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "apron",
+    "arms",
+    "blades",
+    "bow",
+    "bundle",
+    "cord",
+    "floorcord",
+    "head",
+    "legs",
+    "trunk"
+   ],
+   "items": 30,
+   "man_from": "",
+   "man_ranges": [],
+   "man_parts": [],
+   "has_man_span": false,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "sluicekeeper": {
    "in_register": true,
    "in_builders": true,
@@ -2469,12 +2515,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-27T17:50:26+0000",
+ "measured_at": "2026-11-27T19:46:35+0000",
  "measured_at_tz": "Ame",
- "measured_at_epoch": 1795801826.9187143,
- "register_mtime_epoch": 1795801684.403316,
- "register_mtime": "2026-11-27T17:48:04+0000",
- "register_pairs": 70,
+ "measured_at_epoch": 1795808795.6208694,
+ "register_mtime_epoch": 1795808724.1090136,
+ "register_mtime": "2026-11-27T19:45:24+0000",
+ "register_pairs": 72,
  "measurable": [
   "almoner",
   "badger",
@@ -2548,6 +2594,8 @@
  ],
  "not_measurable": [
   "crimp",
+  "hammerman",
+  "shearman",
   "snuffer_chibi",
   "tallyman_chibi"
  ],

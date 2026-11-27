@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "7a4ce41a1c45181daa29b44c3b431cb99c906bb3",
+   "head": "85e4fb826c50eb51d2c276b7de913eba18f72820",
    "ref": "origin/main",
-   "ref_commit": "9ff16a219c308f3b2be0a4d4a73929617f4e9a57",
+   "ref_commit": "70c3c8a5b993ab4b40a65b8712a48667bb8b3fac",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3749,7 +3749,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.495,
+   "corridor_margin_m": 9.5,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.99,
    "read_from": {
@@ -3775,13 +3775,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "hammerman": {
+   "title": "Alltold",
+   "theme": "firepit",
+   "idea": "IT TAKES EVERY BLOW AND PAYS THEM BACK AT ONCE - it does not reduce a hit, resist a hit or heal off one. It KEEPS it. Every blow struck on it is driven into the dished anvil face slung on its chest and stays there as a lit pit, and while the plate fills it does not answer at all: no swing, no call, nothing taken. SEVEN PITS, LIT ROUND THE DISH ONE AT A TIME, so the bill is countable from the doorway and the party can watch their own work adding up. When the seventh lights it turns and pays the whole sum back in a single stroke, on whoever put the most in. THE HABIT THAT FAILS HERE IS THE FIRST ONE A PARTY LEARNS: that hitting a thing harder is always right. Here the fastest kill is also the biggest bill, so the fight is a question about pace and about who is willing to be the mark. IT IS THE OPPOSITE OF THE STOKER, its own theme-mate - the Stoker shrinks when the room is starved; this one grows the harder you work. The counter-play is all on the body: stop striking and the pits go dull, spread the blows and nobody is the mark, cut the two straps and the plate comes off.",
+   "wear": 0.55,
+   "feed_line": "Something ahead is taking it and not answering.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1509,
+   "size": [
+    1.86,
+    1.05,
+    2.26
+   ],
+   "footprint_span": 1.86,
+   "height_m": 2.26,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.138,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.24,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.5561465696258237,
+    "ortho": 2.807020902633667,
+    "clip": [
+     6.690380573272705,
+     17.355436325073242
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 9ff16a219c308f3b2be0a4d4a73929617f4e9a57 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 70c3c8a5b993ab4b40a65b8712a48667bb8b3fac sha bc3a603f",
  "blank_check": {
-  "files": 207,
+  "files": 210,
   "failures": []
  }
 }

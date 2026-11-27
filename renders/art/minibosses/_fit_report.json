@@ -12636,6 +12636,176 @@
    "air_px_eps": 0.02,
    "air_px_min": 150,
    "air_px_tightest_view": "back"
+  },
+  "hammerman": {
+   "creature_h": 2.26,
+   "hero_h": 2.45,
+   "ratio": 0.92,
+   "pair_w": 3.72,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 1.876,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "hammerman",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 49551,
+      "vis": 49551,
+      "delta": 54628,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43668,
+      "vis": 43668,
+      "delta": 54983,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 31109,
+      "vis": 31109,
+      "delta": 38520,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37773,
+      "vis": 37773,
+      "delta": 41969,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 48198,
+      "vis": 48198,
+      "delta": 57479,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44025,
+      "vis": 44025,
+      "delta": 48817,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 203680,
+     "shadow_px": 3215,
+     "mean": 0.4869,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 3075,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 205960,
+     "shadow_px": 2668,
+     "mean": 0.4327,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 2675,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 202920,
+     "shadow_px": 3140,
+     "mean": 0.4862,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 3076,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "measured_at": "2026-11-27T19:58:37+00:00",
+   "measured_by": "tools/art/minibossfit.py",
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     126,
+     126
+    ],
+    "side": [
+     177,
+     178
+    ],
+    "back": [
+     126,
+     126
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 126,
+   "air_px_tightest_view": "front"
   }
  },
  "errors": [],
@@ -12648,7 +12818,7 @@
  "frame_w": 5.6,
  "margin_x": 0.12,
  "rows_unstamped": [],
- "provenance_note": "71 of 71 rows carry a measured_at. An unstamped row is NOT red - this block answers WHEN a stored measurement was taken, not whether it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as rows are re-measured.",
+ "provenance_note": "72 of 72 rows carry a measured_at. An unstamped row is NOT red - this block answers WHEN a stored measurement was taken, not whether it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as rows are re-measured.",
  "self_seen": {
   "asks": "how much of THE MAN survives HIS OWN GEAR, per view - an OCCLUSION measure, NOT a readability score (see the docstring of derive_self_seen and the top-end tile).",
   "instrument": "tools/art/_backread.py",
@@ -12663,14 +12833,15 @@
    "panner"
   ],
   "no_man_reason": "the builder declares an EMPTY `man` span - a deliberate marker that this body has no operator at all (panner pass 4 removed his, by A/B, and left the empty span to say so). A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED and this is NOT red - the first cut of this rule called panner MEASURABLE and turned the register red on a correct body, which is an unearned FAIL and the same fault as an unearned pass.",
-  "census_measured_at": "2026-11-27T18:48:01+0000",
-  "census_register_mtime": "2026-11-27T18:46:13+0000",
-  "census_register_pairs": 71,
+  "census_measured_at": "2026-11-27T19:46:35+0000",
+  "census_register_mtime": "2026-11-27T19:45:24+0000",
+  "census_register_pairs": 72,
   "census_errors": [],
   "build_failed": [],
   "build_failed_reason": "the builder RAISED, so nothing was measurable and nothing is claimed - that is RED, never an honest absence. This list and the census's own `errors` were both unread until 24 Nov 12:3x.",
   "not_measurable": [
    "crimp",
+   "hammerman",
    "shearman",
    "snuffer_chibi",
    "tallyman_chibi"
@@ -12886,8 +13057,8 @@
  "unproved_cells": [],
  "visibility_scope": {
   "asks": "how much of each subject survives the OTHER subject, in the pair cell",
-  "cells": 426,
-  "cells_reading_exactly_1_0": 426,
+  "cells": 432,
+  "cells_reading_exactly_1_0": 432,
   "cells_where_vis_differs_from_alone": 0,
   "air_px_floor": 0,
   "rows_with_no_air": [
@@ -12897,16 +13068,154 @@
   "note": "DERIVED THIS RUN off the rows in this file, never carried. The method is sound - with/without through one locked camera - but place() holds air between the two bodies in almost every row, so mostly the answer is settled before the render. THIS IS A TAKEN-BY-CONSTRUCTION PASS WHEREVER IT PASSES, NOT A MEASUREMENT THAT MOVED - trap 4, an instrument that cannot move is not a pass. IT DOES NOT SAY THE BODY READS, and `seen: 1.0` must never be cited as if it did; `self_seen` answers that question. What it still earns: it goes red if a layout change ever puts the two bodies in front of each other, and alone == 0 still catches a blank or mis-aimed render. RED ON EMPTY: `taken_by_construction` is false when there are no cells at all, so a run that measured nothing cannot read as a pass. `rows_with_no_air` names the rows where the construction argument does NOT hold and the cell is therefore a real measurement - keep an eye on those."
  },
  "measured": [
-  "shearman"
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman",
+  "tither",
+  "blower",
+  "changer",
+  "stopper",
+  "roper",
+  "almoner",
+  "panner",
+  "stiltman",
+  "nightman",
+  "iceman",
+  "straker",
+  "weigher",
+  "dredger",
+  "harrowman",
+  "pledgeman",
+  "crimp",
+  "timberman",
+  "collier",
+  "overlooker",
+  "fanner",
+  "mealman",
+  "thatcher",
+  "badger",
+  "mower",
+  "shearman",
+  "hammerman"
  ],
  "asked": [
-  "shearman"
+  "drillmaster",
+  "scrapwright",
+  "gaoler",
+  "snuffer",
+  "sexton",
+  "porter",
+  "tallyman",
+  "cook",
+  "sluicekeeper",
+  "sower",
+  "snarer",
+  "stoker",
+  "bellman",
+  "boiler",
+  "jointer",
+  "quartermaster",
+  "loader",
+  "hurdleman",
+  "tanner",
+  "reeve",
+  "tapster",
+  "pressman",
+  "strickler",
+  "dyer",
+  "greener",
+  "moulder",
+  "ratcatcher",
+  "drover",
+  "paviser",
+  "fenman",
+  "comfitmaker",
+  "leech",
+  "beadle",
+  "rammer",
+  "fuller",
+  "stackman",
+  "dauber",
+  "sealer",
+  "hooper",
+  "relief",
+  "scraper",
+  "ferryman",
+  "winder",
+  "pitman",
+  "tither",
+  "blower",
+  "changer",
+  "stopper",
+  "roper",
+  "almoner",
+  "panner",
+  "stiltman",
+  "nightman",
+  "iceman",
+  "straker",
+  "weigher",
+  "dredger",
+  "harrowman",
+  "pledgeman",
+  "crimp",
+  "timberman",
+  "collier",
+  "overlooker",
+  "fanner",
+  "mealman",
+  "thatcher",
+  "badger",
+  "mower",
+  "shearman",
+  "hammerman"
  ],
  "blank_check": {
-  "files": 207,
+  "files": 210,
   "failures": [],
-  "cells": 69,
-  "expected_files": 207,
+  "cells": 70,
+  "expected_files": 210,
   "scope": "whole_house"
  },
  "red_summary": {
@@ -12916,6 +13225,6 @@
   "ok_shipped": true
  },
  "verdict": "GREEN",
- "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (71), re-derived from stored measurements; 1 of them rendered this run"
+ "rendered_this_run": 0,
+ "verdict_scope": "every row in pairs (72), re-derived from stored measurements; 0 of them rendered this run (--sheet: no bodies rendered, 72 judged from stored measurements)"
 }

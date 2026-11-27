@@ -27066,3 +27066,369 @@ def shearman():
 
 
 BUILDERS.update({"shearman": shearman})
+
+
+# =============================================================================
+# 70 - THE HAMMERMAN ("Alltold"). firepit. 2026-11-27, art lane.
+# *** THE SEVENTIETH, AND BY THE SUPERVISOR'S 13:23 CT DIRECTIVE THE LAST. ***
+# After this body the art lane does NOT make another miniboss; it pivots to
+# hero gear (weapons, then armour sets, then shields). That directive is the
+# reason this one is written as a close and not as a sixty-ninth variation.
+#
+# WHAT I MEASURED BEFORE A VERTEX WAS WRITTEN - NOT REMEMBERED:
+#   - `BUILDERS` parsed with ast, not a regex: 83 entries, 69 distinct bases
+#     once the 14 `_chibi`/`_tall` variants are folded out. `hammerman` is in
+#     none of them and `assets/monsters/minibosses/hammerman.glb` does not
+#     exist. NOTHING IS BEING REBUILT.
+#   - `data/lore_lines.json` miniboss_feed.by_key on origin/main: 68 keys.
+#     `Delve.MB_NAME` on origin/main, brace-matched at depth 1: 67 keys.
+#     The 69th (`shearman`, Cutloose) is on main as a body and is in neither,
+#     so the cascade is 69 bodies / 68 feed / 67 names and this is the 70th.
+#   - `dungeon_hd.gd` THEME_MINIBOSS + THEME_MINIBOSS_MORE parsed: 67 drawn
+#     bodies over 14 themes. THE THINNEST SIX ARE AT FOUR EACH - barracks,
+#     prison, shrine, keep, firepit, confection. `firepit` IS CHOSEN AND THE
+#     REASON IS IN THE THEME'S OWN PROP LIST: it is the one theme whose
+#     dungeon_hd.gd prop row already carries `Anvil.gltf` and `Anvil_Log.gltf`.
+#     A struck plate belongs in the room that already has the anvil in it.
+#   - firepit's existing four, checked for a re-skin one at a time: STOKER
+#     (only as big as the fire), MOULDER (takes your shape), TAPSTER (drinks
+#     what you brought), FANNER (takes the air). NOT ONE OF THEM DEFERS.
+#
+# THE IDEA, AND WHY IT IS NOT A SEVENTIETH COAT OF AN OLD ONE. Parsed out of
+# the idea phrases in docs/art/ this lane has shipped: forty-odd distinct
+# mechanics that condition on what you hit it with, what you carry, where you
+# stand, who is down, whether a hero can reach another hero, and the room
+# itself. THREE OF THEM TOUCH DAMAGE TAKEN AND ALL THREE MITIGATE IT: the
+# SCRAPWRIGHT replaces the plate you knocked off, the TANNER will not take the
+# same blow twice, the LEECH will not let a wound close. NOT ONE BANKS.
+# This one does not reduce a blow, resist a blow or heal off a blow. IT KEEPS
+# IT. Every hit goes into the plate on its chest and stays there as a lit pit,
+# and while the plate fills it does not answer at all - so the party's own
+# damage is the clock they are being timed by, and the fastest kill is also the
+# biggest bill. When the seventh pit lights it turns and pays the whole sum
+# back in one stroke, on whoever put the most in.
+# THAT MAKES IT THE DELIBERATE OPPOSITE OF THE STOKER, ITS OWN THEME-MATE, AND
+# I WRITE THAT DOWN RATHER THAN HIDE IT: the Stoker gets smaller the less you
+# feed the room. This one gets bigger the harder you work. A party that learned
+# firepit by starving the Stoker arrives here and does the one thing that
+# loses.
+# THE COUNTER-PLAY IS ON THE BODY, WHICH IS THE WHOLE POINT OF DRAWING IT:
+# seven pits, lit left to right round the dish, so the bill is COUNTABLE FROM
+# THE DOORWAY (the Sexton's four niches and the Blower's front count, applied a
+# third time). Stop striking and the pits go dull. Spread the blows and nobody
+# is the mark. Cut the two straps and the plate comes off.
+#
+# PLAINNESS IS THE VOICE. A smith's striker: boots, a soot smock, a leather
+# apron, a dished anvil face slung on two straps, and a long sledge standing
+# head-down on the floor beside him because HE IS NOT SWINGING YET. No
+# flourish. The tongs shoved through the back of his belt are the only thing
+# that says he has been at it a while.
+#
+# WEAR 0.55 AND IT IS SPLIT ON PURPOSE. Smock, apron, boots and straps are
+# hard-used - he is a tradesman, not viewer gear, and firepit's own wear kind
+# is soot. THE PLATE IS NOT WORN: it is the one bright, cared-for, hammered
+# face on him, which is the Drillmaster's gong argument applied again, and here
+# it pays twice because the plate is the only pale on the body AND the surface
+# a viewer has to COUNT.
+#
+# THE ONE EMISSIVE IS THE TALLY AND NOTHING ELSE, INCLUDING THE EYES. The
+# Fanner's pass-4 finding was two separate features sharing one emissive slot,
+# which makes neither of them the thing the eye lands on. The eyes here are
+# DARK pits in a MID face, so the only light on this body is the bill.
+#
+# STATIC: no armature, so bestiary.gd needs a `model` path and NO `anims`
+# entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+# =============================================================================
+CANON.update({
+    "hammerman": ("Alltold", 2.26, (0.118, 0.112, 0.104), (1.000, 0.470, 0.130),
+                  "firepit",
+                  "IT TAKES EVERY BLOW AND PAYS THEM BACK AT ONCE - it does "
+                  "not reduce a hit, resist a hit or heal off one. It KEEPS "
+                  "it. Every blow struck on it is driven into the dished "
+                  "anvil face slung on its chest and stays there as a lit "
+                  "pit, and while the plate fills it does not answer at all: "
+                  "no swing, no call, nothing taken. SEVEN PITS, LIT ROUND "
+                  "THE DISH ONE AT A TIME, so the bill is countable from the "
+                  "doorway and the party can watch their own work adding up. "
+                  "When the seventh lights it turns and pays the whole sum "
+                  "back in a single stroke, on whoever put the most in. THE "
+                  "HABIT THAT FAILS HERE IS THE FIRST ONE A PARTY LEARNS: "
+                  "that hitting a thing harder is always right. Here the "
+                  "fastest kill is also the biggest bill, so the fight is a "
+                  "question about pace and about who is willing to be the "
+                  "mark. IT IS THE OPPOSITE OF THE STOKER, its own theme-mate "
+                  "- the Stoker shrinks when the room is starved; this one "
+                  "grows the harder you work. The counter-play is all on the "
+                  "body: stop striking and the pits go dull, spread the blows "
+                  "and nobody is the mark, cut the two straps and the plate "
+                  "comes off.",
+                  0.55, "Something ahead is taking it and not answering."),
+})
+ORDER = ORDER + ["hammerman"]
+
+# PER-SLOT MATERIALS. `bone` IS THE TALLY BAR AND NOTHING ELSE - not the
+# boss behind it, not the sledge, not the straps. (Through pass 3 it was the
+# dished plate; pass 4 moved the pale onto the bar and sent the dish dark -
+# see the pass-4 note in the builder.) The mechanic is a COUNT on one
+# surface, and a second pale object anywhere gives the eye a second place to
+# look - which is exactly what pass 1's legs and pass 5's sledge shaft were.
+# `glow` IS THE LIT MARKS AND NOTHING ELSE, eyes included.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"hammerman"}
+
+OVERRIDE.update({
+    "hammerman": {
+        # VERTEX-DRIVEN with the rgb as the FILL, as the shearman, mower and
+        # badger: every `body` item that declares no colour renders this, and
+        # the leather/hickory items below are painted per-vertex.
+        'body': ((0.118, 0.112, 0.104), 0.84, 0.03, None, True),  # smock (FILL)
+        'dark': ((0.038, 0.036, 0.034), 0.78, 0.05),  # boots, belt, apron, the
+                                                      # boss, the whole sledge,
+                                                      # tongs, eyes
+        'bone': ((0.820, 0.800, 0.760), 0.30, 0.20),  # THE TALLY BAR ONLY
+        # PASS 2: 2.60 -> 1.00. At 2.60 the lit pits came back CREAM in the
+        # hero render - a white hole, not a hot one - which is the DYER's
+        # pass-3 finding (weld at strength 2.30 read cream, dropped to
+        # 1.05). I had read that note and repeated the fault anyway, so it
+        # is written here against the number instead of in a docstring.
+        'glow': ((1.000, 0.330, 0.070), 1.00),        # THE LIT PITS ONLY
+    },
+})
+
+
+def hammerman():
+    """THE HAMMERMAN - the 70th and the last. He is not hitting you back. He
+    is keeping the account, and you can read it off his chest.
+
+    THE THREE LUMA GUARDS ARE RE-USED, NOT INVENTED. A new body is the wrong
+    place to invent an instrument, so these are the same three the shearman,
+    the badger and the mower carried and for the same reasons:
+      bone/body >= 1.30   the Beadle shipped a pale cue at 1.07 that went flat
+                          against its own pale panel with every register
+                          number passing.
+      bone/mid  >= 2.00   the Thatcher's bar, so the one mid value on the man
+                          cannot climb until the pale stops being pale.
+      mid/body  >= 1.80   so the straps and the face stay readable as a third
+                          value against the smock instead of joining it.
+    """
+    MID = (0.395, 0.330, 0.245)   # strap leather, hickory, and the face
+
+    bone_l = _luma(OVERRIDE["hammerman"]['bone'][0])
+    body_l = _luma(OVERRIDE["hammerman"]['body'][0])
+    mid_l = _luma(MID)
+    if bone_l / max(1e-6, body_l) < 1.30:
+        raise AssertionError(
+            "hammerman: bone/body luma ratio %.2f is under 1.30 - the BAR "
+            "is the only pale on this body and the count is read off it."
+            % (bone_l / max(1e-6, body_l)))
+    if bone_l / max(1e-6, mid_l) < 2.00:
+        raise AssertionError(
+            "hammerman: bone/mid luma ratio %.2f is under 2.00 - the leather "
+            "has climbed into the bar's value." % (bone_l / max(1e-6, mid_l)))
+    if mid_l / max(1e-6, body_l) < 1.80:
+        raise AssertionError(
+            "hammerman: mid/body luma ratio %.2f is under 1.80 - the straps "
+            "have sunk into the smock." % (mid_l / max(1e-6, body_l)))
+
+    P = Parts("hammerman")
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
+    # FRONT IS -Y throughout, as everywhere in this file.
+    # *** PASS 3, AND PASS 2 IS THE FINDING. *** With the legs and the glow
+    # fixed, pass 2's hero render says one thing and it is not about colour:
+    # THE FIGURE IS A POST. The plate is wider than the man carrying it, the
+    # legs are longer than his trunk and the head is a knob - because pass 1
+    # was authored at human proportions and set beside a KayKit chibi, which
+    # is 2.45 m tall and 1.32 m wide. Its own gen report said so in a number I
+    # had already read and not used: span 1.33 m, THE NARROWEST BODY IN THE
+    # HOUSE of seventy, where the median is near 3. A striker who takes every
+    # blow in the room and keeps it must look like he can.
+    # NOTHING BELOW CHANGES THE IDEA OR THE PALETTE - only the proportions.
+    # Authored shorter on purpose: minibossgen normalises to CANON's 2.26 m,
+    # so lowering the landmarks and widening everything buys bulk at the same
+    # final height rather than a bigger creature.
+    HIP, WAIST, CHEST, SHO, HEADC = 0.78, 1.00, 1.28, 1.46, 1.76
+
+    # ---- the stance: planted and wide, and it uses the set's shared `_legs`
+    # A striker stands still and takes it. Every slot is explicit because
+    # `creatures.limb` defaults to slot='bone' and that put the badger's whole
+    # skeleton in the pale slot at its pass 1.
+    # *** PASS 2, AND PASS 1 IS THE FINDING. *** Pass 1 used the set's shared
+    # `_legs`, and `_legs` calls `creatures.limb` WITHOUT A SLOT - limb's
+    # default is slot='bone'. So both legs rendered in the PALE slot, which on
+    # this body is reserved for the plate and nothing else. Every number was
+    # green when it did: ratio 0.92, 3 proving views, 0 blanks, 0 frame clips.
+    # THE LUMA GUARDS ABOVE COULD NOT SEE IT AND THAT IS MY OWN INSTRUMENT'S
+    # FAULT, SAID PLAINLY: they check what the three VALUES are, and say
+    # nothing about WHICH GEOMETRY GOT WHICH SLOT. A palette test is not an
+    # assignment test. The hero render is what caught it - two pale columns
+    # under a pale dish, so the eye had three pale things to choose between
+    # and the count stopped being the thing you look at.
+    # The legs are therefore written out here in the smock slot rather than
+    # borrowed, and `_legs` is left exactly as it is because it is shared with
+    # sixty-nine shipped bodies and is not mine to change.
+    for _s in (-1, 1):
+        limb(P, [(_s * 0.300, 0.070, HIP),
+                 (_s * 0.360, 0.020, 0.420),
+                 (_s * 0.400, -0.070, 0.105)], 0.175, 0.140, 'body')
+        P.add(L.box(0.360, 0.480, 0.150), 'dark',
+              loc=(_s * 0.400, -0.160, 0.075))
+    _seg("legs")
+
+    # ---- the trunk: the broadest in the file, because the plate has to sit on
+    # something that could carry it ----------------------------------------
+    limb(P, [(0.0, 0.0, HIP + 0.02), (0.0, -0.040, WAIST), (0.0, -0.060, CHEST)],
+         0.330, 0.400, 'body')
+    # THE BELT IS NOT DRESS - a dark cut across a mid trunk is what makes the
+    # mass above it read as a CHEST.
+    P.add(L.box(0.700, 0.430, 0.095), 'dark', loc=(0.0, -0.040, WAIST - 0.050))
+    P.add(L.box(0.980, 0.360, 0.230), 'body', loc=(0.0, -0.050, SHO))
+    for _s in (-1, 1):
+        P.add(L.sphere(0.200, 0.190, 0.180, 12, 8), 'body',
+              loc=(_s * 0.470, -0.050, SHO - 0.040))
+    _seg("trunk")
+
+    # ---- the apron: DARK, front only --------------------------------------
+    # It is dark and not mid on purpose. The front already carries a 0.62 m
+    # pale dish; a second mid panel under it makes the front busy and steals
+    # the one surface the viewer is meant to count.
+    P.add(L.box(0.620, 0.070, 0.460), 'dark',
+          loc=(0.0, -0.395, 0.630), rot=(0.045, 0.0, 0.0))
+    _seg("apron")
+
+    # ---- the head and the face --------------------------------------------
+    limb(P, [(0.0, -0.030, SHO + 0.020), (0.0, -0.045, HEADC - 0.185)],
+         0.130, 0.150, 'body')
+    P.add(L.sphere(0.255, 0.262, 0.258, 14, 9), 'body', loc=(0.0, -0.045, HEADC))
+    _face = L.sphere(0.142, 0.062, 0.158, 11, 8)
+    P.add(_face, 'body', loc=(0.0, -0.252, HEADC - 0.015),
+          vcol=[MID] * len(_face[0]))
+    # DARK EYES, NOT LIT ONES. See the docstring above the CANON block: the
+    # only emissive on this body is the tally.
+    for _s in (-1, 1):
+        P.add(L.sphere(0.038, 0.038, 0.038, 8, 6), 'dark',
+              loc=(_s * 0.066, -0.300, HEADC + 0.016))
+    _seg("head")
+
+    # =================== THE PLATE. THIS IS THE MECHANIC. ==================
+    # A dished anvil face, 0.62 m across, slung flat on the chest. It is the
+    # only `bone` on the body and it is a MASS and not a detail - the Beadle's
+    # fault was a body that read the same from behind, and this is 0.62 m of
+    # pale on the FRONT with nothing of the kind on the back.
+    # *** PASS 4, AND PASS 3 IS THE FINDING. *** Through passes 1-3 the plate
+    # was a PALE DISH with seven pits set round it at equal angles, and in
+    # every hero render it read as A CLOCK FACE - at pass 3, with the orange
+    # fixed and the mass fixed, it read as a slot machine. Seven evenly
+    # spaced circles on a pale round field is a DIAL, and a dial is both
+    # theatrical (Mr. E's first art rule: things look like what they are FOR)
+    # and ambiguous (a dial says "a value", not "a count of blows"). Every
+    # number was green over all three passes: GREEN, ratio 0.92, 3 proving
+    # views, 0 blanks, 0 frame clips, and the luma guards passed. A GREEN
+    # REGISTER OVER A BODY THAT READS AS A CLOCK IS THE BEADLE'S FAULT IN A
+    # NEW COAT, and the picture is what found it, three times running.
+    # SO THE ROUND FIELD STOPS BEING THE PALE. The dish goes DARK and becomes
+    # the iron boss the tally is mounted on, and the pale is a STRIP OF BRIGHT
+    # STOCK laid across it with the marks punched along it in a ROW. A row
+    # filling left to right is the one arrangement that cannot be read as
+    # anything but a count, and bright stock on a struck boss is what a smith's
+    # shop actually has in it.
+    _C = (0.0, -0.400, 1.160)
+    P.add(L.sphere(0.310, 0.078, 0.310, 22, 12), 'dark', loc=_C)
+    _seg("plate")
+
+    # ---- the bar: the one pale thing on the body, and the count is ON it ---
+    # PASS 5: 0.560 x 0.150 -> 0.760 x 0.190, and the marks with it. At pass 4
+    # the row read as a COUNT at full frame and as A DASHED LINE beside the
+    # hero, where each mark was about six pixels. The body's whole claim is
+    # that the bill is COUNTABLE FROM THE DOORWAY, so a tally a viewer cannot
+    # count is the claim failing quietly. The bar now runs 0.76 of the 0.98 m
+    # shoulder, which is the widest it can be and still read as stock laid ON
+    # him rather than as a second pair of shoulders.
+    P.add(L.box(0.760, 0.082, 0.190), 'bone', loc=(0.0, -0.518, 1.180))
+    _seg("bar")
+
+    # ---- THE SEVEN PITS. the idea, stated once, as a COUNT ----------------
+    # Seven punched marks in a ROW along the bar, left to right, 0.075 m
+    # apart (pass 5; 0.075 at pass 4) - see the pass-4 note for why a row.
+    # FOUR ARE LIT AND THREE ARE NOT: the body ships showing
+    # a part-paid bill, because a full ring of lit pits is a decoration and a
+    # part-full one is a MECHANIC - a viewer who sees four of seven knows what
+    # the other three are for without being told.
+    # They sit 0.012 m proud of the dish's own front surface at that radius, so
+    # they are drawn ON the plate and survive the front camera. That is the
+    # pass-11 lesson of 17 Nov applied at build time: a cue rendered alone
+    # answers how BIG it is, not whether it can be SEEN, so the honest place
+    # for it is in front of the surface it belongs to.
+    _LIT = 4
+    for _i in range(7):
+        _px = -0.315 + 0.105 * _i
+        P.add(L.sphere(0.042, 0.030, 0.042, 9, 7),
+              'glow' if _i < _LIT else 'dark', loc=(_px, -0.566, 1.180))
+    _seg("pits")
+
+    # ---- the two straps, and they CROSS ON THE BACK -----------------------
+    # The plate is slung, not worn: two leather straps off its top edge, over
+    # each shoulder, and crossed in an X down the back to the belt. The X is
+    # the BACK's own cue - mid leather on a near-black smock - so front and
+    # back differ by a value mass each way and not by a trinket.
+    for _s in (-1, 1):
+        # *** PASS 6. *** At pass 5 these started at (+-0.150, -0.432, 1.440),
+        # which is ABOVE the bar and INBOARD of it, so from the front they
+        # read as two pale rods crossing behind the head and not as anything
+        # carrying anything. A strap has to be seen ENTERING the thing it
+        # holds up. They now start at the bar's own top corners.
+        _pts = [(_s * 0.330, -0.520, 1.272),
+                (_s * 0.360, -0.230, SHO + 0.090),
+                (_s * 0.330, 0.235, SHO - 0.050),
+                (-_s * 0.200, 0.300, WAIST + 0.020)]
+        _st = L.tube(_pts, [0.050, 0.054, 0.054, 0.048], 8)
+        P.raw(_st, 'body', vcol=[MID] * len(_st[0]))
+    _seg("straps")
+
+    # ---- the sledge: HEAD ON THE FLOOR, because he is not swinging --------
+    # The mechanic is that it does not answer while the plate fills, so the
+    # instrument must read AT REST. A sledge on the shoulder reads mid-swing
+    # and would say the opposite of the idea. On the floor it is also a heavy
+    # ground anchor in the silhouette, which no other firepit body has.
+    _hand = (0.560, -0.190, 0.900)
+    _sh = L.tube([(0.760, -0.330, 0.210), (0.660, -0.260, 0.560), _hand],
+                 [0.064, 0.060, 0.052], 9)
+    # *** PASS 6: THE SHAFT GOES DARK. *** It was MID hickory through pass 5
+    # and the full-frame render says why that is wrong: MID against a
+    # near-black smock reads PALE, so the body carried three pale objects -
+    # the tally, the straps and the shaft - and the eye had to choose. That is
+    # pass 1's legs fault in a milder coat. The straps keep MID because they
+    # are the BACK's only cue and the back has no tally; the shaft has no such
+    # job, so it joins the iron.
+    P.raw(_sh, 'dark')
+    P.add(L.box(0.400, 0.280, 0.260), 'dark',
+          loc=(0.760, -0.330, 0.140), rot=(0.0, 0.0, 0.18))
+    _seg("sledge")
+
+    # ---- the arms: right on the sledge, left hanging open -----------------
+    limb(P, [(0.470, -0.060, SHO - 0.060), (0.560, -0.150, 1.150), _hand],
+         0.155, 0.125, 'body')
+    limb(P, [(-0.470, -0.060, SHO - 0.060), (-0.545, -0.170, 1.140),
+             (-0.520, -0.245, 0.870)], 0.155, 0.125, 'body')
+    P.add(L.sphere(0.135, 0.125, 0.120, 10, 7), 'body',
+          loc=(-0.520, -0.255, 0.812))
+    _seg("arms")
+
+    # ---- the tongs through the BACK of the belt ----------------------------
+    # Dark on a dark smock, so this is a SILHOUETTE cue and not a value one -
+    # said plainly because the register will not distinguish the two. Its job
+    # is to put a lump on the back outline that the front has not got.
+    for _dx, _dy, _ln in ((0.000, 0.000, 0.520), (0.062, 0.036, 0.440)):
+        _top = (-0.380 + _dx, 0.255 + _dy, WAIST - 0.040)
+        P.raw(aim(L.cone(0.030, 0.018, _ln, 7), _top,
+                  (_dx * 0.7, _dy * 0.6, -1.0)), 'dark')
+    _seg("tongs")
+
+    return P
+
+
+BUILDERS.update({"hammerman": hammerman})

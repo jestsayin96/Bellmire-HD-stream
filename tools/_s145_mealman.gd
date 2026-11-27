@@ -18,7 +18,15 @@ func _initialize() -> void:
 	var fed := not Delve.miniboss_lines("mealman", "arrive").is_empty()
 	print("S145 mealman fed: %s" % fed)
 	_ok(Delve.MB_NAME.has("mealman") == fed, "MB_NAME row exists exactly when fed (fed=%s named=%s)" % [fed, Delve.MB_NAME.has("mealman")])
-	_ok(Delve.MB_NAME.size() == (65 if fed else 64), "MB_NAME is 64 until fed (got %d)" % Delve.MB_NAME.size())
+	_ok(Delve.MB_NAME.size() == (65 if fed else 64), "MB_NAME is 65 once fed (got %d)" % Delve.MB_NAME.size())
+	# S146: content's C-225 landed, so the hold is spent and the name is written - art's CANON title.
+	_ok(fed, "S146: by_key.mealman is on main (C-225)")
+	_ok(Delve.MB_NAME.get("mealman", "") == "Whitedamp", "MB_NAME mealman is Whitedamp (got '%s')" % Delve.MB_NAME.get("mealman", ""))
+	_ok(Delve.miniboss_name("mealman") == "Whitedamp", "nameplate reads Whitedamp, not Mealman")
+	var uniq := {}
+	for k in Delve.MB_NAME:
+		uniq[String(Delve.MB_NAME[k])] = true
+	_ok(uniq.size() == Delve.MB_NAME.size(), "every MB_NAME value is unique (%d of %d)" % [uniq.size(), Delve.MB_NAME.size()])
 	var drawn := {}
 	for n in 4000:
 		drawn[DungeonHD.miniboss_for("mess", n)] = true

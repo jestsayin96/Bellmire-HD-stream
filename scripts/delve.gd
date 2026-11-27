@@ -479,7 +479,8 @@ const MB_NAME := {
 	"timberman": "Deadfall",   # S127: content's C-203 by_key.timberman landed (9/8/4/8) and art's CANON title (minibosses.py:22232), both read
 	"collier": "Halfblow",   # S129: content's C-205 by_key.collier landed (9/8/4/8, fall lines name Halfblow) and art's CANON title (minibosses.py:22643), both read
 	"overlooker": "Velrick",   # S141: content's C-216 by_key.overlooker landed (9/8/4/8, _note_c216) and art's CANON title (minibosses.py:23819), both read - the 63rd, closing the cascade's first open link
-	"fanner": "Blastmere"}   # S144: art's CANON title (minibosses.py:24245, docs/art/FANNER_THE_64th.md) - the 64th, named in the hour the team lead opened it; content's by_key.fanner (C-222) not yet landed, so the body stays held by miniboss_for
+	"fanner": "Blastmere",   # S144: art's CANON title (minibosses.py:24245, docs/art/FANNER_THE_64th.md) - the 64th, named in the hour the team lead opened it; content's by_key.fanner (C-222) not yet landed, so the body stays held by miniboss_for
+	"mealman": "Whitedamp"}   # S146: art's CANON title (minibosses.py:24699, docs/art/MEALMAN_THE_65th.md) and content's C-225 by_key.mealman (9/8/4/8), both read - the 65th, shutting the cascade at 65 names / 65 feed keys
 static func miniboss_name(key: String) -> String:
 	return String(MB_NAME.get(key, key.capitalize()))
 static var miniboss_no_model: Array = []

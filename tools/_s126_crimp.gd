@@ -28,7 +28,7 @@ func _initialize() -> void:
 	_ok(drawn.has("crimp") == fed, "crimp is drawn exactly when fed (fed=%s drawn=%s)" % [fed, drawn.has("crimp")])
 	_ok(not Delve.MB_NAME.has("crimp") or fed, "MB_NAME carries no crimp row while the feed is absent")
 	_ok(not fed or Delve.MB_NAME.get("crimp", "") == "Oneshort", "S126b: fed, so MB_NAME crimp is Oneshort (got '%s')" % Delve.MB_NAME.get("crimp", ""))
-	_ok(Delve.MB_NAME.size() == (64 if fed else 63), "MB_NAME is 64 once fed (S144 + fanner, S141 + overlooker) (S127 + timberman, S129 + collier) (got %d)" % Delve.MB_NAME.size())
+	_ok(Delve.MB_NAME.size() == (65 if fed else 64), "MB_NAME is 65 once fed (S146 + mealman, S144 + fanner, S141 + overlooker) (S127 + timberman, S129 + collier) (got %d)" % Delve.MB_NAME.size())
 	for k in ["quartermaster", "relief"]:
 		_ok(drawn.has(k), "red-proof: %s IS drawn by the same sweep" % k)
 	if _n < 9:

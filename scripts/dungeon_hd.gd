@@ -250,7 +250,7 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S126: `crimp` (60th, Oneshort, art's tag barracks - field 5) joins barracks with MB_FIT 0.99; miniboss_for holds it out until content's C-202 by_key.crimp arrive lines land, and MB_NAME waits for the same feed (chatcmd.gd MINIBOSS GHOST).
 ## S127: `timberman` (61st, Deadfall, art's tag crypt - field 5) joins crypt with MB_FIT 1.24 (tallest body yet, margin_x 0.12); content's C-203 by_key.timberman landed, so MB_NAME is written in the same change and all five sibling literals move 60 -> 61.
 const THEME_MINIBOSS_MORE := {
-    "barracks": ["quartermaster", "relief", "crimp"], "workshop": ["jointer", "greener", "dyer"],
+    "barracks": ["quartermaster", "relief", "crimp"], "workshop": ["jointer", "greener", "dyer", "overlooker"],
     "prison": ["pressman", "tither", "nightman"], "shrine": ["leech", "beadle", "almoner"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper", "timberman"],
     "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer", "weigher", "pledgeman"], "mess": ["loader", "hooper", "iceman"],
     "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman", "roper", "harrowman"], "wood": ["drover", "winder", "straker", "collier"],

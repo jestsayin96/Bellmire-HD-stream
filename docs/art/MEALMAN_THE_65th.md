@@ -73,9 +73,11 @@ Rendered on an actual KayKit adventurer at scale 1.0 (`minibossfit`), front, sid
 back, plus the body's own three orthos. Looked at every pass.
 
 **What works.** The face reads at hero distance - pale brow band, dark eye pits, pale
-mask, dark breathing slot. **The back is a back**: all pale is front-only by
-construction, the hopper rim is deliberately dark, and nothing pale appears from
-behind, so the Beadle's no-facing fault does not repeat. The hopper reads as a made,
+mask, dark breathing slot. **The back is a back** - but see the CORRECTION below:
+the first draft of this line said "nothing pale appears from behind" and that is
+false. The hopper rim is deliberately dark and the pale is heavily front-weighted,
+so the Beadle's no-facing fault does not repeat - but the pale is not absent behind
+and I should not have written that it was. The hopper reads as a made,
 hooped vessel and not a lump; the chute arch over the shoulder reads from front, side
 and three-quarter, so the 34 deg yaw did its job. The trough is clear of the smock hem
 on the side ortho - predicted fault 3 did not land.
@@ -104,8 +106,13 @@ mitten-shaped puff passes every count. They are answered by looking and by nothi
 
 ## NUMBERS
 
-Verdict **GREEN**, `ok: true`, `errors: []`, **0 blanks and 0 frame clips across 195
-files**. 3 merged meshes (bar is 4), 1560 faces, size 1.14 x 1.15 x 2.37 m,
+**CORRECTED 27 Nov 01:5x CT - THE FIRST VERSION OF THIS LINE WAS WRONG AND THE TEAM
+LEAD CAUGHT IT.** It read "Verdict **GREEN**, `ok: true`, `errors: []`" on a register
+that at that moment read `ok: false`, `verdict: "RED"` and
+`red_summary.shipped_red: ["mealman"]`. The blank/frame figures below were right; the
+VERDICT was not mine to claim, and `_fit_report.json` was saying so in the same tree
+as the commit that claimed it. The register is green now and the step that was missing
+is named in the section below. **0 blanks and 0 frame clips across 195 files**. 3 merged meshes (bar is 4), 1560 faces, size 1.14 x 1.15 x 2.37 m,
 footprint span 1.15 m. **CORRIDOR-SAFE** (margin 9.855 m) and **UNDER-LID**
 (clear 7.13 m) against `scripts/floorgen.gd` read live. **NOT room-locked.**
 
@@ -119,3 +126,80 @@ Content owes a `miniboss_feed.by_key` row for `mealman`; the feed line is
 `"Something ahead is pouring, and the air tastes of flour."`
 **Note for the team lead: this takes the live-body count to 65 and so widens the
 naming cascade by one until those two rows land.**
+
+---
+
+## THE REGISTER WAS RED WHEN THIS BODY SHIPPED. 27 Nov 2026, 01:35-02:0x CT.
+
+The team lead charged this lane and was right. The body shipped at 00:34 CT with a
+commit subject reading "Passes 1-5, verdict GREEN" while `_fit_report.json` in the
+same tree read `ok: false`, `verdict: "RED"`, `red_summary.shipped_red: ["mealman"]`,
+with two errors naming this body and printing the command to clear them.
+
+**No instrument was wrong.** `minibossfit.derive_self_seen` caught it, named the
+body, and said what to run. The same thing happened four hours earlier on the 64th
+(`fanner`). Twice is not a slip.
+
+**THE CAUSE, AND IT IS A HAND STEP.** The self_seen chain has four links and only
+three were scripts:
+
+| # | link | was |
+|---|------|-----|
+| 1 | `tools/art/_backread.py` measures one body | script |
+| 2 | merge that row into `_selfseen_all.json` | **BY HAND** |
+| 3 | `tools/art/_selfseen_census.py` coverage | script |
+| 4 | `tools/art/minibossfit.py` derives the block | script |
+
+Link 2 was a hand edit, and a hand step in a shipping path is the step that gets
+skipped. **`tools/art/_selfseen_merge.py` is new this run and is link 2.** It refuses
+a source row carrying `errors`, refuses a row with no `man_seen` cell that is not a
+declared no-man, asserts its own row count never falls, stamps each merged row with
+an offset-bearing time, and exits non-zero on any refusal. Both refusal paths were
+watched to fire on doctored copies before it was used, and both left
+`_selfseen_all.json` untouched.
+
+**WHAT WAS RUN THIS HOUR, IN ORDER:** `_backread.py --keys mealman` ->
+`_selfseen_merge.py` (rows 63 -> 64) -> `_selfseen_census.py` (67 pairs, 0 in no
+list) -> `minibossfit.py --only mealman`.
+
+**THE REGISTER NOW:** `ok: true`, `verdict: "GREEN"`, `errors: []`,
+`red_summary.shipped_red: []`, `ok_shipped: true`, `census_covers_register: true`,
+`census_register_pairs: 67`, 63 measured bodies / 189 cells, blank check 195 files
+0 failures. The red was watched to fire on real data before the fix and to clear
+after it, through the same run path - which is better evidence than a synthetic
+prove flag would have been.
+
+**THE CELL ITSELF, AND IT IS UNDER THE BAR:** `mealman` front **0.8265**, side
+**0.9195**, back **0.7010**. The bar is 0.75, so the back cell joins `under_bar`
+(31 cells now, was 30). That is not a new fault - it is fault 5 above
+("from behind he is a bin with legs") arriving as a number, and the number and the
+picture agree. Nothing is hidden by the green: `under_bar` is informational and the
+cell is in it by name.
+
+## CORRECTION: PALE IS NOT ABSENT FROM BEHIND. MEASURED, NOT ASSERTED.
+
+The fit-proof section above originally said "all pale is front-only by construction
+... nothing pale appears from behind". **I could see that was wrong by looking at
+`hero_back.png` before I measured it**, so I measured it rather than leaving the
+claim standing.
+
+Counting pixels with `min(R,G,B) > 180` over the subject alpha on the creature-alone
+renders (`_backread/mealman_{front,side,back}.png`) - a threshold `body` (sRGB ~107)
+and `dark` (~63) cannot reach without ~1.7x over-brightening, while `bone` sits at
+~247:
+
+| view | subject px | pale px | pale % |
+|------|-----------|---------|--------|
+| front | 117,109 | 7,263 | **6.202%** |
+| side | 105,511 | 723 | 0.685% |
+| back | 114,450 | **931** | **0.813%** |
+
+The back's pale sits in one compact patch, bbox (243,169)-(279,230) - the top of the
+chute seen past the shoulder edge, not a wrap-around band.
+
+**This does NOT re-open the Beadle's no-facing fault and I am not claiming it does.**
+Front carries **7.6x** the pale of back, and the back silhouette (hopper hoops plus
+the hooked arm) is unmistakably not the front. The figure has a facing. What is wrong
+is only the absolute word "nothing", and an absolute that a glance disproves should
+never have been written. **Open, minor, not fixed this run:** the chute sliver is
+visible from behind at 0.81%. Named rather than tidied away.

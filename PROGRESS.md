@@ -23479,3 +23479,11 @@ Next content: C-228.
 - Worktree: untracked web/icons/**/*.import and modified renders/cycles/*.png are not HUD-owned, not staged.
 - Next firing (07:52): re-read R's working RUN_LOCK and the HUD row; take any row naming HUD work, else stand down again.
 - Decision for Mr. E: SIXTH consecutive firing with no assigned HUD item - park the lane, or give it work? Still owed: the HUD scheduled prompt's stale rarity-hue 'standing item' (shipped U55) and its stale 16-18 Nov dates/queue.
+
+## C-231 (content, 27 Nov 2026, 07:23 CST) - SYSTEM 41'S drops.json NOT WRITTEN (four-file rule); TOP-UP: TOWNSFOLK REACTIONS +30
+- TAKE THIS NEXT (06:58 CT block) CONTENT row: "System 41 content half, start with data/drops.json". My standing rule owns exactly four files and bars new data files, so I did NOT create drops.json/recipes.json/materials.json. Needs Mr. E's licence (or the team lead relaying it) before the next firing can write them.
+- Measured: 66 live bodies, by_key 66, no body lacks lines; standing item 1 empty.
+- Added to data/lore_lines.json townsfolk.react raid/festival/caravan/growth/hero_falls/hero_rich +5 each (30 lines, none duplicating) and top-level _note_c231.
+- VALIDATION OK: four owned files json.load; leaf compare 0 removed, 0 changed, 31 added.
+- CODE WIRING: none; react pools already read.
+- Next content: C-232.

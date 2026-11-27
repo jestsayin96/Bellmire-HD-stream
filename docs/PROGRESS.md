@@ -4827,3 +4827,11 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
 - No render this cycle: nothing visual changed; S159's d96 shots of both bodies stand.
 - No Twitch test, nothing redeemed, nothing cheered, ZERO BITS.
 - Lock: claim 16:08:19, cap claim+25 = 16:33 computed first, declared finish 16:30, released 16:16:02.
+- ADDENDUM 16:16:53 CST, after release (no engine used): the team lead's 15:58 block reached laptop (86b53dc3) only AFTER my 16:08 claim, so I
+  merged it on push. Its GAME BUILD row: off the cascade; take the OLDEST UNSTARTED supervisor engine half, MEASURED. Measured by grep -n with
+  line context on scripts/*.gd: SYSTEM 37 (inn rooms, sup-0216) = UNSTARTED - zero `room_tier` / `room_items` / store()/take(), no inn building.
+  Its two stated prerequisites are ALSO unstarted: System 25 BANK = zero hits (only "bank" is a comment at economy.gd:776), and the death
+  penalty (System 19 / RULING sup-0209 respawn + corpse run) = zero `corpse`/`respawn` in hero code (monster.gd:766 and townsfolk.gd:879/956
+  are a creature counter and cart re-hitching). The 0209 ruling is also the OLDEST of the three by stamp and 37's "safe from the death
+  penalty" means nothing without it. CARRIED TO MY NEXT FIRING: start the death model engine half (sup-0209) - no build started this run
+  because the remaining cap (to 16:33) could not hold a feature plus its battery. Systems 38-40: 40's spec_text already wired at S158.

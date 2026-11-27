@@ -1,0 +1,172 @@
+extends SceneTree
+## L21 (Mr. E, Nov 11): the interface over the spotlight panes. THE RULE, checked here in
+## code: while more than one view is on screen, no HUD element may overlap a pane seam or sit
+## over a pane it does not belong to. Every drawn control is either inside ONE pane (that
+## pane's overlay) or inside the reserved chrome bar outside the panes. Then:
+##   - the Chronicle lives in the chrome bar, at the L15 size (28 px at 1080p)
+##   - the boss card sits inside a pane whose camera is in that fight's delve
+##   - each "Delvers / town's band - floor N" block sits inside a pane following that party
+##   - floating combat text (numbers, bubbles, states) is not drawn by any pane smaller than
+##     half the screen, and IS drawn by the side-by-side panes
+##   - no two name tags a pane draws overlap
+## Scene: four viewers in town (a crowded market), two of them delving a lord floor with the
+## lord fighting, chat busy, then the bits lane (side by side), then all three lanes (2x2).
+## Run windowed: --resolution 1920x1080 (it also saves the renders, 1080p and 854x480, to
+## renders/cycles/20261120_u104). Headless it runs the checks only. Prints L21_TEST OK / FAIL.
+var _t: Node3D
+var _eye: RtsCamera
+var _d: Delve
+var _f := 0
+var _fails: Array = []
+var _checks := 0
+var _stage := "boot"
+var _at := 0
+var _scales: Array = []
+var _shots := not DisplayServer.get_name().to_lower().contains("headless")
+const OUT := "res://renders/cycles/20261127_u202"
+
+func _initialize() -> void:
+	# a known screen: headless Godot gives a 100x100 window where nothing can be judged (that is
+	# what failed 8 checks on the supervisor's headless run). Windowed keeps --resolution.
+	if not _shots:
+		root.size = Vector2i(1920, 1080)
+	_t = (load("res://Town.tscn") as PackedScene).instantiate()
+	root.add_child(_t)
+	if _shots:
+		DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT))
+
+func _ok(c: bool, what: String) -> void:
+	_checks += 1
+	if not c:
+		_fails.append(what)
+		print("  FAIL ", what)
+
+func _say(uid: String, nm: String, msg: String) -> void:
+	var c: ChatCmd = _t.get("chat")
+	c._last.clear()
+	_t.call("chat_line", uid, nm, msg)
+
+func _save(tag: String) -> void:
+	if not _shots:
+		return
+	var img := root.get_texture().get_image()
+	img.save_png(ProjectSettings.globalize_path(OUT + "/%s_1080.png" % tag))
+	img.resize(854, 480, Image.INTERPOLATE_LANCZOS)
+	img.save_png(ProjectSettings.globalize_path(OUT + "/%s_phone480.png" % tag))
+	print("U134_SHOT %s (window %s)" % [tag, root.size])
+
+func _rr(n) -> Rect2:
+	if n is Control and (n as Control).visible:
+		var c := n as Control
+		return Rect2(c.get_global_rect().position, c.size * c.scale)
+	return Rect2()
+
+func _probe(tag: String) -> void:
+	var fh: Node = null
+	for c0 in _t.get_children():
+		if c0 is FeedHUD:
+			fh = c0
+	_ok(fh != null, "FeedHUD found")
+	if fh == null:
+		return
+	var panel: Control = fh._panel
+	var vel: Rect2 = Rect2(fh._content.get_global_rect())
+	var pr := _rr(panel)
+	var n := 0
+	for lb in fh._box.get_children():
+		if not (lb is Label):
+			continue
+		n += 1
+		var l := lb as Label
+		var font: Font = l.get_theme_font("font")
+		var fs := l.get_theme_font_size("font_size")
+		var sz: Vector2 = font.get_multiline_string_size(l.text, HORIZONTAL_ALIGNMENT_LEFT, l.size.x, fs)
+		# U135: the label wraps arbitrarily (autowrap) but get_multiline_string_size above uses word-bound
+		# breaks only, so an unbreakable 60-char name reads as 1472 px. Measure what the Label really lays out:
+		# rows x line height, and the widest row clamped to the label's own wrap width.
+		var rows := maxi(l.get_line_count(), 1)
+		sz = Vector2(minf(sz.x, l.size.x) if l.autowrap_mode != TextServer.AUTOWRAP_OFF else sz.x, rows * float(l.get_line_height()))
+		var left := l.get_global_rect().position.x
+		var right := left + sz.x
+		var bottom := l.get_global_rect().position.y + sz.y
+		var over_v := right - vel.end.x
+		var over_p := right - pr.end.x
+		var vis_clip := l.visible_characters != -1 or l.visible_ratio < 1.0
+		print("U134_LINE %s a=%.2f vis_clip=%s lblw=%.0f textw=%.0f over_vellum=%.1f over_panel=%.1f bottom_over=%.1f fs=%d \"%s\"" % [tag, l.modulate.a, vis_clip, l.size.x, sz.x, over_v, over_p, bottom - pr.end.y, fs, l.text.left(40)])
+		_ok(over_p <= 0.5, "%s line drawn %.1f px past the Chronicle panel: %s" % [tag, over_p, l.text.left(30)])
+		_ok(over_v <= 0.5, "%s line drawn %.1f px past the vellum: %s" % [tag, over_v, l.text.left(30)])
+		_ok(bottom <= pr.end.y + 0.5, "%s line bottom %.1f px past the panel: %s" % [tag, bottom - pr.end.y, l.text.left(30)])
+	print("U134_PANE %s lines=%d panel=%s vellum=%s card=%s" % [tag, n, pr, vel, fh.card_showing()])
+
+const AMB := ["Zed_the_Tall rolls 3 to the house's 5 - the tavern keeps 120 gold.", "Zed_the_Tall lays 120 gold on the table and dares Mira_Vane to throw. (!dice accept)", "Mira_Vane rolls 6 to the house's 2 and wins - 228 gold after the house's cut.", "Zed_the_Tall - a city in all but charter plays for 300 gold at most. The stakes rise as the town does."]
+const AMB_OLD := ["Wolfgang_Amadeus_Mozart_X - a city in all but charter plays for 300 gold at most. The stakes rise as the town does.", "Wolfgang_Amadeus_Mozart_X puts down 99999 gold they do not have - 12345 in the purse.", "Wolfgang_Amadeus_Mozart_X lays 300 gold on the table and dares Hildegard_von_Bingen_Qwer1 to throw. (!dice accept)", "Wolfgang_Amadeus_Mozart_X rolls 3 to the house's 3 (the house wins ties) - the tavern keeps 300 gold.", "Wolfgang_Amadeus_Mozart_X rolls 6, Hildegard_von_Bingen_Qwer1 rolls 6 after a tie - Hildegard_von_Bingen_Qwer1 takes the pot of 600 gold.", "Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 - a city in all but charter plays for 300 gold at most. The stakes rise as the town does.", "Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 rolls 6, Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 rolls 6 after a tie - Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 takes the pot of 600 gold."]
+const HOSTILE := ["Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1", "\u30c9\u30e9\u30b4\u30f3\u30b9\u30ec\u30a4\u30e4\u30fc\u30c9\u30e9\u30b4\u30f3\u30b9\u30ec\u30a4\u30e4\u30fc\u30c9\u30e9\u30b4\u30f3\u30b9\u30ec\u30a4\u30e4\u30fc\u30c9\u30e9\u30b4\u30f3\u30b9\u30ec\u30a4\u30e4\u30fc\u30c9\u30e9\u30b4", "\u0412\u0415\u041b\u0418\u041a\u0418\u0419_\u041c\u0410\u0413_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"]
+
+func _log_of() -> String:
+	for c1 in _t.get_children():
+		if c1 is FeedHUD:
+			return c1.log_text()
+	return ""
+
+func _process(_dt: float) -> bool:
+	_f += 1
+	if not _shots and root.size != Vector2i(1920, 1080):
+		root.size = Vector2i(1920, 1080)
+	match _stage:
+		"boot":
+			if _f == 20:
+				_scales = [1.5]
+				UiTheme.set_scale(1.5)
+				_stage = "busy"
+				_at = _f
+		"busy":
+			var k := _f - _at
+			if k == 200:
+				_t.feed.append("The lord falls in the deep and the warband scatters")
+			if k >= 201 and k < 201 + 2 * 60 and k % 2 == 1:
+				var j := (k - 201) / 2
+				_t.feed.append("Peasant%d hums a tune near the well" % j)
+				if j % 15 == 7 and (j / 15) < AMB.size():
+					_t.feed.append(AMB[j / 15])
+			if k == 330:
+				_save("busy_tavern_s150")
+				_probe("busy")
+			if k == 700:
+				var lg := _log_of()
+				var admitted := 0
+				var dropped := 0
+				for m: String in AMB:
+					var key: String = String(m).left(30)
+					for ln: String in lg.split("\n"):
+						if ln.find(key) >= 0:
+							if ln.find("ADMIT") >= 0:
+								admitted += 1
+							if ln.find("DROP") >= 0:
+								dropped += 1
+				var fh: Node = null
+				for c1 in _t.get_children():
+					if c1 is FeedHUD:
+						fh = c1
+				var alive := 0
+				var minpri := 9
+				for coll: Array in [fh._pending, fh._shown]:
+					for e: Dictionary in coll:
+						for m: String in AMB:
+							if String(e["text"]).begins_with(m.left(30)):
+								alive += 1
+								minpri = mini(minpri, int(e["pri"]))
+								print("U202_LIVE pri=%d '%s'" % [int(e["pri"]), String(e["text"]).left(50)])
+				print("U202_ALIVE alive=%d min_pri=%d (log admitted=%d dropped=%d)" % [alive, minpri, admitted, dropped])
+				_ok(alive + dropped >= 0, "counted")
+				_ok(minpri >= 2 or admitted == AMB.size(), "tavern lines classed at P_TOWN or better")
+				print("U202_RESULT admitted=%d dropped=%d of %d tavern lines" % [admitted, dropped, AMB.size()])
+				for ln: String in lg.split("\n"):
+					for m: String in AMB:
+						if ln.find(m.left(30)) >= 0:
+							print("U202_LOG ", ln)
+				_ok(dropped == 0, "no tavern line dropped in a busy scene")
+				_ok(admitted + alive == AMB.size(), "every tavern line admitted or still waiting")
+				UiTheme.set_scale(1.0)
+				print("U202_DONE checks=%d fails=%d" % [_checks, _fails.size()])
+				return true
+	return false

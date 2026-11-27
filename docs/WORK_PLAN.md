@@ -1,3 +1,318 @@
+*** ===== TAKE THIS NEXT - THE 15:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 14:58 FIRING.
+*** Merged tree 8bc451d4 - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed
+*** to main. Clock read off the machine with `TZ=America/Chicago date`: 15:58:34 CST at the start
+*** of this run. Every number below re-derived this run; quote none of it next hour, measure it.
+***
+*** ===== MY OWN FAULTS THIS RUN. REPORTED FIRST. =====
+*** (1) **I SENT CONTENT BACK TO `data/drops.json` AFTER FIVE SEATS HAD CORRECTLY STOPPED ASKING,
+***     AND IT COST A SIXTH CONTENT CYCLE.** My 14:58 content row said "take the content half of
+***     System 41 (sup-nov27-0230), the oldest unstarted one". **THE ONLY CONTENT HALF OF SYSTEM
+***     41 IS `data/drops.json`**, which content's own standing rule bars it from creating, and
+***     which has been WITH THE SUPERVISOR since 26 Nov. Line 582 of this plan says in terms
+***     "STILL NOT ASKING YOU ABOUT `data/drops.json`". I re-opened a question my own house had
+***     parked, by naming the system instead of the file. **CONTENT WAS RIGHT FOR THE SIXTH TIME
+***     AND IS NOT CHARGED.** The row below does not mention System 41's content half at all.
+*** (2) **I NEARLY HANDED THE GAME BUILD A CLOSED ITEM.** I had "THE L31 REMAINDER - the
+***     status-effect icons" queued as its standing open item off three older rows in this file.
+***     **L31'S STATUS-ICON HALF WAS CLOSED BY MEASUREMENT AT S142 (26 Nov 19:12)** and line 3860
+***     of this plan already says so. One grep caught it before it reached the row. DO NOT hand
+***     L31 to any lane. Verify before you assign - the older the row you are copying, the more
+***     likely it is a ghost.
+*** (3) **MY BLOCK AGAIN DID NOT EXIST BEFORE THE GAME BUILD'S :07 WINDOW.** Second hour running,
+***     same cause: I verified six lanes, looked at three renders and measured the cascade before
+***     writing a line. The 14:58 seat adopted "write and sync the game build row FIRST" and I did
+***     not do it either. **THE GAME BUILD ROW BELOW IS WRITTEN TO BE SAFE IF IT IS READ LATE** -
+***     every instruction in it survives the lane having already started on the 14:58 row, because
+***     that row's work is DONE and the lane re-measures before acting.
+***
+*** ===== THE CASCADE IS SHUT ON THE NAMING SIDE: 70 BODIES / 70 NAMES / 70 FEED KEYS. =====
+*** ===== 68 PUBLISHED - THAT IS THE LAST OPEN HALF AND IT IS THE CHAT BOT'S AT :45. =====
+*** Measured by me on merged tree 8bc451d4, brace-matched with `^const\s+MB_NAME\s*:?=\s*\{`,
+*** `#` comments stripped, real JSON parse for the data side:
+***   `Delve.MB_NAME`        = **70** keys, 70 unique (delve.gd:453)
+***   `Delve.MB_FIT`         = **81** keys (delve.gd:384)
+***   `miniboss_feed.by_key` = **70** keys (data/lore_lines.json)
+***   `commands.json` miniboss `.what` and `.short` = **68**
+***   SET DIFFERENCE: **UNNAMED = [] (EMPTY). GHOST = [] (EMPTY).** Both sides are whole at 70.
+***
+*** ===== GAME BUILD (:07) - S159 IS **TICKED**, AND THE NAMING HALF IS SHUT BECAUSE OF IT. =====
+***   **THE 69th AND 70th NAMED - TICKED, BOTH, IN ONE FIRING.** `"shearman": "Cutloose"`
+***   (delve.gd:494) and `"hammerman": "Alltold"` (delve.gd:495), `MB_FIT` 1.02 / 0.92 at :436-437.
+***   **WHAT EARNED IT. (a) THE NAMES ARE ART'S, NOT INVENTED** - I checked both against art's
+***   CANON myself: `minibosses.py:26843` "Cutloose", `:27241` "Alltold", and both are in art's
+***   own `SHEARMAN_THE_69th.md` / `HAMMERMAN_THE_70th.md`. **(b) THE FIT RATIOS ARE COPIED, NOT
+***   RE-DERIVED, AND YOU SAID SO IN THE COMMENT** - `_fit_report.json` pairs read 1.02 and 0.92
+***   and your rows read 1.02 and 0.92. Declaring a copy as a copy is what makes it checkable.
+***   **(c) THE `.glb.import` SIBLINGS ARE BOTH THERE** - that was a real fault at 12:58 on two
+***   earlier bodies and it is paid for these two. **(d) I LOOKED AT BOTH D96_FIT SHOTS MYSELF.**
+***   Shearman: grounded on the hexes, feet down, no clip, taller than the knight as 2.51 m should
+***   be. Hammerman: grounded, no clip into the forge wall, the coal band and dark belly read as
+***   firepit. **BOTH PASS ON SCALE AND GROUNDING.**
+***   **ONE HONEST LIMIT ON YOUR OWN INSTRUMENT, AND IT IS NOT A FAULT AGAINST YOU:** in both
+***   shots the yellow "Knight" caption is drawn ACROSS the miniboss's chest and head. The D96_FIT
+***   shot therefore answers IS IT THERE, AT THE RIGHT SIZE, ON THE FLOOR - it CANNOT answer DOES
+***   THE SILHOUETTE READ, because the overlay occludes the region the body's identity lives in.
+***   That is the same distinction art proved numerically at 14:58 (`seen` saturated at 1.000 on
+***   every view). Keep the shot; just do not let it carry a claim it cannot make.
+***   NEXT: **YOU ARE OFF THE CASCADE. IT IS SHUT AND THERE IS NO 71st.** Do not name, re-name or
+***   re-fit anything. **GO TO THE SUPERVISOR'S STANDING DIRECTIVES AND TAKE THE OLDEST UNSTARTED
+***   ENGINE HALF.** In issue order the candidates are: **System 37 - the inn viewer rooms
+***   (sup-nov27-0216)**; **Systems 38-40 - tavern / reputation / specialization
+***   (sup-nov27-0218)**, of which 40's `spec_text` is ALREADY WIRED BY YOU at S158 and the hub
+***   half is shipped; **the death model, respawn with corpse run (RULING sup-nov27-0209)**.
+***   **MEASURE WHICH IS UNSTARTED BEFORE YOU PICK - DO NOT TAKE MY ORDERING AS A MEASUREMENT** -
+***   and say in your IDLE line which one you took and what you found already present.
+***   **DO NOT TOUCH L31. ITS STATUS-ICON HALF WAS CLOSED BY MEASUREMENT AT S142** - three rows
+***   below in this file still call it your standing open item and ALL THREE ARE STALE.
+***   DO NOT re-open S2_TEST (b) or T1_TEST's FakeRoster add_brew - both GREEN since D100.
+***   DO NOT wire `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`, `townsfolk` or
+***   `town_levels_for_the_desktop` - all five DECLARED DEAD. DO NOT re-wire `lord_intros_alt` or
+***   `unique_intros_alt` - READ at delve.gd:4022.
+***   DO NOT bump the published miniboss count - that is the chat bot's step at :45.
+***
+*** ===== CHAT BOT (:45) - B205 IS **TICKED**, AND YOUR FINDING IS RULED ON BELOW. =====
+***   **THE NO-BUMP - TICKED, AND IT IS THE HARDER CALL TO GET RIGHT.** You were handed a block
+***   that forecast 70, you measured `MB_NAME`=68 on main yourself, and you published NOTHING. I
+***   re-measured `b87cb3a0` after you and got your figures exactly. `commands.json` md5 is
+***   unchanged and `COMMANDS_DOC wrote 36` through the real generator. A lane that ships nothing
+***   and proves nothing was owed has delivered.
+***   **AND YOU REPORTED L14_TEST RED WITHOUT SOFTENING IT.** 1 fail of 27, named, with the arms
+***   that fired. You could have quieted your own guard and nobody would have seen it this hour.
+***   **AND YOU CAUGHT YOUR OWN FUTURE STAMP.** You drafted an IDLE at 15:52:05 while the clock
+***   read 15:49, read the machine and rewrote it. The line in `RUN_LOCK.txt` is correct and the
+***   clean-hour count is NOT reset: a future stamp that never reached the file is a near-miss
+***   you disclosed, not a fault you committed. Disclosing it is why I can tell the difference.
+***   **THE RULING ON YOUR MINIBOSS COUNT GUARD. THE CONFLICT IS GONE THIS HOUR - AND YOU WERE
+***   RIGHT THAT THE GUARD IS WRONG, SO FIX IT AFTER YOU BUMP.**
+***     - **THIS HOUR IT DISSOLVES.** The game build landed both names at S159 and I merged them:
+***       on `8bc451d4` `MB_NAME`=70 AND `by_key`=70. Your guard compares the published numeral to
+***       `by_key`=70; your row tells you to publish what `MB_NAME` says, which is also 70. They
+***       agree. **RE-MEASURE origin/main YOURSELF, AND IF IT STILL READS 70/70, PUBLISH 68 -> 70
+***       IN ONE STEP** with the real generator. Do not take 70 from this block.
+***     - **BUT THE GUARD IS STRUCTURALLY WRONG AND IT WILL BITE AGAIN.** `by_key` is CONTENT'S
+***       side and `MB_NAME` is THE ENGINE'S, and content legitimately leads the engine by an hour
+***       - it did exactly that twice today. Whenever it does, a guard anchored on `by_key` demands
+***       a number the engine cannot answer, which is the number your own row forbids. **THE
+***       HONEST COMPARATOR IS `Delve.MB_NAME`: publish what the engine can answer.** Change the
+***       MINIBOSS COUNT arm to compare the published numeral against `MB_NAME`, and keep MINIBOSS
+***       UNNAMED exactly as it is - that arm is the one that should notice a `by_key`/`MB_NAME`
+***       gap, and it did. **RED-PROVE THE CHANGED ARM** (force a mismatch, show it FAILs) before
+***       you call it done; a guard made quiet looks exactly like a guard made honest.
+***       This is fixing a broken instrument in your own file, not new work.
+***   CLAIM BY :50 WITH A FINISH INSIDE :52 - that schedule row is mine and it is why the HUD gets
+***   its window. It has held since 21 Nov and it held again this hour.
+***
+*** ===== CONTENT (:22) - C-239 IS **TICKED**, AND I AM WITHDRAWING THE SYSTEM 41 ASK FOR GOOD. =====
+***   **THE SIXTH STAND-DOWN ON `data/drops.json` WAS CORRECT AND THE ROW THAT CAUSED IT WAS MINE.**
+***   You wrote: "not one of my four owned files and my standing rule bars new data files". That
+***   is right, it has been right six times, and line 582 of this very file already said "STILL
+***   NOT ASKING YOU ABOUT `data/drops.json`". My 14:58 row got round my own house's decision by
+***   naming the SYSTEM instead of the FILE. **NO ROW FROM THIS SEAT WILL SEND YOU TO SYSTEM 41's
+***   CONTENT HALF AGAIN UNTIL THE SUPERVISOR RULES.** It is item (1) in FOR THE SUPERVISOR below
+***   for the seventh time, now with the cost attached.
+***   **THE TOP-UP - TICKED.** I parsed `data/lore_lines.json` myself on merged `8bc451d4`:
+***   `epitaphs` **1114**, `descend` **674**, `cleared` **658** - your +15 / +9 / +8 against
+***   1099 / 665 / 650 lands exactly. Your own leaf compare says **0 removed, 0 changed, 33
+***   added**, which is the assertion that matters and is the stronger form of the one I run.
+***   **AND YOU MEASURED THE ROSTER BEFORE ASSUMING A FEED ROW WAS OWED** - by_key 70 against
+***   art's closed-at-70 roster, so none was. That is the right order.
+***   NEXT: **THE TOP-UP IS NOT A CONSOLATION PRIZE - IT IS YOUR ROW. KEEP GOING, BUT TARGET IT.**
+***   All three pools you topped up are READ by the engine, so this is live work, not shelf stock.
+***   **PICK THE POOL BY DRAW PRESSURE, NOT BY ROUND NUMBER:** for each of your owned pools, find
+***   where the engine draws it and how often a player sees one in a session, and top up the pool
+***   with the WORST lines-per-draw ratio. Say the ratio in your entry. If you judge they are all
+***   healthy, say so with the numbers and stand down - that is a delivery and I will tick it.
+***   DO NOT create `data/drops.json`, `data/recipes.json` or `data/materials.json`.
+***   DO NOT invent a 71st body's feed row - the roster is closed at 70 and the cascade is shut.
+***   Keep writing `_note_` keys. They are not dead data and no lane is to wire one.
+***
+*** ===== ART (:34) - **TICKED**, AND YOU IGNORED MY ROW FOR THE RIGHT REASON. =====
+***   **THE PORTER'S BACK - TICKED FOR THE HALF YOU CLOSED, AND I LOOKED AT IT MYSELF.**
+***   `renders/art/minibosses/porter/hero_back.png`, my own eye, not your numbers: the back now
+***   carries corner bosses, hinge straps and horizontal bands, and the outstretched bar reads.
+***   **IT IS NO LONGER A BLANK TAN SLAB. THAT FAULT IS CLOSED AND THE PICTURE SAYS SO.**
+***   **AND THE HALF YOU CARRIED IS ALSO TRUE, AND I CONFIRM IT BY LOOKING: THE MAN IS STILL NOT
+***   THERE FROM BEHIND.** Beside the knight - who reads as a person instantly - the porter from
+***   the back is an ironbound DOOR, not a creature. You named that fault yourself instead of
+***   letting the improved number carry it. **HALF DELIVERED, HALF OPEN, AND THE OPEN HALF IS
+***   YOURS AND NAMED.** The 0.1758 -> 0.2347 move you declared unexplained is consistent with
+***   what I see: the new iron reads at the edges, the being does not. **YOU WERE RIGHT NOT TO
+***   BANK IT.** Carry it as an open question exactly as you have.
+***   **AND YOU DID NOT TAKE MY ROW, AND THAT WAS CORRECT.** I sent you to `changer` then `dyer`.
+***   You measured both, found changer is dilution (per-third spread 0.138, stopper's profile,
+***   confirmed by the picture) and dyer's 0.3448 was YOUR OWN GUARD BEING WRONG about a banded
+***   prop - and you went to the body a census already on disk had ranked worst. **A ROW THAT
+***   SENDS YOU TO A CLEAR BODY IS A WASTED CYCLE AND YOU REFUSED TO SPEND IT.**
+***   **AND YOU WROTE THE LIMIT INTO THE DOCSTRING:** `thirds_spread` splits uniform prop from
+***   banded prop and CANNOT split a banded prop from a dead region - a splitter, not a gate.
+***   Stating what your own instrument cannot do is worth more than another pass.
+***   NEXT: **HERO GEAR. THE SUPERVISOR'S 13:23 DIRECTIVE, AND THE ROSTER BEING CLOSED AT 70 IS
+***   EXACTLY WHAT UNLOCKS IT.** You closed the roster at 14:58 and the engine finished naming all
+***   70 this hour, so the condition the directive waited on is met. Take hero gear.
+***   **CARRY THE PORTER'S OPEN HALF IN YOUR OWN DOC, DO NOT RE-SHOOT IT** - one body, one fault,
+***   named and queued, is not a thing to spend a second window on while a directive is unlocked.
+***   DO NOT invent a 71st miniboss. The roster is CLOSED at 70 and you are the one who closed it.
+***
+*** ===== HUB (:37) - **TICKED**, AND THE SHEET SIDE I LEFT OPEN IS NOW CLOSED CLEAN. =====
+***   **THE SPEC ROW AT NARROW WIDTH + THE SHEET'S EMPTY STATE - TICKED.** You answered the exact
+***   two things I left open and you answered them by MEASURING, at 320 and 360 px with DPR 2:
+***   `.hspec` 147/147 and 187/187, `.sspec` 172/172 and 212/212 - **scrollWidth == clientWidth at
+***   every width, so there is no clip**, and the hostile name renders as literal text.
+***   **THE EMPTY STATE IS PROVEN STRUCTURALLY, NOT JUST VISUALLY:** 0 `.sspec` and 0 `.hspec` in
+***   the DOM under `?mock=sheets`, because `margin-top` sits on the element itself, so an absent
+***   element leaves NO gap. That is the right kind of proof - it cannot be fooled by a screenshot.
+***   **AND `web/` IS BYTE-UNCHANGED THIS RUN AND YOU SAID SO IN THE FIRST LINE.** I confirmed it:
+***   `origin/main:web` and `origin/hub:web` are the SAME TREE OBJECT `568951b1`. A lane that
+***   reports a measurement-only hour as a measurement-only hour is doing the job.
+***   **AND YOU DECLARED A FALSE POSITIVE IN YOUR OWN TOOL INSTEAD OF QUIETLY DROPPING IT** -
+***   `sheet_overlap.js` `hscroll=true` at 320/360/390 traced to `.rail-list` inflating
+***   `documentElement.scrollWidth` to 501 while the page itself does not scroll. Named, measured,
+***   not "fixed" in a probe. Correct on all three counts.
+***   **I RAN NO PUBLISH GATE AND NONE WAS OWED** - you did not claim READY TO PUBLISH, and you
+***   were right not to, because you changed no `web/` byte. Saying so plainly is the rule working.
+***   NEXT: **ONE THING I FOUND WHILE MEASURING THE PUBLISH GAP, AND IT IS SMALL AND IT IS YOURS.**
+***   `web/tools/_to_delete/_beast_dex_block.txt` (90 lines) is inside the `web/` subtree, so it
+***   would ship to `gh-pages` on the next publish. It is a `_to_delete` scratch file sitting in
+***   the published tree. **Decide whether it belongs there and say which**; if it does not, move
+***   it out of `web/` rather than deleting it, and say where it went. Then carry on with the
+***   bestiary work. YOU STILL DO NOT PUBLISH - the push is the SUPERVISOR'S call.
+***
+*** ===== HUD (:52) - U208 IS **TICKED**, AND YOU FOUND THE CAUSE INSTEAD OF RE-SHOOTING. =====
+***   **THE PROBE EXECUTES AGAIN - TICKED, AND I VERIFIED IT OFF YOUR COMMITTED LOG, NOT YOUR
+***   SUMMARY.** `_u208_run_1.0.log:653` reads `U206_VELLUM runs=7 mode=grid` and `:655` reads
+***   `U202_DONE checks=30 fails=0`; `_u208_parse.log` has **0** lines matching Parse Error or
+***   SCRIPT ERROR. The carried item from U207 (`runs=0`, `mode=off`) is closed.
+***   **AND YOU COMMITTED THE LOGS THIS TIME.** Both `_u208_parse.log` and `_u208_run_1.0.log` are
+***   on your branch, so I could judge by the instrument instead of by your account of it. That
+***   was a standing complaint against this lane and it is paid.
+***   **WHAT EARNED THE TICK IS THE CAUSE, NOT THE GREEN.** `Spotlight.of(t)` makes the node on
+***   first use; in play `rts_camera.gd:99` does it; your harness has no camera rig, so `chat.spot`
+***   was never set, every test command answered "The spotlight is not lit yet", no lane went busy,
+***   `mode` stayed `off` and vellum never ran. **THAT IS A ROOT CAUSE WITH A LINE NUMBER**, and
+***   `runs=0 -> runs=7` off a one-line fix in your own probe is the red-prove in the only form
+***   this item could take. You also changed NOTHING in your seven shipped `.gd` files.
+***   **AND YOU WITHDREW YOUR OWN PREVIOUS FINDING WHEN THE WORKING PROBE DISAGREED WITH IT.**
+***   U207's "line fading 63 px past the panel bottom" did not reproduce; worst bottom margin is
+***   **49.3 px INSIDE** the panel. You called it an artefact of the dead probe rather than
+***   defending it. Withdrawing a finding you made is as valuable as making one.
+***   NEXT: **YOUR OWN LOG NOW NAMES THE TIGHTEST FRAME AND IT IS NOT THE ONE YOU PLANNED.**
+***   `U207_MARGIN scale=1.00 min_vellum=10.1 min_panel=64.0 min_bottom=49.3`. **`min_vellum` =
+***   10.1 px is the tightest margin in the house and it is at 100%, not 125% or 150%.** Your
+***   own next-firing note says 150% then 125%. **GO TO 100% FIRST** - the charter rule is the
+***   frame the NUMBER calls worst, and your number calls 100%. Then 125%, then 150% if the window
+***   allows. ONE windowed run per firing still; the rest is reading and needs no lock.
+***   **AND YOUR BINDING CAP WAS WRITTEN CORRECTLY THIS HOUR** - "DECLARED FINISH 16:03, BINDING
+***   CAP 16:07 (the :07 deadline is earlier than claim+15)". That was a two-hour cosmetic fault
+***   and it is fixed. Nothing is owed on it.
+***   The Director-pane hostile-name tag you keep seeing is still NOT YOURS; keep reporting it.
+***
+*** ===== LOCK DISCIPLINE, THE 15:00 HOUR - CLEAN. NOBODY OVERRAN, NOBODY CLAIMED OVER A HOLD. =====
+***   HUD        14:54:01 -> 15:01:33 (7m32s; declared 15:02, binding cap 15:07) - clean.
+***   game build 15:09:01 -> 15:19:18 (10m17s; declared 15:30, cap claim+25 = 15:34) - inside
+***              :07-:40, cap computed before the declaration as it has been since 02:08 on 21 Nov.
+***   chat bot   15:48:10 -> 15:49:43 (1m33s; declared 15:51:30) - claimed at :48, released before
+***              :50, HUD's :52 slot clear. The schedule row holds.
+***   HUD        15:54:35 -> 15:56:25 (1m50s; declared 16:03, binding cap 16:07 WRITTEN CORRECTLY).
+***   Every claim followed an IDLE from the previous lane. **NEVER TWO LANES HOLDING AT ONCE.** No
+***   stale lock cleared. **NO FUTURE STAMP IS IN THE FILE** - the chat bot drafted one, read the
+***   machine clock and rewrote it before writing, and disclosed the near-miss in its own IDLE.
+***   A near-miss disclosed is not a fault committed. **THE CLEAN-HOUR COUNT ADVANCES TO 3.**
+***   MY OWN LATE BLOCK (fault 3) starved nobody: the game build's 14:58 row was fully paid at
+***   S159 and the lane re-measures before acting. Recorded as a fault, NOT folded into the count.
+***
+*** ===== THE DEAD-DATA AUDIT, MEASURED THIS RUN ON 8bc451d4. UNREAD COUNT DID NOT MOVE. =====
+***   Corpus `scripts/*.gd` + `web/app.js` = **49 files** (48 `scripts/*.gd` + 1), 2,495,249 chars.
+***   `data/*.json` = 12 files, **171** top-level keys.
+***   ZERO-HIT = **80: 65 `_note_` + 15 NON-NOTE.** **THE NON-NOTE COUNT IS 15, UNCHANGED**, and
+***   it is the same 15 by name: `lord_intros_alt`, `unique_intros_alt` (runtime-built, READ at
+***   delve.gd:4022); `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+***   `town_levels_for_the_desktop` (declared dead); and the 9 prose/spec strings `technique`,
+***   `boss_floors`, `chronicle_line`, `word_order`, `casing`, `promotion_line`, `one_roll`,
+***   `_gating`, `canon_silences`. **UNREAD LIVE DATA KEYS: ZERO.** The raw total rose 79 -> 80
+***   purely on content's `_note_c239` and carries NO signal. THE SERIES: 52, 53, 56, 79, **80**.
+***   **MY OWN INSTRUMENT WAS WRONG ON ASSET DIRECTORIES AND I CAUGHT IT ON THE SERIES.** My first
+***   pass matched only the DIRECTORY PATH against the corpus and reported **13** unreferenced
+***   against a baseline of zero. A directory is referenced when a FILE in it is, so I re-ran it
+***   by filename and stem and got **2**. Then I checked both rather than publishing them:
+***     - `assets/graveyard/Textures` is a FALSE POSITIVE of the scripts-only corpus -
+***       `character-keeper.glb` and the gravestones reference `Textures/` themselves. Not dead.
+***     - `assets/gear/armour` (5 `.glb` + 5 `.import`) **IS genuinely unreferenced** - no script,
+***       no `data/*.json` and no scene names `armor_black`/`armor_metal`/etc., and the only
+***       reference in the tree is `renders/art/s7_armour/_fit_register.json`, which is EVIDENCE
+***       OUTPUT and not data the game loads. **BUT THIS IS NOT A NEW FINDING AND I ALMOST
+***       PUBLISHED IT AS ONE:** line 21911 of this plan already says "assets/gear/armour IS
+***       GENUINELY UNREFERENCED" and line 21926 already records "UNREFERENCED ASSET DIRECTORIES:
+***       ONE". Grepping the plan first is what turned a false discovery into a true correction.
+***   **SO THE HONEST NUMBER IS: 38 asset directories with files, ONE genuinely unreferenced
+***   (`assets/gear/armour`), and it is a KNOWN open row, not a regression this hour.** The :58
+***   PROMPT's baseline - "34 directories, UNREFERENCED: ZERO" - is STALE in both figures. It is
+***   correction (B) below. NO LANE IS TO WIRE A `_note_` KEY and content is not to stop writing them.
+***
+*** ===== THE HUB: WHAT IS PUBLISHED AND WHAT IS NOT. MEASURED THIS RUN, NOT COPIED. =====
+***   `origin/gh-pages` = **8d214d36**, tree **1d8bce63**, pushed **25 Nov 2026 09:55 CT**.
+***   `origin/hub:web` = **568951b1**, and `origin/main:web` is the SAME TREE OBJECT - the hub
+***   lane is fully merged and there is no lane-side gap.
+***   **MERGED AND NOT PUBLISHED, AND THE GAP IS NOW LARGE AND TWO DAYS OLD:** `NOTES.md` +63,
+***   `app.js` **+174/-8**, `style.css` +22/-1, `index.html` +1/-1, `tools/make_bestiary.py` +48,
+***   `icons/beasts/_manifest.json` +75, **68 new `icons/beasts/*.webp`**, and one
+***   `tools/_to_delete/_beast_dex_block.txt` +90. **THE WHOLE BESTIARY ICON SET IS SITTING
+***   UNPUBLISHED.** The live page was last LOOKED AT by the 22:58 seat on 17 Nov.
+***   The :58 PROMPT still says gh-pages is `05ac2679` / tree `9ca8051e` / 19 Nov, with a gap of
+***   "3 files / +59 / -1". **ALL OF THAT IS STRUCK AND WRONG** - correction (C) below.
+***   NOBODY PUBLISHES. It is the supervisor's call and it is item (2) below.
+***
+*** ===== FOR THE SUPERVISOR =====
+*** (1) **`data/drops.json` OWNERSHIP. SEVENTH HOUR, SIXTH CONTENT STAND-DOWN, AND IT HAS NOW COST
+***     SIX CONTENT CYCLES.** System 41 (encyclopedia / crafting hub, your 02:30 directive) has
+***     exactly one content half - `data/drops.json` - and content's standing rule bars it from
+***     creating a data file that is not one of its four owned files without Mr. E's or your word
+***     IN ITS PROMPT. It has refused six times and been right six times. A team-lead relay does
+***     not reach it, and a firing cannot edit its prompt. **MY RECOMMENDATION, UNCHANGED FROM THE
+***     EARLIER ESCALATIONS AND NOW WITH THE COST ATTACHED: rule in one line that `data/drops.json`
+***     is content's FIFTH owned file, for System 41 and nothing else.** Until that lands I have
+***     withdrawn the ask entirely so the lane stops burning cycles on it.
+*** (2) **THE HUB PUBLISH DECISION, AND THE GAP IS NO LONGER SMALL.** `gh-pages` has not moved
+***     since 25 Nov 09:55 CT. Merged and unpublished: `app.js` +174/-8, `style.css` +22/-1,
+***     `index.html` +1/-1, `NOTES.md` +63, `make_bestiary.py` +48, the icons manifest +75 and
+***     **68 bestiary icons**. The hub lane has NOT claimed READY TO PUBLISH and changed no `web/`
+***     byte this hour, so I ran no publish gate and none was owed. **MY RECOMMENDATION: say the
+***     word and I will run the full publish gate** - `el()`-only, no `innerHTML` on a snapshot
+***     value, no snapshot value as URL/src/href/style, CSP intact and proven by a refused inline
+***     `<style>` injection, the six state checks, a hostile name as literal text, and I will LOOK
+***     at a screenshot - and then do the subtree push by the proven plumbing recipe. **I will not
+***     publish without your word.**
+*** (3) **THE CASCADE IS ONE STEP FROM WHOLE AND IT NEEDS NOTHING FROM YOU - FOR INFORMATION ONLY.**
+***     70 bodies / 70 names / 70 feed keys on main as of `8bc451d4`; 68 published. The chat bot
+***     publishes 68 -> 70 at :45 next hour and the roster is shut end to end.
+***
+*** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED. A FIRING CANNOT EDIT A PROMPT. =====
+*** I did not attempt a prompt write this run: the rule is settled that a scheduled firing has no
+*** live turn to be approved in. These are owed to THIS prompt (:58) and must be landed by the
+*** first seat that gets a LIVE turn from Mr. E, ALL AT ONCE. **THIS LIST IS CUMULATIVE - DO NOT
+*** DROP AN ENTRY BECAUSE YOU DID NOT RE-VERIFY IT; CARRY IT AND SAY YOU CARRIED IT.**
+*** (A) **THE ART FIT REGISTER STANDING NOTE IS STALE** - carried from the 14:58 block, see the
+***     14:58 section below for the measurement. Not re-verified this run; carried verbatim.
+*** (B) **THE DEAD-DATA ASSET-DIRECTORY BASELINE IS STALE IN BOTH FIGURES.** The prompt says
+***     "UNREFERENCED ASSET DIRECTORIES: ZERO (34 directories with files)". **MEASURED THIS RUN ON
+***     `8bc451d4`: 38 directories with files, and ONE genuinely unreferenced -
+***     `assets/gear/armour`** (no script, no `data/*.json`, no scene; only `renders/` evidence
+***     output names it). The plan has recorded this since line 21911 and the PROMPT never caught
+***     up. Also update the corpus line: it says 48 files, the truth is **49** (48 `scripts/*.gd`
+***     + `web/app.js`), and the next seat must not mistake 49 for the `web/**/*.js` glob error.
+*** (C) **THE HUB PUBLISH BASELINE IN THE PROMPT IS TWO VERSIONS STALE.** It says gh-pages is
+***     `05ac2679` / tree `9ca8051e` / pushed 19 Nov 20:06 CT, with a gap of "3 files / +59 / -1
+***     (NOTES.md +9, app.js +46/-1, style.css +4)". **MEASURED THIS RUN: gh-pages is `8d214d36`,
+***     tree `1d8bce63`, pushed 25 Nov 09:55 CT, and the gap is 7 text files plus 68 new icons.**
+***     Replace the whole paragraph, and keep the standing instruction to re-measure every hour.
+*** (D) **L31 MUST BE STRUCK FROM THE GAME BUILD'S STANDING QUEUE WHEREVER IT APPEARS.** Its
+***     status-icon half was CLOSED BY MEASUREMENT at S142 (26 Nov 19:12) and three rows in this
+***     plan still call it the lane's standing open item. The prompt's own L31 paragraph
+***     ("THE L31 REMAINDER IS THE GAME BUILD'S, NOT HUD'S ... It is the status-effect icons")
+***     should gain one sentence: **CLOSED AT S142, DO NOT ASSIGN IT.**
+*** (E) **THE PROMPT'S ID LINE IS STALE EVERY HOUR BY DESIGN - MEASURED NOW:** B205, C-239, H32,
+***     S159, U208, art on porter pass 3. The prompt says to re-measure these and it is right to.
+***
 *** ===== TAKE THIS NEXT - THE 14:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 13:58 FIRING.
 *** Merged tree fb4d6037 - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed

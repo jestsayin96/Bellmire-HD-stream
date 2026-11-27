@@ -4601,3 +4601,10 @@ NEXT UNSTARTED ITEM: backlog 1 (miniboss feed lines). origin/art at 22:2x CT: ne
 VALIDATION OK: items, lore_lines, bosses, potions all json.load; no file edited.
 Lock: none taken, I never run Godot. Git via the Blender bridge.
 NO CODE WIRING. No key added.
+
+## 26 Nov 2026 19:4x CT - HUB firing: CORRECTION OF MY OWN 18:40 RECORD, then stand down
+- Row taken: TAKE THIS NEXT 18:58 block, HUB (:37): correct 7e3914d9's "web/ tree 51a3f8b3 unchanged" claim, record the true publish position, stand down.
+- Measured: 7e3914d9^:web = 51a3f8b3; 7e3914d9:web = db687b8b (it added 3 lines to web/NOTES.md). The commit subject was wrong; history is not rewritten - the correction is in web/NOTES.md and here.
+- Publish position: gh-pages 8d214d36, tree 1d8bce63, 25 Nov 09:55:03 CT. app.js / style.css / index.html identical to hub web/ (empty diffs). Only unpublished delta: web/NOTES.md +34 (this correction adds more notes lines, still notes only).
+- No code changed, so no screenshot, no hostile-name run owed; security greps untouched. NOT claiming READY TO PUBLISH; no publish gate owed. Live-dot colour: n/a.
+- Untracked (delete refused on this machine, named, left): _hub_msg.txt, _hub_ready_shot.png, web/tools/__pycache__/.

@@ -1,3 +1,58 @@
+## B207 - 2026-11-27 17:45 CT - NOTHING WAS OWED AND NOTHING DRIFTED, AND THE PROOF IS THE REAL GENERATOR'S OWN BYTES, NOT A READ OF THEM
+
+Row taken: CHAT BOT (:45) from the 16:58 TAKE THIS NEXT block - "YOU ARE OFF THE CASCADE AND THERE
+IS NOTHING OWED TO IT. Audit your own shipped command surface for drift - published numerals
+against what the engine can answer, the generated doc against the real generator - and fix what you
+find in your own files." Nothing needed fixing. Tree: W6 fast-forwarded to origin/main d7e088f0.
+
+- I RE-WALKED EVERY NUMERAL MY OWN FILES PUBLISH AND READ EACH ONE'S AUTHORITY IN CODE OR DATA
+  MYSELF. Twelve of them, and all twelve agree: forge 60/160/420/1100 = `Roster.WEAPONS` tiers 1-4
+  (roster.gd:173-176); armoury 50/150/400/1000 = `Roster.ARMOUR` 1-4 (:186-188); brew Mending 35 =
+  `POTION_COST` (:210) and "others 12-500" = real JSON parse of data/potions.json, 232 priced rows,
+  cheapest `Pennymend` 12 and dearest `The Hollow King's Cup` 500; oil 12 = `OIL_COST` (:214);
+  wear 30-520 = items.json union, cheapest cosmetic `Straw Hat` 30 and dearest accessory
+  `Crater-glass Ring` 520 over 556 + 254 rows; dye 25 = items.json `dye_cost`; reroll 120 =
+  `REROLL_COST`; respec 200 = `RESPEC_COST`; look 10 = `Spotlight.LOOK_S` 10.0 (spotlight.gd:33);
+  rework "a quarter" = `REWORK_DIVISOR` 4; miniboss 70 = `Delve.MB_NAME`.
+- THE DOC AGAINST THE REAL GENERATOR IS A BYTE-IDENTICAL NO-OP, WHICH IS THE ONLY FORM OF THIS
+  CLAIM WORTH ANYTHING. I md5'd `docs/COMMANDS.md` BEFORE running tools/_commands_doc.gd and again
+  AFTER: **5d4dd277 / 9671 bytes on both sides**, `COMMANDS_DOC OK wrote 36 commands`. The
+  committed doc is what the generator produces, not a hand-kept copy of it. `data/commands.json`
+  md5 **b27b29c0 unchanged** by the merge and by the generator - B206's publish survived the
+  fast-forward, which I checked rather than assumed.
+- DRIFT CHECKED BOTH DIRECTIONS. 36 commands / 36 `order`, nothing in `order` missing from
+  `commands` and nothing in `commands` missing from `order`; every one of the 36 keys has a
+  dispatch case label in chatcmd.gd. The 11 published aliases (armor, commands, path, reputation,
+  roads, sheet, spec, spotlight, stats, steel, watch) carry NO literal case label and route
+  through `canonical()` reading data/commands.json - which is B108's design, and its ALIAS
+  UNUSABLE / SHADOW / CLASH / DEAD arms already watch it. L14_TEST's zero-arms assertion covers
+  them, and 0 arms fired.
+- MY OWN MATCHER WAS WRONG THREE TIMES BEFORE IT WAS RIGHT, AND THE FIRST TWO VERSIONS LIBELLED
+  LIVE COMMANDS. v1 looked for `"name":` and missed GDScript's comma-separated `match` labels
+  (`"armoury", "armory":`), reporting 11 shipped commands as having no handler. v2 required the
+  label line to END in `:` and missed every inline label (`"hero":     out = ...`), reporting 14.
+  v3 read the alias key as `also`; the data says `aliases`, so it called six working aliases
+  orphans. Only v4 - quoted tokens anchored at line start, `:` allowed mid-line - came back
+  **[] / []**. Three wrong shapes in one audit, and had I stopped at any of them I would have
+  "fixed" a surface that was never broken.
+- STAMP HONESTY: my IDLE line reads 17:49:40 and the clock read 17:49:43 immediately after the
+  write, so the stamp is about a second early, not backdated by design and not in the future. I am
+  recording the gap rather than rewriting the lock file over it.
+- Gates (all on the merged tree, headless): parse `--quit-after 300` **rc=0, 0 Parse Error, 0
+  SCRIPT ERROR**; `COMMANDS_DOC OK wrote 36 commands` (real generator); `L14_TEST OK (27 checks)`
+  with `no COMMANDS_DATA guard arm fired on the load (0 fired: [])`; `TWITCH_PARSE OK (8 checks)`.
+- FOR THE GAME BUILD LANE: S161's death model (roster respawn, corpse-run bags, grace count) is
+  **NOT on origin/main** - the newest roster.gd commit there is S158, and `respawn`/`corpse` do not
+  occur anywhere in scripts/ on d7e088f0. So my `reroll` strings ("Dead: raise a new hero", "free
+  when dead; 120 gold alive") still match `_reroll` at chatcmd.gd:483, which admits a dead hero and
+  raises a new one free. I did NOT pre-emptively reword them for an engine that is not on main.
+  WHEN THE RESPAWN HALF MERGES, THAT STRING IS MINE TO RE-CHECK: a hero who respawns onto a corpse
+  run is not a hero raised anew, and the free-when-dead price is published in my file, not yours.
+- No .gd and no data file of mine changed this run. Nothing ticked - the supervisor ticks.
+- Lock: free at claim (last line IDLE game build 17:19:09, tasklist Godot*=0); claimed 17:49:30,
+  declared 17:51:30, cap 18:14, released 17:49:43 - early, clearing the HUD's :52 slot.
+- No Twitch message sent, nothing redeemed, nothing cheered, ZERO BITS.
+
 ## B206 - 2026-11-27 16:45 CT - THE PUBLISHED HALF IS PAID 68 -> 70 AND THE CASCADE IS SHUT 70/70/70, AND I FIXED THE GUARD I REPORTED RED LAST HOUR INSTEAD OF QUIETING IT
 
 Row taken: CHAT BOT (:45) from the 15:58 TAKE THIS NEXT block - "RE-MEASURE origin/main YOURSELF,

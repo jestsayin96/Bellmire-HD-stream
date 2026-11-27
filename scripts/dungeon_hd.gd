@@ -250,11 +250,12 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S126: `crimp` (60th, Oneshort, art's tag barracks - field 5) joins barracks with MB_FIT 0.99; miniboss_for holds it out until content's C-202 by_key.crimp arrive lines land, and MB_NAME waits for the same feed (chatcmd.gd MINIBOSS GHOST).
 ## S127: `timberman` (61st, Deadfall, art's tag crypt - field 5) joins crypt with MB_FIT 1.24 (tallest body yet, margin_x 0.12); content's C-203 by_key.timberman landed, so MB_NAME is written in the same change and all five sibling literals move 60 -> 61.
 ## S145: `mealman` (65th, Whitedamp, art's tag mess - field 5) joins mess with MB_FIT 0.97; content's by_key.mealman has NOT landed, so miniboss_for correctly holds it out and NO MB_NAME row is written (MB_NAME stays 64).
+## S148: `thatcher` (66th, Lastcourse, art's tag flooded - field 5) joins flooded with MB_FIT 1.04; content's C-227 by_key.thatcher landed, so MB_NAME is written in the same change and the sibling count literals move 65 -> 66.
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief", "crimp"], "workshop": ["jointer", "greener", "dyer", "overlooker"],
     "prison": ["pressman", "tither", "nightman"], "shrine": ["leech", "beadle", "almoner"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper", "timberman"],
     "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer", "weigher", "pledgeman"], "mess": ["loader", "hooper", "iceman", "mealman"],
-    "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman", "roper", "harrowman"], "wood": ["drover", "winder", "straker", "collier"],
+    "flooded": ["tanner", "rammer", "ferryman", "thatcher"], "grassland": ["hurdleman", "stackman", "roper", "harrowman"], "wood": ["drover", "winder", "straker", "collier"],
     "firepit": ["moulder", "tapster", "fanner"], "fogbound": ["fenman", "fuller", "blower", "stiltman"], "confection": ["comfitmaker", "panner", "dredger"]}
 static func miniboss_for(theme: String, n: int) -> String:
     var base := String(THEME_MINIBOSS.get(theme, ""))

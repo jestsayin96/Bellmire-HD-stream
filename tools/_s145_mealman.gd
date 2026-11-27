@@ -18,7 +18,7 @@ func _initialize() -> void:
 	var fed := not Delve.miniboss_lines("mealman", "arrive").is_empty()
 	print("S145 mealman fed: %s" % fed)
 	_ok(Delve.MB_NAME.has("mealman") == fed, "MB_NAME row exists exactly when fed (fed=%s named=%s)" % [fed, Delve.MB_NAME.has("mealman")])
-	_ok(Delve.MB_NAME.size() == (65 if fed else 64), "MB_NAME is 65 once fed (got %d)" % Delve.MB_NAME.size())
+	_ok(Delve.MB_NAME.size() == (66 if fed else 64), "MB_NAME is 66 once fed (S148 + thatcher, got %d)" % Delve.MB_NAME.size())
 	# S146: content's C-225 landed, so the hold is spent and the name is written - art's CANON title.
 	_ok(fed, "S146: by_key.mealman is on main (C-225)")
 	_ok(Delve.MB_NAME.get("mealman", "") == "Whitedamp", "MB_NAME mealman is Whitedamp (got '%s')" % Delve.MB_NAME.get("mealman", ""))

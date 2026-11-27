@@ -1,0 +1,573 @@
+===== parse start 04:10:08
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 636 flora on the grass islands
+VALLEY verges 178
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+SNAPSHOT on: https://paaukwaffaamazgrndbv.supabase.co every 60 s
+TWITCH joined #jestsayin96
+TWITCH_EVENTSUB bot token valid (bellmirebro), 128 min left
+TWITCH_EVENTSUB seeded subs pane with 4 subscriber(s)
+TWITCH_EVENTSUB seeded subs pane with 4 subscriber(s)
+TWITCH_EVENTSUB welcome, session AgoQCOzg, keepalive 10 s
+RIG: no clip 'Idle_B' on Barbarian - playing its idle
+TWITCH_EVENTSUB subscribed 7 of 7
+
+--stderr--
+ERROR: COMMANDS_DATA MINIBOSS COUNT: `miniboss` publishes 65 elites and content writes feed rows for 66 - docs/COMMANDS.md counts the chambers wrong and a viewer finds out by asking for one that is not there
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] commands (res://scripts/chatcmd.gd:2450)
+       [1] @implicit_new (res://scripts/twitch_chat.gd:10)
+       [2] _ready (res://scripts/town.gd:350)
+COMMANDS_DATA MINIBOSS COUNT - published 65, feed rows 66
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+
+===== parse rc=0 04:10:30
+===== _s148_thatcher start 04:10:30
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S148 thatcher model: ''
+S148 FAIL: thatcher.glb resolves
+S148 thatcher fed: true
+S148 flooded draw: ["tanner", "rammer", "ferryman", "sluicekeeper"]
+S148 FAIL: thatcher is drawn exactly when fed (fed=true drawn=false)
+S148_THATCHER FAILED (2 of 15)
+
+--stderr--
+
+===== _s148_thatcher rc=0 04:10:32
+===== _s145_mealman start 04:10:32
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S145 mealman model: 'res://assets/monsters/minibosses/mealman.glb'
+S145 mealman fed: true
+S145 mess draw: ["loader", "hooper", "iceman", "mealman", "cook"]
+S145_MEALMAN OK (14 checks)
+
+--stderr--
+
+===== _s145_mealman rc=0 04:10:35
+===== _s144_fanner start 04:10:35
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S144 fanner model: 'res://assets/monsters/minibosses/fanner.glb'
+S144 fanner fed: true
+S144 firepit draw: ["fanner", "stoker", "moulder", "tapster"]
+S144_FANNER OK (10 checks)
+
+--stderr--
+
+===== _s144_fanner rc=0 04:10:38
+===== _s117_straker start 04:10:38
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S117 straker model: 'res://assets/monsters/minibosses/straker.glb'
+S117 straker arrive lines present: true
+S117 wood draws over 4000 picks: ["straker", "collier", "snarer", "drover", "winder"]
+S117_STRAKER OK 11
+
+--stderr--
+
+===== _s117_straker rc=0 04:10:40
+===== _s107_gate start 04:10:40
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S107 shrine draws over 4000 picks: { "leech": 1000, "beadle": 1000, "almoner": 1000, "snuffer": 1000 }
+S107 MB_NAME size: 66
+S107_GATE OK 12
+
+--stderr--
+
+===== _s107_gate rc=0 04:10:43
+===== _s51_names start 04:10:43
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S52 live key sources: by_key 66, MB_FIT base 66, glb stems 68
+S52 red-proof (drizzler planted): 4 faults: MB_NAME key drizzler is not in feed, MB_NAME key drizzler is not in fit, MB_NAME key drizzler is not in glb, drawable key strickler has no MB_NAME entry
+S131 theme arm: drawable 66 ; MB_NAME - theme = [] ; theme - MB_NAME = []
+S131 red-proof (collier erased from a copy of wood): MB_NAME - theme = ["collier"]
+S51 bodies on disk resolving by trade key: 42 ; keys with arrive lines: 42
+S51_NAMES OK 179 checks
+
+--stderr--
+
+===== _s51_names rc=0 04:10:44
+===== _s124_pledgeman start 04:10:44
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S124 pledgeman model: 'res://assets/monsters/minibosses/pledgeman.glb'
+S124 treasury draws over 4000 picks: ["strickler", "sealer", "changer", "weigher", "pledgeman", "tallyman"]
+S124_PLEDGEMAN OK 13
+
+--stderr--
+
+===== _s124_pledgeman rc=0 04:10:47
+===== _s126_crimp start 04:10:47
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S126 crimp model: 'res://assets/monsters/minibosses/crimp.glb'
+S126 crimp fed: true
+S126 NOTE: content's by_key.crimp has landed - the MB_NAME row (Oneshort) is written (S126b)
+S126 barracks draw: ["quartermaster", "relief", "crimp", "drillmaster"]
+S126_CRIMP OK (10 checks)
+
+--stderr--
+
+===== _s126_crimp rc=0 04:10:49
+===== _s127_timberman start 04:10:49
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S127 timberman model: 'res://assets/monsters/minibosses/timberman.glb'
+S127 timberman fed: true
+S127 crypt draw: ["stopper", "timberman", "sexton", "ratcatcher", "scraper", "pitman"]
+S127_TIMBERMAN OK (11 checks)
+
+--stderr--
+
+===== _s127_timberman rc=0 04:10:53
+===== _s129_collier start 04:10:53
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S129 collier model: 'res://assets/monsters/minibosses/collier.glb'
+S129 collier fed: true
+S129 wood draw: ["straker", "collier", "snarer", "drover", "winder"]
+S129_COLLIER OK (11 checks)
+
+--stderr--
+
+===== _s129_collier rc=0 04:10:56
+===== _s141_overlooker start 04:10:56
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S141 overlooker model: 'res://assets/monsters/minibosses/overlooker.glb'
+S141 overlooker fed: true
+S141 workshop draw: ["overlooker", "scrapwright", "jointer", "greener", "dyer"]
+S141_OVERLOOKER OK (11 checks)
+
+--stderr--
+
+===== _s141_overlooker rc=0 04:10:58
+===== _twitch_parse start 04:10:58
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS 1 command -> chat_line
+PASS 2 ping -> pong
+PASS 3 plain chat ignored
+PASS 4 bot ignored
+PASS 5 cooldown
+PASS 6 split packet
+PASS 7 four per frame
+PASS 7b rest next frame
+TWITCH_PARSE OK (8 checks)
+
+--stderr--
+ERROR: COMMANDS_DATA MINIBOSS COUNT: `miniboss` publishes 65 elites and content writes feed rows for 66 - docs/COMMANDS.md counts the chambers wrong and a viewer finds out by asking for one that is not there
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] commands (res://scripts/chatcmd.gd:2450)
+       [1] @implicit_new (res://scripts/twitch_chat.gd:10)
+       [2] _initialize (res://tools/_twitch_parse.gd:21)
+COMMANDS_DATA MINIBOSS COUNT - published 65, feed rows 66
+
+===== _twitch_parse rc=0 04:10:59
+===== _offfloor start 04:10:59
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Hero0 and 7 others descend below the guild post, boots wet from the yard.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 bog frog, 1 slime, 1 skeleton minion.
+FEED Grave goods, left where they lay. Nobody down here needs a comb.
+FEED Hero1 casts Bolt at slime.
+FEED Hero2 casts Smite at slime.
+FEED The slime divides.
+FEED Hero5 turns on the wounded slimeling to finish it.
+FEED Hero6's frost goes off a breath early - the scar is impatient (7 vs DC 10).
+FEED Hero6 casts Bolt at skeleton minion.
+FEED Hero2 casts Smite at bog frog.
+FEED Hero1 casts Chain Bolt at bog frog.
+FEED Hero1 searches (Investigation 24) and turns up 14 gold on floor 1.
+FEED Done. Count the flasks. Count the heads.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 1 bog frog, 1 puglin, 1 skeleton minion.
+FEED Hero6 holds bolt a breath too long and loses it (8 vs DC 11).
+FEED Hero2 casts Smite at puglin.
+FEED Hero6 casts Frost at puglin.
+FEED Hero6 casts Bolt at skeleton minion.
+FEED Hero2 casts Bolt at bog frog.
+FEED Hero1 casts Fire at bog frog.
+FEED Hero1 searches (Investigation 11) and turns up 22 gold on floor 2.
+FEED Floor 2 stands empty. A lamp is lit at the door of it.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 3; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 cave spider, 2 drowned puglins, 1 drowned skeleton minion.
+FEED Hero2 rolls a 20 for initiative and is moving before anything else.
+FEED Hero1 casts Bolt at drowned puglin.
+FEED Hero1 casts Chain Bolt at drowned puglin.
+FEED Hero1 searches (Investigation 23) and turns up 44 gold on floor 3.
+FEED Somebody hangs the wet cloaks over the rail. The drip is steady.
+FEED Hero1 finds a vial of The Reeve's Measure.
+FEED Hero1 searches the chest - Successfully found loot!! 56 gold (Investigation 26 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 0; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed slime, 2 puglins, 1 risen bones, 1 giant rat.
+FEED The oil is running low.
+FEED The hollowed slime divides.
+FEED Hero1 reaches for bolt and finds an empty hand (1 vs DC 12).
+FEED Hero2 casts bolt. The scar adds a verse of its own (9 vs DC 12).
+FEED Hero6 fumbles bolt and the words go sideways (1 vs DC 12).
+FEED A grate shifts, and 1 hollowed cave bat, 1 slime is already upon them.
+FEED Hero5 turns on the wounded hollowed cave bat to finish it.
+FEED Hero7 turns on the wounded hollowed cave bat to finish it.
+FEED Hero1 rolls a 20 searching the floor!
+FEED Hero1 searches (Investigation 26) and turns up 70 gold on floor 4.
+FEED Dust is shaken from the cloak. The count is kept.
+FEED Hero1 finds a vial of Cobbler's Salve.
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 206 gold, 6 ore, 4 stone, 4 pieces of salvaged gear and 4 potions. 24 kills between them.
+FEED Hero1 is fitted with Reed-Cloth Robe. (+10 hp)
+OFFFLOOR 0 of 2015 samples; INPROP 0; MON_INPROP 0 of 287; floor reached 4 frames 6497 obstacles 37
+OFFFLOOR_VERDICT OK 0 of 2015 samples off the floor (home)
+
+--stderr--
+
+===== _offfloor rc=0 04:11:55
+===== _delve_test start 04:11:55
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED They go down as they came in: together, and a little afraid.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 2 giant rats, 1 hollowed puglin.
+FEED The rows end in a row that was never filled.
+FEED MossyMage rolls a 20 for initiative and is moving before anything else.
+T10s floor=1 state=fight foes=3 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+FEED DawnCleric casts Smite at giant rat.
+FEED MossyMage casts Bolt at giant rat.
+T20s floor=1 state=fight foes=2 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+T30s floor=1 state=fight foes=1 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+FEED MossyMage casts Bolt at hollowed puglin.
+FEED DawnCleric casts Smite at hollowed puglin.
+FEED MossyMage searches (Investigation 10) and turns up 11 gold on floor 1.
+FEED Finished. Count the living first, the loot after.
+FEED MossyMage finds a vial of Carrot Broth.
+T40s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+T50s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+T60s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T70s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+T80s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+T90s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+T100s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+T110s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+T120s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 2 bog frogs, 1 cave spider, 1 hollowed puglin.
+FEED The oil is running low.
+FEED DawnCleric's bolt curdles before it leaves the hand (1 vs DC 11).
+FEED MossyMage casts Chain Bolt at hollowed puglin.
+T130s floor=2 state=fight foes=3 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+T140s floor=2 state=fight foes=3 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+FEED MossyMage casts Fire at cave spider.
+FEED DawnCleric casts Bolt at cave spider.
+T150s floor=2 state=fight foes=2 ["JestFan 113/113", "MossyMage 68/68", "DawnCleric 96/96", "BigAxe 119/119"]
+DELVE_TEST OK ran 9001 frames, floor reached 2, state fight (capped at 9001 frames); engine error lines are still read off the log
+
+--stderr--
+
+===== _delve_test rc=0 04:13:03
+===== _townwalk start 04:13:03
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 636 flora on the grass islands
+VALLEY verges 178
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+NAV ready=true bake_ms=906 obstructions=2951 solids=1472 plots=66 road_dropped=188 people=164
+HOUSES_ON_ROAD 0
+DOORS 66 door_off_ground=0 door_leg_through_other_house=0
+RIG: no clip 'Idle_B' on Rogue_Hooded - playing its idle
+FEED 2 bandits are riding on the west road!
+FEED Initiative: the raiders 19, the watch 3 - the raiders strike first.
+RAID started raiders=2
+T=10s walking=100 still=0 (posted=0) inside=64 in_solid=0/719 stuck_on_route=0
+FEED A building is burning!
+T=20s walking=52 still=28 (posted=17) inside=84 in_solid=0/1660 stuck_on_route=0
+T=30s walking=48 still=26 (posted=17) inside=90 in_solid=0/2347 stuck_on_route=0
+FEED The attack is driven off. The gates hold.
+FEED The new frame slips. The townsfolk will try again. (5 vs DC 12)
+T=40s walking=135 still=28 (posted=17) inside=1 in_solid=0/2975 stuck_on_route=0
+T=50s walking=137 still=26 (posted=17) inside=1 in_solid=0/5253 stuck_on_route=0
+T=60s walking=130 still=33 (posted=19) inside=1 in_solid=0/7306 stuck_on_route=0
+FEED The townsfolk raise the ruin again.
+T=70s walking=109 still=54 (posted=25) inside=1 in_solid=0/9197 stuck_on_route=0
+RIG: no clip 'Interact' on Worker_Female - playing its idle
+T=80s walking=96 still=67 (posted=26) inside=1 in_solid=0/10980 stuck_on_route=1
+T=90s walking=91 still=72 (posted=27) inside=1 in_solid=0/12615 stuck_on_route=0
+FEED Hilda Bramble settles in Bellmire, looking for work.
+RIG: no clip 'Spellcast_Raise' on Worker_Male - playing its idle
+T=100s walking=88 still=76 (posted=27) inside=1 in_solid=0/14153 stuck_on_route=0
+RIG: no clip 'Jump_Full_Short' on Worker_Male - playing its idle
+T=110s walking=87 still=77 (posted=27) inside=1 in_solid=0/15749 stuck_on_route=0
+T=120s walking=93 still=71 (posted=27) inside=1 in_solid=0/17366 stuck_on_route=0
+STUCK_ON_ROUTE_TOTAL 1 over 120 s (raw still-with-a-route-now 7)  watchdog fires=9 close=4 repath=5 nudge=0 giveup=0
+TOWNWALK in_solid=0/17366 (0.000%) raid_in_solid=0/5681 (0.000%) PASS
+BAD []
+STUCK_EX ["trader Talen Bramble (41.0,-71.9) next=(41.0414, 0.890005, -72.45871) route=20 solid=- navoff=0.00 push=(-0.34543, 0.0, 0.435188)"]
+
+--stderr--
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+
+===== _townwalk rc=0 04:14:37
+===== BATTERY DONE

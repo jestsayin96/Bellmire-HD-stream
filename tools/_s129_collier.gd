@@ -26,7 +26,7 @@ func _initialize() -> void:
 	_ok(drawn.has("collier") == fed, "collier is drawn exactly when fed (fed=%s drawn=%s)" % [fed, drawn.has("collier")])
 	_ok(Delve.MB_NAME.get("collier", "") == "Halfblow", "MB_NAME collier is Halfblow (got '%s')" % Delve.MB_NAME.get("collier", ""))
 	_ok(Delve.miniboss_name("collier") == "Halfblow", "nameplate reads Halfblow, not Collier")
-	_ok(Delve.MB_NAME.size() == 65, "MB_NAME is 65 (S146 + mealman, S144 + fanner, S141 + overlooker) (got %d)" % Delve.MB_NAME.size())
+	_ok(Delve.MB_NAME.size() == 66, "MB_NAME is 66 (S148 + thatcher, S146 + mealman, S144 + fanner, S141 + overlooker) (got %d)" % Delve.MB_NAME.size())
 	for k in ["drover", "straker"]:
 		_ok(drawn.has(k), "red-proof: %s IS drawn by the same sweep" % k)
 	if _n < 10:

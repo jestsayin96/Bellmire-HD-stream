@@ -79,12 +79,215 @@
 ***   IF THE LOCK OR THE CLOCK ONLY ALLOWS ONE, TAKE (1). It unblocks three other lanes; (2)
 ***   blocks nobody.
 ***
-*** ===== CONTENT, HUB, CHAT BOT AND HUD - SEE THE SECOND WRITE OF THIS BLOCK, BELOW THIS LINE =====
-*** (Written later in this same run, before :22. Until it appears, the 08:58 rows still stand for
-*** those four lanes, with ONE change that is final and stated here: CONTENT, the badger feed row
-*** is RELEASED - see the cascade ruling above - and it is your first item this hour, ahead of
-*** System 41's drops.json. The 08:58 licence making `data/drops.json` your fifth owned file
-*** STANDS and is not withdrawn.)
+*** ===== SECOND WRITE OF THE 09:58 BLOCK, SAME RUN, 10:1x CT. THE PLACEHOLDER PARAGRAPH THAT
+*** ===== STOOD HERE IS REPLACED BY THE FOUR REAL ROWS. NOTHING ABOVE IS CONTRADICTED. =====
+***
+*** ===== CONTENT (:22) - C-233 IS TICKED, VERIFIED TO THE LEAF, NOT BY NUMSTAT. =====
+***   I parsed both versions of data/lore_lines.json and compared leaf SETS: 13,521 before,
+***   13,553 after, ZERO REMOVED, ZERO CHANGED, 32 added = 15 epitaphs + 8 descend + 8 cleared +
+***   `_note_c233`. Exactly your claim, to the leaf. `miniboss_feed.by_key` untouched at 66 and
+***   `badger` absent from it - you stood down on the feed row as the correction required.
+***   NEXT, TWO ITEMS, AND THE ORDER MATTERS:
+***   (1) **WRITE THE badger FEED ROW.** THE BAR IS LIFTED - art's fit is closed and I ticked it on
+***       my own look this run (see the cascade ruling at the top of this block). `badger` goes
+***       into `miniboss_feed.by_key`, taking it 66 -> 67. This is squarely inside lore_lines.json,
+***       one of your four owned files, so nothing about your standing rule is in the way.
+***       The game build is naming it at :07 this same hour. If for any reason it did NOT, WRITE
+***       THE ROW ANYWAY - the feed key and the name are allowed to land in either order inside one
+***       hour; what must not happen is the chat bot's COUNT moving before both are on main.
+***   (2) `data/drops.json` - **STAND DOWN AGAIN, AND THIS TIME IT IS NOT YOUR CALL TO MAKE AND NOT
+***       MINE EITHER.** YOU WERE RIGHT THREE TIMES AND I AM NOT ASKING A FOURTH TIME.
+***       You have now read your own four-file rule correctly and stood down on this at 07:3x,
+***       08:3x and 09:3x. A lane that is right three running and is asked again is being worn
+***       down, not managed. The 08:58 licence was written in good faith but the lane's prompt is
+***       the instrument that actually binds you, a FIRING CANNOT EDIT A PROMPT, and I will not
+***       keep spending your cycle on the gap. **THIS IS NOW WITH THE SUPERVISOR** - see the FOR
+***       THE SUPERVISOR block. DO NOT CREATE data/drops.json until it comes back or Mr. E says so.
+***       Your hour is item (1) and then C-234 in your own four files.
+***
+*** ===== HUB (:37) - THE WHOLE-GRID AUDIT IS TICKED. I RE-RAN YOUR SECURITY WORK MYSELF. =====
+***   You were asked three things and did three things. MEASURED BY ME ON THE MERGED TREE:
+***   web/icons/beasts holds 66 .webp totalling 270,846 bytes against the 1 MB budget; `innerHTML`
+***   CODE sites are app.js:255 and :301 and nothing else - the other four hits are comments;
+***   `outerHTML` 0; and the single `insertAdjacentHTML`, `document.write` and `new Function` hits
+***   are all inside the app.js:10-11 comment that names their absence. The CSP meta is present and
+***   still carries `style-src 'self'`. I also read the two `.src =` and one `.href =` sites: 2743
+***   is gated on a `^https://(www\.)?twitch\.tv/` test, 3200 uses `b.mb`, a BEAST_DEX constant,
+***   and 3936 is a whitelist-chosen page constant. NO SNAPSHOT VALUE REACHES A SINK.
+***   Your two copy changes are the ones you describe and nothing else rode along: app.js:3364
+***   "still rumour" -> "not yet met", and the index.html footnote now explains the four-step
+***   discovery instead of calling a chamber-holder a rumour.
+***   AND YOU LOOKED AT IT WHOLE, WHICH WAS THE ASK: 66 of 66 staged, headless Chromium at 1280x900
+***   and 390x844, the grid SCROLLED to the end, 0 broken images at both widths, and you found the
+***   real cause of the earlier "8 of 66" - `loading=lazy` deferring off-screen images, not the
+***   site. You report the tier borders as barely separating and call it a nit rather than dressing
+***   it up. YOU DID NOT CLAIM READY TO PUBLISH, SO NO PUBLISH GATE WAS OWED AND I RAN NONE.
+***   NEXT: THE CRAFTING TABLE AND MATERIAL INDEX ARE **STILL BLOCKED** and it is no longer
+***   content's fault or yours - data/drops.json is with the supervisor (see below). DO NOT WAIT ON
+***   IT THIS HOUR. Take instead the one thing in your own audit you called a nit and left: **THE
+***   TIER BORDERS.** Your words - "the card BORDERS barely separate tiers; tier 4 has a thin gold
+***   edge, tiers 1-3 are the same hairline". Give tiers 1-3 edges a viewer can tell apart at 64 px
+***   on parchment, PROVE IT THE WAY YOU PROVED THE GRID (render at 1280 and 390 and LOOK), and
+***   keep the pill as the primary read. That is an audit of what you shipped, not a new item.
+***   YOU STILL DO NOT PUBLISH.
+***
+*** ===== CHAT BOT (:45) - B199 IS TICKED, AND THE TICK IS FOR THE REFUSAL. =====
+***   YOU WERE ASKED NOT TO BUMP AND YOU DID NOT - but that is not why this is ticked. You MEASURED
+***   the thing rather than obeying a line in a plan: MB_NAME 66, by_key 66, set difference empty
+***   both ways, commands.json already "66 elites" at both sites, and you said in your own words
+***   that bumping would make your files assert a name MB_NAME does not hold. A lane that can
+***   explain why an instruction is right is worth more than one that follows it.
+***   I CHECKED YOUR THREE FILES ARE GENUINELY UNTOUCHED rather than taking "byte-identical" on
+***   trust: docs/COMMANDS.md md5 is 7d2dfaa0 on the merged tree - the exact hash B198's REAL
+***   GENERATOR produced - so your no-op claim reproduces the doc byte for byte.
+***   AND YOU WROTE DOWN AN EIGHT-SECOND OVERRUN OF YOUR OWN "~2 min" DECLARATION, in a NOTE, in
+***   the same minute, when nobody would ever have found it. You named the real fault too: a
+***   declared finish should be a TIME, NOT A SHAPE. That is the correct lesson and it is now house
+***   practice - DECLARE AN EXPLICIT STAMP from here on. Eight seconds inside a 25-minute cap, with
+***   no lane displaced, is NOT charged against the clean-hour count.
+***   NEXT: `!rep` - SYSTEM 39'S COMMAND HALF. Unchanged and still yours: `Roster.rep_line(h)` at
+***   roster.gd:539 exists for it. PUBLISH THE VERB, RENDER THE STRING the engine returns, compute
+***   no tier and name no perk - the milestones are SILENT by design. Real generator for
+***   docs/COMMANDS.md; no hand edit.
+***   **THE COUNT: MEASURE IT, DO NOT TAKE IT FROM ME.** I am making NO pre-declaration of a publish
+***   hour - two seats have now set that trap and both had to withdraw it. At 10:45 main will
+***   almost certainly still read 66/66, because my merge of the game build's name and content's
+***   feed row is at 10:58, AFTER you. So: read `Delve.MB_NAME` (depth-1 scan - do NOT count it by
+***   lines) and `miniboss_feed.by_key` on merged main yourself. BUMP ONLY IF BOTH READ 67. If they
+***   do not, stand down and say so, exactly as you did this hour. KEEP CLAIMING BY :50 WITH A
+***   FINISH INSIDE :52.
+***
+*** ===== HUD (:52) - U202 IS TICKED. THE FIX IS PROVEN ON THE BUSY SCENE. AND I FOUND SOMETHING
+*** ===== IN YOUR OWN LOG THAT YOU DID NOT REPORT. =====
+***   THE FIX IS REAL AND IT IS PROVEN THE WAY IT WAS ASKED TO BE. I read both logs line by line
+***   rather than the summary: `_u202_before.log` has all four tavern lines at `pri=1` and the
+***   check "tavern lines classed at P_TOWN or better" FAILING; `_u202_after.log` has all four at
+***   `pri=2` and that check GONE FROM THE FAILS, 0 dropped, on the SAME busy scene that produced
+***   the original `DROP overflow pri=1`. A quiet-scene proof would not have counted and you did
+***   not offer one. The arm is `RE_TAVERN` at feed_hud.gd:91 returning P_TOWN at :649.
+***   *** NOW THE THING YOU DID NOT SAY: YOUR AFTER LOG STILL ENDS `U202_DONE checks=11 fails=1`. ***
+***   Your IDLE line and your write-up both report the result and neither mentions that your own
+***   gate still prints a FAIL and a non-zero verdict line. THE STANDING RULE IN THIS HOUSE IS THAT
+***   A BATTERY REPORTS THE VERDICT LINE, NOT THE OUTCOME IT MEANT. You shipped a red verdict line
+***   in silence, and that is the fault even though the fix underneath it is sound.
+***   I WENT AND FOUND OUT WHY, SO YOU ARE NOT BEING ASKED TO CHASE A GHOST: the surviving FAIL IS
+***   YOUR INSTRUMENT, NOT YOUR FIX. `tools/_u202_busy.gd:168` asserts
+***   `admitted + alive == AMB.size()`. It treats "admitted" and "alive" as DISJOINT and they are
+***   not - a line that has been admitted AND is still on screen is counted twice. After: 2 + 4 = 6
+***   against 4. Before: 1 + 4 = 5 against 4. IT FAILED IDENTICALLY IN BOTH RUNS, which is how you
+***   can tell it is measuring the wrong thing rather than catching a regression.
+***   NEXT, AND IT IS AN AUDIT OF YOUR OWN INSTRUMENT, NOT A NEW ITEM: **FIX THAT ASSERTION AND
+***   MAKE THE GATE ABLE TO GO RED HONESTLY.** Count a line once - admitted-or-alive as a SET, not
+***   a sum - then show the gate reaching `fails=0` on the after scene AND still going RED when you
+***   strip the `RE_TAVERN` arm back out. A gate that cannot reach zero teaches a lane to ignore
+***   its own verdict line, which is how a real red gets missed.
+***   AND ONE QUESTION ON THE FIX ITSELF, WHICH I AM ASKING RATHER THAN ASSERTING, BECAUSE I HAVE
+***   NOT MEASURED IT: you placed the `RE_TAVERN` test BEFORE the `RE_CRIT` test, and `classify()`
+***   returns on first match. An UNTAGGED tavern line that also carries a RE_CRIT word - `lord` and
+***   `falls` are both in that alternation, and this game has eight lords - would now return
+***   P_TOWN (2) where it used to return P_CRIT (3). PROTECT_FROM is 2 so it still survives a busy
+***   scene; what it loses is DWELL (18 s -> 12 s) and displacement precedence. TELL ME WHETHER
+***   THAT LINE IS REACHABLE AND WHETHER YOU WANT IT. If the answer is that a staked tavern line
+***   naming a lord is still a tavern line, say so and I will record it as decided.
+***
+*** ===== LOCK DISCIPLINE, 08:58 -> 10:00 CT. CLEAN-HOUR COUNT RESETS TO 0 - MY FAULT, NOT A LANE'S.
+***   QA TESTER 08:41:45 -> 08:46:26, cap claim+15, released inside it. Clean.
+***   CHAT BOT B198 08:49:40 -> 08:50:55 (its own corrected stamp), declared 08:52, cap 09:14:40
+***     computed first. Inside both, cleared the HUD at :52. Clean.
+***   HUD U201 08:53:47 -> 08:58:33, cap 09:08, released before :07. Inside. ONE NOTE AND IT IS NOT
+***     A CHARGE: you wrote THREE consecutive RUNNING lines (08:53:47, 08:55:09, 08:56:14) with no
+***     IDLE between them, then an IDLE, then a fourth RUNNING. No other lane was displaced and the
+***     window was yours, so no rule was broken - but a reader clearing a stale lock cannot tell a
+***     re-declaration from a second live hold. One RUNNING, one IDLE.
+***   GAME BUILD S153 09:08:54 -> 09:09:30, stand-down, no Godot. Clean, and STARVED - see below.
+***   CHAT BOT B199 09:48:23 -> 09:50:31, cap 10:13:23. Eight seconds past its own approximate
+***     declaration, self-reported in a NOTE. Not charged.
+***   HUD U202 09:54:16 -> 09:58:13, declared 10:03, cap 10:09, clear of :07. Clean.
+***   NO TWO LANES HELD AT ONCE. NO STALE LOCK CLEARED. NO FUTURE STAMP SURVIVED - the one that was
+***   written was corrected by its own author within thirteen seconds.
+***   **THE COUNT RESETS TO 0 BECAUSE I STARVED THE GAME BUILD**, and the fix is the split write at
+***   the top of this block: the :07 lane's row went to origin/laptop at 10:04:51 CT, before its
+***   firing, and the other four rows followed. That is the rule working as written, late.
+***
+*** ===== THE DEAD-DATA AUDIT, THIS HOUR. THE UNREAD COUNT DID NOT MOVE. =====
+***   Corpus `scripts/*.gd` + `web/app.js` ONLY - 48 + 1 = 49 files, 2,476,560 chars. Data glob
+***   `data/*.json`, one level, 12 files, 169 top-level keys (168 last hour; C-233 added one).
+***     UNREAD LIVE DATA KEYS: ZERO.
+***     ZERO-HIT KEYS: 79 = 64 `_note_` + 15 NON-NOTE. **THE NON-NOTE 15 IS UNMOVED** and is the
+***     same 15, name for name: the two runtime-built `_alt` pools READ at delve.gd:4022
+***     (`lord_intros_alt`, `unique_intros_alt`); the four declared-dead (`phase2_words`,
+***     `phase2_words_alt`, `phase2_words_alt2`, `town_levels_for_the_desktop`); and the nine
+***     prose/spec strings (biomes `technique`; bosses `boss_floors`; origins `chronicle_line`,
+***     `word_order`, `casing`; ranks `promotion_line`, `one_roll`; strains `_gating`; world
+***     `canon_silences`). NO LANE IS TO WIRE ANY OF THEM.
+***     SERIES: 52 -> 53 -> 56 -> 76 -> 77 -> 78 -> 79. EVERY step is `_note_` keys. The signal is
+***     the 15 and it has not moved for days.
+***     UNREFERENCED ASSET DIRECTORIES: ZERO, of 38 with files, measured off assets/ only.
+***     `assets/graveyard/Textures` flagged again and I RE-PROVED THE GUARD rather than quoting it:
+***     all five .glb in assets/graveyard/ name a texture in their own bytes, and grave_keeper.gd:9
+***     and :10 load two of them by name. A texture subfolder is referenced by its sibling models.
+***
+*** ===== MY OWN SECOND FAULT THIS RUN, AND THE LANE'S NUMBER WAS RIGHT. =====
+*** I measured the hub's beast-icon budget with `du -sb` and got 275,876 bytes against the 270,846
+*** the lane and the 08:58 seat both reported, and I was ready to call it a drift. IT WAS MY
+*** INSTRUMENT. `du` counts directory inodes, and the folder also holds a legitimate 934-byte
+*** `_manifest.json` that is not a portrait. Summing the .webp alone gives 270,846 EXACTLY. When a
+*** long-standing figure and your fresh measurement disagree by a small amount, SUSPECT YOUR OWN
+*** ENUMERATION FIRST - this prompt says that about the dead-data audit and it is true of every
+*** count in this house.
+***
+*** ===== FOR THE SUPERVISOR =====
+*** (1) **NEW, AND IT IS COSTING A LANE AN HOUR AT A TIME. `data/drops.json` OWNERSHIP.**
+***     The content lane's prompt names FOUR owned files and bars new data files. Your 02:30
+***     directive puts System 41 on content, and System 41 needs a drops file. Content has now
+***     correctly stood down THREE FIRINGS RUNNING (07:3x, 08:3x, 09:3x), each time reading its own
+***     rule right and saying so. The 08:58 seat wrote a licence into the plan; the lane judged
+***     that a plan cannot widen a prompt, and I think the lane is right. A FIRING CANNOT EDIT A
+***     PROMPT, so this seat cannot close it from here, and I have STOPPED ASKING rather than make
+***     the lane refuse a fourth time. MY RECOMMENDATION: confirm that `data/drops.json` is
+***     content's fifth owned file for System 41 and nothing else, and it will be landed in the
+***     content prompt on the first live turn (it is already in the owed list below). If you would
+***     rather the file sat with another lane, say which and I will route it there this hour.
+***     BLOCKED MEANWHILE: System 41's Crafting Table and Material Index on the hub.
+*** (2) CARRIED AND NOW ACTUALLY LIVE - THE HUD'S IN-GAME HALF OF SYSTEM 40. I have given the game
+***     build System 40's engine half this hour, so when the subclass exists in roster.gd it has to
+***     read out on the party frames, the leaderboard rows and the feed - HUD-owned code - and your
+***     02:18 directive names no in-game HUD work for 38-40. MY RECOMMENDATION, STILL YOURS: give
+***     the HUD the in-game half explicitly. I have NOT assigned it and nothing is blocked.
+*** (3) CARRIED, THIRD HOUR, UNANSWERED: `!bestiary` IS ALREADY A LIVE COMMAND and System 41
+***     re-specifies it. Does it get REPLACED by the System 41 shape, or does the expanded entry
+***     live at a new verb? MY RECOMMENDATION is unchanged: replace it, keeping the old output as
+***     the fallback for an undiscovered monster. The chat bot is on `!rep` so nothing is blocked.
+*** (4) FOR INFORMATION, CARRIED: the System 41 publisher contract the hub cannot fill itself -
+***     `hero.beasts = {<key>: {faced, survived, killed}}` (game build) and an optional global
+***     `p.bestiary[<key>]` (content). I read that as mine to assign and will queue it to the game
+***     build after System 40's engine half unless you say otherwise.
+*** (5) FOR INFORMATION, CARRIED: System 38's tavern mints the house's matched stake into the
+***     winner's purse rather than debiting a treasury account (economy.gd:893-898). Long-run net
+***     is still a sink. Say the word if you want the tavern put on the treasury.
+***
+*** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, TO BE LANDED ON THE FIRST LIVE TURN ====
+*** A FIRING CANNOT EDIT A SCHEDULED TASK'S PROMPT - the gate is on the CALL, not on a field, and
+*** that is settled. I did not re-test it. These are owed and carried until a live turn:
+*** (A) CONTENT PROMPT - the four-file rule must become FIVE: add `data/drops.json` as owned, for
+***     System 41 and nothing else. **NOW ALSO WITH THE SUPERVISOR** (item 1 above) because three
+***     lane-hours have been spent on it. Land the prompt edit the moment either answer arrives.
+*** (B) THIS PROMPT - the ART row's baseline says the fit register "judges 46 rows, of which 44 are
+***     live bodies"; it judges 69 as of pass 5. Stale figure, should go.
+*** (C) THIS PROMPT - the Step 0 baseline still prints "56 keys return zero literal hits: 41
+***     `_note_` + 15 NON-NOTE" and a corpus of "47 `scripts/*.gd` + `web/app.js` = 48 files". The
+***     non-note 15 is right and unmoved; the raw total is 79 and the corpus is 48 .gd + app.js =
+***     49 files, 2,476,560 chars. The series belongs in the plan, not frozen in the prompt.
+*** (D) **THIS PROMPT, NEW THIS RUN** - the standing note that the art fit register "reads
+***     `RED / ok:false` ... on two CARRIED unmeasured rows (`snuffer_chibi`, `tallyman_chibi`)"
+***     IS NO LONGER TRUE. As of pass 5 the register reads `verdict: GREEN`, `ok: true`,
+***     `red_summary.rows: []`, `shipped_red: []`, `ok_shipped: true`, `errors: []`,
+***     `blind_views: []`, across all 69 rows. The instruction to measure rather than quote stands
+***     and is why this cost nothing, but a seat reading that note today would wrongly discount a
+***     genuinely green register - which is the opposite of the failure mode it was written for.
+***
+*** ===== NEEDS MR. E =====
+*** nothing.
 
 
 *** ===== TAKE THIS NEXT - THE 08:58 CT FIRING, 27 NOV 2026. =====

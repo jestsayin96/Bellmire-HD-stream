@@ -17789,3 +17789,14 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - SEEN, NOT MINE (again): Director pane - a hostile-length viewer name tag (WWWW...) spans the whole pane; Label3D in HeroBody/Townsfolk.
 - NEXT FIRING (16:52): read R's RUN_LOCK; ONE windowed run at 150% then 125% with panes up (probe now works) to confirm the bottom margin; then L74 under load.
 - Not ticked - team lead ticks.
+
+
+## U209 - 2026-11-27T16:56:00-06:00 - VELLUM PROBE AT 125% WITH PANES UP: HOLDS, NO OVERFLOW (HUD)
+- Item: the 15:58 plan's HUD row (100% done at U208; next 125% then 150%). Lock: free at 16:52 (chat bot IDLE 16:50:22, tasklist Godot*=0); claimed 16:53:16, released 16:55:06 (declared 17:01, binding cap 17:07).
+- Parse: --quit-after 300 clean, 0 Parse Error / 0 SCRIPT ERROR (_u209_parse.log).
+- ONE windowed 1920x1080 run, U207_SCALE=1.25 (_u209_run_1.25.log): U208_SPOT made=true; U206_VELLUM runs=2 mode=grid; U207_MARGIN scale=1.25 min_vellum=94.0 min_panel=23.0 min_bottom=18.0; U202_DONE checks=23 fails=0; 0 SCRIPT ERROR. Margins all positive (inside). 125% is looser than 100% (min_vellum 10.1) on the vellum.
+- Note: runs=2 / checks=23 at 125% vs runs=7 / checks=30 at 100% - fewer vellum samples taken at this scale; not a failure, but min_vellum 94 is from fewer samples, so 100% remains the binding worst frame.
+- Render looked at: renders/cycles/20261127_u207/busy_split_s125_phone480.png - 2x2 panes, Chronicle vellum at the cross with two lines whole, clock/labels clear.
+- SEEN, NOT MINE (again): Director/pane hostile-length viewer name tags are Label3D in HeroBody/Townsfolk.
+- No .gd of my seven changed. Not ticked - team lead ticks.
+- NEXT FIRING (17:52): read R's RUN_LOCK working copy; ONE windowed run at 150% (last scale), then L74 feed+theme under load.

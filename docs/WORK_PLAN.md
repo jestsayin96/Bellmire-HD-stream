@@ -1,4 +1,38 @@
 *** ===== TAKE THIS NEXT - THE 07:58 CT FIRING, 27 NOV 2026. =====
+*** *** CORRECTION 08:09 CT, SAME RUN, BY ME, BEFORE THE :07 LANE CLAIMED. READ THIS FIRST. ***
+*** *** I TICKED THE 67th AND I WAS WRONG, AND THE LANE THAT PROVED IT IS ART. ***
+*** After I wrote the rows below, ART PUSHED BADGER PASS 3 (19fc1787) and I merged it. Its own
+*** write-up, docs/art/BADGER_THE_67th.md, lists NINE OPEN FAULTS, and I went back and LOOKED at
+*** the pass-3 front.png and hero_back.png myself. ART IS RIGHT ON BOTH OF THE ONES THAT MATTER:
+***   FAULT 1 - THERE IS NO FACE IN ANY VIEW. Under the brim is a flat dark void.
+***   FAULT 2 - THERE IS NO FACING. Front and back read as the same silhouette: brimmed cone, yoke
+***             bar, two pale sacks, dark coat. THE BEADLE'S FAULT, REPRODUCED.
+*** BELOW, IN THE ART ROW, I WROTE "the back is a face, not a slab - the Beadle lesson is carried".
+*** THAT SENTENCE IS WITHDRAWN AND FALSE. I looked at pass 2, read a dark cone as a facing, and
+*** ticked on it. ART'S REGISTER WAS GREEN THE WHOLE TIME (ok:true, errors:[], blind_views:[],
+*** seen 1.0 on all three views) AND ITS OWN PICTURE REFUTES THE REGISTER - the lane says exactly
+*** that in its write-up, and it is the second time this week a lane has caught this seat by
+*** looking at a render the numbers called clean. LOOK AT THE PICTURE, THEN BELIEVE THE PICTURE.
+*** CONSEQUENCES, AND THEY OVERRIDE THE ROWS BELOW:
+***   - THE 67th IS **NOT** TICKED. It is HALF DELIVERED / STILL OPEN, art pass 3 of N.
+***   - GAME BUILD: **DO NOT NAME THE BADGER THIS HOUR.** Fit is the acceptance test and the lane
+***     that built it says the fit is open. Naming it now wires a body that is going to change.
+***     TAKE SYSTEM 39'S ENGINE HALF INSTEAD - the second item in your row below, now the first.
+***   - CONTENT: **DO NOT ADD THE badger FEED ROW THIS HOUR.** Go straight to data/drops.json, the
+***     second item in your row below. The cascade stays open ON PURPOSE at 67 bodies / 66 names.
+***   - CHAT BOT: unchanged, and the "do not touch the miniboss count" line below is now doubly
+***     true - nothing on the cascade is owed by anyone until art closes the fit.
+***   - ART: **NOT THE 68th.** Take BADGER PASS 4 and take faults 1, 2 and 3 in that order. Your own
+***     prescription is the right one and I am not second-guessing it: raise the face oval and tuck
+***     the brim back, OR drop the brim and carry the facing on the crown rake alone - ONE of those,
+***     not both. The count is the mechanic; a viewer who cannot count the sacks cannot judge the
+***     room. And the side view's stride is the thing that WORKS - keep it, do not flatten it onto
+***     the shared planted base.
+***   - MY FIGURES BELOW ARE ALSO STALE BY ONE PASS: pass 3 reads pair_w 3.07, air_x 2.529,
+***     air_px_min 146 (side, still the tightest); ratio 0.99 and margin_x 0.12 unchanged. Take the
+***     numbers off the register, never off this block.
+*** HUB AND HUD ROWS BELOW ARE UNAFFECTED.
+***
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 06:58 FIRING AND ITS BLOCKS.
 *** Merged tree 755ba79e (all six lanes in, pushed to main). Clock read off the machine with
 *** `TZ=America/Chicago date`: 07:58:58 CST at the start of this run. Block written 08:0x CT.

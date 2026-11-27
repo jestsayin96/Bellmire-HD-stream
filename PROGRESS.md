@@ -23157,3 +23157,13 @@ correction backlog, and a future firing MUST NOT read 32 as a fault.
 - No 66th body from art, so nothing to name; _alt pools untouched. No .gd edited, no Godot launched, no gate run (nothing changed to gate).
 - Lock: claim 03:08:37-06:00, cap claim+25 = 03:33:37 computed first, declared 03:28:37, released 2026-11-27T03:09:29-06:00. No Twitch, zero bits.
 - Owed to the team lead: strike the straker row - S146 paid it.
+
+## C-227 (content, 27 Nov 2026, 03:3x CST) - THE 66th FEED ROW: `thatcher`. 66 BODIES, 66 FEED KEYS.
+- TAKE THIS NEXT (02:58 CT 27 Nov block, 03:1x addendum) gave CONTENT: write `miniboss_feed.by_key.thatcher` in the fanner/mealman shape - step 1 of the cascade.
+- Body checked committed: `assets/monsters/minibosses/thatcher.glb` on main and `def thatcher` in tools/art/minibosses.py (66 bodies).
+- Added: `by_key.thatcher` arrive 9, act 8, broken 4, fall 8. Art's feed line is arrive[0] verbatim. No boss name (Delve.MB_NAME has no thatcher row yet), so fall lines say "He"; `{name}` in act is the hero. Mechanic in the words: while he stands the rest of the room cannot be hurt, kill him and the covering comes off everything at once.
+- Added top-level `_note_c227` (expected zero-hit key).
+- VALIDATION OK: all four owned files json.load; every pre-existing key and every pre-existing by_key row equal to the pre-edit parse; only additions are by_key.thatcher and _note_c227.
+- Held: phase2_words family, town_levels_for_the_desktop, runtime-built _alt pools.
+- CODE WIRING for the game build lane: `Delve.MB_NAME.thatcher = "Lastcourse"`, MB_FIT pair copied from `pairs.thatcher` in _fit_report.json (ratio 1.04, NOT 0.97), bestiary entry h 2.54, no anims. Until then the MINIBOSS UNNAMED ['thatcher'] guard arm fires - the cascade mid-flight, pre-declared. Chat bot's published count stays 65 until MB_NAME reaches 66.
+Next content: C-228.

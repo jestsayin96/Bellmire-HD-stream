@@ -1,0 +1,837 @@
+{
+ "by_key": {
+  "beadle": {
+   "hash": "6c7e7bf2722fff74f1e139533cf2718f0809e434e0e7d9a717ce98090569d7d3",
+   "objs": [
+    {
+     "faces": 92,
+     "mats": [
+      {
+       "base": [
+        0.082,
+        0.092,
+        0.118,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "beadle_body_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.84,
+       "spec": 0.5
+      }
+     ],
+     "obj": "beadle_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 136
+    },
+    {
+     "faces": 484,
+     "mats": [
+      {
+       "base": [
+        0.052,
+        0.05,
+        0.048,
+        1.0
+       ],
+       "metal": 0.06,
+       "name": "beadle_dark_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.72,
+       "spec": 0.5
+      }
+     ],
+     "obj": "beadle_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 614
+    },
+    {
+     "faces": 104,
+     "mats": [
+      {
+       "base": [
+        0.775,
+        0.73,
+        0.615,
+        1.0
+       ],
+       "metal": 0.01,
+       "name": "beadle_bone_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.5,
+       "spec": 0.5
+      }
+     ],
+     "obj": "beadle_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 114
+    },
+    {
+     "faces": 150,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.6,
+        0.075,
+        1.0
+       ],
+       "emit_str": 1.1,
+       "name": "beadle_glow_ov",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "beadle_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 202
+    }
+   ]
+  },
+  "collier": {
+   "hash": "6ca399cb8cf20a5181f8b30233e24a2c32bf13232bd83d8bd5affbbee89c9b8e",
+   "objs": [
+    {
+     "faces": 1829,
+     "mats": [
+      {
+       "base": [
+        0.8,
+        0.8,
+        0.8,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "collier_body_ov",
+       "nodes": [
+        "ATTRIBUTE",
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.88,
+       "spec": 0.5
+      }
+     ],
+     "obj": "collier_body",
+     "vcol_attrs": [
+      "Col"
+     ],
+     "vcol_items": 6,
+     "verts": 1772
+    },
+    {
+     "faces": 800,
+     "mats": [
+      {
+       "base": [
+        0.042,
+        0.046,
+        0.054,
+        1.0
+       ],
+       "metal": 0.06,
+       "name": "collier_dark_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.8,
+       "spec": 0.5
+      }
+     ],
+     "obj": "collier_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 942
+    },
+    {
+     "faces": 44,
+     "mats": [
+      {
+       "base": [
+        0.842,
+        0.79,
+        0.628,
+        1.0
+       ],
+       "metal": 0.0,
+       "name": "collier_bone_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.5,
+       "spec": 0.5
+      }
+     ],
+     "obj": "collier_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 72
+    },
+    {
+     "faces": 230,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.3,
+        0.062,
+        1.0
+       ],
+       "emit_str": 1.15,
+       "name": "collier_glow_ov",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "collier_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 285
+    }
+   ]
+  },
+  "dredger": {
+   "hash": "7974df4f2bbbdeb78a781454d14a9b631f2b174f5db80d1c7f1b8911a6a9fcd9",
+   "objs": [
+    {
+     "faces": 294,
+     "mats": [
+      {
+       "base": [
+        0.236,
+        0.222,
+        0.2,
+        1.0
+       ],
+       "metal": 0.03,
+       "name": "dredger_body_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.86,
+       "spec": 0.5
+      }
+     ],
+     "obj": "dredger_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 318
+    },
+    {
+     "faces": 386,
+     "mats": [
+      {
+       "base": [
+        0.082,
+        0.078,
+        0.074,
+        1.0
+       ],
+       "metal": 0.1,
+       "name": "dredger_dark_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.7,
+       "spec": 0.5
+      }
+     ],
+     "obj": "dredger_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 455
+    },
+    {
+     "faces": 44,
+     "mats": [
+      {
+       "base": [
+        0.944,
+        0.93,
+        0.862,
+        1.0
+       ],
+       "metal": 0.26,
+       "name": "dredger_bone_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.3,
+       "spec": 0.5
+      }
+     ],
+     "obj": "dredger_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 80
+    },
+    {
+     "faces": 96,
+     "mats": [
+      {
+       "emit": [
+        0.96,
+        0.94,
+        0.8,
+        1.0
+       ],
+       "emit_str": 0.7,
+       "name": "dredger_glow_ov",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "dredger_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 84
+    }
+   ]
+  },
+  "dyer": {
+   "hash": "0e0b4a727bad5af9c0ba3513a9777ac67459d293842ada111a85a15432957aac",
+   "objs": [
+    {
+     "faces": 613,
+     "mats": [
+      {
+       "base": [
+        0.055,
+        0.205,
+        0.6,
+        1.0
+       ],
+       "metal": 0.0,
+       "name": "dyer_body_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.54,
+       "spec": 0.5
+      }
+     ],
+     "obj": "dyer_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 636
+    },
+    {
+     "faces": 1128,
+     "mats": [
+      {
+       "base": [
+        0.07,
+        0.062,
+        0.056,
+        1.0
+       ],
+       "metal": 0.03,
+       "name": "dyer_dark_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.82,
+       "spec": 0.5
+      }
+     ],
+     "obj": "dyer_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 1258
+    },
+    {
+     "faces": 510,
+     "mats": [
+      {
+       "base": [
+        0.62,
+        0.105,
+        0.08,
+        1.0
+       ],
+       "metal": 0.0,
+       "name": "dyer_bone_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.58,
+       "spec": 0.5
+      }
+     ],
+     "obj": "dyer_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 514
+    },
+    {
+     "faces": 288,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.69,
+        0.075,
+        1.0
+       ],
+       "emit_str": 1.05,
+       "name": "dyer_glow_ov",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "dyer_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 339
+    }
+   ]
+  },
+  "greener": {
+   "hash": "83eb83d5a487e7bcf537ccf50f9061e6eee15994faee6e90ab01df283b46a862",
+   "objs": [
+    {
+     "faces": 4476,
+     "mats": [
+      {
+       "base": [
+        0.075,
+        0.47,
+        0.355,
+        1.0
+       ],
+       "metal": 0.0,
+       "name": "greener_body_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.62,
+       "spec": 0.5
+      }
+     ],
+     "obj": "greener_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 3934
+    },
+    {
+     "faces": 920,
+     "mats": [
+      {
+       "base": [
+        0.062,
+        0.058,
+        0.052,
+        1.0
+       ],
+       "metal": 0.03,
+       "name": "greener_dark_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.84,
+       "spec": 0.5
+      }
+     ],
+     "obj": "greener_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 1006
+    },
+    {
+     "faces": 986,
+     "mats": [
+      {
+       "base": [
+        0.8,
+        0.8,
+        0.8,
+        1.0
+       ],
+       "metal": 0.06,
+       "name": "greener_bone_ov",
+       "nodes": [
+        "ATTRIBUTE",
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.44,
+       "spec": 0.92
+      }
+     ],
+     "obj": "greener_bone",
+     "vcol_attrs": [
+      "Col"
+     ],
+     "vcol_items": 5,
+     "verts": 998
+    },
+    {
+     "faces": 537,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.265,
+        0.035,
+        1.0
+       ],
+       "emit_str": 1.45,
+       "name": "greener_glow_ov",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "greener_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 476
+    }
+   ]
+  },
+  "leech": {
+   "hash": "5cdd1eb4134dbdd28db494c0e1876729877b14ab0bf2c17444b3729b175d0b4f",
+   "objs": [
+    {
+     "faces": 318,
+     "mats": [
+      {
+       "base": [
+        0.318,
+        0.312,
+        0.302,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "leech_body_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.52,
+       "spec": 0.5
+      }
+     ],
+     "obj": "leech_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 352
+    },
+    {
+     "faces": 318,
+     "mats": [
+      {
+       "base": [
+        0.04,
+        0.038,
+        0.04,
+        1.0
+       ],
+       "metal": 0.06,
+       "name": "leech_dark_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.56,
+       "spec": 0.5
+      }
+     ],
+     "obj": "leech_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 409
+    },
+    {
+     "faces": 238,
+     "mats": [
+      {
+       "base": [
+        0.4,
+        0.33,
+        0.185,
+        1.0
+       ],
+       "metal": 0.22,
+       "name": "leech_bone_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.44,
+       "spec": 0.5
+      }
+     ],
+     "obj": "leech_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 297
+    },
+    {
+     "faces": 112,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.03,
+        0.012,
+        1.0
+       ],
+       "emit_str": 0.6,
+       "name": "leech_glow_ov",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "leech_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 112
+    }
+   ]
+  },
+  "overlooker": {
+   "hash": "2163ae5f612867fc5fd0dce8d2bfaca1ce4eb43259f645072abf8e8312f38d23",
+   "objs": [
+    {
+     "faces": 324,
+     "mats": [
+      {
+       "base": [
+        0.255,
+        0.246,
+        0.292,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "overlooker_body_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.62,
+       "spec": 0.5
+      }
+     ],
+     "obj": "overlooker_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 390
+    },
+    {
+     "faces": 354,
+     "mats": [
+      {
+       "base": [
+        0.07,
+        0.068,
+        0.074,
+        1.0
+       ],
+       "metal": 0.06,
+       "name": "overlooker_dark_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.78,
+       "spec": 0.5
+      }
+     ],
+     "obj": "overlooker_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 391
+    },
+    {
+     "faces": 106,
+     "mats": [
+      {
+       "base": [
+        0.93,
+        0.922,
+        0.88,
+        1.0
+       ],
+       "metal": 0.22,
+       "name": "overlooker_bone_ov",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.34,
+       "spec": 0.5
+      }
+     ],
+     "obj": "overlooker_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 102
+    },
+    {
+     "faces": 126,
+     "mats": [
+      {
+       "emit": [
+        0.82,
+        0.9,
+        1.0,
+        1.0
+       ],
+       "emit_str": 0.8,
+       "name": "overlooker_glow_ov",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "overlooker_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 112
+    }
+   ]
+  },
+  "stoker": {
+   "hash": "2e8efca48e547bb344efb513d3cff0e1a9f682385526d3e4811e4ffb741b4537",
+   "objs": [
+    {
+     "faces": 192,
+     "mats": [
+      {
+       "base": [
+        0.336896,
+        0.231132,
+        0.181264,
+        1.0
+       ],
+       "metal": 0.101937,
+       "name": "stoker_body",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.62,
+       "spec": 0.5
+      }
+     ],
+     "obj": "stoker_body",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 172
+    },
+    {
+     "faces": 140,
+     "mats": [
+      {
+       "base": [
+        0.065903,
+        0.048981,
+        0.041002,
+        1.0
+       ],
+       "metal": 0.04,
+       "name": "stoker_dark",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.74,
+       "spec": 0.5
+      }
+     ],
+     "obj": "stoker_dark",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 192
+    },
+    {
+     "faces": 274,
+     "mats": [
+      {
+       "base": [
+        0.37127,
+        0.348665,
+        0.34113,
+        1.0
+       ],
+       "metal": 0.02,
+       "name": "stoker_bone",
+       "nodes": [
+        "BSDF_PRINCIPLED",
+        "OUTPUT_MATERIAL"
+       ],
+       "rough": 0.558,
+       "spec": 0.5
+      }
+     ],
+     "obj": "stoker_bone",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 334
+    },
+    {
+     "faces": 258,
+     "mats": [
+      {
+       "emit": [
+        1.0,
+        0.42,
+        0.12,
+        1.0
+       ],
+       "emit_str": 3.2,
+       "name": "stoker_glow",
+       "nodes": [
+        "EMISSION",
+        "OUTPUT_MATERIAL"
+       ]
+      }
+     ],
+     "obj": "stoker_glow",
+     "vcol_attrs": [],
+     "vcol_items": 0,
+     "verts": 226
+    }
+   ]
+  }
+ },
+ "errors": [],
+ "ok": true,
+ "tag": "ember_before"
+}

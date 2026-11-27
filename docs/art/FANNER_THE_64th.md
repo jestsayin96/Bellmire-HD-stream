@@ -60,6 +60,97 @@ straight down a line holding two of them and the far one hides behind the near
 one at EVERY radius - widening the ring only aligned them more exactly.
 Spacings are 75/85/105/95 degrees now, so no two vanes are 180 apart.
 
+## PASS 4 - THE GAUGE IS MEASURED NOW, AND THAT CHANGED THE ANSWER TWICE
+
+Three passes judged the vane count BY EYE off a contact sheet and all three
+were wrong in a different way. Pass 4 built the instrument first:
+`tools/art/_fanner_vane_ab.py` re-slots ONE vane to a probe material and
+re-renders through the SAME camera, so a vane's number is the pixels where it
+is the FRONT-MOST thing. Geometry is never dropped, so the bounds cannot move
+and the camera cannot quietly lie.
+
+**IT IMMEDIATELY SAID SOMETHING NO EYE HAD.** Pass 3's "front 3" was not three
+good vanes and one weak one. Three vanes read 4200-6600 px and the fourth read
+**ONE PIXEL**. The vane at 185 degrees sat on the ring's BACK, which on this
+body is the half holding the man: the glow dome ate its lower band and HIS OWN
+SKULL ate the upper. It was absent, not marginal, and no nudge would have found
+it.
+
+**FIX A - THE LAYOUT, CHOSEN BY SEARCH AND NOT BY ARGUMENT.** Two faults pull
+opposite ways, which is why three passes of reasoning could not land it:
+
+- Move the vanes to the FORWARD arc and occlusion dies - every candidate's
+  weakest vane jumped to 400+ px. But every one then read **SIDE = 2**, because
+  from the side a vane's lateral position is `-r*cos(theta)` and a mirror-
+  symmetric fan collapses two pairs onto each other. Measured min lateral gap
+  of the -66/-23/23/66 fan across the four views: **0.0000 m**.
+- Spread them round the full ring and the lateral gaps are fine - pass 3's ring
+  scored 0.0902 m, better than any forward fan - but the man eats whichever one
+  goes behind him.
+
+So the search scores BOTH at once, and round 2 found layouts clear of both,
+with gaps to 0.1141 m. Those still read 3 of 4, and the arithmetic says why:
+the projected ring is only about 0.74 m across and four blades 0.168 m wide
+fill 0.67 m of it, so neighbouring footprints MUST touch. **WIDTH WAS THE ONLY
+FREE VARIABLE LEFT.** Round 3 moved it, one change at a time.
+
+WINNER `ring_a_w090` - 79/134/262/310 degrees, 0.300 long, **0.090 wide**:
+
+    front          count=4  px 3923 3920 3752 4087   fused []
+    side           count=4  px 2859 4282 1880 3800   fused []
+    three_quarter  count=4  px 1926 3650 1588 3776   fused []
+    back           count=4  px 3932 4132 3875 3977   fused []
+
+**FOUR FROM EVERY VIEW, NO FUSED PAIR, WEAKEST VANE 1588 px AGAINST ONE.**
+0.110 still fused; 0.075 also read 4/4/4/4 and lost the tie on weakest-vane
+margin, so the WIDER blade shipped.
+
+**FIX B - THE FEET. A SINGLE RADIUS CANNOT SIT ON THIS RIM.** The bowl is
+squashed 0.82 in y, so the rim is an ELLIPSE, 0.392 across and 0.321 deep. The
+old fixed 0.405 was outside the rim at the sides and **0.084 clear of it dead
+forward** - the forward vanes were standing in mid-air. Each foot now solves
+the ellipse for its own angle.
+
+**FIX C - THE EYES AND THE HEARTH WERE ONE MATERIAL.** "The same warm tone" was
+not a near-miss, it was an identity: both were slotted `glow`, so they were the
+same rgb at the same emission and **no render could ever have separated them**.
+The eyes now carry their own emissive slot, `ember`, a deep red at under half
+the hearth's strength. Measured in RENDERED pixels inside each feature's own
+visible footprint, not on paper (`tools/art/_fanner_value_ab.py`):
+
+    front          eyes luma 0.3337  hearth luma 0.6138  ratio 1.84
+    three_quarter  eyes luma 0.3358  hearth luma 0.6203  ratio 1.85
+
+The hearth out-reads the face. It tied before, by construction.
+
+`ember` is a FIFTH slot and the merge's slot tuple was hard-coded at four.
+A body that does not declare it has no `ember` group and the loop skips it, so
+nothing else moves - and that is EVIDENCE, not an argument:
+`renders/art/minibosses/_ember_regression.json` hashes geometry and material
+state for eight shipped bodies (beadle, dyer, greener, overlooker, dredger,
+stoker, collier, leech) on origin/art's minibosses.py and on this one. **All
+eight hashes identical.**
+
+**FIX D - THE self_seen CELL, AND PASS 3 WAS WAITING FOR SOMETHING THAT CANNOT
+HAPPEN.** Pass 3 wrote that `_backread.py --keys fanner` returned RC=0 but the
+row never landed, and handed the next firing a bug to find. There is no bug:
+**`_backread.py` writes `_backread<tag>.json` and has never written
+`_selfseen_all.json` at any point in its life.** The merge was always a
+separate hand step - the file's own provenance note says so for the dredger,
+the harrowman, the pledgeman and the timberman. The row is merged now, row by
+row, 62 -> 63, the other rows untouched, and measured on the PASS-4 geometry
+rather than pass 3's, because self_seen is an OCCLUSION measure and both of
+this pass's changes move occlusion. `man_seen` front **0.85** against a 0.75
+bar.
+
+`minibossfit` is now **GREEN**: `ok: true`, `errors: []`, `shipped_red: []`,
+`ok_shipped: true`, blank-and-border 192 files 0 failures across 64 cells.
+
+**A TRAP WORTH THE NEXT LANE'S TIME: BLENDER EXITS 0 ON A PYTHON TRACEBACK.**
+The first run of this harness died inside `lordgen.add_lights` - `aura` is the
+rim light's rgb triple and I passed a float - and the subprocess still returned
+**RC=0**. A `.done` file holding 0 is not a pass. Trust the json or nothing.
+
 ## THE FIT PROOF - WHAT I LOOKED AT, AND WHAT IS STILL WRONG
 
 Rendered and LOOKED AT: `renders/art/minibosses/fanner/{front,side,three_quarter}.png`
@@ -71,7 +162,31 @@ GREEN: `ok: true`, `errors: []`, `blank: []`, border check clean, 4 views,
 0.95 - it stands just under a knight, which is right for a thing that is meant
 to look modest until the party crowds it.
 
-**FAULTS I CAN SEE AND AM NOT HIDING:**
+**PASS 3's FAULT LIST, AND WHERE PASS 4 LEFT EACH ONE.** 1 and 4 are CLOSED
+and measured; 2 is IMPROVED BUT NOT CLOSED; 3 and 5 are STILL OPEN AND I LOOKED
+AT THEM. The pass-3 text is kept below verbatim so the record is not tidied.
+
+  1. THE COUNT - **CLOSED.** 4/4/4/4, no fused pair, weakest vane 1588 px.
+  2. THE FEET - **NOT CLOSED, AND I CAN SEE IT IN THE FRONT RENDER.** The
+     ellipse fix removed the dead-forward float, and on the SIDE the vanes
+     plainly meet the rim. On the FRONT there is still background visible
+     between the left-hand blades and the bowl. The cause is not the mount: a
+     vane planted on the FAR rim projects at the far rim's screen height,
+     which sits ABOVE the bowl's near silhouette, so a correct 3D join reads
+     as a gap. Fixing it means dropping the feet far enough to tuck behind the
+     bowl's silhouette, which costs visible vane px - so it is a pass 5 with
+     the gauge re-run, not a tweak.
+  3. A VANE CROSSES THE BOWL MOUTH - **STILL OPEN.** Visible on the side view.
+     The cause is now known and is NOT the radius: the blade box is built on
+     WORLD x/y, so its wide 0.090 axis points radially at some azimuths and
+     tangentially at others. The fix is to orient each blade tangentially so
+     its radial reach is always the 0.052 thickness. I did not take it this
+     pass because it moves occlusion and would have invalidated the self_seen
+     cell I had just landed.
+  5. THE FAR VANE READS OFF THE SKULL ON THE SIDE - **STILL OPEN**, same fix
+     as 3 and same reason for deferring it.
+
+**PASS 3's ORIGINAL LIST, UNEDITED:**
 
 1. **THE GAUGE STILL DOES NOT READ 4 FROM EVERY SIDE.** Pass 3 reads **front
    3, side 4**. I traded the side fault for a front one: the vane at 185

@@ -4811,3 +4811,11 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
   another); hammerman = banks every blow and pays it back on whoever put in most. Both are reskins with feed lines
   today; the delve-side behaviour is a separate row if the team lead wants it.
 - No Twitch test, nothing redeemed, nothing cheered, ZERO BITS.
+
+## C-240 (27 Nov 2026 16:23 CST) - content: top-up by draw pressure (misfire +30)
+- TAKE THIS NEXT gave content: top up the owned pool with the worst lines-per-draw ratio (15:58 block, CONTENT :22 row).
+- Measured draw sites in delve.gd: descend once a delve (674 lines), cleared once a floor (658), epitaphs once a death
+  (1114, roster.gd), misfire once per caster per floor (167). Misfire has the fewest lines against the most draws.
+- data/lore_lines.json misfire 167 -> 197 (+30, all unique, frame `%s %s ... (%d vs DC %d)` kept, name/spell/roll/DC order). `_note_c240` added.
+- VALIDATION OK: lore_lines parses; 0 pre-existing keys changed except misfire (first 167 identical, +30 appended); items/bosses/potions untouched.
+- No miniboss body owed (by_key 70, roster closed). No code wiring implied: misfire is already read by `_pick_line("misfire")`.

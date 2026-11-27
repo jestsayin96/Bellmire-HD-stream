@@ -3361,7 +3361,7 @@ function renderBestiary(p) {
   const beasts = beastBook();
   const shown = beasts.filter((b) => beastFilter === "all" || b.kind === beastFilter);
   const metN = shown.filter((b) => beastTierFor(b, p, rows) > 0).length;
-  const note = el("p", "beast-count", num(metN) + " met, " + num(shown.length - metN) + " still rumour");
+  const note = el("p", "beast-count", num(metN) + " met, " + num(shown.length - metN) + " not yet met");
   box.append(note);
   const grid = el("div", "beast-grid");
   // met first, then rumours; stable inside each group

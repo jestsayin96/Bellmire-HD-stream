@@ -1,0 +1,873 @@
+=== import 10:10:57
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (26 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | ChatCmd[39m[0m
+[   3% ] [90m[1mupdate_scripts_classes[22m | Delve[39m[0m
+[   7% ] [90m[1mupdate_scripts_classes[22m | DungeonHD[39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | Economy[39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | FeedHUD[39m[0m
+[  18% ] [90m[1mupdate_scripts_classes[22m | Roster[39m[0m
+[  22% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  29% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  37% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  40% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  74% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  77% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  81% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  85% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  92% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Scanning actions... (72 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | badger.glb[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | thatcher.glb[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | iotex.png[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | iotex.png[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | iotex.png[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | almoner.webp[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | beadle.webp[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | bellman.webp[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | blower.webp[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | boiler.webp[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | changer.webp[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | collier.webp[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | comfitmaker.webp[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | cook.webp[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | crimp.webp[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | dauber.webp[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | dredger.webp[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | drillmaster.webp[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | drover.webp[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | dyer.webp[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | fanner.webp[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | fenman.webp[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | ferryman.webp[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | fuller.webp[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | gaoler.webp[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | greener.webp[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | harrowman.webp[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | hooper.webp[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | hurdleman.webp[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | iceman.webp[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | jointer.webp[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | leech.webp[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | loader.webp[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | mealman.webp[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | moulder.webp[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | nightman.webp[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | overlooker.webp[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | panner.webp[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | paviser.webp[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | pitman.webp[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | pledgeman.webp[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | porter.webp[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | pressman.webp[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | quartermaster.webp[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | rammer.webp[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | ratcatcher.webp[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | reeve.webp[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | relief.webp[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | roper.webp[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | scraper.webp[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | scrapwright.webp[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | sealer.webp[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | sexton.webp[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | sluicekeeper.webp[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | snarer.webp[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | snuffer.webp[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | sower.webp[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | stackman.webp[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | stiltman.webp[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | stoker.webp[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | stopper.webp[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | straker.webp[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | strickler.webp[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | tallyman.webp[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | tanner.webp[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | tapster.webp[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | thatcher.webp[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | timberman.webp[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | tither.webp[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | weigher.webp[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | winder.webp[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | turbary_hood.webp[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (68 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   1% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   2% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   4% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   5% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   7% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   8% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  10% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  11% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  13% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  14% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  15% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  17% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  18% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  20% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  21% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  23% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  24% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  26% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  27% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  28% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  30% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  31% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  33% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  34% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  36% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  37% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  39% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  40% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  42% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  43% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  44% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  46% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  47% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  49% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  50% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  52% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  53% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  55% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  56% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  57% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  59% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  60% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  62% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  63% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  65% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  66% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  68% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  69% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  71% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  72% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  73% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  75% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  76% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  78% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  79% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  81% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  82% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  84% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  85% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  86% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  88% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  89% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  91% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  92% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  94% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  95% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  97% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing pre-reimport operations...[39m[0m
+[   0% ] [90m[1mpreload_reimporting_scene[22m | Started Preparing scenes for reload (1 steps)[39m[0m
+[   0% ] [90m[1mpreload_reimporting_scene[22m | Analyzing scene [empty][39m[0m
+[  50% ] [90m[1mpreload_reimporting_scene[22m | Preparation done.[39m[0m
+[92m[ DONE ][39m [1mpreload_reimporting_scene[22m
+[0m
+[   0% ] [90m[1mreimport[22m | sluicekeeper.webp[39m[0m
+[   1% ] [90m[1mreimport[22m | sexton.webp[39m[0m
+[   2% ] [90m[1mreimport[22m | sealer.webp[39m[0m
+[   4% ] [90m[1mreimport[22m | scrapwright.webp[39m[0m
+[   5% ] [90m[1mreimport[22m | scraper.webp[39m[0m
+[   7% ] [90m[1mreimport[22m | roper.webp[39m[0m
+[   8% ] [90m[1mreimport[22m | relief.webp[39m[0m
+[  10% ] [90m[1mreimport[22m | reeve.webp[39m[0m
+[  11% ] [90m[1mreimport[22m | ratcatcher.webp[39m[0m
+[  13% ] [90m[1mreimport[22m | rammer.webp[39m[0m
+[  14% ] [90m[1mreimport[22m | quartermaster.webp[39m[0m
+[  15% ] [90m[1mreimport[22m | pressman.webp[39m[0m
+[  17% ] [90m[1mreimport[22m | porter.webp[39m[0m
+[  18% ] [90m[1mreimport[22m | pledgeman.webp[39m[0m
+[  20% ] [90m[1mreimport[22m | pitman.webp[39m[0m
+[  21% ] [90m[1mreimport[22m | paviser.webp[39m[0m
+[  23% ] [90m[1mreimport[22m | panner.webp[39m[0m
+[  24% ] [90m[1mreimport[22m | winder.webp[39m[0m
+[  26% ] [90m[1mreimport[22m | weigher.webp[39m[0m
+[  27% ] [90m[1mreimport[22m | tither.webp[39m[0m
+[  28% ] [90m[1mreimport[22m | timberman.webp[39m[0m
+[  30% ] [90m[1mreimport[22m | thatcher.webp[39m[0m
+[  31% ] [90m[1mreimport[22m | tapster.webp[39m[0m
+[  33% ] [90m[1mreimport[22m | tanner.webp[39m[0m
+[  34% ] [90m[1mreimport[22m | tallyman.webp[39m[0m
+[  36% ] [90m[1mreimport[22m | strickler.webp[39m[0m
+[  37% ] [90m[1mreimport[22m | straker.webp[39m[0m
+[  39% ] [90m[1mreimport[22m | stopper.webp[39m[0m
+[  40% ] [90m[1mreimport[22m | stoker.webp[39m[0m
+[  42% ] [90m[1mreimport[22m | stiltman.webp[39m[0m
+[  43% ] [90m[1mreimport[22m | stackman.webp[39m[0m
+[  44% ] [90m[1mreimport[22m | sower.webp[39m[0m
+[  46% ] [90m[1mreimport[22m | snuffer.webp[39m[0m
+[  47% ] [90m[1mreimport[22m | snarer.webp[39m[0m
+[  49% ] [90m[1mreimport[22m | almoner.webp[39m[0m
+[  50% ] [90m[1mreimport[22m | beadle.webp[39m[0m
+[  52% ] [90m[1mreimport[22m | bellman.webp[39m[0m
+[  53% ] [90m[1mreimport[22m | blower.webp[39m[0m
+[  55% ] [90m[1mreimport[22m | boiler.webp[39m[0m
+[  56% ] [90m[1mreimport[22m | changer.webp[39m[0m
+[  57% ] [90m[1mreimport[22m | collier.webp[39m[0m
+[  59% ] [90m[1mreimport[22m | comfitmaker.webp[39m[0m
+[  60% ] [90m[1mreimport[22m | cook.webp[39m[0m
+[  62% ] [90m[1mreimport[22m | crimp.webp[39m[0m
+[  63% ] [90m[1mreimport[22m | dauber.webp[39m[0m
+[  65% ] [90m[1mreimport[22m | dredger.webp[39m[0m
+[  66% ] [90m[1mreimport[22m | drillmaster.webp[39m[0m
+[  68% ] [90m[1mreimport[22m | drover.webp[39m[0m
+[  69% ] [90m[1mreimport[22m | dyer.webp[39m[0m
+[  71% ] [90m[1mreimport[22m | fanner.webp[39m[0m
+[  72% ] [90m[1mreimport[22m | overlooker.webp[39m[0m
+[  73% ] [90m[1mreimport[22m | nightman.webp[39m[0m
+[  75% ] [90m[1mreimport[22m | moulder.webp[39m[0m
+[  76% ] [90m[1mreimport[22m | mealman.webp[39m[0m
+[  78% ] [90m[1mreimport[22m | loader.webp[39m[0m
+[  79% ] [90m[1mreimport[22m | leech.webp[39m[0m
+[  81% ] [90m[1mreimport[22m | jointer.webp[39m[0m
+[  82% ] [90m[1mreimport[22m | iceman.webp[39m[0m
+[  84% ] [90m[1mreimport[22m | hurdleman.webp[39m[0m
+[  85% ] [90m[1mreimport[22m | hooper.webp[39m[0m
+[  86% ] [90m[1mreimport[22m | harrowman.webp[39m[0m
+[  88% ] [90m[1mreimport[22m | greener.webp[39m[0m
+[  89% ] [90m[1mreimport[22m | gaoler.webp[39m[0m
+[  91% ] [90m[1mreimport[22m | fuller.webp[39m[0m
+[  92% ] [90m[1mreimport[22m | ferryman.webp[39m[0m
+[  94% ] [90m[1mreimport[22m | fenman.webp[39m[0m
+[  95% ] [90m[1mreimport[22m | thatcher.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  97% ] [90m[1mreimport[22m | badger.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  98% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (68 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Reopening scenes...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Loading central editor layout...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Loading plugin window layout...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Editor layout ready.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+=== rc 0 10:11:06
+=== parse 10:11:06
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 636 flora on the grass islands
+VALLEY verges 178
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+SNAPSHOT on: https://paaukwaffaamazgrndbv.supabase.co every 60 s
+TWITCH joined #jestsayin96
+TWITCH_EVENTSUB bot token valid (bellmirebro), 217 min left
+TWITCH_EVENTSUB seeded subs pane with 4 subscriber(s)
+TWITCH_EVENTSUB seeded subs pane with 4 subscriber(s)
+TWITCH_EVENTSUB welcome, session AgoQasXr, keepalive 10 s
+RIG: no clip 'Interact' on Worker_Male - playing its idle
+ERROR: COMMANDS_DATA MINIBOSS GHOST: 1 `Delve.MB_NAME` row(s) are keyed on a word no body carries, so the name can never be drawn on a nameplate nor asked for here - the map looks full while being short by that many names: ["badger"]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] commands (res://scripts/chatcmd.gd:2511)
+       [1] @implicit_new (res://scripts/twitch_chat.gd:10)
+       [2] _ready (res://scripts/town.gd:350)
+COMMANDS_DATA MINIBOSS GHOST - 1 MB_NAME rows keyed on a word no body carries, so the name can never be drawn or asked for: ["badger"]
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+
+=== rc 0 10:11:27
+=== _s154_badger 10:11:27
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S154 badger model: 'res://assets/monsters/minibosses/badger.glb'
+S154 badger fed: false
+S154 mess draw: ["loader", "hooper", "iceman", "mealman", "cook"]
+S154_BADGER OK (14 checks)
+
+=== rc 0 10:11:31
+=== _s148_thatcher 10:11:31
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S148 thatcher model: 'res://assets/monsters/minibosses/thatcher.glb'
+S148 thatcher fed: true
+S148 flooded draw: ["rammer", "ferryman", "thatcher", "sluicekeeper", "tanner"]
+S148_THATCHER OK (15 checks)
+
+=== rc 0 10:11:34
+=== _s145_mealman 10:11:34
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S145 mealman model: 'res://assets/monsters/minibosses/mealman.glb'
+S145 mealman fed: true
+S145 mess draw: ["loader", "hooper", "iceman", "mealman", "cook"]
+S145_MEALMAN OK (14 checks)
+
+=== rc 0 10:11:37
+=== _s144_fanner 10:11:37
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S144 fanner model: 'res://assets/monsters/minibosses/fanner.glb'
+S144 fanner fed: true
+S144 firepit draw: ["fanner", "stoker", "moulder", "tapster"]
+S144_FANNER OK (10 checks)
+
+=== rc 0 10:11:39
+=== _s51_names 10:11:39
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S52 live key sources: by_key 66, MB_FIT base 67, glb stems 69
+S144 HELD: MB_NAME key badger has a body and a fit cell and no feed yet
+S144 HELD: MB_NAME key badger has a body and a fit cell and no feed yet
+S52 red-proof (drizzler planted): 4 faults: MB_NAME key drizzler is not in feed, MB_NAME key drizzler is not in fit, MB_NAME key drizzler is not in glb, drawable key strickler has no MB_NAME entry
+S131 theme arm: drawable 67 ; MB_NAME - theme = [] ; theme - MB_NAME = []
+S131 red-proof (collier erased from a copy of wood): MB_NAME - theme = ["collier"]
+S51 bodies on disk resolving by trade key: 42 ; keys with arrive lines: 42
+S51_NAMES OK 179 checks
+
+=== rc 0 10:11:40
+=== _s107_gate 10:11:40
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S107 shrine draws over 4000 picks: { "leech": 1000, "beadle": 1000, "almoner": 1000, "snuffer": 1000 }
+S107 MB_NAME size: 67
+S107_GATE OK 12
+
+=== rc 0 10:11:43
+=== _s117_straker 10:11:43
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S117 straker model: 'res://assets/monsters/minibosses/straker.glb'
+S117 straker arrive lines present: true
+S117 wood draws over 4000 picks: ["straker", "collier", "snarer", "drover", "winder"]
+S117_STRAKER OK 11
+
+=== rc 0 10:11:45
+=== _s124_pledgeman 10:11:45
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S124 pledgeman model: 'res://assets/monsters/minibosses/pledgeman.glb'
+S124 treasury draws over 4000 picks: ["strickler", "sealer", "changer", "weigher", "pledgeman", "tallyman"]
+S124_PLEDGEMAN OK 13
+
+=== rc 0 10:11:49
+=== _s126_crimp 10:11:49
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S126 crimp model: 'res://assets/monsters/minibosses/crimp.glb'
+S126 crimp fed: true
+S126 NOTE: content's by_key.crimp has landed - the MB_NAME row (Oneshort) is written (S126b)
+S126 barracks draw: ["quartermaster", "relief", "crimp", "drillmaster"]
+S126_CRIMP OK (10 checks)
+
+=== rc 0 10:11:51
+=== _s127_timberman 10:11:51
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S127 timberman model: 'res://assets/monsters/minibosses/timberman.glb'
+S127 timberman fed: true
+S127 crypt draw: ["stopper", "timberman", "sexton", "ratcatcher", "scraper", "pitman"]
+S127_TIMBERMAN OK (11 checks)
+
+=== rc 0 10:11:54
+=== _s129_collier 10:11:54
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S129 collier model: 'res://assets/monsters/minibosses/collier.glb'
+S129 collier fed: true
+S129 wood draw: ["straker", "collier", "snarer", "drover", "winder"]
+S129_COLLIER OK (11 checks)
+
+=== rc 0 10:11:57
+=== _s141_overlooker 10:11:57
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S141 overlooker model: 'res://assets/monsters/minibosses/overlooker.glb'
+S141 overlooker fed: true
+S141 workshop draw: ["overlooker", "scrapwright", "jointer", "greener", "dyer"]
+S141_OVERLOOKER OK (11 checks)
+
+=== rc 0 10:12:00
+=== _twitch_parse 10:12:00
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS 1 command -> chat_line
+PASS 2 ping -> pong
+PASS 3 plain chat ignored
+PASS 4 bot ignored
+PASS 5 cooldown
+PASS 6 split packet
+PASS 7 four per frame
+PASS 7b rest next frame
+TWITCH_PARSE OK (8 checks)
+ERROR: COMMANDS_DATA MINIBOSS GHOST: 1 `Delve.MB_NAME` row(s) are keyed on a word no body carries, so the name can never be drawn on a nameplate nor asked for here - the map looks full while being short by that many names: ["badger"]
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] commands (res://scripts/chatcmd.gd:2511)
+       [1] @implicit_new (res://scripts/twitch_chat.gd:10)
+       [2] _initialize (res://tools/_twitch_parse.gd:21)
+COMMANDS_DATA MINIBOSS GHOST - 1 MB_NAME rows keyed on a word no body carries, so the name can never be drawn or asked for: ["badger"]
+
+=== rc 0 10:12:01
+=== _offfloor 10:12:01
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Hero0 and 7 others descend down, lamps low, nobody talking.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 1 cave bat, 1 cave spider.
+FEED The older rows are laid east to west. The newer rows are laid every which way.
+FEED Hero6 casts Frost at cave bat.
+FEED Hero5 steps on a slot in the floor - a blade! DEX 18 vs DC 10, 2 damage (halved).
+FEED Hero6 casts Frost at giant rat.
+FEED Hero6 casts Bolt at cave spider.
+FEED Hero2 casts Smite at cave spider.
+FEED Hero1 rolls a 20 searching the floor!
+FEED Hero1 searches (Investigation 25) and turns up 17 gold on floor 1.
+FEED They bind what needs binding and move on.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed giant rat, 1 hollowed slime, 1 skeleton minion, 1 giant rat.
+FEED Hero6 casts Bolt at skeleton minion.
+FEED Hero2 casts Bolt at giant rat.
+FEED Hero3 is cut off and falls back to the others.
+FEED Hero1 casts Bolt at hollowed slime.
+FEED Hero6 casts frost; the scar casts something else (1 vs DC 11).
+FEED Hero2 casts Smite at hollowed slime.
+FEED The hollowed slime divides.
+FEED Hero6 casts Bolt at hollowed slimeling.
+FEED Hero1 speaks bolt and the words come out wrong (8 vs DC 11).
+FEED Hero2's smite hisses and goes out (7 vs DC 11).
+FEED Hero1 casts Chain Bolt at hollowed slimeling.
+FEED Hero1 searches (Investigation 23) and turns up 29 gold on floor 2.
+FEED The step was swept again. Nobody asked who had done it.
+FEED Hero1 searches the chest - Successfully found loot!! 43 gold (Investigation 25 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 1; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 1 slime, 2 puglins, 1 drowned cave bat.
+FEED Hero1 rolls a 20 for initiative and is moving before anything else.
+FEED Hero2 rolls a 20 for initiative and is moving before anything else.
+FEED Hero5 rolls a 20 - and the drowned cave bat is gone.
+FEED Hero2's smite goes out sideways into the stone (1 vs DC 11).
+FEED Hero6 loses the shape of frost halfway (7 vs DC 11).
+FEED Hero1 tries fire with cold fingers and it fails (8 vs DC 11).
+FEED Hero5 turns on the wounded puglin to finish it.
+FEED Hero7 turns on the wounded puglin to finish it.
+FEED Hero2 casts Bolt at puglin.
+FEED Hero6 casts Bolt at puglin.
+FEED The slime divides.
+FEED Hero2 casts Smite at puglin.
+FEED Hero6 casts Frost at puglin.
+FEED Hero1 searches (Investigation 20) and turns up 41 gold on floor 3.
+FEED Floor 3 breathes easy now, and so do we.
+FEED Hero1 searches the chest - Successfully found loot!! 38 gold (Investigation 22 vs DC 11).
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 hollowed skeleton minion, 1 risen bones, 2 slimes, 1 drowned slime.
+FEED Gnawbone is down here. The rats' queen, fat on what the delvers dropped.
+FEED There is a hole in that wall that was not there, and it is widening.
+FEED The oil is running low.
+FEED 2 slimes was waiting in the dark, and now it isn't.
+FEED The slime divides.
+FEED Hero2 reaches for smite and finds the shelf bare (9 vs DC 12).
+FEED Hero4 turns on the wounded slimeling to finish it.
+FEED Hero6 turns on the wounded slimeling to finish it.
+FEED Hero0 turns on the wounded slimeling to finish it.
+FEED Hero1 turns on the wounded slimeling to finish it.
+FEED Hero1's fire fizzles. The scar sniffs and looks away (7 vs DC 12).
+FEED Hero2 turns on the wounded slimeling to finish it.
+FEED Hero6 reaches for bolt and finds a blank (1 vs DC 12).
+FEED Hero5 rolls a 20 - and the slimeling is gone.
+FEED Hero2 rolls a 20 - Gnawbone reels.
+FEED Gnawbone shifts, and the fight changes with it.
+FEED Gnawbone's children come squealing.
+FEED Gnawbone is driven to its last - whatever it has been holding back, it is not holding it now.
+FEED Hero1 turns on the wounded giant rat to finish it.
+FEED Hero2 turns on the wounded giant rat to finish it.
+FEED Hero3 turns on the wounded giant rat to finish it.
+FEED Hero4 turns on the wounded giant rat to finish it.
+FEED Hero6 turns on the wounded giant rat to finish it.
+FEED Gnawbone falls to Hero2.
+FEED Hero0 turns on the wounded giant rat to finish it.
+FEED Hero3 turns on the wounded drowned slimeling to finish it.
+FEED Hero4 turns on the wounded drowned slimeling to finish it.
+FEED Hero0 turns on the wounded drowned slimeling to finish it.
+FEED Hero1 searches (Investigation 16) and turns up 49 gold on floor 4.
+FEED Floor done. Bellmire gets a tale; the scar gets nothing.
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 217 gold, 6 ore, 4 stone, 4 pieces of salvaged gear and 4 potions. 34 kills between them.
+FEED Hero1 is fitted with Reed-Cloth Robe. (+10 hp)
+FEED Hero4 is fitted with Ford Leathers. (+10 hp)
+FEED Hero7 is fitted with Tanner's Jerkin. (+10 hp)
+OFFFLOOR 0 of 2140 samples; INPROP 0; MON_INPROP 0 of 332; floor reached 4 frames 6793 obstacles 37
+OFFFLOOR_VERDICT OK 0 of 2140 samples off the floor (home)
+
+=== rc 0 10:12:59
+=== delve 10:12:59
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED The crier's lamp goes out behind them.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 bog frog, 1 giant rat.
+FEED The rows end in a row that was never filled.
+T10s floor=1 state=fight foes=3 ["JestFan 113/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+FEED DawnCleric casts Smite at giant rat.
+FEED DawnCleric casts Bolt at bog frog.
+T20s floor=1 state=fight foes=2 ["JestFan 113/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+FEED MossyMage casts Bolt at bog frog.
+T30s floor=1 state=fight foes=1 ["JestFan 113/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+FEED DawnCleric casts Smite at slime.
+FEED DawnCleric's bolt fizzles in the hand (1 vs DC 10).
+FEED The slime divides.
+FEED MossyMage casts Bolt at slimeling.
+FEED MossyMage searches (Investigation 14) and turns up 12 gold on floor 1.
+FEED Floor 1 is finished. Salt on the blades, then onward.
+T40s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+T50s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+T60s floor=1 state=search foes=0 ["JestFan 113/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T70s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+T80s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+T90s floor=1 state=descend foes=0 ["JestFan 113/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed cave bat, 1 cave spider, 2 puglins.
+FEED The oil is running low.
+T100s floor=2 state=fight foes=4 ["JestFan 113/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+FEED DawnCleric casts Smite at puglin.
+FEED DawnCleric's bolt goes off a beat late and a foot wide (1 vs DC 11).
+T110s floor=2 state=fight foes=3 ["JestFan 113/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+FEED DawnCleric casts Smite at puglin.
+FEED MossyMage reaches the end of fire and finds a blank (8 vs DC 11).
+T120s floor=2 state=fight foes=2 ["JestFan 98/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+FEED DawnCleric casts Bolt at hollowed cave bat.
+FEED MossyMage casts Bolt at cave spider.
+FEED MossyMage searches (Investigation 16) and turns up 25 gold on floor 2.
+FEED What is left is counted. It is enough.
+FEED MossyMage finds a vial of Cobbler's Salve.
+T130s floor=2 state=search foes=0 ["JestFan 98/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+T140s floor=2 state=search foes=0 ["JestFan 98/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+T150s floor=2 state=search foes=0 ["JestFan 98/113", "MossyMage 63/63", "DawnCleric 101/101", "BigAxe 129/129"]
+DELVE_TEST OK ran 9001 frames, floor reached 2, state search (capped at 9001 frames); engine error lines are still read off the log
+
+=== rc 0 10:14:07
+=== townwalk 10:14:07
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 636 flora on the grass islands
+VALLEY verges 178
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+NAV ready=true bake_ms=930 obstructions=2951 solids=1472 plots=66 road_dropped=188 people=164
+HOUSES_ON_ROAD 0
+DOORS 66 door_off_ground=0 door_leg_through_other_house=0
+FEED 4 bandits are riding on the west road!
+FEED Initiative: the raiders 16, the watch 11 - the raiders strike first.
+RAID started raiders=4
+RIG: no clip 'Idle_B' on Barbarian - playing its idle
+T=10s walking=98 still=0 (posted=0) inside=66 in_solid=0/741 stuck_on_route=0
+T=20s walking=53 still=27 (posted=17) inside=84 in_solid=0/1649 stuck_on_route=0
+T=30s walking=45 still=27 (posted=17) inside=92 in_solid=0/2321 stuck_on_route=1
+FEED Ysolde Coalfoot is killed by a bandit.
+T=40s walking=39 still=27 (posted=18) inside=97 in_solid=0/2892 stuck_on_route=0
+T=50s walking=36 still=28 (posted=18) inside=99 in_solid=0/3397 stuck_on_route=0
+FEED The attack is driven off. The gates hold.
+T=60s walking=81 still=28 (posted=17) inside=54 in_solid=0/3932 stuck_on_route=0
+T=70s walking=124 still=27 (posted=17) inside=12 in_solid=0/5771 stuck_on_route=0
+T=80s walking=131 still=27 (posted=18) inside=5 in_solid=0/7827 stuck_on_route=0
+RIG: no clip 'Interact' on OldClassy_Male - playing its idle
+T=90s walking=125 still=32 (posted=18) inside=6 in_solid=0/9879 stuck_on_route=0
+T=100s walking=117 still=37 (posted=20) inside=9 in_solid=0/11705 stuck_on_route=0
+FEED Harl of the Ford settles in Bellmire, looking for work.
+T=110s walking=107 still=47 (posted=24) inside=10 in_solid=0/13635 stuck_on_route=0
+T=120s walking=108 still=45 (posted=24) inside=11 in_solid=0/15520 stuck_on_route=0
+STUCK_ON_ROUTE_TOTAL 1 over 120 s (raw still-with-a-route-now 1)  watchdog fires=1 close=1 repath=0 nudge=0 giveup=0
+TOWNWALK in_solid=0/15520 (0.000%) raid_in_solid=0/8230 (0.000%) PASS
+BAD []
+STUCK_EX ["peasant Dunn Rivers (40.9,-73.8) next=(38.96123, 0.958627, -75.34634) route=16 solid=- navoff=0.00 push=(0.0, 0.0, 0.0)"]
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:826)
+       [1] _ready (res://scripts/town.gd:381)
+
+=== rc 0 10:15:36
+=== BATTERY DONE 10:15:36

@@ -108,6 +108,15 @@
 ***   YOUR OWN FINDING, NOT A CARRIED GHOST** - this is not the `_chibi` standing red on the
 ***   miniboss register. An item whose own acceptance instrument says FAIL is HALF DELIVERED: the
 ***   MEASUREMENT landed, the CARRY did not.
+***   **AND I LOOKED AT `_sheets/t5_front.png` MYSELF RATHER THAN TAKE THE NUMBER - YOUR COUNT
+***   IS RIGHT AND THE FAULT IS WORSE THAN THE WORD "FLAT" SOUNDS.** Eleven weapons are held
+***   HORIZONTAL, pointing out to the figure's left ACROSS the chest, couched like a lance rather
+***   than gripped: axe, dagger, greataxe, greatsword, mace, quarterstaff, sceptre, spear, staff,
+***   sword, wand. **THE TWO THAT READ CORRECTLY ARE THE BOW AND THE CROSSBOW** - the bow upright
+***   and strung in front of the body, the crossbow near-vertical at the hand. That is exactly
+***   your 11 of 13, confirmed by eye and not by your arithmetic. **AND SEVERAL OF THE ELEVEN
+***   PASS THROUGH THE TORSO** at that angle, which is what your `frame_clips` and the per-cell
+***   `clip` figures on the sheet are seeing. The silhouette is unreadable as a carry.
 ***   **AND YOU BUILT THE GATE THAT CATCHES IT.** The orientation gate is new this run and it
 ***   exists because you LOOKED at the front sheet - every gate inherited from `weaponfit`
 ***   measures whether a weapon is THERE and whether it can be SEEN, and not one of them measured

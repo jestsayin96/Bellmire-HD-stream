@@ -1147,7 +1147,16 @@
     "The cooper's boy swept the stair ahead of them.",
     "Bread broken at the lip of the stair, then the dark.",
     "The watch changed. The party did not wait for it.",
-    "Nobody spoke. The torch spoke for them, low and steady."
+    "Nobody spoke. The torch spoke for them, low and steady.",
+    "The stair is swept clean. They go down it anyway.",
+    "One last look at the sky through the gap. Then the dark.",
+    "The rope is tied to the ring. The party follows it down.",
+    "Boots on stone, slow and in step.",
+    "The lamp is trimmed. Nobody says a word about it.",
+    "A cold draught comes up the stair. They breathe it in and go.",
+    "The door is held until the last one is through.",
+    "Someone pats the wall as if it were a horse. Down they go.",
+    "The guild bell, far above, marks them and goes quiet."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1799,7 +1808,15 @@
     "Floor %d is done. Boots scraped clean on the threshold.",
     "Floor %d gives way. They sit a moment, then rise.",
     "Floor %d is theirs, and no more than that.",
-    "Floor %d is still. A rope is coiled and the stair looked at."
+    "Floor %d is still. A rope is coiled and the stair looked at.",
+    "The last of it falls. They stand and wait for a sound that does not come.",
+    "Floor %d is quiet, for what that is worth.",
+    "A lamp is lit again. The party counts heads.",
+    "They wipe the blades and sit on the bottom step.",
+    "The floor holds its breath, then lets it go.",
+    "Dust settles. Nobody hurries it.",
+    "Floor %d is done. The rope is coiled, the next stair looked at.",
+    "Bandages passed hand to hand. Water, then a little bread."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -5136,7 +5153,22 @@
     "Salted the bread, blessed nothing, went down.",
     "Had a good laugh at the gate. It carried a while.",
     "Tied the last knot in the rope and trusted it.",
-    "Brought the bucket, the broom, and the nerve."
+    "Brought the bucket, the broom, and the nerve.",
+    "Salted the stair so nobody slipped. Slipped.",
+    "Patched the boots twice. Not a third time.",
+    "Left the good knife on the table. Took the other.",
+    "Sang low on the way down. Nobody sang back.",
+    "Cut the bread in even shares. Ate last.",
+    "Said they'd be back for supper. The soup was kept.",
+    "Carried the water for the whole party and not a drop for themselves.",
+    "Tightened the strap. Checked the knot. Missed the step.",
+    "Paid the tab before they went. The innkeeper noticed.",
+    "Held the rope while the others climbed. Held it a while longer.",
+    "Wrote the name in the ledger, plain, and went.",
+    "Wore a borrowed cloak. It was returned, in the end.",
+    "Closed the gate quietly so as not to wake the street.",
+    "Counted the party at the stair. Counted again at the bottom.",
+    "Went in with a sharp edge and a dry match. Both were enough, once."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -16283,5 +16315,6 @@
         "blurb": "Knows the name of everything down there. Reads the first trap on a floor."
       }
     }
-  }
+  },
+  "_note_c239": "C-239: epitaphs +15, descend +9, cleared +8 (2 cleared lines carry the floor placeholder). Pools already read by the engine; zero-hit by design, no lane is to wire this key. System 41's drops.json NOT written - not one of the four owned files; stood down a sixth time."
 }

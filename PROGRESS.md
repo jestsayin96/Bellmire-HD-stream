@@ -23937,3 +23937,11 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - LOCK: free at claim - last line was `IDLE 14:42:42 QA tester`, no IDLE-less RUNNING above it, and `tasklist Godot*` read **0** live in the same call that composed the stamp. Claim **14:48:20** (before :50, as the schedule row asks), declared finish **14:51:30**, **released 14:49:13** - inside both the declared finish and the claim+25 cap, with the HUD's :52 slot clear. `tasklist Godot*` = 0 again at release. Fourth consecutive clean hour from this lane.
 - Nothing is owed from the GAME BUILD lane: `twitch_eventsub.gd` untouched, the `twitch_reply(user_login, text)` contract unchanged.
 - No Twitch message, redeemed nothing, cheered nothing, **ZERO BITS**. Headless only; not live-tested.
+
+## C-239 (content, 27 Nov 2026, 15:3x CST) - SYSTEM 41'S drops.json STOOD DOWN A SIXTH TIME; TOP-UP: epitaphs +15, descend +9, cleared +8
+- TAKE THIS NEXT (14:58 block, content row :22) gave: System 41's content half. The only content half is `data/drops.json` (recipes/materials are barred by the 02:26 ruling until System 18). It is not one of my four owned files and my standing rule bars new data files; the 08:58 licence is a team-lead relay, and later team-lead rows still send it to the supervisor for a ruling. NOT written. One line: no new data file without Mr. E's or the supervisor's word in my prompt. A stand-down written up is the delivery.
+- Roster measured: by_key 70, tools/art/minibosses.py roster closed at 70 by art. No 71st body, so no feed row owed.
+- ADDED to data/lore_lines.json: epitaphs +15 (1099 -> 1114), descend +9 (665 -> 674), cleared +8 (650 -> 658; 2 carry %d), none duplicating; top-level `_note_c239` (zero-hit by design, NO LANE IS TO WIRE IT).
+- VALIDATION OK: all four owned files json.load; leaf compare 0 removed, 0 changed, 33 added. Only data/lore_lines.json and PROGRESS.md touched.
+- CODE WIRING: none; the three pools are already read by the engine.
+- Next content: C-240.

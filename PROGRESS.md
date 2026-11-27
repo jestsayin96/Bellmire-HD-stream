@@ -22771,3 +22771,87 @@ stamps, so the three data-loading gates are a DECLARED NO-OP on unchanged bytes 
 - TWITCH: NO ENGINE RAN THIS FIRING AT ALL, so not even a token refresh. No message sent, nothing
   redeemed, nothing cheered, ZERO BITS, no account driven by me.
 - DECISION FOR MR. E: none.
+
+
+## B189 - 26 Nov 2026, 23:46 CT firing. NO CLAIM, NO ENGINE, FILE-ONLY AS ORDERED. THE TEAM LEAD'S ONE QUESTION IS ANSWERED BY MEASUREMENT: B188 READ THE AUTHORITATIVE FILE, THE TRAP DID NOT FIRE - AND THE 33-SECOND GAP HAS TWO READINGS, ONE OF WHICH IS AGAINST MY OWN LANE
+
+The 22:58 plan's CHAT BOT row ordered FILE-ONLY, NO ENGINE: do not touch MINIBOSS UNNAMED, do not
+re-derive the alias drift, and answer one question. I obeyed all three. No lock claim, no Godot, no
+gate run. R's docs/RUN_LOCK.txt last line was `IDLE 2026-11-26T23:17:46-06:00 (game build S144b)`
+with no RUNNING after it when I started and when I finished - the lock was FREE and I left it free,
+and I wrote NO line into it, because a file-only firing owes none.
+
+### THE QUESTION: "SAY WHICH FILE YOU READ." ANSWER: R'S WORKING TREE. PROVEN, NOT ASSERTED.
+B188 reported the lock's last line at 22:47:57 and again at 22:51:12 as `RUNNING
+2026-11-26T22:41:48-06:00 (QA tester ...)` with no following IDLE. The team lead could see
+`IDLE 2026-11-26T22:50:39-06:00 (QA tester)` in R's working copy, 33 s earlier, and asked which of
+the two reads was of a stale copy. It was NEITHER - the string B188 quoted could only have come
+from the authoritative file, and here is why:
+1. W6's own copy of docs/RUN_LOCK.txt carries mtime `2026-11-26T22:51:12.793-06:00` - THE SAME
+   SECOND as B188's second read, because that write WAS B188's merge - and its last line was
+   `IDLE 2026-11-26T21:18:53-06:00 - game build S143b`. IT CARRIED NO QA LINE OF ANY KIND. So the
+   worktree copy cannot be the source of `RUNNING 22:41:48 (QA tester)`.
+2. `origin/main` at that moment was the same content (it is where W6's copy came from), so a
+   `git show` of it cannot be the source either.
+3. The QA lines were UNCOMMITTED ON `laptop` until 47251413 at 23:17:55 - twenty-six minutes AFTER
+   B188's read. The previous commit touching docs/RUN_LOCK.txt is cdb4c967 at 22:26:01. Between
+   those two stamps NO ref anywhere carried a QA line, so no `git show` and no checkout could
+   produce one.
+ONE copy in the house contained that string at 22:51:12 and it was R's WORKING TREE. B188 read the
+right file. The standing trap did not fire this hour.
+
+### WHAT I CANNOT PROVE, SAID PLAINLY, WITH THE READING THAT CHARGES MY OWN LANE LEFT IN
+That leaves the 33 s gap unexplained, and I am not closing it with a guess. Two readings:
+  (a) QA STAMPED `22:50:39` BUT APPENDED LATER. QA's own NEXT line supports this without my help:
+      `IDLE 2026-11-26T22:50:59-06:00 - correction - my own townwalk Godot (pids 28592/17016) was
+      still running at the previous IDLE; killed now`. The 22:50:39 line is therefore already known
+      to have been written while its own claim was not yet true.
+  (b) B188 RE-USED ITS 22:47:57 READ AND STAMPED IT OFF A FRESH CLOCK. That is the exact error this
+      house keeps catching (B184 corrected itself for it; B185 wrote its IDLE stamp off the clock
+      for that reason). I am naming it against my own lane rather than leaving it off the list.
+I CANNOT SEPARATE THEM FROM HERE and the one mtime that would have settled it is gone: R's working
+copy was rewritten at `2026-11-26T23:17:46-06:00` by the game build, so its mtime now dates that
+write and not QA's. WHAT WOULD SETTLE IT IS QA'S OWN RECORD OF WHEN IT APPENDED, and QA is not my
+lane - I am handing the question up, not answering it with an estimate.
+
+### THE TRAP ITSELF, MEASURED LIVE THIS FIRING, SO NO LANE HAS TO ARGUE IT FROM MEMORY AGAIN
+Immediately after fast-forwarding W6 to origin/main `87d8f97b`:
+  23:50:31 CT - W6 docs/RUN_LOCK.txt last line: `IDLE 2026-11-26T22:26:01-06:00 (game build S144)`
+  23:50:39 CT - R  docs/RUN_LOCK.txt last line: `IDLE 2026-11-26T23:17:46-06:00 (game build S144b)`
+EIGHT SECONDS APART, AND THE WORKTREE COPY IS FOUR LOCK LINES AND FIFTY-ONE MINUTES BEHIND - on a
+copy that is as fresh as a merge can make it. A freshly merged worktree is NOT a fresh lock file.
+RULE FOR THIS LANE FROM HERE: read the lock from R's WORKING TREE only, never W6's copy and never a
+`git show`. B188 did; this is the measurement that says why it matters.
+
+### THE WITHDRAWN L56 ORDER - THE CARRY IS RETIRED HERE SO NOBODY PICKS IT UP
+B188's ledger ends `CARRIED TO B189: ARM 1 of the split above`. The 22:58 plan WITHDREW the order
+in its own words - "THE ORDER IS WITHDRAWN. L56 IS NOT OWED BY YOU AND IS NOT CARRIED". So I did
+NOT run arm 1 and did not claim for it. B188's line stands exactly as written (a cycle is never
+rewritten or renumbered); THIS line is what retires it.
+  ARMS LANDED 0 of 3. ORDER WITHDRAWN BY THE TEAM LEAD. NOT CARRIED TO B190.
+
+### DOC/DATA AGREEMENT WITHOUT THE ENGINE - AND I SAY EXACTLY HOW WEAK IT IS
+I did NOT run `tools/_commands_doc.gd` (no engine this hour) and I did NOT emulate it. What I have
+is weaker than a gate and it is this:
+  - `data/commands.json` md5 `d2ae3b81`, `docs/COMMANDS.md` md5 `e9ce025b` - BYTE-IDENTICAL to the
+    stamps from the last two REAL generator runs (B185 20:40 and QA 22:50, both `COMMANDS_DOC OK 32`).
+    So the doc is still exactly the bytes the real generator wrote; nothing has drifted since green.
+  - A plain read of the two files: `commands` 32, `order` 32, doc table rows 32, the order sequence
+    IDENTICAL to the doc row sequence, zero keys on either side without a partner, and no key in
+    `commands` missing from `order` or the reverse.
+THIS IS NOT A GATE RESULT and the real COMMANDS_DOC is still what proves the generator. The "26" in
+my own prompt remains wrong: 32 is the file's number and the generator's, item 2 of the team lead's
+correction backlog, and a future firing MUST NOT read 32 as a fault.
+
+### THE THREE THINGS I WAS TOLD NOT TO DO, AND DID NOT
+- MINIBOSS UNNAMED: not touched, not chased, no parse run at all. It fires on `fanner` until S144
+  lands on `laptop` and that is the game build's row, not a defect of mine.
+- The alias drift: NOT re-derived. B186, B187 and the in-code battery at chatcmd.gd:1085-1131 have
+  each answered it.
+- L56: not run, not split, not estimated again.
+- MY THREE FILES ARE UNCHANGED THIS FIRING: chatcmd.gd `36563136` (3767 lines), commands.json
+  `d2ae3b81`, COMMANDS.md `e9ce025b`. Only this PROGRESS entry is new.
+- FOR THE GAME BUILD LANE: nothing owed in twitch_eventsub.gd.
+- TWITCH: NO ENGINE RAN, so not even a token refresh. No message sent, nothing redeemed, nothing
+  cheered, ZERO BITS, no account driven by me.
+- DECISION FOR MR. E: none.

@@ -22528,3 +22528,9 @@ me.
 - No file under scripts/ changed, so OFFFLOOR / TWITCH_PARSE / TOWNWALK / DELVE_TEST are a declared no-op on unchanged
   bytes (B158 precedent). Commit carries PROGRESS, RUN_LOCK, the log and the frame only.
 - LOCK: claim 19:08:39, cap 19:33:39 computed first, declared 19:30:00, IDLE 19:12:35. No Twitch, 0 bits.
+## C-219 (content, 26 Nov 2026 19:2x CST) - EPITAPHS +16, DESCEND +8, CLEARED +8. ONE FILE, ONE NOTE. BODY COUNT HELD AT 63.
+- Clock via `TZ=America/Chicago date`: 19:22 CST. TAKE THIS NEXT (18:58 block) gave content: keep producing, C-218 ticked, no wiring of `_note_` keys or `phase2_words_alt2`.
+- Checked origin/art for a 64th committed body: none beyond the 63 in by_key (extra keys in minibosses.py are chibi variants/fields). No by_key row written.
+- Added to data/lore_lines.json: epitaphs 984 -> 1000, descend 605 -> 613, cleared 590 -> 598. Plain declaratives, no floor count, no placeholders, deduped. `_note_c219` added (expected zero-hit key).
+- VALIDATION OK: json.load passes on all four owned files; every pre-existing key identical, list pools prefix-identical.
+- CODE WIRING: none (existing pools).

@@ -1,3 +1,74 @@
+## B191 - 27 Nov 2026, 01:45 CT firing. THE FANNER CASCADE IS PAID AT MY END 63 -> 64 AND ALL FOUR OWED GATES ARE GREEN FOR THE FIRST TIME - L14_TEST OK 27/27, AND THE HALF THAT WAS STILL RED WAS A NUMBER IN MY OWN FILE.
+
+WHAT B190 LEFT AND WHAT I FOUND. B190 ran the owed battery and got three of four: parse, TWITCH_PARSE and
+COMMANDS_DOC green, L14_TEST FAIL 1 of 27 on its 27th check ("no COMMANDS_DATA guard arm fired on the load"),
+with two arms firing - MINIBOSS COUNT (published 63, feed rows 64) and MINIBOSS UNNAMED ['fanner']. B190's
+reading was that the gate "CANNOT GO GREEN IN THIS LANE while the gap is open" and was blocked on S144's
+MB_NAME row reaching main. THE FIRST HALF OF THAT WAS RIGHT AND THE SECOND HALF WAS NOT, AND I SAY SO
+PLAINLY BECAUSE IT IS MY OWN LANE'S SENTENCE: UNNAMED was indeed not mine and cleared by itself, but COUNT
+compares content's feed rows against a number published in `data/commands.json` - WHICH IS ONE OF MY THREE
+FILES. Half of that gate was never blocked on anybody. B167 paid exactly this cascade step once before,
+62 -> 63; this is the same payment, one step on.
+
+MEASURED FIRST, OFF THE MERGED WORKTREE, NOT OFF THE MERGE'S WORD:
+  - MB_NAME brace-matched out of scripts/delve.gd: 64 keys, `fanner` PRESENT (it was absent at B190).
+  - content's lore_lines.json miniboss_feed.by_key: 64 rows, `fanner` present.
+  - data/commands.json published "The 63 elites" in BOTH `short` and `what`.
+  - UNNAMED (feed, no name): EMPTY. GHOST (name, no feed): EMPTY.
+  So the only live fault was COUNT, and it was 63-vs-64 in my file.
+
+THE EDIT, AND THE PROOF IT TOUCHED NOTHING ELSE. Raw-byte replace of "The 63 elites" -> "The 64 elites",
+which occurs exactly twice and is the only "63" in the file (verified before editing). Byte-length delta 0.
+I then round-tripped both versions through json.load, blanked only those two fields on both sides and
+compared sort_keys dumps: EVERY OTHER KEY BYTE-IDENTICAL. 32 entries before and after.
+data/commands.json md5 d2ae3b81 -> cc6d34d0.
+
+THE GENERATOR WROTE THE DOC, I DID NOT. I ran the real tools/_commands_doc.gd BEFORE _l14_test, deliberately,
+so the doc could not read red on drift I had just created myself. COMMANDS_DOC OK wrote 32 commands, rc 0, and
+it rewrote docs/COMMANDS.md e9ce025b -> 385c4ea7. `git diff -U0` over both files is SIX lines, three pairs, every
+one of them 63 -> 64 and nothing else; scripts/chatcmd.gd is not in the diff at all. 1 line says "64 elites",
+0 say "63 elites". NOTE FOR THE RECORD, AGAIN: the generator writes 32, not the 26 my prompt still predicts.
+The team lead ruled 32 correct on 26 Nov; this run is the third to confirm it and the prompt is still wrong.
+
+THE BATTERY, AT origin/main c084105a (clean fast-forward, 20 commits, no conflicts, nothing of mine held back):
+  1. parse --headless --path W6 --quit-after 300 -> rc 0, 111 log lines, 0 Parse Error, 0 SCRIPT ERROR.
+  2. tools/_commands_doc.gd -> COMMANDS_DOC OK wrote 32 commands, rc 0.
+  3. tools/_l14_test.gd -> L14_TEST OK (27 CHECKS), ZERO FAIL. The 27th check now reads
+     "no COMMANDS_DATA guard arm fired on the load (0 fired: [])" - the exact line that was B190's only red.
+     Its two doc checks also pass both directions: 32 rows, unpublished [], stale [].
+  4. tools/_twitch_parse.gd -> TWITCH_PARSE OK (8 checks) WITH AN EMPTY STDERR. No MINIBOSS COUNT line, no
+     MINIBOSS UNNAMED line. That empty stderr is the cleanest proof the cascade is shut: 64 bodies-with-feed,
+     64 names, 64 published.
+
+MEALMAN IS NOT MY PROBLEM YET, AND I AM NOT CHASING IT. Game build S145 landed the 65th body `mealman` at 01:15
+and HELD it on purpose: no miniboss_feed.by_key row and no MB_NAME row. I verified both absences myself. A body
+with no feed row is invisible to all three of my numbers, so it moves nothing. When content lands C-225's feed
+row, COUNT will fire again (published 64, feed rows 65) and the payment will be mine a step later - the team
+lead pre-declared that mid-flight red in the plan and told this lane not to touch the gate or chase it. I did
+neither. I am recording the arithmetic so the next seat pays it in the hour rather than reading it as a defect.
+
+DRIFT, BOTH DIRECTIONS, AFTER THE EDIT AS THE PROMPT REQUIRES: 32 entries, every one literally answered in
+scripts/chatcmd.gd (entries with no literal: []), zero orphans either way.
+
+B2_ASK CLEANUP IS ALREADY DONE AND THE QUEUE ITEM IS STALE. My prompt still owes "_b2_ask.gd at the worktree
+root -> B2_ASK OK, then DELETE it and the .b2_* logs". Neither `_b2_ask.gd` nor any `.b2_*` exists at the W6
+root - an earlier firing cleared them. Nothing to run and nothing to delete; I am reporting it closed rather
+than re-adding a file to prove a gate on it.
+
+LOCK, AND THE YIELD RULE. Last line when I read it was IDLE 2026-11-27T01:15:44-06:00 (game build S145), so the
+window was FREE by the current rule - an IDLE from the same lane releases it. tasklist Godot*/obs64/Marvel all
+0 at the claim, so this was a genuinely idle machine and not a starved slot. Claim 2026-11-27T01:48:21-06:00,
+cap claim+25 = 2026-11-27T02:13:21-06:00 COMPUTED FIRST, declared finish 01:51:00 sized off B190's measurement
+that this identical battery takes 99 seconds. Released 2026-11-27T01:49:18-06:00, read off the clock - inside
+the declared time, inside the cap, and clear of the HUD's :52. IDLE line written before this entry. Godot
+process count 0 after the battery. The file edit was done BEFORE the claim, as file-only work needing no lock,
+so the engine window held only engine work.
+
+TWITCH: eventsub autostarted on the headless runs and refreshed its own tokens as it always does. It SENT NO
+MESSAGE, redeemed nothing, cheered nothing. ZERO BITS. No account was driven by me, bellmirebro included.
+
+NOTHING FOR THE GAME BUILD LANE IN twitch_eventsub.gd THIS RUN.
+
 ## S138 - 25 Nov 2026, 15:09-15:2x CT (game build) - S137's SENTENCE IS ALREADY WRITTEN (docs/PROGRESS.md:4448); SYSTEM 13 (PET COMPANIONS) STEP 1: THE THREE UAA DOGS/FOX WALK AT HEEL IN HeroPet, BUT THE PICTURE SAYS THEY ARE A DIFFERENT STYLE
 TAKE THIS NEXT (14:58 CT) GAME BUILD row: (1) S137's own sentence on the picture, (2) then the next open Phase 2 system, named in the claim line.
 1. S137 SENTENCE - IT IS IN MY S137 ENTRY, NOT OWED. docs/PROGRESS.md:4448-4450 (NOTE: S137 was appended to docs/PROGRESS.md, not prepended

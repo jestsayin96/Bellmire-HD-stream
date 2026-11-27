@@ -25972,14 +25972,46 @@ def badger():
     # front and back and had no facing at all. A dark hood that is dark on
     # BOTH sides, with the only face-coloured thing on the -y face, makes the
     # facing geometric. The hood brim also rakes forward, which the walk wants.
+    # *** PASS 3 - THE HEAD. THE TWO LOUDEST FAULTS OF PASS 2, BOTH SEEN IN
+    # *** THE RENDER AND BOTH REFUTING A COMMENT I HAD ALREADY WRITTEN HERE.
+    # Pass 2 shipped a SMOOTH CLOSED CONE with a sharp apex and a face oval
+    # tucked inside it. What the picture showed:
+    #   (a) NO FACE IN ANY VIEW. The oval was occluded by the hood's own cone.
+    #   (b) NO FACING AT ALL - front and back read almost identically, which
+    #       is THE BEADLE'S FAULT REPRODUCED. The pass-2 comment on this very
+    #       block claimed the facing was "geometric by construction" because
+    #       the hood is dark on both sides and the oval is only on -y. That
+    #       reasoning is WRONG and the picture is what proved it: a face that
+    #       cannot be SEEN cannot carry a facing, however correctly it is
+    #       placed. I predicted a mechanism and did not verify an outcome.
+    # THREE CHANGES, AND THEY ARE ONE CHANGE - THE HEAD:
+    #   1. The cone is SHORTER AND BLUNT (apex radius 0.105, not 0.060, and
+    #      0.300 tall, not 0.430). The sharp apex read as a pointed hat, which
+    #      is theatrical and against the plainness rule.
+    #   2. A BRIM THAT OVERHANGS ON -Y ONLY. A hood has an opening; a cone has
+    #      not. The brim is the thing that makes the front a front from the
+    #      outside, before any face is seen - so the facing survives even at
+    #      the distance where the face itself is a smudge.
+    #   3. THE FACE IS THE CAPE'S VALUE, NOT THE COAT'S. `body` against `dark`
+    #      is 0.1187 against 0.0405 of albedo luma, and the thatcher's pass 6
+    #      proved that in this rig that is ONE BAND once lit - which is exactly
+    #      why the oval disappeared. The cape value is 0.3463, an 8.5x ratio
+    #      against the hood, and it is still 2.44x BELOW the sacks, so it
+    #      cannot steal the count. A weathered face on a man who walks for a
+    #      living is the plainest possible reading of that value.
+    # WHAT THIS STILL CANNOT SEE: whether the face reads AS A FACE rather than
+    # as a pale patch. No number here answers that. It is answered by looking.
     limb(P, [(0.0, -0.150, 1.580), (0.0, -0.205, 1.730)], 0.092, 0.080, 'body')
     P.add(L.sphere(0.145, 0.155, 0.168, 14, 9), 'dark', loc=(0.0, -0.215, 1.845))
-    P.raw(aim(L.cone(0.255, 0.060, 0.430, 16), (0.0, -0.165, 1.690),
-              (0.0, -0.150, 1.0)), 'dark')
-    P.add(L.sphere(0.086, 0.052, 0.104, 12, 8), 'body', loc=(0.0, -0.300, 1.838))
-    for s in (-1, 1):
-        P.add(L.sphere(0.026, 0.020, 0.022, 8, 6), 'dark',
-              loc=(s * 0.042, -0.342, 1.862))
+    P.raw(aim(L.cone(0.250, 0.105, 0.300, 16), (0.0, -0.180, 1.760),
+              (0.0, -0.120, 1.0)), 'dark')
+    # the brim: a flattened disc pushed forward of the head, -y only
+    P.add(L.sphere(0.215, 0.185, 0.045, 14, 7), 'dark', loc=(0.0, -0.268, 1.905))
+    _face = L.sphere(0.092, 0.058, 0.108, 12, 8)
+    P.add(_face, 'body', loc=(0.0, -0.318, 1.812), vcol=[CAPE] * len(_face[0]))
+    for _s in (-1, 1):
+        P.add(L.sphere(0.027, 0.020, 0.023, 8, 6), 'dark',
+              loc=(_s * 0.043, -0.360, 1.838))
     _seg("head")
 
     # THE ARMS. One hand up ON the yoke bar - that is what a man under a yoke

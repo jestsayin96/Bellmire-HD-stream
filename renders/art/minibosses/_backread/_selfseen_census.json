@@ -39,7 +39,7 @@
     "gear_yoke",
     "head"
    ],
-   "items": 36,
+   "items": 37,
    "man_from": "parts",
    "man_ranges": [
     [
@@ -52,15 +52,15 @@
     ],
     [
      7,
-     13
-    ],
-    [
-     13,
      14
     ],
     [
      14,
      15
+    ],
+    [
+     15,
+     16
     ]
    ],
    "man_parts": [
@@ -2398,11 +2398,11 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-27T13:54:17+0000",
+ "measured_at": "2026-11-27T13:59:24+0000",
  "measured_at_tz": "Ame",
- "measured_at_epoch": 1795787657.7491705,
- "register_mtime_epoch": 1795787458.966947,
- "register_mtime": "2026-11-27T13:50:58+0000",
+ "measured_at_epoch": 1795787964.2713544,
+ "register_mtime_epoch": 1795787888.2456398,
+ "register_mtime": "2026-11-27T13:58:08+0000",
  "register_pairs": 69,
  "measurable": [
   "almoner",

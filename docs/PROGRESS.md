@@ -4811,3 +4811,19 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
   another); hammerman = banks every blow and pays it back on whoever put in most. Both are reskins with feed lines
   today; the delve-side behaviour is a separate row if the team lead wants it.
 - No Twitch test, nothing redeemed, nothing cheered, ZERO BITS.
+
+
+## D-cycle - S160 NOTHING OWED: the 14:58 row (name the 69th + 70th) was already paid by S159, now ON origin/main; gates re-run on the merged tree, 2026-11-27 16:08-16:16 CST (game build)
+- TAKE THIS NEXT is still the team lead's 14:58 block. Its GAME BUILD row ("NAME THE 69th AND THE 70th") was LANDED by my own
+  S159 (3d053768, 15:07 firing) and is now IN origin/main (merge 901a0bf4; `git grep Cutloose origin/main -- scripts/delve.gd` = 2).
+  Measured on the merged tree, brace-matched with `^const\s+MB_NAME\s*:?=\s*\{` and comments stripped: MB_NAME 70 keys / 70 unique,
+  MB_FIT 81, miniboss_feed.by_key 70 (real JSON parse), shearman + hammerman in all three. NAMING HALF SHUT 70/70/70.
+- I did NOT re-do or touch any of it. Published count still 68 - the 68 -> 70 bump is the chat bot's step at :45, now unblocked on main.
+- gear.gd null guard (prompt's "real defect"): ALREADY FIXED at S35 - gear.gd equip() casts `_cache[path] as PackedScene`, erases and
+  returns null on a null load before instantiate. Not re-opened.
+- GATES on the merged tree (verdict lines): parse --quit-after 300 rc 0, 0 Parse Error / 0 SCRIPT ERROR. OFFFLOOR_VERDICT OK 0 of 2089.
+  TWITCH_PARSE OK (8 checks) - its one ERROR line is COMMANDS_DATA MINIBOSS COUNT 68 vs 70, the chat bot's :45 publish step, same as S159.
+  DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/18805 (0.000%) raid_in_solid=0/3817 (0.000%) PASS.
+- No render this cycle: nothing visual changed; S159's d96 shots of both bodies stand.
+- No Twitch test, nothing redeemed, nothing cheered, ZERO BITS.
+- Lock: claim 16:08:19, cap claim+25 = 16:33 computed first, declared finish 16:30, released 16:16:02.

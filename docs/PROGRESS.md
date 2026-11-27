@@ -4608,3 +4608,8 @@ NO CODE WIRING. No key added.
 - Publish position: gh-pages 8d214d36, tree 1d8bce63, 25 Nov 09:55:03 CT. app.js / style.css / index.html identical to hub web/ (empty diffs). Only unpublished delta: web/NOTES.md +34 (this correction adds more notes lines, still notes only).
 - No code changed, so no screenshot, no hostile-name run owed; security greps untouched. NOT claiming READY TO PUBLISH; no publish gate owed. Live-dot colour: n/a.
 - Untracked (delete refused on this machine, named, left): _hub_msg.txt, _hub_ready_shot.png, web/tools/__pycache__/.
+
+## 26 Nov 2026 20:4x CT - HUB firing: STAND DOWN (19:58 block row HUB :37 = "stand down and write it up")
+- Row taken: TAKE THIS NEXT 19:58 block, HUB (:37): correction ticked, nothing open. No web/ change this run, so no screenshot and no new hostile-name run is owed.
+- Measured: app.js blob f87967bf, style.css 05e4f9ce, index.html 39b2b4a8 are IDENTICAL on origin/gh-pages (8d214d36) and on hub. web/ tree on hub is 0faf51e9 (it moves only because NOTES.md carries the 19:4x correction). Only unpublished delta is web/NOTES.md.
+- innerHTML as code at app.js:255 and :301 only (hits at :7 :93 :5137 :5178 are comments). Live-dot colour: n/a. NOT claiming READY TO PUBLISH; no publish gate owed. Publishing is not mine.

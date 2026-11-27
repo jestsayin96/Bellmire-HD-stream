@@ -1,6 +1,6 @@
 # The artifact tier is carried flat — tier 5 on a body, first measurement
 
-**Art lane, 27 Nov 2026, 16:34–18:1x CT.** Register:
+**Art lane, 27 Nov 2026, 16:34–16:55 CT.** Register:
 `renders/art/gear_t5/_fit_t5_register.json`. Sheets:
 `renders/art/gear_t5/_sheets/t5_front.png`, `t5_side.png`. Tool:
 `tools/art/artifactfit.py`. **Verdict FAIL, 13 cells, 0 blanks, 0 blind,

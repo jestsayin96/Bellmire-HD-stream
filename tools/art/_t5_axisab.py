@@ -1,6 +1,6 @@
 """_t5_axisab - WHICH SLOT CONVENTION IS THE ONE THE VIEWER SEES.
 
-Found by artifactfit's basis selftest, 27 Nov 16:4x CT: weaponfit's two
+Found by artifactfit's basis selftest, 27 Nov 16:42 CT: weaponfit's two
 hand-calibrated bases translate their gear.gd euler triples by TWO DIFFERENT
 RULES. For the staff, SLOT_ROT == C.R.C^-1 (both sides converted). For the
 crossbow, SLOT_ROT == R.C^-1 (the mesh side converted, the slot side left in

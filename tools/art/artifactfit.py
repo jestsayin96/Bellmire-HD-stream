@@ -42,7 +42,7 @@ exactly and its CROSSBOW basis under NO euler order. The residual is exactly
 THE SAME RULE.** They cannot both be a consistent reading of their own euler.
 
 ALGEBRA CANNOT SETTLE WHICH, SO IT WAS SETTLED BY MEASURING THE SLOT FRAME
-(`_t5_slotframe.py`, 27 Nov 17:0x CT). gear.gd:245-249 states, measured by the
+(`_t5_slotframe.py`, 27 Nov 16:46 CT). gear.gd:245-249 states, measured by the
 game build's own tools/_s19_hand.gd on the posed idle, that the slot's +Y is
 world-FORWARD and its +X is world-DOWN (-0.99) - a claim about the GODOT frame.
 On the posed Blender rig the same bone reads:
@@ -410,7 +410,7 @@ def main():
                 "%s: %d vertices below the floor, deepest %.3f m under it - the "
                 "carry drags this weapon through the ground"
                 % (key, n_ground, floor_depth))
-        # *** THE ORIENTATION GATE, ADDED 27 NOV 17:5x CT AFTER LOOKING. ***
+        # *** THE ORIENTATION GATE, ADDED 27 NOV 16:52 CT AFTER LOOKING. ***
         # Every gate inherited from weaponfit measures whether the weapon is
         # THERE and whether it can be SEEN. NOT ONE OF THEM MEASURES WHICH WAY
         # IT POINTS, and the front sheet of this very run shows the legendary

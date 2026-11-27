@@ -1,0 +1,59 @@
+{
+ "key": "badger",
+ "tag": "_p4",
+ "group": "face",
+ "views": {
+  "front": {
+   "face_seen": 3115,
+   "face_noreed": 3115,
+   "contrast": {
+    "face_p50": 0.5145,
+    "ring_p50": 0.2143,
+    "ratio": 2.401,
+    "margin": 0.3002,
+    "face_px": 3115,
+    "ring_px": 1467
+   },
+   "reed_cover": 0,
+   "reed_cover_frac": 0.0,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it"
+  },
+  "side": {
+   "face_seen": 1122,
+   "face_noreed": 1122,
+   "contrast": {
+    "face_p50": 0.5152,
+    "ring_p50": 0.2146,
+    "ratio": 2.401,
+    "margin": 0.3006,
+    "face_px": 1122,
+    "ring_px": 591
+   },
+   "reed_cover": 0,
+   "reed_cover_frac": 0.0,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it"
+  },
+  "back": {
+   "face_seen": 0,
+   "face_noreed": 0,
+   "contrast": {
+    "red": "face mask under 50 px - no contrast was measured"
+   },
+   "reed_cover": 0,
+   "reed_cover_frac": null,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it",
+   "red": "face_seen is 0 - A RESULT, NOT AN ERROR: no pixel of the face plate reaches this camera. Whether that is a fault or the design depends on the view"
+  }
+ },
+ "errors": [],
+ "asks": "how many pixels of the FACE PLATE reach the camera, per view, by with/without through one locked camera - and how many of the missing ones the reed takes",
+ "cannot_see": "whether the plate has a FACE on it (eyes and mouth are dark-on-dark to this test by construction), value, hue, and the dark ties, which stay in the no-reed arm and make it a FLOOR",
+ "repainted_items": 1,
+ "bounds_drift": 0.0,
+ "control_best_face_noreed": 3115,
+ "thatcher_twist_env": "(unset)",
+ "thatch_gauge_env": "(unset)",
+ "head_env": "(unset)",
+ "tiesec_env": "(unset)",
+ "ok": true
+}

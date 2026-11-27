@@ -1860,3 +1860,14 @@ html.watch .suggest-input {
   border-color: rgba(109,72,36,.3);
 }
 html.watch .suggest-send { background: var(--teal-ink); color: var(--parch); }
+
+/* System 41 section 1: chamber-holder cards with per-viewer discovery. The portrait is a page-constant path (BEAST_DEX);
+   an undiscovered beast is the SAME picture flattened to a silhouette by CSS - no second asset, no data. */
+.beast.deep { grid-template-columns: 64px 1fr; column-gap: 10px; align-items: start; }
+.beast.deep > * { grid-column: 2; }
+.beast.deep > .beast-pic { grid-column: 1; grid-row: 1 / span 3; width: 64px; height: auto; align-self: start; object-fit: contain; }
+.beast-pic { display: block; filter: drop-shadow(0 1px 2px rgba(0,0,0,.45)); }
+.beast-pic.beast-sil { filter: brightness(0) opacity(.55); }
+.beast.deep.tier-0 .beast-name { color: var(--ink-soft); letter-spacing: .12em; }
+.beast.deep.tier-4 { border-color: var(--gold, #c6922f); }
+@media (prefers-reduced-motion: reduce) { .beast-pic { transition: none; } }

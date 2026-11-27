@@ -1,0 +1,61 @@
+{
+ "key": "badger",
+ "tag": "_p3",
+ "group": "face",
+ "views": {
+  "front": {
+   "face_seen": 119,
+   "face_noreed": 119,
+   "contrast": {
+    "face_p50": 0.1893,
+    "ring_p50": 0.2358,
+    "ratio": 0.803,
+    "margin": -0.0465,
+    "face_px": 119,
+    "ring_px": 414
+   },
+   "reed_cover": 0,
+   "reed_cover_frac": 0.0,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it"
+  },
+  "side": {
+   "face_seen": 88,
+   "face_noreed": 88,
+   "contrast": {
+    "face_p50": 0.2432,
+    "ring_p50": 0.2423,
+    "ratio": 1.003,
+    "margin": 0.0008,
+    "face_px": 88,
+    "ring_px": 182
+   },
+   "reed_cover": 0,
+   "reed_cover_frac": 0.0,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it"
+  },
+  "back": {
+   "face_seen": 0,
+   "face_noreed": 0,
+   "contrast": {
+    "red": "face mask under 50 px - no contrast was measured"
+   },
+   "reed_cover": 0,
+   "reed_cover_frac": null,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it",
+   "red": "face_seen is 0 - A RESULT, NOT AN ERROR: no pixel of the face plate reaches this camera. Whether that is a fault or the design depends on the view"
+  }
+ },
+ "errors": [
+  "badger: the face plate reaches at most 119 px on ANY view with the reed hidden - the camera, the build or the isolation is broken and nothing here was measured"
+ ],
+ "asks": "how many pixels of the FACE PLATE reach the camera, per view, by with/without through one locked camera - and how many of the missing ones the reed takes",
+ "cannot_see": "whether the plate has a FACE on it (eyes and mouth are dark-on-dark to this test by construction), value, hue, and the dark ties, which stay in the no-reed arm and make it a FLOOR",
+ "repainted_items": 1,
+ "bounds_drift": 0.0,
+ "control_best_face_noreed": 119,
+ "thatcher_twist_env": "(unset)",
+ "thatch_gauge_env": "(unset)",
+ "head_env": "(unset)",
+ "tiesec_env": "(unset)",
+ "ok": false
+}

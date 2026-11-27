@@ -725,3 +725,6 @@ Supervisor sign-off (2026-11-16 20:05 CT, docs/WORK_PLAN.md) with four condition
 
 ## H32 pass 5 (polish) - no security surface change
 Added a skip link (constant href "#stageScroll"), three key shortcuts ("[", "]", "g") that only toggle page-owned layout state or focus the rail, a scrollIntoView on the active tab (an id from the TABS constant) and CSS. No snapshot value reaches a selector, URL, src, href or style; no new innerHTML; no new storage key; CSP meta unchanged.
+
+## System 41 section 1 - chamber-holder Bestiary (2026-11-27)
+New surface: <img src="icons/beasts/<key>.webp"> where <key> comes ONLY from the generated BEAST_DEX constant (web/tools/make_bestiary.py); a snapshot value can only select which listed key is drawn (hero.beasts keys are looked up with hasOwnProperty, never concatenated into a path). Snapshot strings (mechanic, drops, counts) reach the DOM through el()/textContent; verified with a hostile mechanic and drop name. Silhouette is CSS only. No new innerHTML, storage key or CSP change (img-src 'self' already allows it). Undiscovered beasts' names are excluded from the finder.

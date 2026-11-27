@@ -86,6 +86,9 @@ const STALE_S := 40.0
 const LOG_MAX := 900
 const RE_TOWN := "town level|grows into|falls back to|caravan|festival|bounty|raised to level|granary|coffer|hunger"
 const RE_CRIT := "\\b(dies|died|has fallen|fallen|slain|killed|falls|lord|boss|raid|raiders|raiding|besiege|besieged|ablaze|warband|scar)\\b"
+## U202: a staked tavern game (economy.gd tavern_dice / tavern_duel / _dice_refusal / tavern_accept). The viewer who typed
+## !dice is waiting on this exact line, so it must outlive a busy scene - same class as a named hero's own action.
+const RE_TAVERN := "to the house's|the tavern keeps|takes the pot|to throw\\. \\(!dice|gold at most|gold they do not have|the least the tavern takes|has no dare on the table"
 const RE_LOW := "picks up|gathers|finds a|sips|drinks|eats|sweeps|chops|fetches|fills|hauls|mends|sells a|buys a|harvest"
 var feed_log: Array = []        # every ADMIT / MERGE / DROP, with the clock, priority and text
 var stats := {"seen": 0, "admitted": 0, "merged": 0, "dropped": 0, "dropped_protected": 0,
@@ -98,6 +101,7 @@ var _last_admit := -1.0
 var _re_town: RegEx
 var _re_crit: RegEx
 var _re_low: RegEx
+var _re_tavern: RegEx
 ## L39 (Mr. E, Nov 13): "the letters are super huge". The on-stream Chronicle line was the
 ## L15 reading size (28 px at 1080p) - right for the bottom-left panel at full screen, far
 ## too big for a box at the centre of the grid. The FONT shrinks first; HudDock.centre is
@@ -630,6 +634,7 @@ func classify(text: String, tag: Dictionary) -> int:
         _re_town = RegEx.create_from_string(RE_TOWN)
         _re_crit = RegEx.create_from_string(RE_CRIT)
         _re_low = RegEx.create_from_string(RE_LOW)
+        _re_tavern = RegEx.create_from_string(RE_TAVERN)
     var kind := String(tag.get("kind", ""))
     if kind in ["raid", "death", "lord", "boss"]:
         return P_CRIT
@@ -640,6 +645,8 @@ func classify(text: String, tag: Dictionary) -> int:
     var low := text.to_lower()
     if _re_town.search(low) != null:
         return P_TOWN
+    if _re_tavern.search(low) != null:
+        return P_TOWN                       # U202: a dice result is the answer to a viewer's command
     if _re_crit.search(low) != null:
         return P_CRIT
     if _re_low.search(low) != null:

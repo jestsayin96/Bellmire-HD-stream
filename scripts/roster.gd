@@ -880,66 +880,87 @@ const SPEC_AT := 10
 const SPEC_GIFTS_AT := [10, 15, 20]
 const SPECS := {
     "knight": {
-        "guardian": {"name": "Guardian", "blurb": "Plants the shield and makes the dark come to them.", "gifts": ["thorns", "riposte", "resolve"]},
-        "crusader": {"name": "Crusader", "blurb": "Carries the fight forward, and the dead first.", "gifts": ["smite", "rage", "backstab"]},
+        "guardian": {"name": "Guardian", "gifts": ["thorns", "riposte", "resolve"]},
+        "crusader": {"name": "Crusader", "gifts": ["smite", "rage", "backstab"]},
     },
     "warden": {
-        "bastion": {"name": "Bastion", "blurb": "Does not move. Does not need to.", "gifts": ["bulwark", "riposte", "resolve"]},
-        "reaver": {"name": "Reaver", "blurb": "Stopped holding the line and started breaking theirs.", "gifts": ["rage", "backstab", "smite"]},
+        "bastion": {"name": "Bastion", "gifts": ["bulwark", "riposte", "resolve"]},
+        "reaver": {"name": "Reaver", "gifts": ["rage", "backstab", "smite"]},
     },
     "barbarian": {
-        "berserker": {"name": "Berserker", "blurb": "Hurts them more the more they bleed.", "gifts": ["flurry", "backstab", "drain"]},
-        "chieftain": {"name": "Chieftain", "blurb": "Fights so the party fights better.", "gifts": ["hex", "resolve", "bulwark"]},
+        "berserker": {"name": "Berserker", "gifts": ["flurry", "backstab", "drain"]},
+        "chieftain": {"name": "Chieftain", "gifts": ["hex", "resolve", "bulwark"]},
     },
     "rogue": {
-        "shadow": {"name": "Shadow", "blurb": "Gone before the blow lands, back before it lifts.", "gifts": ["riposte", "hex", "rage"]},
-        "tracker": {"name": "Tracker", "blurb": "Reads the floor before it is walked on.", "gifts": ["deadeye", "cleave", "resolve"]},
+        "shadow": {"name": "Shadow", "gifts": ["riposte", "hex", "rage"]},
+        "tracker": {"name": "Tracker", "gifts": ["deadeye", "cleave", "resolve"]},
     },
     "duelist": {
-        "blademaster": {"name": "Blademaster", "blurb": "Two blades become a weather.", "gifts": ["flurry", "rage", "cleave"]},
-        "swashbuckler": {"name": "Swashbuckler", "blurb": "Never where the blow was aimed.", "gifts": ["deadeye", "resolve", "thorns"]},
+        "blademaster": {"name": "Blademaster", "gifts": ["flurry", "rage", "cleave"]},
+        "swashbuckler": {"name": "Swashbuckler", "gifts": ["deadeye", "resolve", "thorns"]},
     },
     "ranger": {
-        "sharpshooter": {"name": "Sharpshooter", "blurb": "One arrow, chosen.", "gifts": ["backstab", "rage", "resolve"]},
-        "strider": {"name": "Strider", "blurb": "Walks the dark like it owes them rent.", "gifts": ["thorns", "bulwark", "riposte"]},
+        "sharpshooter": {"name": "Sharpshooter", "gifts": ["backstab", "rage", "resolve"]},
+        "strider": {"name": "Strider", "gifts": ["thorns", "bulwark", "riposte"]},
     },
     "mage": {
-        "evoker": {"name": "Evoker", "blurb": "Spells that do not stop at one.", "gifts": ["cleave", "rage", "deadeye"]},
-        "abjurer": {"name": "Abjurer", "blurb": "Writes the ward first and the spell after.", "gifts": ["bulwark", "drain", "resolve"]},
+        "evoker": {"name": "Evoker", "gifts": ["cleave", "rage", "deadeye"]},
+        "abjurer": {"name": "Abjurer", "gifts": ["bulwark", "drain", "resolve"]},
     },
     "sage": {
-        "healer": {"name": "Healer", "blurb": "The party walks out because they walked in.", "gifts": ["resolve", "bulwark", "smite"]},
-        "battlemage": {"name": "Battlemage", "blurb": "Learned the mending, then learned the opposite.", "gifts": ["cleave", "hex", "rage"]},
+        "healer": {"name": "Healer", "gifts": ["resolve", "bulwark", "smite"]},
+        "battlemage": {"name": "Battlemage", "gifts": ["cleave", "hex", "rage"]},
     },
     "cleric": {
-        "templar": {"name": "Templar", "blurb": "Prayer with an edge on it.", "gifts": ["cleave", "rage", "riposte"]},
-        "hospitaller": {"name": "Hospitaller", "blurb": "Stands over the fallen and will not shift.", "gifts": ["resolve", "thorns", "drain"]},
+        "templar": {"name": "Templar", "gifts": ["cleave", "rage", "riposte"]},
+        "hospitaller": {"name": "Hospitaller", "gifts": ["resolve", "thorns", "drain"]},
     },
     "paladin": {
-        "oathkeeper": {"name": "Oathkeeper", "blurb": "Keeps the oath and the party with it.", "gifts": ["thorns", "resolve", "riposte"]},
-        "avenger": {"name": "Avenger", "blurb": "Hits hardest when it is nearly over.", "gifts": ["rage", "backstab", "cleave"]},
+        "oathkeeper": {"name": "Oathkeeper", "gifts": ["thorns", "resolve", "riposte"]},
+        "avenger": {"name": "Avenger", "gifts": ["rage", "backstab", "cleave"]},
     },
     "necromancer": {
-        "deathcaller": {"name": "Deathcaller", "blurb": "Speaks and the floor answers.", "gifts": ["arcane_surge", "cleave", "rage"]},
-        "bonewright": {"name": "Bonewright", "blurb": "Builds a wall out of what fell last.", "gifts": ["bulwark", "thorns", "resolve"]},
+        "deathcaller": {"name": "Deathcaller", "gifts": ["arcane_surge", "cleave", "rage"]},
+        "bonewright": {"name": "Bonewright", "gifts": ["bulwark", "thorns", "resolve"]},
     },
     "monk": {
-        "ironfist": {"name": "Ironfist", "blurb": "Every hand is a hammer now.", "gifts": ["rage", "backstab", "cleave"]},
-        "stillwater": {"name": "Stillwater", "blurb": "Stands so still the blows slide off.", "gifts": ["bulwark", "resolve", "thorns"]},
+        "ironfist": {"name": "Ironfist", "gifts": ["rage", "backstab", "cleave"]},
+        "stillwater": {"name": "Stillwater", "gifts": ["bulwark", "resolve", "thorns"]},
     },
     "druid": {
-        "wildheart": {"name": "Wildheart", "blurb": "Let the meadow's teeth out.", "gifts": ["flurry", "cleave", "backstab"]},
-        "grovekeeper": {"name": "Grovekeeper", "blurb": "Roots go down; nothing moves them.", "gifts": ["bulwark", "drain", "resolve"]},
+        "wildheart": {"name": "Wildheart", "gifts": ["flurry", "cleave", "backstab"]},
+        "grovekeeper": {"name": "Grovekeeper", "gifts": ["bulwark", "drain", "resolve"]},
     },
     "warlock": {
-        "hexblade": {"name": "Hexblade", "blurb": "Took the bargain into the hand that holds the blade.", "gifts": ["riposte", "backstab", "cleave"]},
-        "pactbinder": {"name": "Pactbinder", "blurb": "Asked the thing below for more, and got it.", "gifts": ["arcane_surge", "deadeye", "rage"]},
+        "hexblade": {"name": "Hexblade", "gifts": ["riposte", "backstab", "cleave"]},
+        "pactbinder": {"name": "Pactbinder", "gifts": ["arcane_surge", "deadeye", "rage"]},
     },
     "bard": {
-        "skald": {"name": "Skald", "blurb": "Sings the war-song, and swings on the beat.", "gifts": ["rage", "cleave", "resolve"]},
-        "loremaster": {"name": "Loremaster", "blurb": "Knows the name of every thing down there.", "gifts": ["hex", "deadeye", "drain"]},
+        "skald": {"name": "Skald", "gifts": ["rage", "cleave", "resolve"]},
+        "loremaster": {"name": "Loremaster", "gifts": ["hex", "deadeye", "drain"]},
     },
 }
+
+## S158: the path's blurb is CONTENT'S, not ours - data/lore_lines.json -> spec_text[calling][path].blurb
+## (C-237, keyed exactly as SPECS). The placeholder blurbs that lived in SPECS are deleted, so there is
+## one source. Read once and cached; a missing file or row reads "" rather than a stale copy.
+static var _spec_text_cache: Dictionary = {}
+static var _spec_text_loaded := false
+static func spec_blurb(cls: String, path: String) -> String:
+    if not _spec_text_loaded:
+        _spec_text_loaded = true
+        var f := FileAccess.open("res://data/lore_lines.json", FileAccess.READ)
+        if f != null:
+            var d = JSON.parse_string(f.get_as_text())
+            if d is Dictionary and (d as Dictionary).get("spec_text") is Dictionary:
+                _spec_text_cache = (d as Dictionary)["spec_text"]
+    var by_path = _spec_text_cache.get(cls, {})
+    if not (by_path is Dictionary):
+        return ""
+    var row = (by_path as Dictionary).get(path, {})
+    if not (row is Dictionary):
+        return ""
+    return String((row as Dictionary).get("blurb", ""))
 
 static func spec_of(h: Dictionary) -> String:
     var s := String(h.get("spec", ""))
@@ -997,11 +1018,11 @@ func paths_line(user_id: String) -> String:
     if opts.is_empty():
         return "%s's calling has no paths yet." % h["name"]
     if spec_of(h) != "":
-        return "%s walks the %s's road for good - %s" % [h["name"], calling_of(h), String(spec_row(h)["blurb"])]
+        return "%s walks the %s's road for good - %s" % [h["name"], calling_of(h), spec_blurb(String(h["class"]), spec_of(h))]
     var parts: Array = []
     for k: String in opts:
         var row: Dictionary = opts[k]
-        parts.append("%s: %s (first gift %s)" % [row["name"], row["blurb"], ability_word(String((row["gifts"] as Array)[0]))])
+        parts.append("%s: %s (first gift %s)" % [row["name"], spec_blurb(String(h["class"]), k), ability_word(String((row["gifts"] as Array)[0]))])
     var when := ("at level %d" % SPEC_AT) if int(h["level"]) < SPEC_AT else "now"
     return "%s the %s may choose %s, and only once - %s" % [h["name"], h["class"], when, "  |  ".join(parts)]
 
@@ -1027,7 +1048,7 @@ func specialize(user_id: String, path: String) -> String:
     var said: Array = []
     for g: String in spec_gifts(h):
         said.append("%s - %s" % [ability_word(g), ability_blurb(g)])
-    announced.emit("%s takes the %s's road. %s" % [h["name"], calling_of(h), String(opts[key]["blurb"])],
+    announced.emit("%s takes the %s's road. %s" % [h["name"], calling_of(h), spec_blurb(String(h["class"]), key)],
         Color(0.98, 0.80, 0.40))
     hero_moment.emit(user_id, "specialized", "your hero became a %s." % calling_of(h))
     changed.emit(user_id)

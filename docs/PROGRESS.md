@@ -4755,3 +4755,22 @@ TAKE THIS NEXT (11:58 block) GAME BUILD row: "THE BESPOKE BEHAVIOURS - SYSTEM 40
   The DELVE_TEST party carries no chosen path, so the live soak did not fire a way - the S156 gate is the proof.
 - HANDOFFS: the five feed lines are placeholders for content to tune (delve.gd _trapsense caller, _mend_party,
   _death_ward). Which paths carry which way is content-tunable in Roster.SPEC_WAYS. No Twitch, zero bits.
+## D-cycle - S158 C-237's spec_text WIRED, placeholders deleted; the 69th NOT named, 2026-11-27 14:08-14:1x CST (game build)
+TAKE THIS NEXT (13:58 block) GAME BUILD row: "(1) WIRE CONTENT'S `spec_text` AND DELETE THE PLACEHOLDER BLURBS ...
+(2) THEN NAME THE 69th - `shearman` / "Cutloose" ... ONLY AFTER CONTENT'S `by_key.shearman` IS ON MAIN".
+- (1) roster.gd (bak_s158): new static `spec_blurb(cls, path)` reads data/lore_lines.json -> spec_text[calling][path].blurb
+  (cached once; missing row reads "", never a stale copy). The 30 placeholder "blurb" fields are DELETED from SPECS, so
+  there is one source. All three read sites now use it: paths_line (chosen + choice list) and specialize's announce.
+  CORRECTION TO THE ROW: it cites roster.gd:43,46,49,52,55 - those are the CLASSES blurbs (the calling's own line, read
+  by retrain at :745), which spec_text does not cover and which I left alone. The placeholders C-237 replaces were the
+  SPECS path blurbs at :883-940. spec_text's 30 leaves match SPECS' 30 paths exactly (parsed, not counted by key).
+- (2) NOT NAMED. I looked: miniboss_feed.by_key = 68 keys on merged main 2ecca0b8, `shearman` ABSENT (and `hammerman`,
+  the 70th, absent too). Per the row, naming ahead of the feed row inverts the cascade - no MB_NAME, no MB_FIT, no
+  shearman.glb.import this firing. Published count not touched.
+- GATES: parse --quit-after 300 rc 0, 0 Parse Error / 0 SCRIPT ERROR (the one ERROR line is the chat bot's
+  COMMANDS_DATA MINIBOSS COUNT 67 vs 68, its own step at :45). S158_SPECTEXT OK 30 paths read from spec_text, 0
+  placeholders; S158_RED=1 -> S158_SPECTEXT FAIL 30 of 30 (the gate can go red). S155_SPEC OK. S156_WAYS OK 16 checks.
+  TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2039. DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+  TOWNWALK in_solid=0/18217 raid_in_solid=0/4184 PASS.
+- LOOKED AT: text only, no mesh - the sample line printed is knight/guardian "Plants the shield. The blows come to the
+  shield." (content's words, not mine). No Twitch, zero bits.

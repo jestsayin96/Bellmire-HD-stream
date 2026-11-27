@@ -1,0 +1,26 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+  ok   every SPEC_WAYS key is a real path []
+  ok   taunt: the mage really is nearer (1 m vs 6 m)
+  ok   taunt: the near Guardian draws the blow off the nearer mage
+  ok   taunt: no Guardian within TAUNT_R, nobody is drawn
+  ok   aura: no Chieftain, blows land as they were
+  ok   aura: a Chieftain standing, x1.10
+  ok   aura: the Chieftain down, the aura goes with them
+  ok   trapsense: the Tracker reads the first trap of floor 4
+  ok   trapsense: and only the first
+  ok   trapsense: fresh again on floor 5
+FEED Aud the Healer calls the party in close and mends them all.
+  ok   mend_party: mage 20->40, guardian 40->60
+  ok   mend_party: the fallen are not mended
+  ok   mend_party: once a floor
+FEED Tam goes down - and the Stillwater's ward will not let them stay down.
+  ok   death_ward: Stillwater stands at 1 hp
+  ok   death_ward: once a delve
+  ok   death_ward: a path without the ward gets none
+S156 spec_log { "taunt": 0, "trapsense": 2, "mend_party": 1, "death_ward": 1 }
+S156_WAYS OK 16 checks
+
+--STDERR--
+
+RC=0

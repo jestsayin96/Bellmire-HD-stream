@@ -1,0 +1,10 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S158 sample knight/guardian: Plants the shield. The blows come to the shield.
+S158_SPECTEXT FAIL n=30 bad=["knight/guardian", "knight/crusader", "warden/bastion", "warden/reaver", "barbarian/berserker", "barbarian/chieftain", "rogue/shadow", "rogue/tracker", "duelist/blademaster", "duelist/swashbuckler", "ranger/sharpshooter", "ranger/strider", "mage/evoker", "mage/abjurer", "sage/healer", "sage/battlemage", "cleric/templar", "cleric/hospitaller", "paladin/oathkeeper", "paladin/avenger", "necromancer/deathcaller", "necromancer/bonewright", "monk/ironfist", "monk/stillwater", "druid/wildheart", "druid/grovekeeper", "warlock/hexblade", "warlock/pactbinder", "bard/skald", "bard/loremaster"]
+
+--
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S158 sample knight/guardian: Plants the shield. The blows come to the shield.
+S158_SPECTEXT OK 30 paths read from spec_text, 0 placeholders

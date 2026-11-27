@@ -1,3 +1,238 @@
+*** ===== TAKE THIS NEXT - THE 14:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 13:58 FIRING.
+*** Merged tree fb4d6037 - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed
+*** to main. Clock read off the machine with `TZ=America/Chicago date`: 14:59:21 CST at the start
+*** of this run. Every number below re-derived this run; quote none of it next hour, measure it.
+***
+*** ===== MY OWN FAULTS THIS RUN. REPORTED FIRST. =====
+*** (1) **MY `Delve.MB_NAME` MATCHER WAS WRONG FOR THE FIFTH TIME IN THIS HOUSE'S HISTORY, AND IT
+***     WAS A NEW WAY OF BEING WRONG.** I anchored on `const MB_NAME` with a pattern requiring
+***     `=`, and GDScript writes `const MB_NAME := {`. My `(?::\s*[^=]+)?=` could not match `:=`
+***     and the parse returned NOTHING - it did not lie, it died, which is the lucky outcome. The
+***     13:58 seat's version of this fault anchored on the wrong dict and returned a CONFIDENT 37.
+***     **THE MATCHER THAT WORKS, USE THIS ONE:** `^const\s+MB_NAME\s*:?=\s*\{` - the `:?` is the
+***     whole fix - then brace-match from that `{` and strip `#` comments before counting keys.
+*** (2) **MY 14:58 BLOCK DID NOT REACH THE GAME BUILD BEFORE ITS :07 WINDOW AND THAT IS MINE.**
+***     The recipe says sync `laptop` FIRST every hour. It cannot fire if the block does not exist
+***     until :10, and this hour it did not, because I verified six lanes and art's 70-body census
+***     before writing a line. **NO LANE WAS STARVED** - see the GAME BUILD row - but the schedule
+***     mitigation was defeated by my own ordering, not by the clock. THE FIX, AND I HAVE ADOPTED
+***     IT IN THIS BLOCK: WRITE AND SYNC THE GAME BUILD ROW FIRST, VERIFY THE REST AFTER.
+*** (3) **I COUNTED ART'S `_chibi` VARIANTS AS 13 WHERE ART'S OWN DOC SAYS 12.** Both are right
+***     and the answer is the same: `drillmaster_chibi` is BOTH a `_chibi` variant AND one of the
+***     three stems with no `.glb`, so art's prose subtracts it once in one bucket and I counted
+***     it in the other. Set arithmetic, not a discrepancy. **84 builder keys - 13 `_chibi` -
+***     `drillmaster_tall` = 70 base bodies with a shipped `.glb`.** No lane is charged.
+***
+*** ===== THE CASCADE: 70 BODIES / **68** NAMES / **70** FEED KEYS / **68** PUBLISHED. =====
+*** ===== IT IS OPEN ON THE NAMING SIDE, AND THAT IS THE PIPELINE WORKING, NOT A FAULT. =====
+*** Measured by me on merged tree fb4d6037:
+***   `Delve.MB_NAME`        = **68** keys, 68 unique (delve.gd:453, brace-matched, comments stripped)
+***   `Delve.MB_FIT`         = **79** keys (delve.gd:384)
+***   `miniboss_feed.by_key` = **70** keys (data/lore_lines.json, real JSON parse)
+***   `commands.json` miniboss `.what` and `.short` = **68**
+***   SET DIFFERENCE: **UNNAMED = [`hammerman`, `shearman`]. GHOST = [] (EMPTY).**
+***   BODIES = **70**, CLOSED - art wrote the closure down this hour and I verified the count by
+***   art's own stated method and got 70 independently. `shearman.glb` and `hammerman.glb` are
+***   both on main. **CONTENT HAS PAID BOTH FEED ROWS. THE GAME BUILD IS THE ONLY BLOCKING LANE.**
+***
+*** ===== GAME BUILD (:07) - S158 IS **TICKED**. AND YOU ARE UNBLOCKED ON BOTH BODIES. =====
+***   **C-237's `spec_text` WIRED - TICKED.** `roster.gd:949 spec_blurb()` reads
+***   `data/lore_lines.json -> spec_text[calling][path].blurb`; the 30 placeholder blurbs are GONE
+***   (`grep -c "Path of the" scripts/roster.gd` = 0) and three call sites read the data.
+***   **WHAT EARNED IT: THE NEW GATE CAN GO RED AND YOU PROVED IT.** `_s158_red.log` shows
+***   `S158_SPECTEXT FAIL n=30` naming all 30 bad paths, against `OK 30 ... 0 placeholders` green.
+***   A test made quiet looks exactly like a test made honest; you showed which one this is.
+***   **AND YOU REFUSED TO NAME THE 69th BECAUSE `by_key.shearman` WAS ABSENT.** That was the
+***   correct call at 14:08 and it is the rule working.
+***   NEXT: **NAME THE 69th AND THE 70th. THE PRECONDITION IS NOW MET - I MEASURED IT MYSELF.**
+***   `by_key` is **70** on main as of fb4d6037 and holds BOTH `shearman` and `hammerman`.
+***     - `"shearman": "Cutloose"`  (69th, art CANON, `shearman.glb` on main)
+***     - `"hammerman": "Alltold"`  (70th, art CANON, `hammerman.glb` on main)
+***   One `MB_NAME` row + one `MB_FIT` row + the `.glb.import` for each, names taken from art's
+***   CANON and not invented. **RE-MEASURE origin/main YOURSELF FIRST - do not take 70 from this
+***   block.** If you can only take one inside your 25-minute cap, TAKE `shearman` and SPLIT;
+***   say in your IDLE line which you landed and which you carried.
+***   WHEN BOTH LAND, `MB_NAME`=70 SHUTS THE NAMING HALF AND THE ROSTER IS WHOLE AT 70/70/70.
+***   DO NOT bump the published miniboss count - that is the chat bot's step at :45.
+***   DO NOT re-open S2_TEST (b) or T1_TEST's FakeRoster add_brew - both GREEN since D100.
+***   DO NOT wire `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`, `townsfolk` or
+***   `town_levels_for_the_desktop` - all five DECLARED DEAD. DO NOT re-wire `lord_intros_alt` or
+***   `unique_intros_alt` - READ at delve.gd:4022.
+***
+*** ===== CONTENT (:22) - C-238 IS **TICKED**, AND YOUR MINIBOSS FEED IS NOW COMPLETE AT 70. =====
+***   **THE 69th AND 70th FEED ROWS - TICKED, BOTH.** I parsed `data/lore_lines.json` myself:
+***   `miniboss_feed.by_key` went **68 -> 70** and holds `shearman` AND `hammerman`. You were
+***   told two rows were owed and you landed BOTH in one firing. Arrays 9/8/4/8 like mower.
+***   **YOU ARE NO LONGER THE BLOCKING LANE FOR ANYTHING IN THE CASCADE.** Art closed the roster
+***   at 70 this hour, so with these two rows your miniboss feed is COMPLETE against a roster that
+***   will not grow. The only thing standing between 70 bodies and 70 published is the engine.
+***   NEXT: **YOU ARE DRY ON THE CASCADE. GO TO THE SUPERVISOR'S QUEUE, NOT TO NEW MINIBOSS TEXT.**
+***   Take the content half of the standing supervisor directives in the order they were issued:
+***   **System 41 (encyclopedia / crafting hub, sup-nov27-0230)** is the oldest unstarted one with
+***   a content half. Write the TEXT half only; the wiring is the game build's and the hub's.
+***   If you judge it already covered, SAY SO IN ONE LINE WITH THE MEASUREMENT and stand down -
+***   a stand-down written up IS the delivery. DO NOT invent a 71st body's feed row: there is no
+***   71st body and there will not be one.
+***   Keep writing `_note_` keys. They are not dead data and no lane is to wire one.
+***
+*** ===== ART (:34) - **TICKED**, AND THIS IS THE BEST-EVIDENCED HOUR THE ART LANE HAS HAD. =====
+***   I asked you two things at 13:58 and you paid both, plus a finding I did not ask for.
+***   **(a) THE ROSTER CLOSURE, IN WRITING - TICKED.** `docs/art/MINIBOSS_ROSTER_CLOSED_AT_70.md`:
+***   the roster is CLOSED AT 70, the hammerman is the last, no 71st. You gave the method, not
+***   just the number, and I RE-RAN YOUR METHOD AND GOT 70 INDEPENDENTLY (84 builder keys, 13
+***   `_chibi`, `drillmaster_tall` with no `.glb`). You also marked it reversible and Mr. E's to
+***   override, which is exactly the right scope for a lane's call about its own queue.
+***   **(b) THE WORST-MARGIN PASS - TICKED, AND YOU WERE RIGHT THAT MY ASK WAS UNANSWERABLE.**
+***   I told you to pick "the body whose own register carries the worst margin". **THERE IS NO
+***   SUCH MARGIN AND YOU PROVED IT:** `seen` is saturated at 1.000 on every view of every body,
+***   the worst `vis` in the house is 14380px against a floor of 700. **THAT IS THE BEADLE FINDING
+***   OF 18 NOV STATED NUMERICALLY** - the fit register answers IS IT THERE, not DOES IT READ -
+***   and it is worth more than the pass I asked for. You went to `_facingread.py`, an instrument
+***   that already existed, and did not build a fourth copy.
+***   **(c) THE BELLMAN'S EYES HAD NEVER BEEN SEEN, AND I RED-PROVED IT MYSELF.** Your ablation
+***   says 96 eye polygons move **0 px on all three views**. I did not take it: I staged your
+***   on/off pair and compared them PIXEL BY PIXEL in my own container - **0 pixels differ, max
+***   channel delta 0**. (The two PNGs have different md5 and identical byte length; that is PNG
+***   metadata, not pixels, and an md5 alone would have been the wrong instrument.) Geometry that
+***   exists and cannot be seen from any angle. 0.1832 -> **0.4703**, worst of 70 to near median.
+***   **AND I LOOKED AT ALL THREE SHIPPED VIEWS.** FRONT: the dark bib reads as a panel at body
+***   scale. **BACK: bare pale shroud, no bib, no eyes - front and back are tellable apart. THAT
+***   IS THE EXACT VIEW THE BEADLE FAILED AND IT PASSES.** SIDE: a plain cone and a bare mast with
+***   no facing cue - **WHICH IS FAULT 1 AND 2 ON YOUR OWN LIST.** You declared four remaining
+***   faults instead of bundling them, and every one I could check is real and is as you described
+***   it. Carrying four named faults beats shipping one hidden one.
+***   NEXT: **TAKE THE NEXT BODY DOWN YOUR OWN RANKING, BY THE INSTRUMENT THAT HAS SPREAD.**
+***   Your census ranks `changer` 0.2046 third-worst behind stopper (diluted, not broken) and the
+***   bellman (now fixed). **Apply your own per-third guard before you touch it** - if changer's
+***   thirds are flat it is dilution like stopper and you say so and move to `dyer` 0.2654. One
+***   body, the worst view, corrections from the picture. DO NOT invent a 71st.
+***   AFTER THAT, the supervisor's 13:23 directive takes you to HERO GEAR - the roster being
+***   closed is what unlocks it.
+***
+*** ===== HUB (:37) - THE SPEC ROW IS **TICKED**. YOUR STAND-DOWN LAST HOUR BOUGHT THIS. =====
+***   **SYSTEM 40's HUB HALF - TICKED.** `spec_name` now draws on BOTH the hero card
+***   (`app.js:967`, `.hspec`) and the hero sheet (`app.js:1098`, `.sspec`, "Path of the X").
+***   **I RE-RAN THE SECURITY GREPS MYSELF RATHER THAN TAKE YOUR WORD:** `el()` is
+***   `createElement` + `textContent` and nothing else; your two new sites both go through it; the
+***   only `innerHTML` in `app.js` is the two known page-owned sites (`:255`, `:301`) and your
+***   diff does not touch them; no `insertAdjacentHTML`, no `document.write`, no `eval`, no
+***   `new Function`; the spec value never becomes a URL, src, href or style. The empty string
+***   draws nothing rather than "none", which is the contract you wrote.
+***   **AND YOU WIRED THE HOSTILE NAME INTO YOUR OWN MOCK** (`spec_name: "Guardian " + bad`), so
+***   the literal-text path is exercised by `?mock=`, not just asserted. That is the right habit.
+***   ONE THING I OWE YOU AND DID NOT DO: I verified this by grep and by reading the diff, and I
+***   did NOT render the card this hour. The tick is on the code and the contract. If the row
+***   collides with anything at narrow width, that is still open and it is mine to have missed.
+***   YOU STILL DO NOT PUBLISH. The push is the SUPERVISOR'S call. If you consider the hub ready,
+***   say "READY TO PUBLISH" and stop, and I will run the full publish gate the moment you claim it.
+***   NEXT: **THE SPEC ROW AT NARROW WIDTH, AND THEN THE SHEET'S EMPTY STATE.** Check the card at
+***   a phone-width viewport - `.hspec` is a new block element in `idb` and the card is dense.
+***   Then confirm an UNSPECIALIZED hero draws no empty gap on the sheet, not just no text.
+***
+*** ===== CHAT BOT (:45) - B204 IS **TICKED**. THE PUBLISHED HALF IS SHUT AT 68. =====
+***   **THE 67 -> 68 BUMP - TICKED.** `.what` and `.short` both read 68 and I measured
+***   `MB_NAME`=68 on main myself to confirm 68 was the honest figure.
+***   **WHAT EARNED IT: YOU PUBLISHED 68 AND NOT 69, AND YOU WERE RIGHT.** The 69th and 70th
+***   bodies existed on main when you fired, and a lane counting BODIES would have published 70.
+***   You measured `MB_NAME` and `by_key`, found `shearman` and `hammerman` named nowhere and fed
+***   nowhere, and published the number the ENGINE can actually answer. A viewer asking
+***   `!miniboss Cutloose` would have got nothing. That is the whole reason the published count
+***   follows names and not bodies, and you got it right unprompted.
+***   You used the real generator (`COMMANDS_DOC wrote 36 commands`) and the doc diff is ONE LINE.
+***   NEXT: **THE TARGET IS NOW 70, BUT ONLY IF THE GAME BUILD LANDS BOTH NAMES FIRST.**
+***   Content paid `by_key`=70 this hour and the game build is told above to name both. If it
+***   does, `MB_NAME`=70 and the published count goes **68 -> 70** in one step.
+***   **RE-MEASURE origin/main YOURSELF AND PUBLISH WHAT `MB_NAME` SAYS - 68, 69 OR 70.** Do not
+***   take 70 from this block; it is a forecast, not a measurement. If the game build split the
+***   job, 69 is the honest figure and you publish 69. Use the real generator, never a hand edit.
+***   CLAIM BY :50 WITH A FINISH INSIDE :52 - that schedule row is mine and it is why the HUD
+***   gets its window. It has held since 21 Nov.
+***
+*** ===== HUD (:52) - U207 IS **NOT TICKED**, AND THE REASON IS THE INSTRUMENT, NOT YOU. =====
+***   **THE VELLUM CHECK DID NOT EXECUTE. SECOND FIRING RUNNING.** Your own IDLE says it: panes
+***   would not raise in this tree, `mode=off`, **`vellum runs=0`**. I am not ticking a probe that
+***   did not run - and you did not ask me to; you wrote the zero down plainly instead of
+***   reporting the run as green, which is the correct behaviour and the reason I trust the rest.
+***   U206 EXECUTED IT (runs=3) AND U207 DID NOT, SO SOMETHING ABOUT THE TREE OR THE MODE CHANGED
+***   BETWEEN 13:54 AND 14:54. That delta is the item, not the vellum margin.
+***   NEXT: **STOP RE-SHOOTING THE PROBE AND FIND WHY THE PANES WILL NOT RAISE.** You have burned
+***   two windows on a probe that cannot answer. Diff your own U206 and U207 harnesses and your
+***   tree state; `mode=off` is a fact about the run, so find what sets `mode`. **ONE windowed run
+***   maximum this firing** - the rest is reading, which needs no lock.
+***   WHEN IT EXECUTES AGAIN, go to the frame YOUR OWN LOG calls tightest, not the prettiest.
+***   COSMETIC, NO COST, AND IT IS THE SECOND HOUR RUNNING: your lock line said "cap 15:09" =
+***   claim+15, but your window hard-releases at **:07**. THE BINDING CAP IS THE EARLIER OF THE
+***   TWO - 15:07, not 15:09. You released at 15:01:33 so nothing overran and the clean count is
+***   untouched. Write the binding cap, not the looser of the two.
+***
+*** ===== LOCK DISCIPLINE, THE 14:00 HOUR - CLEAN. NOBODY OVERRAN, NOBODY CLAIMED OVER A HOLD. =====
+***   game build 14:08:32 -> 14:16:31 (7m59s; declared 14:30, cap 14:33) - inside :07-:40.
+***   QA tester  14:42:17 -> 14:42:42 (25s; declared 14:46, cap 14:50) - not one of the six, same rule, clean.
+***   chat bot   14:48:20 -> 14:49:13 (53s; declared 14:51:30, released early to clear :52) - good.
+***   HUD        14:54:01 -> 15:01:33 (7m32s; declared 15:02) - inside its window, released early.
+***   Every claim followed an IDLE from the previous lane. Never two lanes holding at once. No
+***   stale lock cleared. **NO FUTURE STAMPS** - every line is at or behind the machine clock.
+***   The HUD's "cap 15:09" is a mis-stated cap in a line that released 5.5 minutes early; it is
+***   cosmetic and is NOT an overrun. **THE CLEAN-HOUR COUNT ADVANCES TO 2.**
+***   My own missed :07 sync (fault 2) starved nobody - the game build's 13:58 rows were already
+***   correct and its precondition landed on main at ~15:05, before its window - so I am not
+***   resetting the count on it. I am recording it as a fault without folding it into the count,
+***   and the next seat should hold me to that distinction.
+***
+*** ===== THE DEAD-DATA AUDIT, MEASURED THIS RUN ON fb4d6037. UNREAD COUNT DID NOT MOVE. =====
+***   Corpus `scripts/*.gd` + `web/app.js` = **49 files** (2,494,004 chars), `data/*.json` = 12
+***   files, **170** top-level keys. **NOTE THE CORPUS GREW: 48 `scripts/*.gd` where the baseline
+***   says 47.** That is a real new engine script, not a glob fault - the prompt's "48 files"
+***   total is now **49** and the next seat should not treat 49 as the `web/**/*.js` error.
+***   ZERO-HIT = 79: **64 `_note_` + 15 NON-NOTE.** **THE NON-NOTE COUNT IS 15, UNCHANGED**, and
+***   it is the same 15 by name: `lord_intros_alt`, `unique_intros_alt` (runtime-built, READ at
+***   delve.gd:4022); `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+***   `town_levels_for_the_desktop` (declared dead); and the 9 prose/spec strings `technique`,
+***   `boss_floors`, `chronicle_line`, `word_order`, `casing`, `promotion_line`, `one_roll`,
+***   `_gating`, `canon_silences`. **UNREAD LIVE DATA KEYS: ZERO.**
+***   `spec_text` is NO LONGER a dead key - the game build wired it at S158, exactly as the 13:58
+***   block predicted. The raw total rose 56 -> 79 purely on `_note_` keys and carries NO signal.
+***
+*** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED. A FIRING CANNOT EDIT A PROMPT. =====
+*** I did not attempt a prompt write this run: the rule is settled that a scheduled firing has no
+*** live turn to be approved in. These are owed to THIS prompt (:58) and must be landed by the
+*** first seat that gets a LIVE turn from Mr. E, all at once:
+***   (A) **THE ART FIT REGISTER STANDING NOTE IS STALE AND NOW READS BACKWARDS.** The prompt says
+***       the register's top-level verdict "reads `RED / ok:false` ... on two CARRIED unmeasured
+***       rows (`snuffer_chibi`, `tallyman_chibi`)". **MEASURED THIS RUN ON BOTH SIDES OF THE
+***       MERGE: `ok: true`, `verdict: "GREEN"`, `red_summary.rows` EMPTY, `shipped_red` EMPTY,
+***       `errors` EMPTY.** The two `_chibi` rows now sit in `self_seen.not_measurable` - an
+***       honest absence that claims nothing - and no longer hold the register red. A seat reading
+***       the prompt today would report a red gate that is green. REPLACE THAT PARAGRAPH.
+***   (B) **THE MINIBOSS COUNT IN THE FREEZE SECTION IS STALE.** It says "as of 21 Nov the fit
+***       register judges 46 rows, of which 44 are live bodies". It is now **72 rows / 70 live
+***       bodies**, and THE ROSTER IS CLOSED AT 70 by the art lane's written ruling this hour
+***       (`docs/art/MINIBOSS_ROSTER_CLOSED_AT_70.md`). The "GENUINELY DRY: the ART lane may invent
+***       MINIBOSSES" permission should record that art has closed its own queue at 70.
+***   (C) **ADD THE `:=` MATCHER FIX TO THE `Delve.MB_NAME` WARNING.** The prompt warns against
+***       flat regexes; it does not say that `const MB_NAME := {` defeats a pattern anchored on
+***       `=`. That is now the FIFTH way this one constant has broken a seat's parser. The line to
+***       add: anchor on `^const\s+MB_NAME\s*:?=\s*\{`, brace-match, strip comments.
+***   (D) **THE ID LIST IS STALE.** As of this run: B204, C-238, D100, H32, L74, S158, T5, U207,
+***       and art is on the bellman bib pass 4 with the roster closed at 70.
+***   (E) **THE DEAD-DATA BASELINE'S FILE COUNT IS NOW 49, NOT 48** (48 `scripts/*.gd` + app.js).
+***       The warning about `web/**/*.js` wrongly making it 49 is still correct and must STAY -
+***       but a seat measuring 49 today is measuring correctly. Say both.
+***
+*** ===== FOR THE SUPERVISOR =====
+***   **(1) THE ART LANE HAS CLOSED THE MINIBOSS ROSTER AT 70 AND THAT IS A QUEUE DECISION WITH
+***   HOUSE-WIDE REACH. IT IS RECORDED, NOT RATIFIED.** `docs/art/MINIBOSS_ROSTER_CLOSED_AT_70.md`
+***   says no 71st body will be invented; the lane marked it its own reversible call and Mr. E's
+***   to override. I verified the count (70) independently and I think the reasoning is sound: all
+***   14 floorgen themes covered since the 33rd, the engine is two bodies behind, and the lane
+***   judges the remaining ideas to be re-skins. **MY RECOMMENDATION: LET IT STAND.** It converts
+***   an open-ended queue into a finite denominator (70/70/70) that every other lane can plan
+***   against, and your 13:23 directive already points art at hero gear after the cap. It needs
+***   your word only because it changes what four lanes plan for.
+***   **(2) THE HUB IS STILL UNPUBLISHED AND THE GAP HAS GROWN AGAIN.** See THE HUB below. The
+***   System 40 spec row landed this hour. No publish verification was run - the lane has not
+***   claimed "READY TO PUBLISH", so the gate is not owed and I did not run it.
 *** ===== TAKE THIS NEXT - THE 13:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 12:58 FIRING AND BOTH ITS WRITES.
 *** Merged tree 70c3c8a5 - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed

@@ -20,11 +20,16 @@ var _f := 0
 var _fails: Array = []
 var _checks := 0
 var _vel_runs := 0   # U206: how many times the vellum check really executed
+var _sc := 1.5
+var _tag := "s150"
+var _min_v := 9999.0
+var _min_p := 9999.0
+var _min_b := 9999.0
 var _stage := "boot"
 var _at := 0
 var _scales: Array = []
 var _shots := not DisplayServer.get_name().to_lower().contains("headless")
-const OUT := "res://renders/cycles/20261127_u202"
+const OUT := "res://renders/cycles/20261127_u207"
 
 func _initialize() -> void:
 	# a known screen: headless Godot gives a 100x100 window where nothing can be judged (that is
@@ -99,9 +104,12 @@ func _probe(tag: String) -> void:
 		var over_p := right - pr.end.x
 		var vis_clip := l.visible_characters != -1 or l.visible_ratio < 1.0
 		print("U134_LINE %s a=%.2f vis_clip=%s lblw=%.0f textw=%.0f over_vellum=%.1f over_panel=%.1f bottom_over=%.1f fs=%d \"%s\"" % [tag, l.modulate.a, vis_clip, l.size.x, sz.x, over_v, over_p, bottom - pr.end.y, fs, l.text.left(40)])
+		_min_p = minf(_min_p, -over_p)
+		_min_b = minf(_min_b, -(bottom - pr.end.y))
 		_ok(over_p <= 0.5, "%s line drawn %.1f px past the Chronicle panel: %s" % [tag, over_p, l.text.left(30)])
 		if has_vel:
 			_vel_runs += 1
+			_min_v = minf(_min_v, -over_v)
 			_ok(over_v <= 0.5, "%s line drawn %.1f px past the vellum: %s" % [tag, over_v, l.text.left(30)])
 		_ok(bottom <= pr.end.y + 0.5, "%s line bottom %.1f px past the panel: %s" % [tag, bottom - pr.end.y, l.text.left(30)])
 	print("U134_PANE %s lines=%d panel=%s vellum=%s card=%s" % [tag, n, pr, (str(vel) if has_vel else "NONE(split off: _content is only built by _build_chrome)"), fh.card_showing()])
@@ -123,8 +131,12 @@ func _process(_dt: float) -> bool:
 	match _stage:
 		"boot":
 			if _f == 20:
-				_scales = [1.5]
-				UiTheme.set_scale(1.5)
+				var e := OS.get_environment("U207_SCALE")
+				if e != "":
+					_sc = e.to_float()
+				_tag = "s%d" % int(round(_sc * 100.0))
+				_scales = [_sc]
+				UiTheme.set_scale(_sc)
 				_stage = "busy"
 				_at = _f
 		"busy":
@@ -137,7 +149,7 @@ func _process(_dt: float) -> bool:
 				if j % 15 == 7 and (j / 15) < AMB.size():
 					_t.feed.append(AMB[j / 15])
 			if k == 330:
-				_save("busy_tavern_s150")
+				_save("busy_tavern_" + _tag)
 				_probe("busy")
 			if k == 700:
 				var lg := _log_of()
@@ -191,9 +203,19 @@ func _process(_dt: float) -> bool:
 				print("U203_SET seen=%d of %d (sum was %d)" % [seen, AMB.size(), admitted + alive])
 				_ok(seen == AMB.size(), "every tavern line admitted or still waiting (set, not sum)")
 				# U206: now raise the panes (split mode), so FeedHUD builds _content and the vellum check executes.
-				_say("local_mre", "MrE", "!testbits 500 bigaxe")
-				_say("local_mre", "MrE", "!testsub mossymage")
-				_say("local_mre", "MrE", "!testpoints dawncleric")
+				# U207: the named heroes (bigaxe...) are not in every roster; use whoever really exists.
+				var hn: Array = []
+				if _t.get("chat").roster.heroes.size() < 3:
+					for jn in ["Bigaxe", "Mossymage", "Dawncleric"]:
+						_say("v_" + jn.to_lower(), jn, "!enlist")
+				var c2: ChatCmd = _t.get("chat")
+				for hk in c2.roster.heroes:
+					hn.append(String(c2.roster.heroes[hk].get("name", "")).to_lower())
+				print("U207_HEROES n=%d %s" % [hn.size(), str(hn.slice(0, 4))])
+				if hn.size() >= 3:
+					_say("local_mre", "MrE", "!testbits 500 " + hn[0])
+					_say("local_mre", "MrE", "!testsub " + hn[1])
+					_say("local_mre", "MrE", "!testpoints " + hn[2])
 				_stage = "split"
 				_at = _f
 		"split":
@@ -202,11 +224,12 @@ func _process(_dt: float) -> bool:
 				_t.feed.append("Villager%d hums a tune near the well" % k2)
 			if k2 == 240:
 				_ok(HudDock.split(_t), "U206 panes are up (HudDock.split true)")
-				_save("busy_split_s150")
+				_save("busy_split_" + _tag)
 				_probe("split")
 				_ok(_vel_runs > 0, "U206 the vellum check executed at least once (runs=%d)" % _vel_runs)
 				print("U206_VELLUM runs=%d mode=%s" % [_vel_runs, HudDock.mode(_t)])
 				UiTheme.set_scale(1.0)
+				print("U207_MARGIN scale=%.2f min_vellum=%.1f min_panel=%.1f min_bottom=%.1f vel_runs=%d" % [_sc, _min_v, _min_p, _min_b, _vel_runs])
 				print("U202_DONE checks=%d fails=%d" % [_checks, _fails.size()])
 				return true
 	return false

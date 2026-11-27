@@ -17767,3 +17767,13 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - Render looked at: renders/cycles/20261127_u202/busy_split_s150_1080.png - 2x2 panes, Chronicle box at the cross, two lines whole inside the vellum.
 - SEEN, NOT MINE: in the Director pane a hostile-length viewer name tag (MAR_WWWW...) runs off the pane's left/right edge. It is a Label3D name tag (HeroBody/Townsfolk), not a HUD file.
 - Next firing (14:52): re-read R's RUN_LOCK; take L74 (feed + theme under load at 100/125/150%).
+
+
+## U207 - 2026-11-27T15:01:33-06:00 - vellum probe at 100/125/150%: PROBE DID NOT REACH SPLIT MODE, RE-ARM NEXT FIRING (HUD)
+- Item: U206 NEXT from the 13:58 plan block (probe the worst frame, not the prettiest). Lock: free at 14:52 (chat bot IDLE 14:49:13); claimed 14:54:01, released 15:01:33 (inside the :07 deadline).
+- Parse: --quit-after 300 rc clean, 0 SCRIPT ERROR / 0 Parse Error (_u207_parse.log). Windowed 1920x1080 runs at scale 1.0/1.25/1.5 (logs _u207_final_*.log, _u207_run_*.log).
+- RIGHT-EDGE MARGINS (min over lines, panel): 100% 21 px, 125% 23 px, 150% 27 px - 100% is the tightest on the right edge, not 150%. Bottom margin min 12 px at 100%, 18 px at 125%.
+- THE VELLUM CHECK DID NOT EXECUTE (runs=0, mode=off) AT ANY SCALE. Cause found: the probe's saved roster is EMPTY in this tree ("No hero named bigaxe" - !testbits needs existing heroes). I made the probe enlist three heroes via !enlist when the roster is short (n=3 now) but the grid still stayed "off", so Spotlight._layout is not being set by those test commands here. NOT solved. U206's runs=3 therefore cannot be re-confirmed on this tree today.
+- A POSSIBLE REAL DEFECT (needs a look, not yet fixed): a fading line (a=0.43) was measured 63 px PAST THE PANEL BOTTOM at 100% (U134_LINE split "Hilda the Younger, Edda Ashwood...") and a 'Mossymage takes the oath' line 37 px past the bottom at 150%. Other lines sit 12-300 px inside. Probe-only evidence, windowed; suspect lines that are mid-fade after the box has grown (feed_hud.gd box/panel height).
+- NEXT FIRING: read Spotlight.busy()/_relayout to find what makes `busy()` non-empty (the lanes), drive that in the probe so mode=grid, then re-run 100% first (tightest), then look at the bottom overflow in feed_hud.gd.
+- Not ticked - team lead ticks. Files edited: tools/_u202_busy.gd (probe only). None of my seven .gd files changed.

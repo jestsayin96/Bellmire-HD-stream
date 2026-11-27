@@ -1,3 +1,168 @@
+*** ===== TAKE THIS NEXT - THE 05:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 04:58 FIRING AND ITS BLOCKS.
+*** Merged tree 43221c7f (all six lanes in). Clock read off the machine with `TZ=America/Chicago date`.
+*** WRITTEN AT 06:1x CT, AFTER :05. By this house's own rule that makes it the NEXT cycle's block:
+*** the 06:07 game build may well have read the 04:58 block instead, and that is not its fault.
+***
+*** *** THE CASCADE IS SHUT AT 66/66/66/66 ON MAIN AND NOTHING IS OWED ON IT BY ANY LANE. ***
+*** MEASURED BY ME ON THE MERGED TREE, BRACE-MATCHED, ANCHORED ON THE REAL DECLARATION
+*** (ONE `const MB_NAME := {` in scripts/delve.gd, no duplicates):
+***     Delve.MB_NAME        = 66 keys.  miniboss_feed.by_key = 66 keys.
+***     SET DIFFERENCE EMPTY IN BOTH DIRECTIONS.
+***     data/commands.json   = "The 66 elites" at BOTH sites; docs/COMMANDS.md line 39 = "The 66".
+***     _fit_report.json     = 68 rows = 66 LIVE BODIES + 2 retired `_chibi`; thatcher.glb on main.
+***
+*** *** AND THE 66th IS ALREADY FULLY WIRED. I CHECKED A HANDOFF BEFORE PASSING IT ON, AND IT
+*** *** WAS WRONG. *** art's THATCHER_THE_66th.md closes with "`bestiary.gd` still needs a `model`
+*** path and no `anims` entry. That wiring is the game build's and is not done here." THAT IS
+*** FALSE FOR THIS FAMILY and I am not forwarding it. The behaviour, not the name:
+*** `Delve.miniboss_model()` (delve.gd:489) resolves `MB_DIR + key + ".glb"` BY CONVENTION, and
+*** delve.gd:522 sets `def["anims"] = {}` unconditionally for every mb_model. thatcher.glb is on
+*** main, so the body already resolves and already has no anims. THERE IS NOTHING TO WIRE.
+*** bestiary.gd carries explicit paths only for broodglut/lastcuff/leech - which is why the line
+*** looked right. Art is not charged with this: it is one wrong sentence in an otherwise exemplary
+*** report, and catching it is my job, not art's.
+***
+*** ===== GAME BUILD (:07) - S149 IS TICKED. THE THATCHER NEEDS NOTHING FURTHER. =====
+***   I did not take your claim. I read the diff and traced every damage path myself, because your
+***   write-up says "every blow (swing, _strike, cleave, thorns)" and that is a claim about code
+***   you did not diff. IT HOLDS, and the reasoning is better than the sentence: `_ward()` returns
+***   0.0 under the roof, delve.gd:1860 multiplies `dmg` by `_ward(tgt)` BEFORE `_ability_hit()`,
+***   so `luck` (2811) is roofed TRANSITIVELY on the pre-multiplied dmg and needs no `_thatch`;
+***   `cleave` (2803) and `thorns` (2826) DO need their own because their target is a DIFFERENT
+***   monster from `tgt`. That is exactly where you put them. `drain` (2789) also falls out to
+***   zero. The RED arm (S149_THATCH 1 of 9 failing by design) is what makes the other 8 worth
+***   reading. Your HONEST LIMIT comment - "the room is a radius, not the floor's room cell" - is
+***   the right way to ship a known approximation.
+***   ONE OBSERVATION ON WORK YOU SHIPPED THIS HOUR, NOT A NEW ITEM, AND YOURS TO JUDGE: 1863
+***   passes `"resist"` as the hurt kind when `_ward(tgt) < 1.0`, but 2803 and 2826 pass NO kind.
+***   So a blow zeroed by the roof is labelled on the swing path and unlabelled on the cleave and
+***   thorns paths. I am not telling you it is wrong - a silent 0 may be what you want - only that
+***   the three paths disagree and you are the one who can say which is right.
+***   YOUR STANDING OPEN ITEM IS UNCHANGED: THE L31 REMAINDER, the status-effect icons, in
+***   delve.gd / monster.gd / party_frames.gd / boss_bar.gd. Read L31 in full before building.
+***   LOCK: claim 05:08:49, cap claim+25 = 05:33:49 COMPUTED FIRST, declared 05:28:49, released
+***   05:16:44. Inside both. That is eight straight hours of the cap-first pattern. Keep it.
+***
+*** ===== CONTENT (:22) - C-229 IS TICKED. NOTHING IS OWED ON THE CASCADE. =====
+***   I verified it leaf by leaf rather than taking it, because your numstat read +121/-41 and a
+***   reordered JSON block reads as dropped keys: parsed BOTH sides, 13,308 -> 13,388 leaves,
+***   ZERO leaf paths removed, ZERO values changed in place, 80 added. The 41 "deletions" are your
+***   writer reordering its own output and nothing else. Your arithmetic is exact: 13 disasters x
+***   (2 begin_alt + 2 pass_alt + 2 during) = 78 lines, + `_note_c229` + `disasters._note_variants_c229`
+***   = 80. `begin`, `pass` and `cost` are untouched, as you said.
+***   Continue your own queue (C-230), or stand down and write it up. Do not touch MB_NAME or
+***   data/commands.json.
+***
+*** ===== ART (:34) - PASS 9 ACCEPTED, FAULT 5 CLOSED, AND THE TRADE STANDS. MY CALL. =====
+***   YOU ASKED ME TO DECIDE WHETHER THE TRADE STANDS. IT STANDS. Here is the reasoning, and I
+***   looked at the worst frame your own numbers name (side, cue p50 1.0174) before deciding.
+***   WHAT I CAN SEE: the three ties now read as BINDINGS clasping the outside of the bundle, and
+***   the yealm reads as a bound sheaf rather than a loose spray. That is identity, and identity
+***   is worth more than the cue-value points it cost. The body still separates cleanly from the
+***   coat on both the side and the back frames.
+***   YOUR OWN HONESTY IS WHY I CAN DECIDE THIS AT ALL. You reported a regression you caused, you
+***   named the escape argument that would have excused it (pass 8's "a modulated mass separates
+***   from a flat one"), you CHECKED it, found the side spread went DOWN too (0.4689 -> 0.4318)
+***   and p95 with it, and refused to make the argument. And you said plainly that `_stemread`
+***   scored `_p9e` green while all three ties were invisible. A lane that reports its instrument
+***   scoring its own bypass is worth more than a lane that ships green.
+***   PASS 10 - FAULT 3, THE HEAD, IS NOW THE MOST VALUABLE THING OPEN ON THIS BODY. I confirmed
+***   it by eye at side: the head is almost entirely behind the bundle and the splayed stems cover
+***   a little more of it than pass 8 did. A miniboss the player meets face-on in a corridor needs
+***   a face from the side. TAKE THE TIE-SECTION LEVER WITH IT - you named it yourself (0.040,
+***   `dark`, narrower bands return cue pixels while still reading as bindings) and it is one
+***   constant, so it costs you nothing to carry in the same pass.
+***   FAULT 4 (the leggett reads as a satchel) stays open and I can see it from the back too.
+***   NOTHING IS OWED TO THE GAME BUILD - see the block at the top. The thatcher is fully wired.
+***
+*** ===== HUB (:37) - NO PUBLISH IS OWED, AND THE DELTA HAS SHRUNK TO ONE DOCS FILE. =====
+***   You made no READY TO PUBLISH claim, so I RAN NO PUBLISH VERIFICATION THIS HOUR and I say so
+***   plainly rather than reporting an unearned gate.
+***   RE-MEASURED BY ME, NOT CARRIED: merged main's `web/` tree and `origin/hub:web` are the SAME
+***   TREE OBJECT (1eafbda5), so you are fully merged. Against gh-pages the difference is ONE FILE,
+***   web/NOTES.md, +63/-0. index.html, app.js and style.css are IDENTICAL to what is live.
+***   Carry on with non-web work, or stand down and write it up. Do not push to gh-pages.
+***
+*** ===== HUD (:52) - FIFTH CONSECUTIVE STAND-DOWN. STILL NOT YOUR FAULT, AND I CHECKED AGAIN. =====
+***   U198 accepted. Your window was free (chat bot released 05:49:20, clear of :52) and you did
+***   the right thing again: no item named, so you wrote up the stand-down instead of inventing
+***   one. That IS the delivery and I am recording it as such.
+***   I DID NOT JUST REPEAT LAST HOUR'S ESCALATION. S149 landed this hour and it is one of Mr. E's
+***   80 systems, so I checked whether it carries a HUD half I could hand you. IT DOES NOT: the
+***   roof's player-facing tell rides on D61.1's existing `"resist"` hurt kind, which is already
+***   shipped, and the only inconsistency I found (cleave and thorns pass no kind) is in delve.gd -
+***   the game build's file, not yours. I am not stretching that into a HUD item to keep you busy.
+***   If you are dry again, audit your own shipped work and write it up.
+***
+*** ===== CHAT BOT (:45) - B195 IS TICKED. THE CASCADE IS SHUT AT YOUR END. =====
+***   I checked every number rather than taking one. data/commands.json: 500 leaves BOTH sides,
+***   leaf-path sets IDENTICAL, EXACTLY 2 values changed (/commands/miniboss/short and /what),
+***   byte delta 0. docs/COMMANDS.md: exactly one line changed, the `!miniboss` row, 65 -> 66 -
+***   consistent with the real generator and with no hand edit. And I re-derived your precondition
+***   independently on the merged tree: MB_NAME 66, by_key 66, difference empty both ways.
+***   YOUR BEFORE-IMAGE DISCIPLINE IS THE BEST EVIDENCE PATTERN IN THIS HOUSE - reconstructing an
+***   image whose md5 matches a committed copy is proof that does not depend on your own say-so.
+***   AND YOUR 04:51:20 NOTE REMAINS THE RIGHT MODEL: you charged yourself with a lock fault off a
+***   remembered shape, then read the clock, found 04:50:55 was INSIDE your declared 04:52:30, and
+***   withdrew the charge in the same minute before any other lane read it. Do not stop doing that.
+***   LOCK: claim 05:48:00, cap 06:13:00 computed first, declared 05:52:00, released 05:49:20.
+***   Inside both and clear of the HUD's :52. Five hours running. Keep claiming by :50.
+***
+*** ===== FOR THE SUPERVISOR =====
+***   1. THE HUD, THIRD HOUR OF ASKING, AND I HAVE NEW EVIDENCE RATHER THAN A REPEAT. U198 is the
+***      FIFTH consecutive stand-down. Both mechanical causes are still excluded (the lock was
+***      free at :52; the schedule fix holds). NEW THIS HOUR: S149 landed - one of Mr. E's 80
+***      systems, touching combat legibility - and I checked it specifically for a HUD half to
+***      assign. It has none: the tell rides on D61.1's shipped `"resist"` kind, and the one
+***      inconsistency I found is in delve.gd, the game build's file. So the absence of HUD work
+***      is now confirmed against the newest system in the house, not just inferred from the old
+***      ones. RECOMMENDATION, UNCHANGED: either name HUD work, or tell me the lane is deliberately
+***      parked and I will stop reporting the stand-downs as an open question. I would rather be
+***      told it is parked than keep spending a lane's firing on a write-up.
+***   2. THE HUB PUBLISH QUESTION. RE-MEASURED BY ME THIS HOUR; THE FIGURES MOVED AGAIN, SO DO NOT
+***      READ THE 04:58 BLOCK'S:
+***         origin/gh-pages = 8d214d36, tree 1d8bce63, last pushed 2026-11-25 09:55 CT.
+***         origin/hub:web  = tree 1eafbda5 (unchanged this hour; hub shipped only a plan sync).
+***         DIFFERENCE = 1 FILE: web/NOTES.md, +63 / -0. NOTHING ELSE.
+***      index.html, app.js and style.css are IDENTICAL between gh-pages and origin/hub:web.
+***      RECOMMENDATION, UNCHANGED: there is no user-visible change waiting on you. Publish or hold
+***      is housekeeping, not a blocked deliverable.
+***   3. ONE THING THAT IS GENUINELY NEW AND IS YOURS, NOT MINE. The live page was last LOOKED AT
+***      on 17 Nov by the 22:58 seat. gh-pages has been REPUBLISHED SINCE THEN (25 Nov 09:55 CT,
+***      tree 1d8bce63). So the tree that is live right now has never been looked at by anybody.
+***      Nothing suggests it is broken and the diff that produced it was reviewed. I am flagging
+***      the gap, not claiming a fault. RECOMMENDATION: a one-minute look at the live page the next
+***      time you are in it, or tell me to do it and I will.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
+***   THE LIST IS CUMULATIVE. Items (a)-(h) from the 03:58 and 04:58 blocks ALL STAND and are not
+***   repeated here. I re-measured (f) and (h) this hour and both are still owed. ADD THESE THREE.
+***   (i) THE STANDING NOTE ON THE ART FIT REGISTER IS NOW FALSE AND WILL MAKE A SEAT MIS-REPORT
+***       ART. The team lead prompt says the register "reads `RED / ok:false` and has done for
+***       days, on two CARRIED unmeasured rows (`snuffer_chibi`, `tallyman_chibi`)". MEASURED ON
+***       MERGED MAIN 43221c7f: verdict GREEN, ok true, red_summary.rows EMPTY, retired_red EMPTY,
+***       shipped_red EMPTY, rows_unstamped EMPTY, unproved_cells EMPTY, 68 of 68 rows carry a
+***       measured_at. The two `_chibi` rows are still present but are no longer red. A seat
+***       obeying the prompt would refuse to call art's gate green when it IS green.
+***   (j) THE STEP 0 BASELINE, RE-MEASURED THIS HOUR on merged main 43221c7f with the prompt's own
+***       one-level globs. The prompt's figures are from 21 Nov:
+***         corpus 2,453,484 chars / 49 files (48 `scripts/*.gd` + web/app.js)  [prompt: 2,345,688 / 48]
+***         NOTE THE 49 IS NOT THE RECURSIVE-GLOB TRAP THE PROMPT WARNS OF. I used `scripts/*.gd`
+***         one level plus `web/app.js` by name. scripts/ has simply gained one .gd since 21 Nov.
+***         data/*.json 12 files, 165 TOP-LEVEL KEYS                            [prompt: 146]
+***         ZERO-HIT 75 = 60 `_note_`/`_source` + 15 NON-NOTE                   [prompt: 56 = 41 + 15]
+***         NON-NOTE IS STILL EXACTLY 15 AND STILL THE SAME 15. The series holds across every seat.
+***         asset dirs with files 38, UNREFERENCED ZERO                         [prompt: 34]
+***         (`assets/graveyard/Textures` is the known basename false positive - one colormap.png
+***         read by its five sibling .glb files, not by script. Guard 1 applied. Honest count ZERO.)
+***   (k) THE HUB SHAs IN THE PROMPT ARE TWO REPUBLISHES STALE. The prompt says gh-pages is
+***       05ac2679 / tree 9ca8051e / pushed 19 Nov 20:06 CT, and the delta is 3 files / +59 / -1.
+***       MEASURED: gh-pages 8d214d36 / tree 1d8bce63 / pushed 25 Nov 09:55 CT, delta ONE file
+***       (web/NOTES.md +63/-0). The app.js and style.css changes the prompt lists as unpublished
+***       HAVE SINCE BEEN PUBLISHED. The prompt already says to re-measure rather than copy, and
+***       that instruction is what caught this - but the figures themselves should be corrected.
+***
 *** ===== TAKE THIS NEXT - THE 04:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 03:58 FIRING AND ITS BLOCKS.
 *** Merged tree 4ec0d159 (all six lanes in, pushed 05:0x CT). Clock read off the machine.

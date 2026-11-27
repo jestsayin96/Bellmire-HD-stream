@@ -2129,6 +2129,7 @@ const MB_WAYS := {
 	"snuffer": "snuff", "gaoler": "hook", "tallyman": "strip", "porter": "bar",
 	"sluicekeeper": "flood", "snarer": "snare", "bellman": "blink", "boiler": "set",
 	"beadle": "order", "rammer": "drop", "fuller": "wring", "pitman": "pit",
+	"thatcher": "thatch",
 }
 ## S78: the Fuller KEEPS EVERY BLOW (content's C-126 words, verbatim: "Every blow you land goes into
 ## the cloth. It keeps them. It gives them all back at once."). Each act it counts the hp it lost
@@ -2321,6 +2322,8 @@ func _mb_way_tick(mon: Monster, alive: Array, near: Dictionary, delta: float) ->
 			_order_uid = String(called.get("uid", ""))
 			_order_mon = mon
 			near = called                             # the act line names the hero it called
+		"thatch":
+			pass                                      # S149: the roof is passive (see _thatch); the act only voices it
 	var line := _miniboss_say_for(key, "act", near)
 	if line != "":
 		_say(line)
@@ -2495,8 +2498,32 @@ func _lord_tick(mon: Monster, ways: Dictionary, alive: Array, near: Dictionary, 
 			_say("%s is enraged." % String(mon.def.get("name", "It")))
 			FeedHUD.card_on(town, String(mon.def.get("name", "It")), "Enraged.", Color(1.0, 0.25, 0.15))
 
+## S149: the Thatcher ROOFS THE ROOM (art's idea, THATCHER_THE_66th.md: "while it stands nothing else
+## in the room can be hurt"; content's C-227 act line: "The blow goes into straw and stops."). While a
+## standing, UNBROKEN Thatcher whose act lines are on disk is within MB_THATCH_R of a creature, every
+## blow on that creature goes into the thatch and does nothing - the Thatcher itself is never roofed,
+## so the party must take it first (or break it: at MB_BROKEN_FRAC a tie is cut and the roof opens).
+## HONEST LIMIT: "the room" is a radius, not the floor's room cell - floorgen has no room id on a monster.
+const MB_THATCH_R := 10.0
+func _thatch(tgt: Monster) -> float:
+	if dun == null or not is_instance_valid(tgt):
+		return 1.0
+	for mv in dun.monsters:
+		if mv == tgt or not is_instance_valid(mv):
+			continue
+		var t: Monster = mv
+		if t.state == Monster.S.DEAD or String(t.get_meta("mb_key", "")) != "thatcher" or bool(t.get_meta("mb_broken", false)):
+			continue
+		if t.hp / maxf(1.0, t.max_hp) <= MB_BROKEN_FRAC or miniboss_lines("thatcher", "act").is_empty():
+			continue
+		if _flat(t.global_position, tgt.global_position) < MB_THATCH_R:
+			return 0.0
+	return 1.0
+
 ## a lord warded by what it called takes only that share while any of it stands
 func _ward(tgt: Monster) -> float:
+	if _thatch(tgt) == 0.0:
+		return 0.0                                    # S149: under the Thatcher's roof
 	var ways: Dictionary = tgt.def.get("ways", {})
 	if ways.has("ward") and not _live_called(tgt).is_empty():
 		return float(ways["ward"])
@@ -2773,7 +2800,7 @@ func _ability_hit_one(ability: String, m: Dictionary, tgt: Monster, dmg: float, 
 					best = o
 			if best != null:
 				var was_dead := best.state == Monster.S.DEAD
-				best.hurt(dmg * 0.35)
+				best.hurt(dmg * 0.35 * _thatch(best))   # S149: the cleave does not get under the roof
 				if not was_dead and best.state == Monster.S.DEAD:
 					_kills += 1
 					_on_kill(best, m)
@@ -2796,7 +2823,7 @@ func _ability_hit_one(ability: String, m: Dictionary, tgt: Monster, dmg: float, 
 				var o: Monster = f
 				if o != tgt and is_instance_valid(o) and o.state != Monster.S.DEAD and _flat(o.global_position, tgt.global_position) < 2.5:
 					var was := o.state == Monster.S.DEAD
-					o.hurt(dmg * 0.5)
+					o.hurt(dmg * 0.5 * _thatch(o))   # S149
 					if not was and o.state == Monster.S.DEAD:
 						_kills += 1
 						_on_kill(o, m)

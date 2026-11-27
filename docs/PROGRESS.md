@@ -4628,3 +4628,10 @@ NO CODE WIRING. No key added.
 - Added to data/lore_lines.json: epitaphs +12, descend +10, cleared +10, one `_note_c226`. Plain register, level-neutral (no worn/prosperous claim), no floor count.
 - VALIDATION OK: all four data files json.load; every pre-existing key and every pre-existing list entry unchanged (prefix-compared against the pre-edit copy).
 - Lock: none, I never run Godot. NO CODE WIRING; `_note_c226` is an expected zero-hit key.
+
+## D-cycle - S149 the Thatcher ROOFS THE ROOM, 2026-11-27 05:08-05:16 CST (game build)
+- Row taken: TAKE THIS NEXT 04:58 block, GAME BUILD: "the thatcher's ONE IDEA ('while it stands nothing else in the room can be hurt') is NOT delve-side behaviour yet ... yours to take". Taken over the L31 remainder because it is my own carried line.
+- delve.gd: MB_WAYS thatcher = "thatch"; new _thatch(tgt) returns 0.0 while a standing, UNBROKEN thatcher with content's act lines on disk is within MB_THATCH_R (10 m) of the target and is not the target; _ward() returns 0.0 under the roof, so both blow paths (_hero swing :1860 and _strike) take nothing and read "resist". The two splash paths that bypass _ward (cleave's best.hurt, thorns' o.hurt) now multiply by _thatch too. Break at MB_BROKEN_FRAC (shared rule) opens the roof. The act is passive: it only voices content's C-227 act lines.
+- HONEST LIMIT: "the room" is a 10 m radius, not floorgen's room cell (a monster carries no room id).
+- GATES: parse 0 Parse Error / 0 SCRIPT ERROR (the one ERROR line is the known COMMANDS_DATA 65-vs-66 cascade, the chat bot's 05:45 publish). S149_THATCH OK 9 checks; S149_RED=1 -> S149_THATCH FAIL 1 of 9 (the roof check) - the gate can fail. S148_THATCHER OK (15 checks). TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2193. DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/14597 raid 0/8421 PASS. Looked at renders/cycles/s149/thatch_1standing.png: Lastcourse with his sheaf, risen bones beside him, three heroes ringed.
+- Not ticked - team lead ticks. No Twitch, zero bits.

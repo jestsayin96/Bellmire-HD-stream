@@ -23370,3 +23370,10 @@ Next content: C-228.
 - Worktree: untracked web/icons/**/*.import and modified renders/cycles/*.png are not HUD-owned, not staged.
 - Next firing (05:52): re-read R's working RUN_LOCK and the HUD row; take any row naming HUD work, else stand down again.
 - Decision for Mr. E: none. Supervisor asked (03:58) whether the HUD lane is deliberately parked or should be given work - that answer is Mr. E's/the team lead's.
+## C-229 (content, 27 Nov 2026, 05:2x CST) - BACKLOG 2: 78 DISASTER VARIANT LINES, 13 DISASTERS
+- TAKE THIS NEXT (04:58 CT 27 Nov block) CONTENT row: C-228 ticked, nothing owed on the cascade, do not touch MB_NAME or data/commands.json, continue own queue (C-229, backlog 2) or stand down. No new committed art body since thatcher (66 bodies, 66 feed keys), so took backlog 2.
+- Added: +2 begin_alt, +2 pass_alt, +2 during on each of the 13 disasters = 78 lines, no duplicate of any existing line in its pool. begin, pass and cost UNCHANGED (the build worker reads cost). Plain register, nothing theatrical.
+- Added `disasters._note_variants_c229` and top-level `_note_c229` (expected zero-hit keys, wire nothing).
+- VALIDATION OK: all four owned files json.load; every pre-existing key byte-identical (pre-edit parse compared: 0 missing, 0 changed; only 39 array-appends + 2 note keys); file round-trips at indent 2 plus trailing newline as before.
+- CODE WIRING: none. Pickers already read begin_alt/pass_alt/during by length.
+- Next content: C-230.

@@ -1729,3 +1729,19 @@ IDLE 2026-11-27T15:56:25-06:00 - HUD U208: vellum probe EXECUTES again (runs=7 m
 RUNNING 2026-11-27T16:08:19-06:00 (game build, claim 2026-11-27T16:08:19-06:00, cap claim+25 = 16:33, DECLARED FINISH 16:30. Lock free: last line IDLE HUD 15:56:25, tasklist Godot*=0.) (game build)
 
 IDLE 2026-11-27T16:16:02-06:00 - game build S160: nothing owed (69th/70th already named by S159, on origin/main, MB_NAME 70); gates green on merged tree. Claim 16:08:19, cap 16:33, declared 16:30, released early. tasklist Godot*=0. Zero bits. (game build)
+
+RUNNING 2026-11-27T16:42:07-06:00 (QA tester: headless whole-project parse, claim 2026-11-27T16:42:07-06:00, DECLARED FINISH +4min, cap +8min. Lock free: last line IDLE game build 16:16:02, tasklist Godot*=0.) (QA tester)
+
+IDLE 2026-11-27T16:42:30-06:00 - QA tester: headless parse done rc=0 in 23s (claim 2026-11-27T16:42:07-06:00). tasklist Godot*=INFO: No tasks are running which match the specified criteri. No Twitch message, redeemed nothing, cheered nothing, ZERO BITS. (QA tester)
+
+RUNNING 2026-11-27T16:48:45-06:00 (chat bot B206: publish 68 -> 70 gate battery on W6 - parse, real _commands_doc, _l14_test, _twitch_parse, plus a RED-PROVE of the rewritten MINIBOSS COUNT arm. claim 2026-11-27T16:48:45-06:00, cap claim+25, DECLARED FINISH 2026-11-27T16:51:30-06:00 - hard release before 16:52 to clear the HUD's :52 slot. Lock free: last line IDLE QA tester 16:42:30, tasklist Godot*=0. Headless, no Twitch sends, zero bits. (chat bot)
+
+IDLE 2026-11-27T16:50:22-06:00 - chat bot B206: PUBLISHED 68 -> 70 AND FIXED THE GUARD THAT B205 REPORTED RED. I re-measured origin/main (9a550229) myself before publishing: MB_NAME=70 brace-matched at delve.gd:455, by_key=70, UNNAMED=[], GHOST=[], MB_FIT=81 - so the number the engine can answer is 70 and I did NOT take it from the plan block. commands.json .what/.short 68 -> 70, 2 leaves changed, key sets identical. MINIBOSS COUNT arm re-anchored from content by_key to Delve.MB_NAME. Gates: parse rc=0 / 0 Parse Error / 0 SCRIPT ERROR / 0 guard arms, COMMANDS_DOC OK wrote 36 (real generator, doc now carries 70), L14_TEST OK 27 of 27 (B205 red is CLEARED), TWITCH_PARSE OK 8. RED-PROVE: forced published 69 -> MINIBOSS COUNT fired, rc=1, message read "published 69, MB_NAME names 70, feed rows 70"; commands.json restored byte-identical (md5 b27b29c0 both sides). Claim 16:48:45, cap 17:13, declared 16:51:30, released early. tasklist Godot*=0 at claim. No Twitch message, redeemed nothing, cheered nothing, ZERO BITS. (chat bot)
+
+RUNNING 2026-11-27T16:53:16-06:00 (HUD U209: parse + ONE windowed 1920x1080 probe at 125% scale, panes up. claim 2026-11-27T16:53:16-06:00, DECLARED FINISH 17:01, BINDING CAP 17:07 - the :07 deadline). Lock free: last line IDLE chat bot 16:50:22, tasklist Godot*=0. Zero bits, no Twitch sends. (HUD)
+
+IDLE 2026-11-27T16:55:06-06:00 - HUD U209: parse rc clean 0 errors, ONE windowed 125% run done (U202_DONE checks=23 fails=0, runs=2 mode=grid). Released inside the :07 deadline. tasklist Godot*: INFO: No tasks are running which match the specified criteri. Zero bits. (HUD)
+
+RUNNING 2026-11-27T17:08:28-06:00 (game build: fetch/merge, read TAKE THIS NEXT, parse + gates if an item is owed. claim 2026-11-27T17:08:28-06:00, cap 17:33:28, DECLARED FINISH 17:30:00). Lock free: last line IDLE HUD 16:55:06, tasklist Godot*=0. Zero bits, no Twitch sends. (game build)
+
+IDLE 2026-11-27T17:19:09-06:00 - game build S161: death model slice 1 of 3 (RULING sup-nov27-0209) - roster respawn, deaths counter, durability threshold, corpse-run bags, grace count. Gates: parse rc 0 / 0 errors, DEATH_TEST OK 23 of 23 (new), TWITCH_PARSE OK 8, OFFFLOOR_VERDICT OK 0 of 2085, DELVE_TEST OK 9001 frames 0 SCRIPT ERROR, TOWNWALK 0/16166 PASS. Claim 17:08:28, cap 17:33:28, declared 17:30:00, released early. tasklist Godot* at release: 0. Zero bits, no Twitch sends. (game build)

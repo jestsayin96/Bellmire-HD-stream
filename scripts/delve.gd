@@ -2732,6 +2732,8 @@ func _finish() -> void:
 		if is_instance_valid(bb) and bb.has_method("compact"):
 			bb.compact(false)
 	state = "home"
+	for m in party:                   # S161: the grace-period count (first 3 delves wear no gear)
+		roster.note_delve_done(String(m["uid"]))
 	var out: Array = []
 	for m in _alive():
 		out.append(m["uid"])

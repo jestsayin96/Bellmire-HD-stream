@@ -7,9 +7,11 @@ extends Node
 # Keyed by Twitch USER-ID, never display name: viewers rename themselves and a
 # name key would orphan their hero. The id arrives in the IRC tags as `user-id`.
 #
-# PERMADEATH. When a hero dies they move to `fallen` for the memorial and the
-# leaderboards, and the viewer rolls a fresh one. That is what makes buying
-# armour matter.
+# S161 / RULING sup-nov27-0209 (Mr. E): RESPAWN WITH CORPSE RUN. Permadeath is struck.
+# A hero who falls wakes in town - same hero, gear, level. Death costs gear
+# durability (threshold: >25 full, 1-25 half, 0 broken) and drops carried gold and
+# consumables in a bag on the floor (`bags`, 1 h owner-only, then finders keepers,
+# gone at 2 h). `fallen` stays as the war record (`!memorial`), not a graveyard.
 #
 # No Twitch dependency in here on purpose - this is pure data and rules so it
 # can be driven from a fake chat feed and tested headless.
@@ -222,6 +224,15 @@ const RESPEC_COST := 200
 var heroes := {}        # user_id -> hero dictionary
 var patrons := {}       # user_id -> {name, given} - who has given to the valley
 var fallen := []        # newest first; the memorial
+var bags := []          # S161: corpse-run bags {owner, name, floor, gold, potions, oil, t}
+
+# S161 death model numbers (RULING sup-nov27-0209)
+const DUR_DEGRADED_AT := 25      # above this, full power
+const DUR_GRACE_DELVES := 3      # first 3 delves: no durability loss on death
+const DUR_BASE_LOSS := 8         # every death
+const DUR_PER_FLOOR := 3         # plus this per floor of depth
+const BAG_OWNER_S := 3600        # owner-only retrieval window
+const BAG_LIFE_S := 7200         # then anyone; gone after this
 var rng := RandomNumberGenerator.new()
 
 signal changed(user_id: String)
@@ -333,8 +344,18 @@ func prof(h: Dictionary) -> int:
     return 2 + int(floor((float(int(h.get("level", 1))) - 1.0) / 4.0))
 
 # 10 + DEX + armour, and +2 for a shield in the off hand, as 5E does it.
+## S161: the threshold model. 1.0 above 25%, 0.5 at 1-25%, 0.0 broken. Missing = 100.
+func dur_factor(h: Dictionary, slot: String) -> float:
+    var d := int(h.get("dur_" + slot, 100))
+    if d > DUR_DEGRADED_AT:
+        return 1.0
+    return 0.5 if d > 0 else 0.0
+
+func durability(h: Dictionary, slot: String) -> int:
+    return int(h.get("dur_" + slot, 100))
+
 func armour_class(h: Dictionary) -> int:
-    var ac := 10 + mod(h, "dex") + int(ARMOUR[int(h.get("armour", 0))].get("ac", 0))
+    var ac := 10 + mod(h, "dex") + int(round(float(ARMOUR[int(h.get("armour", 0))].get("ac", 0)) * dur_factor(h, "armour")))
     var off := String(CLASSES[String(h["class"])].get("offhand", ""))
     if off.begins_with("shield"):
         ac += 2
@@ -420,7 +441,7 @@ func regen_mana(h: Dictionary, delta: float) -> void:
 func attack(h: Dictionary) -> float:
     var prim: String = String(CLASSES[h["class"]].get("primary", "str"))
     return float(CLASSES[h["class"]]["atk"]) + float(mod(h, prim)) * 1.6 \
-         + float(WEAPONS[int(h["weapon"])]["atk"])
+         + float(WEAPONS[int(h["weapon"])]["atk"]) * dur_factor(h, "weapon")
 
 func speed(h: Dictionary) -> float:
     return float(CLASSES[h["class"]]["spd"]) + float(mod(h, "dex")) * 0.15 + acc_bonus(h, "speed")
@@ -438,6 +459,8 @@ func heal_power(h: Dictionary) -> float:
 
 ## L9: a weapon's damage dice by tier (bare hands 1d4 ... scarforged 2d8)
 func weapon_dice(h: Dictionary) -> Array:
+    if dur_factor(h, "weapon") <= 0.0:
+        return WEAPONS[0].get("dice", [1, 4])     # S161: broken - bare-fist damage
     return WEAPONS[clampi(int(h.get("weapon", 0)), 0, WEAPONS.size() - 1)].get("dice", [1, 4])
 
 func dice_str(h: Dictionary) -> String:
@@ -1097,13 +1120,25 @@ static func unlocked_at(h: Dictionary, level: int) -> Array:
     return out
 
 func kill(user_id: String, killed_by: String, floor_no: int, day: int) -> String:
+    # S161 / RULING sup-nov27-0209: a fall is no longer the end. The hero stays in
+    # `heroes`, alive, and wakes in town; the fall is recorded, gear is worn, and
+    # what was carried is left on the floor in a bag for the corpse run.
     var h := get_hero(user_id)
     if h.is_empty() or not bool(h["alive"]):
         return ""
-    h["alive"] = false
-    _rare_finds.erase(user_id)      # D70.2: the dead do not come home with anything
+    _rare_finds.erase(user_id)      # D70.2: the fallen do not come home with anything
     Sfx.sting()
+    h["deaths"] = int(h.get("deaths", 0)) + 1
+    var worn := 0
+    if int(h.get("delves_completed", 0)) >= DUR_GRACE_DELVES:
+        worn = DUR_BASE_LOSS + DUR_PER_FLOOR * maxi(0, floor_no)
+        for slot in ["weapon", "armour"]:
+            h["dur_" + slot] = maxi(0, int(h.get("dur_" + slot, 100)) - worn)
+    var bag := {}
+    if floor_no > 0:
+        bag = drop_bag(user_id, floor_no)
     fallen.push_front({
+        "uid": user_id, "rose": true,
         "name": h["name"], "class": h["class"], "level": int(h["level"]),
         "deepest": max(int(h["deepest"]), floor_no), "kills": int(h["kills"]),
         "killed_by": killed_by, "day": day,
@@ -1113,17 +1148,75 @@ func kill(user_id: String, killed_by: String, floor_no: int, day: int) -> String
         fallen.resize(200)
     changed.emit(user_id)
     _e3po("viewer_down")       # D37: a viewer's hero fell - E3PO notes it
+    var tail := ""
+    if not bag.is_empty() and (int(bag["gold"]) > 0 or int(bag["potions"]) > 0 or int(bag["oil"]) > 0):
+        tail += " Your bag (%dg) lies on floor %d - !delve within the hour to fetch it." % [int(bag["gold"]), floor_no]
+    if worn > 0:
+        tail += " Gear worn to %d%%%s." % [durability(h, "weapon"), " - BROKEN, see the smith" if durability(h, "weapon") <= 0 or durability(h, "armour") <= 0 else ""]
     # D70.2: tell the OWNER, by login, in one line. killed_by is a monster/raider name the game made.
-    hero_moment.emit(user_id, "fell", ("your hero fell defending Bellmire, cut down by %s at level %d. !reroll to rise again." % [killed_by, int(h["level"])]) if floor_no <= 0 else ("your hero fell on floor %d to %s at level %d. !reroll to rise again." % [floor_no, killed_by, int(h["level"])]))
+    hero_moment.emit(user_id, "fell", (("your hero was cut down defending Bellmire by %s, and wakes in town." % killed_by) if floor_no <= 0 else ("your hero fell on floor %d to %s and wakes in town." % [floor_no, killed_by])) + tail)
     # A hero cut down in the town by a raider was being announced as "falls on
     # floor 0", because this line assumed every death happens underground.
-    # Raids account for 3-5 deaths per ten days, so that nonsense was on screen
-    # regularly. Above ground gets its own wording.
     if floor_no <= 0:
-        return "%s the %s is cut down defending Bellmire by %s. Level %d, %d kills. !reroll to rise again." \
-            % [h["name"], h["class"], killed_by, int(h["level"]), int(h["kills"])]
-    return "%s the %s falls on floor %d to %s. Level %d, %d kills. !reroll to rise again." \
-        % [h["name"], h["class"], floor_no, killed_by, int(h["level"]), int(h["kills"])]
+        return "%s the %s is cut down defending Bellmire by %s - and rises again. Fallen %d %s." \
+            % [h["name"], h["class"], killed_by, int(h["deaths"]), "time" if int(h["deaths"]) == 1 else "times"]
+    return "%s the %s falls on floor %d to %s - and wakes in Bellmire. Fallen %d %s." \
+        % [h["name"], h["class"], floor_no, killed_by, int(h["deaths"]), "time" if int(h["deaths"]) == 1 else "times"]
+
+## S161: carried gold and consumables leave the hero and lie on the floor. Banked gold
+## (System 25, not built yet) would be exempt; equipped gear never drops.
+func drop_bag(user_id: String, floor_no: int) -> Dictionary:
+    var h := get_hero(user_id)
+    if h.is_empty():
+        return {}
+    var bag := {"owner": user_id, "name": String(h["name"]), "floor": floor_no,
+        "gold": int(h.get("gold", 0)), "potions": int(h.get("potions", 0)),
+        "oil": int(h.get("oil", 0)), "t": int(Time.get_unix_time_from_system())}
+    h["gold"] = 0
+    h["potions"] = 0
+    h["oil"] = 0
+    bags.append(bag)
+    return bag
+
+## S161: a bag's state for `who` right now: "owner" (theirs, inside the hour),
+## "anyone" (past the hour, finders keepers), "locked" (someone else's, inside the
+## hour - visible, not takeable) or "gone" (past two hours).
+func bag_state(bag: Dictionary, who: String, now := -1) -> String:
+    var t := now if now >= 0 else int(Time.get_unix_time_from_system())
+    var age := t - int(bag.get("t", t))
+    if age >= BAG_LIFE_S:
+        return "gone"
+    if String(bag.get("owner", "")) == who:
+        return "owner" if age < BAG_OWNER_S else "anyone"
+    return "anyone" if age >= BAG_OWNER_S else "locked"
+
+## S161: `who` walks over the bags on `floor_no`; takes every one they may take and
+## returns the total. Expired bags are swept. The delve-side walk-over is the next slice.
+func take_bags(who: String, floor_no: int, now := -1) -> Dictionary:
+    var h := get_hero(who)
+    var got := {"gold": 0, "potions": 0, "oil": 0, "bags": 0}
+    var keep := []
+    for bag: Dictionary in bags:
+        var st := bag_state(bag, who, now)
+        if st == "gone":
+            continue
+        if int(bag["floor"]) == floor_no and not h.is_empty() and st in ["owner", "anyone"]:
+            for k in ["gold", "potions", "oil"]:
+                got[k] = int(got[k]) + int(bag[k])
+                h[k] = int(h.get(k, 0)) + int(bag[k])
+            got["bags"] = int(got["bags"]) + 1
+            continue
+        keep.append(bag)
+    bags = keep
+    if int(got["bags"]) > 0:
+        changed.emit(who)
+    return got
+
+## S161: delves finished, for the grace period (first 3 delves wear no gear).
+func note_delve_done(user_id: String) -> void:
+    var h := get_hero(user_id)
+    if not h.is_empty():
+        h["delves_completed"] = int(h.get("delves_completed", 0)) + 1
 
 # --------------------------------------------------------------- leaderboard
 # ------------------------------------------------------- the guild roll
@@ -1172,6 +1265,8 @@ func leaderboard(kind := "deepest", n := 10) -> Array:
             "deepest": int(h["deepest"]), "gold": int(h["gold"]),
             "kills": int(h["kills"]), "level": int(h["level"])})
     for f: Dictionary in fallen:
+        if heroes.has(String(f.get("uid", ""))):
+            continue          # S161: a fall the hero rose from is a war record, not a board row
         rows.append({"name": f["name"], "alive": false, "rank": rank_of(f),
             "standing": standing(f),
             "deepest": int(f["deepest"]), "gold": 0,
@@ -1359,7 +1454,7 @@ func save_all() -> void:
         push_warning("roster: cannot write %s" % SAVE_PATH)
         return
     f.store_string(JSON.stringify({"heroes": heroes, "fallen": fallen,
-        "patrons": patrons}, "  "))
+        "patrons": patrons, "bags": bags}, "  "))
     f.close()
 
 func load_all() -> void:
@@ -1381,6 +1476,7 @@ func load_all() -> void:
         if not h.has("oil"):
             h["oil"] = 2
     fallen = d.get("fallen", [])
+    bags = d.get("bags", [])
     patrons = d.get("patrons", {})
 
 

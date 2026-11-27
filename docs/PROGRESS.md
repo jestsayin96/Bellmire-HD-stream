@@ -4842,3 +4842,32 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
 - data/lore_lines.json misfire 167 -> 197 (+30, all unique, frame `%s %s ... (%d vs DC %d)` kept, name/spell/roll/DC order). `_note_c240` added.
 - VALIDATION OK: lore_lines parses; 0 pre-existing keys changed except misfire (first 167 identical, +30 appended); items/bosses/potions untouched.
 - No miniboss body owed (by_key 70, roster closed). No code wiring implied: misfire is already read by `_pick_line("misfire")`.
+
+## D-cycle - S161 THE DEATH MODEL, SLICE 1 OF 3: roster respawn + durability + corpse-run bags (RULING sup-nov27-0209), 2026-11-27 17:08-17:2x CST (game build)
+- TAKE THIS NEXT (team lead 16:58) gave game build the death model. RE-MEASURED UNSTARTED before writing: roster.kill() set
+  alive=false; zero hits for durability / deaths / delves_completed / bags in scripts/*.gd; `"delves"` is declared at fresh() and
+  incremented NOWHERE (snapshot_pub reads it - it is always 0; not touched this slice).
+- roster.gd (mine): kill() no longer sets alive=false - the hero stays in `heroes`, alive, "wakes in Bellmire". `deaths` counter.
+  `fallen` keeps every fall as the war record, now with `uid` + `rose`; leaderboard() skips a fallen row whose uid is still a hero
+  (no double row), pre-ruling permadeath rows still list. Durability `dur_weapon` / `dur_armour` (missing = 100): loss per death
+  = 8 + 3 x floor; GRACE: none while delves_completed < 3. THRESHOLD: dur_factor 1.0 above 25, 0.5 at 1-25, 0.0 broken - applied in
+  attack() (weapon atk), armour_class() (armour ac) and weapon_dice() (broken = bare-fist 1d4). Gear stays equipped. drop_bag():
+  ALL carried gold + potions + oil leave the hero into `bags` {owner, name, floor, gold, potions, oil, t unix}; saved/loaded.
+  bag_state(): owner-only under 1 h, "locked" (visible, not takeable) to others, finders keepers 1-2 h, gone at 2 h.
+  take_bags(who, floor). note_delve_done(). Owner and town lines say "wakes in town" - NO "!reroll" in them any more.
+  Town (raid) deaths: respawn + wear, NO bag (the ruling's bag is a dungeon-floor object).
+- delve.gd (mine): _finish() calls roster.note_delve_done for every party member (the grace count).
+- NOT IN THIS SLICE (carried, in order): (2) delve-side - the glowing bag body at the death spot, walk-over calling take_bags,
+  skull marker + timer into floor state / snapshot_pub for the hub map, durability on the hero card; (3) economy.gd repair
+  (base * rarity_mult * (1 - dur/100)) - the `!repair` command and !hero/!me durability text are the CHAT BOT's (chatcmd.gd).
+  Guild insurance (System 35) waits on Mr. E's rank number - the ruling says he sets it. Broken-gear LOOK (cracked/dented) is art+mine, later.
+- NEW GATE tools/_death_test.gd: DEATH_TEST OK 23 of 23 (alive after fall, kept, deaths 1, dur 80/80 at floor 4, gear equipped,
+  carried dropped, bag 100g, memorial row, line has no !reroll, 80% = full power, locked/owner states, finder blocked inside hour,
+  wrong floor, finders keepers after hour, owner retrieves, gone at 2 h, degraded <25, broken = fist dice, grace, counter, one board row).
+  Its first check ("hero alive after fall") is false on the pre-S161 kill() by construction (that code set alive=false).
+- GATES (verdict lines): parse --quit-after 300 rc 0, 0 Parse Error / 0 SCRIPT ERROR. TWITCH_PARSE OK (8 checks).
+  OFFFLOOR_VERDICT OK 0 of 2085. DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/16166 (0.000%) raid_in_solid=0/6036
+  (0.000%) PASS - off a RE-RUN: the first run's verdict line was cut off by my own log trim (stdout+stderr, last 6000 chars), so I
+  did not count an rc=0 over no verdict.
+- No render: nothing visual changed in this slice; the bag body is slice 2 and will be rendered there.
+

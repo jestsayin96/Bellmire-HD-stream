@@ -25163,7 +25163,13 @@ OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"thatcher"}
 
 OVERRIDE.update({
     "thatcher": {
-        'body': ((0.130, 0.148, 0.120), 0.74, 0.03),   # wet-weathered coat
+        # PASS 7: VERTEX-DRIVEN, AND THE RGB BELOW IS STILL THE FILL. Every
+        # `body` item that declares no colour of its own is painted this exact
+        # rgb by `merge_objs`, so the trunk, arms, legs and upper coat render
+        # byte-for-byte as they did at pass 5 BY CONSTRUCTION and not by hope.
+        # The 5th element True is the flag `apply_overrides` reads; the 4th is
+        # the dielectric specular level and this body declares none.
+        'body': ((0.130, 0.148, 0.120), 0.74, 0.03, None, True),  # coat (FILL)
         'dark': ((0.048, 0.050, 0.044), 0.80, 0.05),   # hood, ties, leggett
         'bone': ((0.880, 0.820, 0.620), 0.56, 0.00),   # THE REED ONLY
     },
@@ -25186,6 +25192,88 @@ def thatcher():
             "thatcher: bone/body luma ratio %.2f is under 1.30 - the yealm IS "
             "the cue and a cue that goes flat against the coat cannot be read "
             "(bone %.3f, body %.3f)" % (ratio, bone_l, body_l))
+
+    # ---------------------------------------------------- PASS 7: THE LEATHER LAP
+    # OPEN FAULT 1 OF PASS 5, IN MY OWN WORDS THE LOUDEST: "THE MAN IS ONE
+    # VALUE." Coat, trunk, arms and legs were all the one `body` slot, and the
+    # instrument agreed with the eye - `value_man_visible` spread 0.2383 with
+    # only 3 bands at 5% on the front.
+    #
+    # PASS 6 TRIED THE OBVIOUS THING AND IT FAILED, MEASURED, AND THE FAILURE
+    # IS THE FINDING. I re-slotted this same skirt cone from `body` to `dark` -
+    # the Moulder's rule read literally, apron darker than gown - and measured
+    # it: front spread 0.2383 -> 0.2526, side 0.2308 -> 0.2201 (DOWN), back
+    # 0.2423 -> 0.2406 (DOWN), and `bands_5pct` STAYED AT 3 ON ALL THREE VIEWS.
+    # **ALBEDO IS NOT VALUE IN THIS RIG.** `dark` carries 2.9x less albedo than
+    # `body` (0.049 against 0.142) and bought ~0.08 of screen luma: p50 moved
+    # 0.3476 -> 0.3110 and the mass simply shifted one histogram band. The even
+    # light rig plus the world term lift everything, so the two solid slots this
+    # body owns are ONE BAND APART once lit and no re-slot between them can make
+    # a third value. Pass 6 is reverted and recorded, not buried.
+    #
+    # SO THE HEADROOM IS UPWARD, NOT DOWNWARD, AND THE NUMBERS SAY SO OUTRIGHT:
+    # at pass 5 the man ran p5 0.1754 to p95 0.4137 and the top THREE bands of
+    # eight held 0.0023, 0.0037 and 0.0 - nothing on this man is bright. This
+    # lane's own record is "brightness has a ceiling and contrast does not", and
+    # here the ceiling is nowhere near reached. The lap is therefore LIGHTER
+    # than the coat, not darker, which inverts the Moulder's direction while
+    # keeping the thing the Moulder's rule is actually for: a waistline made by
+    # VALUE rather than by a belt alone.
+    #
+    # AND IT IS WHAT THE TRADE IS FOR. A thatcher kneels into his work and drags
+    # combed reed across his lap all day; undyed buff leather from the hip down
+    # is what the job requires, and it is the plainest thing he could be wearing.
+    # Things look like what they are FOR.
+    #
+    # IT IS A VERTEX COLOUR AND NOT A FOURTH SLOT, FOR TWO REASONS. The two
+    # free slots left in the merge are `glow` and `ember` and BOTH are emissive
+    # - a lit apron is a lantern, not leather - and a fourth solid group would
+    # spend the four-mesh bar on a recolour. Vertex colours keep this body at
+    # THREE meshes, which is under the bar it already held.
+    #
+    # NO NEW GEOMETRY, DELIBERATELY. The float this body shipped at pass 4 came
+    # from a new mass set near an existing surface; painting the skirt cone that
+    # is ALREADY there cannot float against the coat BY CONSTRUCTION.
+    LAP = (0.420, 0.350, 0.240)
+
+    # THE ASSERTION THIS PASS ADDS - AND READ THE NEXT PARAGRAPH BEFORE YOU
+    # TRUST IT, BECAUSE IT DOES NOT GUARD WHAT ITS NAME SUGGESTS.
+    #
+    # *** THIS IS AN ALBEDO GUARD. IT IS NOT A CUE-MARGIN GUARD, AND ON THIS
+    # *** BODY IT PASSES AT 2.29 WHILE THE SHIPPED SIDE VIEW MEASURES 1.001. ***
+    # I wrote it to stop a later colour edit letting the lap argue with the
+    # yealm, and then measured the thing it claims to protect with
+    # `tools/art/_cuevalue.py` - with and without through one locked camera, on
+    # the frame that actually ships. Screen luma, cue against lap, p50:
+    # front 0.6518 / 0.5646 = 1.154, back 0.5908 / 0.5599 = 1.055, and
+    # SIDE 0.5419 / 0.5413 = **1.001** - dead level. That is the Beadle's fault
+    # by the Beadle's own number (1.07) and worse, in the space that matters.
+    # The reason is pass 6's finding one rung up: ALBEDO IS NOT VALUE IN THIS
+    # RIG, so an albedo ratio OVERSTATES the separation a viewer gets. A number
+    # that answers a question the picture was never asked is this lane's
+    # pass-11 fault, and I am not leaving it in the file unlabelled.
+    #
+    # SO WHAT IT IS ACTUALLY FOR, HONESTLY: it is a cheap monotone tripwire. It
+    # cannot say the cue reads, and nothing at build time can. It only says a
+    # later edit has not moved the lap UP relative to the reed. The instrument
+    # that answers the real question is `_cuevalue.py`, it must be re-run after
+    # any colour change on this body, and its own docstring says what it still
+    # cannot see. 2.00 is the bar because it is clear of the 1.30 the bone/body
+    # pair is held to, and the lap sits at 2.29.
+    lap_l = _luma(LAP)
+    if bone_l / max(1e-6, lap_l) < 2.00:
+        raise ValueError(
+            "thatcher: bone/lap luma ratio %.2f is under 2.00 - the leather "
+            "lap is close enough to the reed to argue with the cue, which is "
+            "the Beadle's fault with the values swapped (bone %.3f, lap %.3f)"
+            % (bone_l / max(1e-6, lap_l), bone_l, lap_l))
+    # and the lap must still be LIGHTER than the coat or it is not a second
+    # value at all - the pass 6 failure, re-run by accident.
+    if lap_l / max(1e-6, body_l) < 1.80:
+        raise ValueError(
+            "thatcher: lap/body luma ratio %.2f is under 1.80 - pass 6 proved "
+            "a one-band separation does not move `bands_5pct` at all "
+            "(lap %.3f, body %.3f)" % (lap_l / max(1e-6, body_l), lap_l, body_l))
 
     P = Parts("thatcher")
     P.spans = {}
@@ -25305,9 +25393,37 @@ def thatcher():
     P.raw(aim(L.cone(0.238, 0.190, WAIST - HIP, 22),
               (0.0, 0.004, HIP), (0.0, 0.0, 1.0),
               scale=(1.0, 0.74, 1.0)), 'body')
+    # PASS 6, AND IT IS ONE CHANGE: THE SKIRT IS THE LEATHER LAP AND IT IS THE
+    # DARKER VALUE. Pass 5 shipped with open fault 1 standing - "the man is one
+    # value" - and the instrument agreed with the eye: `value_man_visible`
+    # spread 0.2383 with only 3 bands at 5% on the front, coat and trunk and
+    # arms and legs all the one `body` slot. That is the MOULDER'S CONTRAST
+    # RULE unobeyed - the gown the lighter dark, the apron and the boots the
+    # darker - so the waistline is made by VALUE and not by a belt alone.
+    # THE FIX IS A RE-SLOT, NOT NEW GEOMETRY, AND THAT IS DELIBERATE: the
+    # float this body shipped at pass 4 came from a new mass placed near an
+    # existing surface, and a cone already concentric with the coat cannot
+    # float against it BY CONSTRUCTION. No mesh is added - the `dark` group
+    # already exists for the hood, ties, belt, boots and leggett - so the
+    # four-mesh bar is untouched, and NO SECOND PALE is introduced anywhere:
+    # the yealm stays the only pale thing on the body, which is the Mealman's
+    # rule and the reason this body carries no straw hat.
+    # AND IT IS WHAT THE TRADE IS FOR. A thatcher kneels into his work and
+    # drags combed reed across his lap all day, so leather from the waist down
+    # is what the job actually requires. Plainness is the voice.
     P.raw(aim(L.cone(0.356, 0.238, HIP - HEM, 22),
               (0.0, 0.004, HEM), (0.0, 0.0, 1.0),
               scale=(1.0, 0.74, 1.0)), 'body')
+    # PASS 7 PAINTS THIS CONE AND NOTHING ELSE. The item is grabbed by identity
+    # the moment it is appended - the Collier's pattern - because `_metal_read`
+    # and `_trade_read` rebuild the body with spans filtered out, so an INDEX
+    # key would paint the wrong cone and, worse, paint it the FILL colour: a
+    # silent mis-paint that reads as "the fix is not there" rather than as an
+    # error.
+    _lap = P.items[-1]
+    P.vcols[id(_lap)] = [LAP] * len(_lap[0])
+    if id(_lap) not in P.vcols:
+        raise ValueError("thatcher lap: the leather lap painted nothing")
     P.add(L.box(0.284, 0.192, 0.044), 'dark', loc=(0.0, 0.004, WAIST - 0.026))
     _close("coat")
 

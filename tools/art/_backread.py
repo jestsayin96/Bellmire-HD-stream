@@ -30,8 +30,46 @@ SO THIS FILE ASKS THE VIEWER'S TWO QUESTIONS, PER VIEW:
      pixels. One flat mass scores 1 band; a body that reads scores three or
      more.
 
+*** THE THIRD STATE, ADDED 26 Nov 2026 18:4x CT - AND IT CLOSES A RED OF MY
+*** OWN THAT STOOD FOR TWO DAYS. `panner` has read
+*** `panner: the man span merged to no object` in `_selfseen_all.json` since
+*** 24 Nov 11:3x, holding that whole file at `ok: false`, and the body is
+*** CORRECT: panner pass 4 removed its operator deliberately after an A/B it
+*** documents in full, and left `P.spans["man"] = (len(P.items), len(P.items))`
+*** - an EMPTY span - as the marker. `minibosses.man_ranges` honours that and
+*** so does the register's census (`no_man`, GREEN, see
+*** docs/art/SELFSEEN_AUDIT_24NOV.md section 6, where the same unearned red
+*** was caught one level up). THIS FILE never got the matching branch, so the
+*** instrument kept reporting a fault in a body the house had already ruled
+*** right. An instrument that cannot report an unearned PASS can still report
+*** an unearned FAIL, and they are the same fault.
+***
+*** WHAT NO_MAN CLAIMS: NOTHING. It is not a pass. No view is rendered, no
+*** cell is written, nothing goes in `views`, and the register goes on
+*** counting panner in `no_man` and not in `measured_bodies`. It is the
+*** honest absence, stated out loud, in place of a wrong red.
+***
+*** AND WHAT THIS BRANCH CANNOT SEE, SAID PLAINLY: an empty span is a
+*** DECLARATION, and this file cannot read a builder's mind. A body that
+*** meant to split a figure and wrapped zero items would also declare an
+*** empty span. The one discriminator available is WHERE the empty span
+*** sits: the marker is written as the last statement of the builder, so
+*** `a == b == len(P.items)`, while an `_open()/_close("man")` pair that
+*** wrapped nothing leaves `a == b < len(P.items)` with items authored after
+*** it. The mid-build form is therefore RED, and only the end-of-build form
+*** is NO_MAN. That is a real discriminator and it is not mind-reading, but
+*** it does NOT catch a builder whose accidental empty `_close("man")` is its
+*** final statement. Both branches were fired and watched before shipping -
+*** see `--prove-empty-mid`.
+
 IT GOES RED, NOT BLIND, ON EVERY WAY IT CAN FAIL:
   - no `man` span and no `man_parts`          -> RED (nothing to measure)
+  - an EMPTY `man` span NOT at the end of the
+    builder's items                           -> RED (a `_close("man")` that
+                                                 wrapped zero items; the
+                                                 deliberate no-operator marker
+                                                 is the end-of-build form and
+                                                 reads NO_MAN, not red)
   - a `man_parts` naming a span the builder
     does not declare                          -> RED (a declaration that misses
                                                  is a lie, not an absence)
@@ -66,6 +104,7 @@ EPS = 2.0 / 255.0
 VIEWS = (("front", 0.0), ("side", 90.0), ("back", 180.0))
 _REAL_MERGE = M.merge_objs
 SPLIT = {"span": None, "ids": set(), "counts": {}}
+PROVE_EMPTY_MID = ""
 
 
 def _split_merge(key, items, mats, suffix=None, vcols=None):
@@ -159,6 +198,47 @@ def measure(repo, key, outdir, tag=""):
         rep["errors"].append("%s: no `man` span and no `man_parts` - nothing "
                              "to measure" % key)
         return rep
+    # *** DECLARED-AND-EMPTY IS NOT BROKEN, AND IT IS NOT A PASS EITHER. ***
+    # See the third-state block at the top of this file. The marker is the
+    # LAST statement of the builder, so it sits at the end of the item list;
+    # an empty span with items authored after it is a `_close("man")` that
+    # wrapped nothing, and that is RED.
+    n_items = len(P.items)
+    empty = [r for r in ranges if r[1] <= r[0]]
+    if len(empty) == len(ranges):
+        at_end = all(r[0] >= n_items for r in ranges)
+        if PROVE_EMPTY_MID == key:
+            at_end = False
+            rep["prove_empty_mid"] = True
+        rep["items"] = n_items
+        rep["empty_ranges"] = ranges
+        if not at_end:
+            # SAY WHAT THE NUMBER IS. The first cut of this message printed
+            # `n_items` under the label "items authored after it", which is
+            # the total, not the tail - a number that means something other
+            # than its label, which is the fault class this lane keeps
+            # catching. The tail is what makes the span mid-build, so the
+            # tail is what gets printed.
+            after = n_items - max(r[0] for r in ranges)
+            rep["items_after_span"] = after
+            rep["verdict"] = "RED"
+            rep["errors"].append(
+                "%s: an EMPTY `man` span at %s in a builder of %d items, with "
+                "%d authored after it - a `_close(\"man\")` that wrapped zero "
+                "items, not the end-of-build no-operator marker"
+                % (key, ranges, n_items, after))
+            return rep
+        rep["no_man"] = True
+        rep["verdict"] = "NO_MAN"
+        rep["no_man_reason"] = (
+            "the builder declares an EMPTY `man` span as its last statement - "
+            "a deliberate marker that this body has no operator at all. A "
+            "machine with no man cannot fail a can-you-see-the-man test. "
+            "NOTHING IS CLAIMED: no view is rendered and no cell is written, "
+            "so this row is an honest absence and NOT a pass. Matches "
+            "`minibosses.man_ranges` and the register census's `no_man` "
+            "state (docs/art/SELFSEEN_AUDIT_24NOV.md section 6).")
+        return rep
     SPLIT["span"] = ranges
     M.merge_objs = _split_merge
     try:
@@ -251,7 +331,14 @@ def main():
     ap.add_argument("--keys", default="dyer,greener")
     ap.add_argument("--tag", default="")
     ap.add_argument("--out", default="")
+    # An assertion nobody has seen fire is not an assertion. This moves the
+    # declared-empty `man` marker from the END of the item list into the
+    # MIDDLE, in memory only, so the mid-build RED can be WATCHED to fire on
+    # the very body the NO_MAN branch exists for.
+    ap.add_argument("--prove-empty-mid", default="")
     args = ap.parse_args(argv)
+    global PROVE_EMPTY_MID
+    PROVE_EMPTY_MID = args.prove_empty_mid
     outdir = os.path.join(args.repo, "renders", "art", "minibosses", "_backread")
     os.makedirs(outdir, exist_ok=True)
     rows = {}

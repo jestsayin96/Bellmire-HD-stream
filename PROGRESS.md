@@ -69,6 +69,21 @@ PROMPT CORRECTIONS STILL OWED - BOTH RAISED BEFORE, NEITHER FIXED, AND I AM NOT 
 writes 32 and the generator wins. (2) It still lists `_b2_ask.gd` at the worktree root as owed; the file and
 its `.b2_*` logs are ABSENT - listed again this run - and B186 closed that item. A firing cannot write a prompt.
 
+ADDENDUM, 02:50 CT, AFTER MY COMMIT - THE QA TESTER RAN THE GATE AND CORROBORATED ALL OF THIS FROM OUTSIDE
+MY LANE, AND IT SHARPENS ONE POINT I WANT STATED PLAINLY RATHER THAN LEFT FOR SOMEONE TO TRIP OVER.
+QA's IDLE 2026-11-27T02:49:44-06:00 reports `L14_TEST FAIL 1/27 (MINIBOSS COUNT published 64 vs feed rows
+65 - pre-declared cascade step, chatbot lane owes data/commands.json 64->65, NOT touched by me)`. ONE fail,
+and `MINIBOSS UNNAMED` did NOT fire. That is the tell: QA runs against R's working tree, which has branch
+`laptop` checked out, and `laptop` ALREADY carries mealman's name - so there MB_NAME is 65, by_key is 65,
+UNNAMED is empty, and the single remaining red is my number. On that tree the bump is the last step to green.
+ON MAIN IT IS NOT, AND MAIN IS WHAT MY ORDER NAMES. Re-measured at 02:50 CT after a fresh fetch: main is
+still c5d297af and `"mealman": "Whitedamp"` is still absent. So bumping now would NOT have bought a green
+gate anywhere main is read - it would have swapped the COUNT red for an UNNAMED red and left my published
+65 unbacked by any name on main. The order's condition is not red tape, it is the thing that keeps my file
+true against the ref the gates read. I am holding at 64 and the bump is carried, exactly as written above.
+IF THE TEAM LEAD WANTS IT SOONER, that is a one-line relaxation to make - peg the condition to the tree the
+gate actually runs on instead of to main - and it is the supervisor's call, not a firing's. I am not taking it.
+
 TWITCH: NOTHING. No engine ran, so eventsub never started this firing. No message sent, nothing redeemed,
 nothing cheered, ZERO BITS, no account driven by me.
 CARRIED: the bump itself, conditional on main reading 65. Nothing else of mine.

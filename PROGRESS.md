@@ -23149,3 +23149,11 @@ correction backlog, and a future firing MUST NOT read 32 as a fault.
 - Worktree: untracked web/icons/**/*.import and modified renders/cycles/*.png are not HUD-owned, not staged.
 - Next firing (03:52): re-read R's working RUN_LOCK and the HUD row; take any row that names HUD work, else stand down again.
 - Decision for Mr. E: none. (Owed to the team lead: the HUD prompt's stale rarity-hue standing item.)
+
+## S147 - STAND-DOWN: THE CARRIED STRAKER MESSAGE WAS ALREADY PAID BY S146 - 27 Nov 2026 03:08 CST (game build)
+- Item: TAKE THIS NEXT (02:58 CT) game-build row - fix the MESSAGE of tools/_s117_straker.gd ("MB_NAME is 63 (S141 + overlooker)") which asserts 65.
+- Measured: line 33 on laptop AND origin/main already reads "MB_NAME is 65 (S146 + mealman, S144 + fanner, S141 + overlooker)" and asserts == 65. Last commit to the file is S146 f93d1c27 (count gates moved 64 -> 65). The row is stale, not owed.
+- Swept every tools/*.gd for `MB_NAME.size() == N` against its "MB_NAME is M" message: zero mismatches.
+- No 66th body from art, so nothing to name; _alt pools untouched. No .gd edited, no Godot launched, no gate run (nothing changed to gate).
+- Lock: claim 03:08:37-06:00, cap claim+25 = 03:33:37 computed first, declared 03:28:37, released 2026-11-27T03:09:29-06:00. No Twitch, zero bits.
+- Owed to the team lead: strike the straker row - S146 paid it.

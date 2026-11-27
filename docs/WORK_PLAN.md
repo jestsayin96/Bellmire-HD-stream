@@ -142,6 +142,41 @@
 ***     item** - that is a half-of-an-existing-item reading of the hero-gear directive
 ***     (sup-nov27-1323), not a new item, and I am saying out loud that I read it that way.
 ***     Please confirm or overrule before I write that row.
+***
+*** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, ADDED 16:58 CT 27 NOV 2026. =====
+*** A FIRING CANNOT EDIT A SCHEDULED TASK. The first seat to get a LIVE TURN from Mr. E should
+*** land these in the :58 team lead prompt together with everything already listed in the older
+*** FOR THE NEXT TEAM LEAD blocks further down this file. All three are MECHANICAL - a stale
+*** measurement in my own charter - not an authority change, so no verbatim words are needed.
+*** (1) **THE PUBLISHED-HUB FIGURES IN THE :58 PROMPT ARE STALE BY TWO DAYS AND BY A LARGE
+***     MARGIN.** The prompt states gh-pages is `05ac2679`, tree `9ca8051e`, pushed 19 Nov 20:06
+***     CT, with a delta of "3 files / +59 / -1". MEASURED BY ME THIS RUN:
+***       `origin/gh-pages`        = **8d214d36**, tree **1d8bce63**, pushed **25 Nov 09:55 CT**
+***       `origin/hub:web`         = **568951b1**
+***       `git diff --shortstat origin/gh-pages origin/hub:web` = **74 files changed,
+***       +473 / -10** - including **68 new `icons/beasts/*.webp`**, `icons/beasts/_manifest.json`
+***       +75, `app.js` +174/-8, `style.css` +22/-1, `index.html` 1/1, `NOTES.md` +63,
+***       `tools/make_bestiary.py` +48 and `tools/_to_delete/_beast_dex_block.txt` +90.
+***     The prompt's own paragraph warns twice against copying these SHAs and says two seats
+***     copied them anyway. **THE FIGURES IN IT ARE NOW THEMSELVES THE STALE ONES.** Replace the
+***     whole "WHAT IS PUBLISHED / WHAT IS MERGED AND NOT PUBLISHED" block with an instruction to
+***     measure and nothing else - no SHAs at all - so there is no number left to copy.
+***     **NOTE FOR WHOEVER PUBLISHES: this delta DOES touch `web/`** (`app.js`, `style.css`,
+***     `index.html`), so the full publish verification IS owed when the supervisor calls it.
+*** (2) **THE DEAD-DATA CORPUS IS 49 FILES NOW, NOT 48, AND THAT IS GROWTH, NOT A GLOB ERROR.**
+***     The prompt says "The right count is 48" and warns that a `web/**/*.js` glob wrongly
+***     reports 49 by pulling in `web/tools/sheet_overlap.js`. I used the correct globs -
+***     `scripts/*.gd` + `web/app.js` - and got **48 `.gd` + 1 = 49**. There are 48 scripts now;
+***     the baseline's 47 is one behind. Keep the warning about the glob; change the number to a
+***     "count it, do not quote it".
+*** (3) **DO NOT REPORT `assets/graveyard/Textures` AS AN UNREFERENCED ASSET DIRECTORY.** My own
+***     walker flagged it this run and **I CONFIRMED IT IS A FALSE POSITIVE BY LOOKING**: all five
+***     `.glb` files in `assets/graveyard/` name `Textures` internally, and the folder is read
+***     through `grave_keeper.gd:9-10` (`res://assets/graveyard/character-keeper.glb`) and
+***     `town.gd:5030`. The baseline walks 34 directories and mine walked 38 because it descends
+***     one level further into texture subfolders. **THE UNREFERENCED COUNT IS STILL ZERO.** A
+***     texture folder is referenced by the model, not by a GDScript string - the right fix is to
+***     say so in the prompt's Step 0 guard list, not to hand any lane a wiring job.
 *** ===== TAKE THIS NEXT - THE 15:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 14:58 FIRING.
 *** Merged tree 8bc451d4 - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed

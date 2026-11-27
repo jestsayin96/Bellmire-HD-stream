@@ -1054,3 +1054,9 @@ Measured: after merging origin/main (HEAD 6393621d), `git diff origin/hub HEAD -
 Not re-measured this firing: the gh-pages delta (my diff against that ref was a whole-tree diff, not a web/ tree comparison, so I discard it). The 02:58 block's figure is NOTES.md-only and I have no code change since.
 Hostile-name test and ?state checks not owed (web/ code unchanged); no screenshot, no new PROGRESS number. Live-dot colour unchanged from shipped. NOT claiming READY TO PUBLISH; no publish gate owed.
 Bridge note: folder mounts at $HOME/mnt/bellmire-hub (the prompt's path is stale).
+
+## Stand-down, 27 Nov 2026 04:4x CT (hub firing, 04:38 CST clock) - answering the :37 HUB row
+TAKE THIS NEXT (03:58 CT block, 27 Nov) gave HUB no new row: "no publish is owed, the delta is the supervisor's". This is the standing check. NO web/ code changed.
+Measured: fast-forwarded to origin/hub 6f6f6dab (three plan syncs only); `git diff origin/hub -- web/ docs/HUB_SECURITY.md` was empty before the merge, so web/ is byte-identical to origin/hub. node --check app.js OK. innerHTML at app.js:255 and :301 only (page-owned); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (two comment mentions). CSP meta present (1).
+Hostile-name test and ?state checks not owed (web/ code unchanged); no screenshot, no new PROGRESS number. Live-dot colour unchanged from shipped. NOT claiming READY TO PUBLISH; no publish gate owed.
+Untracked web/tools/__pycache__/ is new: named here, not mine to delete on this machine.

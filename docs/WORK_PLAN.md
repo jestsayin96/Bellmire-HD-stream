@@ -1,3 +1,226 @@
+*** ===== TAKE THIS NEXT - THE 11:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 10:58 FIRING AND ITS TWO WRITES.
+*** Merged tree 537d203a - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed
+*** to main. Clock read off the machine with `TZ=America/Chicago date`: 11:59:05 CST at the start
+*** of this run; this first write 12:05 CT.
+***
+*** *** TWO WRITES AGAIN, AND THIS IS THE FIRST. *** The GAME BUILD row goes out NOW so it reaches
+*** origin/laptop BEFORE the :07 firing. The CONTENT, HUB, ART, CHAT BOT and HUD rows land in a
+*** SECOND WRITE in this same run, before :22. Nothing in this first write will be contradicted.
+***
+*** ===== THE CASCADE IS SHUT AT 67 / 67 / 67 / 67. I MEASURED ALL FOUR SIDES MYSELF. =====
+*** Measured on the merged tree with a BRACE-MATCHED, COMMENT-AWARE DEPTH-1 PARSER:
+***   `Delve.MB_NAME`          = **67** keys (delve.gd:450), `badger` present
+***   `miniboss_feed.by_key`   = **67** keys (inside data/lore_lines.json, NOT a data/*.json file
+***                              of its own - it is read via `Delve.lore()` at chatcmd.gd:707)
+***   SET DIFFERENCE **EMPTY BOTH WAYS** - UNNAMED empty, GHOST empty.
+***   `commands.json` miniboss `.short` and `.what` = **67**; order 34 / commands 34.
+***   hub `BEAST_DEX` = **67** rows and its generated comment agrees.
+*** A FAULT OF MY OWN, FIRST, BECAUSE IT IS THE FOURTH TIME THIS CONSTANT HAS BEATEN A SEAT: my
+*** first parse of MB_NAME returned **0** and I nearly wrote that down. The declaration is
+*** `const MB_NAME := {` and my pattern required `=`, so it matched nothing. A zero from a parser
+*** is not a zero in the file. I found the declaration with a grep for `^const MB_NAME` before
+*** publishing anything. THE SAME SHAPE BIT ME TWICE MORE THIS RUN - see the two notes below.
+***
+*** ===== GAME BUILD (:07) - S155 IS **TICKED**, AND THE REMAINDER IS NAMED. =====
+***   **SYSTEM 40'S ENGINE HALF - TICKED.** 15 callings x 2 paths = 30, permanent, gifts at
+***   10/15/20, S155_SPEC OK 24 checks, L48 OK 11, TWITCH_PARSE OK 8, OFFFLOOR OK 0 of 2433,
+***   DELVE_TEST OK 9001 frames, TOWNWALK in_solid 0/18920 PASS, 0 SCRIPT ERROR.
+***   WHAT EARNED THE TICK RATHER THAN THE COUNT: you READ roster.gd instead of taking the
+***   directive's five callings, found FIFTEEN, and adapted under the directive's own caveat. You
+***   caught two path names colliding with existing CLASS keys (Rogue->"Ranger", Paladin->"Warden")
+***   and renamed them Tracker and Oathkeeper so a calling and a path never read as one word. And
+***   EVERY GIFT IS AN EXISTING ABILITY KEY that already resolves in delve.gd, with none repeating
+***   the calling's own kit - so there is no label without an effect and nothing new in delve.gd.
+***   THAT IS THE OPPOSITE OF THE `MODEL_BY` FAULT: you refused to add a name with nothing behind it.
+***   **AND YOU DECLARED YOUR OWN REMAINDER WITHOUT BEING ASKED** - the directive's bespoke
+***   behaviours (taunt/aggro, trap-skip per floor, party heal, death save, party buff aura) are
+***   NOT in. That is why this is the ENGINE HALF ticked and not System 40 whole.
+***   NEXT: **THE BESPOKE BEHAVIOURS - SYSTEM 40'S REMAINDER, IN delve.gd.** Your own list, your
+***   own files. Take as many as the window holds and say which you left; a gift that changes a
+***   delve number is worth more than five that change a label.
+***   **WHAT IS NOT YOURS AT :07 AND I WANT THE REASON ON THE RECORD: THE 68th.** Art shipped the
+***   68th body at 11:56:47 CT - THE MOWER (Oneswath), stem `mower`. DO NOT NAME IT THIS FIRING.
+***   Content's `by_key.mower` does not exist yet and content does not fire until :22, so an
+***   MB_NAME row now would be a GHOST - a name keyed on a word no body carries a feed for. That is
+***   the S115 and S121 precedent in your own file and it is the right sequencing: content writes
+***   the feed at :22, you name it at 13:07. The cascade is a ONE-HOUR PIPELINE, not a round trip.
+***   HANDOFFS YOU WROTE AND I AM ROUTING, SO YOU DO NOT CARRY THEM: `!paths` / `!specialize` ->
+***   chat bot; the 30 names and blurbs -> content; `spec` on the hero card -> hub. All three are
+***   in the second write.
+***   LOCK, AND IT IS CLEAN: claim 11:09:13, cap claim+25 = 11:34:13 COMPUTED FIRST, declared
+***   finish 11:33, released 11:16:37 - inside both. That is the fix you proposed yourself holding
+***   for the tenth hour. Keep it.
+***
+*** ===== SECOND WRITE OF THE 11:58 BLOCK, SAME RUN, 12:1x CT. THE FIVE REMAINING ROWS. =====
+*** ===== NOTHING IN THE FIRST WRITE IS CONTRADICTED. =====
+***
+*** ===== ART (:34) - THE 68th IS **TICKED**, AND I LOOKED AT IT AND RED-PROVED IT MYSELF. =====
+***   **THE MOWER (Oneswath), stem `mower`** - invented, modelled, fitted and shipped in one hour,
+***   and the lane's licence to invent is the only reason this item exists. It is the first body
+***   whose read is conditioned on DISTANCE and the idea survives contact with the picture.
+***   **I STAGED THE RENDERS AND LOOKED, AT THE FRAME YOUR OWN NUMBERS CALL WORST.** `air_px_min`
+***   is 72 at the FRONT view (the badger's was 146, so this is your tightest body yet) - so front
+***   is the frame I opened, not the prettiest one. The scythe sweeps the full width of the ground
+***   toward the hero and the reach IS the silhouette; you can read "this one hits you from over
+***   there" without being told. `frame_edge` is 0 on all four sides of all three views and
+***   `fits_frame` is true, so the tightest body in the house is still inside its frame.
+***   **THE BEADLE TEST PASSES.** Front and back are plainly different figures: the front carries
+***   the hat brim, the pale face oval and the blade sweeping LEFT across the ground; the back has
+***   no face at all, a different shoulder and arm line, and the blade sweeping RIGHT and away.
+***   A body that reads the same from behind is the fault that cost us an hour on the Beadle and
+***   this one does not have it.
+***   **AND I RED-PROVED YOUR ABLATION IN MY OWN CONTAINER RATHER THAN TAKING YOUR NUMBER.**
+***   Max-channel diff of `_ab_mower/front_with.png` against `front_without.png`, 700x980:
+***       floor >= 0  -> **686,000 px over all 980 rows** - that is EVERY PIXEL IN THE IMAGE
+***       floor >= 12 -> **6,225 px in 22 rows, y=818-839, x=0-384**
+***   The unfloored number is not 74% noise, it is 100% noise - the whole frame "changes" because
+***   the renderer never lands twice the same. With the floor on, it collapses to a thin band low
+***   and left: THE BLADE ALONG THE GROUND, which is exactly the geometry the ablation is testing.
+***   YOUR OWN LESSON REPRODUCES INDEPENDENTLY ON MY MACHINE. That is the third instrument fault
+***   of this shape the house has now written down (the MB_NAME regex, the `du -sb` inode count,
+***   and the unfloored pixel diff) and you found this one unaided, during the same hour you
+***   invented the body. KEEP PUTTING THE FLOOR ON.
+***   NEXT: **THE 69th IS YOURS.** Unchanged licence. Do not spend a second pass on the mower -
+***   it is GREEN, it fits, and its remaining softness (no face from the front at distance) is the
+***   point of the design, not a defect. One note for the invention: you have now built the
+***   tightest body in the house at air_px_min 72. If the 69th wants reach too, check the frame
+***   EARLY rather than at fit time.
+***
+*** ===== CONTENT (:22) - C-235 IS **TICKED**, AND THE STAND-DOWN IS THE DELIVERY. =====
+***   You were asked to check the CONTENT of all 67 feed keys, not the count, and to stand down in
+***   writing if they were sound. You did exactly that and the audit is a real one: every key has
+***   arrive and fall, none thinner than 9 arrive / 8 fall, `{name}` appears ONLY in act and broken
+***   as ruled, no empty line, no unbalanced brace, no duplicate within a key. You also surfaced
+***   two things you were right to leave alone rather than silently fix: collier's 125-char arrive
+***   line, and one cross-key duplicate fall line shared by `relief` and `scraper`. Flagging and
+***   not touching shipped text under an additive-only rule is the correct call both times.
+***   AND YOU STOOD DOWN ON `data/drops.json` A FIFTH TIME. You were right five times. It is item
+***   (1) in FOR THE SUPERVISOR below for the third hour and I am still not asking you again.
+***   NEXT, AND YOU HAVE A REAL QUEUED ROW FOR THE FIRST TIME IN THREE HOURS:
+***   **(1) THE 68th FEED ROW - `by_key.mower`.** Art shipped THE MOWER (Oneswath) at 11:56:47 CT
+***   and I ticked it above. The body is on main; the feed row is yours and the game build cannot
+***   name it until you write it - that is the S115/S121 sequencing and it is why the game build
+***   was told NOT to touch MB_NAME at :07. **THIS IS THE ONE THING THAT UNBLOCKS THE 68th.**
+***   THE SUBJECT, SO THE VOICE HAS SOMETHING TRUE TO HOLD: this one kills from a distance. The
+***   scythe is longer than the room is wide and he never has to come to you. Write it in the
+***   plain voice - the horror is the reach and the unhurriedness, not gore.
+***   **(2) IF THE CLOCK ALLOWS, THE 30 SPECIALIZATION NAMES AND BLURBS** the game build wrote as
+***   placeholders at S155 and handed to you by name. They are in `roster.gd` SPECS. Fifteen
+***   callings, two paths each. Tune the text only; the keys and gifts are the game build's.
+***
+*** ===== HUB (:37) - THE TIER LADDER IS **TICKED**, AND I CHECKED THE PART YOU FLAGGED. =====
+***   You did the row I actually gave you this time and you proved it the way I asked: rendered at
+***   **1280x900 and 390x844**, one card per tier, and LOOKED. The ladder is a sound design - 1
+***   Faced 3px ink-soft, 2 Survived 5px teal, 3 Killed 7px dark gold, 4 Full 7px gold plus the
+***   existing full frame - and keeping the PILL as the primary read is right: the edge reinforces,
+***   it does not carry. I read the CSS myself; it is seven lines on `.beast.deep` and nothing rode
+***   along with it.
+***   **I RE-RAN YOUR SECURITY WORK MYSELF, BECAUSE YOU TOUCHED web/ AND MADE A SECURITY CLAIM -
+***   THAT IS ALWAYS OWED AND IT IS NOT THE PUBLISH GATE.** Your `app.js` delta is +2/-1 and it is
+***   ENTIRELY the generated BEAST_DEX block - the `66 chamber-holders` comment becoming 67 and one
+***   new `["badger", "Forestall"]` row. No new sink, no snapshot value in a URL or style, and the
+***   row is a pair of plain strings in a generated table.
+***   **YOU DID NOT CLAIM READY TO PUBLISH AND YOU SAID SO IN THE COMMIT, SO NO PUBLISH GATE WAS
+***   OWED AND I RAN NONE.** Third hour running you have said that out loud. Keep doing it.
+***   THE ONE THING I WANT NAMED, BECAUSE YOU NAMED IT FIRST: **"Tier 1 verified by computed style,
+***   not in the viewport frame."** That is an honest limit and it is also the single weakest point
+***   in an otherwise complete proof - tier 1 is the thinnest edge and therefore the one most
+***   likely to be invisible at 64 px, and it is the one you did not actually SEE.
+***   NEXT: **GET TIER 1 INTO THE FRAME AND LOOK AT IT.** Same two widths. If a 3px ink-soft edge
+***   on parchment is not separable from no edge at all at 64 px, say so and widen it - a ladder
+***   whose bottom rung is invisible is a four-step ladder with three steps.
+***   AFTER THAT, IF THE CLOCK ALLOWS: **`spec` ON THE HERO CARD** - the game build's S155 handoff,
+***   `Roster.calling_of` / the hero record's `spec`. It is yours by file.
+***
+*** ===== CHAT BOT (:45) - BOTH ITEMS **TICKED**, AND YOU DID NOT TAKE MY NUMBER. =====
+***   **THE COUNT IS PAID 66 -> 67** and **`!rep` IS THE 34th COMMAND.** I verified both on the
+***   merged tree myself: `commands.json` miniboss `.short` and `.what` both read 67, `order` is 34
+***   and `commands` is 34, and `Roster.rep_line` really does exist at `roster.gd:539` - so the new
+***   dispatch arm calls something real. That last check is the one that matters: a command arm
+***   pointing at a function that does not exist is the `MODEL_BY` fault wearing a different hat,
+***   and yours points at live code you correctly did not modify.
+***   **YOU WROTE YOUR OWN BRACE-MATCHED PARSER AND MEASURED 67/67 INDEPENDENTLY RATHER THAN
+***   TAKING THE FIGURE OUT OF MY ROW.** We agree, and we agree because we measured separately.
+***   That is exactly the behaviour this house asks for and it is the third hour you have done it.
+***   AND THE DOC WAS WRITTEN BY THE REAL GENERATOR - md5 7d2dfaa0 -> 515e4503, so unlike B200 this
+***   run's COMMANDS_DOC was not a no-op. You ran the generator BEFORE L14_TEST on purpose so the
+***   doc could not be stale under the gate that checks it. Good order.
+***   **THE STAMP FAULT IS CLOSED AND I AM RECORDING IT AS CLOSED.** B198 a ten-second future
+***   stamp, B199 an eight-second overrun, B200 a fifty-nine-second future stamp - and B201 both
+***   stamps composed from a clock read in the same call immediately before the write. Claim
+***   11:49:15, declared 11:51:30, released 11:50:14, inside both and clear of the HUD at :52. You
+***   also claimed before :50, which is the schedule fix working. Three hours of self-correction
+***   ending in a clean hour is the rule working, not luck.
+***   NEXT: **`!paths` AND `!specialize <path>` - SYSTEM 40'S COMMAND HALF.** The game build's S155
+***   handoff, written for you by name: `Roster.paths_line(uid)` and `Roster.specialize(uid, path)`
+***   already exist and return their own text. Add the dispatch arms and the `commands.json`
+***   entries; do not add logic to roster.gd, exactly as you did not for `!rep`. Mind your own
+***   d=2 `!paths`/`!mats` neighbour finding when you pick aliases.
+***
+*** ===== HUD (:52) - U204 IS **TICKED**, THE CARRIED FAULT IS CLOSED, AND YOUR ANSWER IS RECORDED.
+***   **THE LOGS ARE COMMITTED.** `_u203_after.log`, `_u203_mutant.log` and `_u204_after.log` are
+***   on origin/hud-ui. I asked for this two hours running and you did it first this firing, before
+***   anything else, as asked. A reader can now judge U203 by its own branch. That fault is closed.
+***   **YOUR RE_TAVERN ANSWER IS ACCEPTED AND I AM RECORDING IT AS DECIDED - I WILL NOT ASK AGAIN.**
+***   Verbatim: the only variable text in the tavern lines is the hero's own name, so the order
+***   change is reachable only for a hero whose name is itself a whole-word crit token (`Boss`,
+***   `Scar`, `Lord`); a staked tavern line naming a lord is still a tavern line; you want P_TOWN
+***   (dwell 12 s, still above PROTECT_FROM) and you are not changing it. **DECIDED. CLOSED.**
+***   That is an item closed by answering it, and it counts as fully as a patch would.
+***   AND YOU FIXED THE DEFECT YOU FOUND IN YOUR OWN PROBE - `_u202_busy.gd:73` `get_global_rect on
+***   Nil`, now guarded, re-run windowed at 150%: 0 SCRIPT ERROR, U202_DONE checks=14 fails=0.
+***   **THE HONEST LIMIT YOU WROTE DOWN IS WHY THIS IS A TICK AND NOT A WAVE-THROUGH:** you said
+***   yourself that in that run `vellum == panel`, i.e. the fallback fired, `_content` was STILL
+***   Nil at the sample, and so over_vellum is measured against the panel and the vellum
+***   measurement is NOT yet real. You shipped the fix and declared what it does not yet prove.
+***   That is the difference between a gate made honest and a gate made quiet, and you have now
+***   drawn that line correctly two hours running.
+***   NEXT: **THE `_content` NIL QUESTION, READ-ONLY FIRST, AS YOU PROPOSED.** `feed_hud.gd:136`
+***   sets `_content` in `_build`, so why your probe's FeedHUD has it Nil is the open question.
+***   Read before you write. If the answer is that the probe builds a FeedHUD that never runs
+***   `_build`, say so and the vellum line can be retired rather than repaired.
+***
+*** ===== FOR THE SUPERVISOR - TWO ITEMS, BOTH CARRIED, NEITHER MINE. =====
+***   **(1) `data/drops.json` - THIRD HOUR WITH YOU, FIFTH CONTENT STAND-DOWN.** Content has now
+***   declined to create it five firings running and has been right every time: it is a NEW data
+***   file and content's four-file rule does not cover it. The lane is not blocked - it has the
+***   68th feed row this hour - but the item cannot move without you. RECOMMENDATION: rule either
+***   that content may create it under a named four-file exception, or that it is the game build's
+***   because the engine reads drops. One line either way closes it.
+***   **(2) THE HUB PUBLISH DELTA - I RE-MEASURED IT MYSELF THIS HOUR AND IT HAS GROWN.**
+***   `origin/gh-pages` is **8d214d36**, tree **1d8bce63**, last pushed **25 NOV 09:55 CT**.
+***   `origin/hub:web` is tree **c9190a5a**. They are NOT equal. The delta is **74 files,
+***   +463 / -9** - NOTES.md +63, app.js +168/-7, icons/beasts/_manifest.json +75, and 71 `.webp`
+***   portraits. Last hour's row said 73 files; the badger portrait is the 74th, so DO NOT carry
+***   the old figure. The hub has NOT claimed READY TO PUBLISH and I ran no publish gate.
+***   RECOMMENDATION: the Bestiary on the live page is two days and 67 portraits behind the
+***   merged tree. If you want it published, say so and I will do the subtree push by the proven
+***   plumbing method and run the full verification first.
+***   NEEDS MR. E: nothing.
+***
+*** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (A FIRING CANNOT EDIT A PROMPT). =====
+*** I attempted no prompt write this run: a firing has no live turn to be approved in. These are
+*** owed to THIS prompt (:58) and should be landed by the first seat to get a LIVE turn:
+***   (a) **THE ART FIT REGISTER'S STANDING NOTE IS STALE.** The prompt says its top-level verdict
+***       "reads `RED / ok:false` and has done for days" on two carried `_chibi` rows. MEASURED
+***       THIS HOUR: `verdict` is **GREEN**, `ok` is **true**, `red_summary.rows` is **[]**,
+***       `shipped_red` **[]**, `retired_red` **[]**, `ok_shipped` **true**. Art cleared it. The
+***       note should now read that the register is GREEN and that a RED return is a real event.
+***   (b) **THE DEAD-DATA BASELINE'S FILE COUNTS HAVE MOVED.** The prompt says the corpus is 47
+***       `scripts/*.gd` + `web/app.js` = 48 files and 146 top-level keys. MEASURED THIS HOUR:
+***       **48** `scripts/*.gd` + `web/app.js` = **49 files**, 2,487,508 chars, 12 `data/*.json`,
+***       **169** top-level keys. The `web/app.js`-not-a-glob rule is unchanged and still right.
+***   (c) **THE MINIBOSS BODY COUNT IN THE FREEZE SECTION IS STALE.** It says the fit register
+***       judges 46 rows / 44 live bodies. MEASURED: **70** pairs, **67** live wired bodies,
+***       **81** `.glb` in `assets/monsters/minibosses/` = 67 wired + 11 retired `_chibi` + the two
+***       BOSSES `broodglut` and `lastcuff` (wired at `bestiary.gd:108` and `:117`, NOT a backlog)
+***       + `mower`, the 68th, shipped this hour. Art's own comment at `minibosses.py:24655` says
+***       the same. The IDs line should read: B201, C-235, D100, H32, L74, S155, T5, U204.
+***   (d) **THE GH-PAGES FIGURES ARE STALE.** The prompt says gh-pages is 05ac2679 / tree 9ca8051e
+***       pushed 19 Nov 20:06 and the delta is 3 files +59/-1. MEASURED THIS HOUR: **8d214d36 /
+***       tree 1d8bce63, pushed 25 NOV 09:55 CT**, delta **74 files +463/-9**. Struck and replaced.
+***
 *** ===== TAKE THIS NEXT - THE 10:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 09:58 FIRING AND ITS FOUR WRITES.
 *** Merged tree a6cc4e1f - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed

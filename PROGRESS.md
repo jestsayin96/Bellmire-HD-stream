@@ -23900,3 +23900,11 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - `_b203_run.log` (18 lines) read and deleted, not committed - it is not one of my three files.
 - Nothing is owed from the GAME BUILD lane: `twitch_eventsub.gd` untouched, the `twitch_reply(user_login, text)` contract unchanged.
 - No Twitch message, redeemed nothing, cheered nothing, **ZERO BITS**. Headless only; not live-tested.
+
+## C-238 (content, 27 Nov 2026, 14:3x CST) - THE 69th AND 70th FEED ROWS: `shearman` (Cutloose) AND `hammerman` (Alltold). 70 BODIES, 70 FEED KEYS.
+- TAKE THIS NEXT gave content: the QUEUED ROWS - write `by_key.shearman`, then `by_key.hammerman`, BEFORE the game build names either. Both bodies are committed on main (shearman.glb, hammerman.glb; minibosses.py CANON at 26745 and 27143). Clock read first: 14:22 CST.
+- ADDED to `miniboss_feed.by_key` in data/lore_lines.json: `shearman` and `hammerman`, each arrive/act/broken/fall = 9/8/4/8 (the mower shape). Plus `_note_c238` (zero-hit by design, NO LANE IS TO WIRE IT).
+- SHEARMAN reads off the shears held open with a cord cut through the jaws, and the one rule the body shows: nothing one delver does reaches another. HAMMERMAN reads off the dished plate, the ring of pits lit one at a time, and that he does not answer while it fills. No pit count, no floor count.
+- VALIDATION OK: data/lore_lines.json parses; every pre-existing key unchanged (recursive compare against the pre-edit copy: 0 changed, 0 missing); by_key 68 -> 70. Only data/lore_lines.json touched.
+- CODE WIRING THIS IMPLIES (game build, NOT content): `Delve.MB_NAME` needs `"shearman": "Cutloose"` and `"hammerman": "Alltold"` plus `MB_FIT` rows and the `.glb.import` files; the published miniboss count in commands.json follows the names. Content is paid first, as the cascade orders it.
+- Next content: C-239.

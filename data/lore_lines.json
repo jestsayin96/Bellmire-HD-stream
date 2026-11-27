@@ -15507,6 +15507,84 @@
           "The horn is still shut at his hip. Water and a stone.",
           "Pick up the line. Stand close the next time."
         ]
+      },
+      "shearman": {
+        "arrive": [
+          "A man in an apron stood at the far end of the room with a pair of shears held open above his shoulder.",
+          "They are a metre and a third of honed edge. They are the only bright thing on him.",
+          "A cord is caught in the jaws, cut clean through, both ends hanging.",
+          "He is not looking at any one of you. He is looking at what runs between you.",
+          "Nobody in the room has said a word. It is hard to say one across the gap.",
+          "A hand on a shoulder. A shield thrown over a neighbour. A call across the boards. He cuts those.",
+          "Every blow that lands still lands on one of you, and every one of you can still swing.",
+          "There is no one to pick you up. Pick yourself.",
+          "Mind the shears. Mind who is standing beside you."
+        ],
+        "act": [
+          "{name} reaches for the one beside them. The reach finds nothing.",
+          "{name} calls across the room. Nobody turns.",
+          "{name} swings alone. The others are swinging alone too.",
+          "A blow lands on the nearest. The rest cannot reach them.",
+          "{name} goes down and stays down. Nobody could get there.",
+          "{name} counts the gap and does not wait on it.",
+          "The shears close on a cord. Something between two of them goes slack.",
+          "{name} stops looking for help and goes for the man with the shears."
+        ],
+        "broken": [
+          "He loses the jaws on a swing and stands with the shears hanging open.",
+          "The cord is whole again, for as long as it takes him to find his grip.",
+          "A hand finds a shoulder. It stays there a moment.",
+          "He steps back. The room is a room full of people again, and not four of them."
+        ],
+        "fall": [
+          "He is down. The shears go over and the blades lie shut on the boards.",
+          "The cord is on the floor in two pieces. It is only a cord now.",
+          "An apron, a pair of shears, and what he never once struck.",
+          "He never took a thing off any of you. He took what you leaned on.",
+          "A hand finds a shoulder. It stays this time.",
+          "The room is a party again. It took a moment to feel it.",
+          "Nobody fell who needed picking up. Pick up the ones who did.",
+          "Stand close the next time."
+        ]
+      },
+      "hammerman": {
+        "arrive": [
+          "A man in a soot smock stood at the far side of the room with a long sledge standing head-down beside him.",
+          "A dished anvil face hangs on his chest from two straps. It is the brightest thing on him.",
+          "Round the dish there are small dark pits, in a ring. They are cold.",
+          "He is not swinging. He has not lifted the sledge. A pair of tongs rides in the back of his belt.",
+          "He does not answer a blow. He takes it, and it goes into the plate.",
+          "A pit lights. Then another. They light one at a time, round the dish.",
+          "The plate keeps the count. He only keeps the plate.",
+          "The ring fills and he pays it back in the one stroke, on whoever put the most in.",
+          "Mind the plate. Mind how hard you work."
+        ],
+        "act": [
+          "{name} strikes the plate and a pit lights.",
+          "{name} hits him again, and again. The ring is a little fuller each time.",
+          "{name} steps back. The pits go dull, one by one.",
+          "{name} spreads the work. No one is the mark.",
+          "A blow lands and he does not answer. The plate is warm.",
+          "{name} counts the pits and keeps count of the blows. It is the same number.",
+          "The ring is nearly round. Nobody is happy about how fast it went.",
+          "{name} goes for the straps."
+        ],
+        "broken": [
+          "The straps part and the plate drops on the boards, still warm.",
+          "The pits go out all together. The ring is empty again.",
+          "He lifts the sledge for the first time and has nothing to pay it with.",
+          "A stroke with nothing in it. It goes through the floor and not through anyone."
+        ],
+        "fall": [
+          "He is down. The sledge goes over and the head lies still on the boards.",
+          "The dish is dark. Every pit is cold.",
+          "A smock, a pair of tongs, and a plate that kept every blow it was ever given.",
+          "He took everything you gave him. He gave none of it back.",
+          "The ring never filled. Somebody had the sense to stop.",
+          "He was keeping the account. You could read it off his chest.",
+          "Put the tongs in the fire. Put the sledge by the door.",
+          "Hit harder the next time. Hit slower."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -15560,7 +15638,8 @@
     "_note_c214": "C-214: C-213's prepared text diffs, landed on the team lead's 14:58 CT plan row. The changer's arms were deleted on 21 Nov (Mr. E: delete the bars); the body is man, post, collar and a pale drum with three dark rungs. Changed: changer arrive.1 drops three-armed turnstile for turnstile post; arrive.2 works the arms, and the arms work the room becomes works the post, and the post works the room; arrive.8 clean plates on the bar ends becomes a clean plate under the post. Dyer arrive.1 A fourth is in the vat becomes The vat is steaming (three cloths on the builder, none in the vat). CORRECTED AND FINISHED IN C-215 (25 Nov): the held list over-stated by two - broken.1 and fall.6 never named a bar or an arm. The eight that did (arrive.7, act.0, act.6, broken.0, broken.2, broken.3, fall.0, fall.3) are now reworded to the post and drum; the jam counterplay survives as a promise (a body set against the post holds it) and no cell names an arm or a bar. Nothing is held. Arrays stay 9/7/4/8 and 9/8. No key added except this note. Expected zero-hit key; NO LANE IS TO WIRE IT.",
     "_note_c216": "C-216: overlooker (Velrick, the 63rd body, workshop). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - the head turned off his shoulders, the pale mitt held level along the pick - and the one rule: he goes for whoever has hurt him least and re-reads when that changes. No number, no arm-count, no new mechanic; the counterplay in broken is stated as a promise the way the changer's is. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row, if the game build wants one: \"overlooker\": \"Velrick\".",
     "_note_c234": "C-234: badger (Forestall, the 67th body, art lane, committed on main). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - four pale full sacks on a yoke, the town's own stamp on them - and the one rule: he is leaving, and every sack that leaves the floor is gone from the granary. Put him down and what is still on the yoke stays to be carried up. No number beyond the four sacks art's own body shows. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row is the game build's: \"badger\": \"Forestall\".",
-    "_note_c236": "C-236: mower (Oneswath, the 68th body, art lane, committed on main). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - the long honed blade level at ankle height, the only bright thing on him - and the one rule the picture shows: stand off in the open and the stroke takes everyone on one beat; close inside and it goes over. No number, no floor count. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row is the game build's: \"mower\": \"Oneswath\"."
+    "_note_c236": "C-236: mower (Oneswath, the 68th body, art lane, committed on main). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - the long honed blade level at ankle height, the only bright thing on him - and the one rule the picture shows: stand off in the open and the stroke takes everyone on one beat; close inside and it goes over. No number, no floor count. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row is the game build's: \"mower\": \"Oneswath\".",
+    "_note_c238": "C-238: shearman (Cutloose, the 69th body) and hammerman (Alltold, the 70th and last, art lane, both committed on main - shearman.glb and hammerman.glb, minibosses.py CANON). Arrive/act/broken/fall = 9/8/4/8 like mower. Shearman: names the one readable thing - the open shears with a cord cut through the jaws - and the one rule the picture shows: the lines between the party are cut, nothing one delver does reaches another. Hammerman: names the dished plate on his chest, the ring of pits that light one at a time as it is struck, and that he does not answer while it fills; the pay-back stroke is on whoever put the most in. No number of pits, no floor count. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME rows are the game build's: \"shearman\": \"Cutloose\", \"hammerman\": \"Alltold\"."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

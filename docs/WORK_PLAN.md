@@ -1,3 +1,156 @@
+*** ===== TAKE THIS NEXT - THE 01:58 CT FIRING, 27 NOV 2026. CLEAN-HOUR COUNT = 3. =====
+*** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 01:58:52 and 02:01:52
+*** CST. The firing and the machine date are BOTH 27 Nov this hour - no rollover split.
+*** Merged main c084105a -> 7e4cc699, ALL SIX LANES IN. PROGRESS.md +96/-0 and I did NOT accept the
+*** arithmetic: the per-lane sum is 98 (laptop 10 + content 9 + hud-ui 8 + chatbot 71), which is 2
+*** MORE than the merged file gained. I proved nothing was lost the stronger way instead of waving
+*** at it - I took the exact SET of lines each of the four lanes added and asserted every one of
+*** them is present in the merged file: laptop 10/10, content 9/9, hud-ui 8/8, chatbot 71/71, ZERO
+*** missing. The gap of 2 is two duplicate lines (a repeated blank/separator) that a line COUNT
+*** collapses and a line SET does not. Two conflicts, one region each, three marker lines each;
+*** residual markers on all four exact shapes = 0 in PROGRESS.md, the file that actually conflicted.
+***
+*** ===== THE CASCADE IS OPEN EXACTLY ONE STEP AND IT IS THE GAME BUILD'S TO SHUT AT 02:07. =====
+***   Re-measured by me on the MERGED tree 7e4cc699 this run, BRACE-MATCHED, not copied:
+***   - `Delve.MB_NAME` = 64 keys. `miniboss_feed.by_key` = 65 keys (parsed as JSON, not regexed).
+***   - THE SET DIFFERENCE IS THE WHOLE STORY: by_key MINUS MB_NAME = ['mealman'], and MB_NAME MINUS
+***     by_key = [] - EMPTY. There is exactly one unnamed body and nothing is dangling the other way.
+***   - `MB_FIT` = 76 rows and ALREADY CARRIES `mealman` 0.97 (S145 wrote the pair, held the name).
+***   WHAT HAPPENED THIS HOUR, IN ORDER, AND IT IS THE SEQUENCE WORKING: game build S145 shipped the
+***   65th body at 01:15 and HELD the name because by_key.mealman had not landed; content landed
+***   C-225 at 01:24, nine minutes later. So the hold was correct when it was written and is now
+***   spent. THE 00:58 ROW MADE THIS CONDITIONAL ("CHECK IT FIRST and if it has not, carry this").
+***   *** THE CONDITION IS MET. I CHECKED IT SO THE GAME BUILD DOES NOT HAVE TO. THE ROW IS NOW
+***   *** UNCONDITIONAL. ***
+***
+*** ===== GAME BUILD (:07) - S145 TICKED. NAME THE 65th. NO CONDITION LEFT ON THIS ROW. =====
+***   S145 TICKED. I read the committed verdict LINES, not the return codes, out of
+***   renders/cycles/s145_gates.log: S145_MEALMAN OK 10, S144_FANNER OK 10, TWITCH_PARSE OK 8,
+***   OFFFLOOR OK 0/2206, DELVE_TEST OK 9001, TOWNWALK PASS 0/18223 raid 0/4747, parse 0 errors.
+***   And the hold is the part I am ticking hardest: you shipped a body and REFUSED to name it while
+***   the feed row was missing, and said so in the lock line. That is the discipline that keeps this
+***   chain honest in both directions.
+***   NEXT, AT 02:07: write `Delve.MB_NAME.mealman`. COPY art's measured pair, do not re-derive it -
+***   `pairs.mealman.ratio = 0.97`, creature_h 2.37 / hero 2.45, margin_x 0.12, fits_frame true,
+***   3/3 proving views, and MB_FIT.mealman is already in delve.gd from your own S145. Content's
+***   by_key.mealman IS ON MAIN - I parsed it, 9 arrive / 8 act / 4 broken / 8 fall. Hold the body
+***   off floors with miniboss_for exactly as S144 held fanner. When this lands the chain reads
+***   65 names / 65 feed keys and the cascade is SHUT.
+***   CARRIED COSMETIC, STILL NOT WORTH A WINDOW OF ITS OWN: `_s117_straker.gd`'s message still
+***   READS "MB_NAME is 63 (S141 + overlooker)" while ASSERTING 64 - and it will assert 65 after
+***   this row. Fix the message the next time you are in that file anyway.
+***
+*** ===== CONTENT (:22) - C-225 TICKED. YOU ARE AT THE HEAD OF THE CHAIN WITH NOTHING OWED. =====
+***   C-225 TICKED and I re-counted it rather than taking it: I parsed data/lore_lines.json as JSON
+***   and `miniboss_feed.by_key.mealman` is present with the fanner shape you were asked for -
+***   arrive 9, act 8, broken 4, fall 8. by_key is 65 keys. Your branch is PROGRESS.md +9 and that
+***   one data file; nothing else touched.
+***   NEXT: THERE IS NO 66th BODY, so there is no feed row to write and I am not inventing one.
+***   Keep producing what you produce unthrottled - epitaphs, descend, cleared - hold the body count
+***   at 65, and write no new `by_key` row until art ships a 66th body. Your `_note_` keys are
+***   EXPECTED zero-hit keys and no one is to stop you writing them.
+***   DO NOT WIRE `phase2_words_alt2`. It is dead for exactly the reason its two siblings are: there
+***   is no `alt2` anywhere in scripts/, web/ or tools/, and delve.gd composes `base + "_alt"` only.
+***
+*** ===== ART (:34) - TICKED, AND THIS IS THE BEST SHAPE OF FIX THERE IS: YOU DELETED A HAND STEP. =====
+***   TICKED, and I checked the thing that would have made it hollow, because a register that flips
+***   `ok: false -> true` in the same hour a lane is charged is EXACTLY the shape of a test made
+***   QUIET rather than a test made HONEST. IT IS HONEST. What I verified on the merged tree:
+***   - `ok` true, `errors` [], `red_summary.rows` [], `red_summary.shipped_red` [], `ok_shipped`
+***     true. The two errors that cleared were the mealman self_seen cell and the census covering
+***     66 register rows while being read against 67 - BOTH named the same missing measurement.
+***   - THE CELL WAS MEASURED, NOT ASSERTED: `_backread_mealman.json` is a new 193-line measurement,
+***     `_selfseen_all.json` gained its row, the census now reports `register_pairs: 67` with
+***     `mealman` in its `measurable` list and a real 9-span / 38-item man breakdown - and three
+***     committed renders (mealman_front/side/back.png) stand behind it.
+***   - THE INSTRUMENT WAS NEVER WRONG AND YOU SAID SO YOURSELF: `derive_self_seen` caught the
+***     missing cell on fanner AND on mealman, named the body, and printed the command to run. What
+***     failed twice was that link 2 of a four-link chain was a HAND EDIT. `tools/art/
+***     _selfseen_merge.py` is now that link, and it refuses a source row carrying `errors`, refuses
+***     a row with no `man_seen` cell unless the body is a declared no-man, stamps `measured_at` with
+***     `%z` so a wrong zone is VISIBLE, appends to `provenance` instead of replacing it, and asserts
+***     the output row count can never FALL. A merge tool that could quietly lose a row would be a
+***     worse fault than the one it fixes, and you wrote the assertion for a fault that cannot fire
+***     today so that a later edit fails loudly. That is the right instinct and I am recording it.
+***   NEXT: you are the one GENUINELY DRY lane allowed to invent - the 66th miniboss, or pass work on
+***   what is shipped. Measure the live count off tools/art/minibosses.py or the fit register, never
+***   off a line in any prompt.
+***
+*** ===== HUB (:37) - THE LANE IS ALIVE AGAIN. FOUR SILENT FIRINGS ENDED. =====
+***   Last hour I measured four firings - 21:37, 22:37, 23:37, 00:37 - with no commit at all. This
+***   hour you committed: `06d0981f`, web/NOTES.md +6, the stand-down written up, web/ CODE UNCHANGED.
+***   That is the row satisfied and I am recording the recovery, not the old charge.
+***   I RAN NO PUBLISH VERIFICATION THIS HOUR, AND IT WAS NOT OWED: you did not claim READY TO
+***   PUBLISH, and you were right not to. Saying so plainly rather than reporting an unearned gate.
+***   NEXT: same row. Keep the web tree honest, never publish - that call is the supervisor's, not
+***   mine and not yours - and if you are dry, commit the stand-down as you did this hour.
+***
+*** ===== HUD (:52) - U194 TICKED AS A DELIVERY, UNDER MY OWN ROW'S OWN TERMS. =====
+***   The 00:58 row said in its own words: "If you have none worth the window, STAND DOWN AND WRITE
+***   IT UP again and I will record that as a delivery again." You did exactly that. I am keeping my
+***   word. TICKED.
+***   AND THIS WAS NOT A STARVED HOUR - I CHECKED BEFORE DECIDING THAT, because a starved lane
+***   breaks the clean-hour count and I own the schedule. Your :52 window was genuinely FREE: the
+***   chat bot claimed at 01:48:21 with a declared finish of 01:51:00 and wrote its IDLE at 01:49:18,
+***   clear of :52 - the very fix I put in two hours ago, obeyed for a second hour running. You had
+***   the window and chose to stand down with no item rather than invent one. That is the row
+***   working, not the lane losing.
+***   NEXT: same honest row - name the next concrete own-work defect in YOUR OWN shipped files and
+***   fix it, with the evidence log COMMITTED on your branch (U124's uncommitted `_u122.log` is the
+***   thing not to repeat). If you have none worth the window, stand down and write it up and I will
+***   record that as a delivery AGAIN. I will not invent a HUD item to fill this row; the freeze
+***   forbids it and handing you another lane's file is what stranded this lane before.
+***
+*** ===== CHAT BOT (:45) - B191 TICKED. YOUR NEXT ROW IS AN ORDER, NOT A TASK. READ IT TWICE. =====
+***   B191 TICKED. All four gates green for the first time, and I verified the two numbers that
+***   matter rather than the return codes: data/commands.json published count reads "The 64 elites"
+***   and docs/COMMANDS.md was rewritten by the REAL generator to match. L14_TEST OK 27 checks zero
+***   fail, its 27th check - the exact one that was B190's only red - reads (0 fired: []).
+***   TWITCH_PARSE OK 8 with an EMPTY stderr. And you checked drift in BOTH directions, 32 entries,
+***   zero orphans either way, which is the part most lanes skip.
+***   *** NEXT, AND THE ORDER IS THE ENTIRE ROW. AT THIS MINUTE YOU ARE CORRECT: published 64 against
+***   *** MB_NAME 64. The game build names the 65th at 02:07. DO NOT BUMP 64 -> 65 UNTIL `MB_NAME`
+***   *** ACTUALLY READS 65 ON MAIN - CHECK IT FIRST, WITH A BRACE-MATCHED PARSE, NOT A REGEX. If it
+***   *** reads 65, bump the published count and let the REAL generator rewrite docs/COMMANDS.md. If
+***   *** it still reads 64, STAND DOWN AND SAY SO - a published count no name backs is the same
+***   *** fault as the one you just paid off, pointing the other way. ***
+***   AND PRE-DECLARED AGAIN, SO YOU DO NOT CHASE IT: between content's C-225 (landed, on main NOW)
+***   and the game build's naming run, `MINIBOSS COUNT` and `MINIBOSS UNNAMED ['mealman']` WILL fire
+***   and L14_TEST WILL READ RED. THAT IS THE CASCADE MID-FLIGHT, DECLARED BY ME, NOT A DEFECT OF
+***   YOURS. Do not touch the gate and do not chase it.
+***
+*** ===== LOCK DISCIPLINE THIS HOUR - CLEAN, AND THE :50/:52 FIX HELD A SECOND HOUR. =====
+***   Read off R's WORKING copy of docs/RUN_LOCK.txt, which is the authoritative one and is often
+***   uncommitted - a `git show origin/laptop:...` would have missed a live claim.
+***   - chat bot B190: claim 00:46:43, cap 01:11:43 computed FIRST, declared 00:51:30, IDLE 00:48:22.
+***   - game build S145: claim 01:08:59, cap 01:33:59 computed FIRST, declared 01:28:59, IDLE 01:15:44.
+***   - chat bot B191: claim 01:48:21, cap 02:13:21 computed FIRST, declared 01:51:00, IDLE 01:49:18.
+***   - QA tester (:41, not one of the six): IDLE 00:44:30, inside its own window.
+***   - HUD: took NO lock and said so.
+***   ZERO overruns. ZERO claims over a live hold. No two lanes holding at once. No stale lock
+***   cleared. Every stamp carries -06:00 and every one is in the PAST - no future stamps.
+***   The game build's cap-computed-first fix is now unbroken since 02:08 on 21 Nov. The chat bot
+***   claimed at :48 with a finish inside :52 for the second hour, and the HUD's window was free.
+***   CLEAN-HOUR COUNT = 3 (was 2 at 00:58). Nothing of mine folded into it.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS. A FIRING CANNOT WRITE A PROMPT. =====
+***   The list below this block still stands and I am ADDING to it, not replacing it. New this hour:
+***   - THIS SEAT'S OWN PROMPT: its STANDING NOTE ON THE ART FIT REGISTER says the top-level verdict
+***     "reads RED / ok:false and has done for days" on two carried unmeasured `_chibi` rows
+***     (snuffer_chibi, tallyman_chibi), and tells the next seat not to report the art gate as green.
+***     THAT IS NOW STALE. Measured on 7e4cc699 at 02:0x CT 27 Nov: `ok` is TRUE, `errors` is [],
+***     and `red_summary.rows` is EMPTY - the _chibi rows are no longer producing a red. The note's
+***     advice was right for days and is wrong now. A seat that obeys it will under-report art.
+***   - GAME BUILD PROMPT: nothing new owed this hour.
+***
+*** ===== FOR THE SUPERVISOR =====
+***   ONE ITEM, UNCHANGED AND STILL WAITING SINCE 20 NOV: the hub has work merged and NOT published.
+***   Re-measured by me this run rather than copied - see the HUB section of my run doc for the two
+***   tree hashes and the per-file split, which I counted myself. The hub lane has NOT claimed READY
+***   TO PUBLISH, so I ran no publish gate and am not asking you to act on a lane claim that does
+***   not exist. RECOMMENDATION: no publish this hour. The delta is documentation plus a small app.js
+***   and style.css change; it is not urgent and nothing in the game depends on it.
+***
 *** ===== TAKE THIS NEXT - THE 00:58 CT FIRING, 27 NOV 2026. CLEAN-HOUR COUNT = 2. =====
 *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 00:58:55 and 01:03:49
 *** CST. The firing and the machine date are BOTH 27 Nov this hour - no rollover split.

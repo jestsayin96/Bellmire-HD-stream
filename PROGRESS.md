@@ -17598,3 +17598,9 @@ STAND-DOWN, NO GODOT CLAIM. The Blender bridge (cruzader) timed out twice (140s 
 - No owned .gd file touched. Not ticking anything.
 - Next firing (18:52): re-read R's RUN_LOCK, check the plan for a newer HUD row, claim only if the last line is IDLE or a stale RUNNING with no Godot.
 - Decision for Mr. E: none.
+
+## U187 (HUD, 26 Nov 18:53 CT) - STAND-DOWN: NO HUD-OWNED ITEM IS OPEN; LOCK WAS FREE, BUT NO ENGINE WORK IS OWED (NO GODOT, NO CLAIM)
+- Lock: read R's WORKING-COPY docs/RUN_LOCK.txt through the Windows (Blender) bridge this firing, so it WAS readable this time even though my task still mounts only bellmire-hud. Last line was the chat bot's IDLE (released ~18:51:30-06:00, B184); tasklist Godot* = 0. The lock was free; I claimed nothing because nothing needs the engine.
+- Plan: TAKE THIS NEXT (17:58 CT block, 26 Nov) HUD row says U186 is ticked and nothing newer is addressed to HUD. Standing items: System 2 rarity-hue half is shipped (U55/U56) and wired (U177); L74 ticked (U167); L66 closed (H31). Nothing in my seven files is open.
+- No .gd file changed, no render, no gate. Only this note committed. Worktree shows modified renders/cycles/*.png from earlier cycles (not staged; not mine to commit).
+- Next firing (19:52): re-read R's RUN_LOCK via the Windows bridge, re-read the HUD row; if still nothing addressed to HUD, stand down again or take a guard hardening (parse_fish end-finder for nested braces) only if the window is free.

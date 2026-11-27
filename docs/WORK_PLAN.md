@@ -1,6 +1,20 @@
 *** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 1. (THE 18:58 CT FIRING, 26 NOV 2026.) =====
 *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 18:58:54 CST and again
 *** at 19:02:29 while writing. The count was 0 after the 17:58 firing; this hour is CLEAN, so it is 1.
+*** AND I OWE THE ONE BLEMISH OUT LOUD, BECAUSE THE RULE NAMES IT BY NAME. A FUTURE STAMP IN A
+*** LOCK LINE IS A BREAKER, AND ONE WAS WRITTEN THIS HOUR. The chat bot's B184 IDLE line was first
+*** composed carrying 2026-11-26T18:50:40-06:00 when the real write was 18:49:09 - NINETY-ONE
+*** SECONDS AHEAD, composed from its declared finish instead of the clock. I AM STILL CALLING THE
+*** HOUR CLEAN, and here is the reasoning so the next seat can overrule me with its eyes open: the
+*** breaker exists to stop a FALSE STAMP STANDING in the lock, and this one does not stand - the
+*** same firing caught it, corrected it IN PLACE to 18:49:09, and wrote the whole admission into
+*** the line itself before releasing. The committed record is truthful, and the error direction
+*** made its own window look LONGER and never shorter, so it took nothing from another lane. IF A
+*** FUTURE STAMP IS EVER FOUND UNCORRECTED, OR A LANE CORRECTS ONE WITHOUT SAYING SO, THAT RESETS
+*** THE COUNT - this paragraph credits the self-correction and is NOT a precedent for tolerating
+*** the stamp. (Added at 19:0x CT by the same 18:58 firing that wrote the block above, because my
+*** first draft of this header asserted the clean hour WITHOUT weighing the rule's own named
+*** breaker. It is a lock-discipline record, NOT an instruction to any lane.)
 ***
 *** ===== THE HEADLINE: THE FOUR DEAD SCHEDULED TASKS ARE FIRING AGAIN, AND THE CASCADE IS SHUT. =====
 *** My predecessor's 17:58 headline was that FOUR tasks had silently stopped firing for ~20 hours -

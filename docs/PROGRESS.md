@@ -4622,3 +4622,9 @@ NO CODE WIRING. No key added.
 - graves=3 IS NOT THE TERRAIN'S HONEST ANSWER ON BOTH SIDES. New town.gd `_grave_census` (gate-only tally): side -1 = 9 of 9 tries blocked by is_clear; side +1 = 3 placed, 6 blocked; road filter rejects none. The far side of the nave still places nothing. Not changed this run - placement against is_clear is a separate decision; reported for the lead.
 - VERDICTS: parse --quit-after 300 rc=0, 0 SCRIPT ERROR / 0 Parse Error. S143_KEEPER OK graves=3 height_m=1.85 max_travel=4.87 lantern=true hand_gap_m=0.0000 shots=4/4 clips idle 151 / walk 659 / interact-right 659. TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2034. TOWNWALK in_solid=0/17521 PASS. DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
 - Lock: claim 21:08:07, cap 21:33:07 computed first, declared 21:33:07, IDLE 21:18:53. No Twitch, zero bits.
+
+## C-226 (content, 27 Nov 2026 02:3x CST) - EPITAPH / DESCEND / CLEARED BATCH. NO 66th BODY, SO NO FEED ROW.
+- Row taken: TAKE THIS NEXT 01:58 block, CONTENT (:22): "THERE IS NO 66th BODY ... keep producing epitaphs, descend, cleared, hold the body count at 65." by_key = 65 = MB_NAME target; nothing to write against.
+- Added to data/lore_lines.json: epitaphs +12, descend +10, cleared +10, one `_note_c226`. Plain register, level-neutral (no worn/prosperous claim), no floor count.
+- VALIDATION OK: all four data files json.load; every pre-existing key and every pre-existing list entry unchanged (prefix-compared against the pre-edit copy).
+- Lock: none, I never run Godot. NO CODE WIRING; `_note_c226` is an expected zero-hit key.

@@ -23651,3 +23651,63 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - LOOK: renders/cycles/20261127_u202/busy_tavern_s150_1080.png - 150%, 2x2 lanes, Chronicle shows the lord's-fall line and "Zed_the_Tall rolls 3 to the house's 5 - the tavern keeps 120 gold." wrapped to two rows inside the vellum, nothing clipped.
 - Lock: claimed 09:54:16, declared finish 10:03, IDLE 09:58:13, inside claim+15 and before :07.
 - Next firing: re-read R's working RUN_LOCK and the HUD row. Open decision carried for Mr. E/supervisor: the HUD's in-game half of System 40 (subclass on party frames / leaderboard rows / feed).
+## B199 - 2026-11-27 09:45 CT - THE PRE-DECLARED 09:45 PUBLISH WAS NOT OWED, AND I MEASURED THAT INSTEAD OF TAKING IT
+- THE ITEM: my row's `!dice` was paid by B198 last hour, so the only thing standing in my name this
+  hour was the cascade publish the 07:58 block pre-declared for 09:45 ("ITS PUBLISH IS DUE 09:45").
+  B198 left me the right instruction and I followed it: MEASURE, DO NOT BUMP ON THE BLOCK'S WORD.
+- MEASURED on merged main 015ba646 (fetch + merge clean, fast-forward, no conflicts), not copied:
+    Delve.MB_NAME               = 66   (ONE declaration, scripts/delve.gd:449-485)
+    lore_lines.miniboss_feed.by_key = 66
+    SET DIFFERENCE EMPTY BOTH WAYS.
+    data/commands.json          = "The 66 elites" at BOTH sites - already correct.
+    bodies on disk              = 80 .glb = 66 named + 11 retired `_chibi` + 2 bestiary.gd creatures
+                                  (broodglut, lastcuff) + 1 unnamed: `badger`.
+  SO NOTHING WAS OWED AT MY END. The 08:09 correction barred the game build from naming the badger
+  until art closes the fit, and S153 stood down at 09:09 without naming it. Publishing 66 -> 67 would
+  have made my two files assert a name that does not exist in MB_NAME, and would have RED-ed
+  L14_TEST's miniboss check by my own hand. I DID NOT TOUCH THE COUNT. The cascade stays open at
+  67 bodies / 66 names ON PURPOSE, exactly as the block says, and my end of it is shut.
+- MY OWN INSTRUMENT WAS WRONG TWICE BEFORE IT WAS RIGHT, AND I AM REPORTING THAT FIRST:
+  1. My MB_NAME matcher found ZERO declarations. The regex demanded a type between `:` and `=`, and
+     the real line is `const MB_NAME := {`. A matcher that returns 0 and a file with no declaration
+     look identical from the outside - that is the whole danger. Fixed to `:?=`, then 66.
+  2. My drift matcher reported TWELVE unanswered commands, `dice` among them - a verb B198 landed and
+     L14 proved green an hour ago. The arms are `"dice":    out = ...` with the BODY ON THE SAME LINE
+     and my pattern anchored the colon to end-of-line, so it missed every single-line arm (48 of 76).
+     Corrected: 76 tokens, and the honest answer is below. THIRD CYCLE RUNNING that this seat's own
+     matcher was the wrong shape for the file it was pointed at.
+- DRIFT AUDIT, BOTH DIRECTIONS, after the matcher was fixed:
+    DIRECTION B (a data command nothing answers): **ZERO**. All 33 commands are answered, directly
+      or through one of the 31 aliases. order == commands keys, 33 == 33.
+    DIRECTION A (a code arm with no data entry): 19 raw, and 16 ARE MY OWN FALSE POSITIVES - dict
+      literals (`"seven": 7`, `"treasury": int(...)`, item maps) are indented `"tok":` exactly like a
+      match arm and my matcher cannot tell them apart. ONE GROUP IS REAL AND IT IS CORRECT AS IT
+      STANDS: `testbits`, `testsub`, `testpoints` at chatcmd.gd:216 are L17 local-only hooks that
+      `return ""` unless the id begins with `local_`. A Twitch viewer can never reach them. They MUST
+      NOT be published to data/commands.json or docs/COMMANDS.md - that would advertise a test hook
+      to chat. L14 checks direction B only, and that is the right asymmetry, not a hole.
+- GATES, battery 09:48:23 -> 09:49:0x on a tree MY LANE HAD NEVER GATED (this main carries S152's
+  System 39 engine half and 30 new hub beast icons):
+    parse --headless --quit-after 300  rc=0, 0 Parse Error, 0 SCRIPT ERROR. 3 ERROR lines = the same
+      pre-existing assets/graveyard/character-keeper.glb import-cache miss carried in every B193-B198
+      log. Not new, not mine.
+    COMMANDS_DOC OK wrote 33 commands, rc=0 - AND A GENUINE NO-OP: docs/COMMANDS.md md5 7d2dfaa0
+      before and 7d2dfaa0 after, 8791 bytes. The REAL GENERATOR reproduces B198's doc byte for byte,
+      so last hour's regenerated doc is confirmed as generator output and not a hand edit.
+    L14_TEST OK (27 checks) rc=0, zero fail.
+    TWITCH_PARSE OK (8 checks) rc=0.
+  tasklist Godot* = 0 after. Lock free at the claim (last line IDLE 09:09:30 game build S153);
+  claim 09:48:23, cap claim+25 = 10:13:23 computed first, declared ~2 min, released 09:49:2x - inside
+  both and clear of the HUD at :52.
+- NO EDIT TO ANY OF MY THREE FILES, and that is the delivery. scripts/chatcmd.gd, data/commands.json
+  and docs/COMMANDS.md are byte-identical to main. My diff is PROGRESS.md and the battery log.
+- NOTHING OWED TO THE GAME BUILD LANE in twitch_eventsub.gd this cycle. The reply contract is
+  untouched: twitch_reply(user_login, text), no @name, no rate limiting.
+- No Twitch test of any kind. eventsub autostarted on the four headless runs and refreshed its own
+  tokens as it always does; it SENT NO MESSAGE, redeemed nothing, cheered nothing, ZERO BITS, and no
+  account was driven by me.
+- Next chat bot (10:45): the cascade publish is STILL the only thing in my name and it is STILL
+  conditional - re-measure MB_NAME against by_key first, both directions, and bump ONLY if the game
+  build has actually named the badger. Carried for the supervisor, not for me to take: the `!bestiary`
+  HARD COLLISION (System 41 re-specs a shipped verb) was routed up at 07:58 and no block newer than
+  08:09 has answered it. I am not guessing at it.

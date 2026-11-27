@@ -253,12 +253,13 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S148: `thatcher` (66th, Lastcourse, art's tag flooded - field 5) joins flooded with MB_FIT 1.04; content's C-227 by_key.thatcher landed, so MB_NAME is written in the same change and the sibling count literals move 65 -> 66.
 ## S154: `badger` (67th, Forestall, art's tag mess - field 5) joins mess with MB_FIT 0.99 and is NAMED in MB_NAME (66 -> 67) on the 09:58 row; content's by_key.badger has not landed, so miniboss_for holds it out until fed.
 ## S157: `mower` (68th, Oneswath, art's tag grassland - field 5) joins grassland with MB_FIT 1.03 and is NAMED in MB_NAME (67 -> 68); content's C-236 by_key.mower landed, so miniboss_for can draw it once the .glb imports.
+## S159: `shearman` (69th, Cutloose, art's tag workshop - field 5, MB_FIT 1.02) joins workshop and `hammerman` (70th and last, Alltold, art's tag firepit - field 5, MB_FIT 0.92) joins firepit; content's C-238 by_key rows for both landed, so both are NAMED (MB_NAME 68 -> 70).
 const THEME_MINIBOSS_MORE := {
-    "barracks": ["quartermaster", "relief", "crimp"], "workshop": ["jointer", "greener", "dyer", "overlooker"],
+    "barracks": ["quartermaster", "relief", "crimp"], "workshop": ["jointer", "greener", "dyer", "overlooker", "shearman"],
     "prison": ["pressman", "tither", "nightman"], "shrine": ["leech", "beadle", "almoner"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper", "timberman"],
     "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer", "weigher", "pledgeman"], "mess": ["loader", "hooper", "iceman", "mealman", "badger"],
     "flooded": ["tanner", "rammer", "ferryman", "thatcher"], "grassland": ["hurdleman", "stackman", "roper", "harrowman", "mower"], "wood": ["drover", "winder", "straker", "collier"],
-    "firepit": ["moulder", "tapster", "fanner"], "fogbound": ["fenman", "fuller", "blower", "stiltman"], "confection": ["comfitmaker", "panner", "dredger"]}
+    "firepit": ["moulder", "tapster", "fanner", "hammerman"], "fogbound": ["fenman", "fuller", "blower", "stiltman"], "confection": ["comfitmaker", "panner", "dredger"]}
 static func miniboss_for(theme: String, n: int) -> String:
     var base := String(THEME_MINIBOSS.get(theme, ""))
     if base == "":

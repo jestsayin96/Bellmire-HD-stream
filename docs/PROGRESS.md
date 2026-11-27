@@ -4781,3 +4781,33 @@ TAKE THIS NEXT (13:58 block) GAME BUILD row: "(1) WIRE CONTENT'S `spec_text` AND
 - LOOKED at 1400x900 headless render (route-mocked snapshot, 3 heroes): Aldric card shows "Guardian", Brin (spec "") shows no line, hostile spec_name "<img src=x onerror=alert(1)>" rendered as literal text, img[src=x] count = 0, 0 page errors, 0 dialogs. NUMBER: 3 spec elements for 3 heroes' 2 specialized cards + 1 opened sheet; 0 injected nodes.
 - innerHTML still exactly 2 page-owned sites (app.js:255, :301); no outerHTML/insertAdjacentHTML/document.write/eval/new Function. node --check OK.
 - Not run: ?state=* / ?mock=chronicle/crowd sweep beyond the hostile test; live-dot colour unchanged (no live-dot change this run).
+
+## D-cycle - S159 the 69th AND the 70th NAMED - shearman/Cutloose + hammerman/Alltold, 2026-11-27 15:09-15:2x CST (game build)
+TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) THEN NAME THE 69th - `shearman` / \"Cutloose\"
+... ONLY AFTER CONTENT'S `by_key.shearman` IS ON MAIN ... (3) THE 70th, `hammerman` / \"Alltold\" ... SAME RULE". (1) was S158.
+- FOUND IT THIS WAY: content's C-238 landed BOTH feed rows on main in the 14:58 merge (04488ad7) - lore_lines.json
+  miniboss_feed.by_key.shearman (:15511) and .hammerman (:15550), parent `by_key` read at :13292, not a bare substring.
+  So both were named in the same change; the whole job is four rows and one import, well inside the cap, not split.
+- delve.gd MB_FIT: shearman 1.02, hammerman 0.92 - art's renders/art/minibosses/_fit_report.json pairs.<key>.ratio,
+  copied not re-derived (fits_frame true, margin_x 0.12 both). MB_NAME 68 -> 70: "shearman": "Cutloose",
+  "hammerman": "Alltold" - titles read off art's CANON (minibosses.py:26814 / :27212), matching C-238's note.
+- dungeon_hd.gd THEME_MINIBOSS_MORE under ART'S field-5 tags: shearman -> workshop, hammerman -> firepit.
+- tools/_s51_names.gd literal 68 -> 70. shearman.glb.import + hammerman.glb.import written by --headless --import.
+- PUBLISHED COUNT NOT TOUCHED - still 68; the 68 -> 70 bump is the chat bot's step at :45. The cascade now reads
+  70 bodies / 70 names / 70 feed / 68 published, which is the right order (names never ahead of feed).
+- GATES (verdict lines): import rc 0; parse --quit-after 300 rc 0, 0 Parse Error / 0 SCRIPT ERROR. S51_NAMES OK 179
+  checks (S131 theme arm: drawable 70, MB_NAME - theme = [], theme - MB_NAME = []). OFFFLOOR_VERDICT OK 0 of 1985.
+  TWITCH_PARSE OK (8 checks) - its one ERROR line is COMMANDS_DATA MINIBOSS COUNT 68 vs 70, the chat bot's :45 step,
+  exactly as the 68 one was at S158. DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/17934 (0.000%) raid_in_solid=0/6126
+  (0.000%) PASS (re-run on its own so its verdict line was captured whole).
+- LOOKED AT IT: tools/_d96_fit.gd windowed 1920x1080, `key=shearman:workshop` and `key=hammerman:firepit`:
+  D96_FIT OK 5 checks each - own model (shearman.glb / hammerman.glb) loaded, 2.50m = 1.02 x hero and 2.25m = 0.92 x
+  hero against art's 1.02 / 0.92, arrive line with the body present, fall line on the kill ("He took everything you
+  gave him. He gave none of it back."). Shots renders/cycles/d96/shearman.png + hammerman.png, both read by eye: each
+  stands on its own theme floor beside the knight with its CANON name over its head; the shears read in the
+  shearman's hand and the hammerman's chest plate shows its ring of pits. OBSERVATION FOR ART, NOT A DEFECT I CHARGE:
+  under this shot's sun both bodies render very near white (smock / torso blow out) - worth a glance on art's luma pass.
+- ONE IDEA EACH, NOT YET BEHAVIOUR: shearman = the lines between the party are cut (nothing one delver does reaches
+  another); hammerman = banks every blow and pays it back on whoever put in most. Both are reskins with feed lines
+  today; the delve-side behaviour is a separate row if the team lead wants it.
+- No Twitch test, nothing redeemed, nothing cheered, ZERO BITS.

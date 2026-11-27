@@ -1707,3 +1707,15 @@ IDLE 2026-11-27T13:55:25-06:00 - HUD U206: split-mode vellum probe ran windowed 
 
 RUNNING 2026-11-27T14:08:32-06:00 (game build S158: merge + TAKE THIS NEXT item. claim 14:08:32, cap claim+25 = 14:33, DECLARED FINISH 14:30. Lock free: last line IDLE HUD 13:55:25, tasklist Godot*=0. Zero bits. (game build))
 IDLE 2026-11-27T14:16:31-06:00 - game build S158: C-237 spec_text wired into roster.gd (spec_blurb, 30 placeholder path blurbs deleted). 69th NOT named: by_key.shearman ABSENT on main (68 keys), so no MB_NAME/MB_FIT. parse 0, S158_SPECTEXT OK 30 (red-proven FAIL 30), S155_SPEC OK, S156_WAYS OK 16, TWITCH_PARSE OK 8, OFFFLOOR 0/2039, DELVE_TEST OK 0 SCRIPT ERROR, TOWNWALK PASS. Claim 14:08:32, cap 14:33, declared 14:30, released early. tasklist Godot*=0. ZERO BITS. (game build)
+
+RUNNING 2026-11-27T14:42:17-06:00 (QA tester: headless whole-project parse, expected finish 14:46, cap 14:50)
+IDLE 2026-11-27T14:42:42-06:00 - QA tester: headless parse, flagged=25. tasklist Godot*=0. Zero bits. (QA tester)
+
+RUNNING 2026-11-27T14:48:20-06:00 (chat bot B204 four-gate battery on W6 for the published miniboss bump 67->68, claim 2026-11-27T14:48:20-06:00, cap claim+25, DECLARED FINISH 2026-11-27T14:51:30-06:00 - hard release before 14:52 to clear the HUD's :52 slot. Lock free: last line IDLE QA tester 14:42:42, tasklist Godot*=0. Headless, no Twitch sends, zero bits. (chat bot)
+IDLE 2026-11-27T14:49:13-06:00 - chat bot B204: THE PUBLISHED MINIBOSS COUNT IS BUMPED 67 -> 68 and the cascade's published half is SHUT. I re-measured origin/main myself (4e6eee97): MB_NAME=68 brace-matched at delve.gd:453, by_key=68, UNNAMED=[] GHOST=[]; shearman and hammerman are named NOWHERE and fed NOWHERE, so the target was 68, NOT 69. Four gates GREEN: COMMANDS_DOC wrote 36 commands (real generator), parse rc=0, L14_TEST OK 27 checks, TWITCH_PARSE OK 8 checks. Claim 14:48:20, declared 14:51:30, released early. tasklist Godot*=0. No Twitch message, redeemed nothing, cheered nothing, ZERO BITS. (chat bot)
+
+RUNNING 2026-11-27T14:54:01-06:00 (HUD U207 vellum probe at 100/125/150% windowed, expected finish 15:02, cap 15:09)
+
+IDLE 2026-11-27T15:01:33-06:00 - HUD U207: vellum probe re-run at 100/125/150% windowed; panes would not raise in this tree (mode=off, vellum runs=0), so the vellum check did not execute; findings in PROGRESS.md. tasklist Godot*=0. (HUD)
+RUNNING 2026-11-27T15:09:01-06:00 (game build: merge + TAKE THIS NEXT item, claim 2026-11-27T15:09:01-06:00, cap claim+25 = 15:33, DECLARED FINISH 15:30 - release by :40 regardless. Lock free: last line IDLE HUD 15:01:33, tasklist Godot*=0.) (game build)
+IDLE 2026-11-27T15:19:18-06:00 - game build S159: the 69th AND 70th NAMED (shearman/Cutloose workshop MB_FIT 1.02, hammerman/Alltold firepit MB_FIT 0.92, MB_NAME 68 -> 70). Found content's C-238 by_key.shearman AND by_key.hammerman BOTH ON MAIN (14:58 merge), so named both. Published count NOT touched (68; chat bot's :45 step). Gates GREEN; D96_FIT OK x2, looked at both shots. Claim 15:09:01, cap 15:34, declared 15:30, released early. tasklist Godot*=0. Zero bits. (game build)

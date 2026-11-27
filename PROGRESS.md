@@ -1,3 +1,102 @@
+## B194 - 27 Nov 2026, 04:45 CT firing. I DID NOT PUBLISH 65 -> 66, BECAUSE THE CONDITION THE ROW SETS IS NOT MET ON THE MERGED TREE - AND THE REASON IS A STRUCTURAL ONE THE ROW DOES NOT ACCOUNT FOR.
+
+THE ROW. The team lead's 03:58 CHAT BOT row: "PUBLISH 65 -> 66, BUT ONLY AFTER MB_NAME IS 66", and
+plainly, in the same row: "IF MB_NAME IS STILL 65, THE GAME BUILD HAS NOT LANDED ITS STEP - DO NOT
+BUMP THE COUNT, run your gates, and say so."
+
+I MEASURED IT MYSELF ON THE MERGED TREE, BRACE-MATCHED, ANCHORED ON THE REAL DECLARATION
+(`const MB_NAME := {` at scripts/delve.gd:448, single declaration, no duplicates), not copied from
+this prompt and not copied from another lane's write-up:
+    origin/main a147ee3e, merged into W6 `chatbot` as a fast-forward this run:
+        Delve.MB_NAME        = 65 keys. Last two: fanner, mealman. NO `thatcher`.
+        miniboss_feed.by_key = 66 keys.
+        by_key - MB_NAME     = ["thatcher"].   MB_NAME - by_key = [] (empty).
+        data/commands.json   = "65 elites" at BOTH sites. docs/COMMANDS.md = "The 65".
+SO THE CONDITION IS NOT MET AND I MADE NO EDIT TO ANY OF MY THREE FILES THIS HOUR.
+
+BUT THE ROW'S INFERENCE IS WRONG, AND THIS IS THE FINDING OF THE RUN. "MB_NAME is still 65" does
+NOT mean the game build has not landed its step. IT HAS. I went and looked at the lane's own branch
+instead of inferring from main:
+    origin/laptop 74a31ef9 - "S148: wire and name the 66th - thatcher MB_FIT 1.04, flooded row,
+    MB_NAME Lastcourse (65 -> 66 = by_key 66), import thatcher.glb, count gates to 66, new S148
+    gate". I brace-matched MB_NAME on THAT tree too: 66 keys, `thatcher` present, last two
+    mealman, thatcher. docs/RUN_LOCK.txt IDLE 2026-11-27T04:18:06-06:00 is the same work.
+THE STEP IS DONE. IT IS SIX MINUTES OLDER THAN MY SLOT AND IT IS ON THE WRONG BRANCH TO HELP ME.
+
+WHY THAT IS STRUCTURAL, NOT A MISS BY ANYONE. Lanes push to their own branches; main gains their
+work only at the team lead's :58 merge. The game build fires at :07 and this hour relaunched at
+04:15 and landed at 04:18 - AFTER the 03:58 merge that built the tree I read. So a body named at
+:07-:18 cannot be in my merged tree at :45 of the SAME hour; it arrives at :58 and I publish it at
+:45 of the NEXT hour. The row says "Both fire inside this hour in that order. Do not take step 3
+before step 2 has landed" - the ordering is right and the hour is not. Last hour proves the real
+cadence: S146 named mealman at 02:17, the 03:58 merge carried it, and B193 published it at 03:48.
+THE CASCADE IS A ONE-HOUR PIPELINE, NOT A ONE-HOUR ROUND TRIP, AND NOTHING IS WRONG WITH IT.
+
+THE GATES I RAN UNDER THE CLAIM, ON THE MERGED TREE a147ee3e (lock free, machine idle):
+  1. parse  --headless --path W6 --quit-after 300  rc=0, 0 Parse Error, 0 SCRIPT ERROR. 3 ERROR
+     lines, all one pre-existing assets/graveyard/character-keeper.glb import-cache miss - the
+     IDENTICAL 3 lines are in B193's own parse log, so not new and not mine.
+  2. tools/_commands_doc.gd  -> COMMANDS_DOC OK wrote 32 commands, rc=0, AND IT WAS A TRUE NO-OP:
+     md5 docs/COMMANDS.md 2ba1e0a1 BEFORE the generator, 2ba1e0a1 AFTER. The doc already matches
+     the data file byte for byte, which is the no-op confirmation the owed list asks for - proven
+     by the real generator's own bytes, not by an emulation.
+  3. tools/_l14_test.gd -> L14_TEST FAIL 1 (27 checks). THE ONE RED IS THE PRE-DECLARED CASCADE
+     STEP AND NOTHING ELSE: check 27 "no COMMANDS_DATA guard arm fired on the load" reads
+     (2 fired: ["MINIBOSS COUNT", "MINIBOSS UNNAMED"]).
+         MINIBOSS COUNT  - published 65, feed rows 66. This half is MINE and it is the one the row
+                           holds back for an hour. My edit is ready and I did not make it.
+         MINIBOSS UNNAMED - ["thatcher"]: one body draws a feed with no MB_NAME row. This half is
+                           NOT mine at all and is already paid on origin/laptop; it empties by
+                           itself at the :58 merge.
+     So after the 04:58 merge main carries MB_NAME 66 / by_key 66 / published 65, and L14_TEST
+     stays red on the COUNT arm alone until my 05:45 publish. That is the cost the row chose
+     knowingly and I am naming it rather than quietly taking it.
+  4. tools/_twitch_parse.gd -> TWITCH_PARSE OK (8 checks), rc=0. ONE DIFFERENCE FROM B193 THAT I
+     WILL NOT ROUND OFF: B193 reported this gate with an EMPTY stderr. MINE IS NOT EMPTY - it
+     carries both COMMANDS_DATA lines (MINIBOSS COUNT, MINIBOSS UNNAMED), because the loader runs
+     on its load too. The gate still passes all 8 checks; the stderr is a consequence of the open
+     cascade, not of the gate. When the cascade shuts the stderr empties again.
+
+DRIFT CHECKED BOTH DIRECTIONS, FILE-ONLY, AND I FIXED MY OWN MATCHER RATHER THAN REPEATING ITS
+ARTEFACT. data/commands.json: json.load clean, 500 leaves, 32 entries, `order` 32 and its set is
+exactly the command-key set.
+    Direction A - every one of the 32 published entries is literally answered in chatcmd.gd: 0
+    missing. Resolved against match arms AND aliases: 0 published keys unreachable.
+    Direction B - 48 `match verb:` arms; every arm is a published key, a declared alias, or one of
+    the three local-only test verbs (testbits/testsub/testpoints, gated to local_* ids). 0 orphans.
+    LAST HOUR MY MATCHER FLAGGED `testbits` ALONE AND I CALLED IT AN ARTEFACT; this hour I wrote
+    the matcher to resolve aliases and name the local-only set explicitly, so it flags nothing and
+    the artefact is gone rather than excused.
+    Aliases: 31 declared, 0 shadowed by a command key, 0 declared on two commands. 4 of them
+    (armor, sheet, spotlight, watch) have NO literal in chatcmd.gd and that is CORRECT, not drift -
+    canonical() routes aliases out of COMMANDS_DATA, which is why the loader guards ALIAS
+    UNUSABLE/SHADOW/CLASH at all; all three are clean.
+
+HOUSEKEEPING. The owed list's item 4 (_b2_ask.gd at the worktree root, then delete it and the
+.b2_* logs) is historically CLOSED - neither the script nor any .b2_* log exists in W6. I TRIED to delete
+my own .b194_battery.log AND COULD NOT: rm in a connected folder returns "Operation not permitted" until Mr. E approves deletion, and I will NOT raise a permission prompt on his machine while he is away for one log file. It stays, named here, alongside ~45 untracked _b1xx_*.log files from earlier cycles sitting at
+the worktree root; they are untracked and harmless, they are this lane's own litter, and I am
+naming them rather than mass-deleting another cycle's evidence unasked.
+
+THE CLAIM, AND A SELF-CHARGE I WITHDREW IN THE SAME MINUTE I WROTE IT. Claim
+2026-11-27T04:48:24-06:00, cap claim+25 = 05:13:24 computed first, declared finish 04:52:30.
+Engine work ended 04:48:48. I released at 04:50:55 - INSIDE the declaration by 95 seconds and
+clear of the HUD's :52. My IDLE line nonetheless opens a sentence "I OWN A LOCK FAULT" claiming I
+had run past my declared finish: I WROTE THAT FROM THE REMEMBERED SHAPE OF THE RUN AND THEN READ
+THE CLOCK, which is the exact fault this house has charged twice today, and the clock said I was
+early. I appended a NOTE line to docs/RUN_LOCK.txt in the same minute withdrawing it, before any
+other lane could read it. The lock reads IDLE + NOTE; nothing else in that line is withdrawn.
+Lock was free at the claim (last line IDLE 2026-11-27T04:18:06-06:00, game build S148) and
+tasklist Godot*/obs64/Marvel = 0 checked live at 04:48:02 and again at 04:50:55.
+
+NOTHING IS OWED FROM THE GAME BUILD LANE IN twitch_eventsub.gd BY THIS RUN. I asked for nothing
+and the contract is untouched: chatcmd.gd still emits twitch_reply(user_login, text) with no @name
+and no rate limiting.
+
+
+NO TWITCH ACTION. eventsub autostarted on the headless runs and refreshed its own tokens as
+always. It SENT NO MESSAGE, redeemed nothing, cheered nothing, ZERO BITS, and I drove no account.
+
 ## B193 - 27 Nov 2026, 03:45 CT firing. THE CASCADE IS PAID AT MY END 64 -> 65 AND ALL FOUR OWED GATES ARE GREEN - AND THE PROOF THAT MY EDIT TOUCHED NOTHING ELSE CAME FROM A FILE IN ANOTHER REPO, NOT FROM MY OWN SAY-SO.
 
 THE ROW, AND I CHECKED ITS CONDITION ANYWAY. The team lead's 02:58 block made the row unconditional and

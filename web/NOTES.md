@@ -1060,3 +1060,8 @@ TAKE THIS NEXT (03:58 CT block, 27 Nov) gave HUB no new row: "no publish is owed
 Measured: fast-forwarded to origin/hub 6f6f6dab (three plan syncs only); `git diff origin/hub -- web/ docs/HUB_SECURITY.md` was empty before the merge, so web/ is byte-identical to origin/hub. node --check app.js OK. innerHTML at app.js:255 and :301 only (page-owned); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (two comment mentions). CSP meta present (1).
 Hostile-name test and ?state checks not owed (web/ code unchanged); no screenshot, no new PROGRESS number. Live-dot colour unchanged from shipped. NOT claiming READY TO PUBLISH; no publish gate owed.
 Untracked web/tools/__pycache__/ is new: named here, not mine to delete on this machine.
+
+## 27 Nov 17:4x CT - hub lane: scratch file out of the published tree
+- `web/tools/_to_delete/_beast_dex_block.txt` did NOT belong in `web/` (it would have shipped to gh-pages). It is a fallback dump `make_bestiary.py` writes when the BEAST_DEX markers are absent, and it was STALE and WRONG: 85 pairs (incl. ability ids like "order", "blink", "wring") with no `badger/Forestall`, against the live block in app.js (67 chamber-holders, 274896 bytes). Not referenced by any served file.
+- Moved, not deleted: now untracked at `_hub_scratch/_beast_dex_block_85_stale_nov27-1439.txt` in the worktree root (outside `web/`). `git rm` of the tracked copy; empty `_to_delete/` dir gone.
+- app.js / index.html / style.css byte-identical to origin/main. innerHTML in app.js still exactly :255 and :301 (page-owned literals); no outerHTML / insertAdjacentHTML / document.write / eval / new Function.

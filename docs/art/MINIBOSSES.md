@@ -4757,8 +4757,8 @@ tripod read is fault 1 and everything else is smaller than it.
 |---|---|---|---|---|---|---|
 | `shearman` | Cutloose | 2.51 | workshop | **IT CUTS WHAT JOINS YOU** - it does not pick a hero and takes nothing off anybody. It cuts the lines BETWEEN them: no heal, no shield thrown over a neighbour, no covering a man who is down, no aura, no shared guard. Every one of you is at full strength and completely alone, four people fighting in the same room instead of one party | 0.30 | 1.60 |
 
-**THE 69th READS AS A PAIR OF OPEN SHEARS AT HERO SCALE - PASS 3 CLOSED IT.**
-Three passes, 27 Nov 12:35-13:08 CT. Gate GREEN, ratio **1.02** (2.51 m against
+**THE 69th READS AS A PAIR OF OPEN SHEARS WITH A CORD CUT IN THE JAWS.**
+Four passes, 27 Nov 12:35-13:06 CT. Gate GREEN, ratio **1.02** (2.51 m against
 a hero at 2.45), 3 proving views, `seen` 1.0 on all three, `fits_frame` true,
 `frame_edge` zero on all four sides of all three views, blank check 0 failures
 over 207 files, 811 faces, 4 meshes, span 1.50, CORRIDOR-SAFE and UNDER-LID.
@@ -4770,8 +4770,10 @@ BOTH blades are drawn against air instead of one against the torso, and at hero
 scale it is now plainly a pair of open shears.
 The **Beadle test passes** - front carries the face oval and a 0.42 x 0.74 MID
 apron mass, the back has neither plus the cord bundle on the right hip.
-**ONE STANDING FAULT AND IT IS THE WORST KIND:** the cord in the jaws reads as
-a HOOK, which is the Gaoler's cue. Next change is one thing - straighten both
-cord pieces across the jaw so the GAP is what the eye lands on, or take the jaw
-cord off entirely (the two pieces on the floor already say it and they read).
+**PASS 4 CLOSED THE LAST BIG ONE.** At pass 3 the cord in the jaws read as a
+HOOK - the Gaoler's cue, so worse than invisible - because both pieces ran
+along the jaw's NORMAL, straight into the camera, and occluded each other into
+one bent rod. Moved into the SHEAR PLANE, bridging the mouth, the cut becomes a
+GAP IN A CROSSBAR and it reads. Still open and recorded: a stiff right arm,
+over-bright eyes, and a gaunt plain man under a large instrument.
 See docs/art/SHEARMAN_THE_69th.md.

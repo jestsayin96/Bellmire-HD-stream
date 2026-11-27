@@ -1,11 +1,9 @@
-# THE SHEARMAN - "Cutloose", the 69th. IT READS AS A PAIR OF OPEN SHEARS AT
-# HERO SCALE, AND ONE OBJECT ON IT STILL READS AS THE WRONG THING.
+# THE SHEARMAN - "Cutloose", the 69th. IT READS AS A PAIR OF OPEN SHEARS WITH
+# A CORD CUT IN THE JAWS, AT HERO SCALE.
 
-27 Nov 2026, 12:35-13:08 CT. **Three passes, and passes 1 and 2 are the
-finding.** Passes 1 and 2 both carried a full green sheet and both failed the
-only test that matters; pass 3 closed it. The body is WIREABLE with one named
-standing fault - see WIRING at the bottom, and read THE STANDING FAULT first,
-because it is an object that reads as a different creature's cue.
+27 Nov 2026, 12:35-13:06 CT. **Four passes, and passes 1, 2 and 3 are the
+finding.** Three of the four carried an IDENTICAL full green sheet and two of
+those three were wrong. The body is WIREABLE - see WIRING at the bottom.
 
 | key | title | h | theme | THE IDEA | wear | span |
 |---|---|---|---|---|---|---|
@@ -66,20 +64,27 @@ Pass 3 put the whole instrument ABOVE THE SHOULDER LINE, where the only body
 at those heights is the head and cap (|x| <= 0.232) and the inner blade clears
 them by 0.17. Both blades against air; the pair reads as a pair.
 
-### THE STANDING FAULT - READ THIS ONE FIRST
+### PASS 4 - THE CORD READ AS A HOOK, AND A HOOK IS THE GAOLER'S CUE
 
-**THE CORD IN THE JAWS READS AS A HOOK, AND A HOOK IS THE GAOLER'S CUE.** This
-is now the worst thing on the body and it is worse than being invisible,
-because it points at a different creature. Only one of the two cord pieces
-survives the view (the other hides behind the near blade), it is drooped, and a
-single bent tan rod hanging in an open jaw is a hook. The "cut, with a gap
-between the halves" statement never lands in any view. **THE NEXT CHANGE, AND
-IT IS ONE THING: straighten both cord pieces and set them across the jaw so the
-GAP between them is what the eye lands on - or take the cord off the body
-entirely.** The two pieces on the FLOOR already carry the same statement and
-they read correctly, so removing the jaw cord costs less than it looks.
+At pass 3 the body read as shears and the one object inside the jaws read as a
+**HOOK** - which is worse than invisible, because it points at a different
+creature in this same file. **THE CAUSE WAS A DIRECTION, NOT A SHAPE:** the two
+cord pieces ran along the jaw's NORMAL, almost straight into the front camera,
+so they projected onto the same short stub, the near one occluded the far one,
+and what survived was a single bent tan rod hanging in an open mouth.
 
-### THE REST OF THE FAULT LIST, HONEST
+**PASS 4 PUT THE CORD IN THE SHEAR PLANE**, bridging the mouth from one inner
+edge to the other, and took the droop out. That is the one direction in which
+the front camera sees the cord's whole length, and it turns the CUT into a GAP
+IN THE MIDDLE OF A CROSSBAR - which is the thing the eye is meant to land on.
+**I looked at `hero_front.png` again and it reads: two short bars bridging the
+open jaws with a clear gap between them.** The hook is gone and the idea is now
+in the silhouette rather than only in the idea text.
+
+A straight bar in two pieces reads as CUT; a curved one reads as SLACK. Worth
+keeping.
+
+### THE REST OF THE FAULT LIST, HONEST AND STILL OPEN
 
 2. **THE RIGHT ARM IS A STRAIGHT BAR WITH A HARD ELBOW.** Stiff.
 3. **THE EYES ARE TOO BRIGHT AND TOO BIG.** Two white dots on a body whose
@@ -115,13 +120,16 @@ the Beadle cost. The two cut pieces on the floor also read, in both views.
 - **PASS 2** - blades to 0.95 m, jaw to 0.300 (35 degrees), instrument stood up
   at his right side, roll down to 0.20. **Real at full frame, still a sword at
   hero scale.** This is the pass that proved the angle was not the cause.
-- **PASS 3** - the whole instrument above the shoulder line. **Closed it.**
+- **PASS 3** - the whole instrument above the shoulder line. **Closed the
+  sword read.**
   **THE LEFT ARM HAD TO COME WITH IT AND THAT IS A SECOND CHANGE, SAID PLAINLY
   RATHER THAN HIDDEN:** with the bow at shoulder height a left hand on it must
   reach up and across the man's own face, which is a worse fault than the one
   being fixed, so the left arm now hangs. It also killed pass 2's flat-plate
   arm - but that is a SIDE EFFECT OF A FORCED CHANGE and it is not evidence
   that the forced change was right.
+- **PASS 4** - the cord moved out of the jaw's normal and into the shear
+  plane. **Closed the hook read.** One change, one render, one look.
 
 ### AN INSTRUMENT NOTE: A NUMBER AND A PICTURE DISAGREED AND THE PIPELINE WAS
 ### RIGHT BOTH TIMES

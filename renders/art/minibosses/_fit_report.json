@@ -12486,45 +12486,45 @@
    "visibility": {
     "front": {
      "creature": {
-      "alone": 27077,
-      "vis": 27077,
-      "delta": 31790,
+      "alone": 27127,
+      "vis": 27127,
+      "delta": 31591,
       "seen": 1.0
      },
      "hero": {
-      "alone": 43675,
-      "vis": 43675,
-      "delta": 53530,
+      "alone": 43676,
+      "vis": 43676,
+      "delta": 56809,
       "seen": 1.0
      },
      "proves": true
     },
     "side": {
      "creature": {
-      "alone": 16718,
-      "vis": 16718,
-      "delta": 23057,
+      "alone": 16294,
+      "vis": 16294,
+      "delta": 22836,
       "seen": 1.0
      },
      "hero": {
-      "alone": 37765,
-      "vis": 37765,
-      "delta": 41866,
+      "alone": 37753,
+      "vis": 37753,
+      "delta": 41502,
       "seen": 1.0
      },
      "proves": true
     },
     "back": {
      "creature": {
-      "alone": 26367,
-      "vis": 26367,
-      "delta": 34613,
+      "alone": 26451,
+      "vis": 26451,
+      "delta": 33784,
       "seen": 1.0
      },
      "hero": {
-      "alone": 44040,
-      "vis": 44040,
-      "delta": 48277,
+      "alone": 44018,
+      "vis": 44018,
+      "delta": 48258,
       "seen": 1.0
      },
      "proves": true
@@ -12552,12 +12552,12 @@
    },
    "ground": {
     "front": {
-     "plane_px": 194560,
-     "shadow_px": 2502,
-     "mean": 0.4058,
+     "plane_px": 187720,
+     "shadow_px": 2306,
+     "mean": 0.4338,
      "max": 0.7077,
      "error": null,
-     "rim_filled_px": 2600,
+     "rim_filled_px": 2609,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -12566,12 +12566,12 @@
      }
     },
     "side": {
-     "plane_px": 197600,
-     "shadow_px": 2395,
-     "mean": 0.3847,
-     "max": 0.7103,
+     "plane_px": 193040,
+     "shadow_px": 2197,
+     "mean": 0.4142,
+     "max": 0.708,
      "error": null,
-     "rim_filled_px": 2132,
+     "rim_filled_px": 2094,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -12580,12 +12580,12 @@
      }
     },
     "back": {
-     "plane_px": 193800,
-     "shadow_px": 2523,
-     "mean": 0.407,
-     "max": 0.708,
+     "plane_px": 186960,
+     "shadow_px": 2352,
+     "mean": 0.4351,
+     "max": 0.7077,
      "error": null,
-     "rim_filled_px": 2926,
+     "rim_filled_px": 2728,
      "shadow_edge": {
       "top": 0,
       "bottom": 0,
@@ -12596,7 +12596,7 @@
    },
    "ground_from": "measured this run",
    "proving_views": 3,
-   "measured_at": "2026-11-27T18:56:55+00:00",
+   "measured_at": "2026-11-27T19:01:26+00:00",
    "measured_by": "tools/art/minibossfit.py",
    "views_from": "recorded on the row when it was rendered",
    "air_px": {
@@ -12605,8 +12605,8 @@
      151
     ],
     "side": [
-     181,
-     184
+     199,
+     201
     ],
     "back": [
      151,

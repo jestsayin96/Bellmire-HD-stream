@@ -27015,12 +27015,25 @@ def shearman():
     # and reads as being IN the jaws rather than resting on a blade. The free
     # ends drop; the cut ends do not. It is MID, not pale, because the pale is
     # the opening.
-    _M = BOW + AX * 0.600
+    # *** PASS 4. THE CORD RAN ALONG THE JAW'S NORMAL AND THAT IS WHY IT READ
+    # AS A HOOK. *** At pass 3 the two pieces ran along NRM - almost straight
+    # into the front camera - so they projected onto the same short stub, one
+    # occluded the other, and what was left was a single bent tan rod hanging
+    # in an open jaw. THAT IS A HOOK, AND A HOOK IS THE GAOLER'S CUE: the fault
+    # was not that the cord was invisible, it was that it read as a different
+    # creature. A cord that has to be seen being cut must lie IN THE SHEAR
+    # PLANE, bridging the mouth from one inner edge to the other, because that
+    # is the one direction in which the front camera sees its whole length -
+    # and then the CUT is a gap in the middle of a crossbar, which is the thing
+    # the eye is meant to land on. The droop is gone too: a straight bar in two
+    # pieces reads as cut, a curved one reads as slack.
+    _M = BOW + AX * 0.700
+    _EDGE = 0.022 + SPLAY * (0.700 / LEN)   # the inner edges at this height
     for _s in (-1, 1):
-        _far = _M + NRM * (_s * 0.420) + Vector((0.0, 0.0, -0.095))
-        _mid = _M + NRM * (_s * 0.245) + Vector((0.0, 0.0, -0.030))
-        _cut = _M + NRM * (_s * 0.055)
-        _cd = L.tube([_far, _mid, _cut], [0.024, 0.029, 0.032], 7)
+        _out = _M + PERP * (_s * _EDGE)
+        _cut = _M + PERP * (_s * 0.072)
+        _cd = L.tube([_out, (_out + _cut) * 0.5, _cut],
+                     [0.030, 0.031, 0.032], 7)
         P.raw(_cd, 'body', vcol=[MID] * len(_cd[0]))
     _seg("cord")
 

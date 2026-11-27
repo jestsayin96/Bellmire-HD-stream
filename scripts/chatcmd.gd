@@ -2502,10 +2502,20 @@ static func commands() -> Dictionary:
             _guard_faults.append("MINIBOSS FIELDS")
             push_error("COMMANDS_DATA MINIBOSS FIELDS: `miniboss`.what publishes %d elites and `miniboss`.short publishes %d - my own two declarations disagree, so !miniboss answers one number and docs/COMMANDS.md prints the other" % [mb_said[0], mb_said[1]])
             printerr("COMMANDS_DATA MINIBOSS FIELDS - what %d, short %d" % [mb_said[0], mb_said[1]])
-        elif mb_said[0] != mb_live.size():
+        elif mb_said[0] != Delve.MB_NAME.size():
+            # B206: THIS ARM USED TO COMPARE AGAINST `mb_live.size()` - content's
+            # `miniboss_feed.by_key`. THAT WAS THE WRONG ANCHOR AND IT COST A CYCLE. by_key is
+            # CONTENT'S side and `MB_NAME` is THE ENGINE'S, and content legitimately lands a feed
+            # row an hour before the engine lands the name - it did exactly that twice on 27 Nov.
+            # Whenever it does, a guard anchored on by_key demands a published number the engine
+            # cannot answer, which is the number this lane's own row forbids it to publish. At
+            # B205 this arm fired for precisely that reason while nothing was wrong.
+            # THE HONEST COMPARATOR IS WHAT THE ENGINE CAN ANSWER: `Delve.MB_NAME`. The by_key
+            # figure stays in the message because the gap between the two is the thing a reader
+            # needs to see, but it no longer decides the fault - MINIBOSS UNNAMED owns that gap.
             _guard_faults.append("MINIBOSS COUNT")
-            push_error("COMMANDS_DATA MINIBOSS COUNT: `miniboss` publishes %d elites and content writes feed rows for %d - docs/COMMANDS.md counts the chambers wrong and a viewer finds out by asking for one that is not there" % [mb_said[0], mb_live.size()])
-            printerr("COMMANDS_DATA MINIBOSS COUNT - published %d, feed rows %d" % [mb_said[0], mb_live.size()])
+            push_error("COMMANDS_DATA MINIBOSS COUNT: `miniboss` publishes %d elites and `Delve.MB_NAME` carries %d names (content writes feed rows for %d) - docs/COMMANDS.md counts the chambers wrong and a viewer finds out by asking for one the nameplate cannot name" % [mb_said[0], Delve.MB_NAME.size(), mb_live.size()])
+            printerr("COMMANDS_DATA MINIBOSS COUNT - published %d, MB_NAME names %d, feed rows %d" % [mb_said[0], Delve.MB_NAME.size(), mb_live.size()])
         if not mb_unnamed.is_empty():
             _guard_faults.append("MINIBOSS UNNAMED")
             push_error("COMMANDS_DATA MINIBOSS UNNAMED: %d body(s) content writes a feed for carry no `Delve.MB_NAME` row, so the nameplate falls back to the capitalised trade and !miniboss answers the trade word the rename exists to remove - nothing crashes and nothing reads wrong in a log, which is why this is a fault and not a warning: %s" % [mb_unnamed.size(), mb_unnamed])

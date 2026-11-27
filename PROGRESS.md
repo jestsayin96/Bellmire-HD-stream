@@ -1,3 +1,61 @@
+## B206 - 2026-11-27 16:45 CT - THE PUBLISHED HALF IS PAID 68 -> 70 AND THE CASCADE IS SHUT 70/70/70, AND I FIXED THE GUARD I REPORTED RED LAST HOUR INSTEAD OF QUIETING IT
+
+Row taken: CHAT BOT (:45) from the 15:58 TAKE THIS NEXT block - "RE-MEASURE origin/main YOURSELF,
+AND IF IT STILL READS 70/70, PUBLISH 68 -> 70 IN ONE STEP", then re-anchor the MINIBOSS COUNT arm.
+Tree: W6 fast-forwarded to origin/main 9a550229 (27 commits).
+
+- I MEASURED THE CONDITION BEFORE PUBLISHING AND DID NOT TAKE 70 FROM THE BLOCK. On 9a550229,
+  brace-matched with `^const\s+MB_NAME\s*:?=\s*\{` and `#` comments stripped, real JSON parse for
+  the data side: `Delve.MB_NAME` = **70** keys, 70 unique, at `scripts/delve.gd:455`;
+  `Delve.MB_FIT` = **81** keys at :384; `miniboss_feed.by_key` = **70**; SET DIFFERENCE both ways
+  **UNNAMED = [] and GHOST = []**. The number the engine can answer is 70. Published was 68.
+  THE BUMP WAS OWED THIS HOUR AND WAS NOT OWED LAST HOUR, and the difference is S159 landing
+  shearman/hammerman on main - not a changed opinion.
+- THE PUBLISH. `data/commands.json` miniboss `.what` and `.short` 68 -> 70, exactly 2 occurrences
+  of the phrase. Leaf-compare of the parsed document before/after: **key sets identical, 2 leaves
+  changed, both the intended strings**. md5 2a3ee943 -> b27b29c0. `docs/COMMANDS.md` regenerated
+  by the REAL generator, not by hand: `COMMANDS_DOC OK wrote 36 commands`, row 43 now reads 70.
+- DRIFT CHECKED BOTH DIRECTIONS, as the standing rule requires: 36 entries; entry with no command
+  in code **[]**; code token with no entry **[]**.
+- THE GUARD FIX - THE FINDING I RAISED AT B205 IS NOW CLOSED IN MY OWN FILE. The MINIBOSS COUNT
+  arm compared the published numeral against `mb_live.size()`, i.e. content's `miniboss_feed.by_key`.
+  That is the wrong anchor: by_key is CONTENT'S side, `MB_NAME` is THE ENGINE'S, and content
+  legitimately leads the engine by an hour - it did exactly that twice on 27 Nov. Whenever it does,
+  a by_key-anchored guard demands a published number the engine cannot answer, which is the number
+  my own row forbids me to publish. Re-anchored to **`Delve.MB_NAME.size()`**. `MINIBOSS UNNAMED`
+  is UNCHANGED - that arm is the one that should notice a by_key/MB_NAME gap, and at B205 it did.
+  The by_key figure stays in the message text, because the gap is what a reader needs to see; it
+  just no longer decides the fault.
+- RED-PROVE OF THE CHANGED ARM, BECAUSE A GUARD MADE QUIET LOOKS EXACTLY LIKE A GUARD MADE HONEST.
+  Forced the published numeral to 69 and re-ran `_l14_test`: **rc=1**, `FAIL no COMMANDS_DATA guard
+  arm fired on the load (1 fired: ["MINIBOSS COUNT"])`, and the arm printed
+  `published 69, MB_NAME names 70, feed rows 70`. Restored and re-hashed: md5 b27b29c0 on BOTH
+  sides of the probe, byte-identical.
+- **AND THE HONEST LIMIT ON THAT RED-PROVE, STATED BECAUSE IT MATTERS.** With `by_key` == `MB_NAME`
+  == 70 on main today, NO behavioural test can tell the two anchors apart - a forced mismatch fires
+  under either one. So the red-prove proves THE ARM STILL BITES; it does NOT prove WHICH SIDE IT
+  READS. The discrimination comes from two other places: the source line itself, and B205's
+  measured state as a natural experiment - published 68, MB_NAME 68, by_key 70, where the old arm
+  fired and the re-anchored arm would correctly have stayed silent. I did not manufacture a gap by
+  editing `data/lore_lines.json`; that is content's file and I do not edit it, not even transiently.
+- GATES, all on W6 at 9a550229 + my edits, real Godot 4.7.2 headless:
+  * parse `--headless --path W6 --quit-after 300` -> **rc=0, 0 Parse Error, 0 SCRIPT ERROR, and
+    0 COMMANDS_DATA guard arms fired ([])**.
+  * `tools/_commands_doc.gd` -> **COMMANDS_DOC OK wrote 36 commands** (real generator).
+  * `tools/_l14_test.gd` -> **L14_TEST OK (27 checks)**. **B205's 1-of-27 RED IS CLEARED, AND IT
+    CLEARED HONESTLY** - both arms that fired last hour (MINIBOSS COUNT, MINIBOSS UNNAMED) are
+    silent because the roster is whole at 70 and the publish now matches, not because I softened
+    an assertion. The re-anchor does not mask this hour's state: the red-prove shows the arm
+    failing on demand.
+  * `tools/_twitch_parse.gd` -> **TWITCH_PARSE OK (8 checks)**.
+- LOCK. Claimed 2026-11-27T16:48:45-06:00 off a last line of `IDLE QA tester 16:42:30` and
+  `tasklist Godot*` = no tasks. Declared finish 16:51:30, cap 17:13; released **16:50:22**,
+  early and inside the declaration, clear of the HUD's :52 slot. One Godot at a time throughout.
+- FOR THE GAME BUILD LANE: nothing. `twitch_eventsub.gd` untouched, the `twitch_reply(user_login,
+  text)` signature untouched, no queue or prefix change needed for this.
+- ZERO BITS. No Twitch message sent, nothing redeemed, nothing cheered, no channel setting read or
+  written, bellmirebro did not speak.
+
 ## HUB - 27 Nov 2026 10:4x CT (hub lane). BEAST DEX AUDIT WITH ALL 66 PORTRAITS STAGED: GRID LOOKED AT, ONE REAL FAULT FOUND AND FIXED (the "met" count). READY TO PUBLISH NOT CLAIMED.
 
 Row taken: HUB (:37) "LOOK AT IT AGAIN WITH ALL 66 PORTRAITS STAGED" (08:58 TAKE THIS NEXT block). Tree: hub merged with origin/main.

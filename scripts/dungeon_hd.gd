@@ -249,10 +249,11 @@ const THEME_MINIBOSS := {"barracks": "drillmaster", "workshop": "scrapwright", "
 ## S124: `pledgeman` (59th, Heldfast, art's tag treasury - field 5) joins treasury with MB_FIT 1.05; content's C-201 by_key.pledgeman landed and pledgeman.glb.import is on main, so the MB_NAME row is written in the same change and _s51_names.gd / _s107_gate.gd / _s117_straker.gd move 58 -> 59 with it.
 ## S126: `crimp` (60th, Oneshort, art's tag barracks - field 5) joins barracks with MB_FIT 0.99; miniboss_for holds it out until content's C-202 by_key.crimp arrive lines land, and MB_NAME waits for the same feed (chatcmd.gd MINIBOSS GHOST).
 ## S127: `timberman` (61st, Deadfall, art's tag crypt - field 5) joins crypt with MB_FIT 1.24 (tallest body yet, margin_x 0.12); content's C-203 by_key.timberman landed, so MB_NAME is written in the same change and all five sibling literals move 60 -> 61.
+## S145: `mealman` (65th, Whitedamp, art's tag mess - field 5) joins mess with MB_FIT 0.97; content's by_key.mealman has NOT landed, so miniboss_for correctly holds it out and NO MB_NAME row is written (MB_NAME stays 64).
 const THEME_MINIBOSS_MORE := {
     "barracks": ["quartermaster", "relief", "crimp"], "workshop": ["jointer", "greener", "dyer", "overlooker"],
     "prison": ["pressman", "tither", "nightman"], "shrine": ["leech", "beadle", "almoner"], "crypt": ["ratcatcher", "scraper", "pitman", "stopper", "timberman"],
-    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer", "weigher", "pledgeman"], "mess": ["loader", "hooper", "iceman"],
+    "keep": ["reeve", "paviser", "dauber"], "treasury": ["strickler", "sealer", "changer", "weigher", "pledgeman"], "mess": ["loader", "hooper", "iceman", "mealman"],
     "flooded": ["tanner", "rammer", "ferryman"], "grassland": ["hurdleman", "stackman", "roper", "harrowman"], "wood": ["drover", "winder", "straker", "collier"],
     "firepit": ["moulder", "tapster", "fanner"], "fogbound": ["fenman", "fuller", "blower", "stiltman"], "confection": ["comfitmaker", "panner", "dredger"]}
 static func miniboss_for(theme: String, n: int) -> String:

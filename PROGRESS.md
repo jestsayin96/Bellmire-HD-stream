@@ -1,3 +1,16 @@
+## HUB - 27 Nov 2026 10:4x CT (hub lane). BEAST DEX AUDIT WITH ALL 66 PORTRAITS STAGED: GRID LOOKED AT, ONE REAL FAULT FOUND AND FIXED (the "met" count). READY TO PUBLISH NOT CLAIMED.
+
+Row taken: HUB (:37) "LOOK AT IT AGAIN WITH ALL 66 PORTRAITS STAGED" (08:58 TAKE THIS NEXT block). Tree: hub merged with origin/main.
+- NUMBERS (headless Chromium, ?mock=bestiary, payload v6 stub, all 66 icons/beasts/*.webp present): 66 <img> in the grid, 0 broken (naturalWidth 0), 97 cards total (31 lore beasts + 66 chamber-holders), no page errors, no dialogs.
+- Reads at 1280 and at 390 px: two columns at 1280 (230 px min), one at phone. Silhouettes (brightness(0) + tone) read as bodies, not black rectangles - each is recognisably a different figure. They draw at about 60x90, not the 112x156 attribute size (CSS scales them) - fine.
+- TIER BORDERS DO NOT SEPARATE: every card has the same thin tan border; tier is carried only by the flag pill (Undiscovered / Faced / Survived / Killed / Full entry, 1 each + 62 undiscovered with Mockhero pinned). Readable, but not a border signal. NOT changed this hour; left as a finding.
+- FAULT FOUND AND FIXED: the header "N met, M not yet met" counted every lore beast as met (beastTierFor returns 4 for non-deep kinds), so with 28 RUMOUR cards on screen it read "31 met, 66 not yet met" (unpinned) / "35 met, 62" (pinned). Now uses the same test each card uses (deep: tier>0; others: Chronicle names it): unpinned "3 met, 94 not yet met", pinned "7 met, 90 not yet met".
+- SECOND FIX: .beast-grid align-items:start - a Rumour card no longer stretches to the height of the Met card beside it (measured 387 px vs 137 px, was 387 vs 387).
+- Chamber-holder copy "rumour" is already gone: chamber-holders read Undiscovered, Rumour is lords only.
+- web/tools/_beast_dex_block.txt is already under web/tools/_to_delete/ (tracked there).
+- SECURITY (re-run on the edited file): innerHTML code sites app.js:255 and :301 only (other hits are comments), outerHTML/eval( 0, no new insertAdjacentHTML/document.write/Function sites; node --check rc 0. Hostile name <img src=x onerror=alert(1)> renders as literal text on stale/open/default, 0 injected imgs, 0 dialogs. Empty/fail/chronicle/crowd render with no page error. Live dot colour: unchanged this hour (no live-dot work).
+- Not looked at: real-device phone, and the grid against a real v6 payload (only the mock). READY TO PUBLISH: NOT CLAIMED.
+
 ## B196 - 27 Nov 2026, 06:45 CT firing. NOTHING WAS OWED, SO NOTHING WAS EDITED - AND THE ONE REAL FINDING THIS HOUR IS AGAINST MY OWN DRIFT MATCHER, WHICH WAS WRONG TWICE IN OPPOSITE DIRECTIONS BEFORE IT WAS RIGHT.
 
 THE ROW. The 05:58 CHAT BOT row ticks B195 and names no new item: "THE CASCADE IS SHUT AT YOUR

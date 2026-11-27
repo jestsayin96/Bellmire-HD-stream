@@ -955,7 +955,7 @@ html.overlay #bands { display: none !important; }
 .sigil-sm { width: 22px; height: 22px; }
 #bestiaryBody { max-height: max(320px, calc(100vh - 300px)); max-height: max(320px, calc(100dvh - 300px)); overflow-y: auto; overscroll-behavior: contain; padding-right: 2px; }
 .beast-count { margin: 4px 0 8px; color: var(--ink-soft); font-size: .85rem; }
-.beast-grid  { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.beast-grid  { display: grid; align-items: start; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
 .beast {
   background: rgba(246, 236, 209, .55); border: 1px solid var(--edge-2);
   border-radius: 7px; padding: 9px 11px; display: grid; gap: 5px; align-content: start;

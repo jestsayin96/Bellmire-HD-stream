@@ -26335,3 +26335,351 @@ def badger():
 
 
 BUILDERS.update({"badger": badger})
+
+
+# =============================================================================
+# 68 THE MOWER - "Oneswath". THE GRASSLAND, AND A CONDITION NOTHING IN THIS
+# FILE HAS EVER ASKED: WHERE YOU ARE STANDING.
+#
+# WHAT I CHECKED BEFORE I DESIGNED IT, BY MEASURING AND NOT BY MEMORY. I read
+# every CANON mechanic in this file off the file itself - 67 entries, counted
+# by parsing the tuples, not by trusting any line in my prompt - and the
+# conditions already taken are: how many of you are on it (FANNER), which of
+# you has struck it (STRAKER, OVERLOOKER), what you struck it with (TANNER,
+# COLLIER, DREDGER), when you struck it (PANNER, RAMMER, ICEMAN, STOPPER),
+# what you are carrying (SEALER, PLEDGEMAN, TITHER, BADGER), who is down
+# (PRESSMAN, STILTMAN), and the room itself - light, air, floor, roof, walls,
+# water, sound (SNUFFER, NIGHTMAN, BLOWER, PITMAN, TIMBERMAN, DAUBER,
+# SLUICEKEEPER, BELLMAN). NOT ONE of the 67 is conditioned on DISTANCE.
+#
+# AND IT IS THE DELIBERATE INVERSE OF THE FANNER, WHICH IS WHY I AM WRITING
+# THAT DOWN INSTEAD OF HIDING IT. Blastmere's own entry says "the condition is
+# on HOW MANY OF YOU ARE ON IT, which no other body in this file asks about" -
+# and it punishes crowding. This one REQUIRES crowding, and it does not care
+# how many come: one hero inside the sweep is as safe as five. A party that has
+# learned the Fanner will stand off this body and be cut on one count. Two
+# bodies whose right answers are opposite is worth more to a floor than two
+# more bodies with the same answer.
+#
+# A MOWER IS A REAL TRADE AND THE SCYTHE IS A REAL REACH. A man mowing takes a
+# swath: he stands, swings the blade level through the grass at one height, and
+# everything in the arc goes down at once - he does not pick a stem. And a
+# scythe has a real dead circle, which is the whole mechanic and not an
+# invention: the blade is on the far end of a 1.5 m haft, so the ground at the
+# mower's own boots is the one place the edge cannot reach.
+#
+# PLAINNESS IS THE VOICE. He is a man in a smock and a broad hat with a scythe
+# and a honing horn on his hip. The horn is a real thing a real mower carries -
+# water and a whetstone, because a scythe is honed every few minutes - and IT
+# STAYS SHUT: a visible pale whetstone would be a second pale mass on the one
+# body whose pale mass IS the mechanic. That is the Mealman's rule applied
+# before the render rather than at pass 7.
+#
+# WEAR 0.42 AND IT IS SPLIT ON PURPOSE. The smock, hat and boots are worn - he
+# works outdoors all summer. THE BLADE IS NOT: it is the one honed, bright,
+# cared-for thing on him, because a working man keeps his instrument (the
+# Drillmaster's gong argument, same logic) and because the blade is what the
+# viewer must read the LENGTH of to judge whether to close.
+#
+# STATIC: no `anims` entry, so bestiary.gd needs a `model` path and NO `anims`
+# entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+# =============================================================================
+CANON.update({
+    "mower": ("Oneswath", 2.52, (0.140, 0.134, 0.118), (0.880, 0.900, 0.840),
+              "grassland",
+              "IT CUTS AT ONE HEIGHT AND IT CANNOT CUT WHAT IS INSIDE THE "
+              "HAFT - it does not choose a target and it does not strike "
+              "twice. It takes a SWATH: one level stroke at one height, and "
+              "every delver standing out in the open at its reach is cut by "
+              "the same stroke on the same beat, however many of them there "
+              "are. But the blade is on the far end of a haft, and a scythe "
+              "has a dead circle it cannot reach into - THE GROUND AT ITS OWN "
+              "BOOTS. A hero who closes INSIDE the sweep takes nothing at "
+              "all; the stroke goes over the top of them and is wasted, and "
+              "it has to break the hold and back off to get a swath back. So "
+              "the habit that fails here is SPACING, which is the one habit a "
+              "party never questions: stand off at a sensible distance and "
+              "you are all cut on one count, or do the thing nobody wants to "
+              "do and walk into the blade's own arc and crowd its boots. IT "
+              "IS THE EXACT OPPOSITE OF THE FANNER, which punishes the whole "
+              "line for crowding it - a party that learned Blastmere will "
+              "stand off this one and lose the line to it. THE REACH IS THE "
+              "THING TO READ: the honed blade is the only pale on the body "
+              "and it is the only long thing on it, level at ankle height, so "
+              "a viewer can see at a glance how far out the stroke goes and "
+              "therefore how far in they have to get.",
+              0.42, "Something ahead is taking a swath."),
+})
+ORDER = ORDER + ["mower"]
+
+# PER-SLOT MATERIALS. `bone` IS THE BLADE AND NOTHING ELSE - not the haft, not
+# the nibs, not the horn, not the stone. The mechanic is a LENGTH, and a second
+# pale thing anywhere on the body gives the eye a second length to measure.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"mower"}
+
+OVERRIDE.update({
+    "mower": {
+        # VERTEX-DRIVEN with the rgb as the FILL, exactly as the badger: every
+        # `body` item that declares no colour renders this value, and the four
+        # leather items below are painted per-vertex.
+        'body': ((0.140, 0.134, 0.118), 0.80, 0.03, None, True),  # smock (FILL)
+        'dark': ((0.044, 0.042, 0.038), 0.78, 0.05),  # hat, boots, haft, nibs
+        'bone': ((0.890, 0.870, 0.820), 0.28, 0.20),  # THE BLADE ONLY
+    },
+})
+
+
+def mower():
+    """THE MOWER - the 68th. He is not aiming at anybody. He is taking a swath,
+    and the only safe ground in the room is the ground he is standing on.
+
+    THE THREE LUMA GUARDS ARE RE-USED, NOT INVENTED. A new body is the wrong
+    place to invent an instrument, so these are the same three the badger
+    carried and for the same reasons:
+      bone/body >= 1.30   the Beadle shipped a pale cue at 1.07 that went flat
+                          against its own pale panel with every register number
+                          passing.
+      bone/mid  >= 2.00   the Thatcher's bar, so the one mid value on the man
+                          cannot climb up and argue with the pale.
+      mid/body  >= 1.80   the Thatcher's pass-6 finding: a ONE-BAND albedo
+                          separation does not move `bands_5pct` at all.
+
+    AND SAID AGAIN BECAUSE IT IS STILL TRUE: ALL THREE ARE ALBEDO TRIPWIRES AND
+    ALBEDO IS NOT VALUE IN THIS RIG. They stop a later colour edit; they do not
+    say the blade READS, and they say nothing at all about the one question
+    this body lives or dies on - WHETHER A VIEWER CAN SEE HOW FAR THE REACH
+    GOES. That is answered by looking at the render and by the A/B in
+    tools/art/_reachread.py, which goes RED ON EMPTY.
+    """
+    bone_l = _luma(OVERRIDE["mower"]['bone'][0])
+    body_l = _luma(OVERRIDE["mower"]['body'][0])
+    if bone_l / max(1e-6, body_l) < 1.30:
+        raise ValueError(
+            "mower: bone/body luma ratio %.2f is under 1.30 - the blade IS the "
+            "reach and a reach that goes flat against the smock cannot be "
+            "measured by eye (bone %.3f, body %.3f)"
+            % (bone_l / max(1e-6, body_l), bone_l, body_l))
+
+    # THE ONE MID VALUE ON THE MAN: leather. Belt, two leggings, the honing
+    # horn and the face. A mower wears leather leggings because he is swinging
+    # a blade past his own shins all day - the second value is what the trade
+    # requires, which is the same argument the badger's yoke-cape made.
+    MID = (0.405, 0.345, 0.252)
+    mid_l = _luma(MID)
+    if bone_l / max(1e-6, mid_l) < 2.00:
+        raise ValueError(
+            "mower: bone/mid luma ratio %.2f is under 2.00 - the leather is "
+            "close enough to the blade to argue with the reach "
+            "(bone %.3f, mid %.3f)" % (bone_l / max(1e-6, mid_l), bone_l, mid_l))
+    if mid_l / max(1e-6, body_l) < 1.80:
+        raise ValueError(
+            "mower: mid/body luma ratio %.2f is under 1.80 - the Thatcher's "
+            "pass 6 proved a one-band separation is not a second value "
+            "(mid %.3f, body %.3f)" % (mid_l / max(1e-6, body_l), mid_l, body_l))
+
+    P = Parts("mower")
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
+    # FRONT IS -Y throughout, as everywhere in this file.
+    # THE STANCE IS PLANTED AND WIDE, and it uses the set's shared `_legs` on
+    # purpose. The badger is the one body that must NOT plant, because its
+    # mechanic is that it is going; this one's mechanic is that it is STAYING -
+    # a mower stands his ground and swings, and the dead circle the party has
+    # to reach is the ground between these two boots. A wide stance is what a
+    # man swinging a 1.5 m haft actually does, and it also makes the safe
+    # ground the picture is about physically visible between the feet.
+    # EVERY slot here is explicit: `creatures.limb` defaults to slot='bone',
+    # which put the badger's whole skeleton in the pale slot at pass 1. `_legs`
+    # is the shared helper and is already correct; the explicit calls below are
+    # the ones to watch.
+    # *** PASS 2, AND IT IS THE BADGER'S PASS-2 FAULT ARRIVING BY A DIFFERENT
+    # *** DOOR. I USED THE SHARED HELPER AND THE SHARED HELPER IS THE BUG.
+    # Pass 1 called `_legs(...)`, which is the set's planted base and which I
+    # took on trust because it is shared and proven. It calls `limb()` WITHOUT
+    # A SLOT, and `creatures.limb` defaults to slot='bone' - so both legs
+    # rendered in the PALE slot. On most bodies in this file `bone` is a mid
+    # neutral and nobody ever noticed. On THIS body `bone` is the honed blade
+    # and nothing else, because the mechanic is a LENGTH the viewer has to
+    # measure - and pass 1 shipped a figure standing on two pale legs nearly
+    # the blade's own value, which gives the eye three long pale things and
+    # the wrong one is the reach.
+    # THE THREE LUMA ASSERTIONS ABOVE PASSED CLEAN THROUGH IT, exactly as they
+    # did on the badger: they compare DECLARED COLOURS and cannot see which
+    # slot a call landed in. An instrument that cannot see is not a pass. The
+    # only reason this is fixed is that I looked at front.png.
+    # I DID NOT FIX `_legs`. It is shared by most of the file and changing its
+    # default would move every other row in the register to fix one body. The
+    # legs are therefore built here in 'body', same geometry as the helper at
+    # stance 0.27, with the slot explicit on every call.
+    for s in (-1, 1):
+        limb(P, [(s * 0.270, 0.060, 0.920),
+                 (s * 0.330, 0.020, 0.497),
+                 (s * 0.370, -0.060, 0.090)], 0.105, 0.085, 'body')
+        P.add(L.box(0.270, 0.440, 0.115), 'dark',
+              loc=(s * 0.370, -0.140, 0.0575))
+    _seg("legs")
+
+    # THE LEATHER LEGGINGS - mid value, painted per-vertex. Low on the shins,
+    # where a mower's own blade passes.
+    for s in (-1, 1):
+        _leg = L.xform(L.box(0.225, 0.255, 0.280)[0],
+                       loc=(s * 0.315, 0.015, 0.370)), L.box(0.225, 0.255, 0.280)[1]
+        P.raw((_leg[0], _leg[1]), 'body', vcol=[MID] * len(_leg[0]))
+    _seg("leggings")
+
+    # THE TRUNK, TURNED INTO THE STROKE. The shoulders carry +x against a hip
+    # at 0 - he is at the far end of a right-to-left swing, which is where the
+    # blade in this build is. A square-on trunk would have made the scythe read
+    # as a thing he is holding rather than a thing he is swinging.
+    HIP, SHO = 0.860, 1.600
+    limb(P, [(0.0, -0.010, HIP), (0.040, -0.070, 1.260), (0.120, -0.130, SHO)],
+         0.265, 0.215, 'body')
+    # the smock, short - a man who swings does not wear it to the knee
+    P.raw(aim(L.cone(0.325, 0.250, 0.460, 16), (0.0, -0.040, 0.660),
+              (0.0, -0.100, 1.0)), 'body')
+    _seg("body")
+
+    # THE BELT - one continuous band whose ends notch the silhouette, the
+    # badger's pass-6 finding re-used. *** AND PASS 1'S ARITHMETIC FOR IT WAS
+    # AGAINST THE WRONG RADIUS, WHICH IS THIS LANE'S OLDEST FAULT IN A NEW
+    # PLACE: A NUMBER THAT ANSWERS THE WRONG QUESTION. *** I checked 0.600
+    # against the TRUNK half-width (0.250) and called it 0.050 proud - but the
+    # trunk is not the outline here, THE SMOCK IS. The smock cone runs r 0.325
+    # at z 0.660 to r 0.250 at z 1.120, so at the belt's z 0.952 its radius is
+    # 0.325 - 0.075 * (0.292 / 0.460) = 0.277. A 0.600 belt is 0.300 half-width
+    # against that: 0.023 proud, which is what pass 1 rendered and what I could
+    # not see in the picture. 0.680 gives 0.340 against 0.277 - 0.063 proud on
+    # each side - and that is a notch an eye can find.
+    # *** PASS 3, SIDE VIEW, AND IT IS THE BADGER'S PASS-6 TRY 1 REPRODUCED BY
+    # *** A LANE THAT HAD ALREADY PAID FOR IT: "the lit top face read as a
+    # *** plank". I widened the belt in X to buy the front notch and never
+    # asked what its DEPTH does to the SIDE silhouette. At 0.310 deep and
+    # 0.088 thick the band stood out of the smock fore and aft with its top
+    # face lit, and together with the horn at the same height it read as one
+    # tan shelf across the hips. The fix is the depth, not the width - the
+    # front notch is bought in X and costs nothing in Y: 0.250 deep and 0.072
+    # thick, dropped 8 mm so the smock closes over its top face. THE WIDTH IS
+    # UNCHANGED AT 0.680, so the notch measured above is untouched.
+    _belt = L.xform(L.box(0.680, 0.250, 0.072)[0], loc=(0.030, -0.045, 0.944),
+                    rot=(0.06, 0.0, 0.0)), L.box(0.680, 0.250, 0.072)[1]
+    P.raw((_belt[0], _belt[1]), 'body', vcol=[MID] * len(_belt[0]))
+
+    # THE HONING HORN, on the belt behind the right hip. Water and a whetstone.
+    # IT STAYS SHUT - see the header: a visible pale stone would be a second
+    # pale mass on the one body whose pale mass is the mechanic.
+    # PASS 3: slimmer and set further back and lower. At the belt's own height
+    # the horn was a second tan mass in the same band and the two merged into
+    # the shelf above; a horn hangs BELOW a belt, which is also what a horn
+    # actually does.
+    _horn = aim(L.cone(0.050, 0.021, 0.260, 12), (0.285, 0.205, 0.838),
+                (0.30, 0.52, -1.0))
+    P.raw(_horn, 'body', vcol=[MID] * len(_horn[0]))
+    _seg("belt_horn")
+
+    # BOTH ARMS FORWARD AND DOWN ONTO THE HAFT, and they are not a pair. The
+    # right is short to the butt grip, the left is long and across the body to
+    # the mid nib. Two hands on one haft at two different heights is what makes
+    # this read as a TOOL BEING WORKED and not a staff being held, and it is
+    # also most of this body's facing: from behind there is no haft between the
+    # hands at all.
+    limb(P, [(0.240, -0.100, 1.560), (0.400, -0.165, 1.360),
+             (0.430, -0.280, 1.210)], 0.095, 0.070, 'body')
+    P.add(L.sphere(0.072, 0.066, 0.066, 10, 7), 'body', loc=(0.432, -0.288, 1.196))
+    _seg("arm_butt")
+    limb(P, [(-0.200, -0.140, 1.540), (-0.140, -0.340, 1.200),
+             (0.000, -0.480, 0.900)], 0.095, 0.070, 'body')
+    P.add(L.sphere(0.072, 0.066, 0.066, 10, 7), 'body', loc=(0.004, -0.492, 0.886))
+    _seg("arm_nib")
+
+    # THE HAFT - 1.57 m of ash from the butt at the right hand down across the
+    # body to the blade bed at the left front. Dark, and dark on purpose: the
+    # haft is the thing the blade is NOT. A viewer has to be able to tell the
+    # reach from the handle at a glance, because the reach is what they are
+    # judging and the handle is where they have to get to.
+    BUTT = (0.460, -0.100, 1.160)
+    BED = (-0.620, -0.580, 0.168)
+    limb(P, [BUTT, (0.020, -0.340, 0.760), (-0.340, -0.500, 0.400), BED],
+         0.036, 0.028, 'dark')
+    # the two NIBS - the grip pegs. Real, and they are what the hands hold.
+    limb(P, [(0.380, -0.140, 1.100), (0.440, -0.300, 1.200)], 0.030, 0.026, 'dark')
+    limb(P, [(0.020, -0.340, 0.760), (0.000, -0.510, 0.900)], 0.030, 0.026, 'dark')
+    _seg("haft")
+
+    # ======================= THE BLADE. THIS IS THE MECHANIC. ================
+    # LEVEL, LOW, AND LONG, and all three of those are the fight:
+    #   LEVEL - every point of the spine is at z 0.150. "It cuts at one height"
+    #           is not a line in CANON that the art then contradicts; the
+    #           geometry is flat to a thousandth and the side view shows it.
+    #   LOW   - 0.150 against a 2.085 m figure is the bottom 7%. The stroke
+    #           goes along the floor, which is what makes the top of a crouched
+    #           hero's head the safe place to be.
+    #   LONG  - the tip is 1.70 m out in x from the body centre against a
+    #           0.30 m trunk. The blade is the longest thing on the body by a
+    #           factor of five, and nothing else on it is pale.
+    # The curve is concave TOWARD the mower, which is what a scythe blade is:
+    # the edge is the inner line, so the cutting edge faces the dead circle it
+    # cannot reach. That is the mechanic drawn rather than stated.
+    SPINE = [(-0.620, -0.580), (-1.000, -0.600), (-1.340, -0.480),
+             (-1.580, -0.220), (-1.700, 0.140)]
+    WID = [0.145, 0.130, 0.106, 0.070, 0.028]
+    BZ = 0.150
+    edge = []
+    for (sx, sy), w in zip(SPINE, WID):
+        d = Vector((-sx, -sy, 0.0))          # inward, toward the body centre
+        d = d.normalized() if d.length > 1e-9 else Vector((1.0, 0.0, 0.0))
+        edge.append((sx + d.x * w, sy + d.y * w))
+    loop = [(x, y, BZ) for (x, y) in SPINE] + [(x, y, BZ) for (x, y) in reversed(edge)]
+    # THE ABLATION HOOK, the Beadle's pattern (`_BEADLE_NAPE`). Set by
+    # tools/art/_reachread.py to build this body WITHOUT its blade so the two
+    # can be shot through one camera and the moved pixels counted. A group
+    # rendered ALONE answers how BIG it is; only the A/B answers whether it
+    # can be SEEN, which is the pass-11 finding this lane paid for itself.
+    if not globals().get("_MOWER_NOBLADE", False):
+        P.raw(L.membrane(loop, 0.022), 'bone')
+    # THE BACK RIB. A scythe blade is not a sheet of paper - it has a thickened
+    # back, and without it this membrane reads as a flat cut-out from the side
+    # view, where it is only 0.022 thick. Same slot: a rib in another slot
+    # would be a second object on the one thing that has to read as one length.
+    if not globals().get("_MOWER_NOBLADE", False):
+        limb(P, [(x, y, BZ) for (x, y) in SPINE], 0.026, 0.011, 'bone')
+    # the tang and ring - where the blade is pinned to the haft. Dark, small,
+    # and it is the JOINT: it tells the eye the pale thing ends here and the
+    # dark thing takes over, which is the length the viewer is measuring.
+    limb(P, [(-0.560, -0.560, 0.168), (-0.680, -0.600, 0.158)], 0.040, 0.034, 'dark')
+    _seg("blade")
+
+    # THE HEAD, and it is turned with the shoulders. Neck, skull, and a face
+    # oval in the MID value - the Beadle's fault was a body that read the same
+    # from front and back, and a face is the cheapest honest facing there is.
+    limb(P, [(0.120, -0.130, SHO), (0.140, -0.160, 1.690)], 0.090, 0.082, 'body')
+    P.add(L.sphere(0.168, 0.162, 0.188, 13, 9), 'body', loc=(0.140, -0.170, 1.800))
+    _face = L.xform(L.sphere(0.106, 0.052, 0.118, 11, 8)[0],
+                    loc=(0.140, -0.302, 1.792)), L.sphere(0.106, 0.052, 0.118, 11, 8)[1]
+    P.raw((_face[0], _face[1]), 'body', vcol=[MID] * len(_face[0]))
+    _seg("head")
+
+    # THE HAT - a broad flat brim, dark, and TILTED FORWARD. The tilt is doing
+    # two jobs: it is what a man working in the sun does with a hat, and it is
+    # a facing. A disc aimed straight up is a surface of revolution and would
+    # have no front at all - which is exactly the fault the badger's yoke-cape
+    # was found to have, by construction and not by tuning. 0.69 m across
+    # against a 0.34 m skull: the brim is the top of the silhouette and nothing
+    # else in this file has one.
+    P.raw(aim(L.cone(0.345, 0.325, 0.032, 18), (0.140, -0.170, 1.930),
+              (0.0, -0.195, 1.0)), 'dark')
+    P.raw(aim(L.cone(0.178, 0.148, 0.140, 14), (0.140, -0.170, 1.944),
+              (0.0, -0.195, 1.0)), 'dark')
+    _seg("hat")
+
+    # THE FIGURE, for the man-value census: the scythe is his gear.
+    P.man_parts = ("legs", "leggings", "body", "belt_horn", "arm_butt",
+                   "arm_nib", "head", "hat")
+    return P
+
+
+BUILDERS.update({"mower": mower})

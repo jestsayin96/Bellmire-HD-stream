@@ -35,11 +35,12 @@
     "arm_yoke",
     "body",
     "cape",
+    "face",
     "gear_sacks",
     "gear_yoke",
     "head"
    ],
-   "items": 37,
+   "items": 42,
    "man_from": "parts",
    "man_ranges": [
     [
@@ -48,25 +49,30 @@
     ],
     [
      6,
-     7
+     10
     ],
     [
-     7,
-     14
-    ],
-    [
-     14,
-     15
-    ],
-    [
-     15,
+     10,
      16
+    ],
+    [
+     16,
+     17
+    ],
+    [
+     17,
+     18
+    ],
+    [
+     18,
+     19
     ]
    ],
    "man_parts": [
     "body",
     "cape",
     "head",
+    "face",
     "arm_yoke",
     "arm_free"
    ],
@@ -1107,6 +1113,71 @@
     39,
     61
    ],
+   "man_span_empty": false
+  },
+  "mower": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arm_butt",
+    "arm_nib",
+    "belt_horn",
+    "blade",
+    "body",
+    "haft",
+    "hat",
+    "head",
+    "leggings",
+    "legs"
+   ],
+   "items": 25,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     4
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     8,
+     10
+    ],
+    [
+     10,
+     12
+    ],
+    [
+     12,
+     14
+    ],
+    [
+     20,
+     23
+    ],
+    [
+     23,
+     25
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "leggings",
+    "body",
+    "belt_horn",
+    "arm_butt",
+    "arm_nib",
+    "head",
+    "hat"
+   ],
+   "has_man_span": true,
+   "man_span": null,
    "man_span_empty": false
   },
   "nightman": {
@@ -2398,12 +2469,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-27T13:59:24+0000",
+ "measured_at": "2026-11-27T17:50:26+0000",
  "measured_at_tz": "Ame",
- "measured_at_epoch": 1795787964.2713544,
- "register_mtime_epoch": 1795787888.2456398,
- "register_mtime": "2026-11-27T13:58:08+0000",
- "register_pairs": 69,
+ "measured_at_epoch": 1795801826.9187143,
+ "register_mtime_epoch": 1795801684.403316,
+ "register_mtime": "2026-11-27T17:48:04+0000",
+ "register_pairs": 70,
  "measurable": [
   "almoner",
   "badger",
@@ -2435,6 +2506,7 @@
   "loader",
   "mealman",
   "moulder",
+  "mower",
   "nightman",
   "overlooker",
   "paviser",

@@ -165,3 +165,170 @@ Content owes a `miniboss_feed.by_key` row for `thatcher`; the feed line is
 naming cascade by one until those rows land.** The 65th's cascade was declared
 shut at 02:07 this morning; this re-opens it by exactly one body, on purpose,
 under the standing permission for a dry art lane to invent.
+
+---
+
+# PASSES 6 AND 7 - 27 Nov 2026, 03:34 CT FIRING. OPEN FAULT 1 IS CLOSED AND I OPENED A NEW ONE AND MEASURED IT.
+
+The 02:58 plan's addendum gave this lane one row: *"the next pass on the
+thatcher is YOUR OWN open fault 1 - THE MAN IS ONE VALUE, `value_man_visible`
+spread 0.238, 3 bands at 5%, against the Moulder's contrast rule. You named it;
+take it. A 67th body does not outrank it."* I took it and nothing else.
+
+**WHAT I CHECKED FOR FIRST, MEASURED.** The live count off `tools/art/
+minibosses.py` and the tree: 79 `.glb` under `assets/monsters/minibosses/`,
+minus 11 `_chibi`, minus the two bosses = **66 live bodies**, `thatcher` last.
+I did not invent a 67th; the row says it would not outrank this. I also
+re-measured the baseline out of `_backread.json` rather than trusting the
+0.238 in my own pass-5 writeup: front 0.2383 / side 0.2308 / back 0.2423,
+`bands_5pct` 3 on all three. It matched.
+
+## PASS 6 - THE OBVIOUS FIX, AND IT FAILED, AND THE FAILURE IS THE FINDING
+
+I re-slotted the coat's skirt cone from `body` to `dark` - the Moulder's rule
+read literally, apron darker than gown. I wrote the bar down BEFORE rendering:
+`dark_frac` above 0.20, `bands_5pct` 3 -> 4, spread above 0.30.
+
+| view | spread p5 -> p6 | bands_5pct | verdict |
+|---|---|---|---|
+| front | 0.2383 -> 0.2526 | 3 -> **3** | fail |
+| side | 0.2308 -> **0.2201** | 3 -> **3** | fail, and DOWN |
+| back | 0.2423 -> **0.2406** | 3 -> **3** | fail, and DOWN |
+
+**ALBEDO IS NOT VALUE IN THIS RIG.** `dark` carries 2.9x less albedo than
+`body` (luma 0.049 against 0.142) and bought about 0.08 of screen luma: p50
+moved 0.3476 -> 0.3110 and the mass shifted one histogram band, from band 2
+into band 1, where there was already 19% of it. The even light rig plus the
+world term lift everything off the floor, so **the two solid slots this body
+owns are one band apart once lit, and no re-slot between them can make a third
+value.** Reverted. Recorded here rather than buried, because the next body that
+reaches for `dark` to fix a flat man will waste the same pass.
+
+## PASS 7 - THE LEATHER LAP. IT WORKED, ON ALL THREE VIEWS
+
+The headroom is UPWARD and the pass-5 numbers said so outright: the man ran p5
+0.1754 to p95 0.4137 and the top three bands of eight held 0.0023, 0.0037 and
+0.0. Nothing on him was bright. This lane's own record is *"brightness has a
+ceiling and contrast does not"*, and here the ceiling was nowhere near reached.
+So the lap is LIGHTER than the coat, which inverts the Moulder's direction
+while keeping what that rule is for - a waistline made by VALUE, not by a belt.
+
+Buff leather from the hip down, `LAP = (0.420, 0.350, 0.240)`. It is what the
+trade is for: a thatcher kneels into his work and drags combed reed across his
+lap all day. It is a **vertex colour on the existing `body` slot**, not a
+fourth slot - the two free slots in the merge are `glow` and `ember` and both
+are emissive, and a lit apron is a lantern. **The body stays at THREE meshes**,
+under the four-mesh bar it already held. **No new geometry**: the skirt cone
+was already there, and a cone already concentric with the coat cannot float
+against it by construction - which is the pass-4 float answered by shape of
+fix rather than by a second measurement.
+
+Bar written down before the render: p95 above 0.4137 (if it did not move, the
+paint did not land), spread above 0.30, `bands_5pct` 3 -> 4, and `man_seen`
+must not fall.
+
+| view | spread | p95 | bands_5pct | man_seen |
+|---|---|---|---|---|
+| front | 0.2383 -> **0.3990** | 0.4137 -> **0.5797** | 3 -> **4** | 0.9074 -> 0.9074 |
+| side | 0.2308 -> **0.3948** | 0.4095 -> **0.5761** | 3 -> **4** | 0.7408 -> 0.7408 |
+| back | 0.2423 -> **0.4128** | 0.3947 -> **0.5652** | 3 -> **4** | 0.9756 -> 0.9758 |
+
+Band 4 (0.500-0.625) was empty at pass 5 and now holds 19.5% / 25.2% / 20.2%.
+`man_seen` did not move, which is the hazard I was watching: `_backread` counts
+a man pixel where `|B - X|` clears EPS, so a body drifting toward the near-black
+background can LOSE seen while looking better. It went up, by 0.0002.
+
+**I LOOKED.** `renders/art/minibosses/thatcher/hero_{front,side,back}.png`, on
+the knight, idle. The man is no longer a slab: dark boots, hands, hood and
+leggett; mid grey-green coat, trunk, arms and legs; the pale lap at the hip;
+the reed above it. The waistline is made by value now and reads at hero
+distance from all three views. **The back is still a back** - dark hood, no
+face, no pale on the head.
+
+## THE NEW FAULT I OPENED, AND THE INSTRUMENT THAT FOUND IT
+
+My own pass-7 build-time assertion is `bone_l / lap_l >= 2.00` and **it passes
+at 2.29 on albedo.** Pass 6 had just proved albedo is not value, so I did not
+trust it, and wrote `tools/art/_cuevalue.py` to ask the viewer's question on
+the frame that ships: render with and without through ONE locked camera, count
+the pixels that moved, and read luma off the shipped frame at those pixels.
+The cue is the `bone` mesh hidden; the lap is a second build with the lap
+painted the slot's own fill, geometry byte-identical so nothing can move.
+
+| view | cue p50 | lap p50 | margin | ratio |
+|---|---|---|---|---|
+| front | 0.6518 | 0.5646 | 0.0872 | 1.154 |
+| back | 0.5908 | 0.5599 | 0.0309 | 1.055 |
+| **side** | 0.5419 | 0.5413 | **0.0006** | **1.001** |
+
+**ON THE SIDE VIEW THE LAP AND THE YEALM ARE AT THE SAME SCREEN VALUE.** That
+is the Beadle's fault by the Beadle's own number - it shipped 1.07 and its pale
+knob went flat against its own pale panel while every number in its register
+passed - and this is worse, in the space that matters. My albedo guard said
+2.29 and the picture says 1.001. **A number that answers a question the picture
+was never asked is this lane's pass-11 fault**, and rather than delete the
+assertion I have relabelled it in the builder, in full, as a monotone tripwire
+that CANNOT say the cue reads, with `_cuevalue.py` named as the instrument that
+can and a standing instruction to re-run it after any colour change here.
+
+**AND THE FIRST CUT OF `_cuevalue.py` WAS ITSELF WRONG, AND ITS OWN RED-ON-EMPTY
+GUARD IS THE ONLY REASON I KNOW.** It flattened the lap by patching
+`Parts._vc`, and the thatcher writes `P.vcols[id(item)]` directly - the
+Collier's pattern - so the "flattened" build was identical and the lap mask was
+**0 px**. A margin over zero pixels reads green and means nothing; this one
+went red and printed the mask size. The hook that cannot be dodged is the
+MERGE, because that is where `vcols` is consumed. Second run: 18350 / 14209 /
+19909 lap pixels.
+
+**WHY I AM NOT FIXING IT BY DARKENING THE LAP, AND THE NUMBERS BEHIND THAT.**
+The two metrics are in direct conflict on the side view and I measured the box
+rather than guessing at it. `bands_5pct` only rises when a mass reaches an
+EMPTY band, and the only empty band in reach is band 4, 0.500-0.625; calibrating
+screen luma against albedo off my own two measured points (0.142 -> 0.347 and
+0.357 -> 0.541) puts the lap's floor for band 4 at about 0.30 albedo luma, which
+lands near 0.50 on screen. **The side view's cue only reaches 0.5419.** So there
+is no lap value on the side view that both adds a band and clears the reed.
+**The lever is therefore not the lap's colour at all - it is that the yealm is
+UNDER-LIT FROM THE SIDE, 0.5419 against 0.6518 on the front.** Lift the reed's
+side value and a band-4 lap clears it by about 0.13. That is the next pass and
+it is a lighting/orientation question, not a palette one. I am not taking it in
+the same pass that opened it, and I am not shipping a guess at it.
+
+## OPEN FAULTS AFTER PASS 7 - NAMED, NOT TIDIED
+
+1. ~~THE MAN IS ONE VALUE~~ - **CLOSED at pass 7**, measured on three views.
+2. **NEW, AND MINE: the lap goes flat against the yealm on the SIDE view**,
+   screen ratio 1.001. Numbers and the diagnosis above. **This is the loudest
+   remaining fault and the first thing the next pass should take.**
+3. **The face is better, not good.** Unchanged by this pass.
+4. **The leggett reads as a dark box at the hip** - a satchel, not a tool.
+   Unchanged, and the lap now sits beside it, which if anything makes the lump
+   more obvious.
+5. **The stems are fatter than reed** - rods, not combed reed. Unchanged.
+6. **The yealm occludes his chest and most of his right arm** in front.
+   Unchanged, and still the honest cost of putting the cue where a carried
+   bundle goes.
+
+**WHAT THE HARNESS STILL CANNOT SEE.** `_cuevalue.py` measures VALUE and
+nothing else: two masses can be well separated in luma and still argue through
+hue, through touching silhouettes, or through one being shaped like the other.
+It says nothing about whether the reed reads AS reed. Faults 3, 4 and 5 above
+are invisible to every number in this house and are answered by looking.
+
+## NUMBERS AFTER PASS 7
+
+Verdict **GREEN**, `ok: true`, `errors: []`, `red_summary.shipped_red: []`,
+`ok_shipped: true`, `rows_judged: 68`, read out of
+`renders/art/minibosses/_fit_report.json` AFTER the self_seen chain was run in
+order - `_backread.py --tag _p7` -> `_selfseen_merge.py` -> `_selfseen_census.py`
+-> `minibossfit.py --only thatcher`. **0 blanks across 198 files, failures [].**
+Hero pair unchanged by a colour pass: creature 2.54 / hero 2.45, **ratio 1.04**,
+margin_x 0.12, `fits_frame: true`, **3/3 proving views**. 3 merged meshes.
+
+## WIRING - UNCHANGED BY THIS PASS, AND STILL NOT DONE BY ME
+
+Pass 7 changes colour only. No geometry, no bounds, no ratio moved, so every
+number the game build was given still stands: `MB_FIT.thatcher` **ratio 1.04**,
+creature_h 2.54 / hero 2.45, margin_x 0.12, 3 proving views - copy
+`pairs.thatcher` out of `renders/art/minibosses/_fit_report.json`, and
+**0.97 is the mealman's number, not this body's.**

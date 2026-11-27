@@ -1,0 +1,60 @@
+{
+ "key": "thatcher",
+ "cue_slot": "bone",
+ "views": {
+  "front": {
+   "cue": {
+    "px": 35261,
+    "p50": 0.6518,
+    "p90": 0.7179,
+    "mean": 0.5637
+   },
+   "lap": {
+    "px": 18350,
+    "p50": 0.5646,
+    "p90": 0.5831,
+    "mean": 0.5416
+   },
+   "screen_margin": 0.0872,
+   "screen_ratio": 1.154
+  },
+  "side": {
+   "cue": {
+    "px": 31256,
+    "p50": 0.5419,
+    "p90": 0.6666,
+    "mean": 0.5191
+   },
+   "lap": {
+    "px": 14209,
+    "p50": 0.5413,
+    "p90": 0.5797,
+    "mean": 0.535
+   },
+   "screen_margin": 0.0006,
+   "screen_ratio": 1.001
+  },
+  "back": {
+   "cue": {
+    "px": 28465,
+    "p50": 0.5908,
+    "p90": 0.6859,
+    "mean": 0.5333
+   },
+   "lap": {
+    "px": 19909,
+    "p50": 0.5599,
+    "p90": 0.568,
+    "mean": 0.5461
+   },
+   "screen_margin": 0.0309,
+   "screen_ratio": 1.055
+  }
+ },
+ "errors": [],
+ "asks": "the SHIPPED screen luma of the pale cue against the lap, per view, measured by with/without through one locked camera - NOT an albedo ratio",
+ "cannot_see": "hue, touching silhouettes, and whether either mass reads as what it IS. Those are answered by looking.",
+ "engine": "BLENDER_EEVEE",
+ "engine2": "BLENDER_EEVEE",
+ "ok": true
+}

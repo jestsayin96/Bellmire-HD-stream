@@ -1877,3 +1877,7 @@ html.watch .suggest-send { background: var(--teal-ink); color: var(--parch); }
 .beast.deep.tier-3 { border-left: 7px solid var(--gold-dk); }
 .beast.deep.tier-4 { border-left: 7px solid var(--gold, #c6922f); }
 @media (prefers-reduced-motion: reduce) { .beast-pic { transition: none; } }
+
+/* S157: specialization line on the hero card and sheet (snapshot text, textContent only) */
+.hspec, .sspec { display: block; font-size: 0.78rem; letter-spacing: 0.04em; color: var(--teal-ink, #0e6a66); font-weight: 600; }
+.hspec { margin-top: 1px; }

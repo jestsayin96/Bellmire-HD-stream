@@ -962,6 +962,9 @@ function heroCard(h, isOpen, isMine) {
   meta.append(what, quick);
   idb.append(meta);
   if (h.title) idb.append(el("span", "htitle", h.title));
+  // S157 / System 40: the specialization's display name; "" (unspecialized) draws nothing
+  const specTxt = typeof h.spec_name === "string" ? h.spec_name.trim() : "";
+  if (specTxt) idb.append(el("span", "hspec", specTxt));
   const coa = coat(h.name, "md");
   coa.classList.add("hcoa");
   sum.append(sg, idb, coa);
@@ -1091,6 +1094,8 @@ function heroSheet(h, mode) {
   const lv = pickNum(h.level);
   const callingTxt = `${cap(h.species)} ${cap(h.class)}`.trim() || "Adventurer";
   who.append(el("div", "scall", callingTxt + (lv != null && lv > 0 ? ", level " + num(lv) : "") + (h.rank ? "  \u00b7  " + h.rank : "")));
+  const sheetSpec = typeof h.spec_name === "string" ? h.spec_name.trim() : "";
+  if (sheetSpec) who.append(el("div", "sspec", "Path of the " + sheetSpec));
   sid.append(who);
   if (!fallen) {
     // H11: pin this hero as "mine" so it is easy to find next visit
@@ -5231,7 +5236,7 @@ function withMock(p) {
     else if (MOCK === "satchel2") carry = { weight: 112, cap: 150, band: "heavily encumbered" };
     const me = { name: "mockviewer", class: "knight", species: "human", level: 4, rank: "Delver", standing: 12, ac: 15, hp: 30, gold: 120,
       kills: 3, deepest: 2, delves: 2, xp: 40, to_hit: 4, prof: 2, saves: "STR +4", stats: { str: 14, dex: 12, con: 13, int: 9, wis: 11, cha: 8 },
-      satchel: items, carry, where: "walking to The Smithy " + bad,
+      spec: "guardian", spec_name: "Guardian " + bad, satchel: items, carry, where: "walking to The Smithy " + bad,
       vault: MOCK === "satchel0" ? { slots: 12, items: [] } : { slots: 12, items: [{ name: bad + " Hoard", slot: "gem", weight: 0, sell: 500 }, { name: "Spare boots", slot: "armour", weight: 4, sell: 12 }] } };
     out.heroes = [me].concat(arr(p.heroes));
     out.orders = [{ who: "mockviewer", item: bad + " Helm", shop: "The Smithy", walker: "mockviewer" }, { who: "someone-else", item: "Loaf", shop: "The Provisioner" }];

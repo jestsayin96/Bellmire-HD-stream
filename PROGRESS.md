@@ -23861,3 +23861,13 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - VALIDATION OK: all four owned files json.load; every pre-existing key of lore_lines.json equal to its pre-edit value; only new key spec_text (with _note_c237); all 30 path stems found in roster.gd SPECS.
 - CODE WIRING: game build may read `spec_text[calling][path].blurb` over SPECS blurbs in paths_line / specialize replies. Zero-hit until then (expected, _note_c237).
 - Next content: C-238.
+## HUB 13:39 CT, 27 Nov - THE `spec` FIELD CONTRACT (the row's one block) - web/ UNCHANGED, no publish gate owed
+- Row: TAKE THIS NEXT 12:58 block, HUB (:37): "name the field contract you need, one short block, nothing else; if the game build lands the field, do the card; else stand down". Checked origin/main first: scripts/snapshot_pub.gd:602-603 still publishes name/class/species/level/xp and NO spec (grep of scripts/snapshot_pub.gd for spec/calling = only "species"). Field NOT landed -> no card, stand-down on the card.
+- THE CONTRACT I NEED, for the game build's publisher row (hero rows only, additive, no payload-version bump needed beyond the usual additive-field rule):
+  1. KEY NAME: `spec` on each hero row (and on fallen rows if cheap). Value is the DISPLAY NAME, i.e. `Roster.calling_of(h)`'s path name ("Guardian", "Tracker") - NOT the raw stem. Reason: the hub must never turn a snapshot value into anything but text, and the display name is the string a viewer reads; the raw stem would need a hub-side name table that could drift from SPECS.
+  2. NOT YET SPECIALIZED: publish `spec` as the EMPTY STRING "" (or omit it). The card then shows NOTHING extra - the existing "Species Class, level N" line stays exactly as it is. No "unchosen" placeholder, no "?" - an unspecialized hero is the normal case below level SPEC_AT and must not look like missing data.
+  3. WHEN SET: the card's calling line becomes "Species <spec> (class), level N" via el()/textContent only; the crest icon keeps keying off the BASE `class` (so `class` must keep being published unchanged - do not replace it with the path name).
+  4. OPTIONAL, ONLY IF EASY: `spec_way` (taunt/trapsense/mend_party/death_ward/aura/"") as a short string; the hub would render it as a fixed-label chip chosen from a page-owned whitelist, never as free text. Not needed for the card; skip it if it costs a line.
+  5. LENGTH/TRUST: treat as untrusted like every name - the hub caps and escapes it; publisher should clamp to ~24 chars.
+- Security invariants: not touched this hour (web/ byte-identical to origin/hub; nothing to re-grep). Hostile-name test not owed.
+- Merged origin/main (33 commits) into hub before reading the plan, so this read the current block.

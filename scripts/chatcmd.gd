@@ -203,6 +203,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                     out = _caravan_line()
         "festival", "feast":
                     out = _festival_line()
+        "dice":    out = _needs(user_id, func(): return _dice_line(user_id, arg, arg2))
         "town", "bellmire":
                     out = _town_line()
         "bestiary", "beasts", "monsters":
@@ -574,6 +575,58 @@ const TOWN_BUILT := {"market_hall": "the market hall", "stables": "the stables",
                      "mage_tower": "the mage tower"}
 
 ## the town's standing, or {} when nothing is standing. An override wins; otherwise the
+## S38 (B198): `!dice` - the tavern's dice game. THE RULES LIVE IN economy.gd AND THEY STAY THERE.
+## This arm resolves WHO is playing and renders the engine's own `text`; it computes no payout,
+## moves no gold and re-states no rule. Three shapes, and the engine's own contract decides each:
+##   `!dice`            -> tavern_dice(h)        a throw for luck, no stake, nothing moves
+##   `!dice <amt>`      -> tavern_dice(h, amt)   against the house
+##   `!dice accept`     -> tavern_accept(h)      settle a dare already on the table
+##   `!dice <amt> <who>` -> tavern_challenge(h, other, amt)
+## WHY A CHALLENGE AND NOT A DUEL: tavern_duel takes BOTH purses, so S151 put an offer in front of
+## it - the challenged hero must type `!dice accept`. Calling tavern_duel from here would gamble a
+## viewer's gold without them, which is exactly what the engine lane refused to allow.
+## A refusal (min, max, gold, dead, self, none) already arrives as a finished line in `text`, so
+## there is nothing for this lane to phrase. The one line that IS this lane's own is the unparsable
+## stake, because the engine is never reached with it.
+func _dice_line(user_id: String, arg: String, arg2: String) -> String:
+    var e = _economy()
+    if e == null:
+        return "There is no tavern standing yet."
+    var h := roster.get_hero(user_id)
+    if arg == "accept":
+        return String(e.tavern_accept(h).get("text", ""))
+    if arg == "":
+        return String(e.tavern_dice(h).get("text", ""))
+    if not arg.is_valid_int():
+        return "%s - a stake is a number of gold. !dice 20, or !dice 20 <name> to dare someone." % String(h.get("name", "A hero"))
+    var amt := int(arg)
+    if arg2 == "":
+        return String(e.tavern_dice(h, amt).get("text", ""))
+    var other := _hero_named(arg2)
+    if other.is_empty():
+        return "No hero named %s." % safe_word(arg2)
+    return String(e.tavern_challenge(h, other, amt).get("text", ""))
+
+## the living hero whose name a viewer typed, or {} - the roster is the only register of names
+func _hero_named(nm: String) -> Dictionary:
+    if roster == null or nm == "":
+        return {}
+    for k in roster.heroes:
+        var c: Dictionary = roster.heroes[k]
+        if String(c.get("name", "")).to_lower() == nm:
+            return c
+    return {}
+
+## the economy standing beside the roster in the town, or null. _town_state() below digs the same
+## node out for its own reasons; this returns the node itself, because the tavern is CALLED, not read.
+func _economy():
+    if roster == null:
+        return null
+    var t := roster.get_parent()
+    if t == null:
+        return null
+    return t.get("economy")
+
 ## economy and the growth the Roster's own parent holds.
 func _town_state() -> Dictionary:
     if town_of.is_valid():

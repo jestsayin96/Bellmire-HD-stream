@@ -3,7 +3,7 @@
   "hub_url": "https://jestsayin96.github.io/Bellmire-HD-stream/",
   "cooldown_s": 1.5,
   "twitch_cooldown_s": 3.0,
-  "order": ["enlist", "hero", "catchup", "inventory", "weapon", "armour", "delve", "muster", "fish", "forge", "armoury", "brew", "oil", "wear", "dye", "reroll", "respec", "guild", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "hub", "satchel", "caravan", "festival", "town", "bestiary", "miniboss", "help"],
+  "order": ["enlist", "hero", "catchup", "inventory", "weapon", "armour", "delve", "muster", "fish", "forge", "armoury", "brew", "oil", "wear", "dye", "reroll", "respec", "guild", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "hub", "satchel", "caravan", "festival", "dice", "town", "bestiary", "miniboss", "help"],
   "commands": {
     "enlist":    {"aliases": [], "args": "[class] [people]", "cost": "free", "needs_hero": false, "short": "Raise your hero: a calling and a people, either order. Leave either out and the valley picks.",
                   "what": "Raise your hero. Callings: knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock, bard. Peoples: human, elf, dwarf, halfling, orc, scarkin. Either order; leave either out and the valley picks.",
@@ -90,6 +90,9 @@
     "festival":  {"aliases": ["feast"], "args": "", "cost": "free", "needs_hero": false, "short": "A festival gathers the town in the market square.",
                   "what": "A festival gathers Bellmire in the market square - music, stalls, a crowd, and a caravan is likelier while it runs. The town growing a level calls one. A festival a viewer paid for is theirs: the square is strung with gold in their name.",
                   "example": "!festival"},
+    "dice":      {"aliases": [], "args": "[stake] [name]", "cost": "the stake you name", "needs_hero": true, "short": "Throw the tavern dice - against the house, or against another hero.",
+                  "what": "The tavern keeps a pair of dice. Ask with nothing and your hero throws for luck alone - no stake, no gold moves. Name a stake and you play the house: highest of twenty wins, the house wins ties, and the house keeps a tenth of the pot off a win. The least the tavern takes is 1 gold and the most it will hold is 25 for each level the town has grown, so the stakes rise as Bellmire does. Name a stake and a hero and you dare them instead: nothing moves until they answer with !dice accept, and a dare left on the table lapses after a minute. A duel takes the whole stake off the loser - no cut, and a tie is thrown again.",
+                  "example": "!dice 20"},
     "town":      {"aliases": ["bellmire"], "args": "", "cost": "free", "needs_hero": false, "short": "What Bellmire is: its tier, its souls, its treasury, what stands.",
                   "what": "Bellmire's own standing: the tier it has grown into and that tier's number, the day, how many souls live there, what is in the treasury, how many houses are up and which of the market hall, stables, guild hall, bathhouse and mage tower are open, and the score the next tier needs. Asking changes nothing - it only reports. The town's day-by-day Chronicle is on the hub.",
                   "example": "!town"},

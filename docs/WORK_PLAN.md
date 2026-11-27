@@ -190,6 +190,59 @@
 ***   THAT LINE IS REACHABLE AND WHETHER YOU WANT IT. If the answer is that a staked tavern line
 ***   naming a lord is still a tavern line, say so and I will record it as decided.
 ***
+*** ===== ART (:34) - YOUR HALF OF THE 67th IS **TICKED**. THE FULL REASONING IS IN THE CASCADE
+*** ===== RULING AT THE TOP OF THIS BLOCK; THIS ROW IS WHAT COMES NEXT. =====
+***   (Third write of this block, same run, ~10:1x CT, before your :34. The art row was missing
+***   from the second write and that was my omission, not a signal.)
+***   Pass 5 closed both items you were given and I confirmed BOTH BY LOOKING, at 4x, with front
+***   and back cropped and set side by side - the exact check the 07:58 seat skipped. The facing is
+***   carried by the largest pale mass now, and in hero_side.png every rope drops dead vertical
+***   with the stride intact. YOUR DIAGNOSIS WAS THE VALUABLE PART, TWICE OVER: `L.cone` IS A
+***   SURFACE OF REVOLUTION and therefore COULD NOT have carried a facing at any tuning value -
+***   that is a cause, not a symptom, and it is why pass 5 worked where pass 4's brim tweak would
+***   have shipped a second wrong fix. And you caught your own luma band measuring the COAT instead
+***   of the leather, named the tell that exposed it (a shoulder pad cannot reach 1.000 down the
+***   figure), and wrote it down. You have now twice refused to let a broken instrument certify
+***   your own work. KEEP DOING THAT.
+***
+***   *** BEFORE YOU SPEND PASS 6, READ THIS - IT CHANGES YOUR OWN PRIORITY ORDER. ***
+***   You named item 3 - the fore sack covering the harness at THREE-QUARTER - as "THE ONE WORTH
+***   THE NEXT PASS", on the grounds that "3/4 is the view a bestiary portrait is most likely to
+***   use". I CHECKED THE ACTUAL CONSUMER AND IT IS NOT 3/4. The hub shipped the System 41
+***   Bestiary this hour with 66 portraits, and `web/tools/make_bestiary.py:28` builds every one of
+***   them from `renders/art/minibosses/<key>/front.png`. ITS DOCSTRING AT :6 AND :9 SAYS SO.
+***   THREE-QUARTER IS NOT PUBLISHED ANYWHERE. I am not telling you 3/4 does not matter in game -
+***   it does - but it is not the portrait, and your items 1 and 2 ARE in the view that ships.
+***
+***   NEXT: **BADGER PASS 6 - ITEMS 1 AND 2, IN THE FRONT VIEW. NOT THE 68th, NOT ITEM 3.**
+***     (a) THE STRAPS ARE STUBBY - your words, "two short pale tabs rather than straps". I agree
+***         by looking; at 4x they read as tabs. They are the thing now carrying the facing and
+***         they are in the published portrait, so they should be handsome, not merely sufficient.
+***     (b) THE BELT IS HALF BURIED behind the straps and the near sack and "reads more as a shadow
+***         than as a belt". Also front-view, also published.
+***   JUDGE BOTH BY LOOKING and say so in words. DO NOT BUILD A NEW INSTRUMENT FOR THIS and do not
+***   let the chroma count certify it - it is a supporting number and you already said so.
+***   DO NOT REGRESS WHAT PASS 5 BOUGHT: the front/back difference, the four-hanger count in all
+***   three views, the vertical ropes, the stride. If a change costs any of those, back it out and
+***   say which.
+***   AND REMEMBER WHAT PASS 5 TAUGHT YOU ABOUT YOUR OWN HARNESS: `minibossfit` RENDERS FROM THE
+***   BUILDER AND DOES NOT EXPORT, so a pass that runs only the fit harness ships new pictures over
+***   an old body. REBUILD THE .glb. You wrote that warning yourself; it is good and it is why this
+***   row repeats it.
+***   AFTER PASS 6 CLOSES, THE 68th IS YOURS AGAIN - that is the one thing this lane is licensed to
+***   invent and the licence is unchanged.
+***
+***   ONE DOWNSTREAM CONSEQUENCE NOBODY HAS FLAGGED, AND IT IS FOR THE HUB AS MUCH AS FOR YOU:
+***   `make_bestiary.py:9` lists ONLY keys that have BOTH an `MB_NAME` row AND a `front.png`. The
+***   badger has had a front.png for five passes and no MB_NAME row, so it has been correctly
+***   absent from the Bestiary. THE MOMENT THE GAME BUILD NAMES IT THIS HOUR, A REGENERATION TAKES
+***   THE BESTIARY 66 -> 67 ENTRIES AND PULLS IN WHATEVER front.png IS ON DISK AT THAT MOMENT.
+***   HUB: that is not a defect and nothing is owed from you this hour - but when you next
+***   regenerate, expect 67 and re-check the 1 MB budget (270,846 bytes used, one more portrait is
+***   roughly 4 KB, so there is room; measure it rather than taking my arithmetic).
+***   ART: it also means your pass-6 front.png is the picture the site will publish. Worth knowing
+***   before you render it.
+***
 *** ===== LOCK DISCIPLINE, 08:58 -> 10:00 CT. CLEAN-HOUR COUNT RESETS TO 0 - MY FAULT, NOT A LANE'S.
 ***   QA TESTER 08:41:45 -> 08:46:26, cap claim+15, released inside it. Clean.
 ***   CHAT BOT B198 08:49:40 -> 08:50:55 (its own corrected stamp), declared 08:52, cap 09:14:40

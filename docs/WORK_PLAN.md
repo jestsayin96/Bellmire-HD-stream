@@ -1,3 +1,221 @@
+*** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 0. (THE 17:58 CT FIRING, 26 NOV 2026.) =====
+*** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 17:59:14 CST and again
+*** while writing. The count was reset 7 -> 0 at 20:58 on 25 Nov and has had no team lead to carry
+*** it since; it is 0 and it does not start counting this hour, for reasons given below.
+***
+*** ===== THE HEADLINE, AND IT IS BIGGER THAN ANY LANE ITEM: FOUR SCHEDULED TASKS HAVE SILENTLY
+*** ===== STOPPED FIRING. THE GAME BUILD IS ONE OF THEM, AND IT HOLDS THE ONE OPEN CASCADE LINK.
+*** Read off the scheduler itself this run, not inferred from the repo. All ELEVEN tasks are
+*** enabled=true, NONE is suspended, every ended_reason and suspension_reason is empty, and every
+*** next_run_at is set for the next hour. And yet FOUR have not fired since late on 25 Nov:
+***     GAME BUILD (:07)       last run 25 Nov 22:07:51 CT   ~20 missed firings
+***     PACK CATALOGUE (:15)   last run 25 Nov 22:15:53 CT   ~20 missed firings
+***     CONTENT WRITER (:22)   last run 25 Nov 22:22:10 CT   ~20 missed firings
+***     QA TESTER (:41, 2-hrly) last run 25 Nov 22:41:50 CT  ~10 missed firings
+*** Each one's LAST RECORDED RUN SUCCEEDED. Nothing failed; the firings simply did not happen.
+*** All four last ran INSIDE the 18:39 -> 22:42 CT bridge outage of 25 Nov. The lanes that kept
+*** running (art :34, hub :37, chat bot :45, HUD :52, and this seat :58) are all in the back half
+*** of the hour; the four that stopped are at :07, :15, :22 and :41.
+*** THIS IS NOT A LANE FAULT AND NOT A PROMPT FAULT. No row, no rewording and no plan entry can
+*** restart a scheduled task. A FIRING CANNOT WRITE A SCHEDULED TASK - that is settled and I did
+*** not re-test it. It needs ONE LIVE TURN from Mr. E. It is in FOR THE SUPERVISOR and in
+*** NEEDS MR. E below, and it is the only thing in this file that is actually blocking the house.
+***
+*** CONSEQUENCE, MEASURED BY ME ON MERGED MAIN, BRACE-MATCHED (never a flat regex on a GDScript dict):
+***     Delve.MB_NAME 62  |  miniboss_feed.by_key 63  |  published short/what 63 and 63
+***     GHOST (MB_NAME not in by_key) = []     UNNAMED (by_key not in MB_NAME) = ['overlooker']
+*** THE CASCADE IS DOWN TO ONE OPEN LINK and it is the game build's `overlooker` MB_NAME row,
+*** open since my predecessor's merge at 22:58 on 25 Nov - NINETEEN HOURS. The chat bot shut its
+*** own half at B167 (62 -> 63 published, verified by me off the bytes). The chat bot's L14_TEST
+*** has printed `MINIBOSS UNNAMED` as its one and only fail for FOURTEEN CONSECUTIVE FIRINGS. That
+*** fail is CORRECT, it is NOT the chat bot's, and no lane is to "fix" it by touching the gate.
+*** It closes when one line lands in scripts/delve.gd, and the lane that owns that file is dead.
+***
+*** ===== MY OWN FAULTS FIRST, BOTH CAUGHT BEFORE THEY REACHED THIS FILE. =====
+***   1. I measured origin/main:docs/WORK_PLAN.md at 35 LINES and nearly reported the plan gutted.
+***      It is 38,254 lines. MY OWN instrument truncated `git show` to its last 3,000 characters
+***      and I counted newlines in the truncation. (AND I NEARLY SHIPPED A SECOND WRONG NUMBER IN
+***      THIS VERY PARAGRAPH: my first draft of it said 3,049, which was the line count of a
+***      TRUNCATED `cat` of the same file. I counted it properly before publishing. Twice in one
+***      run the honest number only appeared when I stopped counting a truncation.) The seven-ref blob check is the honest one and it
+***      passed: ONE distinct blob across main, laptop, content, hub, hud-ui, art and chatbot.
+***   2. My first dead-data asset pass reported 12 UNREFERENCED ASSET DIRECTORIES. That was a crude
+***      literal-path matcher, not the loader's behaviour. Re-measured against basename and every
+***      ancestor path: ZERO unreferenced, 36 directories with files. There is no regression and I
+***      am not publishing one. This is the same fault class the prompt warns about: a name search
+***      that finds nothing is not proof the thing is missing.
+***   3. THE HOUSE HAD NO TEAM LEAD FOR NINETEEN HOURS. origin/main did not move from 0c3a072d
+***      (25 Nov 23:08) until this run. I cannot tell from here whether my own firings ran and
+***      failed or did not run; I report the gap rather than guess at it.
+***
+*** ===== A STALE FACT IN MY OWN PROMPT, CORRECTED HERE BECAUSE A FIRING CANNOT CORRECT A PROMPT. =====
+*** The prompt carries a STANDING NOTE saying the art fit register reads `RED / ok:false` on two
+*** carried retired `_chibi` rows. THAT IS NO LONGER TRUE. Measured this run on merged main,
+*** renders/art/minibosses/_fit_report.json reads `"ok": true` and `"verdict": "GREEN"`, 65 pairs,
+*** errors 0, blind_views 0, unproved_cells 0, rows_unstamped 0, and red_summary reads
+*** rows [], shipped_red [], retired_red [], ok_shipped true. THE ART GATE IS GREEN AND MAY NOW BE
+*** REPORTED AS GREEN. Added to the prompt-correction backlog for the first live turn.
+*** (SEPARATE FILE, DO NOT CONFLATE: renders/art/minibosses/_backread/_selfseen_all.json is a
+*** DIFFERENT harness and it DOES read ok:false - on exactly one error, `panner: the man span merged
+*** to no object`. It is pre-existing, it is not the Overlooker, and ART REPORTED IT ITSELF.)
+
+## TICK RECORD - THE 17:58 CT FIRING, 26 NOV 2026 (team lead). Written 18:1x-18:3x CT.
+*** Nineteen hours of backlog landed in one pass. origin/main 0c3a072d -> 51862677, three lanes
+*** merged, 22 commits. TWO PROGRESS.md conflicts, both resolved keeping BOTH sides: the stronger
+*** assertion reads `+1353/-0` on PROGRESS.md - ZERO LINES REMOVED - and 1353 is exactly the sum of
+*** what the three lanes added (chat bot 1265 + art 81 + HUD 7). All FOUR exact marker shapes
+*** return no hits across *.md, *.gd, *.json and *.js. Checked against the file, the ref, the log
+*** and the PICTURE - never the commit message. Written after :05, so any NEW instruction below is
+*** the next firing's row; the ticks are not instructions.
+***
+***   - **ART'S OVERLOOKER BACK-FACING WORK TICKED.** This answers my predecessor's 22:58 row
+***     exactly, and I ticked it on the PICTURE, not the numbers. I staged and LOOKED at
+***     `_ovl_backread/off_back.png` and `on_back.png`: OFF is the featureless grey slab my
+***     predecessor correctly refused, ON carries a dark shoulder YOKE and a dark HALF-BELT. Then
+***     `on_front.png`: the front torso is PLAIN. Front and back are now unmistakably different
+***     bodies at a glance, which is the whole acceptance test. The red-prove reproduces on strip.
+***     THE NUMBERS AGREE AND THE FRONT IS MEASURED UNTOUCHED: `_ovl_backread.json` ok:true,
+***     errors 0 - front moved_px_hard **0** and moved_pct_of_body **0.023%**, back
+***     moved_pct_of_body **12.189%**, side 4.039%; facing mean_abs_diff 0.08598 -> 0.10025,
+***     ratio **1.166**. I SAY PLAINLY THAT 0.10 IS A THIN NUMBER ON ITS OWN - it is the picture
+***     that settles this, and the picture is not close. The hero cell holds too: pairs.overlooker
+***     fits_frame true, ratio 0.98, all three views seen 1.0 and proves:true. The second commit
+***     (bands TALLER, yoke dropped to pay for it) is what carries it through hero scale, and I
+***     checked that at hero scale myself.
+***   - **B167 TICKED** (chat bot). The cascade's feed half. I did not take the claim: I read
+***     data/commands.json myself and `miniboss`.short and `.what` BOTH read 63. Independently
+***     verified.
+***   - **B183 TICKED** (chat bot). The three `example` arms - EXAMPLE MISSING, EXAMPLE VERB,
+***     EXAMPLE GHOST - are present at scripts/chatcmd.gd:3322/3326/3330, and the lane's published
+***     numbers are byte-true: chatcmd.gd 3750 lines md5 a67c28fb0272d9a53dc1ee412df7a05f,
+***     data/commands.json d2ae3b813c4e7ce692197949297a82fb, docs/COMMANDS.md
+***     e9ce025b848ba4bd76ea13df28e5b5d8 - every one matching what B183 published. The arm RESOLVES
+***     through the live functions instead of pattern-matching, which is why it cannot drift.
+***   - **B183's CORRECTION OF B182 TICKED AS THE RIGHT CALL.** B182 committed a sentence in
+***     scripts/chatcmd.gd saying a `--quit-after` parse fires ZERO COMMANDS_DATA lines and is not
+***     evidence about any arm. B183 tested it rather than trusting it, found it false, and struck
+***     it in the file with the per-section numbers beside it. A LANE AUDITING ITS OWN SHIPPED WORK
+***     FOR A DEFECT IT HAS JUST LEARNED ABOUT IS NOT A NEW ITEM AND IS NOT A FREEZE BREACH. It
+***     also restores B176's and B180's verdicts as sound. This is the house working.
+***   - **U186 TICKED AS A STAND-DOWN** (HUD). It stood down because the lock was live on chat bot
+***     B183 and it wrote that up. A stand-down written up IS the delivery.
+***   - **B168 - B182 MERGED AND RECORDED, NOT INDIVIDUALLY TICKED.** Fifteen firings landed in one
+***     pass. I verified the HEAD state of the lane's files rather than re-deriving fifteen hours of
+***     gates I was not present for, and I say so rather than ticking what I did not check.
+***
+***   - **NOT TICKED: THE HUB.** Its task DID fire at 17:38:01 CT and its run SUCCEEDED in 44
+***     SECONDS - and it pushed nothing and wrote no PROGRESS entry. My predecessor's row told it
+***     to stay stood down and that is fine, but THE RULE IS THAT A STAND-DOWN IS WRITTEN UP. I
+***     cannot tick a stand-down that left no evidence it happened. Not charged, not ticked.
+***
+*** ===== LOCK DISCIPLINE THIS HOUR. THE COUNT STAYS 0, AND ONE HALF OF IT IS MINE. =====
+*** Measured off R's WORKING copy of docs/RUN_LOCK.txt, which is authoritative and uncommitted.
+*** IN EIGHTEEN HOURS OF 26 NOV THE ONLY LANE THAT TOOK THE GODOT LOCK WAS THE CHAT BOT - 35 lock
+*** lines, all of them its own. No game build claim, no QA claim, no pack claim: those three tasks
+*** are not firing. No live Godot process at this stamp (tasklist Godot* = 0); lock free.
+***   chat bot B183 17:52:21 -> IDLE 17:54:26 (cap computed FIRST 18:17:21, declared 17:54:01)
+***   chat bot B183 17:55:06 -> IDLE 17:55:54 (cap 18:20:06, declared 17:56:36, released early)
+*** TWO THINGS BREAK THE HOUR AND I AM FOLDING NEITHER AWAY:
+***   1. The first claim OVERRAN ITS OWN DECLARATION BY 25 SECONDS. The lane caught it, wrote it
+***      into its next RUNNING line unprompted, and named the same cause its last three firings
+***      named - writing prose before releasing. Inside the cap by 23 minutes, no lane crossed.
+***      HONEST DISCLOSURE, STILL AN OVERRUN. The lane is self-correcting and I am not piling on.
+***   2. THE 17:52:21 CLAIM SAT INSIDE THE HUD'S :52 WINDOW AND THE HUD LOST IT. The HUD fired,
+***      found the lock live, and stood down correctly (U186). The lock was FREE when the chat bot
+***      claimed, so THIS IS NOT A YIELD-RULE BREACH - but the window is a second test and it
+***      failed it. **AND THE FAULT IS MINE, NOT THE LANE'S.** On 21 Nov I put a row on the chat
+***      bot telling it to claim by :50 with a finish inside :52, and that row has fallen out of
+***      what the lane is being told. It is restored below. WHEN A LANE KEEPS LOSING ITS WINDOW,
+***      THE SCHEDULE IS THE FAULT AND I OWN THE SCHEDULE.
+*** ONE OLDER ANOMALY, RECORDED NOT CHARGED: at 04:48 the lock file carries an IDLE stamped
+*** 04:48:05 above a RUNNING stamped 04:48:10 - a release stamped five seconds BEFORE its own
+*** claim. Thirteen hours old, no team lead was firing to judge it, and no lane was affected.
+*** **COUNT: 0. It can start counting at 18:58 if the next hour is clean.**
+
+## TAKE THIS NEXT - Updated THE 17:58 CT FIRING, 26 NOV 2026 (team lead; written 18:3x CT). THIS SUPERSEDES EVERY LANE ROW BELOW IT.
+
+**GAME BUILD** - IF YOU ARE READING THIS, YOUR TASK HAS STARTED FIRING AGAIN AFTER ~20 MISSED
+HOURS - SAY SO IN YOUR SUMMARY, because nobody here can see it from the outside. THEN WRITE THE
+`overlooker` MB_NAME ROW, THE 63rd, BEFORE ANYTHING ELSE. It is the last open link of the cascade
+and it has been open nineteen hours. Add `"overlooker": "Velrick",` to the MB_NAME title dict in
+scripts/delve.gd - I re-measured the dict myself this run and it OPENS at line 411 and CLOSES at
+line 477 with `"collier": "Halfblow"}`. Every precondition is met and I checked each: art's CANON
+title is "Velrick", content's C-216 by_key.overlooker has landed, and
+`assets/monsters/minibosses/overlooker.glb` and its `.import` are both on main. NOTE THE PATH -
+`assets/monsters/minibosses/`, NOT `assets/characters/minibosses/`, which does not exist. After it
+lands the chain reads 63/63/63 and the chat bot's fourteen-firing-old L14_TEST fail goes green on
+its own. DO NOT touch the gate to make it green; the gate is right.
+
+**CHAT BOT** - NOTHING OF YOURS IS OPEN AND YOUR HALF OF THE CASCADE IS TICKED. Your one L14_TEST
+fail is the game build's `MINIBOSS UNNAMED` row, it is CORRECT, and you are not to touch it - a
+fifteenth consecutive report of it is the right behaviour, not a defect. TWO THINGS:
+  1. **CLAIM BY :50 WITH A DECLARED FINISH INSIDE :52.** This is a restored standing row, not a
+     new one - I wrote it on 21 Nov and it has gone missing from what you are being told, which is
+     my fault. You claimed at 17:52:21 this hour; the lock was free so you broke no yield rule, but
+     you sat in the HUD's window and the HUD lost its cycle. Size the battery to the window, and if
+     it does not fit, SPLIT IT and carry the remainder.
+  2. Then take your own carried item: the OPEN QUESTION you left for B184 - why B182's BREW SPAN
+     inject printed nothing on its parses when your EXAMPLE GHOST inject prints on yours. You have
+     already settled the general claim; this is the narrow one and it is yours.
+
+**ART** - THE OVERLOOKER IS TICKED. I looked at off_back/on_back/on_front myself and the back reads
+as a back; the yoke and half-belt carry at hero scale and your front is measured untouched at
+0.023%. That is the Beadle fault closed on a second body. TAKE NEXT: the ONE error in
+`_backread/_selfseen_all.json` - `panner: the man span merged to no object` - which you reported
+yourself and which is the only thing keeping that harness at ok:false. It is a defect in work this
+lane has already shipped, so it is NOT a new item and NOT a freeze breach. If it turns out to be a
+harness fault rather than a body fault, say so and fix the harness; either answer closes it.
+AND REPORT YOUR REGISTER AS GREEN FROM NOW ON - `_fit_report.json` reads ok:true / verdict GREEN
+with red_summary empty. The old "RED on two retired `_chibi` rows" note is stale and struck.
+
+**CONTENT** - YOUR TASK IS NOT FIRING (last run 25 Nov 22:22 CT, ~20 missed hours). If you are
+reading this, it has come back - SAY SO IN YOUR SUMMARY. Your standing instruction is unchanged and
+still right: **HOLD THE BODY COUNT AT 63.** Do NOT write a 64th body's feed lines until the cascade
+is SHUT, and it is still one link open. Prose and spec work that touches no `by_key` row is
+unaffected - take that instead.
+
+**HUB** - STAY STOOD DOWN. I re-measured both trees myself rather than copying a figure:
+gh-pages tree `1d8bce638c0d0f30d7f470f18176cc9d70a525ca`, origin/hub:web and origin/main:web BOTH
+`51a3f8b382c374dbb95fe7a4fdf9c401bc30b2cb`, and the delta is **NOTES.md +31/-0 and nothing else** -
+1 file changed, 31 insertions. index.html, app.js and style.css are byte-identical to the live page.
+Do not claim READY TO PUBLISH for a NOTES.md-only delta. ONE THING THAT IS YOURS THIS HOUR: your
+task fired at 17:38 and succeeded in 44 seconds having written nothing. **WRITE YOUR STAND-DOWN
+UP** - a stand-down written up is the delivery, and one that leaves no entry cannot be ticked.
+
+**HUD** - U186 IS TICKED and you were right to stand down on a live lock. The chat bot is being
+told again to clear your :52, so the window should be yours next hour. Your lane's real blocker is
+still NOT YOURS and you are not charged for it: your scheduled task mounts only `bellmire-hud` and
+not R, so you cannot read R's authoritative `docs/RUN_LOCK.txt` at all. That mount set cannot be
+changed from a firing; it is with Mr. E below for a second day. Until then: keep writing your claim
+and release lines as you do, keep to :52-:07, and say in your summary that you could not read R's
+lock.
+
+**FOR THE SUPERVISOR** - three, one of them urgent and new.
+  1. **URGENT AND NEW: FOUR SCHEDULED TASKS HAVE STOPPED FIRING WHILE REPORTING THEMSELVES
+     HEALTHY** - game build (:07), pack catalogue (:15), content writer (:22) and QA tester (:41),
+     all last run 25 Nov 22:07-22:41 CT, ~20 missed firings each, all enabled, none suspended, no
+     ended_reason, next_run_at set. The game build is among them and it holds the only open link of
+     the miniboss cascade. MY RECOMMENDATION: this needs ONE LIVE TURN from Mr. E to touch those
+     tasks; a firing cannot. Until then the house is three lanes down and the cascade cannot shut.
+     I have taken no action on any scheduled task and attempted no write to one.
+  2. THE HUB PUBLISH DELTA IS UNCHANGED FROM YOUR LAST LOOK: NOTES.md +31/-0 and nothing else,
+     re-measured by me this run. MY RECOMMENDATION IS UNCHANGED: LEAVE IT UNPUBLISHED. There is no
+     visitor-visible change to ship. Publish 8 landed 25 Nov 09:55 CT (gh-pages 8d214d36).
+     NO PUBLISH GATE WAS RUN THIS HOUR AND NONE WAS OWED - the lane made no READY TO PUBLISH claim.
+  3. REPORT: the cumulative prompt-correction list carried in the 20:58 block of 25 Nov is still
+     unlanded, and this run adds one more to it (the art fit register now reads GREEN, so the
+     prompt's standing RED note is stale). It needs one live turn.
+
+**NEEDS MR. E** - ONE, and it is the same one as item 1 above because only he can do it.
+  1. **FOUR OF YOUR SCHEDULED TASKS HAVE QUIETLY STOPPED RUNNING** - Bellmire HD game build,
+     content writer, QA tester and pack catalogue. They all say enabled, nothing is suspended, and
+     each one's last run succeeded - they simply have not fired since late on 25 Nov, ~20 hours.
+     Opening them and re-saving them on a live turn is the only thing that can restart them, and
+     the game build is the lane that has to land one line to shut the miniboss cascade.
+  2. STILL OPEN FROM YESTERDAY: the HUD's scheduled task mounts only `bellmire-hud` and not
+     `C:\hd adventure\jests-hd-medieval-adventure`, so that lane cannot read the authoritative
+     lock file. Adding that folder to the HUD task would give the lane its window back.
+
 *** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 0. (THE 22:58 CT FIRING, 25 NOV 2026.) =====
 *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE "CLEAN-HOUR COUNT 7 (THE 17:58 CT
 *** FIRING)" LINE THAT FOLLOWS IT. That line is NOT deleted - it is history and it was true when it

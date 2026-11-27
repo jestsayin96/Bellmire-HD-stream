@@ -23608,3 +23608,33 @@ Item: HUD row of the 07:58 TAKE THIS NEXT block - measure the longest economy.gd
 - VALIDATION OK: four owned files json.load; leaf compare 0 removed, 0 changed, 32 added (31 lines + note).
 - CODE WIRING: none; pools already read.
 - Next content: C-234.
+## HUB 27 Nov 2026 09:42 CT - the System 41 Bestiary, AUDITED WHOLE with all 66 portraits staged
+- ROW QUOTED VERBATIM. Block "*** ===== TAKE THIS NEXT - THE 08:58 CT FIRING, 27 NOV 2026. =====" (docs/WORK_PLAN.md
+  line 1 on hub after merging origin/main), HUB row header at line 135: "*** ===== HUB (:37) - SYSTEM 41 SECTION 1 IS
+  TICKED. I RE-RAN YOUR SECURITY WORK MYSELF. =====" - NEXT: "AN AUDIT OF WHAT YOU JUST SHIPPED, NOT A NEW ITEM: LOOK AT
+  IT AGAIN WITH ALL 66 PORTRAITS STAGED." Three asks: stage all 66 and look; fix the "rumour" copy; MOVE
+  web/tools/_beast_dex_block.txt to _to_delete/.
+- THE NUMBER: 66 of 66 portraits staged (270,846 bytes, 1 MB budget) and rendered in headless Chromium at 1280x900 and
+  390x844. BROKEN IMAGES AFTER SCROLLING THE WHOLE GRID: 0 at both widths (66 cards, bestiaryBody scrolls internally:
+  7,148 px of content in a 600 px region at 1280; 13,632 px in 544 px at 390).
+- WHAT I LOOKED AT AND WHAT I SAW: (1) SILHOUETTES - brightness(0) opacity .55 on parchment reads as a BODY, not a
+  rectangle: the ladder-and-cart, the winged-arm figure, the tripod easel and the stove-and-hopper shapes are each
+  distinct at 64 px wide. No second asset needed. (2) TIER SEPARATION - the flag pill carries it (Undiscovered grey,
+  Faced/Survived/Killed/Full entry teal); the card BORDERS barely separate tiers - tier 4 has a thin gold edge, tiers 1-3
+  are the same hairline. A nit, not a fault; the pill is what reads. (3) PHONE - one column, cards stack, text wraps, no
+  horizontal scroll. The 64 px portrait is small but legible. (4) 61 of 66 imgs were incomplete on first paint at 1280
+  because loading=lazy defers off-screen ones; after scrolling all were loaded, so the earlier "8 of 66" breakage was
+  the staging, as the previous write-up said.
+- THE "RUMOUR" COPY, FIXED: the count line said "N met, M still rumour" and counted undiscovered chamber-holders as
+  rumours. It now reads "N met, M not yet met" (app.js:3364). The panel footnote in index.html still told every viewer
+  a beast "is only a rumour"; it now explains the four-step discovery (face = name, survive = how it fights, kill =
+  spoils, five kills = full entry) and keeps the Met/rumour sentence for the lore beasts only.
+- STALE FILE: web/tools/_beast_dex_block.txt MOVED to web/tools/_to_delete/ (mv -n worked; rm is refused here).
+- INVARIANTS RE-RUN ON THE CHANGED TREE: node --check rc 0; innerHTML CODE sites app.js:255 and :301 only (line numbers
+  unchanged); outerHTML 0, eval( 0, document.write 0, new Function 0, insertAdjacentHTML 0 outside comments; CSP meta
+  present with style-src 'self'. STATE/MOCK SWEEP with a hostile hero name <img src=x onerror=alert(1)>: ?state=empty,
+  fail, stale, ?mock=chronicle, crowd, roll, bands, bestiary, ?open=1 -> 0 page errors, 0 dialogs, 0 img[src=x];
+  where the name is shown it is literal text. Hostile mechanic "<b>rings</b>" and hostile drop "<img src=x ...>" in a
+  staged v5 payload render as literal text on the cards (0 injected elements).
+- NOT CLAIMED: READY TO PUBLISH. This is a 2-file copy fix (app.js 1 line, index.html 1 line) on top of an already
+  waiting delta; no publish gate owed. Live-dot colour: unchanged this run (no rail change).

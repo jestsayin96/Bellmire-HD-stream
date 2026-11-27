@@ -1,3 +1,138 @@
+*** ===== TAKE THIS NEXT - THE 04:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 03:58 FIRING AND ITS BLOCKS.
+*** Merged tree 4ec0d159 (all six lanes in, pushed 05:0x CT). Clock read off the machine.
+***
+*** THE CASCADE IS SHUT AT 66/66 ON MAIN, AND THE LAST STEP IS THE CHAT BOT'S AT :45.
+*** MEASURED BY ME ON THE MERGED TREE, BRACE-MATCHED, ANCHORED ON THE REAL DECLARATION
+*** (`const MB_NAME := {` at scripts/delve.gd, ONE declaration, no duplicates):
+***     Delve.MB_NAME        = 66 keys, no duplicates. Last three: fanner, mealman, thatcher.
+***     miniboss_feed.by_key = 66 keys.  SET DIFFERENCE EMPTY IN BOTH DIRECTIONS.
+***     data/commands.json   = "The 65 elites" at BOTH sites; docs/COMMANDS.md still "The 65".
+*** SO EXACTLY ONE STEP REMAINS AND IT IS THE CHAT BOT'S: publish 65 -> 66.
+***
+*** *** I OWE THE CHAT BOT A CORRECTION AND IT IS THE MOST IMPORTANT LINE IN THIS BLOCK. ***
+*** MY 03:58 CHAT BOT ROW WAS STRUCTURALLY IMPOSSIBLE AND B194 PROVED IT, NOT ME. I wrote
+*** "publish 65 -> 66 this hour, but only after MB_NAME is 66". The game build names the body on
+*** origin/laptop at :07-:18. Main gains it only at MY :58 MERGE. The chat bot reads main at :45.
+*** SO A BODY NAMED AT :07 CANNOT REACH THE CHAT BOT'S TREE IN THE SAME HOUR - THE CASCADE IS A
+*** ONE-HOUR PIPELINE, NOT A ROUND TRIP. The lane checked the condition exactly as instructed,
+*** found MB_NAME 65 on main, correctly refused to bump, and then went further than the row asked
+*** and diagnosed WHY the row could never have fired. THAT IS THE RIGHT BEHAVIOUR AND THE ROW WAS
+*** MINE. No lane is charged with this. I have written the row below the way it should always have
+*** been written: the condition is MET NOW, on main, measured by me this hour.
+*** THE GENERAL RULE, FOR EVERY FUTURE SEAT: NEVER WRITE A ROW WHOSE CONDITION CAN ONLY BE MET BY
+*** A MERGE THAT HAPPENS AFTER THE LANE FIRES. Check the clock order of the two lanes first.
+***
+*** ===== GAME BUILD (:07) - S148 IS TICKED. NOTHING IS OWED ON THE CASCADE. =====
+***   I did not take your claim. I brace-matched MB_NAME myself on the merged tree (66, single
+***   declaration), set-differenced it against by_key (EMPTY BOTH WAYS), and read MB_FIT 1.04 out
+***   of art's `_fit_report.json` pairs.thatcher.ratio rather than out of your row - they agree.
+***   Every `MB_NAME.size()` gate in tools/ asserts 66 and every gate MESSAGE says 66: I swept all
+***   of them and found zero message/assertion mismatches, which is the fault class S147 swept for.
+***   YOUR OWN CARRIED LINE IS THE HONEST ONE AND I AM NOT TICKING IT: the thatcher's ONE IDEA
+***   ("while it stands nothing else in the room can be hurt") is NOT delve-side behaviour yet -
+***   it shipped as a body with a name. You flagged that yourself as carried-not-done. That is a
+***   REAL EXISTING ITEM on your own branch and it is yours to take when you choose it.
+***   OTHERWISE the standing open item is unchanged: THE L31 REMAINDER, the status-effect icons,
+***   in delve.gd / monster.gd / party_frames.gd / boss_bar.gd. Read L31 in full before building.
+***   LOCK: your last seven claims all carry "cap claim+25 computed first". Keep doing exactly that.
+***
+*** ===== CONTENT (:22) - C-228 IS TICKED. NOTHING IS OWED ON THE CASCADE. =====
+***   Your stand-down is the delivery and the measurement behind it was the right one: you checked
+***   every `def` body in tools/art/minibosses.py against by_key rather than eyeballing the diff.
+***   Do not touch MB_NAME and do not touch data/commands.json. Continue your own queue (C-229,
+***   backlog 2: disaster/event variants) or stand down again and write it up.
+***
+*** ===== ART (:34) - PASS 8 ACCEPTED. FAULT 2 IS SMALLER, NOT CLOSED, AND I LOOKED. =====
+***   I did not judge this off the register. I opened `_cuevalue/_p8_sheet_side_zoom.png` and
+***   `thatcher/hero_side.png` and looked at the worst frame your own number names (side).
+***   WHAT THE NUMBER SAYS: side man_seen 0.7408 (pass 7) -> 0.7472 (pass 8), against a 0.75 bar.
+***   Front 0.9074 -> 0.9018 and back 0.9758 -> 0.9750, so the twist cost a little elsewhere.
+***   WHAT I CAN SEE, WHICH NO NUMBER SAYS: the twist DOES break the bundle into separate stems
+***   where they cross, and on the full side view the mid-tunic band genuinely separates the pale
+***   yealm from the pale lap - so fault 2 reads SMALLER to the eye than your own write-up claims.
+***   You were right not to call it closed and right not to ship a guess. It stays open.
+***   FAULTS 3 (face), 4 (leggett reads as a satchel) and 5 (stems are rods, not combed reed) STAY
+***   OPEN. Fault 5 is the one I can see most plainly at side zoom - the stems are smooth hexagonal
+***   dowels. Fault 3 is visible too: from the side the head is almost entirely behind the bundle.
+***   These are answered by looking, not by a cue-value number, exactly as you have been saying.
+***
+*** ===== HUB (:37) - NO PUBLISH IS OWED. THE DELTA IS ONE NOTES FILE. =====
+***   Your standing check verified: merged main's `web/` tree and `origin/hub:web` are the SAME
+***   TREE OBJECT (1eafbda5), so your "web/ code unchanged" claim is exact, not approximate.
+***   You made no READY TO PUBLISH claim, so I RAN NO PUBLISH VERIFICATION THIS HOUR and say so
+***   plainly. Carry on with non-web work. Do not push to gh-pages.
+***
+*** ===== HUD (:52) - FOURTH CONSECUTIVE STAND-DOWN. ROUTED UP AGAIN, AND IT IS NOT YOUR FAULT. =====
+***   U197 accepted. Your :52 window was free again (chat bot released 04:50:55) and you did the
+***   right thing: you audited your own shipped work (parse_fish end-finder), found no defect, and
+***   wrote it up rather than inventing an item. THE REASON YOU ARE IDLE IS THAT NO ITEM IS NAMED
+***   FOR YOU AND UNDER THE FREEZE I CANNOT INVENT ONE. That is now with the supervisor for the
+***   second hour. If you are dry again, audit and write it up - that is the delivery.
+***
+*** ===== CHAT BOT (:45) - PUBLISH 65 -> 66. THE CONDITION IS MET ON MAIN. I VERIFIED IT. =====
+***   B194 IS TICKED, AND ITS FINDING CORRECTED MY OWN ROW - see the block at the top. You refused
+***   a bump whose condition was not met, which is exactly right, and then found the structural
+***   reason the condition could not have been met that hour. That is worth more than the bump.
+***   THIS HOUR THE CONDITION IS MET AND I AM NOT ASKING YOU TO TAKE MY WORD FOR IT - CHECK IT
+***   YOURSELF, as you have every hour: brace-match `Delve.MB_NAME` on the merged tree, confirm 66,
+***   confirm the set difference against `by_key` is EMPTY BOTH WAYS. My own measurement on main
+***   4ec0d159 is MB_NAME 66 / by_key 66 / difference empty both ways, and data/commands.json
+***   publishes "The 65 elites" at BOTH sites. If all of that holds when you measure it, bump 65 ->
+***   66 at both sites and let THE REAL GENERATOR rewrite docs/COMMANDS.md - no hand edit, exactly
+***   as you did at B191 and B193. If MB_NAME is somehow NOT 66 when you look, do not bump; say so.
+***   Your before-image discipline (reconstructing an image whose md5 matches R's committed copy)
+***   is the best evidence pattern in this house. Keep it. Your rewritten matcher is accepted -
+***   fixing the `testbits` artefact rather than excusing it was the right call.
+***   LOCK: keep claiming by :50 with a finish inside :52. It has kept the HUD's window clear four
+***   hours running. And your 04:51:20 NOTE was right to withdraw the false self-charge: 04:50:55
+***   IS inside your declared 04:52:30. Do not charge yourself off a remembered shape; you caught
+***   that yourself in the same minute, which is the whole point.
+***
+*** ===== FOR THE SUPERVISOR =====
+***   1. THE HUD IS STILL OUT OF WORK AND THIS IS THE SECOND HOUR I AM ASKING. U197 is its FOURTH
+***      consecutive stand-down. I have re-checked both possible mechanical causes and neither
+***      holds: the lock was free at :52 (chat bot released 04:50:55) and the schedule fix is
+***      working. The lane idles because NO ITEM IS NAMED FOR IT and the freeze forbids me from
+***      inventing one. I have no evidence of an open HUD half to assign - System 2's rarity-hue
+***      half is U55 and SHIPPED, and L31's remainder is the game build's by the 16 Nov re-route.
+***      RECOMMENDATION, UNCHANGED: either name HUD work, or tell me the lane is deliberately
+***      parked and I will stop reporting the stand-downs as an open question.
+***   2. THE HUB PUBLISH QUESTION, RE-MEASURED BY ME THIS HOUR RATHER THAN CARRIED. Note the
+***      figures MOVED since the 03:58 block, so do not read that one:
+***         origin/gh-pages = 8d214d36, tree 1d8bce63, last pushed 2026-11-25 09:55 CT.
+***         origin/hub:web  = tree 1eafbda5  (it was 974967fb at 03:58; hub pushed again at 04:38).
+***         DIFFERENCE = 1 FILE: web/NOTES.md, +63 / -0  (it was +57 / -0 at 03:58). NOTHING ELSE.
+***      index.html, app.js and style.css are IDENTICAL between gh-pages and origin/hub:web.
+***      RECOMMENDATION, UNCHANGED FROM 03:58: there is no user-visible change waiting on you.
+***      Publish or hold is a housekeeping question, not a blocked deliverable.
+***   3. NOTHING ELSE IS WAITING ON YOU.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
+***   The 03:58 list (a)-(e) STANDS AND IS NOT REPEATED HERE. I re-measured every one of them this
+***   hour and all five are still true and still owed. ADD THESE TWO. This list is cumulative.
+***   (f) THE STEP 0 BASELINE IS STALE BEYOND THE CORPUS COUNT (e) ALREADY NAMES. MEASURED BY ME
+***       ON MERGED MAIN 4ec0d159 with the prompt's own one-level globs:
+***         corpus 2,451,914 chars / 49 files (48 `scripts/*.gd` + web/app.js)  [prompt: 2,345,688 / 48]
+***         data/*.json 12 files, 164 TOP-LEVEL KEYS                            [prompt: 146]
+***         ZERO-HIT 74 = 59 `_note_` + 15 NON-NOTE                             [prompt: 56 = 41 + 15]
+***         NON-NOTE IS STILL EXACTLY 15 AND STILL THE SAME 15 - the series holds.
+***         asset dirs with files 38, UNREFERENCED ZERO                         [prompt: 34]
+***       ONE MATCHER NOTE FOR WHOEVER RUNS THIS NEXT: a basename matcher reports
+***       `assets/graveyard/Textures` as unreferenced. IT IS A FALSE POSITIVE - `graveyard` IS
+***       referenced (grave_keeper.gd, town.gd, web/app.js) and `Textures` is a texture subfolder
+***       read by the .glb importer, not by script. Guard 1 applied; the honest count is ZERO.
+***   (g) NEW, AND STRUCTURAL - THE CASCADE IS A ONE-HOUR PIPELINE. No prompt says this and two
+***       successive team lead rows have been written as though a body named by the game build at
+***       :07 could be published by the chat bot at :45 of the SAME hour. IT CANNOT: lanes push
+***       their own branches and main gains them only at the :58 merge. The chat bot caught this
+***       at B194, not this seat. PUT IT IN THE TEAM LEAD PROMPT as a rule: NEVER WRITE A ROW
+***       WHOSE CONDITION CAN ONLY BE MET BY A MERGE THAT HAPPENS AFTER THE LANE FIRES.
+***   (h) THE ID LIST IN THE FREEZE SECTION IS STALE. Prompt reads B104, C-163, D100, H32, L74,
+***       S85, T5, U124, art on paviser pass 8. MEASURED THIS HOUR: B194, C-228, D100, H32, L74,
+***       S148, T5, U197, art on THATCHER pass 8. (The prompt already says to re-measure these
+***       every hour; this is the current reading, not a replacement for measuring.)
+***
 *** ===== TAKE THIS NEXT - THE 03:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 02:58 FIRING AND ITS 03:1x ADDENDUM.
 *** Merged tree e1ea480e (all six lanes in, pushed 04:02 CT). Clock read off the machine.

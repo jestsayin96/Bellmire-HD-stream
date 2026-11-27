@@ -1,3 +1,92 @@
+*** ===== TAKE THIS NEXT - THE 03:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 02:58 FIRING AND ITS 03:1x ADDENDUM.
+*** Merged tree e1ea480e (all six lanes in, pushed 04:02 CT). Clock read off the machine.
+***
+*** THE CASCADE IS OPEN AGAIN AT 65 AGAINST 66, AND CONTENT OPENED IT CORRECTLY THIS HOUR.
+*** MEASURED BY ME ON THE MERGED TREE, BRACE-MATCHED, ANCHORED ON THE REAL DECLARATION
+*** (`const MB_NAME := {` at scripts/delve.gd:448 - my first parse anchored on a COMMENT and I
+*** re-did it before quoting a number):
+***     Delve.MB_NAME        = 65 keys, no duplicates, single declaration. Last: mealman.
+***     miniboss_feed.by_key = 66 keys.  SET DIFFERENCE: by_key - MB_NAME = ["thatcher"]. Other
+***                            direction EMPTY.
+***     data/commands.json   = "65 elites" at BOTH sites; docs/COMMANDS.md line 39 = "The 65".
+*** SO THE ORDER FOR THIS HOUR IS: GAME BUILD NAMES IT (:07), THEN CHAT BOT PUBLISHES IT (:45).
+*** Both fire inside this hour in that order. Do not take step 3 before step 2 has landed.
+***
+*** ===== GAME BUILD (:07) - NAME THE 66th. MB_NAME 65 -> 66, `thatcher`. =====
+***   Content's feed row LANDED THIS HOUR and I verified it leaf by leaf rather than taking it:
+***   data/lore_lines.json parsed both sides, by_key 65 -> 66, the ONLY added body is `thatcher`
+***   (act/arrive/broken/fall), and the leaf-path set REMOVED NOTHING - the `-1` in its numstat is
+***   a brace/comma shift, not a dropped key. C-227 is TICKED.
+***   THE NUMBERS ARE ART'S, AND READ THEM OUT OF THE FILE, NOT OUT OF THIS BLOCK: copy
+***   `pairs.thatcher` from renders/art/minibosses/_fit_report.json. Art states ratio 1.04,
+***   creature_h 2.54 / hero 2.45, margin_x 0.12, fits_frame true, 3/3 proving views.
+***   *** 0.97 IS THE MEALMAN'S NUMBER, NOT THIS BODY'S. Art says so in its own doc and I am
+***   *** repeating it because the two bodies landed one hour apart.
+***   Pass 7 changed COLOUR ONLY - no geometry, no bounds, no ratio moved - so every number the
+***   lane was already given still stands.
+***
+*** ===== CONTENT (:22) - C-227 IS TICKED. NOTHING IS OWED ON THE CASCADE. =====
+***   You have paid step 1 and the next two steps are other lanes'. Do not touch MB_NAME and do not
+***   touch data/commands.json. Continue your own queue, or stand down and write it up.
+***
+*** ===== ART (:34) - THE THATCHER PASS 8: LIFT THE REED'S SIDE VALUE. =====
+***   PASS 7 IS ACCEPTED AND I LOOKED AT THE PICTURE, not just the register. Fault 1 ("the man is
+***   one value") is genuinely CLOSED on three views. YOUR OWN NEW FAULT 2 IS REAL AND I CAN SEE
+***   IT: at `screen_margin` 0.0006 / ratio 1.001 the pale lap and the yealm sit in one value band
+***   from the side, and on the render the tan skirt and the reed stems read as a single pale mass.
+***   TAKE YOUR OWN DIAGNOSIS - it is the right one. The yealm is UNDER-LIT FROM THE SIDE (cue p50
+***   0.5419 against 0.6518 front), so the lever is light/orientation, NOT the lap's colour; you
+***   measured that there is no lap value on the side that both adds a band and clears the reed.
+***   REFUSING TO SHIP A GUESS IN THE SAME PASS THAT OPENED THE FAULT WAS THE RIGHT CALL.
+***   Faults 3 (face), 4 (leggett reads as a satchel) and 5 (stems are rods, not combed reed) stay
+***   open and stay invisible to every number in the house - they are answered by looking.
+***
+*** ===== HUB (:37) - NO PUBLISH IS OWED. THE DELTA IS STILL THE SUPERVISOR'S. =====
+***   03:37 stand-down accepted: web/ byte-identical to origin/hub, checks re-run, no READY TO
+***   PUBLISH claim - so I ran NO publish verification this hour and say so plainly.
+***   Carry on with non-web work. Do not push to gh-pages.
+***
+*** ===== HUD (:52) - U196 STAND-DOWN ACCEPTED. =====
+***   The 02:58 row named no HUD item and you correctly did not invent one. The :52 window is
+***   yours and the chat bot has cleared it three hours running. If you are dry, audit your own
+***   shipped work for a defect and write it up - that is the delivery.
+***
+*** ===== CHAT BOT (:45) - PUBLISH 65 -> 66, BUT ONLY AFTER MB_NAME IS 66. =====
+***   B193 IS TICKED AND THE EVIDENCE WAS THE BEST KIND IN THIS HOUSE: you reconstructed a
+***   BEFORE-IMAGE whose md5 matched R's own committed copy, which is an independent check and not
+***   your own say-so. 500 leaves, leaf-paths identical, exactly 2 changed, byte delta 0.
+***   THIS HOUR, CHECK THE CONDITION BEFORE YOU EDIT, EXACTLY AS YOU DID LAST HOUR: brace-match
+***   `Delve.MB_NAME` on the MERGED tree and confirm it is 66 and that the set difference against
+***   by_key is EMPTY BOTH WAYS. IF MB_NAME IS STILL 65, THE GAME BUILD HAS NOT LANDED ITS STEP -
+***   DO NOT BUMP THE COUNT, run your gates, and say so. L14_TEST's MINIBOSS COUNT arm going red in
+***   that case is the PRE-DECLARED cascade step, not a defect of yours.
+***   Your `testbits`/`testsub`/`testpoints` matcher artefact is understood and is NOT drift.
+***
+*** ===== FOR THE SUPERVISOR =====
+***   1. THE HUB DELTA IS STILL UNPUBLISHED AND HAS BEEN SINCE 20 NOV. Measured by me this hour,
+***      not copied: origin/gh-pages tree vs origin/hub:web - see the hub row in my run doc for the
+***      per-file split I counted myself. The hub lane has made no READY TO PUBLISH claim, so
+***      nothing is owed from it. RECOMMENDATION: tell us publish or hold; it is a one-line answer
+***      and the delta is only growing.
+***   2. NOTHING ELSE IS WAITING ON YOU.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
+***   Land these the first time Mr. E is LIVE. This list is cumulative; add, do not replace.
+***   (a) THIS SEAT'S PROMPT, the STANDING NOTE ON THE ART FIT REGISTER, is now STALE AND WRONG.
+***       It says the register "reads RED / ok:false and has done for days" on two carried
+***       `snuffer_chibi` / `tallyman_chibi` rows. MEASURED ON THE MERGED TREE THIS HOUR:
+***       `verdict: "GREEN"`, `ok: true`, `errors: []`, `red_summary.rows: []`, `shipped_red: []`,
+***       `retired_red: []`, `ok_shipped: true`, `unproved_cells: []`. The two retired cells no
+***       longer hold it red. The instruction "do not report the art gate is green" is therefore
+***       backwards and should be replaced with: the register is GREEN; report it as measured.
+***   (b) THIS SEAT'S PROMPT, the FREEZE section, says the fit register "judges 46 rows, of which
+***       44 are live bodies". MEASURED: 68 pairs = 66 live bodies + 2 retired `_chibi` cells.
+***       Same class of staleness, same fix - re-measure, never quote the prompt.
+***   (c) THE MINIBOSS COUNT IN EVERY PROMPT IS STALE BY CONSTRUCTION and always will be. The
+***       standing instruction to measure it off `tools/art/minibosses.py` or the fit register is
+***       the correct one and needs no change - it just needs obeying, including by this seat.
+***
 *** ===== ADDENDUM TO THE 02:58 CT FIRING, 27 NOV 2026 - WRITTEN AT 03:1x CT, AFTER :05. =====
 *** *** READ THIS FIRST: IT CORRECTS MY OWN ART ROW BELOW, WHICH WENT STALE INSIDE MY OWN RUN. ***
 *** THIS ADDENDUM WAS WRITTEN AFTER :05 AND IT SAYS SO ON ITS FACE. The CORRECTION of a wrong row

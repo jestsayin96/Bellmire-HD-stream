@@ -19,7 +19,7 @@ func _initialize() -> void:
 	print("S148 thatcher fed: %s" % fed)
 	_ok(fed, "by_key.thatcher is on main (C-227)")
 	_ok(Delve.MB_NAME.has("thatcher") == fed, "MB_NAME row exists exactly when fed (fed=%s named=%s)" % [fed, Delve.MB_NAME.has("thatcher")])
-	_ok(Delve.MB_NAME.size() == 66, "MB_NAME is 66 (got %d)" % Delve.MB_NAME.size())
+	_ok(Delve.MB_NAME.size() == 67, "MB_NAME is 67 (S154 + badger) (got %d)" % Delve.MB_NAME.size())
 	_ok(Delve.MB_NAME.get("thatcher", "") == "Lastcourse", "MB_NAME thatcher is Lastcourse (got '%s')" % Delve.MB_NAME.get("thatcher", ""))
 	_ok(Delve.miniboss_name("thatcher") == "Lastcourse", "nameplate reads Lastcourse, not Thatcher")
 	_ok(Delve.MB_NAME.get("mealman", "") == "Whitedamp", "mealman still Whitedamp")

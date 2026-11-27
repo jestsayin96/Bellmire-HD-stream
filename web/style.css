@@ -1870,4 +1870,10 @@ html.watch .suggest-send { background: var(--teal-ink); color: var(--parch); }
 .beast-pic.beast-sil { filter: brightness(0) opacity(.55); }
 .beast.deep.tier-0 .beast-name { color: var(--ink-soft); letter-spacing: .12em; }
 .beast.deep.tier-4 { border-color: var(--gold, #c6922f); }
+/* tier edge ladder (hub 11:4x): the PILL stays the primary read; the left edge only reinforces it.
+   1 Faced = thin ink, 2 Survived = teal, 3 Killed = heavy dark gold, 4 Full = gold all round + heavy gold edge. */
+.beast.deep.tier-1 { border-left: 3px solid var(--ink-soft); }
+.beast.deep.tier-2 { border-left: 5px solid var(--teal-ink); }
+.beast.deep.tier-3 { border-left: 7px solid var(--gold-dk); }
+.beast.deep.tier-4 { border-left: 7px solid var(--gold, #c6922f); }
 @media (prefers-reduced-motion: reduce) { .beast-pic { transition: none; } }

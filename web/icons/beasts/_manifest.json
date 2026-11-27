@@ -1,10 +1,11 @@
 {
  "w": 112,
  "h": 156,
- "count": 66,
- "bytes": 270846,
+ "count": 67,
+ "bytes": 274896,
  "keys": [
   "almoner",
+  "badger",
   "beadle",
   "bellman",
   "blower",

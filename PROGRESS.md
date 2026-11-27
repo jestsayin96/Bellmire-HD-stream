@@ -1,3 +1,76 @@
+## B193 - 27 Nov 2026, 03:45 CT firing. THE CASCADE IS PAID AT MY END 64 -> 65 AND ALL FOUR OWED GATES ARE GREEN - AND THE PROOF THAT MY EDIT TOUCHED NOTHING ELSE CAME FROM A FILE IN ANOTHER REPO, NOT FROM MY OWN SAY-SO.
+
+THE ROW, AND I CHECKED ITS CONDITION ANYWAY. The team lead's 02:58 block made the row unconditional and
+said he had checked it so I would not have to - and then said to check it anyway. I did, brace-matched on
+the MERGED worktree (origin/main 7ce4377d), never off a flat regex and never copied from my prompt or from
+the QA tester's line:
+  - `Delve.MB_NAME` out of scripts/delve.gd: 65 keys, zero duplicates, last three overlooker/fanner/mealman.
+  - content's lore_lines.json `miniboss_feed.by_key`: 65 rows, same last three.
+  - SET DIFFERENCE EMPTY BOTH WAYS. MB_NAME minus by_key = [], by_key minus MB_NAME = [].
+  - `data/commands.json` published "The 64 elites" at BOTH sites.
+So the condition was met and the one open step was mine. B192 refused this same bump an hour ago because
+MB_NAME still read 64 on main; the number moved, not the standard.
+
+THE EDIT, AND AN INDEPENDENT BEFORE-IMAGE. Raw-byte replace of "The 64 elites" -> "The 65 elites", which
+occurs exactly twice. Byte-length delta 0. json.load round-trip on both sides: 500 leaves, leaf-path sets
+IDENTICAL, EXACTLY TWO changed - /commands/miniboss/short and /commands/miniboss/what. 32 entries before
+and after. data/commands.json md5 cc6d34d0 -> ff80d8ec.
+  WHAT I DID BETTER THAN MY OWN FIRST ATTEMPT, AND WHY IT MATTERS: my `cp` of the pre-edit file to /tmp was
+  DENIED (that mount is not writable here) and the script wrote the file anyway before the copy failed - so
+  for a moment I had an edited file and no before-image. I did NOT assert the diff from memory. I had taken
+  an md5 of the file before editing (cc6d34d0), reconstructed the before-image by the exact inverse of the
+  only write performed, confirmed it hashes to cc6d34d0, AND THEN found the same hash on R's own committed
+  copy of data/commands.json - a file in another working tree that my run never touched. That last one is
+  the real evidence: the before-image is corroborated from outside this worktree, not by my own arithmetic.
+  SCRATCH GOES IN $HOME, NOT /tmp, ON THIS BRIDGE. Noted for the next seat.
+
+THE GENERATOR WROTE THE DOC, I DID NOT. tools/_commands_doc.gd ran BEFORE _l14_test, deliberately, so the
+doc could not read red on drift I had just created. COMMANDS_DOC OK wrote 32 commands, rc 0, and it rewrote
+docs/COMMANDS.md md5 385c4ea7 -> 2ba1e0a1; line 39 now reads "The 65 elites" and no line says 64. No hand
+edit to the doc. The generator writes 32, not the 26 my prompt still predicts - third cycle running.
+
+THE GATES, AT origin/main 7ce4377d, ON AN IDLE MACHINE IN A FREE WINDOW:
+  - parse --headless --path W6 --quit-after 300: rc=0, 0 Parse Error, 0 SCRIPT ERROR.
+  - COMMANDS_DOC OK wrote 32 commands, rc=0.
+  - L14_TEST OK (27 CHECKS, ZERO FAIL). The MINIBOSS COUNT arm that the QA tester caught red at 02:49:44,
+    and that the team lead pre-declared as a cascade step owed by this lane, IS SHUT.
+  - TWITCH_PARSE OK (8 checks) with an EMPTY stderr - no MINIBOSS COUNT, no MINIBOSS UNNAMED.
+Whole battery: 25 seconds.
+
+THE THREE ERROR LINES I DID NOT HIDE AND DID NOT OWN. The parse log carries 3 `ERROR:` lines, all one fault:
+assets/graveyard/character-keeper.glb and its missing .godot/imported .scn - an import-cache miss, not a
+script fault. I checked whether it was mine or new before reporting it clean: THE IDENTICAL THREE LINES ARE
+IN B191's OWN PARSE LOG. Pre-existing, not new, not this lane's. rc=0 and the two counts that matter are 0.
+
+DRIFT BOTH DIRECTIONS, AND I SUSPECTED MY OWN MATCHER FIRST AGAIN. 32 entries, every one literally answered
+in scripts/chatcmd.gd, zero missing. The other direction flagged ONE token, `testbits`, and it is a MATCHER
+ARTIFACT, not drift: testbits/testsub/testpoints are local-only test verbs gated to `local_*` user ids
+(chatcmd.gd:218 returns an empty string for anyone else, so no Twitch viewer can reach them) and are
+deliberately outside the published surface the data file documents. The tell that it was my matcher and not
+the code: it caught ONE of three identical siblings, because my second regex required a bare quoted line and
+testsub/testpoints sit in a match arm with a colon. Zero genuine orphans either way.
+
+THE 66th IS ALREADY ON MAIN AND IT MOVES NONE OF MY NUMBERS. This merge brought art's thatcher - 
+assets/monsters/minibosses/thatcher.glb, docs/art/THATCHER_THE_66th.md, six render views - with NO feed row
+and NO MB_NAME row. So 65/65 is whole and my published 65 is correct TODAY. MINIBOSS COUNT will fire again
+only when content lands thatcher's feed row, and the team lead has already pre-declared that step (his block
+says the chat bot's count "then goes to 66"). I am not bumping ahead of the names: B192 proved this lane
+refuses a count ahead of the names as readily as one behind them.
+
+LOCK. Claim 03:48:48, cap claim+25 = 04:13:48 COMPUTED FIRST, declared finish 03:51:18, IDLE written
+03:50:31 off the clock - inside both and clear of the HUD's :52. Window held 1 min 43 s. Lock was free: last
+line was game build S147's IDLE 03:09:29. Machine genuinely idle at the claim - Godot, obs64 and Marvel all
+absent from tasklist - so this was NOT a starved run, the first in several firings I can say that of.
+
+THE MOUNT CHANGED SHAPE AND THE NEXT SEAT SHOULD KNOW BEFORE IT COSTS THEM A MINUTE. device_bash no longer
+reaches the worktree at "$HOME/mnt/hd adventure/bellmire-bot". The connected folders are now mounted
+INDIVIDUALLY at top level: "$HOME/mnt/bellmire-bot" and "$HOME/mnt/jests-hd-medieval-adventure". Both read
+and write fine. This is a mount-shape change, NOT a missing permission - I did not call
+device_request_folder_access and nobody should.
+
+TWITCH. Zero. eventsub autostarted on the headless runs and refreshed its own tokens as it always does; it
+SENT NO MESSAGE, redeemed nothing, cheered nothing, ZERO BITS, no account driven by me.
+
 ## B192 - 27 Nov 2026, 02:45 CT firing. THE ORDER'S CONDITION IS NOT MET ON MAIN, SO I STOOD DOWN FROM THE BUMP AND SAID SO - AND THE NAME IS NOT MISSING WORK, IT IS SITTING ON `laptop` WAITING FOR A MERGE.
 
 THE ROW I WAS GIVEN WAS AN ORDER WITH ONE CONDITION IN IT, AND THE CONDITION DECIDED THE WHOLE RUN.

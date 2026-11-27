@@ -1,5 +1,5 @@
 {
- "ok": true,
+ "ok": false,
  "hero": {
   "h": 2.45,
   "w": 1.32,
@@ -11786,9 +11786,182 @@
    "air_px_eps": 0.02,
    "air_px_min": 172,
    "air_px_tightest_view": "side"
+  },
+  "mealman": {
+   "creature_h": 2.37,
+   "hero_h": 2.45,
+   "ratio": 0.97,
+   "pair_w": 3.0,
+   "gap_x": 0.45,
+   "margin_x": 0.12,
+   "air_x": 2.603,
+   "fits_frame": true,
+   "engine": "BLENDER_EEVEE",
+   "views": [
+    "hero_front.png",
+    "hero_side.png",
+    "hero_back.png"
+   ],
+   "views_dir": "mealman",
+   "visibility": {
+    "front": {
+     "creature": {
+      "alone": 29815,
+      "vis": 29815,
+      "delta": 35128,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 43681,
+      "vis": 43681,
+      "delta": 55048,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "side": {
+     "creature": {
+      "alone": 26942,
+      "vis": 26942,
+      "delta": 35556,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 37764,
+      "vis": 37764,
+      "delta": 42766,
+      "seen": 1.0
+     },
+     "proves": true
+    },
+    "back": {
+     "creature": {
+      "alone": 29188,
+      "vis": 29188,
+      "delta": 39177,
+      "seen": 1.0
+     },
+     "hero": {
+      "alone": 44019,
+      "vis": 44019,
+      "delta": 48899,
+      "seen": 1.0
+     },
+     "proves": true
+    }
+   },
+   "frame_edge": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "ground": {
+    "front": {
+     "plane_px": 189240,
+     "shadow_px": 3560,
+     "mean": 0.4909,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2160,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "side": {
+     "plane_px": 189240,
+     "shadow_px": 3380,
+     "mean": 0.4785,
+     "max": 0.7103,
+     "error": null,
+     "rim_filled_px": 2118,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    },
+    "back": {
+     "plane_px": 190000,
+     "shadow_px": 3341,
+     "mean": 0.4867,
+     "max": 0.708,
+     "error": null,
+     "rim_filled_px": 2163,
+     "shadow_edge": {
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 0
+     }
+    }
+   },
+   "ground_from": "measured this run",
+   "proving_views": 3,
+   "measured_at": "2026-11-27T00:51:55-06:00",
+   "measured_by": "tools/art/minibossfit.py",
+   "views_from": "recorded on the row when it was rendered",
+   "air_px": {
+    "front": [
+     176,
+     174
+    ],
+    "side": [
+     171,
+     170
+    ],
+    "back": [
+     174,
+     175
+    ]
+   },
+   "frame_edge_disk": {
+    "front": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "side": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    },
+    "back": {
+     "top": 0,
+     "bottom": 0,
+     "left": 0,
+     "right": 0
+    }
+   },
+   "air_px_eps": 0.02,
+   "air_px_min": 170,
+   "air_px_tightest_view": "side"
   }
  },
- "errors": [],
+ "errors": [
+  "mealman: in the register and in NO self_seen census list - the census was never ASKED about this body, so nothing in the self_seen block describes it and GREEN cannot reach it. Re-run tools/art/_selfseen_census.py",
+  "self_seen: the census was taken over 66 register rows and is being read against 67, and this run's rows are NOT a subset of what it covers - it describes a different house. Re-run tools/art/_selfseen_census.py"
+ ],
  "blind_views": [],
  "stale_margin": [],
  "margin_derived": [],
@@ -11798,7 +11971,7 @@
  "frame_w": 5.6,
  "margin_x": 0.12,
  "rows_unstamped": [],
- "provenance_note": "66 of 66 rows carry a measured_at. An unstamped row is NOT red - this block answers WHEN a stored measurement was taken, not whether it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as rows are re-measured.",
+ "provenance_note": "67 of 67 rows carry a measured_at. An unstamped row is NOT red - this block answers WHEN a stored measurement was taken, not whether it is right. Stamping began 25 Nov 2026 02:5x CT; the gap closes as rows are re-measured.",
  "self_seen": {
   "asks": "how much of THE MAN survives HIS OWN GEAR, per view - an OCCLUSION measure, NOT a readability score (see the docstring of derive_self_seen and the top-end tile).",
   "instrument": "tools/art/_backread.py",
@@ -11827,9 +12000,11 @@
   "not_measurable_reason": "no `man` span on the builder, so there is nothing to split and NOTHING IS CLAIMED for these rows - absent, not green.",
   "uncovered": [],
   "uncovered_reason": "MEASURABLE and carrying no self_seen cell - the instrument could have answered and did not. RED: this is the silent absence that hid nine bodies for three days.",
-  "uncensused": [],
+  "uncensused": [
+   "mealman"
+  ],
   "uncensused_reason": "in the register and in NO census list - not measurable, not unmeasurable, not no-man, not failed. The census has never been ASKED about this body, so NOTHING here describes it and a GREEN verdict does not reach it. RED: this is how nine bodies hid under a green register for three days, and the 54th body shipped without re-running tools/art/_selfseen_census.py would hide the same way.",
-  "census_covers_register": true,
+  "census_covers_register": false,
   "under_bar": [
    {
     "rank": 1,
@@ -12018,13 +12193,14 @@
    "view": "back",
    "man_seen": 1.0
   },
-  "verdict": "GREEN"
+  "census_count_scope": "judged",
+  "verdict": "RED"
  },
  "unproved_cells": [],
  "visibility_scope": {
   "asks": "how much of each subject survives the OTHER subject, in the pair cell",
-  "cells": 396,
-  "cells_reading_exactly_1_0": 396,
+  "cells": 402,
+  "cells_reading_exactly_1_0": 402,
   "cells_where_vis_differs_from_alone": 0,
   "air_px_floor": 0,
   "rows_with_no_air": [
@@ -12034,25 +12210,29 @@
   "note": "DERIVED THIS RUN off the rows in this file, never carried. The method is sound - with/without through one locked camera - but place() holds air between the two bodies in almost every row, so mostly the answer is settled before the render. THIS IS A TAKEN-BY-CONSTRUCTION PASS WHEREVER IT PASSES, NOT A MEASUREMENT THAT MOVED - trap 4, an instrument that cannot move is not a pass. IT DOES NOT SAY THE BODY READS, and `seen: 1.0` must never be cited as if it did; `self_seen` answers that question. What it still earns: it goes red if a layout change ever puts the two bodies in front of each other, and alone == 0 still catches a blank or mis-aimed render. RED ON EMPTY: `taken_by_construction` is false when there are no cells at all, so a run that measured nothing cannot read as a pass. `rows_with_no_air` names the rows where the construction argument does NOT hold and the cell is therefore a real measurement - keep an eye on those."
  },
  "measured": [
-  "fanner"
+  "mealman"
  ],
  "asked": [
-  "fanner"
+  "mealman"
  ],
  "blank_check": {
-  "files": 192,
+  "files": 195,
   "failures": [],
-  "cells": 64,
-  "expected_files": 192,
+  "cells": 65,
+  "expected_files": 195,
   "scope": "whole_house"
  },
  "red_summary": {
-  "rows": [],
-  "shipped_red": [],
+  "rows": [
+   "mealman"
+  ],
+  "shipped_red": [
+   "mealman"
+  ],
   "retired_red": [],
-  "ok_shipped": true
+  "ok_shipped": false
  },
- "verdict": "GREEN",
+ "verdict": "RED",
  "rendered_this_run": 1,
- "verdict_scope": "every row in pairs (66), re-derived from stored measurements; 1 of them rendered this run"
+ "verdict_scope": "every row in pairs (67), re-derived from stored measurements; 1 of them rendered this run"
 }

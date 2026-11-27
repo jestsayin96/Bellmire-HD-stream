@@ -55,6 +55,252 @@
 ***   `town_levels_for_the_desktop` - all five are DECLARED DEAD. DO NOT re-wire the two runtime
 ***   `_alt` pools (`lord_intros_alt`, `unique_intros_alt`) - they are READ at delve.gd:4022.
 ***
+*** ===== SECOND WRITE OF THE 12:58 CT FIRING, 27 NOV 2026 - THE OTHER FIVE LANES. =====
+*** Written 13:10 CT, before :22. The GAME BUILD row above stands unchanged and reached
+*** origin/laptop at 13:06, a fast-forward, before its :07 firing.
+***
+*** ===== CONTENT (:22) - C-236 IS **TICKED**. YOU UNBLOCKED THE WHOLE CASCADE. =====
+***   **THE 68th FEED ROW `by_key.mower` - TICKED.** I parsed `miniboss_feed.by_key` myself with a
+***   brace-matched parser: **68** keys, `mower` present, and the set difference against
+***   `Delve.MB_NAME` is now exactly `[mower]` one way and EMPTY the other. That is the shape it is
+***   supposed to have at this point in the pipeline: you paid your step, the game build owes the
+***   next one, and nothing is lost in between. YOU WERE THE BLOCKING LANE AND YOU ARE NOT ANY MORE
+***   - the game build has the naming row this hour because you landed yours at 12:23:17 CT.
+***   NEXT: **(1) THE 30 SPECIALIZATION NAMES AND BLURBS** - item (2) from the 11:58 block,
+***   carried forward UNCHANGED because you ran out of clock, not because it was wrong. They are
+***   in `roster.gd` SPECS: fifteen callings, two paths each, placeholders the game build wrote at
+***   S155 and handed you BY NAME. **Tune the text only. The keys and the gifts are the game
+***   build's and S156 has now wired five bespoke ways onto those same keys** - so a key you
+***   rename breaks live behaviour, not just a label. Text in, keys untouched.
+***   THE VOICE NOTE, since the ways are now real: five of these paths FIGHT differently (taunt,
+***   trapsense, mend_party, death_ward, aura). Where a blurb promises a way of fighting, that
+***   promise is now kept in delve.gd - so write the promise plainly and do not oversell the four
+***   paths that fight through their gifts alone.
+***   **(2) IF THE CLOCK ALLOWS: a feed row is NOT owed for the 69th until art ships it.** Do not
+***   pre-write one.
+***   STILL NOT ASKING YOU ABOUT `data/drops.json` - you stood down on it five times and were
+***   right five times. It is item (1) in FOR THE SUPERVISOR for the fourth hour.
+***
+*** ===== HUB (:37) - YOU CLOSED THE OPEN QUESTION I LEFT YOU, AND YOU REFUSED THE SECOND ITEM
+*** ===== FOR THE RIGHT REASON. NO PUBLISH GATE WAS OWED AND I RAN NONE. =====
+***   **TIER 1 IN THE FRAME - the limit I named at 11:58 is CLOSED BY MEASUREMENT.** You rendered
+***   at the same two widths, got tier 1 into the viewport frame, and reported the 3px ink-soft
+***   edge READS at 64 px with no widening needed. That is the honest outcome and it needed no CSS
+***   change - closing an item by proving it sound counts fully in this house.
+***   **web/ IS BYTE-UNCHANGED THIS HOUR** - your whole delta is PROGRESS.md +9/-0. I checked:
+***   no `app.js`, no `style.css`, no `index.html`. So there was no security claim to re-run and
+***   NO PUBLISH GATE WAS OWED. **I RAN NO PUBLISH VERIFICATION THIS HOUR AND I AM SAYING SO.**
+***   **AND YOU REFUSED `spec` ON THE HERO CARD FOR A CORRECT, STRUCTURAL REASON: the snapshot
+***   publisher sends no spec field.** That is the right refusal and it is the same class as the
+***   game build refusing the empty `MODEL_BY` const - you declined to render a field that has
+***   nothing behind it rather than invent a placeholder. Do not work around it.
+***   NEXT: **NAME THE FIELD CONTRACT YOU NEED, IN ONE SHORT BLOCK, AND NOTHING ELSE ON THIS.**
+***   I have given the publisher row to the GAME BUILD above (the publisher is its file). Write
+***   down exactly what you need in the snapshot - the key name, whether you want the raw path
+***   stem or its display name, and what the card should show for a hero who has NOT specialized
+***   yet - so when the field arrives it arrives in the shape you can use. That is one block of
+***   text, not a feature.
+***   IF THE GAME BUILD LANDS THE FIELD AT :07 THIS HOUR, you may do the card at :37 in the same
+***   hour - check `origin/main` for the field before you start, do not assume it.
+***   OTHERWISE STAND DOWN AND SAY SO. A stand-down written up is the delivery.
+***
+*** ===== ART (:34) - DRY THIS HOUR AND THAT IS NOT A FAULT. =====
+***   Your whole delta against main is the plan sync - 284 lines of `docs/WORK_PLAN.md` and
+***   nothing else. **YOUR 68th BODY WAS ALREADY TICKED AT 11:58** (THE MOWER / Oneswath, shipped
+***   11:56:47 CT) and it is now doing exactly what a shipped body should: content fed it at 12:23
+***   and the game build names it this hour. You are not owed a second pass on it.
+***   NEXT: **THE 69th IS YOURS** - unchanged from 11:58. Minibosses are the one thing this lane
+***   may invent (the freeze's named exception) and the licence position is unchanged.
+***   MEASURE THE COUNT OFF `tools/art/minibosses.py` OR YOUR FIT REGISTER, NOT off any number in
+***   a prompt or in this row. I tried to count your roster myself with a flat regex this run and
+***   got 43, which I do not believe and am NOT publishing as your count - a regex is not a parser
+***   and your roster is nested. Your register is the instrument; I am not overriding it.
+***   FIT IS THE ACCEPTANCE TEST: front, side AND BACK on a real body, and LOOK at the render -
+***   the Beadle had no facing from behind while every number in its register said `seen: 1.0`.
+***   THE STANDING REGISTER NOTE IS UNCHANGED AND IS NOT YOURS: the top-level verdict reads
+***   `RED / ok:false` on two CARRIED, RETIRED rows (`snuffer_chibi`, `tallyman_chibi`).
+***   `shipped_red` is empty and `ok_shipped` is true. No shipped body is red.
+***
+*** ===== CHAT BOT (:45) - B202 IS **TICKED**. THE BUMP IS YOURS AND IT COMES AFTER :07. =====
+***   **`!paths` AND `!specialize <path>` - SYSTEM 40'S COMMAND HALF, TICKED.** Verified on the
+***   merged tree by my own count: `commands.json` `order` = **36** and `commands` = **36**, equal,
+***   with `paths` (aliases path/roads) and `specialize` (alias spec) both present and slotted
+***   after `respec` where a reader would look for them. `docs/COMMANDS.md` carries both rows.
+***   The dispatch arms are in `chatcmd.gd` and - the check that actually matters - they call
+***   `Roster.paths_line` and `Roster.specialize`, **which the game build wrote at S155 and which
+***   I confirmed exist in roster.gd**. You added no logic to roster.gd, exactly as instructed and
+***   exactly as you did for `!rep`. A command arm pointing at a function that does not exist is
+***   the `MODEL_BY` fault in a different hat; yours points at live code.
+***   **THE DOC WAS THE REAL GENERATOR AGAIN** - md5 changed, 36 commands written, and you ran it
+***   BEFORE L14_TEST so the doc could not be stale under the gate that checks it. Fourth hour.
+***   **AND YOUR LOCK LINE IS NOW THE MODEL FOR THIS HOUSE.** Claim 12:50:53 - before :50 as the
+***   schedule fix asks - declared 12:52:38, RELEASED EARLY at 12:51:37 explicitly to clear the
+***   HUD's slot, stamp read from the clock in the same call that wrote it. The HUD took :54 and
+***   shipped. That is two consecutive clean hours after three of self-correction.
+***   NEXT: **BUMP THE PUBLISHED MINIBOSS COUNT 67 -> 68.** `commands.json` miniboss `.short` and
+***   `.what` both read **67** right now; I measured them, do not take my figure, measure them
+***   yourself. **DO NOT RUN BEFORE THE GAME BUILD HAS NAMED THE MOWER.** The cascade is a ONE-HOUR
+***   PIPELINE, not a round trip (B194 settled this structurally): check `Delve.MB_NAME` on
+***   `origin/main` for `mower` FIRST. If the row is not there, **DO NOT BUMP** - publishing 68
+***   against 67 names inverts the cascade, which is worse than leaving it at 67. Say you stood
+***   down and why; that is the delivery.
+***   YOUR `COMMANDS_DATA MINIBOSS UNNAMED` GUARD IS THE RIGHT INSTRUMENT FOR THIS and I want you
+***   to know I read it: `chatcmd.gd:2511`. It is designed to catch exactly the state main is in
+***   right now (one body fed with no MB_NAME row). If it fires this hour it is TELLING THE TRUTH.
+***   Do not soften it to get a green - that is the one thing that would turn an honest gate into
+***   a quiet one.
+***
+*** ===== HUD (:52) - U205 IS **TICKED**, AND I PROVED YOUR PREMISE IN THE SOURCE MYSELF. =====
+***   **THE `_content` Nil QUESTION IS ANSWERED CORRECTLY AND THE RETIREMENT IS HONEST.** You
+***   retired a check, so under the standing rule I checked whether you had made a test quiet
+***   rather than honest - and you had not. I read `feed_hud.gd` myself:
+***     `_content` is assigned at **exactly one** site, line 136, inside `_build_chrome()`.
+***     `_build_chrome()` is called from **exactly one** site, line 235, under `if _chrome:`.
+***     `_chrome` is written at **exactly one** site, line 317, from `HudDock.split(get_parent())`
+***     at line 315.
+***   So `_chrome` is true precisely when split is true, and in a FULL-SCREEN probe `_content` is
+***   Nil **by design, not by fault**. Your diagnosis is right in both halves.
+***   **AND U204's ALIAS WAS GENUINELY WORSE THAN NO CHECK**, which is the part worth saying out
+***   loud: falling back to the panel rect made `over_vellum` an arithmetic DUPLICATE of
+***   `over_panel`, so the log printed a panel rect under the vellum's name and the assertion could
+***   only ever restate a check that had already passed. Retiring that is a gain in honesty.
+***   **YOU ALSO COMMITTED YOUR LOGS THIS TIME** - `_u205_parse.log` and `_u205_after.log` are on
+***   your branch, 949 lines between them. Last hour U124's whole evidence was an UNCOMMITTED file
+***   in your working tree and I told you to commit it. You did. I could judge this one off a ref.
+***   NEXT, AND IT IS THE OTHER HALF OF WHAT YOU JUST FOUND: **THE VELLUM CHECK NOW RUNS NOWHERE.**
+***   That is not a complaint about the fix - the fix is right - it is the consequence. Your probe
+***   runs full-screen, `has_vel` is therefore always false, and so the vellum assertion is live
+***   code that never executes in any gate. **RUN THE PROBE WITH THE PANES UP** - the split mode
+***   that actually builds `_content` - so the vellum check executes at least once and can go red.
+***   If it goes red, you have found a real clip. If it goes green, the check is earning its place.
+***   Either answer is worth the window; a check that never runs is worth nothing.
+***   SAME LOCK DISCIPLINE AS THIS HOUR, WHICH WAS CLEAN: claim 12:54:02 after the chat bot's
+***   early IDLE at 12:51:37, released 12:55:37, inside both your declared finish and your cap.
+***
+*** ===== FOR THE SUPERVISOR ===== (from the Bellmire HD Team Lead, 12:58 CT firing, 27 Nov)
+***   **(1) `data/drops.json` - FOURTH HOUR, UNCHANGED AND STILL YOURS.** Content has stood down on
+***   it FIVE times and been right five times. It needs a ruling, not another firing.
+***   **(2) THE HUB PUBLISH DECISION HAS GROWN A LOT AND THE OLD FIGURE IN MY PROMPT IS WRONG.**
+***   I re-measured both trees myself rather than copying: `origin/gh-pages^{tree}` = 1d8bce63,
+***   `origin/hub:web` = c9190a5a, NOT equal. The unpublished delta is now **74 files, +463/-9
+***   text and 67 BINARY files** - the whole bestiary beast-icon set (`icons/beasts/*.webp` plus
+***   `_manifest.json` +75), `app.js` +168/-7, `style.css` +18/-1, `index.html` +1/-1,
+***   `NOTES.md` +63 and a new `tools/make_bestiary.py` +48. Live gh-pages is **8d214d36, pushed
+***   25 Nov 09:55 CT**. MY PROMPT SAYS 05ac2679 / 19 Nov 20:06 CT AND THAT IS STALE - I cannot
+***   fix the prompt from a firing, so the correction is in FOR THE NEXT TEAM LEAD below.
+***   **MY RECOMMENDATION: this is now a substantial release and it deserves a real publish gate
+***   before it goes, not a wave-through** - but the hub lane has NOT claimed READY TO PUBLISH, so
+***   the gate is not owed yet and I have run none. When you want it, say so and I will run the
+***   full battery (el()-only, no innerHTML on snapshot values, no snapshot value as URL/src/href/
+***   style, CSP intact by the inline-<style> injection test, the six state checks, a hostile name
+***   rendering as literal text, and a screenshot I have LOOKED at).
+***   **ONE THING I WANT ON THE RECORD BEFORE ANY PUBLISH, because it would go live with it:** the
+***   delta includes **`web/tools/_to_delete/_beast_dex_block.txt` (+90)**. gh-pages is the `web/`
+***   subtree AT ROOT, so that file would publish to the live site as `tools/_to_delete/
+***   _beast_dex_block.txt`. It is a plain text scratch file - no secret in it, not a security
+***   hole - but a directory literally named `_to_delete` on a public page is cruft I would rather
+***   remove before a release than after. NOT MY CALL TO DELETE and I have deleted nothing; the
+***   hub lane owns `web/`. Say the word and I will give the hub the row.
+***   **(3) SYSTEM 40 IS THREE-QUARTERS IN AND I AM NOT TICKING IT WHOLE.** Engine half S155
+***   TICKED, bespoke ways S156 TICKED, command half B202 TICKED. The HUB HALF IS BLOCKED on the
+***   snapshot publisher sending a `spec` field, which I have routed to the game build as a one-
+***   field row. No decision needed from you - this is a progress report so the number in your
+***   own tracking is not ahead of the code.
+***
+*** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt) =====
+*** A SCHEDULED RUN CANNOT EDIT A SCHEDULED TASK. I attempted no write this run and I am not
+*** pretending the attempt is the fix: the corrections below are owed and the FIRST SEAT TO GET A
+*** LIVE TURN SHOULD LAND THEM ALL AT ONCE. This list CARRIES FORWARD - add, do not replace.
+***   (a) **THE HUB PUBLISH BASELINE IS STALE.** The prompt says gh-pages is `05ac2679`, tree
+***       `9ca8051e`, pushed 19 Nov 20:06 CT, and that the delta is "3 files / +59 / -1 - NOTES.md
+***       +9, web/app.js +46/-1, web/style.css +4". MEASURED 27 Nov 13:0x CT: gh-pages is
+***       **8d214d36**, tree **1d8bce63**, pushed **25 Nov 09:55 CT**; `origin/hub:web` tree is
+***       **c9190a5a**; the delta is **74 files, +463/-9 text, 67 binary**. Replace the whole
+***       block. (The prompt already warns twice not to copy those figures - this is the third
+***       time the warning has been right.)
+***   (b) **THE DEAD-DATA CORPUS HAS GROWN BY ONE FILE.** The prompt's baseline says "47
+***       `scripts/*.gd` + `web/app.js` = 48 files". It is now **48 `scripts/*.gd` + `web/app.js`
+***       = 49 files**, 2,492,828 chars, 12 `data/*.json`, **169** top-level keys. The NON-NOTE
+***       zero-hit count is **STILL EXACTLY 15** and the fifteen are the same fifteen. Only the
+***       corpus size and the note count moved.
+***   (c) **A NEW FALSE POSITIVE IN THE ASSET-DIRECTORY AUDIT, SO THE NEXT SEAT DOES NOT CHASE IT.**
+***       Walking `assets/` now reports **38** directories with files (the prompt says 34) and
+***       flags **one** as unreferenced: `assets/graveyard/Textures`. **IT IS NOT UNREFERENCED.**
+***       `assets/graveyard` is read FOUR times (`grave_keeper.gd` x3, `town.gd` x1, including
+***       `graveyard/character` and `graveyard/lantern`), the directory holds `colormap.png` - the
+***       shared GLTF atlas the five `.glb` files in that folder resolve through their own
+***       materials and `.import` files - and the engine never names the directory at all. This is
+***       the same class as the `renders/` false positives: **a GLTF texture sidecar is not a dead
+***       asset directory.** UNREFERENCED ASSET DIRECTORIES IS STILL **ZERO**. Add the sidecar
+***       exclusion to the recipe.
+***   (d) **THE ART ROSTER COUNT IN THE PROMPT ("as of 21 Nov the fit register judges 46 rows, of
+***       which 44 are live bodies") IS SIX DAYS OLD AND THE BODY COUNT IS NOW 68.** Do not replace
+***       it with a number from a flat regex - mine returned 43 on `minibosses.py` and I do not
+***       believe it. Replace it with a pointer to the register rather than a figure.
+***   (e) **THE ID LIST IS STALE EVERY HOUR BY DESIGN** - as of 13:1x CT 27 Nov: B202, C-236,
+***       D100, H32, L74, **S156**, T5, **U205**, and art on the 68th body (THE MOWER).
+***
+*** ===== THIRD WRITE OF THE 12:58 CT FIRING, 27 NOV 2026 - I AM CORRECTING TWO OF MY OWN ROWS
+*** ===== BECAUSE ART SHIPPED THE 69th WHILE I WAS WRITING THE SECOND WRITE. =====
+*** Written 13:15 CT. THE ART AND CONTENT ROWS IN THE SECOND WRITE ABOVE ARE SUPERSEDED BY THIS
+*** BLOCK AND BY NOTHING ELSE. The GAME BUILD, HUB, CHAT BOT and HUD rows stand UNCHANGED.
+*** MY FAULT, AND IT IS THE SAME FAULT THE PROMPT WARNS ABOUT BY NAME: I measured art's branch at
+*** 13:0x, found only a plan sync, and wrote "ART - DRY THIS HOUR" and told content "a feed row is
+*** NOT owed for the 69th until art ships it". Art pushed `7a4ce41a` at **13:00:32 CT** and
+*** `85e4fb82` at **13:03:54 CT** - between my merge and my sync. I caught it by RE-READING EVERY
+*** LANE REF AT SYNC TIME, which is in the recipe for exactly this reason, and I merged the new
+*** commits into main before finishing (main a3869882). A stale instruction left standing is a
+*** lane's wasted cycle, so I am fixing it in the same run rather than leaving it for 13:58.
+***
+*** ===== THE CASCADE IS NOW TWO STEPS DEEP: 69 BODIES / 67 NAMES / 68 FEED KEYS / 67 PUBLISHED.
+*** Nobody is behind. Each lane owes exactly one step and they must land IN ORDER:
+***   `mower`    - body YES (11:56), feed YES (12:23), MB_NAME **NO**, published **NO**
+***   `shearman` - body YES (13:00), feed **NO**,      MB_NAME **NO**, published **NO**
+*** SO: game build names `mower` (:07, already its row) -> chat bot publishes 68 (:45, already its
+*** row). Content writes `by_key.shearman` (:22, below) -> game build names it NEXT hour -> chat
+*** bot publishes 69 the hour after. DO NOT TRY TO SHORTCUT THAT. It is a one-hour pipeline per
+*** step and B194 settled structurally that it is not a round trip.
+*** THE CHAT BOT'S ROW ABOVE IS STILL CORRECT AS WRITTEN - it bumps to match `Delve.MB_NAME`, NOT
+*** to match the body count. 68 is the right number for it this hour even though 69 bodies stand.
+***
+*** ===== ART (:34) - **THE 69th IS TICKED. STRIKE "DRY THIS HOUR" ABOVE - IT WAS WRONG.** =====
+***   **THE SHEARMAN (Cutloose), the 69th - TICKED**, and it earned it on the thing this house
+***   actually asks for rather than on the count.
+***   FIT IS THE ACCEPTANCE TEST AND YOU SHOT ALL THREE FACINGS PLUS TWO MORE: `front.png`,
+***   `side.png`, `three_quarter.png`, `hero_front.png`, `hero_side.png` and - the one that
+***   matters - **`hero_back.png`**. The Beadle shipped with no facing from behind while every
+***   number in its register read `seen: 1.0`, and a back shot is the only thing that catches it.
+***   You shot the back. 161 lines of writeup in `docs/art/SHEARMAN_THE_69th.md`, `_fit_report.json`
+***   +183/-12 and `_report.json` +99/-5.
+***   **AND PASS 4 IS WHY THIS IS A TICK AND NOT A HALF.** You found your own cord reading as a
+***   HOOK at silhouette, recognised that a hook is **the Gaoler's cue**, and changed it - a
+***   SILHOUETTE COLLISION WITH AN ALREADY-SHIPPED BODY, caught by you, in your own fourth pass,
+***   with no one asking. That is the single most valuable kind of art fault to catch, because two
+***   bodies that read as one are invisible to every number in a fit register. You also recorded
+***   that "the green sheet was identical on two bodies that did not read" - keep that note.
+***   NEXT: **THE 70th IS YOURS.** Unchanged licence, unchanged exception: minibosses are the one
+***   thing this lane may invent. MEASURE YOUR OWN COUNT off `tools/art/minibosses.py` or your fit
+***   register - NOT off the number 69 in this row and not off any number in any prompt. My own
+***   flat regex returned 43 on your roster this run and I refused to publish it as your count; a
+***   regex is not a parser.
+***   AND DO NOT SPEND A FIFTH PASS ON THE SHEARMAN - it is fitted, it reads, and it is ticked.
+***
+*** ===== CONTENT (:22) - **A SECOND QUEUED ROW, AND IT NOW OUTRANKS THE BLURBS.** =====
+***   **STRIKE "a feed row is NOT owed for the 69th until art ships it. Do not pre-write one."**
+***   Art HAS shipped it - 13:00:32 CT, THE SHEARMAN (Cutloose), stem `shearman`, body on main.
+***   **(1) `by_key.shearman` - THE 69th FEED ROW. THIS IS NOW YOUR FIRST ITEM.** It is the
+***   blocking step for the whole 69th, exactly as `by_key.mower` was for the 68th, and you are
+***   the only lane that can pay it. The game build cannot name a body you have not fed.
+***   THE SUBJECT, so the voice has something true to hold: read art's own
+***   `docs/art/SHEARMAN_THE_69th.md` before you write a line of it - art recorded what this body
+***   IS and, in pass 4, what it must not be mistaken for (the Gaoler). Shears, and a cord that is
+***   deliberately NOT a hook. Plain voice; the horror is the cutting loose, not gore.
+***   **(2) THE 30 SPECIALIZATION NAMES AND BLURBS** - demoted to second, not dropped. Still in
+***   `roster.gd` SPECS, still text-only, and the warning from the second write stands and has
+***   teeth now: **S156 wired five bespoke ways onto those same keys, so a key you rename breaks
+***   live behaviour.** Text in, keys untouched.
+***   If the clock only holds one of the two, **TAKE (1)** - it unblocks two other lanes.
+***
 *** ===== TAKE THIS NEXT - THE 11:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 10:58 FIRING AND ITS TWO WRITES.
 *** Merged tree 537d203a - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed

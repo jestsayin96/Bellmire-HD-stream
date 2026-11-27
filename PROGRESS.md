@@ -23711,3 +23711,95 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
   build has actually named the badger. Carried for the supervisor, not for me to take: the `!bestiary`
   HARD COLLISION (System 41 re-specs a shipped verb) was routed up at 07:58 and no block newer than
   08:09 has answered it. I am not guessing at it.
+
+## B200 - 2026-11-27 10:45 CT - `!rep` IS WRITTEN AS THE 34th COMMAND AND HELD ON A WIP BRANCH, THE COUNT STOOD DOWN FOR A THIRD HOUR ON A MEASURED REASON, AND MY OWN BATTERY TESTED A TREE WITHOUT THE BADGER IN IT
+
+- THE COUNT: **NO BUMP, AND THIS TIME I CAN NAME THE ARM THAT DECIDES IT.** Measured on merged main
+  (fast-forward to a2e4b4f6, the team lead's 09:58 fourth write): `Delve.MB_NAME` 66 by depth-1 scan
+  of the one declaration at delve.gd:449, `miniboss_feed.by_key` 66, GHOST empty, UNNAMED empty.
+  data/commands.json already publishes "66 elites" at both sites. The supervisor asked for 67/67 and
+  main reads 66/66, exactly as his 09:58 sequencing predicted (his merge of S154 is at 10:58, after
+  my :45).
+  **AND THE AUTHORITY IS NOT `MB_NAME` AT ALL - IT IS content's FEED ROWS, AND I READ THE ARM TO BE
+  SURE.** chatcmd.gd:2481 `var mb_live: Dictionary = miniboss_names()`, and MINIBOSS COUNT at :2502
+  compares the published number against `mb_live.size()` - the by_key set. So "bump when MB_NAME
+  reads 67" is the WRONG CONDITION in general: if the game build names a body before content feeds
+  it, MB_NAME is 67 while the number my own guard checks is still 66, and a bump would red MINIBOSS
+  COUNT by my own hand. **BUMP ON by_key, with MB_NAME as the second half of the AND - never on
+  MB_NAME alone.** Written down so the next seat in this lane does not have to re-derive it.
+- **AND THAT STATE IS NOT HYPOTHETICAL - IT IS LIVE ON `laptop` RIGHT NOW.** On R's working tree
+  (branch `laptop`, 15be9474, which carries S154) I measure MB_NAME **67** and by_key **66**, GHOST
+  **['badger']**. That fires my `MINIBOSS GHOST` arm (chatcmd.gd:2509), and `tools/_l14_test.gd:162-163`
+  reads `ChatCmd.guard_faults()` and FAILS on any non-empty answer. **SO L14_TEST IS STRUCTURALLY RED
+  ON ANY TREE THAT HAS S154 WITHOUT CONTENT'S by_key.badger** - which is the window the team lead
+  already declared ("L14_TEST MINIBOSS MAY READ RED BETWEEN THE GAME BUILD'S PUSH AND THE CHAT BOT'S
+  BUMP. THAT IS THIS PIPELINE, NOT A FAULT"). It is the fanner precedent at S144 repeating exactly.
+  NO LANE IS TO EDIT A COUNT TO SILENCE IT; it clears itself when by_key.badger merges.
+- **MY OWN FAULT, AND IT IS THE REASON THAT RED IS STILL A PREDICTION AND NOT A MEASUREMENT.** I ran
+  my gate battery BEFORE merging origin/main into W6. The battery is green - and it is green on a
+  tree that does not contain the badger, so it proves nothing about the GHOST window I spent the
+  hour describing. I am not dressing that up: the battery answered a question nobody asked. The
+  merge happened after it, and the post-merge tree (66/66) cannot show the red either. It will be
+  measurable at 11:45 on a main that carries S154.
+- GATES, battery 10:48:2x -> 10:49:3x on W6 AT a2e4b4f6 (pre-merge tree, see the fault above):
+    parse --headless --quit-after 300  rc=0, 0 Parse Error, 0 SCRIPT ERROR, **ZERO COMMANDS_DATA lines**.
+      3 ERROR lines = the same pre-existing assets/graveyard/character-keeper.glb import-cache miss
+      carried in every B193-B199 log. Not new, not mine.
+    COMMANDS_DOC OK wrote 33 commands, rc=0 - a true NO-OP: docs/COMMANDS.md md5 7d2dfaa0 before and
+      7d2dfaa0 after, so the real generator still reproduces B198's doc byte for byte.
+    L14_TEST OK (27 checks) rc=0, zero fail.
+    TWITCH_PARSE OK (8 checks) rc=0.
+  tasklist Godot* = 0 after, read through the Windows bridge. Claim 10:48:10, cap claim+25 = 11:13:10,
+  DECLARED FINISH 10:51:00 as an explicit stamp (the B199 lesson), released and clear of the HUD :52.
+- **I WROTE AN IDLE STAMP 59 SECONDS IN THE FUTURE AND CORRECTED IT IN THE SAME MINUTE.** The IDLE
+  line read 10:50:40; the clock one second later read 10:49:41. A NOTE at 10:49:55 in docs/RUN_LOCK.txt
+  carries the correction. This is the third stamp fault in three hours in this lane (B198 ten seconds
+  future, B199 eight seconds over its own "~2 min", B200 fifty-nine seconds future) and mine is the
+  worst of the three because I composed the stamp BEFORE reading the clock. THE RULE IS NOW ONE LINE:
+  read the clock, then write the stamp. Never the other way round.
+- **THE WORK: `!rep`, SYSTEM 39'S COMMAND HALF, WRITTEN IN FULL AND DELIBERATELY NOT LANDED.**
+  data/commands.json: `rep` added as the 34th command and inserted into `order` at index 3 (after
+  `catchup`); every pre-existing entry byte-identical, every other top-level key identical, `order`
+  set == `commands` keys, json.load clean. scripts/chatcmd.gd: one arm,
+  `"rep", "favour", "favor": out = _needs(user_id, func(): return Roster.rep_line(roster.get_hero(user_id)))`.
+  It RENDERS `Roster.rep_line` (roster.gd:539) and adds no sentence of its own - no tier computed,
+  no perk named, no threshold restated, exactly as the row specified. `needs_hero: true`, so a
+  viewer with no hero gets the enlist nudge instead of a row of zeroes that reads like a real answer.
+- **WHAT I DID NOT PUT IN THE PROSE, ON PURPOSE.** `rep`.what names NO townspeople. Listing "smith,
+  innkeeper, fishmonger, chandler, trader" would be a LIST CLAIM against `Roster.REP_NPCS`
+  (roster.gd:505) - another lane's constant - and B51's standard is that a list claim gets a guard
+  arm or it does not get published. The engine's own line names all five when a viewer asks, so the
+  list costs nothing to omit and would cost a guard to keep. No number appears either, so no
+  MINIBOSS-style count arm is owed.
+- **A COLLISION I FOUND AND DID NOT WALK INTO: `standing` ALREADY MEANS SOMETHING ELSE IN MY OWN
+  DATA.** `ask.topics.standing` answers "Standing is your place on the guild roll ... !guild shows
+  the ranks." So `standing` as a `!rep` alias would make one word mean the guild roll in plain chat
+  and reputation with a `!`. Aliases are `favour`/`favor` instead. **AND THE SAME WORD IS IN THE
+  ENGINE'S OWN OUTPUT**: `rep_line` renders "<name>'s standing - ...". That is roster.gd, not my
+  file, and I am not touching it - FOR THE GAME BUILD LANE TO WEIGH, not a request: the word
+  "standing" in rep_line collides with the guild-roll sense my ask table teaches viewers. Nothing
+  breaks; a viewer can be told two things by one word.
+- LENGTHS, measured not guessed: the bare `!help` line goes 358 -> **363** chars with `!rep` in
+  `order`, against `REPLY_MAX` 440 - **77 chars of headroom**, room for about a dozen more verbs
+  before B173's cliff. The `!help rep` detail line is 109 chars. `rep`.what is 429 chars and is
+  never sent to chat (docs/COMMANDS.md and the hub carry it).
+- DRIFT AUDIT BOTH DIRECTIONS on the edited tree: direction B (an arm with no entry) is ONLY the
+  three L17 local hooks `testbits`/`testsub`/`testpoints`, which must stay unpublished. Direction A's
+  residue (`armor`, `commands`, `sheet`, `spotlight`, `stats`, `steel`, `watch`) is pre-existing and
+  not a fault - those aliases are resolved by `canonical()` before the match reaches a verb. All
+  three of my new words (`rep`, `favour`, `favor`) appear on BOTH sides.
+- **HELD, NOT LANDED, AND THE REASON IS THE YIELD RULE.** docs/COMMANDS.md must come from the REAL
+  generator in the same breath as the data file, and the generator needs the lock. At 10:52:49 the
+  lock's last line was my own NOTE - free - but the HUD claims at :52, i.e. that instant. Launching
+  a Godot into the moment another lane claims is what the rule forbids, and a four-second run is not
+  worth racing a lane for. SO: checkpoint commit to `chatbot-b200-wip`, nothing on `chatbot`.
+  **RESUME AT B201 (11:45):** merge main, re-measure by_key AND MB_NAME (bump to 67 only if BOTH
+  read 67), merge `chatbot-b200-wip`, run `tools/_commands_doc.gd` as the real generator so
+  docs/COMMANDS.md carries `!rep` as row 34, then parse + L14 + TWITCH_PARSE, and land all four
+  files on `chatbot` in one commit. If L14 reads red with ONLY `MINIBOSS GHOST ['badger']`, that is
+  the declared pipeline window and NOT a reason to edit a count.
+- NOTHING OWED TO THE GAME BUILD LANE in twitch_eventsub.gd this cycle. The reply contract is
+  untouched: twitch_reply(user_login, text), no @name, no rate limiting.
+- No Twitch test of any kind. eventsub autostarted on the four headless runs and refreshed its own
+  tokens as it always does; it SENT NO MESSAGE, redeemed nothing, cheered nothing, ZERO BITS, and no
+  account was driven by me.

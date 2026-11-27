@@ -212,6 +212,16 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                     out = _miniboss_line(rest)
         "catchup", "mystory", "since":
                     out = _catchup(user_id)
+        # S39 COMMAND HALF: `!rep` - the verb is PUBLISHED and `Roster.rep_line` is RENDERED,
+        # and that is the whole of it. No tier is computed here, no perk is named and no
+        # threshold is restated: the milestones are SILENT BY DESIGN (roster.gd:537-539 says
+        # so in its own comment) and this arm keeps them silent. The engine owns both the
+        # count and the "(next N)" it prints; if that wording ever changes, this arm changes
+        # nothing, because it adds no sentence of its own to the line it passes through.
+        # needs_hero: standing is a thing a hero has, so a viewer with none gets the enlist
+        # nudge from _needs rather than a row of zeroes that reads like a real answer.
+        "rep", "favour", "favor":
+                    out = _needs(user_id, func(): return Roster.rep_line(roster.get_hero(user_id)))
         "look":     out = _needs(user_id, func(): return _spot(user_id, "look", 0.0, ""))
         "testbits", "testsub", "testpoints":
                     # L17 test-only: the local chat box (Mr. E's keyboard) fakes a cheer / sub / redeem.

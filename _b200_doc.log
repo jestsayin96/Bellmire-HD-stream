@@ -1,0 +1,6 @@
+CMD D:\1game\Godot_v4.7.2-stable_win64_console.exe --headless --path C:\hd adventure\bellmire-bot --script res://tools/_commands_doc.gd
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+COMMANDS_DOC OK wrote 33 commands
+
+RC=0

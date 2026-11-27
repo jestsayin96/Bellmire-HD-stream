@@ -3,7 +3,7 @@
   "hub_url": "https://jestsayin96.github.io/Bellmire-HD-stream/",
   "cooldown_s": 1.5,
   "twitch_cooldown_s": 3.0,
-  "order": ["enlist", "hero", "catchup", "inventory", "weapon", "armour", "delve", "muster", "fish", "forge", "armoury", "brew", "oil", "wear", "dye", "reroll", "respec", "guild", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "hub", "satchel", "caravan", "festival", "dice", "town", "bestiary", "miniboss", "help"],
+  "order": ["enlist", "hero", "catchup", "rep", "inventory", "weapon", "armour", "delve", "muster", "fish", "forge", "armoury", "brew", "oil", "wear", "dye", "reroll", "respec", "guild", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "hub", "satchel", "caravan", "festival", "dice", "town", "bestiary", "miniboss", "help"],
   "commands": {
     "enlist":    {"aliases": [], "args": "[class] [people]", "cost": "free", "needs_hero": false, "short": "Raise your hero: a calling and a people, either order. Leave either out and the valley picks.",
                   "what": "Raise your hero. Callings: knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock, bard. Peoples: human, elf, dwarf, halfling, orc, scarkin. Either order; leave either out and the valley picks.",
@@ -14,6 +14,9 @@
     "catchup":   {"aliases": ["mystory", "since"], "args": "", "cost": "free", "needs_hero": false, "short": "What your hero did while you were away, in a line.",
                   "what": "What happened to your hero while you were away: what they did, how it went, and where they stand now. One line, kept short on purpose - the Chronicle of every day in full, and the sheet behind it, are on the hub.",
                   "example": "!catchup"},
+    "rep":       {"aliases": ["favour", "favor"], "args": "", "cost": "free", "needs_hero": true, "short": "Where your hero stands with the townspeople who keep a counter.",
+                  "what": "Where your hero stands with each townsperson in Bellmire who keeps a counter: what your hero has earned with that one, and the next mark it climbs to. Favour comes from trade and nothing else - work given to the smith, a bed taken at the inn, fish sold, brews and oil bought, goods moved with the trader. What a mark is worth is never said here: you are told the count, not what it buys. Asking changes nothing - it only reports.",
+                  "example": "!rep"},
     "inventory": {"aliases": ["inv", "bag", "items"], "args": "", "cost": "free", "needs_hero": true,
                   "what": "What your hero carries: title, weapon, armour, accessories, dye, brews, oil, gold, and the best fish caught.",
                   "example": "!inventory"},

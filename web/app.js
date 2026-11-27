@@ -3360,7 +3360,7 @@ function renderBestiary(p) {
   const statOf = (key) => (snap && Object.prototype.hasOwnProperty.call(snap, key) && snap[key] && typeof snap[key] === "object") ? snap[key] : null;
   const beasts = beastBook();
   const shown = beasts.filter((b) => beastFilter === "all" || b.kind === beastFilter);
-  const metN = shown.filter((b) => beastTierFor(b, p, rows) > 0).length;
+  const metN = shown.filter((b) => b.kind === "deep" ? beastTierFor(b, p, rows) > 0 : beastMentions(rows, b.terms).n > 0).length;   // same test each card uses for Met/Rumour (a lord is only met if the Chronicle names it)
   const note = el("p", "beast-count", num(metN) + " met, " + num(shown.length - metN) + " not yet met");
   box.append(note);
   const grid = el("div", "beast-grid");

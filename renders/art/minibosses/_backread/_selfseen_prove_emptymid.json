@@ -3,7 +3,7 @@
   "panner": {
    "key": "panner",
    "errors": [
-    "panner: an EMPTY `man` span at [[24, 24]] in a builder of 24 items, with 0 authored after it - a `_close(\"man\")` that wrapped zero items, not the end-of-build no-operator marker"
+    "panner: an EMPTY `man` span at [[12, 12]] in a builder of 24 items, with 12 authored after it - a `_close(\"man\")` that wrapped zero items, not the end-of-build no-operator marker [CONSTRUCTED BY --prove-empty-mid: the builder's own declared span is [[24, 24]] and was RELOCATED in memory to [[12, 12]] to watch this branch fire. THIS IS NOT A FAULT IN THE BODY.]"
    ],
    "views": {},
    "man_from": "span",
@@ -14,19 +14,35 @@
     ]
    ],
    "prove_empty_mid": true,
-   "items": 24,
-   "empty_ranges": [
+   "prove_declared_ranges": [
     [
      24,
      24
     ]
    ],
-   "items_after_span": 0,
+   "prove_span_moved_to": [
+    12,
+    12
+   ],
+   "man_ranges_proved": [
+    [
+     12,
+     12
+    ]
+   ],
+   "items": 24,
+   "empty_ranges": [
+    [
+     12,
+     12
+    ]
+   ],
+   "items_after_span": 12,
    "verdict": "RED"
   }
  },
  "errors": [
-  "panner: an EMPTY `man` span at [[24, 24]] in a builder of 24 items, with 0 authored after it - a `_close(\"man\")` that wrapped zero items, not the end-of-build no-operator marker"
+  "panner: an EMPTY `man` span at [[12, 12]] in a builder of 24 items, with 12 authored after it - a `_close(\"man\")` that wrapped zero items, not the end-of-build no-operator marker [CONSTRUCTED BY --prove-empty-mid: the builder's own declared span is [[24, 24]] and was RELOCATED in memory to [[12, 12]] to watch this branch fire. THIS IS NOT A FAULT IN THE BODY.]"
  ],
  "ok": false
 }

@@ -1,0 +1,1256 @@
+{
+ "error": null,
+ "rows": [
+  {
+   "f": "renders/art/system2/_vis_tmp/_body_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_body_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_body_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axeDouble_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axeDouble_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axeDouble_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axeDouble_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axeDouble_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axeDouble_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axeDouble_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axeDouble_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axeDouble_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axe_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axe_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axe_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axe_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axe_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axe_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axe_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axe_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_axe_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_crossbow_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_crossbow_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_crossbow_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_crossbow_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_crossbow_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_crossbow_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_crossbow_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_crossbow_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_crossbow_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_dagger_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_dagger_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_dagger_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_dagger_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_dagger_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_dagger_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_dagger_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_dagger_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_dagger_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_hammer_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_hammer_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_hammer_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_hammer_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_hammer_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_hammer_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_hammer_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_hammer_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_hammer_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_shield_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_shield_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_shield_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_shield_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_shield_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_shield_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_shield_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_shield_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_shield_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_staff_common_back.png",
+   "same_bytes": false,
+   "len_eq": false,
+   "first_diff_off": 265,
+   "px_moved": 20542,
+   "max_delta_255": 255.0,
+   "pixels_identical": false
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_staff_common_front.png",
+   "same_bytes": false,
+   "len_eq": false,
+   "first_diff_off": 265,
+   "px_moved": 20455,
+   "max_delta_255": 255.0,
+   "pixels_identical": false
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_staff_common_side.png",
+   "same_bytes": false,
+   "len_eq": false,
+   "first_diff_off": 265,
+   "px_moved": 20434,
+   "max_delta_255": 255.0,
+   "pixels_identical": false
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_staff_rare_back.png",
+   "same_bytes": false,
+   "len_eq": false,
+   "first_diff_off": 265,
+   "px_moved": 26290,
+   "max_delta_255": 255.0,
+   "pixels_identical": false
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_staff_rare_front.png",
+   "same_bytes": false,
+   "len_eq": false,
+   "first_diff_off": 265,
+   "px_moved": 26274,
+   "max_delta_255": 255.0,
+   "pixels_identical": false
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_staff_rare_side.png",
+   "same_bytes": false,
+   "len_eq": false,
+   "first_diff_off": 265,
+   "px_moved": 26706,
+   "max_delta_255": 255.0,
+   "pixels_identical": false
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_staff_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": false,
+   "first_diff_off": 265,
+   "px_moved": 31611,
+   "max_delta_255": 255.0,
+   "pixels_identical": false
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_staff_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": false,
+   "first_diff_off": 265,
+   "px_moved": 31080,
+   "max_delta_255": 255.0,
+   "pixels_identical": false
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_staff_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": false,
+   "first_diff_off": 265,
+   "px_moved": 31214,
+   "max_delta_255": 255.0,
+   "pixels_identical": false
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_sword_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_sword_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_sword_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_sword_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_sword_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_sword_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_sword_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_sword_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/_vis_tmp/_w_sword_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axeDouble_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axeDouble_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axeDouble_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axeDouble_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axeDouble_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axeDouble_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axeDouble_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axeDouble_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axeDouble_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axe_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axe_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axe_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axe_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axe_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axe_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axe_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axe_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/axe_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/crossbow_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/crossbow_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/crossbow_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/crossbow_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/crossbow_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/crossbow_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/crossbow_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/crossbow_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/crossbow_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/dagger_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/dagger_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/dagger_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/dagger_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/dagger_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/dagger_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/dagger_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/dagger_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/dagger_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/hammer_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/hammer_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/hammer_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/hammer_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/hammer_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/hammer_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/hammer_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/hammer_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/hammer_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/shield_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/shield_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/shield_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/shield_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/shield_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/shield_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/shield_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/shield_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/shield_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/sword_common_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/sword_common_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/sword_common_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/sword_rare_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/sword_rare_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/sword_rare_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/sword_uncommon_back.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/sword_uncommon_front.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  },
+  {
+   "f": "renders/art/system2/sword_uncommon_side.png",
+   "same_bytes": false,
+   "len_eq": true,
+   "first_diff_off": 265,
+   "px_moved": 0,
+   "max_delta_255": 0.0,
+   "pixels_identical": true
+  }
+ ],
+ "summary": {
+  "n_files": 138,
+  "n_pixels_identical": 129,
+  "n_pixels_differ": 9,
+  "n_error": 0,
+  "first_diff_offsets_histogram": {
+   "265": 138
+  }
+ }
+}

@@ -2168,6 +2168,53 @@
    ],
    "man_span_empty": false
   },
+  "thatcher": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arms",
+    "coat",
+    "head",
+    "leggett",
+    "legs",
+    "trunk",
+    "yealm"
+   ],
+   "items": 32,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     10,
+     14
+    ],
+    [
+     14,
+     17
+    ],
+    [
+     17,
+     20
+    ],
+    [
+     20,
+     24
+    ],
+    [
+     26,
+     32
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "coat",
+    "trunk",
+    "arms",
+    "head"
+   ],
+   "has_man_span": true,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "timberman": {
    "in_register": true,
    "in_builders": true,
@@ -2304,12 +2351,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-27T01:41:30-0600",
+ "measured_at": "2026-11-27T02:59:57-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795765290.5087721,
- "register_mtime_epoch": 1795762319.0602553,
- "register_mtime": "2026-11-27T00:51:59-0600",
- "register_pairs": 67,
+ "measured_at_epoch": 1795769997.765318,
+ "register_mtime_epoch": 1795769839.6003518,
+ "register_mtime": "2026-11-27T02:57:19-0600",
+ "register_pairs": 68,
  "measurable": [
   "almoner",
   "beadle",
@@ -2370,6 +2417,7 @@
   "tallyman",
   "tanner",
   "tapster",
+  "thatcher",
   "timberman",
   "tither",
   "weigher",

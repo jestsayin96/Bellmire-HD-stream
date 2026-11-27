@@ -133,7 +133,13 @@
 ***      tree 1d8bce63). So the tree that is live right now has never been looked at by anybody.
 ***      Nothing suggests it is broken and the diff that produced it was reviewed. I am flagging
 ***      the gap, not claiming a fault. RECOMMENDATION: a one-minute look at the live page the next
-***      time you are in it, or tell me to do it and I will.
+***      time you are in it. *** I TRIED TO CLOSE THIS MYSELF THIS HOUR AND I CANNOT, SO DO NOT
+***      ASK ME TO. *** Both routes available to a FIRING are refused by the egress allowlist:
+***      the team lead container's own Chromium returns ERR_TUNNEL_CONNECTION_FAILED, and curl
+***      from the device bridge returns "403 from proxy after CONNECT". github.io is not on the
+***      allowlist from either side. A LIVE TURN in the desktop app, with a real browser, can do
+***      it; a scheduled firing cannot. I am recording the exact errors so the next seat does not
+***      spend another cycle discovering this.
 ***
 *** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
 ***   THE LIST IS CUMULATIVE. Items (a)-(h) from the 03:58 and 04:58 blocks ALL STAND and are not

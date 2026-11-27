@@ -1,5 +1,5 @@
 {
- "ok": false,
+ "ok": true,
  "floor_geom": {
   "gd": "scripts\\floorgen.gd",
   "cell_m": 4.0,
@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "df1a970deefca36769db546a3c330534141aa1d8",
+   "head": "ce5aca168682c4935da759b62974e46bd77d4f16",
    "ref": "origin/main",
-   "ref_commit": "87d8f97b7f4c103a710ffad15a813281dfd469a7",
+   "ref_commit": "1449fd32593799583d33c8dc67b30603dd124209",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3540,15 +3540,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "mealman": {
+   "title": "Whitedamp",
+   "theme": "mess",
+   "idea": "IT MAKES YOUR OWN FIRE THE ROOM'S - it has been working meal in here long enough that the air carries it, and meal in the air is not smoke, it is fuel. While it stands, every point of burning anybody deals lands on EVERY body in this room, its own included, and it does not care who swung. Nothing escalates, nothing is on a count and nothing is summoned: the air is already thick at the doorway and it stays thick until the man stops pouring. So the party's own kit is the trap, and the choice is honest both ways - bench the fire hand and lose that damage for the whole fight, or set the air off on purpose and take the burn yourselves to put a hole in it faster than any blade will. It is the only body in this file you can kill quickest by hurting your own line. WHAT A VIEWER READS IS THE FALL: the pale rope of meal running out of the chute at his shoulder into the trough in his hands, and the drift coming off the trough lip. While that is pouring the air is fuel.",
+   "wear": 0.36,
+   "feed_line": "Something ahead is pouring, and the air tastes of flour.",
+   "pack_used": null,
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1560,
+   "size": [
+    1.14,
+    1.15,
+    2.37
+   ],
+   "footprint_span": 1.15,
+   "height_m": 2.37,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.855,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 7.13,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.4333869410717957,
+    "ortho": 2.6688449382781982,
+    "clip": [
+     6.312215805053711,
+     16.168201446533203
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
- "errors": [
-  "fanner: 5 meshes, the bar is four"
- ],
+ "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 87d8f97b7f4c103a710ffad15a813281dfd469a7 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 1449fd32593799583d33c8dc67b30603dd124209 sha bc3a603f",
  "blank_check": {
-  "files": 192,
+  "files": 195,
   "failures": []
  }
 }

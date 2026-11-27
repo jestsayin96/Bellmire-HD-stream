@@ -24645,3 +24645,413 @@ def fanner():
 
 
 BUILDERS.update({"fanner": fanner})
+
+
+# =====================================================================
+# THE MEALMAN - THE 65th. "Whitedamp".
+#
+# WHAT I MEASURED BEFORE I DESIGNED, AND IT IS NOT A REMEMBERED LIST.
+#   - LIVE BODIES = 64 on origin/art: 77 `.glb` under assets/monsters/
+#     minibosses/, minus 11 `_chibi`, minus the two bosses `broodglut` and
+#     `lastcuff`. Counted off the ref, not a worktree.
+#   - I PARSED ALL 76 CANON ENTRIES OUT OF THIS FILE AND READ EVERY GIMMICK
+#     STRING before drawing a line. 62 distinct non-variant bodies across all
+#     FOURTEEN floorgen themes; `mess` stands at 4, which is the joint-thinnest
+#     rung.
+#   - HEIGHT 2.37 and WEAR 0.36 ARE FREE RUNGS, measured off those entries:
+#     2.36 and 2.38 are taken and 2.37 is not; 0.35 and 0.38 are taken and
+#     0.36 is not. The title `Whitedamp` is not among the 62 taken titles.
+#
+# THREE DESIGNS DIED ON THAT READING, and they died on the reading rather than
+# on taste - the Tither's habit, kept:
+#   - THE DUST ON A COUNT: the air thickens a step every round until any flame
+#     takes the room. Dead. The SLUICEKEEPER already winds its hazard open "a
+#     step at a time" and the Tither's own docstring already struck a design
+#     for this exact reason: an escalating room clock is ONE fight shape, not
+#     two. So the dust here does NOT escalate. It is thick from the doorway.
+#   - A SACK THAT BURSTS WHEN STRUCK, spraying the room. Dead. The FULLER
+#     "gives back what you put in" and the TANNER "will not take the same blow
+#     twice" - a body that answers the blow you landed is a shape this file
+#     has twice.
+#   - A MEAL-MAN WHO STRIKES THE MEASURE LEVEL. Dead before it was drawn: the
+#     STRICKLER is literally that trade ("IT STRIKES YOU LEVEL") and shares the
+#     grain-measure kit. Nothing of that kit is on this body - no measure, no
+#     strike, no scoop.
+#
+# WHAT IS NOT IN THE OTHER 64 IS A DAMAGE TYPE TURNED AGAINST ITS OWNER. Every
+# other condition in this file is on the MONSTER (its plate, its lamp, its
+# water, its hook) or on the party's POSITION (the Fanner's crowd count) or on
+# ONE hero (the Dyer's mark, the Drover's yoke). This one is on the party's own
+# ABILITY LIST: while it stands, fire is friendly fire. The closest neighbour is
+# the FULLER and it is not the same sentence - the Fuller punishes the hand that
+# landed the blow and heals itself; the Mealman does not care who swung, spreads
+# the burn to EVERY body in the room including its own, and so is also the one
+# monster you can kill fastest by hurting yourself. The verb is new, not the
+# monster, which is the bar.
+#
+# NO EMISSIVE SLOT IS USED ON THIS BODY AND THAT IS THE MECHANIC, NOT AN
+# OVERSIGHT. It is the first body in the file with nothing alight on it: a room
+# whose whole rule is "no flame in here" must not carry a flame. The cue census
+# still reads it, because this file's countable cues are mostly pale geometry
+# in the `bone` slot already (pledgeman, blower, stopper) and MB_CUEOFF takes
+# `bone` - so the A/B arm that matters is unchanged and no gate goes blind.
+CANON.update({
+    "mealman": ("Whitedamp", 2.37, (0.80, 0.78, 0.70), (0.92, 0.90, 0.80),
+                "mess",
+                "IT MAKES YOUR OWN FIRE THE ROOM'S - it has been working meal "
+                "in here long enough that the air carries it, and meal in the "
+                "air is not smoke, it is fuel. While it stands, every point "
+                "of burning anybody deals lands on EVERY body in this room, "
+                "its own included, and it does not care who swung. Nothing "
+                "escalates, nothing is on a count and nothing is summoned: "
+                "the air is already thick at the doorway and it stays thick "
+                "until the man stops pouring. So the party's own kit is the "
+                "trap, and the choice is honest both ways - bench the fire "
+                "hand and lose that damage for the whole fight, or set the "
+                "air off on purpose and take the burn yourselves to put a "
+                "hole in it faster than any blade will. It is the only body "
+                "in this file you can kill quickest by hurting your own line. "
+                "WHAT A VIEWER READS IS THE FALL: the pale rope of meal "
+                "running out of the chute at his shoulder into the trough in "
+                "his hands, and the drift coming off the trough lip. While "
+                "that is pouring the air is fuel.",
+                0.36, "Something ahead is pouring, and the air tastes of flour."),
+})
+ORDER = ORDER + ["mealman"]
+
+# PER-SLOT MATERIALS. `bone` IS THE MEAL AND NOTHING ELSE - the fall, the three
+# drifts off the trough lip, the caked mask and the caked brow. The hopper, the
+# chute and the trough are NOT pale: a body caked pale all over has no gauge at
+# all, which is the Beadle's flat-pale fault reached from the other side. The
+# builder ASSERTS the ratio, so a later colour edit dies at build time.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"mealman"}
+
+OVERRIDE.update({
+    "mealman": {
+        'body': ((0.150, 0.132, 0.104), 0.72, 0.04),   # the meal-floor smock
+        'dark': ((0.052, 0.048, 0.042), 0.78, 0.06),   # trough, boots, pits
+        'bone': ((0.935, 0.920, 0.860), 0.52, 0.00),   # THE MEAL ONLY
+    },
+})
+
+# THE ASSEMBLY YAW. The hopper, the chute and the fall are ONE rigid group and
+# it is turned 34 deg off X - the Pitman's ladder fix, and the Tither took it
+# for the same reason. An arch built in the XZ plane is EDGE-ON to the side
+# ortho and collapses to a post; an arch built in the YZ plane does the same to
+# the front ortho. 34 deg gives every camera 0.83 of the arch's span and no
+# camera the degenerate view.
+_MEAL_YAW = math.radians(34.0)
+
+
+def _yaw(p, a=_MEAL_YAW):
+    """Rotate a point about Z. The group's one transform, in one place."""
+    c, s = math.cos(a), math.sin(a)
+    return (p[0] * c - p[1] * s, p[0] * s + p[1] * c, p[2])
+
+
+def mealman():
+    """THE MEALMAN - the 65th. He is pouring, and the air is the weapon.
+
+    THE ONE NUMBER THIS BUILDER ASSERTS. The fall is the cue and the cue is
+    pale, so a pale that goes flat against the smock is a cue a viewer cannot
+    take - the Beadle shipped a 1.07 bone/body ratio and its pale band went
+    flat against its own panel. Checked here so a colour edit dies at build
+    time rather than in a render nobody re-reads.
+
+    WHAT I EXPECT TO GO WRONG, WRITTEN BEFORE I RENDERED IT so the pictures can
+    refute me rather than confirm me. Five, and I expect at least two to stand:
+      1. THE FALL READS AS A STAFF. A pale vertical rope beside a man is the
+         same silhouette as a pale pole, and half this file's bodies hold a
+         pole. The three answers built in are: it is TAPERED (narrow at the
+         chute mouth, wide at the trough, so it has no constant width a pole
+         would have), it is RAKED off vertical, and it ENDS IN A SPREAD at the
+         trough instead of a flat cut. If it still reads as a staff after the
+         render, the spread is the thing to grow, not the rope.
+      2. THE CHUTE ARCH AGAINST THE SKULL. The arch passes over the shoulder
+         at roughly head height and the back view is where it will meet the
+         skull. 34 deg of yaw moves it off the midline but does not guarantee
+         separation from behind - and the back view is exactly where the
+         Beadle's no-facing fault lived.
+      3. THE TROUGH FUSING WITH THE HEM. A vessel held low in both hands is
+         0.20 m from a flared smock hem. It is carried forward on a LEAN for
+         that reason and the side ortho is where it will be judged.
+      4. NO FACING FROM THE BACK. The pale is on the mask and the brow, both
+         FRONT-ONLY by construction, and the back of the skull is bare dark.
+         That is the Beadle fix applied as geometry rather than as hope, so I
+         expect the back to read as a back - but the hopper is also on the back
+         and a big pale-rimmed mass there could read as a front to a viewer who
+         has not seen the man before. The rim is therefore NOT pale.
+      5. THE EYES. Two dark pits between a pale brow and a pale mask: the face
+         is read by CONTRAST, not by its own colour, and this body has no
+         emissive to fall back on. "The head now has no face at all" is this
+         lane's own pass-11 fault and no blank check and no border check can
+         see it. It is answered by looking, this pass, and nothing else.
+
+    Static: no `anims` entry, so bestiary.gd needs a `model` path and NO
+    `anims` entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+    """
+    bone_l = _luma(OVERRIDE["mealman"]['bone'][0])
+    body_l = _luma(OVERRIDE["mealman"]['body'][0])
+    ratio = bone_l / max(1e-6, body_l)
+    if ratio < 1.30:
+        raise ValueError(
+            "mealman: bone/body luma ratio %.2f is under 1.30 - the fall IS "
+            "the cue and a cue that goes flat against the smock cannot be "
+            "read (bone %.3f, body %.3f)" % (ratio, bone_l, body_l))
+
+    P = Parts("mealman")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.100
+    KNEE = 0.520
+    HIP = 0.950
+    WAIST = 1.150
+    SHO = 1.640
+    HEAD = 1.950
+    HEM = 0.600
+    TROUGH = 1.010        # the trough's rim plane - carried LOW and FORWARD
+
+    # HE LEANS AWAY FROM HIS OWN LOAD. The hopper is on his back, so unlike
+    # every carrier in this file that stoops INTO its load, this one is pulled
+    # BACK by it and stands into the pull - 0.075 m of forward offset at the
+    # shoulder. It is also what keeps the trough clear of the smock hem on the
+    # side ortho (fault 3).
+    LEAN = 0.075
+
+    # ---- legs. Staggered, hem clears the knee so the outline has a JOINT.
+    _open()
+    for _i in (-1, 1):
+        _fwd = -0.062 if _i < 0 else 0.055
+        _h = Vector((0.160 * _i, 0.0, HIP))
+        _k = Vector((0.188 * _i, _fwd * 0.55 - 0.016, KNEE))
+        _a = Vector((0.210 * _i, _fwd, ANK))
+        limb(P, [tuple(v) for v in seat([_h, _k, _a], 0.108)], 0.108, 0.084,
+             'body')
+        P.add(L.box(0.108, 0.154, 0.066), 'dark',
+              loc=(0.210 * _i, _fwd - 0.038, ANK - 0.048))
+    _close("legs")
+
+    # ---- the smock. Squashed in y so front and side orthos cannot get the
+    # same outline (the Overlooker's FIX I - a smock on a man is wider across
+    # than it is deep).
+    _open()
+    P.raw(aim(L.cone(0.244, 0.194, WAIST - HIP, 22),
+              (0.0, 0.004, HIP), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.74, 1.0)), 'body')
+    P.raw(aim(L.cone(0.368, 0.244, HIP - HEM, 22),
+              (0.0, 0.004, HEM), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.74, 1.0)), 'body')
+    # the belt that takes the hopper's straps
+    P.add(L.box(0.290, 0.196, 0.046), 'dark', loc=(0.0, 0.004, WAIST - 0.028))
+    _close("smock")
+
+    # ---- the trunk, raked forward by LEAN, and the shoulder yoke.
+    _open()
+    limb(P, [(0.0, 0.004, WAIST), (0.0, -LEAN * 0.55, WAIST + 0.225),
+             (0.0, -LEAN, SHO)], 0.222, 0.192, 'body')
+    P.add(L.sphere(0.318, 0.148, 0.106, 14, 9), 'body',
+          loc=(0.0, -LEAN, SHO - 0.018))
+    # the two straps over the shoulders, running back to the hopper. They are
+    # what says the mass behind him is CARRIED and not growing out of him.
+    for _i in (-1, 1):
+        limb(P, [(0.150 * _i, -LEAN - 0.030, SHO - 0.010),
+                 (0.148 * _i, 0.060, SHO - 0.090),
+                 (0.130 * _i, 0.185, SHO - 0.240)], 0.030, 0.026, 'dark')
+    _close("trunk")
+
+    # ---- the arms. BOTH hands on the trough, low and forward: the pose is a
+    # man carrying a full vessel, which is the one pose that cannot be mistaken
+    # for a threat, and the Tither's argument for why that is worth having.
+    _open()
+    for _i in (-1, 1):
+        limb(P, [(0.268 * _i, -LEAN - 0.010, SHO - 0.055),
+                 (0.300 * _i, -0.168, WAIST + 0.030),
+                 (0.196 * _i, -0.286, TROUGH + 0.052)], 0.094, 0.072, 'body')
+        # the mitt on the rim
+        P.add(L.sphere(0.082, 0.072, 0.064, 10, 7), 'dark',
+              loc=(0.196 * _i, -0.300, TROUGH + 0.030))
+    _close("arms")
+
+    # ---- the head. The skull is BARE DARK BEHIND and the pale is front-only:
+    # fault 4 answered by construction. The brow band and the mask are two
+    # pale bars with the dark eye pits between them, and that contrast is the
+    # whole face (fault 5).
+    _open()
+    _hx, _hy = 0.0, -LEAN - 0.020
+    limb(P, [(0.0, -LEAN, SHO + 0.010), (_hx, _hy, HEAD - 0.090)],
+         0.082, 0.074, 'body')
+    P.add(L.sphere(0.138, 0.132, 0.150, 14, 10), 'body',
+          loc=(_hx, _hy, HEAD))
+    # THE CAKED BROW - front only, and narrow. A band that wrapped the skull
+    # would give the body no facing, which is the Beadle's exact fault.
+    P.add(L.box(0.206, 0.052, 0.034), 'bone',
+          loc=(_hx, _hy - 0.106, HEAD + 0.044))
+    # the two eye pits, sunk, between the brow and the mask
+    for _i in (-1, 1):
+        P.add(L.sphere(0.034, 0.026, 0.030, 10, 7), 'dark',
+              loc=(_hx + 0.060 * _i, _hy - 0.112, HEAD - 0.002))
+    # THE MASK - caked cloth over mouth and nose, front only, with a dark
+    # breathing slot across it so it is a mask and not a bandage.
+    P.add(L.sphere(0.126, 0.058, 0.082, 12, 8), 'bone',
+          loc=(_hx, _hy - 0.096, HEAD - 0.072))
+    P.add(L.box(0.142, 0.030, 0.020), 'dark',
+          loc=(_hx, _hy - 0.146, HEAD - 0.078))
+    # the knot at the back of the mask - dark, and it is the only thing on the
+    # back of the skull, so the back stays a back.
+    P.add(L.sphere(0.038, 0.038, 0.034, 8, 6), 'dark',
+          loc=(_hx, _hy + 0.140, HEAD - 0.046))
+    _close("head")
+
+    # ---- THE HOPPER. On his back, yawed with the whole group. Not pale.
+    _open()
+    _hop = (0.0, 0.272, 0.0)
+    _hb = _yaw((_hop[0], _hop[1], 0.0))
+    P.raw(aim(L.cone(0.300, 0.198, 0.520, 20),
+              (_hb[0], _hb[1], 1.190), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.80, 1.0)), 'body')
+    # the rim, DARK on purpose (fault 4: a pale-rimmed mass on his back would
+    # read as a front to a viewer who has not seen him before)
+    P.raw(aim(L.cone(0.312, 0.300, 0.054, 20),
+              (_hb[0], _hb[1], 1.704), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.80, 1.0)), 'dark')
+    # two hoops round the bin, so it reads as a made vessel and not a lump
+    for _z in (1.330, 1.560):
+        P.raw(aim(L.cone(0.286, 0.286, 0.030, 20),
+                  (_hb[0], _hb[1], _z), (0.0, 0.0, 1.0),
+                  scale=(1.0, 0.80, 1.0)), 'dark')
+    _close("hopper")
+
+    # ---- THE CHUTE. An arch out of the hopper's rim, over the right
+    # shoulder, ending in a downturned mouth forward of his chest. Built in
+    # the group's yawed frame so no ortho gets it edge-on (fault 2).
+    _open()
+    _a0 = _yaw((0.080, 0.230, 1.690))
+    _a1 = _yaw((0.235, 0.040, 1.995))
+    # PASS 3 - THE MOUTH GOES OUTBOARD, AND THIS IS THE ONE CHANGE THIS PASS.
+    # Pass 2 put the rope where it belongs geometrically and the pictures still
+    # refused it, for two reasons that are the same reason: there was no AIR
+    # round it. FRONT ortho - the mouth sat at x 0.317 and the right arm runs
+    # x 0.268 -> 0.196 through exactly that corridor, so the rope was cut into
+    # two pale slivers by his own forearm, and at HERO DISTANCE those slivers
+    # are flecks. The cue did not survive the only distance that matters.
+    # SIDE ortho - the rope ran flat down the chest with nothing between, so it
+    # read as a bib or a tabard rather than as something falling.
+    # So the mouth is given in WORLD coordinates instead of the yawed frame:
+    # x 0.455 is clear outboard of the elbow and y -0.330 is clear forward of
+    # it, and the landing moves with it to the trough's near-outer quarter. The
+    # arch keeps its 34 deg build up to `_a1`, so fault 2's answer is untouched.
+    # WHAT THIS COSTS, SAID BEFORE THE RENDER: the pour no longer lands in the
+    # middle of the trough, so the spread dome sits off-centre, and a rope held
+    # that far out may read as a thing he is HOLDING rather than a thing
+    # falling. If it does, the spread is what has to grow, not the rope.
+    _a2 = (0.455, -0.330, 1.795)
+    _pts = [_a0,
+            _yaw((0.170, 0.160, 1.880)),
+            _a1,
+            (0.392, -0.148, 1.918),
+            _a2]
+    limb(P, _pts, 0.076, 0.062, 'body')
+    # the mouth: a short dark collar, so the fall has a place it comes OUT of
+    P.raw(aim(L.cone(0.078, 0.066, 0.064, 14),
+              (_a2[0], _a2[1], _a2[2] - 0.060), (0.0, 0.0, 1.0)), 'dark')
+    _close("chute")
+
+    # ---- THE FALL. The cue. Tapered narrow-to-wide, raked off vertical, and
+    # it ENDS IN A SPREAD at the trough rather than a flat cut - the three
+    # answers to fault 1, built in rather than hoped for.
+    _open()
+    _top = (_a2[0], _a2[1], _a2[2] - 0.088)
+    _bot = (0.205, -0.390, TROUGH + 0.058)
+    _dz = (_bot[0] - _top[0], _bot[1] - _top[1], _bot[2] - _top[2])
+    _len = math.sqrt(sum(c * c for c in _dz))
+    # PASS 2 - THE FALL WAS PLACED FROM ITS MIDPOINT AND THAT IS A BUG, NOT A
+    # TASTE NOTE. `L.cone` is built BASE-AT-ORIGIN extending +Z (every other
+    # call in this file passes the base plane: see the smock, the hopper, the
+    # trough). Pass 1 passed the MIDPOINT, so the rope started halfway down the
+    # chest and ran a full length further - through the trunk, through the
+    # trough and out the bottom, where it read as a pale APRON hanging over the
+    # smock in both the front and the side ortho. It was the loudest thing on
+    # the body and it was saying the wrong word. The base goes at `_top`.
+    # NOTHING ELSE MOVED THIS PASS so the render can be read as one change.
+    # PASS 4 - ONE ROPE BECOMES THREE, AND THAT IS THE ONE CHANGE THIS PASS.
+    # Pass 3 bought the cue its air and the cue then told a different lie. At
+    # HERO DISTANCE - the only distance that decides anything - a single pale
+    # straight-sided column standing clear of a figure's flank reads as A WHITE
+    # SWORD. I predicted "it reads as a staff" in fault 1 before the first
+    # render and then watched the fix produce the same misread in a better
+    # position, which is the useful half of writing the prediction down.
+    # Width was the wrong lever: a THINNER slab is a thinner blade, and a
+    # WIDER one is a plank. The lever is COUNT. Three narrow streams at three
+    # different rakes cannot be one object, so no blade reading survives them,
+    # and a thing that arrives in several strands at once is a thing falling.
+    # They stay inside the same envelope, so the body's bounds, its hero ratio
+    # and its corridor span are unchanged and comparable with pass 3's.
+    # PASS 5 - THE STRANDS SPLAY, AND THIS IS THE ONE CHANGE THIS PASS.
+    # Pass 4's three strands DID NOT SURVIVE THE HERO SHEET. Side by side with
+    # a KayKit adventurer the dark seams between them fall under a pixel, the
+    # three fuse back into one slab and the white-sword reading came straight
+    # back. That is the Fanner's fused-vane fault in another coat: a count
+    # answered at render resolution and lost at stream distance.
+    # So COUNT was the wrong lever too, and the right one was in the failure
+    # itself - what survives distance is the OUTLINE. A blade reads as a blade
+    # because its outline is a long straight-sided wedge, and pass 3 and pass 4
+    # both kept that outline exactly. A pour reads as a pour because it is
+    # TIGHT AT THE MOUTH and FANS as it drops. So the strands now leave the
+    # chute almost on top of each other and land 0.21 m apart, and the spread
+    # below them is wider than any of them: the silhouette is a fan over a
+    # heap, which is not a shape a sword has at any resolution.
+    for _ox, _oy, _bx, _by, _r0, _r1 in (
+            (-0.018, 0.005, -0.105, 0.034, 0.030, 0.046),
+            (0.002, -0.011, 0.012, -0.052, 0.027, 0.041),
+            (0.019, 0.008, 0.105, 0.040, 0.024, 0.038)):
+        _t = (_top[0] + _ox, _top[1] + _oy, _top[2])
+        _b = (_bot[0] + _bx, _bot[1] + _by, _bot[2])
+        _d = (_b[0] - _t[0], _b[1] - _t[1], _b[2] - _t[2])
+        P.raw(aim(L.cone(_r0, _r1, math.sqrt(sum(c * c for c in _d)), 12),
+                  _t, _d), 'bone')
+    # THE SPREAD where it lands: a low pale dome sitting in the trough, wider
+    # than the rope that feeds it. This is what makes the rope a POUR.
+    # PASS 5: the heap is widened to 0.182 in x so it OUT-SPANS the fan above
+    # it (0.21 of fan, 0.364 of heap). It is kept inside the trough's own rim
+    # ellipse but for about 0.02 m, which reads as meal heaped over the lip and
+    # not as a float - named here so the next pass checks it rather than
+    # assumes it.
+    P.add(L.sphere(0.182, 0.112, 0.070, 16, 9), 'bone',
+          loc=(_bot[0], _bot[1] + 0.020, TROUGH + 0.040))
+    # THE DRIFT. Three pale puffs coming off the trough lip, staggered in all
+    # three axes so no two fuse in any ortho. This is the one thing on the body
+    # that says the air ITSELF is carrying his work.
+    for _dx, _dy, _dz2, _r in ((-0.250, -0.300, 0.085, 0.082),
+                               (0.262, -0.252, 0.142, 0.066),
+                               (-0.052, -0.368, 0.206, 0.054)):
+        P.add(L.sphere(_r, _r * 0.86, _r * 0.74, 12, 8), 'bone',
+              loc=(_dx, _dy, TROUGH + _dz2))
+    _close("fall")
+
+    # ---- THE TROUGH. Dark inside, carried forward on the LEAN so it clears
+    # the smock hem (fault 3). Shallow and wide so it reads as a vessel being
+    # filled and not a shield.
+    _open()
+    P.raw(aim(L.cone(0.300, 0.372, 0.130, 20),
+              (0.0, -0.300, TROUGH - 0.066), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.62, 1.0)), 'body')
+    P.raw(aim(L.cone(0.266, 0.340, 0.088, 20),
+              (0.0, -0.300, TROUGH - 0.020), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.62, 1.0)), 'dark')
+    _close("trough")
+
+    # THE FIGURE. The hopper, the chute, the fall and the trough are the LOAD
+    # and the WORK, not the man, and that is a declaration: a can-you-see-the-
+    # man test must not score his own pour as part of him.
+    P.man_parts = ("legs", "smock", "trunk", "arms", "head")
+    return P
+
+
+BUILDERS.update({"mealman": mealman})

@@ -15468,6 +15468,45 @@
           "Count what is left on the boards. That is what you saved.",
           "Take the sacks home. Mind the stair."
         ]
+      },
+      "mower": {
+        "arrive": [
+          "A man in a broad hat stood at the far end of the room with a scythe held low.",
+          "The haft is ash and dark with handling. The blade is the only bright thing on him.",
+          "It runs level, a hand off the boards, and it is longer than he is tall.",
+          "He is not looking at anyone. He is looking at the grass that is not there.",
+          "A horn hangs shut at his hip. Water and a stone. He has honed it already.",
+          "He takes a swath. Everything in the sweep goes down on the one beat.",
+          "The edge is long and the haft is longer. The ground at his own boots is the one place it does not go.",
+          "Stand off and be cut together. Close, and the stroke goes over you.",
+          "Mind the blade. Mind where you stand."
+        ],
+        "act": [
+          "{name} holds back, out in the open. The stroke comes level and finds them.",
+          "{name} watches the blade go through. It is longer than it looked.",
+          "{name} goes in under the sweep. The edge passes overhead and takes nothing.",
+          "{name} keeps to the boards at his feet. The stroke is spent on air.",
+          "The whole line goes down on the one beat. Nobody was close enough to be spared.",
+          "{name} counts the stroke, then the step in. It is shorter than the step back.",
+          "{name} crowds the boots. He has to stop and set his feet again.",
+          "The blade comes round. {name} is already inside it."
+        ],
+        "broken": [
+          "He loses the stroke and stands a moment with the edge hanging.",
+          "He steps back to find his swing. There is room for it now.",
+          "The blade rides high and comes through on nothing.",
+          "A stroke goes over the top of them. He draws a breath and sets again."
+        ],
+        "fall": [
+          "He is down. The scythe goes over and the blade lies still along the boards.",
+          "The haft is ash and the edge is bright. It stays bright.",
+          "A broad hat, a smock, and a blade that never touched the one who closed.",
+          "He took the swath in one pass and he took it every time. Only the ones who stood off.",
+          "The long edge is on the floor and nothing in the room is moving under it.",
+          "He never chose one of you. He never needed to.",
+          "The horn is still shut at his hip. Water and a stone.",
+          "Pick up the line. Stand close the next time."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -15520,7 +15559,8 @@
     "_note_c212": "C-212: collier text change, shipped on the supervisor's 11:00 CT ruling (A) and the team lead's 11:58 plan row. The body shows three vents at 360p, so the count words came out and the mechanic words stayed: arrive.3 drops \"Four\", arrive.4 drops \"four\", act.6 becomes \"seats another plug. One more red eye goes out.\" in place of \"the third plug. Three dark mouths and one red\". Eight stakes (arrive.2) unchanged. Arrays stay 9/8/4/8, no key added or removed. _note_c205 above is left byte-identical as history; its \"four pale plugs answer the four vents\" is superseded by this note. Expected zero-hit key; NO LANE IS TO WIRE IT.",
     "_note_c214": "C-214: C-213's prepared text diffs, landed on the team lead's 14:58 CT plan row. The changer's arms were deleted on 21 Nov (Mr. E: delete the bars); the body is man, post, collar and a pale drum with three dark rungs. Changed: changer arrive.1 drops three-armed turnstile for turnstile post; arrive.2 works the arms, and the arms work the room becomes works the post, and the post works the room; arrive.8 clean plates on the bar ends becomes a clean plate under the post. Dyer arrive.1 A fourth is in the vat becomes The vat is steaming (three cloths on the builder, none in the vat). CORRECTED AND FINISHED IN C-215 (25 Nov): the held list over-stated by two - broken.1 and fall.6 never named a bar or an arm. The eight that did (arrive.7, act.0, act.6, broken.0, broken.2, broken.3, fall.0, fall.3) are now reworded to the post and drum; the jam counterplay survives as a promise (a body set against the post holds it) and no cell names an arm or a bar. Nothing is held. Arrays stay 9/7/4/8 and 9/8. No key added except this note. Expected zero-hit key; NO LANE IS TO WIRE IT.",
     "_note_c216": "C-216: overlooker (Velrick, the 63rd body, workshop). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - the head turned off his shoulders, the pale mitt held level along the pick - and the one rule: he goes for whoever has hurt him least and re-reads when that changes. No number, no arm-count, no new mechanic; the counterplay in broken is stated as a promise the way the changer's is. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row, if the game build wants one: \"overlooker\": \"Velrick\".",
-    "_note_c234": "C-234: badger (Forestall, the 67th body, art lane, committed on main). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - four pale full sacks on a yoke, the town's own stamp on them - and the one rule: he is leaving, and every sack that leaves the floor is gone from the granary. Put him down and what is still on the yoke stays to be carried up. No number beyond the four sacks art's own body shows. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row is the game build's: \"badger\": \"Forestall\"."
+    "_note_c234": "C-234: badger (Forestall, the 67th body, art lane, committed on main). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - four pale full sacks on a yoke, the town's own stamp on them - and the one rule: he is leaving, and every sack that leaves the floor is gone from the granary. Put him down and what is still on the yoke stays to be carried up. No number beyond the four sacks art's own body shows. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row is the game build's: \"badger\": \"Forestall\".",
+    "_note_c236": "C-236: mower (Oneswath, the 68th body, art lane, committed on main). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - the long honed blade level at ankle height, the only bright thing on him - and the one rule the picture shows: stand off in the open and the stroke takes everyone on one beat; close inside and it goes over. No number, no floor count. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row is the game build's: \"mower\": \"Oneswath\"."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

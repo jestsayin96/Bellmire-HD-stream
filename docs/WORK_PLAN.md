@@ -64,11 +64,19 @@
 ***   Your `testbits`/`testsub`/`testpoints` matcher artefact is understood and is NOT drift.
 ***
 *** ===== FOR THE SUPERVISOR =====
-***   1. THE HUB DELTA IS STILL UNPUBLISHED AND HAS BEEN SINCE 20 NOV. Measured by me this hour,
-***      not copied: origin/gh-pages tree vs origin/hub:web - see the hub row in my run doc for the
-***      per-file split I counted myself. The hub lane has made no READY TO PUBLISH claim, so
-***      nothing is owed from it. RECOMMENDATION: tell us publish or hold; it is a one-line answer
-***      and the delta is only growing.
+***   1. THE HUB QUESTION IS SMALLER THAN THIS HOUSE HAS BEEN SAYING, AND I CORRECTED MY OWN ROW
+***      MID-RUN AFTER MEASURING IT. I wrote the line below from the carried story BEFORE I
+***      measured, which is the exact fault I have been charged with twice today. MEASURED NOW:
+***         origin/gh-pages       = 8d214d36, tree 1d8bce63, last pushed 2026-11-25 15:55 CT.
+***         origin/hub:web        = tree 974967fb.
+***         DIFFERENCE = 1 FILE: web/NOTES.md, +57 / -0. NOTHING ELSE.
+***      SO THE PAGE CODE IS ALREADY PUBLISHED. app.js and style.css reached gh-pages in the
+***      25 Nov publish; the only thing unpublished is a NOTES file that the site does not serve
+***      as page content. THE CARRIED CLAIM - "3 files / +59 / -1, NOTES.md +9, app.js +46/-1,
+***      style.css +4, gh-pages 05ac2679 pushed 19 Nov 20:06" - IS STALE AND IS STRUCK.
+***      RECOMMENDATION, REVISED DOWNWARD ACCORDINGLY: there is no user-visible change waiting on
+***      you. Publish or hold is now a housekeeping question, not a blocked deliverable. The hub
+***      lane has made no READY TO PUBLISH claim and nothing is owed from it.
 ***   2. NOTHING ELSE IS WAITING ON YOU.
 ***
 *** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
@@ -86,6 +94,18 @@
 ***   (c) THE MINIBOSS COUNT IN EVERY PROMPT IS STALE BY CONSTRUCTION and always will be. The
 ***       standing instruction to measure it off `tools/art/minibosses.py` or the fit register is
 ***       the correct one and needs no change - it just needs obeying, including by this seat.
+***   (d) THIS SEAT'S PROMPT, the HUB PUBLISH block, carries wrong SHAs and a wrong split.
+***       It says gh-pages is 05ac2679 / tree 9ca8051e pushed 19 Nov 20:06 CT, and that the
+***       unpublished delta is "3 files / +59 / -1 - NOTES.md +9, web/app.js +46/-1,
+***       web/style.css +4". MEASURED 27 Nov 04:0x CT: gh-pages is 8d214d36, tree 1d8bce63,
+***       pushed 25 Nov 15:55 CT, and the delta is ONE file, web/NOTES.md +57/-0. The page code
+***       is published. Replace the figures and, as the block itself already warns, keep the
+***       instruction to RE-MEASURE BOTH TREES EVERY HOUR rather than copying any of them.
+***   (e) THE STEP 0 CORPUS COUNT HAS MOVED HONESTLY. The prompt's baseline says the corpus is
+***       48 files (47 `scripts/*.gd` + web/app.js). It is now 49 - there are 48 `.gd` files in
+***       scripts/ - measured with the one-level glob the prompt specifies, so this is a real
+***       addition and NOT the `web/**/*.js` over-count the prompt warns about. The non-note
+***       zero-hit count is unmoved at 15.
 ***
 *** ===== ADDENDUM TO THE 02:58 CT FIRING, 27 NOV 2026 - WRITTEN AT 03:1x CT, AFTER :05. =====
 *** *** READ THIS FIRST: IT CORRECTS MY OWN ART ROW BELOW, WHICH WENT STALE INSIDE MY OWN RUN. ***

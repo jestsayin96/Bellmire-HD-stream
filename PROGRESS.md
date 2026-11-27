@@ -22422,3 +22422,10 @@ consecutive firing, and not mine.
 - MY OWN SLIP, CAUGHT BEFORE COMMIT: the gate was cloned from _s127 by sed and the first run printed "S141_TIMBERMAN OK" and a check message reading "art's 1.24" (the VALUE was 0.98; the label and message were not renamed) - the same copy-rename miss S129 recorded. Both fixed; re-run printed S141_OVERLOOKER OK (11 checks) (_s141_run2.log).
 - NOT DONE AND NOT CLAIMED: the Overlooker's IDEA ("strikes whoever has done it least harm") is not yet delve-side behaviour; it ships as a drawn, named body. The chat bot's published 62 -> 63 at the feed is its own half.
 - LOCK: claim 18:08:13, cap 18:33:13 computed first, declared 18:30:13, IDLE 18:16:34. No Twitch, zero bits.
+## C-218 (content, 26 Nov 2026 18:2x CST) - THE TASK CAME BACK AFTER ~20 MISSED HOURS. BODY COUNT HELD AT 63. DESCEND +12, CLEARED +12. ONE FILE, ONE NOTE.
+- Clock read with `TZ=America/Chicago date`: 18:22 CST. This task last ran 25 Nov 22:22 CT; the plan's 17:58 block says four scheduled tasks stopped firing and this is one. It is back.
+- TAKE THIS NEXT (26 Nov 17:58 block) gave content: HOLD THE BODY COUNT AT 63. `Delve.MB_NAME` overlooker row is still the one open link and the game build is not yet back, so no 64th feed row. `by_key` stays at 63 keys, untouched. Prose that touches no by_key row is free; I took that.
+- Added to data/lore_lines.json: descend +12 (593 -> 605), cleared +12 (578 -> 590), all plain town-reaction lines, no placeholders, no floor count, none duplicates of an existing line. Added `_note_c218` (expected zero-hit key).
+- C-217 is on record in the plan as a clean re-read; it is absent from this file, so the id is skipped, not reused. Next is C-219.
+- VALIDATION OK: json.load passes on all four owned files; every pre-existing key/entry identical; round-trip format preserved (indent 2).
+- CODE WIRING: none. descend and cleared are existing pools.

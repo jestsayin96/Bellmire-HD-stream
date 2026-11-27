@@ -903,3 +903,19 @@ Method: folder walked recursively with `find` (32 files, 6 directories); `readme
 | Cleared for use | **NO.** Unlicensed and gated. Do not import, convert or redistribute any file from this pack until a licence file or an author licence is found on disk. |
 
 Method: folder walked with `find` (209 files, 5 directories including root), extension-counted; sibling zip read by central directory; licence-like names searched at every depth; case-insensitive grep of the `.obj` and `.mtl` text for licence terms returned nothing. The `.mtl` header was read only to confirm it is a Blender export. No `.blend`, `.fbx` or `.obj` body was opened as a licence source. Selection note: every other directory in `_packs` already has a catalogue entry; this pack appeared only in the 20 Nov gate list, so it was the next one unverified.
+
+## PACK CATALOGUE - 19_fantasy_weapons_CC0.blend (26 Nov 2026, pack-catalogue firing)
+
+| Field | Value |
+|---|---|
+| Pack location | `C:\hd adventure\_packs\19_fantasy_weapons_CC0.blend` (loose single file, 653,584 bytes, Blender 2.7x-era header `BLENDER_v271`. Not a directory, and it has no sibling `.zip` or folder. It was the only item in `_packs` with no catalogue entry, so it was the next one unverified) |
+| Author | Not stated in the file. The top table of this document credits "(OGA upload)", and that is not verified against anything on disk |
+| Licence | **NO LICENCE FILE FOUND.** No LICENSE, readme, credits or terms file exists beside the blend in `_packs`. A binary scan of the whole `.blend` for `licen[cs]e`, `creative commons`, `CC0`, `CC-BY`, `public domain`, `attribution`, `copyright`, `opengameart`, `author`, `readme`, `credit`, `terms`, `kenney`, `kaykit`, `quaternius` returned no licence text. The only hit was the Blender struct field `author[80]`, which is not a licence. No text datablock is present. **The CC0 entry in the top table is therefore unverified against the file, and this entry does not confirm it.** Nothing is guessed. |
+| File count | 1 file. Inside it: 19 weapon objects (Axe, Bardiche, Battleaxe, Bow, Broadsword, Buckler, Dagger, Glaive, Greatsword, Halberd, Katana, Longsword, Mace, Rapier, Saber, Scimitar, Shortsword, Spear, Warhammer), plus a `Weapons` collection and a `Camera`. The mesh datablocks are 26, materials 3 (`Material`, `Material.001`, `Material.002`), images 1 (`longsword_normal.png`, which is an external-path reference and not embedded). |
+| Commercial use | Not determinable from the pack |
+| Attribution | Not determinable from the pack |
+| Cleared for use | **NO.** Unlicensed on disk and gated. Do not import, convert, or ship any mesh from this file until a licence file or an author licence is found on disk. |
+
+Method: file size and magic header read with `od`. Binary scan run with Python `re` (case-insensitive, read-only) over the whole file for licence terms and a broad set of licence-adjacent words. Datablock names extracted from the binary by prefix (`OB`, `ME`, `MA`, `TE`, `IM`, `TXT`, `SC`, `WO`, `CA`, `LA`). The file was not opened in Blender and nothing was written to it. No other file was read as a licence source.
+
+Selection note: every real directory in `_packs` already has a catalogue entry (checked by name against this file), so the only unverified item was this loose blend. The `_extracted_rpg_items` and `_generated` folders are our own working directories (see the LICENCE GATE section), not third-party packs.

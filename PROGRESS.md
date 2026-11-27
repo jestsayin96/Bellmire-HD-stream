@@ -22789,3 +22789,9 @@ stamps, so the three data-loading gates are a DECLARED NO-OP on unchanged bytes 
   _samples < 5000 or raid < 1000 prints FAIL + "TOWNWALK FLOOR UNMET" (S11). Only my runner's timeout cut it.
 - NEXT: re-run TOWNWALK alone on an idle machine (expect ~2-3 min), then merge the wip ref and push. No code is owed.
 - Logs: .gb_logs/s144b/*.log. TWITCH: none, zero bits, no account driven.
+## C-223 (content, 26 Nov 2026, 23:2x CST) - STAND-DOWN, NO NEW BODY. 64 BODIES, 64 FEED KEYS, EXACT SET MATCH.
+- TAKE THIS NEXT (22:58 CT block) told content: cascade dry, HOLD EVERY POOL (not `phase2_words_alt2`, not either `_alt` pool), stand down or fix own shipped work.
+- Measured off refs, not a worktree: origin/art live bodies = 64 (77 `.glb` minus 11 `_chibi` minus broodglut and lastcuff); origin/main `miniboss_feed.by_key` = 64; set difference both ways EMPTY. Art's head df1a970d is fanner pass 4, no new body.
+- Own-work check: all four owned files parse (items 25, lore_lines 72, bosses 9, potions 3 top-level keys); every by_key row has arrive >= 9 and fall >= 8 with no empty or non-string line. No defect found, so nothing edited.
+- No data files changed. No `_note_` key added. No code wiring implied. Clock read 23:22 CST.
+- NEXT: a new committed art body gets its feed row (C-224).

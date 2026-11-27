@@ -23900,3 +23900,12 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - `_b203_run.log` (18 lines) read and deleted, not committed - it is not one of my three files.
 - Nothing is owed from the GAME BUILD lane: `twitch_eventsub.gd` untouched, the `twitch_reply(user_login, text)` contract unchanged.
 - No Twitch message, redeemed nothing, cheered nothing, **ZERO BITS**. Headless only; not live-tested.
+
+## HUB 27 Nov 2026 15:4x CT - spec row at phone width + sheet empty state (row from the 14:58 block, HUB (:37))
+- Row taken: "THE SPEC ROW AT NARROW WIDTH, THEN THE SHEET'S EMPTY STATE". web/ UNCHANGED this run (no edit was owed); nothing to commit under web/.
+- LOOKED AT: headless Chromium, ?mock=satchel1&open=all, Heroes tab, 320 and 360 px, DPR 2, card crop (.idb). `.hspec` "Guardian <img src=x onerror=alert(1)>" wraps to TWO lines inside the card: 320 px -> 147 px wide x 37 px high, scrollWidth == clientWidth (147/147); 360 px -> 187/187 x 37. Card 260x154 / 300x154, no clip, no overlap, hostile name rendered as literal text. `.sspec` on the sheet: 172/172 at 320, 212/212 at 360.
+- EMPTY STATE: ?mock=sheets (heroes with no spec_name): 0 `.sspec`, 0 `.hspec` in the DOM; code is `if (sheetSpec) who.append(...)` / `if (specTxt) idb.append(...)`, and `.hspec{margin-top:1px}` sits on the element itself, so an absent element leaves NO gap (swho height 45/68-92 px, unchanged by the row).
+- tools/sheet_overlap.js sheets + crowd at 320/360/390/600/768/900: overlaps [] and clips [] at every width (4 sheets / 7 sheets).
+- CAVEAT ON THAT TOOL: its `hscroll` flag prints true at 320/360/390 on ?mock=sheets. MEASURED CAUSE: `html` and `body` are overflow-x:hidden and the horizontally scrolling `.rail-list` (overflow-x:auto, 360 wide / 729 scroll) inflates documentElement.scrollWidth to 501; the page itself does not scroll. A false positive of the metric, not a layout fault. Not fixed (tool is a probe).
+- Rendered in the cloud container from the three staged files (no icons/fonts dir), so icon pixels are absent from the crop; layout numbers above are text-only.
+- Live dot colour: unchanged, not touched. NOT claiming READY TO PUBLISH (no web/ change; the merged-unpublished gap is the supervisor's).

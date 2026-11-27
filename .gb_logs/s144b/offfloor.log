@@ -1,0 +1,93 @@
+START 23:10:37
+[   0.1] Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+[   0.1] 
+[   1.7] FEED Hero0 and 7 others descend, the door-keeper nodding them through.
+[   1.7] FEED They carry 24 flasks of oil between them.
+[   7.7] L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+[   7.7] L28D_DECALS floor 1 mess: 18 (cap 24)
+[   7.7] FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed giant rat, 1 puglin, 1 cave spider.
+[   7.7] FEED The dust lies flat except in one line, wall to wall.
+[   7.7] FEED Hero4 rolls a 20 for initiative and is moving before anything else.
+[   9.2] FEED Hero2 casts Smite at puglin.
+[   9.2] FEED Hero7 spots a blade trap (Perception 16 vs DC 10) and steps round it.
+[  11.9] FEED Hero5 is cut off and falls back to the others.
+[  12.3] FEED Hero6 is cut off and falls back to the others.
+[  13.1] FEED Hero6 is cut off and falls back to the others.
+[  13.2] FEED Hero1 searches (Investigation 20) and turns up 14 gold on floor 1.
+[  13.2] FEED Floor 1 is taken back from the dark. It is not much, and it is theirs.
+[  13.2] FEED Hero1 finds a vial of The Gleaner's Cup.
+[  16.2] FEED Hero0 and 7 others take a breather, and press on deeper.
+[  24.1] L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+[  24.1] L28D_DECALS floor 2 grassland: 18 (cap 24)
+[  24.1] FEED Floor 2 - a workshop, remade as a sunken meadow: 1 giant rat, 1 cave spider, 1 bog frog, 1 cave bat.
+[  24.1] FEED Hero1 rolls a 20 for initiative and is moving before anything else.
+[  25.0] FEED Hero2 casts Smite at bog frog.
+[  25.1] FEED Hero6 casts Frost at bog frog.
+[  25.2] FEED Hero1 casts Bolt at bog frog.
+[  25.6] FEED Hero3 rolls a 20 - and the cave bat is gone.
+[  26.6] FEED Hero2 casts Bolt at cave spider.
+[  27.3] FEED Hero2's bolt goes out like a lamp in a draught (10 vs DC 11).
+[  27.3] FEED Hero6's frost rebounds off a stone that was not there (1 vs DC 11).
+[  27.4] FEED Hero1 casts Bolt at giant rat.
+[  27.5] FEED Hero1 searches (Investigation 20) and turns up 27 gold on floor 2.
+[  27.5] FEED Finished - and the next door has gone from shut to merely closed.
+[  27.5] FEED Hero1 finds a vial of Tallow Cup.
+[  30.5] FEED Hero0 and 7 others take a breather, and press on deeper.
+[  43.6] L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 2; lights 52 (shadowed 1)
+[  43.6] L28D_DECALS floor 3 confection: 18 (cap 24)
+[  43.6] FEED Floor 3 - a tomb, remade as the confection: 2 drowned slimes, 2 hollowed cave bats.
+[  43.6] FEED Hero4 rolls a 20 for initiative and is moving before anything else.
+[  47.4] FEED Hero1 spots a pressure plate (Perception 14 vs DC 11) and steps round it.
+[  47.4] FEED Hero2 casts Smite at drowned slime.
+[  47.5] FEED The drowned slime divides.
+[  47.8] FEED Hero2 tries smite. The floor is unmoved (1 vs DC 11).
+[  47.9] FEED Hero7 turns on the wounded drowned slimeling to finish it.
+[  47.9] FEED Hero0 turns on the wounded drowned slimeling to finish it.
+[  47.9] FEED Hero2 turns on the wounded drowned slimeling to finish it.
+[  47.9] FEED Hero3 turns on the wounded drowned slimeling to finish it.
+[  47.9] FEED Hero5 rolls a 20 - and the drowned slimeling is gone.
+[  48.1] FEED Hero1 casts Chain Bolt at drowned slimeling.
+[  48.1] FEED Hero6 casts Bolt at drowned slimeling.
+[  48.2] FEED Hero2 casts Smite at drowned slimeling.
+[  49.1] FEED Hero2 casts Smite at hollowed cave bat.
+[  49.2] FEED Hero6 turns on the wounded hollowed cave bat to finish it.
+[  50.7] FEED Hero2 casts Bolt at drowned slime.
+[  51.0] FEED Hero6 casts Frost at drowned slimeling.
+[  51.0] FEED Hero5 turns on the wounded drowned slimeling to finish it.
+[  51.0] FEED Hero0 turns on the wounded drowned slimeling to finish it.
+[  51.3] FEED Hero1 searches (Investigation 24) and turns up 44 gold on floor 3.
+[  51.3] FEED The blades are wiped, and the hands after them.
+[  52.6] FEED Shadows peel off the walls - an ambush! 1 skeleton minion, 1 hollowed puglin, 1 risen bones surges in.
+[  53.0] FEED Hero1's bolt goes somewhere, and not where it was sent (10 vs DC 11).
+[  56.6] FEED Hero0 and 7 others take a breather, and press on deeper.
+[  62.7] L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+[  62.7] L28D_DECALS floor 4 flooded: 18 (cap 24)
+[  62.7] FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 giant rats, 1 slime, 2 cave spiders.
+[  62.7] FEED The Weeping Bowman is down here. It never stops drawing.
+[  62.7] FEED A sob, a draw, a snap. In that order, always.
+[  62.7] FEED The oil is running low.
+[  65.2] FEED Hero6's frost sparks once and gives up (1 vs DC 12).
+[  66.5] FEED Hero2 grips bolt too hard and it snaps off (11 vs DC 12).
+[  67.0] FEED The Weeping Bowman nocks a volley - cover!
+[  67.9] FEED The slime divides.
+[  67.9] FEED Hero1's chain is swallowed whole by the scar (8 vs DC 12).
+[  68.1] FEED The Weeping Bowman nocks a volley - cover!
+[  69.1] FEED Hero4 rolls a 20 - The Weeping Bowman reels.
+[  69.1] FEED The Weeping Bowman shifts, and the fight changes with it.
+[  69.2] FEED The Weeping Bowman nocks a volley - cover!
+[  69.5] FEED The Weeping Bowman is driven to its last - whatever it has been holding back, it is not holding it now.
+[  69.8] FEED The Weeping Bowman falls to Hero4.
+[  69.8] FEED Hero1 rolls a 20 searching the floor!
+[  69.8] FEED The Weeping Bowman is slain on floor 4!
+[  69.8] FEED The hoard is split 8 ways - 17 gold each to Hero0, Hero1, Hero2, Hero3, Hero4, Hero5, Hero6, Hero7.
+[  69.8] FEED Hero1 finds a vial of The Quarryman's Nerve.
+[  72.1] FEED Hero1 searches the chest - Successfully found loot!! 67 gold (Investigation 25 vs DC 12).
+[  72.8] FEED Battered, the party climbs back out from floor 4.
+[  72.8] FEED Hero0 and 7 others come home to Bellmire with 288 gold, 6 ore, 4 stone, 4 pieces of salvaged gear and 4 potions. 26 kills between them.
+[  72.8] FEED Hero1 is fitted with Reed-Cloth Robe. (+10 hp)
+[  72.8] FEED Hero2 is fitted with Reed-Cloth Robe. (+10 hp)
+[  72.8] FEED Hero4 is fitted with Ford Leathers. (+10 hp) Haggled 13% off (15).
+[  72.8] FEED Hero5 is fitted with Tanner's Jerkin. (+10 hp) A natural 1 - the smith takes offence and charges a tenth over.
+[  72.9] OFFFLOOR 0 of 2367 samples; INPROP 0; MON_INPROP 0 of 319; floor reached 4 frames 7685 obstacles 37
+[  72.9] OFFFLOOR_VERDICT OK 0 of 2367 samples off the floor (home)
+END rc=0 wall=73.0

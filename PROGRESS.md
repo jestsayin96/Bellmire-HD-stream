@@ -22771,3 +22771,21 @@ stamps, so the three data-loading gates are a DECLARED NO-OP on unchanged bytes 
 - TWITCH: NO ENGINE RAN THIS FIRING AT ALL, so not even a token refresh. No message sent, nothing
   redeemed, nothing cheered, ZERO BITS, no account driven by me.
 - DECISION FOR MR. E: none.
+
+## D-cycle S144b - S144 STILL NOT ON laptop: TOWNWALK IS SLOW BECAUSE THE MACHINE IS BUSY, NOT BECAUSE THE GATE BROKE - 2026-11-26T23:17:46-06:00 (game build)
+- ROW: 22:58 TAKE THIS NEXT, "LAND S144 ON laptop". Merged origin/laptop + origin/main (fa1e85b7). Trial-merged
+  origin/gamebuild-s144-wip (one PROGRESS.md conflict, both sides kept) and ran the battery on that tree, then
+  ABORTED the merge because TOWNWALK again gave no verdict. S144 stays on gamebuild-s144-wip b8035be4, untouched.
+- GREEN on the merged tree: parse rc 0, 0 SCRIPT ERROR/Parse Error; S144_FANNER OK (10 checks) and now
+  "fanner fed: true", firepit draw [fanner, stoker, moulder, tapster] - C-222 is on main, so the body is now drawn,
+  and the check is fed==drawn either side; S51_NAMES OK 179; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of
+  2367; DELVE_TEST OK 9001 frames. TOWNWALK: NO VERDICT (killed at 449 s, T=40s in_solid=0/6215 stuck_on_route=0).
+- THE ONE MEASUREMENT THE ROW ASKED FOR: wall time per 10 game-seconds went 54 s, 85 s, 133 s, 131 s (rising).
+  s106 / s138 ran the whole 120 s in ~2 min. NAV bake 1234 ms vs 876-878 ms before. At 23:17 CST the machine's
+  CPU read 85% load with Marvel-Win64-Shipping (6.1 GB, top CPU) and obs64 running - Mr. E is playing (and OBS is
+  up). The town sim is starved of CPU; nothing in the gate or the code changed between the 21:18 pass and now.
+  I killed my Godot early so as not to compete with his game/stream.
+- I DID NOT RAISE THE BUDGET. The gate is frame-counted (7200 frames) and already goes RED on a starved run:
+  _samples < 5000 or raid < 1000 prints FAIL + "TOWNWALK FLOOR UNMET" (S11). Only my runner's timeout cut it.
+- NEXT: re-run TOWNWALK alone on an idle machine (expect ~2-3 min), then merge the wip ref and push. No code is owed.
+- Logs: .gb_logs/s144b/*.log. TWITCH: none, zero bits, no account driven.

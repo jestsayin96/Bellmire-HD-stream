@@ -1,0 +1,48 @@
+START 23:11:50
+[   0.1] Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+[   0.1] 
+[   2.0] FEED The echoes ahead of us are one footfall too many.
+[   2.0] FEED They carry 8 flasks of oil between them.
+[   8.0] L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+[   8.0] L28D_DECALS floor 1 mess: 18 (cap 24)
+[   8.0] FEED Floor 1 - a tomb, remade as a mess hall: 2 bog frogs, 1 giant rat.
+[   8.0] FEED The rows end in a row that was never filled.
+[  12.2] T10s floor=1 state=fight foes=3 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  15.9] FEED DawnCleric casts Smite at bog frog.
+[  16.3] T20s floor=1 state=fight foes=3 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  16.4] FEED MossyMage casts bolt and gets weather for it (8 vs DC 10).
+[  17.9] FEED DawnCleric fumbles smite and the words come out as soup (7 vs DC 10).
+[  19.9] FEED MossyMage casts Bolt at bog frog.
+[  20.4] T30s floor=1 state=fight foes=1 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  20.7] FEED DawnCleric casts Smite at bog frog.
+[  21.8] FEED MossyMage searches (Investigation 23) and turns up 14 gold on floor 1.
+[  21.8] FEED Floor 1 held, and nobody thanks the stone.
+[  24.6] T40s floor=1 state=search foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  28.7] T50s floor=1 state=search foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  32.9] T60s floor=1 state=search foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  33.8] FEED JestFan and 3 others take a breather, and press on deeper.
+[  37.0] T70s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  41.1] T80s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  45.3] T90s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  49.4] T100s floor=1 state=descend foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  56.3] L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+[  56.3] L28D_DECALS floor 2 grassland: 18 (cap 24)
+[  56.3] FEED Floor 2 - a workshop, remade as a sunken meadow: 1 hollowed giant rat, 2 giant rats, 1 slime.
+[  56.3] FEED The oil is running low.
+[  60.0] FEED DawnCleric casts Smite at giant rat.
+[  60.1] T110s floor=2 state=fight foes=4 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  60.3] FEED MossyMage casts Fire at giant rat.
+[  62.8] FEED DawnCleric casts Bolt at slime.
+[  63.8] FEED MossyMage casts Bolt at slime.
+[  64.0] FEED JestFan rolls a 20 - and the slime is gone.
+[  64.0] FEED The slime divides.
+[  64.2] T120s floor=2 state=fight foes=4 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  68.4] FEED DawnCleric casts Bolt at hollowed giant rat.
+[  68.4] T130s floor=2 state=fight foes=1 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  68.4] FEED MossyMage reaches for bolt and the scar flinches first (1 vs DC 11).
+[  68.9] FEED MossyMage searches (Investigation 9) and turns up 17 gold on floor 2.
+[  68.9] FEED Blades wiped, breaths caught. The door stands open.
+[  72.5] T140s floor=2 state=search foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  76.6] T150s floor=2 state=search foes=0 ["JestFan 98/98", "MossyMage 73/73", "DawnCleric 96/96", "BigAxe 119/119"]
+[  76.6] DELVE_TEST OK ran 9001 frames, floor reached 2, state search (capped at 9001 frames); engine error lines are still read off the log
+END rc=0 wall=76.9

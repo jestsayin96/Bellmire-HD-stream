@@ -1,0 +1,10 @@
+START 23:10:35
+[   0.1] Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+[   0.1] 
+[   1.8] S52 live key sources: by_key 64, MB_FIT base 64, glb stems 66
+[   1.8] S52 red-proof (drizzler planted): 4 faults: MB_NAME key drizzler is not in feed, MB_NAME key drizzler is not in fit, MB_NAME key drizzler is not in glb, drawable key strickler has no MB_NAME entry
+[   1.8] S131 theme arm: drawable 64 ; MB_NAME - theme = [] ; theme - MB_NAME = []
+[   1.8] S131 red-proof (collier erased from a copy of wood): MB_NAME - theme = ["collier"]
+[   1.8] S51 bodies on disk resolving by trade key: 42 ; keys with arrive lines: 42
+[   1.8] S51_NAMES OK 179 checks
+END rc=0 wall=2.0

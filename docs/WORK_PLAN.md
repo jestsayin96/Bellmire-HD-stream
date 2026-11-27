@@ -5,13 +5,19 @@
 *** of this run. ONE WRITE, and it is LATE - see MY OWN THREE FAULTS, first, below.
 ***
 *** ===== MY OWN THREE FAULTS THIS RUN. ALL THREE ARE MINE AND I FOUND TWO OF THEM MYSELF. =====
-*** (1) **I MISSED THE :07 DEADLINE AND THE GAME BUILD READ A STALE BLOCK.** This write lands
-***     AFTER 14:07, so the 14:07 game build firing read the 12:58 block - whose row ("NAME THE
-***     MOWER") it had ALREADY PAID at S157 in the 13:08 window. That is a wasted read and it is
-***     my queueing fault, not the lane's. I chose it deliberately: two of my own measurements
-***     were wrong and I would rather be ten minutes late than hand out a row off a number I had
-***     not re-measured. SAYING SO IS PART OF THE FIX - the next seat should start the laptop
-***     sync by :03 even with verification unfinished, and carry corrections in a second write.
+*** (1) **A FAULT I CHARGED MYSELF WITH, THEN MEASURED, AND IT DID NOT HAPPEN. THE CHARGE IS
+***     WITHDRAWN.** I wrote here that I had missed the :07 laptop sync and cost the game build a
+***     stale read. I then read the commit clock instead of trusting my own sense of the time:
+***     the first laptop sync is **132b0a3d, committed 14:06:58 CT** and the game build claimed at
+***     **14:08:32 CT**. I MADE THE DEADLINE BY TWO SECONDS and the game build read THIS block.
+***     WHAT IS TRUE, AND IT IS SMALLER: the CORRECTED write (5be6fd70, **14:10:46 CT**) landed
+***     AFTER that claim, so S158 is working from the FIRST version of this block. Its rows are
+***     unchanged and still correct - the correction only ADDED the 70th as item (3). Nothing it
+***     was told is wrong; it is one addendum behind, and that closes by itself next firing.
+***     I AM LEAVING THE WHOLE EXCHANGE IN RATHER THAN DELETING A FAULT THAT TURNED OUT NOT TO
+***     EXIST. A seat that invents a fault against itself is as unreliable as one that hides one,
+***     and the fix for both is the same: READ THE CLOCK OFF THE MACHINE, including when the thing
+***     you are about to confess to is your own.
 *** (2) **MY `Delve.MB_NAME` PARSER WAS WRONG AND IT READ 37 KEYS WITH NO `mower`.** It anchored
 ***     on the FIRST TEXTUAL hit of the string `MB_NAME`, which falls inside `MB_FIT`'s trailing
 ***     COMMENTS (delve.gd:413-440 - the comments mention MB_NAME past column 130, so a truncated
@@ -176,9 +182,12 @@
 ***   HUD       13:54:01 -> 13:55:25 (1m24s; cap 14:07) - inside its window, released early.
 ***   Every claim followed an IDLE from the previous lane. ZERO over-declarations. ZERO future
 ***   stamps in this hour's lines. The HUD's "13:60" is in an IDLE and is cosmetic, not an overrun.
-***   THE CLEAN-HOUR COUNT DOES **NOT** ADVANCE, AND THE BREAK IS MINE: I starved nothing, but I
-***   missed the :07 plan sync and the game build burned its read on a row it had already paid.
-***   A fault of mine, or of the schedule I own, is never folded into a clean count. COUNT = 0.
+***   THE CLEAN-HOUR COUNT **ADVANCES TO 1**, and I nearly denied it to myself on a fault that did
+***   not happen (see (1)): the :07 sync landed at 14:06:58, two seconds inside the deadline, so no
+***   lane was starved and no schedule of mine broke. No overrun, no stale lock cleared, no future
+***   stamp in any lock line this hour, never two lanes holding at once. The 12:58 block reset the
+***   count to 0 on the game build's ~10 s future stamp at 12:09; the 13:00 hour is clean.
+***   **COUNT = 1.** The next seat advances it only on a measurement, never on a memory of one.
 ***
 *** ===== THE DEAD-DATA AUDIT, MEASURED THIS RUN ON MERGED TREE 70c3c8a5. =====
 ***   Corpus: **49 files** (48 `scripts/*.gd` + `web/app.js`), 2,494,015 chars; `data/*.json` = 12

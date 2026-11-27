@@ -1,0 +1,166 @@
+{
+ "pairs": [
+  {
+   "file": "renders/art/system2/axeDouble_common_back.png",
+   "old_bytes": 277402,
+   "new_bytes": 277402,
+   "dims": [
+    [
+     760,
+     760
+    ],
+    [
+     760,
+     760
+    ]
+   ],
+   "px_total": 577600,
+   "px_moved": 0,
+   "pct_moved": 0.0,
+   "max_delta_255": 0.0,
+   "alpha_moved": 0
+  },
+  {
+   "file": "renders/art/system2/axeDouble_uncommon_front.png",
+   "old_bytes": 300561,
+   "new_bytes": 300561,
+   "dims": [
+    [
+     760,
+     760
+    ],
+    [
+     760,
+     760
+    ]
+   ],
+   "px_total": 577600,
+   "px_moved": 0,
+   "pct_moved": 0.0,
+   "max_delta_255": 0.0,
+   "alpha_moved": 0
+  },
+  {
+   "file": "renders/art/system2/axe_rare_side.png",
+   "old_bytes": 274032,
+   "new_bytes": 274032,
+   "dims": [
+    [
+     760,
+     760
+    ],
+    [
+     760,
+     760
+    ]
+   ],
+   "px_total": 577600,
+   "px_moved": 0,
+   "pct_moved": 0.0,
+   "max_delta_255": 0.0,
+   "alpha_moved": 0
+  },
+  {
+   "file": "renders/art/system2/crossbow_rare_back.png",
+   "old_bytes": 274124,
+   "new_bytes": 274124,
+   "dims": [
+    [
+     760,
+     760
+    ],
+    [
+     760,
+     760
+    ]
+   ],
+   "px_total": 577600,
+   "px_moved": 0,
+   "pct_moved": 0.0,
+   "max_delta_255": 0.0,
+   "alpha_moved": 0
+  },
+  {
+   "file": "renders/art/system2/dagger_common_front.png",
+   "old_bytes": 291979,
+   "new_bytes": 291979,
+   "dims": [
+    [
+     760,
+     760
+    ],
+    [
+     760,
+     760
+    ]
+   ],
+   "px_total": 577600,
+   "px_moved": 0,
+   "pct_moved": 0.0,
+   "max_delta_255": 0.0,
+   "alpha_moved": 0
+  },
+  {
+   "file": "renders/art/system2/dagger_uncommon_side.png",
+   "old_bytes": 272918,
+   "new_bytes": 272918,
+   "dims": [
+    [
+     760,
+     760
+    ],
+    [
+     760,
+     760
+    ]
+   ],
+   "px_total": 577600,
+   "px_moved": 0,
+   "pct_moved": 0.0,
+   "max_delta_255": 0.0,
+   "alpha_moved": 0
+  },
+  {
+   "file": "renders/art/system2/hammer_uncommon_back.png",
+   "old_bytes": 282048,
+   "new_bytes": 282048,
+   "dims": [
+    [
+     760,
+     760
+    ],
+    [
+     760,
+     760
+    ]
+   ],
+   "px_total": 577600,
+   "px_moved": 0,
+   "pct_moved": 0.0,
+   "max_delta_255": 0.0,
+   "alpha_moved": 0
+  },
+  {
+   "file": "renders/art/system2/shield_rare_front.png",
+   "old_bytes": 294260,
+   "new_bytes": 294260,
+   "dims": [
+    [
+     760,
+     760
+    ],
+    [
+     760,
+     760
+    ]
+   ],
+   "px_total": 577600,
+   "px_moved": 0,
+   "pct_moved": 0.0,
+   "max_delta_255": 0.0,
+   "alpha_moved": 0
+  }
+ ],
+ "error": null,
+ "n_modified": 138
+}

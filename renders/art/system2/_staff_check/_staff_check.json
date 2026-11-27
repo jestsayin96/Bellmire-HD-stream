@@ -1,0 +1,243 @@
+{
+ "error": null,
+ "cells": [
+  {
+   "rarity": "common",
+   "view": "front",
+   "which": "old",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2165,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "common",
+   "view": "front",
+   "which": "new",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2160,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "common",
+   "view": "side",
+   "which": "old",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2161,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "common",
+   "view": "side",
+   "which": "new",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2160,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "common",
+   "view": "back",
+   "which": "old",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2172,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "common",
+   "view": "back",
+   "which": "new",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2173,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "uncommon",
+   "view": "front",
+   "which": "old",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 3482,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "uncommon",
+   "view": "front",
+   "which": "new",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 3490,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "uncommon",
+   "view": "side",
+   "which": "old",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 3423,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "uncommon",
+   "view": "side",
+   "which": "new",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 3427,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "uncommon",
+   "view": "back",
+   "which": "old",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 3448,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "uncommon",
+   "view": "back",
+   "which": "new",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 3445,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "rare",
+   "view": "front",
+   "which": "old",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2816,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "rare",
+   "view": "front",
+   "which": "new",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2829,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "rare",
+   "view": "side",
+   "which": "old",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2857,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "rare",
+   "view": "side",
+   "which": "new",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2848,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "rare",
+   "view": "back",
+   "which": "old",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2820,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  },
+  {
+   "rarity": "rare",
+   "view": "back",
+   "which": "new",
+   "dims": [
+    760,
+    760
+   ],
+   "opaque_px": 2823,
+   "blank": false,
+   "border_alpha_max": 0.0,
+   "border_touch": false
+  }
+ ],
+ "blanks": [],
+ "border_clips": [],
+ "sheet": "C:\\hd adventure\\bellmire-art\\renders\\art\\system2\\_staff_check\\_staff_old_vs_new_26nov2034.png",
+ "layout": "rows=common,uncommon,rare ; cols 1-3 = OLD front,side,back ; cols 4-6 = NEW front,side,back"
+}

@@ -902,6 +902,7 @@ func tavern_dice(h: Dictionary, amount := 0) -> Dictionary:
         text = "%s rolls %d to the house's %d%s - the tavern keeps %d gold." \
             % [nm, you, house, " (the house wins ties)" if you == house else "", amount]
     h["gold"] = int(h.get("gold", 0)) + delta
+    Roster.rep_add(h, "innkeeper")            # S152 System 39: a staked game, silent
     return {"ok": true, "fun": false, "you": you, "house": house, "delta": delta, "text": text}
 
 func tavern_duel(a: Dictionary, b: Dictionary, amount: int) -> Dictionary:
@@ -927,6 +928,8 @@ func tavern_duel(a: Dictionary, b: Dictionary, amount: int) -> Dictionary:
     win["gold"] = int(win.get("gold", 0)) + amount
     lose["gold"] = int(lose.get("gold", 0)) - amount
     tavern_duels += 1
+    Roster.rep_add(a, "innkeeper")            # S152 System 39: both players did business here
+    Roster.rep_add(b, "innkeeper")
     var na := String(a.get("name", "A hero"))
     var nb := String(b.get("name", "A hero"))
     return {"ok": true, "a": ra, "b": rb, "throws": throws, "winner": String(win.get("name", "")),

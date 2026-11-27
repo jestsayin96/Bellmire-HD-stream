@@ -485,9 +485,68 @@ func haggle(h: Dictionary, list_price: int) -> int:
 # Every purchase in the game goes through here, so the guild's rate goes here
 # too rather than being sprinkled over each shop. Charisma haggles; rank is
 # the guild telling the smith what this one pays.
-func cost_for(h: Dictionary, base: int) -> int:
-    var off := float(rank_row(h).get("off", 0.0))
+func cost_for(h: Dictionary, base: int, npc := "") -> int:
+    var off := float(rank_row(h).get("off", 0.0)) + (rep_off(h, npc) if npc != "" else 0.0)
     return maxi(1, int(round(float(base) * price_mult(h) * (1.0 - off))))
+
+## S152 - SYSTEM 39, NPC REPUTATION (engine half). Each hero keeps a `reputation` dict, one count
+## per townsperson they deal with, raised on every completed piece of business (never on a
+## refusal or a purse that came up short). Standing crosses REP_AT milestones and each one is
+## SILENT: no feed line, no popup, no emit - the smith's bill is simply smaller next time and the
+## fishmonger's tips put a hero on better water. REPUTATION NEVER DECAYS: nothing here subtracts.
+##   smithy     - +1 per weapon forged, reworked or armour fitted; REP_OFF off the forge per tier
+##   chandler   - +1 per potion or oil purchase; REP_OFF off the chandler per tier
+##   fishmonger - +1 per fish landed (town.gd _on_fish); +1 catch luck per tier
+##   innkeeper  - +1 per staked game or duel at the tavern (economy.gd); counted, no perk yet -
+##                the house cut is the gold sink System 38 rests on and is not mine to soften
+##   trader     - the key exists and reads 0: no hero-facing trade exists in the engine yet, so
+##                there is nothing to count. Counted the day a hero can trade.
+## Static so economy.gd (which holds no Roster) can count the tavern through the same function.
+const REP_NPCS := ["smithy", "innkeeper", "fishmonger", "chandler", "trader"]
+const REP_AT := [10, 25, 50, 100]
+const REP_OFF := 0.02
+
+static func rep_of(h: Dictionary, npc: String) -> int:
+    var r: Variant = h.get("reputation", {})
+    return int((r as Dictionary).get(npc, 0)) if typeof(r) == TYPE_DICTIONARY else 0
+
+static func rep_tier(h: Dictionary, npc: String) -> int:
+    var n := rep_of(h, npc)
+    var t := 0
+    for at: int in REP_AT:
+        if n >= at:
+            t += 1
+    return t
+
+## Raise one count. Returns the new count. Unknown npc keys are refused (returns -1) so a typo
+## at a call site cannot quietly open a sixth ledger.
+static func rep_add(h: Dictionary, npc: String, n := 1) -> int:
+    if not npc in REP_NPCS or n <= 0:
+        return -1
+    if typeof(h.get("reputation")) != TYPE_DICTIONARY:
+        h["reputation"] = {}
+    var r: Dictionary = h["reputation"]
+    r[npc] = int(r.get(npc, 0)) + n
+    return int(r[npc])
+
+static func rep_off(h: Dictionary, npc: String) -> float:
+    if npc != "smithy" and npc != "chandler":
+        return 0.0
+    return REP_OFF * float(rep_tier(h, npc))
+
+## For the chat bot's `!rep`: every townsperson, the count and the next milestone. The perk
+## itself is never named - the milestones are silent by design.
+static func rep_line(h: Dictionary) -> String:
+    var parts: Array = []
+    for npc: String in REP_NPCS:
+        var n := rep_of(h, npc)
+        var nxt := -1
+        for at: int in REP_AT:
+            if n < at:
+                nxt = at
+                break
+        parts.append("%s %d%s" % [npc, n, (" (next %d)" % nxt) if nxt > 0 else ""])
+    return "%s's standing - %s." % [String(h.get("name", "A hero")), ", ".join(parts)]
 
 func spend(h: Dictionary, cost: int) -> bool:
     if int(h["gold"]) < cost:
@@ -511,10 +570,11 @@ func buy_weapon(user_id: String, kind := "") -> String:
                 return "%s already carries %s %s." % [h["name"], _an(weapon_name(h)), weapon_name(h)]
             if bool(WEAPONS[int(h["weapon"])].get("found", false)):
                 return "No smith in Bellmire will put a hammer to scarforged steel."
-            var rework := haggle(h, cost_for(h, int(int(WEAPONS[int(h["weapon"])]["cost"]) / REWORK_DIVISOR)))
+            var rework := haggle(h, cost_for(h, int(int(WEAPONS[int(h["weapon"])]["cost"]) / REWORK_DIVISOR), "smithy"))
             if not spend(h, rework):
                 return "%s needs %d gold to have it reworked into a %s - you have %d." % [h["name"], rework, kind, int(h["gold"])]
             h["wkind"] = kind
+            rep_add(h, "smithy")
             _stamp(h)
             changed.emit(user_id)
             return "The smith reworks %s's steel into %s %s.%s" % [h["name"], _an(weapon_name(h)), weapon_name(h), last_haggle]
@@ -531,13 +591,14 @@ func buy_weapon(user_id: String, kind := "") -> String:
     if kind != "":
         peek["wkind"] = kind
     var label := weapon_name(peek)
-    var price := haggle(h, cost_for(h, int(w["cost"])))
+    var price := haggle(h, cost_for(h, int(w["cost"]), "smithy"))
     if not spend(h, price):
         return "%s needs %d gold for %s %s - you have %d." \
             % [h["name"], price, _an(label), label, int(h["gold"])]
     h["weapon"] = nxt
     if kind != "":
         h["wkind"] = kind
+    rep_add(h, "smithy")
     _stamp(h)
     changed.emit(user_id)
     return "%s takes up %s %s. (+%d atk, %dd%d) %s%s" % [h["name"], _an(label), label, int(w["atk"]), int(w["dice"][0]), int(w["dice"][1]), forge_flavour(nxt), last_haggle]
@@ -594,11 +655,12 @@ func buy_armour(user_id: String) -> String:
         return "%s wants %s, but Bellmire has no one who can make it yet." \
             % [h["name"], ARMOUR[nxt]["name"]]
     var a: Dictionary = ARMOUR[nxt]
-    var aprice := haggle(h, cost_for(h, int(a["cost"])))
+    var aprice := haggle(h, cost_for(h, int(a["cost"]), "smithy"))
     if not spend(h, aprice):
         return "%s needs %d gold for %s - you have %d." \
             % [h["name"], aprice, a["name"], int(h["gold"])]
     h["armour"] = nxt
+    rep_add(h, "smithy")
     _stamp(h)
     changed.emit(user_id)
     return "%s is fitted with %s. (+%d hp)%s" % [h["name"], armour_name(h), int(a["hp"]), last_haggle]
@@ -606,10 +668,11 @@ func buy_armour(user_id: String) -> String:
 func buy_potion(user_id: String, n := 1) -> String:
     var h := get_hero(user_id)
     if h.is_empty(): return "no hero"
-    var pprice := haggle(h, cost_for(h, POTION_COST * n))
+    var pprice := haggle(h, cost_for(h, POTION_COST * n, "chandler"))
     if not spend(h, pprice):
         return "%s needs %d gold - you have %d." % [h["name"], pprice, int(h["gold"])]
     h["potions"] = int(h["potions"]) + n
+    rep_add(h, "chandler")
     changed.emit(user_id)
     return "%s buys %d %s. Now carrying %d.%s" % [h["name"], n,
         "potion" if n == 1 else "potions", int(h["potions"]), last_haggle]
@@ -620,11 +683,12 @@ func buy_potion(user_id: String, n := 1) -> String:
 func buy_oil(user_id: String, n := 1) -> String:
     var h := get_hero(user_id)
     if h.is_empty(): return "no hero"
-    var oprice := haggle(h, cost_for(h, OIL_COST * n))
+    var oprice := haggle(h, cost_for(h, OIL_COST * n, "chandler"))
     if not spend(h, oprice):
         return "%s needs %d gold for oil - you have %d." \
             % [h["name"], oprice, int(h["gold"])]
     h["oil"] = int(h.get("oil", 0)) + n
+    rep_add(h, "chandler")
     changed.emit(user_id)
     return "%s buys %d flask%s of oil. Now carrying %d.%s" \
         % [h["name"], n, "" if n == 1 else "s", int(h.get("oil", 0)), last_haggle]

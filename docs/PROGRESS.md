@@ -4691,3 +4691,26 @@ TAKE THIS NEXT (06:58 block) named THE L31 REMAINDER (status-effect icons), or S
 - TAKE THIS NEXT (07:58 block) HUB row: "no publish owed; carry on with non-web work or stand down". Gave no web row. No READY TO PUBLISH claim, so no publish gate owed.
 - Measured: HEAD:web tree == origin/main:web tree == 1eafbda5 (web/ unchanged; merged origin/hub + origin/main clean). `node --check web/app.js` rc 0. innerHTML code sites = app.js:255 and :301 only (other hits are comments at :7 :93 :5137 :5178); outerHTML 0, eval 0; insertAdjacentHTML / document.write / new Function appear only inside the :10-11 comment naming their absence. CSP meta present.
 - No web/ change this run, so hostile-name test not re-owed. Not looked at in a screenshot (nothing to look at - no change). Live-dot colour: unchanged from shipped design.
+## D-cycle - S152 SYSTEM 39 NPC reputation, engine half, 2026-11-27 08:09-08:1x CST (game build)
+TAKE THIS NEXT (07:58 block) GAME BUILD row: DO NOT NAME THE BADGER (art says its fit is open); take SYSTEM 39's
+ENGINE HALF. Badger not touched - no MB_FIT, no MB_NAME, no row.
+- roster.gd (backup roster.gd.bak_s152): per-hero `reputation` dict over REP_NPCS = smithy, innkeeper, fishmonger,
+  chandler, trader. Static rep_of / rep_tier / rep_add / rep_off / rep_line. Milestones REP_AT 10/25/50/100.
+  rep_add refuses an unknown key and any n <= 0, so nothing ever subtracts - REPUTATION NEVER DECAYS. Old saves
+  with no dict read 0 (no load_all migration needed; rep_add creates it on first business).
+- HOOKS, counted only AFTER the purse is debited (a refusal never counts): smithy +1 on forge, rework, armour
+  (so the L55 kit-up after a delve counts too - it is the same counter); chandler +1 on potion and oil purchase;
+  fishmonger +1 per landed FISH (cat == "fish", never junk/treasure) in town.gd _on_fish; innkeeper +1 per staked
+  tavern_dice and +1 to BOTH sides of tavern_duel (economy.gd). Bare `!dice` and refused stakes do not count.
+- THE SILENT PERKS: cost_for(h, base, npc) takes REP_OFF = 2% per tier off at the smith and the chandler (stacks
+  with the guild rank's off, before the haggle); fishmonger tier adds +1 catch luck per tier to the hero's Angler.
+  No feed line, no emit, no text - the bill just gets smaller. innkeeper: COUNTED, NO PERK - the 10% house cut is the
+  gold sink System 38 rests on and I will not soften it unasked. trader: KEY EXISTS AND READS 0 - no hero-facing
+  trade exists in the engine (the caravan trades with the TREASURY, town.gd _settle_trade), so there is nothing to
+  count yet. Saying so rather than inventing a trade.
+- NOT MINE, LEFT FOR THEIR ROWS: `!rep` (chat bot) -> Roster.rep_line(h) returns the ready line, counts and next
+  milestone only, the perk is never named. The fishmonger's 50-catch line etc. (content).
+- GATES: parse --quit-after 300 0 Parse Error / 0 SCRIPT ERROR. S152_REP OK 17; S152_RED=1 (price WITHOUT the npc
+  key) -> S152_REP FAIL 1 of 17 - the gate can go red. S151_DICE OK 21 (economy.gd touched). TWITCH_PARSE OK (8
+  checks). OFFFLOOR_VERDICT OK 0 of 2330. DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/19260
+  raid 0/5516 PASS. Logic only - no picture to look at; the test prints the rep_line it produces. No Twitch, zero bits.

@@ -5468,10 +5468,15 @@ func _on_fish(uid: String) -> void:
         var fh: Dictionary = roster.get_hero(uid) if roster else {}
         if not fh.is_empty():
             ang.hook_bonus = roster.mod(fh, "dex") + (roster.prof(fh) if String(fh.get("class", "")) in ["ranger", "druid"] else 0)
+            ang.luck += Roster.rep_tier(fh, "fishmonger")     # S152 System 39: silent, never announced
         ang.target = end + fw * 7.0 + Vector3(1.0, 0, 0)
         ang.target.y = WATER_Y
         ang.caught.connect(func(item: Dictionary, who: String) -> void:
             _on_caught(item, who)
+            if String(item.get("cat", "")) == "fish":      # S152 System 39: a fish, never a boot
+                var rh: Dictionary = roster.get_hero(uid) if roster else {}
+                if not rh.is_empty():
+                    Roster.rep_add(rh, "fishmonger")
             if int(item.get("strike", 0)) == 20:
                 feed.append("%s rolls a 20 on the strike - a perfect hook!" % who)
                 tag_feed("find", [who])

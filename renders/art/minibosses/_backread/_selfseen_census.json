@@ -2351,11 +2351,11 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-27T03:45:05-0600",
- "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795772705.5910788,
- "register_mtime_epoch": 1795770153.214997,
- "register_mtime": "2026-11-27T03:02:33-0600",
+ "measured_at": "2026-11-27T10:44:39+0000",
+ "measured_at_tz": "Ame",
+ "measured_at_epoch": 1795776279.0181627,
+ "register_mtime_epoch": 1795772713.8497229,
+ "register_mtime": "2026-11-27T09:45:13+0000",
  "register_pairs": 68,
  "measurable": [
   "almoner",

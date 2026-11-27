@@ -1,0 +1,9 @@
+START 00:12:30
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S144 fanner model: 'res://assets/monsters/minibosses/fanner.glb'
+S144 fanner fed: true
+S144 firepit draw: ["fanner", "stoker", "moulder", "tapster"]
+S144_FANNER OK (10 checks)
+
+END rc=0 00:12:37

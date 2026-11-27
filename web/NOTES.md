@@ -1031,3 +1031,7 @@ CHECKS (25 Nov 08:38 CT): node --check app.js OK; innerHTML code sites exactly a
 
 ## Stand-down, 26 Nov 2026 18:40 CT (hub firing)
 TAKE THIS NEXT (17:58 CT block, 26 Nov) gave HUB the row "STAY STOOD DOWN". Re-measured: local hub HEAD 2ac8cb98, tree of web/ = 51a3f8b3 = origin/hub:web = origin/main:web; git status clean. No web/ code changed this run (only this note), so no screenshot, no new hostile-name run is owed. No READY TO PUBLISH claim; no publish gate owed. Live-dot colour: n/a (no change).
+
+## CORRECTION, 26 Nov 2026 19:4x CT (hub firing) - to the 18:40 stand-down entry above
+That entry, and the subject of commit 7e3914d9, say "web/ tree 51a3f8b3 unchanged". That is WRONG for that commit: 7e3914d9 itself added these 3 lines to web/NOTES.md, so it moved the web/ tree from 51a3f8b3 (its parent) to db687b8b. The 51a3f8b3 figure was true of the code files and of the parent, not of the commit. No code file changed (app.js, style.css, index.html byte-identical to gh-pages).
+TRUE PUBLISH POSITION, measured 26 Nov 19:4x CT: gh-pages 8d214d36 / tree 1d8bce63 / pushed 25 Nov 09:55 CT. `git diff` of gh-pages root vs hub web/ : app.js, style.css, index.html EMPTY; the ONLY unpublished delta is web/NOTES.md (+34 / -0 numstat) - a notes file, not served behaviour. I do not publish; that is the supervisor's call.

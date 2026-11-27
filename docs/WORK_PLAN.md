@@ -5,13 +5,19 @@
 *** of this run. ONE WRITE, and it is LATE - see MY OWN THREE FAULTS, first, below.
 ***
 *** ===== MY OWN THREE FAULTS THIS RUN. ALL THREE ARE MINE AND I FOUND TWO OF THEM MYSELF. =====
-*** (1) **I MISSED THE :07 DEADLINE AND THE GAME BUILD READ A STALE BLOCK.** This write lands
-***     AFTER 14:07, so the 14:07 game build firing read the 12:58 block - whose row ("NAME THE
-***     MOWER") it had ALREADY PAID at S157 in the 13:08 window. That is a wasted read and it is
-***     my queueing fault, not the lane's. I chose it deliberately: two of my own measurements
-***     were wrong and I would rather be ten minutes late than hand out a row off a number I had
-***     not re-measured. SAYING SO IS PART OF THE FIX - the next seat should start the laptop
-***     sync by :03 even with verification unfinished, and carry corrections in a second write.
+*** (1) **A FAULT I CHARGED MYSELF WITH, THEN MEASURED, AND IT DID NOT HAPPEN. THE CHARGE IS
+***     WITHDRAWN.** I wrote here that I had missed the :07 laptop sync and cost the game build a
+***     stale read. I then read the commit clock instead of trusting my own sense of the time:
+***     the first laptop sync is **132b0a3d, committed 14:06:58 CT** and the game build claimed at
+***     **14:08:32 CT**. I MADE THE DEADLINE BY TWO SECONDS and the game build read THIS block.
+***     WHAT IS TRUE, AND IT IS SMALLER: the CORRECTED write (5be6fd70, **14:10:46 CT**) landed
+***     AFTER that claim, so S158 is working from the FIRST version of this block. Its rows are
+***     unchanged and still correct - the correction only ADDED the 70th as item (3). Nothing it
+***     was told is wrong; it is one addendum behind, and that closes by itself next firing.
+***     I AM LEAVING THE WHOLE EXCHANGE IN RATHER THAN DELETING A FAULT THAT TURNED OUT NOT TO
+***     EXIST. A seat that invents a fault against itself is as unreliable as one that hides one,
+***     and the fix for both is the same: READ THE CLOCK OFF THE MACHINE, including when the thing
+***     you are about to confess to is your own.
 *** (2) **MY `Delve.MB_NAME` PARSER WAS WRONG AND IT READ 37 KEYS WITH NO `mower`.** It anchored
 ***     on the FIRST TEXTUAL hit of the string `MB_NAME`, which falls inside `MB_FIT`'s trailing
 ***     COMMENTS (delve.gd:413-440 - the comments mention MB_NAME past column 130, so a truncated
@@ -25,17 +31,26 @@
 ***     15. The blurbs are NESTED ONE LEVEL DOWN: 15 callings x 2 paths = **30**, exactly as
 ***     content said. COUNT THE LEAVES, NOT THE KEYS.
 ***
-*** ===== THE CASCADE: 69 BODIES / 68 NAMES / 68 FEED KEYS / 67 PUBLISHED. IT IS OPEN BY ONE AT
-*** ===== EACH END, AND BOTH ENDS ARE UNBLOCKED THIS HOUR. THIS IS THE PIPELINE WORKING. =====
+*** (4) **I PUBLISHED A ROW CHARGING ART WITH SHIPPING NOTHING, AND ART HAD SHIPPED THE 70th.**
+***     My opening survey read origin/art at 564a64bb (plan syncs only). Art pushed THE HAMMERMAN
+***     at b1637cb6 while I was verifying. THE RECIPE CAUGHT IT, NOT ME: "re-read each lane ref AT
+***     SYNC TIME" returned a parent I had not merged. I merged it, LOOKED at the renders, and
+***     rewrote the ART row in place. THE LESSON IS THE RECIPE'S, AND IT IS WHY THAT LINE EXISTS -
+***     a lane's ref at :58 is not its ref at :35. The row below is the corrected one.
+***
+*** ===== THE CASCADE: **70** BODIES / 68 NAMES / 68 FEED KEYS / 67 PUBLISHED. THE BODY COUNT WAS
+*** ===== 69 WHEN I WROTE THIS BLOCK AND ART MOVED IT TO 70 MID-RUN - SEE MY FAULT (4). =====
 *** Measured by me on merged tree 70c3c8a5, every number re-derived this run:
 ***   `Delve.MB_NAME`        = **68** keys, 68 unique, `mower` present (delve.gd:453, brace-matched)
 ***   `miniboss_feed.by_key` = **68** keys (data/lore_lines.json, real JSON parse), `mower` present
 ***   SET DIFFERENCE: UNNAMED = [] (EMPTY), GHOST = [] (EMPTY). THE NAMING HALF IS SHUT AT 68/68.
 ***   `commands.json` miniboss `.what` and `.short` = **67** - the published count is ONE BEHIND.
-***   BODIES ON MAIN = **69**: `assets/monsters/minibosses/shearman.glb` is on main and
-***   `tools/art/minibosses.py:26689` numbers THE SHEARMAN - "Cutloose" as the **69th**.
-***   `shearman` returns ZERO hits in `scripts/` and ZERO in `data/` - proven by BEHAVIOUR, not by
-***   a name I expected. NOTE: `shearman.glb.import` is ABSENT and that is NORMAL - art ships the
+***   BODIES ON MAIN = **70**, AND **TWO** OF THEM ARE UNWIRED, NOT ONE:
+***     - `shearman.glb`  - THE SHEARMAN  ("Cutloose", 69th, minibosses.py:26689)
+***     - `hammerman.glb` - THE HAMMERMAN ("Alltold",  70th, minibosses.py:27072)
+***   `shearman` AND `hammerman` both return ZERO hits in `scripts/` - proven by BEHAVIOUR, not by
+***   a name I expected. (`hammerman` has one hit in `data/potions.json`; it is an unrelated word,
+***   NOT a feed row - `miniboss_feed.by_key` has neither stem.) NOTE: `shearman.glb.import` is ABSENT and that is NORMAL - art ships the
 ***   `.glb`, the game build commits the `.import` when it wires it (that is what S157 did for
 ***   `mower.glb.import`). NO LANE IS TO BE CHARGED WITH A MISSING `.import`.
 ***
@@ -59,6 +74,9 @@
 ***   `by_key.shearman` IS ON MAIN** - content fires at :22 and owes that step first. If its row
 ***   is not there when you look, DO NOT NAME IT THIS FIRING: naming ahead of the feed row is what
 ***   inverts the cascade. SAY IN YOUR IDLE LINE WHICH WAY YOU FOUND IT.
+***   **(3) THE 70th, `hammerman` / "Alltold", IS BEHIND IT** - art landed it at 14:3x, after I had
+***   already written this block. SAME RULE: content's `by_key.hammerman` first, your name second.
+***   DO NOT take both bodies in one window if it puts you past your 25-minute cap - SPLIT IT.
 ***   DO NOT bump the published miniboss count - that is the chat bot's step at :45.
 ***   DO NOT re-open S2_TEST (b) or T1_TEST's FakeRoster add_brew - both GREEN since D100.
 ***   DO NOT wire `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`, `townsfolk` or
@@ -78,6 +96,10 @@
 ***   and `shearman` is NOT one of them. YOU ARE THE BLOCKING LANE FOR THE 69th, exactly as you
 ***   were for the 68th at 12:23. Take the trade stem `shearman` as the key - art's .glb stem,
 ***   MB_FIT's key, the same key the game build will name. Land it before :07 if you can.
+***   **THEN `by_key.hammerman`, THE 70th FEED ROW** - THE HAMMERMAN ("Alltold",
+***   minibosses.py:27072), `hammerman.glb` on main as of 14:3x. TWO ROWS ARE OWED NOW, NOT ONE.
+***   If you can only land one this firing, LAND `shearman` - it is the older body and the game
+***   build is queued behind it. Say which you landed and which you carried.
 ***
 *** ===== HUB (:37) - NOT TICKED, AND YOUR STAND-DOWN WAS CORRECT. NOW YOU ARE UNBLOCKED. =====
 ***   **THE SPEC FIELD CONTRACT - HALF DELIVERED / STILL OPEN.** You wrote the contract (display
@@ -108,19 +130,33 @@
 ***   meant 14:00. The RUNNING line said 14:00 and you released at 13:55:25, so NOTHING overran
 ***   and the clean count is untouched. Write the hour as it rolls.
 ***
-*** ===== ART (:34) - NOTHING SHIPPED THIS HOUR AND NO STAND-DOWN WRITTEN. THAT IS THE ONE GAP. =====
-***   Your three commits this hour are MY plan syncs and nothing else. `git diff` of your branch
-***   against main is EMPTY of art work. Your last real body was **SHEARMAN pass 4** (85e4fb82) in
-***   the 12:xx window, and before it THE SHEARMAN (Cutloose), the 69th (7a4ce41a).
-***   I AM NOT CHARGING YOU WITH BEING DRY - you may invent minibosses freely and you are the ONE
-***   LANE AHEAD OF THE ENGINE: you have shipped 69 bodies against 68 names. But the freeze rule
-***   is that a dry or blocked lane **SAYS SO IN WRITING**, and this hour there is no line from you
-***   at all. A stand-down written up IS the delivery; silence is not.
-***   NEXT: **EITHER the 70th body, OR a written stand-down naming what you are carrying.** If
-***   SHEARMAN needs a pass 5, say which measurement says so and shoot the worst view, not the
-***   best. FIT IS THE ACCEPTANCE TEST: front, side AND back on a real body, and LOOK at the render
-***   yourself - the Beadle had no facing from behind while its register read `seen: 1.0`.
-***   The lock fits in any gap; you only need it to prove fit.
+*** ===== ART (:34) - THE 70th SHIPPED AND I LOOKED AT IT MYSELF. THIS ROW REPLACES A WRONG ONE. =====
+***   *** READ MY FAULT (4) FIRST: twenty minutes ago this row said "NOTHING SHIPPED THIS HOUR AND
+***   *** NO STAND-DOWN WRITTEN". THAT WAS WRONG. You pushed THE HAMMERMAN (b1637cb6) between my
+***   *** merge and my sync, my first survey missed it, and the sync-time re-read caught it. I have
+***   *** merged it and rewritten this row rather than leave a false charge standing. ***
+***   **THE HAMMERMAN ("Alltold"), THE 70th - DELIVERED, AND IT PASSES FIT BY MY OWN EYES.** I
+***   staged `hero_front`, `hero_side` and `hero_back` and LOOKED at all three next to the hero:
+***     - FRONT: the head reads, and the mechanic is LEGIBLE ON THE BODY - a row of seven pips
+***       across the chest plate, part pale and part dark. "Banks every blow and pays them back at
+***       once" is readable off the model without a tooltip. That is the plainness rule working.
+***     - BACK: **HE HAS A FACING FROM BEHIND** - distinct head, shoulders, and the two crossed
+***       tally staves. This is the exact view the Beadle failed while its register read
+***       `seen: 1.0`, so it is the one I check first. It passes.
+***     - SIDE: silhouette is clearly his and not the hero's; the haft and hammer head read.
+***   A FINDING I NEARLY PUBLISHED AND KILLED BY LOOKING AT THE THIRD VIEW: in front and back he
+***   appeared to cast NO ground shadow while the hero plainly did. The SIDE view shows his shadow
+***   clearly. It was my misreading of two frames, not a fault of yours, and it is not an item.
+***   NOT TICKED, AND NOT BECAUSE OF YOU: a body is ticked when the ENGINE names it. `hammerman`
+***   has zero hits in `scripts/`. The tick comes when content and the game build pay their steps.
+***   YOU ARE TWO BODIES AHEAD OF THE ENGINE (70 bodies / 68 names) and that is the right place
+***   for you to be. NOTHING YOU MADE IS WASTED; IT IS QUEUED WORK.
+***   NEXT: **YOU CALLED THE HAMMERMAN "THE 70th AND THE LAST". SAY PLAINLY WHETHER YOU MEAN IT.**
+***   If the roster is closed at 70, write that down in one line - it changes what every lane
+***   plans for and it must not live only in a commit subject. If it is closed, your next work is
+***   PASSES ON WHAT EXISTS: pick the body whose own register carries the worst margin, shoot the
+***   worst view, and fix that. Either way WRITE A LINE THIS FIRING - a stand-down written up IS
+***   the delivery, and an hour with no line from you is the one thing I cannot verify.
 ***
 *** ===== CHAT BOT (:45) - B203 IS **TICKED**, AND THE STAND-DOWN IT CHOSE WAS THE RIGHT CALL. =====
 ***   **B202's CARRIED RED-PROVE - TICKED.** The `specialize` EXAMPLE GHOST arm fires honestly:
@@ -146,9 +182,12 @@
 ***   HUD       13:54:01 -> 13:55:25 (1m24s; cap 14:07) - inside its window, released early.
 ***   Every claim followed an IDLE from the previous lane. ZERO over-declarations. ZERO future
 ***   stamps in this hour's lines. The HUD's "13:60" is in an IDLE and is cosmetic, not an overrun.
-***   THE CLEAN-HOUR COUNT DOES **NOT** ADVANCE, AND THE BREAK IS MINE: I starved nothing, but I
-***   missed the :07 plan sync and the game build burned its read on a row it had already paid.
-***   A fault of mine, or of the schedule I own, is never folded into a clean count. COUNT = 0.
+***   THE CLEAN-HOUR COUNT **ADVANCES TO 1**, and I nearly denied it to myself on a fault that did
+***   not happen (see (1)): the :07 sync landed at 14:06:58, two seconds inside the deadline, so no
+***   lane was starved and no schedule of mine broke. No overrun, no stale lock cleared, no future
+***   stamp in any lock line this hour, never two lanes holding at once. The 12:58 block reset the
+***   count to 0 on the game build's ~10 s future stamp at 12:09; the 13:00 hour is clean.
+***   **COUNT = 1.** The next seat advances it only on a measurement, never on a memory of one.
 ***
 *** ===== THE DEAD-DATA AUDIT, MEASURED THIS RUN ON MERGED TREE 70c3c8a5. =====
 ***   Corpus: **49 files** (48 `scripts/*.gd` + `web/app.js`), 2,494,015 chars; `data/*.json` = 12
@@ -209,7 +248,7 @@
 ***       (delve.gd:453), not on the first textual occurrence - the first hit is inside MB_FIT's
 ***       comments and brace-matching from there silently reads 37. It cost me a measurement today.
 ***   (e) ID HIGH-WATER MARKS, measured 13:58 CT 27 Nov: B203, C-237, D100, H32, L74, S157, T5,
-***       U206, and art on SHEARMAN pass 4 (the 69th body).
+***       U206, and art on THE HAMMERMAN (the 70th body, b1637cb6).
 ***
 *** ===== NEEDS MR. E =====
 ***   nothing.

@@ -1,3 +1,230 @@
+*** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 2. (THE 19:58 CT FIRING, 26 NOV 2026.) =====
+*** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 19:59:01 CST and again
+*** while writing. The count was 1 after the 18:58 firing; this hour is CLEAN, so it is 2.
+*** ONE CLAIM ALL HOUR AND IT WAS CORRECT IN EVERY FIELD: game build claimed 19:08:39, wrote
+*** "cap claim+25 computed first" and a declared finish of 19:30:00 (inside the 19:33:39 cap), and
+*** released at 19:12:35 - inside both, tasklist Godot* = 0. No second claim, no overrun, no claim
+*** over a live hold, no future stamp, no stale lock cleared, no two lanes holding at once.
+*** AND I OWE THE REASONING ON ONE JUDGEMENT, SO A SUCCESSOR CAN OVERRULE ME WITH ITS EYES OPEN:
+*** THE CHAT BOT LOST ITS WHOLE CYCLE THIS HOUR AND I AM STILL CALLING THE HOUR CLEAN. It did not
+*** lose it to lock contention - the lock was FREE at :45, no lane held it and no lane took
+*** anything from it. Its scheduled task was SUSPENDED (see the headline). "A starved lane" in
+*** this house's breaker list means starved of the ENGINE by another lane's hold, and that is not
+*** what happened. I record the lost cycle as the headline rather than folding it into the count.
+***
+*** ===== THE HEADLINE: THE CHAT BOT'S SCHEDULED TASK IS DISABLED. READ OFF THE SCHEDULER, NOT
+*** ===== INFERRED FROM THE REPO, AND IT IS THE ONLY THING WRONG IN THE HOUSE THIS HOUR. =====
+*** trig_01X4f9fEK6r64Hz2U3CLxeY9 "Bellmire HD chat bot" (:45) reads enabled=FALSE with
+*** suspension_reason **device_absent**, updated_at 2026-11-26T19:45:55 CT. ended_reason is EMPTY,
+*** so this is a HOLD, not a permanent end, and next_run_at is still set for 20:45 CT. Its last
+*** recorded run SUCCEEDED - B184 at 18:45:36, finished 18:51:35. THE 19:45 FIRING DID NOT HAPPEN.
+*** HOW I FOUND IT, because the repo alone would not have told me: the lane left NO lock line, NO
+*** commit, NO log in W6 (W6 is clean at 3db5e40a, 18:50) and NO run doc in the project. I then
+*** read the scheduler and found it absent from the enabled list entirely.
+*** THE CAUSE IS VISIBLE AND IT IS NOT THE LANE'S: the Blender bridge died mid-hour. ART's 19:34
+*** firing reported it ("the bridge died before I could commit so NOTHING IS PUSHED"), and the
+*** chat bot's suspension stamp 19:45:55 sits inside that window. THE BRIDGE IS BACK - I probed it
+*** at 19:59 and ran every git operation in this run through it.
+*** I ATTEMPTED THE RE-ENABLE ONCE AND IT WAS REFUSED, which is the settled answer: a FIRING
+*** cannot write a scheduled task, and the gate is on the CALL and not on a field - this attempt
+*** carried ONLY enabled=true, no prompt and no name, and was still refused. I did not test it
+*** twice. It needs ONE LIVE TURN, or it lifts by itself at 20:45 now the device is back.
+*** NO LANE IS TO DO ANYTHING ABOUT THIS. B185's item is unchanged and still the chat bot's.
+***
+*** ===== MY OWN FAULTS FIRST. TWO, BOTH CAUGHT BEFORE THEY REACHED A ROW. =====
+***   1. I MEASURED `docs/WORK_PLAN.md` AS +137 LINES ON art, chatbot AND hud-ui AGAINST main AND
+***      WAS ONE STEP FROM REPORTING THREE LANES OUT OF SYNC. It was MY OWN three-dot diff: the
+***      merge-base predates the 18:58 amendment, so each lane's own sync commit reads as an
+***      addition main "lacks" while main holds the identical text. THE BLOB CHECK IS THE HONEST
+***      INSTRUMENT AND IT SAID SO: one distinct blob 4b5198fd across all SEVEN refs, set size 1.
+***      The prompt warns that two dots are not three; this is the same trap wearing the other
+***      face, and the lesson is that a plan-sync question is answered by blob identity, never by
+***      a diff against a stale merge-base.
+***   2. PROGRESS.md merged +39/-0 while the three lanes' own numstats sum to 40 ADDED LINES, and
+***      I did NOT publish 39 as their total. I checked every one of the 40 added line-strings
+***      against merged HEAD: ZERO MISSING (laptop 26/0 missing, content 7/0, hud-ui 7/0). The
+***      1-line gap is a coincident blank separator collapsing at a shared anchor, the same shape
+***      the 18:58 firing found at 3 lines. Zero lines removed, zero content lost. All FOUR exact
+***      marker shapes return no hits across every tracked md/gd/json/js/py/txt/css/html file.
+***
+*** ===== TWO STALE FACTS IN PROMPTS I OWN, CORRECTED HERE BECAUSE A FIRING CANNOT EDIT A PROMPT.
+*** ===== BOTH WOULD COST A LANE A CYCLE, AND ONE OF THEM HAS BEEN COSTING ONE FOR DAYS. =====
+***   (a) *** THE HUD'S PROMPT STILL CARRIES THE STRUCK RARITY-HUE ITEM AS ITS STANDING ITEM. ***
+***       It reads, verbatim: "YOUR STANDING ITEM, AND IT IS THE MOST VALUABLE OPEN ITEM IN THE
+***       HOUSE: THE RARITY-HUE HALF OF SYSTEM 2 ... As of 18 Nov 09:2x CT this had still not been
+***       started. Take the item." MY OWN charter struck exactly those sentences: that half SHIPPED
+***       as U55 (`ui_theme.gd:176` names itself "U55 (System 2, HUD half)", `rarity_hue` :196,
+***       `rarity_ink` :200, `rarity_pip` :204, called at `leaderboard_panel.gd:197` and `:202`),
+***       and my charter says in terms "Do not hand the rarity row to the HUD again - it refused it,
+***       correctly, eight times before a seat finally checked." THE LANE IS READING THE STRUCK
+***       VERSION EVERY HOUR. It has behaved correctly anyway - U186, U187 and U188 are all honest
+***       stand-downs - but it is being told hourly that it is sitting on the most valuable open
+***       item in the house. FIRST LIVE TURN: strike that block from the HUD prompt.
+***   (b) THE GAME BUILD'S PROMPT CARRIES THE gear.gd NULL-GUARD DEFECT AS OPEN. IT IS FIXED.
+***       Measured on merged main this run at `scripts/gear.gd:105-110`: "S35: ResourceLoader
+***       .exists() is true for an un-imported asset whose load() still returns null ... Skip the
+***       piece, never instantiate a null", then `var ps := _cache[path] as PackedScene` / `if ps
+***       == null: _cache.erase(path); return null`. The unguarded `instantiate()` the prompt
+***       describes no longer exists. NO LANE IS TO TAKE IT, and if a row ever hands it back, say so.
+***   Both go on the prompt-correction backlog in FOR THE NEXT TEAM LEAD below.
+***
+*** ===== THE DEAD-DATA AUDIT, MEASURED THIS RUN ON MERGED MAIN a0bbcd83. =====
+*** Corpus 48 files (47 `scripts/*.gd` + `web/app.js`), 2,440,276 chars; `data/*.json` 12 files,
+*** 158 top-level keys. UNREAD LIVE DATA KEYS: **ZERO**. UNREFERENCED ASSET DIRECTORIES: **ZERO**
+*** (36 directories with files, measured off `assets/` only, basename and every ancestor path).
+*** 68 keys return zero literal hits: 53 `_note_` + **15 NON-NOTE, AND THE NON-NOTE COUNT HAS NOT
+*** MOVED** - it is the same 15 names the baseline accounts for, nothing added and nothing lost:
+*** two runtime-built `_alt` pools (`lord_intros_alt`, `unique_intros_alt`, READ at delve.gd:4022),
+*** four declared dead (`phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+*** `town_levels_for_the_desktop`), nine prose/spec strings (`technique`, `boss_floors`,
+*** `chronicle_line`, `word_order`, `casing`, `promotion_line`, `one_roll`, `_gating`,
+*** `canon_silences`). THE SERIES: 52 (05:0x) -> 53 -> 56 (08:58) -> 68 now, every step a `_note_`
+*** key of content's and never a non-note. The raw total carries no signal; 15 is the number.
+
+## TICK RECORD - THE 19:58 CT FIRING, 26 NOV 2026 (team lead).
+*** origin/main ec33647c -> a0bbcd83, FOUR lanes merged. Every claim below was checked against the
+*** file, the ref or the parsed JSON - never the commit message.
+***
+***   - **S142 TICKED (game build). L31 IS CLOSED WHOLE.** The row asked it to measure, not assume,
+***     and to close by disproving if there was nothing to build. It did exactly that and changed
+***     NO CODE (its numstat is PROGRESS.md +26, RUN_LOCK +8, a 301-line log and one 1080p frame -
+***     zero `.gd`). I VERIFIED BOTH HALVES MYSELF. Heroes: `delve.gd:4056 func statuses(...)`,
+***     `party_frames.gd:3` preloads `status_icon.gd`, `:198 var sts := d.statuses(m)`, `:214`
+***     instantiates `StatusIconScript.new().setup(...)` - the chain is live end to end. Monsters:
+***     I did not take the "all 14 `_give` calls target delver dicts" claim, I read them - 14 call
+***     sites (194, 1985, 1991, 2254, 2263, 2273, 2275, 2283, 2336, 2417, 2419, 2484, 3270, 3868)
+***     plus the definition at 3883, and the three that could have been a monster are not: 194 is
+***     `for m in _alive()`, 3270 is the trap path printing `h["name"]`, 3868 is `_rally_states`,
+***     whose own docstring says "Apply the rally package to one delver dict". `_give` writes `st`,
+***     `slow`, `venom` on a delver. NOTHING CARRIES A CONDITION ON A MONSTER, so there is nothing
+***     to draw and building one would be a new feature. Gates: parse rc 0 / 0 SCRIPT ERROR,
+***     S118_STATUS OK 14, L31_ICONS OK 15 (chips_past_bar=0, distinct_secs=15).
+***     ONE MEASURED CAVEAT, RECORDED AND NOT A ROW: `party_frames.gd:198` gates the chips on
+***     `UiTheme.scale < 1.4`, so at 150% UI scale a hero shows NO status chips. That reads like a
+***     deliberate space decision and the icons are live at 100% and 125%; I am not inventing work
+***     from it, but the next seat should know the closure has that boundary.
+***   - **C-219 TICKED (content). INDEPENDENTLY RE-COUNTED, NOT TAKEN.** I parsed
+***     `data/lore_lines.json` on both refs and diffed the structures: epitaphs 984 -> 1000 (+16),
+***     descend 605 -> 613 (+8), cleared 590 -> 598 (+8) - the claim exactly. ZERO top-level keys
+***     lost, ONE added (`_note_c219`), and ZERO pre-existing list entries missing on any key.
+***     THE `-4` IN ITS NUMSTAT IS NOT A DELETION - it is a writer reordering its own output, which
+***     is the trap the charter names; the key and entry SETS settle it and nothing was dropped.
+***     `miniboss_feed.by_key` HELD AT 63 with no row written, which is correct - art has shipped
+***     no 64th body, and a line for a body that does not exist would hold nothing out of a floor.
+***   - **THE HUB'S CORRECTION TICKED (123e6c50).** The row asked it to correct its own false
+***     subject line and record the true publish position, and it is all there in `web/NOTES.md`
+***     where a reader will hit it: 7e3914d9 "moved the web/ tree from 51a3f8b3 (its parent) to
+***     db687b8b", the true position "gh-pages 8d214d36 / tree 1d8bce63 / pushed 25 Nov 09:55 CT",
+***     and "the ONLY unpublished delta is web/NOTES.md (+34 / -0)". A LANE THAT CORRECTS ITS OWN
+***     RECORD IN THE PLACE THE ERROR LIVES IS THE BEHAVIOUR THIS HOUSE WANTS. It made NO READY TO
+***     PUBLISH claim, so NO PUBLISH GATE WAS OWED AND I RAN NONE - said plainly, as required.
+***   - **U188 TICKED AS A STAND-DOWN (HUD).** The 18:58 row named it no item and said so on its
+***     face; it stood down, committed the write-up (PROGRESS.md +7), and did not reach into a file
+***     it does not own. A stand-down written up IS the delivery. See fault (a) above - this lane
+***     is doing the right thing while its prompt tells it otherwise.
+***   - **ALSO MERGED, NOT A LANE OF MINE:** the pack catalogue worker (:15) catalogued
+***     `19_fantasy_weapons_CC0.blend` as **NO LICENCE FILE FOUND, not cleared**
+***     (`docs/art/ASSET_SOURCES.md` +16). That is the correct answer under the licence rule - it
+***     recorded the absence instead of guessing - and NO LANE IS TO USE THAT PACK until a licence
+***     page is read. The QA tester (:41) is not due again until 20:41.
+***
+***   - **NOT TICKED: ART, AND IT IS NOT ART'S FAULT.** It took its row and did the work - its own
+***     report says the red-prove "was proving its own bypass and is now genuine, 12 not 0", which
+***     is exactly what the 18:58 row asked for - but THE BRIDGE DIED BEFORE IT COULD COMMIT AND
+***     NOTHING IS PUSHED. I read the ref and the worktree separately, because a worktree is not a
+***     branch: `origin/art` carries only plan syncs, while W5 holds `tools/art/_backread.py`
+***     modified at 19:37:17, `_selfseen_prove_noman.json` and `_selfseen_prove_emptymid.json` at
+***     19:37:42, and two logs at 19:41/19:42 - all uncommitted. THE WORK EXISTS AND I CANNOT TICK
+***     WHAT IS IN NO COMMIT. Its row this hour is to push it.
+***   - **NOT TICKED: THE CHAT BOT.** No firing happened; see the headline. Nothing is owed by it
+***     and nothing is charged to it.
+
+## TAKE THIS NEXT - THE 19:58 CT FIRING, 26 NOV 2026 (team lead).
+*** THESE SIX ROWS SUPERSEDE EVERY "TAKE THIS NEXT" BELOW. The file reads reverse chronological.
+*** I MISSED THE GAME BUILD'S :07 THIS HOUR AND SAY SO: I spent the front of the run proving the
+*** chat bot's silence was a scheduler suspension rather than guessing at it, and these rows went
+*** in after 20:07. The game build's 20:07 firing therefore read the 18:58 rows. That cost is
+*** mine, not its, and its row below is written to be correct whichever block it read.
+***
+***  - **GAME BUILD (:07)** - S142 IS TICKED AND L31 IS CLOSED WHOLE; you have nothing carried.
+***    PHASE 2 IS YOURS BY THE STANDING FORMULA: take the LOWEST-NUMBERED system in Mr. E's
+***    Systems 5-80 that is not already closed, and say which you took and why. MEASURE BEFORE YOU
+***    BUILD - Systems 3 and 4 both closed as ALREADY WIRED, so the first question on any system is
+***    whether the engine already does it. Do NOT take the `gear.gd` null-guard defect from your own
+***    prompt: I measured it closed at `gear.gd:105-110` (S35) this run, and a row that hands it
+***    back is wrong - say so if one does.
+***  - **CONTENT (:22)** - C-219 VERIFIED AND TICKED, re-counted key by key. Keep producing,
+***    unthrottled. `by_key` holding at 63 was the right call and stays right until art ships a
+***    64th body. `_note_` keys are yours to keep writing - there are 53 now, every one accounted
+***    for in my audit, and no lane wires one. `phase2_words_alt2` is dead for the same reason as
+***    its two siblings.
+***  - **ART (:34)** - **COMMIT AND PUSH YOUR 19:34 WORK BEFORE ANYTHING ELSE.** The hardened
+***    red-prove is finished on disk in W5 and in NO commit, so nothing downstream can see it and I
+***    cannot tick it: `tools/art/_backread.py`, `_selfseen_prove_emptymid.json`,
+***    `_selfseen_prove_noman.json` and the two `_b2_*` logs. The bridge is BACK - I ran every git
+***    command in this run through it. Push the prove file WITH the generator so the number and the
+***    instrument land together, and say in your summary whether `items_after_span` now reads 12 on
+***    a GENUINE mid-build empty span rather than a forced flag. IF YOU HAVE ALREADY PUSHED IT BY
+***    THE TIME YOU READ THIS, say so in one line and spend the hour on a miniboss - your standing
+***    permission is live, and measure the count off the fit register, never off a prompt.
+***    Your 51 modified `renders/art/system2/*.png` are ALSO uncommitted and older than this hour -
+***    name them or commit them, but do not leave them unexplained a third time.
+***  - **HUB (:37)** - YOUR CORRECTION IS TICKED AND IT WAS THE RIGHT SHAPE OF FIX. Nothing is
+***    open: the only thing merged and not published is `web/NOTES.md`, and publishing is two seats
+***    above you. STAND DOWN AND WRITE IT UP. If you touch `web/` at all, the hostile-name test and
+***    the state checks come back and I will re-run the greps myself.
+***  - **CHAT BOT (:45)** - YOUR TASK WAS SUSPENDED AT 19:45:55 AND YOUR 19:45 FIRING DID NOT
+***    HAPPEN. Nothing is charged to you. IF YOU ARE READING THIS, THE HOLD HAS LIFTED AND YOUR
+***    ITEM IS UNCHANGED, exactly as B184 split it: `scripts/chatcmd.gd` still carries B183's block
+***    calling the BREW SPAN path a LIVE OPEN QUESTION, and B184 answered it in one run (both
+***    injects, one load, 8 COMMANDS_DATA lines, BREW SPAN LOW and HIGH both printing). Strike that
+***    sentence with B184's numbers beside it. Comment-only; the gate is one ~25s parse.
+***    CLAIM BY :50 WITH A FINISH INSIDE :52 - that row is working and it stays.
+***  - **HUD (:52)** - U188's STAND-DOWN IS TICKED AND IT IS THE RIGHT CALL. **AND READ THIS:
+***    YOUR OWN PROMPT IS LYING TO YOU.** It names the rarity-hue half of System 2 as your standing
+***    item and "the most valuable open item in the house". IT SHIPPED AS U55 - `ui_theme.gd:176`
+***    says so in its own words, with `rarity_hue` :196, `rarity_ink` :200, `rarity_pip` :204 and
+***    two calls at `leaderboard_panel.gd:197` and `:202`. DO NOT TAKE IT. I cannot edit the prompt
+***    from a firing; this row is the correction and it wins over the prompt. Nothing HUD-owned is
+***    open, so fix a defect in your OWN shipped work if you find one and otherwise stand down and
+***    write it up - and COMMIT YOUR EVIDENCE LOG when you do ship.
+***
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, TO BE LANDED IN ONE LIVE TURN:
+***   1. HUD PROMPT: strike the "YOUR STANDING ITEM ... THE RARITY-HUE HALF OF SYSTEM 2 ... Take
+***      the item" block. It shipped as U55. This is the oldest and most expensive one on the list.
+***   2. GAME BUILD PROMPT: the `gear.gd:98-104` null-guard defect block is STRUCK - fixed at S35,
+***      measured at `gear.gd:105-110` on 26 Nov.
+***   3. TEAM LEAD PROMPT: the gh-pages facts are stale twice over (it says 05ac2679 / tree
+***      9ca8051e / 19 Nov 20:06). TRUE: gh-pages 8d214d36 / tree 1d8bce63 / pushed 25 Nov 09:55
+***      CT; the unpublished delta is ONE file, web/NOTES.md +34/-0.
+***   4. TEAM LEAD PROMPT: the STANDING NOTE saying the art fit register reads RED / ok:false on two
+***      retired `_chibi` rows is struck - it reads ok:true / GREEN, 65 pairs, shipped_red [].
+***   5. TEAM LEAD PROMPT: the dead-data baseline figures (34 asset dirs, 146 keys, 56 zero-hit)
+***      are stale. TRUE this run: 36 dirs / 158 keys / 68 zero-hit. THE 15 NON-NOTE IS STABLE AND
+***      IS THE NUMBER TO CARRY; the raw total carries no signal.
+***   (Items 3, 4 and 5 were already raised by the 17:58 and 18:58 firings. They are repeated, not
+***   duplicated - this list is the backlog and it is meant to be carried whole until it is landed.)
+***
+*** FOR THE SUPERVISOR:
+***   1. **THE CHAT BOT'S SCHEDULED TASK IS SUSPENDED (device_absent, 19:45:55 CT) AND A FIRING
+***      CANNOT RE-ENABLE IT.** I attempted it once with enabled=true alone and was refused.
+***      ended_reason is empty and next_run_at is set for 20:45, and the device is back, so it may
+***      lift by itself. RECOMMENDATION: do nothing for one cycle. If the 20:45 firing is also
+***      absent, it needs one live turn from Mr. E to flip enabled=true, and that is worth asking
+***      for - this lane holds the only item currently carried in the house.
+***      NOTE THE PATTERN FOR THE WATCH LIST: the four tasks that silently stopped on 25 Nov all
+***      last ran inside that day's bridge outage, and this suspension also lands inside a bridge
+***      outage (art reported the bridge down at 19:34; it was back by 19:38). A bridge outage
+***      costing a scheduled task is now TWICE OBSERVED. I report the correlation, not a cause.
+***   2. THE HUB PUBLISH QUESTION IS UNCHANGED AND STILL YOURS: the only thing merged and not
+***      published is `web/NOTES.md`, +34 lines, a notes file. RECOMMENDATION: LEAVE IT
+***      UNPUBLISHED - no functional delta, the live site is current as of publish 8 (25 Nov
+***      09:55 CT), and a push to ship a notes file spends a publish for nothing. I ran NO publish
+***      verification this hour because the lane claimed no readiness.
+***
+*** NEEDS MR. E: nothing. The chat bot suspension is the supervisor's to route and may lift on its
+*** own at 20:45; nothing else in this house is waiting on him.
+
 *** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 1. (THE 18:58 CT FIRING, 26 NOV 2026.) =====
 *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 18:58:54 CST and again
 *** at 19:02:29 while writing. The count was 0 after the 17:58 firing; this hour is CLEAN, so it is 1.

@@ -22413,3 +22413,72 @@ consecutive firing, and not mine.
 - No owned .gd file touched. Not ticking anything.
 - Next firing (18:52): re-read R's RUN_LOCK, check the plan for a newer HUD row, claim only if the last line is IDLE or a stale RUNNING with no Godot.
 - Decision for Mr. E: none.
+
+## B184 - 26 Nov 2026, 18:45 CT firing. THE CARRIED OPEN QUESTION IS SHUT IN ONE LAUNCH: THE BREW SPAN ARM FIRES ON A PLAIN PARSE, AND WHAT PRINTED NOTHING WAS B182'S READING OF ITS OWN LOG.
+
+**One claim, ONE launch, ~26s of engine, claimed at :48 and released at :49 - no file of mine changed.**
+
+### 1. The question, and why one run could answer it
+B183 carried, and the team lead's `TAKE THIS NEXT` row assigned, the narrow question left over from
+B182: why B182's `brew`.cost inject printed **no** `BREW SPAN` line on its parses when B183's
+`forge`.example inject printed `EXAMPLE GHOST` on its own. Two answers were possible and they are
+very different: either the `BREW SPAN` arm sits on a path a parse does not reach, or B182's inject
+fired and its **per-section slicing of one combined battery log** lost the lines.
+
+Comparing two runs cannot separate those cleanly, so I put **both injects in the same
+`data/commands.json`** and ran **one** parse, logged to **its own file**:
+
+- `brew`.cost `"others 12-500 gold"` -> `"others 40-480 gold"` - B181's exact pre-fix span
+- `forge`.example `"!forge spear"` -> `"!forge fnord"` - B183's exact inject, already known to fire
+
+Injected md5 `23a141aab5ed313aa6dd7d0752fd57f8`.
+
+### 2. The answer: both arms fired, off one load, on one parse
+`--headless --path . --quit-after 300`, rc=0, 164 lines, **0 Parse Error, 0 SCRIPT ERROR**, and
+**8 COMMANDS_DATA lines**:
+
+| arm | line |
+|---|---|
+| `BREW SPAN LOW` | published 40, cheapest row `pennymend` 12 |
+| `BREW SPAN HIGH` | published 480, dearest row `kingsmend` 500 |
+| `EXAMPLE GHOST` | `forge`.example asks the smith for "fnord"; `Gear.KINDS` refuses it |
+| `MINIBOSS UNNAMED` | the game build's `overlooker` row (pair) |
+
+So there is **no path difference**. `BREW SPAN` and `EXAMPLE GHOST` fired off the same load of the
+same file on the same parse. B182's inject was genuine and its arms *were* firing; the slicing was
+the fault, which is exactly the cause B183 named as likeliest - now measured instead of guessed.
+The parse loads this data and fires these arms: three firings running (B183 clean 2 / injected 4,
+B184 injected 8), plus the two archived pure-parse logs B183 cited. **Nobody is to widen this back
+out.**
+
+### 3. Nothing of mine changed, and the no-op gates were not re-run
+`data/commands.json` restored in a `finally` block and md5-verified **pre == post ==
+`d2ae3b813c4e7ce692197949297a82fb`** (21232 bytes); `scripts/chatcmd.gd` `a67c28fb` 3750 lines and
+`docs/COMMANDS.md` `e9ce025b` untouched. On byte-unchanged data the three data-loading gates are a
+declared no-op and were not re-run - the B158 stand-down precedent, which was ticked.
+
+`MINIBOSS UNNAMED` is a **fifteenth** consecutive firing and that is **correct**: the game build's
+S141 named the 63rd at 18:16 on its own branch and the team lead's merge to `main` has not run yet,
+so my worktree cannot see the row. I did not touch the gate.
+
+### 4. Two things about my own conduct, both corrections
+- **The window was finally respected.** The team lead restored the standing row: claim by **:50**
+  with a declared finish inside **:52**. I claimed **18:48:10**, sized **one** launch instead of
+  six, declared 18:51:30 and released at **18:49:09** - fifty seconds inside my own declaration and
+  the first firing in four without overrunning it (B181 six seconds, B182 five, B183 twenty-five).
+  The fix was the one B175's CORRECTION asked for: write the IDLE before composing the prose.
+- **My IDLE stamp was wrong and I corrected it in place.** I first wrote the stamp `18:50:40` -
+  **ninety-one seconds ahead of the real write at 18:49:09** - because I composed it from my
+  declared finish instead of reading the clock. A stamp later than reality makes my own window look
+  *longer*, never shorter, so it took nothing from another lane, but this lane has cleared a live
+  lock off a bad timestamp before. Corrected in the lock file with the error stated, not quietly.
+
+### 5. Carried to B185, deliberately not taken
+`scripts/chatcmd.gd` still carries B183's block calling this a **live open question**. That sentence
+is now answered and the comment should say so. It is a comment-only change whose gate is a ~25s
+parse, which does not fit inside `:52`, so I **split and carried it** rather than declare a
+crossing into the HUD's window.
+
+**Twitch:** the parse run's eventsub autostarted and refreshed its own tokens as on every headless
+run - it sent **no message**, redeemed nothing, cheered nothing, **zero bits**, no account driven by
+me.

@@ -1,0 +1,1210 @@
+{
+ "verdict": "FAIL",
+ "ok": false,
+ "tier": 5,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "cells": 13,
+ "views": [
+  "front",
+  "side",
+  "back"
+ ],
+ "bare_kinds": [
+  "wraps"
+ ],
+ "basis_selftest": {
+  "euler_order": "YXZ",
+  "rule": "Rslot = C . R_godot(held_rot) . C^-1  (identity at zero)",
+  "premise_measured": {
+   "slot_x_dot_world_down": 1.0,
+   "slot_y_dot_world_forward": 0.9885
+  },
+  "checked": [
+   "premise@bone",
+   "crossbow@cal",
+   "crossbow@live",
+   "crossbow@cal(divergence recorded)"
+  ],
+  "crossbow_live_held_rot": [
+   "-90",
+   "35",
+   "90"
+  ],
+  "crossbow_live_roll_deg": 35.0,
+  "weaponfit_rule_divergence": {
+   "family": "crossbow",
+   "weaponfit_rule_differs": true,
+   "held_rot_cal": [
+    "-90",
+    "0",
+    "90"
+   ],
+   "residual_angle_deg": 90.0,
+   "residual_axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "shaft_separation_deg": 90.0,
+   "prod_separation_deg": 90.0,
+   "reading": "weaponfit's crossbow basis is R.C^-1 where every other family it ships is C.R.C^-1 (identity at zero). OPEN QUESTION for the crossbow's own pass - NOT resolved here, and no tier-5 path uses it."
+  }
+ },
+ "seen_min": 0.15,
+ "vis_min": 900,
+ "min_proving": 2,
+ "show_min": 0.7,
+ "px_per_m": 200.0,
+ "grip_shift_gate": "staff",
+ "laths": [],
+ "floor_breaks": [
+  "bow: 31 vertices below the floor, deepest 0.012 m under it - the carry drags this weapon through the ground"
+ ],
+ "lances": [
+  "axe: long axis 90 deg from vertical (world [-0.989, 0.151, -0.0]) - this weapon is carried HORIZONTAL, not hanging in the fist. gear.gd gives res://assets/gear/artifact/axe_small_golden.glb held_rot [0.0, 0.0, 0.0]; a kind with no row of its own falls through to `return Vector3.ZERO` and is carried flat.",
+  "dagger: long axis 90 deg from vertical (world [-0.989, 0.151, -0.0]) - this weapon is carried HORIZONTAL, not hanging in the fist. gear.gd gives res://assets/gear/artifact/dagger_golden.glb held_rot [0.0, 0.0, 0.0]; a kind with no row of its own falls through to `return Vector3.ZERO` and is carried flat.",
+  "greataxe: long axis 90 deg from vertical (world [-0.989, 0.151, -0.0]) - this weapon is carried HORIZONTAL, not hanging in the fist. gear.gd gives res://assets/gear/artifact/axe_double_golden.glb held_rot [0.0, 0.0, 0.0]; a kind with no row of its own falls through to `return Vector3.ZERO` and is carried flat.",
+  "greatsword: long axis 90 deg from vertical (world [-0.989, 0.151, -0.0]) - this weapon is carried HORIZONTAL, not hanging in the fist. gear.gd gives res://assets/gear/artifact/sword_big_golden.glb held_rot [0.0, 0.0, 0.0]; a kind with no row of its own falls through to `return Vector3.ZERO` and is carried flat.",
+  "mace: long axis 90 deg from vertical (world [-0.989, 0.151, -0.0]) - this weapon is carried HORIZONTAL, not hanging in the fist. gear.gd gives res://assets/gear/artifact/hammer_double_golden.glb held_rot [0.0, 0.0, 0.0]; a kind with no row of its own falls through to `return Vector3.ZERO` and is carried flat.",
+  "quarterstaff: long axis 90 deg from vertical (world [-0.989, 0.151, -0.0]) - this weapon is carried HORIZONTAL, not hanging in the fist. gear.gd gives res://addons/kaykit_character_pack_skeletons/Assets/gltf/Skeleton_Staff.gltf held_rot [0.0, 0.0, 0.0]; a kind with no row of its own falls through to `return Vector3.ZERO` and is carried flat.",
+  "sceptre: long axis 90 deg from vertical (world [-0.989, 0.151, -0.0]) - this weapon is carried HORIZONTAL, not hanging in the fist. gear.gd gives res://assets/gear/hammer_B.gltf held_rot [0.0, 0.0, 0.0]; a kind with no row of its own falls through to `return Vector3.ZERO` and is carried flat.",
+  "spear: long axis 90 deg from vertical (world [-0.989, 0.151, -0.0]) - this weapon is carried HORIZONTAL, not hanging in the fist. gear.gd gives res://assets/gear/halberd.gltf held_rot [0.0, 0.0, 0.0]; a kind with no row of its own falls through to `return Vector3.ZERO` and is carried flat.",
+  "staff: long axis 90 deg from vertical (world [-0.989, 0.151, -0.0]) - this weapon is carried HORIZONTAL, not hanging in the fist. gear.gd gives res://addons/kaykit_character_pack_skeletons/Assets/gltf/Skeleton_Staff.gltf held_rot [0.0, 0.0, 0.0]; a kind with no row of its own falls through to `return Vector3.ZERO` and is carried flat.",
+  "sword: long axis 90 deg from vertical (world [-0.989, 0.151, -0.0]) - this weapon is carried HORIZONTAL, not hanging in the fist. gear.gd gives res://assets/gear/artifact/sword_golden.glb held_rot [0.0, 0.0, 0.0]; a kind with no row of its own falls through to `return Vector3.ZERO` and is carried flat.",
+  "wand: long axis 90 deg from vertical (world [-0.989, 0.151, -0.0]) - this weapon is carried HORIZONTAL, not hanging in the fist. gear.gd gives res://assets/gear/wand_A.gltf held_rot [0.0, 0.0, 0.0]; a kind with no row of its own falls through to `return Vector3.ZERO` and is carried flat."
+ ],
+ "blanks": [],
+ "frame_clips": [
+  "greatsword_front.png",
+  "greatsword_back.png"
+ ],
+ "blind_views": [],
+ "errors": [],
+ "models": {
+  "axe": {
+   "kind": "axe",
+   "model": "res://assets/gear/artifact/axe_small_golden.glb",
+   "verts": 1652,
+   "checked": 1051,
+   "reach": 0.044,
+   "drop": 0.33,
+   "span": 0.937,
+   "tip_z": 0.684,
+   "hero_h": 2.45,
+   "clip": 150,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 0.6,
+   "hand_scale_arm": "begins 'res://assets/gear/artifact/'",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.989,
+    0.151,
+    -0.0
+   ],
+   "hang_deg_from_vertical": 90.0,
+   "aspect": 2.53,
+   "minor": {
+    "front": 76,
+    "side": 43,
+    "back": 77
+   },
+   "opaque": {
+    "front": 98626,
+    "side": 81266,
+    "back": 99379
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 4698,
+    "side": 1227,
+    "back": 4465
+   },
+   "delta": {
+    "front": 4963,
+    "side": 1286,
+    "back": 4741
+   },
+   "alone": {
+    "front": 6059,
+    "side": 1588,
+    "back": 6056
+   },
+   "seen": {
+    "front": 0.7754,
+    "side": 0.7727,
+    "back": 0.7373
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.2111,
+    0.3741,
+    0.9366
+   ],
+   "local_ext": [
+    0.1322,
+    0.6236,
+    1.5745
+   ],
+   "mid_px": 74.8,
+   "best_minor": 77,
+   "show": 1.029,
+   "proving_views": 3
+  },
+  "bow": {
+   "kind": "bow",
+   "model": "res://assets/gear/artifact/bow_golden.glb",
+   "verts": 1526,
+   "checked": 1218,
+   "reach": 0.652,
+   "drop": 0.652,
+   "span": 0.375,
+   "tip_z": 1.293,
+   "hero_h": 2.45,
+   "clip": 451,
+   "ground": 31,
+   "floor_depth": 0.0117,
+   "hand_scale": 0.6,
+   "hand_scale_arm": "begins 'res://assets/gear/artifact/'",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "held_rot_arm": "eq 'res://assets/gear/artifact/bow_golden.glb'",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.0,
+    -0.001,
+    1.0
+   ],
+   "hang_deg_from_vertical": 0.1,
+   "aspect": 3.44,
+   "minor": {
+    "front": 76,
+    "side": 18,
+    "back": 76
+   },
+   "opaque": {
+    "front": 96471,
+    "side": 81350,
+    "back": 97148
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 3374,
+    "side": 2315,
+    "back": 2281
+   },
+   "delta": {
+    "front": 3926,
+    "side": 2380,
+    "back": 2801
+   },
+   "alone": {
+    "front": 4464,
+    "side": 3402,
+    "back": 4467
+   },
+   "seen": {
+    "front": 0.7558,
+    "side": 0.6805,
+    "back": 0.5106
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.0853,
+    0.375,
+    1.3046
+   ],
+   "local_ext": [
+    0.0973,
+    0.6319,
+    2.1743
+   ],
+   "mid_px": 75.8,
+   "best_minor": 76,
+   "show": 1.002,
+   "proving_views": 3
+  },
+  "crossbow": {
+   "kind": "crossbow",
+   "model": "res://addons/kaykit_character_pack_skeletons/Assets/gltf/Skeleton_Crossbow.gltf",
+   "verts": 785,
+   "checked": 659,
+   "reach": 0.556,
+   "drop": 0.555,
+   "span": 0.418,
+   "tip_z": 1.197,
+   "hero_h": 2.45,
+   "clip": 108,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 1.0,
+   "hand_scale_arm": "default",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Y",
+   "long_axis_world": [
+    -0.151,
+    -0.989,
+    -0.001
+   ],
+   "hang_deg_from_vertical": 89.9,
+   "aspect": 1.28,
+   "minor": {
+    "front": 85,
+    "side": 222,
+    "back": 85
+   },
+   "opaque": {
+    "front": 98070,
+    "side": 92610,
+    "back": 98876
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 5754,
+    "side": 15354,
+    "back": 11256
+   },
+   "delta": {
+    "front": 6210,
+    "side": 20084,
+    "back": 22081
+   },
+   "alone": {
+    "front": 11443,
+    "side": 16711,
+    "back": 11472
+   },
+   "seen": {
+    "front": 0.5028,
+    "side": 0.9188,
+    "back": 0.9812
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.4181,
+    1.1113,
+    1.421
+   ],
+   "local_ext": [
+    0.5082,
+    1.1113,
+    1.4188
+   ],
+   "mid_px": 222.3,
+   "best_minor": 222,
+   "show": 0.999,
+   "proving_views": 3
+  },
+  "dagger": {
+   "kind": "dagger",
+   "model": "res://assets/gear/artifact/dagger_golden.glb",
+   "verts": 1141,
+   "checked": 318,
+   "reach": 0.075,
+   "drop": 0.073,
+   "span": 0.688,
+   "tip_z": 0.716,
+   "hero_h": 2.45,
+   "clip": 0,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 0.5,
+   "hand_scale_arm": "begins 'res://assets/gear/artifact/dagger_'",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.989,
+    0.151,
+    -0.0
+   ],
+   "hang_deg_from_vertical": 90.0,
+   "aspect": 4.67,
+   "minor": {
+    "front": 31,
+    "side": 26,
+    "back": 32
+   },
+   "opaque": {
+    "front": 95356,
+    "side": 81266,
+    "back": 96116
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 1315,
+    "side": 274,
+    "back": 1188
+   },
+   "delta": {
+    "front": 1424,
+    "side": 307,
+    "back": 1302
+   },
+   "alone": {
+    "front": 2039,
+    "side": 488,
+    "back": 2033
+   },
+   "seen": {
+    "front": 0.6449,
+    "side": 0.5615,
+    "back": 0.5844
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.1232,
+    0.1486,
+    0.6879
+   ],
+   "local_ext": [
+    0.1109,
+    0.2972,
+    1.3892
+   ],
+   "mid_px": 29.7,
+   "best_minor": 32,
+   "show": 1.077,
+   "proving_views": 2
+  },
+  "greataxe": {
+   "kind": "greataxe",
+   "model": "res://assets/gear/artifact/axe_double_golden.glb",
+   "verts": 2362,
+   "checked": 1778,
+   "reach": 0.254,
+   "drop": 0.269,
+   "span": 1.276,
+   "tip_z": 0.894,
+   "hero_h": 2.45,
+   "clip": 82,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 0.6,
+   "hand_scale_arm": "begins 'res://assets/gear/artifact/'",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.989,
+    0.151,
+    -0.0
+   ],
+   "hang_deg_from_vertical": 90.0,
+   "aspect": 2.47,
+   "minor": {
+    "front": 106,
+    "side": 48,
+    "back": 106
+   },
+   "opaque": {
+    "front": 102085,
+    "side": 81266,
+    "back": 102855
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 8142,
+    "side": 1885,
+    "back": 7935
+   },
+   "delta": {
+    "front": 8642,
+    "side": 1944,
+    "back": 8420
+   },
+   "alone": {
+    "front": 9500,
+    "side": 2218,
+    "back": 9510
+   },
+   "seen": {
+    "front": 0.8571,
+    "side": 0.8499,
+    "back": 0.8344
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.2321,
+    0.5227,
+    1.2761
+   ],
+   "local_ext": [
+    0.1355,
+    0.8712,
+    2.1515
+   ],
+   "mid_px": 104.5,
+   "best_minor": 106,
+   "show": 1.014,
+   "proving_views": 3
+  },
+  "greatsword": {
+   "kind": "greatsword",
+   "model": "res://assets/gear/artifact/sword_big_golden.glb",
+   "verts": 1444,
+   "checked": 780,
+   "reach": 0.13,
+   "drop": 0.13,
+   "span": 1.627,
+   "tip_z": 0.77,
+   "hero_h": 2.45,
+   "clip": 0,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 0.6,
+   "hand_scale_arm": "begins 'res://assets/gear/artifact/'",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.989,
+    0.151,
+    -0.0
+   ],
+   "hang_deg_from_vertical": 90.0,
+   "aspect": 6.31,
+   "minor": {
+    "front": 54,
+    "side": 58,
+    "back": 54
+   },
+   "opaque": {
+    "front": 101988,
+    "side": 81266,
+    "back": 102771
+   },
+   "border": {
+    "front": 1.0,
+    "side": 0.0,
+    "back": 1.0
+   },
+   "vis": {
+    "front": 7932,
+    "side": 1551,
+    "back": 7837
+   },
+   "delta": {
+    "front": 8343,
+    "side": 1623,
+    "back": 8223
+   },
+   "alone": {
+    "front": 8422,
+    "side": 1768,
+    "back": 8449
+   },
+   "seen": {
+    "front": 0.9418,
+    "side": 0.8773,
+    "back": 0.9276
+   },
+   "outside": {
+    "front": 38,
+    "side": 0,
+    "back": 38
+   },
+   "ext": [
+    0.2599,
+    0.283,
+    1.6265
+   ],
+   "local_ext": [
+    0.1013,
+    0.4331,
+    2.7346
+   ],
+   "mid_px": 52.0,
+   "best_minor": 58,
+   "show": 1.116,
+   "proving_views": 3
+  },
+  "mace": {
+   "kind": "mace",
+   "model": "res://assets/gear/artifact/hammer_double_golden.glb",
+   "verts": 3641,
+   "checked": 3321,
+   "reach": 0.232,
+   "drop": 0.241,
+   "span": 1.01,
+   "tip_z": 0.872,
+   "hero_h": 2.45,
+   "clip": 157,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 0.4,
+   "hand_scale_arm": "begins 'res://assets/gear/artifact/hammer_'",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.989,
+    0.151,
+    -0.0
+   ],
+   "hang_deg_from_vertical": 90.0,
+   "aspect": 2.14,
+   "minor": {
+    "front": 99,
+    "side": 53,
+    "back": 99
+   },
+   "opaque": {
+    "front": 98659,
+    "side": 81266,
+    "back": 99422
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 4678,
+    "side": 2970,
+    "back": 4489
+   },
+   "delta": {
+    "front": 5002,
+    "side": 3036,
+    "back": 4823
+   },
+   "alone": {
+    "front": 5692,
+    "side": 3318,
+    "back": 5692
+   },
+   "seen": {
+    "front": 0.8219,
+    "side": 0.8951,
+    "back": 0.7887
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.2579,
+    0.4725,
+    1.0104
+   ],
+   "local_ext": [
+    0.4291,
+    1.1808,
+    2.5271
+   ],
+   "mid_px": 94.5,
+   "best_minor": 99,
+   "show": 1.048,
+   "proving_views": 3
+  },
+  "quarterstaff": {
+   "kind": "quarterstaff",
+   "model": "res://addons/kaykit_character_pack_skeletons/Assets/gltf/Skeleton_Staff.gltf",
+   "verts": 1879,
+   "checked": 1771,
+   "reach": 0.458,
+   "drop": 0.14,
+   "span": 2.023,
+   "tip_z": 1.098,
+   "hero_h": 2.45,
+   "clip": 414,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 1.0,
+   "hand_scale_arm": "default",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.989,
+    0.151,
+    -0.0
+   ],
+   "hang_deg_from_vertical": 90.0,
+   "aspect": 2.79,
+   "minor": {
+    "front": 122,
+    "side": 120,
+    "back": 121
+   },
+   "opaque": {
+    "front": 104569,
+    "side": 81481,
+    "back": 105611
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 11784,
+    "side": 8904,
+    "back": 10741
+   },
+   "delta": {
+    "front": 12373,
+    "side": 8956,
+    "back": 11195
+   },
+   "alone": {
+    "front": 15081,
+    "side": 9311,
+    "back": 15314
+   },
+   "seen": {
+    "front": 0.7814,
+    "side": 0.9563,
+    "back": 0.7014
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.5978,
+    0.7616,
+    2.0225
+   ],
+   "local_ext": [
+    0.5978,
+    0.7533,
+    2.1018
+   ],
+   "mid_px": 150.7,
+   "best_minor": 122,
+   "show": 0.81,
+   "proving_views": 3
+  },
+  "sceptre": {
+   "kind": "sceptre",
+   "model": "res://assets/gear/hammer_B.gltf",
+   "verts": 772,
+   "checked": 490,
+   "reach": 0.201,
+   "drop": 0.201,
+   "span": 0.925,
+   "tip_z": 0.841,
+   "hero_h": 2.45,
+   "clip": 162,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 0.62,
+   "hand_scale_arm": "begins 'res://assets/gear/'",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.989,
+    0.151,
+    -0.0
+   ],
+   "hang_deg_from_vertical": 90.0,
+   "aspect": 2.22,
+   "minor": {
+    "front": 83,
+    "side": 78,
+    "back": 82
+   },
+   "opaque": {
+    "front": 98290,
+    "side": 81266,
+    "back": 99054
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 4419,
+    "side": 3750,
+    "back": 4124
+   },
+   "delta": {
+    "front": 4665,
+    "side": 3753,
+    "back": 4370
+   },
+   "alone": {
+    "front": 5597,
+    "side": 4010,
+    "back": 5611
+   },
+   "seen": {
+    "front": 0.7895,
+    "side": 0.9352,
+    "back": 0.735
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.385,
+    0.4012,
+    0.9251
+   ],
+   "local_ext": [
+    0.6469,
+    0.6801,
+    1.5095
+   ],
+   "mid_px": 84.3,
+   "best_minor": 83,
+   "show": 0.984,
+   "proving_views": 3
+  },
+  "spear": {
+   "kind": "spear",
+   "model": "res://assets/gear/halberd.gltf",
+   "verts": 1723,
+   "checked": 1463,
+   "reach": 0.49,
+   "drop": 0.312,
+   "span": 1.683,
+   "tip_z": 1.13,
+   "hero_h": 2.45,
+   "clip": 536,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 0.62,
+   "hand_scale_arm": "begins 'res://assets/gear/'",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.989,
+    0.151,
+    -0.0
+   ],
+   "hang_deg_from_vertical": 90.0,
+   "aspect": 2.12,
+   "minor": {
+    "front": 161,
+    "side": 63,
+    "back": 161
+   },
+   "opaque": {
+    "front": 105939,
+    "side": 81266,
+    "back": 106719
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 12076,
+    "side": 3400,
+    "back": 11792
+   },
+   "delta": {
+    "front": 12601,
+    "side": 3411,
+    "back": 12322
+   },
+   "alone": {
+    "front": 14181,
+    "side": 4125,
+    "back": 14191
+   },
+   "seen": {
+    "front": 0.8516,
+    "side": 0.8242,
+    "back": 0.8309
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.3076,
+    0.8016,
+    1.6835
+   ],
+   "local_ext": [
+    0.291,
+    1.2928,
+    2.7468
+   ],
+   "mid_px": 160.3,
+   "best_minor": 161,
+   "show": 1.004,
+   "proving_views": 3
+  },
+  "staff": {
+   "kind": "staff",
+   "model": "res://addons/kaykit_character_pack_skeletons/Assets/gltf/Skeleton_Staff.gltf",
+   "verts": 1879,
+   "checked": 1771,
+   "reach": 0.458,
+   "drop": 0.14,
+   "span": 2.023,
+   "tip_z": 1.098,
+   "hero_h": 2.45,
+   "clip": 414,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 1.0,
+   "hand_scale_arm": "default",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.989,
+    0.151,
+    -0.0
+   ],
+   "hang_deg_from_vertical": 90.0,
+   "aspect": 2.79,
+   "minor": {
+    "front": 122,
+    "side": 120,
+    "back": 121
+   },
+   "opaque": {
+    "front": 104569,
+    "side": 81481,
+    "back": 105611
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 11784,
+    "side": 8904,
+    "back": 10741
+   },
+   "delta": {
+    "front": 12373,
+    "side": 8956,
+    "back": 11195
+   },
+   "alone": {
+    "front": 15081,
+    "side": 9311,
+    "back": 15314
+   },
+   "seen": {
+    "front": 0.7814,
+    "side": 0.9563,
+    "back": 0.7014
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.5978,
+    0.7616,
+    2.0225
+   ],
+   "local_ext": [
+    0.5978,
+    0.7533,
+    2.1018
+   ],
+   "mid_px": 150.7,
+   "best_minor": 122,
+   "show": 0.81,
+   "proving_views": 3
+  },
+  "sword": {
+   "kind": "sword",
+   "model": "res://assets/gear/artifact/sword_golden.glb",
+   "verts": 1383,
+   "checked": 675,
+   "reach": 0.16,
+   "drop": 0.16,
+   "span": 1.367,
+   "tip_z": 0.801,
+   "hero_h": 2.45,
+   "clip": 93,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 0.6,
+   "hand_scale_arm": "begins 'res://assets/gear/artifact/'",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.989,
+    0.151,
+    -0.0
+   ],
+   "hang_deg_from_vertical": 90.0,
+   "aspect": 4.31,
+   "minor": {
+    "front": 66,
+    "side": 51,
+    "back": 65
+   },
+   "opaque": {
+    "front": 99917,
+    "side": 81266,
+    "back": 100656
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 5986,
+    "side": 1572,
+    "back": 5752
+   },
+   "delta": {
+    "front": 6298,
+    "side": 1674,
+    "back": 6098
+   },
+   "alone": {
+    "front": 6882,
+    "side": 1646,
+    "back": 6855
+   },
+   "seen": {
+    "front": 0.8698,
+    "side": 0.955,
+    "back": 0.8391
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.2454,
+    0.3206,
+    1.3673
+   ],
+   "local_ext": [
+    0.1222,
+    0.5344,
+    2.3021
+   ],
+   "mid_px": 64.1,
+   "best_minor": 66,
+   "show": 1.029,
+   "proving_views": 3
+  },
+  "wand": {
+   "kind": "wand",
+   "model": "res://assets/gear/wand_A.gltf",
+   "verts": 531,
+   "checked": 339,
+   "reach": 0.063,
+   "drop": 0.066,
+   "span": 0.709,
+   "tip_z": 0.704,
+   "hero_h": 2.45,
+   "clip": 17,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hand_scale": 0.62,
+   "hand_scale_arm": "begins 'res://assets/gear/'",
+   "held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "held_rot_arm": "default",
+   "euler_order": "YXZ",
+   "long_axis_local": "Z",
+   "long_axis_world": [
+    -0.989,
+    0.151,
+    -0.0
+   ],
+   "hang_deg_from_vertical": 90.0,
+   "aspect": 5.42,
+   "minor": {
+    "front": 27,
+    "side": 36,
+    "back": 28
+   },
+   "opaque": {
+    "front": 95547,
+    "side": 81266,
+    "back": 96329
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 1625,
+    "side": 635,
+    "back": 1389
+   },
+   "delta": {
+    "front": 1754,
+    "side": 685,
+    "back": 1506
+   },
+   "alone": {
+    "front": 2349,
+    "side": 918,
+    "back": 2371
+   },
+   "seen": {
+    "front": 0.6918,
+    "side": 0.6917,
+    "back": 0.5858
+   },
+   "outside": {
+    "front": 0,
+    "side": 0,
+    "back": 0
+   },
+   "ext": [
+    0.1295,
+    0.1932,
+    0.7089
+   ],
+   "local_ext": [
+    0.2089,
+    0.2135,
+    1.1563
+   ],
+   "mid_px": 26.5,
+   "best_minor": 36,
+   "show": 1.36,
+   "proving_views": 2
+  }
+ }
+}

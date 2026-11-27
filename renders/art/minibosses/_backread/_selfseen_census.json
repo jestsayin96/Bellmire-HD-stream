@@ -27,6 +27,53 @@
    ],
    "man_span_empty": false
   },
+  "badger": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arm_free",
+    "arm_yoke",
+    "body",
+    "cape",
+    "gear_sacks",
+    "gear_yoke",
+    "head"
+   ],
+   "items": 36,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     6
+    ],
+    [
+     6,
+     7
+    ],
+    [
+     7,
+     13
+    ],
+    [
+     13,
+     14
+    ],
+    [
+     14,
+     15
+    ]
+   ],
+   "man_parts": [
+    "body",
+    "cape",
+    "head",
+    "arm_yoke",
+    "arm_free"
+   ],
+   "has_man_span": true,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "beadle": {
    "in_register": true,
    "in_builders": true,
@@ -2180,28 +2227,28 @@
     "trunk",
     "yealm"
    ],
-   "items": 32,
+   "items": 54,
    "man_from": "parts",
    "man_ranges": [
     [
-     10,
-     14
+     27,
+     31
     ],
     [
-     14,
-     17
+     31,
+     34
     ],
     [
-     17,
-     20
+     34,
+     37
     ],
     [
-     20,
-     24
+     37,
+     41
     ],
     [
-     26,
-     32
+     48,
+     54
     ]
    ],
    "man_parts": [
@@ -2351,14 +2398,15 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-27T10:44:39+0000",
+ "measured_at": "2026-11-27T13:54:17+0000",
  "measured_at_tz": "Ame",
- "measured_at_epoch": 1795776279.0181627,
- "register_mtime_epoch": 1795772713.8497229,
- "register_mtime": "2026-11-27T09:45:13+0000",
- "register_pairs": 68,
+ "measured_at_epoch": 1795787657.7491705,
+ "register_mtime_epoch": 1795787458.966947,
+ "register_mtime": "2026-11-27T13:50:58+0000",
+ "register_pairs": 69,
  "measurable": [
   "almoner",
+  "badger",
   "beadle",
   "bellman",
   "blower",

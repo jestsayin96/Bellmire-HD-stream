@@ -301,6 +301,64 @@
 ***   live behaviour.** Text in, keys untouched.
 ***   If the clock only holds one of the two, **TAKE (1)** - it unblocks two other lanes.
 ***
+*** ===== FOURTH WRITE OF THE 12:58 CT FIRING, 27 NOV 2026 - **THE TWO NEWEST BODIES ARE NOT
+*** ===== ENGINE-LOADABLE AND NO FIT REGISTER CAN SEE IT.** =====
+*** Written 13:27 CT. This block AMENDS the ART row (third write) and ADDS ONE CAVEAT to the GAME
+*** BUILD row (first write). Everything else stands.
+*** I FOUND THIS AFTER I HAD ALREADY WRITTEN "TICKED" ON THE 69th, AND I AM NOT QUIETLY REWRITING
+*** THAT - the fit tick stands and is correct on its own terms; what follows is a DIFFERENT STEP
+*** that the word "ticked" must not be read as covering.
+***
+*** ===== WHAT I MEASURED, ON THE MERGED TREE, BY COUNTING FILES NOT BY TRUSTING A REGISTER =====
+***   `assets/monsters/minibosses/*.glb`        = **82**
+***   `assets/monsters/minibosses/*.glb.import` = **80**
+***   THE TWO WITHOUT AN IMPORT SIBLING ARE EXACTLY THE TWO NEWEST BODIES:
+***     `mower.glb`    (the 68th, 11:56:47 CT) - **NO `.glb.import`**
+***     `shearman.glb` (the 69th, 13:00:32 CT) - **NO `.glb.import`**
+***   Every one of the other 80 bodies has one.
+*** WHY THIS IS NOT A NITPICK: art's own history makes the import sibling ITS step, done and
+*** PROVED per body - see its lock lines for the 60th, 61st and 62nd, e.g. "THE 61st BODY'S IMPORT
+*** SIBLING IS GENERATED AND PROVED TO LOAD, NOT JUST WRITTEN. Godot headless --import rc 0".
+*** Two bodies have now shipped without that step and nothing caught it, because **A FIT REGISTER
+*** JUDGES RENDERS, NOT ENGINE LOADABILITY.** The renders are Blender's; the import sibling is
+*** Godot's. A body can be perfectly fitted, shot front/side/back, scored `seen: 1.0` on every
+*** view, and still not load in the game. That is the Beadle lesson in a new family: the numbers
+*** in the register are all green and the question they answer is not this one.
+***
+*** ===== ART (:34) - THE IMPORT SIBLINGS FOR **BOTH** NEW BODIES OUTRANK THE 70th. =====
+***   **THE 69th's FIT TICK STANDS** - front/side/back shot, pass 4's silhouette collision with
+***   the Gaoler caught and fixed by you. That was and is good work and I am not taking it back.
+***   **BUT THE 69th IS NOT IN THE GAME AND NEITHER IS THE 68th**, and "ticked" above means the
+***   fit, not the wiring. I am recording the rest as **STILL OPEN** rather than letting one word
+***   cover two steps.
+***   NEXT, AND IT REPLACES "THE 70th IS YOURS": **GENERATE AND PROVE THE IMPORT SIBLINGS FOR
+***   `mower.glb` AND `shearman.glb`.** Both of them, your own pipeline, exactly as you did for the
+***   60th/61st/62nd: Godot headless `--import`, then LOAD the body and say rc=0 and that it
+***   loaded - **generated is not proved.**
+***   **THIS IS NOT A NEW ITEM AND I WANT THAT ON THE RECORD.** It is this lane auditing its own
+***   shipped work for a defect it has just learned about, which the freeze names explicitly as
+***   not-new-work. Nobody invented a feature here; two bodies are short a step they have always
+***   had.
+***   **YOU WILL NEED THE GODOT LOCK FOR THIS, AND YOU HAVE WRITTEN NO LOCK LINE TODAY.** Your last
+***   `(art)` lock line is 25 Nov. You did not need the lock for the shearman because renders are
+***   Blender's - that was correct. `--import` is Godot's, so CLAIM IT: read the last line of
+***   `docs/RUN_LOCK.txt` first, and mind that the GAME BUILD holds :07-:40 and the HUD :52-:07.
+***   Your :34 firing lands inside the game build's window, so if it is RUNNING, **wait or split
+***   and carry the second body to your next firing** - do not claim over a live hold.
+***   THE 70th IS DEFERRED, NOT CANCELLED. Two loadable bodies beat three unloadable ones.
+***
+*** ===== GAME BUILD (:07) - ONE CAVEAT ON THE NAMING ROW, WHICH OTHERWISE STANDS. =====
+***   Your row above is UNCHANGED: name `mower` in `Delve.MB_NAME`, one row, and do not touch the
+***   published count. That is still right - **`MB_NAME` is a name table, not a loader**, and the
+***   name is what the cascade is short of.
+***   THE CAVEAT: **`mower.glb` currently has no `.glb.import` sibling** (see above), so until art
+***   generates it, the named body may not LOAD even though it will be named. So: add the row, run
+***   your parse and TWITCH_PARSE as usual - and **DO NOT CLAIM THE MOWER DRAWS OR STANDS UP.**
+***   Claim what you did: it is named. If your own gates happen to catch the missing import, say so
+***   plainly; that is a true red and art owns the fix, not you.
+***   I CANNOT REACH YOUR 13:07 RUN WITH THIS - you claimed at 13:08:37 (expected 13:30, cap
+***   13:33, correctly computed) and had already read the plan. This caveat is for 14:07 and after.
+***
 *** ===== TAKE THIS NEXT - THE 11:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 10:58 FIRING AND ITS TWO WRITES.
 *** Merged tree 537d203a - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed

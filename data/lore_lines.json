@@ -1121,7 +1121,15 @@
     "The smith looked at the edge once more and nodded.",
     "A woman at the well filled their flasks and asked for nothing.",
     "Lamps were lit along the lane, one door at a time.",
-    "The gate-warden wrote the hour in the book and the number of them."
+    "The gate-warden wrote the hour in the book and the number of them.",
+    "The party took the stair in single file. Nobody spoke.",
+    "A hand on the rail, a hand on the lamp. Down they went.",
+    "The gate-warden counted them through and shut the book.",
+    "They went down at the turn of the hour, boots dry.",
+    "Packs checked, straps pulled tight. The stair took them.",
+    "The lamp-lighter trimmed the wick for them and stepped back.",
+    "They left the bread on the sill for the walk back.",
+    "Down past the guild post, door kept, light carried."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1747,7 +1755,15 @@
     "Doors stood open down the lane till late.",
     "The gate-warden wrote the hour in the book and the number of them. The same number.",
     "A kettle went on in every house on the row.",
-    "The step was swept again. Nobody asked who had done it."
+    "The step was swept again. Nobody asked who had done it.",
+    "Floor %d is swept and the lamps are lit.",
+    "Floor %d held. The party counts heads and finds them all.",
+    "Floor %d is done. The stair is clear behind them.",
+    "Floor %d goes quiet. Somebody laughs, short, and stops.",
+    "The last of floor %d is down. Blades wiped, packs checked.",
+    "Floor %d is behind them. The dust settles slowly.",
+    "Floor %d is theirs. The bell at the post rings once.",
+    "Floor %d is clear. A kettle would be welcome."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -2277,7 +2293,11 @@
       "Wait for the dark to settle. Then go.",
       "Rope out. Anyone slips, we haul.",
       "Stay in the light. Walk in pairs.",
-      "Same as last time. Slower."
+      "Same as last time. Slower.",
+      "Lamps up. Eyes on the floor.",
+      "Short steps. Listen first.",
+      "Same stair. Different dark.",
+      "Keep the party tight."
     ],
     "lord": [
       "Hold together!",
@@ -2582,7 +2602,11 @@
       "One at a time. Let it come.",
       "Nobody runs. Nobody follows.",
       "Mind the door behind us. Keep it clear.",
-      "Whatever comes next, we came to do it."
+      "Whatever comes next, we came to do it.",
+      "Plant your feet. Wait for the opening.",
+      "We have the numbers. Use them.",
+      "Hold the line. Heal the line.",
+      "Stay loose. It will make a mistake."
     ],
     "trap": [
       "Floor's wrong here.",
@@ -2886,7 +2910,11 @@
       "Fresh oil in the seams.",
       "A brick sits proud. Leave it.",
       "Slow down. The floor has a pattern.",
-      "Coin on the flag, and no one has taken it."
+      "Coin on the flag, and no one has taken it.",
+      "Wire at ankle height. Step over.",
+      "Stone sounds hollow. Stop.",
+      "The dust is disturbed. Someone was here.",
+      "A thin crack, straight as a rule. Mind it."
     ],
     "hurt": [
       "I'm bleeding!",
@@ -3190,7 +3218,11 @@
       "Bleeding stops or it does not. Walk.",
       "Bite your lip. Hold the lamp.",
       "Count it a lesson. A cheap one.",
-      "Shake it out. Back to it."
+      "Shake it out. Back to it.",
+      "Not deep. Keep moving.",
+      "Wrap it later. Walk now.",
+      "That one will mark. Fine.",
+      "Breathe. Count to three. Go."
     ],
     "drink": [
       "Bottoms up.",
@@ -3483,7 +3515,11 @@
       "Stopper in. Pocket it. On.",
       "Not a drop left in the flask.",
       "Fine brew. Do not say so aloud.",
-      "Smells of the herb-wife's shed. Works the same."
+      "Smells of the herb-wife's shed. Works the same.",
+      "Down the hatch. Do not taste it.",
+      "Cork back in. Pocket it.",
+      "Warm and bitter. It will do.",
+      "Another flask spent. Worth it."
     ],
     "misfire": [
       "That wasn't the spell I cast.",
@@ -3782,7 +3818,11 @@
       "Tongue slipped on the name.",
       "The lamp flickered at the wrong word.",
       "Too fast. Too fast.",
-      "Not that. Never that."
+      "Not that. Never that.",
+      "The word came out wrong.",
+      "Hands shook. Try again.",
+      "Lost the thread mid-word.",
+      "Not the one I meant."
     ],
     "_note_c129": "C-129 (19 Nov 2026 21:4x CST): no miniboss body owed (36 bodies on origin/art, 36 keys in by_key). Repeat-heavy pools extended: epitaphs, descend (verb frame '%s %s' kept, no 'descend down'), cleared ('Floor %d' frame kept where used), misfire (name, spell, roll, DC order kept), barks in all six kinds. Plain register, no mechanics. Additive, nested under barks per the 20:58 note. Expected zero-hit key.",
     "_note_c132": "C-132 (20 Nov 2026 CST): no miniboss body owed (36 keys in by_key, no new committed body on origin/art). Repeat-heavy pools extended: epitaphs +24, descend +15 (verb frame '%s %s' kept on eight), cleared +14 ('Floor %d' kept where used), misfire +8 (name, spell, roll, DC order kept), barks +21. Plain register, no mechanics, no floor counts. Additive, nested under barks. Expected zero-hit key.",
@@ -5005,7 +5045,27 @@
     "Wrote the name of the inn on the inside of the belt.",
     "Held the line one breath longer than was needed.",
     "Packed light. Packed the bandage.",
-    "Went ahead to look. Came back once to say it was clear."
+    "Went ahead to look. Came back once to say it was clear.",
+    "Checked the rope twice. Trusted the third knot.",
+    "Held the line until the line was a floor.",
+    "Wrote home every month. The last one is still on the table.",
+    "Bought the good lamp. It burned a long time after.",
+    "Said the stair was nothing. Took it anyway.",
+    "Sharpened the blade the night before. Needed it sooner.",
+    "Went down on a full stomach and a short list.",
+    "Counted the party in. Counted one short on the way out.",
+    "Left the door open for the others.",
+    "Never lost a flask. Lost the rest.",
+    "Paid the ferry-fee in advance, out of habit.",
+    "The bell rang at the guild post. Nobody answered it.",
+    "Stood watch the whole way down.",
+    "Carried the pack for three. Set it down once.",
+    "Quiet hands. Quiet feet. Quiet end.",
+    "Held the lamp for the others and kept it steady.",
+    "The roll has a line for them. The line is full.",
+    "Knew the smith by name. The smith knows theirs.",
+    "Good company on the stair. Gone from it now.",
+    "Ate bread at the gate and walked in whistling."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -15836,5 +15896,6 @@
   "_note_c225": "C-225 (content, 27 Nov 2026): the 65th miniboss_feed.by_key row, key `mealman` (art's .glb stem, committed on origin/art, THE MEALMAN, Whitedamp). arrive 9, act 8, broken 4, fall 8, matching the fanner shape. No boss name used - Delve.MB_NAME has no mealman entry yet, so the fall lines say `He`, and `{name}` in act is the hero. Mechanic carried in the words: burning lands on everyone in the room including him, no flame on the body, the dust does not escalate, steel is the slow safe way. Held every other pool. Expected zero-hit key.",
   "_note_c226": "C-226 (content, 27 Nov 2026): 12 epitaphs, 10 descend, 10 cleared, appended; no miniboss by_key row because there is no 66th committed body (65 names / 65 feed keys). Plain, short, nothing theatrical. Expected zero-hit key.",
   "_note_c227": "C-227 (content, 27 Nov 2026): the 66th miniboss_feed.by_key row, key `thatcher` (art's .glb stem, committed: assets/monsters/minibosses/thatcher.glb on main, def thatcher in tools/art/minibosses.py). arrive 9, act 8, broken 4, fall 8, fanner/mealman shape. Art's feed line is arrive[0] verbatim. No boss name used - Delve.MB_NAME has no thatcher row yet (game build owes 'Lastcourse'), so fall lines say He and {name} in act is the hero. Mechanic in the words: while he stands the rest of the room cannot be hurt (blows land in thatch), kill him and the covering comes off everything at once. He hits nobody and does nothing to himself. Held every other pool. Expected zero-hit key.",
-  "_note_c229": "C-229 (content, 27 Nov 2026): backlog 2, 78 disaster variant lines, same shape as C-148/C-69. Additive; nothing wired. Expected zero-hit key."
+  "_note_c229": "C-229 (content, 27 Nov 2026): backlog 2, 78 disaster variant lines, same shape as C-148/C-69. Additive; nothing wired. Expected zero-hit key.",
+  "_note_c230": "C-230 (27 Nov 2026 CST): no committed art body lacks feed lines (66 bodies, 66 keys); backlog 3 top-up. epitaphs +20, descend +8, cleared +8 (floor-number %d lines only), barks enter/lord/trap/hurt/drink/misfire +4 each. Additive, plain register, no mechanics, no floor counts. Expected zero-hit key; wire nothing."
 }

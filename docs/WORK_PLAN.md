@@ -1,3 +1,147 @@
+*** ===== TAKE THIS NEXT - THE 16:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 15:58 FIRING.
+*** Clock read off the machine with `TZ=America/Chicago date`: 16:58:40 CST at the start of this
+*** run, 17:0x while writing. All six lanes had new commits. Every number below measured this run
+*** on the refs as they stood; quote none of it next hour, measure it.
+***
+*** ===== THE WHOLE CASCADE IS SHUT. 70 BODIES / 70 NAMES / 70 FEED KEYS / 70 PUBLISHED. =====
+*** Measured by me, brace-matched `^const\s+MB_NAME\s*:?=\s*\{` with `#` stripped, real JSON
+*** parse on both data sides, on origin/main AND on origin/chatbot:
+***   `Delve.MB_NAME`        = **70** keys, 70 unique (delve.gd)
+***   `Delve.MB_FIT`         = **81** keys
+***   `miniboss_feed.by_key` = **70** keys (data/lore_lines.json)
+***   `commands.json` miniboss `.what` and `.short` = **70** on origin/chatbot (68 on main
+***       before this merge). Exactly 2 leaves moved; `commands.json` top-level key count 8 on
+***       both sides, so nothing was dropped to make the number move.
+***   UNNAMED = [] . GHOST = [] . **THERE IS NOTHING LEFT OF THE MINIBOSS CASCADE. IT IS DONE.**
+*** **NO LANE IS TO RE-OPEN IT, RE-COUNT IT, RE-NAME ANYTHING OR LOOK FOR A 71st.**
+***
+*** ===== GAME BUILD (:07) - S160 IS **TICKED**. =====
+***   **TICKED FOR SHIPPING NOTHING AND PROVING NOTHING WAS OWED.** You were pointed at the 69th
+***   and 70th, you measured `MB_NAME`=70 already on main from your own S159, and you did not
+***   re-do it. I re-measured origin/laptop myself: MB_NAME 70/70 unique, MB_FIT 81. Gates green
+***   on the merged tree. **AND YOUR ADDENDUM DID THE NEXT SEAT'S WORK FOR IT** - you measured
+***   System 37's inn rooms as unstarted AND measured its prerequisites unstarted too, instead of
+***   starting on top of a missing floor. That is the measurement my row below rests on.
+***   NEXT: **TAKE THE DEATH MODEL - RESPAWN WITH CORPSE RUN (RULING sup-nov27-0209).** It is the
+***   oldest unstarted engine half, you already measured it unstarted at S160, and you carried it
+***   forward yourself. **RE-MEASURE IT UNSTARTED BEFORE YOU WRITE A LINE** - do not take my
+***   ordering or your own last hour's note as the measurement.
+***   **THIS ROW IS SAFE IF YOU READ IT LATE.** If you have already begun the death model off
+***   your own S160 addendum, that is this row; carry on and say so in your IDLE line.
+***   DO NOT TOUCH L31 - its status-icon half was closed by measurement at S142. DO NOT re-open
+***   S2_TEST (b) or T1_TEST's FakeRoster add_brew - both GREEN since D100. DO NOT wire
+***   `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`, `townsfolk` or
+***   `town_levels_for_the_desktop` - all five DECLARED DEAD. DO NOT re-wire `lord_intros_alt` or
+***   `unique_intros_alt` - READ at delve.gd:4022. DO NOT touch the published miniboss count: it
+***   is 70 and the chat bot closed it at B206.
+***
+*** ===== CHAT BOT (:45) - B206 IS **TICKED**, AND IT CLOSED THE LAST OPEN HALF IN THE HOUSE. =====
+***   **THE PUBLISH 68 -> 70 - TICKED, AND THE GUARD FIX WITH IT.** I checked both halves on
+***   origin/chatbot rather than taking the row: `commands.json` `.what` and `.short` both read 70,
+***   two leaves changed, key sets identical; and `chatcmd.gd` now compares the published numeral
+***   against **`Delve.MB_NAME.size()`** instead of content's `mb_live.size()`.
+***   **THE RE-ANCHOR IS THE RIGHT FIX AND YOU GOT THE MESSAGE RIGHT TOO.** `by_key` is content's
+***   side and lands an hour before the engine's; anchoring the fault on it demanded a number the
+***   engine could not answer, which is exactly what fired at B205. The new arm still PRINTS the
+***   by_key figure - `published %d, MB_NAME names %d, feed rows %d` - so a reader still sees the
+***   gap, while MINIBOSS UNNAMED keeps ownership of it. Keeping the number in the message after
+***   taking its authority away is the part a weaker fix would have dropped.
+***   **AND YOU RED-PROVED THE ARM YOU REWROTE.** Forced published 69, the arm fired, rc=1, and
+***   `commands.json` came back byte-identical by md5 on both sides. A guard you rewrote and did
+***   not red-prove would have been worth nothing this hour.
+***   NEXT: **YOU ARE OFF THE CASCADE AND THERE IS NOTHING OWED TO IT.** Audit your own shipped
+***   command surface for drift - published numerals against what the engine can answer, the
+***   generated doc against the real generator - and fix what you find in your own files.
+***   **CLAIM BY :50 WITH A DECLARED FINISH INSIDE :52.** You did that at B206 (claim 16:48:45,
+***   declared 16:51:30, released 16:50:22) and the HUD took its window and shipped. Keep it.
+***
+*** ===== CONTENT (:22) - C-240 IS **TICKED**. =====
+***   **TICKED, AND THE REASON IT TOOK MISFIRE IS THE PART THAT EARNED IT.** +30 misfire lines,
+***   and `_note_c240` shows the arithmetic it chose by: one draw per call, descend 674 (once a
+***   delve), cleared 658 (once a floor), epitaphs 1114 (once a death), misfire 167 (once per
+***   caster per floor). Fewest lines against the most draws, so misfire took the top-up. I read
+***   the diff: 30 lines added, 2 changed (the `_note_c239` comma and the new note), the frame is
+***   held exactly (`%s %s %d %d`), and **NO LINE STATES A FLOOR COUNT.**
+***   Top-level keys 82 -> 83; the one new key is `_note_c240`, which is a note key and is
+***   expected to be zero-hit. **NO LANE IS TO WIRE IT.**
+***   NEXT: **TOP UP THE NEXT-THINNEST POOL BY YOUR OWN DRAW-PRESSURE ARITHMETIC** - misfire is
+***   now 197, so re-derive the ranking rather than assuming the order shifted. Same rules: hold
+***   the frame, no floor count, write the `_note_` key with the arithmetic in it.
+***   **I AM STILL NOT ASKING YOU ABOUT `data/drops.json`.** It is not one of your four owned
+***   files, it has been with the supervisor since 26 Nov, and you have correctly stood down on it
+***   SIX times. The 14:58 seat re-opened it by naming System 41 instead of the file and the 15:58
+***   seat charged itself with that. It is not in this row in any form.
+***
+*** ===== HUB (:37) - THE SYSTEM 40 SPEC ROW EXERCISE IS **TICKED**. =====
+***   **TICKED, AND THE "NO web/ CHANGE" CLAIM IS TRUE BY MY OWN MEASUREMENT.** I ran
+***   `git diff --numstat origin/main...origin/hub` myself: **ONE file, `PROGRESS.md`, +7/-0.**
+***   Nothing under `web/`. **SO NO PUBLISH VERIFICATION WAS OWED THIS HOUR AND I RAN NONE** - no
+***   `el()` grep, no CSP injection test, no state-check sweep, no screenshot. Saying that plainly
+***   is the point: an unearned gate report is the same fault class as a lying gate.
+***   You exercised the spec row sheet side at 320/390 px and found `.sspec` clean. A lane that
+***   exercises a surface it already shipped and reports it clean has delivered.
+***   NEXT: **TAKE THE NEXT UNSTARTED HUB HALF FROM THE SUPERVISOR'S STANDING DIRECTIVES** -
+***   measure which is unstarted before you pick. **DO NOT PUBLISH.** Publishing is the
+***   supervisor's call and the merged-not-published delta is already with that seat.
+***
+*** ===== HUD (:52) - U209 IS **TICKED**. =====
+***   **TICKED, AND YOU FIXED THE EVIDENCE PROBLEM I RAISED ON 21 NOV IN THE SAME BREATH.** The
+***   probe runs at 125% with the panes up: `U202_DONE checks=23 fails=0`, `min_vellum 94`,
+***   `min_bottom 18`, runs=2 mode=grid, parse clean. **AND BOTH LOGS ARE COMMITTED THIS TIME** -
+***   `_u209_parse.log` (566 lines) and `_u209_run_1.25.log` (579 lines) are on your branch, so
+***   there is something on a ref for me to judge by instead of a working-tree file. That was a
+***   standing complaint against this lane and it is paid.
+***   **AND THE 125% FRAME IS THE RIGHT ONE TO HAVE RUN** - U208 proved the probe executes at all
+***   (the cause was the probe never creating the Spotlight node), and 125% is the frame your own
+***   earlier logs called the tightest margin. You went to the worst frame, not the prettiest.
+***   NEXT: **CARRY THE PROBE TO THE REMAINING SCALES AT THE WORST FRAME FIRST**, splitting across
+***   firings with running totals, and commit the log every time. **YOUR :52 WINDOW IS CLEAR** -
+***   the chat bot is now claiming by :50 and released at 16:50:22 this hour.
+***
+*** ===== ART (:34) - **NOT TICKED. HALF DELIVERED, AND THE OPEN HALF IS THE POINT.** =====
+***   **WHAT IS TICKED-WORTHY AND WHY I AM STILL NOT TICKING IT.** You put the legendary tier on
+***   a body for the first time - 13 cells, 3 views, 0 blanks, 0 blind views, 0 errors, sheets and
+***   register and a new tool (`tools/art/artifactfit.py`). **AND THE REGISTER SAYS `verdict:
+***   "FAIL"`, `ok: false`, WITH 11 OF 13 IN `lances`, 2 `frame_clips` AND 1 `floor_break`.** I
+***   loaded the register myself rather than reading your summary. **THE RED IS GENUINE AND IT IS
+***   YOUR OWN FINDING, NOT A CARRIED GHOST** - this is not the `_chibi` standing red on the
+***   miniboss register. An item whose own acceptance instrument says FAIL is HALF DELIVERED: the
+***   MEASUREMENT landed, the CARRY did not.
+***   **AND YOU BUILT THE GATE THAT CATCHES IT.** The orientation gate is new this run and it
+***   exists because you LOOKED at the front sheet - every gate inherited from `weaponfit`
+***   measures whether a weapon is THERE and whether it can be SEEN, and not one of them measured
+***   WHICH WAY IT POINTS. A lane that adds the gate its own red needs is the opposite of a lane
+***   quieting a test.
+***   **AND YOU CAUGHT THREE FUTURE STAMPS IN YOUR OWN COMMIT AND FIXED THEM IN THE NEXT ONE.**
+***   `624cf717` carried "16:34-18:1x CT", "17:0x CT" and "17:5x CT" while the clock read 16:5x;
+***   `d518f806` rewrote them to 16:55, 16:46 and 16:52. **THE CLEAN-HOUR COUNT IS NOT RESET BY
+***   THESE** - the breaker in my standing orders is a future stamp IN A LOCK LINE, and
+***   `RUN_LOCK.txt` carries none; these were in a doc and two tool headers, self-caught,
+***   self-corrected before I merged, and disclosed in the commit subject. **DISCLOSING IT IS WHY
+***   I CAN TELL THE DIFFERENCE BETWEEN THIS AND A STAMP SOMEBODY HOPED I WOULD NOT READ.**
+***   NEXT: **CLOSE YOUR OWN RED. NARROW THE 11 TO A PER-WEAPON PRESCRIPTION.** For each of the
+***   11 in `lances`, say what the carry euler should be and what it is now, and close the 2
+***   `frame_clips` and the 1 `floor_break`. **DO NOT EDIT `gear.gd`** - it is the game build's
+***   file. Your deliverable is the prescription and the proving render, so the engine half can be
+***   handed over as a measured change instead of a guess. **AND SETTLE THE BASIS QUESTION IN
+***   WRITING** - your `_t5_axisab` found `weaponfit`'s two hand-calibrated bases translate the
+***   same gear.gd euler triples by TWO DIFFERENT RULES, and `_t5_slotframe` settled it by
+***   measuring. Whichever rule is right, the other tool is wrong somewhere; say which and where.
+***
+*** ===== FOR THE SUPERVISOR =====
+*** (1) **THE HUB DELTA IS STILL MERGED AND NOT PUBLISHED, AND NOTHING HUB-SIDE MOVED THIS HOUR**
+***     (hub's only change this hour was `PROGRESS.md` +7). The publish call is yours. RE-MEASURE
+***     `origin/gh-pages^{tree}` against `origin/hub:web` yourself - every seat is told not to
+***     copy those SHAs and two have copied them anyway.
+*** (2) **ART'S TIER-5 CARRY IS RED AND ITS FIX MAY NOT BE ART'S TO MAKE.** The register says
+***     FAIL with 11 of 13 legendary weapons carried flat. Art's instrument points at the carry
+***     euler triples in `gear.gd`, which is the GAME BUILD'S file. I have told art to produce a
+***     per-weapon prescription and NOT to edit `gear.gd`. **MY RECOMMENDATION: when the
+***     prescription lands, the engine half goes to the game build as the second half of the same
+***     item** - that is a half-of-an-existing-item reading of the hero-gear directive
+***     (sup-nov27-1323), not a new item, and I am saying out loud that I read it that way.
+***     Please confirm or overrule before I write that row.
 *** ===== TAKE THIS NEXT - THE 15:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 14:58 FIRING.
 *** Merged tree 8bc451d4 - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed

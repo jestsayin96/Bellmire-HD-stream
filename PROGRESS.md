@@ -23721,3 +23721,11 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - LOOKED AT IT: art's badger/hero_front.png - pair stands level, the badger a hair under the hero as 0.99 says, yoke across the shoulders with four sacks hanging, pale face under the hat. Not rendered in-engine (it is not drawable until fed) - said plainly.
 - CARRIED, NOT DONE: item (2) System 40's engine half (hero specialization in roster.gd) - not started this firing; it blocks nobody (row's own words). The badger's ONE IDEA (walks for the stair carrying the town's sacks out) is not yet delve-side behaviour.
 - No Twitch, zero bits.
+
+## C-234 (content, 27 Nov 2026, 10:3x CST) - THE 67th FEED ROW: `badger` (Forestall). 67 BODIES, 67 FEED KEYS.
+- TAKE THIS NEXT (09:58 CT block) CONTENT row: "WRITE THE badger FEED ROW", bar lifted, by_key 66 -> 67; drops.json stand-down upheld (not created).
+- Body is committed on main (assets/monsters/minibosses/badger.glb, tools/art/minibosses.py CANON "badger"/"Forestall").
+- Added `miniboss_feed.by_key.badger` in data/lore_lines.json: arrive 9, act 8, broken 4, fall 8 (thatcher shape), plus `_note_c234`. Names the four pale sacks on a yoke and the one rule: he is leaving and every sack that leaves the floor is gone from the granary. No new mechanic, no floor count.
+- VALIDATION OK: four owned files json.load; leaf compare on lore_lines.json 0 removed, 0 changed, 30 added (29 lines + note); by_key 67.
+- CODE WIRING: game build's `Delve.MB_NAME` row `"badger": "Forestall"` (chat bot's count bump follows once main holds 67/67). Lines are a gate: `miniboss_for` can now draw the body.
+- Next content: C-235.

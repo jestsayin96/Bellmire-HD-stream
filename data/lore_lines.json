@@ -15429,6 +15429,45 @@
           "Dry reed and a leggett on the floor.",
           "Sweep the straw back. Then go in."
         ]
+      },
+      "badger": {
+        "arrive": [
+          "A man in a road coat stood at the far side of the room with a yoke across his shoulders.",
+          "Four sacks hang from the yoke, two a side. They are pale and full and new, and nothing else on him is.",
+          "The stamp on the sacks is Bellmire's own. It is this morning's stock, out of the town's own store.",
+          "He is not facing you. He is walking for the stair, and he does not hurry.",
+          "Nothing in the room is his to command. The others only stand where he needs them to stand.",
+          "He has not struck anyone. He does not mean to.",
+          "Every sack that gets up that stair is gone from the granary. Count them.",
+          "The fight can be won and the town still short.",
+          "Mind the sacks. Mind the road."
+        ],
+        "act": [
+          "{name} fights through the nearest. The man with the yoke has not stopped walking.",
+          "{name} clears the room at an even pace. The yoke is nearer the stair than it was.",
+          "{name} goes past what is hitting them, and straight for the sacks.",
+          "{name} counts four. Then counts again.",
+          "A blow lands on the others. A sack goes through the door.",
+          "{name} spends a good while on the wrong ones. Nobody says so. The yoke is lighter.",
+          "{name} cuts a rope. A sack drops, and stays on the boards.",
+          "The line pushes forward. The one it came for is already at the stair."
+        ],
+        "broken": [
+          "A sack is down on the boards. It stays there and he does not turn for it.",
+          "One side of the yoke rides high. The weight is not even.",
+          "Three sacks, and the yoke sits crooked. He walks on.",
+          "Fewer on his shoulders than at the door. Fewer in the granary too."
+        ],
+        "fall": [
+          "He is down. The yoke goes over and the sacks stay on the floor.",
+          "Every sack still on him is on the boards. Carry them up.",
+          "A road coat, a bent yoke, and what was left of the stock.",
+          "He bought it in one parish and sold it in the next. The parish went short.",
+          "The ones that got out are gone. The ones on the floor are the town's.",
+          "He never struck a blow. It was never the point of him.",
+          "Count what is left on the boards. That is what you saved.",
+          "Take the sacks home. Mind the stair."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -15480,7 +15519,8 @@
     "_note_c205": "C-205: collier (Halfblow, the 62nd) feed row, same shape as timberman - arrive 9, act 8, broken 4, fall 8, {name} in act only. Written off art's COLLIER_THE_62nd.md: the party's heaviest blow is the liability (a measured stroke is safe, an overblow bursts a vent and the flare takes the room); four pale plugs answer the four vents; short man in a wide hat, shovel, eight stakes, spoil tail. Fall lines are neutral on whether the room flared, since one fall set covers either ending. Last arrive line is the art lane's own suggested line. Expected zero-hit key.",
     "_note_c212": "C-212: collier text change, shipped on the supervisor's 11:00 CT ruling (A) and the team lead's 11:58 plan row. The body shows three vents at 360p, so the count words came out and the mechanic words stayed: arrive.3 drops \"Four\", arrive.4 drops \"four\", act.6 becomes \"seats another plug. One more red eye goes out.\" in place of \"the third plug. Three dark mouths and one red\". Eight stakes (arrive.2) unchanged. Arrays stay 9/8/4/8, no key added or removed. _note_c205 above is left byte-identical as history; its \"four pale plugs answer the four vents\" is superseded by this note. Expected zero-hit key; NO LANE IS TO WIRE IT.",
     "_note_c214": "C-214: C-213's prepared text diffs, landed on the team lead's 14:58 CT plan row. The changer's arms were deleted on 21 Nov (Mr. E: delete the bars); the body is man, post, collar and a pale drum with three dark rungs. Changed: changer arrive.1 drops three-armed turnstile for turnstile post; arrive.2 works the arms, and the arms work the room becomes works the post, and the post works the room; arrive.8 clean plates on the bar ends becomes a clean plate under the post. Dyer arrive.1 A fourth is in the vat becomes The vat is steaming (three cloths on the builder, none in the vat). CORRECTED AND FINISHED IN C-215 (25 Nov): the held list over-stated by two - broken.1 and fall.6 never named a bar or an arm. The eight that did (arrive.7, act.0, act.6, broken.0, broken.2, broken.3, fall.0, fall.3) are now reworded to the post and drum; the jam counterplay survives as a promise (a body set against the post holds it) and no cell names an arm or a bar. Nothing is held. Arrays stay 9/7/4/8 and 9/8. No key added except this note. Expected zero-hit key; NO LANE IS TO WIRE IT.",
-    "_note_c216": "C-216: overlooker (Velrick, the 63rd body, workshop). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - the head turned off his shoulders, the pale mitt held level along the pick - and the one rule: he goes for whoever has hurt him least and re-reads when that changes. No number, no arm-count, no new mechanic; the counterplay in broken is stated as a promise the way the changer's is. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row, if the game build wants one: \"overlooker\": \"Velrick\"."
+    "_note_c216": "C-216: overlooker (Velrick, the 63rd body, workshop). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - the head turned off his shoulders, the pale mitt held level along the pick - and the one rule: he goes for whoever has hurt him least and re-reads when that changes. No number, no arm-count, no new mechanic; the counterplay in broken is stated as a promise the way the changer's is. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row, if the game build wants one: \"overlooker\": \"Velrick\".",
+    "_note_c234": "C-234: badger (Forestall, the 67th body, art lane, committed on main). Arrive/act/broken/fall = 9/8/4/8 like the recent set. Names the one readable thing only - four pale full sacks on a yoke, the town's own stamp on them - and the one rule: he is leaving, and every sack that leaves the floor is gone from the granary. Put him down and what is still on the yoke stays to be carried up. No number beyond the four sacks art's own body shows. Zero-hit key by design; NO LANE IS TO WIRE IT. MB_NAME row is the game build's: \"badger\": \"Forestall\"."
   },
   "phase2_words_alt": {
     "_note": "C-66: SECOND POOLS for phase2_words, same shape and same tokens, additive, dead until wired. Every list is a pool; the game draws from phase2_words[...] and phase2_words_alt[...] together so a repeat is not the same line. {floor} is a floor stood on, never a total. Collected lines are keyed by town band as before: patched (levels 1-4), mended (5-8), prosperous (9-12); a legendary is never second-hand. THE ARTIFACT RULE: no shop stocks an artifact at any level and the trader never carries one, so no errand, sell or refusal line here names one as bought or sold; an artifact is found. Stone rule unchanged: one stone, one hero, dead on a lord's floor while the lord lives.",

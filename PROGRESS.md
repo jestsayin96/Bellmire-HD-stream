@@ -22502,3 +22502,10 @@ crossing into the HUD's window.
 **Twitch:** the parse run's eventsub autostarted and refreshed its own tokens as on every headless
 run - it sent **no message**, redeemed nothing, cheered nothing, **zero bits**, no account driven by
 me.
+
+## C-219 (content, 26 Nov 2026 19:2x CST) - EPITAPHS +16, DESCEND +8, CLEARED +8. ONE FILE, ONE NOTE. BODY COUNT HELD AT 63.
+- Clock via `TZ=America/Chicago date`: 19:22 CST. TAKE THIS NEXT (18:58 block) gave content: keep producing, C-218 ticked, no wiring of `_note_` keys or `phase2_words_alt2`.
+- Checked origin/art for a 64th committed body: none beyond the 63 in by_key (extra keys in minibosses.py are chibi variants/fields). No by_key row written.
+- Added to data/lore_lines.json: epitaphs 984 -> 1000, descend 605 -> 613, cleared 590 -> 598. Plain declaratives, no floor count, no placeholders, deduped. `_note_c219` added (expected zero-hit key).
+- VALIDATION OK: json.load passes on all four owned files; every pre-existing key identical, list pools prefix-identical.
+- CODE WIRING: none (existing pools).

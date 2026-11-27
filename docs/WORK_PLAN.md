@@ -221,6 +221,67 @@
 ***       pushed 19 Nov 20:06 and the delta is 3 files +59/-1. MEASURED THIS HOUR: **8d214d36 /
 ***       tree 1d8bce63, pushed 25 NOV 09:55 CT**, delta **74 files +463/-9**. Struck and replaced.
 ***
+*** ===== LOCK DISCIPLINE, 11:00 -> 12:00 CT. THE CLEAN-HOUR COUNT GOES 0 -> **1**. =====
+***   GAME BUILD S155 11:09:13 -> 11:16:37, cap claim+25 = 11:34:13 COMPUTED FIRST, declared
+***     11:33. Inside both, by sixteen minutes. CLEAN - the lane's own fix, tenth hour holding.
+***   CHAT BOT B201 11:49:15 -> 11:50:14, declared 11:51:30 as an EXPLICIT STAMP, cap 12:14:15.
+***     Inside both and clear of the HUD at :52 by nearly two minutes. It also CLAIMED BEFORE :50,
+***     which is the schedule row this seat wrote on 21 Nov still doing its job.
+***     **AND THE STAMP FAULT IS CLOSED.** After B198 (ten-second future stamp), B199 (eight-second
+***     overrun) and B200 (fifty-nine-second future stamp), B201 composed BOTH stamps from a clock
+***     read in the same call immediately before writing. No correction was needed after the fact.
+***     Three hours of self-diagnosis ending in a clean hour - the house practice adopted at 10:58
+***     worked on the first hour it was in force.
+***   HUD U204 11:54:12 -> 11:55:07, declared 11:59:12, cap 12:07. Inside both. One RUNNING, one
+***     IDLE. Clean.
+***   NO FUTURE STAMP ANYWHERE THIS HOUR - the first hour in four. NO TWO LANES HELD AT ONCE. NO
+***   STALE LOCK CLEARED. NO LANE CLAIMED OVER A LIVE HOLD. NO LANE STARVED.
+***   **COUNT = 1.** It is a small number and it is honest; I am not folding three hours of
+***   corrected stamps into it retroactively.
+***   AND I DID NOT STARVE THE :07 LANE: my first write reached origin/laptop at 12:06 CT and the
+***   game build claimed at 12:09:00 (cap claim+25 = 12:34:00, computed first again), so it read
+***   this hour's row. The two-write mitigation is now three hours old and has not missed.
+***
+*** ===== THE DEAD-DATA AUDIT, 11:58 CT FIRING. THE NON-NOTE COUNT HAS NOT MOVED: **15**. =====
+***   Measured on merged tree 3a5878f5, corpus = **48 `scripts/*.gd` + `web/app.js` = 49 files**,
+***   2,487,508 chars. Data glob `data/*.json`, one level = 12 files, **169 top-level keys**.
+***   (`web/app.js` named explicitly, NOT a `web/**/*.js` glob; `data/town/bellmire.json` excluded.)
+***   - UNREAD LIVE DATA KEYS: **ZERO.**
+***   - ZERO-HIT KEYS: **79 = 64 `_note_` + 15 NON-NOTE.** The 15 are the same 15 as always:
+***     two runtime-built `_alt` pools (`lord_intros_alt`, `unique_intros_alt`, READ at
+***     delve.gd:4022 via `base + "_alt"` - DO NOT WIRE), four of the declared-dead family
+***     (`phase2_words`, `phase2_words_alt`, `phase2_words_alt2`, `town_levels_for_the_desktop`),
+***     and nine prose/spec strings (`technique`, `boss_floors`, `chronicle_line`, `word_order`,
+***     `casing`, `promotion_line`, `one_roll`, `_gating`, `canon_silences`).
+***   - THE SERIES: 52 (05:0x 21 Nov) -> 53 -> 56 (08:58 21 Nov) -> **79** today. The RAW total
+***     rises only because content keeps writing `_note_` keys, which is correct and carries no
+***     signal. THE NUMBER TO WATCH IS THE NON-NOTE 15 AND IT HAS NOT MOVED.
+***   - UNREFERENCED ASSET DIRECTORIES: **ZERO** (38 directories with files, measured off
+***     `assets/` only).
+***     **A FAULT OF MY OWN, REPORTED BECAUSE THE NEXT SEAT WILL HIT IT:** my first walk returned
+***     **1** - `assets/graveyard/Textures` - and I nearly published a regression against a
+***     ZERO baseline. IT IS A FALSE POSITIVE. `assets/graveyard/` is referenced SIX times across
+***     `scripts/grave_keeper.gd` and `scripts/town.gd`, and `Textures/` holds `colormap.png`,
+***     which is consumed by the SIBLING `.glb` files through their `.import`, not by any script
+***     path. A texture subdirectory loaded through a model is INVISIBLE to a directory-name
+***     search. This is the same class as the `renders/` false positives and the unfloored pixel
+***     diff: the instrument measured itself. **GUARD 5, AND WRITE IT INTO THE PROMPT: BEFORE
+***     CALLING AN ASSET DIRECTORY UNREFERENCED, CHECK WHETHER ITS PARENT IS READ AND WHETHER ITS
+***     CONTENTS ARE LOADED BY A SIBLING MODEL.**
+***
+*** ===== PHASE 2 - WHAT IS WIRED AND WHAT IS ONLY ON DISK, MEASURED THIS HOUR. =====
+***   WIRED: Systems 38 and 39 WHOLE (39's command half `!rep` landed this hour as the 34th
+***     command). SYSTEM 40's ENGINE HALF in (S155, 15 callings x 2 paths, 30 gifts, all existing
+***     ability keys); its command half (`!paths`/`!specialize`) and the hub's `spec` card are
+***     assigned this hour, and the directive's bespoke behaviours are the named remainder.
+***   THE MINIBOSS LINE: **67 wired end to end** (body + MB_NAME + feed + published count + hub
+***     Bestiary). ONLY ON DISK: **`mower`, the 68th** - body and fit GREEN on main as of this
+***     merge, no feed row, no name row. Content writes it at :22, the game build names it at
+***     13:07. That is the whole backlog and it is one body deep.
+***   `assets/monsters/minibosses/` holds **81 `.glb`** = 67 wired + 11 retired `_chibi` +
+***     the two BOSSES `broodglut` and `lastcuff` (wired at `bestiary.gd:108` and `:117`) + mower.
+***     THE 14 "UNWIRED" STEMS ARE NOT A BACKLOG and no lane is to be handed them.
+***
 *** ===== TAKE THIS NEXT - THE 10:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 09:58 FIRING AND ITS FOUR WRITES.
 *** Merged tree a6cc4e1f - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed

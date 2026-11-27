@@ -919,3 +919,15 @@ Method: folder walked with `find` (209 files, 5 directories including root), ext
 Method: file size and magic header read with `od`. Binary scan run with Python `re` (case-insensitive, read-only) over the whole file for licence terms and a broad set of licence-adjacent words. Datablock names extracted from the binary by prefix (`OB`, `ME`, `MA`, `TE`, `IM`, `TXT`, `SC`, `WO`, `CA`, `LA`). The file was not opened in Blender and nothing was written to it. No other file was read as a licence source.
 
 Selection note: every real directory in `_packs` already has a catalogue entry (checked by name against this file), so the only unverified item was this loose blend. The `_extracted_rpg_items` and `_generated` folders are our own working directories (see the LICENCE GATE section), not third-party packs.
+
+## PACK CATALOGUE - _extracted_rpg_items (27 Nov 2026, pack-catalogue firing)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| _extracted_rpg_items (an FBX-only extraction of "Ultimate RPG Items Pack - Aug 2019", whose source is `_packs\quaternius_ultimate_rpg_items_CC0\`, verified above) | Quaternius (patreon.com/quaternius) | **CC0 1.0 Universal** (inherited from the source pack) | **NONE inside this folder.** Licence read in full from the source: `_packs\quaternius_ultimate_rpg_items_CC0\Ultimate RPG Items Pack - Aug 2019\License.txt` ("LowPoly Models by @Quaternius ... CC0 1.0 Universal ... https://creativecommons.org/publicdomain/zero/1.0/") | 106 `.fbx`, 0 other files | permitted (CC0 1.0) | not required by CC0; credit kept (Quaternius) |
+
+- Checked: walked every file under `_packs\_extracted_rpg_items\` (106 files, all `.fbx`, all under `Ultimate RPG Items Pack - Aug 2019\FBX\`). Set-compared against the source pack's `FBX\` folder: 106 names in each, identical, none extra, none missing.
+- Why a row at all: the folder name is not in the log, so a reader could mistake its FBX files for an unlogged download. They are the same CC0 geometry as the row above, not a new source.
+- No licence file in this folder. Per the rule, it is recorded as such here rather than guessed; the licence is taken from the source pack's `License.txt`, which is the only copy on disk.
+- Not in `_packs\_generated\` (art-lane output, not a third-party download): it holds lane-made `.glb`, textures and `refs\` images, with no licence claim. Not catalogued here.
+- Status: **CLEARED for use (CC0 1.0), by inheritance from `quaternius_ultimate_rpg_items_CC0`.** Any FBX that enters `assets/` still needs its own row.

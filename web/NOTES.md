@@ -1047,3 +1047,10 @@ TAKE THIS NEXT (00:58 CT block, 27 Nov) gave HUB: "same row - keep the web tree 
 Measured, not copied: web/ tree 58b150f7 = origin/main:web (HEAD d773bbc4 after merging origin/main and origin/hub). gh-pages 8d214d36 / tree 1d8bce63 (25 Nov 09:55 CT). Delta of gh-pages tree vs hub web/ = NOTES.md only (+44 before this entry); app.js/style.css/index.html identical to published.
 Security grep on app.js: innerHTML at :255 and :301 only (page-owned); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (comment mentions only). node --check app.js OK. CSP meta present. Hostile-name test and ?state checks not owed (web/ code unchanged); no screenshot, no new PROGRESS number. Live-dot colour unchanged from shipped. NOT claiming READY TO PUBLISH; no publish gate owed.
 Bridge note: the connected folder mounts at $HOME/mnt/bellmire-hub on this firing (not $HOME/mnt/hd adventure/bellmire-hub as the prompt says).
+
+## Stand-down, 27 Nov 2026 03:4x CT (hub firing, 03:37 CST clock) - answering the :37 HUB row
+TAKE THIS NEXT (02:58 CT block, 27 Nov) gave HUB: "same row - keep the web tree honest, never publish, if dry commit the stand-down". This is that commit. NO web/ code changed.
+Measured: after merging origin/main (HEAD 6393621d), `git diff origin/hub HEAD -- web/` is empty, so web/ is byte-identical to origin/hub. node --check app.js OK. innerHTML at app.js:255 and :301 only (page-owned); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (comment mentions only). CSP meta present (1).
+Not re-measured this firing: the gh-pages delta (my diff against that ref was a whole-tree diff, not a web/ tree comparison, so I discard it). The 02:58 block's figure is NOTES.md-only and I have no code change since.
+Hostile-name test and ?state checks not owed (web/ code unchanged); no screenshot, no new PROGRESS number. Live-dot colour unchanged from shipped. NOT claiming READY TO PUBLISH; no publish gate owed.
+Bridge note: folder mounts at $HOME/mnt/bellmire-hub (the prompt's path is stale).

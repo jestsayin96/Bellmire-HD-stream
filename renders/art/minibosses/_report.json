@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "ce5aca168682c4935da759b62974e46bd77d4f16",
+   "head": "296817747d34d871e29d00d89db31a132b77c82d",
    "ref": "origin/main",
-   "ref_commit": "1449fd32593799583d33c8dc67b30603dd124209",
+   "ref_commit": "c5d297af054e2c509c325b88bec0722a606c1559",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3561,7 +3561,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.855,
+   "corridor_margin_m": 9.85,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.13,
    "read_from": {
@@ -3587,13 +3587,60 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "thatcher": {
+   "title": "Lastcourse",
+   "theme": "flooded",
+   "idea": "IT COVERS THE REST - it has been over every other thing in this room with reed before you got here, and while it stands nothing else in here can be hurt at all. Your blows land in thatch. Nothing is summoned, nothing is on a count and it does nothing whatever to itself: it is the only body in this file whose whole effect lands on the OTHER monsters. So the room keeps hitting you at full weight while you cannot hit the room back, and the fight is one question - can you get through what is beating on you to the one man at the back who is not. Kill the thatcher and the covering comes off everything at once. WHAT A VIEWER READS IS THE YEALM: the fat pale bundle of combed reed over his shoulder, banded with three ties and cut square at the butt, and the leggett down in his off hand that he beats it home with. While that is on his shoulder there is more covering where that came from.",
+   "wear": 0.37,
+   "feed_line": "Something ahead has been over this room with reed.",
+   "pack_used": null,
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "faces": 1224,
+   "size": [
+    1.52,
+    0.85,
+    2.54
+   ],
+   "footprint_span": 1.52,
+   "height_m": 2.54,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.484,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 6.96,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.5394245873927557,
+    "ortho": 2.7560102939605713,
+    "clip": [
+     6.444357395172119,
+     17.09001350402832
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 1449fd32593799583d33c8dc67b30603dd124209 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs c5d297af054e2c509c325b88bec0722a606c1559 sha bc3a603f",
  "blank_check": {
-  "files": 195,
+  "files": 198,
   "failures": []
  }
 }

@@ -1,3 +1,9 @@
+> **RESOLVED 27 Nov 2026 03:0x CT - DO NOT ACT ON THIS FILE.** The Blender MCP
+> bridge came back at the 02:34 firing after six stranded runs, and every file
+> this note lists was verified TRACKED in git (`git ls-files --error-unmatch`,
+> 12 of 12) before this line was written. Nothing below is owed. The note is
+> kept for the record of the stranded hours and for nothing else.
+
 # ART LANE - SEVEN FILES FINISHED ON DISK AND IN NO COMMIT. 25 NOV 2026, 20:34 FIRING.
 
 **SUPERSEDES `_ART_COMMIT_OWED_nov25_1934.md` AND `_ART_COMMIT_OWED_nov25_1834.md`.**

@@ -25055,3 +25055,356 @@ def mealman():
 
 
 BUILDERS.update({"mealman": mealman})
+
+
+# =============================================================================
+# THE THATCHER - the 66th body. 27 Nov 2026.
+#
+# WHAT I MEASURED BEFORE DESIGNING (not remembered, and not off any prompt):
+#   - ORDER parsed out of this file: 65 live keys. The prompt in front of me
+#     said 33; it was 32 stale. The count came from the file.
+#   - All 79 CANON tuples brace-matched and EVERY gimmick string read. 65
+#     distinct non-variant bodies over all 14 floorgen themes. `flooded` stands
+#     at 4 (sluicekeeper, tanner, rammer, ferryman) - joint-thinnest - and reed
+#     is cut in flooded beds, so that is where this one goes.
+#   - Free rungs, measured against those tuples: height 2.54 (2.52 and 2.55
+#     taken, 2.54 not), wear 0.37 (0.36 and 0.38 taken, 0.37 not), and
+#     `Lastcourse` is not among the 79 taken titles.
+#
+# THE IDEA: IT COVERS THE REST. While it stands, nothing else in the room can
+# be hurt. This is the one shape not in the other 65 - a TARGET-PRIORITY
+# INVERSION. Every other protection in the file points at itself or at the
+# party:
+#   - PAVISER keeps its face to you          - protects ITSELF.
+#   - NIGHTMAN "CANNOT BE HURT" while lit    - protects ITSELF.
+#   - COOK heals the room                    - the room still TAKES the damage.
+#   - QUARTERMASTER arms the room            - buffs the room's OFFENCE.
+#   - LEECH stops wounds closing             - denies the PARTY, not the adds.
+#   - TIMBERMAN's death is the danger        - about its own death.
+# Nothing in the file makes the ADDS unkillable, so nothing in the file forces
+# the party to ignore a room beating on them and push the one body at the back.
+#
+# TWO DESIGNS DIED ON THAT READING, before a line was drawn:
+#   - A thatcher who re-covers himself every time he is hit. Dead: that is the
+#     SCRAPWRIGHT ("every plate knocked off is replaced from the floor") and the
+#     DAUBER ("every time you hurt it it lays a fresh course"). Self-repair on a
+#     count is taken twice over.
+#   - A thatcher who smothers one hero under reed. Dead: the HOOPER "casks one
+#     of you" and the DROVER "yokes one of you". Single-hero removal is taken.
+#   So this body does NOTHING to itself and NOTHING to one hero. It is the only
+#   body whose whole effect lands on the OTHER monsters.
+#
+# WHAT I EXPECT TO GO WRONG, WRITTEN BEFORE THE FIRST RENDER so the pictures
+# can refute me rather than confirm me. Five, and I expect at least two to stand:
+#   1. THE YEALM READS AS A YOKE. A load across the shoulders is the DROVER's
+#      silhouette, and that is a mechanic collision as well as a shape one. The
+#      three answers built in are: it is FAT (r 0.205 against a yoke's thin
+#      beam), it is DIAGONAL in all three axes rather than square across, and it
+#      is PALE AND BANDED - a yoke is a thin dark beam. If it still reads as a
+#      yoke, the lever is the butt lip, not the length.
+#   2. THE YEALM READS AS A POLE OR A SPEAR. This is the MEALMAN's pale-rope
+#      fault in another coat, and half this file holds a pole. Answered by the
+#      taper, the three dark ties breaking the run, and the CUT LIP at both ends
+#      - a pole has no lip and no bands.
+#   3. THE TIES FUSE AT HERO DISTANCE. The Mealman's three strands fused into
+#      one slab with seams under a pixel, and the Fanner's vanes did it first.
+#      The ties here are 0.038 deep on a 0.21 radius, which is the same order
+#      of thing. If they fuse, the bundle goes back to a plank and fault 1 is
+#      re-opened by the fix for fault 2.
+#   4. THE BUTT STUBS READ AS FLECKS. Three stubs at r 0.055 beside a 0.205
+#      bundle is exactly the ratio that gave the Mealman "white mittens". They
+#      are here because a cut butt is what says REED and not TIMBER; if they do
+#      not survive the hero sheet they should be cut, not grown.
+#   5. THE FACE. This body uses NO pale on the head at all - `bone` is the reed
+#      and nothing else, so the Mealman's pale-brow-and-mask sandwich is not
+#      available. The face is instead a BODY-coloured oval inside a DARK hood:
+#      the contrast sandwich reached from the other side, and the hood is dark
+#      front AND back so the facing is geometric, not hoped for (the Beadle's
+#      no-facing fault). "The head now has no face at all" is this lane's own
+#      pass-11 fault and no blank check and no border check can see it. It is
+#      answered by looking, and by nothing else.
+#
+# Static: no `anims` entry, so bestiary.gd needs a `model` path and NO `anims`
+# entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+# =============================================================================
+CANON.update({
+    "thatcher": ("Lastcourse", 2.54, (0.130, 0.148, 0.120), (0.880, 0.820, 0.620),
+                 "flooded",
+                 "IT COVERS THE REST - it has been over every other thing in "
+                 "this room with reed before you got here, and while it stands "
+                 "nothing else in here can be hurt at all. Your blows land in "
+                 "thatch. Nothing is summoned, nothing is on a count and it "
+                 "does nothing whatever to itself: it is the only body in this "
+                 "file whose whole effect lands on the OTHER monsters. So the "
+                 "room keeps hitting you at full weight while you cannot hit "
+                 "the room back, and the fight is one question - can you get "
+                 "through what is beating on you to the one man at the back "
+                 "who is not. Kill the thatcher and the covering comes off "
+                 "everything at once. WHAT A VIEWER READS IS THE YEALM: the "
+                 "fat pale bundle of combed reed over his shoulder, banded "
+                 "with three ties and cut square at the butt, and the leggett "
+                 "down in his off hand that he beats it home with. While that "
+                 "is on his shoulder there is more covering where that came "
+                 "from.",
+                 0.37, "Something ahead has been over this room with reed."),
+})
+ORDER = ORDER + ["thatcher"]
+
+# PER-SLOT MATERIALS. `bone` IS THE REED AND NOTHING ELSE - the yealm, its two
+# cut lips and the three butt stubs. The coat, the hood, the ties, the leggett
+# and the boots are NOT pale. A second pale mass anywhere would compete with
+# the cue, which is the Mealman's rule, and it is also why this body carries no
+# straw hat even though a thatcher's hat is made of the same stuff: the hat
+# would have been a pale disc on the head arguing with the pale bundle beside
+# it, and a pale disc is symmetric front-to-back so it would have cost the
+# facing as well. The builder ASSERTS the ratio, so a later colour edit dies at
+# build time rather than in a render nobody re-reads.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"thatcher"}
+
+OVERRIDE.update({
+    "thatcher": {
+        'body': ((0.130, 0.148, 0.120), 0.74, 0.03),   # wet-weathered coat
+        'dark': ((0.048, 0.050, 0.044), 0.80, 0.05),   # hood, ties, leggett
+        'bone': ((0.880, 0.820, 0.620), 0.56, 0.00),   # THE REED ONLY
+    },
+})
+
+
+def thatcher():
+    """THE THATCHER - the 66th. He has already covered everything else in here.
+
+    THE ONE NUMBER THIS BUILDER ASSERTS. The yealm is the cue and the cue is
+    pale, so a pale that goes flat against the coat is a cue a viewer cannot
+    take - the Beadle shipped a 1.07 bone/body ratio and its pale knob went
+    flat against its own pale panel while every number in its register passed.
+    """
+    bone_l = _luma(OVERRIDE["thatcher"]['bone'][0])
+    body_l = _luma(OVERRIDE["thatcher"]['body'][0])
+    ratio = bone_l / max(1e-6, body_l)
+    if ratio < 1.30:
+        raise ValueError(
+            "thatcher: bone/body luma ratio %.2f is under 1.30 - the yealm IS "
+            "the cue and a cue that goes flat against the coat cannot be read "
+            "(bone %.3f, body %.3f)" % (ratio, bone_l, body_l))
+
+    P = Parts("thatcher")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.100
+    KNEE = 0.520
+    HIP = 0.950
+    WAIST = 1.150
+    SHO = 1.640
+    HEAD = 1.950
+    HEM = 0.600
+
+    # HE STOOPS INTO HIS LOAD. The yealm's mass centre sits BEHIND him
+    # (y +0.12), so he stands forward against the pull - the opposite of the
+    # Mealman, who is pulled back by a hopper and leans into the pull.
+    LEAN = 0.085
+
+    # ---- THE YEALM. One fat tapered bundle resting through the right
+    # shoulder, butt high and outboard, tip low and across to the left behind
+    # him. DIAGONAL IN ALL THREE AXES on purpose: a bundle square across the
+    # shoulders is the Drover's yoke (fault 1), and a bundle run mostly in Y
+    # collapses to a blob in the FRONT ortho while one run mostly in X
+    # collapses in the SIDE - the Mealman's 34 deg lesson, applied to a line
+    # instead of an arch. dx 0.88, dy 0.44, dz 0.72 gives every camera a real
+    # diagonal and no camera the degenerate view.
+    # PASS 2 RE-AIM. Pass 1 put the butt at y -0.100 - the NEAR end - so both
+    # the front and the side camera looked straight down the bore, and with
+    # three bands round it the body read as a CANNON. That is not a taste note
+    # and it was not on my predicted list: the faults I wrote were yoke and
+    # pole, and the picture refused both and handed me a worse one. THE RULE
+    # THIS BUYS: a cut lip is a disc, and a disc facing a camera is a bore.
+    # The butt now sits high, far outboard and BEHIND (y +0.150), so its face
+    # normal carries +y and points AWAY from the front camera; the bundle is
+    # seen on its flank from every ortho. It also no longer crosses the
+    # midline, which is what had it passing behind the trunk and reading as
+    # two disconnected pale objects.
+    YA = Vector((0.700, 0.150, SHO + 0.420))       # the butt, high, out, BEHIND
+    YB = Vector((0.090, -0.230, SHO - 0.520))      # the tip, low, in, forward
+    _yd = YB - YA
+    _ylen = _yd.length
+    R_BUTT, R_TIP = 0.205, 0.150
+
+    _open()
+    # PASS 3 - THE BUNDLE IS STEMS, NOT A TUBE. Pass 2 killed the bore but
+    # handed back a SMOOTH TAPERED CYLINDER with flat cut discs at both ends
+    # and three crisp bands round it, and at any distance that is a PIPE. The
+    # Mealman's rule says what survives distance is the OUTLINE, and a
+    # cylinder's outline is two parallel lines. A yealm's outline is ragged:
+    # it is many stems, tight where the ties are and SPLAYED at both ends.
+    # So the single cone and the two cut lips and the three loose stubs are
+    # all gone, replaced by seven bound stems. The lips and the stubs only
+    # ever existed to fake what stems give for real - a cut end that is a FAN
+    # and not a disc - which is why removing them is part of this one change
+    # and not a second one.
+    N_STEM = 7
+    R_RING, R_STEM = 0.098, 0.058
+
+    def _f(t):
+        # the splay profile: tight at the ties, open at both ends. A yealm is
+        # bound in the middle and cut at the ends, so the silhouette has a
+        # WAIST - which is the one thing a pipe can never have.
+        return 0.85 + 0.55 * (2.0 * t - 1.0) ** 2
+
+    _ax = _yd.normalized()
+    _p1 = _ax.cross(Vector((0.0, 0.0, 1.0))).normalized()
+    _p2 = _p1.cross(_ax).normalized()
+    for _i in range(N_STEM):
+        if _i == 0:
+            _off = Vector((0.0, 0.0, 0.0))
+        else:
+            _th = TAU * (_i - 1) / (N_STEM - 1)
+            _off = (_p1 * math.cos(_th) + _p2 * math.sin(_th)) * R_RING
+        # RAGGED ENDS. Each stem is cut a little long or a little short, so
+        # neither end is flush. A flush end is a disc and a disc is a bore.
+        _e0 = -0.055 + 0.110 * ((_i * 5) % N_STEM) / float(N_STEM - 1)
+        _e1 = 0.070 - 0.130 * ((_i * 3) % N_STEM) / float(N_STEM - 1)
+        _pts = []
+        for _k in range(5):
+            _t = _k / 4.0
+            _base = YA + _yd * _t
+            _ext = _ax * (-_e0 if _k == 0 else (_e1 if _k == 4 else 0.0))
+            _pts.append(tuple(_base + _off * _f(_t) + _ext))
+        limb(P, _pts, R_STEM, R_STEM * 0.86, 'bone')
+    # THE THREE TIES, kept, and only now do they mean anything: they are what
+    # the stems are tight AT. Placed unevenly (0.18 / 0.46 / 0.76) so that if
+    # two fuse at hero distance the third still breaks the run.
+    for _t in (0.18, 0.46, 0.76):
+        _rr = R_RING * _f(_t) + R_STEM + 0.014
+        _c = YA + _yd * _t
+        P.raw(aim(L.cone(_rr, _rr, 0.040, 18),
+                  tuple(_c - _ax * 0.020), tuple(_yd)), 'dark')
+    _close("yealm")
+
+    # ---- legs. Staggered so the outline has a JOINT in it.
+    _open()
+    for _i in (-1, 1):
+        _fwd = -0.058 if _i < 0 else 0.052
+        _h = Vector((0.158 * _i, 0.0, HIP))
+        _k = Vector((0.186 * _i, _fwd * 0.55 - 0.014, KNEE))
+        _a = Vector((0.206 * _i, _fwd, ANK))
+        limb(P, [tuple(v) for v in seat([_h, _k, _a], 0.106)], 0.106, 0.082,
+             'body')
+        P.add(L.box(0.106, 0.150, 0.064), 'dark',
+              loc=(0.206 * _i, _fwd - 0.036, ANK - 0.046))
+    _close("legs")
+
+    # ---- the coat. Squashed in y so the front and side orthos cannot hand
+    # back the same outline (the Overlooker's FIX I).
+    _open()
+    P.raw(aim(L.cone(0.238, 0.190, WAIST - HIP, 22),
+              (0.0, 0.004, HIP), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.74, 1.0)), 'body')
+    P.raw(aim(L.cone(0.356, 0.238, HIP - HEM, 22),
+              (0.0, 0.004, HEM), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.74, 1.0)), 'body')
+    P.add(L.box(0.284, 0.192, 0.044), 'dark', loc=(0.0, 0.004, WAIST - 0.026))
+    _close("coat")
+
+    # ---- the trunk, raked forward by LEAN, with a pad under the yealm. The
+    # pad is what says the mass on his shoulder is CARRIED and not growing out
+    # of him - the Mealman's straps argument, done with one piece.
+    _open()
+    limb(P, [(0.0, 0.004, WAIST), (0.0, -LEAN * 0.55, WAIST + 0.225),
+             (0.0, -LEAN, SHO)], 0.218, 0.188, 'body')
+    P.add(L.sphere(0.312, 0.146, 0.104, 14, 9), 'body',
+          loc=(0.0, -LEAN, SHO - 0.018))
+    P.add(L.sphere(0.138, 0.120, 0.058, 12, 8), 'dark',
+          loc=(0.268, -0.030, SHO + 0.064))
+    _close("trunk")
+
+    # ---- the arms, and the pose is the whole legibility argument. RIGHT hand
+    # UP gripping the yealm (so the bundle is held, not balanced), LEFT hand
+    # DOWN on the leggett. An asymmetric pose cannot be mistaken for the
+    # Drover's two-handed yoke and it gives the silhouette a diagonal to match
+    # the bundle's.
+    _open()
+    limb(P, [(0.266, -LEAN - 0.010, SHO - 0.050),
+             (0.344, -0.136, SHO - 0.010),
+             (0.336, -0.062, SHO + 0.082)], 0.092, 0.070, 'body')
+    P.add(L.sphere(0.080, 0.070, 0.062, 10, 7), 'dark',
+          loc=(0.336, -0.050, SHO + 0.104))
+    limb(P, [(-0.266, -LEAN - 0.010, SHO - 0.050),
+             (-0.326, -0.140, WAIST + 0.060),
+             (-0.298, -0.206, WAIST - 0.248)], 0.092, 0.070, 'body')
+    P.add(L.sphere(0.080, 0.070, 0.062, 10, 7), 'dark',
+          loc=(-0.298, -0.212, WAIST - 0.282))
+    _close("arms")
+
+    # ---- THE LEGGETT. The thatcher's beating board on a short handle, down in
+    # the off hand. Dark, and kept at thigh height so it is clear of the boots
+    # and clear of the coat hem in the side ortho.
+    _open()
+    # PASS 4 - THE BOARD WAS FLOATING, AND THAT IS A BUG AND NOT A TASTE NOTE.
+    # The side ortho showed clear white between the end of the handle and the
+    # top of the board. Measured off the numbers rather than the picture:
+    # L.box takes FULL extents, so a 0.186-deep board centred at WAIST-0.650
+    # topped out at z 0.593 while the handle stopped at z 0.630 - a 0.037 m
+    # gap, carried since pass 1 and invisible to every blank and border check
+    # in the harness, because a float is neither a blank nor a clip. The
+    # handle now runs down to 0.560 and the board's top is 0.593, so they
+    # OVERLAP by 0.033 and no tilt of the board can re-open it.
+    limb(P, [(-0.298, -0.216, WAIST - 0.300),
+             (-0.296, -0.296, WAIST - 0.590)], 0.034, 0.030, 'dark')
+    P.add(L.box(0.152, 0.040, 0.186), 'dark',
+          loc=(-0.290, -0.306, WAIST - 0.650), rot=(0.10, 0.0, 0.06))
+    _close("leggett")
+
+    # ---- the head. A DARK HOOD round a BODY-coloured face: the contrast
+    # sandwich reached from the other side, since `bone` is not available on
+    # the head (fault 5). The hood is dark front AND back, so what a viewer
+    # sees from behind is all hood and the facing is GEOMETRIC rather than
+    # hoped for - the Beadle's no-facing fault answered by construction and
+    # not by a colour.
+    _open()
+    _hx, _hy = 0.0, -LEAN - 0.018
+    limb(P, [(0.0, -LEAN, SHO + 0.010), (_hx, _hy, HEAD - 0.090)],
+         0.080, 0.072, 'dark')
+    P.add(L.sphere(0.142, 0.136, 0.152, 14, 10), 'dark',
+          loc=(_hx, _hy, HEAD))
+    # THE FACE - PASS 5, AND MY OWN PREDICTED FAULT 5 LANDED. On the three
+    # orthos this face read perfectly well. On the HERO SHEET, beside a real
+    # KayKit knight at the distance a viewer actually sees, the head was a
+    # dark blob with two faint dots and no face at all. That is this lane's
+    # pass-11 fault exactly, and no number in the register can see it: the
+    # body scores `seen: 1.0` on all three views with no face on it, because
+    # `seen` answers how much of the man is VISIBLE and not whether he has a
+    # FACE. The picture is the evidence and the number was never asked.
+    #
+    # THE CAUSE WAS SIZE AND SHADOW, NOT COLOUR. The oval was 0.096 x 0.108
+    # and SET IN behind the hood's mouth, so it sat in the hood's own shadow
+    # and the body/dark luma ratio of 2.9 never got to do any work. It is now
+    # larger and stands PROUD of the hood (y -0.112 against the hood's front
+    # at -0.103 + its own radius), so it is a lit shape rather than a recess.
+    P.add(L.sphere(0.122, 0.064, 0.130, 12, 8), 'body',
+          loc=(_hx, _hy - 0.112, HEAD - 0.008))
+    # the two eye pits, bigger and set wider, sunk into that oval. Dark on the
+    # lighter face: the contrast runs the other way to the Mealman's, so it
+    # must be LOOKED at on the hero sheet and not on the ortho.
+    for _i in (-1, 1):
+        P.add(L.sphere(0.038, 0.030, 0.034, 10, 7), 'dark',
+              loc=(_hx + 0.058 * _i, _hy - 0.158, HEAD + 0.024))
+    # the mouth, a dark slot low on the oval, so the face has a bottom edge
+    # and does not read as a blank plate.
+    P.add(L.box(0.112, 0.030, 0.022), 'dark',
+          loc=(_hx, _hy - 0.164, HEAD - 0.084))
+    _close("head")
+
+    # THE FIGURE. The yealm and the leggett are the LOAD and the WORK, not the
+    # man, and that is a declaration: a can-you-see-the-man test must not score
+    # his own bundle as part of him.
+    P.man_parts = ("legs", "coat", "trunk", "arms", "head")
+    return P
+
+
+BUILDERS.update({"thatcher": thatcher})

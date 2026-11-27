@@ -13,7 +13,7 @@ func _ok(c: bool, what: String) -> void:
 func _initialize() -> void:
 	_ok(Delve.MB_NAME.get("fanner", "") == "Blastmere", "MB_NAME fanner is Blastmere (got '%s')" % Delve.MB_NAME.get("fanner", ""))
 	_ok(Delve.miniboss_name("fanner") == "Blastmere", "nameplate reads Blastmere, not Fanner")
-	_ok(Delve.MB_NAME.size() == 64, "MB_NAME is 64 (got %d)" % Delve.MB_NAME.size())
+	_ok(Delve.MB_NAME.size() == 65, "MB_NAME is 65 (S146 + mealman) (got %d)" % Delve.MB_NAME.size())
 	_ok(is_equal_approx(float(Delve.MB_FIT.get("fanner", 0.0)), 0.95), "MB_FIT fanner is art's 0.95")
 	_ok((DungeonHD.THEME_MINIBOSS_MORE.get("firepit", []) as Array).has("fanner"), "fanner is in the firepit row")
 	var model := Delve.miniboss_model("fanner")

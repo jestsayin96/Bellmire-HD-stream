@@ -1111,7 +1111,17 @@
     "Bread was pressed into a hand. No words with it.",
     "The lamp-seller trimmed three wicks free of charge.",
     "Boots ringing on the stair. The street went quiet to hear.",
-    "The ferryman tied off early and stood at the top."
+    "The ferryman tied off early and stood at the top.",
+    "The innkeeper set the bowls out early and did not say for whom.",
+    "Someone swept the step before they went down.",
+    "A dog walked them to the stair-head and sat.",
+    "The baker's boy ran after with a wrapped crust.",
+    "Rope was checked end to end at the top. Twice.",
+    "The bell-ringer let the hour pass unrung so they could go quiet.",
+    "The smith looked at the edge once more and nodded.",
+    "A woman at the well filled their flasks and asked for nothing.",
+    "Lamps were lit along the lane, one door at a time.",
+    "The gate-warden wrote the hour in the book and the number of them."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1727,7 +1737,17 @@
     "The lamp-seller sold out by noon.",
     "A child counted the heroes back up the stair. All there.",
     "The ferryman cast off again. The tide waits for no one, he said.",
-    "Shutters came open all down the lane."
+    "Shutters came open all down the lane.",
+    "The innkeeper counted the bowls and put one away.",
+    "The dog was at the stair-head before the first boot showed.",
+    "The baker's boy had saved the crust. It was still warm.",
+    "Somebody rang the hour at last.",
+    "The smith took the dented blade without a word and went to the forge.",
+    "The well-woman filled the flasks again. Same price: none.",
+    "Doors stood open down the lane till late.",
+    "The gate-warden wrote the hour in the book and the number of them. The same number.",
+    "A kettle went on in every house on the row.",
+    "The step was swept again. Nobody asked who had done it."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4973,7 +4993,19 @@
     "Slept sound the night before. Woke early.",
     "Fixed the cellar hinge before leaving. It does not squeak now.",
     "Took the rear. Watched the others through.",
-    "Wiped the blade clean before the last stair."
+    "Wiped the blade clean before the last stair.",
+    "Carried the water for the others. Drank last.",
+    "Mended the strap twice. It held. He did not.",
+    "Left the good lamp with the rest. Took the old one.",
+    "Knew the stair by feel. Counted it down in the dark.",
+    "Shared the heel of the loaf at the second landing.",
+    "Said the roster aloud before going on. Nobody was missing then.",
+    "Tied a clean knot in the rope. It was still tied after.",
+    "Pulled the door shut behind him. Kept the draught off the others.",
+    "Wrote the name of the inn on the inside of the belt.",
+    "Held the line one breath longer than was needed.",
+    "Packed light. Packed the bandage.",
+    "Went ahead to look. Came back once to say it was clear."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -15683,5 +15715,6 @@
   "_note_c220": "C-220 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - origin/art minibosses.py has no key outside by_key, so no by_key row. Expected zero-hit key.",
   "_note_c221": "C-221 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - origin/art minibosses.py has no key outside by_key, so no by_key row. Expected zero-hit key.",
   "_note_c222": "C-222 (content, 26 Nov 2026): the 64th miniboss_feed.by_key row, key `fanner` (art's .glb stem, no variant). arrive 9, act 8, broken 4, fall 8, matching the overlooker shape. No boss name used - Delve.MB_NAME has no fanner entry yet, so the fall lines say `He`, and `{name}` in act is the hero. Mechanic carried in the words: it burns as hard as the party crowds it, four pale vanes are the count, a broken vane stays broken. Held every other pool. Expected zero-hit key.",
-  "_note_c225": "C-225 (content, 27 Nov 2026): the 65th miniboss_feed.by_key row, key `mealman` (art's .glb stem, committed on origin/art, THE MEALMAN, Whitedamp). arrive 9, act 8, broken 4, fall 8, matching the fanner shape. No boss name used - Delve.MB_NAME has no mealman entry yet, so the fall lines say `He`, and `{name}` in act is the hero. Mechanic carried in the words: burning lands on everyone in the room including him, no flame on the body, the dust does not escalate, steel is the slow safe way. Held every other pool. Expected zero-hit key."
+  "_note_c225": "C-225 (content, 27 Nov 2026): the 65th miniboss_feed.by_key row, key `mealman` (art's .glb stem, committed on origin/art, THE MEALMAN, Whitedamp). arrive 9, act 8, broken 4, fall 8, matching the fanner shape. No boss name used - Delve.MB_NAME has no mealman entry yet, so the fall lines say `He`, and `{name}` in act is the hero. Mechanic carried in the words: burning lands on everyone in the room including him, no flame on the body, the dust does not escalate, steel is the slow safe way. Held every other pool. Expected zero-hit key.",
+  "_note_c226": "C-226 (content, 27 Nov 2026): 12 epitaphs, 10 descend, 10 cleared, appended; no miniboss by_key row because there is no 66th committed body (65 names / 65 feed keys). Plain, short, nothing theatrical. Expected zero-hit key."
 }

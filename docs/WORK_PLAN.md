@@ -1,3 +1,109 @@
+*** ===== TAKE THIS NEXT - THE 21:58 CT FIRING, 26 NOV 2026. CLEAN-HOUR COUNT 4. =====
+*** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 21:58:30 CST and again
+*** at 22:00:50 and 22:03 while writing. Count was 3 after the 20:58 firing; this hour is CLEAN -> 4.
+***
+*** ===== THE 20:58 OPEN HALF IS PAID. S143 IS NOW TICKED WHOLE. =====
+***   S143b: the lantern IS in his right hand. grave_keeper.gd hangs it from a Marker3D at the fist
+***   of the Kenney rig's arm-right node (x=-0.27, measured off the glb accessor), pins the arm in
+***   the kit's holding-right pose while he walks and idles, and keeps interact-right while tending.
+***   S143_KEEPER OK hand_gap_m=0.0000, shots 4/4, front/side/back/tend rendered. The lane fixed the
+***   exact half I refused last hour, by measurement, in one firing.
+***
+*** ===== ART SHIPPED A 64th BODY. THE NAMING CASCADE IS OPEN AND IT IS BEING SHUT THIS HOUR. =====
+***   MEASURED THIS RUN, BRACE-MATCHED, NOT BY REGEX: `Delve.MB_NAME` = 63 entries.
+***   `miniboss_feed.by_key` in data/lore_lines.json = 63 keys ON CONTENT'S OWN BRANCH. Bodies = 64
+***   (`assets/monsters/minibosses/fanner.glb` is now on main). `fanner` returns ZERO hits in
+***   scripts/ and data/ on origin/laptop. SO: 64 bodies, 63 names, 63 feed keys.
+***   THE LAST TIME THIS GAP OPENED (62 -> 63) THE CHAT BOT'S `MINIBOSS UNNAMED` PAIR FIRED FOR
+***   FIFTEEN CONSECUTIVE FIRINGS before S141 named VELRICK and B185 watched it clear. I am giving
+***   both halves out in the SAME HOUR THE BODY LANDED so that does not happen a second time.
+***   I READ THIS AS THE SECOND HALF OF AN EXISTING CHAIN, NOT AS NEW WORK, AND I SAY SO OUT LOUD:
+***   delve.gd:438 already names the three-way key - art's .glb stem = MB_FIT's key =
+***   content's miniboss_feed.by_key key. Naming a body that exists is that chain being walked.
+***
+*** ===== GAME BUILD (:07) - NAME THE 64th BODY. =====
+***   Add the 64th `Delve.MB_NAME` entry keyed on art's .glb STEM `fanner` (exactly that spelling),
+***   with art's CANON title taken from `docs/art/FANNER_THE_64th.md` (now on main) the same way
+***   S68/S70/S72/S75/S76 took theirs off minibosses.py. Do not invent a title and do not re-key it.
+***   The body is RED in art's own register (see the ART row) - THAT DOES NOT BLOCK THE NAME, the
+***   name does not depend on fit, and the two halves are independent. Gate it as you gated S141.
+***
+*** ===== CONTENT (:22) - C-222: THE 64th FEED ROW. =====
+***   Add the 64th `miniboss_feed.by_key` row for key `fanner` - the .glb stem exactly, no variant,
+***   no `_chibi`. Your own branch measured 63 by_key keys this run against 64 bodies. Hold every
+***   other pool where it stands. C-221 IS TICKED: epitaphs 1016->1032, descend 621->629, cleared
+***   606->614, ZERO entries lost, ZERO duplicates, one `_note_c221` added, the `-5` in the numstat
+***   is your writer reordering its own output. I re-counted it off both refs rather than taking it.
+***
+*** ===== ART (:34) - THE FANNER IS NOT TICKED. PASS 4, AND YOUR OWN INSTRUMENT SAYS WHY. =====
+***   `_fit_report.json` on origin/art: `ok: false`, `verdict: "RED"`, `red_summary.shipped_red:
+***   ["fanner"]`, `ok_shipped: false`, and one error in its own words - "fanner: MEASURABLE by the
+***   self_seen census and carrying NO self_seen cell - an unasked instrument is RED, not green".
+***   *** THIS IS NOT THE STANDING `_chibi` NOTE AND NO SEAT SHOULD WAVE IT THROUGH AS ONE. *** That
+***   note holds while `shipped_red` is EMPTY and `ok_shipped` is TRUE. Here shipped_red names a
+***   SHIPPED body and ok_shipped is FALSE. main read `ok: true` / GREEN before this merge; this
+***   commit flipped it. pairs 65 -> 66, zero rows dropped, rows_unstamped and unproved_cells empty.
+***   WHAT PASS 4 OWES, ALL FOUR OF THEM YOUR OWN WORDS, NOT MINE: (1) land the self_seen cell - a
+***   `_backread --keys fanner` run does not land its row in `_selfseen_all.json`; (2) the vane
+***   gauge reads front 3 / side 4 and is NOT closed; (3) vane feet are not visibly planted; (4)
+***   eyes tie with the hearth in value. YOU DECLARED EVERY ONE OF THESE YOURSELF AND HID NOTHING -
+***   "RED AND CORRECT", "STILL WRONG AND NOT HIDDEN" - and you named two of the three passes as
+***   your own fault. That is why this is a half-delivery and not a charge.
+***
+*** ===== HUB (:37) - NOTHING IS MERGED BEYOND THE NOTES FILE AND THE DECISION IS NOT YOURS. =====
+***   You shipped only the plan sync this hour, which is correct and is not a fault. Re-measured by
+***   me: origin/gh-pages tree vs origin/hub:web is ONE file, `web/NOTES.md`, and the publish call
+***   sits with the SUPERVISOR. You raised no readiness claim, so NO PUBLISH GATE WAS OWED AND I RAN
+***   NONE. If you are dry, stand down and write it up - a stand-down written up IS the delivery.
+***
+*** ===== HUD (:52) - FIVE STAND-DOWNS RUNNING IS MY FAULT, NOT YOURS. =====
+***   U189 and U190 were both honest and both correct: the plan named no HUD item. The sentence in
+***   YOUR PROMPT calling the rarity-hue half "the most valuable open item in the house" IS STRUCK
+***   AND WRONG - you shipped it as U55 (`ui_theme.gd:176/196/200/204`, read by
+***   `leaderboard_panel.gd:197` and `:202`) and you refused that row correctly eight times. I
+***   cannot edit a prompt from a firing; it is item 1 of the correction backlog and the plan is
+***   what you obey. THIS HOUR: if the plan names no HUD item, you may stand down and write it up,
+***   or audit a defect in your OWN shipped work (U55, U124) - auditing your own shipped work for a
+***   defect you have just learned about is NOT new work and does not break the freeze.
+***
+*** ===== CHAT BOT (:45) - SPLIT L56. THE 7-MINUTE CEILING IS REAL AND IT IS MINE TO FIX. =====
+***   B187 was right and I am recording it as right: your slot is :45 and the HUD owns :52, so you
+***   have SEVEN MINUTES, and L56 does not fit it - that is two firings you have now lost to the
+***   same wall. Mr. E's yield rule answers it in his own words: "split the job and carry the
+***   remainder to your next firing". SO: cut L56 into arms that each finish inside :52 and land ONE
+***   ARM PER FIRING with running totals in PROGRESS.md. Do not declare a crossing into :52 - that
+***   stopped being correct behaviour under his ruling. B185 AND B186 ARE TICKED (comment-only, 31
+***   changed lines, 0 non-comment, verified in R against the refs - not in a worktree, where that
+***   same pipeline printed me a false zero last hour). THE WIDER FIX IS NOT A PLAN ROW: the window
+***   itself lives in all seven prompts and a firing cannot edit one, so "give the chat bot a window
+***   that fits its work" is now item 7 of the correction backlog for the first live turn.
+***
+*** ===== FOR THE NEXT TEAM LEAD - THE PROMPT-CORRECTION BACKLOG, NOW SEVEN. =====
+***   A firing CANNOT edit a scheduled task; the gate is on the CALL, not on a field, and it is
+***   settled - do not test it again. Land all seven on the first LIVE turn:
+***   1. HUD prompt: strike "the most valuable open item in the house" for the rarity-hue half -
+***      U55 SHIPPED IT. Costing that lane a cycle an hour for days. HIGHEST VALUE.
+***   2. Chat bot prompt: "COMMANDS_DOC wrote 26 commands" is stale - the real generator writes 32.
+***      The lane found this itself at B185. A future firing must not read 32 as a fault.
+***   3. Team lead prompt: the miniboss body count is baked at "thirty-three", then "44 live
+***      bodies and two retired `_chibi`" - it is 64 bodies / 66 register pairs as of this hour.
+***   4. Team lead prompt: the STEP 0 corpus is "48 files" - it is 49 since S143 added
+***      `grave_keeper.gd`, and will move again.
+***   5. Team lead prompt: the published gh-pages SHA/date block is stale again - re-measure, never
+***      copy it.
+***   6. Team lead prompt: the `_fit_report.json` standing note ("top-level verdict reads RED on two
+***      carried `_chibi` rows") now has a REAL counter-example - this hour shipped_red named a live
+***      body. The note needs the "shipped_red empty / ok_shipped true" test written INTO it.
+***   7. Chat bot + HUD prompts: the :45 slot gives the chat bot seven minutes against a :52 HUD
+***      window the HUD has left EMPTY five firings running. Reallocate the window.
+***
+*** ===== FOR THE SUPERVISOR =====
+***   1. HUB PUBLISH, unchanged and still yours: only `web/NOTES.md` is merged-and-unpublished.
+***      RECOMMENDATION: leave it unpublished - no functional delta; a publish spends a cycle for a
+***      notes file. No readiness claim was made, so no publish gate was run.
+***   2. THE FANNER IS RED BY ART'S OWN REGISTER AND IS NOT TICKED. No decision needed from you -
+***      recorded so the register's `ok:false` is not read next hour as the old `_chibi` note.
+***
 *** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 3. (THE 20:58 CT FIRING, 26 NOV 2026.) =====
 *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 20:58:57 CST and again
 *** at 21:02:07 while writing. The count was 2 after the 19:58 firing; this hour is CLEAN, so it is 3.

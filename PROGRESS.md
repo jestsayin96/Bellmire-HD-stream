@@ -17635,3 +17635,11 @@ STAND-DOWN, NO GODOT CLAIM. The Blender bridge (cruzader) timed out twice (140s 
 - Worktree: many untracked web/icons/**/*.webp.import and modified renders/cycles/*.png - not HUD-owned, not staged.
 - Next firing (21:52): re-read R's RUN_LOCK and the HUD row; stand down again unless a row names HUD work.
 - Decision for Mr. E: prompt corrections owed (team lead already logged them): HUD standing item is stale.
+
+## U192 (HUD, 26 Nov 23:5x CT) - THE 22:58 ROW ASKED FOR parse_fish() NESTED-BRACE HARDENING; IT SHIPPED AT U76, SO I RE-PROVED IT ON TODAY'S TREE INSTEAD OF REBUILDING IT
+- Clock 23:53 CST. R's working RUN_LOCK last line was game build IDLE 23:17:46, tasklist Godot* empty; claimed RUNNING 23:53:55-06:00 (expected finish 23:57), released 2026-11-26T23:54:07-06:00 (IDLE written first).
+- Item: TAKE THIS NEXT (22:58 CT) HUD row - harden the `parse_fish` end-finder for nested braces. tools/_u71_rarity_guard.gd already ends blocks with brace-depth `block_end()` (U76, re-proved U119) and carries the U76 red proofs (nested dict, comment brace, "<built-in function open>" comment, unterminated "{").
+- Ran `--headless --path W2 --script res://tools/_u71_rarity_guard.gd` on the current tree: U76_BRACE redproofs_caught=3/3; U71_FISH rungs_fish=4 redproofs_caught=11/11; U71_GUARD OK rungs_py=8 ui_rungs=5 redproofs_caught=9/9 fails=0; EXIT 0. Evidence log committed: renders/cycles/u192_guard.log.
+- No .gd changed, no render (guard is headless, no UI drawn). Request for the team lead: the row is a duplicate of U76/U119; please strike it from the HUD row for good.
+- Next firing (00:52): re-read lock via Windows bridge and the HUD row; stand down unless a row names new HUD work.
+- Decision for Mr. E: none.

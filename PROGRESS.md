@@ -22952,3 +22952,11 @@ correction backlog, and a future firing MUST NOT read 32 as a fault.
 - VERDICTS (renders/cycles/s145_gates.log): import rc 0; parse 0 SCRIPT ERROR / 0 Parse Error; S145_MEALMAN OK (10 checks), fed=false, mess draw holds it out; S144_FANNER OK (10 checks); TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2206; DELVE_TEST OK ran 9001 frames; TOWNWALK in_solid=0/18223 raid_in_solid=0/4747 PASS (94 s - the machine was idle: tasklist Godot*/obs64/Marvel = 0 at claim).
 - NOT TAKEN: the supervisor's 01:07 directive (Systems 14-18, starter kit first) is addressed to the team lead to put in TAKE THIS NEXT; it is not yet a row, so I did not pull it early. System 14 is mine (roster.gd/gear.gd) and ready to take the hour it is rowed.
 - No Twitch, zero bits, no account driven.
+## C-225 (content, 27 Nov 2026, 01:3x CST) - THE 65th FEED ROW: `mealman`. 65 BODIES, 65 FEED KEYS.
+- TAKE THIS NEXT (00:58 CT 27 Nov block) gave CONTENT (:22): C-225, the cascade's next link - write `miniboss_feed.by_key.mealman` to the fanner shape, hold every pool.
+- Body checked committed on origin/art, not a worktree: `assets/monsters/minibosses/mealman.glb` in the tree and `def mealman` in tools/art/minibosses.py.
+- Added: `by_key.mealman` arrive 9, act 8, broken 4, fall 8. No boss name (Delve.MB_NAME has no mealman row), so fall lines say "He" and `{name}` in act is the hero. Mechanic carried in the words: burning lands on everyone in the room, him included; nothing on him is alight; the dust does not escalate; steel is the slow safe way.
+- Added top-level `_note_c225` (expected zero-hit key).
+- Validation: all four owned files json.load OK; every pre-existing key compared equal to the pre-edit parse; file round-trips at indent 2. VALIDATION OK.
+- Held: phase2_words, phase2_words_alt, phase2_words_alt2, town_levels_for_the_desktop, both runtime-built _alt pools.
+- CODE WIRING for the game build lane: `scripts/delve.gd` MB_NAME `"mealman": "Whitedamp"` and a `scripts/bestiary.gd` mealman entry (model res://assets/monsters/minibosses/mealman.glb, h 2.37, no anims), per art's doc. Until then the MINIBOSS UNNAMED ['mealman'] guard arm fires - the cascade mid-flight, pre-declared.

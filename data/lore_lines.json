@@ -15079,6 +15079,45 @@
           "Whoever stood closest felt it last.",
           "Go on out. The room is cold."
         ]
+      },
+      "mealman": {
+        "arrive": [
+          "A man in a flour-white smock stood under a hopper bigger than he was, turned a little off the door.",
+          "The hopper is hooped like a barrel. A pale chute runs over his shoulder and down to a trough at his hip.",
+          "He is pouring. Fine meal comes down the chute and settles in the trough.",
+          "His face is a pale mask with a dark slot to breathe through. He has not looked up.",
+          "Nothing on him is alight. That is the point of him.",
+          "The air at the door is thick and tastes of flour. It does not get thicker. It does not need to.",
+          "Leave the fire hand at the door. Leave the lamp too, if you can spare it.",
+          "Whatever burns in here burns for everyone. Him included.",
+          "Mind the flour."
+        ],
+        "act": [
+          "{name} throws fire. It lands on the whole line, and on him, all the same.",
+          "{name} keeps the fire hand in the pocket. Steel does the work. It is slow.",
+          "{name} sets the air off on purpose. Everybody burns. He burns with the rest.",
+          "{name} swings steel. The meal settles. Nothing catches.",
+          "{name} takes the burn and keeps swinging. It is quicker this way. Nobody says so.",
+          "A spark off {name}'s blade. The room answers, all of it.",
+          "{name} sets the lamp down by the wall. The air is easier.",
+          "{name} reaches for the flint, and thinks better of it."
+        ],
+        "broken": [
+          "A hoop is gone from the hopper. Meal runs out of the gap and does not stop.",
+          "The chute runs thin. The trough sits lower than it did.",
+          "He braces the hopper with a shoulder. It leans anyway.",
+          "Less meal in the air. The same rule holds."
+        ],
+        "fall": [
+          "He is down. The hopper tips and the meal goes across the boards.",
+          "The chute runs dry. The trough is empty.",
+          "He poured to the end. It was his work.",
+          "A white smock and a split hopper.",
+          "The air stays thick a while. Wait before you light anything.",
+          "Whoever burned the most knew it. So did he.",
+          "He never lifted a hand. The room did the rest.",
+          "Open the door. Let it clear."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -15643,5 +15682,6 @@
   "_note_c219": "C-219 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - art has committed no 64th body, so no by_key row. Expected zero-hit key.",
   "_note_c220": "C-220 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - origin/art minibosses.py has no key outside by_key, so no by_key row. Expected zero-hit key.",
   "_note_c221": "C-221 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - origin/art minibosses.py has no key outside by_key, so no by_key row. Expected zero-hit key.",
-  "_note_c222": "C-222 (content, 26 Nov 2026): the 64th miniboss_feed.by_key row, key `fanner` (art's .glb stem, no variant). arrive 9, act 8, broken 4, fall 8, matching the overlooker shape. No boss name used - Delve.MB_NAME has no fanner entry yet, so the fall lines say `He`, and `{name}` in act is the hero. Mechanic carried in the words: it burns as hard as the party crowds it, four pale vanes are the count, a broken vane stays broken. Held every other pool. Expected zero-hit key."
+  "_note_c222": "C-222 (content, 26 Nov 2026): the 64th miniboss_feed.by_key row, key `fanner` (art's .glb stem, no variant). arrive 9, act 8, broken 4, fall 8, matching the overlooker shape. No boss name used - Delve.MB_NAME has no fanner entry yet, so the fall lines say `He`, and `{name}` in act is the hero. Mechanic carried in the words: it burns as hard as the party crowds it, four pale vanes are the count, a broken vane stays broken. Held every other pool. Expected zero-hit key.",
+  "_note_c225": "C-225 (content, 27 Nov 2026): the 65th miniboss_feed.by_key row, key `mealman` (art's .glb stem, committed on origin/art, THE MEALMAN, Whitedamp). arrive 9, act 8, broken 4, fall 8, matching the fanner shape. No boss name used - Delve.MB_NAME has no mealman entry yet, so the fall lines say `He`, and `{name}` in act is the hero. Mechanic carried in the words: burning lands on everyone in the room including him, no flame on the body, the dust does not escalate, steel is the slow safe way. Held every other pool. Expected zero-hit key."
 }

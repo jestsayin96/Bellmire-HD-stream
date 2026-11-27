@@ -24201,3 +24201,278 @@ def overlooker():
 
 
 BUILDERS.update({"overlooker": overlooker})
+
+
+# =====================================================================
+# THE FANNER - THE 64TH. 2026-11-26, the art lane.
+#
+# WHAT I CHECKED FOR FIRST, MEASURED THIS RUN AND NOT REMEMBERED. I parsed
+# `ORDER` out of this file (63 unique keys, no chibi/tall variants among them)
+# and then parsed the full `CANON` hook string of 61 of them with a paren
+# matcher - `timberman` and `collier` defeated the matcher and were read by
+# hand, so the corpus is 63 of 63. The prompt's count and docs/art/
+# MINIBOSSES.md's table BOTH disagree with the file: the table carries only 26
+# bodies, and a gap argument made against 26 of 63 would have been an
+# instrument that cannot see. The overlooker's own docstring says "the 63rd",
+# which is the second witness.
+#
+# WHY THIS ONE - THE AXIS IS EMPTY. Every one of the 63 is answered by a
+# decision about WHAT the party does (damage, healing, gear, gold, light, air,
+# ground, facing), WHO acts (the Beadle), WHO is struck (Overlooker, Fenman,
+# Dyer), WHERE it stands (Weigher, Roper, Harrowman), WHEN it acts (Rammer,
+# Panner, Stopper, Blower, Iceman), HOW HARD it swings (Dredger) or WHICH OF
+# THEM has struck (Straker). NOT ONE OF THEM ASKS HOW MANY OF YOU ARE ON IT.
+# That is this one, and the party owns it outright.
+#
+# THE THREE IT IS NEAREST TO, AND THE DIFFERENCES ARE NOT QUIBBLES:
+#   - the FERRYMAN also ends with one hero fighting it, and it is the opposite
+#     direction: the Ferryman CHOOSES who is aboard and nobody else's blows
+#     land at all. The Fanner chooses nothing - every blow lands, always, and
+#     the party decides how many of them to spend.
+#   - the DREDGER is the nearest in shape of sentence and it is about ONE
+#     hero's hand: how hard that hand swings. The Fanner does not care how
+#     hard anybody swings; it cares how many are standing in its reach.
+#   - the STOKER is the other firepit fire and its condition is on the ROOM -
+#     starve the pit. The Fanner's pit is on its own chest and cannot be
+#     starved; the draught is the party.
+#
+# WEAR 0.64 IS A FREE RUNG, measured off the 63: 0.62 and 0.65 are taken and
+# 0.64 is not. It is also the honest number - the basket and its vanes are his
+# instrument and a working man keeps his instrument, but the coat has stood at
+# a hearth for years. HEIGHT 2.33 is likewise free (2.32 and 2.34 are taken),
+# and modest on purpose: a thing that grows with a crowd should not start tall.
+CANON.update({
+    "fanner": ("Blastmere", 2.33, (0.72, 0.46, 0.30), (1.00, 0.62, 0.22),
+               "firepit",
+               "IT BURNS AS HARD AS YOU CROWD IT - it carries its own hearth "
+               "on its chest and every delver inside its reach is one more "
+               "draught on it. One hero alone fights a low red and takes all "
+               "day about it; the whole line on it at once fights a white "
+               "heat that answers every one of them. It does not choose a "
+               "target, it has no phase, nothing summons and nothing splits - "
+               "the condition is on HOW MANY OF YOU ARE ON IT, which no other "
+               "body in this file asks about, and it is the one number a "
+               "party never thinks of as a cost. So the habit that fails here "
+               "is the first habit a party has: everybody in. THE COUNT IS "
+               "THE FOUR VANES standing out of the basket rim - one vane is "
+               "one draught it can still take, they are the only pale on the "
+               "whole body, and a vane that is broken off stays broken. So "
+               "the party has two honest answers and both cost: send one hand "
+               "in and win slowly with the rest of the line standing idle, or "
+               "spend the early fight breaking vanes off the rim while it is "
+               "at its hottest and crowd it once they are gone.",
+               0.64, "Something ahead is being fanned, and it is not a forge."),
+})
+ORDER = ORDER + ["fanner"]
+
+# PER-SLOT MATERIALS. `bone` IS THE FOUR VANES AND NOTHING ELSE - they are the
+# gauge, so they are the only pale on the body and they are pale for that
+# reason and no other. Measured rec709 luma: body 0.190, bone 0.929, so the
+# BONE/BODY RATIO IS 4.90 - the Beadle shipped 1.07 and went flat against its
+# own pale panel, and the assertion below is in the builder, not in this
+# comment, so a later colour edit cannot walk it back quietly.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"fanner"}
+
+OVERRIDE.update({
+    "fanner": {
+        'body': ((0.255, 0.175, 0.140), 0.70, 0.05),   # the scorched coat
+        'dark': ((0.070, 0.066, 0.062), 0.74, 0.10),   # basket, hood, boots
+        'bone': ((0.940, 0.930, 0.890), 0.36, 0.20),   # THE FOUR VANES ONLY
+        'glow': ((1.000, 0.520, 0.180), 0.90),         # the hearth, recessed
+    },
+})
+
+
+def fanner():
+    """THE FANNER - the 64th. He carries his own hearth high, in both hands.
+
+    THE ONE NUMBER THIS BUILDER ASSERTS. Same guard the overlooker carries and
+    for the same reason: the gauge is pale, and a pale gauge that goes flat
+    against the body is a count a viewer cannot take. Checked here so a colour
+    edit dies at build time rather than in a render nobody re-reads.
+
+    WHAT IS PALE: the four vanes. Nothing else on the body.
+
+    THE TRAP I BUILT AGAINST BEFORE RENDERING. Four flat vanes at 0/90/180/270
+    would hand the front ortho two broadsides and TWO HAIRLINES, and a hairline
+    vane is a vane a viewer cannot count - the gauge would read 4 from one
+    camera and 2 from the next. So they sit at 45/135/225/315 off his own
+    forward and are tilted out of vertical, which gives every camera 0.707 of
+    each vane's width; and they are 0.052 thick, so even a vane seen dead
+    edge-on is a bar and not a line. THE HARNESS CANNOT SEE THIS: a count is
+    not a blank and not a clip, so no blank-or-border check would have caught
+    a vane that vanished. It is answered by construction and then by looking.
+    """
+    bone_l, body_l = _luma(OVERRIDE["fanner"]['bone'][0]), \
+        _luma(OVERRIDE["fanner"]['body'][0])
+    ratio = bone_l / max(1e-6, body_l)
+    if ratio < 1.30:
+        raise ValueError(
+            "fanner: bone/body luma ratio %.2f is under 1.30 - the four vanes "
+            "ARE the gauge and a gauge that goes flat against the coat cannot "
+            "be counted (bone %.3f, body %.3f)" % (ratio, bone_l, body_l))
+
+    P = Parts("fanner")
+    P.spans = {}
+    _m = [0]
+
+    def _open():
+        _m[0] = len(P.items)
+
+    def _close(name):
+        P.spans[name] = (_m[0], len(P.items))
+
+    ANK = 0.100
+    KNEE = 0.530
+    HIP = 0.985
+    WAIST = 1.185
+    SHO = 1.690
+    HEAD = 2.020
+    HEM = 0.615
+    BASK = 1.545          # the basket's rim plane - CHEST height, held HIGH
+
+    # HE STOOPS INTO IT. Every carrier in this file leans into its load and
+    # this one carries a hearth at chest height in both hands, so the lean is
+    # 0.090 m of forward offset by the shoulder. It is also what keeps the
+    # basket clear of his own chin on the side ortho.
+    LEAN = 0.090
+
+    # ---- legs. Staggered, and the hem clears the knee so the outline has a
+    # JOINT in it - the one thing a turned piece cannot have.
+    _open()
+    for _i in (-1, 1):
+        _fwd = -0.070 if _i < 0 else 0.060
+        _h = Vector((0.168 * _i, 0.0, HIP))
+        _k = Vector((0.196 * _i, _fwd * 0.55 - 0.018, KNEE))
+        _a = Vector((0.220 * _i, _fwd, ANK))
+        limb(P, [tuple(v) for v in seat([_h, _k, _a], 0.112)], 0.112, 0.088,
+             'body')
+        P.add(L.box(0.112, 0.160, 0.068), 'dark',
+              loc=(0.220 * _i, _fwd - 0.040, ANK - 0.050))
+    _close("legs")
+
+    # ---- the coat. Fitted at the waist, flared at the hip, and SQUASHED in
+    # y so the front and side orthos cannot get the same outline (the
+    # overlooker's FIX I - a coat on a man is wider across than it is deep).
+    _open()
+    P.raw(aim(L.cone(0.252, 0.200, WAIST - HIP, 22),
+              (0.0, 0.004, HIP), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.76, 1.0)), 'body')
+    P.raw(aim(L.cone(0.382, 0.252, HIP - HEM, 22),
+              (0.0, 0.004, HEM), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.76, 1.0)), 'body')
+    P.add(L.box(0.300, 0.200, 0.048), 'dark', loc=(0.0, 0.004, WAIST - 0.030))
+    _close("coat")
+
+    # ---- the trunk, raked forward by LEAN. ---------------------------------
+    _open()
+    limb(P, [(0.0, 0.004, WAIST), (0.0, -LEAN * 0.55, WAIST + 0.230),
+             (0.0, -LEAN, SHO)], 0.228, 0.196, 'body')
+    # the shoulder yoke - a horizontal bar no hero silhouette carries
+    P.add(L.sphere(0.330, 0.150, 0.110, 14, 9), 'body',
+          loc=(0.0, -LEAN, SHO - 0.020))
+    _close("trunk")
+
+    # ---- BOTH ARMS UP ON THE RIM. He is CARRYING, and a two-handed HIGH
+    # carry is the half of the silhouette that is not a man. The panner and
+    # the dredger both hold a disc LOW in both hands; this rim is at 1.545
+    # against their chest-down holds, and that difference is the whole reason
+    # this body does not read as either of them. It is checked by looking.
+    _open()
+    for _i in (-1, 1):
+        _s = Vector((0.300 * _i, -LEAN, SHO - 0.040))
+        _e = _s + Vector((0.075 * _i, -0.145, -0.165))
+        _w = Vector((0.252 * _i, -LEAN - 0.300, BASK - 0.050))
+        limb(P, [tuple(_s), tuple(_e)], 0.106, 0.094, 'body')
+        limb(P, [tuple(_e), tuple(_w)], 0.094, 0.098, 'body')
+        P.add(L.sphere(0.128, 0.128, 0.108, 11, 8), 'dark',
+              loc=tuple(_w + Vector((0.0, -0.030, 0.012))))
+    _close("arms")
+
+    # ---- the head, under a hearth-hand's hood, pushed down by the stoop ----
+    _open()
+    limb(P, [(0.0, -LEAN, SHO), (0.0, -LEAN - 0.030, SHO + 0.105)],
+         0.098, 0.090, 'body')
+    P.add(L.sphere(0.168, 0.182, 0.158, 14, 10), 'dark',
+          loc=(0.0, -LEAN - 0.048, HEAD - 0.070))
+    # eyes. 0.046 - the collier's 360p lesson: 0.025 does not exist at the
+    # bottom rung. Pushed PROUD of the hood so the brim cannot shade them.
+    for _s in (-1.0, 1.0):
+        P.add(L.sphere(0.046, 0.046, 0.046, 9, 7), 'glow',
+              loc=(0.062 * _s, -LEAN - 0.196, HEAD - 0.086))
+    _close("head")
+
+    # ---- THE BASKET. His own hearth, shallow and WIDE, held out in front on
+    # the lean so the side ortho sees it clear of the trunk. The fire inside
+    # is RECESSED under the rim: a glow level with the rim blooms past the
+    # silhouette and the border check reads that as a clip, and more to the
+    # point a fire you can see the whole of is not a fire in a basket.
+    _open()
+    _BC = Vector((0.0, -LEAN - 0.300, BASK))
+    P.raw(aim(L.cone(0.300, 0.392, 0.175, 24), tuple(_BC), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.82, 1.0)), 'dark')
+    P.raw(aim(L.cone(0.392, 0.392, 0.034, 24),
+              tuple(_BC + Vector((0.0, 0.0, 0.175))), (0.0, 0.0, 1.0),
+              scale=(1.0, 0.82, 1.0)), 'dark')
+    # the hearth itself, sunk 0.052 below the rim
+    # PASS 2, FIX A - THE HEARTH DID NOT EXIST IN THE PICTURE. Pass 1 sank a
+    # FLAT glow disc 0.052 under the rim and all three orthos are near
+    # level with it, so every camera saw the rim wall and none saw the fire:
+    # the creature whose whole mechanic is the hearth it carries rendered as
+    # a man holding a black tub. `blank: []` and `errors: []` were both true
+    # and both blind - a glow that is present in the mesh and occluded by
+    # the body's own geometry is not a blank, and no number in this harness
+    # asks the viewer's question. It is a DOME now, and it stands 0.040
+    # PROUD of the rim so it breaks the rim line on a level camera.
+    P.add(L.sphere(0.300, 0.246, 0.118, 20, 10), 'glow',
+          loc=tuple(_BC + Vector((0.0, 0.0, 0.126))))
+    _close("basket")
+
+    # ---- THE FOUR VANES - THE GAUGE. One vane is one draught it can still
+    # take. 45/135/225/315 off forward and tilted 24 degrees out of vertical,
+    # for the reason set out in the docstring: no camera gets a hairline.
+    _open()
+    # PASS 3, FIX C - THE COUNT WAS UNREADABLE FROM THE SIDE AND MY PASS-2
+    # FIX MADE IT WORSE: front 4, side 3 became front 4, side 2. The cause is
+    # arithmetic and no radius could have cured it. FOUR VANES AT 90-DEGREE
+    # SPACING ARE TWO ANTIPODAL PAIRS, so each ortho looks straight down a
+    # line holding two of them and the far one hides behind the near one at
+    # EVERY radius - widening the ring only aligned them more exactly. The
+    # spacings are 75/85/105/95 degrees now, which is the smallest change
+    # that leaves no two vanes 180 degrees apart, so no single camera axis
+    # can stack a pair. THIS IS THE SECOND TIME THIS GAUGE FOOLED ME and
+    # both times the number was green: a vane hidden behind another vane is
+    # not a blank, not a clip and not a hairline, and the only instrument
+    # that has ever caught it is looking at the picture.
+    for _a in (math.radians(25.0), math.radians(100.0),
+               math.radians(185.0), math.radians(290.0)):
+        _dir = Vector((math.sin(_a), -math.cos(_a), 0.0)).normalized()
+        # PASS 2, FIX B - TWO FAULTS, BOTH VISIBLE AND NEITHER MEASURED.
+        # (1) FLOAT: a 0.150 foot on a 0.175 wall left the vane hanging with
+        #     air under it on front and three-quarter, and on the side one
+        #     vane stood clear of the basket altogether. The foot is 0.088
+        #     now, which is INSIDE the bowl wall, so each vane is planted in
+        #     the rim it is supposed to stand out of.
+        # (2) THE COUNT CHANGED WITH THE CAMERA: front 4, side 3, three-
+        #     quarter 4. My own docstring argued the vanes against HAIRLINES
+        #     and never asked about OCCLUSION, so the gauge failed the one
+        #     way I had not written down. A wider ring (0.330 -> 0.405) and
+        #     a near-upright stand (24 -> 11 degrees) separate the near and
+        #     far pairs in the side ortho instead of stacking them, and the
+        #     wider ring also walks the inner vanes off the skull, which is
+        #     what put a vane across his own eye in the three-quarter.
+        _foot = _BC + _dir * 0.405 + Vector((0.0, 0.0, 0.088))
+        _tilt = (_dir * math.sin(math.radians(11.0)) +
+                 Vector((0.0, 0.0, math.cos(math.radians(11.0))))).normalized()
+        P.raw(aim(L.box(0.052, 0.168, 0.300), tuple(_foot + _tilt * 0.150),
+                  tuple(_tilt)), 'bone')
+    _close("vanes")
+
+    # THE FIGURE. The basket and the vanes are the LOAD, not the man, and that
+    # is a declaration: a can-you-see-the-man test must not score his own
+    # hearth as part of him.
+    P.man_parts = ("legs", "coat", "trunk", "arms", "head")
+    return P
+
+
+BUILDERS.update({"fanner": fanner})

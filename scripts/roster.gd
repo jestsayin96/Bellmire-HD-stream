@@ -969,6 +969,25 @@ static func spec_gifts(h: Dictionary) -> Array:
             out.append(String(g[i]))
     return out
 
+## S156: SYSTEM 40's REMAINDER - the bespoke behaviours. Each path whose blurb promises a way of
+## fighting carries ONE way, live in delve.gd from the moment the path is chosen (SPEC_AT):
+##   taunt      - creatures within TAUNT_R go for this hero instead of the nearest
+##   trapsense  - once a floor, the first trap the party meets is read before it is walked on
+##   mend_party - once a floor, when a delver drops under a third, the whole party is mended
+##   death_ward - a second death save in the same delve
+##   aura       - while this hero stands, the whole party's blows land harder
+## Paths not listed here fight through their gifts alone.
+const SPEC_WAYS := {
+    "guardian": "taunt", "bastion": "taunt", "oathkeeper": "taunt",
+    "tracker": "trapsense", "strider": "trapsense", "loremaster": "trapsense",
+    "healer": "mend_party", "hospitaller": "mend_party", "grovekeeper": "mend_party",
+    "stillwater": "death_ward", "bonewright": "death_ward", "abjurer": "death_ward",
+    "chieftain": "aura", "skald": "aura",
+}
+
+static func spec_way(h: Dictionary) -> String:
+    return String(SPEC_WAYS.get(spec_of(h), ""))
+
 ## for !paths: both roads for this hero's calling, and what each gives first
 func paths_line(user_id: String) -> String:
     var h := get_hero(user_id)

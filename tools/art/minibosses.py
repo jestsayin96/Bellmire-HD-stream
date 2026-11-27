@@ -26683,3 +26683,386 @@ def mower():
 
 
 BUILDERS.update({"mower": mower})
+
+
+# =============================================================================
+# 69 THE SHEARMAN - "Cutloose". THE CONDITION NOTHING IN THIS FILE HAS ASKED:
+# WHETHER THE PARTY IS ACTING ON EACH OTHER.
+#
+# WHAT I CHECKED BEFORE I DESIGNED IT, BY MEASURING AND NOT BY MEMORY. I parsed
+# `BUILDERS` in this file - every `BUILDERS = {` and `BUILDERS.update({` key,
+# minus the five non-body names the same pattern catches (`budget`, `cap_used`,
+# `prims`, `smallest_prim`, `tris`) - and got 68 bodies, which is why this one
+# is the 69th and not a number carried out of a prompt. I then read the IDEA
+# line off all 68 docstrings and sorted them by WHAT THEY CONDITION ON. The
+# mower's own entry lists the axes already taken and it is still right: how
+# many of you are on it (FANNER), which of you struck it (STRAKER, OVERLOOKER),
+# what you struck with (TANNER, COLLIER, DREDGER), when you struck (PANNER,
+# RAMMER, ICEMAN, STOPPER), what you carry (SEALER, PLEDGEMAN, TITHER, BADGER),
+# who is down (PRESSMAN, STILTMAN), the room itself (SNUFFER, NIGHTMAN, BLOWER,
+# PITMAN, TIMBERMAN, DAUBER, SLUICEKEEPER, BELLMAN), and - since the 68th -
+# WHERE YOU ARE STANDING (MOWER).
+# NOT ONE of the 69 asks whether one hero's action REACHES ANOTHER HERO. Every
+# body in this file conditions on the party's relationship to IT. This one
+# conditions on the party's relationship to EACH OTHER, which is a different
+# axis and not a harder version of an old one.
+#
+# AND IT IS THE DELIBERATE OPPOSITE OF THE COOK, WHICH IS WHY I WRITE IT DOWN
+# INSTEAD OF HIDING IT. The Cook KEEPS THE PACK ALIVE - it is the body that
+# makes the room's healing matter more. This one makes it impossible. A party
+# that has learned to bring a healer to the Cook brings the same answer here
+# and finds the answer is the one thing that does not work.
+#
+# A SHEARMAN IS A REAL TRADE AND THE SHEARS ARE A REAL SIZE. Cloth finishing
+# had three steps and this file already has two of them - the FULLER (29th) and
+# the DYER (23rd). The third man cropped the raised nap off the finished cloth
+# with hand shears that were 1.0-1.4 m long and weighed near twenty pounds,
+# worked with both hands off a padded board. The instrument is enormous and it
+# is enormous in the historical record, not because a set piece needs a big
+# prop. That is the whole reason this body can carry its mechanic in one shape:
+# A HUGE OPEN V. Nothing in the other 68 is a V. The mower is the only other
+# body whose pale is a long edge and it is LEVEL AND LOW at ankle height; this
+# one is OPEN AND HIGH above the shoulder. Two long pale edges in the house that
+# cannot be confused at a glance, which was checked by naming the difference
+# before the first render rather than discovering it at pass 6.
+#
+# PLAINNESS IS THE VOICE. A man in a flat cap and a shear-board apron with the
+# shears up across his body and a cord cut in the jaws. No flourish, and the
+# bundle of ends on his hip is the only thing that says he has been at it a
+# while.
+#
+# WEAR 0.30 AND IT IS SPLIT ON PURPOSE. The smock, apron, cap and boots are
+# worn - he is a tradesman, not viewer gear. THE BLADES ARE NOT: they are the
+# one honed, bright, cared-for thing on him, the Drillmaster's gong argument and
+# the Mower's blade argument applied a third time, and here it pays twice
+# because the blades are the only pale on the body AND the shape a viewer has
+# to read the OPENING of.
+#
+# STATIC: no `anims` entry, so bestiary.gd needs a `model` path and NO `anims`
+# entry. THAT WIRING IS THE GAME BUILD'S AND IS NOT DONE HERE.
+# =============================================================================
+CANON.update({
+    "shearman": ("Cutloose", 2.51, (0.132, 0.138, 0.150), (0.885, 0.875, 0.845),
+                 "workshop",
+                 "IT CUTS WHAT JOINS YOU - it does not pick a hero and it does "
+                 "not take anything off anybody. It cuts the LINES BETWEEN "
+                 "THEM. While it stands, nothing one delver does can reach "
+                 "another: no heal, no shield thrown over a neighbour, no "
+                 "covering a man who is down, no aura, no pull, no shared "
+                 "guard. Every blow it lands still lands on one of you, and "
+                 "every one of you still swings - so the party is at full "
+                 "strength and completely alone, four people fighting in the "
+                 "same room instead of one party fighting. THE HABIT THAT "
+                 "FAILS HERE IS THE DEEPEST ONE A PARTY HAS: that somebody "
+                 "else will pick you up. A line cut is cut for good and the "
+                 "only way to get the party back is to put the shearman down, "
+                 "so the fight has exactly one answer and it is the fastest "
+                 "possible kill with no safety net under it. IT IS THE "
+                 "OPPOSITE OF THE COOK, which makes the room's healing matter "
+                 "more; a party that learned the Cook brings a healer here and "
+                 "the healer is the one member who has nothing to do. THE "
+                 "SHAPE TO READ IS THE OPENING: the shears are the only pale "
+                 "on the body, a metre and a third of honed edge held open "
+                 "above his shoulder with a cord cut through in the jaws, so a "
+                 "viewer can see what it does to a thing that joins two ends "
+                 "before it has done it to them.",
+                 0.30, "Something ahead is cutting the lines."),
+})
+ORDER = ORDER + ["shearman"]
+
+# PER-SLOT MATERIALS. `bone` IS THE TWO BLADES AND NOTHING ELSE - not the bow,
+# not the handles, not the cord, not the cap. The mechanic is an OPENING, and a
+# second pale thing anywhere on the body gives the eye a second gap to measure.
+OVERRIDE_ALLOWED = set(OVERRIDE_ALLOWED) | {"shearman"}
+
+OVERRIDE.update({
+    "shearman": {
+        # VERTEX-DRIVEN with the rgb as the FILL, exactly as the mower and the
+        # badger: every `body` item that declares no colour renders this value,
+        # and the leather/cord items below are painted per-vertex.
+        'body': ((0.132, 0.138, 0.150), 0.82, 0.03, None, True),  # smock (FILL)
+        'dark': ((0.042, 0.042, 0.046), 0.76, 0.05),  # cap, boots, belt, bow
+        'bone': ((0.885, 0.875, 0.845), 0.26, 0.22),  # THE TWO BLADES ONLY
+    },
+})
+
+
+def shearman():
+    """THE SHEARMAN - the 69th. He is not cutting a hero. He is cutting the
+    cord, and the cord is what the party is to each other.
+
+    THE THREE LUMA GUARDS ARE RE-USED, NOT INVENTED. A new body is the wrong
+    place to invent an instrument, so these are the same three the badger and
+    the mower carried and for the same reasons:
+      bone/body >= 1.30   the Beadle shipped a pale cue at 1.07 that went flat
+                          against its own pale panel with every register number
+                          passing.
+      bone/mid  >= 2.00   the Thatcher's bar, so the one mid value on the man
+                          cannot climb up and argue with the pale.
+      mid/body  >= 1.80   the Thatcher's pass-6 finding: a ONE-BAND albedo
+                          separation does not move `bands_5pct` at all.
+
+    AND SAID AGAIN BECAUSE IT IS STILL TRUE: ALL THREE ARE ALBEDO TRIPWIRES AND
+    ALBEDO IS NOT VALUE IN THIS RIG. They stop a later colour edit; they do not
+    say the shears READ, and they say nothing at all about the one question
+    this body lives or dies on - WHETHER A VIEWER CAN SEE THAT THE JAWS ARE
+    OPEN AND THAT SOMETHING IS CUT IN THEM. That is answered by looking at the
+    render, which is what the fit proof is for.
+
+    WHY THE SHEAR PLANE IS ROLLED 0.42 rad AND IT IS NOT A STYLE CHOICE. Open
+    shears read as a V only when you look at the plane the two blades share. At
+    roll 0 that plane faces the front camera square on, the V is at its widest -
+    and the cord being cut runs along the plane's own normal, straight into the
+    camera, so it is A DOT in the one view that is the acceptance view. Rolling
+    the whole instrument about its own axis costs 9% of the apparent opening
+    (0.51 m of jaw becomes 0.47 projected) and buys the cord its full length in
+    the front view. I chose that trade before rendering and the render is what
+    settles whether it was right.
+    """
+    bone_l = _luma(OVERRIDE["shearman"]['bone'][0])
+    body_l = _luma(OVERRIDE["shearman"]['body'][0])
+    if bone_l / max(1e-6, body_l) < 1.30:
+        raise ValueError(
+            "shearman: bone/body luma ratio %.2f is under 1.30 - the OPENING "
+            "is the mechanic and an opening that goes flat against the smock "
+            "cannot be read by eye (bone %.3f, body %.3f)"
+            % (bone_l / max(1e-6, body_l), bone_l, body_l))
+
+    # THE ONE MID VALUE ON THE MAN: leather and cord. The shear-board apron,
+    # the face, the cord cut in the jaws and the two pieces on the floor. A
+    # shearman wears a heavy apron because he leans his whole weight on a
+    # padded board all day - the second value is what the trade requires, the
+    # same argument the mower's leggings and the badger's yoke-cape made. THE
+    # CORD CARRIES IT TOO, on purpose: the thing being cut and the thing
+    # protecting him are the same material, which is true of the trade and
+    # keeps the count of values on this body at three.
+    MID = (0.400, 0.350, 0.270)
+    mid_l = _luma(MID)
+    if bone_l / max(1e-6, mid_l) < 2.00:
+        raise ValueError(
+            "shearman: bone/mid luma ratio %.2f is under 2.00 - the leather is "
+            "close enough to the blades to argue with the opening "
+            "(bone %.3f, mid %.3f)" % (bone_l / max(1e-6, mid_l), bone_l, mid_l))
+    if mid_l / max(1e-6, body_l) < 1.80:
+        raise ValueError(
+            "shearman: mid/body luma ratio %.2f is under 1.80 - the Thatcher's "
+            "pass 6 proved a one-band separation is not a second value "
+            "(mid %.3f, body %.3f)" % (mid_l / max(1e-6, body_l), mid_l, body_l))
+
+    P = Parts("shearman")
+    P.spans = {}
+    _at = [0]
+
+    def _seg(name):
+        P.spans[name] = (_at[0], len(P.items))
+        _at[0] = len(P.items)
+
+    # FRONT IS -Y throughout, as everywhere in this file.
+    HIP, WAIST, CHEST, SHO, HEADC = 0.98, 1.22, 1.50, 1.66, 1.90
+
+    # ---- the stance: planted, and it uses the set's shared `_legs` ----------
+    # A shearman works standing at a board. He is not going anywhere and he is
+    # not lunging: the mechanic happens above his hands, so the base's whole
+    # job is to be boring and to read PLANTED from the doorway. Every slot is
+    # explicit because `creatures.limb` defaults to slot='bone' and that put
+    # the badger's whole skeleton in the pale slot at its pass 1.
+    _legs(P, 0.0, y=0.0, hip=HIP, stance=0.185, r0=0.108, r1=0.086,
+          boot=(0.255, 0.390, 0.110))
+    _seg("legs")
+
+    # ---- the trunk ---------------------------------------------------------
+    limb(P, [(0.0, 0.0, HIP + 0.02), (0.0, -0.030, WAIST), (0.0, -0.050, CHEST)],
+         0.212, 0.258, 'body')
+    # THE BELT IS NOT DRESS - it is a dark cut across a mid trunk, and a cut at
+    # the waist is what makes the mass above it read as a CHEST.
+    P.add(L.box(0.430, 0.300, 0.072), 'dark', loc=(0.0, -0.040, WAIST - 0.030))
+    P.add(L.box(0.615, 0.245, 0.142), 'body', loc=(0.0, -0.045, SHO))
+    for _s in (-1, 1):
+        P.add(L.sphere(0.124, 0.118, 0.112, 11, 8), 'body',
+              loc=(_s * 0.288, -0.045, SHO - 0.028))
+    _seg("trunk")
+
+    # ---- the apron: THE FACING CUE, and it is a mass and not a detail ------
+    # The Beadle's fault was a body that read the same from behind. This apron
+    # is 0.42 x 0.74 of MID on the FRONT ONLY, so front and back differ by a
+    # large value mass and not by a 0.04 trinket - and the cord bundle below
+    # hangs on the BACK of the right hip, so each view has something the other
+    # has not got.
+    _ap = L.box(0.420, 0.062, 0.740)
+    P.add(_ap, 'body', loc=(0.0, -0.206, 0.880), rot=(0.055, 0.0, 0.0),
+          vcol=[MID] * len(_ap[0]))
+    _seg("apron")
+
+    # ---- the head, cap and face -------------------------------------------
+    limb(P, [(0.0, -0.030, SHO + 0.020), (0.0, -0.045, HEADC - 0.130)],
+         0.084, 0.096, 'body')
+    P.add(L.sphere(0.186, 0.194, 0.198, 14, 9), 'dark', loc=(0.0, -0.045, HEADC))
+    # A FLAT CAP, NOT A BRIM AND NOT A CONE. A cone on a ball is a lantern -
+    # the stiltman's pass-4 fault - and a broad brim is the mower's read. A
+    # low disc gives the head a flat top in BOTH views and belongs to the
+    # trade.
+    P.add(L.cone(0.232, 0.206, 0.064, 14), 'dark', loc=(0.0, -0.062, HEADC + 0.152))
+    _face = L.sphere(0.104, 0.050, 0.116, 11, 8)
+    P.add(_face, 'body', loc=(0.0, -0.188, HEADC - 0.010),
+          vcol=[MID] * len(_face[0]))
+    eyes(P, (0.0, 0.0, HEADC + 0.012), 0.044, 0.025, -0.228)
+    _seg("head")
+
+    # ======================= THE SHEARS. THIS IS THE MECHANIC. ==============
+    # Held up across the body in both hands, bow low on the right, jaws open
+    # high on the left. 1.30 m of blade, which is the real length of the real
+    # instrument and not a prop scaled up for a silhouette.
+    # *** PASS 2, AND PASS 1 IS THE FINDING. *** At pass 1 this was 1.30 m of
+    # blade at SPLAY 0.235 - a 22 degree included angle - carried diagonally
+    # across the whole figure with the bow down behind the right elbow. Every
+    # number passed: GREEN, ratio 1.02, 3 proving views, 0 blanks, frame_edge
+    # zero. AND IT DID NOT READ. I opened front.png and side.png and both say
+    # the same thing: TWO NEAR-PARALLEL POLES OVER A MAN'S SHOULDER. Two long
+    # bars 22 degrees apart are parallel at stream distance, and the one thing
+    # that would have said otherwise - the bow closing the bottom of the V -
+    # was dark, small and lying against a dark torso, so the eye never found
+    # the apex. The mechanic is an OPENING and the opening was invisible.
+    # THE CAUSE IS ONE THING AND IT IS NOT "the shear is wrong": it is THE V'S
+    # ASPECT RATIO AND ITS BACKGROUND. So the blades come down to 0.95 m (still
+    # the short end of the real instrument's range), the jaw opens to 0.300,
+    # which doubles the included angle to 35 degrees, and the whole instrument
+    # stands UP AND OUT at his right side against open background instead of
+    # lying across his chest. The roll drops with it, because the roll was
+    # bought to make the cord visible and at pass 1 the cord it bought was a
+    # rod through the man's face.
+    # *** PASS 3, AND PASS 2 IS THE FINDING - FROM THE HERO RENDER, NOT THE
+    # REGISTER. *** Pass 2 doubled the included angle to 35 degrees and stood
+    # the instrument up at his right, and at FULL FRAME it reads: two blades
+    # and a bow closing the V. I then opened `hero_front.png` - the body beside
+    # an actual KayKit adventurer, which is the distance a viewer gets - and it
+    # reads as A TALL MAN WITH A SWORD AND AN ORNATE GUARD. Every gate number
+    # was green when it did: ratio 1.02, seen 1.0 on three views, frame_edge
+    # zero, 0 blanks.
+    # THE CAUSE IS NOT THE ANGLE AND PASS 2 PROVED THAT BY FIXING THE ANGLE AND
+    # CHANGING NOTHING AT HERO SCALE. It is that ONE BLADE IS DRAWN AGAINST THE
+    # BACKGROUND AND THE OTHER AGAINST THE TORSO: the inner blade falls inside
+    # the body's own outline and stops being a silhouette, so what survives
+    # shrinking is one pale diagonal plus a dark mass under it, which is a
+    # sword and a hilt. A pair only reads as a pair when both halves are
+    # drawn against air.
+    # SO THE WHOLE INSTRUMENT GOES ABOVE THE SHOULDER LINE, where the only body
+    # at those heights is the head and the cap (|x| <= 0.232) and the inner
+    # blade clears it by 0.17 at its closest. THE LEFT ARM HAD TO COME WITH IT
+    # AND THAT IS A SECOND CHANGE, SAID PLAINLY RATHER THAN HIDDEN: with the
+    # bow at shoulder height a left hand on it must reach up and across the
+    # man's own face, which is a worse fault than the one being fixed, so the
+    # left arm now hangs. That also happens to kill the pass-2 flat-plate arm,
+    # which was fault 4 - it is a side effect of a forced change and it is NOT
+    # evidence that the forced change was right.
+    BOW = Vector((0.560, -0.300, 1.600))
+    AX = Vector((0.110, -0.060, 1.000)).normalized()
+    LEN = 0.950
+    SPLAY = 0.300               # half the jaw opening, at the tips
+    ROLL = 0.200                # see the docstring and the pass-2 note above
+
+    _p0 = Vector((AX.z, 0.0, -AX.x)).normalized()
+    _n0 = AX.cross(_p0).normalized()
+    _R = Matrix.Rotation(ROLL, 4, AX)
+    PERP = (_R @ _p0).normalized()
+    NRM = (_R @ _n0).normalized()
+
+    # ---- the two blades: flat plates, because a rod is not an edge ---------
+    # `L.membrane` from an ordered loop is the set's flat-panel primitive and
+    # it is what the mower's blade is built from. The INNER edge of each blade
+    # is the cutting edge and the two of them diverge linearly from nearly shut
+    # at the bow to SPLAY at the tip - so the opening a viewer reads is a real
+    # measured divergence and not two sticks at an angle.
+    W0, W1 = 0.150, 0.038       # blade depth at the root and at the tip
+    for _s in (-1, 1):
+        _inner, _outer = [], []
+        for _i in range(8):
+            _u = 0.150 + (LEN - 0.150) * _i / 7.0
+            _t = _u / LEN
+            _e = 0.022 + SPLAY * _t
+            _w = W0 + (W1 - W0) * _t
+            _c = BOW + AX * _u
+            _inner.append(_c + PERP * (_s * _e))
+            _outer.append(_c + PERP * (_s * (_e + _w)))
+        P.raw(L.membrane(_inner + _outer[::-1], 0.020), 'bone')
+    _seg("blades")
+
+    # ---- the bow: the U-spring behind the jaws, and it is DARK -------------
+    # Real cloth shears are one piece of steel bent into a bow at the back; the
+    # hands go on the bows. It is dark so the pale on this body stays at two
+    # objects - the blades - and the eye has exactly one gap to measure.
+    _ha = BOW + AX * 0.150 + PERP * 0.058
+    _hb = BOW + AX * 0.150 - PERP * 0.058
+    limb(P, [tuple(_ha), tuple(BOW - AX * 0.040 + PERP * 0.122),
+             tuple(BOW - AX * 0.300), tuple(BOW - AX * 0.040 - PERP * 0.122),
+             tuple(_hb)], 0.044, 0.044, 'dark')
+    _seg("bow")
+
+    # ---- the two arms: both hands on the instrument ------------------------
+    # The left arm crosses the chest to the shear well above the bow, which is
+    # what a man holding a long two-handed tool diagonally actually does, and
+    # it is also the strongest asymmetry in the front silhouette.
+    _hand_r = BOW - AX * 0.020 + PERP * 0.040
+    limb(P, [(0.288, -0.060, SHO - 0.040), (0.430, -0.190, 1.540),
+             tuple(_hand_r)], 0.098, 0.080, 'body')
+    # THE LEFT ARM HANGS. See the pass-3 note above: it is a forced change.
+    limb(P, [(-0.288, -0.060, SHO - 0.040), (-0.345, -0.105, 1.300),
+             (-0.330, -0.145, 1.040)], 0.098, 0.080, 'body')
+    _seg("arms")
+
+    # ---- THE CORD CUT IN THE JAWS. the idea, stated once, in one object ----
+    # Two pieces with a 0.11 m gap between them, at u=0.86 where the jaw is
+    # 0.355 m across, so the cord has about 0.14 m of clearance from each edge
+    # and reads as being IN the jaws rather than resting on a blade. The free
+    # ends drop; the cut ends do not. It is MID, not pale, because the pale is
+    # the opening.
+    # *** PASS 4. THE CORD RAN ALONG THE JAW'S NORMAL AND THAT IS WHY IT READ
+    # AS A HOOK. *** At pass 3 the two pieces ran along NRM - almost straight
+    # into the front camera - so they projected onto the same short stub, one
+    # occluded the other, and what was left was a single bent tan rod hanging
+    # in an open jaw. THAT IS A HOOK, AND A HOOK IS THE GAOLER'S CUE: the fault
+    # was not that the cord was invisible, it was that it read as a different
+    # creature. A cord that has to be seen being cut must lie IN THE SHEAR
+    # PLANE, bridging the mouth from one inner edge to the other, because that
+    # is the one direction in which the front camera sees its whole length -
+    # and then the CUT is a gap in the middle of a crossbar, which is the thing
+    # the eye is meant to land on. The droop is gone too: a straight bar in two
+    # pieces reads as cut, a curved one reads as slack.
+    _M = BOW + AX * 0.700
+    _EDGE = 0.022 + SPLAY * (0.700 / LEN)   # the inner edges at this height
+    for _s in (-1, 1):
+        _out = _M + PERP * (_s * _EDGE)
+        _cut = _M + PERP * (_s * 0.072)
+        _cd = L.tube([_out, (_out + _cut) * 0.5, _cut],
+                     [0.030, 0.031, 0.032], 7)
+        P.raw(_cd, 'body', vcol=[MID] * len(_cd[0]))
+    _seg("cord")
+
+    # ---- two pieces on the floor, and the gap between them ----------------
+    # The jaws say what it is about to do; these say it has already been done.
+    # They are ON THE FLOOR rather than falling in mid-air, because a floating
+    # object reads as a mistake at stream distance.
+    for _a, _b in (((-0.520, -0.400, 0.034), (-0.185, -0.455, 0.032)),
+                   ((-0.065, -0.470, 0.032), (0.265, -0.395, 0.034))):
+        _fc = L.tube([_a, ((_a[0] + _b[0]) / 2.0, (_a[1] + _b[1]) / 2.0 - 0.030,
+                           0.033), _b], [0.027, 0.030, 0.027], 7)
+        P.raw(_fc, 'body', vcol=[MID] * len(_fc[0]))
+    _seg("floorcord")
+
+    # ---- the bundle of ends on the BACK of the right hip ------------------
+    # Dark on a dark smock, so this is a SILHOUETTE cue and not a value cue -
+    # said plainly because the register will not distinguish the two. Its job
+    # is to put a lump on the back outline that the front has not got.
+    for _i, (_dx, _dy, _len) in enumerate(((0.000, 0.000, 0.330),
+                                           (0.046, 0.034, 0.275),
+                                           (-0.040, 0.026, 0.300),
+                                           (0.022, 0.062, 0.245),
+                                           (-0.018, 0.058, 0.215))):
+        _top = Vector((0.262 + _dx, 0.168 + _dy, WAIST - 0.055))
+        P.raw(aim(L.cone(0.026, 0.016, _len, 7), tuple(_top),
+                  (_dx * 0.8, _dy * 0.5, -1.0)), 'dark')
+    _seg("bundle")
+
+    return P
+
+
+BUILDERS.update({"shearman": shearman})

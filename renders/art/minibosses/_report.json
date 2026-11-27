@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "1be9c05379ce8651045114610d328c4883d72713",
+   "head": "7a4ce41a1c45181daa29b44c3b431cb99c906bb3",
    "ref": "origin/main",
-   "ref_commit": "a2e4b4f6bbdcfddf2c77d6daa54605b2379ebefd",
+   "ref_commit": "9ff16a219c308f3b2be0a4d4a73929617f4e9a57",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -3655,7 +3655,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.495,
+   "corridor_margin_m": 9.49,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.07,
    "read_from": {
@@ -3681,13 +3681,107 @@
     "three_quarter.png",
     "side.png"
    ]
+  },
+  "mower": {
+   "title": "Oneswath",
+   "theme": "grassland",
+   "idea": "IT CUTS AT ONE HEIGHT AND IT CANNOT CUT WHAT IS INSIDE THE HAFT - it does not choose a target and it does not strike twice. It takes a SWATH: one level stroke at one height, and every delver standing out in the open at its reach is cut by the same stroke on the same beat, however many of them there are. But the blade is on the far end of a haft, and a scythe has a dead circle it cannot reach into - THE GROUND AT ITS OWN BOOTS. A hero who closes INSIDE the sweep takes nothing at all; the stroke goes over the top of them and is wasted, and it has to break the hold and back off to get a swath back. So the habit that fails here is SPACING, which is the one habit a party never questions: stand off at a sensible distance and you are all cut on one count, or do the thing nobody wants to do and walk into the blade's own arc and crowd its boots. IT IS THE EXACT OPPOSITE OF THE FANNER, which punishes the whole line for crowding it - a party that learned Blastmere will stand off this one and lose the line to it. THE REACH IS THE THING TO READ: the honed blade is the only pale on the body and it is the only long thing on it, level at ankle height, so a viewer can see at a glance how far out the stroke goes and therefore how far in they have to get.",
+   "wear": 0.42,
+   "feed_line": "Something ahead is taking a swath.",
+   "pack_used": null,
+   "parts": 3,
+   "engine": "BLENDER_EEVEE",
+   "faces": 645,
+   "size": [
+    2.65,
+    1.16,
+    2.52
+   ],
+   "footprint_span": 2.65,
+   "height_m": 2.52,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.35,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 6.98,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.9174474874117169,
+    "ortho": 3.2766788005828857,
+    "clip": [
+     7.235668182373047,
+     20.01015853881836
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
+  },
+  "shearman": {
+   "title": "Cutloose",
+   "theme": "workshop",
+   "idea": "IT CUTS WHAT JOINS YOU - it does not pick a hero and it does not take anything off anybody. It cuts the LINES BETWEEN THEM. While it stands, nothing one delver does can reach another: no heal, no shield thrown over a neighbour, no covering a man who is down, no aura, no pull, no shared guard. Every blow it lands still lands on one of you, and every one of you still swings - so the party is at full strength and completely alone, four people fighting in the same room instead of one party fighting. THE HABIT THAT FAILS HERE IS THE DEEPEST ONE A PARTY HAS: that somebody else will pick you up. A line cut is cut for good and the only way to get the party back is to put the shearman down, so the fight has exactly one answer and it is the fastest possible kill with no safety net under it. IT IS THE OPPOSITE OF THE COOK, which makes the room's healing matter more; a party that learned the Cook brings a healer here and the healer is the one member who has nothing to do. THE SHAPE TO READ IS THE OPENING: the shears are the only pale on the body, a metre and a third of honed edge held open above his shoulder with a cord cut through in the jaws, so a viewer can see what it does to a thing that joins two ends before it has done it to them.",
+   "wear": 0.3,
+   "feed_line": "Something ahead is cutting the lines.",
+   "pack_used": null,
+   "parts": 4,
+   "engine": "BLENDER_EEVEE",
+   "faces": 811,
+   "size": [
+    1.5,
+    0.73,
+    2.51
+   ],
+   "footprint_span": 1.5,
+   "height_m": 2.51,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 9.495,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 6.99,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 1.5084694631891393,
+    "ortho": 2.779144287109375,
+    "clip": [
+     6.314608097076416,
+     17.023469924926758
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   }
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs a2e4b4f6bbdcfddf2c77d6daa54605b2379ebefd sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 9ff16a219c308f3b2be0a4d4a73929617f4e9a57 sha bc3a603f",
  "blank_check": {
-  "files": 201,
+  "files": 207,
   "failures": []
  }
 }

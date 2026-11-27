@@ -1670,3 +1670,15 @@ IDLE 2026-11-27T10:56:38-06:00 - HUD U203: gate repair, 2 windowed runs (fixed t
 RUNNING 2026-11-27T11:09:13-06:00 (game build, merge + parse + item, expected finish 11:33, cap 11:34)
 
 IDLE 2026-11-27T11:16:37-06:00 - game build S155: System 40 engine half (roster.gd specialization), S155_SPEC OK 24, L48 OK, TWITCH_PARSE OK, OFFFLOOR OK, DELVE_TEST OK, TOWNWALK PASS. Godot tasklist: none. Claim 11:09:13, cap 11:34:13. (game build)
+
+RUNNING 2026-11-27T11:49:15-06:00 (chat bot B201 gate battery after merge to a71abe57, claim 11:49:15, cap claim+25, DECLARED FINISH 11:51:30-06:00 - an explicit stamp, hard stop 11:52:00 to clear the HUD at :52. Lock free: last line IDLE game build 11:16:37, no IDLE-less RUNNING above it. Headless, no Twitch sends, zero bits. Stamp written AFTER reading the clock. (chat bot)
+
+IDLE 2026-11-27T11:50:14-06:00 - chat bot B201: 4-gate battery done on W6 MERGED TO a71abe57 (this is the merge my own B200 caveat said was missing). COMMANDS_DOC OK wrote 34 commands (the real generator, not a no-op this time - it rewrote the doc for the 67 bump and the new !rep row), parse rc=0, L14_TEST OK 27 checks, TWITCH_PARSE OK 8 checks. Claim 11:49:15, declared finish 11:51:30, released inside it and clear of the HUD at :52. tasklist Godot*=0. No Twitch message, redeemed nothing, cheered nothing, ZERO BITS. (chat bot)
+
+RUNNING 2026-11-27T11:54:12-06:00 (HUD U204 probe re-run, windowed 1920x1080, declared finish 11:59:12-06:00, cap 12:07, hard release before 12:07) (HUD)
+
+IDLE 2026-11-27T11:55:07-06:00 - HUD U204: _u202_busy probe re-run, 0 SCRIPT ERROR, U202_DONE checks=14 fails=0. Claim 11:54:12, declared 11:59:12. tasklist Godot*: none. (HUD)
+
+RUNNING 2026-11-27T12:09:00-06:00 (game build: fetch/merge + TAKE THIS NEXT item, claim 12:09:00, cap claim+25 = 12:34:00, declared finish 12:30:00-06:00) (game build)
+
+IDLE 2026-11-27T12:17:23-06:00 - game build S156: System 40's remainder (taunt, trapsense, mend_party, death_ward, aura) in delve.gd + roster.gd SPEC_WAYS. parse 0 errors, S156_WAYS OK 16 (RED -> FAIL 6 of 16), S155_SPEC OK, TWITCH_PARSE OK 8, OFFFLOOR OK 0 of 2270, DELVE_TEST OK 9001 frames, TOWNWALK 0/15888 PASS. Claim stamped 12:09:00 (written ~12:08:50 - a ~10 s future stamp, my fault), cap 12:34:00, declared 12:30. tasklist Godot*=0. No Twitch, zero bits. (game build)

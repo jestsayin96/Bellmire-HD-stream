@@ -186,6 +186,9 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                     out = _oil(user_id, arg)
         "reroll":   out = _reroll(user_id, display)
         "respec":   out = _needs(user_id, func(): return roster.respec(user_id, arg))
+        "paths":    out = _needs(user_id, func(): return roster.paths_line(user_id))
+        "specialize":
+                    out = _needs(user_id, func(): return roster.specialize(user_id, arg))
         "memorial": out = _memorial()
         "deepest":  out = _board("deepest")
         "richest":  out = _board("gold")
@@ -3363,6 +3366,13 @@ static func commands() -> Dictionary:
                     ex_checked += 1
                     if not Roster.CLASSES.has(ex_one):
                         ex_ghost.append("`respec`.example names the calling \"%s\" and Roster.CLASSES has no such row, so the respec is refused" % ex_one)
+                "specialize":
+                    ex_checked += 1
+                    var ex_roads: Array = []
+                    for ex_cl: String in Roster.SPECS:
+                        ex_roads.append_array((Roster.SPECS[ex_cl] as Dictionary).keys())
+                    if not ex_roads.has(ex_one):
+                        ex_ghost.append("`specialize`.example names the road \"%s\" and no Roster.SPECS row carries it, so roster.gd refuses the line this file published" % ex_one)
                 "enlist":
                     ex_checked += 1
                     if not Roster.CLASSES.has(ex_one):

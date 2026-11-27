@@ -4733,3 +4733,25 @@ pull a Phase 2 system early. Checked the prompt's gear.gd null-guard defect: ALR
 `ps == null` -> erase + return null) - the prompt's line is stale. Lock claimed 09:08:54, cap 09:33:54, no Godot
 launched, released at once. Committed only RUN_LOCK.txt and this entry; the five modified renders/ pngs in R are
 not this firing's and were left alone. No Twitch, zero bits.
+## D-cycle - S156 SYSTEM 40's REMAINDER: the paths' bespoke ways, 2026-11-27 12:08-12:2x CST (game build)
+TAKE THIS NEXT (11:58 block) GAME BUILD row: "THE BESPOKE BEHAVIOURS - SYSTEM 40'S REMAINDER, IN delve.gd". The
+68th (mower) NOT named, per the same row - no MB_NAME, no MB_FIT, no theme row.
+- roster.gd (bak_s156): SPEC_WAYS maps 14 of the 30 paths to ONE way each + static spec_way(h). The other 16 paths
+  fight through their gifts alone - said, not padded.
+- delve.gd (bak_s156), ALL FIVE of the directive's behaviours, each changing a delve number, none a label:
+  taunt (guardian/bastion/oathkeeper) - in the creatures' answer loop, after `nearest` and the grudge pick, a living
+  visible taunter within TAUNT_R 9 m takes the blow instead of the nearest delver (grudge creatures are not drawn).
+  trapsense (tracker/strider/loremaster) - once a floor, the first TRAP (not portcullis gate) the party fails to
+  spot is read instead ("X reads a spike trap before anyone walks on it"), then the normal spotted path runs (TOOLS
+  callings may still disarm). mend_party (healer/hospitaller/grovekeeper) - once a floor, the first delver to drop
+  under MEND_AT 34% calls it: every LIVING delver gets MEND_FRAC 20% of max through _mend (so the Leech's basin
+  still eats it). death_ward (stillwater/bonewright/abjurer) - after the old CON death save is spent or failed, a
+  second one that HOLDS at 1 hp, once a delve. aura (chieftain/skald) - while one stands, _hero_damage x1.10 for
+  the whole party. _sense_floor/_mend_floor reset in start(); `warded` lives on the per-delve member dict.
+- GATES: parse --quit-after 300 rc 0, 0 Parse Error / 0 SCRIPT ERROR. S156_WAYS OK 16 checks; S156_RED=1 (every
+  path stripped) -> S156_WAYS FAIL 6 of 16 - the gate can go red. S155_SPEC OK. TWITCH_PARSE OK (8 checks).
+  OFFFLOOR_VERDICT OK 0 of 2270. DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/15888 raid 0/8277 PASS.
+- NOT LOOKED AT IN A PICTURE: these are rule changes with feed lines, not a body or a mesh; the test prints them.
+  The DELVE_TEST party carries no chosen path, so the live soak did not fire a way - the S156 gate is the proof.
+- HANDOFFS: the five feed lines are placeholders for content to tune (delve.gd _trapsense caller, _mend_party,
+  _death_ward). Which paths carry which way is content-tunable in Roster.SPEC_WAYS. No Twitch, zero bits.

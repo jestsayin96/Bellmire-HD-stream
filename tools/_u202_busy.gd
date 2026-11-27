@@ -71,9 +71,12 @@ func _probe(tag: String) -> void:
 		return
 	var panel: Control = fh._panel
 	var pr := _rr(panel)
-	# U204: _content is only built for the ChronicleScroll skin; in other scenes it is Nil. Fall back to the panel rect
-	# so the probe measures instead of throwing get_global_rect on Nil.
-	var vel: Rect2 = Rect2(fh._content.get_global_rect()) if fh._content != null else pr
+	# U205: _content is built ONLY by feed_hud._build_chrome(), which runs only while HudDock.split() is true (spotlight
+	# panes up). This probe runs full-screen, so Nil here is correct, not a bug: there IS no vellum in this scene.
+	# U204 aliased vellum to the panel, which made over_vellum a duplicate of over_panel. Retired: the vellum check
+	# runs only when the vellum exists, and the log says so instead of printing a panel rect under the vellum name.
+	var has_vel: bool = fh._content != null
+	var vel: Rect2 = Rect2(fh._content.get_global_rect()) if has_vel else Rect2()
 	var n := 0
 	for lb in fh._box.get_children():
 		if not (lb is Label):
@@ -91,14 +94,15 @@ func _probe(tag: String) -> void:
 		var left := l.get_global_rect().position.x
 		var right := left + sz.x
 		var bottom := l.get_global_rect().position.y + sz.y
-		var over_v := right - vel.end.x
+		var over_v := (right - vel.end.x) if has_vel else 0.0
 		var over_p := right - pr.end.x
 		var vis_clip := l.visible_characters != -1 or l.visible_ratio < 1.0
 		print("U134_LINE %s a=%.2f vis_clip=%s lblw=%.0f textw=%.0f over_vellum=%.1f over_panel=%.1f bottom_over=%.1f fs=%d \"%s\"" % [tag, l.modulate.a, vis_clip, l.size.x, sz.x, over_v, over_p, bottom - pr.end.y, fs, l.text.left(40)])
 		_ok(over_p <= 0.5, "%s line drawn %.1f px past the Chronicle panel: %s" % [tag, over_p, l.text.left(30)])
-		_ok(over_v <= 0.5, "%s line drawn %.1f px past the vellum: %s" % [tag, over_v, l.text.left(30)])
+		if has_vel:
+			_ok(over_v <= 0.5, "%s line drawn %.1f px past the vellum: %s" % [tag, over_v, l.text.left(30)])
 		_ok(bottom <= pr.end.y + 0.5, "%s line bottom %.1f px past the panel: %s" % [tag, bottom - pr.end.y, l.text.left(30)])
-	print("U134_PANE %s lines=%d panel=%s vellum=%s card=%s" % [tag, n, pr, vel, fh.card_showing()])
+	print("U134_PANE %s lines=%d panel=%s vellum=%s card=%s" % [tag, n, pr, (str(vel) if has_vel else "NONE(split off: _content is only built by _build_chrome)"), fh.card_showing()])
 
 const AMB := ["Zed_the_Tall rolls 3 to the house's 5 - the tavern keeps 120 gold.", "Zed_the_Tall lays 120 gold on the table and dares Mira_Vane to throw. (!dice accept)", "Mira_Vane rolls 6 to the house's 2 and wins - 228 gold after the house's cut.", "Zed_the_Tall - a city in all but charter plays for 300 gold at most. The stakes rise as the town does."]
 const AMB_OLD := ["Wolfgang_Amadeus_Mozart_X - a city in all but charter plays for 300 gold at most. The stakes rise as the town does.", "Wolfgang_Amadeus_Mozart_X puts down 99999 gold they do not have - 12345 in the purse.", "Wolfgang_Amadeus_Mozart_X lays 300 gold on the table and dares Hildegard_von_Bingen_Qwer1 to throw. (!dice accept)", "Wolfgang_Amadeus_Mozart_X rolls 3 to the house's 3 (the house wins ties) - the tavern keeps 300 gold.", "Wolfgang_Amadeus_Mozart_X rolls 6, Hildegard_von_Bingen_Qwer1 rolls 6 after a tie - Hildegard_von_Bingen_Qwer1 takes the pot of 600 gold.", "Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 - a city in all but charter plays for 300 gold at most. The stakes rise as the town does.", "Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 rolls 6, Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 rolls 6 after a tie - Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 takes the pot of 600 gold."]

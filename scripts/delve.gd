@@ -51,6 +51,8 @@ func _e3po(cat: String, sub := "") -> void:
 
 func start(uids: Array) -> void:
 	_rng.randomize()
+	_sense_floor = -1              # S156: the paths' once-a-floor ways start fresh each delve
+	_mend_floor = -1
 	for uid in uids:
 		var h: Dictionary = roster.get_hero(uid)
 		if h.is_empty() or not bool(h["alive"]):
@@ -1901,6 +1903,13 @@ func _fight_body(delta: float, alive: Array, foes: Array) -> void:
 				if float(m["hp"]) / float(m["max"]) < float(near["hp"]) / float(near["max"]):
 					near = m
 			nd = _flat((near["body"] as Node3D).global_position, mon.global_position)
+		# S156: a taunting path (Guardian, Bastion, Oathkeeper) draws it off whoever is nearest
+		if not ways.has("grudge"):
+			var tn := _taunter(mon.global_position, alive)
+			if not tn.is_empty() and not is_same(tn, near):
+				near = tn
+				nd = _flat((near["body"] as Node3D).global_position, mon.global_position)
+				spec_log["taunt"] += 1
 		var r := REACH + mon._height() * 0.2
 		var shots := float(ways.get("ranged", 0.0))
 		if shots > 0.0:
@@ -2678,6 +2687,8 @@ func _hero_hit(m: Dictionary) -> void:
 	if float(m["hp"]) > 0.0 and float(m["hp"]) < float(m["max"]) * 0.25 and int(m.get("hurt_bark", -1)) != floor_no:
 		m["hurt_bark"] = floor_no
 		_bark(m, "hurt")
+	if float(m["hp"]) > 0.0 and float(m["hp"]) < float(m["max"]) * MEND_AT:
+		_mend_party()                 # S156: a Healer's path answers once a floor
 	var b: HeroBody = m["body"]
 	if is_instance_valid(b) and b.is_inside_tree():
 		Rig.play(b._anim, "Hit_A")
@@ -2699,6 +2710,8 @@ func _hero_hit(m: Dictionary) -> void:
 			m["hp"] = 1.0
 			_say("%s should be dead - and stands back up (%d)." % [m["h"]["name"], s])
 			return
+	if _death_ward(m):                # S156: a warded path gets a second one, and it holds
+		return
 	Rig.play(b._anim, "Death_A")
 	_vox(m, "death", 3.0)             # S2
 	b.fallen = true
@@ -3130,7 +3143,7 @@ func _hero_damage(h: Dictionary, crit: bool) -> float:
 	var md := roster.mod(h, prim)
 	var flat := roster.attack(h) * 0.75 + kit_bonus + roster.acc_bonus(h, "dmg") - float(n) * float(s + 1) * 0.5 - float(md)
 	var dice := _dice(n, s) + (_dice(n, s) if crit else 0)
-	return maxf(1.0, float(dice + md) + flat)
+	return maxf(1.0, (float(dice + md) + flat) * _aura_mult())     # S156: a Chieftain or Skald standing
 
 ## a creature's blow on 2d6: the same 0.6-1.0 of its base, mean 0.8, now dice;
 ## a natural 20 doubles it
@@ -3210,6 +3223,75 @@ const TRAPS := {
 	"Portcullis":    {"noun": "a portcullis", "what": "the portcullis crashes down!", "dice": [2, 8], "sfx": "hit", "name": "a portcullis"},
 	"SwarmTrap":     {"noun": "a grated floor", "what": "the bars drop open - something is coming up through them!", "dice": [1, 1], "sfx": "swing", "name": "a swarm grate"},
 }
+## ---- S156: SYSTEM 40's REMAINDER - the paths' bespoke ways (Roster.SPEC_WAYS). Each is a
+## number that changes in the delve, never a label: who the creature hits, whether a trap goes
+## off, how much life the party has, whether a hero dies, how hard every blow lands.
+const TAUNT_R := 9.0          # a taunter this close to a creature takes its blow instead
+const MEND_AT := 0.34         # a delver under a third of their life calls the mend
+const MEND_FRAC := 0.20       # ...which gives every living delver a fifth of their life
+const AURA_MULT := 1.10       # while a Chieftain or Skald stands, every blow lands a tenth harder
+var spec_log := {"taunt": 0, "trapsense": 0, "mend_party": 0, "death_ward": 0}
+var _sense_floor := -1
+var _mend_floor := -1
+
+func _way_holders(way: String) -> Array:
+	var out: Array = []
+	for m in party:
+		if float(m.get("hp", 0.0)) > 0.0 and Roster.spec_way(m["h"]) == way:
+			out.append(m)
+	return out
+
+func _taunter(at: Vector3, alive: Array) -> Dictionary:
+	var best: Dictionary = {}
+	var bd := TAUNT_R
+	for m in alive:
+		if float(m.get("hp", 0.0)) <= 0.0 or has_st(m, "invisible") or Roster.spec_way(m["h"]) != "taunt":
+			continue
+		if not (m.get("body") is Node3D) or not is_instance_valid(m["body"]):
+			continue
+		var d := _flat((m["body"] as Node3D).global_position, at)
+		if d < bd:
+			bd = d
+			best = m
+	return best
+
+## once a floor: the name of the delver who read the trap, or "" if no one can
+func _trapsense() -> String:
+	if _sense_floor == floor_no:
+		return ""
+	var hs := _way_holders("trapsense")
+	if hs.is_empty():
+		return ""
+	_sense_floor = floor_no
+	spec_log["trapsense"] += 1
+	return String(hs[0]["h"]["name"])
+
+func _mend_party() -> bool:
+	if _mend_floor == floor_no:
+		return false
+	var hs := _way_holders("mend_party")
+	if hs.is_empty():
+		return false
+	_mend_floor = floor_no
+	spec_log["mend_party"] += 1
+	for o in party:
+		if float(o.get("hp", 0.0)) > 0.0:
+			_mend(o, float(o["max"]) * MEND_FRAC)
+	_say("%s the %s calls the party in close and mends them all." % [hs[0]["h"]["name"], Roster.calling_of(hs[0]["h"])])
+	return true
+
+func _death_ward(m: Dictionary) -> bool:
+	if Roster.spec_way(m["h"]) != "death_ward" or bool(m.get("warded", false)):
+		return false
+	m["warded"] = true
+	m["hp"] = 1.0
+	spec_log["death_ward"] += 1
+	_say("%s goes down - and the %s's ward will not let them stay down." % [m["h"]["name"], Roster.calling_of(m["h"])])
+	return true
+
+func _aura_mult() -> float:
+	return AURA_MULT if not _way_holders("aura").is_empty() else 1.0
+
 var trap_log := {"spotted": 0, "disarmed": 0, "sprung": 0, "saved": 0, "damage": 0.0}
 
 func trap_dc() -> int:
@@ -3249,6 +3331,11 @@ func _meet_trap(m: Dictionary, tr: Dictionary, force_spot := -1) -> void:
 	var spotted := pd != 1 and (pd == 20 or per >= dc)
 	if force_spot >= 0:
 		spotted = force_spot == 1
+	if not spotted and force_spot < 0:
+		var reader := _trapsense()          # S156: a Tracker reads the first one a floor
+		if reader != "":
+			spotted = true
+			_say("%s reads %s before anyone walks on it." % [reader, spec["name"]])
 	if spotted:
 		trap_log["spotted"] += 1
 		if String(h["class"]) in TOOLS:

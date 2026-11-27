@@ -601,6 +601,10 @@ func _sheet(r: Roster, h: Dictionary, id := "", delv: Dictionary = {}) -> Dictio
     var row := {
         "name": String(h.get("name", "?")), "class": String(h.get("class", "")),
         "species": Roster.species_of(h), "level": int(h.get("level", 1)), "xp": int(h.get("xp", 0)),
+        # S157 (additive): System 40's hub half. `spec` is the path STEM ("guardian"), "" until the
+        # hero specializes; `spec_name` is its display name ("Guardian"), "" until then. Both come
+        # straight off Roster.spec_of / spec_row - one source, so an invalid stored spec reads "".
+        "spec": Roster.spec_of(h), "spec_name": String(Roster.spec_row(h).get("name", "")),
         "rank": r.rank_of(h), "standing": r.standing(h), "title": r.title_of(h),
         "ac": r.armour_class(h), "hp": int(r.max_hp(h)), "max_hp": int(r.max_hp(h)),
         "xp_next": int(r._xp_needed(int(h.get("level", 1)))), "prof": r.prof(h),

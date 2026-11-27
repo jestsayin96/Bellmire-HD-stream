@@ -1129,7 +1129,17 @@
     "Packs checked, straps pulled tight. The stair took them.",
     "The lamp-lighter trimmed the wick for them and stepped back.",
     "They left the bread on the sill for the walk back.",
-    "Down past the guild post, door kept, light carried."
+    "Down past the guild post, door kept, light carried.",
+    "The ferryman's boy waved them off and went back to his nets.",
+    "Torches lit at the post, one each, no spares.",
+    "They ate standing, crumbs on the stair, and went down.",
+    "The bell-ringer let the rope go slack as they passed.",
+    "Hands on hilts, hoods up, down the worn steps.",
+    "Somebody coughed at the gate. They went down anyway.",
+    "Rope coiled, lamp filled, the guild clerk's tally kept.",
+    "The cat at the post watched them go, unbothered.",
+    "Small coin in the offering bowl. Down they went.",
+    "They went down by the baker's hour, bread warm in the pack."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1763,7 +1773,17 @@
     "The last of floor %d is down. Blades wiped, packs checked.",
     "Floor %d is behind them. The dust settles slowly.",
     "Floor %d is theirs. The bell at the post rings once.",
-    "Floor %d is clear. A kettle would be welcome."
+    "Floor %d is clear. A kettle would be welcome.",
+    "Floor %d is clear. They sit a moment on the bottom stair.",
+    "Floor %d is quiet at last. Somebody counts the arrows.",
+    "Floor %d is theirs. The torches burn lower than they did.",
+    "Floor %d is done. A strap is retied, a boot knocked on stone.",
+    "Floor %d falls still. The lamp is trimmed before anyone speaks.",
+    "Floor %d is behind them. Nobody cheers. Somebody nods.",
+    "Floor %d is clear. Bandages out, and then bread.",
+    "Floor %d is done. The next stair waits, and so does supper.",
+    "Floor %d goes dark and stays dark. That will do.",
+    "Floor %d is finished. Salt on the blades, then onward."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -5065,7 +5085,27 @@
     "The roll has a line for them. The line is full.",
     "Knew the smith by name. The smith knows theirs.",
     "Good company on the stair. Gone from it now.",
-    "Ate bread at the gate and walked in whistling."
+    "Ate bread at the gate and walked in whistling.",
+    "Paid the smith in full. Died owing nothing.",
+    "Mended the boots twice. Third time they did not hold.",
+    "Left a good rope at the third hook. It is still there.",
+    "Took the short watch so another could sleep.",
+    "Said it was only a scratch. Said it kindly.",
+    "Counted the torches in. Counted one out.",
+    "Their bowl is still on the shelf. Nobody has moved it.",
+    "Never lost a coin of the party's. Lost the rest.",
+    "Walked the stair a hundred times. Once too few coming up.",
+    "Kept the map honest. The map is all that came back.",
+    "Shared the last of the water and said they were not thirsty.",
+    "Knew every step of the guild road. The stair was new.",
+    "Sharpened the others' blades before their own.",
+    "Whistled off-key. The stair is quieter for it.",
+    "Had a cart half-paid at the wheelwright's. The wheelwright will keep it.",
+    "Banged the pots at dawn so the rest would rise. Rose first themselves.",
+    "Tied the bundle tight and sent it up with the others.",
+    "Asked for a drink at the gate. Got it. Went down.",
+    "Held the door until the door was all that held.",
+    "A steady one. The post is short a name."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -15928,5 +15968,6 @@
   "_note_c227": "C-227 (content, 27 Nov 2026): the 66th miniboss_feed.by_key row, key `thatcher` (art's .glb stem, committed: assets/monsters/minibosses/thatcher.glb on main, def thatcher in tools/art/minibosses.py). arrive 9, act 8, broken 4, fall 8, fanner/mealman shape. Art's feed line is arrive[0] verbatim. No boss name used - Delve.MB_NAME has no thatcher row yet (game build owes 'Lastcourse'), so fall lines say He and {name} in act is the hero. Mechanic in the words: while he stands the rest of the room cannot be hurt (blows land in thatch), kill him and the covering comes off everything at once. He hits nobody and does nothing to himself. Held every other pool. Expected zero-hit key.",
   "_note_c229": "C-229 (content, 27 Nov 2026): backlog 2, 78 disaster variant lines, same shape as C-148/C-69. Additive; nothing wired. Expected zero-hit key.",
   "_note_c230": "C-230 (27 Nov 2026 CST): no committed art body lacks feed lines (66 bodies, 66 keys); backlog 3 top-up. epitaphs +20, descend +8, cleared +8 (floor-number %d lines only), barks enter/lord/trap/hurt/drink/misfire +4 each. Additive, plain register, no mechanics, no floor counts. Expected zero-hit key; wire nothing.",
-  "_note_c231": "C-231 (content, 27 Nov 2026): townsfolk.react raid/festival/caravan/growth/hero_falls/hero_rich +5 each (30 lines). No new body, 66=66 feed keys. Plain register, no mechanics. data/drops.json NOT created: the four-file rule bars new data files; awaiting Mr. E's licence. Expected zero-hit key; wire nothing."
+  "_note_c231": "C-231 (content, 27 Nov 2026): townsfolk.react raid/festival/caravan/growth/hero_falls/hero_rich +5 each (30 lines). No new body, 66=66 feed keys. Plain register, no mechanics. data/drops.json NOT created: the four-file rule bars new data files; awaiting Mr. E's licence. Expected zero-hit key; wire nothing.",
+  "_note_c232": "C-232: epitaphs +20, descend +10, cleared +10 (10 lines carry the floor placeholder). Pools already read by the engine; no wiring."
 }

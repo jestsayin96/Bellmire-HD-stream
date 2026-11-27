@@ -1,0 +1,34 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S155 A: 15 callings, 30 paths
+  ok   A: every calling has paths (missing [])
+  ok   A: every calling splits exactly two ways ([])
+  ok   A: no path name is also a calling ([])
+  ok   A: path keys are unique across callings ([])
+  ok   B: every path has three gifts ([])
+  ok   B: every gift has a word and a blurb ([])
+  ok   B: no gift repeats the calling's own kit ([])
+  ok   C: refused below level 10 -> Tess must reach level 10 to choose a path (level 9 now).
+  said: Tess is a Crusader now, for good. Learns Smite - the dead and the fallen take double.
+  ok   C: chosen at level 10
+  ok   C: first gift (smite) arrives with the choice
+  ok   C: the third gift is NOT given early
+  ok   C: level 15 announces the second gift (["rage"])
+  ok   C: level 20 announces the third gift
+  ok   C: level 10 does not re-announce the first gift
+  ok   C: level 20 holds all three (["cleave", "bulwark", "resolve", "smite", "rage", "backstab"])
+  ok   D: a second choice is refused -> Tess is already a Crusader, and that is for good.
+  ok   D: retrain refused once on a path -> Tess walks the Crusader's road for good - the calling cannot be changed now.
+  ok   D: called Crusader, not knight
+  ok   D: !me sheet reads the path name
+  ok   D: an unknown road is refused and names the real two -> The rogue's roads are Shadow or Tracker.
+  ok   D: !paths reads both roads -> Odo the rogue may choose now, and only once - Shadow: Not there when the blow lands. There when it lifts. (first gift Riposte)  |  Tracker: Reads the floor. The first trap is seen before it is stepped on. (first gift Deadeye)
+  ok   D: a path from another calling is ignored
+  ok   E: a Crusader hits the dead harder in delve (2.59 vs 1.08)
+  ok   F: spec survives a JSON round-trip
+CHECKS 24 FAILS 0
+S155_SPEC OK
+
+--STDERR--
+
+RC=0

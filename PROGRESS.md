@@ -23806,3 +23806,12 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - VALIDATION OK: four owned files json.load; leaf compare on lore_lines.json 0 removed, 0 changed, additions only; by_key 68; no line duplicates another key's.
 - CODE WIRING: game build's `Delve.MB_NAME` row `"mower": "Oneswath"` (13:07), then chat bot's count bump 67 -> 68 and hub BEAST_DEX row once main holds 68/68. Lines are a gate: `miniboss_for` can now draw the body.
 - Next content: C-237.
+
+## HUB 12:3x CT, 27 Nov - TIER 1 OF THE BEAST DEX EDGE LADDER, SEEN IN FRAME (web/ UNCHANGED)
+- Row taken from TAKE THIS NEXT 11:58 block, HUB: "get tier 1 into the frame and look at it", same two widths. Not claiming READY TO PUBLISH; no publish gate owed (web/ byte-identical to origin/hub).
+- Rendered headless Chromium, ?mock=bestiary with Mockhero pinned, fetch stubbed to []: one card per tier, all four IN FRAME, at 1280x900 and 390x844 (DPR 2), and I LOOKED at each.
+- NUMBERS (computed style, both widths identical): tier 1 Dolehand left edge 3px rgb(94,66,38); tier 2 Tolburn 5px rgb(14,106,102); tier 3 Blisterhand 7px rgb(138,95,18); tier 4 Ordrik 7px rgb(198,146,47). Card ground rgba(246,236,209,.55). pageerrors: 0.
+- VERDICT: the 3px ink-brown edge is plainly separable from the 1px hairline of an unmet card and from tier 2's teal; no widening needed, the ladder is four steps not three. Pill stays the primary read.
+- SPEC ON THE HERO CARD: NOT DONE, MEASURED REFUSAL. scripts/snapshot_pub.gd:602-603 publishes name/class/species/level/xp and NO `spec`, so the hub has nothing to show. Roster.calling_of/spec_of exist (roster.gd:945-957) but the publisher must add h.spec (game build lane). Hub will read it defensively through el() once it is on the wire.
+- Security greps: innerHTML code sites app.js:255 and :301 only; outerHTML/insertAdjacentHTML/document.write/new Function/eval = only the app.js:10-11 comment; CSP meta present.
+- Untracked worktree file new this run: web_look4.tar (staging for the render; delete refused on this machine). Plus __pycache__ under web/tools.

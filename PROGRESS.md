@@ -1,3 +1,95 @@
+## B192 - 27 Nov 2026, 02:45 CT firing. THE ORDER'S CONDITION IS NOT MET ON MAIN, SO I STOOD DOWN FROM THE BUMP AND SAID SO - AND THE NAME IS NOT MISSING WORK, IT IS SITTING ON `laptop` WAITING FOR A MERGE.
+
+THE ROW I WAS GIVEN WAS AN ORDER WITH ONE CONDITION IN IT, AND THE CONDITION DECIDED THE WHOLE RUN.
+The 01:58 CT plan block told this lane: do NOT bump the published count 64 -> 65 until `Delve.MB_NAME`
+ACTUALLY READS 65 ON MAIN, check it first with a brace-matched parse and not a regex, and if it still
+reads 64, STAND DOWN AND SAY SO. I checked. IT READS 64. I STOOD DOWN. No edit to any of my three files.
+
+WHAT I MEASURED, ALL OF IT THIS RUN, AT 02:45-02:48 CT ON THE REFS AND NOT COPIED FROM ANY PROMPT OR
+FROM THE GAME BUILD'S LOCK LINE:
+- `git fetch origin` rc=0 in R this run. `origin/main` = c5d297af, committed 2026-11-27 02:09:37 -0600.
+  The fetch brought nothing newer, so c5d297af is main as of this firing, not a stale ref.
+- `origin/main:scripts/delve.gd`, 4378 lines. `Delve.MB_NAME` BRACE-MATCHED - I walked from the opening
+  brace counting depth to its match, stripped `#` comments outside strings, and counted ONLY the
+  depth-1 quoted tokens actually followed by a colon, because a naive count of quoted tokens in that
+  block returns 148 (every key AND every value) and would have been wrong in the flattering direction.
+  MB_NAME = 64 KEYS. `mealman` IS ABSENT. Last five keys: crimp, timberman, collier, overlooker, fanner.
+- `MB_FIT` in the same file = 76 rows and `mealman` IS present - S145's held pair, exactly as declared.
+- `origin/main:data/lore_lines.json` parsed as JSON, not regexed: `miniboss_feed.by_key` = 65 KEYS and
+  `mealman` IS present. So on main the chain reads 65 FEED KEYS AGAINST 64 NAMES.
+- MY OWN PUBLISHED NUMBER: `data/commands.json` reads "64 elites" (both occurrences), md5 cc6d34d0,
+  21232 bytes, 32 entries. `docs/COMMANDS.md` md5 385c4ea7. Both byte-for-byte as B191 committed them.
+
+AND THE PART THAT KEEPS THIS FROM BEING READ AS A LANE BLOCKED ON NOTHING: `origin/laptop:scripts/delve.gd`
+DOES CARRY `"mealman": "Whitedamp"`. I checked the game build's branch as well as main precisely so the
+next seat is not told a name is owed when it is already written. Game build S146 named the 65th at
+02:17:01 and its own IDLE says so. The gap I measured is a MERGE LATENCY, not unfinished work: the name
+lands on main when the team lead merges at :58, roughly thirteen minutes after this firing closed. There
+is no lane to chase and nothing for the game build to redo.
+
+WHY I DID NOT BUMP ANYWAY, WHEN I COULD SEE THE NAME ON `laptop` AND KNEW THE MERGE WAS COMING.
+Because the order names MAIN as the authority and a published count no name on main backs is the same
+fault as the one B191 paid off, pointing the other way - the row says that in those words. Bumping on
+the strength of another branch would have made my file right for about thirteen minutes of nobody's
+clock and wrong against every ref a gate actually reads. The honest shape of this hour is a measurement
+and a stand-down, not a number moved early to have moved something.
+
+WHAT THE NEXT SEAT (B193, 03:45) SHOULD EXPECT, STATED SO IT CAN BE CHECKED RATHER THAN TRUSTED.
+Re-measure MB_NAME on main the same brace-matched way FIRST. If the :58 merge carried c5d297af forward
+with `laptop` in it, MB_NAME will read 65 with `mealman` present, by_key will still read 65, and the
+condition in my row is then MET: bump `data/commands.json` 64 -> 65 and let the REAL generator rewrite
+`docs/COMMANDS.md`. Do not take my word that the merge happened - the whole point of this entry is that
+a branch is not main.
+
+THE PRE-DECLARED RED, UNCHASED. Between content's C-225 and the name reaching main, `MINIBOSS COUNT` and
+`MINIBOSS UNNAMED ['mealman']` fire and L14_TEST reads RED. The team lead pre-declared that twice and told
+this lane not to chase it. I did not run the gate and I did not touch it. Note the arithmetic plainly
+though, because it is the reason the COUNT arm fires and not a defect: my published 64 matches MB_NAME 64
+and does NOT match by_key 65, and the order pegged my number to MB_NAME. Both halves are behaving.
+
+DRIFT CHECKED BOTH DIRECTIONS, off the data file this run and not off last hour's memory: `json.load`
+passes, 32 command entries, every one literally present in `scripts/chatcmd.gd`, ZERO orphans either way -
+no entry without a command answering it, no command answered in code without an entry.
+
+LOCK: I TOOK NO LOCK AND RAN NO ENGINE, AND THE REASON IS THE YIELD RULE, NOT A STARVED SLOT.
+Read off R's WORKING copy of docs/RUN_LOCK.txt, the authoritative one, at 02:45 and again at 02:47 CT.
+The last line is `RUNNING 2026-11-27T02:42:42-06:00 (QA tester, cap claim+9 = 02:51:42)` with NO IDLE from
+that lane after it. Under the rule as it now stands, that lane HOLDS the lock, so I waited and then stood
+down rather than claim across it. QA's claim was inside its own cap the whole time I looked. Nothing of
+mine needed the engine this hour in any case: all four owed gates went green at B191 and not one byte of
+my three files changed since, so a re-run would have reproduced the pre-declared red and told nobody
+anything. No stale lock cleared, no second Godot launched, no claim written.
+
+BRANCH STATE: `chatbot` HEAD 221e569d, ZERO commits ahead of origin/chatbot before this entry - B191 is
+pushed and nothing was left sitting in the worktree. The only untracked paths are `web/icons/items/ring/*.import`
+sidecars Godot's own import pass drops; they are the hub lane's tree, not mine, and I left them alone.
+
+PROMPT CORRECTIONS STILL OWED - BOTH RAISED BEFORE, NEITHER FIXED, AND I AM NOT GOING TO STOP SAYING IT:
+(1) this lane's prompt still tells the seat to expect `COMMANDS_DOC wrote 26 commands`. The real generator
+writes 32 and the generator wins. (2) It still lists `_b2_ask.gd` at the worktree root as owed; the file and
+its `.b2_*` logs are ABSENT - listed again this run - and B186 closed that item. A firing cannot write a prompt.
+
+ADDENDUM, 02:50 CT, AFTER MY COMMIT - THE QA TESTER RAN THE GATE AND CORROBORATED ALL OF THIS FROM OUTSIDE
+MY LANE, AND IT SHARPENS ONE POINT I WANT STATED PLAINLY RATHER THAN LEFT FOR SOMEONE TO TRIP OVER.
+QA's IDLE 2026-11-27T02:49:44-06:00 reports `L14_TEST FAIL 1/27 (MINIBOSS COUNT published 64 vs feed rows
+65 - pre-declared cascade step, chatbot lane owes data/commands.json 64->65, NOT touched by me)`. ONE fail,
+and `MINIBOSS UNNAMED` did NOT fire. That is the tell: QA runs against R's working tree, which has branch
+`laptop` checked out, and `laptop` ALREADY carries mealman's name - so there MB_NAME is 65, by_key is 65,
+UNNAMED is empty, and the single remaining red is my number. On that tree the bump is the last step to green.
+ON MAIN IT IS NOT, AND MAIN IS WHAT MY ORDER NAMES. Re-measured at 02:50 CT after a fresh fetch: main is
+still c5d297af and `"mealman": "Whitedamp"` is still absent. So bumping now would NOT have bought a green
+gate anywhere main is read - it would have swapped the COUNT red for an UNNAMED red and left my published
+65 unbacked by any name on main. The order's condition is not red tape, it is the thing that keeps my file
+true against the ref the gates read. I am holding at 64 and the bump is carried, exactly as written above.
+IF THE TEAM LEAD WANTS IT SOONER, that is a one-line relaxation to make - peg the condition to the tree the
+gate actually runs on instead of to main - and it is the supervisor's call, not a firing's. I am not taking it.
+
+TWITCH: NOTHING. No engine ran, so eventsub never started this firing. No message sent, nothing redeemed,
+nothing cheered, ZERO BITS, no account driven by me.
+CARRIED: the bump itself, conditional on main reading 65. Nothing else of mine.
+FOR THE GAME BUILD lane: nothing owed in twitch_eventsub.gd.
+DECISION FOR MR. E: none.
+
 ## B191 - 27 Nov 2026, 01:45 CT firing. THE FANNER CASCADE IS PAID AT MY END 63 -> 64 AND ALL FOUR OWED GATES ARE GREEN FOR THE FIRST TIME - L14_TEST OK 27/27, AND THE HALF THAT WAS STILL RED WAS A NUMBER IN MY OWN FILE.
 
 WHAT B190 LEFT AND WHAT I FOUND. B190 ran the owed battery and got three of four: parse, TWITCH_PARSE and

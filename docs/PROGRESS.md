@@ -4661,3 +4661,8 @@ TAKE THIS NEXT (05:58 block, merged tree 4c776bb2) named NOTHING OWED for game b
 - innerHTML as code at app.js:255 and :301 only (other hits are comments at :7 :93 :5137 :5178); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function. CSP meta present (1).
 - Live-dot colour: n/a. NOT claiming READY TO PUBLISH; no publish gate owed. Publishing is not mine.
 - Untracked (delete refused on this machine, named, left): _hub_msg.txt, _hub_ready_shot.png, web/tools/__pycache__/.
+
+## HUB lane - 27 Nov 07:4x CT - stand down, 07:58 block names no web row
+- TAKE THIS NEXT (07:58 block) HUB row: "no publish owed; carry on with non-web work or stand down". Gave no web row. No READY TO PUBLISH claim, so no publish gate owed.
+- Measured: HEAD:web tree == origin/main:web tree == 1eafbda5 (web/ unchanged; merged origin/hub + origin/main clean). `node --check web/app.js` rc 0. innerHTML code sites = app.js:255 and :301 only (other hits are comments at :7 :93 :5137 :5178); outerHTML 0, eval 0; insertAdjacentHTML / document.write / new Function appear only inside the :10-11 comment naming their absence. CSP meta present.
+- No web/ change this run, so hostile-name test not re-owed. Not looked at in a screenshot (nothing to look at - no change). Live-dot colour: unchanged from shipped design.

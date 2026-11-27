@@ -23638,3 +23638,16 @@ Item: HUD row of the 07:58 TAKE THIS NEXT block - measure the longest economy.gd
   staged v5 payload render as literal text on the cards (0 injected elements).
 - NOT CLAIMED: READY TO PUBLISH. This is a 2-file copy fix (app.js 1 line, index.html 1 line) on top of an already
   waiting delta; no publish gate owed. Live-dot colour: unchanged this run (no rail change).
+
+## U202 - feed_hud.gd classify(): tavern/dice lines no longer admitted at the lowest class (27 Nov 09:52 CT firing) - FIXED, proven on a busy scene
+Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 found, prove it the way it was found (a busy scene).
+- Change (feed_hud.gd, HUD-owned): new `RE_TAVERN` (to the house's | the tavern keeps | takes the pot | to throw. (!dice | gold at most | gold they do not have | the least the tavern takes | has no dare on the table) checked in classify() after RE_TOWN and before RE_CRIT/RE_LOW -> `P_TOWN`. Matches the four economy.gd producers (tavern_dice, tavern_duel, tavern_accept, _dice_refusal). P_TOWN >= PROTECT_FROM, so the lines are never dropped as routine/stale and overflow drops the pri-1 ambient lines first.
+- Probe: tools/_u202_busy.gd (windowed 1920x1080, scale 150%): a lord's-fall line, then 60 "PeasantN hums a tune" ambient lines (pri=1) with the 4 tavern lines interleaved. Same probe, same frames, before vs after:
+  - BEFORE (_u202_before.log): all 4 tavern lines `pri=1`, the same class as the ambient flood.
+  - AFTER (_u202_after.log): all 4 `pri=2`, 0 dropped, 2 ADMITted at t=5.2/7.8 ahead of the flood.
+- HONEST LIMIT: my 60-line burst did NOT reproduce a literal `DROP overflow pri=1` of a tavern line in the BEFORE run (dropped=0 both runs; they were still queued at pri=1 when the probe ended). U201's drops came from a lord fight + delve chatter, which this probe does not stage. What is proven is the class (1 -> 2) and the ordering under a flood, not the exact drop line.
+- Probe's own last check ("admitted + alive == 4") double-counts a line that is both admitted and still on the scroll, so it prints 1 FAIL in the AFTER run; the 4 pri=2 LIVE lines above it are the measurement. Left as run, not edited after the fact.
+- Gates: parse --quit-after 300 -> 0 SCRIPT ERROR / 0 Parse Error (_u202_parse2.log; _u202_parse.log is the pre-edit tree).
+- LOOK: renders/cycles/20261127_u202/busy_tavern_s150_1080.png - 150%, 2x2 lanes, Chronicle shows the lord's-fall line and "Zed_the_Tall rolls 3 to the house's 5 - the tavern keeps 120 gold." wrapped to two rows inside the vellum, nothing clipped.
+- Lock: claimed 09:54:16, declared finish 10:03, IDLE 09:58:13, inside claim+15 and before :07.
+- Next firing: re-read R's working RUN_LOCK and the HUD row. Open decision carried for Mr. E/supervisor: the HUD's in-game half of System 40 (subclass on party frames / leaderboard rows / feed).

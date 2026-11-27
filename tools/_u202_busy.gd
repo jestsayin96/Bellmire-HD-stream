@@ -165,7 +165,23 @@ func _process(_dt: float) -> bool:
 						if ln.find(m.left(30)) >= 0:
 							print("U202_LOG ", ln)
 				_ok(dropped == 0, "no tavern line dropped in a busy scene")
-				_ok(admitted + alive == AMB.size(), "every tavern line admitted or still waiting")
+				# U203: count each line ONCE - admitted-or-alive as a SET. The old sum counted a line that was
+				# admitted AND still on screen twice (2+4 against 4) and failed identically before and after.
+				var seen := 0
+				for m: String in AMB:
+					var key2: String = String(m).left(30)
+					var here := false
+					for ln: String in lg.split("\n"):
+						if ln.find(key2) >= 0 and ln.find("ADMIT") >= 0:
+							here = true
+					for coll2: Array in [fh._pending, fh._shown]:
+						for e2: Dictionary in coll2:
+							if String(e2["text"]).begins_with(key2):
+								here = true
+					if here:
+						seen += 1
+				print("U203_SET seen=%d of %d (sum was %d)" % [seen, AMB.size(), admitted + alive])
+				_ok(seen == AMB.size(), "every tavern line admitted or still waiting (set, not sum)")
 				UiTheme.set_scale(1.0)
 				print("U202_DONE checks=%d fails=%d" % [_checks, _fails.size()])
 				return true

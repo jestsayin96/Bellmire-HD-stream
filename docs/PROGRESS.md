@@ -4661,3 +4661,29 @@ TAKE THIS NEXT (05:58 block, merged tree 4c776bb2) named NOTHING OWED for game b
 - innerHTML as code at app.js:255 and :301 only (other hits are comments at :7 :93 :5137 :5178); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function. CSP meta present (1).
 - Live-dot colour: n/a. NOT claiming READY TO PUBLISH; no publish gate owed. Publishing is not mine.
 - Untracked (delete refused on this machine, named, left): _hub_msg.txt, _hub_ready_shot.png, web/tools/__pycache__/.
+
+## D-cycle - S151 SYSTEM 38 tavern games, economy.gd house-game logic, 2026-11-27 07:09-07:2x CST (game build)
+TAKE THIS NEXT (06:58 block) named THE L31 REMAINDER (status-effect icons), or System 38 if that is shut.
+- L31 RE-MEASURED, STILL CLOSED BY MEASUREMENT (S142's finding holds on the merged tree): every `_give` call in
+  delve.gd (194, 1991, 1997, 2261, 2270, 2280, 2282, 2290, 2345, 2426, 2428, 2493, 3303, 3901; def 3916) targets a
+  delver dict (near/o/weak/m from live_heroes/_alive/_rally_states). monster.gd carries no condition field - its only
+  "hold" is `_hold_until`, the one-shot animation lock behind busy(); `enraged` already draws (aura + swell); the
+  Thatcher's `mb_broken` is a miniboss phase with its own S149 visuals. Nothing on a monster to draw. No code.
+- SYSTEM 38 TAKEN. economy.gd (backup economy.gd.bak_s151) gains tavern_dice(h, amount) and tavern_duel(a, b, amount):
+  bare roll = no stakes; vs house both d20, BEAT the house (ties are the house's), a win pays 2x stake less
+  ceil(10%) of the pot; lost stakes and the cut leave the economy (tavern_take, never the treasury), payouts counted
+  in tavern_paid; duels: both stake, no cut, ties re-roll (bounded at 8, then broken) so one command always ends.
+  Min 1g, max dice_max_bet() = 25 x town_level (25g at a crossing, 300g at level 12). Refusals (min/max/purse/dead/
+  self) move no gold. Each returns a Dictionary with ok/why/rolls/deltas and a plain `text` line, so the CHAT BOT's
+  `!dice` (theirs, not built here) only parses args and renders. Nothing calls it yet - logic only, no picture to look at.
+- MY OWN FIRST LEDGER WAS WRONG: I asserted heroes + take == start, which forgets the house is a counterparty that
+  PAYS on a win. It failed 764493 + 177659 vs 800000; the code was right and the invariant wasn't. Added tavern_paid;
+  the true ledger is heroes + take - paid == start, and the sink is take - paid (35507g net over 2000 games).
+- GATES: parse rc=0 0 Parse Error / 0 SCRIPT ERROR (re-run after the ledger edit). S151_DICE OK 21; S151_RED=1 ->
+  S151_DICE FAIL 1 of 21 (ledger without take) - the gate can fail. TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0
+  of 2201. DELVE_TEST OK ran 9001 frames. TOWNWALK in_solid=0/16349 raid 0/8963 PASS. No Twitch, zero bits.
+- CONSENT, CAUGHT BEFORE COMMIT: an immediate duel would let `!dice 300 someone` gamble away another viewer's purse
+  without them. Added tavern_challenge(a, b, amt) (stakes checked, NO gold moves, one open dare per challenged hero)
+  and tavern_accept(b) (settles through tavern_duel, purses re-checked; dares lapse after 60 s). Still one roll per
+  settling command. FOR THE CHAT BOT: `!dice` / `!dice amt` -> economy.tavern_dice(h, amt); `!dice amt player` ->
+  tavern_challenge(h, other, amt); `!dice accept` -> tavern_accept(h). Each returns {ok, why, text, ...} to render.

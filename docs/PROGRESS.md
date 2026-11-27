@@ -4755,3 +4755,10 @@ TAKE THIS NEXT (11:58 block) GAME BUILD row: "THE BESPOKE BEHAVIOURS - SYSTEM 40
   The DELVE_TEST party carries no chosen path, so the live soak did not fire a way - the S156 gate is the proof.
 - HANDOFFS: the five feed lines are placeholders for content to tune (delve.gd _trapsense caller, _mend_party,
   _death_ward). Which paths carry which way is content-tunable in Roster.SPEC_WAYS. No Twitch, zero bits.
+
+## HUB 27 Nov 14:39 CT - SPEC ROW ON THE HERO CARD AND SHEET (System 40 hub half, S157 field)
+- Row taken: "TAKE THIS NEXT 13:58 - HUB: build the spec row on the hero card". snapshot_pub.gd:607 publishes spec + spec_name on origin/main; merged before building.
+- web/app.js: card gets span.hspec = spec_name; sheet gets div.sspec = "Path of the <spec_name>". Empty/non-string spec_name draws NOTHING. el()/textContent only; never a URL/src/href/style. web/style.css +3 lines (teal-ink on parchment; teal-br was faint). Mock viewer carries a hostile spec_name.
+- LOOKED at 1400x900 headless render (route-mocked snapshot, 3 heroes): Aldric card shows "Guardian", Brin (spec "") shows no line, hostile spec_name "<img src=x onerror=alert(1)>" rendered as literal text, img[src=x] count = 0, 0 page errors, 0 dialogs. NUMBER: 3 spec elements for 3 heroes' 2 specialized cards + 1 opened sheet; 0 injected nodes.
+- innerHTML still exactly 2 page-owned sites (app.js:255, :301); no outerHTML/insertAdjacentHTML/document.write/eval/new Function. node --check OK.
+- Not run: ?state=* / ?mock=chronicle/crowd sweep beyond the hostile test; live-dot colour unchanged (no live-dot change this run).

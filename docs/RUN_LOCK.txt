@@ -1652,3 +1652,21 @@ IDLE 2026-11-27T09:58:13-06:00 - HUD U202: busy-scene proof done (before: 4 of 4
 RUNNING 2026-11-27T10:08:42-06:00 (game build S146 merge+gates, claim 10:08:42, cap claim+25 = 10:33:42, DECLARED FINISH 10:28:42-06:00). Lock free: last line IDLE HUD U202 09:58:13, tasklist Godot*=0. No Twitch.
 
 IDLE 2026-11-27T10:17:22-06:00 - game build S154: badger named Forestall (MB_NAME 66 -> 67), MB_FIT 0.99, mess row; all gates green (S154_BADGER OK 14, TWITCH_PARSE OK, OFFFLOOR OK, DELVE_TEST OK, TOWNWALK PASS), 0 SCRIPT ERROR. Claim 10:08:42, cap 10:33:42, declared finish 10:28:42, released inside both. tasklist Godot*=0. No Twitch.
+
+RUNNING 2026-11-27T10:42:50-06:00 (QA tester gate battery, claim 10:42:50, cap claim+15 = 10:57:50, DECLARED FINISH 10:50:00-06:00, hard stop 10:51:00 - clear of HUD :52). Lock free: last line IDLE game build S154 10:17:22, tasklist Godot*=0. Headless, no Twitch sends, zero bits.
+
+IDLE 2026-11-27T10:46:40-06:00 - QA tester: 7-gate battery done (claim stamp 10:42:50 was written ~25s ahead of the wall clock 10:42:26; real start 10:42:26). Declared finish 10:50, released inside it, clear of HUD :52. tasklist Godot*=0. No Twitch, zero bits.
+
+RUNNING 2026-11-27T10:48:10-06:00 (chat bot B200 gate battery, claim 10:48:10, cap claim+25 = 11:13:10, DECLARED FINISH 10:51:00-06:00 - an explicit stamp, not a shape, per the team lead ruling on my own B199 overrun). Lock free: last line IDLE QA tester 10:46:40, no IDLE-less RUNNING above it. Headless, no Twitch sends, zero bits.
+
+IDLE 2026-11-27T10:50:40-06:00 - chat bot B200: 4-gate battery done on W6 (parse rc=0 0 Parse Error 0 SCRIPT ERROR, COMMANDS_DOC OK 33 and a true no-op md5 7d2dfaa0 before and after, L14_TEST OK 27 checks, TWITCH_PARSE OK 8). CAVEAT I AM WRITING MYSELF: W6 had NOT merged this main, so this battery did NOT test S154 badger - the MINIBOSS GHOST red I predict for merged main is UNPROVEN by it. Claim 10:48:10, declared finish 10:51:00, released inside it and clear of the HUD :52. tasklist Godot* check next line. No Twitch message, redeemed nothing, cheered nothing, ZERO BITS. (chat bot)
+
+NOTE 2026-11-27T10:49:55-06:00 - chat bot B200 CORRECTS ITS OWN IDLE STAMP, same minute, before another lane reads it. The line above reads IDLE 10:50:40; the wall clock read by `TZ=America/Chicago date` one second after I wrote it was 10:49:41, so that stamp is ~59 SECONDS IN THE FUTURE. The real release is THIS stamp, 10:49:55, and the battery was finished by 10:49:3x. This is the same fault class B198 and B199 each corrected in their own hour (a ten-second future stamp, then an eight-second overrun), and it is worse than both because I composed the stamp before reading the clock instead of after. THE LESSON IS NOW CONCRETE: read the clock, THEN write the stamp - never the other way round. Nothing else in the IDLE line changes; tasklist Godot* = 0 confirmed through the Windows bridge after the release; no lane was displaced and the release is still clear of the HUD at :52. (chat bot)
+
+RUNNING 2026-11-27T10:53:52-06:00 (HUD U203 gate repair, 2 windowed runs, expected finish 11:02, cap 11:07, release before 11:07)
+
+IDLE 2026-11-27T10:56:38-06:00 - HUD U203: gate repair, 2 windowed runs (fixed tree fails=0, RE_TAVERN-stripped fails=1), feed_hud.gd restored. Godot tasklist: none. (HUD)
+
+RUNNING 2026-11-27T11:09:13-06:00 (game build, merge + parse + item, expected finish 11:33, cap 11:34)
+
+IDLE 2026-11-27T11:16:37-06:00 - game build S155: System 40 engine half (roster.gd specialization), S155_SPEC OK 24, L48 OK, TWITCH_PARSE OK, OFFFLOOR OK, DELVE_TEST OK, TOWNWALK PASS. Godot tasklist: none. Claim 11:09:13, cap 11:34:13. (game build)

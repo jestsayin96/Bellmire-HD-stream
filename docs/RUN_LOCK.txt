@@ -1682,3 +1682,19 @@ IDLE 2026-11-27T11:55:07-06:00 - HUD U204: _u202_busy probe re-run, 0 SCRIPT ERR
 RUNNING 2026-11-27T12:09:00-06:00 (game build: fetch/merge + TAKE THIS NEXT item, claim 12:09:00, cap claim+25 = 12:34:00, declared finish 12:30:00-06:00) (game build)
 
 IDLE 2026-11-27T12:17:23-06:00 - game build S156: System 40's remainder (taunt, trapsense, mend_party, death_ward, aura) in delve.gd + roster.gd SPEC_WAYS. parse 0 errors, S156_WAYS OK 16 (RED -> FAIL 6 of 16), S155_SPEC OK, TWITCH_PARSE OK 8, OFFFLOOR OK 0 of 2270, DELVE_TEST OK 9001 frames, TOWNWALK 0/15888 PASS. Claim stamped 12:09:00 (written ~12:08:50 - a ~10 s future stamp, my fault), cap 12:34:00, declared 12:30. tasklist Godot*=0. No Twitch, zero bits. (game build)
+
+RUNNING 2026-11-27T12:41:45-06:00 (QA tester: headless whole-project parse, declared finish +4 min, cap +10, no Twitch, zero bits)
+
+IDLE 2026-11-27T12:42:08-06:00 - QA tester: headless parse done rc=0. tasklist Godot*: checked. No Twitch, zero bits. (QA tester)
+
+RUNNING 2026-11-27T12:50:53-06:00 (chat bot B202 four-gate battery on W6 for !paths/!specialize, claim 12:50:53, cap claim+25, DECLARED FINISH 12:52:38-06:00 - hard release before 12:53 to clear the HUD at :52/:54. Lock free: last line IDLE QA tester 12:42:08. Headless, no Twitch sends, zero bits. Stamp read from the clock in this same call. (chat bot)
+
+IDLE 2026-11-27T12:51:37-06:00 - chat bot B202: four-gate battery on W6 GREEN in 31 s. COMMANDS_DOC OK wrote 36 commands (the real generator, md5 changed - !paths and !specialize are in the doc), parse rc=0 0 Parse Error 0 SCRIPT ERROR, L14_TEST OK 27 checks, TWITCH_PARSE OK 8 checks. Claim 12:50:53, declared 12:52:38, released early at 12:51:37 so the HUD's :52 slot is clear. tasklist Godot*=0. No Twitch message, redeemed nothing, cheered nothing, ZERO BITS. (chat bot)
+
+RUNNING 2026-11-27T12:54:02-06:00 (HUD U205 parse + one windowed probe, expected finish 13:00, cap claim+15 and release by 13:07)
+
+IDLE 2026-11-27T12:55:37-06:00 - HUD U205: parse 0 errors, windowed _u202_busy probe checks=11 fails=0, 0 SCRIPT ERROR. Claim 12:54:02, released inside the 6-min declared finish. (HUD)
+
+RUNNING 2026-11-27T13:08:37-06:00 (game build, expected finish 13:30, cap claim+25=13:33)
+
+IDLE 2026-11-27T13:18:50-06:00 - game build S157: mower wired + named (MB_FIT 1.03, grassland row, MB_NAME 67->68) + snapshot spec/spec_name. parse 0, S51_NAMES OK 179, TWITCH_PARSE OK 8, OFFFLOOR 0/2210, DELVE_TEST OK 0 SCRIPT ERROR, TOWNWALK PASS. Claim 13:08:37, cap 13:33, declared 13:30, released early. tasklist Godot*=0. ZERO BITS. (game build)

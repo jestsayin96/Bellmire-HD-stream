@@ -656,3 +656,168 @@ game build to re-derive. **`assets/monsters/minibosses/thatcher.glb` IS
 re-exported this pass**: the yealm geometry changed, so a tree with the old
 `.glb` has pass-8 dowels. Static, so `bestiary.gd` still needs a `model` path
 and **no `anims` entry**. That wiring is the game build's and is not done here.
+
+---
+
+# PASS 10 - 27 Nov 2026, 06:3x-07:1x CT
+
+## FIRST, A CORRECTION TO THIS DOCUMENT. MY PASS-9 HANDOFF SENTENCE WAS WRONG
+
+Pass 9 closed with "`bestiary.gd` still needs a `model` path and no `anims`
+entry. That wiring is the game build's and is not done here." **THAT IS FALSE
+FOR THIS FAMILY** and the team lead caught it before forwarding it, which is
+the only reason it did not become a work row for a lane that had nothing to do.
+The behaviour, not the name: `Delve.miniboss_model()` (delve.gd:489) resolves
+`MB_DIR + key + ".glb"` BY CONVENTION, and delve.gd:522 sets `def["anims"] = {}`
+unconditionally for every mb_model. `thatcher.glb` is on main, so the body
+already resolves and already has no anims. `bestiary.gd` carries explicit paths
+only for broodglut / lastcuff / leech, which is why the sentence looked right.
+**THERE WAS NEVER ANYTHING TO WIRE.** Corrected here so it stops travelling.
+
+## THE HEADLINE: FAULT 3'S PREMISE IS FALSE, AND I KILLED IT WITH A NUMBER AND A PICTURE
+
+Fault 3 has stood open for three passes carrying one sentence - "from the side
+the head is almost entirely behind the bundle" - and the team lead confirmed it
+by eye and named it "the most valuable thing open on this body". **IT IS NOT
+TRUE, and the thing it names as the cause takes ZERO pixels.**
+
+`tools/art/_faceseen.py`, the viewer's question through one locked camera:
+
+    view    face_seen   face_noreed   reed_cover   face/ring luma ratio
+    front       3699          3698           -1    1.564  (margin 0.1306)
+    side        1778          1777           -1    1.608  (margin 0.1294)
+    back           0             0            0    (no face - BY DESIGN)
+
+`reed_cover` is the face pixels the bundle takes. It is **-1 on front and -1 on
+side** - zero inside render noise. The reed does not occlude this face at all.
+At side the face plate reaches 1,778 px, 48% of its front count, and the 48% is
+**foreshortening of an ellipsoid seen edge-on**, not occlusion. Its local
+contrast against what surrounds it is if anything BETTER at side than at front
+(ratio 1.608 against 1.564, margins equal to three decimal places).
+
+**I LOOKED BEFORE I BELIEVED MY OWN INSTRUMENT**, because the standing rule here
+is that when a number and a picture disagree the picture is the evidence. The
+picture agrees with the number: at side the head stands clear of the bundle with
+the face plate, an eye pit and the mouth slot all visible. The bundle is
+entirely behind and to the right of it.
+
+So I did NOT make the change this pass was handed to me to make. A fix premised
+on a cause that measures zero would have moved the head for nothing and spent
+the pass proving it.
+
+**WHAT IS ACTUALLY WEAK AT SIDE, HAVING LOOKED:** the head's PROFILE has no
+face in it. It reads as two fused dark lobes - hood behind, face plate in front
+- because a face seen edge-on needs a brow, a nose and a jaw break and this one
+has none. That is a different fault from the one on the list, it is worth doing,
+and it is the honest pass-11 item. It is not an occlusion problem and no amount
+of moving the head will touch it.
+
+## THE INSTRUMENT, AND IT FAILED ITS OWN FIRST RUN IN A WAY I HAD TO FIX
+
+`_faceseen.py` repaints the face oval into the hood's `dark` slot and counts the
+pixels that MOVED. It does NOT remove the face geometry, and that is the whole
+design: the face oval is the front-most thing on this body in -y, so dropping it
+moves the world bounds, which changes `build_miniboss`'s height normalisation
+`k`, which moves EVERY VERTEX. The diff would have been huge, uniform and green.
+`bounds_drift` is asserted at 0.0 rather than hoped.
+
+**ITS FIRST RUN REPORTED A FAULT THAT WAS NOT THERE, AND IT WAS MY GUARD.** I
+wrote `face_noreed < 300 px` as a per-view instrument error. The BACK view came
+back 0/0 and was reported as a broken camera. It is nothing of the kind: this
+body's hood is dark front AND back precisely so a viewer behind him sees no
+face - the Beadle's no-facing fault answered by construction, shipped at pass 5.
+**My red-on-empty guard called a deliberate design decision an instrument
+failure.** The control is now global - if the face is invisible on EVERY view
+with the reed gone, the instrument is broken - and a per-view zero is a RESULT.
+
+**WHAT `_faceseen` CANNOT SEE, AND ONE OF THESE MATTERS HERE:** it counts the
+face PLATE. Eyes and mouth are `dark` and go dark-on-dark the moment the plate
+is repainted, so they are **invisible to this test by construction**. It can
+therefore score a healthy 1,778 px on a plate with no face on it - which is
+precisely this lane's pass-11 fault in a new coat, and precisely why the
+pass-11 item above was found by LOOKING and not by this file. The ring in the
+contrast read is "whatever is within 6 px and opaque", usually hood but not a
+hood mask. And the three ties stay in the no-reed arm, so that arm is a FLOOR.
+
+## THE TIE-SECTION LEVER: TAKEN, MEASURED, AND REFUSED
+
+I named this lever myself at pass 9 and the team lead handed it back to take
+with the head. I took it. **It does not pay, and my own pass-9 prediction of
+what it would do was wrong.**
+
+`_cuevalue`, section 0.040 (shipped) -> 0.026:
+
+    view    cue p50            cue px            spread           ratio
+    front   0.6557 -> 0.6577   33704 -> 34759    0.5716 -> 0.5647  1.161 -> 1.165
+    side    0.5507 -> 0.5507   30330 -> 31429    0.4318 -> 0.4303  1.017 -> 1.017
+    back    0.5899 -> 0.5899   27080 -> 28101    0.5215 -> 0.5229  1.054 -> 1.054
+
+The pixels came back exactly as predicted - about 1,100 per view, +3.5% of reed.
+**The VALUE did not move at all.** Side p50 is identical to four decimals and
+the side ratio is identical to three. The reason is arithmetic and I should have
+seen it before spending the arm: the pixels a narrower band returns are the reed
+AT THAT BAND'S STATION, which has the same median as the rest of the reed.
+Adding pixels at the median cannot move the median. **The side's 1.017 is not
+recoverable through the ties, and pass 9's "narrower bands return cue pixels"
+was true and irrelevant in the same sentence.**
+
+And the spread went marginally DOWN on two views, so the modulation argument
+does not rescue it either - the same escape I refused at pass 9.
+
+So the trade is inverted from the one I proposed: there are no cue-value points
+to win, and narrowing the bands spends a little of the thing the team lead
+explicitly valued - the ties reading as BINDINGS. **I looked at the A/B side by
+side; at 0.026 they still clasp and still read, so this is not a disaster
+avoided, it is a change that buys nothing.** The section stays at 0.040. The
+constant is left in the file env-gated (`THATCHER_TIESEC`, default 0.040,
+byte-identical) so the next pass can re-run the measurement instead of
+re-arguing it from memory.
+
+## WHAT I DID SHIP: FAULT 4, THE LEGGETT, AND IT IS THE TEETH
+
+Fault 4 - "the leggett reads as a satchel" - the team lead can see it from the
+back too. He is right, and the reason is that the thing IS a featureless dark
+rectangle hanging at the hip, which is a description of a bag.
+
+**WHAT SEPARATES A LEGGETT FROM A SATCHEL IS NOT SHAPE, IT IS PURPOSE.** A
+leggett's whole point is its RIDGED WORKING FACE - that is what combs the butt
+ends of the reed flush when he beats them. A satchel has no teeth. So the thing
+that makes it read is the thing it is FOR, which is this house's first art rule.
+
+Five ridges across the working face, `dark` like the board, so **no second pale
+enters this body and the cue argument is untouched**. The offsets are carried
+through the board's own rotation (0.10, 0, 0.06) rather than written in world
+axes - ridges placed by eye in world z would walk off the face along its length,
+which is pass 4's float re-run by hand.
+
+**MEASURED, AND IT COSTS NOTHING.** `_cuevalue` with the teeth on is IDENTICAL
+to the shipped arm on all three views, down to the lap pixel count
+(18060 / 13987 / 19609) and every cue p50. The teeth sit clear of both masks.
+
+**AND I LOOKED, WHICH IS WHAT ACTUALLY DECIDED IT.** Side by side at 3x, the
+plain board reads as a pouch and the ridged one reads as a tool, immediately and
+at a glance. It was gated default-OFF while it was measured so the baseline arm
+was byte-identical and the A/B was a real comparison; it ships default-ON and
+the gate stays so it can be re-run.
+
+## WHAT I CAN STILL SEE IN THE SHIPPED FRAME, HAVING LOOKED
+
+1. **THE HEAD HAS NO PROFILE.** From the side it is two fused dark lobes with no
+   brow, nose or jaw break. This is the real fault 3 and it is pass 11.
+2. The teeth cover the lower two thirds of the board face and leave a plain
+   strip at the top where the handle enters. It happens to read as a shoulder
+   or a frame, but it was not designed and I did not intend it.
+3. The cut-end points are still long and needle-sharp - closer to quills than
+   to blunt-cut straw. Unchanged from pass 9 and still open.
+4. The lowest splay still hangs loose below the bottom tie and a few stems read
+   as separate flicks against the coat.
+5. The board is still a touch small and square against the figure.
+
+## WIRING - NOTHING. SEE THE CORRECTION AT THE TOP
+
+`MB_FIT.thatcher` ratio unchanged; the teeth add about 0.015 m in -y at the hip
+and nothing in z, so the height normalisation and the footprint verdict are
+untouched. **`assets/monsters/minibosses/thatcher.glb` IS re-exported this
+pass** - the leggett geometry changed, so a tree with the old `.glb` has a
+plain board. The body resolves by convention and already has no anims.
+**THE GAME BUILD HAS NOTHING TO DO FOR THIS BODY.**

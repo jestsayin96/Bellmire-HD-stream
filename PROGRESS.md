@@ -1,3 +1,70 @@
+## B196 - 27 Nov 2026, 06:45 CT firing. NOTHING WAS OWED, SO NOTHING WAS EDITED - AND THE ONE REAL FINDING THIS HOUR IS AGAINST MY OWN DRIFT MATCHER, WHICH WAS WRONG TWICE IN OPPOSITE DIRECTIONS BEFORE IT WAS RIGHT.
+
+THE ROW. The 05:58 CHAT BOT row ticks B195 and names no new item: "THE CASCADE IS SHUT AT YOUR
+END." L56 is not owed by me and is not carried - the team lead withdrew that order at B188 on this
+lane's own arithmetic (4 x 7200 ticks = 8 minutes against a 7-minute slot). So this hour had no
+publish in it and I did not invent one. The freeze forbids that.
+
+I MEASURED THE CONDITION ANYWAY, BEFORE DECIDING, because a shut cascade is a claim and not a
+fact until it is read off the tree. On the merged tree (origin/main 49c31758), brace-matched on the
+real declaration - ONE `const MB_NAME := {` at scripts/delve.gd:449, no duplicates:
+- `Delve.MB_NAME` = 66 keys, last four overlooker, fanner, mealman, thatcher.
+- `miniboss_feed.by_key` = 66. It lives inside data/lore_lines.json, not in a file of its own -
+  worth writing down, because my first read of this hour looked for data/miniboss_feed.json and
+  there is no such file.
+- SET DIFFERENCE EMPTY IN BOTH DIRECTIONS.
+- data/commands.json already reads "The 66 elites" at BOTH sites (md5 225c5483, 21232 bytes);
+  docs/COMMANDS.md line 39 already reads "The 66" (md5 9c8048d5).
+66/66/66/66. There was no bump to make, so I made none and left all three of my files untouched.
+
+GATES, ALL FOUR, AND THE POINT OF RE-RUNNING THEM IS THAT THE TREE IS NOT THE ONE B195 PROVED
+GREEN - it has gained S149's roof and S150's resist labels since. Battery 06:48:30 -> 06:48:55,
+25 s, under the lock:
+- parse `--headless --path W6 --quit-after 300` rc=0, 0 Parse Error, 0 SCRIPT ERROR. 3 ERROR lines,
+  all the one pre-existing assets/graveyard/character-keeper.glb import-cache miss that is also in
+  B193's, B194's and B195's logs - not new and not mine.
+- `tools/_commands_doc.gd` -> COMMANDS_DOC OK wrote 32 commands, rc=0, and A TRUE NO-OP:
+  docs/COMMANDS.md md5 9c8048d5 BEFORE AND AFTER the real generator ran. That is the strongest
+  statement available that the committed doc is the generator's own bytes with no hand edit in it.
+- `tools/_l14_test.gd` -> L14_TEST OK, 27 checks, ZERO FAIL.
+- `tools/_twitch_parse.gd` -> TWITCH_PARSE OK, 8 checks, rc=0, EMPTY stderr - no MINIBOSS COUNT,
+  no MINIBOSS UNNAMED.
+
+THE FINDING: MY MATCHER WAS WRONG TWICE IN OPPOSITE DIRECTIONS, AND I AM REPORTING BOTH WRONG
+SHAPES RATHER THAN ONLY THE RIGHT ONE. Drift is the one thing this lane re-derives every hour, so
+the instrument matters more than this hour's answer.
+- Shape 1 required the arm label to be alone on its line and end at the colon. It missed EVERY
+  single-line arm (`"hero":     out = _needs(...)`) and reported 11 published entries as
+  unanswered. Phantoms, all of them.
+- Shape 2 accepted any arm-shaped label anywhere in the file. It swallowed dictionary-literal keys
+  and the number words of a word-to-number table, and reported 16 arms as orphans - `eleven`,
+  `seventy`, `treasury`, `mage_tower` and the like. Phantoms again, pointing the other way.
+- The honest shape scopes to the real `match verb:` blocks by indent extent (the file is
+  4-space-indented, not tabbed - the assumption that cost shape 3 its first run) and takes only
+  labels at the arm level inside them. THE READING: 59 dispatch arm verbs; 32 published entries;
+  31 aliases; ZERO orphans in BOTH directions; all three local-only test verbs
+  (testbits/testsub/testpoints) present and deliberately outside the published surface; 0 aliases
+  shadowing a published key; 0 alias claimed twice; docs/COMMANDS.md 32 rows in EXACT data order;
+  500 JSON leaves.
+- One thing the scoped matcher surfaced that is NOT drift and is NOT mine: there are three
+  `match verb:` blocks, and the one at chatcmd.gd:3745 is `ui_kinds()`, a sound/UI mapping, not a
+  command dispatch. Fifteen verbs appear in both. That is by design; I note it so the next run does
+  not read it as a shadow.
+
+LOCK: claim 2026-11-27T06:48:30-06:00, cap claim+25 = 07:13:30 COMPUTED FIRST, declared finish
+06:51:30; IDLE written at 06:50:09 read off the clock - released inside both and clear of the HUD's
+:52. Machine genuinely idle at the claim: Godot/obs64/Marvel all 0 at 06:48:08, and the lock's last
+line was IDLE 06:45:54 (QA tester), so this was not a starved run and I crossed nobody's window.
+
+NOTHING OWED TO THE GAME BUILD LANE in twitch_eventsub.gd this cycle.
+
+No Twitch test: eventsub autostarted on the headless runs and refreshed its own tokens as always -
+it SENT NO MESSAGE, redeemed nothing, cheered nothing, ZERO BITS, no account driven by me.
+
+Next chat bot (07:45): read the :58 block's CHAT BOT row first. If the cascade is still shut and no
+row names an item, run the owed battery as a regression confirmation again and audit drift with the
+scoped matcher - and do not re-derive the two wrong shapes above; they are recorded here.
+
 ## B194 - 27 Nov 2026, 04:45 CT firing. I DID NOT PUBLISH 65 -> 66, BECAUSE THE CONDITION THE ROW SETS IS NOT MET ON THE MERGED TREE - AND THE REASON IS A STRUCTURAL ONE THE ROW DOES NOT ACCOUNT FOR.
 
 THE ROW. The team lead's 03:58 CHAT BOT row: "PUBLISH 65 -> 66, BUT ONLY AFTER MB_NAME IS 66", and
@@ -23395,3 +23462,20 @@ Next content: C-228.
 - NOTHING OWED TO THE GAME BUILD LANE in twitch_eventsub.gd this cycle.
 - No Twitch test: eventsub autostarted on the headless runs and refreshed its own tokens as always - it SENT NO MESSAGE, redeemed nothing, cheered nothing, ZERO BITS, no account driven by me.
 - Next chat bot (06:45): L56 (delve-heavy soak - engine and lock), unless the :58 block names otherwise. The cascade is shut at 66/66/66 across MB_NAME, by_key and the published count; COUNT fires again only when a 67th body gets a feed row.
+
+## C-230 (content, 27 Nov 2026, 06:2x CST) - NO NEW BODY, SO BACKLOG 3: 60 LINES, 66 BODIES = 66 FEED KEYS
+- TAKE THIS NEXT (05:58 CT block) CONTENT row: C-229 ticked, nothing owed on the cascade, do not touch MB_NAME or data/commands.json, continue own queue (C-230) or stand down.
+- Measured off origin/art: 66 live bodies in assets/monsters/minibosses (the rest are 11 retired `_chibi` plus broodglut/lastcuff, which bestiary.gd paths explicitly), by_key = 66, no body lacks feed lines. Standing item 1 is empty.
+- Added to data/lore_lines.json: epitaphs +20, descend +8, cleared +8 (floor-number `%d` lines only), barks enter/lord/trap/hurt/drink/misfire +4 each (24). 60 lines, none duplicating an existing line in its pool. Plain register, no mechanics, no floor counts.
+- Added top-level `_note_c230` (expected zero-hit key, wire nothing).
+- VALIDATION OK: all four owned files json.load; leaf-path compare of pre/post: 0 removed, 0 changed, 61 added (60 lines + note); round-trips at indent 2 plus trailing newline as before.
+- CODE WIRING: none. Pickers already read these pools.
+- Next content: C-231.
+
+## U199 (HUD, 27 Nov 06:5x CT) - STAND-DOWN: THE 05:58 ROW STILL NAMES NO HUD ITEM; LOCK FREE, NO GODOT, NO CLAIM
+- Clock 06:53 CST. R's WORKING-COPY docs/RUN_LOCK.txt last line: chat bot B196 IDLE 2026-11-27T06:50:09-06:00 (claim 06:48:30, released inside its cap); tasklist Godot* empty at 06:53. Lock free, so standing down was my choice, not a yield. Nothing claimed.
+- Item: TAKE THIS NEXT (05:58 CT block) HUD row - "FIFTH CONSECUTIVE STAND-DOWN; U198 accepted; S149 checked for a HUD half and has none (its tell rides on the shipped 'resist' hurt kind; the cleave/thorns inconsistency is in delve.gd, not mine); if dry again, audit your own shipped work". No HUD item named. Rarity-hue half shipped U55; L74 ticked 16 Nov.
+- Audit: U195 already closed the parse_fish end-finder worry (block_end() in tools/_u71_rarity_guard.gd). Nothing new shipped by this lane since, so nothing new to audit. No .gd touched, no render, no gate.
+- Worktree: untracked web/icons/**/*.import and modified renders/cycles/*.png are not HUD-owned, not staged.
+- Next firing (07:52): re-read R's working RUN_LOCK and the HUD row; take any row naming HUD work, else stand down again.
+- Decision for Mr. E: SIXTH consecutive firing with no assigned HUD item - park the lane, or give it work? Still owed: the HUD scheduled prompt's stale rarity-hue 'standing item' (shipped U55) and its stale 16-18 Nov dates/queue.

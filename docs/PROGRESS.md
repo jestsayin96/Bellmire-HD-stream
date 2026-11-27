@@ -4636,6 +4636,24 @@ NO CODE WIRING. No key added.
 - GATES: parse 0 Parse Error / 0 SCRIPT ERROR (the one ERROR line is the known COMMANDS_DATA 65-vs-66 cascade, the chat bot's 05:45 publish). S149_THATCH OK 9 checks; S149_RED=1 -> S149_THATCH FAIL 1 of 9 (the roof check) - the gate can fail. S148_THATCHER OK (15 checks). TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2193. DELVE_TEST OK 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/14597 raid 0/8421 PASS. Looked at renders/cycles/s149/thatch_1standing.png: Lastcourse with his sheaf, risen bones beside him, three heroes ringed.
 - Not ticked - team lead ticks. No Twitch, zero bits.
 
+## D-cycle - S150 a roofed blow says "resist" on every path, 2026-11-27 06:09-06:1x CST (game build)
+TAKE THIS NEXT (05:58 block, merged tree 4c776bb2) named NOTHING OWED for game build; it carried ONE observation on S149,
+"yours to judge": delve.gd:1863 labels a roof-zeroed swing "resist" but cleave (2803) and thorns (2826) pass no kind.
+- JUDGED: the three paths should agree. An unlabelled 0 goes through show_result as kind "hit" - parchment "0" that
+  POOLS into the hit number still rising - so a cleave into a roofed creature read as a hit that did nothing. "resist"
+  is the D61.1 teal "the defender won" figure, which is exactly what the roof is. Cleave and thorns now pass
+  `"resist" if _thatch(x) < 1.0 else ""`; luck (2811) passes `"resist" if _ward(tgt) < 1.0`, matching 1863 because its
+  dmg is already warded at 1860 (re-read, confirmed). No damage numbers changed - labels only. Backup delve.gd.bak_s150.
+- tools/_s150_resist.gd (S149 setup reused): cleave and thorns into a roofed foe must bump results_shown["resist"]
+  and not "hit"; luck on a roofed foe likewise; a cleave beyond MB_THATCH_R must still read "hit". The gate calls
+  _ability_hit_one directly with dmg 20, so the luck NUMBER in the render (resist 10) is a harness artifact - in play
+  that dmg arrives pre-warded to 0; the label is what the gate tests.
+- GATES: parse rc=0, 0 Parse Error / 0 SCRIPT ERROR across the whole battery log. S150_RESIST OK 6 checks;
+  S150_RED=1 -> S150_RESIST FAIL 2 of 6 (cleave reads hit +1 and deals 7.0 once the roof is opened) - the gate can fail.
+  S149_THATCH OK 9 checks (no regression). TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2371. DELVE_TEST OK
+  9001 frames. TOWNWALK in_solid=0/16672 raid 0/8219 PASS. LOOKED at renders/cycles/s150/resist_2after.png: a teal
+  "resist 0" stands over the roofed bones beside Lastcourse; "lucky!" and the unroofed "7" read separately.
+- No Twitch, zero bits. L31 remainder (status icons) still open, untouched this hour.
 ## 27 Nov 2026 06:4x CT - HUB firing: STAND DOWN (05:58 block row HUB :37 = "carry on with non-web work, or stand down and write it up")
 - Row taken: TAKE THIS NEXT 05:58 block, HUB (:37). It names no web row; no web/ change this run, so no screenshot and no new hostile-name run is owed.
 - Merged origin/main (49c31758) into hub, clean. web/ tree on HEAD = origin/hub = 1eafbda5 (same tree object).

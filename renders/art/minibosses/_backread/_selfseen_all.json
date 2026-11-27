@@ -4631,34 +4631,27 @@
   },
   "panner": {
    "key": "panner",
-   "errors": [
-    "panner: the man span merged to no object"
-   ],
+   "errors": [],
    "views": {},
-   "bounds_control": [
-    -0.91316,
-    -0.64107,
-    0.0,
-    0.82224,
-    0.72571,
-    2.26
+   "man_from": "span",
+   "man_ranges": [
+    [
+     24,
+     24
+    ]
    ],
-   "bounds_split": [
-    -0.91316,
-    -0.64107,
-    0.0,
-    0.82224,
-    0.72571,
-    2.26
+   "items": 24,
+   "empty_ranges": [
+    [
+     24,
+     24
+    ]
    ],
-   "objs_control": 2,
-   "objs_split": 2,
-   "item_counts": {
-    "inside": 0,
-    "outside": 24,
-    "total": 24
-   },
-   "measured_at": "24 Nov 2026 11:3x CT"
+   "no_man": true,
+   "verdict": "NO_MAN",
+   "no_man_reason": "the builder declares an EMPTY `man` span as its last statement - a deliberate marker that this body has no operator at all. A machine with no man cannot fail a can-you-see-the-man test. NOTHING IS CLAIMED: no view is rendered and no cell is written, so this row is an honest absence and NOT a pass. Matches `minibosses.man_ranges` and the register census's `no_man` state (docs/art/SELFSEEN_AUDIT_24NOV.md section 6).",
+   "measured_at": "2026-11-26T18:40:20-0600 CT",
+   "supersedes": "the 24 Nov 2026 11:3x CT row, which carried `panner: the man span merged to no object` - an UNEARNED RED on a correct body. The error was the instrument's, not the body's: panner pass 4 removed its operator deliberately and declares an EMPTY `man` span to say so, which `minibosses.man_ranges` and the register census (`no_man`) both already honoured and `_backread.py` did not. Fixed in the harness 26 Nov 2026 18:4x CT; both new branches fired and watched."
   },
   "roper": {
    "key": "roper",
@@ -10591,9 +10584,7 @@
    "measured_at": "2026-11-26T17:47:38-0600 CT (26 Nov 2026 art firing)"
   }
  },
- "errors": [
-  "panner: the man span merged to no object"
- ],
- "ok": false,
- "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds. | 24 Nov 2026 19:5x CT for the DREDGER (57th), measured by tools/art/_backread.py --keys dredger and MERGED into this file row-by-row. NOT written with --out, which OVERWRITES and would have destroyed the other 56 rows - the same wholesale-wipe shape this file's own carry rule exists to prevent. 24 Nov 2026 21:0x CT for the 58th body (harrowman), measured by tools/art/_backread.py --keys harrowman in the same run that built it; its own row carries its measured_at. 24 Nov 2026 21:5x CT for the 59th body (pledgeman), measured by _backread.py and MERGED into this file - the other rows untouched. 25 Nov 2026 02:0x CT for the 61st body (timberman), measured by tools/art/_backread.py --keys timberman in the run that built it and MERGED into this file - the other rows untouched. ; 2026-11-26T17:47:38-0600 CT (26 Nov 2026 art firing) for the OVERLOOKER (63rd), which the 25 Nov 22:46 census listed as MEASURABLE and which had NO row here at all - minibossfit went RED on it this run and the red PRE-DATES this run's edit: the body was born at pass 5 and was never fed to the instrument. Its cells are man_seen 1.0 on all three views, and that is an HONEST 1.0 that says nothing good: he carries NO GEAR (34 items inside the man span, 0 outside), so there is nothing that could occlude him. Per derive_self_seen's own docstring a high self_seen says UNOBSTRUCTED, never that the body READS - his facing is measured by tools/art/_ovl_backread.py, not by this."
+ "errors": [],
+ "ok": true,
+ "provenance": "21 Nov 2026 03:3x CT for the original 25 bodies; 24 Nov 2026 11:3x CT for the 7 that the 21 Nov run never asked about (almoner, blower, changer, panner, roper, stopper, tither). Every row carries its own `measured_at`; 24 Nov 2026 16:45 CT for the SIX bodies whose builders split the figure from the gear under names other than `man` (hurdleman, iceman, nightman, stiltman, straker, tanner) and which the census had therefore been filing as not_measurable - see minibosses.man_ranges and tools/art/_manparts_prove.py. Every row carries its own `measured_at`. ; 2026-11-24T17:47:22-0600 CT (S118) for the SEVENTEEN bodies that had never named a figure at all and sat in the census `not_measurable` list - the silent outcome - now declaring `man_parts` in their own builders: bellman, cook, drillmaster, gaoler, jointer, loader, porter, quartermaster, rammer, scrapwright, sexton, sluicekeeper, snarer, snuffer, sower, stoker, tallyman. Same instrument, same three views, same with/without delta through one camera; 0 errors, 0 reds. | 24 Nov 2026 19:5x CT for the DREDGER (57th), measured by tools/art/_backread.py --keys dredger and MERGED into this file row-by-row. NOT written with --out, which OVERWRITES and would have destroyed the other 56 rows - the same wholesale-wipe shape this file's own carry rule exists to prevent. 24 Nov 2026 21:0x CT for the 58th body (harrowman), measured by tools/art/_backread.py --keys harrowman in the same run that built it; its own row carries its measured_at. 24 Nov 2026 21:5x CT for the 59th body (pledgeman), measured by _backread.py and MERGED into this file - the other rows untouched. 25 Nov 2026 02:0x CT for the 61st body (timberman), measured by tools/art/_backread.py --keys timberman in the run that built it and MERGED into this file - the other rows untouched. ; 2026-11-26T17:47:38-0600 CT (26 Nov 2026 art firing) for the OVERLOOKER (63rd), which the 25 Nov 22:46 census listed as MEASURABLE and which had NO row here at all - minibossfit went RED on it this run and the red PRE-DATES this run's edit: the body was born at pass 5 and was never fed to the instrument. Its cells are man_seen 1.0 on all three views, and that is an HONEST 1.0 that says nothing good: he carries NO GEAR (34 items inside the man span, 0 outside), so there is nothing that could occlude him. Per derive_self_seen's own docstring a high self_seen says UNOBSTRUCTED, never that the body READS - his facing is measured by tools/art/_ovl_backread.py, not by this. | 2026-11-26T18:40:20-0600 CT (26 Nov 2026 art firing) for the PANNER row, REPLACED not added: the one error that held this file at ok:false for two days was a HARNESS fault and is fixed in tools/art/_backread.py, which now reports a declared-empty `man` span as NO_MAN - an honest absence that claims NOTHING and is not a pass - and goes RED on an empty span that is not the end-of-build marker. No view was rendered for this row because there is no man to render; `views` is {} on purpose. The other 61 rows were verified byte-identical across the merge."
 }

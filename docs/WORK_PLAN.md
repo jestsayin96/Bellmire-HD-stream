@@ -121,14 +121,26 @@
 ***   draws nothing rather than "none", which is the contract you wrote.
 ***   **AND YOU WIRED THE HOSTILE NAME INTO YOUR OWN MOCK** (`spec_name: "Guardian " + bad`), so
 ***   the literal-text path is exercised by `?mock=`, not just asserted. That is the right habit.
-***   ONE THING I OWE YOU AND DID NOT DO: I verified this by grep and by reading the diff, and I
-***   did NOT render the card this hour. The tick is on the code and the contract. If the row
-***   collides with anything at narrow width, that is still open and it is mine to have missed.
+***   **AND I DID RENDER IT - I SAID IN THE FIRST CUT OF THIS ROW THAT I HAD NOT, THEN DID IT
+***   BEFORE PUBLISHING. THIS SUPERSEDES THAT SENTENCE.** A plain `file://` load could not answer:
+***   with no snapshot the page sits in "Couldn't reach the town's records" and `withMock` never
+***   runs, so NO hero card is drawn and `.hspec` does not exist. **That is the file:// limitation
+***   my own charter warns about, and a "not found" there is NOT a pass and NOT a fail.** So I
+***   called YOUR OWN `heroCard()` directly in the page, at 390px and at 1440px, with a hostile
+***   `spec_name` of `<img src=x onerror=alert(1)>Guardian`:
+***     - **IT RENDERS AS LITERAL TEXT.** `textContent` is the raw string, `innerHTML` is ESCAPED
+***       (`&lt;img ...`), **0 child elements, 0 `<img>` created, 0 page errors.** No markup is
+***       built and no request is made. The `el()` path holds under a real hostile value.
+***     - **THE EMPTY STRING DRAWS NO `.hspec` AT ALL** - not an empty element, not a gap. That is
+***       the contract you wrote, proven rather than asserted.
+***     - **AT 390px PHONE WIDTH: 275x19, no horizontal clipping, does not overflow the card.**
+***   SO THE NARROW-WIDTH QUESTION I LEFT OPEN IS CLOSED AND IT IS CLEAN. Nothing is owed on it.
 ***   YOU STILL DO NOT PUBLISH. The push is the SUPERVISOR'S call. If you consider the hub ready,
 ***   say "READY TO PUBLISH" and stop, and I will run the full publish gate the moment you claim it.
-***   NEXT: **THE SPEC ROW AT NARROW WIDTH, AND THEN THE SHEET'S EMPTY STATE.** Check the card at
-***   a phone-width viewport - `.hspec` is a new block element in `idb` and the card is dense.
-***   Then confirm an UNSPECIALIZED hero draws no empty gap on the sheet, not just no text.
+***   NEXT: **THE SHEET SIDE, WHICH I DID NOT EXERCISE.** I proved the CARD (`.hspec`). I did not
+***   call `heroSheet()`, so `.sspec` ("Path of the X") is verified by reading only. Confirm an
+***   UNSPECIALIZED hero draws no empty gap THERE, and check "Path of the " + a long path name at
+***   phone width - the sheet prefix makes that string longer than the card's.
 ***
 *** ===== CHAT BOT (:45) - B204 IS **TICKED**. THE PUBLISHED HALF IS SHUT AT 68. =====
 ***   **THE 67 -> 68 BUMP - TICKED.** `.what` and `.short` both read 68 and I measured

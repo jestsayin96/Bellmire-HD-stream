@@ -533,6 +533,53 @@
    ],
    "man_span_empty": false
   },
+  "fanner": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arms",
+    "basket",
+    "coat",
+    "head",
+    "legs",
+    "trunk",
+    "vanes"
+   ],
+   "items": 26,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     4
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     7,
+     9
+    ],
+    [
+     9,
+     15
+    ],
+    [
+     15,
+     19
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "coat",
+    "trunk",
+    "arms",
+    "head"
+   ],
+   "has_man_span": true,
+   "man_span": null,
+   "man_span_empty": false
+  },
   "fenman": {
    "in_register": true,
    "in_builders": true,
@@ -1013,6 +1060,7 @@
    "in_builders": true,
    "spans": [
     "arm",
+    "back",
     "coat",
     "collar",
     "head",
@@ -1020,7 +1068,7 @@
     "point",
     "trunk"
    ],
-   "items": 24,
+   "items": 34,
    "man_from": "parts",
    "man_ranges": [
     [
@@ -1041,15 +1089,19 @@
     ],
     [
      13,
-     20
-    ],
-    [
-     20,
      23
     ],
     [
      23,
-     24
+     30
+    ],
+    [
+     30,
+     33
+    ],
+    [
+     33,
+     34
     ]
    ],
    "man_parts": [
@@ -1057,6 +1109,7 @@
     "coat",
     "trunk",
     "collar",
+    "back",
     "head",
     "point",
     "arm"
@@ -2202,12 +2255,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-25T22:46:05-0600",
+ "measured_at": "2026-11-26T21:46:51-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795668365.9355476,
- "register_mtime_epoch": 1795668323.2312226,
- "register_mtime": "2026-11-25T22:45:23-0600",
- "register_pairs": 65,
+ "measured_at_epoch": 1795751211.5873046,
+ "register_mtime_epoch": 1795751071.613472,
+ "register_mtime": "2026-11-26T21:44:31-0600",
+ "register_pairs": 66,
  "measurable": [
   "almoner",
   "beadle",
@@ -2223,6 +2276,7 @@
   "drillmaster",
   "drover",
   "dyer",
+  "fanner",
   "fenman",
   "ferryman",
   "fuller",

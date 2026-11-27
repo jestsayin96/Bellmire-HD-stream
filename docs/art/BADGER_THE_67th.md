@@ -76,11 +76,38 @@ out of the store. Condition is the receipt.
 Ratio 1.04 is the THATCHER'S number and 0.97 is the MEALMAN'S. Neither is this
 body's. Do not re-derive it and do not copy it from a prompt or a plan row.**
 
+## PASS 3 - THE HEAD. ONE FAULT CLOSED, TWO STILL OPEN, AND MY FIX CAUSED
+## THE THING IT WAS MEANT TO CURE
+
+Pass 3 changed the head and nothing else: a shorter blunt crown, a brim that
+overhangs on -y only, and the face oval repainted from the coat's value to the
+cape's (8.5x the hood's albedo instead of 2.9x - the thatcher's pass 6 proved
+2.9x is one band once lit, which is why the oval had been invisible).
+
+- **FAULT 4 IS CLOSED.** The head reads as a plain brimmed working hat. The
+  pointed-hat silhouette is gone.
+- **FAULT 1 IS STILL OPEN AND MY OWN FIX IS NOW THE CAUSE.** The brim I added
+  so the hood would have an opening OVERHANGS THE FACE from the fit camera's
+  slight downward angle, so the face oval is in shadow behind it and still
+  does not read from the front. The value change was right and the geometry
+  that was supposed to reveal it is what hides it.
+- **FAULT 2 IS IMPROVED, NOT FIXED.** The raked crown and brim give the front
+  and back different outlines, but at hero distance both still read as "dark
+  hatted figure, two pale sacks, dark bar". A body whose facing rests on a
+  brim edge has a weak facing.
+- Numbers after pass 3, for the record: man_seen front 0.907 / side 0.869 /
+  back 0.840; `value_man_visible` spread 0.521 / 0.495 / 0.502, bands_5pct
+  4 / 4 / 5. Register `ok: true`, verdict GREEN, errors [], blank 201 / 0.
+  **Every one of those was green while the face was invisible.** They are not
+  wrong, they are answering a different question.
+
 ## OPEN FAULTS - WHAT I CAN SEE IN THE RENDERS, AND I LOOKED AT ALL THREE
 
-1. **NO FACE, IN ANY VIEW.** The hood is a smooth closed cone with no opening
-   and the body-coloured face oval is not visible at all. It is occluded by
-   the hood cone itself. Loudest fault.
+1. **NO FACE, IN ANY VIEW.** Still open after pass 3. At pass 2 the closed
+   cone hid the oval; at pass 3 the brim added to open the hood hides it
+   instead. Loudest fault. The next pass should raise the face oval and tuck
+   the brim back, or drop the brim and carry the facing on the crown rake
+   alone - ONE of those, not both at once.
 2. **NO FACING - THE BEADLE'S FAULT, REPRODUCED.** Front and back read almost
    identically: a dark cone-headed figure with two pale sacks and a dark bar.
    **The builder carries a comment claiming the facing is "geometric by
@@ -92,7 +119,7 @@ body's. Do not re-derive it and do not copy it from a prompt or a plan row.**
    separable masses"; that is also refuted by the picture. This is the worst
    fault in substance, because the count IS the mechanic - a viewer who cannot
    count the sacks cannot judge whether to go in.
-4. The hood apex reads as a pointed hat - theatrical, against the plainness rule.
+4. ~~The hood apex reads as a pointed hat~~ **CLOSED AT PASS 3.**
 5. The sacks read as lumpy gourds or bottles rather than grain sacks; the
    bottom bulge makes them read like boxing gloves from the front.
 6. The yoke reads as a black coat-rack bracket from the front and the hands are

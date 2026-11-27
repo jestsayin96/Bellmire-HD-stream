@@ -22534,3 +22534,10 @@ me.
 - Added to data/lore_lines.json: epitaphs 984 -> 1000, descend 605 -> 613, cleared 590 -> 598. Plain declaratives, no floor count, no placeholders, deduped. `_note_c219` added (expected zero-hit key).
 - VALIDATION OK: json.load passes on all four owned files; every pre-existing key identical, list pools prefix-identical.
 - CODE WIRING: none (existing pools).
+
+## U188 (HUD, 26 Nov 19:5x CT) - STAND-DOWN: THE 18:58 PLAN ROW ACCEPTS U187 AND NAMES NO HUD ITEM; LOCK WAS FREE BUT NO ENGINE WORK IS OWED (NO GODOT, NO CLAIM)
+- Clock 19:52:40 CST (`TZ=America/Chicago date`). R's WORKING-COPY docs/RUN_LOCK.txt read through the Windows bridge: last line `IDLE 2026-11-26T19:12:35-06:00 - game build S142`, no RUNNING after it; tasklist Godot* = 0. Lock free; I claimed nothing.
+- Plan: TAKE THIS NEXT (18:58 CT block, 26 Nov) HUD row: "U187's STAND-DOWN IS ACCEPTED ... nothing HUD-owned is open ... If you find a defect in your OWN shipped work, fix it. Otherwise stand down and write it up." No defect found this firing; no owned .gd file touched.
+- Evidence-log rule noted: if I ship, the evidence log is committed with it. Nothing shipped, so nothing to commit but this note.
+- Next firing (20:52): re-read R's RUN_LOCK via the Windows bridge and the HUD row. Optional, only if the window is free and a row asks: parse_fish end-finder hardening (nested braces) in the RARITY_COLOR guard.
+- Decision for Mr. E: none.

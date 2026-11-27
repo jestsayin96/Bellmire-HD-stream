@@ -1139,7 +1139,15 @@
     "Rope coiled, lamp filled, the guild clerk's tally kept.",
     "The cat at the post watched them go, unbothered.",
     "Small coin in the offering bowl. Down they went.",
-    "They went down by the baker's hour, bread warm in the pack."
+    "They went down by the baker's hour, bread warm in the pack.",
+    "Boots laced, packs weighed, the clerk nodded them through.",
+    "The gate-warden held the lamp a moment longer than needed.",
+    "A child at the well waved. Someone waved back, and they went down.",
+    "Rain on the cobbles. Hoods up, down the steps.",
+    "The cooper's boy swept the stair ahead of them.",
+    "Bread broken at the lip of the stair, then the dark.",
+    "The watch changed. The party did not wait for it.",
+    "Nobody spoke. The torch spoke for them, low and steady."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1783,7 +1791,15 @@
     "Floor %d is clear. Bandages out, and then bread.",
     "Floor %d is done. The next stair waits, and so does supper.",
     "Floor %d goes dark and stays dark. That will do.",
-    "Floor %d is finished. Salt on the blades, then onward."
+    "Floor %d is finished. Salt on the blades, then onward.",
+    "Floor %d is quiet. The wounded sit and the sound ones stand guard.",
+    "Floor %d is cleared. Somebody counts the flasks and finds enough.",
+    "Floor %d is held. Water passed round, a joke too tired to land.",
+    "Floor %d is behind them. The dust settles on what is left.",
+    "Floor %d is done. Boots scraped clean on the threshold.",
+    "Floor %d gives way. They sit a moment, then rise.",
+    "Floor %d is theirs, and no more than that.",
+    "Floor %d is still. A rope is coiled and the stair looked at."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -5105,7 +5121,22 @@
     "Tied the bundle tight and sent it up with the others.",
     "Asked for a drink at the gate. Got it. Went down.",
     "Held the door until the door was all that held.",
-    "A steady one. The post is short a name."
+    "A steady one. The post is short a name.",
+    "Mended the nets in the evening. The nets are still mended.",
+    "Kept the ledger honest. The ledger is a page short.",
+    "Shared the last of the cheese. Went down hungry and unbothered.",
+    "Knew every step of the stair by sound. Knew the last one too.",
+    "Left the shutters latched and the dog fed.",
+    "Counted the arrows twice. Used all of them.",
+    "Carried the lamp. Did not complain of the weight.",
+    "Said little. Did the work. Is missed at the table.",
+    "Patched the boot before the descent. The boot came home alone.",
+    "Paid the dues in full before the stair, and quietly.",
+    "Walked in front so the young ones need not.",
+    "Salted the bread, blessed nothing, went down.",
+    "Had a good laugh at the gate. It carried a while.",
+    "Tied the last knot in the rope and trusted it.",
+    "Brought the bucket, the broom, and the nerve."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -15969,5 +16000,6 @@
   "_note_c229": "C-229 (content, 27 Nov 2026): backlog 2, 78 disaster variant lines, same shape as C-148/C-69. Additive; nothing wired. Expected zero-hit key.",
   "_note_c230": "C-230 (27 Nov 2026 CST): no committed art body lacks feed lines (66 bodies, 66 keys); backlog 3 top-up. epitaphs +20, descend +8, cleared +8 (floor-number %d lines only), barks enter/lord/trap/hurt/drink/misfire +4 each. Additive, plain register, no mechanics, no floor counts. Expected zero-hit key; wire nothing.",
   "_note_c231": "C-231 (content, 27 Nov 2026): townsfolk.react raid/festival/caravan/growth/hero_falls/hero_rich +5 each (30 lines). No new body, 66=66 feed keys. Plain register, no mechanics. data/drops.json NOT created: the four-file rule bars new data files; awaiting Mr. E's licence. Expected zero-hit key; wire nothing.",
-  "_note_c232": "C-232: epitaphs +20, descend +10, cleared +10 (10 lines carry the floor placeholder). Pools already read by the engine; no wiring."
+  "_note_c232": "C-232: epitaphs +20, descend +10, cleared +10 (10 lines carry the floor placeholder). Pools already read by the engine; no wiring.",
+  "_note_c233": "C-233: epitaphs +15, descend +8, cleared +8 (8 lines carry the floor placeholder). Pools already read by the engine; no wiring."
 }

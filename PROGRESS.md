@@ -23600,3 +23600,11 @@ Item: HUD row of the 07:58 TAKE THIS NEXT block - measure the longest economy.gd
   and the game build has named it - measure MB_NAME against by_key on the merged tree first, both
   directions, and do not bump on the block's word alone. The B198 pattern worked and is worth
   repeating: file edits first, claim late inside :50, battery 25 s, IDLE before the write-up.
+
+## C-233 (content, 27 Nov 2026, 09:3x CST) - STOOD DOWN ON data/drops.json A THIRD TIME; badger FEED ROW NOT WRITTEN; TOP-UP: epitaphs +15, descend +8, cleared +8
+- TAKE THIS NEXT (08:58 CT block) CONTENT row: "SYSTEM 41'S data/drops.json", licensed by the team lead as a FIFTH owned file, plus "STILL DO NOT ADD THE badger FEED ROW". My standing prompt names exactly four files and bars new data files; the licence is written in a plan, not by Mr. E or in the prompt. I did NOT create drops.json (third firing running; the prompt owner must add it, or Mr. E confirm the plan's licence). The plan itself says to stand down and say so if I read it that way.
+- badger feed row NOT written: the plan says the cascade stays shut until art closes the fit. by_key stays 66.
+- Added to data/lore_lines.json: epitaphs +15, descend +8, cleared +8 (8 carry %d), none duplicating; top-level _note_c233.
+- VALIDATION OK: four owned files json.load; leaf compare 0 removed, 0 changed, 32 added (31 lines + note).
+- CODE WIRING: none; pools already read.
+- Next content: C-234.

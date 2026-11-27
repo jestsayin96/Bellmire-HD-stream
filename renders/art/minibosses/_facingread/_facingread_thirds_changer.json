@@ -1,0 +1,89 @@
+{
+ "tag": "_thirds_changer",
+ "bodies": {
+  "changer": {
+   "front_px": 121308,
+   "back_px": 121775,
+   "inter_px": 112672,
+   "union_px": 130411,
+   "sil_iou": 0.864,
+   "in_diff_frac": 0.2046,
+   "in_mean_abs": 0.0653,
+   "in_diff_thirds": {
+    "top": 0.3063,
+    "mid": 0.1683,
+    "bot": 0.1951
+   },
+   "thirds_px": {
+    "top": 22625,
+    "mid": 54058,
+    "bot": 35989
+   },
+   "thirds_spread": 0.138
+  },
+  "stopper": {
+   "front_px": 192318,
+   "back_px": 191470,
+   "inter_px": 189615,
+   "union_px": 194173,
+   "sil_iou": 0.9765,
+   "in_diff_frac": 0.1794,
+   "in_mean_abs": 0.0579,
+   "in_diff_thirds": {
+    "top": 0.1873,
+    "mid": 0.2011,
+    "bot": 0.1101
+   },
+   "thirds_px": {
+    "top": 75366,
+    "mid": 80597,
+    "bot": 33652
+   },
+   "thirds_spread": 0.091
+  },
+  "bellman": {
+   "front_px": 124121,
+   "back_px": 123151,
+   "inter_px": 112425,
+   "union_px": 134847,
+   "sil_iou": 0.8337,
+   "in_diff_frac": 0.4703,
+   "in_mean_abs": 0.1477,
+   "in_diff_thirds": {
+    "top": 0.4925,
+    "mid": 0.4481,
+    "bot": 0.4703
+   },
+   "thirds_px": {
+    "top": 31553,
+    "mid": 31621,
+    "bot": 49251
+   },
+   "thirds_spread": 0.0444
+  },
+  "dyer": {
+   "front_px": 256184,
+   "back_px": 247450,
+   "inter_px": 225829,
+   "union_px": 277805,
+   "sil_iou": 0.8129,
+   "in_diff_frac": 0.2654,
+   "in_mean_abs": 0.0812,
+   "in_diff_thirds": {
+    "top": 0.1649,
+    "mid": 0.2061,
+    "bot": 0.5097
+   },
+   "thirds_px": {
+    "top": 81839,
+    "mid": 88814,
+    "bot": 55176
+   },
+   "thirds_spread": 0.3448
+  }
+ },
+ "errors": [],
+ "asks": "are the FRONT and the MIRRORED BACK of this body tellable apart, in outline (sil_iou) and inside it (in_diff_frac)",
+ "cannot_see": "WHETHER THE DIFFERENCE IS A FACING. Posture, stride and one-sided gear all score here. No pass mark is set in this file on purpose - read the bodies against each other and then look at the pictures.",
+ "ok": true
+}

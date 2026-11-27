@@ -842,15 +842,44 @@ def porter():
     # stand outside the body from any angle.
     LY = 0.40
     P.add(L.box(0.84, 0.14, 2.12), 'body', loc=(0.0, LY, 1.24), rot=(0.10, 0.0, 0.0))
+    # *** PASS 3, 27 NOV 2026. THE IRON WAS ALL ON THE FACE NOBODY CAN SEE. ***
+    # Found by looking at renders/art/minibosses/_backread/porter_s118_back.png
+    # after `_selfseen_all.json` put `porter back man_seen 0.1758` at the BOTTOM
+    # OF ALL 198 CELLS IN THE HOUSE - second worst is 0.4611 and the median is
+    # 0.9325, so this is not a tail, it is an outlier standing on its own.
+    # Every band, boss, hinge strap and ring below was placed at `LY - 0.0xx`,
+    # which is the leaf's INNER face, the one turned toward the man's back. The
+    # leaf board itself spans y 0.33..0.47. So from the BACK camera the nearest
+    # surface in the whole picture is a BARE 0.84 x 2.12 PLANK and every piece
+    # of iron on this body is behind it. The numbers say the same thing without
+    # being asked to: on the back view p50 0.5304 and p95 0.5467, so HALF THE
+    # PICTURE SITS INSIDE A VALUE BAND 0.016 WIDE. A flat tan slab.
+    # A hung door is banded on the face that shows - that is what the bands are
+    # FOR, and putting them where only the carrier could see them was never the
+    # truthful build. The iron now goes on BOTH faces. No new material and no
+    # new mesh: every piece here is already the 'dark' slot, so the four-mesh
+    # cap is untouched. Nothing moves in x or z and the outer pieces sit inside
+    # the band's own 0.07 thickness, so THE FOOTPRINT IS UNCHANGED - this buys
+    # a read, not width, and the gate re-measures it rather than taking my word.
+    # WHAT THIS DOES NOT FIX, SAID BEFORE THE RENDER RATHER THAN AFTER:
+    # `man_seen` WILL NOT MOVE. It asks how much of THE MAN is visible, and
+    # iron on a leaf is gear. The man stays hidden behind his own load from
+    # behind and that is a separate fault, carried in the summary, not quietly
+    # folded into this one.
     for z in (0.52, 1.06, 1.60, 2.16):                      # iron bands across
-        P.add(L.box(0.90, 0.07, 0.11), 'dark', loc=(0.0, LY - 0.095, z), rot=(0.10, 0.0, 0.0))
+        for face in (LY - 0.095, LY + 0.095):
+            P.add(L.box(0.90, 0.07, 0.11), 'dark', loc=(0.0, face, z),
+                  rot=(0.10, 0.0, 0.0))
         for s in (-1, 1):                                   # bosses on the bands
-            P.add(L.sphere(0.055, 0.045, 0.055, 8, 6), 'dark',
-                  loc=(s * 0.30, LY - 0.145, z))
+            for face in (LY - 0.145, LY + 0.145):
+                P.add(L.sphere(0.055, 0.045, 0.055, 8, 6), 'dark',
+                      loc=(s * 0.30, face, z))
     for s in (-1, 1):                                       # two hinge straps
-        P.add(L.box(0.12, 0.08, 1.98), 'dark', loc=(s * 0.37, LY - 0.08, 1.24),
-              rot=(0.10, 0.0, 0.0))
+        for face in (LY - 0.08, LY + 0.08):
+            P.add(L.box(0.12, 0.08, 1.98), 'dark', loc=(s * 0.37, face, 1.24),
+                  rot=(0.10, 0.0, 0.0))
     P.add(L.box(0.24, 0.09, 0.09), 'dark', loc=(0.0, LY - 0.17, 2.02))   # pull ring bar
+    P.add(L.box(0.24, 0.09, 0.09), 'dark', loc=(0.0, LY + 0.17, 2.02))   # and outside
     for s in (-1, 1):                                       # the slung strap
         limb(P, [(s * 0.26, 0.28, 2.00), (s * 0.34, -0.14, 1.52)], 0.040, 0.034, 'dark')
     # THE DRAWBAR - 2.3 m of squared oak, crosswise, both hands under it.

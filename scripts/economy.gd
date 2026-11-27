@@ -820,3 +820,152 @@ func _counter_watch() -> void:
         feed.append("%s stands at the smithy with %d gold for %s steel, but a level %d smithy sells nothing past %s - %s is the best it will make." \
             % [nm, int(h.get("gold", 0)), rarity_of(nxt), lv, rarity_of(cap), String(best["name"])])
         _tag("shop", [nm])
+
+# ---- SYSTEM 38 (S151): TAVERN GAMES - the house-game logic behind `!dice` ----
+## Mr. E's directive (27 Nov 02:18 CT, claude/sup-nov27-0218): one roll per command, no doubling
+## down, no side bets. The tavern building already stands; this is a function on it, not a building.
+##   tavern_dice(h, 0)        bare `!dice` - a roll for fun, no gold moves
+##   tavern_dice(h, amt)      against the house: both roll a d20, BEAT the house to win. A win pays
+##                            double the stake less the house's 10% cut of that pot; a loss leaves the
+##                            stake with the tavern. A TIE IS THE HOUSE'S ("beat the house roll").
+##                            Gold the tavern keeps LEAVES THE ECONOMY (a System 20 sink) - it is
+##                            counted in tavern_take and never reaches the treasury; what it pays on
+##                            a win is counted in tavern_paid. The house edge (ties, and the cut)
+##                            makes take - paid the net gold sunk, positive over any long run.
+##   tavern_duel(a, b, amt)   viewer against viewer: both stake, higher roll takes the pot, NO cut,
+##                            ties re-roll (bounded) so a duel always ends in one command.
+## Stakes: min DICE_MIN, max dice_max_bet() which scales with the town level. Each call returns a
+## Dictionary - ok, why (on a refusal), rolls, delta(s) and a plain `text` line - so the chat bot's
+## `!dice` only renders it; this file owns the rules and moves the gold.
+const DICE_MIN := 1
+const DICE_MAX_PER_LEVEL := 25    # a crossing stakes 25g at most; a city in all but charter 300g
+const DICE_HOUSE_CUT := 0.10
+const DICE_TIE_REROLLS := 8
+var dice_rng := RandomNumberGenerator.new()
+var tavern_take := 0              # gold the house has kept and sunk (lost stakes + its cut)
+var tavern_paid := 0              # gold the house has paid out on wins (the stake it matched)
+var tavern_games := 0
+var tavern_duels := 0
+
+func dice_max_bet() -> int:
+    return DICE_MAX_PER_LEVEL * maxi(1, town_level)
+
+func _dice_stake_ok(h: Dictionary, amount: int) -> String:
+    if amount < DICE_MIN:
+        return "min"
+    if amount > dice_max_bet():
+        return "max"
+    if int(h.get("gold", 0)) < amount:
+        return "gold"
+    return ""
+
+func _dice_refusal(h: Dictionary, why: String, amount: int) -> String:
+    var nm := String(h.get("name", "A hero"))
+    match why:
+        "min":
+            return "%s - the least the tavern takes is %d gold." % [nm, DICE_MIN]
+        "max":
+            return "%s - %s plays for %d gold at most. The stakes rise as the town does." \
+                % [nm, town_name, dice_max_bet()]
+        "gold":
+            return "%s puts down %d gold they do not have - %d in the purse." % [nm, amount, int(h.get("gold", 0))]
+        "dead":
+            return "%s is in no state to throw dice." % nm
+        "self":
+            return "%s cannot dice against themselves." % nm
+    return "%s cannot play that." % nm
+
+func tavern_dice(h: Dictionary, amount := 0) -> Dictionary:
+    var nm := String(h.get("name", "A hero"))
+    if not bool(h.get("alive", true)):
+        return {"ok": false, "why": "dead", "text": _dice_refusal(h, "dead", amount)}
+    var you := dice_rng.randi_range(1, 20)
+    if amount <= 0:
+        return {"ok": true, "fun": true, "you": you, "delta": 0,
+            "text": "%s throws the tavern dice for luck: %d." % [nm, you]}
+    var why := _dice_stake_ok(h, amount)
+    if why != "":
+        return {"ok": false, "why": why, "text": _dice_refusal(h, why, amount)}
+    var house := dice_rng.randi_range(1, 20)
+    tavern_games += 1
+    var delta := 0
+    var text := ""
+    if you > house:
+        var cut := int(ceil(float(amount * 2) * DICE_HOUSE_CUT))
+        delta = amount - cut                      # stake back + stake won, less the cut of the pot
+        tavern_take += cut
+        tavern_paid += amount                     # the house matched the stake
+        text = "%s rolls %d to the house's %d and wins - %d gold after the house's cut." % [nm, you, house, amount * 2 - cut]
+    else:
+        delta = -amount
+        tavern_take += amount
+        text = "%s rolls %d to the house's %d%s - the tavern keeps %d gold." \
+            % [nm, you, house, " (the house wins ties)" if you == house else "", amount]
+    h["gold"] = int(h.get("gold", 0)) + delta
+    return {"ok": true, "fun": false, "you": you, "house": house, "delta": delta, "text": text}
+
+func tavern_duel(a: Dictionary, b: Dictionary, amount: int) -> Dictionary:
+    if is_same(a, b):
+        return {"ok": false, "why": "self", "text": _dice_refusal(a, "self", amount)}
+    for p in [a, b]:
+        if not bool(p.get("alive", true)):
+            return {"ok": false, "why": "dead", "who": String(p.get("name", "")), "text": _dice_refusal(p, "dead", amount)}
+        var why := _dice_stake_ok(p, amount)
+        if why != "":
+            return {"ok": false, "why": why, "who": String(p.get("name", "")), "text": _dice_refusal(p, why, amount)}
+    var ra := 0
+    var rb := 0
+    var throws := 0
+    while ra == rb and throws <= DICE_TIE_REROLLS:
+        ra = dice_rng.randi_range(1, 20)
+        rb = dice_rng.randi_range(1, 20)
+        throws += 1
+    if ra == rb:
+        rb = ra - 1 if ra > 1 else ra + 1        # bounded: the last tie is broken, never left open
+    var win: Dictionary = a if ra > rb else b   # ra != rb is guaranteed above
+    var lose: Dictionary = b if ra > rb else a
+    win["gold"] = int(win.get("gold", 0)) + amount
+    lose["gold"] = int(lose.get("gold", 0)) - amount
+    tavern_duels += 1
+    var na := String(a.get("name", "A hero"))
+    var nb := String(b.get("name", "A hero"))
+    return {"ok": true, "a": ra, "b": rb, "throws": throws, "winner": String(win.get("name", "")),
+        "pot": amount * 2, "delta_a": amount if is_same(win, a) else -amount, "delta_b": amount if is_same(win, b) else -amount,
+        "text": "%s rolls %d, %s rolls %d%s - %s takes the pot of %d gold." \
+            % [na, ra, nb, rb, " after a tie" if throws > 1 else "", String(win.get("name", "")), amount * 2]}
+
+## S151: a duel takes BOTH purses, so the challenged must agree - otherwise `!dice 300 someone` would
+## gamble away a viewer's gold without them. tavern_challenge posts the offer (stakes checked now,
+## no gold moves); tavern_accept(b) settles it through tavern_duel, re-checking both purses then. One
+## open offer per challenged hero (a new one replaces it); offers lapse after DICE_OFFER_MS.
+const DICE_OFFER_MS := 60000
+var _dice_offers: Array = []      # [{a, b, amt, at}]
+
+func tavern_challenge(a: Dictionary, b: Dictionary, amount: int, now_ms := -1) -> Dictionary:
+    if is_same(a, b):
+        return {"ok": false, "why": "self", "text": _dice_refusal(a, "self", amount)}
+    for p in [a, b]:
+        if not bool(p.get("alive", true)):
+            return {"ok": false, "why": "dead", "who": String(p.get("name", "")), "text": _dice_refusal(p, "dead", amount)}
+        var why := _dice_stake_ok(p, amount)
+        if why != "":
+            return {"ok": false, "why": why, "who": String(p.get("name", "")), "text": _dice_refusal(p, why, amount)}
+    var t := now_ms if now_ms >= 0 else Time.get_ticks_msec()
+    for i in range(_dice_offers.size() - 1, -1, -1):
+        if is_same(_dice_offers[i]["b"], b):
+            _dice_offers.remove_at(i)
+    _dice_offers.append({"a": a, "b": b, "amt": amount, "at": t})
+    return {"ok": true, "pending": true, "text": "%s lays %d gold on the table and dares %s to throw. (!dice accept)" \
+        % [String(a.get("name", "A hero")), amount, String(b.get("name", "A hero"))]}
+
+func tavern_accept(b: Dictionary, now_ms := -1) -> Dictionary:
+    var t := now_ms if now_ms >= 0 else Time.get_ticks_msec()
+    for i in range(_dice_offers.size() - 1, -1, -1):
+        var o: Dictionary = _dice_offers[i]
+        if t - int(o["at"]) > DICE_OFFER_MS:
+            _dice_offers.remove_at(i)
+            continue
+        if is_same(o["b"], b):
+            _dice_offers.remove_at(i)
+            return tavern_duel(o["a"], b, int(o["amt"]))
+    return {"ok": false, "why": "none", "text": "%s has no dare on the table." % String(b.get("name", "A hero"))}

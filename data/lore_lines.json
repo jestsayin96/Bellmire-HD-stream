@@ -11470,7 +11470,12 @@
         "Hold the line, neighbours! Our roofs, our rules!",
         "My knees say run. My pride says stay. Pride is losing.",
         "Take the cart and go! I'll mind the shop!",
-        "Not today, you thieving sods. Not in Bellmire."
+        "Not today, you thieving sods. Not in Bellmire.",
+        "Shutters up! Every one! Now!",
+        "Take the ladder in. Take the cat in.",
+        "They'll want the grain. Sit on the grain.",
+        "Bells again. I'd hoped for a quiet week.",
+        "Hold the line, lads. I'll hold the ladle."
       ],
       "disaster": [
         "It's the end! No - it's weather. It's only weather. Probably.",
@@ -11524,7 +11529,12 @@
         "Hang the garlands high. The wind will do the rest.",
         "Even the guards are singing. Badly, but singing.",
         "A good day, neighbours. Remember it when the grey comes back.",
-        "One more dance, then the dishes. Promise."
+        "One more dance, then the dishes. Promise.",
+        "Bring the long table. Bring the other long table.",
+        "Somebody tune that fiddle or hide it.",
+        "Bread's warm. Cheese is sharp. That's a feast.",
+        "Good night for it. Look at the sky.",
+        "Pass the jug and keep your elbows in."
       ],
       "caravan": [
         "Wagons! Wagons on the road! Open the gate!",
@@ -11546,7 +11556,12 @@
         "Bellmire's on the map now - look, a caravan.",
         "If they've brought dye, I'm closing the shop and weeping.",
         "The guild clerk will want every sack inked.",
-        "Welcome, strangers! Spend freely and leave gently."
+        "Welcome, strangers! Spend freely and leave gently.",
+        "Count the barrels before you thank them.",
+        "Fresh faces on the road. Fresh coin, too.",
+        "That one sells cloth. I'll want a look.",
+        "Wheel's cracked on the third wagon. Fetch the wright.",
+        "They came through the wet, and no one's bandit-struck. Good sign."
       ],
       "growth": [
         "The wall's grown again. Lord, we're becoming something.",
@@ -11568,7 +11583,12 @@
         "Bellmire, a city one day. I'll still sell the same loaves.",
         "The masons are singing. Listen - they're singing!",
         "Growth is good. Growing pains are cheaper than shrinking.",
-        "Stand tall, Bellmire. You're getting taller."
+        "Stand tall, Bellmire. You're getting taller.",
+        "Another roof on the hill. Folk keep coming.",
+        "The street's got a name now. Took us long enough.",
+        "Wall's higher. I sleep a bit better.",
+        "New stalls by the well. Prices will follow.",
+        "We've a second baker. The first is not pleased."
       ],
       "hunger": [
         "The bin's empty. The bin was full yesterday.",
@@ -11622,7 +11642,12 @@
         "Who'll tell his family? Somebody has to.",
         "A hero's death is a short story. A hero's life, a long one.",
         "Bury him with his boots. He'd want that.",
-        "Bellmire remembers. That's what we do."
+        "Bellmire remembers. That's what we do.",
+        "He kept the door. Somebody lay a lamp for him.",
+        "Lad's gone below for good. Ring it once.",
+        "Boots by the chapel step. Nobody touch them.",
+        "He owed me a copper. I'll let it lie.",
+        "A quiet one, he was. Quiet's the worst to lose."
       ],
       "hero_rich": [
         "Look at him! Pockets full, boots shining!",
@@ -11644,7 +11669,12 @@
         "Come, sit, tell us everything - and leave the purse on the bar.",
         "Wealth's a fine thing till it's your neighbour's.",
         "Rich now, dead tomorrow. Drink up, friend.",
-        "The guild clerk's smiling. Never trust a smiling clerk."
+        "The guild clerk's smiling. Never trust a smiling clerk.",
+        "Sat on the best bench, he did, and tipped the girl.",
+        "New cloak, new sword. Same grin.",
+        "He paid the whole tavern's slate. I nearly wept.",
+        "Gold sits well on a hero who came home with it.",
+        "Take it to the Vault, lad, before the market has it."
       ]
     },
     "remember": [
@@ -15897,5 +15927,6 @@
   "_note_c226": "C-226 (content, 27 Nov 2026): 12 epitaphs, 10 descend, 10 cleared, appended; no miniboss by_key row because there is no 66th committed body (65 names / 65 feed keys). Plain, short, nothing theatrical. Expected zero-hit key.",
   "_note_c227": "C-227 (content, 27 Nov 2026): the 66th miniboss_feed.by_key row, key `thatcher` (art's .glb stem, committed: assets/monsters/minibosses/thatcher.glb on main, def thatcher in tools/art/minibosses.py). arrive 9, act 8, broken 4, fall 8, fanner/mealman shape. Art's feed line is arrive[0] verbatim. No boss name used - Delve.MB_NAME has no thatcher row yet (game build owes 'Lastcourse'), so fall lines say He and {name} in act is the hero. Mechanic in the words: while he stands the rest of the room cannot be hurt (blows land in thatch), kill him and the covering comes off everything at once. He hits nobody and does nothing to himself. Held every other pool. Expected zero-hit key.",
   "_note_c229": "C-229 (content, 27 Nov 2026): backlog 2, 78 disaster variant lines, same shape as C-148/C-69. Additive; nothing wired. Expected zero-hit key.",
-  "_note_c230": "C-230 (27 Nov 2026 CST): no committed art body lacks feed lines (66 bodies, 66 keys); backlog 3 top-up. epitaphs +20, descend +8, cleared +8 (floor-number %d lines only), barks enter/lord/trap/hurt/drink/misfire +4 each. Additive, plain register, no mechanics, no floor counts. Expected zero-hit key; wire nothing."
+  "_note_c230": "C-230 (27 Nov 2026 CST): no committed art body lacks feed lines (66 bodies, 66 keys); backlog 3 top-up. epitaphs +20, descend +8, cleared +8 (floor-number %d lines only), barks enter/lord/trap/hurt/drink/misfire +4 each. Additive, plain register, no mechanics, no floor counts. Expected zero-hit key; wire nothing.",
+  "_note_c231": "C-231 (content, 27 Nov 2026): townsfolk.react raid/festival/caravan/growth/hero_falls/hero_rich +5 each (30 lines). No new body, 66=66 feed keys. Plain register, no mechanics. data/drops.json NOT created: the four-file rule bars new data files; awaiting Mr. E's licence. Expected zero-hit key; wire nothing."
 }

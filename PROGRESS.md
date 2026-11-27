@@ -23815,3 +23815,12 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - SPEC ON THE HERO CARD: NOT DONE, MEASURED REFUSAL. scripts/snapshot_pub.gd:602-603 publishes name/class/species/level/xp and NO `spec`, so the hub has nothing to show. Roster.calling_of/spec_of exist (roster.gd:945-957) but the publisher must add h.spec (game build lane). Hub will read it defensively through el() once it is on the wire.
 - Security greps: innerHTML code sites app.js:255 and :301 only; outerHTML/insertAdjacentHTML/document.write/new Function/eval = only the app.js:10-11 comment; CSP meta present.
 - Untracked worktree file new this run: web_look4.tar (staging for the render; delete refused on this machine). Plus __pycache__ under web/tools.
+
+## U205 (HUD, 27 Nov 12:5x CT) - THE `_content` NIL QUESTION IS ANSWERED READ-ONLY AND THE VELLUM LINE IS RETIRED, NOT REPAIRED (ENGINE CLAIM 12:54:02 -> IDLE 12:55:37, DECLARED FINISH 13:00, CAP 13:09)
+- Clock read first (12:53 CST). R's WORKING-COPY RUN_LOCK last line was IDLE chat bot B202 12:51:37; tasklist Godot* = 0. Claim written after both checks.
+- ANSWER: `FeedHUD._content` is assigned only in `_build_chrome()` (feed_hud.gd:117-136), and `_build()` calls that only when `_chrome` is true, i.e. `HudDock.split(parent)` = mode != "off" = spotlight panes up. The probe runs full-screen, so `_build` DID run, down the plain PanelContainer/parchment branch, and `_content` is correctly Nil. There is no vellum in that scene to measure. Not a FeedHUD defect; no seven-file edit.
+- CHANGE (tools/_u202_busy.gd only, my own probe): U204 aliased vellum to the panel, so over_vellum duplicated over_panel under another name. Now the vellum check runs only when `_content != null`; otherwise the U134_PANE line prints `vellum=NONE(split off: ...)`. Checks 14 -> 11 (the 3 duplicate checks gone).
+- GATES: parse 0 Parse Error / 0 SCRIPT ERROR (_u205_parse.log); windowed 1920x1080 @150% `_u205_after.log` 0 SCRIPT ERROR, U203_SET seen=4 of 4, U202_DONE checks=11 fails=0. Render looked at: renders/cycles/20261127_u202/busy_tavern_s150_1080.png - Chronicle panel, 3 lines inside the parchment, last line whole.
+- OPEN, SMALL: the vellum overflow is still UNMEASURED in split mode (panes up) at 150%. That needs a probe that raises HudDock mode, then samples `_content`. Not done this firing.
+- Rarity-hue half of System 2 was recorded shipped (U193/U55/U76); not retaken.
+- Next firing (13:52): re-read R's RUN_LOCK and the HUD row; then either the split-mode vellum probe or L74 (feed/theme under load).

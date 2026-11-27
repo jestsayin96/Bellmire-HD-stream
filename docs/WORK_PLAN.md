@@ -319,6 +319,22 @@
 ***     winner's purse rather than debiting a treasury account (economy.gd:893-898). Long-run net
 ***     is still a sink. Say the word if you want the tavern put on the treasury.
 ***
+*** (6) **THE UNPUBLISHED HUB DELTA IS NO LONGER SMALL AND I AM RE-STATING IT BECAUSE EVERY
+***     FIGURE THIS HOUSE CARRIED FOR IT IS STALE.** MEASURED BY ME AT 10:1x CT, 27 NOV, not
+***     copied: gh-pages is commit 8d214d36, tree 1d8bce63, pushed 25 NOV 09:55 CT. (The team lead
+***     prompt still says 05ac2679 / tree 9ca8051e / 19 Nov 20:06 - STRUCK, and it is in the owed
+***     prompt-corrections list below.) `origin/hub:web` is tree f042fcdb. THE DIFFERENCE IS NOW
+***     73 FILES, +454 / -8: 66 binary beast portraits, plus NOTES.md +63, app.js +167/-7,
+***     icons/beasts/_manifest.json +74, index.html +1/-1, style.css +11, tools/make_bestiary.py
+***     +48, and the retired tools/_to_delete/_beast_dex_block.txt +90. The prompt's carried
+***     figure of "3 files / +59 / -1" is from 21 Nov and is long gone.
+***     THAT IS THE WHOLE OF SYSTEM 41 SECTION 1 SITTING UNPUBLISHED - a complete shipped feature,
+***     security-swept by the lane and re-swept by me this hour, with the live page still showing
+***     the 25 Nov state. I AM NOT ASKING TO PUBLISH AND THE LANE HAS NOT CLAIMED READY; publishing
+***     is yours and I have run no publish gate. I am only making sure the size of what is waiting
+***     is in front of you, because it grew by two orders of magnitude while the line describing it
+***     did not change.
+***
 *** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, TO BE LANDED ON THE FIRST LIVE TURN ====
 *** A FIRING CANNOT EDIT A SCHEDULED TASK'S PROMPT - the gate is on the CALL, not on a field, and
 *** that is settled. I did not re-test it. These are owed and carried until a live turn:
@@ -331,6 +347,12 @@
 ***     `_note_` + 15 NON-NOTE" and a corpus of "47 `scripts/*.gd` + `web/app.js` = 48 files". The
 ***     non-note 15 is right and unmoved; the raw total is 79 and the corpus is 48 .gd + app.js =
 ***     49 files, 2,476,560 chars. The series belongs in the plan, not frozen in the prompt.
+*** (E) **THIS PROMPT, NEW THIS RUN** - the hub block says gh-pages is "05ac2679, tree 9ca8051e,
+***     pushed 19 NOV 20:06 CT" and that what is merged-and-unpublished is "3 files / +59 / -1".
+***     BOTH ARE STALE. Measured 27 Nov 10:1x CT: gh-pages is 8d214d36, tree 1d8bce63, pushed
+***     25 NOV 09:55 CT, and the unpublished delta is 73 files / +454 / -8. The prompt's own
+***     instruction to re-measure every hour is why this cost nothing - but a third wrong SHA in
+***     that paragraph should go.
 *** (D) **THIS PROMPT, NEW THIS RUN** - the standing note that the art fit register "reads
 ***     `RED / ok:false` ... on two CARRIED unmeasured rows (`snuffer_chibi`, `tallyman_chibi`)"
 ***     IS NO LONGER TRUE. As of pass 5 the register reads `verdict: GREEN`, `ok: true`,

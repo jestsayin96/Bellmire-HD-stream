@@ -1,3 +1,306 @@
+*** ===== TAKE THIS NEXT - THE 06:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 05:58 FIRING AND ITS BLOCKS.
+*** Merged tree fe2be310 (all six lanes in, pushed to main). Clock read off the machine with
+*** `TZ=America/Chicago date`: 06:58:43 CST at the start of this run.
+*** WRITTEN AT 07:1x CT, AFTER :05. BY THIS HOUSE'S OWN RULE THAT MAKES IT THE NEXT CYCLE'S
+*** BLOCK: the 07:07 game build will have read the 05:58 block, and that is not its fault. It is
+*** mine, and the cause is named in my run doc - I spent the first twenty minutes on a matcher
+*** that was wrong three times before it was right.
+***
+*** *** MY OWN FAULT FIRST: MY MB_NAME MATCHER WAS WRONG THREE TIMES IN THREE DIRECTIONS. ***
+*** I read 37 keys, then 122, then 36, before reading the true 66. Shape 1 split on commas at
+*** depth 0 without skipping string literals. Shape 2 skipped strings but NOT `#` comments, so an
+*** apostrophe in a comment opened a fake string and the brace walk ran past MB_NAME's close into
+*** the dicts below it. Shape 3 fixed the extent (lines 449..485) but took ONE key per line from a
+*** dict that is packed SIX ENTRIES TO A LINE. Only the fourth - comment-aware brace walk for the
+*** extent, then every `"key":` inside it - is right. THE CHAT BOT FOUND THE SAME CLASS OF FAULT
+*** IN ITS OWN MATCHER THIS HOUR, INDEPENDENTLY, AND REPORTED BOTH WRONG SHAPES. Two seats, same
+*** morning, same lesson: THE DICT IS PACKED MULTI-ENTRY PER LINE, SO A PER-LINE REGEX UNDERCOUNTS
+*** BY A FACTOR OF SIX AND A COMMENT-BLIND BRACE WALK OVERCOUNTS. Parse it properly or count nothing.
+***
+*** *** THE CASCADE IS SHUT AT 66/66/66/66 AND NOTHING IS OWED ON IT BY ANY LANE. ***
+*** MEASURED BY ME on merged main fe2be310, comment- and string-aware brace walk, anchored on the
+*** ONE `const MB_NAME := {` at scripts/delve.gd:449 (extent 449..485, no duplicate declarations):
+***     Delve.MB_NAME = 66 keys (last four in file order: overlooker, fanner, mealman, thatcher).
+***     miniboss_feed.by_key = 66 keys (it lives in data/lore_lines.json, not a file of its own).
+***     SET DIFFERENCE EMPTY IN BOTH DIRECTIONS.
+***     data/commands.json = "The 66 elites" at BOTH sites; docs/COMMANDS.md line 39 = "The 66".
+*** The chat bot's B196 read of the same four numbers is CONFIRMED INDEPENDENTLY by this measurement.
+***
+*** *** TWO BASELINE FACTS IN THE :58 PROMPT ARE NOW STALE. THE PROMPT CANNOT BE EDITED FROM A
+*** *** FIRING, SO THEY ARE CORRECTED HERE AND LISTED IN "FOR THE NEXT TEAM LEAD". ***
+***  (1) THE ART FIT REGISTER IS GREEN. The prompt's standing note says its top-level verdict reads
+***      "RED / ok:false ... on two CARRIED unmeasured rows (snuffer_chibi, tallyman_chibi)". AS OF
+***      THIS MERGE THAT IS FALSE: renders/art/minibosses/_report.json reads ok:TRUE, errors:[],
+***      red_arm:null, blank_check 198 files / 0 failures, and ZERO of its 77 rows carries ok:false.
+***      The register is 77 rows = 66 LIVE BODIES + 11 retired `_chibi` cells (tallyman, cook,
+***      sluicekeeper, sower, boiler, snarer, gaoler, porter, sexton, stoker, snuffer) - NOT the
+***      "46 rows, 44 live, two _chibi" of the prompt, and NOT the "68 rows / 2 _chibi" my own 05:58
+***      block wrote. ART CLEARED ITS OWN CARRIED RED. Do not report the art gate as red again, and
+***      do not quote 46 or 68.
+***  (2) THE DEAD-DATA CORPUS HAS GROWN BY ONE SCRIPT. The prompt says 48 files (47 `scripts/*.gd`
+***      + web/app.js). MEASURED: 49 files = 48 `scripts/*.gd` + web/app.js, 2,453,719 chars,
+***      12 `data/*.json`, 166 top-level keys (prompt says 146). That is real growth, not a
+***      miscount - the NON-NOTE zero-hit count is UNMOVED at 15, which is the number that carries
+***      the signal.
+***
+*** ===== THE DEAD-DATA AUDIT, THIS HOUR. UNREAD COUNT DID NOT MOVE. =====
+*** Corpus `scripts/*.gd` + `web/app.js` ONLY (48 + 1 = 49 files; tools/ excluded as test code,
+*** `web/tools/sheet_overlap.js` excluded as tools/). Data glob `data/*.json`, one level.
+***   UNREAD LIVE DATA KEYS: ZERO.
+***   ZERO-HIT KEYS: 76 = 61 `_note_` + 15 NON-NOTE. THE NON-NOTE COUNT IS 15, exactly where it has
+***   sat for days. SERIES: 52 (05:0x 21 Nov) -> 53 -> 56 (08:58 21 Nov) -> 76 now, all of the rise
+***   in `_note_` keys, which carry no signal. The 15 are the SAME 15 and every one is accounted for:
+***   two runtime-built `_alt` pools (lord_intros_alt, unique_intros_alt, READ at delve.gd:4022 via
+***   `base + "_alt"`), four of the declared-dead family (phase2_words, phase2_words_alt,
+***   phase2_words_alt2, town_levels_for_the_desktop), and nine prose/spec strings that are not
+***   items (_gating, boss_floors, canon_silences, casing, chronicle_line, one_roll, promotion_line,
+***   technique, word_order). NO LANE IS TO WIRE ANY OF THEM.
+***   UNREFERENCED ASSET DIRECTORIES: ZERO, of 38 directories with files, measured off assets/ only.
+***   *** AND A NEW GUARD ON MY OWN INSTRUMENT, BECAUSE IT RAISED A FALSE POSITIVE THIS HOUR: ***
+***   my walk flagged `assets/graveyard/Textures` as unreferenced because no script names it. THAT
+***   IS THE WRONG QUESTION TO ASK OF IT. It is a pack-internal texture folder, and I proved the
+***   reference: every .glb in assets/graveyard/ names `colormap` in its own bytes, and scripts/
+***   loads those .glb files by name (grave_keeper.gd:9 BODY, :10 LANTERN). A TEXTURE SUBFOLDER OF A
+***   MODEL PACK IS REFERENCED BY ITS SIBLING MODELS, NEVER BY A SCRIPT. Do not report it as dead.
+***
+*** *** ===== AND NOW THE REAL FINDING OF THIS RUN, WHICH IS A FAULT OF MINE AND NOT OF ANY LANE.
+*** *** FIVE SUPERVISOR DIRECTIVES FROM 02:09-02:30 CT TODAY ARE NOWHERE IN THIS PLAN. =====
+*** The supervisor issued Systems 37, 38, 39, 40 and 41 plus two rulings in the project docs this
+*** morning, each carrying MR. E'S OWN VERBATIM WORDS and each naming OWNERS LANE BY LANE. Not one
+*** line of any of them reached the plan. THIS HOUSE'S OWN RULE IS THAT A RULING ONLY EXISTS WHERE A
+*** WORKER WILL READ IT - IN A PROMPT OR IN THE PLAN - so for five hours those directives have not
+*** existed as far as any lane is concerned. THAT IS WHY THE HUB AND THE HUD KEEP STANDING DOWN: I
+*** have been writing "no web row" at a lane that has had a full directive waiting for it since
+*** 02:30. The stand-downs are correct behaviour against the rows I gave; the rows were wrong.
+*** I am landing them below. THIS IS TRANSCRIPTION, NOT NEW WORK: Systems 5-80 are Mr. E's own,
+*** approved one by one, and 37-41 sit inside that range. The freeze does not apply (both directives
+*** say so in their own words).
+***
+*** SYSTEM 37 - THE INN (VIEWER ROOMS). Mr. E: "hotels style - their home instead of house. Like if
+***   you bought a house in the hotel." One inn building; every viewer buys a room as personal
+***   storage. Stored items are SAFE FROM THE DEATH PENALTY (System 19). GOLD GOES IN THE BANK
+***   (System 25), EVERYTHING ELSE IN THE ROOM. Four tiers: bunk 5 slots / room 10 / suite 20 /
+***   loft 30, upgrades priced as a gold sink. Equipped gear stays on the hero - you store BACKUP
+***   gear. Storage is NOT sellable through viewer shops (System 29). Commands !room !store !take
+***   !upgrade room !inn. OWNERS: game build (roster.gd room_tier + room_items + store()/take();
+***   economy.gd pricing and slot constants; town.gd the inn scaling with town level, same pattern
+***   as the existing HOUSES dict at :19; snapshot_pub.gd room contents in the hero card), chat bot
+***   (the five commands). Build order: AFTER System 25 (bank).
+*** SYSTEM 38 - TAVERN GAMES. `!dice [amount]` against the house (house takes 10%, a gold sink),
+***   `!dice [amount] [player]` viewer-vs-viewer winner-takes-all, bare `!dice` for fun. Min bet 1g,
+***   max scales with town level. ONE ROLL PER COMMAND, no doubling down - it is Twitch chat, not a
+***   casino sim. The tavern building already exists; this is a function on it, not a new building.
+***   OWNERS: game build (economy.gd house-game logic), chat bot (`!dice`). SMALLEST OF THE THREE.
+*** SYSTEM 39 - NPC REPUTATION. A per-HERO `reputation` dict in roster.gd (smithy, innkeeper,
+***   fishmonger, chandler, trader), incremented on repair/store/catch/buy/trade, with threshold
+***   milestones giving silent discounts and better outcomes. MILESTONES ARE SILENT - no popup, no
+***   announcement; the viewer just notices the repair bill got smaller. REPUTATION DOES NOT DECAY.
+***   `!rep` shows standing. OWNERS: game build (roster.gd/economy.gd/fishing.gd), chat bot (`!rep`),
+***   content (the milestone flavour lines - the fishmonger's line at 50 catches).
+*** SYSTEM 40 - CLASS SPECIALIZATION. At level 10 (or Mr. E's call) each class splits two ways:
+***   Knight -> Guardian/Crusader, Rogue -> Shadow/Ranger, Sage -> Healer/Battlemage, Paladin ->
+***   Warden/Avenger, Barbarian -> Berserker/Chieftain. PERMANENT once chosen. One ability at
+***   specialization, a second at 15, a third at 20. `!specialize [path]`, `!paths` to read both
+***   first. THE DIRECTIVE CARRIES ITS OWN CAVEAT AND I AM PASSING IT ON UNCHANGED: if roster.gd
+***   CLASSES has changed since it was written, THE TREE ADAPTS TO WHATEVER CLASSES EXIST - the
+***   PATTERN (two paths per class) is the system, the names are tunable content. OWNERS: game build
+***   (roster.gd/delve.gd), content (path and ability text), chat bot (`!specialize`/`!paths`), hub
+***   (subclass on the hero card). SHIPS LAST of 38-40 - it needs the combat system stable.
+*** SYSTEM 41 - ENCYCLOPEDIA AND CRAFTING HUB. Mr. E: "All that can be handled on the hub as well.
+***   Have a crafting tab with everything that can be crafted. And where to craft it and what
+***   material and monster drops are needed to craft." And: "At this point all the monsters are
+***   going to need an encyclopedia." THREE INTERLINKED HUB SECTIONS: the Bestiary (expanded, with a
+***   per-viewer DISCOVERY mechanic - silhouette and "???" until encountered, mechanic text on
+***   surviving, drops on killing, full entry at five kills), the Crafting Table (every recipe, with
+***   "craftable now?" green/red and what is missing), and the Material Index (every material, every
+***   source, every recipe it feeds). OWNERS: hub lane (all three UI sections), content
+***   (data/drops.json, data/recipes.json, data/materials.json), game build (drop roll on death in
+***   delve.gd, crafting in economy.gd, gather nodes, per-viewer discovery in roster.gd, bestiary
+***   data in snapshot_pub.gd), chat bot (`!bestiary [name]` expanded, `!drops [monster]`,
+***   `!materials`/`!mats`). IT SHIPS INCREMENTALLY, NOT AS ONE PIECE - each section goes live as the
+***   data behind it lands, and no section waits for the others.
+*** RULING - SYSTEM 26'S RECIPE BOOK IS A CONTENT DEPENDENCY. Mr. E, 02:26: "that means every item
+***   needs a recipe." System 26 DOES NOT SHIP until data/recipes.json exists; the mechanic without
+***   recipes is a command that does nothing. Each entry: output (must match an items.json key),
+***   materials dict, gold, smithy_level, tier. THE MATERIAL CHAIN MUST CLOSE - a recipe naming a
+***   material no source provides is BROKEN, and content cross-checks every recipe against the
+***   sources BEFORE committing. Start common (8-10 recipes), then uncommon (6-8), rare (4-6), very
+***   rare (2-3), legendary (1-2). ARTIFACTS ARE FOUND, NEVER CRAFTED (C-55, still binding).
+***   *** AND THIS ONE IS MINE TO DO: the ruling names TEAM LEAD as the seat that verifies the chain
+***   *** end to end - every material in a recipe has a source, every craftable item has a recipe.
+***   *** I OWE THAT VERIFICATION THE HOUR data/recipes.json FIRST LANDS. It is not owed yet, because
+***   *** the file does not exist and the ruling puts it AFTER System 18 defines what materials are.
+*** RULING - BELLMIREBRO STAYS CURRENT WITH EVERY NEW SYSTEM (02:20 CT). Recorded here so it exists
+***   where lanes read; it binds the chat bot's command surface to every system above as it ships.
+***
+*** ===== GAME BUILD (:07) - S150 IS TICKED. =====
+***   I DID NOT TAKE YOUR CLAIM, I TRACED IT. Your write-up says the roof-zeroed blow now reads
+***   "resist" on cleave, thorns and luck "as the swing does at delve.gd:1863". It HOLDS, at three
+***   call sites I read myself: 2803 cleave (`"resist" if _thatch(best) < 1.0`), 2826 thorns (same
+***   on `o`), 2811 luck (`"resist" if _ward(tgt) < 1.0`). AND THE ONE THAT LOOKED WRONG IS RIGHT:
+***   luck tests `_ward`, not `_thatch`, which reads like a different condition - but `_ward()` at
+***   delve.gd:2524 OPENS with `if _thatch(tgt) == 0.0: return 0.0`, so under the roof `_ward` is
+***   itself 0.0 and the label fires. Your comment on 2811 says exactly that and it is accurate.
+***   Gate red-proven: S150_RESIST OK 6 with its RED arm failing 2 of 6 as designed.
+***   NEXT: THE L31 REMAINDER - the status-effect icons. It is YOURS, not the HUD's, because its
+***   open half lives in delve.gd, monster.gd, party_frames.gd and boss_bar.gd. D61.1 already
+***   landed the damage numbers and S142 closed the status-icon half for heroes by measurement
+***   (heroes are live; monsters carry no conditions to draw). READ S142's OWN FINDING BEFORE YOU
+***   START: if monsters still carry no drawable conditions, the honest answer is that the row is
+***   CLOSED BY MEASUREMENT and you say so rather than drawing icons for state that does not exist.
+***   CLOSING AN ITEM BY DISPROVING IT COUNTS FULLY. If you find it genuinely open, take it.
+***   IF THAT IS SHUT: take SYSTEM 38 (tavern games) - the smallest of the new wave, economy.gd
+***   house-game logic only, the tavern building already exists.
+***
+*** ===== CONTENT (:22) - C-230 IS TICKED. =====
+***   Backlog 3 top-up landed (epitaphs +20, descend +8, cleared +8, barks +24), no new body, and I
+***   confirmed 66/66 on the feed myself. You also corrected your own cycle stamp to the machine
+***   clock mid-run - that is the right instinct and I am recording it as a credit, not a fault.
+***   NEXT: SYSTEM 41'S CONTENT HALF, AND START WITH data/drops.json, NOT recipes.json. The 02:26
+***   ruling puts recipes AFTER System 18 defines what materials exist, so recipes would be built on
+***   names nothing drops. DROPS DO NOT HAVE THAT DEPENDENCY: every monster and miniboss needs a
+***   drop table, and you have 66 named elites and the full monster list already on disk. The shape
+***   is in the directive: per key, `common`/`rare`/`legendary` arrays of {item, chance}. THE RULES
+***   THAT MATTER: every monster drops SOMETHING even if it is bone dust or torn cloth; MINIBOSSES
+***   GET UNIQUE DROPS THAT ONLY COME FROM THEM (the Gaoler's Hook, the Snuffer's Lamp Oil) and
+***   those are the ingredients for rare+ recipes; drop chance scales with floor depth. Material
+***   names follow the Bellmire voice - PLAIN WORKING WORDS. Not "Ethereal Moonstone of the
+***   Ancients." Just "moonstone." Write it as data; the game build reads it in delve.gd on death.
+***
+*** ===== ART (:34) - PASS 10 IS TICKED, AND YOU CLEARED YOUR OWN CARRIED RED. =====
+***   Thatcher pass 10 in, plus two pass-9 fit registers you found uncommitted in your own worktree
+***   and committed rather than leaving them to rot - exactly right. I VERIFIED THE REGISTER MYSELF:
+***   _report.json ok:TRUE, errors:[], red_arm:null, blank_check 198 files / 0 failures, 77 rows,
+***   ZERO rows with ok:false. THE CARRIED `_chibi` RED THAT HAS SAT ON YOUR TOP-LINE VERDICT FOR
+***   DAYS IS GONE, and I have struck the prompt's "the art gate reads RED" note in this plan.
+***   AND THE THING I WANT TO SAY PLAINLY: you reported FAULT 3'S PREMISE AS FALSE BY MEASUREMENT
+***   AND REFUSED THE TIE LEVER. A lane that measures a handed-down fault, finds the premise wrong,
+***   and refuses the change rather than making a cosmetic edit to look busy is doing the single
+***   hardest thing this house asks. That is the second time today a lane has corrected the seat
+***   above it; do it again whenever the measurement says so.
+***   NEXT: THE 67th MINIBOSS. Art is the one GENUINELY DRY lane licensed to invent them. MEASURE
+***   THE COUNT OFF tools/art/minibosses.py OR THE FIT REGISTER, NEVER off a line in a prompt - as
+***   of this merge the register judges 77 rows = 66 live + 11 retired `_chibi`. Fit is the
+***   acceptance test: front, side AND back on a real body, and LOOK at the render yourself.
+***   AND CARRY FORWARD YOUR OWN LESSON FROM THE BEADLE: a register can read `seen: 1.0` on every
+***   view and still be a body with no face from behind. Your new tools/art/_faceseen.py is the
+***   right answer to that - use it on the 67th from the start.
+***
+*** ===== HUB (:37) - YOUR STAND-DOWN WAS CORRECT AND MY ROW WAS WRONG. YOU HAVE WORK NOW. =====
+***   You stood down at 05:58 because my row named no web item, you re-ran the security greps
+***   anyway, you confirmed web/ identical to gh-pages, and you did NOT claim READY TO PUBLISH. All
+***   correct. THE ROW WAS THE FAULT: SYSTEM 41 HAS NAMED YOU THE OWNER OF THREE HUB SECTIONS SINCE
+***   02:30 CT AND I NEVER TOLD YOU. That is mine, and I am sorry for four hours of it.
+***   NEXT: SYSTEM 41, SECTION 1 - THE EXPANDED BESTIARY, AND IT IS THE RIGHT ONE TO START ON
+***   BECAUSE ITS DATA ALREADY EXISTS. The portraits are on disk in renders/art/minibosses/, the 66
+***   names are in Delve.MB_NAME, the mechanics are in art's own CANON docs and the fit register's
+***   `idea` field. The Crafting Table and Material Index both WAIT on content's three json files,
+***   which do not exist yet; the Bestiary does not. BUILD THE DISCOVERY MECHANIC FROM THE START, do
+***   not retrofit it: silhouette + "???" until a viewer has encountered it, name on first
+***   encounter, mechanic text on surviving, drops on killing, full entry at five kills. Per viewer.
+***   THE RULES THAT DO NOT BEND: el() only and NO innerHTML on any snapshot value; no snapshot
+***   value used as a URL, src, href or style; the strict CSP stays intact; a hostile monster name
+***   must render as literal text. Deep ink and charcoal, parchment, one teal accent, restrained
+***   gold - and Twitch's purple, wordmark and logo are NEVER used. YOU STILL DO NOT PUBLISH:
+***   republishing is the supervisor's call, and the 3-file delta already waiting is with them.
+***
+*** ===== CHAT BOT (:45) - B196 IS TICKED, AND THE MATCHER AUDIT IS WHY. =====
+***   Nothing was owed on the cascade and you edited nothing - correct, and I confirmed all four
+***   numbers independently. The battery was green on a tree that had gained S150 since B195, and
+***   COMMANDS_DOC was a TRUE NO-OP (md5 9c8048d5 before and after the real generator), which is
+***   the strongest available statement that the committed doc carries no hand edit.
+***   BUT THE REASON THIS IS TICKED IS THE PART THAT FOUND NOTHING WRONG WITH THE CODE. You reported
+***   that your own drift matcher was wrong TWICE IN OPPOSITE DIRECTIONS - 11 phantom unanswered,
+***   then 16 phantom orphans - and you published BOTH WRONG SHAPES instead of only the right one.
+***   I HIT THE SAME CLASS OF FAULT ON MB_NAME IN THE SAME HOUR AND IT COST ME THE :07 ROW. A lane
+***   that reports its instrument's failure modes is worth more than one that reports clean numbers.
+***   NEXT: `!dice` (SYSTEM 38) IS YOURS TO SPEC BUT NOT TO BUILD ALONE - the house-game logic is
+***   the game build's in economy.gd. SO WHILE THAT IS UNBUILT, TAKE THE COMMAND SURFACE OF THE NEW
+***   WAVE: the 02:20 ruling binds bellmirebro to stay current with every new system, and five
+***   systems just landed in this plan carrying NINE commands you own - !room !store !take
+***   !upgrade room !inn (37), !dice (38), !rep (39), !specialize !paths (40), and !bestiary
+***   expanded / !drops / !materials (41). WRITE NONE OF THEM YET. Instead give me ONE audit: for
+***   each of those, does the verb or an alias ALREADY EXIST in chatcmd.gd, and would any of them
+***   SHADOW an existing alias or collide with one of your 31? You hold the only instrument in the
+***   house that can answer that, and finding a collision now is worth ten times finding it later.
+***   KEEP CLAIMING BY :50 WITH A FINISH INSIDE :52 - it has worked every hour since I set it.
+***
+*** ===== HUD (:52) - SIXTH CONSECUTIVE STAND-DOWN, AND I HAVE STOPPED PRETENDING IT IS BAD LUCK. =====
+***   U199 stood down correctly: my 05:58 row named no HUD item, the lock was free, you took no
+***   claim and you wrote it up. A stand-down written up IS the delivery and I am recording it as one.
+***   BUT SIX IN A ROW IS A STRUCTURAL FAULT AND IT IS MINE. Here is what I now know, having read the
+***   five directives: THE ENTIRE NEW WAVE NAMES NO IN-GAME HUD WORK. Systems 37, 38, 39 and 41
+***   name game build, content, hub and chat bot. System 40 names "hub (subclass on the hero card)"
+***   - that is the WEB hero card, the hub lane's file, not yours - and it ships LAST of the three
+***   because it needs combat stable. So your starvation is not an accident of my rows any more; the
+***   supervisor's whole 02:09-02:30 wave is web-and-engine facing and your files (ui_theme.gd,
+***   leaderboard_panel.gd, feed_hud.gd, hud_dock.gd) are not in it. I AM ROUTING THAT UP THIS RUN
+***   WITH A NAMED RECOMMENDATION RATHER THAN WRITING YOU A SEVENTH EMPTY ROW.
+***   WHAT TO DO THIS HOUR, AND IT IS REAL WORK THE FREEZE EXPLICITLY ALLOWS: AUDIT YOUR OWN SHIPPED
+***   WORK. Pick the most recently shipped of your items and try to make it go red. U124 is the
+***   model: it closed a three-hour-old open question by measuring 118 checks and proving there was
+***   never a clip - the sighting was a line caught mid-fade at alpha 0.55 - and it shipped NO
+***   feed_hud.gd edit. That was the right outcome and it was ticked as a full delivery.
+***   AND WHEN YOU DO IT, LOOK AT THE WORST FRAME, NOT THE PRETTIEST: U124 shipped having looked at
+***   its 150% shot when its own log said 125% was the tightest margin. Pick the frame the NUMBER
+***   says is worst. If you find nothing, say so with the measurement - that closes a question too.
+***
+*** ===== FOR THE SUPERVISOR =====
+*** (1) THE HUD LANE HAS NOW STOOD DOWN SIX CONSECUTIVE FIRINGS AND THE CAUSE IS NO LONGER MY ROWS.
+***     I found the real cause this run: your 02:09-02:30 directive wave (Systems 37-41 + two
+***     rulings) names game build, content, hub and chat bot as owners, and names NO in-game HUD
+***     work at all. System 40's "subclass on the hero card" is the hub's web card, not the HUD's
+***     files, and it ships last of 38-40 anyway. The HUD owns ui_theme.gd, leaderboard_panel.gd,
+***     feed_hud.gd and hud_dock.gd and has nothing queued against any of them.
+***     MY RECOMMENDATION, AND IT IS YOURS TO TAKE, NOT MINE: give the HUD the IN-GAME half of
+***     System 40 explicitly - the subclass has to read out on the party frames, the leaderboard
+***     rows and the feed, not only on the web hero card, and that is HUD-owned code. I have NOT
+***     assigned it, because System 40 ships last and because naming a second owner on one of your
+***     systems is a decision above this seat even under the half-of-an-existing-item reading. If
+***     you would rather the HUD keep auditing its own shipped work until the wave reaches it, say
+***     so and I will write that as a standing row instead of a stand-down every hour.
+*** (2) THE 3-FILE HUB DELTA IS STILL WITH YOU, UNCHANGED AND RE-MEASURED THIS HOUR. See THE HUB
+***     section of my run doc for the exact trees and per-file split, counted by me, not copied.
+*** (3) FOR THE RECORD, NOT FOR A DECISION: your five directives sat outside the plan for over four
+***     hours and therefore did not exist for any lane. The fault is mine - landing them is this
+***     seat's job and four firings went past without doing it. They are in the plan as of this
+***     block. IF YOU ISSUE A DIRECTIVE AND DO NOT SEE IT IN THE PLAN'S NEXT BLOCK, THAT IS A BUG IN
+***     ME AND I WOULD RATHER BE TOLD THAN HAVE IT WAIT FOR ME TO NOTICE.
+***
+*** ===== NEEDS MR. E =====
+*** nothing.
+***
+*** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (A FIRING CANNOT EDIT A PROMPT) =====
+*** The :58 prompt cannot be written from a firing - the gate is on the CALL, not on a field, and
+*** that is settled; do not test it again. THE FIRST SEAT WITH A LIVE TURN SHOULD LAND ALL OF THESE
+*** AT ONCE. This list is cumulative - carry forward anything earlier blocks added and still owed.
+***  (a) THE ART FIT REGISTER NOTE IS STALE. The prompt's "A STANDING NOTE ON THE ART FIT REGISTER"
+***      says its verdict reads "RED / ok:false" on two carried `_chibi` rows. MEASURED FALSE this
+***      hour: ok:TRUE, zero rows ok:false, 77 rows = 66 live + ELEVEN retired `_chibi`. Replace the
+***      whole note and strike the "46 rows, 44 live bodies, two retired `_chibi`" figure with it.
+***  (b) THE DEAD-DATA BASELINE'S FILE COUNT IS STALE. Prompt says 48 files (47 `scripts/*.gd` +
+***      web/app.js), 146 top-level keys. MEASURED: 49 files (48 + app.js), 2,453,719 chars, 12
+***      `data/*.json`, 166 top-level keys. NON-NOTE zero-hit is UNMOVED at 15 - keep that sentence,
+***      it is the one that carries signal. Note the series now reads ... 56 (21 Nov) -> 76 (27 Nov),
+***      all of the rise in `_note_`.
+***  (c) ADD THE MB_NAME PACKING FACT TO THE REGEX WARNING. The prompt already warns that flat
+***      regexes have lied about `Delve.MB_NAME`. ADD THE MECHANISM, because knowing it is what
+***      makes the warning usable: the dict is PACKED SIX ENTRIES TO A LINE, so a per-line regex
+***      undercounts by ~6x (I read 36 for 66), and a brace walk that skips string literals but NOT
+***      `#` comments runs past the close brace on an apostrophe in a comment and overcounts (I read
+***      122). The extent is scripts/delve.gd:449..485, ONE declaration.
+***  (d) ADD THE PACK-TEXTURE GUARD TO STEP 0'S FOUR GUARDS, AS A FIFTH. A texture subfolder inside
+***      a model pack (assets/graveyard/Textures) is referenced by its SIBLING .glb FILES, not by any
+***      script, so an asset-directory walk that asks scripts/ about it reports a false positive.
+***      Prove the reference through the model, not the script.
+***  (e) THE PROMPT'S ID LINE IS STALE EVERY HOUR BY DESIGN, but record the measurement anyway:
+***      as of this merge B196, C-230, D100, H32, L74, S150, T5, U199, art on thatcher pass 10.
+***  (f) THE PROMPT SHOULD SAY WHERE SUPERVISOR DIRECTIVES LIVE AND THAT LANDING THEM IS THIS SEAT'S
+***      STANDING DUTY. Five directives sat outside the plan for four hours this morning because no
+***      step in this prompt says "read the project docs for new supervisor directives and land them
+***      in the plan". STEP 1 SHOULD SAY IT. That omission cost the hub and the HUD four hours each.
+
 *** ===== TAKE THIS NEXT - THE 05:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 04:58 FIRING AND ITS BLOCKS.
 *** Merged tree 43221c7f (all six lanes in). Clock read off the machine with `TZ=America/Chicago date`.

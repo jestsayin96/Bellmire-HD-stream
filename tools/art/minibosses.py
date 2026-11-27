@@ -25986,13 +25986,84 @@ def badger():
     # the mass a viewer reads FIRST, not in a 3000 px oval he reads last.
     # SAME VERTEX COLOUR, so all three luma guards above are untouched - this
     # adds no fourth value and cannot argue with the sack count.
+    # *** PASS 6 ITEM (a) - THE STRAPS WERE STUBBY AND THE CAUSE IS MEASURABLE.
+    # I called them "two short pale tabs rather than straps" myself and the
+    # team lead agreed by looking at 4x. The cause is not the tube radius, it
+    # is WHERE THE TOP IS: z=1.392 sits INSIDE the cape cone (which spans
+    # z 1.25 - 1.55), so the top 0.14 of every strap was never visible and the
+    # VISIBLE run was only cape-hem 1.25 down to 1.085, about 0.21 against a
+    # 0.092 width. That is 2.3:1 and nothing 2.3:1 reads as a strap.
+    # THE FIX IS LENGTH AND WIDTH AND NOTHING ELSE: take the foot down to
+    # z=0.975 (past the belt, so each strap crosses it the way a strap does)
+    # and the radius 0.046 -> 0.040. Visible run becomes about 0.315 against
+    # 0.080 = 3.9:1. PALE AREA GOES UP, NOT DOWN - 0.0252 against 0.0193, a
+    # 30% gain - so the facing these straps now carry gets stronger, which
+    # matters because they are the thing carrying it in the PUBLISHED view.
+    # (web/tools/make_bestiary.py:28 builds every portrait from front.png.)
+    # SAME VERTEX COLOUR AND SAME SLOT - no fourth value, so the three luma
+    # guards and the four-sack count are untouched by construction.
     for _sx in (-0.120, 0.120):
-        _strap = L.tube([(_sx, -0.350, 1.392), (_sx * 0.95, -0.320, 1.085)],
-                        0.046, 8)
+        _strap = L.tube([(_sx, -0.350, 1.392), (_sx * 0.95, -0.316, 0.975)],
+                        0.040, 8)
         P.raw(_strap, 'body', vcol=[CAPE] * len(_strap[0]))
     # the belt the straps buckle to. DARK, and FRONT ONLY - a full ring would
     # put the same bar on the back and hand back the symmetry this just bought.
-    P.add(L.box(0.460, 0.095, 0.085), 'dark', loc=(0.0, -0.300, 1.058))
+    #
+    # *** PASS 6 ITEM (b) - THE BELT WAS PRESENT AND UNREADABLE, AND I PROVED
+    # *** WHICH OF THOSE TWO IT WAS BY ABLATION RATHER THAN BY EYE.
+    # The team lead said it "reads more as a shadow than as a belt". Looking at
+    # the 5x crop I could not find a belt AT ALL and was about to report it as
+    # invisible. So I rendered the front view with and without the box through
+    # the one camera and counted the pixels that MOVED - the only test in this
+    # lane that has ever answered "can it be SEEN".
+    #   FIRST ANSWER, AND IT WAS WRONG: 5,351 px moved, spread over 373 rows
+    #   from y=182 to y=792. I nearly wrote that number down as the belt's
+    #   area. It is a waist belt; it cannot be 610 rows tall. Splitting the
+    #   diff by MAGNITUDE settled it: only 1,657 px move by >=12/255, and
+    #   those sit in 53 rows, y=480-532, which is exactly a waist band. The
+    #   other 3,694 were sub-12 render noise. A diff count with no magnitude
+    #   floor measures the renderer, not the geometry.
+    #   SO: the belt is 1,657 px = 0.74% of the figure's 223,624 opaque px,
+    #   and the alpha bbox and silhouette pixel count are IDENTICAL with and
+    #   without it - it changes ZERO outline pixels. That is the whole fault.
+    #   It is dark-on-dark, entirely inside the outline, and cut into three by
+    #   the two straps crossing in FRONT of it.
+    # THE FIX CANNOT BE VALUE. A pale belt would be a fourth pale mass and the
+    # Mealman's rule plus this body's whole mechanic forbid it - the count IS
+    # the sacks. So the belt is made to read by SILHOUETTE and FORM instead,
+    # which is pass 5's lesson reused: carry the read in construction, not in a
+    # tuning value that the lighting can take back.
+    #   WIDTH 0.460 -> 0.580. The trunk is about 0.504 across at z=1.058, so
+    #     the old belt was ENTIRELY inside the body outline. 0.580 puts about
+    #     0.038 of belt past the trunk on each side, so the ends notch the
+    #     silhouette. An outline read survives any light; a value read does not.
+    #   FORWARD y -0.300 -> -0.335. Front face goes to -0.3825, which is in
+    #     front of the straps' -0.356, so the straps now terminate AT the belt
+    #     and re-emerge below it as short tails. The belt stops being cut into
+    #     three pieces by the things that are supposed to buckle to it.
+    #   HEIGHT 0.085 -> 0.080 and DEPTH 0.095 -> 0.085. I TRIED THIS TWO WAYS
+    #     AND BOTH FIRST TRIES WERE WRONG; BOTH ARE RECORDED BECAUSE THE PAIR
+    #     IS THE ACTUAL FINDING.
+    #     TRY 1 was 0.100 tall, 0.095 deep at y=-0.335. Continuous, but it
+    #       stood so proud of the trunk that its TOP FACE caught the light and
+    #       read as a shelf or a plank across the waist, not as leather.
+    #     TRY 2 pulled it back to y=-0.330 and thinned it to 0.070 deep. That
+    #       put its front face at -0.365 against the straps' -0.356 - NINE
+    #       THOUSANDTHS apart, effectively coplanar - and the straps punched
+    #       straight through it. The belt went back to reading as three
+    #       separate dark segments, which is the original fault returning.
+    #     SO THE TWO PROPERTIES ARE INDEPENDENT AND I HAD BLAMED THE WRONG
+    #     ONE: CONTINUITY needs the belt clearly IN FRONT of the straps, and
+    #     the SHELF look came from HEIGHT, not from how far forward it sat.
+    #     Final: 0.080 tall (kills the lit top face) at y=-0.345 with depth
+    #     0.085, so the front face is -0.3875, a clear 0.03 in front of the
+    #     straps, and the back face is -0.3025 against the trunk's -0.299 with
+    #     no float for the side view to show.
+    #   The WIDTH is the part that was doing the real work and the width never
+    #     changed through any of this.
+    # Still FRONT ONLY and still `dark` - no fourth value, three luma guards
+    # untouched, and the back stays the plain pale trapezoid pass 5 bought.
+    P.add(L.box(0.580, 0.085, 0.080), 'dark', loc=(0.0, -0.345, 1.058))
     _seg("cape")
 
     # THE HEAD. A DEEP HOOD, DARK FRONT AND BACK, with a BODY-COLOURED face

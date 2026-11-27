@@ -204,14 +204,39 @@ def measure(repo, key, outdir, tag=""):
     # an empty span with items authored after it is a `_close("man")` that
     # wrapped nothing, and that is RED.
     n_items = len(P.items)
+    # *** THE PROVE ARM CONSTRUCTS THE CASE; IT DOES NOT ASSERT IT. ***
+    # The first cut of this arm set `at_end = False` by hand on the real
+    # end-of-build span. The branch fired, but on bytes where the span was
+    # STILL `(n_items, n_items)` - so the tail it printed was 0, and the RED
+    # read "an EMPTY `man` span at [[24, 24]] in a builder of 24 items, with 0
+    # authored after it". Its own number denied its own premise, and the CLI
+    # help one screen below claimed the marker had been MOVED when nothing had
+    # moved. A prove that bypasses the discriminator it exists to watch proves
+    # the bypass, not the discriminator. So the span is now RELOCATED, in
+    # memory only, to a genuine mid-build position - `a == b == k` with
+    # `k < len(P.items)` - and `at_end` is then computed by the SHIPPED rule
+    # off the constructed span, untouched. The red that fires is the real one.
+    if PROVE_EMPTY_MID == key:
+        if n_items < 2:
+            rep["items"] = n_items
+            rep["verdict"] = "RED"
+            rep["errors"].append(
+                "%s: --prove-empty-mid cannot be constructed on a builder of "
+                "%d item(s) - a mid-build span needs at least one item "
+                "authored after it. NOTHING IS PROVEN; this is the prove "
+                "arm failing, not the body" % (key, n_items))
+            return rep
+        k = n_items // 2
+        rep["prove_empty_mid"] = True
+        rep["prove_declared_ranges"] = ranges
+        rep["prove_span_moved_to"] = [k, k]
+        ranges = [(k, k)]
+        rep["man_ranges_proved"] = [list(r) for r in ranges]
     empty = [r for r in ranges if r[1] <= r[0]]
     if len(empty) == len(ranges):
         at_end = all(r[0] >= n_items for r in ranges)
-        if PROVE_EMPTY_MID == key:
-            at_end = False
-            rep["prove_empty_mid"] = True
         rep["items"] = n_items
-        rep["empty_ranges"] = ranges
+        rep["empty_ranges"] = [list(r) for r in ranges]
         if not at_end:
             # SAY WHAT THE NUMBER IS. The first cut of this message printed
             # `n_items` under the label "items authored after it", which is
@@ -222,11 +247,30 @@ def measure(repo, key, outdir, tag=""):
             after = n_items - max(r[0] for r in ranges)
             rep["items_after_span"] = after
             rep["verdict"] = "RED"
+            # THE MESSAGE MUST NOT OUTLIVE ITS OWN PREMISE. `after` is what
+            # makes the span mid-build; if it is not positive there is no
+            # mid-build span and this branch has no business firing. Saying so
+            # out loud beats printing "with 0 authored after it" under a
+            # sentence that asserts the opposite, which is what shipped.
+            span_s = str([list(r) for r in ranges])
+            if after <= 0:
+                rep["errors"].append(
+                    "%s: INSTRUMENT FAULT - the mid-build branch fired on %s "
+                    "in a builder of %d items with items_after_span=%d. A span "
+                    "with nothing authored after it is the end-of-build "
+                    "marker; this branch cannot judge it and nothing is "
+                    "claimed about the body" % (key, span_s, n_items, after))
+                return rep
             rep["errors"].append(
                 "%s: an EMPTY `man` span at %s in a builder of %d items, with "
                 "%d authored after it - a `_close(\"man\")` that wrapped zero "
-                "items, not the end-of-build no-operator marker"
-                % (key, ranges, n_items, after))
+                "items, not the end-of-build no-operator marker%s"
+                % (key, span_s, n_items, after,
+                   (" [CONSTRUCTED BY --prove-empty-mid: the builder's own "
+                    "declared span is %s and was RELOCATED in memory to %s to "
+                    "watch this branch fire. THIS IS NOT A FAULT IN THE BODY.]"
+                    % (rep.get("prove_declared_ranges"), span_s))
+                   if rep.get("prove_empty_mid") else ""))
             return rep
         rep["no_man"] = True
         rep["verdict"] = "NO_MAN"

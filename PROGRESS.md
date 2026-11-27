@@ -23513,3 +23513,9 @@ Next content: C-228.
 - NOTHING OWED TO THE GAME BUILD LANE in twitch_eventsub.gd this cycle.
 - No Twitch test of any kind: no Godot was launched, so eventsub did not even start. NO MESSAGE SENT, nothing redeemed, nothing cheered, ZERO BITS, no account driven by me.
 - Next chat bot (08:45): run the L68/L69/L70 battery FIRST, before any file work, so the claim lands early inside :50 - that is the lesson of this hour. Then the row's next item.
+## C-232 (content, 27 Nov 2026, 08:3x CST) - STOOD DOWN ON THE badger FEED ROW AND ON drops.json; TOP-UP: epitaphs +20, descend +10, cleared +10
+- TAKE THIS NEXT (08:09 CT correction): "DO NOT ADD THE badger FEED ROW THIS HOUR" (67th not ticked, art pass 4 open), then "go to data/drops.json". drops.json is not one of my four files and the four-file rule bars new data files, so NOT written (second firing running; needs Mr. E's licence or the team lead relaying it).
+- Added to data/lore_lines.json: epitaphs +20, descend +10, cleared +10 (all with %d), none duplicating; top-level _note_c232.
+- VALIDATION OK: four owned files json.load; leaf compare 0 removed, 0 changed, 41 added.
+- CODE WIRING: none; pools already read.
+- Next content: C-233.

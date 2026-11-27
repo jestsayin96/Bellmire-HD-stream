@@ -982,10 +982,22 @@ static var _cmds: Dictionary = {}
 ## said the same before anything was re-run: _b172_parse.log and _b176_parse.log, 2 COMMANDS_DATA
 ## lines each and zero gate verdicts in either.
 ## SO B176's AND B180's VERDICTS READ OFF THE PARSE WERE RIGHT, and B182's retraction of them was
-## the error, not the readings. WHAT B182 ACTUALLY SAW IS NOT BEING DISMISSED: its BREW SPAN
-## inject genuinely printed no BREW SPAN line on its two parses. That is a narrow, open question
-## about that one arm's path - the likeliest cause is its per-section slicing of one combined log,
-## not the engine - and it is NOT a property of the parse. Nobody is to widen it back out.
+## the error, not the readings.
+## B184 SHUT THE ONE QUESTION B183 LEFT OPEN HERE, AND THIS SENTENCE IS THE STRIKE OF IT. B183's
+## block said B182's BREW SPAN inject printing nothing was "a narrow, open question about that one
+## arm's path". IT IS NOT OPEN. B184 put BOTH injects in ONE file and ran ONE parse, so the two
+## possible answers were separated in a single load instead of compared across two runs:
+## `brew`.cost "others 12-500 gold" -> "others 40-480 gold" (B181's exact pre-fix span) AND
+## `forge`.example "!forge spear" -> "!forge fnord" (B183's exact inject) together, injected md5
+## 23a141aab5ed313aa6dd7d0752fd57f8. ONE `--headless --quit-after 300` parse, rc=0, 164 lines,
+## 0 Parse Error, 0 SCRIPT ERROR, and EIGHT COMMANDS_DATA lines - BREW SPAN LOW "published 40,
+## cheapest row pennymend 12", BREW SPAN HIGH "published 480, dearest row kingsmend 500", EXAMPLE
+## GHOST on the forge row, and the game build's MINIBOSS UNNAMED pair. THE BREW SPAN ARM IS ON NO
+## DIFFERENT PATH FROM EXAMPLE GHOST: both fired off one load of one file on one parse. B182's
+## inject was genuine and its arms were genuinely firing; what printed nothing was its per-section
+## slicing of one combined battery log - the cause B183 named as likeliest, now measured instead of
+## guessed. The parse loads this data and fires these arms, measured three firings running:
+## B183 clean 2 / injected 4, B184 injected 8. NOBODY IS TO WIDEN THIS BACK OUT AGAIN.
 ## WHAT STANDS FROM B182's BLOCK: the three scripts load the data deliberately and are the
 ## cheapest place to prove an arm (1.6s against 25s), and tools/_l14_test.gd is the only gate that
 ## FAILS on a non-empty guard_faults(), so it is the one that turns a fired arm into an exit code.
@@ -3250,8 +3262,13 @@ static func commands() -> Dictionary:
         # read out of data/commands.json at load.
         # NOT FATAL, like every arm here: the commands answer either way and killing the bot over
         # a stale example would be the larger fault. A battery greps COMMANDS_DATA; no line is the
-        # healthy reading. AND IT IS NOT EVIDENCE FROM A PARSE - see B182's block above: this arm
-        # only fires on a run that LOADS the data (_l14_test, _twitch_parse, _commands_doc).
+        # healthy reading. THE SENTENCE THAT STOOD HERE IS STRUCK BY B185 FOR THE SAME REASON AS
+        # B182's block above: it said this arm "only fires on a run that LOADS the data
+        # (_l14_test, _twitch_parse, _commands_doc)", pointing at a block that is itself struck.
+        # A `--headless --quit-after 300` PARSE LOADS THIS DATA AND FIRES THIS ARM - B183 red-proved
+        # EXAMPLE GHOST on a parse (clean 2 COMMANDS_DATA lines, injected 4) and B184 fired it again
+        # among eight on one parse. The three scripts are still the CHEAPEST place to prove an arm
+        # (1.6s against 25s), which is the true half of what this sentence was reaching for.
         var ex_verb: Array[String] = []
         var ex_ghost: Array[String] = []
         var ex_missing: Array[String] = []

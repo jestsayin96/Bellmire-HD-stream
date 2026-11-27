@@ -25335,8 +25335,75 @@ def thatcher():
     # ever existed to fake what stems give for real - a cut end that is a FAN
     # and not a disc - which is why removing them is part of this one change
     # and not a second one.
-    N_STEM = 7
-    R_RING, R_STEM = 0.098, 0.058
+    # ------------------------------------------------- PASS 9: THE STEM GAUGE
+    # OPEN FAULT 5 OF PASS 8, AND THE TEAM LEAD NAMED IT AS THE ONE HE COULD
+    # SEE MOST PLAINLY AT SIDE ZOOM: "the stems are smooth hexagonal dowels",
+    # not combed reed. I OPENED `_cuevalue/_p8_sheet_side_zoom.png` MYSELF
+    # BEFORE TOUCHING THIS, and he is right - and there are TWO causes in that
+    # picture, not one, which is why they are two switches here and are
+    # measured apart:
+    #   (A) GAUGE. Seven stems at r 0.058 inside a 0.098 ring is SEVEN FAT
+    #       POLES. Each one is wide enough on screen that its 8-sided
+    #       cross-section shows as flat facets with long smooth quads running
+    #       the full length - that is the "hexagonal" half of the fault.
+    #   (B) TIPS. `limb` -> `tube(caps=True)` closes each stem with a FLAT
+    #       n-gon disc. At the cut end of the bundle that is a clean flat
+    #       plate per stem, which is exactly what a sawn dowel looks like and
+    #       is nothing like a cut straw. This is the loudest tell in the frame
+    #       and no number in the register can reach it.
+    #
+    # WHAT THIS PASS DOES NOT DO, DELIBERATELY: IT DOES NOT CHANGE THE
+    # ENVELOPE. The bundle's outer surface is held at exactly the pass-8
+    # radius at every t (see R_PROUD below), so the gross silhouette, the
+    # bounds, the fit ratio and the ties are all unmoved. Only the TEXTURE of
+    # the bundle changes. The float this body shipped at pass 4 came from a
+    # new mass near an existing surface; holding the envelope means this pass
+    # cannot repeat that by construction.
+    #
+    # AND THE STEMS ARE SHELLED, NOT RINGED, FOR A REASON PASS 3 PAID FOR.
+    # Pass 2's fault was "the bundle is a tube". Nineteen thin stems on ONE
+    # ring is a hollow pipe of straws with a bore down the middle and a
+    # SMOOTHER outline than seven fat ones - the pass-2 fault walked back in
+    # wearing a finer coat. So they sit on three shells (1 + 6 + 12) that fill
+    # the volume, and the outer twelve overlap slightly at the waist so the
+    # boundary is scalloped by twelve bumps instead of six.
+    # *** THE GAUGE HAS A COST AND I MEASURED IT BEFORE I SHIPPED IT. ***
+    # Gauge level 1 (19 stems) fixed the dowel read and PART-UNDID PASS 8.
+    # `_cuevalue` on the side view, cue p50 against the lap:
+    #     pass-8 shipped  0.5809 / 0.5413 = 1.073
+    #     gauge level 1   0.5476 / 0.5413 = 1.012   <- most of pass 8 given back
+    # The reed footprint went UP (30,569 -> 34,256 px), so there is not LESS
+    # reed - each reed pixel is DARKER, because the azimuthal gaps between
+    # fine stems let the dark coat show through from behind. Fault 5's fix
+    # was quietly paying for itself out of fault 2's account, and the only
+    # reason I know is that I re-ran the locked-camera instrument instead of
+    # trusting a picture I was pleased with.
+    #
+    # LEVEL 2 IS THE ANSWER AND IT IS MORE STEMS, NOT FEWER. Backing off
+    # toward pass 8 would buy the value back by giving the dowels back. The
+    # gaps are the problem, so the outer shell is PACKED - sixteen stems on a
+    # waist circumference of 0.70 at a diameter of 0.060 is heavy overlap, so
+    # the coat cannot show through there, while the splayed ends stay open
+    # because that is what a cut end does.
+    _g = os.environ.get("THATCHER_GAUGE", "2")
+    THATCH_GAUGE = _g != "0"
+    THATCH_TIPS = os.environ.get("THATCHER_TIPS", "1") != "0"
+
+    R_RING = 0.098
+    R_STEM_P8 = 0.058
+    if _g == "1":
+        R_STEM = 0.030
+        SHELLS = ((0.0, 1), (0.46, 6), (1.0, 12))
+    elif THATCH_GAUGE:
+        R_STEM = 0.030
+        SHELLS = ((0.0, 1), (0.45, 7), (1.0, 16))
+    else:
+        R_STEM = R_STEM_P8
+        SHELLS = ((0.0, 1), (1.0, 6))
+    # how far the outermost shell's CENTRELINE must move out to keep the
+    # pass-8 outer surface: r_out(t) + R_STEM == R_RING*_f(t) + R_STEM_P8.
+    R_PROUD = R_STEM_P8 - R_STEM
+    N_STEM = sum(_c for _, _c in SHELLS)
 
     def _f(t):
         # the splay profile: tight at the ties, open at both ends. A yealm is
@@ -25420,32 +25487,58 @@ def thatcher():
     # 13 points keeps the same two endpoints (so the taper and the bounds are
     # the same) and samples the turn finely enough to read as a curve.
     _NK = 5 if abs(_tw) < 1e-6 else 13
-    for _i in range(N_STEM):
-        if _i == 0:
-            _off0 = None
-        else:
-            _th0 = TAU * (_i - 1) / (N_STEM - 1)
-        # RAGGED ENDS. Each stem is cut a little long or a little short, so
-        # neither end is flush. A flush end is a disc and a disc is a bore.
-        _e0 = -0.055 + 0.110 * ((_i * 5) % N_STEM) / float(N_STEM - 1)
-        _e1 = 0.070 - 0.130 * ((_i * 3) % N_STEM) / float(N_STEM - 1)
-        _pts = []
-        for _k in range(_NK):
-            _t = _k / float(_NK - 1)
-            _base = YA + _yd * _t
-            _ext = _ax * (-_e0 if _k == 0 else (_e1 if _k == _NK - 1 else 0.0))
-            if _i == 0:
-                _off = Vector((0.0, 0.0, 0.0))
-            else:
-                _th = _th0 + _tw * _t
-                _off = (_p1 * math.cos(_th) + _p2 * math.sin(_th)) * R_RING
-            _pts.append(tuple(_base + _off * _f(_t) + _ext))
-        limb(P, _pts, R_STEM, R_STEM * 0.86, 'bone')
+    _i = -1
+    for _sh_frac, _sh_n in SHELLS:
+        for _j in range(_sh_n):
+            _i += 1
+            _th0 = (TAU * _j / _sh_n) + (0.37 * _sh_frac)
+            # RAGGED ENDS. Each stem is cut a little long or a little short,
+            # so neither end is flush. A flush end is a disc and a disc is a
+            # bore. Spread over 11 so the pattern does not repeat per shell.
+            _e0 = -0.055 + 0.110 * ((_i * 5) % 11) / 10.0
+            _e1 = 0.070 - 0.130 * ((_i * 3) % 11) / 10.0
+            # PER-STEM GAUGE JITTER. Reed is not milled. A stem a fifth fatter
+            # than its neighbour stands proud of the envelope and one a fifth
+            # thinner falls inside it, so the boundary is ragged rather than
+            # two parallel lines. Deterministic, so the body is reproducible.
+            _rs = R_STEM * (0.80 + 0.40 * ((_i * 7) % 11) / 10.0)
+            _pts, _radii = [], []
+            for _k in range(_NK):
+                _t = _k / float(_NK - 1)
+                _base = YA + _yd * _t
+                _ext = _ax * (-_e0 if _k == 0
+                              else (_e1 if _k == _NK - 1 else 0.0))
+                if _sh_frac <= 0.0:
+                    _off = Vector((0.0, 0.0, 0.0))
+                else:
+                    _th = _th0 + _tw * _t
+                    _r = (R_RING * _f(_t) + R_PROUD) * _sh_frac
+                    _off = (_p1 * math.cos(_th) + _p2 * math.sin(_th)) * _r
+                _pts.append(_base + _off + _ext)
+                # the pass-8 taper down the length, kept exactly
+                _rr = _rs * (1.0 + (0.86 - 1.0) * _t)
+                # (B) THE TIPS. The end sample is pulled in to a fifth of the
+                # gauge, so `tube`'s end cap is a near-point instead of a flat
+                # plate. NOT caps=False: an open tube shows its own hollow
+                # inside, which is a worse lie than a flat end.
+                if THATCH_TIPS and _k in (0, _NK - 1):
+                    _rr *= 0.22
+                _radii.append(_rr)
+            P.raw(L.tube(_pts, _radii, 6 if THATCH_GAUGE else 8), 'bone')
     # THE THREE TIES, kept, and only now do they mean anything: they are what
     # the stems are tight AT. Placed unevenly (0.18 / 0.46 / 0.76) so that if
     # two fuse at hero distance the third still breaks the run.
+    # PASS 9 FIXES A TIE THIS SAME PASS BROKE, AND ONLY THE FULL-FIGURE VIEW
+    # SHOWED IT. The tie radius was derived from R_STEM. Dropping the gauge
+    # 0.058 -> 0.030 therefore shrank every tie by 0.028 while the stems
+    # stayed out at the pass-8 envelope, so all three bands sank INSIDE the
+    # bundle and stopped reading: at the zoom the stems looked right and the
+    # figure read as a loose spray instead of a bound yealm. The ties are
+    # what the stems are tight AT, so the radius must come from the ENVELOPE
+    # - which is held constant across gauges by construction - and never
+    # from the gauge of an individual stem.
     for _t in (0.18, 0.46, 0.76):
-        _rr = R_RING * _f(_t) + R_STEM + 0.014
+        _rr = R_RING * _f(_t) + R_STEM_P8 + 0.014
         _c = YA + _yd * _t
         P.raw(aim(L.cone(_rr, _rr, 0.040, 18),
                   tuple(_c - _ax * 0.020), tuple(_yd)), 'dark')

@@ -1,0 +1,101 @@
+{
+ "asks": "(A) crowns per 100 px of reed footprint across the MIDDLE of the bundle - is the eye given many fine stems or a few fat poles; (B) largest connected near-constant-luma patch in the CUT-END zones as a fraction of them - a flat sawn cap, or not",
+ "method": "with/without through the one locked camera _cuevalue.py already writes; zones derived per run from the footprint's own principal axis",
+ "cannot_see": "whether it reads as REED specifically; a flat-lit geometric fix; and the body's other open faults. The picture is the evidence, this is the suspect.",
+ "floors": {
+  "foot_px": 500,
+  "mid_rows": 20,
+  "end_px": 300
+ },
+ "arms": {
+  "_p9a": {
+   "front": {
+    "foot_px": 34122,
+    "mid_rows": 214,
+    "crowns_per_row": 6.579,
+    "crowns_per_100": 7.606,
+    "end_px": 6555,
+    "flat_patch_px": 521,
+    "flat_frac": 0.0795
+   },
+   "side": {
+    "foot_px": 30233,
+    "mid_rows": 183,
+    "crowns_per_row": 6.071,
+    "crowns_per_100": 7.279,
+    "end_px": 6372,
+    "flat_patch_px": 670,
+    "flat_frac": 0.1051
+   },
+   "back": {
+    "foot_px": 27065,
+    "mid_rows": 207,
+    "crowns_per_row": 4.208,
+    "crowns_per_100": 8.369,
+    "end_px": 6125,
+    "flat_patch_px": 377,
+    "flat_frac": 0.0616
+   }
+  },
+  "_p9e": {
+   "front": {
+    "foot_px": 36301,
+    "mid_rows": 222,
+    "crowns_per_row": 8.874,
+    "crowns_per_100": 10.539,
+    "end_px": 5461,
+    "flat_patch_px": 160,
+    "flat_frac": 0.0293
+   },
+   "side": {
+    "foot_px": 33168,
+    "mid_rows": 188,
+    "crowns_per_row": 9.91,
+    "crowns_per_100": 10.586,
+    "end_px": 5615,
+    "flat_patch_px": 58,
+    "flat_frac": 0.0103
+   },
+   "back": {
+    "foot_px": 29933,
+    "mid_rows": 243,
+    "crowns_per_row": 4.86,
+    "crowns_per_100": 8.778,
+    "end_px": 4872,
+    "flat_patch_px": 84,
+    "flat_frac": 0.0172
+   }
+  },
+  "_p9f": {
+   "front": {
+    "foot_px": 33574,
+    "mid_rows": 207,
+    "crowns_per_row": 8.686,
+    "crowns_per_100": 10.537,
+    "end_px": 5461,
+    "flat_patch_px": 160,
+    "flat_frac": 0.0293
+   },
+   "side": {
+    "foot_px": 29949,
+    "mid_rows": 184,
+    "crowns_per_row": 9.201,
+    "crowns_per_100": 11.042,
+    "end_px": 5617,
+    "flat_patch_px": 58,
+    "flat_frac": 0.0103
+   },
+   "back": {
+    "foot_px": 26799,
+    "mid_rows": 209,
+    "crowns_per_row": 5.191,
+    "crowns_per_100": 9.558,
+    "end_px": 4847,
+    "flat_patch_px": 84,
+    "flat_frac": 0.0173
+   }
+  }
+ },
+ "errors": [],
+ "verdict": "GREEN"
+}

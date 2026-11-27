@@ -536,3 +536,123 @@ not this body's.** Nothing in that row changed at pass 8.
 the geometry changed - so a tree that has the old `.glb` has pass-7 stems.
 Static, so `bestiary.gd` still needs a `model` path and **no `anims` entry**.
 That wiring is the game build's and is not done here.
+
+================================================================================
+# PASS 9 - THE STEM GAUGE. FAULT 5 IS CLOSED BY EYE AND BY TWO NUMBERS, AND IT
+# WAS PAID FOR OUT OF FAULT 2'S ACCOUNT. BOTH HALVES OF THAT ARE REPORTED HERE.
+
+The team lead, 27 Nov 04:58 CT, naming fault 5 as the one he could see most
+plainly at side zoom: **"the stems are smooth hexagonal dowels"**. I opened
+`_cuevalue/_p8_sheet_side_zoom.png` myself before touching anything, and he is
+right. There were **TWO causes in that picture, not one**:
+
+  **(A) GAUGE.** Seven stems at r 0.058 in a 0.098 ring are seven fat poles,
+  each wide enough on screen that its 8-sided cross-section shows as flat
+  facets with long smooth quads - the "hexagonal" half.
+  **(B) THE CUT END.** `limb` -> `tube(caps=True)` closes every stem with a
+  flat n-gon disc. A sawn dowel has exactly that; a cut straw has nothing like
+  it. This was the loudest tell in the frame and no number could reach it.
+
+## THE ENVELOPE IS HELD, SO THE FIT CANNOT MOVE - AND IT DID NOT
+
+Every stem's centreline is placed so `r_out(t) + R_STEM == R_RING*_f(t) +
+0.058`, the pass-8 outer surface at every t. The gross silhouette, the bounds
+and the ties' reach are therefore unchanged **by construction**, and the
+measurement agrees: **`MB_FIT.thatcher` ratio 1.04 on all five A/B arms**,
+GREEN, `failures: []`, 0 blanks, 0 frame clips. The pass-4 float came from new
+mass near an existing surface; holding the envelope means this pass cannot
+repeat it.
+
+## FIVE ARMS, AND THE TWO CAUSES WERE MEASURED APART
+
+`tools/art/_stemread.py` is new and asks the ONE question `_cuevalue.py` says
+in its own docstring that it cannot ask. It reads the with/without pair
+`_cuevalue` already writes through its one locked camera, derives its zones
+per run from the footprint's own principal axis, and goes red on empty.
+(A) is `crowns_per_100` across the MIDDLE of the bundle; (B) is `flat_frac`,
+the largest connected near-constant-luma patch, in the CUT-END zones only.
+
+| arm | gauge / tips | crowns/100 (side) | flat_frac (side) | side cue/lap |
+|---|---|---|---|---|
+| `_p9a` | pass-8 baseline | 7.279 | 0.1051 | **1.0732** |
+| `_p9b` | A only, 19 stems | 10.900 | 0.0199 | 1.0116 |
+| `_p9c` | B only, 7 fat stems | 7.796 | 0.0355 | 1.0628 |
+| `_p9d` | A(19) + B | 11.048 | 0.0189 | 1.0148 |
+| `_p9e` | A(24 packed) + B | 10.586 | 0.0103 | 1.0406 |
+| `_p9f` | **SHIPPED** + ties fixed | **11.042** | **0.0103** | **1.0174** |
+
+**THE INSTRUMENT DISCRIMINATES, WHICH IS THE POINT.** Crowns move on the gauge
+arm (+50%) and barely on the tips arm (+7%); flat_frac moves on the tips arm
+(-66%) and on the gauge arm. Each number responds to its own cause, so neither
+fix can hide a miss on the other behind a single score.
+
+**AND `_p9c` IS A FINDING, NOT A WASTED ARM: B ALONE MAKES IT WORSE.** Seven
+fat stems with pointed ends stop reading as dowels and start reading as
+**sharpened stakes**. The cut-end fix is only correct on top of the gauge fix.
+A one-arm pass would have shipped that.
+
+## WHAT I BROKE THIS PASS AND ONLY THE FULL FIGURE SHOWED IT
+
+The tie radius was `R_RING*_f(t) + R_STEM + 0.014`. Dropping the gauge
+0.058 -> 0.030 shrank all three ties by 0.028 while the stems stayed out at
+the envelope, so **every band sank inside the bundle and stopped reading**. At
+the zoom the stems looked right; on the full figure the yealm read as a loose
+spray instead of a bound sheaf, and `_stemread` could not see it - it measures
+stems, not bindings. The radius now comes from the **envelope** constant and
+never from an individual stem's gauge. Pass 3's waist profile only actually
+reads now that the ties clasp the outside of the bundle.
+
+## THE COST, STATED PLAINLY. FAULT 2 IS WORSE ON THE SIDE THAN PASS 8 LEFT IT
+
+`_cuevalue`, cue p50 against lap p50, pass-8 shipped -> pass-9 shipped:
+
+    front  1.1529 -> 1.1614   (better; cue spread 0.5377 -> 0.5716)
+    side   1.0732 -> 1.0174   (WORSE - most of pass 8's gain given back)
+    back   1.0831 -> 1.0536   (worse)
+
+The reed footprint did not shrink from the gauge - it grew, 30,569 -> 33,660
+px at `_p9e` - so there is not less reed; **each reed pixel is darker**,
+because the azimuthal gaps between fine stems let the dark coat show through
+from behind. Packing the outer shell to 16 stems recovered most of it
+(1.0116 -> 1.0406). Restoring the ties then spent it again (1.0406 -> 1.0174),
+because the bands are `dark` and occlude pale reed (footprint 33,168 ->
+29,949).
+
+**I CHECKED THE ESCAPE AND IT DOES NOT HOLD.** Pass 8's own note on this
+instrument says a MODULATED mass separates from a flat one even where the
+medians sit on top of each other, which would have excused the p50 drop. The
+side cue **spread went down too**, 0.4689 -> 0.4318, and p95 0.6994 -> 0.6650:
+the fat stems' bright crowns were brighter than the fine ones'. The modulation
+argument does not rescue this and I am not making it.
+
+So **fault 2 is partly re-opened by my own hand on the side and back views**,
+and the team lead should decide whether that trade stands. The obvious lever
+for pass 10 is the tie section height (0.040, `dark`) - narrower bands would
+return cue pixels while still reading as bindings - and it is one change.
+
+## WHAT I CAN STILL SEE IN THE SHIPPED FRAME, HAVING LOOKED
+
+1. The cut-end points are **long and needle-sharp** - closer to quills than to
+   blunt-cut straw. Much better than discs, not yet right.
+2. The lowest splay hangs loose below the bottom tie and a few stems read as
+   separate flicks against the coat, slightly muddying the coat's edge.
+3. **FAULT 3 IS UNCHANGED AND IF ANYTHING SLIGHTLY WORSE** - from the side the
+   head is still almost entirely behind the bundle, and the splayed stems
+   cover a little more of it.
+4. FAULT 4 (the leggett reads as a satchel) is untouched and still open.
+
+## WHAT `_stemread.py` CANNOT SEE, AND IT MISSED SOMETHING REAL THIS PASS
+
+It cannot tell reed from any other fine fibre - rope, quills and a wheat sheaf
+all score well. It counts crowns from SHADING, so a flat-lit geometric fix
+will not move it. **And it scored `_p9e` green while all three ties were
+invisible**, because it measures stems and nothing else. The picture is the
+evidence; this is the suspect.
+
+## WIRING - THE NUMBERS DID NOT MOVE, THE GLB DID
+
+`MB_FIT.thatcher` **ratio 1.04**, unchanged on every arm - nothing for the
+game build to re-derive. **`assets/monsters/minibosses/thatcher.glb` IS
+re-exported this pass**: the yealm geometry changed, so a tree with the old
+`.glb` has pass-8 dowels. Static, so `bestiary.gd` still needs a `model` path
+and **no `anims` entry**. That wiring is the game build's and is not done here.

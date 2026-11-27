@@ -1,0 +1,39 @@
+{
+ "ok": true,
+ "errors": [],
+ "views": {
+  "front": {
+   "moved_px": 679,
+   "body_px": 128916,
+   "moved_pct_of_body": 0.527,
+   "moved_px_at_160_rung_est": 35.5
+  },
+  "side": {
+   "moved_px": 426,
+   "body_px": 188395,
+   "moved_pct_of_body": 0.226,
+   "moved_px_at_160_rung_est": 22.3
+  },
+  "back": {
+   "moved_px": 0,
+   "body_px": 127156,
+   "moved_pct_of_body": 0.0,
+   "moved_px_at_160_rung_est": 0.0
+  }
+ },
+ "key": "bellman",
+ "suffix": "_glow",
+ "guard_pct": 20.0,
+ "asks": "how many rendered pixels MOVE when this mesh is hidden - i.e. how much of it a viewer can actually see",
+ "cannot_see": "LEGIBILITY. A visible part is not a readable one, and a part the same value as what is behind it moves few pixels while being unoccluded.",
+ "all_objs": [
+  "bellman_body",
+  "bellman_dark",
+  "bellman_bone",
+  "bellman_glow"
+ ],
+ "ablated": [
+  "bellman_glow"
+ ],
+ "polys_removed_in_bbox": 96
+}

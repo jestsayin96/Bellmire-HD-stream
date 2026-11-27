@@ -1,0 +1,37 @@
+CENSUS70 START 2026-11-27 14:38:52
+CHUNK 0 START 14:38:52
+CHUNK 0 rc=0 5.9s
+STDERR_TAIL: C:\hd adventure\bellmire-art\tools\art\_facingread.py:91: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  sc.world.use_nodes = True
+
+CHUNK 1 START 14:38:58
+CHUNK 1 rc=0 6.2s
+STDERR_TAIL: C:\hd adventure\bellmire-art\tools\art\_facingread.py:91: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  sc.world.use_nodes = True
+
+CHUNK 2 START 14:39:04
+CHUNK 2 rc=0 8.4s
+STDERR_TAIL: C:\hd adventure\bellmire-art\tools\art\_facingread.py:91: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  sc.world.use_nodes = True
+
+CHUNK 3 START 14:39:12
+CHUNK 3 rc=0 6.6s
+STDERR_TAIL: C:\hd adventure\bellmire-art\tools\art\_facingread.py:91: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  sc.world.use_nodes = True
+
+CHUNK 4 START 14:39:19
+CHUNK 4 rc=0 8.6s
+STDERR_TAIL: C:\hd adventure\bellmire-art\tools\art\_facingread.py:91: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  sc.world.use_nodes = True
+
+CHUNK 5 START 14:39:28
+CHUNK 5 rc=0 6.4s
+STDERR_TAIL: C:\hd adventure\bellmire-art\tools\art\_facingread.py:91: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  sc.world.use_nodes = True
+
+CHUNK 6 START 14:39:34
+CHUNK 6 rc=0 8.5s
+STDERR_TAIL: C:\hd adventure\bellmire-art\tools\art\_facingread.py:91: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  sc.world.use_nodes = True
+
+CENSUS70 DONE 2026-11-27 14:39:42

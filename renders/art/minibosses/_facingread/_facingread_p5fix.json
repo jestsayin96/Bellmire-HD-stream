@@ -1,0 +1,36 @@
+{
+ "tag": "_p5fix",
+ "bodies": {
+  "bellman": {
+   "front_px": 124121,
+   "back_px": 123151,
+   "inter_px": 112425,
+   "union_px": 134847,
+   "sil_iou": 0.8337,
+   "in_diff_frac": 0.1865,
+   "in_mean_abs": 0.0613
+  },
+  "stopper": {
+   "front_px": 192318,
+   "back_px": 191470,
+   "inter_px": 189615,
+   "union_px": 194173,
+   "sil_iou": 0.9765,
+   "in_diff_frac": 0.1794,
+   "in_mean_abs": 0.0579
+  },
+  "beadle": {
+   "front_px": 146775,
+   "back_px": 146386,
+   "inter_px": 142088,
+   "union_px": 151073,
+   "sil_iou": 0.9405,
+   "in_diff_frac": 0.3233,
+   "in_mean_abs": 0.1174
+  }
+ },
+ "errors": [],
+ "asks": "are the FRONT and the MIRRORED BACK of this body tellable apart, in outline (sil_iou) and inside it (in_diff_frac)",
+ "cannot_see": "WHETHER THE DIFFERENCE IS A FACING. Posture, stride and one-sided gear all score here. No pass mark is set in this file on purpose - read the bodies against each other and then look at the pictures.",
+ "ok": true
+}

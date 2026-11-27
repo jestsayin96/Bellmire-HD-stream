@@ -26,7 +26,7 @@ func _initialize() -> void:
 	_ok(drawn.has("overlooker") == fed, "overlooker is drawn exactly when fed (fed=%s drawn=%s)" % [fed, drawn.has("overlooker")])
 	_ok(Delve.MB_NAME.get("overlooker", "") == "Velrick", "MB_NAME overlooker is Velrick (got '%s')" % Delve.MB_NAME.get("overlooker", ""))
 	_ok(Delve.miniboss_name("overlooker") == "Velrick", "nameplate reads Velrick, not Overlooker")
-	_ok(Delve.MB_NAME.size() == 63, "MB_NAME is 63 (got %d)" % Delve.MB_NAME.size())
+	_ok(Delve.MB_NAME.size() == 64, "MB_NAME is 64 (S144 + fanner) (got %d)" % Delve.MB_NAME.size())
 	for k in ["jointer", "dyer"]:
 		_ok(drawn.has(k), "red-proof: %s IS drawn by the same sweep" % k)
 	if _n < 10:

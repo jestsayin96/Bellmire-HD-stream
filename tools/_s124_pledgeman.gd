@@ -28,7 +28,7 @@ func _initialize() -> void:
 	_ok(drawn.has("pledgeman"), "pledgeman IS drawn by the treasury sweep")
 	_ok(Delve.MB_NAME.get("pledgeman", "") == "Heldfast", "MB_NAME pledgeman is Heldfast (got '%s')" % Delve.MB_NAME.get("pledgeman", ""))
 	_ok(Delve.miniboss_name("pledgeman") == "Heldfast", "miniboss_name resolves Heldfast")
-	_ok(Delve.MB_NAME.size() == 63, "MB_NAME is 63 (S141 + overlooker) (got %d) - S126 + crimp, S127 + timberman, S129 + collier" % Delve.MB_NAME.size())
+	_ok(Delve.MB_NAME.size() == 64, "MB_NAME is 64 (S144 + fanner, S141 + overlooker) (got %d) - S126 + crimp, S127 + timberman, S129 + collier" % Delve.MB_NAME.size())
 	if _fails == 0:
 		print("S124_PLEDGEMAN OK %d" % _checks)
 	else:

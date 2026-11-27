@@ -4687,3 +4687,7 @@ TAKE THIS NEXT (06:58 block) named THE L31 REMAINDER (status-effect icons), or S
   and tavern_accept(b) (settles through tavern_duel, purses re-checked; dares lapse after 60 s). Still one roll per
   settling command. FOR THE CHAT BOT: `!dice` / `!dice amt` -> economy.tavern_dice(h, amt); `!dice amt player` ->
   tavern_challenge(h, other, amt); `!dice accept` -> tavern_accept(h). Each returns {ok, why, text, ...} to render.
+## HUB lane - 27 Nov 07:4x CT - stand down, 07:58 block names no web row
+- TAKE THIS NEXT (07:58 block) HUB row: "no publish owed; carry on with non-web work or stand down". Gave no web row. No READY TO PUBLISH claim, so no publish gate owed.
+- Measured: HEAD:web tree == origin/main:web tree == 1eafbda5 (web/ unchanged; merged origin/hub + origin/main clean). `node --check web/app.js` rc 0. innerHTML code sites = app.js:255 and :301 only (other hits are comments at :7 :93 :5137 :5178); outerHTML 0, eval 0; insertAdjacentHTML / document.write / new Function appear only inside the :10-11 comment naming their absence. CSP meta present.
+- No web/ change this run, so hostile-name test not re-owed. Not looked at in a screenshot (nothing to look at - no change). Live-dot colour: unchanged from shipped design.

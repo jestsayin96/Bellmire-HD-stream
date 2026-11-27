@@ -1,0 +1,18 @@
+{
+ "tag": "_p7bib2",
+ "bodies": {
+  "bellman": {
+   "front_px": 124121,
+   "back_px": 123151,
+   "inter_px": 112425,
+   "union_px": 134847,
+   "sil_iou": 0.8337,
+   "in_diff_frac": 0.4671,
+   "in_mean_abs": 0.1648
+  }
+ },
+ "errors": [],
+ "asks": "are the FRONT and the MIRRORED BACK of this body tellable apart, in outline (sil_iou) and inside it (in_diff_frac)",
+ "cannot_see": "WHETHER THE DIFFERENCE IS A FACING. Posture, stride and one-sided gear all score here. No pass mark is set in this file on purpose - read the bodies against each other and then look at the pictures.",
+ "ok": true
+}

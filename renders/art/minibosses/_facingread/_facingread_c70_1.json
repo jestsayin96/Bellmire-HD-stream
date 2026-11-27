@@ -1,0 +1,99 @@
+{
+ "tag": "_c70_1",
+ "bodies": {
+  "snarer": {
+   "front_px": 62305,
+   "back_px": 63192,
+   "inter_px": 48149,
+   "union_px": 77348,
+   "sil_iou": 0.6225,
+   "in_diff_frac": 0.437,
+   "in_mean_abs": 0.1055
+  },
+  "stoker": {
+   "front_px": 77740,
+   "back_px": 79702,
+   "inter_px": 65063,
+   "union_px": 92379,
+   "sil_iou": 0.7043,
+   "in_diff_frac": 0.5612,
+   "in_mean_abs": 0.1568
+  },
+  "bellman": {
+   "front_px": 124121,
+   "back_px": 123151,
+   "inter_px": 112425,
+   "union_px": 134847,
+   "sil_iou": 0.8337,
+   "in_diff_frac": 0.1832,
+   "in_mean_abs": 0.0608
+  },
+  "boiler": {
+   "front_px": 59372,
+   "back_px": 57644,
+   "inter_px": 48301,
+   "union_px": 68715,
+   "sil_iou": 0.7029,
+   "in_diff_frac": 0.5121,
+   "in_mean_abs": 0.1175
+  },
+  "jointer": {
+   "front_px": 161639,
+   "back_px": 161166,
+   "inter_px": 145726,
+   "union_px": 177079,
+   "sil_iou": 0.8229,
+   "in_diff_frac": 0.4919,
+   "in_mean_abs": 0.1098
+  },
+  "quartermaster": {
+   "front_px": 99627,
+   "back_px": 93944,
+   "inter_px": 69238,
+   "union_px": 124333,
+   "sil_iou": 0.5569,
+   "in_diff_frac": 0.5228,
+   "in_mean_abs": 0.1306
+  },
+  "loader": {
+   "front_px": 107239,
+   "back_px": 106754,
+   "inter_px": 97664,
+   "union_px": 116329,
+   "sil_iou": 0.8395,
+   "in_diff_frac": 0.5577,
+   "in_mean_abs": 0.1386
+  },
+  "hurdleman": {
+   "front_px": 216469,
+   "back_px": 214161,
+   "inter_px": 190174,
+   "union_px": 240456,
+   "sil_iou": 0.7909,
+   "in_diff_frac": 0.6288,
+   "in_mean_abs": 0.1467
+  },
+  "tanner": {
+   "front_px": 161751,
+   "back_px": 164001,
+   "inter_px": 141699,
+   "union_px": 184053,
+   "sil_iou": 0.7699,
+   "in_diff_frac": 0.4468,
+   "in_mean_abs": 0.1029
+  },
+  "reeve": {
+   "front_px": 138807,
+   "back_px": 138148,
+   "inter_px": 119414,
+   "union_px": 157541,
+   "sil_iou": 0.758,
+   "in_diff_frac": 0.5797,
+   "in_mean_abs": 0.1457
+  }
+ },
+ "errors": [],
+ "asks": "are the FRONT and the MIRRORED BACK of this body tellable apart, in outline (sil_iou) and inside it (in_diff_frac)",
+ "cannot_see": "WHETHER THE DIFFERENCE IS A FACING. Posture, stride and one-sided gear all score here. No pass mark is set in this file on purpose - read the bodies against each other and then look at the pictures.",
+ "ok": true
+}

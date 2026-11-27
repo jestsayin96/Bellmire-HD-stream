@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "85e4fb826c50eb51d2c276b7de913eba18f72820",
+   "head": "b1637cb64f9e5ee89d648bc271075dab9ef1f010",
    "ref": "origin/main",
-   "ref_commit": "70c3c8a5b993ab4b40a65b8712a48667bb8b3fac",
+   "ref_commit": "4e6eee97d19b96163e932e907923b61b488a45f5",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -593,21 +593,36 @@
    "fits": true
   },
   "bellman": {
-   "title": "The Bellman",
+   "title": "Tolburn",
    "theme": "fogbound",
    "idea": "IT RINGS FROM WHERE IT IS NOT - the sound comes from the wrong place",
    "wear": 0.65,
    "feed_line": "A bell, and not where you thought.",
+   "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
-   "faces": 842,
+   "faces": 950,
    "size": [
     2.72,
     1.2,
     2.7
    ],
    "footprint_span": 2.72,
+   "height_m": 2.7,
+   "corridor_clear_m": 11.0,
+   "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 8.278,
+   "lid": "UNDER-LID",
+   "lid_clear_m": 6.8,
+   "read_from": {
+    "cell_m": "scripts\\floorgen.gd:21",
+    "wall_in_m": "scripts\\floorgen.gd:1698",
+    "hall_w": "scripts\\floorgen.gd:848",
+    "lid_y_m": "scripts\\floorgen.gd:1383",
+    "lid_thick_m": "scripts\\floorgen.gd:1378"
+   },
+   "fits": true,
    "glb": true,
    "glb_msg": "",
    "cam": {
@@ -622,21 +637,7 @@
     "front.png",
     "three_quarter.png",
     "side.png"
-   ],
-   "height_m": 2.7,
-   "corridor_clear_m": 11.0,
-   "lid_underside_m": 9.5,
-   "corridor_margin_m": 8.28,
-   "lid": "UNDER-LID",
-   "lid_clear_m": 6.8,
-   "read_from": {
-    "cell_m": "scripts\\floorgen.gd:21",
-    "wall_in_m": "scripts\\floorgen.gd:1698",
-    "hall_w": "scripts\\floorgen.gd:848",
-    "lid_y_m": "scripts\\floorgen.gd:1383",
-    "lid_thick_m": "scripts\\floorgen.gd:1378"
-   },
-   "fits": true
+   ]
   },
   "boiler": {
    "title": "Scaldmere",
@@ -3796,7 +3797,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 9.138,
+   "corridor_margin_m": 9.14,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.24,
    "read_from": {
@@ -3826,7 +3827,7 @@
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 70c3c8a5b993ab4b40a65b8712a48667bb8b3fac sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 4e6eee97d19b96163e932e907923b61b488a45f5 sha bc3a603f",
  "blank_check": {
   "files": 210,
   "failures": []

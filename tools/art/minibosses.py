@@ -1566,7 +1566,76 @@ def bellman():
     # a deep hood with nothing in it but two lights
     P.add(L.sphere(0.135, 0.150, 0.165, 14, 9), 'dark', loc=(X - 0.04, -0.12, 2.06))
     P.raw(aim(L.cone(0.245, 0.055, 0.40, 16), (X - 0.04, -0.08, 1.92), (0.04, -0.14, 1.0)), 'bone')
-    eyes(P, (X - 0.04, 0.0, 2.04), 0.048, 0.024, -0.22)
+    # 27 NOV 2026 - THE EYES WERE INSIDE THE HOOD AND HAD NEVER BEEN SEEN.
+    # fwd was -0.22. The dark hood sphere is centred y -0.12 with a y-radius of
+    # 0.150, so its front face is y -0.270: an eye of radius 0.024 centred at
+    # -0.22 reaches only -0.244 and sat ENTIRELY INSIDE IT. Measured, not
+    # guessed - `_mb_partablate.py` deleted the 96 eye polygons and the render
+    # MOVED ZERO PIXELS on front, side AND back. The docstring above promises
+    # "a deep hood with nothing in it but two lights"; there were no lights.
+    # This is why the body scored the worst facing of all 70 (in_diff 0.1832):
+    # nothing whatever on its front was absent from its back.
+    # -0.34 puts the eye bodies 0.046 proud of that face - two lights AT the
+    # mouth of the hood, which is what the hood is for.
+    eyes(P, (X - 0.04, 0.0, 2.04), 0.048, 0.024, -0.34)
+    # 27 NOV 2026, THE SECOND CHANGE, AND IT IS THE ONE THAT WAS ACTUALLY
+    # NEEDED. Freeing the eyes bought 679 visible px on the front and moved the
+    # facing number by 0.0033 - a null. The cause was never the eyes: the SHROUD
+    # is 44% of this body's pixels and it moved 3.3% front-to-back, because a
+    # plain cone has no front. So the shroud gets one: an OILCLOTH BIB, dark on
+    # bone, down the front only. Wear 0.65 is river damp and a man who works a
+    # wet floor wears his oilcloth on the front of him - it looks like what it
+    # is for, and it cannot wrap the way the Beadle's band did because it is
+    # laid on one face of a cone.
+    # The cone is L.cone(0.52, 0.17, 1.48): r(z) = 0.52 - 0.2365*z, so each
+    # plate is pushed out to its own local radius and tilted to the slope
+    # (atan 0.2365 = 0.2325 rad) instead of stair-stepping down a flat front.
+    # THE BIB TOOK THREE GOES AND EVERY CORRECTION CAME FROM THE PICTURE.
+    # v1: five tilted plates. Each stepped inward by 0.050 while being 0.050
+    #     deep, so every joint opened a ledge - a chest of drawers on a cone.
+    # v2: eight deeper overlapping plates. The joints CLOSED and the facing
+    #     score reached 0.4671, but it still read as a STAIRCASE: the side
+    #     edges stepped, the banding showed, and an oilcloth does not have
+    #     stairs down it. The number was already good with the fault in it,
+    #     which is the argument for looking at the render rather than the JSON.
+    # v3, below: ONE panel. A quad strip of 11 rings x 5 columns laid on the
+    #     cone's own surface, so it curves with the garment and tapers
+    #     smoothly - no steps on the edges and nothing to shimmer at stream
+    #     distance. r(z) = 0.52 - 0.2365*z is the shroud cone's own radius.
+    _BZ0, _BZ1, _BN, _BM = 0.17, 1.33, 10, 4
+    _ring_v = []
+    for _i in range(_BN + 1):
+        _t = _i / float(_BN)
+        _z = _BZ0 + (_BZ1 - _BZ0) * _t
+        _r = 0.52 - 0.2365 * _z
+        _w = min(0.47, 1.34 * _r) * (1.0 - 0.10 * _t)   # tapers a touch faster than the cone
+        _phi = (_w * 0.5) / _r
+        _out, _inn = [], []
+        for _j in range(_BM + 1):
+            _a = -_phi + 2.0 * _phi * _j / float(_BM)
+            for _rr, _acc in ((_r + 0.036, _out), (_r - 0.004, _inn)):
+                _acc.append((X + _rr * math.sin(_a), -_rr * math.cos(_a), _z))
+        _ring_v.append((_out, _inn))
+    _V, _F = [], []
+    _base = {}
+    for _i, (_out, _inn) in enumerate(_ring_v):
+        _base[_i] = len(_V)
+        _V.extend([tuple(v) for v in _out] + [tuple(v) for v in _inn])
+    _M1 = _BM + 1
+    for _i in range(_BN):
+        _a0, _b0 = _base[_i], _base[_i + 1]
+        for _j in range(_BM):
+            _F.append((_a0 + _j, _a0 + _j + 1, _b0 + _j + 1, _b0 + _j))              # outer
+            _F.append((_a0 + _M1 + _j + 1, _a0 + _M1 + _j,
+                       _b0 + _M1 + _j, _b0 + _M1 + _j + 1))                          # inner
+        _F.append((_a0 + _M1, _b0 + _M1, _b0, _a0))                                  # left edge
+        _F.append((_a0 + _BM, _b0 + _BM, _b0 + _M1 + _BM, _a0 + _M1 + _BM))          # right edge
+    for _i, _flip in ((0, False), (_BN, True)):
+        _a0 = _base[_i]
+        for _j in range(_BM):
+            _q = (_a0 + _j, _a0 + _j + 1, _a0 + _M1 + _j + 1, _a0 + _M1 + _j)
+            _F.append(_q if _flip else tuple(reversed(_q)))
+    P.raw(([Vector(v) for v in _V], _F), 'dark')
     _seg("body")
     # ARM ONE - high, to its left, bell up and well clear of the hood
     limb(P, [(X - 0.14, -0.06, 1.88), (X - 0.58, -0.16, 2.08), (X - 1.02, -0.22, 2.26)],

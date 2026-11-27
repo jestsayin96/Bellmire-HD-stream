@@ -1,3 +1,171 @@
+*** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 3. (THE 20:58 CT FIRING, 26 NOV 2026.) =====
+*** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 20:58:57 CST and again
+*** at 21:02:07 while writing. The count was 2 after the 19:58 firing; this hour is CLEAN, so it is 3.
+*** THREE CLAIMS, ALL CORRECT IN EVERY FIELD, NO TWO LANES HOLDING AT ONCE: game build 20:08:33,
+*** cap 20:33:33 computed first, declared 20:30:00, RELEASED 20:19:27 - inside both. Chat bot
+*** 20:38:46, cap 21:03:46 computed first, declared 20:46:00, RELEASED 20:40:06 - inside both and
+*** clear of the HUD's :52. QA tester 20:41:46 -> 20:45:46, capped at 20:51:46 to clear :52 and it
+*** did. No overrun, no claim over a live hold, no future stamp, no stale lock cleared.
+*** AND THE CHAT BOT'S SUSPENSION HAS LIFTED BY ITSELF, exactly as the 19:58 firing recommended
+*** waiting one cycle for: its firing came in LATE at 20:36 rather than 20:45, it claimed, worked
+*** and released cleanly. NO LIVE TURN WAS NEEDED. That item comes OFF the supervisor's list.
+***
+*** ===== MY OWN FAULT FIRST, AND IT IS THE EXACT TRAP THE CHARTER NAMES. =====
+***   I RAN A COMMENT-ONLY AUDIT OF `scripts/chatcmd.gd` THROUGH `device_bash` IN W4 AND IT
+***   PRINTED `RC_NONCOMMENT_LINES=0`. THAT ZERO WAS A LIE. W4 is a WORKTREE: its `.git` is a file
+***   holding a Windows path, git died with "not a git repository", and `grep -c` on an EMPTY
+***   STRING returns 0 - a failed command's nothing wearing the costume of a clean verdict. I
+***   re-ran it in R against the refs, where the pipeline PROVED ITSELF by printing 31 changed
+***   lines first, and only then read 0 non-comment. THE GUARD IS: a count of zero is only
+***   evidence if the same instrument printed a non-zero number beside it.
+***
+*** ===== S143 IS NOT TICKED, AND THE REASON IS A PICTURE, NOT A NUMBER. =====
+***   The game build wired System 14 (the graveyard keeper) and its gates are all green:
+***   parse rc=0 / 0 Parse Error / 0 SCRIPT ERROR, S143_KEEPER OK graves=3 height_m=1.85
+***   max_travel=4.87 clips={idle,walk,interact-right}, OFFFLOOR OK 0/2293, TOWNWALK PASS 0/19450,
+***   DELVE_TEST OK 9001 frames, TWITCH_PARSE OK 8. The pack is Kenney Graveyard Kit 5.0, CC0,
+***   LICENSE.txt committed beside it - cleared under the licence rule, read off the file.
+***   I LOOKED AT `renders/cycles/s143/keeper.png` AND THEN CROPPED AND UPSCALED THE BODY.
+***   THE GRAVES STAND - three stones on the grass beside the nave, which is the half of the claim
+***   that was broken before (the old 3x2 grid placed ZERO) and is now true. BUT THE LANTERN IS NOT
+***   HELD. `grave_keeper.gd` adds it as a child of the KEEPER ROOT at a fixed offset
+***   (0.38, 0.55, 0.22), not to a hand, and in the frame the forearm passes THROUGH the lantern
+***   frame at hip height. The kit ships a `holding-right` clip the script never plays - its own
+***   docstring says "lantern in hand". FIT IS THE ACCEPTANCE TEST FOR ANYTHING WORN OR PLACED, and
+***   no number in the battery could see this: height, travel and clip lengths are all correct.
+***   SO: KEEPER AND GRAVE GARDEN HALF DELIVERED, LANTERN ATTACHMENT STILL OPEN. Not a new item -
+***   it is the second half of S143 and it goes back to the lane that owns the file.
+***
+*** ===== THE DEAD-DATA AUDIT, MEASURED THIS RUN ON MERGED MAIN. =====
+*** Corpus is now 49 files (48 `scripts/*.gd` + `web/app.js`), 2,446,908 chars - 48 gd, not 47,
+*** because S143 added `scripts/grave_keeper.gd`. THAT IS A REAL MOVE, NOT A MISCOUNT: one new
+*** tracked script, and the charter's "47 gd" figure is simply older than this hour.
+*** `data/*.json` 12 files, 159 top-level keys (+1, content's `_note_c220`).
+*** UNREAD LIVE DATA KEYS: **ZERO**. UNREFERENCED ASSET DIRECTORIES: **ZERO** of 38 directories
+*** with files (+2 this hour, `assets/graveyard` and `assets/graveyard/Textures`, and BOTH are
+*** referenced - the new pack is wired, not dumped). 69 keys return zero literal hits: 54 `_note_`
+*** + **15 NON-NOTE, UNMOVED** - the same fifteen names the baseline accounts for, nothing added
+*** and nothing lost. THE SERIES: 52 -> 53 -> 56 -> 68 -> 69, every step a `_note_` key of
+*** content's and never a non-note. 15 is the number; the raw total carries no signal.
+
+## TICK RECORD - THE 20:58 CT FIRING, 26 NOV 2026 (team lead).
+*** origin/main c5baf423 -> this commit, ALL SIX LANES MERGED. Every claim checked against the
+*** file, the ref, the parsed JSON or the picture - never the commit message.
+***   - **C-220 TICKED (content). RE-COUNTED, NOT TAKEN.** I parsed `data/lore_lines.json` on both
+***     refs and diffed the structures: epitaphs 1000 -> 1016 (+16), descend 613 -> 621 (+8),
+***     cleared 598 -> 606 (+8) - the claim exactly. ZERO top-level keys lost, ONE added
+***     (`_note_c220`), zero pre-existing entries missing, and every entry in all three changed
+***     pools is UNIQUE (1016/1016, 621/621, 606/606). The `-4` in its numstat is a writer
+***     reordering its own output, not a deletion. `by_key` held at 63, which is right while art
+***     has shipped no 64th body.
+***   - **ART'S HARDENED RED-PROVE TICKED.** The 19:58 row asked it to push the work the bridge ate
+***     and to say whether `items_after_span` now reads 12 on a GENUINE mid-build span. IT DOES, and
+***     I read the artefact rather than the claim: `_selfseen_prove_emptymid.json` shows the
+***     builder's own declared span [[24,24]] RELOCATED in memory to [[12,12]] in a 24-item builder,
+***     `items_after_span: 12`, and the RED then fired through the SHIPPED discriminator with
+***     `at_end` computed off the constructed span - the forced `at_end = False` bypass is gone.
+***     It also added an INSTRUMENT FAULT guard that refuses to judge a span with nothing authored
+***     after it. THIS IS A TEST MADE HONEST, NOT A TEST MADE QUIET: the arm can still go red, and
+***     it now goes red for the real reason. Its 138 "uncommitted" renders are explained and 9 real
+***     ones are committed.
+***   - **B185 AND B186 TICKED (chat bot).** B185 struck B183's LIVE OPEN QUESTION sentence with
+***     B184's numbers, and a SECOND stale one at the EXAMPLE arm making the same false claim.
+***     COMMENT-ONLY VERIFIED IN R AGAINST THE REFS: 31 changed lines in `scripts/chatcmd.gd`,
+***     **0 non-comment**. Gates green (parse rc=0, L14_TEST OK 27, TWITCH_PARSE OK 8, COMMANDS_DOC
+***     a genuine no-op). B186 took no claim and no engine because its row was already paid, and
+***     audited drift four ways instead - reporting that three of its four findings were its own
+***     matcher. A LANE THAT PUBLISHES ITS OWN FALSE POSITIVES IS WORTH MORE THAN ONE THAT DOES NOT.
+***   - **THE HUB'S STAND-DOWN TICKED, AND I RE-MEASURED ITS CLAIM MYSELF.** It said the web code
+***     blobs are identical to gh-pages and only NOTES.md is unpublished. TRUE: `origin/gh-pages`
+***     8d214d36 / tree 1d8bce63 (pushed 25 Nov 09:55 CT) against `origin/hub:web` 0faf51e9 is ONE
+***     file, `NOTES.md +38 / -0`. It made NO readiness claim, so NO PUBLISH GATE WAS OWED AND I RAN
+***     NONE - said plainly, as required. (+38, not the +34 of an hour ago. I counted it.)
+***   - **U189 TICKED AS A STAND-DOWN (HUD).** The 19:58 row named it no item and told it its own
+***     prompt is lying about the rarity-hue half; it stood down, said so, and reached into no file
+***     it does not own. Fourth honest stand-down in a row from this lane while its prompt tells it
+***     otherwise.
+***   - **NOT TICKED: S143 (game build).** See the block above - the keeper and the grave garden
+***     are delivered and good, the lantern is not held. Half delivered, half open.
+***   - **ALSO MERGED, NOT A LANE OF MINE:** the QA tester's 20:41 battery, all green on the working
+***     tree (L14_TEST OK 27, TWITCH_PARSE OK 8, COMMANDS_DOC OK 32, OFFFLOOR OK 0/2410, TOWNWALK
+***     PASS 0/16906, DELVE_TEST OK 9001 frames), claimed and released inside a 10-minute self-cap.
+
+## TAKE THIS NEXT - THE 20:58 CT FIRING, 26 NOV 2026 (team lead).
+*** THESE SIX ROWS SUPERSEDE EVERY "TAKE THIS NEXT" BELOW. The file reads reverse chronological.
+***
+***  - **GAME BUILD (:07)** - **FINISH S143: PUT THE LANTERN IN HIS HAND.** I am not ticking System
+***    14 and the reason is in the frame, not the log. `scripts/grave_keeper.gd` parents the lantern
+***    to the KEEPER ROOT at a fixed offset (0.38, 0.55, 0.22); in `renders/cycles/s143/keeper.png`,
+***    cropped and upscaled, the forearm passes THROUGH the lantern frame at the hip. Attach it to
+***    the hand node of the Kenney rig (the kit ships a `holding-right` clip your script never
+***    plays, and your own docstring says "lantern in hand"), then RE-RENDER FRONT, SIDE AND BACK
+***    and look at all three yourself before you call it done - a single three-quarter frame is how
+***    this one got past a green battery. SECOND, SMALLER, SAME ITEM: your gate reports `graves=3`
+***    where the garden keeps up to SIX and `_spawn_grave_keeper` needs only 2 - say whether 3 is
+***    the terrain's honest answer or the second side is still failing `is_clear`. Everything else
+***    about S143 is TICK-READY: gates green, Kenney CC0 licence committed, graves standing.
+***  - **CONTENT (:22)** - C-220 VERIFIED AND TICKED, re-counted pool by pool and checked for
+***    duplicates. Keep producing, unthrottled. `by_key` at 63 stays right until art ships a 64th
+***    body. `_note_` keys are yours to keep writing - 54 now, every one accounted for, no lane
+***    wires one, and `phase2_words_alt2` is dead for the same reason as its two siblings.
+***  - **ART (:34)** - YOUR RED-PROVE IS TICKED AND IT IS GENUINE NOW. Nothing is carried. SPEND
+***    THE HOUR ON A MINIBOSS - your standing permission to invent them is live and it is the only
+***    place in this house where new work is allowed. MEASURE THE COUNT OFF `tools/art/minibosses.py`
+***    OR THE FIT REGISTER, never off a prompt or off this row. A 64th body is also the one thing
+***    that would give content a 64th `by_key` row to write.
+***  - **HUB (:37)** - YOUR STAND-DOWN IS TICKED AND YOUR MEASUREMENT WAS RIGHT; I re-measured both
+***    trees myself and got the same one file. Nothing is open. The unpublished delta is `NOTES.md`
+***    +38/-0 and publishing is two seats above you. STAND DOWN AND WRITE IT UP. If you touch `web/`
+***    at all, the hostile-name test and the state checks come back and I re-run the greps myself.
+***  - **CHAT BOT (:45)** - B185 AND B186 ARE BOTH TICKED AND YOUR SUSPENSION LIFTED BY ITSELF.
+***    Nothing is carried. **AND YOU WERE RIGHT ABOUT YOUR OWN PROMPT:** it tells you to expect
+***    "COMMANDS_DOC wrote 26 commands" and the real generator writes 32. THE GENERATOR WINS; 32 is
+***    not a fault and no future firing is to read it as one. I cannot edit the prompt from a
+***    firing, so this row is the correction and it is on the backlog below. Your window row stands:
+***    CLAIM BY :50 WITH A FINISH INSIDE :52. With no item carried, audit your own shipped work and
+***    fix what you find, or stand down and write it up.
+***  - **HUD (:52)** - U189 IS TICKED. **YOUR PROMPT IS STILL LYING TO YOU** and I still cannot edit
+***    it from a firing: it names the rarity-hue half of System 2 as your standing item and "the most
+***    valuable open item in the house". IT SHIPPED AS U55 - `ui_theme.gd:176` says so in its own
+***    words, `rarity_hue` :196, `rarity_ink` :200, `rarity_pip` :204, called at
+***    `leaderboard_panel.gd:197` and `:202`. DO NOT TAKE IT. This row wins over the prompt. Nothing
+***    HUD-owned is open, so fix a defect in your OWN shipped work if you find one and otherwise
+***    stand down and write it up - and COMMIT YOUR EVIDENCE LOG when you do ship.
+***
+*** FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, TO BE LANDED IN ONE LIVE TURN:
+***   1. HUD PROMPT: strike the "YOUR STANDING ITEM ... THE RARITY-HUE HALF OF SYSTEM 2 ... Take
+***      the item" block. It shipped as U55. Oldest and most expensive one on this list.
+***   2. GAME BUILD PROMPT: the `gear.gd:98-104` null-guard defect block is STRUCK - fixed at S35,
+***      measured at `gear.gd:105-110` on 26 Nov.
+***   3. TEAM LEAD PROMPT: the gh-pages facts are stale twice over (it says 05ac2679 / tree
+***      9ca8051e / 19 Nov 20:06). TRUE, re-measured 26 Nov 21:0x: gh-pages 8d214d36 / tree
+***      1d8bce63 / pushed 25 Nov 09:55 CT; the unpublished delta is ONE file, `web/NOTES.md`
+***      +38/-0.
+***   4. TEAM LEAD PROMPT: the STANDING NOTE saying the art fit register reads RED / ok:false on two
+***      retired `_chibi` rows is struck - it reads ok:true / GREEN, 65 pairs, shipped_red [].
+***   5. TEAM LEAD PROMPT: the dead-data baseline figures are stale. TRUE this run: corpus 49 files
+***      (48 gd + app.js), 38 asset dirs, 159 keys, 69 zero-hit = 54 note + 15 non-note. THE 15
+***      NON-NOTE IS STABLE AND IS THE NUMBER TO CARRY.
+***   6. **NEW THIS HOUR - CHAT BOT PROMPT:** it says to expect "COMMANDS_DOC wrote 26 commands".
+***      The real generator writes **32**, proven twice as a byte-identical no-op (B185, and the QA
+***      tester's independent battery at 20:41). The lane found this on itself and said so.
+***   (Items 1-5 were raised by earlier firings. They are repeated, not duplicated - this list is
+***   the backlog and it is carried whole until it is landed.)
+***
+*** FOR THE SUPERVISOR:
+***   1. **THE CHAT BOT SUSPENSION IS CLOSED - NO ACTION NEEDED.** The 19:58 firing recommended
+***      waiting one cycle rather than spending a live turn; the hold lifted by itself and the lane
+***      ran at 20:36. I am taking it off this list. The observation worth keeping is the pattern:
+***      TWICE NOW a scheduled task has been suspended `device_absent` inside a Blender-bridge
+***      outage, and TWICE it has been the bridge and not the lane. Correlation reported, not cause.
+***   2. THE HUB PUBLISH QUESTION IS UNCHANGED AND STILL YOURS: the only thing merged and not
+***      published is `web/NOTES.md`, now +38/-0, a notes file. RECOMMENDATION: LEAVE IT
+***      UNPUBLISHED - no functional delta, the live site is current as of publish 8 (25 Nov
+***      09:55 CT), and a push to ship a notes file spends a publish for nothing. I ran NO publish
+***      verification this hour because the lane claimed no readiness.
+***
+*** NEEDS MR. E: nothing.
+
 *** ===== LOCK DISCIPLINE: CLEAN-HOUR COUNT 2. (THE 19:58 CT FIRING, 26 NOV 2026.) =====
 *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 19:59:01 CST and again
 *** while writing. The count was 1 after the 18:58 firing; this hour is CLEAN, so it is 2.

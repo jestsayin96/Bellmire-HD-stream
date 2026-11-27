@@ -545,7 +545,7 @@
     "trunk",
     "vanes"
    ],
-   "items": 26,
+   "items": 30,
    "man_from": "parts",
    "man_ranges": [
     [
@@ -983,6 +983,55 @@
    "man_parts": [
     "man_core",
     "arm_boom"
+   ],
+   "has_man_span": true,
+   "man_span": null,
+   "man_span_empty": false
+  },
+  "mealman": {
+   "in_register": true,
+   "in_builders": true,
+   "spans": [
+    "arms",
+    "chute",
+    "fall",
+    "head",
+    "hopper",
+    "legs",
+    "smock",
+    "trough",
+    "trunk"
+   ],
+   "items": 38,
+   "man_from": "parts",
+   "man_ranges": [
+    [
+     0,
+     4
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     7,
+     11
+    ],
+    [
+     11,
+     15
+    ],
+    [
+     15,
+     23
+    ]
+   ],
+   "man_parts": [
+    "legs",
+    "smock",
+    "trunk",
+    "arms",
+    "head"
    ],
    "has_man_span": true,
    "man_span": null,
@@ -2255,12 +2304,12 @@
   }
  },
  "errors": [],
- "measured_at": "2026-11-26T23:05:31-0600",
+ "measured_at": "2026-11-27T01:41:30-0600",
  "measured_at_tz": "Central Standard Time",
- "measured_at_epoch": 1795755931.075457,
- "register_mtime_epoch": 1795755911.229208,
- "register_mtime": "2026-11-26T23:05:11-0600",
- "register_pairs": 66,
+ "measured_at_epoch": 1795765290.5087721,
+ "register_mtime_epoch": 1795762319.0602553,
+ "register_mtime": "2026-11-27T00:51:59-0600",
+ "register_pairs": 67,
  "measurable": [
   "almoner",
   "beadle",
@@ -2289,6 +2338,7 @@
   "jointer",
   "leech",
   "loader",
+  "mealman",
   "moulder",
   "nightman",
   "overlooker",

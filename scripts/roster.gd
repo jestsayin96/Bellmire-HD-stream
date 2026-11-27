@@ -730,6 +730,8 @@ func respec(user_id: String, cls: String, prepaid := false) -> String:
         return "No such calling. Try: %s" % ", ".join(CLASSES.keys())
     if cls == h["class"]:
         return "%s is already a %s." % [h["name"], cls]
+    if spec_of(h) != "":     # S155: a path is permanent, so the calling under it is too
+        return "%s walks the %s's road for good - the calling cannot be changed now." % [h["name"], calling_of(h)]
     if not prepaid and not spend(h, cost_for(h, RESPEC_COST)):
         return "%s needs %d gold to retrain - you have %d." \
             % [h["name"], RESPEC_COST, int(h["gold"])]
@@ -767,6 +769,10 @@ func award(user_id: String, gold: int, xp: int, kills := 0, floor_no := 0) -> vo
             announced.emit("%s learns %s - %s." % [h["name"], ability_word(key), ability_blurb(key)],
                 Color(0.70, 0.92, 1.0))
             hero_moment.emit(user_id, "learned", "your hero reached level %d and learned %s." % [int(h["level"]), ability_word(key)])
+        if int(h["level"]) == SPEC_AT and spec_of(h) == "" and SPECS.has(String(h["class"])):
+            announced.emit("%s may choose a path now - !paths to read both roads." % h["name"],
+                Color(0.98, 0.80, 0.40))
+            hero_moment.emit(user_id, "path_open", "your hero reached level %d and may choose a path (!paths)." % SPEC_AT)
     # A promotion is a story beat, so it is said out loud like a level-up.
     var rank_now := rank_of(h)
     if rank_now != rank_was:
@@ -859,6 +865,155 @@ const ABILITY_WORDS := {
     "scarborn":     ["Scarborn", "the scar's own are death to the undead"],
 }
 
+## ---- S155: SYSTEM 40 - CLASS SPECIALIZATION (Mr. E 27 Nov 02:18, engine half).
+## At SPEC_AT a hero may choose ONE of two paths for their calling, and it is PERMANENT - the
+## moment the hero becomes the viewer's own. The directive named five classes; roster.gd has
+## FIFTEEN, so per its own caveat the tree adapts: every calling splits two ways. Two path
+## names in the directive collide with existing CLASS keys ("Ranger", "Warden") and were renamed
+## (Tracker, Oathkeeper) so a calling and a path can never read as the same word.
+## Each path hands over one gift at SPEC_AT, a second at 15, a third at 20 (SPEC_GIFTS_AT).
+## Every gift is an EXISTING ability key that already resolves in delve.gd through
+## _ability_mult / _ability_hit / _soak (via abilities_of), and none repeats the calling's own
+## kit - so no gift is a label with no effect behind it. Names and blurbs are tunable content.
+## The chat commands (!paths / !specialize) are the chat bot's; they call paths_line/specialize.
+const SPEC_AT := 10
+const SPEC_GIFTS_AT := [10, 15, 20]
+const SPECS := {
+    "knight": {
+        "guardian": {"name": "Guardian", "blurb": "Plants the shield and makes the dark come to them.", "gifts": ["thorns", "riposte", "resolve"]},
+        "crusader": {"name": "Crusader", "blurb": "Carries the fight forward, and the dead first.", "gifts": ["smite", "rage", "backstab"]},
+    },
+    "warden": {
+        "bastion": {"name": "Bastion", "blurb": "Does not move. Does not need to.", "gifts": ["bulwark", "riposte", "resolve"]},
+        "reaver": {"name": "Reaver", "blurb": "Stopped holding the line and started breaking theirs.", "gifts": ["rage", "backstab", "smite"]},
+    },
+    "barbarian": {
+        "berserker": {"name": "Berserker", "blurb": "Hurts them more the more they bleed.", "gifts": ["flurry", "backstab", "drain"]},
+        "chieftain": {"name": "Chieftain", "blurb": "Fights so the party fights better.", "gifts": ["hex", "resolve", "bulwark"]},
+    },
+    "rogue": {
+        "shadow": {"name": "Shadow", "blurb": "Gone before the blow lands, back before it lifts.", "gifts": ["riposte", "hex", "rage"]},
+        "tracker": {"name": "Tracker", "blurb": "Reads the floor before it is walked on.", "gifts": ["deadeye", "cleave", "resolve"]},
+    },
+    "duelist": {
+        "blademaster": {"name": "Blademaster", "blurb": "Two blades become a weather.", "gifts": ["flurry", "rage", "cleave"]},
+        "swashbuckler": {"name": "Swashbuckler", "blurb": "Never where the blow was aimed.", "gifts": ["deadeye", "resolve", "thorns"]},
+    },
+    "ranger": {
+        "sharpshooter": {"name": "Sharpshooter", "blurb": "One arrow, chosen.", "gifts": ["backstab", "rage", "resolve"]},
+        "strider": {"name": "Strider", "blurb": "Walks the dark like it owes them rent.", "gifts": ["thorns", "bulwark", "riposte"]},
+    },
+    "mage": {
+        "evoker": {"name": "Evoker", "blurb": "Spells that do not stop at one.", "gifts": ["cleave", "rage", "deadeye"]},
+        "abjurer": {"name": "Abjurer", "blurb": "Writes the ward first and the spell after.", "gifts": ["bulwark", "drain", "resolve"]},
+    },
+    "sage": {
+        "healer": {"name": "Healer", "blurb": "The party walks out because they walked in.", "gifts": ["resolve", "bulwark", "smite"]},
+        "battlemage": {"name": "Battlemage", "blurb": "Learned the mending, then learned the opposite.", "gifts": ["cleave", "hex", "rage"]},
+    },
+    "cleric": {
+        "templar": {"name": "Templar", "blurb": "Prayer with an edge on it.", "gifts": ["cleave", "rage", "riposte"]},
+        "hospitaller": {"name": "Hospitaller", "blurb": "Stands over the fallen and will not shift.", "gifts": ["resolve", "thorns", "drain"]},
+    },
+    "paladin": {
+        "oathkeeper": {"name": "Oathkeeper", "blurb": "Keeps the oath and the party with it.", "gifts": ["thorns", "resolve", "riposte"]},
+        "avenger": {"name": "Avenger", "blurb": "Hits hardest when it is nearly over.", "gifts": ["rage", "backstab", "cleave"]},
+    },
+    "necromancer": {
+        "deathcaller": {"name": "Deathcaller", "blurb": "Speaks and the floor answers.", "gifts": ["arcane_surge", "cleave", "rage"]},
+        "bonewright": {"name": "Bonewright", "blurb": "Builds a wall out of what fell last.", "gifts": ["bulwark", "thorns", "resolve"]},
+    },
+    "monk": {
+        "ironfist": {"name": "Ironfist", "blurb": "Every hand is a hammer now.", "gifts": ["rage", "backstab", "cleave"]},
+        "stillwater": {"name": "Stillwater", "blurb": "Stands so still the blows slide off.", "gifts": ["bulwark", "resolve", "thorns"]},
+    },
+    "druid": {
+        "wildheart": {"name": "Wildheart", "blurb": "Let the meadow's teeth out.", "gifts": ["flurry", "cleave", "backstab"]},
+        "grovekeeper": {"name": "Grovekeeper", "blurb": "Roots go down; nothing moves them.", "gifts": ["bulwark", "drain", "resolve"]},
+    },
+    "warlock": {
+        "hexblade": {"name": "Hexblade", "blurb": "Took the bargain into the hand that holds the blade.", "gifts": ["riposte", "backstab", "cleave"]},
+        "pactbinder": {"name": "Pactbinder", "blurb": "Asked the thing below for more, and got it.", "gifts": ["arcane_surge", "deadeye", "rage"]},
+    },
+    "bard": {
+        "skald": {"name": "Skald", "blurb": "Sings the war-song, and swings on the beat.", "gifts": ["rage", "cleave", "resolve"]},
+        "loremaster": {"name": "Loremaster", "blurb": "Knows the name of every thing down there.", "gifts": ["hex", "deadeye", "drain"]},
+    },
+}
+
+static func spec_of(h: Dictionary) -> String:
+    var s := String(h.get("spec", ""))
+    return s if (SPECS.get(String(h.get("class", "")), {}) as Dictionary).has(s) else ""
+
+static func spec_row(h: Dictionary) -> Dictionary:
+    var s := spec_of(h)
+    if s == "":
+        return {}
+    return (SPECS[String(h.get("class", ""))] as Dictionary)[s]
+
+## what the hero is CALLED - the path's name once chosen ("Guardian", not "knight")
+static func calling_of(h: Dictionary) -> String:
+    var row := spec_row(h)
+    return String(row["name"]) if not row.is_empty() else String(h.get("class", ""))
+
+## the gifts the path has handed over by this level (in unlock order)
+static func spec_gifts(h: Dictionary) -> Array:
+    var out: Array = []
+    var row := spec_row(h)
+    if row.is_empty():
+        return out
+    var lvl := int(h.get("level", 1))
+    var g: Array = row["gifts"]
+    for i in mini(g.size(), SPEC_GIFTS_AT.size()):
+        if lvl >= int(SPEC_GIFTS_AT[i]):
+            out.append(String(g[i]))
+    return out
+
+## for !paths: both roads for this hero's calling, and what each gives first
+func paths_line(user_id: String) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty():
+        return "No hero yet - type !enlist to join the valley."
+    var opts: Dictionary = SPECS.get(String(h["class"]), {})
+    if opts.is_empty():
+        return "%s's calling has no paths yet." % h["name"]
+    if spec_of(h) != "":
+        return "%s walks the %s's road for good - %s" % [h["name"], calling_of(h), String(spec_row(h)["blurb"])]
+    var parts: Array = []
+    for k: String in opts:
+        var row: Dictionary = opts[k]
+        parts.append("%s: %s (first gift %s)" % [row["name"], row["blurb"], ability_word(String((row["gifts"] as Array)[0]))])
+    var when := ("at level %d" % SPEC_AT) if int(h["level"]) < SPEC_AT else "now"
+    return "%s the %s may choose %s, and only once - %s" % [h["name"], h["class"], when, "  |  ".join(parts)]
+
+## for !specialize <path>. PERMANENT: a second call is refused, and so is a retrain afterwards.
+func specialize(user_id: String, path: String) -> String:
+    var h := get_hero(user_id)
+    if h.is_empty():
+        return "No hero yet - type !enlist to join the valley."
+    if not bool(h.get("alive", true)):
+        return "%s is dead. !reroll to raise a new hero." % h["name"]
+    if spec_of(h) != "":
+        return "%s is already a %s, and that is for good." % [h["name"], calling_of(h)]
+    var opts: Dictionary = SPECS.get(String(h["class"]), {})
+    var key := path.strip_edges().to_lower()
+    if not opts.has(key):
+        var names: Array = []
+        for k: String in opts:
+            names.append(String(opts[k]["name"]))
+        return "The %s's roads are %s." % [h["class"], " or ".join(names)]
+    if int(h["level"]) < SPEC_AT:
+        return "%s must reach level %d to choose a path (level %d now)." % [h["name"], SPEC_AT, int(h["level"])]
+    h["spec"] = key
+    var said: Array = []
+    for g: String in spec_gifts(h):
+        said.append("%s - %s" % [ability_word(g), ability_blurb(g)])
+    announced.emit("%s takes the %s's road. %s" % [h["name"], calling_of(h), String(opts[key]["blurb"])],
+        Color(0.98, 0.80, 0.40))
+    hero_moment.emit(user_id, "specialized", "your hero became a %s." % calling_of(h))
+    changed.emit(user_id)
+    return "%s is a %s now, for good. Learns %s." % [h["name"], calling_of(h), "; ".join(said)]
+
 static func ability_word(key: String) -> String:
     return String((ABILITY_WORDS.get(key, [key, ""]) as Array)[0])
 
@@ -880,6 +1035,9 @@ static func abilities_of(h: Dictionary) -> Array:
                 var k := String((src as Dictionary)[at])
                 if not out.has(k):
                     out.append(k)
+    for g: String in spec_gifts(h):     # S155: the chosen path's gifts so far
+        if not out.has(g):
+            out.append(g)
     return out
 
 ## what a level-up hands over at THIS level, so the announcement can name it
@@ -889,6 +1047,13 @@ static func unlocked_at(h: Dictionary, level: int) -> Array:
         var d: Dictionary = src
         if d.has(level):
             out.append(String(d[level]))
+    # S155: a chosen path's second and third gifts arrive on the level-up (the first arrives
+    # with the choice itself, in specialize())
+    var row := spec_row(h)
+    if not row.is_empty() and level != SPEC_AT:
+        var i := SPEC_GIFTS_AT.find(level)
+        if i >= 0 and i < (row["gifts"] as Array).size():
+            out.append(String(row["gifts"][i]))
     return out
 
 func kill(user_id: String, killed_by: String, floor_no: int, day: int) -> String:
@@ -1128,7 +1293,7 @@ func describe(user_id: String) -> String:
     return ("%s the %s, %s, level %d  |  AC %d  HP %d  prof %s  to-hit %s  |  %s" +
             "  |  saves %s  |  %s, %s  |  %d potions, %d oil, %d gold" +
             "  |  deepest floor %d, %d kills") \
-        % [h["name"], "%s %s" % [species_of(h), h["class"]], rank_of(h), int(h["level"]),
+        % [h["name"], "%s %s" % [species_of(h), calling_of(h)], rank_of(h), int(h["level"]),
            armour_class(h), int(max_hp(h)), sign_str(prof(h)),
            sign_str(attack_bonus(h)), _stat_line(h["stats"]), save_line(h),
            "%s (%s)" % [weapon_name(h), dice_str(h)], ARMOUR[int(h["armour"])]["name"],

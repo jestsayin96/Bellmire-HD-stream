@@ -191,6 +191,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
         "richest":  out = _board("gold")
         "guild", "ranks":
                     out = _board("standing")
+        "rep":      out = _needs(user_id, func(): return Roster.rep_line(roster.get_hero(user_id)))
         "deadliest": out = _board("kills")
         "patrons", "benefactors":
                     out = _patrons()

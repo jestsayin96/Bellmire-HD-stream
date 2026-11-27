@@ -1103,7 +1103,15 @@
     "Chalk marks on the post. Somebody is keeping count.",
     "The weaver tied a red thread to the rail. For luck. For nothing.",
     "Candles lit in the window. Two more than yesterday.",
-    "The miller left the sack at the door and waited."
+    "The miller left the sack at the door and waited.",
+    "The ostler checked every strap twice and said nothing.",
+    "Someone had swept the steps. Nobody owned to it.",
+    "The smith set his hammer down and watched them go.",
+    "A child held the gate open, solemn as a priest.",
+    "Bread was pressed into a hand. No words with it.",
+    "The lamp-seller trimmed three wicks free of charge.",
+    "Boots ringing on the stair. The street went quiet to hear.",
+    "The ferryman tied off early and stood at the top."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1711,7 +1719,15 @@
     "The cooper went back to hammering. The sound was welcome.",
     "Somebody opened the shutters on the stair-side of the house.",
     "The well-rope was left slack overnight. Nobody minded.",
-    "Dogs slept in the road. Carts went round."
+    "Dogs slept in the road. Carts went round.",
+    "The ostler loosened the straps and let out a breath.",
+    "Somebody put the kettle on at the head of the stair.",
+    "The smith picked his hammer back up. It was warm yet.",
+    "Bread was set out on the step. Nobody asked who for.",
+    "The lamp-seller sold out by noon.",
+    "A child counted the heroes back up the stair. All there.",
+    "The ferryman cast off again. The tide waits for no one, he said.",
+    "Shutters came open all down the lane."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4941,7 +4957,23 @@
     "Said the roof would hold till spring. It held.",
     "Carried the water up for the others and went down dry.",
     "Wrote nothing down. Said the work would speak.",
-    "Held the door for the one behind. Was not followed."
+    "Held the door for the one behind. Was not followed.",
+    "Mended the strap twice. Wore it down anyway.",
+    "Counted the steps going down. Did not count them coming up.",
+    "Left bread at the gate for the dog. The dog waited.",
+    "Told the others to go ahead. Stayed to hold the rope.",
+    "Sharpened the knife the night before. Said it was habit.",
+    "Took the long way round the pit. It was not long enough.",
+    "Kept the lamp low to save the oil. Saved it.",
+    "Hummed out of tune. Nobody minded.",
+    "Marked the wall at every turn. The marks stop here.",
+    "Paid the innkeeper in advance. Owed nothing.",
+    "Knew the horses by name. Knew the cook's too.",
+    "Packed light and called it the whole trick.",
+    "Slept sound the night before. Woke early.",
+    "Fixed the cellar hinge before leaving. It does not squeak now.",
+    "Took the rear. Watched the others through.",
+    "Wiped the blade clean before the last stair."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -15570,5 +15602,6 @@
   "_note_c204": "C-204 (25 Nov 2026, content): DRAFT of the supervisor's directive section 2 (24 Nov 23:54 CT) - 11 new ask topics, parked here because data/commands.json is the chat bot lane's file and NOT one of content's four. Replies are the directive's text verbatim; phrases are the directive's samples plus word-boundary variants, and bare 'streamer' was NOT used (too common in ordinary chat), 'streamer+away' / 'is the streamer here' instead. To land: whoever owns commands.json copies draft.topics into /ask/topics (same {reply,phrases} shape) and appends draft.order_append to /ask/order. Do NOT read this key from code. Expected zero-hit key. DRAFT_JSON={\"order_append\":[\"bug\",\"suggest\",\"afk\",\"died\",\"howdelve\",\"howbands\",\"standing\",\"permadeath\",\"creator\",\"howoil\",\"thanks\"],\"topics\":{\"bug\":{\"reply\":\"If you found a bug, head to the guild hall and use the Suggestion Box - !hub to get there. The builders read every one.\",\"phrases\":[\"bug\",\"broken\",\"glitch\",\"not working\",\"found a bug\",\"report a bug\",\"bug+report\"]},\"suggest\":{\"reply\":\"Got an idea for Bellmire? The guild hall has a Suggestion Box - !hub and look for it. Every suggestion gets read.\",\"phrases\":[\"suggestion\",\"feature request\",\"you should add\",\"idea for\",\"i have an idea\",\"suggest+feature\",\"add+to+game\"]},\"afk\":{\"reply\":\"The game runs itself while the streamer is away - your hero keeps living, fighting and trading. !hero to check on yours.\",\"phrases\":[\"is anyone here\",\"is the streamer here\",\"streamer+away\",\"are you a bot\",\"is this a bot\",\"afk\",\"anyone+home\"]},\"died\":{\"reply\":\"Heroes fall, but the valley always needs more. !enlist for a new one - pick a calling and a people, or let the valley choose.\",\"phrases\":[\"i died\",\"am i dead\",\"respawn\",\"dead+hero\",\"hero+died\",\"hero+dead\",\"my hero+dead\"]},\"howdelve\":{\"reply\":\"!delve sends your hero into the scar - deeper floors pay more but hit harder. Oil your lamp first (!oil) or you go nowhere.\",\"phrases\":[\"how does delving work\",\"what is a delve\",\"what does delve do\",\"how+delve\",\"delve+work\",\"what+delve\"]},\"howbands\":{\"reply\":\"A band is a party of heroes delving together. !muster joins the next one forming - bands share the danger and split what they find.\",\"phrases\":[\"what are bands\",\"what is a band\",\"how do parties work\",\"how+bands\",\"how+party\",\"band+work\",\"what+band\"]},\"standing\":{\"reply\":\"Standing is your place on the guild roll - earned by gold, kills and surviving. The deeper you go, the faster it climbs. !guild shows the ranks.\",\"phrases\":[\"what is standing\",\"what does standing do\",\"how do i rank up\",\"how+rank\",\"how+standing\",\"what+standing\"]},\"permadeath\":{\"reply\":\"Death is real here. Your hero joins the Fallen and their name is remembered, but you keep nothing. !enlist gets a fresh start.\",\"phrases\":[\"what happens when i die\",\"permadeath\",\"perma death\",\"is death permanent\",\"do i lose my hero\",\"what+happens+die\"]},\"creator\":{\"reply\":\"Built by JestSayin96 - the game, the bot, the guild hall, all of it. Come watch it grow.\",\"phrases\":[\"who made this\",\"who is jestsayin\",\"who made the game\",\"who built this\",\"who+made+game\",\"who+built+game\",\"who+created\"]},\"howoil\":{\"reply\":\"Oil lights your lamp for the scar. No lamp, no delve. !oil before you !delve - the town gives one free.\",\"phrases\":[\"what is oil\",\"why oil\",\"need oil\",\"what+oil\",\"why+need+oil\",\"oil+for\",\"what does oil do\"]},\"thanks\":{\"reply\":\"The town appreciates you.\",\"phrases\":[\"thanks bot\",\"good bot\",\"ty bot\",\"thank you bot\",\"thx bot\",\"thanks+bellmirebro\",\"good+bellmirebro\"]}}}",
   "_note_c218": "C-218 (content, 26 Nov 2026): descend +12 and cleared +12, plain town-reaction lines with no placeholders, none naming a floor or a count. Written on a body-count hold at 63; no by_key row touched. Expected zero-hit key.",
   "_note_c219": "C-219 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - art has committed no 64th body, so no by_key row. Expected zero-hit key.",
-  "_note_c220": "C-220 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - origin/art minibosses.py has no key outside by_key, so no by_key row. Expected zero-hit key."
+  "_note_c220": "C-220 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - origin/art minibosses.py has no key outside by_key, so no by_key row. Expected zero-hit key.",
+  "_note_c221": "C-221 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - origin/art minibosses.py has no key outside by_key, so no by_key row. Expected zero-hit key."
 }

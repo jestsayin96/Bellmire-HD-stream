@@ -15150,6 +15150,45 @@
           "He never lifted a hand. The room did the rest.",
           "Open the door. Let it clear."
         ]
+      },
+      "thatcher": {
+        "arrive": [
+          "Something ahead has been over this room with reed.",
+          "A man in a dark hood stood at the back with a bound sheaf of cut stems across his shoulder.",
+          "Every body in the room is thatched. Roof-deep, close and tidy, the way a good hand lays it.",
+          "He has a flat board at his hip and a handle in his fist. He is not looking at you. He is looking at the work.",
+          "The hood has no face worth the name. The sheaf is neat, tied in three places.",
+          "Strike the ones in front and the blow lands in straw. It lands in straw every time.",
+          "He is not hitting anyone. He does not need to.",
+          "The roof stays on while he stands. Walk past the others and reach him.",
+          "Mind the reed. Count the ties."
+        ],
+        "act": [
+          "{name} strikes the nearest. The blow goes into straw and stops.",
+          "{name} cuts through the thatch. A handful comes away. The rest holds.",
+          "{name} goes round the others. The hooded man is at the back.",
+          "{name} beats at the roof. It sheds the weather and the steel alike.",
+          "The line pushes forward. The thatch takes it all, and gives nothing back.",
+          "{name} aims for the man at the back and not the room. It is the only blow that counts.",
+          "Straw flies. The one under it is not marked.",
+          "{name} spends a good while on straw. Nobody says it was wasted. It was."
+        ],
+        "broken": [
+          "A tie is cut on the sheaf. The stems splay and do not close.",
+          "A bare patch shows on the roof, and it does not grow back.",
+          "He sets the leggett to the thatch and beats it flat. It is thinner than before.",
+          "Fewer stems on his shoulder. He works as if there were plenty."
+        ],
+        "fall": [
+          "He is down. The sheaf comes apart on the boards.",
+          "The thatch goes off the room all at once, like a roof lifted off.",
+          "Every body in there is bare now. They can be hurt, and they know it.",
+          "A dark hood and a loose bundle of cut stems.",
+          "He laid the whole roof himself. It came off with him.",
+          "Nothing was ever protecting itself. It was all him.",
+          "Dry reed and a leggett on the floor.",
+          "Sweep the straw back. Then go in."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -15716,5 +15755,6 @@
   "_note_c221": "C-221 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - origin/art minibosses.py has no key outside by_key, so no by_key row. Expected zero-hit key.",
   "_note_c222": "C-222 (content, 26 Nov 2026): the 64th miniboss_feed.by_key row, key `fanner` (art's .glb stem, no variant). arrive 9, act 8, broken 4, fall 8, matching the overlooker shape. No boss name used - Delve.MB_NAME has no fanner entry yet, so the fall lines say `He`, and `{name}` in act is the hero. Mechanic carried in the words: it burns as hard as the party crowds it, four pale vanes are the count, a broken vane stays broken. Held every other pool. Expected zero-hit key.",
   "_note_c225": "C-225 (content, 27 Nov 2026): the 65th miniboss_feed.by_key row, key `mealman` (art's .glb stem, committed on origin/art, THE MEALMAN, Whitedamp). arrive 9, act 8, broken 4, fall 8, matching the fanner shape. No boss name used - Delve.MB_NAME has no mealman entry yet, so the fall lines say `He`, and `{name}` in act is the hero. Mechanic carried in the words: burning lands on everyone in the room including him, no flame on the body, the dust does not escalate, steel is the slow safe way. Held every other pool. Expected zero-hit key.",
-  "_note_c226": "C-226 (content, 27 Nov 2026): 12 epitaphs, 10 descend, 10 cleared, appended; no miniboss by_key row because there is no 66th committed body (65 names / 65 feed keys). Plain, short, nothing theatrical. Expected zero-hit key."
+  "_note_c226": "C-226 (content, 27 Nov 2026): 12 epitaphs, 10 descend, 10 cleared, appended; no miniboss by_key row because there is no 66th committed body (65 names / 65 feed keys). Plain, short, nothing theatrical. Expected zero-hit key.",
+  "_note_c227": "C-227 (content, 27 Nov 2026): the 66th miniboss_feed.by_key row, key `thatcher` (art's .glb stem, committed: assets/monsters/minibosses/thatcher.glb on main, def thatcher in tools/art/minibosses.py). arrive 9, act 8, broken 4, fall 8, fanner/mealman shape. Art's feed line is arrive[0] verbatim. No boss name used - Delve.MB_NAME has no thatcher row yet (game build owes 'Lastcourse'), so fall lines say He and {name} in act is the hero. Mechanic in the words: while he stands the rest of the room cannot be hurt (blows land in thatch), kill him and the covering comes off everything at once. He hits nobody and does nothing to himself. Held every other pool. Expected zero-hit key."
 }

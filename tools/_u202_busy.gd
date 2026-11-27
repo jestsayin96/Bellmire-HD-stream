@@ -70,8 +70,10 @@ func _probe(tag: String) -> void:
 	if fh == null:
 		return
 	var panel: Control = fh._panel
-	var vel: Rect2 = Rect2(fh._content.get_global_rect())
 	var pr := _rr(panel)
+	# U204: _content is only built for the ChronicleScroll skin; in other scenes it is Nil. Fall back to the panel rect
+	# so the probe measures instead of throwing get_global_rect on Nil.
+	var vel: Rect2 = Rect2(fh._content.get_global_rect()) if fh._content != null else pr
 	var n := 0
 	for lb in fh._box.get_children():
 		if not (lb is Label):

@@ -25347,21 +25347,98 @@ def thatcher():
     _ax = _yd.normalized()
     _p1 = _ax.cross(Vector((0.0, 0.0, 1.0))).normalized()
     _p2 = _p1.cross(_ax).normalized()
+
+    # ------------------------------------------------ PASS 8: THE BIND'S TWIST
+    # OPEN FAULT 2 OF PASS 7, WHICH I OPENED MYSELF AND MEASURED: on the SIDE
+    # view the leather lap and the yealm sit at the same screen value - cue
+    # 0.5419 against lap 0.5413, ratio 1.001 - while the front reads 1.154.
+    # My pass-7 diagnosis was that the lever is NOT the lap's colour, because
+    # there is no lap value on the side that both reaches the one empty
+    # histogram band and still clears the reed. The team lead accepted that
+    # diagnosis and handed the pass back as a light/orientation question.
+    #
+    # SO I MEASURED THE MECHANISM BEFORE TOUCHING ANYTHING, AND IT IS NOT A
+    # PER-VIEW LIGHTING DIFFERENCE AT ALL. `minibossfit.aim_lights` SPINS THE
+    # WHOLE RIG WITH THE CAMERA, so the light is identical RELATIVE TO EVERY
+    # CAMERA and no view is "darker" by the rig. What differs is this bundle's
+    # own body-fixed axis against that rotating key. Key base (0.9, -1.0, 0.85)
+    # against the yealm axis, |L . axis|:
+    #     front  0.510  -> perpendicular component 0.856
+    #     side   0.930  -> perpendicular component 0.373   <-- END-ON
+    #     back   0.332  -> perpendicular component 0.940
+    # AT THE SIDE AZIMUTH THE KEY IS NEARLY PARALLEL TO THE BUNDLE. A cylinder
+    # lit along its own axis gets almost no diffuse anywhere on its flank -
+    # the best normal available falls from 0.856 to 0.373, a 2.3x drop in the
+    # key's whole contribution - and that is the entire fault. The number and
+    # the picture agree for once, and they agree on a cause.
+    #
+    # THE OBVIOUS FIX IS RE-AIMING THE BUNDLE, AND I SWEPT IT AND REFUSED IT.
+    # Holding the length and the z-run fixed and sweeping the xy direction over
+    # its whole legal range, the side's perpendicular component only ever rises
+    # by taking it off the front: the current aim sits near the WORST side
+    # value (0.373 against a floor of 0.348), and the best side value in reach,
+    # 0.590, costs the front 0.856 -> 0.643 and needs dy ~ 0, which drives the
+    # butt onto the midline and out from BEHIND him. That breaks the pass-2
+    # re-aim (butt behind, so no camera looks down the bore) and the pass-3
+    # three-axis diagonal in one move, to trade one view for another. A
+    # zero-sum fix that un-ticks two earlier passes is not a fix.
+    #
+    # WHAT IS NOT ZERO-SUM: TWIST THE BIND. Each stem follows a helix about the
+    # bundle axis instead of running parallel to it, so its tangent leaves the
+    # axis and keeps turning along its length - which means that at EVERY
+    # azimuth some span of every stem is across the key instead of down it.
+    # Swept the same way, the trade is strongly asymmetric, because the front
+    # is already near the 1.0 ceiling and saturated while the side is deep in
+    # the shadow end. Mean perpendicular component over all stem segments:
+    #     twist    side        front       back
+    #       0    0.3733      0.8563      0.9401   (pass 7)
+    #     180    0.4097 +9.8%  -1.1%       -1.5%
+    #     360    0.5207 +39.5% -3.6%       -5.0%
+    #
+    # AND THE BOUNDS CANNOT MOVE, BY CONSTRUCTION AND NOT BY HOPE - which is
+    # why this is the safe lever the week this body's fit numbers went to the
+    # game build. The twist only rotates the offset vector's PHASE; `_off` is
+    # built from the same `R_RING * _f(_t)` and its LENGTH is untouched, so
+    # every stem centreline stays on the identical tube about the identical
+    # axis, the end rings sweep the same circle, and the convex hull is the
+    # same set. creature_h, ratio, margin_x and `fits_frame` are therefore
+    # unchanged, and I re-measure them anyway rather than asserting it.
+    #
+    # THE HAZARD, NAMED BEFORE I RENDERED: an over-twist is a ROPE, and
+    # "the yealm reads as a pale rope" is the MEALMAN's fault and is already
+    # written at the top of this body's own history as fault 2 of pass 1. The
+    # helix angle is atan(twist_rad * R_RING / |_yd|): 180 deg gives 14.6 deg,
+    # a bound bundle that has been carried; 360 deg gives 27.6 deg, which is a
+    # corkscrew. So the number the sweep likes best is the one most likely to
+    # ship the older fault, and that is exactly a question only the picture can
+    # settle. A/B'd on the frame that ships, both arms looked at.
+    YEALM_TWIST_DEG = float(os.environ.get("THATCHER_TWIST", "180"))
+    _tw = math.radians(YEALM_TWIST_DEG)
+    # A HELIX NEEDS SAMPLES. Pass 7 lofted each stem through FIVE control
+    # points, which is plenty for a straight run and is a visible zig-zag once
+    # the phase turns - 5 points over a full turn is a pentagon, not a helix.
+    # 13 points keeps the same two endpoints (so the taper and the bounds are
+    # the same) and samples the turn finely enough to read as a curve.
+    _NK = 5 if abs(_tw) < 1e-6 else 13
     for _i in range(N_STEM):
         if _i == 0:
-            _off = Vector((0.0, 0.0, 0.0))
+            _off0 = None
         else:
-            _th = TAU * (_i - 1) / (N_STEM - 1)
-            _off = (_p1 * math.cos(_th) + _p2 * math.sin(_th)) * R_RING
+            _th0 = TAU * (_i - 1) / (N_STEM - 1)
         # RAGGED ENDS. Each stem is cut a little long or a little short, so
         # neither end is flush. A flush end is a disc and a disc is a bore.
         _e0 = -0.055 + 0.110 * ((_i * 5) % N_STEM) / float(N_STEM - 1)
         _e1 = 0.070 - 0.130 * ((_i * 3) % N_STEM) / float(N_STEM - 1)
         _pts = []
-        for _k in range(5):
-            _t = _k / 4.0
+        for _k in range(_NK):
+            _t = _k / float(_NK - 1)
             _base = YA + _yd * _t
-            _ext = _ax * (-_e0 if _k == 0 else (_e1 if _k == 4 else 0.0))
+            _ext = _ax * (-_e0 if _k == 0 else (_e1 if _k == _NK - 1 else 0.0))
+            if _i == 0:
+                _off = Vector((0.0, 0.0, 0.0))
+            else:
+                _th = _th0 + _tw * _t
+                _off = (_p1 * math.cos(_th) + _p2 * math.sin(_th)) * R_RING
             _pts.append(tuple(_base + _off * _f(_t) + _ext))
         limb(P, _pts, R_STEM, R_STEM * 0.86, 'bone')
     # THE THREE TIES, kept, and only now do they mean anything: they are what

@@ -332,3 +332,207 @@ number the game build was given still stands: `MB_FIT.thatcher` **ratio 1.04**,
 creature_h 2.54 / hero 2.45, margin_x 0.12, 3 proving views - copy
 `pairs.thatcher` out of `renders/art/minibosses/_fit_report.json`, and
 **0.97 is the mealman's number, not this body's.**
+
+---
+
+# PASS 8 - THE BIND'S TWIST. THE SIDE MOVED, AND IT IS NOT CLOSED
+
+Taken off the 03:58 plan, ART (:34): *"THE THATCHER PASS 8: LIFT THE REED'S
+SIDE VALUE... TAKE YOUR OWN DIAGNOSIS - it is the right one. The yealm is
+UNDER-LIT FROM THE SIDE... so the lever is light/orientation, NOT the lap's
+colour."* I took that and nothing else.
+
+**WHAT I CHECKED FOR FIRST, MEASURED.** 79 `.glb` under
+`assets/monsters/minibosses/` minus 11 `_chibi` minus the two bosses =
+**66 live bodies**, `thatcher` last in `ORDER`. I did not invent a 67th; the
+plan named this pass. I also measured the one thing my own prompt still
+carries as owed: **`snarer_chibi.glb.import` EXISTS**, written 17 Nov 18:53,
+sitting beside `snarer_chibi.glb`. That line is stale and nothing is owed on
+it; the body loads.
+
+## THE CAUSE, MEASURED BEFORE I TOUCHED ANYTHING - AND IT IS NOT THE LIGHTING
+
+I went looking for a per-view lighting difference and **there is none.**
+`minibossfit.aim_lights` SPINS THE WHOLE RIG WITH THE CAMERA, so the light is
+identical relative to every camera and no view is "darker" by the rig. What
+differs is this bundle's own body-fixed axis against that rotating key. Key
+base `(0.9, -1.0, 0.85)` against the yealm axis:
+
+| view | \|L . axis\| | perpendicular component |
+|---|---|---|
+| front | 0.510 | 0.856 |
+| **side** | **0.930** | **0.373** |
+| back | 0.332 | 0.940 |
+
+**AT THE SIDE AZIMUTH THE KEY IS NEARLY PARALLEL TO THE BUNDLE.** A cylinder
+lit along its own axis gets almost no diffuse anywhere on its flank: the best
+normal available falls from 0.856 to 0.373, a 2.3x drop in the key's whole
+contribution. That is the entire fault, and for once the number and the
+picture agree on a cause and not just on a symptom.
+
+## THE OBVIOUS FIX IS RE-AIMING THE BUNDLE. I SWEPT IT AND REFUSED IT
+
+Holding the length and the z-run fixed and sweeping the xy direction over its
+whole legal range: the current aim sits near the **worst** side value in reach
+(0.373 against a floor of 0.348), and the best available, 0.590, costs the
+front 0.856 -> 0.643 and needs `dy ~ 0` - which drives the butt onto the
+midline and out from BEHIND him. That breaks the **pass-2 re-aim** (butt
+behind, so no camera looks down the bore) and the **pass-3 three-axis
+diagonal** in one move, to trade one view for another. A zero-sum fix that
+un-ticks two earlier passes is not a fix. **It also moves the bounds, in the
+hour the game build is wiring this body's fit numbers**, which is the worst
+possible hour for it.
+
+## WHAT IS NOT ZERO-SUM: TWIST THE BIND
+
+Each stem follows a helix about the bundle axis instead of running parallel to
+it, so its tangent leaves the axis and keeps turning along its length - at
+every azimuth some span of every stem is ACROSS the key instead of down it.
+The trade is strongly asymmetric because the front is already near the 1.0
+ceiling and saturated while the side is deep in the shadow end. Predicted,
+before rendering, as mean perpendicular component over all stem segments:
+
+| twist | side | front | back |
+|---|---|---|---|
+| 0 (pass 7) | 0.3733 | 0.8563 | 0.9401 |
+| 180 | 0.4097 **+9.8%** | -1.1% | -1.5% |
+| 360 | 0.5207 **+39.5%** | -3.6% | -5.0% |
+
+**THE BOUNDS CANNOT MOVE, BY CONSTRUCTION.** The twist rotates the offset
+vector's PHASE only; its LENGTH is the same `R_RING * _f(_t)`, so every stem
+centreline stays on the identical tube about the identical axis and the convex
+hull is the same set. That is why this was the safe lever this week. **I
+re-measured it anyway rather than asserting it** - see below, and it did not
+hold to the millimetre.
+
+## THE A/B ON THE FRAME THAT SHIPS - AND THE CONTROL PROVES THE RIG
+
+Three arms through `_cuevalue.py`, which now takes a `--tag` so arms cannot
+overwrite each other and records the twist it was built at, so a report can
+never be read against the wrong arm. **The twist-0 arm reproduced pass 7 to
+four decimals** - side margin +0.0006, ratio 1.001, cue 0.5419, lap 0.5413 -
+which is what makes the other two arms readable at all.
+
+| arm | front margin / ratio | **side margin / ratio** | back margin / ratio |
+|---|---|---|---|
+| twist 0 (pass 7) | +0.0872 / 1.154 | **+0.0006 / 1.001** | +0.0309 / 1.055 |
+| **twist 180 (SHIPPED)** | +0.0835 / 1.148 | **+0.0133 / 1.025** | +0.0524 / 1.094 |
+| twist 360 | +0.0824 / 1.146 | **+0.0399 / 1.074** | +0.0505 / 1.090 |
+
+## WHY I SHIPPED THE ARM THE NUMBERS LIKE LESS
+
+**360 WINS ON EVERY NUMBER AND IS A ROPE.** I wrote that hazard down before I
+rendered - "the yealm reads as a pale rope" is the MEALMAN's fault and is
+already fault 2 of this body's own pass 1 - and the picture delivered it. At
+360 the stems lose their separate identity through the middle of the bundle
+and the whole mass reads as **twisted cloth, a wrung towel**, not reed. That
+is not a near-miss: it is a material misread AND it un-does pass 3, which
+bought the many-stems reading deliberately by deleting a smooth cone. At 180
+the helix angle is 14.6 deg - stems that curve and cross, a bundle that has
+been carried - and every stem still reads as a stem.
+Sheets: `renders/art/minibosses/_cuevalue/_p8_sheet_3x3.png` and
+`_p8_sheet_side_zoom.png` (side view, three arms, 3x).
+
+**SO THE PICTURE OVERRULED THE NUMBER, AND THE NUMBER IT OVERRULED WAS ALSO
+NOT GOOD ENOUGH.** 1.074 is **the Beadle's own shipped ratio**, the figure
+this entire fault was framed against. Neither arm reaches a side margin I
+would call closed.
+
+## FAULT 2 IS SMALLER. IT IS NOT CLOSED, AND I AM NOT TICKING IT
+
+Side ratio 1.001 -> **1.025**. That is a real move in the right direction on
+the right lever, and it is a sixth of the front's separation. **I looked at
+`renders/art/minibosses/thatcher/hero_side.png` on the knight, idle**, and at
+hero distance the pale reed above and the pale-tan lap below still read as two
+patches of one tone in one figure, with the dark coat band between them doing
+most of the separating. The twist's real gain there is not the median at all -
+it is the internal shadow between crossed stems, which makes the bundle read
+as a **different material** from the flat skirt. **Fault 2 stays open at a
+smaller size.**
+
+**AND THE SPREAD METRIC I ADDED THIS PASS DID NOT FIND IT EITHER - SAID
+PLAINLY.** I added p5/p95/spread to `_cuevalue.py` on the reasoning that a
+modulated mass beside a flat one separates even at an equal median. The reed's
+side spread is 0.4795 and the lap's is 0.1072 - **4.5x, and it was already
+4.5x at pass 7, on the arm that has the fault.** A number that reads the same
+on the faulty arm and the fixed one is not measuring the fault. I am keeping
+it because it is the right question for the NEXT body, and labelling it here
+as having failed on this one rather than quoting it as support.
+
+## THE BOUNDS CLAIM, RE-MEASURED, AND WHERE IT DID NOT HOLD
+
+| number | pass 7 | pass 8 | moved? |
+|---|---|---|---|
+| creature_h | 2.54 | **2.54** | no |
+| hero_h | 2.45 | **2.45** | no |
+| **ratio** | **1.04** | **1.04** | **no** |
+| margin_x | 0.12 | **0.12** | no |
+| fits_frame | true | **true** | no |
+| proving views | 3/3 | **3/3** | no |
+| footprint_span | 1.52 | **1.51** | **YES, by 0.01** |
+| pair_w | 3.38 | **3.37** | **YES, by 0.01** |
+| faces | 1224 | **1672** | +448 |
+
+**MY "BY CONSTRUCTION" ARGUMENT WAS RIGHT ABOUT THE HULL AND WRONG ABOUT THE
+MESH, BY A CENTIMETRE.** The stems are lofted tubes at `ring=8`, so at 13
+samples instead of 5 the facets land in different places and the extreme
+vertex is not the same vertex. The height did not move and neither did
+anything the game build was given; the footprint lost 1 cm and the pair width
+followed it. **Still CORRIDOR-SAFE (margin 9.492 m) and UNDER-LID.** The face
+count is the honest price of sampling a helix: +37%, on a 3-mesh static body,
+well under the four-mesh bar.
+
+## OPEN FAULTS AFTER PASS 8 - NAMED, NOT TIDIED
+
+1. ~~THE MAN IS ONE VALUE~~ - closed at pass 7 for the figure overall. **But
+   see 7 below: a narrower piece of it is still open and I found it by
+   looking at this pass's own render.**
+2. **THE LAP GOES FLAT AGAINST THE YEALM ON THE SIDE** - 1.001 -> **1.025**.
+   **STILL THE LOUDEST FAULT.** The lever that remains is the axis re-aim
+   above, which is measured and costed and **MOVES THE BOUNDS** - it must not
+   land in an hour when the game build is mid-wire on this body.
+3. **The face is better, not good.** Unchanged. At hero distance beside the
+   knight's actual face it is a dark ovoid with two dots.
+4. **The leggett reads as a dark box at the hip** - a satchel, not a tool.
+   Unchanged, and plain in `hero_front.png`.
+5. **The stems are fatter than reed** - rods, not combed reed. **Eased, not
+   fixed.** The twist gives them curvature and crossing, but at 7 stems of
+   R 0.058 in a bundle of R_RING 0.098 they still read closer to rolled
+   parchment than to a comb of reed.
+6. **The yealm occludes his chest and most of his right arm** in front.
+   Unchanged, and still the honest cost of putting the cue where a carried
+   bundle goes.
+7. **NEW, AND MINE, FROM LOOKING AT THIS PASS'S OWN FRONT RENDER: the arm does
+   not separate from the trunk.** At hero distance the right arm against the
+   coat is one unbroken dark grey-green mass. Pass 5's "the man is one value"
+   was closed as a whole-figure fault and this is its residue in a narrower
+   place. No number in this house reports it; `value_man_visible` counts the
+   man's pixels together, so an arm at the trunk's exact value costs it
+   nothing.
+
+**WHAT THE HARNESS STILL CANNOT SEE.** `_cuevalue.py` measures VALUE and
+nothing else - and this pass proved that adding SPREAD to it did not extend
+its reach. It says nothing about hue, about touching silhouettes, about
+whether the reed reads AS reed, or about faults 3, 4, 5 and 7, every one of
+which is answered by looking and by nothing else.
+
+## NUMBERS AFTER PASS 8
+
+Verdict **GREEN**, `ok: true`, `errors: []`, `blind_views: []`,
+`rows_judged: 68`, read out of `renders/art/minibosses/_fit_report.json` after
+the chain was run in order - `minibossgen --only thatcher` (rebuild + glb
+export) -> `_backread --keys thatcher --tag _p8` -> `_selfseen_merge` ->
+`_selfseen_census` -> `minibossfit --only thatcher` -> `_cuevalue`.
+**Blank and border: 198 files, `failures: []`, 0 blanks, 0 frame clips** -
+`frame_edge` 0 on all four sides of all three hero views. 3 merged meshes.
+
+## WIRING - THE GAME BUILD'S NUMBERS DID NOT MOVE, AND THE GLB DID
+
+`MB_FIT.thatcher` **ratio 1.04**, creature_h 2.54 / hero 2.45, margin_x 0.12,
+3 proving views - copy `pairs.thatcher` out of
+`renders/art/minibosses/_fit_report.json`, and **0.97 is the mealman's number,
+not this body's.** Nothing in that row changed at pass 8.
+**But `assets/monsters/minibosses/thatcher.glb` IS re-exported this pass** -
+the geometry changed - so a tree that has the old `.glb` has pass-7 stems.
+Static, so `bestiary.gd` still needs a `model` path and **no `anims` entry**.
+That wiring is the game build's and is not done here.

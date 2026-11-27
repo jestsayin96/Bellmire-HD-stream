@@ -76,9 +76,21 @@ def _stats(lum, mask, name, errs, key):
                     "margin over no pixels is not a pass" % (key, name, n))
         return dict(px=n, red="mask under 500 px")
     v = lum[mask]
+    # PASS 8 ADDS THE SPREAD, AND IT IS HERE BECAUSE A p50 CANNOT ANSWER THE
+    # QUESTION THIS INSTRUMENT WAS BUILT FOR. Two masses at the SAME median do
+    # not argue equally: a flat mass beside a flat mass is one shape, and a
+    # MODULATED mass beside a flat one still separates - the eye reads the
+    # internal variation as a different material even where the medians sit on
+    # top of each other. The thatcher's side view is exactly that case, so a
+    # pass judged on p50 alone could move the picture and measure nothing, or
+    # move the number and change nothing a viewer sees. p5/p95 are reported for
+    # BOTH masses so the comparison is like for like.
     return dict(px=n,
                 p50=round(float(np.percentile(v, 50)), 4),
                 p90=round(float(np.percentile(v, 90)), 4),
+                p5=round(float(np.percentile(v, 5)), 4),
+                p95=round(float(np.percentile(v, 95)), 4),
+                spread=round(float(np.percentile(v, 95) - np.percentile(v, 5)), 4),
                 mean=round(float(v.mean()), 4))
 
 
@@ -129,14 +141,19 @@ def main():
     ap.add_argument("--key", default="thatcher")
     ap.add_argument("--cue-slot", default="bone")
     ap.add_argument("--out", default="")
+    # A/B ARMS MUST NOT OVERWRITE EACH OTHER. Pass 8 sweeps one parameter over
+    # three arms and compares them; without a tag the second arm silently eats
+    # the first and the "comparison" is one render against itself.
+    ap.add_argument("--tag", default="")
     args = ap.parse_args(argv)
     key = args.key
+    tag = args.tag
     outdir = os.path.join(args.repo, "renders", "art", "minibosses", "_cuevalue")
     os.makedirs(outdir, exist_ok=True)
-    tmp = os.path.join(outdir, "_tmp")
+    tmp = os.path.join(outdir, "_tmp" + tag)
     os.makedirs(tmp, exist_ok=True)
     errs = []
-    rep = {"key": key, "cue_slot": args.cue_slot, "views": {}, "errors": errs,
+    rep = {"key": key, "tag": tag, "cue_slot": args.cue_slot, "views": {}, "errors": errs,
            "asks": "the SHIPPED screen luma of the pale cue against the lap, "
                    "per view, measured by with/without through one locked "
                    "camera - NOT an albedo ratio",
@@ -188,7 +205,7 @@ def main():
         depth = [(p - cam.location).dot(fwd) for p in pts]
         cam_d.clip_start = max(0.01, min(depth) - radius * 0.5)
         cam_d.clip_end = max(depth) + radius * 2.0 + 8.0
-        B = _shot(os.path.join(outdir, "%s_%s.png" % (key, vname)))
+        B = _shot(os.path.join(outdir, "%s%s_%s.png" % (key, tag, vname)))
         Xc = _shot(os.path.join(tmp, "_nocue_%s.png" % vname), hide=cue)
         frames[vname] = (B, Xc, cam.location.copy(), cam.rotation_euler.copy(),
                          cam_d.clip_start, cam_d.clip_end)
@@ -237,8 +254,11 @@ def main():
                 cell["cue"]["p50"] / max(1e-6, cell["lap"]["p50"]), 3)
         rep["views"][vname] = cell
 
+    # THE ARM MUST NAME ITSELF. A sweep whose report does not carry the value
+    # it was built at is a sweep you can read against the wrong arm.
+    rep["thatcher_twist_env"] = os.environ.get("THATCHER_TWIST", "(unset)")
     rep["ok"] = not errs
-    out = args.out or os.path.join(outdir, "_cuevalue_%s.json" % key)
+    out = args.out or os.path.join(outdir, "_cuevalue_%s%s.json" % (key, tag))
     with open(out, "w") as fh:
         json.dump(rep, fh, indent=1)
     print("[cuevalue] wrote %s ok=%s" % (out, rep["ok"]), flush=True)

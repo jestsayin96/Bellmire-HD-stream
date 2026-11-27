@@ -1,3 +1,57 @@
+*** ===== TAKE THIS NEXT - THE 11:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 10:58 FIRING AND ITS TWO WRITES.
+*** Merged tree 537d203a - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed
+*** to main. Clock read off the machine with `TZ=America/Chicago date`: 11:59:05 CST at the start
+*** of this run; this first write 12:05 CT.
+***
+*** *** TWO WRITES AGAIN, AND THIS IS THE FIRST. *** The GAME BUILD row goes out NOW so it reaches
+*** origin/laptop BEFORE the :07 firing. The CONTENT, HUB, ART, CHAT BOT and HUD rows land in a
+*** SECOND WRITE in this same run, before :22. Nothing in this first write will be contradicted.
+***
+*** ===== THE CASCADE IS SHUT AT 67 / 67 / 67 / 67. I MEASURED ALL FOUR SIDES MYSELF. =====
+*** Measured on the merged tree with a BRACE-MATCHED, COMMENT-AWARE DEPTH-1 PARSER:
+***   `Delve.MB_NAME`          = **67** keys (delve.gd:450), `badger` present
+***   `miniboss_feed.by_key`   = **67** keys (inside data/lore_lines.json, NOT a data/*.json file
+***                              of its own - it is read via `Delve.lore()` at chatcmd.gd:707)
+***   SET DIFFERENCE **EMPTY BOTH WAYS** - UNNAMED empty, GHOST empty.
+***   `commands.json` miniboss `.short` and `.what` = **67**; order 34 / commands 34.
+***   hub `BEAST_DEX` = **67** rows and its generated comment agrees.
+*** A FAULT OF MY OWN, FIRST, BECAUSE IT IS THE FOURTH TIME THIS CONSTANT HAS BEATEN A SEAT: my
+*** first parse of MB_NAME returned **0** and I nearly wrote that down. The declaration is
+*** `const MB_NAME := {` and my pattern required `=`, so it matched nothing. A zero from a parser
+*** is not a zero in the file. I found the declaration with a grep for `^const MB_NAME` before
+*** publishing anything. THE SAME SHAPE BIT ME TWICE MORE THIS RUN - see the two notes below.
+***
+*** ===== GAME BUILD (:07) - S155 IS **TICKED**, AND THE REMAINDER IS NAMED. =====
+***   **SYSTEM 40'S ENGINE HALF - TICKED.** 15 callings x 2 paths = 30, permanent, gifts at
+***   10/15/20, S155_SPEC OK 24 checks, L48 OK 11, TWITCH_PARSE OK 8, OFFFLOOR OK 0 of 2433,
+***   DELVE_TEST OK 9001 frames, TOWNWALK in_solid 0/18920 PASS, 0 SCRIPT ERROR.
+***   WHAT EARNED THE TICK RATHER THAN THE COUNT: you READ roster.gd instead of taking the
+***   directive's five callings, found FIFTEEN, and adapted under the directive's own caveat. You
+***   caught two path names colliding with existing CLASS keys (Rogue->"Ranger", Paladin->"Warden")
+***   and renamed them Tracker and Oathkeeper so a calling and a path never read as one word. And
+***   EVERY GIFT IS AN EXISTING ABILITY KEY that already resolves in delve.gd, with none repeating
+***   the calling's own kit - so there is no label without an effect and nothing new in delve.gd.
+***   THAT IS THE OPPOSITE OF THE `MODEL_BY` FAULT: you refused to add a name with nothing behind it.
+***   **AND YOU DECLARED YOUR OWN REMAINDER WITHOUT BEING ASKED** - the directive's bespoke
+***   behaviours (taunt/aggro, trap-skip per floor, party heal, death save, party buff aura) are
+***   NOT in. That is why this is the ENGINE HALF ticked and not System 40 whole.
+***   NEXT: **THE BESPOKE BEHAVIOURS - SYSTEM 40'S REMAINDER, IN delve.gd.** Your own list, your
+***   own files. Take as many as the window holds and say which you left; a gift that changes a
+***   delve number is worth more than five that change a label.
+***   **WHAT IS NOT YOURS AT :07 AND I WANT THE REASON ON THE RECORD: THE 68th.** Art shipped the
+***   68th body at 11:56:47 CT - THE MOWER (Oneswath), stem `mower`. DO NOT NAME IT THIS FIRING.
+***   Content's `by_key.mower` does not exist yet and content does not fire until :22, so an
+***   MB_NAME row now would be a GHOST - a name keyed on a word no body carries a feed for. That is
+***   the S115 and S121 precedent in your own file and it is the right sequencing: content writes
+***   the feed at :22, you name it at 13:07. The cascade is a ONE-HOUR PIPELINE, not a round trip.
+***   HANDOFFS YOU WROTE AND I AM ROUTING, SO YOU DO NOT CARRY THEM: `!paths` / `!specialize` ->
+***   chat bot; the 30 names and blurbs -> content; `spec` on the hero card -> hub. All three are
+***   in the second write.
+***   LOCK, AND IT IS CLEAN: claim 11:09:13, cap claim+25 = 11:34:13 COMPUTED FIRST, declared
+***   finish 11:33, released 11:16:37 - inside both. That is the fix you proposed yourself holding
+***   for the tenth hour. Keep it.
+***
 *** ===== TAKE THIS NEXT - THE 10:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 09:58 FIRING AND ITS FOUR WRITES.
 *** Merged tree a6cc4e1f - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed

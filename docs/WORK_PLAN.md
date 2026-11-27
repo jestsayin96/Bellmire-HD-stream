@@ -1,3 +1,224 @@
+*** ===== TAKE THIS NEXT - THE 23:58 CT FIRING, 26 NOV 2026. CLEAN-HOUR COUNT = 1. =====
+*** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 23:58:42, 00:03:16,
+*** 00:08:37 and 00:15 CST - so this is the 23:58 firing of 26 Nov and the machine date is already
+*** 27 Nov. Both are true. Merged main 87d8f97b -> 6ad1d08f, all six lanes in, PROGRESS.md +115/-0.
+***
+*** ===== MY OWN FAULT FIRST, AND IT COST THE HUD ITS WINDOW. =====
+***   I WROTE THE HUD A ROW FOR WORK THAT WAS ALREADY SHIPPED. The 22:58 block ordered the lane to
+***   "harden the `parse_fish` end-finder for nested braces". IT SHIPPED AT U76. I proved it the way
+***   I should have proved it before writing the row: `git log -S block_end -- tools/
+***   _u71_rarity_guard.gd` returns EXACTLY ONE commit, `3522eea3 U76: brace-depth end-finder for
+***   the rarity guard's table parsers + 3 red proofs`. One command, and I did not run it.
+***   THE ROW IS STRUCK FOR GOOD, as U192 asked. Do not hand it to the HUD again.
+***   The lane did the right thing with a wrong row: it checked before rebuilding, re-proved the
+***   guard green on today's tree and committed the log. That is a closure and it counts fully.
+***   I AM NOT FOLDING THIS INTO THE CLEAN-HOUR COUNT, and I am saying so out loud rather than
+***   leaving it silent: the count measures LOCK DISCIPLINE, and on lock discipline this hour was
+***   clean (see the foot of this block). A stale row of mine is a worse fault than a late IDLE and
+***   it does not belong inside a lock counter where it would be laundered. It is written here
+***   instead, at the top, where the next seat reads it first. If a seat disagrees, change the rule
+***   in writing rather than quietly re-scoring the number.
+***   SECOND FAULT, SMALLER: this block lands after 00:07, so the GAME BUILD's 00:07 firing read
+***   the 22:58 rows, not these. The cause was my own verification pass running long. Its row below
+***   is therefore aimed at the 01:07 firing.
+***
+*** ===== THE NAMING CASCADE IS UNCHANGED: 64 BODIES, 64 FEED KEYS, 63 NAMES. =====
+***   Re-measured by me this run, BRACE-MATCHED, off the refs and not a worktree - not copied from
+***   the 22:58 block:
+***   - LIVE BODIES = 64 on origin/art (77 `.glb` under assets/monsters/minibosses/, MINUS 11
+***     `_chibi`, MINUS the two bosses `broodglut` and `lastcuff`). `fanner` present.
+***   - `miniboss_feed.by_key` = 64 on origin/main AND on origin/content, `fanner` present.
+***   - `Delve.MB_NAME` = 63 on origin/laptop AND on origin/main, NO `fanner`; = 64 on
+***     origin/gamebuild-s144-wip, HAS `fanner`.
+***   SO THE GAP IS STILL A FEED ROW WITH NO NAME, exactly as last hour, and it clears the moment
+***   S144 lands on `laptop`. Nothing else is needed and no lane owes anything else for it.
+***
+*** ===== GAME BUILD (:07) - DO NOT SPEND A THIRD ENGINE WINDOW ON TOWNWALK TONIGHT. =====
+***   S144b WAS RIGHT AND I AM RECORDING IT AS RIGHT, TWICE OVER. You refused to land on a gate
+***   that printed no verdict, and you REFUSED TO RAISE THE BUDGET - instead you showed the gate
+***   still goes red on a starved run (`_samples < 5000` or `raid < 1000` prints FAIL +
+***   "TOWNWALK FLOOR UNMET"). That is the S85 lesson obeyed without being told. You also killed
+***   your own Godot early so as not to compete with Mr. E's machine. Correct on every count.
+***   *** THE BLOCKER IS STILL THERE AND I MEASURED IT MYSELF AT 00:08 CST: `tasklist` shows
+***   *** obs64.exe, Marvel.exe AND Marvel-Win64-Shipping.exe LIVE. Mr. E is playing and streaming
+***   *** RIGHT NOW. *** Your 54 s -> 85 s -> 133 s -> 131 s per 10 game-seconds is that, and
+***   nothing in the gate or the code changed.
+***   THIS HOUR, IN THIS ORDER: run `tasklist` FIRST. If Marvel or obs64 is up, DO NOT CLAIM THE
+***   LOCK FOR TOWNWALK - say so in one line, do file-only work, and carry S144 to the next firing.
+***   A third starved run costs you a window and costs him frames on his own stream. If the machine
+***   is idle, run TOWNWALK ALONE (expect ~2-3 min), then merge `gamebuild-s144-wip` b8035be4 and
+***   land S144 on `laptop`. No code is owed and the name itself is already verified - I counted
+***   MB_NAME = 64 brace-matched off your wip ref again this run.
+***
+*** ===== CONTENT (:22) - C-223 IS TICKED. I RE-COUNTED IT INDEPENDENTLY, I DID NOT TAKE IT. =====
+***   Your stand-down was a measurement, not a shrug, and my numbers landed on yours exactly: 64
+***   live bodies, `by_key` 64, set difference EMPTY BOTH WAYS, no data file touched, no `_note_`
+***   added. You also re-checked your own four files for defects and found none. That is the right
+***   shape for a dry hour.
+***   NEXT: STILL DRY, AND NO C-224 IS OWED. Art shipped NO new body this hour - passes 4 and 5
+***   refined `fanner`, which already has its feed row. HOLD EVERY POOL: do not touch
+***   `phase2_words_alt2`, `phase2_words`, `phase2_words_alt`, `town_levels_for_the_desktop` or
+***   either runtime-built `_alt` pool. Stand down and write it up, or fix a defect in your own
+***   shipped work. A written-up stand-down is the delivery.
+***
+*** ===== ART (:34) - TICKED. THE RED CLEARED HONESTLY AND I CHECKED THAT FOUR WAYS. =====
+***   Passes 4 and 5 are in. I went looking for the "test made quiet" fault and did not find it:
+***   1. THE RULE IS UNCHANGED. `tools/art/minibossfit.py` is BYTE-IDENTICAL between origin/main
+***      and origin/art (`diff --numstat` empty). You did not loosen the thing that judged you.
+***   2. THE CENSUS VERDICT IS UNCHANGED. `fanner` is still in `measurable` (62 entries) on BOTH
+***      refs. You did not make yourself unmeasurable.
+***   3. THE CELL ACTUALLY LANDED, in the file the rule reads: `_backread/_selfseen_all.json` rows
+***      62 -> 63 with `fanner` present. MY FIRST READ WAS WRONG AND NEARLY CHARGED YOU - I looked
+***      at `_fit_report.json`'s own top-level `self_seen` (28 entries, no `fanner`) and briefly
+***      had you down as having quieted the gate. That dict is not the cell store. I checked the
+***      rule instead of trusting my own first number, which is the only reason this row is a tick.
+***   4. THE VERDICT IS EARNED: `ok: true`, `errors: []`, `red_summary.shipped_red: []`,
+***      `ok_shipped: true`, verdict GREEN.
+***   AND I LOOKED AT THE PICTURES, front, side and back, because fit is the acceptance test: four
+***   vanes read in ALL THREE views with no fused pair, the hearth clearly out-reads the eyes from
+***   the side, and HE HAS A REAL BACK - no repeat of the Beadle's no-facing fault. The ember slot
+***   is the right fix for the right reason: the eyes and the hearth were ONE material and could
+***   never have been separated by any render, which is a construction fault, not a taste note.
+***   NEXT: THE 65th BODY. Mr. E's standing permission for a dry art lane is live, and THE CASCADE
+***   IS NOT A REASON TO HOLD - it clears when S144 lands, and a body takes you several passes
+***   anyway. MEASURE THE EXISTING SET off `tools/art/minibosses.py` before you design, so the 65th
+***   is not a re-skin, and bring one idea that changes the fight. Commit and push in the same run
+***   that finishes it.
+***
+*** ===== HUB (:37) - YOU FIRED AND YOU WROTE NOTHING. THAT IS NOT A STAND-DOWN. =====
+***   MEASURED, NOT ASSUMED: your worktree's own ref log
+***   (`.git/worktrees/bellmire-hub/logs/HEAD`) records a MERGE of main at 23:38:17 CST, one minute
+***   after your :37 firing - so the lane ran and did git work. It then committed nothing, pushed
+***   nothing and added no PROGRESS entry. Your last own commit is `ba8dee29`, the 20:38 stand-down.
+***   THE RULE IS "A STAND-DOWN WRITTEN UP IS THE DELIVERY", and the written-up half is the half
+***   that was missing. I am not charging you with idleness - being dry is fine and the publish
+***   call is not yours - but silence leaves the next seat unable to tell a dry lane from a dead
+***   task, and this house has lost twenty hours to exactly that confusion once already.
+***   THIS HOUR: commit a write-up to `hub` even if it is four lines - what you checked, what you
+***   found, that you are dry. If instead your run FAILED after the merge, say that; a failure
+***   written up is also a delivery.
+***   THE PUBLISH POSITION, MEASURED BY ME THIS RUN AND NOT COPIED: origin/gh-pages `8d214d36`,
+***   tree `1d8bce63`, pushed 25 Nov 09:55 CT. origin/hub:web is `0faf51e9`. The delta is ONE file,
+***   `NOTES.md` +38/-0 - unchanged from last hour because nothing shipped. You raised no readiness
+***   claim, SO NO PUBLISH GATE WAS OWED AND I RAN NONE. The publish call is the SUPERVISOR'S.
+***
+*** ===== HUD (:52) - U192 TICKED. THE BAD ROW WAS MINE; HERE IS AN HONEST ONE. =====
+***   See the fault block at the top: the row you were given was already paid at U76 and you proved
+***   it instead of rebuilding it. Struck for good. Your three red proofs (nested dict, comment
+***   brace, unterminated "{") and the committed `renders/cycles/u192_guard.log` are exactly what a
+***   closure-by-disproof should look like, and you took and released your window in 12 seconds.
+***   NEXT, AND I AM NOT GOING TO DRESS THIS UP: I DO NOT HAVE A NEW HUD ITEM THAT IS HONESTLY
+***   YOURS. The rarity-hue half shipped at U55, L31's status-icon half was closed by measurement
+***   at S142, and `parse_fish` shipped at U76. Inventing one would break the freeze, and handing
+***   you another lane's file is what stranded this lane before.
+***   SO: name the NEXT concrete own-work defect in YOUR OWN shipped files and fix it - the freeze
+***   explicitly permits that and it is the one category that is always open to you - with the
+***   evidence log committed on your branch. If you have none worth the window, STAND DOWN AND
+***   WRITE IT UP; that is a delivery and I will record it as one, not as a starved hour.
+***   THE STRUCTURAL FIX IS NOT YOURS AND NOT AVAILABLE FROM A FIRING: your prompt still advertises
+***   the rarity-hue half as "the most valuable open item in the house". It is item 1 of the
+***   backlog below and it is the reason this lane keeps being handed ghosts.
+***
+*** ===== CHAT BOT (:45) - B189 IS TICKED, AND IT ANSWERED MY QUESTION BY MEASUREMENT. =====
+***   I asked which file B188 read. You proved it was R's WORKING TREE with three independent
+***   arguments, any one of which would have done: W6's own copy carried NO QA line at all at that
+***   mtime; origin/main was the same content; and the QA lines were UNCOMMITTED on `laptop` until
+***   47251413 at 23:17:55, twenty-six minutes after the read, so no ref anywhere could have
+***   produced that string. The standing trap did not fire. THE ROW IS CLOSED - do not re-derive it.
+***   AND YOU LEFT IN THE READING THAT CHARGES YOUR OWN LANE rather than closing a 33-second gap
+***   with a guess. That is the habit this house runs on. I am not asking you to close it further.
+***   You obeyed FILE-ONLY, NO ENGINE exactly, took no lock and wrote no lock line - correct, a
+***   file-only firing owes none.
+***   THIS HOUR: *** MINIBOSS UNNAMED WILL STILL FIRE ON `fanner` IF YOU PARSE. IT IS EXPECTED, IT
+***   IS CORRECT, AND IT IS NOT YOUR DEFECT *** - 64 feed keys against 63 names, unchanged, and it
+***   clears when S144 lands. DO NOT TOUCH THE GATE. Do not re-derive the alias drift (B186, B187
+***   and your own in-code battery have each answered it). Your window is clear this hour: QA does
+***   NOT fire at :41 (it is every two hours and ran at 22:41), so :45-:52 is genuinely yours.
+***   Take L68/L69/L70's remaining gates if they fit inside :52, or do file-only work and say so.
+***
+*** ===== LOCK DISCIPLINE, 22:58 -> 23:58 CT - CLEAN, AND THE COUNT ADVANCES 0 -> 1. =====
+***   - game build: claim 23:08:03, cap 23:33:03 COMPUTED FIRST, declared 23:33:03, IDLE 23:17:46.
+***     Inside cap and inside declaration. Its cap-first habit is holding - no over-declaration.
+***   - HUD: claim 23:53:55, cap 00:08:55 computed first, declared 23:57, IDLE 23:54:07. Inside
+***     both, released 12 seconds after claiming, well clear of :07.
+***   - chat bot: NO CLAIM, file-only, correctly wrote no lock line.
+***   - art: no lock taken (Blender only, as its ruling allows). content and hub: no lock needed.
+***   - No overrun, no claim over a live hold, no stale lock cleared, no future stamp, never two
+***     lanes holding at once. The count was reset to 0 at 22:58 by that seat for starving the HUD;
+***     on lock discipline this hour is clean, so it stands at 1.
+***
+*** ===== THE DEAD-DATA AUDIT, MEASURED THIS RUN ON MERGED TREE 6ad1d08f. UNREAD COUNT: ZERO. ====
+***   Corpus 49 files = 48 `scripts/*.gd` + `web/app.js`, 2,449,752 chars. 12 `data/*.json`, 161
+***   top-level keys. *** THE 48 -> 49 IS REAL GROWTH, NOT THE `web/**/*.js` GLOB FAULT: the 48th
+***   `.gd` is `scripts/grave_keeper.gd` from S143. I checked. ***
+***   - UNREAD LIVE DATA KEYS: ZERO.
+***   - UNREFERENCED ASSET DIRECTORIES: ZERO IN SUBSTANCE. The walker names one,
+***     `assets/graveyard/Textures`, and it is a FALSE POSITIVE of the same class as the old
+***     renders/ walk - it is the Kenney kit's texture folder, loaded through the `.glb`, and
+***     `assets/graveyard` itself IS referenced. 38 directories with files.
+***   - 71 keys return zero literal hits: 56 `_note_` + 15 NON-NOTE, and the 15 are EXACTLY the
+***     known fifteen, unmoved: `_gating`, `boss_floors`, `canon_silences`, `casing`,
+***     `chronicle_line`, `lord_intros_alt`, `one_roll`, `phase2_words`, `phase2_words_alt`,
+***     `phase2_words_alt2`, `promotion_line`, `technique`, `town_levels_for_the_desktop`,
+***     `unique_intros_alt`, `word_order`.
+***   - THE SERIES (raw moves, non-note does not): 52 -> 53 -> 56 -> 71. The raw rise is content
+***     writing `_note_` keys and carries NO signal. THE NON-NOTE COUNT HAS BEEN 15 THROUGHOUT.
+***     The 07:58 block's "81 (42 notes + 39 non-note)" remains STRUCK as an over-count.
+***
+*** ===== FOR THE NEXT TEAM LEAD - THE PROMPT-CORRECTION BACKLOG, NOW NINE. =====
+***   A firing CANNOT edit a scheduled task; the gate is on the CALL, not on a field, and it is
+***   SETTLED - do not test it a sixth time. I ATTEMPTED NOTHING THIS RUN. Land all nine on the
+***   first LIVE turn:
+***   1. HUD prompt: strike "the most valuable open item in the house" for the rarity-hue half -
+***      U55 SHIPPED IT (`ui_theme.gd:176/196/200/204`, read at `leaderboard_panel.gd:197/:202`).
+***      STILL THE HIGHEST VALUE ITEM ON THIS LIST - it is why this lane keeps getting ghost rows.
+***   2. Chat bot prompt: "COMMANDS_DOC wrote 26 commands" is stale - the generator writes 32.
+***   3. Team lead prompt: the miniboss body count is baked at "thirty-three", then "44 live bodies
+***      and two retired `_chibi`". MEASURED AGAIN THIS HOUR: 64 live bodies, 66 register rows,
+***      77 `.glb`. ART'S PROMPT CARRIES THE SAME STALE "THIRTY-THREE" - fix both.
+***   4. Team lead prompt: the STEP 0 corpus is "48 files". It is 49 now (48 `.gd` + app.js) and
+***      the reason is grave_keeper.gd, so the prompt should say "count it, do not quote it".
+***   5. Team lead prompt: the published gh-pages block is stale. It is `8d214d36` / tree
+***      `1d8bce63` / 25 Nov 09:55 CT, and `origin/hub:web` is `0faf51e9`. NEVER COPY IT.
+***   6. Team lead prompt: the `_fit_report.json` standing note needs the real test written into
+***      it - "`shipped_red` EMPTY and `ok_shipped` TRUE" - and it should also say WHERE the
+***      self_seen cells live (`_backread/_selfseen_all.json`, NOT `_fit_report.json`'s own
+***      `self_seen` dict), because that very confusion nearly cost art a tick this hour.
+***   7. Chat bot + HUD prompts: the :45 slot gives the chat bot SEVEN MINUTES. L56 needs 8 (4 x
+***      7200 ticks) and the RUNS axis is a `const` in `tools/` the lane may not edit, so NO SPLIT
+***      EXISTS. Reallocate the slot.
+***   8. The QA tester (:41, every two hours) caps itself to clear the HUD's :52 and therefore sits
+***      on the chat bot's :45-:52 window. Whether the QA prompt is mine to edit HAS NEVER BEEN
+***      RULED ON - see the supervisor block.
+***   9. NEW THIS HOUR: the team lead prompt tells this seat to write the TAKE THIS NEXT rows but
+***      says nothing about VERIFYING A ROW IS NOT ALREADY SHIPPED before writing it. One
+***      `git log -S` would have saved the HUD its window tonight. Add it to STEP 4 as a required
+***      check, in the same breath as "GREP THE PLAN BEFORE YOU PUBLISH A FINDING AS NEW".
+***
+*** ===== FOR THE SUPERVISOR =====
+***   1. THE HUB PUBLISH, STILL WAITING SINCE 20 NOV AND NARROWER THAN EVER. origin/gh-pages
+***      `8d214d36` (tree `1d8bce63`, 25 Nov 09:55 CT) vs origin/hub:web `0faf51e9`. The delta is
+***      ONE FILE, `NOTES.md` +38/-0 - no code, no CSS, no HTML. The lane has NOT claimed "ready to
+***      publish" and I ran no publish gate. MY RECOMMENDATION: there is nothing here that needs
+***      publishing - a notes file is not a page change - so leave it unpublished and let it ride
+***      until the lane has a real web/ change. Say the word either way and I will do the push by
+***      the plumbing recipe.
+***   2. THE :41/:45/:52 COLLISION, ROUTED UP A SECOND HOUR. The QA tester at :41 caps itself to
+***      clear the HUD's :52 and lands on the chat bot's :45 window; it took that lane three
+***      firings. I own the seven lane prompts, but the QA tester and the pack catalogue worker
+***      were added by you on 20 Nov and WHETHER THEIR PROMPTS ARE MINE TO EDIT HAS NEVER BEEN
+***      RULED ON. I have not touched them. MY RECOMMENDATION: either rule that they are mine and I
+***      will move QA off :41 on the next live turn, or move it yourself. One line settles it.
+***   3. A SIGNAL I CANNOT CHASE FROM HERE, FOR YOUR AWARENESS ONLY. The pack catalogue worker
+***      (:15, not one of my six) reported its 23:15 run SUCCEEDED but fired and finished 4.7
+***      SECONDS apart, where a real run of that task takes minutes, and its last commit to `hub`
+***      is 19:19. The QA tester, art and chat bot all show healthy multi-minute runs by the same
+***      measure. It is not my lane and I have changed nothing; it may be worth one look.
+***
+*** ===== NEEDS MR. E =====
+***   NOTHING. He is playing and streaming right now; nothing in this block needs him, and the one
+***   thing that is blocked tonight - TOWNWALK - is blocked by his own machine being busy, which is
+***   correct and is not a fault of any lane. The game build has been told not to compete with it.
 *** ===== TAKE THIS NEXT - THE 22:58 CT FIRING, 26 NOV 2026. CLEAN-HOUR COUNT RESET TO 0. =====
 *** THIS BLOCK SUPERSEDES EVERY ROW BELOW IT. Clock read off the machine at 22:58:35, 23:04:12 and
 *** 23:06 CST. The count was 4 after the 21:58 firing. I AM RESETTING IT TO 0 AND THE FAULT IS MINE:

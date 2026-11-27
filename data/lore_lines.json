@@ -15040,6 +15040,45 @@
           "Whoever you were behind is not behind you any more.",
           "Go on out. Nobody is counting."
         ]
+      },
+      "fanner": {
+        "arrive": [
+          "A man in a scorched coat stood with a basket of fire held at his chest in both hands.",
+          "The coat has stood at a hearth for years. The hearth has come with him.",
+          "Four pale vanes stand out of the basket rim. They are the only pale thing on him.",
+          "He is not tall. Standing alone, he does not look like much.",
+          "The fire in the basket sits low and red. It is waiting to see how many of you there are.",
+          "He does not pick a target. He does not need to.",
+          "Come in one at a time and it stays low. Come in together and you will feel it.",
+          "The draught is not his. The draught is whoever is standing in reach.",
+          "Four vanes. Count them from the door."
+        ],
+        "act": [
+          "{name} steps in beside the others. The red goes orange.",
+          "{name} is the only one in reach. The fire stays low and red. It will take all day.",
+          "One more delver in reach and the basket brightens. That is the draught.",
+          "{name} swings. The hearth answers the whole line, not only {name}.",
+          "{name} stands off and does not come in. The fire drops a shade.",
+          "The line closes on him. White heat. It answers every one of them.",
+          "{name} breaks a vane off the rim. It stays broken.",
+          "Everybody in, the habit says. {name} is in. The fire is up."
+        ],
+        "broken": [
+          "A vane is gone from the rim. It will not be put back.",
+          "Fewer vanes, and the fire has less to draw on.",
+          "He turns the basket to hide the gap. The gap is still there.",
+          "The rim is bare in places. The fire sits lower."
+        ],
+        "fall": [
+          "He is down. The basket tips and the fire goes out on the boards.",
+          "No draught now. The red goes to grey.",
+          "He kept the hearth high to the end. It was his to carry.",
+          "A scorched coat and an empty basket.",
+          "It burned as hard as you crowded it. Nobody argues that.",
+          "The coat is still warm. It will not be for long.",
+          "Whoever stood closest felt it last.",
+          "Go on out. The room is cold."
+        ]
       }
     },
     "_note_c86": "C-86: quartermaster and loader (sixteenth and seventeenth minibosses, art lane) get arrive and fall lines, eight each. act and broken are omitted on purpose: they belong to mechanics not built, and miniboss_lines() returns [] for a missing phase. Keys are the art lane's own: quartermaster, loader.",
@@ -15603,5 +15642,6 @@
   "_note_c218": "C-218 (content, 26 Nov 2026): descend +12 and cleared +12, plain town-reaction lines with no placeholders, none naming a floor or a count. Written on a body-count hold at 63; no by_key row touched. Expected zero-hit key.",
   "_note_c219": "C-219 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - art has committed no 64th body, so no by_key row. Expected zero-hit key.",
   "_note_c220": "C-220 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - origin/art minibosses.py has no key outside by_key, so no by_key row. Expected zero-hit key.",
-  "_note_c221": "C-221 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - origin/art minibosses.py has no key outside by_key, so no by_key row. Expected zero-hit key."
+  "_note_c221": "C-221 (content, 26 Nov 2026): epitaphs +16, descend +8, cleared +8. Plain short declaratives, no floor count, no placeholders. Body count held at 63 - origin/art minibosses.py has no key outside by_key, so no by_key row. Expected zero-hit key.",
+  "_note_c222": "C-222 (content, 26 Nov 2026): the 64th miniboss_feed.by_key row, key `fanner` (art's .glb stem, no variant). arrive 9, act 8, broken 4, fall 8, matching the overlooker shape. No boss name used - Delve.MB_NAME has no fanner entry yet, so the fall lines say `He`, and `{name}` in act is the hero. Mechanic carried in the words: it burns as hard as the party crowds it, four pale vanes are the count, a broken vane stays broken. Held every other pool. Expected zero-hit key."
 }

@@ -22572,3 +22572,9 @@ me.
   NOT DONE AND CARRIED: the stones are still plain boxes (the Kenney gravestones are imported for that); the lantern is
   at his side, not on the hand bone; System 72 (hero gravestones) is the keeper's real purpose and is a separate system.
 - LOCK: claim 20:08:33, cap 20:33:33 computed first, declared 20:30:00, IDLE 20:19:27. No Twitch, 0 bits.
+## C-220 (content, 26 Nov 2026 20:2x CST) - EPITAPHS +16, DESCEND +8, CLEARED +8. ONE FILE, ONE NOTE. BODY COUNT HELD AT 63.
+- Clock via `TZ=America/Chicago date`: 20:22 CST. TAKE THIS NEXT (19:58 block) gave content: keep producing, C-219 ticked, no wiring of `_note_` keys or `phase2_words_alt2`.
+- Checked origin/art tools/art/minibosses.py against by_key: no committed body outside the 63. No by_key row written.
+- Added to data/lore_lines.json: epitaphs 1000 -> 1016, descend 613 -> 621, cleared 598 -> 606. Deduped, no floor count, no placeholders. `_note_c220` added (expected zero-hit key).
+- VALIDATION OK: json.load passes on all four owned files; every pre-existing key identical, list pools prefix-identical.
+- CODE WIRING: none (existing pools).

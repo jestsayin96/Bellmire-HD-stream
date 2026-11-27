@@ -931,3 +931,14 @@ Selection note: every real directory in `_packs` already has a catalogue entry (
 - No licence file in this folder. Per the rule, it is recorded as such here rather than guessed; the licence is taken from the source pack's `License.txt`, which is the only copy on disk.
 - Not in `_packs\_generated\` (art-lane output, not a third-party download): it holds lane-made `.glb`, textures and `refs\` images, with no licence claim. Not catalogued here.
 - Status: **CLEARED for use (CC0 1.0), by inheritance from `quaternius_ultimate_rpg_items_CC0`.** Any FBX that enters `assets/` still needs its own row.
+
+## Pack catalogue - 2026-11-27 (PACK CATALOGUE worker)
+
+### `_packs/3d_crystals_new/` - NO LICENCE FILE FOUND - NOT CLEARED FOR USE
+- Directory checked: `_packs/3d_crystals_new/` (5 files) and `_packs/3d_crystals_new.zip` (5 entries, zip comment empty). Neither holds a licence, readme, terms or credits file.
+- Files: `174.jpg`, `174_norm.jpg`, `crystal.jpg`, `crystal_simple_norm.jpg` (images, 0.46-1.56 MB each), `crystals.blend` (4.0 MB Blender scene).
+- Licence type: **unknown**. Author and source: **unknown** (no pack name, author or URL found on disk).
+- Byte-level search of `crystals.blend` and the four JPGs for licence, copyright, CC and attribution strings returned nothing. The .blend may be compressed, so this search is not conclusive.
+- Commercial use: **not established**. Attribution: **not established**.
+- Decision: per the rule, recorded as NO LICENCE FILE FOUND and not guessed. Do not load, convert or ship anything from this pack until a licence is found or the author confirms one.
+- Catalogue note: the pack is not in the tables above. Whether any file in the repo uses it was not checked.

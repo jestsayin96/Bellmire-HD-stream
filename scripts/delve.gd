@@ -2800,7 +2800,7 @@ func _ability_hit_one(ability: String, m: Dictionary, tgt: Monster, dmg: float, 
 					best = o
 			if best != null:
 				var was_dead := best.state == Monster.S.DEAD
-				best.hurt(dmg * 0.35 * _thatch(best))   # S149: the cleave does not get under the roof
+				best.hurt(dmg * 0.35 * _thatch(best), false, "resist" if _thatch(best) < 1.0 else "")   # S149: the cleave does not get under the roof; S150: and says so, as the swing does (1863)
 				if not was_dead and best.state == Monster.S.DEAD:
 					_kills += 1
 					_on_kill(best, m)
@@ -2808,7 +2808,7 @@ func _ability_hit_one(ability: String, m: Dictionary, tgt: Monster, dmg: float, 
 		"luck":     # L48: halfling luck - now and then the blow lands twice
 			if is_instance_valid(tgt) and tgt.state != Monster.S.DEAD and _rng.randf() < 0.12:
 				var was2 := tgt.state == Monster.S.DEAD
-				tgt.hurt(dmg * 0.5)
+				tgt.hurt(dmg * 0.5, false, "resist" if _ward(tgt) < 1.0 else "")   # S150: dmg is already warded (1860); label it as 1863 does
 				_float_text(m, "lucky!", Color(0.95, 0.85, 0.40), 56, 2.6)
 				if not was2 and tgt.state == Monster.S.DEAD:
 					_kills += 1
@@ -2823,7 +2823,7 @@ func _ability_hit_one(ability: String, m: Dictionary, tgt: Monster, dmg: float, 
 				var o: Monster = f
 				if o != tgt and is_instance_valid(o) and o.state != Monster.S.DEAD and _flat(o.global_position, tgt.global_position) < 2.5:
 					var was := o.state == Monster.S.DEAD
-					o.hurt(dmg * 0.5 * _thatch(o))   # S149
+					o.hurt(dmg * 0.5 * _thatch(o), false, "resist" if _thatch(o) < 1.0 else "")   # S149; S150: labelled like the swing (1863)
 					if not was and o.state == Monster.S.DEAD:
 						_kills += 1
 						_on_kill(o, m)

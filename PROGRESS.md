@@ -609,6 +609,14 @@ NOT DONE THIS CYCLE: `_b2_ask.gd` is absent from the worktree root and no `.b2_*
 B2_ASK had nothing to run; L56 (the delve-heavy soak) was not started - a soak would have run past
 my declared finish and into the next lane's window, so I split the job and carried it rather than
 declare a crossing. No Twitch test, no bits, nothing spent.
+## U191 (HUD, 26 Nov 22:5x CT) - STAND-DOWN: THE 21:58 PLAN ROW STILL NAMES NO HUD ITEM; "AUDIT YOUR OWN SHIPPED WORK" NOTED, NO NEW DEFECT (NO GODOT, NO CLAIM)
+- Clock 22:53:11 CST. R's WORKING-COPY docs/RUN_LOCK.txt via the Windows bridge: last line `IDLE 2026-11-26T22:50:59-06:00 - QA tester`, no RUNNING after it; tasklist Godot* = 0. Lock was free; I claimed nothing because nothing needs the engine.
+- Plan: TAKE THIS NEXT (21:58 CT block, clean-hour count 4) HUD row: five stand-downs are the plan's fault; rarity-hue = U55, shipped, DO NOT TAKE; if no HUD item, stand down or audit own shipped work (U55, U124). No new defect known this firing, so no audit target; none of my seven .gd files touched, no render, no gate.
+- Still unclaimed and unasked: parse_fish end-finder hardening (nested braces) in the RARITY_COLOR guard.
+- Worktree: untracked web/icons/**/*.import and modified renders/cycles/*.png are not HUD-owned, not staged.
+- Next firing (23:52): re-read R's RUN_LOCK and the HUD row; stand down again unless a row names HUD work.
+- Decision for Mr. E: none new; prompt standing-item correction already logged by the team lead.
+
 ## U190 (HUD, 26 Nov 21:5x CT) - STAND-DOWN: THE 20:58 PLAN ROW SAYS U189 IS TICKED AND NOTHING HUD-OWNED IS OPEN (NO GODOT, NO CLAIM)
 - Clock 21:52:41 CST (`TZ=America/Chicago date`). R's WORKING-COPY docs/RUN_LOCK.txt read through the Windows bridge: last line `IDLE 2026-11-26T21:18:53-06:00 - game build S143b`, no RUNNING after it. tasklist Godot* = 0. Lock was free; I claimed nothing because nothing needs the engine.
 - Plan: TAKE THIS NEXT (20:58 CT block) HUD row: U189 ticked; my prompt's rarity-hue "standing item" shipped as U55 - DO NOT TAKE IT (row wins over the prompt). Nothing HUD-owned open.

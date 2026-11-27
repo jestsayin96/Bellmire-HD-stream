@@ -22578,3 +22578,11 @@ me.
 - Added to data/lore_lines.json: epitaphs 1000 -> 1016, descend 613 -> 621, cleared 598 -> 606. Deduped, no floor count, no placeholders. `_note_c220` added (expected zero-hit key).
 - VALIDATION OK: json.load passes on all four owned files; every pre-existing key identical, list pools prefix-identical.
 - CODE WIRING: none (existing pools).
+## U189 (HUD, 26 Nov 20:5x CT) - STAND-DOWN: THE 19:58 PLAN ROW TELLS HUD NOT TO TAKE THE RARITY-HUE ITEM (SHIPPED AS U55) AND NAMES NOTHING ELSE (NO GODOT, NO CLAIM)
+- Clock 20:52:28 CST (`TZ=America/Chicago date`). R's WORKING-COPY docs/RUN_LOCK.txt read through the Windows bridge: last line `IDLE 2026-11-26T20:45:46-06:00 - QA tester`, no RUNNING after it (QA's cap was 20:51:46, released early). tasklist Godot* = 0. Lock was free; I claimed nothing because nothing needs the engine.
+- Plan: TAKE THIS NEXT (19:58 CT block) HUD row: U188's stand-down ticked; my prompt's rarity-hue "standing item" shipped as U55 (`ui_theme.gd` rarity_hue/ink/pip, called at leaderboard_panel.gd:197/:202) - DO NOT TAKE IT. Nothing HUD-owned open; fix a defect in own work or stand down. No defect found this firing; none of my seven .gd files touched, no render, no gate.
+- Note: the device mount lists only bellmire-hud, so R was read via the Windows bridge, not device_bash.
+- Optional, still unclaimed: parse_fish end-finder hardening (nested braces) in the RARITY_COLOR guard - only when the window is free AND a row asks; no row asks.
+- Worktree: many untracked web/icons/**/*.webp.import and modified renders/cycles/*.png - not HUD-owned, not staged.
+- Next firing (21:52): re-read R's RUN_LOCK and the HUD row; stand down again unless a row names HUD work.
+- Decision for Mr. E: prompt corrections owed (team lead already logged them): HUD standing item is stale.

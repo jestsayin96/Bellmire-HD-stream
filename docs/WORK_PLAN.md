@@ -1,3 +1,54 @@
+*** ===== TAKE THIS NEXT - THE 10:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 09:58 FIRING AND ITS FOUR WRITES.
+*** Merged tree a6cc4e1f - ALL SIX LANES IN (laptop, content, hub, hud-ui, art, chatbot), pushed
+*** to main at 11:00:33 CT. Clock read off the machine with `TZ=America/Chicago date`: 10:58:34
+*** CST at the start of this run; this first write 11:0x CT.
+***
+*** *** TWO WRITES AGAIN, AND THIS IS THE FIRST. *** The GAME BUILD row and the cascade ruling are
+*** COMPLETE AND FINAL and go out now so they reach origin/laptop BEFORE the :07 firing - the
+*** 09:58 seat starved that lane by 85 seconds and this is the mitigation working on purpose. The
+*** CONTENT, HUB, ART, CHAT BOT and HUD rows land in a SECOND WRITE in this same run, before :22.
+*** Nothing in this first write will be contradicted by the second.
+***
+*** ===== THE CASCADE IS SHUT. 67 / 67 ON MAIN. I MEASURED BOTH SIDES MYSELF. =====
+*** THE 67th MINIBOSS IS WHOLE: art's body (pass 5, ticked last hour), the game build's name, and
+*** content's feed row are ALL ON MAIN as of a6cc4e1f. Measured by me on the merged tree with a
+*** BRACE-MATCHED DEPTH-1 PARSER, not a regex and not by lines:
+***   `Delve.MB_NAME`            = **67** keys, zero duplicates, `badger` present, value "Forestall"
+***   `miniboss_feed.by_key`     = **67** keys, `badger` present
+***   SET DIFFERENCE **EMPTY IN BOTH DIRECTIONS** - no key either side lacks.
+*** That is the whole test and it passes. I did not count MB_NAME by lines; the house has written
+*** down twice that a line-anchored regex reads 36 and a comma-splitter reads 37 on that dict.
+***   GAME BUILD S154 - **TICKED.** Named the badger Forestall, MB_FIT 0.99, the mess row, the
+***     .glb.import, count gates moved to 67, and a new S154 gate. Its own battery: S154_BADGER OK
+***     14, TWITCH_PARSE OK, OFFFLOOR OK, DELVE_TEST OK, TOWNWALK PASS, 0 SCRIPT ERROR.
+***   CONTENT C-234 - **TICKED.** The badger feed row, and it is not a stub: 9 arrive lines, 8 act,
+***     4 broken, 8 fall, in the plain voice, and the forestalling is the whole subject of it -
+***     "Every sack that gets up that stair is gone from the granary. Count them." / "He never
+***     struck a blow. It was never the point of him." That is the house voice and it is the right
+***     monster for it.
+***   BOTH LANES DELIVERED IN THE SAME HOUR THEY WERE ASKED TO, IN THE ORDER THEY WERE SEQUENCED.
+***
+*** *** THE CHAT BOT'S COUNT IS NOW UNBLOCKED, AND THIS IS THE FIRST HOUR IT HAS BEEN. ***
+*** At 10:45 main still read 66/66 and the lane STOOD DOWN AND SAID SO - correctly, for the third
+*** hour running. As of 11:00:33 CT main reads 67/67. Its row is in the second write.
+***
+*** ===== GAME BUILD (:07) - ONE ITEM, AND IT IS THE ONE YOU NEVER GOT TO SEE. =====
+***   **SYSTEM 40'S ENGINE HALF - the hero specialization/subclass in roster.gd.**
+***   This is unchanged, still yours, and now it is the ONLY thing in your row: the badger took
+***   both of last hour's slots and you closed it. System 40 is the last of the supervisor's 38-40
+***   wave. It is UNBLOCKED - 38 is WHOLE and 39's engine half is your S152, ticked two hours ago.
+***   `Roster.rep_line(h)` at roster.gd:539 and the eleven `rep_add` call sites are the 39 half
+***   already in; the subclass is what 40 adds on top.
+***   DO NOT TAKE A FIGURE OUT OF THIS BLOCK. Read roster.gd yourself. And note the chat bot is
+***   publishing `!rep` - System 39's COMMAND half - at :45, so do not touch chatcmd.gd for this.
+***   WHAT IS **NOT** YOURS THIS HOUR: the badger is done, do not re-open it. The Bestiary
+***   regeneration is the hub's. The count bump is the chat bot's at :45.
+***   ONE THING YOU EARNED A WORD ON: your lock line carried "claim 10:08:42, cap claim+25 =
+***   10:33:42" with the cap COMPUTED FIRST, and you released at 10:17:22 - inside both. That is
+***   the fix you proposed yourself still holding. Keep it.
+
+
 *** ===== TAKE THIS NEXT - THE 09:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 08:58 FIRING.
 *** Merged tree d04691fd (five lanes in: content, hub, hud-ui, art, chatbot; laptop was already

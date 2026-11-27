@@ -22502,3 +22502,29 @@ crossing into the HUD's window.
 **Twitch:** the parse run's eventsub autostarted and refreshed its own tokens as on every headless
 run - it sent **no message**, redeemed nothing, cheered nothing, **zero bits**, no account driven by
 me.
+
+## D-cycle S142 - L31's status-icon half CLOSED BY MEASUREMENT, no code changed, 2026-11-26T19:12:35-06:00 (game build)
+- Row (18:58 TAKE THIS NEXT): close L31's last half by measuring it; build only a real gap.
+- HEROES - LIVE. delve.gd:4056 statuses() returns [word, colour, key, bad, secs] off potions.json `states`;
+  party_frames.gd:3 preloads status_icon.gd and :214 builds one StatusIcon per state (ink badge in the state's
+  colour, red rim when bad, a glyph per key, first-letter fallback), then the word with seconds left (:217-219,
+  S118). New-state line: delve.gd:3911 _on_apply (refresh stays silent). Over the head on the floor:
+  delve.gd:4070 _tags_tick Label3D. Names come from potions.json, not code.
+- MONSTERS - NOTHING TO SHOW, AND THAT IS NOT A GAP. D61.2 asks for "the conditions the game ALREADY applies".
+  The game applies none to monsters: all 14 _give() calls (delve.gd 194..3868) target delver dicts, and no line in
+  scripts/ writes a slow/venom/st/burn field to a Monster node. monster.gd's only state-like flags are
+  `enraged` (drawn as the red aura/crown) and `phase`. Drawing monster condition icons would first mean INVENTING
+  monster conditions - a new feature, so NOT built.
+- FOR THE TEAM LEAD: D61's DONE clause ("three conditions visible on both a party frame AND a monster") cannot be
+  met by any wiring - it needs monster conditions that do not exist. Close .2 on the hero half, or rule that
+  monster conditions are a new item. D61.3 (boss bar thresholds/attention/mechanic) is a separate sub-item and
+  was not part of this row.
+- GATES ON TODAY'S MERGED TREE (renders/cycles/l31/_close_l31.log, committed): parse rc 0, 0 SCRIPT ERROR /
+  0 Parse Error; S118_STATUS OK 14; L31_FIT chips_past_bar=0; L31_ICONS party=6 states_wanted=15 icons=15
+  keyed_and_sized=15; L31_COUNTDOWN distinct_secs=15 stale=0; L31_ICONS OK 15.
+- LOOKED: renders/cycles/l31/l31_icons_1080.png (fresh, 19:11) - 15 states on three heroes, each with its own
+  icon, word and seconds 40s..12s, nothing past the bar. (l31_icons_crop.png is an 18 Nov hand crop the gate does
+  not write - not refreshed, said so.)
+- No file under scripts/ changed, so OFFFLOOR / TWITCH_PARSE / TOWNWALK / DELVE_TEST are a declared no-op on unchanged
+  bytes (B158 precedent). Commit carries PROGRESS, RUN_LOCK, the log and the frame only.
+- LOCK: claim 19:08:39, cap 19:33:39 computed first, declared 19:30:00, IDLE 19:12:35. No Twitch, 0 bits.

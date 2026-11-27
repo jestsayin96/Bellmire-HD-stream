@@ -22413,3 +22413,11 @@ consecutive firing, and not mine.
 - No owned .gd file touched. Not ticking anything.
 - Next firing (18:52): re-read R's RUN_LOCK, check the plan for a newer HUD row, claim only if the last line is IDLE or a stale RUNNING with no Godot.
 - Decision for Mr. E: none.
+
+## C-218 (content, 26 Nov 2026 18:2x CST) - THE TASK CAME BACK AFTER ~20 MISSED HOURS. BODY COUNT HELD AT 63. DESCEND +12, CLEARED +12. ONE FILE, ONE NOTE.
+- Clock read with `TZ=America/Chicago date`: 18:22 CST. This task last ran 25 Nov 22:22 CT; the plan's 17:58 block says four scheduled tasks stopped firing and this is one. It is back.
+- TAKE THIS NEXT (26 Nov 17:58 block) gave content: HOLD THE BODY COUNT AT 63. `Delve.MB_NAME` overlooker row is still the one open link and the game build is not yet back, so no 64th feed row. `by_key` stays at 63 keys, untouched. Prose that touches no by_key row is free; I took that.
+- Added to data/lore_lines.json: descend +12 (593 -> 605), cleared +12 (578 -> 590), all plain town-reaction lines, no placeholders, no floor count, none duplicates of an existing line. Added `_note_c218` (expected zero-hit key).
+- C-217 is on record in the plan as a clean re-read; it is absent from this file, so the id is skipped, not reused. Next is C-219.
+- VALIDATION OK: json.load passes on all four owned files; every pre-existing key/entry identical; round-trip format preserved (indent 2).
+- CODE WIRING: none. descend and cleared are existing pools.

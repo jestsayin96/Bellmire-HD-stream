@@ -23937,3 +23937,74 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - LOCK: free at claim - last line was `IDLE 14:42:42 QA tester`, no IDLE-less RUNNING above it, and `tasklist Godot*` read **0** live in the same call that composed the stamp. Claim **14:48:20** (before :50, as the schedule row asks), declared finish **14:51:30**, **released 14:49:13** - inside both the declared finish and the claim+25 cap, with the HUD's :52 slot clear. `tasklist Godot*` = 0 again at release. Fourth consecutive clean hour from this lane.
 - Nothing is owed from the GAME BUILD lane: `twitch_eventsub.gd` untouched, the `twitch_reply(user_login, text)` contract unchanged.
 - No Twitch message, redeemed nothing, cheered nothing, **ZERO BITS**. Headless only; not live-tested.
+
+## B205 - 2026-11-27 15:45 CT - NO BUMP WAS OWED, AND THE GATE THAT GUARDS MY OWN PUBLISH ASKS FOR A NUMBER MY ROW FORBIDS ME
+
+**THE ROW SAID RE-MEASURE AND PUBLISH WHAT `MB_NAME` SAYS - 68, 69 OR 70. I MEASURED 68, SO I
+PUBLISHED NOTHING.** Measured by me on origin/main `b87cb3a0`, not quoted from the 14:58 block:
+  `Delve.MB_NAME`        = **68** keys, 68 unique (delve.gd:453, anchored on `^const\s+MB_NAME\s*:?=\s*\{`,
+                           brace-matched, `#` comments stripped - the matcher the plan says works)
+  `Delve.MB_FIT`         = **79** keys (delve.gd:384)
+  `miniboss_feed.by_key` = **70** keys (real JSON parse)
+  published `.what`/`.short` = **68** already
+  SET DIFFERENCE: **UNNAMED = [`hammerman`, `shearman`]. GHOST = [] (EMPTY).**
+The 69th and 70th ARE named - on `origin/laptop` **ed0184d6**, where `MB_NAME`=**70** and both keys
+are present. **MERGE-PENDING, NOT MERGED.** The team lead's block forecast 70 and said plainly not
+to take 70 from the block; I measured and the forecast has not landed on main yet. Publishing 70
+against a main that names 68 would have `!miniboss` promise two elites whose names the engine
+cannot answer - the exact harm B204 was ticked for refusing. **data/commands.json NOT EDITED.**
+
+**GATES, AND ONE OF THEM IS RED. I AM REPORTING IT RED.**
+  GATE 1 `tools/_commands_doc.gd` -> `COMMANDS_DOC OK wrote 36 commands`, rc=0. REAL GENERATOR,
+    run as a no-op confirmation; it changed nothing, so docs/COMMANDS.md is byte-unchanged.
+  GATE 2 parse `--headless --path W6 --quit-after 300` -> rc=0, **0 Parse Error, 0 SCRIPT ERROR**.
+  GATE 3 `tools/_l14_test.gd` -> **L14_TEST FAIL 1 (27 checks)**, rc=1.
+  GATE 4 `tools/_twitch_parse.gd` -> `TWITCH_PARSE OK (8 checks)`, rc=0.
+
+**WHY L14 IS RED, AND IT IS NOT A BROKEN TEST.** Its one failing arm asserts that ZERO
+`COMMANDS_DATA` guard arms fire on the load. **TWO FIRED: `MINIBOSS COUNT` and `MINIBOSS UNNAMED`.**
+`MINIBOSS UNNAMED` is honest and is the game build's open half - two fed bodies with no `MB_NAME`
+row on main, and it closes when `ed0184d6` merges.
+
+**THE FINDING, AND IT IS IN MY OWN FILE. I DID NOT CHANGE IT.** `MINIBOSS COUNT`
+(`scripts/chatcmd.gd:2504-2508`) compares the published numeral against `miniboss_names()`, and
+`miniboss_names()` (chatcmd.gd:708) is keyed on **content's `by_key`** - **70** - NOT on
+`Delve.MB_NAME` - **68**. So the guard will not go green until the published count reads **70**,
+which is precisely the number my row forbids me to publish while the naming half is open.
+The guard's own error text names the harm correctly - "a viewer finds out by asking for one that
+is not there" - and a viewer asks by NAME, which comes from `MB_NAME`. **SO THE GUARD'S INTENT
+MATCHES THE HOUSE RULE AND ITS COMPARISON DOES NOT.** The two agree only while the pipeline is
+SHUT; the moment content pays `by_key` ahead of the game build naming - which is the normal,
+healthy shape of this pipeline, and is the state right now - the guard demands a lie.
+**I AM NOT TOUCHING IT ON MY OWN JUDGEMENT.** Changing a guard's comparison is a behaviour change,
+the freeze forbids inventing work, and either reading is defensible:
+  (a) published tracks NAMES -> the comparison should read `Delve.MB_NAME.size()`, one line in my file;
+  (b) published tracks FEED ROWS -> the comparison is right, B204's ticked reasoning is wrong, and
+      I should have published 70 this hour.
+B204 was TICKED for reading it as (a). The guard implements (b). **THE TEAM LEAD OR THE SUPERVISOR
+DECIDES WHICH, AND I WILL WRITE WHICHEVER IS RULED.** Until then L14_TEST is red by this one arm
+and it self-heals the hour `ed0184d6` merges and the published count goes 68 -> 70 together.
+
+**MY OWN TWO FAULTS THIS RUN.**
+(1) **I WROTE AN IDLE STAMP THREE MINUTES IN THE FUTURE.** I composed `IDLE 15:52:05` while the
+    machine clock read **15:49:34**, then read the clock and rewrote the line to `15:49:43` with
+    the correction stated in the lock file itself rather than quietly. This house has been charged
+    for future stamps before; the fix is the same every time - READ THE CLOCK OFF THE MACHINE
+    BEFORE WRITING A TIME, including the release you are about to claim credit for.
+(2) **MY FIRST PASS AT THIS FINDING WAS BACKWARDS AND THE GATE CORRECTED ME.** I grepped for the
+    numeral `68` and for a `MB_NAME.size()` comparison, found neither in my own file, and had
+    already concluded that **the published count was UNGUARDED** - that nothing but a worker's
+    hand measurement stood between a wrong number and a live viewer. Then GATE 3 went red and
+    named `MINIBOSS COUNT` firing. The guard exists, it is twenty lines from where I was reading,
+    and it was doing its job the whole time; my grep could not see it because the comparison is
+    against a Dictionary's `.size()`, not against a literal. **A STATIC GREP THAT FINDS NOTHING IS
+    NOT EVIDENCE THAT NOTHING IS THERE, AND I WAS ONE SUMMARY AWAY FROM TELLING MR. E HIS PUBLISH
+    PATH WAS UNPROTECTED WHEN IT IS NOT.** Run the gate before you report the absence.
+Also: my drift matcher for "an entry no command answers" returned TEN false positives (`armour`,
+`bestiary`, `brew`, `delve`, `dice`...) - all of which demonstrably answer. That matcher is wrong
+for the fourth time in this lane's history and I am reporting its output as MINE, not as drift.
+The real drift check is GATE 1: the generator wrote 36 commands over 36 JSON entries, no diff.
+
+NO TWITCH MESSAGE. REDEEMED NOTHING. CHEERED NOTHING. **ZERO BITS.** Headless only.
+Lock: claim 15:48:10, cap 16:13, declared finish 15:51:30, **released 15:49:43** - early, and the
+HUD's :52 slot was clear before it opened. `tasklist Godot*` = 0 after.

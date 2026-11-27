@@ -25963,6 +25963,36 @@ def badger():
     _cape = aim(L.cone(0.400, 0.235, 0.300, 16), (0.0, -0.110, 1.400),
                 (0.0, -0.130, 1.0))
     P.raw(_cape, 'body', vcol=[CAPE] * len(_cape[0]))
+
+    # *** PASS 5 - FAULT 2, AND THE CAUSE IS ONE WORD: `cone`. ***
+    # The team lead's 08:58 row: "the largest pale shape on the body - the
+    # leather yoke-cape - is identical from both sides, and at stream distance
+    # that trapezoid is what a viewer reads first. PUT THE FACING WHERE THE
+    # AREA IS. A 3000 px face oval cannot carry a read the cape contradicts."
+    # I looked at hero_front.png and hero_back.png side by side and he is
+    # right, and the cause is not a tuning value: `L.cone` IS A SURFACE OF
+    # REVOLUTION ABOUT ITS OWN AXIS. The cape CANNOT have a facing, by
+    # construction, no matter what numbers go in it. The single `aim`
+    # direction (0, -0.130, 1.0) tips it 7 degrees forward and that is the
+    # entire difference between the front and the back of the biggest pale
+    # mass on the body - sub-pixel at stream distance.
+    # SO THE FIX IS NOT TO THE CONE. It is to put pale AREA on the front that
+    # has no counterpart on the back, and the trade supplies it: a yoke pad is
+    # STRAPPED ON. Two leather straps run from under the front hem down the
+    # chest to a belt at the waist - that is how the pad is kept from riding
+    # off the shoulders when the man walks, and it is the plainest possible
+    # reason for the shape. Front reads: pale trapezoid, two pale legs, one
+    # dark bar across. Back reads: plain pale trapezoid. That is a facing in
+    # the mass a viewer reads FIRST, not in a 3000 px oval he reads last.
+    # SAME VERTEX COLOUR, so all three luma guards above are untouched - this
+    # adds no fourth value and cannot argue with the sack count.
+    for _sx in (-0.120, 0.120):
+        _strap = L.tube([(_sx, -0.350, 1.392), (_sx * 0.95, -0.320, 1.085)],
+                        0.046, 8)
+        P.raw(_strap, 'body', vcol=[CAPE] * len(_strap[0]))
+    # the belt the straps buckle to. DARK, and FRONT ONLY - a full ring would
+    # put the same bar on the back and hand back the symmetry this just bought.
+    P.add(L.box(0.460, 0.095, 0.085), 'dark', loc=(0.0, -0.300, 1.058))
     _seg("cape")
 
     # THE HEAD. A DEEP HOOD, DARK FRONT AND BACK, with a BODY-COLOURED face
@@ -26066,6 +26096,30 @@ def badger():
     # bears, dark so it cannot be mistaken for a fifth sack.
     P.raw(L.tube([(-0.495, -0.060, 1.700), (0.0, -0.140, 1.762),
                   (0.495, -0.060, 1.700)], 0.055, 8), 'dark')
+    # *** PASS 5 - THE REGRESSION I INTRODUCED AT PASS 4 AND NAMED MYSELF. ***
+    # The lead confirmed it by looking: "in hero_side.png the two aft ropes
+    # read as long straight RIGID STRUTS - a sawhorse, not rope."
+    # THE CAUSE IS A COMMENT THAT WAS HALF TRUE. Pass 4 wrote "the rope leaves
+    # the bar DIRECTLY ABOVE ITS OWN SACK" and then started all four ropes at a
+    # FIXED y = -0.100 while the sacks sit at y -0.455 and y +0.415. It was
+    # true in x and false in y, and nobody reading it would have caught that.
+    # An aft rope therefore ran 0.515 back and 0.611 down - a straight metre of
+    # dark at 40 degrees, which is a strut, because rope does not hold an
+    # angle. It only showed in the SIDE view because that is the one camera
+    # that sees y.
+    # THE HONEST FIX IS THE YOKE, NOT THE ROPE. One bar across the shoulders
+    # can only hang TWO loads; this man carries FOUR, two of them aft. So he
+    # carries a CROSS-YOKE - the shoulder bar plus a short fore-and-aft spar
+    # at each end - which is what anyone hanging four loads off one set of
+    # shoulders actually uses. Every rope then drops DEAD VERTICAL from its own
+    # spar, in x AND in y, so there is no diagonal left anywhere for any camera
+    # to read as a strut. The spars are horizontal, dark and continuous with
+    # the bar at the very top of the figure: they read as the yoke frame, and
+    # they are NOT hanging masses - the four-hanger read that pass 4 bought
+    # stays exactly four. I checked that by looking, not by assuming it.
+    for _sx in (-0.420, 0.430):
+        P.raw(L.tube([(_sx, -0.500, 1.710), (_sx, 0.460, 1.710)], 0.040, 8),
+              'dark')
     _seg("gear_yoke")
 
     # ------------------------------------------------------------- THE COUNT
@@ -26193,13 +26247,14 @@ def badger():
         P.raw(aim(L.cone(0.062, 0.030, 0.101, 10), (sx, sy, sz + 0.139),
                   (0.0, 0.0, 1.0)), 'bone')
         _ring(P, (sx, sy, sz + 0.169), 0.039, 'z', 'dark', 0.014, 12)
-        # the rope from the yoke end down to the neck of the sack
-        # the rope leaves the bar DIRECTLY ABOVE ITS OWN SACK. Pass 3 ran
-        # every rope from one of the two bar ENDS, which crossed them over
-        # each other and pulled the eye into a single dark fan; four vertical
-        # ropes at four x read as four hangers and help the count instead of
-        # arguing with it.
-        limb(P, [(sx * 0.97, -0.100, 1.716), (sx, sy, sz + 0.225)],
+        # the rope from the spar down to the neck of the sack. Pass 3 ran every
+        # rope from one of the two bar ENDS, which crossed them over each other
+        # and pulled the eye into a single dark fan; four ropes at four x read
+        # as four hangers and help the count instead of arguing with it.
+        # PASS 5: the start is now (sx, sy) and not (sx * 0.97, -0.100), so the
+        # rope is DEAD VERTICAL in both axes and the aft pair cannot read as
+        # struts. This is the line the pass-4 comment already claimed to be.
+        limb(P, [(sx, sy, 1.712), (sx, sy, sz + 0.225)],
              0.021, 0.018, 'dark')
     _seg("gear_sacks")
 

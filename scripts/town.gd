@@ -1965,11 +1965,19 @@ func _dress_landmarks() -> void:
                 bell.position = Vector3(tp.x, g + 11.4, tp.z)
                 add_child(bell)
                 # small kept garden of graves beside the nave
-                for i in range(6):
-                    var gp := p - side * (_width_of(key) * 0.5 + 3.0) + f * (float(i % 3) * 2.6 - 2.6) - side * (float(i / 3) * 2.2)
-                    if is_clear(gp, 0.6, true):
-                        _box(Vector3(0.7, 1.0, 0.18), Vector3(gp.x, height_at(gp.x, gp.z) + 0.45, gp.z), _stone(), yaw)
-                        _objs.append([gp, 0.8])
+                # S143: the original single-side 3x2 grid was measured to place ZERO graves
+                # (every cell failed is_clear), so the garden never stood. Try the far side
+                # of the nave too (three rows each side), and keep the first six clear spots.
+                for gsd in [-1.0, 1.0]:
+                    for i in range(9):
+                        if _grave_spots.size() >= 6:
+                            break
+                        var gsf: float = float(gsd)
+                        var gp: Vector3 = p - side * gsf * (_width_of(key) * 0.5 + 3.0) + f * (float(i % 3) * 2.6 - 2.6) - side * gsf * (float(i / 3) * 2.2)
+                        if is_clear(gp, 0.6, true) and road_dist(gp) > 1.2:
+                            _box(Vector3(0.7, 1.0, 0.18), Vector3(gp.x, height_at(gp.x, gp.z) + 0.45, gp.z), _stone(), yaw)
+                            _objs.append([gp, 0.8])
+                            _grave_spots.append(gp)    # S143 / System 14: the keeper's round
             "lm_barracks":
                 # drill yard in front: dummies, racks, archery butts
                 var yard := front + f * 5.0
@@ -5012,6 +5020,25 @@ func _near_market(rng: RandomNumberGenerator, r := 9.0) -> Vector3:
         q = _market_pos + Vector3(cos(a), 0, sin(a)) * rng.randf_range(4.0, r + 6.0)
     return q
 
+## S143 / System 14: the graveyard keeper tends the chapel's kept graves.
+## Driven by its own script (scripts/grave_keeper.gd) - Kenney rig, own clips.
+var _grave_spots: Array = []
+var grave_keeper: Node3D = null
+const GRAVE_KEEPER := preload("res://scripts/grave_keeper.gd")
+
+func _spawn_grave_keeper() -> void:
+    if _grave_spots.size() < 2 or grave_keeper != null:
+        return
+    var k := Node3D.new()
+    k.set_script(GRAVE_KEEPER)
+    k.set("town", self)
+    k.set("spots", _grave_spots.duplicate())
+    var p0: Vector3 = _grave_spots[0]
+    k.position = Vector3(p0.x + 1.0, height_at(p0.x + 1.0, p0.z), p0.z)
+    k.name = "GraveKeeper"
+    add_child(k)
+    grave_keeper = k
+
 func _more_folk(rng: RandomNumberGenerator) -> void:
     var tavern := _shop_door("tavern")
     var store := _shop_door("store")
@@ -5071,6 +5098,7 @@ func _more_folk(rng: RandomNumberGenerator) -> void:
         if String(pl.get("landmark", "")) == "lm_chapel":
             priest.face_yaw = float(pl["yaw"])
     _put_folk(priest, chapel[0])
+    _spawn_grave_keeper()              # S143 / System 14
     # 7. the WATCH: pairs walking a beat round the ring road and out to the gates
     var beat: Array = []
     if _wall_info.has("gates"):

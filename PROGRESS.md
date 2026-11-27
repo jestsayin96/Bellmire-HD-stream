@@ -22541,3 +22541,34 @@ me.
 - Evidence-log rule noted: if I ship, the evidence log is committed with it. Nothing shipped, so nothing to commit but this note.
 - Next firing (20:52): re-read R's RUN_LOCK via the Windows bridge and the HUD row. Optional, only if the window is free and a row asks: parse_fish end-finder hardening (nested braces) in the RARITY_COLOR guard.
 - Decision for Mr. E: none.
+
+## D-cycle S143 - SYSTEM 14 (GRAVEYARD KEEPER NPC) WIRED, AND THE CHAPEL'S GRAVE GARDEN, WHICH HAD BEEN PLACING ZERO STONES, NOW STANDS - 2026-11-26T20:19-06:00 (game build)
+- Row (19:58 TAKE THIS NEXT, read after its 20:07 landing): "take the LOWEST-NUMBERED system in 5-80 not already closed".
+  HOW I GOT THE NUMBER: 5-11 closed by my own headers (S31..S108); 12 WHOLE at S137 (lead's 14:58 tick record);
+  13's wiring closed at S138/S139/S140 with its look ruled by the supervisor. No line anywhere in PROGRESS or the plan names
+  System 14. MASTER VISION doc: 14 = "Graveyard keeper NPC - Kenney Graveyard Kit (Keeper character). Tends the hero
+  gravestones, lantern in hand, walking between the graves."
+- MEASURED BEFORE BUILDING: grep keeper/sexton/graveyard in town.gd/townsfolk.gd/notables.gd = no such NPC. The only
+  graves in town are the lm_chapel "small kept garden of graves beside the nave" (town.gd ~1967). A first gate run with
+  the keeper wired printed `S143_KEEPER FAIL no keeper (graves=0)`: EVERY cell of that 3x2 grid failed is_clear, so the
+  garden has NEVER STOOD. Latent since it was written; nobody saw it because nothing looked for it.
+- BUILT: (1) the garden tries both sides of the nave, three rows each, keeps the first six clear spots off the road
+  (road_dist > 1.2); this seed places 3. (2) scripts/grave_keeper.gd (no class_name): Kenney keeper body, node-animated
+  rig with its OWN clips (idle/walk/interact-right), so it is driven there and NOT through Townsfolk/Rig, whose clip map
+  is KayKit's. Scaled to 1.85 m off its measured AABB, a candle lantern + warm OmniLight at his side, walks grave to grave
+  at 1.1 m/s and stoops 5-9 s at each. ResourceLoader.exists guard: a missing body places nothing. (3) town.gd:
+  _grave_spots, _spawn_grave_keeper() after the chapel priest. (4) assets/graveyard/: keeper, lantern-candle, three
+  gravestones (not yet used), Textures/colormap.png, LICENSE.txt - Kenney Graveyard Kit 5.0, CC0 1.0, READ off the pack's
+  own License.txt this run. docs/art/ASSET_SOURCES.md:247 still says "not measured" for this pack - art's row, not edited.
+- GATES (renders/cycles/s143/_s143_*.log, committed): parse rc 0, 0 SCRIPT ERROR / 0 Parse Error;
+  S143_KEEPER OK graves=3 height_m=1.85 max_travel=4.87 clips={idle 170, walk 524, interact-right 176};
+  OFFFLOOR_VERDICT OK 0 of 2293; TWITCH_PARSE OK (8 checks); TOWNWALK in_solid=0/19450 raid 0/5298 PASS;
+  DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR.
+- LOOKED: renders/cycles/s143/keeper.png (1080p) - the keeper in his hat with the lantern, between three stones beside the chapel.
+- OWN FAULT, SAID: my first battery ran against an edit made mid-run and a parse error (untyped `gp`) - I killed my own
+  Godot and re-ran the whole battery clean as _s143c; only that run is reported above.
+- FOR THE TEAM LEAD / ART, NOT A LANE CALL: the Kenney keeper is BLOCKY-voxel styled beside KayKit chibi townsfolk - the
+  same style question the supervisor ruled for pets. He reads as a deliberate odd-one-out to me; art may want to rule.
+  NOT DONE AND CARRIED: the stones are still plain boxes (the Kenney gravestones are imported for that); the lantern is
+  at his side, not on the hand bone; System 72 (hero gravestones) is the keeper's real purpose and is a separate system.
+- LOCK: claim 20:08:33, cap 20:33:33 computed first, declared 20:30:00, IDLE 20:19:27. No Twitch, 0 bits.

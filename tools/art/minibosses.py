@@ -25537,11 +25537,25 @@ def thatcher():
     # what the stems are tight AT, so the radius must come from the ENVELOPE
     # - which is held constant across gauges by construction - and never
     # from the gauge of an individual stem.
+    # ----------------------------------------------- PASS 10: THE TIE SECTION
+    # I NAMED THIS LEVER MYSELF AT PASS 9 AND THE TEAM LEAD HANDED IT BACK TO
+    # TAKE. The bands are `dark` and they occlude pale reed, so restoring them
+    # cost the side cue p50 1.0406 -> 1.0174 - most of pass 8's gain. A
+    # NARROWER band still clasps the bundle and still breaks the run of stems,
+    # because what makes a binding read is that it WRAPS, not that it is tall.
+    # So the section is the one constant that returns cue pixels without
+    # touching the thing the ties are for.
+    # THE OFFSET MOVES WITH IT, AND THAT IS NOT A SECOND CHANGE. The band was
+    # pushed back along the axis by 0.020 - exactly half the 0.040 section -
+    # to sit centred on its station. Leaving the literal 0.020 behind while
+    # the section shrank would have slid all three bands DOWN the bundle and
+    # made this a two-variable pass measured as one.
+    TIE_SEC = float(os.environ.get("THATCHER_TIESEC", "0.040"))
     for _t in (0.18, 0.46, 0.76):
         _rr = R_RING * _f(_t) + R_STEM_P8 + 0.014
         _c = YA + _yd * _t
-        P.raw(aim(L.cone(_rr, _rr, 0.040, 18),
-                  tuple(_c - _ax * 0.020), tuple(_yd)), 'dark')
+        P.raw(aim(L.cone(_rr, _rr, TIE_SEC, 18),
+                  tuple(_c - _ax * (TIE_SEC * 0.5)), tuple(_yd)), 'dark')
     _close("yealm")
 
     # ---- legs. Staggered so the outline has a JOINT in it.
@@ -25642,8 +25656,41 @@ def thatcher():
     # OVERLAP by 0.033 and no tilt of the board can re-open it.
     limb(P, [(-0.298, -0.216, WAIST - 0.300),
              (-0.296, -0.296, WAIST - 0.590)], 0.034, 0.030, 'dark')
-    P.add(L.box(0.152, 0.040, 0.186), 'dark',
-          loc=(-0.290, -0.306, WAIST - 0.650), rot=(0.10, 0.0, 0.06))
+    _LEG_LOC = (-0.290, -0.306, WAIST - 0.650)
+    _LEG_ROT = (0.10, 0.0, 0.06)
+    P.add(L.box(0.152, 0.040, 0.186), 'dark', loc=_LEG_LOC, rot=_LEG_ROT)
+    # ------------------------------------------------- PASS 10: THE TEETH ARM
+    # OPEN FAULT 4, AND THE TEAM LEAD CAN SEE IT FROM THE BACK TOO: "the
+    # leggett reads as a satchel". IT IS A FEATURELESS DARK RECTANGLE HANGING
+    # AT THE HIP, which is a description of a bag, so the read is correct and
+    # the geometry is what is wrong.
+    # WHAT SEPARATES THE TWO IS NOT SHAPE, IT IS PURPOSE. A leggett's whole
+    # point is its RIDGED WORKING FACE - that is what combs the butt ends of
+    # the reed flush when he beats them. A satchel has no teeth. So the thing
+    # that makes it read is the thing it is FOR, which is this house's first
+    # art rule, and it costs no new slot: the ridges are `dark` like the board,
+    # so NO SECOND PALE enters this body and the cue argument is untouched.
+    # THE OFFSETS ARE CARRIED THROUGH THE BOARD'S OWN ROTATION rather than
+    # written in world axes. The board is tilted (0.10, 0, 0.06); ridges placed
+    # by eye in world z would walk off its face along its length, which is a
+    # float waiting to happen - pass 4's fault, re-run by hand.
+    # SHIPPED ON AT PASS 10, HAVING LOOKED AT THE A/B. It was gated default-OFF
+    # while it was measured, so the baseline arm was byte-identical and the
+    # comparison was real and not a render against itself. The picture is
+    # decisive - the plain board reads as a pouch and the ridged one reads as a
+    # tool - and `_cuevalue` is IDENTICAL on all three views down to the lap
+    # pixel count (18060 / 13987 / 19609), so the teeth cost the cue argument
+    # exactly nothing. The gate stays so the A/B can be re-run.
+    if os.environ.get("THATCHER_TEETH", "1") in ("1", "on"):
+        _rm = (Matrix.Rotation(_LEG_ROT[2], 3, 'Z')
+               @ Matrix.Rotation(_LEG_ROT[1], 3, 'Y')
+               @ Matrix.Rotation(_LEG_ROT[0], 3, 'X'))
+        for _k in range(-2, 3):
+            _o = _rm @ Vector((0.0, -0.026, 0.0295 * _k))
+            P.add(L.box(0.146, 0.018, 0.013), 'dark',
+                  loc=(_LEG_LOC[0] + _o.x, _LEG_LOC[1] + _o.y,
+                       _LEG_LOC[2] + _o.z),
+                  rot=_LEG_ROT)
     _close("leggett")
 
     # ---- the head. A DARK HOOD round a BODY-coloured face: the contrast

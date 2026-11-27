@@ -1,0 +1,59 @@
+{
+ "key": "thatcher",
+ "tag": "_p10a",
+ "group": "head",
+ "views": {
+  "front": {
+   "face_seen": 3699,
+   "face_noreed": 3698,
+   "contrast": {
+    "face_p50": 0.3619,
+    "ring_p50": 0.2314,
+    "ratio": 1.564,
+    "margin": 0.1306,
+    "face_px": 3699,
+    "ring_px": 1831
+   },
+   "reed_cover": -1,
+   "reed_cover_frac": -0.0003,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it"
+  },
+  "side": {
+   "face_seen": 1778,
+   "face_noreed": 1777,
+   "contrast": {
+    "face_p50": 0.3423,
+    "ring_p50": 0.2129,
+    "ratio": 1.608,
+    "margin": 0.1294,
+    "face_px": 1778,
+    "ring_px": 635
+   },
+   "reed_cover": -1,
+   "reed_cover_frac": -0.0006,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it"
+  },
+  "back": {
+   "face_seen": 0,
+   "face_noreed": 0,
+   "contrast": {
+    "red": "face mask under 50 px - no contrast was measured"
+   },
+   "reed_cover": 0,
+   "reed_cover_frac": null,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it",
+   "red": "face_seen is 0 - A RESULT, NOT AN ERROR: no pixel of the face plate reaches this camera. Whether that is a fault or the design depends on the view"
+  }
+ },
+ "errors": [],
+ "asks": "how many pixels of the FACE PLATE reach the camera, per view, by with/without through one locked camera - and how many of the missing ones the reed takes",
+ "cannot_see": "whether the plate has a FACE on it (eyes and mouth are dark-on-dark to this test by construction), value, hue, and the dark ties, which stay in the no-reed arm and make it a FLOOR",
+ "repainted_items": 1,
+ "bounds_drift": 0.0,
+ "control_best_face_noreed": 3698,
+ "thatcher_twist_env": "(unset)",
+ "thatch_gauge_env": "(unset)",
+ "head_env": "(unset)",
+ "tiesec_env": "(unset)",
+ "ok": true
+}

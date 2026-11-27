@@ -1,0 +1,41 @@
+{
+ "key": "thatcher",
+ "tag": "_p10base",
+ "group": "head",
+ "views": {
+  "front": {
+   "face_seen": 3699,
+   "face_noreed": 3698,
+   "reed_cover": -1,
+   "reed_cover_frac": -0.0003,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it"
+  },
+  "side": {
+   "face_seen": 1778,
+   "face_noreed": 1777,
+   "reed_cover": -1,
+   "reed_cover_frac": -0.0006,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it"
+  },
+  "back": {
+   "face_seen": 0,
+   "face_noreed": 0,
+   "reed_cover": 0,
+   "reed_cover_frac": null,
+   "other_cover_note": "pixels of the face missing in the NO-REED arm are taken by something that is not the reed; this file does not name it",
+   "red": "face_noreed under 300 px - instrument fault, not a result"
+  }
+ },
+ "errors": [
+  "thatcher/back: face_noreed is 0 px - the face plate could not be seen even with the reed gone, so nothing was measured here"
+ ],
+ "asks": "how many pixels of the FACE PLATE reach the camera, per view, by with/without through one locked camera - and how many of the missing ones the reed takes",
+ "cannot_see": "whether the plate has a FACE on it (eyes and mouth are dark-on-dark to this test by construction), value, hue, and the dark ties, which stay in the no-reed arm and make it a FLOOR",
+ "repainted_items": 1,
+ "bounds_drift": 0.0,
+ "thatcher_twist_env": "(unset)",
+ "thatch_gauge_env": "(unset)",
+ "head_env": "(unset)",
+ "tiesec_env": "(unset)",
+ "ok": false
+}

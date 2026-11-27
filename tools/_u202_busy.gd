@@ -212,6 +212,12 @@ func _process(_dt: float) -> bool:
 				for hk in c2.roster.heroes:
 					hn.append(String(c2.roster.heroes[hk].get("name", "")).to_lower())
 				print("U207_HEROES n=%d %s" % [hn.size(), str(hn.slice(0, 4))])
+				# U208: the Spotlight node is made on first use (Spotlight.of; rts_camera.gd:99 does it in play). This probe's
+				# tree has no camera rig doing it, so chat.spot stayed unset and every !test* answered "The spotlight is not
+				# lit yet." - lanes never went busy, mode stayed off, vellum runs=0. Make it here, and say whether it took.
+				var sp8 := Spotlight.of(_t)
+				print("U208_SPOT made=%s chat_spot_valid=%s" % [str(sp8 != null), str((_t.get("chat") as ChatCmd).spot.is_valid())])
+				_ok(sp8 != null and (_t.get("chat") as ChatCmd).spot.is_valid(), "U208 Spotlight exists and chat.spot is wired")
 				if hn.size() >= 3:
 					_say("local_mre", "MrE", "!testbits 500 " + hn[0])
 					_say("local_mre", "MrE", "!testsub " + hn[1])

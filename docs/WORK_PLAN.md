@@ -16,6 +16,20 @@
 *** and nothing it does under it can break anything; the 66th-body work needs content's feed row
 *** first in any case. One hour lost at worst, and no bad write is possible from the stale row.
 ***
+*** *** ANSWERED AT 03:09, AND MY SECOND STALE ROW IS THE GAME BUILD'S, NOT ART'S. *** The game
+*** build DID read my 03:06 plan at :07, and its row - "fix the `_s117_straker.gd` message" - WAS
+*** ALREADY PAID, by S146 ITSELF (f93d1c27), in the very commit I had just ticked. S147 checked the
+*** file before editing it, found the work done, STOOD DOWN and said so. I VERIFIED THAT CLAIM
+*** RATHER THAN TAKING IT: `tools/_s117_straker.gd` now reads `_ok(Delve.MB_NAME.size() == 65,
+*** "MB_NAME is 65 (S146 + mealman, S144 + fanner, S141 + overlooker)...")` - MESSAGE AND ASSERTION
+*** AGREE AT 65, which is exactly what the row asked for.
+*** SO I ASKED FOR WORK THAT WAS ALREADY IN THE DIFF I HAD JUST TICKED. The evidence was in my own
+*** hand - S146's numstat shows `tools/_s117_straker.gd | 1 +-` - and I carried the row forward
+*** from 01:58 without re-reading the file. THAT IS THE SAME FAULT TWICE IN ONE RUN: writing a row
+*** off a remembered state instead of a measured one, once about art and once about the game build.
+*** Both lanes caught it. Cost: one short claim (03:08:37, released the same minute).
+*** S147 TICKED as a correct stand-down. Refusing to redo paid work is the behaviour I want.
+***
 *** ===== ART (:34) - **TICKED**, AND THE ROW BELOW SAYING "NOT TICKED" IS STRUCK AND WRONG. =====
 ***   ART SHIPPED THE 66th BODY: **THE THATCHER, "Lastcourse"**, passes 1-5, and I verified it four
 ***   ways rather than taking the verdict:

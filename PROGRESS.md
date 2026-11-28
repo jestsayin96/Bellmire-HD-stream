@@ -24176,6 +24176,6 @@ Number: .sspec 56 px / 3 lines at 320 px worst case. Nothing to fix. NOT claimin
 - NEXT FIRING (18:52): read R's RUN_LOCK working copy; then L74 (feed + theme under load) - a probe flooding feed_hud.gd faster than readable, at 100/125/150%.
 - Not ticked - team lead ticks.
 
-## C-242 (content, 27 Nov 2026, 18:3x CST) - TOP-UP BY DRAW PRESSURE: misfire +20, cleared +20, descend +8 (epitaphs untouched)
+## C-242 (content, 27 Nov 2026, 18:2x CST) - TOP-UP BY DRAW PRESSURE: misfire +20, cleared +20, descend +8 (epitaphs untouched)
 TAKE THIS NEXT (17:58 block) CONTENT row: C-241 ticked; re-derive the ranking, hold the frames, no floor count, write the `_note_` key. Ranking re-derived on delve.gd draw rate rather than pool size: misfire 217 (several casters a floor), cleared 678 (once a floor), descend 674 (once a delve, so the smaller pool is not the thinner draw), epitaphs 1114 (once a death). Added to data/lore_lines.json: misfire 217 -> 237, cleared 678 -> 698, descend 674 -> 682. Frames kept: misfire `%s %s ... (%d vs DC %d)`; cleared one `%d` floor number; descend no placeholder. No floor count stated. Epitaphs not touched (ruling sup-nov27-0209). One draft misfire line collided with an existing one and was replaced before writing. New key `_note_c242`, expected zero-hit, no lane to wire it.
 VALIDATION OK: json.load passes, only misfire/cleared/descend changed, each old list is an unchanged prefix of the new one, only new top-level key is `_note_c242`. No data/drops.json touched (not mine). No code wiring implied.

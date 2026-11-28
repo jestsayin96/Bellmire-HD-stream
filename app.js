@@ -2776,7 +2776,7 @@ function openGuildChat() {
 // baked in as a const and not overridable at runtime. Clicking the button runs the
 // device grant below (per the Twitch docs); nothing contacts Twitch before the click.
 // The empty-id branch in twitchSignIn() is kept as a defensive fallback only.
-const TWITCH_CLIENT_ID = "mpblygfdxvdpnr0dvi3andjlvb4y0r";  // Bellmire Hub Login: PUBLIC client, device-code grant, chat scopes only. Not overridable at runtime.
+const TWITCH_CLIENT_ID = "vycakn50ijzi1qrcbzqo0xc9kh1h8h";  // Bellmire Guild Chat: PUBLIC client, device-code grant, chat scopes only. Not overridable at runtime.
 const TW_DEVICE = "https://id.twitch.tv/oauth2/device";
 const TW_TOKEN = "https://id.twitch.tv/oauth2/token";
 const TW_USERS = "https://api.twitch.tv/helix/users";
@@ -2795,13 +2795,28 @@ function signinSay(html, cls) {
 }
 
 async function twitchSignIn() {
-  // The original Device Code flow used a Public Twitch client that no longer exists.
-  // Supabase Auth (the Room's sign-in) is now the single Twitch auth path.
-  // If the viewer already has a Supabase session, bridge it into the spotlight.
+  // If the viewer already has a spotlight from the Supabase session bridge, just show it.
   if (twLogin) { highlightMyHero(twLogin); return; }
-  // Otherwise, redirect to the Room tab where the Supabase PKCE sign-in lives.
-  signinSay("Opening the sign-in page…");
-  setActiveTab("room");
+  if (twPolling) return;
+  if (!TWITCH_CLIENT_ID) {
+    signinSay("Twitch sign-in isn't set up yet — it needs Mr. E to register the app and add its client id. Until then, type your hero's name in the box below.", "gated");
+    return;
+  }
+  try {
+    signinSay("Asking Twitch for a code…");
+    const body = "client_id=" + encodeURIComponent(TWITCH_CLIENT_ID) + "&scopes=" + encodeURIComponent(TW_SCOPES);
+    const res = await fetch(TW_DEVICE, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body });
+    if (!res.ok) throw new Error("Twitch said " + res.status);
+    const d = await res.json();
+    const strong = el("b", null, String(d.user_code || "").toUpperCase());
+    const uri = String(d.verification_uri || "https://www.twitch.tv/activate");
+    const link = el("a", "signinlink", uri.replace(/^https?:\/\//, ""));
+    if (/^https:\/\/(www\.)?twitch\.tv\//.test(uri)) { link.href = uri; link.target = "_blank"; link.rel = "noopener noreferrer"; }
+    signinSay([document.createTextNode("Go to "), link, document.createTextNode(" and enter the code "), strong], "code");
+    pollForToken(String(d.device_code || ""), Math.max(5, n0(d.interval) || 5), Date.now() + (n0(d.expires_in) || 600) * 1000);
+  } catch (e) {
+    signinSay("Couldn't reach Twitch sign-in just now. Try again in a moment.", "bad");
+  }
 }
 
 async function pollForToken(deviceCode, intervalS, deadline) {

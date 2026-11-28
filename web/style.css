@@ -1909,3 +1909,8 @@ ol.bagmap, ul.bagmarks { list-style: none; margin: 0; padding: 0; }
 .room-login { margin: 8px 0; }
 #roomStatus { color: var(--ink); font-style: normal; }
 .room-form .chip { justify-self: start; padding: 8px 18px; }
+/* H36: My Room - own sheet + satchel quick buttons */
+.room-sheet { margin: 10px 0; }
+.room-sheet > summary { cursor: pointer; }
+.room-bag .room-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; }
+.room-quick { padding: 4px 8px; min-height: 28px; }

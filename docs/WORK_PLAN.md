@@ -1,4 +1,187 @@
 ================================================================================
+## THE 11:58 CT FIRING, 28 NOV 2026 - TEAM LEAD. SUPERSEDES EVERY ROW BELOW THIS LINE.
+Written 12:0x-12:1x CT, 28 Nov 2026. Clock read with `TZ=America/Chicago date` (17:58 UTC = 11:58 CST).
+REACHES THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52).
+THE GAME BUILD FIRED AT 12:07 BEFORE THIS BLOCK EXISTED, SO IT READS THIS AT 13:07.
+
+### 1. SIX FOR SIX. ALL SIX LANES SHIPPED, ALL SIX MERGED AND PUSHED.
+`origin/main` was **01509ae6**, it is now **668c41c8**, pushed as a verified fast-forward.
+Order: laptop, content, art, hub, hud-ui, chatbot. Nothing forced, no history rewritten, no branch
+deleted. PROGRESS.md took FOUR conflicts (content, hub, hud-ui, chatbot), each one block, resolved
+keeping BOTH sides with a state machine. **+98/-0 on PROGRESS.md - ZERO lines removed** - and proved
+by SET MEMBERSHIP, not arithmetic: every line each lane added that main lacked (laptop 47, content 7,
+hub 6, hud-ui 6, chatbot 19) is present in the merged file, 0 missing. Residual markers: **0**,
+counted with a literal `startswith` over all four exact shapes, never `grep -E`.
+
+### TICKED THIS HOUR
+- **GAME BUILD S176 - TICKED.** Systems 15-17 town tier work, the words half. I did not take the
+  claim: I read `tools/_s171_tiers.gd` and it has REAL red arms (tier-1 crier, a downward change,
+  a broken clock, tier_at override, a hall with no words, hall meshes present but unresolved), and
+  I read all seven verdict lines off the lane's own 773-line `_s174_battery.log` MYSELF, ungrepped
+  and untruncated: parse rc=0 / 0 Parse Error; `S171_TIERS OK changes=151 cried=118
+  hall_mesh=town_hall_t3.glb`; `TWITCH_PARSE OK (8 checks)`; `OFFFLOOR_VERDICT OK 0 of 2174`;
+  `DEATH_TEST OK 36 of 36`; `TOWNWALK in_solid=0/17468 raid_in_solid=0/4502 PASS`,
+  `STUCK_ON_ROUTE_TOTAL 0`; `DELVE_TEST OK 9001 frames`. `WELL_TIER_MESHES := false` confirmed at
+  town.gd:139 and guarding at :1116, so the mesh path is inert and the commit is safe.
+- **CONTENT C-253 - TICKED.** `town_buildings.shops` (6) + `shop_events` in lore_lines.json, file
+  round-trips, every pre-existing key unchanged.
+- **ART - TICKED, TWO DELIVERIES.** The INN tier ladder t1/t2/t3 exterior-only (36 files in
+  assets/buildings/, each .glb with its .import sibling) with all five views plus
+  `_tiers_side_by_side.png` rendered; and **520 dead `web/**/*.webp.import` sidecars dropped** -
+  I verified that count by `ls-tree` (main carried 523 .import under web/, art leaves 3: the two
+  fonts and og.png) and **the lane's 520 is exactly right; my first instrument said 513 and it was
+  MY undercount.** Zero `.webp` images were harmed: `git diff --name-status main...art -- web/` is
+  520 D, **all `.import`, zero `.webp`**.
+- **HUB H36 - TICKED.** My Room shows the viewer's own sheet + satchel with Wear/Dye pre-fill, and
+  the 10 s poll no longer wipes a part-typed request. Cache bust bumped on BOTH: `style.css?v=10`,
+  `app.js?v=12`.
+- **HUD U225 - TICKED AS A FULL DELIVERY.** It stood down because art held a live lock, wrote the
+  carry up, and took nothing. That is the yield rule working and it is a delivery.
+- **CHAT BOT B224 - TICKED.** A comment-only correction to its own measurement block in
+  `chatcmd.gd`, gated green (parse rc=0, L14_TEST OK 27 checks, both COMMANDS.md symmetry arms at
+  40 rows), `data/commands.json` and `docs/COMMANDS.md` byte-unchanged.
+
+### NOT TICKED, AND WHY
+- **Nothing is being withheld this hour.** All six are ticked.
+- **The WELL_TIER_MESHES flip is NOT ticked and was never claimed** - it is the next row below.
+- **I did NOT re-run any Godot gate myself.** At 12:0x the lock window was the HUD's (:52-:07) and
+  then the game build's (:07-:40), so taking it would have been the exact fault I charge others
+  with. I verified by reading the gate's source and the lane's full log instead, and I am saying so
+  rather than implying I re-ran it.
+
+### 2. *** TAKE THIS NEXT - SIX ROWS. THESE SUPERSEDE EVERY ROW BELOW. ***
+
+**GAME BUILD (:07) - FLIP `WELL_TIER_MESHES` AND MAKE THE TOWN VISIBLY CHANGE. Priority #1, and
+every other half is now in place.** Content's `landmarks.inn` carries **3 tiers of words**, art's
+`town_inn_t1/t2/t3.glb` are on main **with .import siblings**, and your own reader already resolves
+them (`S171_TIERS OK ... hall_mesh=town_hall_t3.glb` proves mesh_for works on a real family).
+Order: flip the flag -> render the square at **L1 / L3 / L6** -> **LOOK at the three shots side by
+side** and only then commit. Then the landmark mesh swap for **hall and inn** the same way.
+ALSO OWED, ONE LINE: **commit `_s174_battery.log`.** Your evidence for S176 is an UNCOMMITTED file
+in R's working tree - it verified clean when I read it, but on `origin/laptop` there is nothing to
+judge S176 by. Commit the log with your next cycle.
+NOT YOURS TO INVENT: your supervisor-ordered run (polling -> snapshot cadence -> town) is already
+through to town - you recorded polling, cadence, MAX_ROWS and solo_ask as landed at PROGRESS 24767.
+
+**CONTENT (:22) - FINISH THE `districts.*` TIER WORDS, THEN QUEST BOARD 18.** All 7 `landmarks.*`
+families carry `tiers` of exactly 3. Check every `districts.*` entry for the same and write any that
+is short; that is what the reader resolves. **YOUR C-253 SHOP WORDS ARE NOT WASTED AND NEED NO
+REWRITE** - `town_tiers.words_of` resolves `districts.*`, `landmarks.*` and `sites.*` only, so
+`town_buildings.shops` is reached through a layout entry's optional `words` field, and wiring that
+is the GAME BUILD's half, not yours. Keep writing ahead; you are correctly ahead of your reader.
+
+**ART (:34) - THE NEXT TOWN TIER FAMILY, AND READ THE LOCK ROW BELOW BEFORE YOU CLAIM.** Content
+has words for all seven landmark families (barracks, chapel, hall, inn, market_hall, windmill,
+workshop); hall, well and inn have meshes. Take the next family by that list and ship t1/t2/t3
+exterior-only, three tiers **rendered side by side** so the progression reads at a glance - that is
+the acceptance test and your inn delivery met it. Then hero gear. The roster is **closed at 70**.
+
+**HUB (:37) - PROVE THE SIGNED-IN ROUND TRIP, BECAUSE IT IS YOUR OWN NAMED BLOCKER.** You wrote at
+PROGRESS 24830 that you are NOT claiming ready to publish because the signed-in round trip against
+live Supabase is unproven. That is the right call and it is the one thing standing between H36 and a
+live page. Prove it end to end (sign in -> file a request -> the row lands -> the engine's poller
+sees it -> My Room's Recent shows it) and say so in those words. **YOU STILL NEVER PUBLISH.**
+
+**CHAT BOT (:45) - AUDIT THE 40-COMMAND SURFACE AGAINST SUPERVISOR ORDER 2, DOC ONLY.** The hub is
+the primary interface; chat is viewers talking, BellmireBro announcing, and MINIMAL commands.
+Nothing shipped is reverted and **you add no command, verb or alias.** Walk `docs/COMMANDS.md` and
+mark which of the 40 are now HUB-FIRST FALLBACKS (gear, inventory, quests, party) versus the
+minimal set (`!enlist`, `!hero`, `!help`). A doc that tells a viewer the truth about where a thing
+is done is in-charter and is real work under the deadline clause.
+
+**HUD (:52) - TAKE YOUR U225 CARRY, AND YOUR :52 WINDOW IS CLEAR THIS HOUR.** You lost the window
+to art at 11:52 through no fault of yours; the row that stops it recurring is below and it is MINE,
+not yours. Resume the carry you wrote up.
+
+### 3. LOCK DISCIPLINE - THE CLEAN-HOUR COUNT RESETS TO 0, AND THE FAULT IS MINE TO FIX.
+Holders this hour: QA tester 10:42:32-10:43:48; chat bot 10:47:41-10:51:01; HUD 10:53:33-10:56:42;
+game build 11:09:02-11:19:29; art 11:52:58-11:53:35; chat bot 11:54:33-11:55:55. **Nobody claimed
+over a live hold** - every claim followed an IDLE from the previous holder, and every lane read the
+last line first. No lock was cleared on age.
+**TWO MECHANICAL FAULTS, BOTH ART'S LOCK LINE, AND THEY BREAK THE COUNT:**
+ (a) **ART OVER-DECLARED BY 27 MINUTES.** Its claim says `cap claim+25` and then
+     `DECLARED FINISH 12:45:00-06:00`. Claim was 11:52:58, so the cap is **12:17:58**. A declared
+     finish may not exceed the cap. Actual hold was **37 seconds**, it released at 11:53:35 and
+     wrote the cap correctly in its IDLE - so this is a transcription fault, not a greedy hold, and
+     I am charging it as the former. **ART: compute claim+25 FIRST, then write the declared finish
+     inside it.** That is the exact fix the game build adopted after seven of these, and it has held
+     for it since 02:08 on 21 Nov.
+ (b) **IT CLAIMED AT 11:52:58, INSIDE THE HUD's :52 WINDOW, AND COST THE HUD ITS CYCLE.** The lock
+     was genuinely free, so **no yield violation and art broke no rule it was given** - and the HUD
+     correctly stood down and wrote it up (U225). But this is the same cost the chat bot was
+     imposing at :52 until I gave it a row, and *** WHEN A LANE KEEPS LOSING ITS WINDOW THE
+     SCHEDULE IS THE FAULT AND IT IS MINE. *** So:
+*** NEW STANDING ROW FOR ART - THE LOCK GAP IS :40-:45. ***
+Art fires at :34 inside the game build's :07-:40 window, so it has ONE clean gap: **after the game
+build's hard release at :40 and before the chat bot at :45.** ART: claim only in that gap. If your
+render is not ready by :45, **SPLIT THE JOB AND CARRY THE REMAINDER TO YOUR NEXT FIRING** - do not
+claim at :52 and do not declare a crossing. A fit render is never worth another lane's whole cycle.
+This goes in art's PROMPT at the next live turn; until then THIS PLAN IS THE INSTRUMENT and art
+obeys this row.
+
+### 4. DEAD-DATA AUDIT - THE SERIES WENT 16 -> 15 NON-NOTE AND THAT IS THE READER ARRIVING.
+Measured by me at 12:0x CT on merged main (668c41c8). Corpus `scripts/*.gd` + `web/app.js` =
+**51 files (50 .gd), 2,600,608 chars**; `data/*.json` = 12 files, **185 top-level keys**; ZERO-HIT
+**93 = 78 `_note_` + 15 NON-NOTE**. Series, non-note/raw: 15/52, 15/53, 15/56, 15/88, **16/93 at
+11:2x**, **15/93 now**.
+*** THE SIXTEENTH WAS `town_buildings` AND IT IS NOW READ. DO NOT RE-OPEN IT. *** The 11:2x
+addendum called it correctly: zero readers, queued work, "it becomes the game build's when you build
+the /2 loader, and not before." **S171 built it.** `scripts/town_tiers.gd:26` reads
+`d["town_buildings"]`. The predicted event happened on schedule and the count fell back to the
+charter's 15, which are unchanged and all still accounted for (two runtime-built `_alt` pools READ
+at delve.gd:4022, four of the declared-dead family, nine prose/spec strings).
+**UNREAD LIVE DATA KEYS: ZERO.** Unreferenced asset directories: **1 by the script corpus,
+`assets/graveyard/Textures`, and it is READ** - five `.glb` binaries carry `Textures/colormap.png`
+inside them (guard 5). So **ZERO genuinely unreferenced**, unchanged.
+Sub-keys are NOT in this instrument's reach: `shop_events`, `upgrade_events`, `landmark_events`,
+`site_events`, `square_events` and `shops` are second-level under a live top-level key and have zero
+readers in `scripts/`. **That is queued work, exactly like town_buildings was, and NO LANE IS TO
+WIRE ONE TO SILENCE AN AUDIT.**
+
+### 5. *** A PUBLISH HAZARD I FOUND AND NOBODY HAS TRIPPED YET. THE RECIPE'S SOURCE TREE IS NOW
+### THE DIRTY ONE. ***
+I PUBLISHED NOTHING THIS HOUR AND RAN NO PUBLISH GATE, because **the hub did not claim ready to
+publish** (PROGRESS 24830, its own words, and its reason is sound). Saying so plainly: an unearned
+gate report is the same fault class as a lying gate.
+But measure before next hour trusts the recipe. `origin/gh-pages^{tree}` = **dd6294a0**;
+`origin/hub:web` = **2a437982**; `origin/main:web` = **8bfc05de**.
+ - gh-pages vs **main:web**: **6 files** - NOTES.md +37, app.js +50/-4, index.html 2/2 (the v=10 /
+   v=12 bust), style.css +5, tools/_room_h33.js.txt +225, tools/hub_actions_schema.sql +18/-4.
+ - gh-pages vs **hub:web**: **526 files** - the same 6 **plus 520 `.webp.import` sidecars that
+   hub:web still carries.**
+*** ART'S CLEANUP LANDED ON MAIN, NOT ON `hub`. *** The proven push method commits
+`tree = origin/hub:web`, so **publishing from `origin/hub:web` today would put 520 dead sidecars
+back on the live site.** The honest source this hour is `origin/main:web`. DO NOT silently swap the
+recipe either: the next seat with a LIVE TURN should fix the recipe in this prompt, and until then
+whoever publishes must re-measure BOTH trees and publish from the one without the sidecars. The
+cheapest real fix is for the **hub** to merge main (it picks the deletion up and the question dies).
+The 520 are provably dead: zero hits for `webp.import` anywhere in `scripts/`, `web/app.js` or
+`tools/`, and only fonts + og.png keep a legitimate sidecar.
+
+### 6. FOR THE NEXT TEAM LEAD - CORRECTIONS OWED IN PROMPTS, NOT YET WRITABLE.
+A FIRING CANNOT EDIT A SCHEDULED TASK (the gate is on the CALL, proven three times). I attempted no
+write. These are owed on the next LIVE turn and are in this plan meanwhile:
+ 1. **ART's prompt** - add the :40-:45 lock-gap row and the compute-cap-first rule (section 3).
+ 2. **THIS prompt (:58)** - the publish-method block still says `tree = origin/hub:web` with no
+    warning; add "re-measure both trees, publish from the one without the dead sidecars" (section 5).
+ 3. **THIS prompt (:58)** - the hub baseline figures (`23eee62a` / `e346dc16`, "the entire
+    difference is web/NOTES.md +10/-0") are stale; gh-pages is now **dd6294a0** and the delta is the
+    6 files in section 5. The prompt already says to re-measure every hour; the stale numbers in it
+    should still go.
+ 4. **THIS prompt (:58)** - the dead-data baseline series should carry 15/93 and the
+    `town_buildings` resolution, so no seat re-discovers it.
+
+### 7. FOR THE SUPERVISOR
+**Nothing is blocked on you this hour, and I am taking no decision that is yours.**
+One thing for your awareness, no action asked: the hub's own named blocker is a signed-in round trip
+against live Supabase, and proving it means a real Twitch OAuth sign-in against the live project. It
+is inside the architecture you ordered (Option A, Supabase Auth) and inside W-LIVE's rules (no bits,
+no subscriptions, nothing posts as Mr. E), so I have given it to the lane as ordinary work. If you
+want that round trip witnessed by you before the hub may ever claim "ready to publish", say so and I
+will put it in the lane's row as a gate.
+*** ===== END OF THE 11:58 CT BLOCK ===== ***
+
+================================================================================
 ## ADDENDUM TO THE 10:58 CT BLOCK - 28 NOV 2026, written 11:2x CT. ONE FINDING, NO ROW CHANGES.
 THIS IS THE NEXT FIRING'S ROW FOR NOBODY - every row in the 10:58 block above STANDS UNCHANGED.
 REACHES: art (:34), hub (:37), chat bot (:45), HUD (:52) this hour, and THE GAME BUILD AT 12:07,

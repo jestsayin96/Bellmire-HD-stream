@@ -5911,19 +5911,25 @@ function finderOpen(r) {
       a.args.forEach(([k, lab]) => {
         const l = el("label", "sat-lab", lab + " "); const i = el("input", "suggest-input"); i.type = "text"; i.maxLength = 60; i.autocomplete = "off"; i.setAttribute("aria-label", lab);
         inputs[k] = i; l.append(i); slot.append(l);
-        // wear / dye: offer the names from THIS viewer's own satchel as suggestions (a datalist, not a rule -
-        // the engine still decides). Names are snapshot strings, so they go in as option.value (a property), never markup.
-        if (k === "item" && (a.kind === "wear" || a.kind === "dye")) {
-          const h = myHeroRow(), names = [];
-          if (h) for (const r of satchelRows(h)) { const n = clean(r.name, 60); if (n && names.indexOf(n) < 0) names.push(n); }
-          if (names.length) {
-            const dl = el("datalist"); dl.id = "roomItems";
-            names.slice(0, 40).forEach((n) => { const o = el("option"); o.value = n; dl.append(o); });
-            i.setAttribute("list", "roomItems"); l.append(dl);
-          }
-        }
+        // wear / dye: the item box is bound to ONE persistent datalist of THIS viewer's own satchel names
+        // (a suggestion, not a rule - the engine still decides). Names are snapshot strings: option.value, never markup.
+        if (k === "item" && (a.kind === "wear" || a.kind === "dye")) i.setAttribute("list", "roomItems");
       });
     };
+    const dl = el("datalist"); dl.id = "roomItems";
+    f.refreshItems = () => {
+      const h = myHeroRow(), names = [];
+      if (h) for (const r of satchelRows(h)) { const n = clean(r.name, 60); if (n && names.indexOf(n) < 0) names.push(n); }
+      dl.replaceChildren();
+      names.slice(0, 40).forEach((n) => { const o = el("option"); o.value = n; dl.append(o); });
+    };
+    // a satchel row's Wear / Dye button pre-fills the form (still a request; the viewer presses File request)
+    f.fill = (kind, item) => {
+      const ix = ACTIONS.findIndex((a) => a.kind === kind); if (ix < 0) return;
+      sel.value = String(ix); sel.dispatchEvent(new Event("change"));
+      if (inputs.item) { inputs.item.value = clean(item, 60); inputs.item.focus(); }
+    };
+    f.refreshItems();
     sel.addEventListener("change", draw); draw();
     const go = el("button", "chip on", "File request"); go.type = "submit";
     let armed = false;   // a once-and-for-good request needs a second press (no browser dialog)
@@ -5934,7 +5940,7 @@ function finderOpen(r) {
       if (a.confirm && !armed) { armed = true; go.textContent = "Press again: once and for good"; return; }
       armed = false; go.textContent = "File request"; send(a, vals);
     });
-    f.append(sel, slot, go);
+    f.append(sel, slot, go, dl);
     return f;
   }
   function recent() {
@@ -5955,8 +5961,34 @@ function finderOpen(r) {
     box.append(ul);
     return box;
   }
+  let sheetOpen = true;
+  let formNode = null;   // built once per sign-in so the 10 s poll never wipes what the viewer is typing
+  function mySheet(h) {
+    const box = el("details", "room-sheet"); box.open = sheetOpen;
+    box.addEventListener("toggle", () => { sheetOpen = box.open; });
+    box.append(el("summary", "room-h", "Your character sheet"));
+    try { box.append(heroSheet(h)); } catch (e) { box.append(el("p", "note", "The sheet could not be drawn this time.")); }
+    return box;
+  }
+  function myBag(h) {
+    const rs = satchelRows(h).filter((r) => r.note !== "equipped");
+    const box = el("div", "room-bag"); box.append(el("h3", "room-h", "Your satchel"));
+    if (!rs.length) { box.append(el("p", "note", "Nothing in the satchel (or the town has not published it yet).")); return box; }
+    const ul = el("ul", "room-list");
+    rs.slice(0, 40).forEach((r) => {
+      const li = el("li", "room-row"); li.append(el("b", "", r.name), document.createTextNode(r.qty > 1 ? "  \u00d7" + r.qty : "  "));
+      [["wear", "Wear"], ["dye", "Dye"]].forEach(([k, lab]) => {
+        const b = el("button", "linkbtn room-quick", lab); b.type = "button"; b.setAttribute("aria-label", lab + " " + r.name);
+        b.addEventListener("click", () => { if (formNode) formNode.fill(k, r.name); });
+        li.append(document.createTextNode(" "), b);
+      });
+      ul.append(li);
+    });
+    box.append(ul); return box;
+  }
   function paint() {
     root.replaceChildren();
+    if (!session) formNode = null;
     if (authOn === null && !session) { root.append(el("p", "note", "Checking whether sign-in is open…")); return; }
     if (!session) {
       root.append(el("p", "", "Sign in with your Twitch account to open your room: your hero, your gear and your requests to the town, all in one place."));
@@ -5973,7 +6005,8 @@ function finderOpen(r) {
     else card.append(el("span", "note", "No hero under your name on the roll right now. Type !enlist in chat to raise one."));
     root.append(card);
     root.append(el("p", "note", "Changes take effect in 15–30 seconds in-game."));
-    if (desk !== "closed") root.append(actionForm());
+    if (h) root.append(mySheet(h), myBag(h));
+    if (desk !== "closed") { if (!formNode) formNode = actionForm(); else formNode.refreshItems(); root.append(formNode); }
     root.append(recent());
   }
   function sync() {

@@ -25182,3 +25182,88 @@ which `_l14_test.gd` excludes by name (**L17: `!test*` are local-only, never doc
 - **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or
   changed; Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
 - Not ticked - the team lead ticks.
+
+### B227 - THE SIX POINTERS B226 REPORTED AND DID NOT FIX NOW NAME A PLACE A VIEWER CAN ACTUALLY FIND, AND THIS TIME THE REAL GENERATOR AND THE REAL L14 GATE BOTH RAN GREEN (nov28-1445)
+
+Row taken: **CHAT BOT (:45)** from the 13:58 TAKE THIS NEXT block - *"The pointer pass is closed and
+I accept your eleven exclusions with reasons... the next step is the reply text itself: walk the
+commands that now point at a hub tab and make sure the chat reply is the short answer with the hub
+as the full one, rather than two full answers. Doc and data only; no command, verb or alias added;
+order stays 40."* Merged `origin/main` **b9ee3fbb** (rc=0, no conflicts).
+
+**THE BIGGER FAULT WAS NOT WORDINESS, IT WAS SIX POINTERS AIMED AT TABS THAT DO NOT EXIST - AND
+B226 HAD ALREADY FOUND IT AND LEFT IT DELIBERATELY.** B226's own entry says it: *"a viewer told
+'under Gear' will scan 16 tabs and find no Gear. The honest form is 'under My Room -> Gear'. I did
+NOT reword the 27 - that is 6 proven entries of churn outside my row... Reported, not done."* This
+hour's row IS to walk those pointers, so the residual is now in scope and it is done.
+- **MEASURED MYSELF, NOT TAKEN ON TRUST.** The 16 visible tab labels in `web/index.html`: Live,
+  Boards, Town, Heroes, Bands, Chronicle, The die, Guild Roll, The Fallen, Lore, Bestiary, Shops,
+  Satchel, My Room, Season, Commands. **`Gear`, `Hero` and `Party` are none of them.** They are
+  `optgroup` labels in the `#roomKind` select (`app.js:5779-5788`), and that form is mounted on
+  `root = $("roomBody")` - **inside My Room**. So the words are real; the *place* was wrong.
+- Six commands fixed, `short` and `what` both: **`wear`, `dye`** (were "under Gear"), **`respec`,
+  `reroll`, `specialize`** (were "under Hero"), **`party`** (was "under Party"). `short` now says
+  **"under My Room"**; `what` says **"on the request form in My Room"**.
+- **AFTER: every `under <X>` in the data names one of the 16 real tabs** - Boards 6, Commands 2,
+  Guild Roll 4, My Room 16, Shops 10, The Fallen 2. `grep` for "under Gear|under Hero|under Party"
+  across `data/commands.json`, `docs/COMMANDS.md` and `scripts/chatcmd.gd` returns **0**.
+
+**TWO FULL ANSWERS, WHICH IS WHAT THE ROW LITERALLY ASKED FOR - AND I TRIMMED TWO, NOT TWENTY.**
+The doc generator publishes **`what`**, never `short` (`tools/_commands_doc.gd:36`), so `what` is
+the hub's full answer and `short` is the one-second chat reply. The fault is a `short` carrying a
+clause whose only job is detail `what` already holds. Two qualified:
+- `!help`.short dropped *"- gear and errands are managed there"* (121 -> 85 chars). `what` already
+  says it at length, and the bare `!help` tail has read *"Manage your hero on the page: <url>"*
+  since B214.
+- `!paths`.short dropped *"and the first gift of each"* (91 -> 64). That is a promise of content,
+  not content; `what` names each road's gift.
+**I LEFT THE OTHERS AND I WILL SAY WHY, because trimming for symmetry is churn.** `!armoury`'s four
+tiers (leather, chainmail, plate, warded plate) are a four-word ladder a viewer wants inside one
+second, not a second full answer. `!forge` already points at `!forge list` instead of enumerating -
+it is the model, not a fault. `!memorial`'s *"a war record, not a graveyard"* is the command's
+voice, and the hub does not "manage" the fallen. `!satchel`'s *"two fifths of shop cost"* is the
+single number the viewer came for.
+
+**ONE THING I DID *NOT* ADOPT, AND THE REASON IS A TRADE I MADE ON PURPOSE.** B226's suggested form
+was **"under My Room -> Gear"**, which keeps the group word the viewer actually sees in the select.
+**That is the better line and I did not ship it**: I had already released the lock at 14:50:20, and
+re-cutting six entries would have meant regenerating `docs/COMMANDS.md` by **emulation** instead of
+the real generator, or re-claiming inside the HUD's :52 window. **A true line proven by the real
+gate beats a more navigable line that is unproven.** Carried to B228 under a full window.
+
+**GATE: RUN FOR REAL THIS TIME, AND BOTH HALVES GREEN. The emulation debt B226 left is paid.**
+- Lock read from R's **working copy**: last line `IDLE 2026-11-28T14:20:13-06:00` (game build
+  S179). **Free, no live hold.** Claimed **14:50:00**, cap claim+25 = **15:15:00**, declared finish
+  **14:51:45** (inside :52 on purpose), released **IDLE 14:50:20** - **1 minute 25 seconds inside
+  my own declared finish**, no crossing into the HUD window.
+- `tools/_commands_doc.gd` rc=0 in **1.8 s**: **`COMMANDS_DOC OK wrote 40 commands`** (`_b227_doc.log`).
+- `tools/_l14_test.gd` rc=0 in **1.4 s**: **`L14_TEST OK (27 checks)`** (`_b227_l14.log`), including
+  the two arms that matter here - *"docs/COMMANDS.md carries every field the data publishes,
+  verbatim (40 rows; unpublished [])"* and *"publishes nothing the data does not say (40 rows;
+  stale [])"*. **So the doc is the real generator's bytes, not mine.**
+- The ObjectDB/resource lines at exit are Godot's standard headless teardown noise, present on
+  every clean run in this lane's logs; rc=0 on both.
+
+**DRIFT, BOTH DIRECTIONS, AND THE PRE-EXISTING DATA PROVED UNTOUCHED FIELD BY FIELD.** `json.load`
+OK; `order` **40**, `commands` **40**. I edited the raw text by **14 exact single-occurrence
+substring replacements with a count assertion on each** - no `json.dump`, so no whole-file
+reformat. Then a field-by-field diff of the parsed old and new: top-level key order identical,
+`order` identical, command set identical, **field order identical inside every one of the 40**, and
+`ask`/`foreign`/`cooldown_s`/`twitch_cooldown_s`/`hub_url`/`_source` byte-identical. **Exactly 14
+fields changed across 9 commands and nothing else moved.** L14's own symmetry arms cover both drift
+directions and are green.
+
+**THE REPLY BUDGET MOVED IN THE SAFE DIRECTION.** The bare `!help` line is built from `order` keys
+plus the hub tail, not from `short`/`what`, so these edits cannot touch it: still **428 of
+REPLY_MAX 440**. Every edit either shortened a `short` or lengthened one by at most ~11 characters
+("under My Room" for "under Gear"); the worst `!help <cmd>` detail line is still **`!help repair`
+at 251**, which I did not touch, and no arm reds.
+- Nothing owed from `twitch_eventsub.gd`: `twitch_reply(user_login, text)` untouched, no new
+  signature asked of the game build. **No command, verb or alias added - `order` stays 40.**
+- **THE MOUNT IS FLAT AGAIN, A FOURTH REPORT.** `$HOME/mnt/` holds `bellmire-bot` and
+  `jests-hd-medieval-adventure` **flat** - no `hd adventure` parent - so my prompt's
+  `"$HOME/mnt/hd adventure/bellmire-bot"` failed *No such file or directory* as the first command of
+  this run, as at B223, B224 and B226. **I did NOT call `device_request_folder_access`.**
+- **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or
+  changed; Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
+- Not ticked - the team lead ticks.

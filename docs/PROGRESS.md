@@ -5046,3 +5046,30 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
   2114. TOWNWALK in_solid=0/17492 (0.000%) raid_in_solid=0/3854 (0.000%) PASS. DELVE_TEST OK ran 9001 frames, floor reached 2,
   0 SCRIPT ERROR. No render: nothing visual changed. No Twitch test, ZERO BITS.
 - NEXT (3): town visual progression - define and write down the layout format FIRST.
+
+## D-cycle - S170 hub_actions DDL BLOCKED BY PERMISSION + TOWN LAYOUT FORMAT "bellmire-town/2" WRITTEN DOWN, 2026-11-28 02:08-02:2x CST (game build)
+- TAKE THIS NEXT (01:58 block), game build row (02:07): apply web/tools/hub_actions_schema.sql (the H33b
+  private.my_twitch_id() / auth.identities version from main) to Supabase and red-prove S169 against the real table.
+- PUBLISHER, ONE LINE (measured off Supabase project bellmire-hub): public.snapshot newest row 06:45:37 UTC
+  = 00:45 CT, 28 Nov - the publisher lands rows when the game runs; a stale page means the game is not running.
+- DDL NOT APPLIED. I read the main file's bytes (private.my_twitch_id(), SECURITY DEFINER, search_path '', both
+  policies keyed on it) and submitted exactly that as migration `h33b_hub_actions`; THE SESSION'S PERMISSION
+  LAYER DENIED THE MIGRATION as a destructive/unwanted action. I did not route around it. public.hub_actions
+  still does not exist (to_regclass null), so the poller stays closed (prints once, retries every 300 s) and the
+  live red-proof is not run. auth.users = 0 and auth.identities has no provider rows yet, so the second-account
+  updateUser escalation test also has no accounts to run with even once the table exists.
+  -> MR. E: apply the file from the Supabase SQL editor himself, or allow this lane's migration call; then the
+  red-proof runs next firing.
+- ORDER (4) TOWN VISUAL PROGRESSION, FORMAT FIRST: the /1 layout format already existed (data/town/README.md,
+  D93) but had NO notion of tiers. Wrote "bellmire-town/2" into data/town/README.md - strictly additive over /1:
+  tier clock read from lore_lines town_buildings.tier_levels (not copied); per-entry optional tier_at; `family`
+  -> res://assets/buildings/town_<family>_t<t>.glb with highest-existing fallback down to the /1 mesh, so art can
+  ship one tier at a time; `words` -> dotted path into town_buildings (landmarks./districts./sites. defaults),
+  naming the reader for C-248/C-249's tiers[] {name,crier,plaque,see}; THE PIVOT CONTRACT (shared origin at
+  footprint centre, off [0,0], half = largest tier, a swap never moves pos/yaw/door) - matching art's
+  TOWN_HALL_TIERS_DESIGN town_hall_t1..t3 recommendation; roads tier town-wide on the clock; square centrepiece
+  on well_to_fountain's own five stage levels. Doc only; nothing reads /2 yet.
+- NEXT: (a) the DDL + red-proof the moment permission exists; (b) _d93_validate learns tier_at ordering and the
+  largest-tier footprint rule; (c) the /2 loader + tier swap in town.gd.
+- GATES (verdict lines, merged tree): parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks).
+  Offfloor/townwalk/delve not re-run: no .gd or data file changed this cycle (README + PROGRESS + RUN_LOCK only). No Twitch test, ZERO BITS.

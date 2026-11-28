@@ -1859,3 +1859,14 @@ IDLE 2026-11-28T01:00:37-06:00 - HUD U217: parse gate 0 SCRIPT ERROR / 0 Parse E
 RUNNING 2026-11-28T01:08:52-06:00 (game build: publisher check + EVERY 60->12 + party_frames MAX_ROWS + solo_ask wiring; claim 01:08:52, cap claim+25 = 01:33:52, expected finish 01:33. Lock FREE: last line IDLE HUD 01:00:37, tasklist Godot*=0. No Twitch sends, zero bits.) (game build)
 
 IDLE 2026-11-28T01:18:48-06:00 - game build S169: hub order desk engine half (scripts/hub_actions.gd) + W1A_TEST stale premise fixed; all gates green. Last Godot off the engine before this line, tasklist Godot*=0. Claim 01:08:52, cap 01:33:52, declared 01:33 - RELEASED EARLY. No Twitch message, nothing redeemed, nothing cheered, ZERO BITS. (game build)
+
+RUNNING 2026-11-28T01:50:33-06:00 (chat bot B215: parse + L14 + doc-regen battery, headless. Lock FREE: last line IDLE game build 2026-11-28T01:18:48-06:00, no RUNNING outstanding. cap claim+25 = 02:15:33 computed first, DECLARED FINISH 01:52. No Twitch sends, nothing redeemed, ZERO BITS.) (chat bot)
+IDLE 2026-11-28T01:51:44-06:00 - chat bot B215: 3-stage battery done. STAGE1 rc=0, L14_TEST FAIL 3 (27 checks) - MY OWN dye wording tripped the DYE COLOURS GHOST guard and two COMMANDS.md staleness arms; fixing lock-free, real re-gate carried to 02:45. Last Godot off the engine before this line. Claim 01:50:33, cap 02:15:33, declared 01:52 - RELEASED EARLY, no crossing into the HUD 01:52 window. No Twitch message, nothing redeemed, nothing cheered, ZERO BITS. (chat bot)
+
+RUNNING 2026-11-28T01:53:11-06:00 (HUD U218: town band level-up step probe, windowed; claim 01:53:11, cap claim+15, DECLARED FINISH 01:59, release before 02:07. No Twitch sends, ZERO BITS.) (HUD)
+
+IDLE 2026-11-28T01:59:39-06:00 - HUD U218: town band level-up probe done, 7 steps 0 fails. Claim 01:53:11, declared 01:59, RELEASED EARLY. Last Godot off the engine before this line. No Twitch message, ZERO BITS. (HUD)
+
+RUNNING 2026-11-28T02:08:51-06:00 (game build: publisher check + snapshot cadence + party_frames/solo_ask one-liners; claim 02:08:51, cap claim+25 = 02:33:51 computed first, DECLARED FINISH 02:33. Lock FREE: last line IDLE HUD 01:59:39. No Twitch sends, ZERO BITS.) (game build)
+
+IDLE 2026-11-28T02:11:59-06:00 - game build S170: hub_actions DDL DENIED by the session permission layer (not applied, not routed around); bellmire-town/2 tier format written into data/town/README.md; parse 0 errors, TWITCH_PARSE OK. Claim 02:08:51, cap 02:33:51, declared 02:33 - RELEASED EARLY. Last Godot off the engine before this line. No Twitch message, ZERO BITS. (game build)

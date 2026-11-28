@@ -883,14 +883,22 @@ def main():
         for k, v in lab.items():
             if v == 0:
                 rep["errors"].append("LABEL EMPTY: %s" % k)
-        # the progression must be MONOTONIC in silhouette - a number cannot say
-        # it READS, but it can say the three are not the same size
-        hs = [sil[k]["h_px"] for k in ORDER]
-        ws = [sil[k]["px"] for k in ORDER]
-        if not (hs[0] < hs[1] < hs[2]):
-            rep["errors"].append("SILHOUETTE HEIGHT NOT MONOTONIC: %s" % hs)
-        if not (ws[0] < ws[1] < ws[2]):
-            rep["errors"].append("SILHOUETTE AREA NOT MONOTONIC: %s" % ws)
+        # THE LADDER GATE (townlib.ladder_gate), 28 Nov 07:5x CT. It KEEPS the
+        # monotonic rule these four lines used to carry - the hall genuinely
+        # grows each tier (178 < 343 < 609 px) - and that is why it is passed
+        # growth="monotonic" rather than the well's "free". What it ADDS is the
+        # two things this gate never had: RED ON EMPTY (a tier that failed to
+        # render simply vanished from `sil` and every surviving number read
+        # fine) and a SCALE FLOOR, which the well ladder needed because its
+        # 06:46 draft framed the sheet three times too far away and printed
+        # GREEN. dims_m is this file's OWN Blender-space extent, so index 2 is
+        # the Z height unambiguously. Proof: tools/art/_laddergate_validate.py,
+        # which replays this hall sheet and three real well sheets.
+        rep["errors"].extend(T.ladder_gate(
+            sil, list(ORDER),
+            {k: (v.get("dims_m") or [0, 0, 0])[2]
+             for k, v in rep["tiers"].items()},
+            RY, growth="monotonic"))
         rep["sheet"] = {"path": os.path.relpath(sheet, a.repo).replace("\\", "/"),
                         "opaque_px": sheet_px, "subject_moved_px": sheet_moved,
                         "border_alpha_px": T.border_px(sheet), "label_px": lab,

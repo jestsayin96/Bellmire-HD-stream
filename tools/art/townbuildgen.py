@@ -43,6 +43,7 @@ sys.path.insert(0, HERE)
 import lordgen as G
 import lordlib as L
 import townbuild as TB
+import townlib as T          # ladder_gate - see its docstring
 
 W5 = r"C:\hd adventure\bellmire-art"
 HERO = os.path.join(W5, "addons", "kaykit_character_pack_adventures",
@@ -375,6 +376,20 @@ def main():
     for k, v in lab.items():
         if v == 0:
             report["errors"].append("LABEL EMPTY: %s" % k)
+
+    # THE LADDER GATE. Until 28 Nov 07:5x CT `sil` above was measured at the
+    # cost of three extra renders per tier, written into the report, and never
+    # read by a single error branch - so the 06:46 draft of this file, which
+    # framed the sheet three times too far away, printed GREEN exactly like the
+    # fixed one. growth="free" is DELIBERATE and is not laziness: the tier-3
+    # Fountain (1.64 m) is shorter than the tier-2 roofed Well Kept (2.415 m),
+    # so hallgen's monotonic-height rule would fire on the GOOD sheet here.
+    # Proof of both claims: tools/art/_laddergate_validate.py.
+    report["errors"].extend(T.ladder_gate(
+        sil, list(TB.ORDER),
+        {k: v["dims"][2] for k, v in report["tiers"].items()},
+        RY, growth="free"))
+
     report["sheet"] = {"path": os.path.relpath(sheet, a.repo).replace("\\", "/"),
                        "opaque_px": sheet_px, "subject_moved_px": sheet_moved,
                        "border_alpha_px": border_px(sheet), "label_px": lab,

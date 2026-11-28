@@ -1,0 +1,564 @@
+{
+ "Wall_Plaster_WoodGrid": {
+  "instances": 66,
+  "unbacked": 61,
+  "hole_med": 0.2516,
+  "hole_max": 0.3104,
+  "per_file": {
+   "lm_barracks.glb": {
+    "n": 6,
+    "holes": 6,
+    "hole_med": 0.2292
+   },
+   "lm_chapel.glb": {
+    "n": 7,
+    "holes": 6,
+    "hole_med": 0.2292
+   },
+   "lm_hall.glb": {
+    "n": 14,
+    "holes": 12,
+    "hole_med": 0.2861
+   },
+   "lm_watermill.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.2092
+   },
+   "lm_workshop.glb": {
+    "n": 5,
+    "holes": 5,
+    "hole_med": 0.2197
+   },
+   "mk_house_a.glb": {
+    "n": 4,
+    "holes": 4,
+    "hole_med": 0.2303
+   },
+   "mk_house_b.glb": {
+    "n": 6,
+    "holes": 6,
+    "hole_med": 0.2863
+   },
+   "mk_house_c.glb": {
+    "n": 5,
+    "holes": 5,
+    "hole_med": 0.2087
+   },
+   "mk_house_d.glb": {
+    "n": 3,
+    "holes": 3,
+    "hole_med": 0.2256
+   },
+   "town_hall_t1.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.3056
+   },
+   "town_hall_t3.glb": {
+    "n": 14,
+    "holes": 12,
+    "hole_med": 0.2861
+   }
+  }
+ },
+ "Wall_UnevenBrick_Door_Round": {
+  "instances": 17,
+  "unbacked": 16,
+  "hole_med": 0.1876,
+  "hole_max": 0.3636,
+  "per_file": {
+   "lm_barracks.glb": {
+    "n": 3,
+    "holes": 3,
+    "hole_med": 0.1876
+   },
+   "lm_chapel.glb": {
+    "n": 2,
+    "holes": 1,
+    "hole_med": 0.1876
+   },
+   "lm_granary.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.1876
+   },
+   "lm_hall.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.187
+   },
+   "lm_sawmill.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.1876
+   },
+   "lm_watermill.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.1834
+   },
+   "lm_windmill.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.187
+   },
+   "lm_workshop.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.1876
+   },
+   "mk_house_a.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.1876
+   },
+   "mk_house_b.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.1834
+   },
+   "mk_house_c.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.1876
+   },
+   "mk_house_d.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.1876
+   },
+   "town_hall_t2.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.3636
+   },
+   "town_hall_t3.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.187
+   }
+  }
+ },
+ "Wall_Plaster_Door_Flat": {
+  "instances": 1,
+  "unbacked": 1,
+  "hole_med": 0.444,
+  "hole_max": 0.444,
+  "per_file": {
+   "town_hall_t1.glb": {
+    "n": 1,
+    "holes": 1,
+    "hole_med": 0.444
+   }
+  }
+ },
+ "Wall_Plaster_Window_Wide_Round": {
+  "instances": 79,
+  "unbacked": 6,
+  "hole_med": 0.0,
+  "hole_max": 0.2868,
+  "per_file": {
+   "lm_barracks.glb": {
+    "n": 12,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_chapel.glb": {
+    "n": 7,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_hall.glb": {
+    "n": 12,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_watermill.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_workshop.glb": {
+    "n": 7,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_a.glb": {
+    "n": 4,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_b.glb": {
+    "n": 7,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_c.glb": {
+    "n": 4,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_d.glb": {
+    "n": 3,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "town_hall_t2.glb": {
+    "n": 6,
+    "holes": 6,
+    "hole_med": 0.2574
+   },
+   "town_hall_t3.glb": {
+    "n": 12,
+    "holes": 0,
+    "hole_med": 0.0
+   }
+  }
+ },
+ "Wall_UnevenBrick_Window_Wide_Round": {
+  "instances": 45,
+  "unbacked": 4,
+  "hole_med": 0.0,
+  "hole_max": 0.2967,
+  "per_file": {
+   "lm_barracks.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_chapel.glb": {
+    "n": 3,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_granary.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_hall.glb": {
+    "n": 1,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_sawmill.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_watermill.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_workshop.glb": {
+    "n": 6,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_b.glb": {
+    "n": 2,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_c.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_d.glb": {
+    "n": 3,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "town_hall_t2.glb": {
+    "n": 4,
+    "holes": 4,
+    "hole_med": 0.2967
+   },
+   "town_hall_t3.glb": {
+    "n": 1,
+    "holes": 0,
+    "hole_med": 0.0
+   }
+  }
+ },
+ "Wall_Plaster_Window_Wide_Flat": {
+  "instances": 46,
+  "unbacked": 0,
+  "hole_med": 0.0,
+  "hole_max": 0.0,
+  "per_file": {
+   "lm_barracks.glb": {
+    "n": 8,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_chapel.glb": {
+    "n": 3,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_hall.glb": {
+    "n": 9,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_watermill.glb": {
+    "n": 3,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_workshop.glb": {
+    "n": 3,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_a.glb": {
+    "n": 3,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_b.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_c.glb": {
+    "n": 2,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_d.glb": {
+    "n": 1,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "town_hall_t3.glb": {
+    "n": 9,
+    "holes": 0,
+    "hole_med": 0.0
+   }
+  }
+ },
+ "Wall_UnevenBrick_Window_Thin_Round": {
+  "instances": 108,
+  "unbacked": 0,
+  "hole_med": 0.0,
+  "hole_max": 0.0,
+  "per_file": {
+   "lm_barracks.glb": {
+    "n": 18,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_chapel.glb": {
+    "n": 22,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_granary.glb": {
+    "n": 2,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_hall.glb": {
+    "n": 18,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_sawmill.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_watermill.glb": {
+    "n": 2,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_windmill.glb": {
+    "n": 7,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_workshop.glb": {
+    "n": 2,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_a.glb": {
+    "n": 4,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_b.glb": {
+    "n": 2,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_c.glb": {
+    "n": 2,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_d.glb": {
+    "n": 6,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "town_hall_t3.glb": {
+    "n": 18,
+    "holes": 0,
+    "hole_med": 0.0
+   }
+  }
+ },
+ "Wall_Plaster_Straight": {
+  "instances": 80,
+  "unbacked": 0,
+  "hole_med": 0.0,
+  "hole_max": 0.0,
+  "per_file": {
+   "lm_barracks.glb": {
+    "n": 14,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_chapel.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_hall.glb": {
+    "n": 9,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_watermill.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_workshop.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_a.glb": {
+    "n": 3,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_b.glb": {
+    "n": 2,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_c.glb": {
+    "n": 3,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_d.glb": {
+    "n": 9,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "town_hall_t1.glb": {
+    "n": 8,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "town_hall_t2.glb": {
+    "n": 8,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "town_hall_t3.glb": {
+    "n": 9,
+    "holes": 0,
+    "hole_med": 0.0
+   }
+  }
+ },
+ "Wall_UnevenBrick_Straight": {
+  "instances": 230,
+  "unbacked": 0,
+  "hole_med": 0.0,
+  "hole_max": 0.0,
+  "per_file": {
+   "lm_barracks.glb": {
+    "n": 38,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_chapel.glb": {
+    "n": 27,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_granary.glb": {
+    "n": 6,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_hall.glb": {
+    "n": 42,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_sawmill.glb": {
+    "n": 7,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_watermill.glb": {
+    "n": 6,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_windmill.glb": {
+    "n": 16,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "lm_workshop.glb": {
+    "n": 11,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_a.glb": {
+    "n": 9,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_b.glb": {
+    "n": 5,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_c.glb": {
+    "n": 6,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "mk_house_d.glb": {
+    "n": 6,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "town_hall_t2.glb": {
+    "n": 9,
+    "holes": 0,
+    "hole_med": 0.0
+   },
+   "town_hall_t3.glb": {
+    "n": 42,
+    "holes": 0,
+    "hole_med": 0.0
+   }
+  }
+ }
+}

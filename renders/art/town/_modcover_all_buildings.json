@@ -1,0 +1,3511 @@
+{
+ "files": [
+  {
+   "file": "lm_barracks.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 20,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Corner_Exterior_Wood": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0701
+    },
+    "Door_8_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9526,
+     "cover_med": 0.9526,
+     "cover_max": 0.9526,
+     "tris_med": 1142,
+     "thin_ratio_med": 0.0858
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Prop_Chimney": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.9506,
+     "cover_med": 0.9506,
+     "cover_max": 0.9506,
+     "tris_med": 618,
+     "thin_ratio_med": 0.2976
+    },
+    "Roof_Front_Brick8": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.4884,
+     "cover_med": 0.4891,
+     "cover_max": 0.4891,
+     "tris_med": 364,
+     "thin_ratio_med": 0.1327
+    },
+    "Roof_RoundTiles_8x12": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.9818,
+     "cover_med": 0.9818,
+     "cover_max": 0.9818,
+     "tris_med": 6356,
+     "thin_ratio_med": 0.4798
+    },
+    "Wall_Plaster_Straight": {
+     "n": 14,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_Window_Wide_Flat": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 0.7588,
+     "cover_med": 0.7588,
+     "cover_max": 0.7588,
+     "tris_med": 96,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_Window_Wide_Round": {
+     "n": 12,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 124,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_WoodGrid": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.6847,
+     "cover_med": 0.6847,
+     "cover_max": 0.6847,
+     "tris_med": 248,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 38,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 18,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 18,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9013,
+     "cover_max": 0.9224,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Flat1": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 0.8459,
+     "cover_med": 0.8459,
+     "cover_max": 0.8606,
+     "tris_med": 160,
+     "thin_ratio_med": 0.425
+    },
+    "Window_Wide_Round1": {
+     "n": 17,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9142,
+     "cover_max": 0.9365,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Closed": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 0.8857,
+     "cover_med": 0.8857,
+     "cover_max": 0.886,
+     "tris_med": 112,
+     "thin_ratio_med": 0.0894
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 10,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    },
+    "WindowShutters_Wide_Flat_Closed": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.932,
+     "cover_med": 0.9341,
+     "cover_max": 0.9341,
+     "tris_med": 120,
+     "thin_ratio_med": 0.0953
+    },
+    "WindowShutters_Wide_Flat_Open": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.4913,
+     "cover_med": 0.4913,
+     "cover_max": 0.4913,
+     "tris_med": 120,
+     "thin_ratio_med": 0.184
+    },
+    "WindowShutters_Wide_Round_Closed": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.8697,
+     "cover_med": 0.8697,
+     "cover_max": 0.8715,
+     "tris_med": 136,
+     "thin_ratio_med": 0.0824
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 11,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    },
+    "Door_2_Round": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.9597,
+     "cover_med": 0.9597,
+     "cover_max": 0.9597,
+     "tris_med": 6188,
+     "thin_ratio_med": 0.1121
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    },
+    "Roof_Tower_RoundTiles": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.4207,
+     "cover_med": 0.4207,
+     "cover_max": 0.4207,
+     "tris_med": 4024,
+     "thin_ratio_med": 0.7373
+    }
+   }
+  },
+  {
+   "file": "lm_chapel.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 20,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Corner_Exterior_Wood": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0701
+    },
+    "Door_4_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9779,
+     "cover_med": 0.9779,
+     "cover_max": 0.9779,
+     "tris_med": 1228,
+     "thin_ratio_med": 0.0901
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Prop_Chimney": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9506,
+     "cover_med": 0.9506,
+     "cover_max": 0.9506,
+     "tris_med": 618,
+     "thin_ratio_med": 0.2976
+    },
+    "Roof_Front_Brick8": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.4884,
+     "cover_med": 0.4891,
+     "cover_max": 0.4891,
+     "tris_med": 364,
+     "thin_ratio_med": 0.1327
+    },
+    "Roof_RoundTiles_8x14": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9918,
+     "cover_med": 0.9918,
+     "cover_max": 0.9918,
+     "tris_med": 5484,
+     "thin_ratio_med": 0.4318
+    },
+    "Wall_Plaster_Straight": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_Window_Wide_Flat": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.7588,
+     "cover_med": 0.7588,
+     "cover_max": 0.7588,
+     "tris_med": 96,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_Window_Wide_Round": {
+     "n": 7,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 124,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_WoodGrid": {
+     "n": 7,
+     "errors": [],
+     "cover_min": 0.6847,
+     "cover_med": 0.6847,
+     "cover_max": 0.7334,
+     "tris_med": 248,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 27,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 22,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 22,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9013,
+     "cover_max": 0.9224,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Flat1": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.8459,
+     "cover_med": 0.8459,
+     "cover_max": 0.8606,
+     "tris_med": 160,
+     "thin_ratio_med": 0.425
+    },
+    "Window_Wide_Round1": {
+     "n": 10,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9142,
+     "cover_max": 0.9365,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Closed": {
+     "n": 10,
+     "errors": [],
+     "cover_min": 0.8857,
+     "cover_med": 0.8857,
+     "cover_max": 0.886,
+     "tris_med": 112,
+     "thin_ratio_med": 0.0894
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 12,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    },
+    "WindowShutters_Wide_Flat_Open": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.4913,
+     "cover_med": 0.4913,
+     "cover_max": 0.4913,
+     "tris_med": 120,
+     "thin_ratio_med": 0.184
+    },
+    "WindowShutters_Wide_Round_Closed": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8697,
+     "cover_med": 0.8697,
+     "cover_max": 0.8697,
+     "tris_med": 136,
+     "thin_ratio_med": 0.0824
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    },
+    "Door_2_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9597,
+     "cover_med": 0.9597,
+     "cover_max": 0.9597,
+     "tris_med": 6188,
+     "thin_ratio_med": 0.1121
+    },
+    "Roof_Tower_RoundTiles": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.4207,
+     "cover_med": 0.4207,
+     "cover_max": 0.4207,
+     "tris_med": 4024,
+     "thin_ratio_med": 0.7373
+    }
+   }
+  },
+  {
+   "file": "lm_granary.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Door_2_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9597,
+     "cover_med": 0.9597,
+     "cover_max": 0.9597,
+     "tris_med": 6188,
+     "thin_ratio_med": 0.1121
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Prop_Chimney": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9506,
+     "cover_med": 0.9506,
+     "cover_max": 0.9506,
+     "tris_med": 618,
+     "thin_ratio_med": 0.2976
+    },
+    "Roof_Front_Brick6": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.5034,
+     "cover_med": 0.5038,
+     "cover_max": 0.5038,
+     "tris_med": 328,
+     "thin_ratio_med": 0.1687
+    },
+    "Roof_RoundTiles_6x8": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9894,
+     "cover_med": 0.9894,
+     "cover_max": 0.9894,
+     "tris_med": 3796,
+     "thin_ratio_med": 0.5858
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9224,
+     "cover_max": 0.9224,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Round1": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9142,
+     "cover_max": 0.9142,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Closed": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.8857,
+     "cover_med": 0.886,
+     "cover_max": 0.886,
+     "tris_med": 112,
+     "thin_ratio_med": 0.0894
+    },
+    "WindowShutters_Wide_Round_Closed": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.8697,
+     "cover_med": 0.8697,
+     "cover_max": 0.8697,
+     "tris_med": 136,
+     "thin_ratio_med": 0.0824
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    }
+   }
+  },
+  {
+   "file": "lm_hall.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 24,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Corner_Exterior_Wood": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0701
+    },
+    "Door_8_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9526,
+     "cover_med": 0.9526,
+     "cover_max": 0.9526,
+     "tris_med": 1142,
+     "thin_ratio_med": 0.0858
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Prop_Chimney": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9506,
+     "cover_med": 0.9506,
+     "cover_max": 0.9506,
+     "tris_med": 618,
+     "thin_ratio_med": 0.2976
+    },
+    "Roof_Front_Brick8": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.4884,
+     "cover_med": 0.4891,
+     "cover_max": 0.4891,
+     "tris_med": 364,
+     "thin_ratio_med": 0.1327
+    },
+    "Roof_RoundTiles_8x14": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9918,
+     "cover_med": 0.9918,
+     "cover_max": 0.9918,
+     "tris_med": 5484,
+     "thin_ratio_med": 0.4318
+    },
+    "Roof_Tower_RoundTiles": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.4207,
+     "cover_med": 0.4207,
+     "cover_max": 0.4207,
+     "tris_med": 4024,
+     "thin_ratio_med": 0.7373
+    },
+    "Wall_Plaster_Straight": {
+     "n": 9,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_Window_Wide_Flat": {
+     "n": 9,
+     "errors": [],
+     "cover_min": 0.7588,
+     "cover_med": 0.7588,
+     "cover_max": 0.7588,
+     "tris_med": 96,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_Window_Wide_Round": {
+     "n": 12,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 124,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_WoodGrid": {
+     "n": 14,
+     "errors": [],
+     "cover_min": 0.6847,
+     "cover_med": 0.6847,
+     "cover_max": 0.7334,
+     "tris_med": 248,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 42,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 18,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 18,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9013,
+     "cover_max": 0.9224,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Flat1": {
+     "n": 9,
+     "errors": [],
+     "cover_min": 0.8459,
+     "cover_med": 0.8459,
+     "cover_max": 0.8606,
+     "tris_med": 160,
+     "thin_ratio_med": 0.425
+    },
+    "Window_Wide_Round1": {
+     "n": 13,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9142,
+     "cover_max": 0.9365,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Closed": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 0.8857,
+     "cover_med": 0.8857,
+     "cover_max": 0.886,
+     "tris_med": 112,
+     "thin_ratio_med": 0.0894
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 10,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    },
+    "WindowShutters_Wide_Flat_Closed": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.932,
+     "cover_med": 0.932,
+     "cover_max": 0.9341,
+     "tris_med": 120,
+     "thin_ratio_med": 0.0953
+    },
+    "WindowShutters_Wide_Flat_Open": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.4913,
+     "cover_med": 0.4913,
+     "cover_max": 0.4913,
+     "tris_med": 120,
+     "thin_ratio_med": 0.184
+    },
+    "WindowShutters_Wide_Round_Closed": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.8715,
+     "cover_med": 0.8715,
+     "cover_max": 0.8715,
+     "tris_med": 136,
+     "thin_ratio_med": 0.0824
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 12,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    }
+   }
+  },
+  {
+   "file": "lm_sawmill.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Door_2_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9597,
+     "cover_med": 0.9597,
+     "cover_max": 0.9597,
+     "tris_med": 6188,
+     "thin_ratio_med": 0.1121
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Roof_Front_Brick6": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.5034,
+     "cover_med": 0.5038,
+     "cover_max": 0.5038,
+     "tris_med": 328,
+     "thin_ratio_med": 0.1687
+    },
+    "Roof_RoundTiles_6x12": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9889,
+     "cover_med": 0.9889,
+     "cover_max": 0.9889,
+     "tris_med": 4752,
+     "thin_ratio_med": 0.4153
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 7,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9013,
+     "cover_max": 0.9224,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Round1": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9142,
+     "cover_max": 0.9142,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Closed": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.8857,
+     "cover_med": 0.8857,
+     "cover_max": 0.8857,
+     "tris_med": 112,
+     "thin_ratio_med": 0.0894
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    },
+    "WindowShutters_Wide_Round_Closed": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.8697,
+     "cover_med": 0.8697,
+     "cover_max": 0.8697,
+     "tris_med": 136,
+     "thin_ratio_med": 0.0824
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    }
+   }
+  },
+  {
+   "file": "lm_watermill.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Corner_Exterior_Wood": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0701
+    },
+    "Door_4_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9779,
+     "cover_med": 0.9779,
+     "cover_max": 0.9779,
+     "tris_med": 1228,
+     "thin_ratio_med": 0.0901
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Roof_Front_Brick6": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.5034,
+     "cover_med": 0.5038,
+     "cover_max": 0.5038,
+     "tris_med": 328,
+     "thin_ratio_med": 0.1687
+    },
+    "Roof_RoundTiles_6x8": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9894,
+     "cover_med": 0.9894,
+     "cover_max": 0.9894,
+     "tris_med": 3796,
+     "thin_ratio_med": 0.5858
+    },
+    "Wall_Plaster_Straight": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_Window_Wide_Flat": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.7588,
+     "cover_med": 0.7588,
+     "cover_max": 0.7588,
+     "tris_med": 96,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_Window_Wide_Round": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 124,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_WoodGrid": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.6847,
+     "cover_med": 0.6847,
+     "cover_max": 0.6847,
+     "tris_med": 248,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9013,
+     "cover_max": 0.9013,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Flat1": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.8459,
+     "cover_med": 0.8606,
+     "cover_max": 0.8606,
+     "tris_med": 160,
+     "thin_ratio_med": 0.425
+    },
+    "Window_Wide_Round1": {
+     "n": 10,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9142,
+     "cover_max": 0.9365,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    },
+    "WindowShutters_Wide_Flat_Open": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.4913,
+     "cover_med": 0.4913,
+     "cover_max": 0.4913,
+     "tris_med": 120,
+     "thin_ratio_med": 0.184
+    },
+    "WindowShutters_Wide_Round_Closed": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8697,
+     "cover_med": 0.8697,
+     "cover_max": 0.8697,
+     "tris_med": 136,
+     "thin_ratio_med": 0.0824
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    }
+   }
+  },
+  {
+   "file": "lm_windmill.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 12,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Door_8_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9526,
+     "cover_med": 0.9526,
+     "cover_max": 0.9526,
+     "tris_med": 1142,
+     "thin_ratio_med": 0.0858
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Roof_Tower_RoundTiles": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.4207,
+     "cover_med": 0.4207,
+     "cover_max": 0.4207,
+     "tris_med": 4024,
+     "thin_ratio_med": 0.7373
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 16,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 7,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 7,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9013,
+     "cover_max": 0.9224,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "WindowShutters_Thin_Round_Closed": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8857,
+     "cover_med": 0.8857,
+     "cover_max": 0.886,
+     "tris_med": 112,
+     "thin_ratio_med": 0.0894
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    }
+   }
+  },
+  {
+   "file": "lm_workshop.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Corner_Exterior_Wood": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0701
+    },
+    "Door_2_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9597,
+     "cover_med": 0.9597,
+     "cover_max": 0.9597,
+     "tris_med": 6188,
+     "thin_ratio_med": 0.1121
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Prop_Chimney": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9506,
+     "cover_med": 0.9506,
+     "cover_max": 0.9506,
+     "tris_med": 618,
+     "thin_ratio_med": 0.2976
+    },
+    "Roof_Front_Brick8": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.4884,
+     "cover_med": 0.4891,
+     "cover_max": 0.4891,
+     "tris_med": 364,
+     "thin_ratio_med": 0.1327
+    },
+    "Roof_RoundTiles_8x12": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9818,
+     "cover_med": 0.9818,
+     "cover_max": 0.9818,
+     "tris_med": 6356,
+     "thin_ratio_med": 0.4798
+    },
+    "Wall_Plaster_Straight": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_Window_Wide_Flat": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.7588,
+     "cover_med": 0.7588,
+     "cover_max": 0.7588,
+     "tris_med": 96,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_Window_Wide_Round": {
+     "n": 7,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 124,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_WoodGrid": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.6847,
+     "cover_med": 0.6847,
+     "cover_max": 0.7334,
+     "tris_med": 248,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 11,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9013,
+     "cover_max": 0.9013,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Flat1": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.8459,
+     "cover_med": 0.8459,
+     "cover_max": 0.8459,
+     "tris_med": 160,
+     "thin_ratio_med": 0.425
+    },
+    "Window_Wide_Round1": {
+     "n": 13,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9142,
+     "cover_max": 0.9365,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Closed": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.8857,
+     "cover_med": 0.8857,
+     "cover_max": 0.8857,
+     "tris_med": 112,
+     "thin_ratio_med": 0.0894
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    },
+    "WindowShutters_Wide_Flat_Closed": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.932,
+     "cover_med": 0.932,
+     "cover_max": 0.932,
+     "tris_med": 120,
+     "thin_ratio_med": 0.0953
+    },
+    "WindowShutters_Wide_Flat_Open": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.4913,
+     "cover_med": 0.4913,
+     "cover_max": 0.4913,
+     "tris_med": 120,
+     "thin_ratio_med": 0.184
+    },
+    "WindowShutters_Wide_Round_Closed": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.8697,
+     "cover_med": 0.8697,
+     "cover_max": 0.8715,
+     "tris_med": 136,
+     "thin_ratio_med": 0.0824
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 10,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    }
+   }
+  },
+  {
+   "file": "mk_house_a.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Corner_Exterior_Wood": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0701
+    },
+    "Door_2_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9597,
+     "cover_med": 0.9597,
+     "cover_max": 0.9597,
+     "tris_med": 6188,
+     "thin_ratio_med": 0.1121
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Roof_Front_Brick6": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.5034,
+     "cover_med": 0.5038,
+     "cover_max": 0.5038,
+     "tris_med": 328,
+     "thin_ratio_med": 0.1687
+    },
+    "Roof_RoundTiles_6x8": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9894,
+     "cover_med": 0.9894,
+     "cover_max": 0.9894,
+     "tris_med": 3796,
+     "thin_ratio_med": 0.5858
+    },
+    "Wall_Plaster_Straight": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_Window_Wide_Flat": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.7588,
+     "cover_med": 0.7588,
+     "cover_max": 0.7588,
+     "tris_med": 96,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_Window_Wide_Round": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 124,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_WoodGrid": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.6847,
+     "cover_med": 0.6847,
+     "cover_max": 0.7334,
+     "tris_med": 248,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 9,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9013,
+     "cover_max": 0.9224,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Flat1": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.8459,
+     "cover_med": 0.8459,
+     "cover_max": 0.8459,
+     "tris_med": 160,
+     "thin_ratio_med": 0.425
+    },
+    "Window_Wide_Round1": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9142,
+     "cover_max": 0.9365,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Closed": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.8857,
+     "cover_med": 0.8857,
+     "cover_max": 0.8857,
+     "tris_med": 112,
+     "thin_ratio_med": 0.0894
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    },
+    "WindowShutters_Wide_Flat_Closed": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.932,
+     "cover_med": 0.932,
+     "cover_max": 0.932,
+     "tris_med": 120,
+     "thin_ratio_med": 0.0953
+    },
+    "WindowShutters_Wide_Flat_Open": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.4913,
+     "cover_med": 0.4913,
+     "cover_max": 0.4913,
+     "tris_med": 120,
+     "thin_ratio_med": 0.184
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    }
+   }
+  },
+  {
+   "file": "mk_house_b.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Corner_Exterior_Wood": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0701
+    },
+    "Door_4_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9779,
+     "cover_med": 0.9779,
+     "cover_max": 0.9779,
+     "tris_med": 1228,
+     "thin_ratio_med": 0.0901
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Roof_Front_Brick4": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.5196,
+     "cover_med": 0.5199,
+     "cover_max": 0.5199,
+     "tris_med": 252,
+     "thin_ratio_med": 0.2566
+    },
+    "Roof_RoundTiles_4x6": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9802,
+     "cover_med": 0.9802,
+     "cover_max": 0.9802,
+     "tris_med": 2520,
+     "thin_ratio_med": 0.5591
+    },
+    "Wall_Plaster_Straight": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_Window_Wide_Flat": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.7588,
+     "cover_med": 0.7588,
+     "cover_max": 0.7588,
+     "tris_med": 96,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_Window_Wide_Round": {
+     "n": 7,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 124,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_WoodGrid": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.6847,
+     "cover_med": 0.6847,
+     "cover_max": 0.7334,
+     "tris_med": 248,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9013,
+     "cover_max": 0.9013,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Flat1": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.8459,
+     "cover_med": 0.8459,
+     "cover_max": 0.8606,
+     "tris_med": 160,
+     "thin_ratio_med": 0.425
+    },
+    "Window_Wide_Round1": {
+     "n": 9,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9142,
+     "cover_max": 0.9365,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    },
+    "WindowShutters_Wide_Flat_Closed": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.932,
+     "cover_med": 0.932,
+     "cover_max": 0.932,
+     "tris_med": 120,
+     "thin_ratio_med": 0.0953
+    },
+    "WindowShutters_Wide_Flat_Open": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.4913,
+     "cover_med": 0.4913,
+     "cover_max": 0.4913,
+     "tris_med": 120,
+     "thin_ratio_med": 0.184
+    },
+    "WindowShutters_Wide_Round_Closed": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.8697,
+     "cover_med": 0.8697,
+     "cover_max": 0.8715,
+     "tris_med": 136,
+     "thin_ratio_med": 0.0824
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    }
+   }
+  },
+  {
+   "file": "mk_house_c.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Corner_Exterior_Wood": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0701
+    },
+    "Door_2_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9597,
+     "cover_med": 0.9597,
+     "cover_max": 0.9597,
+     "tris_med": 6188,
+     "thin_ratio_med": 0.1121
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Prop_Chimney": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9506,
+     "cover_med": 0.9506,
+     "cover_max": 0.9506,
+     "tris_med": 618,
+     "thin_ratio_med": 0.2976
+    },
+    "Roof_Front_Brick8": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.4884,
+     "cover_med": 0.4891,
+     "cover_max": 0.4891,
+     "tris_med": 364,
+     "thin_ratio_med": 0.1327
+    },
+    "Roof_RoundTiles_8x8": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9474,
+     "cover_med": 0.9474,
+     "cover_max": 0.9474,
+     "tris_med": 3888,
+     "thin_ratio_med": 0.6563
+    },
+    "Wall_Plaster_Straight": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_Window_Wide_Flat": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.7588,
+     "cover_med": 0.7588,
+     "cover_max": 0.7588,
+     "tris_med": 96,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_Window_Wide_Round": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 124,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_WoodGrid": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.6847,
+     "cover_med": 0.6847,
+     "cover_max": 0.6847,
+     "tris_med": 248,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9224,
+     "cover_max": 0.9224,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Flat1": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.8459,
+     "cover_med": 0.8459,
+     "cover_max": 0.8459,
+     "tris_med": 160,
+     "thin_ratio_med": 0.425
+    },
+    "Window_Wide_Round1": {
+     "n": 9,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9365,
+     "cover_max": 0.9365,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Closed": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.886,
+     "cover_med": 0.886,
+     "cover_max": 0.886,
+     "tris_med": 112,
+     "thin_ratio_med": 0.0894
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    },
+    "WindowShutters_Wide_Flat_Open": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.4913,
+     "cover_med": 0.4913,
+     "cover_max": 0.4913,
+     "tris_med": 120,
+     "thin_ratio_med": 0.184
+    },
+    "WindowShutters_Wide_Round_Closed": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8697,
+     "cover_med": 0.8715,
+     "cover_max": 0.8715,
+     "tris_med": 136,
+     "thin_ratio_med": 0.0824
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    }
+   }
+  },
+  {
+   "file": "mk_house_d.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_Exterior_Brick": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Corner_Exterior_Wood": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0701
+    },
+    "Door_2_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9597,
+     "cover_med": 0.9597,
+     "cover_max": 0.9597,
+     "tris_med": 6188,
+     "thin_ratio_med": 0.1121
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Prop_Chimney": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9506,
+     "cover_med": 0.9506,
+     "cover_max": 0.9506,
+     "tris_med": 618,
+     "thin_ratio_med": 0.2976
+    },
+    "Roof_Front_Brick6": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.5034,
+     "cover_med": 0.5038,
+     "cover_max": 0.5038,
+     "tris_med": 328,
+     "thin_ratio_med": 0.1687
+    },
+    "Roof_RoundTiles_6x10": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.979,
+     "cover_med": 0.979,
+     "cover_max": 0.979,
+     "tris_med": 4300,
+     "thin_ratio_med": 0.4786
+    },
+    "Wall_Plaster_Straight": {
+     "n": 9,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_Window_Wide_Flat": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.7588,
+     "cover_med": 0.7588,
+     "cover_max": 0.7588,
+     "tris_med": 96,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_Window_Wide_Round": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 124,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_WoodGrid": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.6847,
+     "cover_med": 0.6847,
+     "cover_max": 0.7334,
+     "tris_med": 248,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9013,
+     "cover_max": 0.9013,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Flat1": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.8459,
+     "cover_med": 0.8459,
+     "cover_max": 0.8459,
+     "tris_med": 160,
+     "thin_ratio_med": 0.425
+    },
+    "Window_Wide_Round1": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9142,
+     "cover_max": 0.9365,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Closed": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.8857,
+     "cover_med": 0.8857,
+     "cover_max": 0.8857,
+     "tris_med": 112,
+     "thin_ratio_med": 0.0894
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    },
+    "WindowShutters_Wide_Flat_Open": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.4913,
+     "cover_med": 0.4913,
+     "cover_max": 0.4913,
+     "tris_med": 120,
+     "thin_ratio_med": 0.184
+    },
+    "WindowShutters_Wide_Round_Closed": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.8697,
+     "cover_med": 0.8697,
+     "cover_max": 0.8697,
+     "tris_med": 136,
+     "thin_ratio_med": 0.0824
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    }
+   }
+  },
+  {
+   "file": "town_hall_t1.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "bench_leg": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.7619
+    },
+    "bench_seat": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.065
+    },
+    "Corner_Exterior_Wood": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0701
+    },
+    "gable": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 8,
+     "thin_ratio_med": 0.0528
+    },
+    "hall_t1_thatch": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9875,
+     "cover_med": 0.9875,
+     "cover_max": 0.9875,
+     "tris_med": 1560,
+     "thin_ratio_med": 0.4613
+    },
+    "Wall_Plaster_Door_Flat": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5596,
+     "cover_med": 0.5596,
+     "cover_max": 0.5596,
+     "tris_med": 92,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_Straight": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_WoodGrid": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.6847,
+     "cover_med": 0.6847,
+     "cover_max": 0.6847,
+     "tris_med": 248,
+     "thin_ratio_med": 0.1302
+    }
+   }
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "Corner_ExteriorWide_Brick": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 0.7668,
+     "cover_med": 0.7668,
+     "cover_max": 0.7668,
+     "tris_med": 2882,
+     "thin_ratio_med": 0.2341
+    },
+    "gable": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 8,
+     "thin_ratio_med": 0.0387
+    },
+    "lamp_box": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.8667
+    },
+    "lamp_flame": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.8333
+    },
+    "lamp_post": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0762
+    },
+    "Prop_Chimney": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9506,
+     "cover_med": 0.9506,
+     "cover_max": 0.9506,
+     "tris_med": 618,
+     "thin_ratio_med": 0.2976
+    },
+    "Roof_RoundTiles_6x8": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9894,
+     "cover_med": 0.9894,
+     "cover_max": 0.9894,
+     "tris_med": 3796,
+     "thin_ratio_med": 0.5858
+    },
+    "Stairs_Exterior_Straight": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9965,
+     "cover_med": 0.9965,
+     "cover_max": 0.9965,
+     "tris_med": 62,
+     "thin_ratio_med": 0.5793
+    },
+    "Wall_Plaster_Straight": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_Window_Wide_Round": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 124,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 9,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 4,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    }
+   }
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "banner": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0147
+    },
+    "banner_bar": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0725
+    },
+    "Corner_Exterior_Brick": {
+     "n": 24,
+     "errors": [],
+     "cover_min": 0.8421,
+     "cover_med": 0.8421,
+     "cover_max": 0.8421,
+     "tris_med": 3102,
+     "thin_ratio_med": 0.176
+    },
+    "Corner_Exterior_Wood": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 12,
+     "thin_ratio_med": 0.0701
+    },
+    "Door_8_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9526,
+     "cover_med": 0.9526,
+     "cover_max": 0.9526,
+     "tris_med": 1142,
+     "thin_ratio_med": 0.0858
+    },
+    "DoorFrame_Round_Brick": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3054,
+     "cover_med": 0.3054,
+     "cover_max": 0.3054,
+     "tris_med": 2046,
+     "thin_ratio_med": 0.1845
+    },
+    "Floor_Brick": {
+     "n": 10,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 4,
+     "thin_ratio_med": 0.01
+    },
+    "Prop_Chimney": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9506,
+     "cover_med": 0.9506,
+     "cover_max": 0.9506,
+     "tris_med": 618,
+     "thin_ratio_med": 0.2976
+    },
+    "Prop_MetalFence_Ornament": {
+     "n": 5,
+     "errors": [],
+     "cover_min": 0.4771,
+     "cover_med": 0.4771,
+     "cover_max": 0.4771,
+     "tris_med": 3988,
+     "thin_ratio_med": 0.0547
+    },
+    "Roof_Front_Brick8": {
+     "n": 2,
+     "errors": [],
+     "cover_min": 0.4884,
+     "cover_med": 0.4891,
+     "cover_max": 0.4891,
+     "tris_med": 364,
+     "thin_ratio_med": 0.1327
+    },
+    "Roof_RoundTiles_8x14": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9918,
+     "cover_med": 0.9918,
+     "cover_max": 0.9918,
+     "tris_med": 5484,
+     "thin_ratio_med": 0.4318
+    },
+    "Roof_Tower_RoundTiles": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.4207,
+     "cover_med": 0.4207,
+     "cover_max": 0.4207,
+     "tris_med": 4024,
+     "thin_ratio_med": 0.7373
+    },
+    "Wall_Plaster_Straight": {
+     "n": 9,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 86,
+     "thin_ratio_med": 0.1301
+    },
+    "Wall_Plaster_Window_Wide_Flat": {
+     "n": 9,
+     "errors": [],
+     "cover_min": 0.7588,
+     "cover_med": 0.7588,
+     "cover_max": 0.7588,
+     "tris_med": 96,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_Window_Wide_Round": {
+     "n": 12,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 124,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_Plaster_WoodGrid": {
+     "n": 14,
+     "errors": [],
+     "cover_min": 0.6847,
+     "cover_med": 0.6847,
+     "cover_max": 0.7334,
+     "tris_med": 248,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Door_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5018,
+     "cover_med": 0.5018,
+     "cover_max": 0.5018,
+     "tris_med": 136,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Straight": {
+     "n": 42,
+     "errors": [],
+     "cover_min": 1.0,
+     "cover_med": 1.0,
+     "cover_max": 1.0,
+     "tris_med": 56,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Thin_Round": {
+     "n": 18,
+     "errors": [],
+     "cover_min": 0.8586,
+     "cover_med": 0.8586,
+     "cover_max": 0.8586,
+     "tris_med": 158,
+     "thin_ratio_med": 0.1302
+    },
+    "Wall_UnevenBrick_Window_Wide_Round": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.7094,
+     "cover_med": 0.7094,
+     "cover_max": 0.7094,
+     "tris_med": 116,
+     "thin_ratio_med": 0.1302
+    },
+    "Window_Thin_Round1": {
+     "n": 18,
+     "errors": [],
+     "cover_min": 0.9013,
+     "cover_med": 0.9013,
+     "cover_max": 0.9224,
+     "tris_med": 418,
+     "thin_ratio_med": 0.2146
+    },
+    "Window_Wide_Flat1": {
+     "n": 9,
+     "errors": [],
+     "cover_min": 0.8459,
+     "cover_med": 0.8459,
+     "cover_max": 0.8606,
+     "tris_med": 160,
+     "thin_ratio_med": 0.425
+    },
+    "Window_Wide_Round1": {
+     "n": 13,
+     "errors": [],
+     "cover_min": 0.9142,
+     "cover_med": 0.9142,
+     "cover_max": 0.9365,
+     "tris_med": 354,
+     "thin_ratio_med": 0.3069
+    },
+    "WindowShutters_Thin_Round_Closed": {
+     "n": 8,
+     "errors": [],
+     "cover_min": 0.8857,
+     "cover_med": 0.8857,
+     "cover_max": 0.886,
+     "tris_med": 112,
+     "thin_ratio_med": 0.0894
+    },
+    "WindowShutters_Thin_Round_Open": {
+     "n": 10,
+     "errors": [],
+     "cover_min": 0.4479,
+     "cover_med": 0.4479,
+     "cover_max": 0.4479,
+     "tris_med": 112,
+     "thin_ratio_med": 0.2344
+    },
+    "WindowShutters_Wide_Flat_Closed": {
+     "n": 3,
+     "errors": [],
+     "cover_min": 0.932,
+     "cover_med": 0.932,
+     "cover_max": 0.9341,
+     "tris_med": 120,
+     "thin_ratio_med": 0.0953
+    },
+    "WindowShutters_Wide_Flat_Open": {
+     "n": 6,
+     "errors": [],
+     "cover_min": 0.4913,
+     "cover_med": 0.4913,
+     "cover_max": 0.4913,
+     "tris_med": 120,
+     "thin_ratio_med": 0.184
+    },
+    "WindowShutters_Wide_Round_Closed": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.8715,
+     "cover_med": 0.8715,
+     "cover_max": 0.8715,
+     "tris_med": 136,
+     "thin_ratio_med": 0.0824
+    },
+    "WindowShutters_Wide_Round_Open": {
+     "n": 12,
+     "errors": [],
+     "cover_min": 0.4885,
+     "cover_med": 0.4885,
+     "cover_max": 0.4885,
+     "tris_med": 136,
+     "thin_ratio_med": 0.2051
+    }
+   }
+  },
+  {
+   "file": "town_well_t1.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "well_t1_iron": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.7512,
+     "cover_med": 0.7512,
+     "cover_max": 0.7512,
+     "tris_med": 44,
+     "thin_ratio_med": 0.1185
+    },
+    "well_t1_rope": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.0274,
+     "cover_med": 0.0274,
+     "cover_max": 0.0274,
+     "tris_med": 236,
+     "thin_ratio_med": 0.1229
+    },
+    "well_t1_stone": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5055,
+     "cover_med": 0.5055,
+     "cover_max": 0.5055,
+     "tris_med": 144,
+     "thin_ratio_med": 0.5736
+    },
+    "well_t1_stone2": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.0972,
+     "cover_med": 0.0972,
+     "cover_max": 0.0972,
+     "tris_med": 88,
+     "thin_ratio_med": 0.1774
+    },
+    "well_t1_wood": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.2886,
+     "cover_med": 0.2886,
+     "cover_max": 0.2886,
+     "tris_med": 192,
+     "thin_ratio_med": 0.6755
+    }
+   }
+  },
+  {
+   "file": "town_well_t2.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "well_t2_iron": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.0988,
+     "cover_med": 0.0988,
+     "cover_max": 0.0988,
+     "tris_med": 220,
+     "thin_ratio_med": 0.3272
+    },
+    "well_t2_rope": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.3009,
+     "cover_med": 0.3009,
+     "cover_max": 0.3009,
+     "tris_med": 200,
+     "thin_ratio_med": 0.4874
+    },
+    "well_t2_stone": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5597,
+     "cover_med": 0.5597,
+     "cover_max": 0.5597,
+     "tris_med": 192,
+     "thin_ratio_med": 0.5179
+    },
+    "well_t2_stone2": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.5876,
+     "cover_med": 0.5876,
+     "cover_max": 0.5876,
+     "tris_med": 404,
+     "thin_ratio_med": 0.3977
+    },
+    "well_t2_trim": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.9702,
+     "cover_med": 0.9702,
+     "cover_max": 0.9702,
+     "tris_med": 180,
+     "thin_ratio_med": 0.3664
+    },
+    "well_t2_wood": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.2679,
+     "cover_med": 0.2679,
+     "cover_max": 0.2679,
+     "tris_med": 164,
+     "thin_ratio_med": 0.6534
+    }
+   }
+  },
+  {
+   "file": "town_well_t3.glb",
+   "errors": [],
+   "skipped_large": [],
+   "prim_skips": 0,
+   "agg": {
+    "well_t3_iron": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.1028,
+     "cover_med": 0.1028,
+     "cover_max": 0.1028,
+     "tris_med": 130,
+     "thin_ratio_med": 0.7981
+    },
+    "well_t3_stone": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.8484,
+     "cover_med": 0.8484,
+     "cover_max": 0.8484,
+     "tris_med": 580,
+     "thin_ratio_med": 0.6564
+    },
+    "well_t3_stone2": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.7805,
+     "cover_med": 0.7805,
+     "cover_max": 0.7805,
+     "tris_med": 516,
+     "thin_ratio_med": 0.4536
+    },
+    "well_t3_water": {
+     "n": 1,
+     "errors": [],
+     "cover_min": 0.8455,
+     "cover_med": 0.8455,
+     "cover_max": 0.8455,
+     "tris_med": 384,
+     "thin_ratio_med": 0.5768
+    }
+   }
+  }
+ ],
+ "modules": {
+  "Corner_Exterior_Brick": {
+   "n": 132,
+   "cover_med": 0.8421,
+   "cover_min": 0.8421,
+   "cover_max": 0.8421,
+   "tris_med": 3102,
+   "errors": []
+  },
+  "Corner_Exterior_Wood": {
+   "n": 60,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 12,
+   "errors": []
+  },
+  "Door_8_Round": {
+   "n": 4,
+   "cover_med": 0.9526,
+   "cover_min": 0.9526,
+   "cover_max": 0.9526,
+   "tris_med": 1142,
+   "errors": []
+  },
+  "DoorFrame_Round_Brick": {
+   "n": 16,
+   "cover_med": 0.3054,
+   "cover_min": 0.3054,
+   "cover_max": 0.3054,
+   "tris_med": 2046,
+   "errors": []
+  },
+  "Prop_Chimney": {
+   "n": 10,
+   "cover_med": 0.9506,
+   "cover_min": 0.9506,
+   "cover_max": 0.9506,
+   "tris_med": 618,
+   "errors": []
+  },
+  "Roof_Front_Brick8": {
+   "n": 14,
+   "cover_med": 0.4891,
+   "cover_min": 0.4891,
+   "cover_max": 0.4891,
+   "tris_med": 364,
+   "errors": []
+  },
+  "Roof_RoundTiles_8x12": {
+   "n": 3,
+   "cover_med": 0.9818,
+   "cover_min": 0.9818,
+   "cover_max": 0.9818,
+   "tris_med": 6356,
+   "errors": []
+  },
+  "Wall_Plaster_Straight": {
+   "n": 80,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 86,
+   "errors": []
+  },
+  "Wall_Plaster_Window_Wide_Flat": {
+   "n": 46,
+   "cover_med": 0.7588,
+   "cover_min": 0.7588,
+   "cover_max": 0.7588,
+   "tris_med": 96,
+   "errors": []
+  },
+  "Wall_Plaster_Window_Wide_Round": {
+   "n": 79,
+   "cover_med": 0.7094,
+   "cover_min": 0.7094,
+   "cover_max": 0.7094,
+   "tris_med": 124,
+   "errors": []
+  },
+  "Wall_Plaster_WoodGrid": {
+   "n": 66,
+   "cover_med": 0.6847,
+   "cover_min": 0.6847,
+   "cover_max": 0.6847,
+   "tris_med": 248,
+   "errors": []
+  },
+  "Wall_UnevenBrick_Door_Round": {
+   "n": 17,
+   "cover_med": 0.5018,
+   "cover_min": 0.5018,
+   "cover_max": 0.5018,
+   "tris_med": 136,
+   "errors": []
+  },
+  "Wall_UnevenBrick_Straight": {
+   "n": 230,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 56,
+   "errors": []
+  },
+  "Wall_UnevenBrick_Window_Thin_Round": {
+   "n": 108,
+   "cover_med": 0.8586,
+   "cover_min": 0.8586,
+   "cover_max": 0.8586,
+   "tris_med": 158,
+   "errors": []
+  },
+  "Window_Thin_Round1": {
+   "n": 108,
+   "cover_med": 0.9013,
+   "cover_min": 0.9013,
+   "cover_max": 0.9224,
+   "tris_med": 418,
+   "errors": []
+  },
+  "Window_Wide_Flat1": {
+   "n": 46,
+   "cover_med": 0.8459,
+   "cover_min": 0.8459,
+   "cover_max": 0.8606,
+   "tris_med": 160,
+   "errors": []
+  },
+  "Window_Wide_Round1": {
+   "n": 114,
+   "cover_med": 0.9142,
+   "cover_min": 0.9142,
+   "cover_max": 0.9365,
+   "tris_med": 354,
+   "errors": []
+  },
+  "WindowShutters_Thin_Round_Closed": {
+   "n": 46,
+   "cover_med": 0.8857,
+   "cover_min": 0.8857,
+   "cover_max": 0.886,
+   "tris_med": 112,
+   "errors": []
+  },
+  "WindowShutters_Thin_Round_Open": {
+   "n": 62,
+   "cover_med": 0.4479,
+   "cover_min": 0.4479,
+   "cover_max": 0.4479,
+   "tris_med": 112,
+   "errors": []
+  },
+  "WindowShutters_Wide_Flat_Closed": {
+   "n": 13,
+   "cover_med": 0.932,
+   "cover_min": 0.932,
+   "cover_max": 0.9341,
+   "tris_med": 120,
+   "errors": []
+  },
+  "WindowShutters_Wide_Flat_Open": {
+   "n": 33,
+   "cover_med": 0.4913,
+   "cover_min": 0.4913,
+   "cover_max": 0.4913,
+   "tris_med": 120,
+   "errors": []
+  },
+  "WindowShutters_Wide_Round_Closed": {
+   "n": 32,
+   "cover_med": 0.8697,
+   "cover_min": 0.8697,
+   "cover_max": 0.8715,
+   "tris_med": 136,
+   "errors": []
+  },
+  "WindowShutters_Wide_Round_Open": {
+   "n": 82,
+   "cover_med": 0.4885,
+   "cover_min": 0.4885,
+   "cover_max": 0.4885,
+   "tris_med": 136,
+   "errors": []
+  },
+  "Door_2_Round": {
+   "n": 9,
+   "cover_med": 0.9597,
+   "cover_min": 0.9597,
+   "cover_max": 0.9597,
+   "tris_med": 6188,
+   "errors": []
+  },
+  "Wall_UnevenBrick_Window_Wide_Round": {
+   "n": 45,
+   "cover_med": 0.7094,
+   "cover_min": 0.7094,
+   "cover_max": 0.7094,
+   "tris_med": 116,
+   "errors": []
+  },
+  "Roof_Tower_RoundTiles": {
+   "n": 5,
+   "cover_med": 0.4207,
+   "cover_min": 0.4207,
+   "cover_max": 0.4207,
+   "tris_med": 4024,
+   "errors": []
+  },
+  "Door_4_Round": {
+   "n": 3,
+   "cover_med": 0.9779,
+   "cover_min": 0.9779,
+   "cover_max": 0.9779,
+   "tris_med": 1228,
+   "errors": []
+  },
+  "Roof_RoundTiles_8x14": {
+   "n": 3,
+   "cover_med": 0.9918,
+   "cover_min": 0.9918,
+   "cover_max": 0.9918,
+   "tris_med": 5484,
+   "errors": []
+  },
+  "Roof_Front_Brick6": {
+   "n": 10,
+   "cover_med": 0.5038,
+   "cover_min": 0.5038,
+   "cover_max": 0.5038,
+   "tris_med": 328,
+   "errors": []
+  },
+  "Roof_RoundTiles_6x8": {
+   "n": 4,
+   "cover_med": 0.9894,
+   "cover_min": 0.9894,
+   "cover_max": 0.9894,
+   "tris_med": 3796,
+   "errors": []
+  },
+  "Roof_RoundTiles_6x12": {
+   "n": 1,
+   "cover_med": 0.9889,
+   "cover_min": 0.9889,
+   "cover_max": 0.9889,
+   "tris_med": 4752,
+   "errors": []
+  },
+  "Roof_Front_Brick4": {
+   "n": 2,
+   "cover_med": 0.5199,
+   "cover_min": 0.5199,
+   "cover_max": 0.5199,
+   "tris_med": 252,
+   "errors": []
+  },
+  "Roof_RoundTiles_4x6": {
+   "n": 1,
+   "cover_med": 0.9802,
+   "cover_min": 0.9802,
+   "cover_max": 0.9802,
+   "tris_med": 2520,
+   "errors": []
+  },
+  "Roof_RoundTiles_8x8": {
+   "n": 1,
+   "cover_med": 0.9474,
+   "cover_min": 0.9474,
+   "cover_max": 0.9474,
+   "tris_med": 3888,
+   "errors": []
+  },
+  "Roof_RoundTiles_6x10": {
+   "n": 1,
+   "cover_med": 0.979,
+   "cover_min": 0.979,
+   "cover_max": 0.979,
+   "tris_med": 4300,
+   "errors": []
+  },
+  "bench_leg": {
+   "n": 2,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 12,
+   "errors": []
+  },
+  "bench_seat": {
+   "n": 1,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 12,
+   "errors": []
+  },
+  "gable": {
+   "n": 4,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 8,
+   "errors": []
+  },
+  "hall_t1_thatch": {
+   "n": 1,
+   "cover_med": 0.9875,
+   "cover_min": 0.9875,
+   "cover_max": 0.9875,
+   "tris_med": 1560,
+   "errors": []
+  },
+  "Wall_Plaster_Door_Flat": {
+   "n": 1,
+   "cover_med": 0.5596,
+   "cover_min": 0.5596,
+   "cover_max": 0.5596,
+   "tris_med": 92,
+   "errors": []
+  },
+  "Corner_ExteriorWide_Brick": {
+   "n": 8,
+   "cover_med": 0.7668,
+   "cover_min": 0.7668,
+   "cover_max": 0.7668,
+   "tris_med": 2882,
+   "errors": []
+  },
+  "lamp_box": {
+   "n": 1,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 12,
+   "errors": []
+  },
+  "lamp_flame": {
+   "n": 1,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 12,
+   "errors": []
+  },
+  "lamp_post": {
+   "n": 1,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 12,
+   "errors": []
+  },
+  "Stairs_Exterior_Straight": {
+   "n": 1,
+   "cover_med": 0.9965,
+   "cover_min": 0.9965,
+   "cover_max": 0.9965,
+   "tris_med": 62,
+   "errors": []
+  },
+  "banner": {
+   "n": 2,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 12,
+   "errors": []
+  },
+  "banner_bar": {
+   "n": 2,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 12,
+   "errors": []
+  },
+  "Floor_Brick": {
+   "n": 10,
+   "cover_med": 1.0,
+   "cover_min": 1.0,
+   "cover_max": 1.0,
+   "tris_med": 4,
+   "errors": []
+  },
+  "Prop_MetalFence_Ornament": {
+   "n": 5,
+   "cover_med": 0.4771,
+   "cover_min": 0.4771,
+   "cover_max": 0.4771,
+   "tris_med": 3988,
+   "errors": []
+  },
+  "well_t1_iron": {
+   "n": 1,
+   "cover_med": 0.7512,
+   "cover_min": 0.7512,
+   "cover_max": 0.7512,
+   "tris_med": 44,
+   "errors": []
+  },
+  "well_t1_rope": {
+   "n": 1,
+   "cover_med": 0.0274,
+   "cover_min": 0.0274,
+   "cover_max": 0.0274,
+   "tris_med": 236,
+   "errors": []
+  },
+  "well_t1_stone": {
+   "n": 1,
+   "cover_med": 0.5055,
+   "cover_min": 0.5055,
+   "cover_max": 0.5055,
+   "tris_med": 144,
+   "errors": []
+  },
+  "well_t1_stone2": {
+   "n": 1,
+   "cover_med": 0.0972,
+   "cover_min": 0.0972,
+   "cover_max": 0.0972,
+   "tris_med": 88,
+   "errors": []
+  },
+  "well_t1_wood": {
+   "n": 1,
+   "cover_med": 0.2886,
+   "cover_min": 0.2886,
+   "cover_max": 0.2886,
+   "tris_med": 192,
+   "errors": []
+  },
+  "well_t2_iron": {
+   "n": 1,
+   "cover_med": 0.0988,
+   "cover_min": 0.0988,
+   "cover_max": 0.0988,
+   "tris_med": 220,
+   "errors": []
+  },
+  "well_t2_rope": {
+   "n": 1,
+   "cover_med": 0.3009,
+   "cover_min": 0.3009,
+   "cover_max": 0.3009,
+   "tris_med": 200,
+   "errors": []
+  },
+  "well_t2_stone": {
+   "n": 1,
+   "cover_med": 0.5597,
+   "cover_min": 0.5597,
+   "cover_max": 0.5597,
+   "tris_med": 192,
+   "errors": []
+  },
+  "well_t2_stone2": {
+   "n": 1,
+   "cover_med": 0.5876,
+   "cover_min": 0.5876,
+   "cover_max": 0.5876,
+   "tris_med": 404,
+   "errors": []
+  },
+  "well_t2_trim": {
+   "n": 1,
+   "cover_med": 0.9702,
+   "cover_min": 0.9702,
+   "cover_max": 0.9702,
+   "tris_med": 180,
+   "errors": []
+  },
+  "well_t2_wood": {
+   "n": 1,
+   "cover_med": 0.2679,
+   "cover_min": 0.2679,
+   "cover_max": 0.2679,
+   "tris_med": 164,
+   "errors": []
+  },
+  "well_t3_iron": {
+   "n": 1,
+   "cover_med": 0.1028,
+   "cover_min": 0.1028,
+   "cover_max": 0.1028,
+   "tris_med": 130,
+   "errors": []
+  },
+  "well_t3_stone": {
+   "n": 1,
+   "cover_med": 0.8484,
+   "cover_min": 0.8484,
+   "cover_max": 0.8484,
+   "tris_med": 580,
+   "errors": []
+  },
+  "well_t3_stone2": {
+   "n": 1,
+   "cover_med": 0.7805,
+   "cover_min": 0.7805,
+   "cover_max": 0.7805,
+   "tris_med": 516,
+   "errors": []
+  },
+  "well_t3_water": {
+   "n": 1,
+   "cover_med": 0.8455,
+   "cover_min": 0.8455,
+   "cover_max": 0.8455,
+   "tris_med": 384,
+   "errors": []
+  }
+ },
+ "blindness": "NEVER RENDERS. Blind to colour, to material, to whether a progression reads, to assembly faults such as a gable hole, and to backface culling. NOT a fit proof.",
+ "validation": {
+  "pair": [
+   "Wall_Plaster_Straight",
+   "Wall_Plaster_WoodGrid"
+  ],
+  "solid_cover_med": 1.0,
+  "lattice_cover_med": 0.6847,
+  "margin": 0.3153,
+  "solid_n": 80,
+  "lattice_n": 66,
+  "verdict": "GREEN",
+  "why": "separates the one pair whose truth came from a PICTURE: solid 1.0000 vs lattice 0.6847, margin 0.3153."
+ }
+}

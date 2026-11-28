@@ -25083,3 +25083,102 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - PROBE FAILS 2 of 3, AND I BELIEVE THE PROBE IS WRONG, NOT THE FEED (not proven): at 125% shown=5 vs cap=4, at 150% shown=5 vs cap=2. _cap() shrinks when UiTheme scale rises, and _tick_feed only evicts when a NEW line is admitted, so the list trails the cap until the next admit. I looked at s150.png (the worst frame by those numbers): the Chronicle shows band + ONE faded line ("Wren sold a loaf 56 x15", the merge counter visible), inside the sheet, nothing clipped. So the picture fits; the list-vs-cap gap is not visible. A LEVEL UP line (pri 2) was not on screen at that instant - it may simply have aged out, which I did not check.
 - Open (next firing): sample shown vs the lines actually drawn after a settle, and check whether a pri-2 line is ever displaced by a newer routine line while still inside its dwell. If _cap() shrinking should evict immediately, that is a feed_hud.gd change (mine).
 - Decision for Mr. E: none. Not ticked - the team lead ticks.
+
+### B226 - THE HUB-POINTER PASS IS CLOSED AT 29 OF 40, AND THE TWO ITEMS MY OWN QUEUE CALLED NEXT WERE ALREADY DONE BY B214 - PLUS THE THREE "INVENTED" LABELS ARE REAL, THEY ARE JUST NOT TABS (nov28-1345)
+
+Row taken: **CHAT BOT (:45)** from the 12:58 TAKE THIS NEXT block - *"FINISH THE HUB-POINTER PASS,
+DOC ONLY. Your own gate says 27 of 40 commands now carry a hub pointer. Walk the other 13, decide
+which genuinely have a hub home under order 2, and mark those the same way... The ones with no hub
+home stay as they are and you say which and why. No command, verb or alias added; order stays 40."*
+Merged `origin/main` **0580cc95** (rc=0, no conflicts). **The count in the row is exactly right:
+27 of 40 carried `On the hub...`, measured off the data, not trusted.**
+
+**WHAT I MARKED - TWO OF THE THIRTEEN, AND ONLY WHERE I COULD SEE THE SURFACE ON `origin/main`.**
+- `!hero` -> `"On the hub too, under My Room."` **My Room** is the viewer's own sheet: the panel
+  heading on `origin/main:web/index.html` is literally *"Your Room at the Inn - Your hero, your
+  gear and your requests to the town"*. Read, not assumed.
+- `!help` -> `"On the hub too, under Commands - gear and errands are managed there."` The
+  **Commands** tab (*"Chat commands"*, `#cmdList`) renders **this lane's own `data/commands.json`**
+  - `app.js` reads `src.order` and each entry's `short`. So the pointer names a tab that is
+  populated by the very file the pointer is written in.
+
+**THE ELEVEN THAT STAY, AND WHY - EACH CHECKED AGAINST THE REAL PAGE, NOT GUESSED.**
+- `!enlist`, `!delve`, `!solo`, `!fish`, `!look`, `!festival` - **no hub action exists.** The hub's
+  action list (`ACTIONS` in `app.js`) is nine kinds in four groups and holds none of these. They
+  are things a hero *does* on stream, not hero management, so order 2 does not reach them.
+  `!enlist` is additionally one of the three commands the 23:40 directive keeps in chat by name.
+- `!hub` - **it IS the hub.** Marking it would point the page at itself.
+- `!muster` - **NOT the same thing as the Bands tab.** Bands reads *"Bands below / Who is down in
+  the scar right now"*; `!muster` is who is **waiting at the mouth** and where you stand in the
+  line. `grep -c muster` on `origin/main:web/app.js` is **0**. Pointing a viewer there would send
+  them to a list their name is not on.
+- `!dice` - **the hub die is a different die and saying otherwise would be a lie.** The panel's own
+  words: *"Tap for a roll of your own - it happens in your browser, the town never hears it, and it
+  has nothing to do with your hero."* `!dice` stakes gold against the house and moves your purse.
+  Same word, different object. **NOT marked, deliberately.**
+- `!rep` - the five ledger-keepers are not on the page: `fishmonger` and `patron` are **0 hits** in
+  `origin/main:web/app.js`; the `ledger` hits are all lore strings.
+- `!patrons` - **0 hits** for `patron` anywhere in the hub's script.
+
+**THE TWO ITEMS MY PROMPT'S QUEUE CALLED "WHAT IS ACTUALLY NEXT" ARE BOTH ALREADY SHIPPED, AND I
+AM NOT GOING TO CLAIM THEM.**
+1. *"Make `!help` point viewers at the hub as the place to manage a hero"* - **B214 did this.** The
+   bare `!help` tail already reads `"Manage your hero on the page: <url>"`, and the docblock above
+   it says why "manage" is the word. All I added was *where* on the page the list itself lives.
+2. *"The docblock on `_rank` says the ladder is NOT on origin/main - only the comment is stale"* -
+   **already corrected at B214 and found again by B224.** The block now reads *"THE REASON HAS
+   CHANGED SINCE THIS SHIPPED"* and states the ladder **is** on main at `roster.gd:1392/1408/1412`,
+   verified by grepping main. **No seat should hand this lane either item a fourth time.**
+
+**A CORRECTION I RAISE AGAINST MY OWN LANE, AND THEN WITHDRAW HALF OF - BECAUSE I NEARLY LIBELLED
+B225's CORRECT WORK.** The row credits me with *"the hub's REAL visible tab labels, which you got
+right this time."* Three of the labels in use - **Party**, **Gear**, **Hero** - are **not tab
+labels**: the 16 tabs are Live, Boards, Town, Heroes, Bands, Chronicle, The die, Guild Roll, The
+Fallen, Lore, Bestiary, Shops, Satchel, My Room, Season, Commands, and `Party`/`Gear` appear
+**nowhere** as visible text in `origin/main:web/index.html`. I was about to report six commands as
+pointing at tabs that do not exist. **THEY ARE REAL AND I WAS WRONG TO DOUBT THEM:** they are
+`<optgroup label>` headings - `Gear`, `Hero`, `Party`, `Shops` - rendered into the `#roomKind`
+select **inside My Room**, so a viewer does see those words. **The residual, and it is small:** a
+viewer told *"under Gear"* will scan 16 tabs and find no Gear. The honest form is
+*"under My Room -> Gear"*. **I did NOT reword the 27 - that is 6 proven entries of churn outside
+my row, and the team lead said the labels were right. Reported, not done.**
+
+**GATE: NOT RUN, AND THE LOCK WAS FREE WHEN I CHECKED - I LET THE WINDOW GO ON PURPOSE.**
+- Lock read from R's **working copy** at 13:46:18 UTC (= 13:46 CT): last line
+  `IDLE 2026-11-28T13:38:58-06:00` (art, barracks import siblings). **Free, no live hold.**
+- My row says *claim by :50, finish inside :52*. Verifying four hub surfaces against `origin/main`
+  before marking anything ran past :50. **A 28-second battery started at :53 finishes inside the
+  HUD's :52 window, and this lane has cost the HUD two consecutive cycles before.** So I claimed
+  **nothing**, wrote **no RUNNING line**, and launched no Godot. Nothing to release.
+- **SO `docs/COMMANDS.md` IS AN EMULATION AWAITING THE REAL GATE, AND HERE IS THE PROOF IT IS
+  FAITHFUL TODAY:** the python generator was run against **`HEAD:data/commands.json`** (the
+  unedited data) and its output is **byte-identical to `HEAD:docs/COMMANDS.md`** - md5
+  **b1ee1edd5f69e6e4b4b9f76942fdb5e5** both sides, 12355 bytes, `identical: True`, 40 rows. Then
+  and only then was it run on the edited data: **5749ad8b96c0181fa15f947a5f3fa2a7**, 12579 bytes,
+  **40 rows, exactly 2 lines changed** (idx 9 `hero`, idx 47 `help`), same line count, LF only, no
+  CRLF. **The real `tools/_commands_doc.gd` still owes this file one run** - next cycle, or whoever
+  holds the lock first.
+- **THE REPLY BUDGET, WHICH IS THE ONE THING THESE EDITS COULD HAVE BROKEN AND DID NOT.** The bare
+  `!help` line is built from `order` keys and the tail, **not** from `short`/`what`, so my edits
+  cannot move it - measured: **428 of REPLY_MAX 440, headroom 12, unchanged.** Longest
+  `!help <cmd>` reply is **251** (`!help repair`); `!help hero` 100, `!help help` 179; **none of
+  the 40 over 440.** The L14 arm that reds on that cliff stays green.
+
+**DRIFT, BOTH DIRECTIONS, AND MY OWN MATCHER WAS WRONG TWICE BEFORE IT WAS RIGHT.**
+`json.load` OK; `order` 40, `commands` 40, symmetric, no duplicate keys. My first harvester matched
+any `"x":` in the file and accused 18 non-commands (`seven`, `eleven`, `treasury`, `mage_tower`...);
+my second required the label to END the line and "lost" 22 live commands including `enlist` and
+`hero`, which plainly work. **Both were my instrument, not the tree.** Re-run with the shape the
+real gate accepts (label with trailing code allowed): **70 arms harvested, A) answered-with-no-entry
+= none, B) entry-with-no-arm = none.** The only unmatched arms are `testbits`/`testpoints`/`testsub`,
+which `_l14_test.gd` excludes by name (**L17: `!test*` are local-only, never documented**).
+- Nothing owed from `twitch_eventsub.gd`: `twitch_reply(user_login, text)` untouched, no new
+  signature asked of the game build. **No command, verb or alias added - `order` stays 40.**
+- **THE MOUNT IS FLAT AGAIN THIS RUN, A THIRD REPORT.** `$HOME/mnt/` holds `bellmire-bot` and
+  `jests-hd-medieval-adventure`, flat - no `hd adventure` parent. My prompt's
+  `"$HOME/mnt/hd adventure/bellmire-bot"` failed with *No such file or directory* as the first
+  command of this run, exactly as it did at B223 and B224. **I did NOT call
+  `device_request_folder_access`.**
+- **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or
+  changed; Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
+- Not ticked - the team lead ticks.

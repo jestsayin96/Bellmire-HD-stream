@@ -24357,3 +24357,5 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - Evidence committed with the change: `_b210_battery.log`.
 - No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.
 - Not ticked - the team lead ticks.
+
+- 2026-11-27 21:4x CT hub run: cache-bust bump landed in web/index.html (app.js?v=8 -> ?v=9, style.css -> ?v=9). NUMBER: 7 of 7 page states render with 0 page errors and 0 CSP violations; document height 900 = viewport 900 (no page scroll). Not ticked - the team lead ticks.

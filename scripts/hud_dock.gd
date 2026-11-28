@@ -359,7 +359,7 @@ class ChronicleScroll extends Control:
 		# room first by narrowing the tier bar, down to a floor, before the name is ever trimmed
 		var nw := font.get_string_size(String(town.get("name", "")).to_upper(), HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
 		var bar_cap := r.end.x - nsz.x - _p(20.0) - (plate.end.x + _p(10.0)) - nw
-		bar.size.x = clampf(bar_cap, _p(84.0), bar_w)
+		bar.size.x = clampf(bar_cap, _p(70.0), bar_w)
 		bar.position.x = r.end.x - bar.size.x
 		bar.position.x -= nsz.x + _p(10.0)
 		draw_string(font, Vector2(r.end.x - nsz.x, base), note, HORIZONTAL_ALIGNMENT_LEFT, -1, nfs, UiTheme.TEAL_ON_PARCH)
@@ -367,9 +367,15 @@ class ChronicleScroll extends Control:
 		var nm := String(town.get("name", "")).to_upper()
 		var nx := plate.end.x + _p(10.0)
 		var room := bar.position.x - _p(10.0) - nx
-		while nm.length() > 3 and font.get_string_size(nm, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x > room:
+		# U226: the bar is at its floor and the name still does not fit (150%, "A MARKET-DAY TOWN"): step the
+		# name's font down, never below 72%, before any letters are trimmed
+		var nfs2 := fs
+		var floor_fs := maxi(12, int(float(fs) * 0.72))
+		while nfs2 > floor_fs and font.get_string_size(nm, HORIZONTAL_ALIGNMENT_LEFT, -1, nfs2).x > room:
+			nfs2 -= 1
+		while nm.length() > 3 and font.get_string_size(nm, HORIZONTAL_ALIGNMENT_LEFT, -1, nfs2).x > room:
 			nm = nm.substr(0, nm.length() - 2).rstrip(" '-") + "…"
-		draw_string(font, Vector2(nx, base), nm, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, UiTheme.INK)
+		draw_string(font, Vector2(nx, base), nm, HORIZONTAL_ALIGNMENT_LEFT, -1, nfs2, UiTheme.INK)
 		# twelve tier cells: earned ones filled, the current one filled by its fraction
 		var gap := maxf(1.0, _p(2.0))
 		var cw := (bar.size.x - gap * float(tiers - 1)) / float(tiers)

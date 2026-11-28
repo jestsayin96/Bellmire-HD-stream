@@ -24872,3 +24872,75 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - Also committing `_s174_battery.log` (S176's evidence, owed per the 11:58 row) and this cycle's `_s177_battery.log` + `_s177_gates.log`.
 - CARRIED TO NEXT FIRING: the same swap for the HALL and the INN (town_hall_t1-3, town_inn_t1-3 exist with .import siblings; the reader already resolves hall_mesh). Not started this window.
 - No Twitch test, nothing redeemed, nothing cheered, ZERO BITS. Not ticked - the team lead ticks.
+## C-254 (content, 28 Nov 2026, 12:2x CST) - SYSTEM 18: THE QUEST BOARD POOL AND BOARD COPY
+- TAKE THIS NEXT: "CONTENT (:22) - finish the `districts.*` tier words, then quest board 18". Checked first: all 8 `districts.*` entries already carry exactly 3 tiers (as do the 7 landmarks, 4 sites, roads), so nothing short to write. Took quest board 18.
+- Added top-level `quest_board` to lore_lines.json: 48 quests (8 per category: gather, survive, deliver, slay, town, social), ranks F-S, each naming its `mechanic`, `mechanic_state` (16 `exists`, 32 `needs_build`), `params` and a `reward_band` 1-7 ladder; plus `board_lines` (posted/claimed/abandoned/done/rotation/refresh/no_refresh/already_active/rank_too_low/empty) and `hub_text`. New `_note_c254`. No new data file.
+- Honest limits: only one S-rank quest (the Gaoler) - S rank needs a bigger set once the ranking system lands; reward amounts are the game build's. Guild board only; Shadow Hall jobs are a later pool.
+- VALIDATION OK: json.load passes; only new keys are `quest_board` and `_note_c254`; every pre-existing key equal; file round-trips byte-exact.
+- WIRING for the game build: read `quest_board.quests`; gate the live draw on `mechanic_state == "exists"` until each `needs_build` mechanic (gather_herb, gather_ore, kill_count, miniboss_kill, deliver_carry, deliver_supply, town_job, craft_station, give_item, chat_cheer) is ticked; map `miniboss_name` to MB_NAME keys. Hub lane reads `hub_text`.
+- Next content: C-255.
+## HUB 28 Nov 12:4x CT - signed-in round trip: database half PROVEN (rolled back), browser half and engine poll NOT
+- Row: TAKE THIS NEXT 11:37 "HUB - prove the signed-in round trip". Real Twitch sign-in is impossible unattended, so I simulated two authenticated twitch identities in one rolled-back DO block on live bellmire-hub. Results: own insert ALLOWED; foreign twitch_id DENIED; status='done' forged DENIED; A sees 1 row, B sees 0; B update DENIED; anon select DENIED; anon insert DENIED. After: hub_actions 0, auth.users 0, auth.identities 0 (nothing persisted).
+- NUMBER: live auth.users = 0, hub_actions = 0, newest snapshot 06:45 UTC (~12 h stale). So no viewer has ever signed in and the engine has had nothing to poll.
+- Not proven: browser OAuth leg, engine poller reading a row, My Room Recent showing it. No web/ file changed (only web/NOTES.md). node --check rc 0; innerHTML only app.js:255, :301; secret-string grep 0; CSP meta 1. No screenshot taken (no layout change). Hostile-name test not owed.
+- gh-pages vs hub:web delta: NOT measured this run (git run through the Blender bridge only for commit/push). NOT claiming READY TO PUBLISH. Live-dot colour unchanged. Merge of origin/main into hub CONFLICTS in docs/art/ASSET_SOURCES.md (art's file, not mine): aborted cleanly, hub left unmerged.
+
+## U226 - HUD 12:52 CT 28 Nov: TOWN BAND LONG TIER NAME FIXED AT 150% (U224/U225 carry CLOSED)
+- Item: standing town-first item; finish the 150% long-tier-name carry. Files: hud_dock.gd only (_town_band).
+- Lock: read from R's working copy at 12:52:54: last line IDLE 12:49:30 (chat bot B225), tasklist Godot=0. Claimed 12:52:54 (expected finish 13:01:54, cap 13:07), IDLE 12:53:53; relaunch 2 claimed 12:54:13, IDLE 12:55:35. Released well before game build's :07.
+- Change: name font steps down (floor 72% of band font) before any letter is trimmed; tier-bar floor 84 -> 70 px. First try (85% floor, bar 84) was WORSE: "A MARKET-DAY TO..." (kept: renders/cycles/20261128_u226a_85pct, _u226a.log). Second try (72%, bar 70) shows the whole "A MARKET-DAY TOWN" with the 12-cell bar and "24 to go" legible at 150%.
+- Gates: parse 0 errors (_u226_parse.log, _u226b_parse.log); windowed 1920x1080 probe at 100/125/150%, band inside sheet, 0 fails, 0 SCRIPT ERROR (_u226.log).
+- BEFORE (U224, 150%): "A MARKET-DAY..." ; after-85%: "A MARKET-DAY TO..." ; AFTER: "A MARKET-DAY TOWN" untrimmed. Looked at renders/cycles/20261128_u226/s150.png (the tightest frame, band 43 px of 208 px). 100%/125% not re-looked; band geometry unchanged, they have more room.
+- Decision for Mr. E: none. Not ticked - the team lead ticks.
+### B225 - THE AUDIT'S VERDICT IS NOW WRITTEN WHERE A VIEWER READS IT: TEN COMMANDS THAT SENT PEOPLE NOWHERE NOW NAME THEIR HUB TAB, AND I USED THE HUB'S REAL TAB NAMES INSTEAD OF THE THREE THIS LANE HAS BEEN INVENTING (nov28-1245)
+
+**ROW TAKEN: CHAT BOT (:45) from the 12:4x CT TAKE THIS NEXT block - "AUDIT THE 40-COMMAND SURFACE AGAINST SUPERVISOR ORDER 2, DOC ONLY." GATE GREEN. NO NEW SURFACE. ZERO BITS.**
+
+- **THE ROW ASKS FOR A MARKING IN A GENERATED FILE, SO THE MARKING WENT IN THE DATA.** `docs/COMMANDS.md`
+  is written by `tools/_commands_doc.gd` from `data/commands.json` and its header lines are hardcoded in
+  the generator, which is not this lane's file. There is no column to add and no prose block to write.
+  **The only text this lane controls is per-command, so that is where the classification lives** - in the
+  idiom eleven commands already use (`forge`, `armoury`, `brew`, `repair`, `oil`, `wear`, `dye`, `reroll`,
+  `respec`, `specialize`, `party`): one short declarative naming the tab. Put in `short` AND `what`, so the
+  line a viewer TYPES says it, not just the doc a viewer never opens.
+- **TEN OF THE FORTY CARRIED NO HUB POINTER AND SHOULD HAVE.** `!rank` and `!guild` -> **Guild Roll**;
+  `!inventory`, `!weapon`, `!armour`, `!paths` -> **My Room**; `!memorial` -> **The Fallen**; `!deepest`,
+  `!deadliest`, `!richest` -> **Boards**. Order 2 names rankings, gear and inventory explicitly. 27 of 40
+  now carry a pointer, up from 17 by the capitalised-idiom count.
+- **I READ THE HUB'S REAL TAB NAMES OFF `web/index.html` RATHER THAN GUESS, AND THAT TURNED UP A FAULT IN
+  THIS LANE'S OWN SHIPPED TEXT.** The hub's tabs are Live, Boards, Town, Heroes, Bands, Chronicle, The die,
+  **Guild Roll**, The Fallen, Lore, Bestiary, **Shops**, **Satchel**, **My Room**, Season, Commands.
+  **"Hero", "Gear" and "Party" are NOT tabs** - and six pre-existing lines (`wear`, `dye` -> "under Gear";
+  `reroll`, `respec`, `specialize` -> "under Hero"; `party` -> "under Party") send a viewer to a tab that
+  does not exist by that name. Only `Shops` of the established four is real. **I did not rewrite them**:
+  they may be sections inside My Room, which is the hub lane's to say, and churning another lane's nav
+  names off my own guess is how a wrong pointer becomes two. **Reported, not done** - team lead's to route.
+- **TWO COMMANDS ARE DELIBERATELY LEFT UNMARKED BECAUSE I COULD NOT VERIFY A HOME FOR THEM.** `!rep` (the
+  five ledger-keepers) and `!patrons` have no tab I could point at on the live page. Saying "on the hub"
+  about a thing that is not there is worse than saying nothing.
+- **THE MINIMAL SET IS UNTOUCHED, PER THE ORDER'S OWN WORDS.** `!enlist`, `!hero`, `!help` get no pointer
+  pushing viewers off them. The rest - `!delve`, `!muster`, `!solo`, `!fish`, `!dice`, `!festival`,
+  `!look`, `!caravan`, `!hub` - are live stream actions, not management verbs, and stay chat-native.
+- **GATE GREEN, REAL GENERATOR, NOT EMULATED.** STAGE1 headless parse rc=0, 0 parse errors. STAGE2
+  `COMMANDS_DOC OK wrote 40 commands`. STAGE3 `L14_TEST OK (27 checks)`, **0 COMMANDS_DATA guard arms
+  fired**, both symmetry arms green (`unpublished []`, `stale []`). Log committed at `_b225_battery.log`.
+- **I MEASURED THE CUT RATHER THAN TRUSTING THE HEADROOM.** Every `!help <cmd>` reply re-measured against
+  the 440-char first cut: longest 251 (`!help repair`), then forge 209, party 180 - **unmoved from B224's
+  figures, because none of the ten I touched is near the top**. The bare `!help` line is **428 of 440,
+  byte-for-byte unchanged**: it lists names and the tail only, so lengthening a `short` cannot touch it.
+  The 12-character headroom B214 reported is still the standing risk and still not mine to take.
+- **I WROTE A FUTURE STAMP ON MY OWN IDLE LINE AND CORRECTED IT IN THE SAME MINUTE.** I composed
+  `IDLE 2026-11-28T12:50:40` at a real clock time of **12:49:30** - 70 s ahead. Caught on the readback,
+  corrected in place to 12:49:30 before any other lane read the file, and the correction is written into
+  the lock line itself. Claim 12:48:50, cap 13:13:50, declared 12:51:30, released 12:49:30 - **no crossing
+  into the HUD's :52 window.** `tasklist Godot*` = 0 before and after; the lock was free (QA tester IDLE
+  12:46:19 from its own lane).
+- **BOTH ITEMS MY PROMPT STILL CALLS "WHAT IS ACTUALLY NEXT" REMAIN SPENT, CHECKED AGAIN AT SOURCE.**
+  Item 1, `!help` pointing at the hub: shipped at **B214** - `help_line("")` ends
+  `"Manage your hero on the page: " + hub_url()`, read by eye at `chatcmd.gd:3912-3913`. Item 2, the stale
+  `_rank` docblock: corrected at B214. **B224 found the same and no seat should hand this lane either again.**
+- Nothing owed from `twitch_eventsub.gd`: `twitch_reply(user_login, text)` untouched, no new signature
+  asked of the game build. No command, verb or alias added - `order` stays 40.
+- **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or changed;
+  Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
+- Not ticked - the team lead ticks.

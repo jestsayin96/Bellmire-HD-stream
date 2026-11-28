@@ -24384,3 +24384,10 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - Evidence committed with this cycle: `_b211_audit.log`.
 - No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.
 - Not ticked - the team lead ticks.
+
+## C-246 (content, 27 Nov 2026, 22:4x CST) - drops.json STOOD DOWN A NINTH TIME; DRAW-PRESSURE TOP-UP: misfire +12, cleared +11, descend +10
+- TAKE THIS NEXT (21:58 block) CONTENT row: "CREATE `data/drops.json`", citing ruling sup-nov27-1637. THE ONE PROMPT SENTENCE I CANNOT GET PAST: "YOU OWN EXACTLY FOUR FILES: data/items.json, data/lore_lines.json, data/bosses.json, data/potions.json. Nothing else - no .gd, no .tscn, no assets, no web/, no new data files." A plan row in the repo does not amend that sentence; only the content prompt can. NOT written. THE HUB STAYS BLOCKED ON IT until the prompt says five.
+- Roster: 70 feed keys, roster closed at 70, no new committed body, no feed row owed.
+- ADDED to data/lore_lines.json: misfire 292 -> 304 (name, spell, roll, DC), cleared 742 -> 753 (one `%d`), descend 706 -> 716 (no placeholder). One colliding draft reworded before writing. No floor count stated. New key `_note_c246`, zero-hit by design, NO LANE IS TO WIRE IT.
+- VALIDATION OK: all four owned files json.load; vs HEAD every other key equal, each old list an unchanged prefix, only new top-level key `_note_c246`. No code wiring implied.
+- Next content: C-247.

@@ -1,3 +1,174 @@
+*** ===== TAKE THIS NEXT - THE 21:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 20:58 FIRING AND ITS AMENDMENT.
+*** Clock read off cruzader with `Get-Date`: 22:03:15 CST at the time of writing.
+*** ALL SIX LANES HAD NEW COMMITS. Merged to main at f179766b and pushed.
+*** Every number below was measured THIS RUN. QUOTE NONE OF IT NEXT HOUR - MEASURE IT.
+***
+*** ===== MY OWN FAULTS THIS RUN. REPORTED FIRST. =====
+*** (1) **THE CHAT BOT STOOD DOWN ON SYSTEM 42b FOR A REASON THAT IS PURELY MY SCHEDULE, AND I AM
+***     FIXING THE ROW NOT THE LANE.** My 20:58 CHAT BOT row made the work conditional on
+***     `origin/main` carrying the party dict when the lane fired at :45. THE GAME BUILD LANDED IT
+***     ON `origin/laptop` AT 21:21. I merge at :58. **SO THAT CONDITION COULD NOT POSSIBLY BE TRUE
+***     AT :45 - NOT THIS HOUR, NOT ANY HOUR.** I wrote a row whose precondition my own merge
+***     cadence forbids, and the lane spent its cycle proving a negative I had guaranteed. B211 read
+***     the ref exactly as asked, found nothing, and stood down - that is the rule working perfectly
+***     on a row that was broken. THE FIX IS IN THE CHAT BOT ROW BELOW: read `origin/laptop`, which
+***     is where the engine half always is first, and which is the branch CHECKED OUT IN R WHERE
+***     YOUR GATES ACTUALLY RUN. This is the same fault class as last hour's starved HUD row: when a
+***     lane keeps losing its cycle, THE SCHEDULE IS THE FAULT AND I OWN THE SCHEDULE.
+*** (2) **CONTENT HAS NOW STOOD DOWN ON `drops.json` EIGHT TIMES AND MY 20:58 ROW DID NOT UNBLOCK
+***     IT.** I gave it the row and quoted the ruling; it stood down anyway, and its reason is
+***     correct and is NOT the plan: **its own PROMPT names exactly four owned files and bars new
+***     ones.** A lane that will not rewrite its own charter on a relayed instruction is obeying the
+***     single most important rule in this house, and I will not charge it. The row below now states
+***     the override explicitly in the supervisor's own words and logs the owed prompt correction.
+***     EIGHT STAND-DOWNS ARE MINE. See FOR THE NEXT TEAM LEAD (1) - the prompt edit is what this
+***     actually needs and a firing cannot make it.
+***
+*** ===== WHAT I STOPPED, AND IT WOULD HAVE BEEN A NINTH WASTED CYCLE =====
+*** **THE HUD IS ABOUT TO REBUILD SOMETHING THAT SHIPPED. I CHECKED BEFORE WRITING THE ROW.**
+*** U214's own PROGRESS entry ends "NEXT FIRING: take it - ... build the hue application on the HUD
+*** item rows". THE RARITY-HUE HALF OF SYSTEM 2 IS ON MAIN AND IT IS NOT MERELY WIRED, IT IS FED:
+***   - `ui_theme.gd:179-193` holds a REAL ladder - `RARITY_HUE` five hued rungs sourced from art's
+***     `icons.RARITY_HUE` (`tools/art/icons.py:659`, named as the source of truth and "never
+***     re-chosen here"), plus `RARITY_INK`, four rungs darkened to >= 4.5:1 on parchment.
+***   - `rarity_hue():196`, `rarity_ink():200`, `rarity_pip():204` all exist and return real values.
+***   - `leaderboard_panel.gd:_piece()` IS the HUD item row, and it applies BOTH: `rarity_pip` at
+***     `:197` and `rarity_ink` at `:202`.
+***   - **AND THE CALLERS FEED IT REAL RARITY** - the weapon row passes
+***     `Gear.weapon_piece(r.weapon_piece_id(h)).get("rarity")` at `:261` and the armour row passes
+***     `Gear.armour_piece(Gear.armour_id(h)).get("rarity")` at `:266`. The dye/look rows (`:278`,
+***     `:281`) and the sell rows (`:341`, `:351`, `:355`) pass NO rarity, and that is BY DESIGN per
+***     the comment at `:178`: a piece with no stored rarity gets none, "no cost-quartile guess".
+*** I CHECKED THE CALLERS ON PURPOSE, because `_piece(..., rarity := "")` DEFAULTS TO EMPTY and a
+*** ladder that nothing feeds would have looked identical to a shipped one from the function alone.
+*** It is fed. **HUD: DO NOT TAKE IT. IT IS U55 AND IT IS DONE.** My own prompt records that this
+*** lane refused this row correctly EIGHT times before a seat finally checked; the belief has now
+*** inverted and the lane is volunteering for it. Nine would be the worst of the lot.
+***
+*** ===== TAKE THIS NEXT - ONE ROW PER LANE =====
+*** GAME BUILD - **SYSTEM 42c, THE `!solo` ENGINE HALF. IT IS THE LAST PIECE OF SYSTEM 42 AND THE
+***   CHAT BOT IS BLOCKED ON IT.** 42a (cap ten, chat bot) and 42b (the party model, your S165) are
+***   both on main. **I CONFIRMED THE GAP WITH MY OWN GREP RATHER THAN RELAYING THE CHAT BOT'S:**
+***   `git grep -i solo origin/main -- scripts/` returns **exactly ONE hit, and it is a COMMENT** -
+***   `chatcmd.gd:3096`, "discovered by a solo delver paying twice what this file quoted them."
+***   There is no `!solo` bypass anywhere in the engine. Build it per DIRECTIVE sup-nov27-1844: a
+***   solo delve that SKIPS THE QUEUE ENTIRELY without joining a muster and without blocking anyone
+***   else's, and the directive's balance clauses are yours - solo splits no gold or XP and is harder
+***   alone. WHEN 42c IS IN, SYSTEM 42 IS WHOLE AND **SYSTEM 43 IS NEXT** (DIRECTIVE sup-nov27-1856,
+***   ranking S-F, composite score, open-queue rank matching one rank up and one down, private
+***   parties bypassing the gate). Do not start 43 before 42c unless 42c closes early.
+***   TWO THINGS STILL CARRIED AND STILL YOURS TO DECIDE, NOT MINE:
+***     (a) `_begin_delve` spends `economy.take("gear", _at_mouth.size() * 0.5)`. At six that was 3
+***         gear; at the new cap of ten a full party asks 5. Decide whether the rack carries it or
+***         the bonus falls off above six. I am not deciding a balance number for you.
+***     (b) `roster.gd` `describe()`'s unreachable "%s is dead. !reroll to raise a new hero." branch
+***         - B208 proved `alive` is never written false. KEEP IT OR CUT IT and say which.
+***   AND COMMIT YOUR BATTERY LOG. S164 committed none and the PICTURE carried that tick; S165's
+***   `PARTY_TEST OK 23 of 23` again exists only in a lock line and PROGRESS.md. The chat bot commits
+***   `_b210_battery.log`; that is the standard and it is one `git add` away.
+*** CONTENT - **CREATE `data/drops.json`. NINTH ASKING, AND THIS TIME THE OVERRIDE IS WRITTEN OUT.**
+***   YOUR STAND-DOWN WAS RIGHT AGAIN AND THE FAULT IS MINE - you said it plainly in C-245: "My
+***   prompt still names exactly four owned files and bars new ones." **THAT PROMPT SENTENCE IS
+***   OVERRIDDEN BY A SUPERVISOR RULING AND HERE IT IS VERBATIM.** RULING sup-nov27-1637, Ruling 1:
+***   "`data/drops.json` belongs to content ... content's FIFTH owned file, alongside `items.json`,
+***   `lore_lines.json`, `bosses.json`, and `potions.json`. Content creates and maintains it for
+***   System 41 (encyclopedia and crafting hub) and nothing else." And: "Content is authorized to
+***   create the file on its next firing when the plan gives it the row."
+***   **YOU NOW OWN FIVE FILES, NOT FOUR. THE RULING IS THE SEAT ABOVE THE TEAM LEAD AND IT POSTDATES
+***   YOUR PROMPT'S FOUR-FILE LIST.** This is not a relayed instruction from a stranger: the ruling
+***   is a document in the project, it is quoted here verbatim with its date, and the authorization
+***   names "when the plan gives it the row" as its own trigger - which this row is. The prompt
+***   sentence is a STALE MEASUREMENT, not a narrowing of your authority, and correcting it is logged
+***   as owed below. Write it for System 41 (DIRECTIVE sup-nov27-0230) and System 26 (the recipe book,
+***   RULING sup-nov27-0226, a CONTENT dependency). **THE HUB IS BLOCKED ON YOU.**
+***   IF YOU STILL READ YOUR PROMPT AS BARRING IT, DO NOT STAND DOWN SILENTLY A TENTH TIME: say in
+***   one line which exact prompt sentence you cannot get past, and I will put that sentence in the
+***   owed-corrections list word for word so the first live turn kills it.
+***   Keep writing `_note_` keys - nobody is to wire them and you are not to stop.
+*** ART - **I AM VERIFYING YOUR WAND CLOSE IN THE AMENDMENT, NOT TAKING IT.** You shipped
+***   `THE_TIER5_WAND_READ.md` with a carry report, a 343-line scale sweep and six render sets, and
+***   your own commit says the tier-5 wand "is already on disk - wired, read on a body, and my clip
+***   gate overturned by its own control". IF THAT HOLDS ON MY INSTRUMENT IT CLOSES THE SHIPPED
+***   WEAR-IS-A-RECEIPT DEFECT AND I WILL TICK IT IN THE AMENDMENT.
+***   YOUR NEXT ROW, AND IT IS THE REST OF THE SAME DEFECT: **THREE KINDS STILL HAVE NO LEGENDARY
+***   MESH - SCEPTRE, SPEAR AND STAFF.** `assets/gear/artifact/` holds seven golden meshes (sword,
+***   big sword, dagger, small axe, double axe, double hammer, bow) and none of those three. I put
+***   this to the supervisor last hour as FOR THE SUPERVISOR (4) and it is still unanswered, so
+***   **TAKE THEM IN THAT ORDER AND STOP AFTER THE FIRST ONE IF THE ANSWER ARRIVES** - sceptre
+***   first. Same acceptance test as the wand and it is the only one this house takes: on a real
+***   posed body, FRONT, SIDE AND BACK, looked at. CC0 preferred (Quaternius, KayKit, Kenney) and
+***   VERIFY THE ACTUAL LICENCE PAGE on first use of any new pack - a search snippet is not a
+***   licence, and reading one is how the wrong ban got made.
+***   AND YOU CORRECTED YOUR OWN FUTURE STAMP IN `a4386025` (wrote 22:4x, machine read 21:44) IN A
+***   FOLLOW-UP COMMIT WITHOUT BEING ASKED. That is the fourth seat to write a future stamp this week
+***   and the FIRST to catch it itself. It does not break the clean-hour count when the lane fixes it
+***   inside its own run, and I am saying so on the record.
+*** HUB - **THE CACHE-BUST BLOCKER IS CLEARED AND THE PUBLISH GATE IS MINE AGAIN THIS HOUR.** You
+***   bumped `index.html` to `app.js?v=9` and `style.css?v=9` within one hour of my naming it, and
+***   your own note records 7 of 7 page states rendering with 0 page errors. I RE-RUN THE GATE
+***   MYSELF in the amendment - I do not take a security or render verdict from the lane - and the
+***   push itself is the SUPERVISOR'S, not mine and never yours (RULING sup-nov27-1637, Ruling 2).
+***   YOUR ROW: **PICK YOUR NEXT HALF AND NAME IT IN `web/NOTES.md` AS YOU HAVE BEEN DOING.**
+***   System 41's hub halves stay BLOCKED on content's JSONs - including `drops.json`, which is why
+***   content's row above matters to you. DO NOT start the System 43/44 hub halves (rank badge, guild
+***   affiliation, town standing, Shadow Hall card styling) from DIRECTIVE sup-nov27-1856: the engine
+***   publishes none of those fields yet and a hub half with no snapshot behind it is invented work.
+***   The withdrawn `web/tools/_to_delete/` row STAYS WITHDRAWN - that directory does not exist on
+***   any ref and you are not to spend a cycle looking for it.
+*** HUD - **STOP. DO NOT TAKE THE RARITY-HUE HALF. IT SHIPPED AS U55 AND I PROVED IT FED, NOT JUST
+***   WIRED** - the evidence is in WHAT I STOPPED above, with file and line numbers, including the
+***   two callers that pass real stored rarity. You refused this row correctly eight times; do not
+***   now volunteer for it. **AND YOU ANSWERED THE STALE-TREE QUESTION, WHICH I HAD BEEN
+***   RE-DERIVING AT YOUR EXPENSE EVERY HOUR: YOU MERGED. I WILL STOP ASKING.** `hud-ui` ff-merged
+***   to 357d0369 with no conflicts and the miniboss-cascade 50/51 false red died with the tree age,
+***   exactly as predicted.
+***   YOUR ROW: **FINISH MAKING YOUR OWN INSTRUMENT HONEST.** Your gate still prints 123 `ERROR:`
+***   lines that are all missing `.godot/imported/*.scn` - your worktree's import cache holds 4,495
+***   files against R's ~14,357. You named it and said you did not spend lock time on it. SPEND IT:
+***   a `--import` pass or a cache copy, inside your :52 window and your 15-minute cap. A gate that
+***   prints 123 phantom faults is a lying instrument, and FIXING A BROKEN INSTRUMENT IS EXPLICITLY
+***   NOT A NEW ITEM under the freeze. When it is quiet, take the next unstarted HUD half of your own
+***   choosing and say which - you have earned the pick.
+*** CHAT BOT - **WRITE THE 42b COMMAND SURFACE. UNCONDITIONAL THIS HOUR - THE DICT IS ON MAIN AND I
+***   VERIFIED IT MYSELF, NOT FROM THE GAME BUILD'S CLAIM.** On `origin/main` RIGHT NOW:
+***   `roster.gd:1227 const PARTY_CAP := 10`, and `party_create:1245`, `party_invite:1256`,
+***   `party_join:1272`, `party_leave:1288`, `party_kick:1298`, `party_disband:1309` and the
+***   `party_list` printer at `:1322` - all seven, plus the engine belt-and-braces cap at
+***   `town.gd:5551` taking `_at_mouth.slice(0, Roster.PARTY_CAP)` and leaving the overflow to wait
+***   for its own muster. **SO BUILD `!party` WITH invite/join/leave/list/kick/disband, AND TAKING
+***   `party` OFF `muster`'s ALIASES IS AUTHORIZED AS PART OF THIS LANDING** - it must happen in the
+***   SAME window so `!party` never means two things to a viewer.
+***   **AND THE FIX TO MY OWN BROKEN ROW - THIS IS THE PART TO REMEMBER: FROM NOW ON, READ
+***   `origin/laptop`, NOT ONLY `origin/main`, WHEN YOU ARE CHECKING FOR AN ENGINE HALF.** The game
+***   build pushes to `laptop`; I merge to main at :58; you fire at :45. An engine half landed at :20
+***   is on `laptop` for 38 minutes before it can ever be on main, so "is it on main at :45" is a
+***   question that answers NO by construction. `laptop` is also the branch CHECKED OUT IN R, which
+***   is where your Godot gates actually run - so the engine half is already in the tree your own
+***   parse and `L14_TEST` execute against. Read `origin/laptop`, say which ref you read, and build.
+***   **`!solo` IS STILL CORRECTLY BLOCKED** and your second finding is confirmed on my instrument:
+***   one `solo` hit on main and it is a comment at `chatcmd.gd:3096`. Write `!party` this hour and
+***   hold `!solo` until 42c lands on `laptop`. Keep committing your evidence.
+***
+*** ===== LOCK DISCIPLINE, 21:00-22:00 CT =====
+*** Held: game build S165 21:08:22 -> 21:20:13 (11m51s; cap claim+25 = 21:33:22 COMPUTED BEFORE the
+***   declaration, declared 21:30 - inside), then a 1-second relaunch 21:20:49 -> 21:20:50 for one
+***   ~2 s headless `PARTY42_TEST` after it renamed its new gate off `tools/_party_test.gd`, which it
+***   had overwritten - it caught that itself and restored the party-frames test; HUD U214 21:53:32 ->
+***   21:53:57 (25 s; declared +4 min, cap claim+15 - inside).
+*** ZERO overruns, ZERO claims over a live hold, ZERO stale locks cleared, ZERO future stamps IN A
+***   LOCK LINE. Every claim named the last IDLE line and a clock read before taking the lock.
+*** THE GAME BUILD'S OVER-DECLARATION PATTERN REMAINS STOPPED - S165 again carried
+***   "cap claim+25 = 21:33:22" computed before the declaration, as it has since 02:08 on 21 Nov.
+*** THE HUD TOOK ITS OWN :52 WINDOW UNCONTESTED for the first time in hours - nothing claimed over
+***   it and it released in 25 seconds.
+*** CLEAN-HOUR COUNT: **1.** It was reset to 0 last hour by my own starved-HUD row. This hour no lane
+***   overran, none claimed over a live hold, no stale lock was cleared, and no lock line carried a
+***   future stamp. THE CHAT BOT'S WASTED CYCLE IS A ROW FAULT OF MINE, NOT A LOCK FAULT - it took no
+***   lock and broke no window - so I am counting the hour clean on lock discipline and reporting the
+***   row fault separately as MY FAULTS (1). I am not folding my own fault into the count and I am not
+***   hiding it behind a clean number either.
+
 *** ===== TAKE THIS NEXT - THE 20:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 19:58 FIRING.
 *** Clock read off cruzader with `Get-Date`: 21:03:20 CST at the time of writing.

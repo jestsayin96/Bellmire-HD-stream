@@ -182,7 +182,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
     ## Measured at B156 against synthetic lines; no entry in commands.json today is of this origin.
     match verb:
         "enlist":   out = _enlist(user_id, display, arg, arg2)
-        "hero":     out = _needs(user_id, func(): return roster.describe(user_id) + _dur_tail(user_id) + _hub_tail())
+        "hero":     out = _needs(user_id, func(): return _with_hub(roster.describe(user_id) + _dur_tail(user_id)))
         "inventory", "inv", "bag", "items":
                     out = _needs(user_id, func(): return inventory(user_id))
         "weapon":   out = _needs(user_id, func(): return _weapon_line(user_id))
@@ -683,6 +683,25 @@ static func hub_url() -> String:
 static func _hub_tail() -> String:
     var u := hub_url()
     return "" if u == "" else "  |  Full sheet: " + u
+
+## B221: THE POINTER IS THE DIRECTIVE'S OWN SURFACE (sup-nov27-2340, "the hub is the primary
+## interface, not chat") AND IT SITS AT THE TAIL - which is the FIRST thing safe_line()'s _cut
+## discards, and _cut backtracks to a word boundary, so what is lost is the WHOLE 49-char URL and
+## the viewer is left pointing at nothing. Measured at B221 off the real data files: `!hero` is
+## `describe() + _dur_tail() + _hub_tail()`, and describe() alone reaches 335 characters on a
+## high-level hero (25-char Twitch display name, "Charcoal-Burner's Greataxe" - the longest weapon
+## name in data/items.json at 26 - Grandmaster, scarwoven mail), with _dur_tail adding up to 103
+## more when BOTH slots are worn and swinging soft. 335 + 103 + 66 = 504 against REPLY_MAX 440.
+## A merely MODEST hero (12-char name, one slot worn) came in at 434 - SIX characters of spare.
+## `!hero` is one of the three commands the directive KEEPS in chat, so the one line that must
+## survive is the one that was being dropped.
+## THIS IS NOT A NEW IDIOM AND NOT NEW SURFACE: `_catchup` has reserved its tail and cut its BODY
+## since L68 (see `var body := CATCHUP_MAX - tail.length()` and `_cut(out, body) + tail`). This is
+## that same idiom, named, for the one other site that can overflow. The wording is UNCHANGED.
+## No-op when the body already fits: _cut returns its input untouched at or under the budget.
+static func _with_hub(body: String) -> String:
+    var t := _hub_tail()
+    return _cut(body, REPLY_MAX - t.length()) + t
 
 ## S162 slice 3 (RULING sup-nov27-0209): the smith mends what the dungeon wore.
 ## The engine owns all of it - Economy.repair charges the gold, restores the piece and writes the

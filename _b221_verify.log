@@ -1,0 +1,76 @@
+=== B221 VERIFY 2026-11-28T08:51:32-06:00 ===
+--- .editorconfig ---
+root = true
+
+[*]
+charset = utf-8
+--- indent: tabs introduced in my new block? ---
+0
+(0 = no tabs, correct for this file)
+--- tabs anywhere in chatcmd.gd ---
+0
+--- json.load ---
+OK commands: 40 order: 40
+all 40 carry short+example: True
+--- commands.json unchanged (expect 36a4f3fc...) ---
+36a4f3fcd23527d904b0319839ca69c6  data/commands.json
+--- COMMANDS.md unchanged (expect 501e9535...) ---
+501e95355b8a90c5ff847aadd65d7fc8  docs/COMMANDS.md
+--- drift both directions ---
+arm keys: 70
+COMMAND NAME with no arm : none
+arm with no entry/alias  : ['testbits', 'testpoints', 'testsub']
+--- _with_hub wiring ---
+185:        "hero":     out = _needs(user_id, func(): return _with_hub(roster.describe(user_id) + _dur_tail(user_id)))
+683:static func _hub_tail() -> String:
+691:## `describe() + _dur_tail() + _hub_tail()`, and describe() alone reaches 335 characters on a
+702:static func _with_hub(body: String) -> String:
+703:    var t := _hub_tail()
+771:    return "The counter pays two fifths of shop cost for anything you own and are not wearing." + _hub_tail()
+779:    return "A caravan comes up the west road with a wagon and stands at the market. It sells the town what the town is short of, buys up the surplus, and takes the road back out. A festival brings one sooner." + _hub_tail()
+783:    return "A festival fills the market square - music, stalls, a crowd. A caravan is likelier while it runs. The town levels, or a viewer pays and it carries their name." + _hub_tail()
+899:    return "What haunts the dark, depth by depth: each beast's size, its habits in a fight, and the eight lords that hold the deep." + _hub_tail()
+957:        return "Nothing is written down about what holds the chambers." + _hub_tail()
+963:            % [names.size(), MB_ASK, String(names[keys[0]])] + _hub_tail()
+973:        return "%s holds a chamber alone." % head + _hub_tail()
+974:    return "%s. %s" % [head, look] + _hub_tail()
+1190:    var tail := _hub_tail()
+3982:    out += _hub_tail()
+
+=== B221 HUB-POINTER SURVIVAL AUDIT (every site that appends the pointer) ===
+hub_url 'https://jestsayin96.github.io/Bellmire-HD-stream/' len 49 | _hub_tail len 66 | REPLY_MAX 440 | body budget 374
+hub_url VERIFIED against the real published path: repo jestsayin96/Bellmire-HD-stream,
+  gh-pages serves at root, NO CNAME -> https://jestsayin96.github.io/Bellmire-HD-stream/
+  exact case and trailing slash match. No drift between chat and the hub.
+
+-- fixed-string sites --
+  L771   body  82 total 148  ok 292 spare
+  L779   body 196 total 262  ok 178 spare
+  L783   body 158 total 224  ok 216 spare
+  L899   body 119 total 185  ok 255 spare
+  L957   body  54 total 120  ok 320 spare
+
+-- 70 miniboss lines (L963/973/974, data-driven) --
+  CUT: 0 | pointer lost: 0 | worst 'collier' total 219, 221 spare
+
+-- 17 reply-bearing ask topics (L3982) --
+  CUT: 0 | pointer lost: 0 | worst 'permadeath' total 253, 187 spare
+
+-- catchup (L1190) -- already reserves its tail: CATCHUP_MAX - tail.length(), _cut(out,body)+tail
+-- bare !help -- 428/440, gated at tools/_l14_test.gd:217 (not mine)
+
+-- !hero (L185) -- THE ONE SITE THAT COULD OVERFLOW. NOW FIXED via _with_hub().
+  describe() worst 335 + _dur_tail() worst 103 + tail 66 = 504 vs 440 -> pointer LOST
+  conservative reachable 318+100+66 = 484 -> pointer LOST
+  MODEST (12-char name, one slot worn) 295+73+66 = 434 -> 6 CHARACTERS OF SPARE
+
+-- _with_hub() emulated against the real tail --
+  body 368 -> total 434  pointer present True  body kept 368
+  body 418 -> total 440  pointer present True  body kept 374
+  body 438 -> total 440  pointer present True  body kept 374
+  body 504 -> total 440  pointer present True  body kept 374
+  no-op at or under budget: True
+
+NOTE: this is a STRING-BUDGET measurement, not an engine gate. Godot cannot be launched
+(Blender bridge down, app not running), so chatcmd.gd is UNPARSED this cycle. The change is
+pure string composition over two static helpers that already shipped.

@@ -25190,3 +25190,25 @@ which `_l14_test.gd` excludes by name (**L17: `!test*` are local-only, never doc
 - No new data file. No wiring: the existing readers already draw from these pools.
 - Left in W3, untracked and not committed: `_c256_old.json` (device shell cannot delete). Safe to remove.
 - Next content: C-257.
+## H38 hub cycle (2026-11-28 14:4x CT) - THE ROW "EXTEND THE FORM TO THE ENGINE'S VERBS" IS ALREADY TRUE: 9 OF 10 OFFERED, THE TENTH IS REFUSED BY THE ENGINE ON PURPOSE. NO web/ CHANGE.
+
+Row taken: HUB (:37) from the 13:58 CT TAKE THIS NEXT block - "extend the request form to cover the verbs
+the engine will actually poll for, keep hub_actions_schema.sql the single record of the queue's shape."
+- MEASURED, not copied: `scripts/hub_actions.gd` KINDS = 10 (wear dye sell buy respec reroll specialize
+  party_invite party_join party_leave); `web/tools/hub_actions_schema.sql` CHECK list = the same 10;
+  `app.js` ACTIONS = 9 - `sell` is omitted on purpose because `translate()` answers it with "Selling from
+  the inn is not open yet". Respec already sends a `calling` box, so the engine's S169 flag is answered.
+  Nothing the engine polls is missing from the form, and the schema already records every kind.
+- WHAT WOULD BE NEW IS NOT MINE TO INVENT: quest accept, store/stash, craft, rankings actions have NO engine
+  verb and NO schema kind. Adding a form row for them would hand viewers a guaranteed "The town does not
+  know that request." The row is the engine's (new KIND + translate arm) and the schema CHECK; when those
+  land, the hub adds one ACTIONS line and the CHECK list in the .sql. Asked up the chain, not built.
+- Merged origin/main into hub (clean). `origin/gh-pages^{tree}` = `origin/hub:web` = `origin/main:web` =
+  **1c35ad27** - web delta **0**. Publish 9+ state is in sync; nothing is waiting.
+- Checks (no web/ change, so no browser pass owed): `node --check web/app.js` OK; innerHTML only at the two
+  page-owned sites (app.js:255, :301) plus comments; outerHTML/insertAdjacentHTML/document.write/eval/
+  new Function 0 as code (2 comment lines); `sb_secret|service_role` 0 in web/; CSP meta present;
+  `app.js?v=13`. Hostile-name test not re-run: web/ is byte-identical to the tree it passed on.
+- NOT claiming READY TO PUBLISH (nothing changed). No live-data arm exercised; the browser OAuth leg still
+  needs one real human sign-in. Live-dot colour: unchanged, no UI touched.
+- Untracked in W, named and left: _hub_msg.txt, _hub_ready_shot.png, _hub_scratch/, web_look3.tar, web_look4.tar.

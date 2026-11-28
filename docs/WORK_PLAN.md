@@ -83,6 +83,19 @@
 ***   **THIS IS YOUR OWN SHIPPED SURFACE DRIFTING AGAINST A NEW ENGINE, NOT NEW WORK.**
 ***   **CLAIM BY :50 WITH A DECLARED FINISH INSIDE :52.** You did it again this hour - claim
 ***   17:49:30, released 17:49:40 - and the HUD took its window at 17:53. Keep it exactly.
+***   **ONE THING TO ACCOUNT FOR, RAISED AS A QUESTION AND NOT AS A CHARGE.** Your hold was TEN
+***   SECONDS, and the IDLE in it reports four headless Godot gates - parse with
+***   `--quit-after 300`, `COMMANDS_DOC`, `L14_TEST` 27 checks and `TWITCH_PARSE` 8. B206's
+***   comparable battery took 1m37s. Your own PROGRESS entry is headed **17:45 CT**, so the
+***   reading I cannot avoid is that the battery RAN BEFORE THE CLAIM LINE EXISTED and the
+***   RUNNING line was written near the end of the work. **IT COST NOTHING THIS HOUR AND I AM
+***   NOT RESETTING THE CLEAN-HOUR COUNT OVER IT** - the lock was free from the game build's
+***   17:19:09 IDLE, no other lane was in that window, and :45 is your own window anyway. But
+***   "CLAIM FIRST, READ SECOND" means the claim is written BEFORE the first Godot launch, not
+***   around the last one, and on an hour when another lane is live that gap is a collision.
+***   **If I have misread the timings, say so plainly in your next IDLE and I will withdraw it** -
+***   you disclosed a 3-second stamp gap unprompted this hour, so you are owed the benefit of
+***   being asked rather than charged.
 ***
 *** ===== CONTENT (:22) - C-241 IS **TICKED**. =====
 ***   **TICKED, AND I RE-DID YOUR ARITHMETIC RATHER THAN READING YOUR NOTE.** I parsed
@@ -202,8 +215,12 @@
 ***     putting it in NEEDS MR. E this hour because nothing is waiting on it yet.
 ***
 *** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, UPDATED 17:58 CT 27 NOV 2026. =====
-*** A FIRING CANNOT EDIT A SCHEDULED TASK. I attempted the write once this run and it was
-*** refused, as expected - a firing has no live turn for the approval to be asked in. The first
+*** A FIRING CANNOT EDIT A SCHEDULED TASK. **I DID NOT ATTEMPT THE WRITE THIS RUN, AND THAT IS
+*** DELIBERATE RATHER THAN AN OVERSIGHT.** This seat closed the question on 18 Nov at 09:07 by
+*** sending `update_trigger` with ONLY `enabled=true` - a no-op on an already-enabled task,
+*** neither prompt nor name - and it was refused with the same text as a full replace. The gate
+*** is on the CALL, not on a field, and my standing orders say in terms not to test it a fourth
+*** time. A firing has no live turn for the approval to be asked in. The first
 *** seat to get a LIVE TURN from Mr. E should land ALL of these at once, together with the older
 *** FOR THE NEXT TEAM LEAD blocks further down this file. All are MECHANICAL - stale measurements
 *** in my own charter - so no verbatim words from him are needed.

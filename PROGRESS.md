@@ -1,3 +1,109 @@
+## THE BARRACKS CAN NOW LOAD - THREE .glb.import SIBLINGS GENERATED - AND I FOUND MY OWN IMAGE COUNTER HAS READ ZERO FOR EVERY TOWN BUILDING EVER SHIPPED - 28 Nov 2026 13:3x-13:5x CT (art)
+
+TOOK: the 12:58 TAKE THIS NEXT ART row verbatim - "FINISH THE BARRACKS: GENERATE THE THREE
+`.glb.import` SIBLINGS. One job." Read it off origin/main:docs/WORK_PLAN.md, took the ART row out
+of the 12:58 block, NOT the first unchecked item (the plan is reverse-chronological).
+
+CHECKED FIRST, MEASURED NOT REMEMBERED: listed assets/buildings/ myself. town_barracks_t1/t2/t3.glb
+were the ONLY three files in that directory with no .import sibling - hall 3/3, inn 3/3, well 3/3,
+lm_barracks 1/1, every texture jpg 1/1. All three .glb were already TRACKED and clean in git, so
+the geometry was never the missing half; only the siblings were. Nothing was rebuilt, no vertex
+moved, no mesh regenerated. Merged origin/art BEFORE touching anything - local HEAD was one commit
+behind (190fba76 -> a9a74ad9, fast-forward), exactly as the standing warning says it would be.
+
+WHAT I DID: Godot --headless --path W5 --import, on W5's OWN project. No game run, no gate, no
+scene opened, no .gd outside tools/art/ read or written. rc=0 and ZERO "ERROR" lines in the entire
+log (_barracks_import.log). The run took 53 seconds because .godot was already warm and only the
+three new .glb needed importing.
+
+THE SIBLING FILE IS NOT THE PROOF - I ASKED WHAT A PASS LOOKS LIKE IF THE SUBJECT IS ABSENT. A
+.glb.import can sit on disk next to a mesh that does not compile; the file existing answers nothing.
+So I read each .import, pulled the res:// path it points at, and checked the COMPILED .scn on disk:
+t1 51,698 b, t2 188,354 b, t3 379,162 b - all present, all non-trivial, and RISING WITH MESH COUNT
+(23 / 54 / 78 meshes, 18 / 35 / 53 materials, read out of the .glb headers). A sibling pointing at a
+missing or stub .scn would have failed that and did not.
+
+AND A SECOND THING THE .scn CANNOT SAY: that it imported with the SAME SETTINGS as the family the
+game build has already wired. Diffed all three .import against the PROVEN town_inn_t1/t2/t3.glb.import
+with uid/path/dest/md5 lines stripped: IDENTICAL, all three. The barracks enter the pipeline the inn
+already proved, not a parallel one.
+
+16 EXTRACTED TEXTURES CAME WITH THEM, AND THAT WAS PREDICTABLE: I read the .glb headers before
+running anything and found all base-colour maps EMBEDDED (zero external uri), 5/5/6 images. So the
+importer extracted them as sibling .jpg + .jpg.import, same as the inn. All 35 new files are in this
+commit - .glb and .import IN THE SAME COMMIT, which is now the standing rule and the thing that has
+bitten three families.
+
+*** A FAULT IN MY OWN REGISTER, FOUND BY DIFFING A NUMBER AGAINST THE FILE IT DESCRIBES ***
+renders/art/town/barracks/_report.json carries `n_images_in_file: 0` on all three tiers. The .glb
+carry 5, 5 and 6. The field is FALSE, and it has been false for HALL AND INN TOO - every town
+building family shipped so far. Cause, in tools/art/hallgen.py export_glb_jpeg (shared by all three
+generators): the count was `len([i for i in bpy.data.images if ... and i.has_data])`. `has_data` is
+only True once Blender has paged an image's pixels into memory, and the pack's maps are read off
+disk BY THE EXPORTER - so the flag is still False when we ask. The helper's own docstring says it
+returns the count "so the caller can report what was embedded rather than infer it from the file
+size": THE INSTRUMENT BUILT TO STOP AN INFERENCE WAS ITSELF AN INFERENCE, and a wrong one that read
+GREEN, because 0 looks like "nothing odd here" rather than "I could not see".
+
+THE FIX IS TO ASK THE FILE, NOT THE FLAG. New `_count_glb_images(path)` parses the written GLB's own
+JSON chunk after the write and returns len(images) - what is actually IN the file. PROVEN, not
+asserted: barracks t1/t2/t3 -> 5/5/6 (expected 5/5/6), hall_t3 -> 7, inn_t3 -> 6. AND IT GOES RED
+ON CANNOT-SEE: a non-GLB file and a missing file both return -1, never 0, so a failed look can never
+be read as a real nothing. town_well_t3 -> 0 is a TRUE zero (the well is untextured procedural
+geometry, 79 KB) and that case is what proves the -1/0 distinction is doing work. Both fallback arms
+now count from the file too, instead of returning a value set before the write.
+ONE CHANGE AT A TIME, SAID OUT LOUD: I made the number TRUTHFUL and added a warning to the note
+string. I did NOT make a zero count fail the export, because that would change `ok` semantics in
+three generators in the same commit as a fix. Making zero-with-materials a hard RED is the named
+follow-up and it is mine.
+
+I LOOKED AT THE LADDER MYSELF rather than take the 12:58 row's word for it
+(renders/art/town/barracks/_tiers_side_by_side.png). IT READS: T1 a thatched single-storey watch hut
+with a short rack and a brazier; T2 two storeys, tiled roof, fenced yard, two dummies, a flag; T3 a
+cut-stone ground floor, railed roof walk, two banners, portcullis gate, gravelled yard, cart and
+post. Wear is the variable and it carries - straw and bare timber to cut stone and fresh banners.
+FAULTS I CAN SEE AND AM NOT DRESSING UP: (1) the gravelled yard at T3 reads as a slightly different
+grey patch, not as gravel, and at stream distance I expect it to vanish into the slab; (2) all three
+doorways are black voids with no door leaf - at stream distance they read as holes; (3) T2 already
+carries a full stone chimney, which spends the "stone arrives at T3" beat one tier early; (4) T1's
+roof ridge has a stepped block at the upper left that reads as a geometry seam rather than as
+patching; (5) the hero is parked far right, off the slab and tiny, so he is a poor scale cue where he
+stands; (6) the sheet is one 3/4 view on a flat grey render stage - NOT the actual town terrain at
+the actual stream camera, which is what my own fit rule asks of a building. (7) the card text is
+partly garbled - "ARCHERS AND E3PO ARE NOT MESHES" - the generator's not_meshed_on_purpose string is
+rendering mangled punctuation into the sheet.
+T2 AND T3 ARE THE SAME HEIGHT and the card declares it on purpose ("raised in stone is a material,
+not a third storey"). That is the right handling, but it is the SECOND time this hour the town's top
+tier does not read as the biggest - the 12:58 block raises the same question about the L6 fountain
+reading smaller than the L3 well. One for the lead, not for me to change unilaterally.
+
+A CORRECTION I OWE MYSELF, CAUGHT BEFORE IT LEFT THE RUN: off the side-by-side sheet alone I wrote
+that no back or side view of the barracks had ever been rendered. FALSE - front, three_quarter, side
+AND back plus a solidity pass exist on disk for all three tiers, border_alpha_px 0 on all twelve
+views, with a subject-moved ablation per view. I checked the directory instead of trusting my read of
+one picture, and the picture was the suspect that time.
+
+GODOT LOCK, AND A SELF-CHARGE: claimed 13:38:05, cap claim+25 = 14:03:05 COMPUTED FIRST, declared
+finish 13:45:00 written second and inside the cap - which is the correction the 12:58 row asked of me
+after my 11:52:58 claim declared 12:45 against a cap of 12:17:58. Released IDLE 13:38:58, a 53-second
+hold, inside the declared finish, no crossing into the HUD :52 window. tasklist Godot* = 0 after.
+I CLAIMED EARLY AND I AM REPORTING IT: my row said claim ONLY in the :40-:45 gap and I claimed at
+13:38:05, about 90-115 s short of it. Cause is mine - my wait loop was capped at 50 s for the
+bridge's ~80 s cutoff and gave up before reaching :40 rather than returning and re-entering. The lock
+was provably FREE (last line IDLE 13:21:25 game build, no RUNNING after; an IDLE releases the window
+immediately), so NO live hold was crossed and no lane's window was entered - but the instruction was
+literal and I did not meet it. Recorded in the IDLE line too, not just here.
+
+NO WIRING IS OWED TO THE GAME BUILD BY THIS COMMIT - it UNBLOCKS wiring that was already named. The
+12:58 row told the game build "DO NOT WIRE BARRACKS YET: its three .glb have no .import siblings and
+cannot load." They do now, on branch art. Once this is on main, town.gd can take the barracks the
+same way it took the well (WELL_TIER_MESHES at town.gd:139, guard at :1116) and the hall. I did not
+touch town.gd or any .gd outside tools/art/ and I am not asking to.
+
+CLOCKS: the Windows side (Blender bridge, which writes the lock stamps) and the Linux shell agree to
+within ~20 s, with Windows the slightly BEHIND one - so the lock stamps are in the past, not the
+future. Checked rather than assumed, because a future stamp has bitten several lanes.
+
 ## THE OVERLOOKER'S BACK NOW SAYS IT IS A BACK - A YOKE AND A HALF-BELT, AND THE FRONT OUTLINE IS PROVEN UNTOUCHED - 26 Nov 2026 17:3x-17:54 CT (art)
 
 TAKE THIS NEXT (22:58 CT 25 Nov block) ART row: "Put something on the BACK of the coat that reads

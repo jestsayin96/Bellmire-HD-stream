@@ -24554,3 +24554,26 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - **MY WORKTREE MOUNT IS NOT WHERE MY PROMPT SAYS IT IS**, and it cost me one failed call: the prompt gives `$HOME/mnt/hd adventure/bellmire-bot`, the real mounts this run are **`$HOME/mnt/bellmire-bot`** and **`$HOME/mnt/jests-hd-medieval-adventure`** - the connected folders are mounted by their own names, with no `hd adventure` parent. `ls $HOME/mnt/` settled it in one call. **I did NOT call `device_request_folder_access`.**
 - No Twitch message, nothing redeemed, nothing cheered, **ZERO BITS**. No channel state read or changed; Mr. E's account was not touched and bellmirebro sent nothing.
 - Not ticked - the team lead ticks.
+
+## C-250 (content, 28 Nov 2026, 02:3x CST) - TOWN-FIRST: THE MOMENT OF CHANGE (district and road upgrade events) AND THE INN EXTERIOR
+- TAKE THIS NEXT (02:22 block, CONTENT): event lines for the hour a district or road steps 1->2 / 2->3, then the inn exterior and storage line. Both done.
+- Added `town_buildings.upgrade_events` (8 districts x to_2/to_3, roads to_2/to_3; each {crier, plaque}) and `town_buildings.inn_exterior.stages[3]` ({name, crier, sign, see, storage}). Plain register; tier 1 patched, tier 3 finished. The only "floor" hit is "stone floors" in a granary line, not a dungeon count.
+- No new data file. One `_note_c250` key. VALIDATION OK: json.load passes, every pre-existing key unchanged (diffed), file round-trips byte-exact.
+- WIRING FOR THE GAME BUILD (not done): fire `upgrade_events.districts[<id>].to_N.crier` when a district reaches tier N; `roads.to_N` likewise; read `inn_exterior.stages[tier-1]` for the outside view and `.storage` for the hub's storage panel. All unwired by design.
+- Next content: C-251.
+
+## C-251 (content, 28 Nov 2026, 05:3x CST) - TOWN-FIRST: MOMENT-OF-CHANGE LINES FOR LANDMARKS, SITES AND THE SQUARE (WRITTEN, NOT YET COMMITTED - BLENDER BRIDGE DOWN)
+- TAKE THIS NEXT / standing order 1: C-250 covered districts, roads and the inn exterior; landmarks, sites and the square had no event lines. Taken.
+- Added to `data/lore_lines.json` -> `town_buildings`: `landmark_events` (7 landmarks x to_2/to_3, {crier, plaque}), `site_events` (sawmill, mine, range, farm x to_2/to_3), `square_events` (well to_3/6/9/12, market to_4/8/12). New key `_note_c251`. No new data file. No dungeon floor counts.
+- VALIDATION OK: json.load passes; only new keys are the three blocks and `_note_c251`; every pre-existing key equal to the pre-edit parse.
+- WIRING for the game build (unwired by design): fire `landmark_events.landmarks[id].to_N.crier` at tier_levels[N]; same for `site_events.sites[id]`; `square_events.well.to_<level>` and `.market.to_<level>` when the town reaches that level.
+- COMMIT: NONE YET. execute_blender_code failed twice (localhost:9876 refused), and git does not run from device_bash on this worktree. Edits sit uncommitted in W3 (`data/lore_lines.json`, this entry). NEXT FIRING WITH A LIVE BRIDGE: fetch, merge origin/main, `git add data/lore_lines.json PROGRESS.md`, commit to `content`, push.
+- Next content: C-252.
+
+## C-252 (content, 28 Nov 2026, 10:3x CST) - TOWN-FIRST: AMBIENT CRIER LINES BY HOUR AND TOWN TIER
+- Bridge was live this firing. First committed C-251 (left uncommitted by the 05:3x seat) as `1ba5a3be` and pushed. Team lead's 09:58 note had already marked it safe to commit.
+- TAKE THIS NEXT gave no content row beyond "you are not blocked"; standing order 1 (town growth text) taken. Gap found: no ambient line varied by BOTH hour of day and town tier.
+- Added `town_buildings.hour_cries` in `data/lore_lines.json`: tiers 1/2/3 x dawn/noon/dusk/night x 3 lines = 36. Tier 1 patched and thin, tier 2 working and lamplit, tier 3 prosperous. New key `_note_c252`. No new data file. No dungeon floor counts.
+- VALIDATION OK: json.load passes; the only new keys are `hour_cries` and `_note_c252`; every pre-existing key equal to the pre-edit parse; file round-trips byte-exact.
+- WIRING for the game build (unwired by design): pick the tier from `tier_levels`, the hour bucket from the day clock, and choose a random line from `hour_cries[tier][bucket]` for the crier ticker.
+- Next content: C-253.

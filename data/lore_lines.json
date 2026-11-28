@@ -17160,7 +17160,355 @@
           "see": "A flagged road with kerbs and gutters, a lamp at each crossing, worn flags."
         }
       ]
+    },
+    "upgrade_events": {
+      "_note": "C-250 / town-first: the MOMENT OF CHANGE. districts{<district id>:{to_2,to_3}} and roads{to_2,to_3} -> {crier (spoken once, in the hour the district or road steps up a tier), plaque (short text for a sign or the chronicle)}. Event lines, not state descriptions: state text lives in `districts` and `roads`. to_2 fires at town level tier_levels[2], to_3 at tier_levels[3]. Ids match `districts` keys. Dead until wired; content worker never touches code. No line states a dungeon floor count.",
+      "districts": {
+        "keep": {
+          "to_2": {
+            "crier": "The clerks have been given houses. Doors, with latches. Nobody lets on that they're pleased.",
+            "plaque": "Latch down."
+          },
+          "to_3": {
+            "crier": "The Close is paved. A man with a broom has been hired, and takes it seriously.",
+            "plaque": "Keep to the path."
+          }
+        },
+        "temple": {
+          "to_2": {
+            "crier": "Roofs go up over the almshouse beds. The bell rings, and for once somebody is under it.",
+            "plaque": "Roofed."
+          },
+          "to_3": {
+            "crier": "Lamps are lit along the Close. The graveside is kept clear, and has been for a while.",
+            "plaque": "Lamps lit."
+          }
+        },
+        "garrison": {
+          "to_2": {
+            "crier": "The pickets get a row of proper huts. Dry boots all round. The sergeant is suspicious.",
+            "plaque": "Dry boots."
+          },
+          "to_3": {
+            "crier": "The Armoury Close is walled and gated. The watch changes by the bell now, not by shouting.",
+            "plaque": "Changed by the bell."
+          }
+        },
+        "mill": {
+          "to_2": {
+            "crier": "The millers' huts are timbered over. The flour dust stays outside. Mostly.",
+            "plaque": "Timbered."
+          },
+          "to_3": {
+            "crier": "The granary quarter is raised. Stone floors, tight doors, and a clerk who counts the sacks.",
+            "plaque": "Sacks counted."
+          }
+        },
+        "craft": {
+          "to_2": {
+            "crier": "The smiths move into a lane. Smoke goes one way, at least, and the neighbours are told which.",
+            "plaque": "One smoke, one lane."
+          },
+          "to_3": {
+            "crier": "The Guild Quarter is built. Signs over the doors, and prices under the signs.",
+            "plaque": "Signs and prices."
+          }
+        },
+        "market": {
+          "to_2": {
+            "crier": "The stallholders have walls behind the stalls now. They sleep where they sell.",
+            "plaque": "Sleep where you sell."
+          },
+          "to_3": {
+            "crier": "The counting houses open. Coin is weighed indoors, and the scales are inspected.",
+            "plaque": "Weighed indoors."
+          }
+        },
+        "homes_s": {
+          "to_2": {
+            "crier": "South Row is relaid and the thatch redone. Mind the wet paint, and the wet dog.",
+            "plaque": "Relaid."
+          },
+          "to_3": {
+            "crier": "Gardens in the south lanes, and walls round them. Somebody has planted roses. Somebody will regret it.",
+            "plaque": "Walled gardens."
+          }
+        },
+        "homes_w": {
+          "to_2": {
+            "crier": "The west huts get proper doors. The wind finds fewer ways in.",
+            "plaque": "Doors fitted."
+          },
+          "to_3": {
+            "crier": "Millside is finished: stone footings, tiled roofs, a drain that works. The west side can look the east in the eye.",
+            "plaque": "Drain working."
+          }
+        }
+      },
+      "roads": {
+        "to_2": {
+          "crier": "The carters unload gravel by the cartload. Someone has put up a milestone, and someone else has argued about it.",
+          "plaque": "Gravelled."
+        },
+        "to_3": {
+          "crier": "The last flag is laid. The road is paved from the gate to the square, and the carters are not to be spoken to for a week.",
+          "plaque": "Paved."
+        }
+      }
+    },
+    "inn_exterior": {
+      "_note": "C-250 / order 1 item 9: INN EXTERIOR and the storage mechanic ONLY, no interior rooms. stages[3] match landmarks.inn tiers (tier_levels 1/5/9). Each = {name, crier (event, spoken on the upgrade), sign (text on the board outside), see (what a viewer sees of the OUTSIDE), storage (one plain line for the hub, saying what the inn keeps for a hero)}. Storage is a hero's own gear kept at the inn between delves; it is not a shop and is never sold from. Condition tracks level. Dead until wired; content worker never touches code. No line states a dungeon floor count.",
+      "stages": [
+        {
+          "name": "The Ale House",
+          "crier": "The ale house hangs a board. It says what it sells. It does not say much else.",
+          "sign": "ALE. BREAD. A BENCH.",
+          "see": "A low house, a painted board, a bench, a barrel by the door.",
+          "storage": "A shelf behind the bar. Your spare gear, kept till you come back."
+        },
+        {
+          "name": "The Inn",
+          "crier": "The inn gets a yard, a stable and a lit window each side. Strangers stop and look.",
+          "sign": "A BED AND A BOWL. GEAR KEPT.",
+          "see": "Two storeys of timber, shuttered windows, a stable yard, a lantern on a hook.",
+          "storage": "A locked chest per guest, under the stair. The key stays on the landlord."
+        },
+        {
+          "name": "The Inn of the Bell",
+          "crier": "The Inn of the Bell is finished: stone below, beam above, lamps at the door. The bell over it has a clapper.",
+          "sign": "SIT. EAT. SLEEP. GEAR KEPT.",
+          "see": "Stone and beam, a carved bell over the door, lamps either side, a stable and a cart-yard, smoke from two chimneys.",
+          "storage": "A strongroom with a bar and a ledger. Everything you leave is written down, and you are given the page."
+        }
+      ]
+    },
+    "landmark_events": {
+      "_note": "C-251 / town-first: the MOMENT OF CHANGE for the seven landmarks. landmarks{<landmark id>:{to_2,to_3}} -> {crier (spoken once, in the hour the landmark steps up a tier), plaque (short sign or chronicle text)}. Event lines, not state: state text lives in `landmarks`. to_2 fires at tier_levels[2], to_3 at tier_levels[3]. Ids match `landmarks` keys. Dead until wired; content worker never touches code. No line states a dungeon floor count.",
+      "landmarks": {
+        "hall": {
+          "to_2": {
+            "crier": "The Chief has had the Hall raised a storey. The stair creaks. He says it will settle.",
+            "plaque": "Mind the stair."
+          },
+          "to_3": {
+            "crier": "The tower is finished and the bell is hung. Everybody in the valley heard it first time, and said so.",
+            "plaque": "One bell."
+          }
+        },
+        "chapel": {
+          "to_2": {
+            "crier": "The chapel has a bell-tower. The bell is small. It is rung on time, which is more than was asked.",
+            "plaque": "Rung at dusk."
+          },
+          "to_3": {
+            "crier": "The temple is dedicated. The doors are open and the lamps are lit, and they will not be put out.",
+            "plaque": "Come in."
+          }
+        },
+        "barracks": {
+          "to_2": {
+            "crier": "The watch has a barracks. Bunks, a rack for spears, a door that locks from the inside.",
+            "plaque": "Bunks for eight."
+          },
+          "to_3": {
+            "crier": "The garrison has a yard and a drill sergeant. The sergeant has already lost his voice. The yard is not lost on anyone.",
+            "plaque": "Drill at first light."
+          }
+        },
+        "windmill": {
+          "to_2": {
+            "crier": "The windmill is turning. The hand mill is kept for the days the wind is not.",
+            "plaque": "Grain in, flour out."
+          },
+          "to_3": {
+            "crier": "The Great Mill runs on both wind and water. The loaf is cheaper. The baker is suspicious of it.",
+            "plaque": "Bread for the valley."
+          }
+        },
+        "workshop": {
+          "to_2": {
+            "crier": "Three forges in a row, and a row of smiths who disagree about all of them. Craft Row is open.",
+            "plaque": "Hammers till dusk."
+          },
+          "to_3": {
+            "crier": "The Guildhall of Crafts has its seal and its ledger. A bad weld now has a name against it.",
+            "plaque": "Made well, or not here."
+          }
+        },
+        "market_hall": {
+          "to_2": {
+            "crier": "The market has a square and a clock-stone. Prices are chalked where all can see them.",
+            "plaque": "Chalk, then coin."
+          },
+          "to_3": {
+            "crier": "The market is covered. The rain is somebody else's trouble now, and the stalls stay open through it.",
+            "plaque": "Open in all weather."
+          }
+        },
+        "inn": {
+          "to_2": {
+            "crier": "The ale house is an inn. It has rooms, and in the rooms, beds, and in the beds, only the people who paid.",
+            "plaque": "Rooms above."
+          },
+          "to_3": {
+            "crier": "The Inn of the Bell has a cellar, a cook and a stable boy. The bell over the door is polished. The door does not shut before dawn.",
+            "plaque": "The bell is rung for arrivals."
+          }
+        }
+      }
+    },
+    "site_events": {
+      "_note": "C-251 / town-first: the MOMENT OF CHANGE for the four work sites. sites{sawmill,mine,range,farm}:{to_2,to_3} -> {crier, plaque}. Event lines; state text lives in `sites`. Same tier_levels as landmarks. Dead until wired; no floor counts.",
+      "sites": {
+        "sawmill": {
+          "to_2": {
+            "crier": "The saw has a wheel. The two men have been told to stand back from it, and they do.",
+            "plaque": "Stand clear."
+          },
+          "to_3": {
+            "crier": "The lumberworks takes its first order from outside the valley. The carter counts the planks twice and says nothing.",
+            "plaque": "Cut here. Raised here."
+          }
+        },
+        "mine": {
+          "to_2": {
+            "crier": "The dig has props and a windlass. The men go down on a rope, not a ladder, and say it is better.",
+            "plaque": "Props checked daily."
+          },
+          "to_3": {
+            "crier": "The deep mine has a second shaft and an air-boy. Nobody asks how deep. Nobody wants the number.",
+            "plaque": "Lamp at the lip."
+          }
+        },
+        "range": {
+          "to_2": {
+            "crier": "The butts have a proper range. The targets are painted, and some are hit.",
+            "plaque": "Mind the line."
+          },
+          "to_3": {
+            "crier": "The archers' yard has a roof for wet days. The arrows still go astray. The roof is not blamed.",
+            "plaque": "Draw. Loose. Fetch."
+          }
+        },
+        "farm": {
+          "to_2": {
+            "crier": "The plot is a farm. It has a hedge, a gate and a dog that will not be told.",
+            "plaque": "Gate shut."
+          },
+          "to_3": {
+            "crier": "The home farm has a barn full and a second barn to fill. The cart goes to market loaded.",
+            "plaque": "Fed, and feeding."
+          }
+        }
+      }
+    },
+    "square_events": {
+      "_note": "C-251 / town-first: the MOMENT OF CHANGE for the square. well_to_fountain.stages[i] and market_growth.stages[i] each have an entry here: well{to_3,to_6,to_9,to_12} and market{to_4,to_8,to_12} keyed by the town level in `level`. -> {crier, plaque}. Fire when town level reaches the stage's level. Dead until wired; no floor counts.",
+      "well": {
+        "to_3": {
+          "crier": "The well has a stone rim. A child fell in last year, and nobody has been lenient on rims since.",
+          "plaque": "Rim laid."
+        },
+        "to_6": {
+          "crier": "The pump is bolted down. The first bucket came up clear and a man tasted it twice, to be sure.",
+          "plaque": "Pump twice."
+        },
+        "to_9": {
+          "crier": "The basin is filled. The water spills. The old women of the square have taken the benches round it, and mean to keep them.",
+          "plaque": "Let it run."
+        },
+        "to_12": {
+          "crier": "The fountain is turned on. It runs day and night. The town stands around it a while and then goes back to work.",
+          "plaque": "Water for the square."
+        }
+      },
+      "market": {
+        "to_4": {
+          "crier": "Awnings up. The fishmonger has put his stall to the north, in the shade, and the rest have followed.",
+          "plaque": "Cloth and shade."
+        },
+        "to_8": {
+          "crier": "The cobbles are set and the lanes are chalked. A second crier has been taken on, and the first is sulking.",
+          "plaque": "Keep to your lane."
+        },
+        "to_12": {
+          "crier": "The market has its own district. Caravans park at the edge and nobody complains. The ledgers have a second book.",
+          "plaque": "Open at dawn."
+        }
+      }
+    },
+    "hour_cries": {
+      "_note": "C-252 / town-first: ambient crier lines by hour of day AND town tier. hour_cries[<tier 1|2|3>][dawn|noon|dusk|night] -> list of 3 short lines. Tier keys match tier_levels (1 at level 1, 2 at level 5, 3 at level 9). Tier 1 is patched and make-do, tier 3 is prosperous: the line should tell a viewer which they are looking at. Dead until wired; content worker never touches code. No line states a dungeon floor count.",
+      "1": {
+        "dawn": [
+          "Cock's up and the fires are not. Blow on them.",
+          "Frost on the thatch. The thatch has seen worse.",
+          "First bucket's drawn. Mind the rope, it's mended twice."
+        ],
+        "noon": [
+          "Sun's overhead and the soup's thin. Both will do.",
+          "Noon bell, such as it is. Somebody hit the pot.",
+          "Dust on the road and bread on the sill. Eat."
+        ],
+        "dusk": [
+          "Light's going. Shutters up, patch the gaps with rag.",
+          "Count the children, count the hens, bar the door.",
+          "The Watch has one lantern. It is walking the long way round."
+        ],
+        "night": [
+          "Dark and quiet. Quiet is all we can afford.",
+          "One lamp lit in the Hall. The Chief is counting again.",
+          "Wind in the thatch. It is only the wind."
+        ]
+      },
+      "2": {
+        "dawn": [
+          "Smoke from every chimney and the baker's already cursing.",
+          "Carts on the lane before the light. Good. Somebody is buying.",
+          "The Watch changes at first light. They are on time, mostly."
+        ],
+        "noon": [
+          "Noon bell, struck properly. The clapper was mended last week.",
+          "Market's full and the lanes are loud. Mind your purse.",
+          "Hot loaf, cold ale, and a queue at the guild post."
+        ],
+        "dusk": [
+          "Lamps going up along the lane. Lit by hand, every one.",
+          "Shutters closed, doors barred, ale poured. Right order.",
+          "Day's trade counted. It came out higher than last month."
+        ],
+        "night": [
+          "The lamps hold and the Watch walks. Sleep.",
+          "Lantern at the gate and a dog at every door.",
+          "A late light at the guild post. Someone is writing names."
+        ]
+      },
+      "3": {
+        "dawn": [
+          "Bells for first light, and every one of them in tune.",
+          "The mill's turning before the sun. Flour by breakfast.",
+          "Whitewash dry on the south lanes. The roses opened overnight."
+        ],
+        "noon": [
+          "Noon bell, and the market hall's doors stand open. Come in.",
+          "Full tables at the inn and not a crumb wasted.",
+          "The square is busy and nobody is hungry. Remember that."
+        ],
+        "dusk": [
+          "Lamps lit on every lane. Nobody walks in the dark here now.",
+          "Evening bell. Gates closing, hearths banked, accounts squared.",
+          "The wall is walked, the water is clear, and the day was good."
+        ],
+        "night": [
+          "Lamps burn all night on the main road. The Watch uses them gladly.",
+          "Stars over a town that does not need to hide. Be glad of it.",
+          "The bell is quiet and the town is not afraid. Sleep well."
+        ]
+      }
     }
   },
-  "_note_c248": "C-248 town_buildings: building, landmark and tier flavour text. Zero-hit by design; no lane wires this key."
+  "_note_c248": "C-248 town_buildings: building, landmark and tier flavour text. Zero-hit by design; no lane wires this key.",
+  "_note_c250": "C-250 / town-first: town_buildings.upgrade_events (district + road tier-change event lines) and town_buildings.inn_exterior (3 stages incl. storage line). Dead until wired; no new data file.",
+  "_note_c251": "C-251 / town-first: town_buildings.landmark_events (7 landmarks x to_2/to_3), site_events (4 sites x to_2/to_3), square_events (well 4 steps, market 3 steps). {crier, plaque} each. Dead until wired; no new data file.",
+  "_note_c252": "C-252 / town-first: town_buildings.hour_cries (3 tiers x 4 hours x 3 lines = 36 crier lines). Dead until wired; no new data file."
 }

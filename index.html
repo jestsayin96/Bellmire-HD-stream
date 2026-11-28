@@ -58,7 +58,7 @@
     ?welcome=1 (force the H22 welcome open, ignoring a past dismissal)
     ?mock=crowd also carries a Satchel (sell prices) with the hostile-name canary (H11)
 -->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 <a class="skip-link" href="#stageScroll">Skip to the stage</a>
@@ -368,6 +368,7 @@
     </section>
     <section class="plain" id="fallen" role="tabpanel" aria-labelledby="tab-fallen" tabindex="0">
       <h2 class="title light">The Fallen <small>remembered</small></h2>
+      <div class="bagsbox" id="bagsBox" aria-live="polite"></div>
       <div class="fallen" id="fallenList"></div>
     </section>
 
@@ -404,7 +405,7 @@
       <p class="eyebrow">What Bellmire has learned of what lies below</p>
       <div class="chips" id="bestiaryChips" role="group" aria-label="Filter the Bestiary"></div>
       <div id="bestiaryBody" role="region" aria-label="Bestiary entries" tabindex="0"></div>
-      <p class="note">A beast is marked <b>Met</b> once the town's remembered Chronicle names it; until then it is only a rumour, and its details stay veiled. Tells and full descriptions are not in the town's published words yet.</p>
+      <p class="note">A chamber-holder stays a silhouette and <b>???</b> until your hero faces it: facing it gives the name, surviving it shows how it fights, killing it shows its spoils, and five kills write the full entry. Every other beast is marked <b>Met</b> once the town's remembered Chronicle names it; until then it is only a rumour.</p>
     </section>
 
     <!-- Shops (H29): every shop and the blacksmith, the trader's caravan and the orders waiting.
@@ -516,6 +517,6 @@
   </div>
 </div>
 
-<script src="app.js?v=8" defer></script>
+<script src="app.js?v=9" defer></script>
 </body>
 </html>

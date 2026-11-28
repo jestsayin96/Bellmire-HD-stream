@@ -341,6 +341,7 @@ function render(p) {
   try { renderState(t, p); } catch (e) { /* the new tab must never break the rest of the page */ }
   renderRoll(arr(p.guild_roll));
   renderFallen(arr(p.fallen));
+  try { renderBags(p.bags); } catch (e) { /* the bag map must never break the rest of the page */ }
   renderCommands(p.commands);
   renderRolls(p.rolls);
   renderLore();
@@ -962,6 +963,9 @@ function heroCard(h, isOpen, isMine) {
   meta.append(what, quick);
   idb.append(meta);
   if (h.title) idb.append(el("span", "htitle", h.title));
+  // S157 / System 40: the specialization's display name; "" (unspecialized) draws nothing
+  const specTxt = typeof h.spec_name === "string" ? h.spec_name.trim() : "";
+  if (specTxt) idb.append(el("span", "hspec", specTxt));
   const coa = coat(h.name, "md");
   coa.classList.add("hcoa");
   sum.append(sg, idb, coa);
@@ -1091,6 +1095,8 @@ function heroSheet(h, mode) {
   const lv = pickNum(h.level);
   const callingTxt = `${cap(h.species)} ${cap(h.class)}`.trim() || "Adventurer";
   who.append(el("div", "scall", callingTxt + (lv != null && lv > 0 ? ", level " + num(lv) : "") + (h.rank ? "  \u00b7  " + h.rank : "")));
+  const sheetSpec = typeof h.spec_name === "string" ? h.spec_name.trim() : "";
+  if (sheetSpec) who.append(el("div", "sspec", "Path of the " + sheetSpec));
   sid.append(who);
   if (!fallen) {
     // H11: pin this hero as "mine" so it is easy to find next visit
@@ -1190,6 +1196,16 @@ function heroSheet(h, mode) {
   const svTxt = h.saves ? String(h.saves) : "";
   sv.append(kv("Saves", svTxt ? svTxt : el("span", "gapnote", "not published")));
   if (!svTxt) gaps.push("saving throws");
+  // S162 wear and repair: numbers only (pickNum), so nothing here is a snapshot string. 0-100 durability,
+  // the fall counter, and the smithy's price to mend both. Missing keys read as "not published".
+  if (!fallen) {
+    const dw = pickNum(h.dur_weapon), da = pickNum(h.dur_armour), nd = pickNum(h.deaths), rp = pickNum(h.repair);
+    const wear = (v) => v == null ? el("span", "gapnote", "not published") : Math.max(0, Math.min(100, Math.round(v))) + "% sound";
+    sv.append(kv("Weapon wear", wear(dw)), kv("Armour wear", wear(da)));
+    sv.append(kv("Falls", nd == null ? el("span", "gapnote", "not published") : (nd > 0 ? "Fell " + num(nd) + (nd === 1 ? " time" : " times") : "Never fallen")));
+    sv.append(kv("Repair price", rp == null ? el("span", "gapnote", "not published") : (rp > 0 ? num(rp) + " gold at the smithy" : "Nothing to mend")));
+    if (dw == null && da == null) gaps.push("gear wear and repair price");
+  }
   cb.append(sv);
   sheet.append(cb);
 
@@ -1331,6 +1347,60 @@ function fallenRow(label, value, cls) {
   const row = el("div", "gfact" + (cls ? " " + cls : ""));
   row.append(el("span", "gk", label), el("span", "gv", value));
   return row;
+}
+// S162 / System 33: the corpse-run bags, drawn as skull markers grouped by floor (the hub has no
+// tile map, so the floors ARE the map: shallow to deep). Every number goes through pickNum and is
+// clamped; every string through ctrlStrip + el(). `open` is only ever true when it is the boolean
+// true. Nothing from the snapshot becomes markup, a URL or a style.
+function bagLeft(s) {
+  if (s == null) return "unknown";
+  const m = Math.floor(s / 60);
+  if (m < 1) return "under a minute";
+  return m >= 60 ? Math.floor(m / 60) + "h " + (m % 60) + "m" : m + " min";
+}
+function renderBags(raw) {
+  const box = $("bagsBox");
+  if (!box) return;
+  box.replaceChildren();
+  if (!Array.isArray(raw)) { box.append(el("p", "empty", "Corpse bags: not published yet.")); return; }
+  const rows = [];
+  for (const b of raw.slice(0, 40)) {
+    if (b == null || typeof b !== "object") continue;
+    const nz = (v) => { const x = pickNum(v); return x != null && x >= 0 ? Math.min(Math.round(x), 999999999) : null; };
+    rows.push({ name: ctrlStrip(nameOf(b)).slice(0, 40) || "Someone", floor: nz(b.floor), gold: nz(b.gold), potions: nz(b.potions),
+      oil: nz(b.oil), ownerLeft: nz(b.owner_left_s), left: nz(b.left_s), open: b.open === true });
+  }
+  const head = el("h3", "st-h", "Bags left below ");
+  head.append(el("small", null, rows.length ? rows.length + (rows.length === 1 ? " bag" : " bags") : ""));
+  box.append(head);
+  if (!rows.length) { box.append(el("p", "empty", "No one has left a bag in the dark. The floors are clear.")); return; }
+  const floors = new Map();
+  for (const r of rows) { const k = r.floor == null ? -1 : r.floor; if (!floors.has(k)) floors.set(k, []); floors.get(k).push(r); }
+  const list = el("ol", "bagmap");
+  for (const k of Array.from(floors.keys()).sort((a, b) => a - b)) {
+    const li = el("li", "bagfloor");
+    li.append(el("span", "bagfl", k < 0 ? "Floor ?" : "Floor " + num(k)));
+    const marks = el("ul", "bagmarks");
+    for (const r of floors.get(k)) {
+      const m = el("li", "bagmark" + (r.open ? " open" : ""));
+      m.append(icon("death", "bagskull"));
+      const body = el("span", "bagbody");
+      body.append(el("b", null, r.name + "'s bag"));
+      const loot = [];
+      if (r.gold) loot.push(num(r.gold) + " gold");
+      if (r.potions) loot.push(num(r.potions) + (r.potions === 1 ? " potion" : " potions"));
+      if (r.oil) loot.push(num(r.oil) + " oil");
+      body.append(el("span", "bagloot", loot.length ? loot.join(" · ") : "nothing of note"));
+      body.append(el("span", "bagstate", r.open
+        ? "Open to anyone" + (r.left != null ? " · gone in " + bagLeft(r.left) : "")
+        : "Owner only" + (r.ownerLeft != null ? " · open in " + bagLeft(r.ownerLeft) : "")));
+      m.append(body);
+      marks.append(m);
+    }
+    li.append(marks);
+    list.append(li);
+  }
+  box.append(list);
 }
 function renderFallen(fs) {
   $("nFallen").textContent = fs.length ? fs.length : "";
@@ -3090,6 +3160,159 @@ function sigil(name, size) {
   return svg;
 }
 
+// BEAST_DEX:BEGIN (generated by web/tools/make_bestiary.py - do not edit by hand)
+// 67 chamber-holders; thumbnails 112x156 webp, 274896 bytes
+const BEAST_DEX = [
+  ["almoner", "Dolehand"],
+  ["badger", "Forestall"],
+  ["beadle", "Ordrik"],
+  ["bellman", "Tolburn"],
+  ["blower", "Deadair"],
+  ["boiler", "Scaldmere"],
+  ["changer", "Evenhand"],
+  ["collier", "Halfblow"],
+  ["comfitmaker", "Brindle"],
+  ["cook", "Blisterhand"],
+  ["crimp", "Oneshort"],
+  ["dauber", "Wetwall"],
+  ["dredger", "Finepass"],
+  ["drillmaster", "Karvok"],
+  ["drover", "Yokebane"],
+  ["dyer", "Venomshade"],
+  ["fanner", "Blastmere"],
+  ["fenman", "Bogwarden"],
+  ["ferryman", "Slackwater"],
+  ["fuller", "Wrynn"],
+  ["gaoler", "Shacklemaw"],
+  ["greener", "Corrodan"],
+  ["harrowman", "Overturn"],
+  ["hooper", "Hoopfast"],
+  ["hurdleman", "Bramblejaw"],
+  ["iceman", "Hoarback"],
+  ["jointer", "Halvrek"],
+  ["leech", "Gulworth"],
+  ["loader", "Millstone"],
+  ["mealman", "Whitedamp"],
+  ["moulder", "Ashform"],
+  ["nightman", "Nightwork"],
+  ["overlooker", "Velrick"],
+  ["panner", "Onceround"],
+  ["paviser", "Shieldmaw"],
+  ["pitman", "Underfoot"],
+  ["pledgeman", "Heldfast"],
+  ["porter", "Drudgewall"],
+  ["pressman", "Crushwright"],
+  ["quartermaster", "Wardgrim"],
+  ["rammer", "Breachar"],
+  ["ratcatcher", "Skivven"],
+  ["reeve", "Lockwarden"],
+  ["relief", "Watchturn"],
+  ["roper", "Drawtight"],
+  ["scraper", "Scourstone"],
+  ["scrapwright", "Ironhyde"],
+  ["sealer", "Leadbite"],
+  ["sexton", "Gravrik"],
+  ["sluicekeeper", "Rothenwell"],
+  ["snarer", "Griplash"],
+  ["snuffer", "Duskhollow"],
+  ["sower", "Thorncast"],
+  ["stackman", "Huskpile"],
+  ["stiltman", "Downfast"],
+  ["stoker", "Cindrak"],
+  ["stopper", "Chokewell"],
+  ["straker", "Everyhand"],
+  ["strickler", "Murkspit"],
+  ["tallyman", "Velmok"],
+  ["tanner", "Flenscar"],
+  ["tapster", "Dregsallow"],
+  ["thatcher", "Lastcourse"],
+  ["timberman", "Deadfall"],
+  ["tither", "Tenthpart"],
+  ["weigher", "Trueweight"],
+  ["winder", "Haulback"],
+];
+// BEAST_DEX:END
+
+// ---- System 41 section 1: the chamber-holders, with PER-VIEWER DISCOVERY. SECURITY: the key and the portrait path come ONLY from
+// BEAST_DEX above (page constants, generated); a snapshot value never builds a path - it can only choose which listed key is drawn,
+// and every string a snapshot sends (mechanic, drops) is text through el(). Tiers, as Mr. E specified:
+//   0 undiscovered: silhouette + "???"   1 faced: name   2 survived: mechanic   3 killed: drops   4 five kills: the full entry
+// The viewer's record is read from THEIR pinned hero: hero.beasts = {<key>: {faced, survived, killed}} (publisher contract, read
+// defensively; today the publisher sends none). The browser's own remembered Chronicle can lift a beast to tier 1 (named) and no
+// further - a headline is not a fight. Global p.bestiary[<key>] numbers/text are shown only at tier 2+.
+const BEAST_FULL_KILLS = 5;
+function viewerBeastRec(p, key) {
+  const mine = getMyHero().toLowerCase();
+  if (!mine || !p) return null;
+  for (const h of arr(p.heroes)) {
+    if (!h || String(h.name || "").toLowerCase() !== mine) continue;
+    const bs = h.beasts && typeof h.beasts === "object" ? h.beasts : null;
+    if (!bs || !Object.prototype.hasOwnProperty.call(bs, key) || !bs[key] || typeof bs[key] !== "object") return null;
+    return bs[key];
+  }
+  return null;
+}
+function beastTierFor(b, p, rows) {
+  if (b.kind !== "deep") return 4;
+  const rec = viewerBeastRec(p, b.mb);
+  const f = rec ? beastNum(rec.faced) : null, sv = rec ? beastNum(rec.survived) : null, k = rec ? beastNum(rec.killed) : null;
+  let t = 0;
+  if (f) t = 1;
+  if (sv) t = 2;
+  if (k) t = 3;
+  if (k >= BEAST_FULL_KILLS) t = 4;
+  if (t === 0 && beastMentions(rows || chronMem, b.terms).n) t = 1;
+  return t;
+}
+const BEAST_TIER_FLAG = ["Undiscovered", "Faced", "Survived", "Killed", "Full entry"];
+function beastPortrait(b, tier) {
+  const img = document.createElement("img");
+  img.className = "beast-pic" + (tier ? "" : " beast-sil");
+  img.src = "icons/beasts/" + b.mb + ".webp";       // b.mb is a BEAST_DEX constant, never a snapshot value
+  img.alt = tier ? b.name : "";
+  img.width = 112; img.height = 156; img.loading = "lazy"; img.decoding = "async";
+  return img;
+}
+function deepBeastCard(b, p, rows, stats) {
+  const tier = beastTierFor(b, p, rows);
+  const card = el("article", "beast deep tier-" + tier + (tier ? " met" : " rumour"));
+  card.tabIndex = 0;
+  card.append(beastPortrait(b, tier));
+  const hb = el("div", "beast-hb");
+  hb.append(el("h3", "beast-name", tier ? b.name : "???"));
+  hb.append(el("span", "beast-kind", "Chamber-holder"));
+  card.append(hb);
+  card.append(el("span", "beast-flag" + (tier ? " met" : ""), BEAST_TIER_FLAG[tier]));
+  const rec = viewerBeastRec(p, b.mb);
+  if (tier === 0) { card.append(el("p", "beast-veil", "A shape in the dark. Face it and the guild learns its name.")); return card; }
+  if (tier === 1) { card.append(el("p", "beast-veil", "Named, not understood. Survive an encounter to learn how it fights.")); }
+  if (tier >= 2) {
+    const m = stats && typeof stats.mechanic === "string" ? stats.mechanic : "";
+    card.append(el("p", m ? "beast-intro" : "beast-veil", m || "How it fights has not been written down yet."));
+  }
+  if (tier >= 3) {
+    const d = stats && Array.isArray(stats.drops) ? stats.drops.filter((x) => typeof x === "string").slice(0, 12) : [];
+    card.append(el("p", "beast-camp", d.length ? "Drops: " + d.join(", ") : "What it drops has not been written down yet."));
+  } else if (tier >= 1) {
+    card.append(el("p", "beast-veil", "Its spoils stay hidden until you kill it."));
+  }
+  const facts = el("dl", "beast-facts");
+  const add = (k, v) => { facts.append(el("dt", "", k), el("dd", "", v)); };
+  if (rec) {
+    const f = beastNum(rec.faced), k = beastNum(rec.killed);
+    if (f != null) add("You faced it", num(f) + (f === 1 ? " time" : " times"));
+    if (k != null) add("You killed it", num(k) + (k === 1 ? " time" : " times") + (tier < 4 ? " (" + num(Math.max(0, BEAST_FULL_KILLS - k)) + " more for the full entry)" : ""));
+  }
+  if (tier >= 2 && stats) {
+    const k = beastNum(stats.killed), d = beastNum(stats.deepest);
+    if (k != null) add("Heroes it has killed", num(k));
+    if (d != null) add("Deepest push against it", num(d));
+    if (typeof stats.standing === "boolean") add("Today", stats.standing ? "It stands" : "It is down");
+  }
+  if (facts.firstChild) card.append(facts);
+  return card;
+}
+
 const BEAST_RUMOURS = [
   "Whispers only. The guild has not stood before it.",
   "Heard of, never met - and the town would keep it so.",
@@ -3097,9 +3320,9 @@ const BEAST_RUMOURS = [
   "The sigil is all the guild has drawn of it so far.",
   "Spoken of low, behind the hand. Not yet faced.",
 ];
-const BEAST_KINDS = { lord: "A deep lord", named: "A named one", kin: "A kin of the deep" };
+const BEAST_KINDS = { deep: "A chamber-holder", lord: "A deep lord", named: "A named one", kin: "A kin of the deep" };
 let beastFilter = "all";
-const BEAST_CHIPS = [["all", "All"], ["lord", "Deep lords"], ["named", "Named ones"], ["kin", "Kin of the deep"]];
+const BEAST_CHIPS = [["all", "All"], ["deep", "Chamber-holders"], ["lord", "Deep lords"], ["named", "Named ones"], ["kin", "Kin of the deep"]];
 const MOCK_BEAST_CHRON = [
   { t: "boss", s: "The Hollow King came up the stair and the guild met it at the door.", at: new Date(Date.now() - 50 * 60000).toISOString() },
   { t: "boss", s: "Heroes fell to the Hollow King before the watch drove it back.", at: new Date(Date.now() - 7 * 3600000).toISOString() },
@@ -3182,6 +3405,7 @@ function beastBook() {
     for (const t of beastTerms(c.name)) f.terms.push(t);
   }
   for (const f of fam.values()) beasts.push(f);
+  for (const d of BEAST_DEX) beasts.push({ kind: "deep", key: "mb:" + d[0], mb: d[0], name: d[1], terms: beastTerms(d[1]), intro: "" });
   return beasts;
 }
 function renderBestiary(p) {
@@ -3207,14 +3431,14 @@ function renderBestiary(p) {
   const statOf = (key) => (snap && Object.prototype.hasOwnProperty.call(snap, key) && snap[key] && typeof snap[key] === "object") ? snap[key] : null;
   const beasts = beastBook();
   const shown = beasts.filter((b) => beastFilter === "all" || b.kind === beastFilter);
-  const metN = shown.filter((b) => beastMentions(rows, b.terms).n).length;
-  const note = el("p", "beast-count", num(metN) + " met, " + num(shown.length - metN) + " still rumour");
+  const metN = shown.filter((b) => b.kind === "deep" ? beastTierFor(b, p, rows) > 0 : beastMentions(rows, b.terms).n > 0).length;   // same test each card uses for Met/Rumour (a lord is only met if the Chronicle names it)
+  const note = el("p", "beast-count", num(metN) + " met, " + num(shown.length - metN) + " not yet met");
   box.append(note);
   const grid = el("div", "beast-grid");
   // met first, then rumours; stable inside each group
-  const ordered = shown.map((b, i) => ({ b, i, met: beastMentions(rows, b.terms).n ? 0 : 1 })).sort((x, y) => x.met - y.met || x.i - y.i);
+  const ordered = shown.map((b, i) => ({ b, i, met: beastTierFor(b, p, rows) ? 0 : 1 })).sort((x, y) => x.met - y.met || x.i - y.i);
   for (const o of ordered) {
-    try { const bc = beastCard(o.b, rows, statOf(o.b.key)); bc.dataset.bi = String(beasts.indexOf(o.b)); grid.append(bc); } catch (e) { /* one bad entry never blanks the book */ }
+    try { const bc = o.b.kind === "deep" ? deepBeastCard(o.b, p, rows, statOf(o.b.mb)) : beastCard(o.b, rows, statOf(o.b.key)); bc.dataset.bi = String(beasts.indexOf(o.b)); grid.append(bc); } catch (e) { /* one bad entry never blanks the book */ }
   }
   box.append(grid);
 }
@@ -4984,9 +5208,21 @@ const MOCK_JOURNAL = [
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
+  if (MOCK === "bags") {   // S162: corpse-run bags across floors, one open, hostile name on purpose
+    out.bags = [
+      { name: "<img src=x onerror=alert(1)>", floor: 4, gold: 212, potions: 2, oil: 1, owner_left_s: 1800, left_s: 5400, open: false },
+      { name: "Brum the Cooper", floor: 4, gold: 0, potions: 0, oil: 0, owner_left_s: 0, left_s: 900, open: true },
+      { name: "Pip", floor: 2, gold: 31, potions: 1, oil: 0, owner_left_s: 0, left_s: 3700, open: true }];
+  }
   if (MOCK === "bestiary") {         // H19: one met lord with real numbers, rumours, hostile name
     out.chronicle = MOCK_BEAST_CHRON;
-    out.bestiary = { hollow_king: { faced: 3, killed: 2, deepest: 7, standing: true } };
+    out.bestiary = { hollow_king: { faced: 3, killed: 2, deepest: 7, standing: true },
+      beadle: { mechanic: "It counts the party aloud and strikes whoever it counts last.", drops: ["Beadle's hat", "Beadle's ring"], killed: 41, deepest: 9, standing: true },
+      cook: { mechanic: "<b>Hostile</b> mechanic text stays literal.", drops: ["<img src=x onerror=alert(1)>"], killed: 3 } };
+    // System 41: one viewer's own record, one beast at every discovery tier (the viewer pins "Mockhero" to see it)
+    out.heroes = arr(out.heroes).concat([{ name: "Mockhero", class: "knight", level: 5, beasts: {
+      beadle: { faced: 9, survived: 6, killed: 5 }, cook: { faced: 4, survived: 2, killed: 1 }, bellman: { faced: 2, survived: 1, killed: 0 },
+      almoner: { faced: 1, survived: 0, killed: 0 } } }]);
   }
   if (MOCK === "sheets") {            // H20: bare L1 hero, kitted veteran, a fallen hero; hostile strings throughout
     out.heroes = MOCK_SHEET_HEROES; out.fallen = MOCK_SHEET_FALLEN; out.parties = MOCK_SHEET_PARTIES; out.chronicle = MOCK_SHEET_CHRON;
@@ -5071,7 +5307,7 @@ function withMock(p) {
     else if (MOCK === "satchel2") carry = { weight: 112, cap: 150, band: "heavily encumbered" };
     const me = { name: "mockviewer", class: "knight", species: "human", level: 4, rank: "Delver", standing: 12, ac: 15, hp: 30, gold: 120,
       kills: 3, deepest: 2, delves: 2, xp: 40, to_hit: 4, prof: 2, saves: "STR +4", stats: { str: 14, dex: 12, con: 13, int: 9, wis: 11, cha: 8 },
-      satchel: items, carry, where: "walking to The Smithy " + bad,
+      spec: "guardian", spec_name: "Guardian " + bad, dur_weapon: 42, dur_armour: 87.6, deaths: 3, repair: 118, satchel: items, carry, where: "walking to The Smithy " + bad,
       vault: MOCK === "satchel0" ? { slots: 12, items: [] } : { slots: 12, items: [{ name: bad + " Hoard", slot: "gem", weight: 0, sell: 500 }, { name: "Spare boots", slot: "armour", weight: 4, sell: 12 }] } };
     out.heroes = [me].concat(arr(p.heroes));
     out.orders = [{ who: "mockviewer", item: bad + " Helm", shop: "The Smithy", walker: "mockviewer" }, { who: "someone-else", item: "Loaf", shop: "The Provisioner" }];
@@ -5305,6 +5541,7 @@ function finderSearch(q) {
   }
   try {
     beastBook().forEach((b, i) => {
+      if (b.kind === "deep" && !beastTierFor(b, p, chronMem)) return;   // an undiscovered beast's name is not searchable
       let k = finderRank(b.name, q);
       for (const t of arr(b.terms)) { const kk = finderRank(t, q); if (kk >= 0 && (k < 0 || kk < k)) k = kk; }
       if (k >= 0) add("lord", { text: b.name, sub: BEAST_KINDS[b.kind] || "", i }, k);

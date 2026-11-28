@@ -997,3 +997,87 @@ THE UNPUBLISHED DELTA (counted this hour, origin/hub:web 80795d06 vs gh-pages tr
 CHECKS (25 Nov 08:38 CT): node --check app.js OK; innerHTML code sites exactly app.js:255 and :301 (page-owned); the only other outerHTML/insertAdjacentHTML/document.write/eval/new Function hits are two comment lines (10, 11); one CSP meta. Untracked in the worktree and named: _hub_ready_shot.png, web/tools/__pycache__/ (delete refused on this machine; not committed).
 
 - 25 Nov 09:4x CT standing check (HUB build run): the TAKE THIS NEXT block (07:58) HUB row was the Suggestion Box measurement; it was already answered at 08:38 (entry above) and is not re-done. Re-counted: origin/hub:web (ad61693b) vs gh-pages tree c03fa129 (publish 7, 5ce35f33) = 3 files, +28/-1 - NOTES.md +23, index.html +2/-1 (the two Suggestion Box anchors), style.css +3. Still no suggestBtn/footer-link on the published page. NEW, UNRESOLVED: could not confirm the Google Form behind the button is public - a WebFetch of the /viewform URL failed client-side with no status, and the cloud shell has no route to docs.google.com. Commit c3fc81c4 recorded an earlier 403 (form not published); that is not re-measured. Someone with a signed-out browser should open the link before any publish, or the button ships dead. CHECKS: node --check app.js OK; innerHTML code sites exactly app.js:255 and :301 (page-owned; other hits are comments); zero outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; one CSP meta; 0 zero-byte files in web/. web/ code unchanged, so no hostile-name rerun owed. Untracked and named: _hub_ready_shot.png, web/tools/__pycache__/. NOT claiming READY TO PUBLISH.
+
+## 25 Nov 2026, 10:4x CT - HUB firing: PROVED A SUGGESTION LANDS (answers the team lead's 09:58 HUB row)
+- Test done through the REAL live page (https://jestsayin96.github.io/Bellmire-HD-stream/, built-in browser):
+  category "other", username "hub-build-test", body marked "[HUB BUILD TEST ... Please ignore/delete]", clicked #sugSend.
+  The form showed "Sent! Thank you" with class `suggest-status ok` - app.js only does that when `res.ok`, i.e. the POST to
+  /rest/v1/suggestions returned a 2xx (Prefer: return=minimal, so the exact code is 201/204 and is not exposed to the page;
+  the browser pane's network log did not capture the request, so I do NOT quote a number I did not see).
+- READ BACK (stronger than the status): a SELECT with the project's own Supabase tool found the row - suggestions id 4,
+  category other, username hub-build-test, created_at 2026-11-25 16:39:40 UTC (10:39:40 CST). Anon has INSERT only by design;
+  the read-back used the owner's tool, not the page. **Mr. E / supervisor: row id 4 is a test row, safe to delete.**
+- WHAT THE LIVE PAGE IS SERVING, MEASURED: the live HTML has `document.lastModified` 09:49:18 and its script tag reads
+  `<script src="app.js">` - NOT `app.js?v=8`. origin/gh-pages (8d214d36, tree 1d8bce63 == origin/hub:web) has `app.js?v=8` at
+  index.html:519. So the Pages CDN was still serving the 09:49 HTML at ~10:40 although 8d214d36 was pushed 09:55:03.
+  The form WORKS on what is served (it has the click handler, not the broken submit), so nothing viewer-facing is broken,
+  but the cache-bust has not reached the HTML yet. Re-check later; it should self-heal as the CDN expires.
+  (The page's own fetch of app.js is blocked by CSP connect-src, which does not list 'self' - expected, not a fault.)
+- CSP: connect-src is exactly `https://paaukwaffaamazgrndbv.supabase.co https://id.twitch.tv https://api.twitch.tv wss://irc-ws.chat.twitch.tv`;
+  the form's POST goes to the supabase origin already listed, so no CSP change. form-action 'none' still holds (button is type=button).
+- GREPS on web/app.js (unchanged since origin/hub): `innerHTML` as code at exactly :255 and :301 (other hits :7 :93 :5137 :5178 are
+  comments); outerHTML / insertAdjacentHTML / document.write / eval / new Function = 0 as code (2 comment lines name them);
+  `node --check` OK. The suggestion form reads .value only into a JSON body and writes status via textContent. No token in any file.
+- web/ is byte-identical to origin/hub (git diff empty). NOT claiming READY TO PUBLISH - nothing new to publish.
+
+## 25 Nov 2026, 11:3x CT - HUB firing: CDN RE-MEASURE (answers the team lead's 10:58 HUB row) - NOT SELF-HEALED
+- Read through the built-in browser at 11:39 CT on https://jestsayin96.github.io/Bellmire-HD-stream/?cb=1138 (cache-busting query):
+  `document.lastModified` = 09:49:18 (11/25/2026), script tags = [`app.js`] - NOT `app.js?v=8`. One CSP meta, #suggestForm present.
+- So 1h44 after gh-pages 8d214d36 (pushed 09:55:03) the Pages CDN still serves the 09:49 HTML. Same reading as 10:40: it did NOT self-heal.
+  The cache-bust is NOT confirmed landed; the item stays open. Viewer impact unchanged: the form on the served HTML works (row id 4 proved it).
+  Not mine to fix or republish - the supervisor owns gh-pages. Next re-check: next firing.
+- web/ unchanged this run (only NOTES.md/PROGRESS.md). NOT claiming READY TO PUBLISH.
+- 25 Nov 13:39 CT hub standing audit (row HUB :37, pack catalogue): web/ unchanged; vs gh-pages tree delta = NOTES.md only. innerHTML only app.js:255, :301. _packs walk = 49 folders = catalogue's 49, none new.
+
+## Stand-down, 26 Nov 2026 18:40 CT (hub firing)
+TAKE THIS NEXT (17:58 CT block, 26 Nov) gave HUB the row "STAY STOOD DOWN". Re-measured: local hub HEAD 2ac8cb98, tree of web/ = 51a3f8b3 = origin/hub:web = origin/main:web; git status clean. No web/ code changed this run (only this note), so no screenshot, no new hostile-name run is owed. No READY TO PUBLISH claim; no publish gate owed. Live-dot colour: n/a (no change).
+
+## CORRECTION, 26 Nov 2026 19:4x CT (hub firing) - to the 18:40 stand-down entry above
+That entry, and the subject of commit 7e3914d9, say "web/ tree 51a3f8b3 unchanged". That is WRONG for that commit: 7e3914d9 itself added these 3 lines to web/NOTES.md, so it moved the web/ tree from 51a3f8b3 (its parent) to db687b8b. The 51a3f8b3 figure was true of the code files and of the parent, not of the commit. No code file changed (app.js, style.css, index.html byte-identical to gh-pages).
+TRUE PUBLISH POSITION, measured 26 Nov 19:4x CT: gh-pages 8d214d36 / tree 1d8bce63 / pushed 25 Nov 09:55 CT. `git diff` of gh-pages root vs hub web/ : app.js, style.css, index.html EMPTY; the ONLY unpublished delta is web/NOTES.md (+34 / -0 numstat) - a notes file, not served behaviour. I do not publish; that is the supervisor's call.
+
+## Stand-down, 27 Nov 2026 01:4x CT (hub firing) - answering the 00:58 block's HUB row
+00:58 TAKE THIS NEXT gave HUB: "commit SOMETHING - what you checked, what you found, that you are dry" (firings 21:37-00:37 left no commit). This is that commit. Not a failure: bridges worked (device_bash read, Blender-bridge git fetch + merge of origin/main rc 0, merge head c084105a).
+Measured, not copied: web/ tree 0faf51e9 = origin/hub:web = origin/main:web. gh-pages 8d214d36 / tree 1d8bce63. Delta vs gh-pages = NOTES.md +38/-0 only (this entry makes it larger; no functional change). app.js/style.css/index.html identical to published.
+Security grep on app.js: innerHTML at :255 and :301 only (both page-owned), zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (comment mentions only at :7-11, :93, :5137, :5178). node --check app.js OK. CSP meta present (index.html:5). index.html's "only innerHTML is two page-owned sites" comment is still true.
+web/ code unchanged, so the hostile-name test and state checks are not owed and were not re-run; no new screenshot, no new PROGRESS number. Live-dot colour unchanged from shipped. NOT claiming READY TO PUBLISH; no publish gate owed. Dry: no HUB row asks for web/ work.
+
+## Stand-down, 27 Nov 2026 02:4x CT (hub firing, 02:37 CT clock) - answering the :37 HUB row
+TAKE THIS NEXT (00:58 CT block, 27 Nov) gave HUB: "same row - keep the web tree honest, never publish, if dry commit the stand-down". This is that commit. NO web/ code changed.
+Measured, not copied: web/ tree 58b150f7 = origin/main:web (HEAD d773bbc4 after merging origin/main and origin/hub). gh-pages 8d214d36 / tree 1d8bce63 (25 Nov 09:55 CT). Delta of gh-pages tree vs hub web/ = NOTES.md only (+44 before this entry); app.js/style.css/index.html identical to published.
+Security grep on app.js: innerHTML at :255 and :301 only (page-owned); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (comment mentions only). node --check app.js OK. CSP meta present. Hostile-name test and ?state checks not owed (web/ code unchanged); no screenshot, no new PROGRESS number. Live-dot colour unchanged from shipped. NOT claiming READY TO PUBLISH; no publish gate owed.
+Bridge note: the connected folder mounts at $HOME/mnt/bellmire-hub on this firing (not $HOME/mnt/hd adventure/bellmire-hub as the prompt says).
+
+## Stand-down, 27 Nov 2026 03:4x CT (hub firing, 03:37 CST clock) - answering the :37 HUB row
+TAKE THIS NEXT (02:58 CT block, 27 Nov) gave HUB: "same row - keep the web tree honest, never publish, if dry commit the stand-down". This is that commit. NO web/ code changed.
+Measured: after merging origin/main (HEAD 6393621d), `git diff origin/hub HEAD -- web/` is empty, so web/ is byte-identical to origin/hub. node --check app.js OK. innerHTML at app.js:255 and :301 only (page-owned); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (comment mentions only). CSP meta present (1).
+Not re-measured this firing: the gh-pages delta (my diff against that ref was a whole-tree diff, not a web/ tree comparison, so I discard it). The 02:58 block's figure is NOTES.md-only and I have no code change since.
+Hostile-name test and ?state checks not owed (web/ code unchanged); no screenshot, no new PROGRESS number. Live-dot colour unchanged from shipped. NOT claiming READY TO PUBLISH; no publish gate owed.
+Bridge note: folder mounts at $HOME/mnt/bellmire-hub (the prompt's path is stale).
+
+## Stand-down, 27 Nov 2026 04:4x CT (hub firing, 04:38 CST clock) - answering the :37 HUB row
+TAKE THIS NEXT (03:58 CT block, 27 Nov) gave HUB no new row: "no publish is owed, the delta is the supervisor's". This is the standing check. NO web/ code changed.
+Measured: fast-forwarded to origin/hub 6f6f6dab (three plan syncs only); `git diff origin/hub -- web/ docs/HUB_SECURITY.md` was empty before the merge, so web/ is byte-identical to origin/hub. node --check app.js OK. innerHTML at app.js:255 and :301 only (page-owned); zero outerHTML / insertAdjacentHTML / document.write / eval / new Function in code (two comment mentions). CSP meta present (1).
+Hostile-name test and ?state checks not owed (web/ code unchanged); no screenshot, no new PROGRESS number. Live-dot colour unchanged from shipped. NOT claiming READY TO PUBLISH; no publish gate owed.
+Untracked web/tools/__pycache__/ is new: named here, not mine to delete on this machine.
+
+## 27 Nov 17:4x CT - hub lane: scratch file out of the published tree
+- `web/tools/_to_delete/_beast_dex_block.txt` did NOT belong in `web/` (it would have shipped to gh-pages). It is a fallback dump `make_bestiary.py` writes when the BEAST_DEX markers are absent, and it was STALE and WRONG: 85 pairs (incl. ability ids like "order", "blink", "wring") with no `badger/Forestall`, against the live block in app.js (67 chamber-holders, 274896 bytes). Not referenced by any served file.
+- Moved, not deleted: now untracked at `_hub_scratch/_beast_dex_block_85_stale_nov27-1439.txt` in the worktree root (outside `web/`). `git rm` of the tracked copy; empty `_to_delete/` dir gone.
+- app.js / index.html / style.css byte-identical to origin/main. innerHTML in app.js still exactly :255 and :301 (page-owned literals); no outerHTML / insertAdjacentHTML / document.write / eval / new Function.
+
+## Stand-down, 27 Nov 2026 18:4x CT (hub firing, 18:38 CST clock) - answering the :37 HUB row
+TAKE THIS NEXT (17:58 CT block) HUB row: "take the next unstarted hub half from the supervisor's standing directives, measure which is unstarted before you pick." MEASURED, and NONE IS BUILDABLE YET - every half is waiting on data that is not published:
+- System 41 (sup 02:30): data/drops.json, data/recipes.json, data/materials.json DO NOT EXIST on origin/main (checked in W after merging main + origin/hub). app.js has no recipes/materials/crafting code (0 hits); "drops" appears 13x, all the existing bestiary. Crafting Table and Material Index have no source rows; Bestiary expansion (kill/death counts, discovery, bounty) has no fields in the payload.
+- Systems 37/39/40 (sup 02:16/02:18): `git grep` of origin/main:scripts/snapshot_pub.gd finds NO room_tier, room_items, specialization or reputation fields. Inn rooms, reputation and subclass-on-hero-card have nothing to read.
+Building any of them now would mean inventing payload fields or hard-coding recipes into app.js; the payload version gate and the "snapshot is the only source" rule forbid it. Game build (snapshot_pub.gd) and content (the three JSONs) go first. Not a row for me until they land.
+Standing check: web/ byte-identical to origin/hub AND origin/main (empty `git diff --stat` both). node --check app.js rc 0. innerHTML at app.js:255 and :301 only (page-owned); outerHTML 0, eval( 0; insertAdjacentHTML / document.write / new Function appear only at lines 10, 11 - comment text, no call sites. CSP meta present (1).
+Hostile-name test, ?state checks, screenshot, new PROGRESS number: not owed (web/ unchanged). Live-dot colour unchanged. NOT claiming READY TO PUBLISH; no publish gate owed. Untracked in worktree, named and not mine to delete here: _hub_msg.txt, _hub_ready_shot.png, _hub_scratch/, web/tools/__pycache__/, web_look3.tar, web_look4.tar.
+
+- 2026-11-27 19:5x CT hub run (TAKE THIS NEXT 18:58 row: re-measure hub halves vs S162 snapshot). S162 published hero-sheet `dur_weapon`/`dur_armour`/`deaths`/`repair` and a top-level `bags` block; app.js read NONE of them (grep: 0 hits). Landed the hero-sheet half: Combat section now lists Weapon wear / Armour wear (0-100 "% sound"), Falls ("Fell N times"/"Never fallen"), Repair price ("N gold at the smithy"/"Nothing to mend"); numbers only via pickNum, missing = "not published" + a gap note. Mock hero (?mock=satchel) carries the four keys. NOT DONE: the `bags` skull markers on the dungeon map (separate half, next firing). Looked at a 1500x950 Chromium render of ?mock=satchel&open=1: rows read 42% / 88% / Fell 3 times / 118 gold; hostile name stays literal text. Number: 4 new rows, 0 new innerHTML sites (still app.js:255 and :301), 0 page errors across ?mock=satchel/crowd/chronicle and ?state=empty/stale/fail. Live-dot colour unchanged (no new colour). Not claiming READY TO PUBLISH.
+
+- 2026-11-27 20:40 CT hub run (TAKE THIS NEXT 19:58 row: the `bags` skull markers). Landed the second S162 half: top-level `bags` is now read by `renderBags()` and drawn at the top of The Fallen as skull markers grouped by floor (the hub has no tile map, so floors are the map, shallow to deep). Each marker: name's bag, gold/potions/oil, "Owner only - open in N" or "Open to anyone - gone in N" (teal edge when open, --dead edge when owner-only; no new colour). Numbers only via pickNum (clamped >= 0), strings via ctrlStrip + el(), `open` only when boolean true. Absent `bags` = "not published yet"; empty array = "floors are clear". Mock: `?mock=bags` (hostile name on purpose). Served files changed: index.html (+1 container), app.js (+~55), style.css (+~13). innerHTML sites unchanged: app.js:255 and :301.
+
+- 2026-11-27 21:4x CT hub run (TAKE THIS NEXT 20:58 block, HUB row: cache-bust bump). Published gh-pages 8d214d36 asks for `app.js?v=8` and the merged tree asked for the SAME string against a different file (app.js 381,431 -> 393,998 chars, style.css changed), so a publish would have left cached browsers on the old script. `index.html` now asks for `app.js?v=9` and `style.css?v=9` (the stylesheet previously carried no version at all). Two lines changed in index.html; app.js and style.css untouched, so innerHTML is still exactly :255 and :301 (page-owned). The CSP is untouched (`'self'` matches a query string).
+- Checked in headless Chromium 1440x900 over a local server: '', ?state=empty/fail/stale, ?mock=chronicle/crowd, ?open=1 -> 0 page errors, 0 CSP violations, requests were `style.css?v=9` and `app.js?v=9`, document height 900 = viewport (no page scroll). Guild chat opened with a click: 0 imgs/onerror, 1 script, no dialog. HONEST LIMIT: the sandbox cannot reach Supabase so every state rendered the offline banner and I saw no live rows; the hostile-name string never appeared in any render, so that arm was exercised but not independently proven by this run. The change is query strings only. Live-dot colour unchanged. Looked at the ?mock=crowd screenshot: palette intact, no clipping of the two-row section bar, no Twitch purple.
+- READY TO PUBLISH on the bump alone: the gate's only named blocker is now closed. The push is the supervisor's.

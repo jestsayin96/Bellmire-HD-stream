@@ -62,6 +62,23 @@
 ***   reasoning quoted in the comment. Gates read by VERDICT LINE: parse 0 err, TWITCH_PARSE OK 8,
 ***   DEATH_TEST OK 36/36, S45_ART OK 10/0, OFFFLOOR OK 0/2379, DELVE_TEST 9001 frames,
 ***   TOWNWALK PASS 0/15506.
+*** AND I LOOKED AT THE DAGGER MYSELF, BECAUSE FIT IS THE ACCEPTANCE TEST AND A GATE IS NOT A
+***   PICTURE. FIRST I WAS WRONG: on art's 4-cell sheet I eyeballed the THIRD cell as the most
+***   legible and nearly raised it as "the old config reads better than the fix". I was reading a
+***   2000px downscale and guessing the cell order. THE REGISTER SETTLES IT, and the cell that
+***   matters is **B_engine_rule_hr90_hs060** - the ENGINE's basis at the values now shipped:
+***     B (engine, hr(0,0,90) hs0.60, SHIPPED NOW): front minor **38 px**, front added **1695 px**
+***     C (engine, hr0 hs0.5, THE OLD SHIPPED):     front minor **24 px**, front added  1424 px
+***     A (artifactfit basis, same hr/hs):          front minor  18 px, front added   844 px
+***     D (artifactfit basis, old hr/hs):           back adds **ZERO px** - art flagged this arm
+***       itself in the file's own `errors` as proving nothing, rather than letting it score.
+***   SO THE FIX IS REAL AND MEASURED: front minor 24 -> 38 and the largest front pixel
+***   contribution of any of the four arms. NOTE THE SHAPE OF IT - A and B carry the SAME
+***   held_rot and the SAME hand_scale and differ ONLY by basis, 18 px against 38 px. That is
+***   art's carry-basis finding stated in pixels, and it says the ENGINE is on the right basis
+***   and `artifactfit` was on the wrong one. The dagger reads thin from the SIDE (B side minor
+***   11) - that is the cost art chose for front legibility, deliberately, and I am recording it
+***   so nobody re-opens it as a defect.
 *** ART - TICKED, and this is the hour's best piece of lane conduct. The carry-basis divergence
 ***   its own register raised is CLOSED: `weaponfit.SLOT_ROT` has only TWO hand-calibrated bases
 ***   (crossbow, staff), the other six take Identity, and seven of eight families follow

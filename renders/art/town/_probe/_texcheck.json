@@ -1,0 +1,187 @@
+{
+ "lm_hall_glb": {
+  "n_images": 0,
+  "images": [],
+  "n_mat": 49,
+  "mats": [
+   {
+    "m": "MI_Brick.003",
+    "base_linked": false,
+    "base_rgba": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "link_from": null
+   },
+   {
+    "m": "MI_Brick.004",
+    "base_linked": false,
+    "base_rgba": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "link_from": null
+   },
+   {
+    "m": "MI_Brick.005",
+    "base_linked": false,
+    "base_rgba": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "link_from": null
+   },
+   {
+    "m": "MI_MetalOrnaments.003",
+    "base_linked": false,
+    "base_rgba": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "link_from": null
+   },
+   {
+    "m": "MI_MetalOrnaments.004",
+    "base_linked": false,
+    "base_rgba": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "link_from": null
+   },
+   {
+    "m": "MI_Plaster.011",
+    "base_linked": false,
+    "base_rgba": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "link_from": null
+   },
+   {
+    "m": "MI_Plaster.012",
+    "base_linked": false,
+    "base_rgba": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "link_from": null
+   },
+   {
+    "m": "MI_Plaster.013",
+    "base_linked": false,
+    "base_rgba": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "link_from": null
+   }
+  ]
+ },
+ "pack_wall_gltf": {
+  "n_images": 6,
+  "images": [
+   {
+    "name": "T_Plaster_BaseColor",
+    "size": [
+     2048,
+     2048
+    ],
+    "packed": true,
+    "filepath": "C:\\hd adventure\\_packs\\Medieval_Village_MegaKit\\Medieval Village MegaKit[Standard]\\glTF\\T_Plaster_BaseColor.png",
+    "has_data": true
+   },
+   {
+    "name": "T_Plaster_Normal",
+    "size": [
+     2048,
+     2048
+    ],
+    "packed": true,
+    "filepath": "C:\\hd adventure\\_packs\\Medieval_Village_MegaKit\\Medieval Village MegaKit[Standard]\\glTF\\T_Plaster_Normal.png",
+    "has_data": true
+   },
+   {
+    "name": "T_Plaster_ORM",
+    "size": [
+     2048,
+     2048
+    ],
+    "packed": true,
+    "filepath": "C:\\hd adventure\\_packs\\Medieval_Village_MegaKit\\Medieval Village MegaKit[Standard]\\glTF\\T_Plaster_ORM.png",
+    "has_data": true
+   },
+   {
+    "name": "T_WoodTrim_BaseColor",
+    "size": [
+     2048,
+     2048
+    ],
+    "packed": true,
+    "filepath": "C:\\hd adventure\\_packs\\Medieval_Village_MegaKit\\Medieval Village MegaKit[Standard]\\glTF\\T_WoodTrim_BaseColor.png",
+    "has_data": true
+   },
+   {
+    "name": "T_WoodTrim_Normal",
+    "size": [
+     2048,
+     2048
+    ],
+    "packed": true,
+    "filepath": "C:\\hd adventure\\_packs\\Medieval_Village_MegaKit\\Medieval Village MegaKit[Standard]\\glTF\\T_WoodTrim_Normal.png",
+    "has_data": true
+   },
+   {
+    "name": "T_WoodTrim_Roughness",
+    "size": [
+     2048,
+     2048
+    ],
+    "packed": true,
+    "filepath": "C:\\hd adventure\\_packs\\Medieval_Village_MegaKit\\Medieval Village MegaKit[Standard]\\glTF\\T_WoodTrim_Roughness.png",
+    "has_data": true
+   }
+  ],
+  "n_mat": 2,
+  "mats": [
+   {
+    "m": "MI_Plaster",
+    "base_linked": true,
+    "base_rgba": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "link_from": "TEX_IMAGE"
+   },
+   {
+    "m": "MI_WoodTrim",
+    "base_linked": true,
+    "base_rgba": [
+     0.8,
+     0.8,
+     0.8,
+     1.0
+    ],
+    "link_from": "TEX_IMAGE"
+   }
+  ]
+ }
+}

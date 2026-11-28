@@ -1011,3 +1011,38 @@ world height and a pixel count cannot see overlap. Two pieces also fell off the
 short floor slab. The per-piece DIMENSIONS in the table above are sound - they
 come off the depsgraph per piece, independently of that sheet - but the sheet
 itself is evidence only for "these things are small".
+
+## The twelve town buildings - TEXTURES RESTORED (art lane, 28 Nov 2026, 02:0x-03:0x CT)
+
+**No new source was introduced by this run and nothing was redistributed.**
+The twelve buildings in `assets/buildings/` (`lm_barracks`, `lm_chapel`,
+`lm_granary`, `lm_hall`, `lm_sawmill`, `lm_watermill`, `lm_windmill`,
+`lm_workshop`, `mk_house_a`-`mk_house_d`) were already derived from the
+**Medieval Village MegaKit [Standard]** on 15 Nov. That export stripped the
+textures: all twelve carried **zero images and zero base-colour links**, every
+material sitting at Blender's default grey. This run put the pack's **own**
+textures back on them.
+
+| asset | author | licence | licence file | what was taken |
+|---|---|---|---|---|
+| Medieval Village MegaKit [Standard] | Quaternius | **CC0 1.0 Universal** | `_packs\Medieval_Village_MegaKit\Medieval Village MegaKit[Standard]\License_Standard.txt` (read off disk 24 Nov, entry ~line 703) | the 9 material node graphs `MI_{Plaster, Brick, UnevenBrick, RockTrim, RoundTiles, WoodTrim, WoodTrim_Wear, MetalOrnaments, WindowGlass}` and their base-colour maps |
+
+**THE DERIVATION IS REPRODUCIBLE FROM `tools/art/towntex.py` ALONE**, which is
+the standard the tier-5 spear set. That file names the exact source module each
+material is harvested from, and the recovery is exact rather than a repaint
+because the stripped export kept both halves of the evidence - **UVs intact**
+(225/225 meshes in `lm_hall`, inside 0..1) and **material names preserved**
+under Blender's `.NNN` de-duplication suffix, with the pack's **object** names
+(`Corner_Exterior_Brick.050`) surviving as independent corroboration.
+
+Two materials were **checked rather than assumed**: `MI_WoodTrim_Wear`
+resolves to the `T_WoodTrim_*` maps (the pack ships no `T_WoodTrim_Wear`), and
+`MI_WindowGlass` carries no texture at all.
+
+**Deliberate, reversible trade:** base colour only (normal and ORM maps
+dropped, their channel means measured and baked to constants), JPEG q90 at
+1024. `lm_hall` 28.1 MB -> 2.24 MB; the set costs **+12.5 MB** in total. Pass
+`--px 2048` and restore the normal branch to reverse it.
+
+Full write-up, the per-file table, the gates and the faults still visible:
+`docs/art/TOWN_BUILDING_TEXTURES.md`. Sheet: `renders/art/town/_texfix_sheet.png`.

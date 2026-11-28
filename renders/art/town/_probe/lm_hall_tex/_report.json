@@ -1,0 +1,36 @@
+{
+ "dims": [
+  13.8013,
+  15.7059,
+  22.4109
+ ],
+ "min": [
+  -4.976,
+  -7.8288,
+  -0.0071
+ ],
+ "centre_xy": [
+  1.9246,
+  0.0242
+ ],
+ "n_tri": 119062,
+ "n_mesh": 225,
+ "views": {
+  "front": {
+   "opaque_px": 270249,
+   "border_alpha_px": 0
+  },
+  "three_quarter": {
+   "opaque_px": 249493,
+   "border_alpha_px": 0
+  },
+  "side": {
+   "opaque_px": 317204,
+   "border_alpha_px": 0
+  },
+  "back": {
+   "opaque_px": 278571,
+   "border_alpha_px": 0
+  }
+ }
+}

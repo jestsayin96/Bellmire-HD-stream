@@ -1,0 +1,247 @@
+{
+ "lm_hall.glb": {
+  "n_mesh": 225,
+  "n_with_uv": 225,
+  "spans": [
+   {
+    "obj": "Corner_Exterior_Brick.050",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Brick.051",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Brick.052",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Brick.053",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Brick.054",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   }
+  ],
+  "base_mat_names": [
+   "MI_Brick",
+   "MI_MetalOrnaments",
+   "MI_Plaster",
+   "MI_RockTrim",
+   "MI_RoundTiles",
+   "MI_UnevenBrick",
+   "MI_WindowGlass",
+   "MI_WoodTrim",
+   "MI_WoodTrim_Wear"
+  ]
+ },
+ "lm_windmill.glb": {
+  "n_mesh": 53,
+  "n_with_uv": 53,
+  "spans": [
+   {
+    "obj": "Corner_Exterior_Brick.050",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Brick.051",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Brick.052",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Brick.053",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Brick.054",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   }
+  ],
+  "base_mat_names": [
+   "MI_MetalOrnaments",
+   "MI_Plaster",
+   "MI_RockTrim",
+   "MI_RoundTiles",
+   "MI_UnevenBrick",
+   "MI_WindowGlass",
+   "MI_WoodTrim",
+   "MI_WoodTrim_Wear"
+  ]
+ },
+ "mk_house_a.glb": {
+  "n_mesh": 63,
+  "n_with_uv": 63,
+  "spans": [
+   {
+    "obj": "Corner_Exterior_Brick.001",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Brick.002",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Brick.003",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Brick.004",
+    "layer": "UVMap",
+    "u": [
+     0.003,
+     0.995
+    ],
+    "v": [
+     0.678,
+     0.998
+    ],
+    "n": 9306
+   },
+   {
+    "obj": "Corner_Exterior_Wood.001",
+    "layer": "UVMap",
+    "u": [
+     0.0,
+     1.0
+    ],
+    "v": [
+     0.213,
+     0.996
+    ],
+    "n": 36
+   }
+  ],
+  "base_mat_names": [
+   "MI_Brick",
+   "MI_MetalOrnaments",
+   "MI_Plaster",
+   "MI_RockTrim",
+   "MI_RoundTiles",
+   "MI_UnevenBrick",
+   "MI_WindowGlass",
+   "MI_WoodTrim",
+   "MI_WoodTrim_Wear"
+  ]
+ }
+}

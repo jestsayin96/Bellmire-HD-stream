@@ -1,0 +1,122 @@
+{
+ "lm_barracks.glb": {
+  "n_images": 0,
+  "n_mat": 51,
+  "base_linked": 0,
+  "n_mesh": 233,
+  "n_tri": 132238,
+  "TEXTURED": false
+ },
+ "lm_chapel.glb": {
+  "n_images": 0,
+  "n_mat": 50,
+  "base_linked": 0,
+  "n_mesh": 179,
+  "n_tri": 110780,
+  "TEXTURED": false
+ },
+ "lm_granary.glb": {
+  "n_images": 0,
+  "n_mat": 29,
+  "base_linked": 0,
+  "n_mesh": 38,
+  "n_tri": 30590,
+  "TEXTURED": false
+ },
+ "lm_hall.glb": {
+  "n_images": 0,
+  "n_mat": 49,
+  "base_linked": 0,
+  "n_mesh": 225,
+  "n_tri": 119062,
+  "TEXTURED": false
+ },
+ "lm_sawmill.glb": {
+  "n_images": 0,
+  "n_mat": 28,
+  "base_linked": 0,
+  "n_mesh": 47,
+  "n_tri": 33048,
+  "TEXTURED": false
+ },
+ "lm_watermill.glb": {
+  "n_images": 0,
+  "n_mat": 41,
+  "base_linked": 0,
+  "n_mesh": 71,
+  "n_tri": 29936,
+  "TEXTURED": false
+ },
+ "lm_windmill.glb": {
+  "n_images": 0,
+  "n_mat": 21,
+  "base_linked": 0,
+  "n_mesh": 53,
+  "n_tri": 50284,
+  "TEXTURED": false
+ },
+ "lm_workshop.glb": {
+  "n_images": 0,
+  "n_mat": 45,
+  "base_linked": 0,
+  "n_mesh": 90,
+  "n_tri": 41252,
+  "TEXTURED": false
+ },
+ "mk_house_a.glb": {
+  "n_images": 0,
+  "n_mat": 39,
+  "base_linked": 0,
+  "n_mesh": 63,
+  "n_tri": 33368,
+  "TEXTURED": false
+ },
+ "mk_house_b.glb": {
+  "n_images": 0,
+  "n_mat": 42,
+  "base_linked": 0,
+  "n_mesh": 79,
+  "n_tri": 29644,
+  "TEXTURED": false
+ },
+ "mk_house_c.glb": {
+  "n_images": 0,
+  "n_mat": 44,
+  "base_linked": 0,
+  "n_mesh": 68,
+  "n_tri": 35508,
+  "TEXTURED": false
+ },
+ "mk_house_d.glb": {
+  "n_images": 0,
+  "n_mat": 44,
+  "base_linked": 0,
+  "n_mesh": 72,
+  "n_tri": 36418,
+  "TEXTURED": false
+ },
+ "town_well_t1.glb": {
+  "n_images": 0,
+  "n_mat": 5,
+  "base_linked": 0,
+  "n_mesh": 5,
+  "n_tri": 704,
+  "TEXTURED": false
+ },
+ "town_well_t2.glb": {
+  "n_images": 0,
+  "n_mat": 6,
+  "base_linked": 0,
+  "n_mesh": 6,
+  "n_tri": 1360,
+  "TEXTURED": false
+ },
+ "town_well_t3.glb": {
+  "n_images": 0,
+  "n_mat": 4,
+  "base_linked": 0,
+  "n_mesh": 4,
+  "n_tri": 1610,
+  "TEXTURED": false
+ }
+}

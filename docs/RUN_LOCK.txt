@@ -1908,3 +1908,7 @@ IDLE 2026-11-28T11:55:55-06:00 - chat bot B224: GATE GREEN on a comment-only cor
 RUNNING 2026-11-28T12:08:27-06:00 (game build S174 - publisher check + snapshot EVERY + town tiers gate. claim 2026-11-28T12:08:27-06:00, cap claim+25 = 12:33:27, DECLARED FINISH 12:33:27-06:00. Lock free: last line IDLE 11:55:55 (chat bot), tasklist Godot*=0.)
 
 IDLE 2026-11-28T12:15:47-06:00 - game build S177: WELL_TIER_MESHES flipped ON after the L1/L3/L6 render (S177_WELL OK t1/t2/t3, looked at side by side); parse rc=0, S171_TIERS OK, TWITCH_PARSE OK, OFFFLOOR OK 0/2317, TOWNWALK PASS, DELVE_TEST OK. Claim 12:08:27, cap 12:33:27, declared 12:33:27, released 2026-11-28T12:15:47-06:00 - inside the declared finish, no crossing. tasklist Godot*=0. No Twitch test, 0 bits. (game build)
+
+RUNNING 2026-11-28T12:41:55-06:00 (QA tester - gate batteries via headless --script, read-only on the repo; claim 2026-11-28T12:41:55-06:00, cap claim+15, DECLARED FINISH 12:50:00-06:00. Lock free: last line IDLE 12:15:47 (game build), tasklist Godot*=0.)
+
+IDLE 2026-11-28T12:46:19-06:00 - QA tester: gates run headless, repo read-only. L14_TEST OK 27, TWITCH_PARSE OK 8, COMMANDS_DOC OK 40 (docs unchanged), OFFFLOOR OK 0/2533, TOWNWALK PASS 0/16172, DELVE_TEST OK; S58_SPAN refused (windowed-only by design, NOT RUN). Released inside declared finish 12:50. tasklist Godot*=0. No Twitch test, 0 bits. (QA tester)

@@ -225,6 +225,29 @@ def trim_materials(px):
             pass
 
 
+def _count_glb_images(path):
+    """Count the images actually embedded in a written .glb, from its own bytes.
+
+    Reads the GLB container's JSON chunk and returns len(json["images"]). This
+    is the viewer's question - what is IN the file - rather than what Blender's
+    in-memory datablock flags imply. Returns -1 if the file cannot be read or
+    parsed at all, which is distinguishable from a true 0 so a caller can never
+    mistake "I could not look" for "there is nothing there"."""
+    import struct as _struct, json as _json
+    try:
+        with open(path, "rb") as fh:
+            hdr = fh.read(12)
+            if len(hdr) < 12 or hdr[:4] != b"glTF":
+                return -1
+            clen, ctype = _struct.unpack("<II", fh.read(8))
+            if ctype != 0x4E4F534A:          # 'JSON'
+                return -1
+            doc = _json.loads(fh.read(clen).decode("utf-8"))
+        return len(doc.get("images", []))
+    except Exception:
+        return -1
+
+
 def export_glb_jpeg(objs, path, quality=82):
     """Export with the base-colour maps written as JPEG.
 
@@ -246,19 +269,31 @@ def export_glb_jpeg(objs, path, quality=82):
         bpy.context.view_layer.objects.active = objs[0]
     except Exception:
         pass
-    n_img = len([i for i in bpy.data.images
-                 if i.name != 'Render Result' and i.has_data])
+    # WAS: len([i for i in bpy.data.images if ... and i.has_data]) - and that
+    # counted ZERO for hall, inn AND barracks, every time. `has_data` is only
+    # True once Blender has paged an image's pixels into memory; the pack's
+    # maps are read straight off disk BY THE EXPORTER, so the datablock flag is
+    # still False when we ask. The field whose whole purpose was to report what
+    # was embedded rather than infer it was itself an inference, and a wrong
+    # one that read GREEN (0 = "nothing odd here") while the truth was 5/5/6.
+    # Found 28 Nov 13:4x CT by diffing this field against the written GLB's own
+    # header. The count is now taken FROM THE FILE WE ACTUALLY WROTE, after the
+    # write - the only place the real answer exists.
     base = dict(filepath=path, export_format='GLB', use_selection=True)
     try:
         bpy.ops.export_scene.gltf(export_image_format='JPEG',
                                   export_jpeg_quality=quality, **base)
-        return True, "jpeg q%d" % quality, n_img
+        n_img = _count_glb_images(path)
+        note = "jpeg q%d" % quality
+        if n_img == 0:
+            note += " - WARNING ZERO IMAGES EMBEDDED (untextured export?)"
+        return True, note, n_img
     except TypeError as e1:
         ok, note = G.export_glb(objs, path)
-        return ok, "FELL BACK TO AUTO (%s): %s" % (e1, note), n_img
+        return ok, "FELL BACK TO AUTO (%s): %s" % (e1, note), _count_glb_images(path)
     except Exception as e2:
         ok, note = G.export_glb(objs, path)
-        return ok, "FELL BACK TO AUTO (%s): %s" % (e2, note), n_img
+        return ok, "FELL BACK TO AUTO (%s): %s" % (e2, note), _count_glb_images(path)
 
 
 _PROTO = {}

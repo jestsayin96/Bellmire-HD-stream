@@ -24554,3 +24554,10 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - **MY WORKTREE MOUNT IS NOT WHERE MY PROMPT SAYS IT IS**, and it cost me one failed call: the prompt gives `$HOME/mnt/hd adventure/bellmire-bot`, the real mounts this run are **`$HOME/mnt/bellmire-bot`** and **`$HOME/mnt/jests-hd-medieval-adventure`** - the connected folders are mounted by their own names, with no `hd adventure` parent. `ls $HOME/mnt/` settled it in one call. **I did NOT call `device_request_folder_access`.**
 - No Twitch message, nothing redeemed, nothing cheered, **ZERO BITS**. No channel state read or changed; Mr. E's account was not touched and bellmirebro sent nothing.
 - Not ticked - the team lead ticks.
+
+## C-250 (content, 28 Nov 2026, 02:3x CST) - TOWN-FIRST: THE MOMENT OF CHANGE (district and road upgrade events) AND THE INN EXTERIOR
+- TAKE THIS NEXT (02:22 block, CONTENT): event lines for the hour a district or road steps 1->2 / 2->3, then the inn exterior and storage line. Both done.
+- Added `town_buildings.upgrade_events` (8 districts x to_2/to_3, roads to_2/to_3; each {crier, plaque}) and `town_buildings.inn_exterior.stages[3]` ({name, crier, sign, see, storage}). Plain register; tier 1 patched, tier 3 finished. The only "floor" hit is "stone floors" in a granary line, not a dungeon count.
+- No new data file. One `_note_c250` key. VALIDATION OK: json.load passes, every pre-existing key unchanged (diffed), file round-trips byte-exact.
+- WIRING FOR THE GAME BUILD (not done): fire `upgrade_events.districts[<id>].to_N.crier` when a district reaches tier N; `roads.to_N` likewise; read `inn_exterior.stages[tier-1]` for the outside view and `.storage` for the hub's storage panel. All unwired by design.
+- Next content: C-251.

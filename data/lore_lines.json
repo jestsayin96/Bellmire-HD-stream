@@ -17160,7 +17160,129 @@
           "see": "A flagged road with kerbs and gutters, a lamp at each crossing, worn flags."
         }
       ]
+    },
+    "upgrade_events": {
+      "_note": "C-250 / town-first: the MOMENT OF CHANGE. districts{<district id>:{to_2,to_3}} and roads{to_2,to_3} -> {crier (spoken once, in the hour the district or road steps up a tier), plaque (short text for a sign or the chronicle)}. Event lines, not state descriptions: state text lives in `districts` and `roads`. to_2 fires at town level tier_levels[2], to_3 at tier_levels[3]. Ids match `districts` keys. Dead until wired; content worker never touches code. No line states a dungeon floor count.",
+      "districts": {
+        "keep": {
+          "to_2": {
+            "crier": "The clerks have been given houses. Doors, with latches. Nobody lets on that they're pleased.",
+            "plaque": "Latch down."
+          },
+          "to_3": {
+            "crier": "The Close is paved. A man with a broom has been hired, and takes it seriously.",
+            "plaque": "Keep to the path."
+          }
+        },
+        "temple": {
+          "to_2": {
+            "crier": "Roofs go up over the almshouse beds. The bell rings, and for once somebody is under it.",
+            "plaque": "Roofed."
+          },
+          "to_3": {
+            "crier": "Lamps are lit along the Close. The graveside is kept clear, and has been for a while.",
+            "plaque": "Lamps lit."
+          }
+        },
+        "garrison": {
+          "to_2": {
+            "crier": "The pickets get a row of proper huts. Dry boots all round. The sergeant is suspicious.",
+            "plaque": "Dry boots."
+          },
+          "to_3": {
+            "crier": "The Armoury Close is walled and gated. The watch changes by the bell now, not by shouting.",
+            "plaque": "Changed by the bell."
+          }
+        },
+        "mill": {
+          "to_2": {
+            "crier": "The millers' huts are timbered over. The flour dust stays outside. Mostly.",
+            "plaque": "Timbered."
+          },
+          "to_3": {
+            "crier": "The granary quarter is raised. Stone floors, tight doors, and a clerk who counts the sacks.",
+            "plaque": "Sacks counted."
+          }
+        },
+        "craft": {
+          "to_2": {
+            "crier": "The smiths move into a lane. Smoke goes one way, at least, and the neighbours are told which.",
+            "plaque": "One smoke, one lane."
+          },
+          "to_3": {
+            "crier": "The Guild Quarter is built. Signs over the doors, and prices under the signs.",
+            "plaque": "Signs and prices."
+          }
+        },
+        "market": {
+          "to_2": {
+            "crier": "The stallholders have walls behind the stalls now. They sleep where they sell.",
+            "plaque": "Sleep where you sell."
+          },
+          "to_3": {
+            "crier": "The counting houses open. Coin is weighed indoors, and the scales are inspected.",
+            "plaque": "Weighed indoors."
+          }
+        },
+        "homes_s": {
+          "to_2": {
+            "crier": "South Row is relaid and the thatch redone. Mind the wet paint, and the wet dog.",
+            "plaque": "Relaid."
+          },
+          "to_3": {
+            "crier": "Gardens in the south lanes, and walls round them. Somebody has planted roses. Somebody will regret it.",
+            "plaque": "Walled gardens."
+          }
+        },
+        "homes_w": {
+          "to_2": {
+            "crier": "The west huts get proper doors. The wind finds fewer ways in.",
+            "plaque": "Doors fitted."
+          },
+          "to_3": {
+            "crier": "Millside is finished: stone footings, tiled roofs, a drain that works. The west side can look the east in the eye.",
+            "plaque": "Drain working."
+          }
+        }
+      },
+      "roads": {
+        "to_2": {
+          "crier": "The carters unload gravel by the cartload. Someone has put up a milestone, and someone else has argued about it.",
+          "plaque": "Gravelled."
+        },
+        "to_3": {
+          "crier": "The last flag is laid. The road is paved from the gate to the square, and the carters are not to be spoken to for a week.",
+          "plaque": "Paved."
+        }
+      }
+    },
+    "inn_exterior": {
+      "_note": "C-250 / order 1 item 9: INN EXTERIOR and the storage mechanic ONLY, no interior rooms. stages[3] match landmarks.inn tiers (tier_levels 1/5/9). Each = {name, crier (event, spoken on the upgrade), sign (text on the board outside), see (what a viewer sees of the OUTSIDE), storage (one plain line for the hub, saying what the inn keeps for a hero)}. Storage is a hero's own gear kept at the inn between delves; it is not a shop and is never sold from. Condition tracks level. Dead until wired; content worker never touches code. No line states a dungeon floor count.",
+      "stages": [
+        {
+          "name": "The Ale House",
+          "crier": "The ale house hangs a board. It says what it sells. It does not say much else.",
+          "sign": "ALE. BREAD. A BENCH.",
+          "see": "A low house, a painted board, a bench, a barrel by the door.",
+          "storage": "A shelf behind the bar. Your spare gear, kept till you come back."
+        },
+        {
+          "name": "The Inn",
+          "crier": "The inn gets a yard, a stable and a lit window each side. Strangers stop and look.",
+          "sign": "A BED AND A BOWL. GEAR KEPT.",
+          "see": "Two storeys of timber, shuttered windows, a stable yard, a lantern on a hook.",
+          "storage": "A locked chest per guest, under the stair. The key stays on the landlord."
+        },
+        {
+          "name": "The Inn of the Bell",
+          "crier": "The Inn of the Bell is finished: stone below, beam above, lamps at the door. The bell over it has a clapper.",
+          "sign": "SIT. EAT. SLEEP. GEAR KEPT.",
+          "see": "Stone and beam, a carved bell over the door, lamps either side, a stable and a cart-yard, smoke from two chimneys.",
+          "storage": "A strongroom with a bar and a ledger. Everything you leave is written down, and you are given the page."
+        }
+      ]
     }
   },
-  "_note_c248": "C-248 town_buildings: building, landmark and tier flavour text. Zero-hit by design; no lane wires this key."
+  "_note_c248": "C-248 town_buildings: building, landmark and tier flavour text. Zero-hit by design; no lane wires this key.",
+  "_note_c250": "C-250 / town-first: town_buildings.upgrade_events (district + road tier-change event lines) and town_buildings.inn_exterior (3 stages incl. storage line). Dead until wired; no new data file."
 }

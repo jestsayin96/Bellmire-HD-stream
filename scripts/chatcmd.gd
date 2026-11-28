@@ -159,7 +159,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
     ## Measured at B156 against synthetic lines; no entry in commands.json today is of this origin.
     match verb:
         "enlist":   out = _enlist(user_id, display, arg, arg2)
-        "hero":     out = _needs(user_id, func(): return roster.describe(user_id) + _hub_tail())
+        "hero":     out = _needs(user_id, func(): return roster.describe(user_id) + _dur_tail(user_id) + _hub_tail())
         "inventory", "inv", "bag", "items":
                     out = _needs(user_id, func(): return inventory(user_id))
         "weapon":   out = _needs(user_id, func(): return _weapon_line(user_id))
@@ -179,6 +179,7 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                     out = _needs(user_id, func():
                         wants_shop.emit(user_id, "armorer")
                         return roster.buy_armour(user_id))
+        "repair":   out = _repair(user_id)
         "brew":     out = _brew(user_id, arg, arg2)
         "wear":     out = _needs(user_id, func(): return roster.wear(user_id, rest))
         "dye":      out = _needs(user_id, func(): return roster.dye(user_id, arg))
@@ -523,6 +524,39 @@ static func hub_url() -> String:
 static func _hub_tail() -> String:
     var u := hub_url()
     return "" if u == "" else "  |  Full sheet: " + u
+
+## S162 slice 3 (RULING sup-nov27-0209): the smith mends what the dungeon wore.
+## The engine owns all of it - Economy.repair charges the gold, restores the piece and writes the
+## line. This lane holds NO copy of the price, the formula or the threshold: a second copy of a
+## number is the defect, not the surface.
+func _repair(user_id: String) -> String:
+    return _needs(user_id, func(): return String(Economy.repair(roster, user_id).get("line", "")))
+
+## The ruling: "show durability if below 100%". Whole gear says nothing - a sheet that reports
+## 100% twice costs a line of chat every time anybody asks for it. Worn gear says how worn, and
+## what the smith wants for it, read from Economy.repair_quote at the moment of asking.
+func _dur_tail(user_id: String) -> String:
+    var h := roster.get_hero(user_id)
+    if h.is_empty():
+        return ""
+    var parts: Array[String] = []
+    for slot: String in ["weapon", "armour"]:
+        var d := roster.durability(h, slot)
+        if d >= 100:
+            continue
+        var state := ""
+        if d <= 0:
+            state = ", broken"
+        elif roster.dur_factor(h, slot) < 1.0:
+            state = ", swinging soft"
+        parts.append("%s %d%%%s" % [slot, d, state])
+    if parts.is_empty():
+        return ""
+    var tail := "  |  worn: " + ", ".join(parts)
+    var total := int(Economy.repair_quote(roster, h).get("total", 0))
+    if total > 0:
+        tail += " - the smith wants %d gold (!repair)" % total
+    return tail
 
 func _hub() -> String:
     var u := hub_url()
@@ -2098,6 +2132,44 @@ static func commands() -> Dictionary:
                 _guard_faults.append("DYE COST")
                 push_error("COMMANDS_DATA DYE COST: `dye`.cost publishes %d gold for a dyeing and the dyer charges %d, read from data/items.json `dye_cost` (raw value `%s`) - docs/COMMANDS.md prices the dyer at money the town does not take, and a viewer finds out by paying" % [dy_said, dy_real, str(dy_raw)])
                 printerr("COMMANDS_DATA DYE COST - published %d, charged %d (items.json `dye_cost` = %s)" % [dy_said, dy_real, str(dy_raw)])
+
+        # ---- B209: THE REPAIR SPAN. THE FIRST PRICE ON MY SURFACE THAT IS A FORMULA. --
+        # `repair`.cost publishes the two ENDS of Economy's repair table - the cheapest whole job
+        # (a broken common piece) and the dearest (a broken legendary one) - because the middle is
+        # a formula and a formula cannot be published to chat. The PRICE loop above cannot carry
+        # this: it reads ONE number against ONE constant, and this is two numbers against an
+        # arithmetic over two constants. Authority: Economy.REPAIR_BASE * Economy.REPAIR_MULT[t]
+        # at dur 0, tier 1 and tier REPAIR_MULT.size()-1, which is repair_list_cost's own
+        # arithmetic with the (1 - dur/100) factor at its maximum. I do NOT restate 40 or 600 on
+        # this side. The guild rate (Roster.cost_for) is NOT in the span and must not be - it is
+        # per hero, and a published price cannot name every hero's rate.
+        var rp_cost: String = String(((cmd_d.get("repair", {}) as Dictionary)).get("cost", ""))
+        var rp_said: Array[int] = []
+        var rp_dig := ""
+        for rp_i in rp_cost.length():
+            var rp_c := rp_cost[rp_i]
+            if rp_c >= "0" and rp_c <= "9":
+                rp_dig += rp_c
+            else:
+                if rp_dig != "" and rp_cost.substr(rp_i).begins_with(" gold"):
+                    rp_said.append(int(rp_dig))
+                rp_dig = ""
+        var rp_mult: Array = Economy.REPAIR_MULT
+        var rp_low := maxi(1, int(ceil(float(Economy.REPAIR_BASE) * float(rp_mult[1]))))
+        var rp_high := maxi(1, int(ceil(float(Economy.REPAIR_BASE) * float(rp_mult[rp_mult.size() - 1]))))
+        if rp_said.size() < 2:
+            _guard_faults.append("REPAIR ANCHOR")
+            push_error("COMMANDS_DATA REPAIR ANCHOR: `repair`.cost carries %d number(s) before \"gold\" and the span needs two - the published cost of a mending can no longer be checked against Economy.REPAIR_BASE * REPAIR_MULT (%d to %d)" % [rp_said.size(), rp_low, rp_high])
+            printerr("COMMANDS_DATA REPAIR ANCHOR - `repair`.cost lost an end of its span; the smith's price is now unchecked")
+        else:
+            if rp_said[0] != rp_low:
+                _guard_faults.append("REPAIR SPAN LOW")
+                push_error("COMMANDS_DATA REPAIR SPAN LOW: `repair`.cost publishes %d gold as the cheapest whole mending and Economy charges %d for a broken tier-1 piece (REPAIR_BASE %d * REPAIR_MULT[1] %s) - docs/COMMANDS.md tells a viewer the floor of the smith's counter and it is the wrong floor" % [rp_said[0], rp_low, Economy.REPAIR_BASE, str(rp_mult[1])])
+                printerr("COMMANDS_DATA REPAIR SPAN LOW - published %d, charged %d" % [rp_said[0], rp_low])
+            if rp_said[rp_said.size() - 1] != rp_high:
+                _guard_faults.append("REPAIR SPAN HIGH")
+                push_error("COMMANDS_DATA REPAIR SPAN HIGH: `repair`.cost publishes %d gold as the dearest whole mending and Economy charges %d for a broken tier-%d piece (REPAIR_BASE %d * REPAIR_MULT[%d] %s) - a viewer saving for the worst case is saving the wrong number" % [rp_said[rp_said.size() - 1], rp_high, rp_mult.size() - 1, Economy.REPAIR_BASE, rp_mult.size() - 1, str(rp_mult[rp_mult.size() - 1])])
+                printerr("COMMANDS_DATA REPAIR SPAN HIGH - published %d, charged %d" % [rp_said[rp_said.size() - 1], rp_high])
 
         # ---- B43: THE PUBLISHED DYE COLOURS. A LIST, NOT A NUMBER. ----------------------
         # The team lead's row asked for the NEXT CLASS of thing on my surface that nothing

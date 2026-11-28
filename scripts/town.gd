@@ -142,6 +142,20 @@ var _well_parts: Array = []    # S173: the procedural well's nodes, hidden while
 var _well_at := Vector3.ZERO   # S173: the well's ground point (ring on the pivot, per art's contract)
 var _well_mesh: Node3D = null
 var _well_path := ""
+## S178: the Chief's Hall wears art's tier meshes (assets/buildings/town_hall_t1..t3.glb,
+## docs/art/TOWN_HALL_LADDER.md - one shared pivot, so the swap happens at the lm_hall node's own
+## origin, as a CHILD of it, and growth.gd's visibility on that node still governs). The tier is
+## town_tiers.tier_of() on the layout's lm_hall entry. OFF = lm_hall.glb, unchanged.
+const HALL_TIER_MESHES := true    # S178: flipped after the L1/L5/L9 render
+## S178: tier 3's paved court runs ~4 m past lm_hall's plot and its iron railing lands ACROSS THE
+## ROAD (renders/cycles/20261128_s178/hall_level9.png; docs/art/TOWN_TIER_FIT_SPEC.md predicted it).
+## Until art trims t3 to the 13.80 x 15.70 plot, tier 3 is played by lm_hall.glb - which art derived
+## t3 from - with its own dressing. Flip to true only after a render of a trimmed t3.
+const HALL_T3_FITS := false
+var _hall_node: Node3D = null      # S178: the lm_hall.glb instance (its meshes hide under a tier)
+var _hall_dress: Array = []        # S178: inscription, wall banners, lamps, flagpole sized to lm_hall
+var _hall_mesh: Node3D = null
+var _hall_path := ""
 var _scar := Vector3.ZERO      # centre of the wild-magic scar (dungeon mouth beyond it)
 var _north_from := Vector3.ZERO  # where the Delvers' Road leaves the ring
 var _scar_info := {}
@@ -1061,6 +1075,7 @@ func show_level(lv: int, quiet := false) -> void:
         growth.show_level(lv, quiet)
     _show_garrison(lv, quiet)
     _show_well_tier(lv)               # S173: quiet too, so a save loaded at level 7 shows its well
+    _show_hall_tier(lv)               # S178: same rule for the Chief's Hall
     # S172: content's town_buildings words for every tier that rose. Deferred so the lines land
     # AFTER economy's own level line; founding (quiet) and falling back are never cried.
     if not quiet and lv > _tiers_level:
@@ -1140,6 +1155,46 @@ func _show_well_tier(lv: int) -> void:
     if WELL_TIER_SCALE != 1.0:
         _well_mesh.scale = Vector3.ONE * WELL_TIER_SCALE
     add_child(_well_mesh)
+
+## S178: swap the Chief's Hall to its tier mesh for this level. tier_of() on the layout entry, then
+## mesh_for()'s fallback (highest existing tier <= t). The tier mesh is a child of the lm_hall node
+## at its origin; lm_hall's own meshes hide under it. lm_hall's dressing (inscription, wall banners,
+## lamps, flagpole) was placed for lm_hall's 13.8 m front, so it stands only beside tier 3, which
+## art derived from lm_hall at the same width. No mesh / unloadable -> lm_hall stays as it was.
+func _show_hall_tier(lv: int) -> void:
+    if not HALL_TIER_MESHES or not is_instance_valid(_hall_node) or not _tiers_ready():
+        return
+    var e: Dictionary = {}
+    for b in tiers.layout.get("buildings", []):
+        if b is Dictionary and String(b.get("landmark", "")) == "lm_hall":
+            e = b
+            break
+    if e.is_empty():
+        return
+    var t: int = tiers.tier_of(e, lv)
+    var path: String = tiers.mesh_for(e, t)
+    if path.ends_with("_t3.glb") and not HALL_T3_FITS:
+        path = ""                      # lm_hall stands for tier 3 until t3 fits its plot
+    if path == _hall_path:
+        return
+    var ps = load(path) if path != "" else null
+    if path != "" and not (ps is PackedScene):
+        return
+    if _hall_mesh != null:
+        _hall_mesh.queue_free()
+        _hall_mesh = null
+    _hall_path = path
+    for c in _hall_node.get_children():
+        if c is Node3D:
+            (c as Node3D).visible = path == ""
+    var full := path == "" or path.ends_with("_t3.glb")
+    for nd in _hall_dress:
+        if is_instance_valid(nd) and nd is Node3D:
+            (nd as Node3D).visible = full
+    if path == "":
+        return
+    _hall_mesh = (ps as PackedScene).instantiate()
+    _hall_node.add_child(_hall_mesh)
 
 ## ---------------------------------------------------------------- dressing
 func _spawn(dir_path: String, name: String, pos: Vector3, yaw: float,
@@ -2019,6 +2074,8 @@ func _dress_landmarks() -> void:
                         break
         match key:
             "lm_hall":
+                _hall_node = plot.get("node", null)
+                var hc0 := get_child_count()
                 # the inscription over the Chief's Hall, word for word from canon
                 var ins := Label3D.new()
                 ins.text = "MEASURE THE GRAIN. COUNT THE FLASKS. KEEP THE DOOR."
@@ -2035,6 +2092,8 @@ func _dress_landmarks() -> void:
                     _livery_banner(front + side * (float(sgn) * 3.0) + f * 0.25, yaw, lv, g + 5.5)
                     _glow(front + side * (float(sgn) * 1.6) + f * 0.6 + Vector3(0, g + 2.6, 0), Color(1.0, 0.75, 0.45), 0.8, 7.0)
                 _flagpole(p + side * (-_width_of(key) * 0.5 - 2.5) + f * 2.0, lv, 13.0, wood)
+                for i in range(hc0, get_child_count()):
+                    _hall_dress.append(get_child(i))
             "lm_chapel":
                 _glow(front + f * 2.6 + Vector3(0, g + 2.6, 0), Color(1.0, 0.85, 0.6), 1.0, 8.0)
                 # the reading stand at the door with its candle, a candle-stand either side

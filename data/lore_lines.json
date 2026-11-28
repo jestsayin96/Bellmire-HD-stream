@@ -18472,5 +18472,665 @@
       }
     }
   },
-  "_note_c254": "C-254: quest_board is the System 18 quest pool and board copy. Nothing reads it yet; the game build wires quest tracking and the hub lane the board UI. quests[].mechanic_state says which are live-ready. No floor counts."
+  "_note_c254": "C-254: quest_board is the System 18 quest pool and board copy. Nothing reads it yet; the game build wires quest tracking and the hub lane the board UI. quests[].mechanic_state says which are live-ready. No floor counts.",
+  "shadow_hall": {
+    "_note": "C-255 / System 44 (sup-nov27-1856): words for the dual guild and morality. Nothing reads this yet; the game build wires it, the hub lane reads hub. KEY SHAPE: tiers[6] = Shadow Hall levels, INDEPENDENT of the town level (level, name, crier on upgrade, plaque, see, unlock) - tiers do not extend town growth_tiers; standing{honored..banished} -> label, chronicle, hub, greet; quests[24] same shape idea as quest_board (mechanic_state is needs_build throughout, payout_band 1-7, risk low/mid/high, min_hall_level 1-6, rank F-S); crime_chronicle{caught,escaped by crime type, alert}; jail; npc_refusal by trade plus rebuild/returned; detection; guild_switch; bounty (PvP assassination lines); hub_text. TOKENS: {hero} {shop} {n} {name} {have} {need} only. Plain register, nothing gothic. Costs and odds are the engine's, not here.",
+    "tiers": [
+      {
+        "level": 1,
+        "name": "The Lean-To",
+        "crier": "Somebody has put a roof against the wall outside the gate. Nobody is saying whose.",
+        "plaque": "Knock twice.",
+        "see": "A shed of old boards leaned on the wall. One lamp, shuttered. A barrel for a door-stop.",
+        "unlock": "A board with two jobs on it. A crate to keep things in. The way is the main gate."
+      },
+      {
+        "level": 2,
+        "name": "The Cellar Door",
+        "crier": "The lean-to has a cellar now. The door is new. The lock is newer.",
+        "plaque": "Ask for no one.",
+        "see": "Boards patched with tin. A trapdoor and a stair going down. A second lamp, a third bolt.",
+        "unlock": "More jobs on the board. Storage rates drop a little. A cloak and a mask on the shelf."
+      },
+      {
+        "level": 3,
+        "name": "The Dug-Out",
+        "crier": "They have dug out the hill behind the wall. The carts go in empty and come out lighter.",
+        "plaque": "Dry. Quiet. Paid up.",
+        "see": "A timbered room cut into the hillside, a table, a ledger, a man who counts. Rope lamps down a tunnel.",
+        "unlock": "A fence who buys what the town would ask questions about. A bounty board with names on it."
+      },
+      {
+        "level": 4,
+        "name": "The Hollow",
+        "crier": "The Hollow is open for trade. The guard has stopped pretending not to know.",
+        "plaque": "What is said here stays here.",
+        "see": "Three rooms, shored with oak. A smoke-stack out of the grass. A cellar with real racks.",
+        "unlock": "A black market stall. Smoke bombs for sale. A safe house that shortens a cell."
+      },
+      {
+        "level": 5,
+        "name": "The Warren",
+        "crier": "The Warren runs under the north field now. Do not dig there.",
+        "plaque": "Members. Then members' friends.",
+        "see": "Stone-lined halls under a farmer's field. A training yard with sand and straw dummies. A door that does not look like a door.",
+        "unlock": "A faster way down. A deeper start. A training yard. Cheapest storage the Hall offers."
+      },
+      {
+        "level": 6,
+        "name": "The Compound",
+        "crier": "There is a walled yard outside the walls, with its own gate, its own lamps and its own watch. It is not on the town's map.",
+        "plaque": "Bellmire keeps its gate. We keep ours.",
+        "see": "A proper compound: wall, gatehouse, bunkhouse, strong-room, a tunnel mouth in the stable. Lamps lit all night.",
+        "unlock": "Every upgrade. The best board, the best fence, the shortest cell and the deepest door."
+      }
+    ],
+    "standing": {
+      "honored": {
+        "label": "Honored",
+        "chronicle": "{hero} is honored in Bellmire. The tavern keeps a stool.",
+        "hub": "Best prices. More notes on the board. Folk say your name first.",
+        "greet": "Good to see you, {hero}. The usual?"
+      },
+      "respected": {
+        "label": "Respected",
+        "chronicle": "{hero} is respected in Bellmire.",
+        "hub": "Fair prices. Doors open.",
+        "greet": "Morning, {hero}."
+      },
+      "neutral": {
+        "label": "Neutral",
+        "chronicle": "{hero} is a stranger in Bellmire still.",
+        "hub": "Standard prices. No one is watching you yet.",
+        "greet": "What'll it be?"
+      },
+      "suspect": {
+        "label": "Suspect",
+        "chronicle": "The guard has begun to watch {hero}.",
+        "hub": "Guards watch you. Your odds are worse on a crime.",
+        "greet": "Keep your hands where I can see them."
+      },
+      "unwelcome": {
+        "label": "Unwelcome",
+        "chronicle": "{hero} is no longer welcome in Bellmire. Some doors have shut.",
+        "hub": "Some shops refuse you. The inn is shut to you.",
+        "greet": "We're closed. To you."
+      },
+      "banished": {
+        "label": "Banished",
+        "chronicle": "{hero} is banished from Bellmire. Only the Shadow Hall will have them.",
+        "hub": "Only the Shadow Hall serves you. Good deeds will bring you back.",
+        "greet": ""
+      }
+    },
+    "quests": [
+      {
+        "id": "sh01",
+        "category": "theft",
+        "rank": "F",
+        "min_hall_level": 1,
+        "title": "Loaf and Lamp oil",
+        "note": "Two loaves from the baker's back shelf. A flask of lamp oil. Small. Do it small.",
+        "mechanic": "steal_item",
+        "mechanic_state": "needs_build",
+        "params": {
+          "shop": "general",
+          "count": 2
+        },
+        "payout_band": 2,
+        "risk": "low"
+      },
+      {
+        "id": "sh02",
+        "category": "theft",
+        "rank": "D",
+        "min_hall_level": 2,
+        "title": "The Smith's Spare",
+        "note": "A short sword off the smithy rack. He has twelve. He will count eleven.",
+        "mechanic": "steal_item",
+        "mechanic_state": "needs_build",
+        "params": {
+          "shop": "smith",
+          "kind": "weapon"
+        },
+        "payout_band": 3,
+        "risk": "mid"
+      },
+      {
+        "id": "sh03",
+        "category": "theft",
+        "rank": "C",
+        "min_hall_level": 3,
+        "title": "Herb Shelf",
+        "note": "Whatever the apothecary keeps behind the counter. Bring it all.",
+        "mechanic": "steal_item",
+        "mechanic_state": "needs_build",
+        "params": {
+          "shop": "apothecary",
+          "count": 3
+        },
+        "payout_band": 4,
+        "risk": "mid"
+      },
+      {
+        "id": "sh04",
+        "category": "theft",
+        "rank": "B",
+        "min_hall_level": 4,
+        "title": "The Till at Dusk",
+        "note": "The takings from the tavern, between the last drinker and the lock-up.",
+        "mechanic": "steal_gold",
+        "mechanic_state": "needs_build",
+        "params": {
+          "shop": "tavern"
+        },
+        "payout_band": 5,
+        "risk": "high"
+      },
+      {
+        "id": "sh05",
+        "category": "raid",
+        "rank": "D",
+        "min_hall_level": 2,
+        "title": "Hold the Gate Open",
+        "note": "When the raiders come, you are the one who does not shut it.",
+        "mechanic": "join_raiders",
+        "mechanic_state": "needs_build",
+        "params": {
+          "role": "gate"
+        },
+        "payout_band": 4,
+        "risk": "mid"
+      },
+      {
+        "id": "sh06",
+        "category": "raid",
+        "rank": "C",
+        "min_hall_level": 3,
+        "title": "Fire in the Hay",
+        "note": "Hay barn at the edge of the market. One torch. Be gone before it takes.",
+        "mechanic": "join_raiders",
+        "mechanic_state": "needs_build",
+        "params": {
+          "role": "torch"
+        },
+        "payout_band": 4,
+        "risk": "mid"
+      },
+      {
+        "id": "sh07",
+        "category": "raid",
+        "rank": "B",
+        "min_hall_level": 4,
+        "title": "Fight Beside Them",
+        "note": "Join the raid proper. Do not hit the ones paying you.",
+        "mechanic": "join_raiders",
+        "mechanic_state": "needs_build",
+        "params": {
+          "role": "fighter"
+        },
+        "payout_band": 5,
+        "risk": "high"
+      },
+      {
+        "id": "sh08",
+        "category": "raid",
+        "rank": "A",
+        "min_hall_level": 5,
+        "title": "Take the Strong-Room",
+        "note": "While the town fights the wall, the strong-room is empty.",
+        "mechanic": "join_raiders",
+        "mechanic_state": "needs_build",
+        "params": {
+          "role": "vault"
+        },
+        "payout_band": 6,
+        "risk": "high"
+      },
+      {
+        "id": "sh09",
+        "category": "sabotage",
+        "rank": "E",
+        "min_hall_level": 1,
+        "title": "Cut the Rope",
+        "note": "The well rope. Not the bucket. The rope.",
+        "mechanic": "sabotage_building",
+        "mechanic_state": "needs_build",
+        "params": {
+          "building": "well"
+        },
+        "payout_band": 2,
+        "risk": "low"
+      },
+      {
+        "id": "sh10",
+        "category": "sabotage",
+        "rank": "D",
+        "min_hall_level": 2,
+        "title": "Loose the Hinges",
+        "note": "The mill door. Nothing dramatic. It just stops closing.",
+        "mechanic": "sabotage_building",
+        "mechanic_state": "needs_build",
+        "params": {
+          "building": "mill"
+        },
+        "payout_band": 3,
+        "risk": "mid"
+      },
+      {
+        "id": "sh11",
+        "category": "sabotage",
+        "rank": "C",
+        "min_hall_level": 3,
+        "title": "Spoil the Forge",
+        "note": "Wet the coal. Twice. He will lose a day and a temper.",
+        "mechanic": "sabotage_building",
+        "mechanic_state": "needs_build",
+        "params": {
+          "building": "smithy"
+        },
+        "payout_band": 4,
+        "risk": "mid"
+      },
+      {
+        "id": "sh12",
+        "category": "sabotage",
+        "rank": "B",
+        "min_hall_level": 4,
+        "title": "Bad Beams",
+        "note": "A weak beam in the new hall. Someone will notice by spring.",
+        "mechanic": "sabotage_building",
+        "mechanic_state": "needs_build",
+        "params": {
+          "building": "hall"
+        },
+        "payout_band": 5,
+        "risk": "high"
+      },
+      {
+        "id": "sh13",
+        "category": "poison",
+        "rank": "D",
+        "min_hall_level": 2,
+        "title": "A Little in the Well",
+        "note": "Not enough to kill. Enough that the town talks.",
+        "mechanic": "poison_well",
+        "mechanic_state": "needs_build",
+        "params": {
+          "strength": "low"
+        },
+        "payout_band": 4,
+        "risk": "high"
+      },
+      {
+        "id": "sh14",
+        "category": "poison",
+        "rank": "C",
+        "min_hall_level": 3,
+        "title": "Spoil the Stores",
+        "note": "Rot in the grain store. Bellmire eats thin for a week.",
+        "mechanic": "poison_stores",
+        "mechanic_state": "needs_build",
+        "params": {
+          "strength": "low"
+        },
+        "payout_band": 4,
+        "risk": "high"
+      },
+      {
+        "id": "sh15",
+        "category": "poison",
+        "rank": "B",
+        "min_hall_level": 4,
+        "title": "The Cask Swap",
+        "note": "One cask in the tavern cellar. Not the good one.",
+        "mechanic": "poison_stores",
+        "mechanic_state": "needs_build",
+        "params": {
+          "target": "tavern"
+        },
+        "payout_band": 5,
+        "risk": "high"
+      },
+      {
+        "id": "sh16",
+        "category": "poison",
+        "rank": "A",
+        "min_hall_level": 5,
+        "title": "The Long Winter",
+        "note": "Foul the town's winter supply. They will remember it.",
+        "mechanic": "poison_stores",
+        "mechanic_state": "needs_build",
+        "params": {
+          "strength": "high"
+        },
+        "payout_band": 7,
+        "risk": "high"
+      },
+      {
+        "id": "sh17",
+        "category": "bounty",
+        "rank": "E",
+        "min_hall_level": 1,
+        "title": "A Name at Your Rank",
+        "note": "The Hall hands you a name. Same rank as you. Find them below.",
+        "mechanic": "pvp_target",
+        "mechanic_state": "needs_build",
+        "params": {
+          "rank_match": "same"
+        },
+        "payout_band": 3,
+        "risk": "high"
+      },
+      {
+        "id": "sh18",
+        "category": "bounty",
+        "rank": "D",
+        "min_hall_level": 2,
+        "title": "Watch the Stair",
+        "note": "Your mark is going down. Meet them where the light fails.",
+        "mechanic": "pvp_target",
+        "mechanic_state": "needs_build",
+        "params": {
+          "rank_match": "same"
+        },
+        "payout_band": 4,
+        "risk": "high"
+      },
+      {
+        "id": "sh19",
+        "category": "bounty",
+        "rank": "C",
+        "min_hall_level": 3,
+        "title": "Ambush at the Scar",
+        "note": "The hidden door puts you behind them. Make it quick.",
+        "mechanic": "pvp_target",
+        "mechanic_state": "needs_build",
+        "params": {
+          "rank_match": "same",
+          "entrance": "hidden"
+        },
+        "payout_band": 5,
+        "risk": "high"
+      },
+      {
+        "id": "sh20",
+        "category": "bounty",
+        "rank": "B",
+        "min_hall_level": 4,
+        "title": "Quiet Work",
+        "note": "A mark who is careful. Wait until they are not.",
+        "mechanic": "pvp_target",
+        "mechanic_state": "needs_build",
+        "params": {
+          "rank_match": "same"
+        },
+        "payout_band": 6,
+        "risk": "high"
+      },
+      {
+        "id": "sh21",
+        "category": "bounty",
+        "rank": "S",
+        "min_hall_level": 6,
+        "title": "The Last Name",
+        "note": "The Hall has one name left for a hero of your rank. It is not a friend. Not yet.",
+        "mechanic": "pvp_target",
+        "mechanic_state": "needs_build",
+        "params": {
+          "rank_match": "same"
+        },
+        "payout_band": 7,
+        "risk": "high"
+      },
+      {
+        "id": "sh22",
+        "category": "smuggle",
+        "rank": "F",
+        "min_hall_level": 1,
+        "title": "Carry the Sack",
+        "note": "A sack from the lean-to to the east road. Do not look inside.",
+        "mechanic": "carry_contraband",
+        "mechanic_state": "needs_build",
+        "params": {
+          "route": "east"
+        },
+        "payout_band": 2,
+        "risk": "low"
+      },
+      {
+        "id": "sh23",
+        "category": "smuggle",
+        "rank": "C",
+        "min_hall_level": 3,
+        "title": "Past the Gate Watch",
+        "note": "Contraband in a cart of turnips. The guard likes turnips.",
+        "mechanic": "carry_contraband",
+        "mechanic_state": "needs_build",
+        "params": {
+          "route": "gate"
+        },
+        "payout_band": 4,
+        "risk": "mid"
+      },
+      {
+        "id": "sh24",
+        "category": "smuggle",
+        "rank": "A",
+        "min_hall_level": 5,
+        "title": "Out Through the Warren",
+        "note": "Move a crate under the north field and out the far side.",
+        "mechanic": "carry_contraband",
+        "mechanic_state": "needs_build",
+        "params": {
+          "route": "tunnel"
+        },
+        "payout_band": 6,
+        "risk": "mid"
+      }
+    ],
+    "crime_chronicle": {
+      "caught": {
+        "theft": [
+          "{hero} was caught lifting from {shop}. The guard has {hero}.",
+          "{hero} had a hand in {shop}'s till. The watch had {hero}'s collar.",
+          "{shop} saw it. {hero} is in a cell."
+        ],
+        "sabotage": [
+          "{hero} was caught at {shop}'s door with a tool. The guard has {hero}.",
+          "Someone had been at {shop}. They found {hero} by the mud on the boots."
+        ],
+        "poison": [
+          "{hero} was taken at the well with a vial. The town is not pleased.",
+          "The guard caught {hero} in the grain store. Nobody is calling it an accident."
+        ],
+        "raid": [
+          "{hero} was seen fighting with the raiders. The wall has {hero} now.",
+          "{hero} was taken on the wrong side of the gate."
+        ],
+        "smuggle": [
+          "{hero}'s cart was opened at the gate. The guard did not like turnips today.",
+          "{hero} was stopped on the east road with a sack. The sack was opened."
+        ]
+      },
+      "escaped": {
+        "theft": [
+          "Something is missing from {shop}. Nobody saw who.",
+          "{shop} counted twice and came up short."
+        ],
+        "sabotage": [
+          "{shop} found something broken this morning. Nobody saw who.",
+          "A hinge gave way at {shop}. It had help."
+        ],
+        "poison": [
+          "The well tastes wrong. The town is talking.",
+          "The stores are spoiled. The guard doubles the watch."
+        ],
+        "raid": [
+          "The raiders had a friend on the inside. The guard is asking who.",
+          "The gate was open when it should not have been."
+        ],
+        "smuggle": [
+          "A cart went out. A cart came back. The guard saw turnips."
+        ]
+      },
+      "alert": {
+        "low": "The watch is easy tonight.",
+        "mid": "The watch is walking in pairs.",
+        "high": "The watch is out in force. Bellmire is on edge."
+      }
+    },
+    "jail": {
+      "enter": [
+        "{hero} is put in a cell. The door is iron. The bench is cold.",
+        "The key turns. {hero} sits."
+      ],
+      "idle": [
+        "A drip. A rat. The guard whistling.",
+        "Three minutes is a long time in a cell.",
+        "The bench is the only furniture. {hero} has tried all of it."
+      ],
+      "confiscate": [
+        "Everything {hero} carried goes on the table. Gold to the treasury. Gear to the shops.",
+        "The guard empties {hero}'s pack. The town will use it well."
+      ],
+      "release": [
+        "The door opens. {hero} walks out lighter.",
+        "{hero} is let out. The guard says nothing. His look says enough."
+      ],
+      "safe_house": [
+        "A word to the right man and the cell is shorter.",
+        "Somebody at the Hall made a call. {hero} walks early."
+      ],
+      "stored_safe": [
+        "Everything in the Hall's boxes stays. Everything in the pack does not."
+      ]
+    },
+    "npc_refusal": {
+      "smith": [
+        "I'll not forge for you. I counted my swords.",
+        "Take it elsewhere. My iron is not for you."
+      ],
+      "tavern": [
+        "We're full. We're always full, for you.",
+        "Not here. Marta's orders."
+      ],
+      "apothecary": [
+        "I know who took the shelf. Out.",
+        "No potions for thieves."
+      ],
+      "general": [
+        "Shop is closed. For you it is closed.",
+        "The counter stays shut. Come back when you have earned it."
+      ],
+      "healer": [
+        "I'll not mend you today. Ask the Sexton.",
+        "The healer's hands are full. Of you, especially."
+      ],
+      "inn": [
+        "The room is let. Every room.",
+        "The innkeeper's not in. Not for you."
+      ],
+      "guard": [
+        "Move along. Now.",
+        "Do not make me find a reason."
+      ],
+      "rebuild": [
+        "Do a good turn and we'll talk.",
+        "One deed won't do it. A few might.",
+        "The board has notes. Take one."
+      ],
+      "returned": [
+        "Doors open, slowly. Don't push it.",
+        "Back in good graces. Do not waste it."
+      ]
+    },
+    "detection": {
+      "start": [
+        "{hero} slips toward {shop}. The street is quiet. Mostly.",
+        "{hero} waits for the lamp-lighter to pass."
+      ],
+      "slipped": [
+        "{hero} was out the door before anyone looked up.",
+        "Nobody saw. Nobody ever does, till they do."
+      ],
+      "close": [
+        "{hero} was a breath from caught. A cat saved them.",
+        "A shout. A lantern. {hero} was already gone."
+      ],
+      "spotted": [
+        "A cry goes up. {hero} runs.",
+        "The watch turns the corner. {hero} is too slow."
+      ],
+      "class": {
+        "rogue": "A rogue's hands are quiet.",
+        "barbarian": "A barbarian is not built for quiet.",
+        "default": "Quiet is a skill. Not every hero has it."
+      }
+    },
+    "guild_switch": {
+      "join_guild": [
+        "{hero} signs the Guild roll. The ink is dry by supper.",
+        "The Guild takes {hero}. A boot-room, a board, a fair day's pay."
+      ],
+      "join_shadow": [
+        "{hero} goes through the cellar door and does not come back the same way.",
+        "{hero} is a member of the Shadow Hall. It is not written down."
+      ],
+      "leave_guild": [
+        "{hero} hands back the Guild badge. The Guildmaster does not look up.",
+        "The Guild remembers {hero}'s name. It will remember it a while."
+      ],
+      "leave_shadow": [
+        "{hero} walks out of the Hall. Nobody stops them. Nobody forgets.",
+        "The Hall lets {hero} go. The Hall keeps a ledger."
+      ],
+      "rejoin": [
+        "Back again. That costs. Gold, and a little standing.",
+        "The door opens a crack. The price has gone up."
+      ],
+      "remembers": "The guild you left remembers. Coming back costs gold and standing.",
+      "both": "No hero stands in both. Pick a door."
+    },
+    "bounty": {
+      "assigned": [
+        "The Hall has a name for {hero}. Same rank. Same weight.",
+        "{hero} is given a name. The Hall does not say why."
+      ],
+      "warning": [
+        "A chill. Somebody is looking for you.",
+        "{hero} feels a stare in the dark. Wise heroes listen."
+      ],
+      "success": [
+        "{hero} came out of the scar alone. The mark did not.",
+        "The Hall is one name lighter."
+      ],
+      "defended": [
+        "{hero} was ready. The one who came for them was not.",
+        "An attempt, a fight, a hero still standing. The Guild will hear of it."
+      ],
+      "failed": [
+        "{hero} went in after a name and came out with a limp.",
+        "The mark was better than the Hall said."
+      ]
+    },
+    "hub_text": {
+      "title": "The Shadow Hall",
+      "subtitle": "Outside the walls. Better pay. Worse odds.",
+      "tier_label": "Hall level {n}: {name}",
+      "fund": "Put gold toward the next level. Every member benefits.",
+      "fund_progress": "{have} of {need} gold",
+      "storage": "Hall storage. Dearer than the town's. Safe from the guard.",
+      "board": "Jobs for those who ask no questions.",
+      "risk_low": "Low risk",
+      "risk_mid": "Some risk",
+      "risk_high": "High risk",
+      "pay_note": "Pays two to three times a Guild note. Jail takes everything you carry.",
+      "guild_card": "Guild: {name}",
+      "shadow_card": "Shadow Hall: {name}",
+      "not_member": "You are not a member. The Hall will not talk to you.",
+      "banished": "Banished. The Hall will have you. Nothing else will."
+    }
+  },
+  "_note_c255": "C-255: shadow_hall is the System 44 word set (Shadow Hall tiers, town standing, 24 criminal jobs, crime Chronicle, jail, NPC refusals, detection, guild switching, PvP bounty lines, hub text). Nothing reads it yet; the game build wires the engine half and the hub lane reads hub_text. No new data file."
 }

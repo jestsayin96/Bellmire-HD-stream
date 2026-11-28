@@ -8,8 +8,8 @@
     "enlist":    {"aliases": [], "args": "[class] [people]", "cost": "free", "needs_hero": false, "short": "Raise your hero: a calling and a people, either order. Leave either out and the valley picks.",
                   "what": "Raise your hero. Callings: knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock, bard. Peoples: human, elf, dwarf, halfling, orc, scarkin. Either order; leave either out and the valley picks.",
                   "example": "!enlist knight dwarf"},
-    "hero":      {"aliases": ["stats", "sheet", "me"], "args": "", "cost": "free", "needs_hero": true, "short": "Your hero's sheet.",
-                  "what": "Your hero's sheet: people and calling, rank, level, AC, HP, to-hit, abilities, saves, weapon and its dice, armour, potions, oil, gold, record, and any gear the dungeon wore, with what the smith wants to mend it.",
+    "hero":      {"aliases": ["stats", "sheet", "me"], "args": "", "cost": "free", "needs_hero": true, "short": "Your hero's sheet. On the hub too, under My Room.",
+                  "what": "Your hero's sheet: people and calling, rank, level, AC, HP, to-hit, abilities, saves, weapon and its dice, armour, potions, oil, gold, record, and any gear the dungeon wore, with what the smith wants to mend it. On the hub too, under My Room.",
                   "example": "!hero"},
     "rank":      {"aliases": ["ranked", "ladder"], "args": "", "cost": "free", "needs_hero": true, "short": "Your letter on the Adventurer's Guild ladder. On the hub too, under Guild Roll.",
                   "what": "Where you stand on the Adventurer's Guild ladder, F up to S, with the score behind it and what the next letter still wants. The floors you walked ALONE count heaviest - the ladder means to measure the player, not the party. Gear counts as it is carried, so a letter can go down as well as up. On the hub too, under Guild Roll.",
@@ -124,8 +124,8 @@
     "miniboss":  {"aliases": ["elite", "elites"], "args": "[name]", "cost": "free", "needs_hero": false, "short": "The 70 elites that hold a chamber alone, each by name.",
                   "what": "The 70 elites that hold a chamber alone, one to a chamber. Ask with no name for how many stand and how to ask; ask by name, or by the trade it keeps as its mark, for one of them: what it is called, what it was, and how it looks when you come through the door. Asking changes nothing - it only reports. Every line of their feed is on the hub.",
                   "example": "!miniboss Ordrik"},
-    "help":      {"aliases": ["commands"], "args": "[command]", "cost": "free", "needs_hero": false, "short": "The command list; !help <command> for one in detail.",
-                  "what": "The command list; !help <command> for one in detail.",
+    "help":      {"aliases": ["commands"], "args": "[command]", "cost": "free", "needs_hero": false, "short": "The command list; !help <command> for one in detail. On the hub too, under Commands - gear and errands are managed there.",
+                  "what": "The command list; !help <command> for one in detail. The same list is on the hub, under Commands. Chat is for talking and for the short commands; gear, the satchel, the counters and your party are managed on the hub, in your own room at the inn.",
                   "example": "!help forge"}
   },
   "ask": {

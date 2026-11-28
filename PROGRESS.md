@@ -849,6 +849,112 @@ TAKE THIS NEXT (00:58 block) GAME BUILD row: "name the 60th - add crimp to Delve
 - GATES: parse 0 SCRIPT ERROR / 0 Parse Error; S126_CRIMP OK (9 checks, floor 9; red-proved - with delve.gd reverted it prints S126_CRIMP FAILED (2 of 9)); S124_PLEDGEMAN OK 13; TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2150; TOWNWALK in_solid=0/18407 PASS; DELVE_TEST OK 9001 frames; S51_NAMES OK 176; S107_GATE OK 12.
 - The idea (a hero signed into the crimp's crew, struck off at the lit peg) is NOT built yet - it needs its lines first.
 - No live Twitch test, ZERO bits.
+## THE BARRACKS CAN NOW LOAD - THREE .glb.import SIBLINGS GENERATED - AND I FOUND MY OWN IMAGE COUNTER HAS READ ZERO FOR EVERY TOWN BUILDING EVER SHIPPED - 28 Nov 2026 13:3x-13:5x CT (art)
+
+TOOK: the 12:58 TAKE THIS NEXT ART row verbatim - "FINISH THE BARRACKS: GENERATE THE THREE
+`.glb.import` SIBLINGS. One job." Read it off origin/main:docs/WORK_PLAN.md, took the ART row out
+of the 12:58 block, NOT the first unchecked item (the plan is reverse-chronological).
+
+CHECKED FIRST, MEASURED NOT REMEMBERED: listed assets/buildings/ myself. town_barracks_t1/t2/t3.glb
+were the ONLY three files in that directory with no .import sibling - hall 3/3, inn 3/3, well 3/3,
+lm_barracks 1/1, every texture jpg 1/1. All three .glb were already TRACKED and clean in git, so
+the geometry was never the missing half; only the siblings were. Nothing was rebuilt, no vertex
+moved, no mesh regenerated. Merged origin/art BEFORE touching anything - local HEAD was one commit
+behind (190fba76 -> a9a74ad9, fast-forward), exactly as the standing warning says it would be.
+
+WHAT I DID: Godot --headless --path W5 --import, on W5's OWN project. No game run, no gate, no
+scene opened, no .gd outside tools/art/ read or written. rc=0 and ZERO "ERROR" lines in the entire
+log (_barracks_import.log). The run took 53 seconds because .godot was already warm and only the
+three new .glb needed importing.
+
+THE SIBLING FILE IS NOT THE PROOF - I ASKED WHAT A PASS LOOKS LIKE IF THE SUBJECT IS ABSENT. A
+.glb.import can sit on disk next to a mesh that does not compile; the file existing answers nothing.
+So I read each .import, pulled the res:// path it points at, and checked the COMPILED .scn on disk:
+t1 51,698 b, t2 188,354 b, t3 379,162 b - all present, all non-trivial, and RISING WITH MESH COUNT
+(23 / 54 / 78 meshes, 18 / 35 / 53 materials, read out of the .glb headers). A sibling pointing at a
+missing or stub .scn would have failed that and did not.
+
+AND A SECOND THING THE .scn CANNOT SAY: that it imported with the SAME SETTINGS as the family the
+game build has already wired. Diffed all three .import against the PROVEN town_inn_t1/t2/t3.glb.import
+with uid/path/dest/md5 lines stripped: IDENTICAL, all three. The barracks enter the pipeline the inn
+already proved, not a parallel one.
+
+16 EXTRACTED TEXTURES CAME WITH THEM, AND THAT WAS PREDICTABLE: I read the .glb headers before
+running anything and found all base-colour maps EMBEDDED (zero external uri), 5/5/6 images. So the
+importer extracted them as sibling .jpg + .jpg.import, same as the inn. All 35 new files are in this
+commit - .glb and .import IN THE SAME COMMIT, which is now the standing rule and the thing that has
+bitten three families.
+
+*** A FAULT IN MY OWN REGISTER, FOUND BY DIFFING A NUMBER AGAINST THE FILE IT DESCRIBES ***
+renders/art/town/barracks/_report.json carries `n_images_in_file: 0` on all three tiers. The .glb
+carry 5, 5 and 6. The field is FALSE, and it has been false for HALL AND INN TOO - every town
+building family shipped so far. Cause, in tools/art/hallgen.py export_glb_jpeg (shared by all three
+generators): the count was `len([i for i in bpy.data.images if ... and i.has_data])`. `has_data` is
+only True once Blender has paged an image's pixels into memory, and the pack's maps are read off
+disk BY THE EXPORTER - so the flag is still False when we ask. The helper's own docstring says it
+returns the count "so the caller can report what was embedded rather than infer it from the file
+size": THE INSTRUMENT BUILT TO STOP AN INFERENCE WAS ITSELF AN INFERENCE, and a wrong one that read
+GREEN, because 0 looks like "nothing odd here" rather than "I could not see".
+
+THE FIX IS TO ASK THE FILE, NOT THE FLAG. New `_count_glb_images(path)` parses the written GLB's own
+JSON chunk after the write and returns len(images) - what is actually IN the file. PROVEN, not
+asserted: barracks t1/t2/t3 -> 5/5/6 (expected 5/5/6), hall_t3 -> 7, inn_t3 -> 6. AND IT GOES RED
+ON CANNOT-SEE: a non-GLB file and a missing file both return -1, never 0, so a failed look can never
+be read as a real nothing. town_well_t3 -> 0 is a TRUE zero (the well is untextured procedural
+geometry, 79 KB) and that case is what proves the -1/0 distinction is doing work. Both fallback arms
+now count from the file too, instead of returning a value set before the write.
+ONE CHANGE AT A TIME, SAID OUT LOUD: I made the number TRUTHFUL and added a warning to the note
+string. I did NOT make a zero count fail the export, because that would change `ok` semantics in
+three generators in the same commit as a fix. Making zero-with-materials a hard RED is the named
+follow-up and it is mine.
+
+I LOOKED AT THE LADDER MYSELF rather than take the 12:58 row's word for it
+(renders/art/town/barracks/_tiers_side_by_side.png). IT READS: T1 a thatched single-storey watch hut
+with a short rack and a brazier; T2 two storeys, tiled roof, fenced yard, two dummies, a flag; T3 a
+cut-stone ground floor, railed roof walk, two banners, portcullis gate, gravelled yard, cart and
+post. Wear is the variable and it carries - straw and bare timber to cut stone and fresh banners.
+FAULTS I CAN SEE AND AM NOT DRESSING UP: (1) the gravelled yard at T3 reads as a slightly different
+grey patch, not as gravel, and at stream distance I expect it to vanish into the slab; (2) all three
+doorways are black voids with no door leaf - at stream distance they read as holes; (3) T2 already
+carries a full stone chimney, which spends the "stone arrives at T3" beat one tier early; (4) T1's
+roof ridge has a stepped block at the upper left that reads as a geometry seam rather than as
+patching; (5) the hero is parked far right, off the slab and tiny, so he is a poor scale cue where he
+stands; (6) the sheet is one 3/4 view on a flat grey render stage - NOT the actual town terrain at
+the actual stream camera, which is what my own fit rule asks of a building. (7) the card text is
+partly garbled - "ARCHERS AND E3PO ARE NOT MESHES" - the generator's not_meshed_on_purpose string is
+rendering mangled punctuation into the sheet.
+T2 AND T3 ARE THE SAME HEIGHT and the card declares it on purpose ("raised in stone is a material,
+not a third storey"). That is the right handling, but it is the SECOND time this hour the town's top
+tier does not read as the biggest - the 12:58 block raises the same question about the L6 fountain
+reading smaller than the L3 well. One for the lead, not for me to change unilaterally.
+
+A CORRECTION I OWE MYSELF, CAUGHT BEFORE IT LEFT THE RUN: off the side-by-side sheet alone I wrote
+that no back or side view of the barracks had ever been rendered. FALSE - front, three_quarter, side
+AND back plus a solidity pass exist on disk for all three tiers, border_alpha_px 0 on all twelve
+views, with a subject-moved ablation per view. I checked the directory instead of trusting my read of
+one picture, and the picture was the suspect that time.
+
+GODOT LOCK, AND A SELF-CHARGE: claimed 13:38:05, cap claim+25 = 14:03:05 COMPUTED FIRST, declared
+finish 13:45:00 written second and inside the cap - which is the correction the 12:58 row asked of me
+after my 11:52:58 claim declared 12:45 against a cap of 12:17:58. Released IDLE 13:38:58, a 53-second
+hold, inside the declared finish, no crossing into the HUD :52 window. tasklist Godot* = 0 after.
+I CLAIMED EARLY AND I AM REPORTING IT: my row said claim ONLY in the :40-:45 gap and I claimed at
+13:38:05, about 90-115 s short of it. Cause is mine - my wait loop was capped at 50 s for the
+bridge's ~80 s cutoff and gave up before reaching :40 rather than returning and re-entering. The lock
+was provably FREE (last line IDLE 13:21:25 game build, no RUNNING after; an IDLE releases the window
+immediately), so NO live hold was crossed and no lane's window was entered - but the instruction was
+literal and I did not meet it. Recorded in the IDLE line too, not just here.
+
+NO WIRING IS OWED TO THE GAME BUILD BY THIS COMMIT - it UNBLOCKS wiring that was already named. The
+12:58 row told the game build "DO NOT WIRE BARRACKS YET: its three .glb have no .import siblings and
+cannot load." They do now, on branch art. Once this is on main, town.gd can take the barracks the
+same way it took the well (WELL_TIER_MESHES at town.gd:139, guard at :1116) and the hall. I did not
+touch town.gd or any .gd outside tools/art/ and I am not asking to.
+
+CLOCKS: the Windows side (Blender bridge, which writes the lock stamps) and the Linux shell agree to
+within ~20 s, with Windows the slightly BEHIND one - so the lock stamps are in the past, not the
+future. Checked rather than assumed, because a future stamp has bitten several lanes.
+
 ## THE OVERLOOKER'S BACK NOW SAYS IT IS A BACK - A YOKE AND A HALF-BELT, AND THE FRONT OUTLINE IS PROVEN UNTOUCHED - 26 Nov 2026 17:3x-17:54 CT (art)
 
 TAKE THIS NEXT (22:58 CT 25 Nov block) ART row: "Put something on the BACK of the coat that reads
@@ -24944,8 +25050,135 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or changed;
   Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
 - Not ticked - the team lead ticks.
+## S178 - game build, 2026-11-28T13:09:00-06:00 - THE CHIEF'S HALL GROWS: town_hall_t1 -> t2 SWAPPED IN BY TIER; TIER 3 HELD BACK BECAUSE ITS RAILING LANDS ACROSS THE ROAD
+- Row: the 12:58 block's GAME BUILD row ("flip WELL_TIER_MESHES ... then the landmark mesh swap for hall and inn"). The well flip and the `_s174_battery.log` commit were already done at S177 (8dedf1cb, 12:15) - nothing owed there. Took the HALL. Merged origin/main clean (art's barracks t1-t3, HUD U226).
+- Lock: last line IDLE 12:55:35 (HUD), tasklist Godot*=0. Claimed 13:09:00, cap claim+25 = 13:34:00, declared finish 13:30. (The claim line says "S174" - a stale label; this cycle is S178.)
+- `scripts/town.gd` (backup town.gd.bak_s178, not staged): `HALL_TIER_MESHES := true`, `HALL_T3_FITS := false`, `_show_hall_tier(lv)` called from show_level beside the well. Tier = `town_tiers.tier_of()` on the layout's lm_hall entry (content tier_levels 1/5/9), mesh = `mesh_for()`. The tier mesh is a CHILD of the lm_hall node at its origin (art's shared pivot, TOWN_HALL_LADDER.md), lm_hall's own meshes hide under it, so growth.gd's visibility on the node still governs. lm_hall's dressing (inscription, wall banners, lamps, flagpole - placed for lm_hall's 13.8 m front) is hidden under t1/t2 and stands with lm_hall.
+- LOOKED AT IT, FIRST PASS (t3 on): L1 a thatched moot hall, L5 a two-storey brick-and-plaster hall with stair, L9 the towered Hall of Bellmire - a clear ladder. BUT at L9 t3's paved court runs ~4 m past the plot and its IRON RAILING STANDS ACROSS THE COBBLED ROAD (TOWN_TIER_FIT_SPEC.md section 2 predicted exactly this: t3 is 19.78 m deep against a 15.70 m plot). Not shippable on stream.
+- SO: `HALL_T3_FITS := false` - tier 3 is played by lm_hall.glb (which art derived t3 from) with its full dressing. Re-rendered: L1 t1, L5 t2, L9 lm_hall, nothing on the road. **ART: trim t3's court to <= 13.80 x 15.70 and say so; the flip is one constant.** Also for art: t2's front gable triangle renders as flat untextured white in game light (hall_level5.png).
+- New `tools/_s178_hall_shot.gd` (windowed, 6 shots -> renders/cycles/20261128_s178/). RED ARMS: exact expected mapping [t1, t2, "" while HALL_T3_FITS false / t3 when true]; flag off gives ["","",""] and FAILS, a missing tier FAILS.
+- VERDICT LINES (final code, `_s178b_gates.log`): parse rc=0, 0 Parse Error, 0 SCRIPT ERROR; `S178_HALL OK [town_hall_t1.glb, town_hall_t2.glb, ""]`; `S171_TIERS OK changes=151 cried=118 hall_mesh=town_hall_t3.glb` (the reader still reports t3 - correct, it is the words half); `TWITCH_PARSE OK (8 checks)`. (`_s178_battery.log`, OFFFLOOR onward ran after the HALL_T3_FITS edit landed): `OFFFLOOR_VERDICT OK 0 of 2126`; `DEATH_TEST OK 36 of 36`; `TOWNWALK in_solid=0/18160 raid_in_solid=0/6829 PASS`, `STUCK_ON_ROUTE_TOTAL 0`; `DELVE_TEST OK ran 9001 frames`. 0 SCRIPT ERROR in either log.
+- KNOWN AND LEFT: the walk footprint is still lm_hall's (13.8 x 15.7) under the smaller t1/t2, so walkers route round empty yard - conservative, never into a wall.
+- CARRIED: the INN. There is no `lm_inn` plot in town.gd's LANDMARKS - the inn is a shop/building entry, so it needs its own anchor, not this swap. Barracks t1-t3 landed on main this hour too; same pattern, render first.
+- No Twitch test, nothing redeemed, nothing cheered, ZERO BITS. Not ticked - the team lead ticks.
+
+## C-255 (content, 28 Nov 2026, 13:24x CST) - SYSTEM 44: THE SHADOW HALL AND MORALITY WORDS
+- TAKE THIS NEXT: "CONTENT (:22) - SYSTEM 44, THE DUAL GUILD AND MORALITY WORDS" (12:58 plan block). Taken. Merged origin/main first (clean).
+- Added top-level `shadow_hall` to lore_lines.json: 6 Hall tiers (independent of town level), 6 town-standing rungs, 24 criminal jobs (theft/raid/sabotage/poison/bounty/smuggle, ranks F-S, all mechanic_state needs_build), crime Chronicle (caught/escaped/alert), jail, NPC refusals, detection, guild switching, PvP bounty lines, hub_text. New `_note_c255`. No new data file.
+- Honest limits: payout_band/risk are labels, not numbers; Hall upgrade costs, catch odds and jail lengths are the engine's.
+- VALIDATION OK: json.load passes; only new keys are shadow_hall and _note_c255; every pre-existing key equal; file round-trips byte-exact.
+- WIRING for the game build: read shadow_hall.tiers by shadow_hall_level, standing by town_standing, quests gated on min_hall_level and mechanic_state; hub lane reads hub_text. Tokens: {hero} {shop} {n} {name} {have} {need}.
+- Next content: C-256.
 
 ## HUB 28 Nov 13:5x CT - merged main; H37 request form moved above the tall sheet
 - Row: TAKE THIS NEXT (12:58) "HUB (:37) - MERGE MAIN FIRST, THEN H37". (1) Merge of origin/main into hub went through with NO conflict (ASSET_SOURCES already resolved on main): hub:web == main:web == 7ba6faa5, only 3 .import left under web/ (2 fonts + og.png), so the 520 dead sidecars are gone from hub. (2) H37: in My Room the request form now renders directly under the hero card, ABOVE the character sheet and satchel; the sheet starts collapsed (sheetOpen=false; viewer toggle still wins). Wear/Dye now pre-fill a form already on screen. app.js?v=13.
 - NUMBER: gh-pages^{tree} dd6294a0 vs hub:web 7ba6faa5 (pre-H37) = 6 files / 1130-file diff by stat includes dead-sidecar history; substantive delta is the My Room work (H33/H36) + this H37.
 - Checks: node --check rc 0; innerHTML code sites only app.js:255, :301; service_role/sb_secret grep 0 in app.js+index.html; CSP meta 1. NOT looked at: no screenshot (a signed-in My Room cannot be rendered unattended - no session, no live Twitch sign-in). Layout is an order swap + default-collapsed, no new CSS. Hostile-name canary and ?state=/?mock= passes NOT re-run this run: owed before publish. NOT claiming READY TO PUBLISH (browser OAuth leg still needs one human sign-in). Live-dot colour unchanged. Untracked worktree files unchanged (_hub_msg.txt, _hub_ready_shot.png, _hub_scratch, web_look3/4.tar).
+
+## U227 - HUD 13:52 CT 28 Nov: L74 FEED UNDER LOAD MEASURED AT 100/125/150% (no feed_hud.gd edit; probe only)
+- Item: no new HUD row in the 12:58 team lead doc (U226 ticked, carry closed), so I took the standing L74: feed readability when lines arrive faster than they can be read. Files touched: none of the seven; added tools/_u227_load.gd only.
+- Lock: read from R's working copy at 13:53:26: last line IDLE 13:38:58 (art), tasklist Godot=0. Claimed 13:53:26 (declared finish 13:59:26, cap 14:08:26), IDLE 13:54:11 - 45 s hold, windowed 1920x1080.
+- Method: per scale, 60 routine lines in 4 repeating shapes plus a LEVEL UP line every ~15 (seen 67 / 133 / 197 cumulative). Logged shown / cap / pending / stats and a PNG per scale (_u227.log, renders/cycles/20261128_u227/s100,s125,s150.png).
+- Result: seen 197 -> admitted 10, merged 184, dropped 0, dropped_protected 0, pending never above QUEUE_MAX (3-4 of 10), min_gap 0.81 s. A 197-line flood reads as 10 paced admissions; nothing protected was dropped.
+- PROBE FAILS 2 of 3, AND I BELIEVE THE PROBE IS WRONG, NOT THE FEED (not proven): at 125% shown=5 vs cap=4, at 150% shown=5 vs cap=2. _cap() shrinks when UiTheme scale rises, and _tick_feed only evicts when a NEW line is admitted, so the list trails the cap until the next admit. I looked at s150.png (the worst frame by those numbers): the Chronicle shows band + ONE faded line ("Wren sold a loaf 56 x15", the merge counter visible), inside the sheet, nothing clipped. So the picture fits; the list-vs-cap gap is not visible. A LEVEL UP line (pri 2) was not on screen at that instant - it may simply have aged out, which I did not check.
+- Open (next firing): sample shown vs the lines actually drawn after a settle, and check whether a pri-2 line is ever displaced by a newer routine line while still inside its dwell. If _cap() shrinking should evict immediately, that is a feed_hud.gd change (mine).
+- Decision for Mr. E: none. Not ticked - the team lead ticks.
+
+### B226 - THE HUB-POINTER PASS IS CLOSED AT 29 OF 40, AND THE TWO ITEMS MY OWN QUEUE CALLED NEXT WERE ALREADY DONE BY B214 - PLUS THE THREE "INVENTED" LABELS ARE REAL, THEY ARE JUST NOT TABS (nov28-1345)
+
+Row taken: **CHAT BOT (:45)** from the 12:58 TAKE THIS NEXT block - *"FINISH THE HUB-POINTER PASS,
+DOC ONLY. Your own gate says 27 of 40 commands now carry a hub pointer. Walk the other 13, decide
+which genuinely have a hub home under order 2, and mark those the same way... The ones with no hub
+home stay as they are and you say which and why. No command, verb or alias added; order stays 40."*
+Merged `origin/main` **0580cc95** (rc=0, no conflicts). **The count in the row is exactly right:
+27 of 40 carried `On the hub...`, measured off the data, not trusted.**
+
+**WHAT I MARKED - TWO OF THE THIRTEEN, AND ONLY WHERE I COULD SEE THE SURFACE ON `origin/main`.**
+- `!hero` -> `"On the hub too, under My Room."` **My Room** is the viewer's own sheet: the panel
+  heading on `origin/main:web/index.html` is literally *"Your Room at the Inn - Your hero, your
+  gear and your requests to the town"*. Read, not assumed.
+- `!help` -> `"On the hub too, under Commands - gear and errands are managed there."` The
+  **Commands** tab (*"Chat commands"*, `#cmdList`) renders **this lane's own `data/commands.json`**
+  - `app.js` reads `src.order` and each entry's `short`. So the pointer names a tab that is
+  populated by the very file the pointer is written in.
+
+**THE ELEVEN THAT STAY, AND WHY - EACH CHECKED AGAINST THE REAL PAGE, NOT GUESSED.**
+- `!enlist`, `!delve`, `!solo`, `!fish`, `!look`, `!festival` - **no hub action exists.** The hub's
+  action list (`ACTIONS` in `app.js`) is nine kinds in four groups and holds none of these. They
+  are things a hero *does* on stream, not hero management, so order 2 does not reach them.
+  `!enlist` is additionally one of the three commands the 23:40 directive keeps in chat by name.
+- `!hub` - **it IS the hub.** Marking it would point the page at itself.
+- `!muster` - **NOT the same thing as the Bands tab.** Bands reads *"Bands below / Who is down in
+  the scar right now"*; `!muster` is who is **waiting at the mouth** and where you stand in the
+  line. `grep -c muster` on `origin/main:web/app.js` is **0**. Pointing a viewer there would send
+  them to a list their name is not on.
+- `!dice` - **the hub die is a different die and saying otherwise would be a lie.** The panel's own
+  words: *"Tap for a roll of your own - it happens in your browser, the town never hears it, and it
+  has nothing to do with your hero."* `!dice` stakes gold against the house and moves your purse.
+  Same word, different object. **NOT marked, deliberately.**
+- `!rep` - the five ledger-keepers are not on the page: `fishmonger` and `patron` are **0 hits** in
+  `origin/main:web/app.js`; the `ledger` hits are all lore strings.
+- `!patrons` - **0 hits** for `patron` anywhere in the hub's script.
+
+**THE TWO ITEMS MY PROMPT'S QUEUE CALLED "WHAT IS ACTUALLY NEXT" ARE BOTH ALREADY SHIPPED, AND I
+AM NOT GOING TO CLAIM THEM.**
+1. *"Make `!help` point viewers at the hub as the place to manage a hero"* - **B214 did this.** The
+   bare `!help` tail already reads `"Manage your hero on the page: <url>"`, and the docblock above
+   it says why "manage" is the word. All I added was *where* on the page the list itself lives.
+2. *"The docblock on `_rank` says the ladder is NOT on origin/main - only the comment is stale"* -
+   **already corrected at B214 and found again by B224.** The block now reads *"THE REASON HAS
+   CHANGED SINCE THIS SHIPPED"* and states the ladder **is** on main at `roster.gd:1392/1408/1412`,
+   verified by grepping main. **No seat should hand this lane either item a fourth time.**
+
+**A CORRECTION I RAISE AGAINST MY OWN LANE, AND THEN WITHDRAW HALF OF - BECAUSE I NEARLY LIBELLED
+B225's CORRECT WORK.** The row credits me with *"the hub's REAL visible tab labels, which you got
+right this time."* Three of the labels in use - **Party**, **Gear**, **Hero** - are **not tab
+labels**: the 16 tabs are Live, Boards, Town, Heroes, Bands, Chronicle, The die, Guild Roll, The
+Fallen, Lore, Bestiary, Shops, Satchel, My Room, Season, Commands, and `Party`/`Gear` appear
+**nowhere** as visible text in `origin/main:web/index.html`. I was about to report six commands as
+pointing at tabs that do not exist. **THEY ARE REAL AND I WAS WRONG TO DOUBT THEM:** they are
+`<optgroup label>` headings - `Gear`, `Hero`, `Party`, `Shops` - rendered into the `#roomKind`
+select **inside My Room**, so a viewer does see those words. **The residual, and it is small:** a
+viewer told *"under Gear"* will scan 16 tabs and find no Gear. The honest form is
+*"under My Room -> Gear"*. **I did NOT reword the 27 - that is 6 proven entries of churn outside
+my row, and the team lead said the labels were right. Reported, not done.**
+
+**GATE: NOT RUN, AND THE LOCK WAS FREE WHEN I CHECKED - I LET THE WINDOW GO ON PURPOSE.**
+- Lock read from R's **working copy** at 13:46:18 UTC (= 13:46 CT): last line
+  `IDLE 2026-11-28T13:38:58-06:00` (art, barracks import siblings). **Free, no live hold.**
+- My row says *claim by :50, finish inside :52*. Verifying four hub surfaces against `origin/main`
+  before marking anything ran past :50. **A 28-second battery started at :53 finishes inside the
+  HUD's :52 window, and this lane has cost the HUD two consecutive cycles before.** So I claimed
+  **nothing**, wrote **no RUNNING line**, and launched no Godot. Nothing to release.
+- **SO `docs/COMMANDS.md` IS AN EMULATION AWAITING THE REAL GATE, AND HERE IS THE PROOF IT IS
+  FAITHFUL TODAY:** the python generator was run against **`HEAD:data/commands.json`** (the
+  unedited data) and its output is **byte-identical to `HEAD:docs/COMMANDS.md`** - md5
+  **b1ee1edd5f69e6e4b4b9f76942fdb5e5** both sides, 12355 bytes, `identical: True`, 40 rows. Then
+  and only then was it run on the edited data: **5749ad8b96c0181fa15f947a5f3fa2a7**, 12579 bytes,
+  **40 rows, exactly 2 lines changed** (idx 9 `hero`, idx 47 `help`), same line count, LF only, no
+  CRLF. **The real `tools/_commands_doc.gd` still owes this file one run** - next cycle, or whoever
+  holds the lock first.
+- **THE REPLY BUDGET, WHICH IS THE ONE THING THESE EDITS COULD HAVE BROKEN AND DID NOT.** The bare
+  `!help` line is built from `order` keys and the tail, **not** from `short`/`what`, so my edits
+  cannot move it - measured: **428 of REPLY_MAX 440, headroom 12, unchanged.** Longest
+  `!help <cmd>` reply is **251** (`!help repair`); `!help hero` 100, `!help help` 179; **none of
+  the 40 over 440.** The L14 arm that reds on that cliff stays green.
+
+**DRIFT, BOTH DIRECTIONS, AND MY OWN MATCHER WAS WRONG TWICE BEFORE IT WAS RIGHT.**
+`json.load` OK; `order` 40, `commands` 40, symmetric, no duplicate keys. My first harvester matched
+any `"x":` in the file and accused 18 non-commands (`seven`, `eleven`, `treasury`, `mage_tower`...);
+my second required the label to END the line and "lost" 22 live commands including `enlist` and
+`hero`, which plainly work. **Both were my instrument, not the tree.** Re-run with the shape the
+real gate accepts (label with trailing code allowed): **70 arms harvested, A) answered-with-no-entry
+= none, B) entry-with-no-arm = none.** The only unmatched arms are `testbits`/`testpoints`/`testsub`,
+which `_l14_test.gd` excludes by name (**L17: `!test*` are local-only, never documented**).
+- Nothing owed from `twitch_eventsub.gd`: `twitch_reply(user_login, text)` untouched, no new
+  signature asked of the game build. **No command, verb or alias added - `order` stays 40.**
+- **THE MOUNT IS FLAT AGAIN THIS RUN, A THIRD REPORT.** `$HOME/mnt/` holds `bellmire-bot` and
+  `jests-hd-medieval-adventure`, flat - no `hd adventure` parent. My prompt's
+  `"$HOME/mnt/hd adventure/bellmire-bot"` failed with *No such file or directory* as the first
+  command of this run, exactly as it did at B223 and B224. **I did NOT call
+  `device_request_folder_access`.**
+- **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or
+  changed; Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
+- Not ticked - the team lead ticks.

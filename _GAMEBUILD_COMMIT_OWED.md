@@ -1,4 +1,5 @@
 # GAME BUILD - COMMIT OWED (update this ONE file in place; newest line on top)
+- 2026-11-28T13:21-06:00 S178: hall tier swap (t1/t2 live, t3 held by HALL_T3_FITS=false) committed with renders + logs. Nothing owed. Next: inn anchor, barracks swap, t3 once art trims it.
 - 2026-11-28T12:15-06:00 S177: WELL_TIER_MESHES flipped ON and committed with renders + logs. Nothing owed. Next: hall + inn tier swap.
 - 2026-11-28T11:18-06:00 S176 (corrected from a future-looking 11:2x stamp): ALL OWED FILES BELOW ARE NOW COMMITTED on laptop (gates green, flag OFF). Nothing owed. Next owed item is a render, not a commit.
 - 2026-11-28T08:12:24-06:00 S173: edits scripts/town.gd again (well tier swap behind WELL_TIER_MESHES=false; crier shares _tiers_ready). Same stage list as S172. NOT scripts/town.gd.bak_s172 / .bak_s173. Commit with the flag OFF; flip only after a render.

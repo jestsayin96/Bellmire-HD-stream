@@ -3,7 +3,7 @@
   "hub_url": "https://jestsayin96.github.io/Bellmire-HD-stream/",
   "cooldown_s": 1.5,
   "twitch_cooldown_s": 3.0,
-  "order": ["enlist", "hero", "catchup", "inventory", "weapon", "armour", "delve", "muster", "party", "solo", "fish", "forge", "armoury", "brew", "repair", "oil", "wear", "dye", "reroll", "respec", "paths", "specialize", "guild", "rep", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "hub", "satchel", "caravan", "festival", "dice", "town", "bestiary", "miniboss", "help"],
+  "order": ["enlist", "hero", "rank", "catchup", "inventory", "weapon", "armour", "delve", "muster", "party", "solo", "fish", "forge", "armoury", "brew", "repair", "oil", "wear", "dye", "reroll", "respec", "paths", "specialize", "guild", "rep", "memorial", "deepest", "deadliest", "richest", "patrons", "look", "hub", "satchel", "caravan", "festival", "dice", "town", "bestiary", "miniboss", "help"],
   "commands": {
     "enlist":    {"aliases": [], "args": "[class] [people]", "cost": "free", "needs_hero": false, "short": "Raise your hero: a calling and a people, either order. Leave either out and the valley picks.",
                   "what": "Raise your hero. Callings: knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock, bard. Peoples: human, elf, dwarf, halfling, orc, scarkin. Either order; leave either out and the valley picks.",
@@ -11,6 +11,9 @@
     "hero":      {"aliases": ["stats", "sheet", "me"], "args": "", "cost": "free", "needs_hero": true, "short": "Your hero's sheet.",
                   "what": "Your hero's sheet: people and calling, rank, level, AC, HP, to-hit, abilities, saves, weapon and its dice, armour, potions, oil, gold, record, and any gear the dungeon wore, with what the smith wants to mend it.",
                   "example": "!hero"},
+    "rank":      {"aliases": ["ranked", "ladder"], "args": "", "cost": "free", "needs_hero": true, "short": "Your letter on the Adventurer's Guild ladder.",
+                  "what": "Where you stand on the Adventurer's Guild ladder, F up to S, with the score behind it and what the next letter still wants. The floors you walked ALONE count heaviest - the ladder means to measure the player, not the party. Gear counts as it is carried, so a letter can go down as well as up.",
+                  "example": "!rank"},
     "catchup":   {"aliases": ["mystory", "since"], "args": "", "cost": "free", "needs_hero": false, "short": "What your hero did while you were away, in a line.",
                   "what": "What happened to your hero while you were away: what they did, how it went, and where they stand now. One line, kept short on purpose - the Chronicle of every day in full, and the sheet behind it, are on the hub.",
                   "example": "!catchup"},

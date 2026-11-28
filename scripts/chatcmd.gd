@@ -194,6 +194,8 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
                     out = _party(user_id, arg, arg2)
         "solo", "alone":
                     out = _solo(user_id)
+        "rank", "ranked", "ladder":
+                    out = _needs(user_id, func(): return _rank(user_id))
         "fish":     out = _needs(user_id, func():
                         wants_fish.emit(user_id)
                         return "%s heads for the docks with a rod." % roster.get_hero(user_id)["name"])
@@ -576,6 +578,30 @@ func _solo(user_id: String) -> String:
             % roster.get_hero(user_id)["name"]
     wants_solo.emit(user_id)
     return "Sent word. Watch the feed."
+
+## S43 (DIRECTIVE sup-nov27-1856): !rank - the S-F adventurer ladder, READ ONLY. The letter is the
+## ENGINE'S to compute and this command never recomputes it: roster.gd:1362-1425 (game build S167)
+## holds LETTER_W, LETTER_RANKS, letter_score(), letter_rank() and letter_next(), and a second copy
+## of those weights living in this file would drift the hour the engine retuned one of them. So
+## this asks the sheet-holder and only words the answer. The directive asks !rank for three things
+## and this says exactly those three: the letter, the composite score, and what the next letter
+## still wants.
+## GUARDED BY has_method, DELIBERATELY: the ladder is on `origin/laptop` at a296a7b4 and is NOT on
+## `origin/main` as this lands. On main `roster` answers none of these three calls, and an
+## unguarded call would take the whole handler down for every viewer who typed it. It degrades to
+## one plain line instead - the same shape town.gd:5363 used on me, guarding `wants_solo` with
+## has_signal while the other half was in flight.
+func _rank(user_id: String) -> String:
+    if not roster.has_method("letter_rank"):
+        return "The Guild has not posted the ladder yet."
+    var h := roster.get_hero(user_id)
+    var letter := String(roster.letter_rank(h))
+    var score := int(roster.letter_score(h))
+    var nx: Dictionary = roster.letter_next(h)
+    if nx.is_empty():
+        return "%s stands %s. %d points. Nothing stands above it." % [h["name"], letter, score]
+    return "%s stands %s. %d points. %d more for %s." \
+        % [h["name"], letter, score, int(nx["need"]), String(nx["letter"])]
 
 # Oil is the cheapest thing on the board and the one most worth buying. A
 # viewer who keeps three flasks in the satchel will out-live a better-armed

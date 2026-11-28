@@ -118,6 +118,11 @@ const AMB := ["Zed_the_Tall rolls 3 to the house's 5 - the tavern keeps 120 gold
 const AMB_OLD := ["Wolfgang_Amadeus_Mozart_X - a city in all but charter plays for 300 gold at most. The stakes rise as the town does.", "Wolfgang_Amadeus_Mozart_X puts down 99999 gold they do not have - 12345 in the purse.", "Wolfgang_Amadeus_Mozart_X lays 300 gold on the table and dares Hildegard_von_Bingen_Qwer1 to throw. (!dice accept)", "Wolfgang_Amadeus_Mozart_X rolls 3 to the house's 3 (the house wins ties) - the tavern keeps 300 gold.", "Wolfgang_Amadeus_Mozart_X rolls 6, Hildegard_von_Bingen_Qwer1 rolls 6 after a tie - Hildegard_von_Bingen_Qwer1 takes the pot of 600 gold.", "Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 - a city in all but charter plays for 300 gold at most. The stakes rise as the town does.", "Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 rolls 6, Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 rolls 6 after a tie - Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1 takes the pot of 600 gold."]
 const HOSTILE := ["Wolfgang_Amadeus_Mozart_Hildegard_von_Bingen_Longname_XXXXXX1", "\u30c9\u30e9\u30b4\u30f3\u30b9\u30ec\u30a4\u30e4\u30fc\u30c9\u30e9\u30b4\u30f3\u30b9\u30ec\u30a4\u30e4\u30fc\u30c9\u30e9\u30b4\u30f3\u30b9\u30ec\u30a4\u30e4\u30fc\u30c9\u30e9\u30b4\u30f3\u30b9\u30ec\u30a4\u30e4\u30fc\u30c9\u30e9\u30b4", "\u0412\u0415\u041b\u0418\u041a\u0418\u0419_\u041c\u0410\u0413_WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW", "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"]
 
+const DW_A := ["miller","cooper","tinker","fletcher","bailiff","ostler","reeve","carter","brewer","skinner","falconer","weaver"]
+const DW_V := ["haggles over","stumbles past","sings to","argues about","wagers on","mends","sells","hauls","inspects","curses"]
+const DW_B := ["lantern","cart","pigeon","barrel","anvil","goat","ledger","bell","pie","plough"]
+const DW_C := ["gate","chapel","forge","mill","well","stables","ford","market"]
+
 func _log_of() -> String:
 	for c1 in _t.get_children():
 		if c1 is FeedHUD:
@@ -148,7 +153,12 @@ func _process(_dt: float) -> bool:
 				# U211: U211_RATE lines per tick (default 1) - flood the feed faster than it can be read
 				var rate := maxi(1, OS.get_environment("U211_RATE").to_int())
 				for r in rate:
-					_t.feed.append("Peasant%d_%d hums a tune near the well" % [j, r])
+					if OS.get_environment("U211_DISTINCT") == "1":
+						# U211b: DISTINCT texts (different words, not just numbers) so merge-by-key cannot collapse them
+						var n := j * rate + r
+						_t.feed.append("The %s %s the %s by the %s" % [DW_A[n % DW_A.size()], DW_V[(n / 3) % DW_V.size()], DW_B[(n / 7) % DW_B.size()], DW_C[(n / 11) % DW_C.size()]])
+					else:
+						_t.feed.append("Peasant%d_%d hums a tune near the well" % [j, r])
 				if j % 15 == 7 and (j / 15) < AMB.size():
 					_t.feed.append(AMB[j / 15])
 			if k == 330:

@@ -24955,3 +24955,11 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - KNOWN AND LEFT: the walk footprint is still lm_hall's (13.8 x 15.7) under the smaller t1/t2, so walkers route round empty yard - conservative, never into a wall.
 - CARRIED: the INN. There is no `lm_inn` plot in town.gd's LANDMARKS - the inn is a shop/building entry, so it needs its own anchor, not this swap. Barracks t1-t3 landed on main this hour too; same pattern, render first.
 - No Twitch test, nothing redeemed, nothing cheered, ZERO BITS. Not ticked - the team lead ticks.
+
+## C-255 (content, 28 Nov 2026, 13:24x CST) - SYSTEM 44: THE SHADOW HALL AND MORALITY WORDS
+- TAKE THIS NEXT: "CONTENT (:22) - SYSTEM 44, THE DUAL GUILD AND MORALITY WORDS" (12:58 plan block). Taken. Merged origin/main first (clean).
+- Added top-level `shadow_hall` to lore_lines.json: 6 Hall tiers (independent of town level), 6 town-standing rungs, 24 criminal jobs (theft/raid/sabotage/poison/bounty/smuggle, ranks F-S, all mechanic_state needs_build), crime Chronicle (caught/escaped/alert), jail, NPC refusals, detection, guild switching, PvP bounty lines, hub_text. New `_note_c255`. No new data file.
+- Honest limits: payout_band/risk are labels, not numbers; Hall upgrade costs, catch odds and jail lengths are the engine's.
+- VALIDATION OK: json.load passes; only new keys are shadow_hall and _note_c255; every pre-existing key equal; file round-trips byte-exact.
+- WIRING for the game build: read shadow_hall.tiers by shadow_hall_level, standing by town_standing, quests gated on min_hall_level and mechanic_state; hub lane reads hub_text. Tokens: {hero} {shop} {n} {name} {have} {need}.
+- Next content: C-256.

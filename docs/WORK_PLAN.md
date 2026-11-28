@@ -1,3 +1,182 @@
+*** ===== TAKE THIS NEXT - THE 18:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 17:58 FIRING.
+*** Clock read off cruzader: 18:58:46 CST at the start of this run, 19:0x while writing.
+*** ALL SIX LANES SHIPPED. Merged tree 3d4bc747, pushed to main.
+*** Every number below was measured THIS RUN. QUOTE NONE OF IT NEXT HOUR - MEASURE IT.
+***
+*** ===== MY OWN FAULTS THIS RUN. REPORTED FIRST. =====
+*** (1) **I WROTE A SELF-CHARGE HERE THAT MY OWN TIMING THEN DISPROVED, AND I AM WITHDRAWING IT
+***     RATHER THAN LEAVING IT TO STAND.** The first text of this block said my row had missed the
+***     game build's :07 window for the fourth hour running. IT DID NOT MISS. `origin/laptop`
+***     carried this block at ~19:06:4x; the game build claimed the lock at **19:08:16** (S163).
+***     The block was on its branch before it claimed. A FALSE CHARGE AGAINST MYSELF IS THE SAME
+***     FAULT CLASS AS A FALSE CHARGE AGAINST A LANE - it would have told the next seat a pattern
+***     exists when this hour is evidence against one. THE REAL AND SMALLER FACT: the margin was
+***     about ninety seconds, which is too thin to rely on. The row below is written to be safe if
+***     read late anyway: it is unconditional and does not ask the game build to re-measure slice
+***     2, which it landed at 18:17.
+*** (2) **MY FIRST ASSET-DIRECTORY MATCHER REPORTED 1 UNREFERENCED DIRECTORY AND IT WAS MY OWN
+***     MATCHER.** It flagged `assets/graveyard/Textures`. Guard 2: its PARENT `assets/graveyard`
+***     IS in the corpus, and the colormap is reached through the .glb's own material, not by a
+***     script path. The honest number is still ZERO. I did not publish the 1 as a regression.
+*** (3) I nearly recorded a one-line shortfall in the PROGRESS.md merge as a lost line. It is not:
+***     content's PROGRESS.md ends with NO TRAILING NEWLINE, so its last line coalesced with the
+***     next lane's first. 4+11+78 = 93 insertions arrive as +92/-0. NOTHING WAS REMOVED.
+***
+*** ===== TWO FIGURES IN MY OWN PROMPT ARE STALE AND I AM CORRECTING THEM HERE =====
+*** A firing cannot edit a prompt, so these go in the plan. See FOR THE NEXT TEAM LEAD below.
+***   - THE HUB IS PUBLISHED AT **8d214d36** ("hub publish 8", cache-bust to app.js?v=8),
+***     pushed **25 NOV 09:55 CT**. My prompt says `05ac2679 / 19 Nov 20:06 CT`. STRUCK, WRONG.
+***   - MERGED AND NOT PUBLISHED IS **73 files / +396 / -10**, not "3 files / +59 / -1".
+***     `origin/gh-pages^{tree}` 1d8bce63 != `origin/hub:web` 84dc021d. The bulk is NEW:
+***     `app.js +174/-8`, `icons/beasts/_manifest.json +75`, and ~70 `icons/beasts/*.webp`.
+***   - THE DEAD-DATA CORPUS IS NOW **48 `scripts/*.gd` + `web/app.js` = 49 files**, 2,506,348
+***     chars, 12 `data/*.json`, **174** top-level keys. My prompt says 47+1=48 and 146 keys.
+***
+*** ===== THE DEAD-DATA AUDIT, 18:58 CT. THE NUMBER THAT CARRIES SIGNAL HAS NOT MOVED. =====
+*** NON-NOTE ZERO-HIT KEYS = **15**, and they are the SAME 15 the baseline accounts for:
+***   two runtime-built `_alt` pools (`lord_intros_alt`, `unique_intros_alt`, READ at delve.gd:4022
+***   via `base + "_alt"`), four declared-dead (`phase2_words`, `phase2_words_alt`,
+***   `phase2_words_alt2`, `town_levels_for_the_desktop`), and nine prose/spec strings
+***   (biomes `technique`; bosses `boss_floors`; origins `chronicle_line`/`word_order`/`casing`;
+***   ranks `promotion_line`/`one_roll`; strains `_gating`; world `canon_silences`).
+*** `_note_` zero-hit keys = 68 (was 41 on 21 Nov). THE RAW TOTAL CARRIES NO SIGNAL - content is
+*** supposed to write those. UNREAD LIVE DATA KEYS: **ZERO**. UNREFERENCED ASSET DIRS: **ZERO**
+*** (38 directories with files, measured off `assets/` only).
+*** NO LANE IS TO WIRE A `_note_` KEY OR `phase2_words_alt2`. CONTENT IS NOT TO STOP WRITING THEM.
+***
+*** ===== GAME BUILD (:07) - S162 VERIFIED AND CREDITED, DELIBERATELY NOT TICKED =====
+***   **WHY NOT TICKED: you called it "slice 2 of 3" and slice 3 is real work.** Same rule as
+***   S161, and it still cuts in your favour: nothing closed here comes back to you.
+***   **WHAT I VERIFIED RATHER THAN TOOK.** I read `economy.gd` myself. `repair_list_cost`
+***   (:991) is the ruling's formula verbatim - `REPAIR_BASE 40 * REPAIR_MULT[tier] * (1 - dur/100)`,
+***   ceil, floor of 1, tier clamped into a 6-wide table `[0,1,2,4,8,15]`. I re-did the arithmetic:
+***   tier 3 at dur 50 -> 40*4*0.5 = 80. It holds. Your comment explaining why base is NOT the
+***   purchase price (the tier already IS the rarity; multiplying again double-counts it) is the
+***   right call and I am recording that I checked the reasoning, not just the number.
+***   **YOUR NEXT ITEM - SLICE 3, ENGINE SIDE ONLY. I HAVE SPLIT THE SLICE, AND THE BOUNDARY IS
+***   MINE TO DRAW, NOT YOURS OR THE CHAT BOT'S.** The ruling names `chatcmd.gd` in slice 3. The
+***   chat bot asked for it by name in its 18:50 lock line. **chatcmd.gd IS THE CHAT BOT'S FILE.**
+***   So: you own `roster.gd` / `economy.gd` / `delve.gd` / `gear.gd` / `snapshot_pub.gd`; the chat
+***   bot builds the `!repair` and durability command surface against your landed `repair()`.
+***   DO NOT BOTH REACH FOR chatcmd.gd. If anything in your half needs a string in that file,
+***   say so in your row and let the chat bot write it.
+***   **AND A SECOND, SMALL, FULLY-SPECIFIED ITEM IN YOUR OWN FILE - ART HAS DONE THE MEASURING.**
+***   `gear.gd` ships the tier-5 dagger at `Vector3.ZERO` and hand_scale 0.5 and it reads BLIND.
+***   Art proved the fix on a posed knight and prescribes exactly two values:
+***     held_rot -> `Vector3(0, 0, 90)`   (the triple gear.gd already ships for the bow)
+***     hand_scale -> `return 0.60`
+***   Art's own doc says the cost out loud: 0.834 m against 0.695 m shipped. TAKE THE TWO VALUES;
+***   DO NOT RE-DERIVE THEM. If you disagree with the length, say so and route it to me.
+***
+*** ===== CONTENT (:22) - C-242 VERIFIED AND TICKED =====
+***   **TICKED.** I parsed both versions of `data/lore_lines.json` and compared KEY SETS, not
+***   hunks: zero top-level keys removed, one added (`_note_c242`), and the three pools moved
+***   exactly as you said - misfire 217->237 (+20), cleared 678->698 (+20), descend 674->682 (+8).
+***   `epitaphs` 1114 unchanged. Your own 18:2x timestamp correction is noted and correct.
+***   **YOUR NEXT ITEM:** keep going as you are - draw-pressure top-up is working and nothing you
+***   write is wasted. ONE HOUSEKEEPING ASK, AND IT IS TINY: your `PROGRESS.md` has no trailing
+***   newline, which coalesces your last line with the next lane's first at every merge. Add one.
+***
+*** ===== ART (:34) - THE DAGGER PRESCRIPTION IS **HALF DELIVERED**, AND THAT IS YOUR OWN WORDING =====
+***   **NOT TICKED, AND YOU TOLD ME WHY YOURSELF.** Your doc says it plainly: *"A GREEN VERDICT
+***   HERE IS A PROOF OF THE PRESCRIPTION, NOT OF WHAT THE GAME SHIPS."* The engine still ships
+***   `Vector3.ZERO` at 0.5. Your half is DONE and CREDITED; the engine half is routed to the game
+***   build above with your two values quoted exactly. It will not be handed back to you.
+***   **WHAT I CHECKED RATHER THAN TOOK, INCLUDING ONE THING THAT LOOKED LIKE A DISCREPANCY.**
+***   Your commit says `@ 0.60`; your own tool's RECOMMEND line says `hs=0.55`. THAT IS NOT A
+***   DISCREPANCY AND I AM RECORDING IT SO NO LATER SEAT RAISES IT: your doc explains you took
+***   0.60 deliberately because 0.55 leaves the back view at 929 px against a 900 px floor - 3% of
+***   margin on a gate re-run every hour. A reasoned, documented departure from your own
+***   recommendation is better practice than following it silently. I also read the gate: `vis_min`
+***   900 with `min_proving` 2 means TWO of three views must prove, so the thin side view of a
+***   blade-on-edge dagger (440 px) is passing by design, not by a loosened gate.
+***   **YOUR NEXT ITEM - THE OPEN QUESTION YOUR OWN REGISTER RAISED.** `basis_selftest` carries
+***   `weaponfit_rule_divergence`: weaponfit's **crossbow** basis is `R.C^-1` where every other
+***   family it ships is `C.R.C^-1` (identity at zero), residual 90 deg about -X, and your register
+***   says "OPEN QUESTION for the crossbow's own pass - NOT resolved here, and no tier-5 path uses
+***   it." Auditing your own shipped work for a defect you have just learned about is explicitly
+***   NOT a new item under the freeze. Take it.
+***
+*** ===== HUD (:52) - U211 CAPTURE 1 OF 2 VERIFIED, NOT TICKED (CAPTURE 2 OUTSTANDING) =====
+***   **VERIFIED BY READING YOUR LOG, NOT YOUR SUMMARY.** `_u211_run_1.0.log:544` publishes
+***   `U211_STATS { seen 250, admitted 8, merged 239, dropped 0, dropped_protected 0,
+***   min_gap 0.800241 }` and `:631` `U202_DONE checks=28 fails=0`. 631 lines, not truncated, and
+***   COMMITTED this time - thank you, that is the thing I asked for last hour.
+***   **AND I OWE YOU A FINDING ABOUT YOUR OWN LOG, BECAUSE IT MAKES YOUR WORK LOOK BROKEN WHEN IT
+***   IS NOT.** Your run log carries ~20 `ERROR: Failed loading resource` lines for
+***   `assets/gear/dungeon/staff_common.glb` and `dagger_uncommon.glb`. **THAT IS NOT A DEFECT AND
+***   SYSTEM 2 IS NOT REGRESSED - I CHECKED BEFORE SAYING SO.** All 24 `.glb` and all 24 `.import`
+***   sidecars are present in BOTH R and your worktree; R's `.godot/imported/` holds 4 cache
+***   entries for those two meshes and **yours holds ZERO**; and the game build's own gate logs in
+***   R carry ZERO failed-load lines. It is W2's cold import cache. Warm it once, or say so in the
+***   log - as it stands any seat judging U211 by its log sees twenty red lines that are yours to
+***   explain and nobody's to fix. **NO LANE IS TO RE-OPEN SYSTEM 2 OFF THAT LOG.**
+***   **YOUR NEXT ITEM:** U211 capture 2 of 2 (125% / 150%), then the verdict across both.
+***
+*** ===== CHAT BOT (:45, CLAIM BY :50, FINISH INSIDE :52) - B208 VERIFIED AND TICKED =====
+***   **TICKED, AND THIS WAS THE BEST-EVIDENCED THING IN THE HOUSE THIS HOUR.** I did not take the
+***   structural claim; I re-proved it on `origin/laptop:scripts/roster.gd` myself. `"alive": true`
+***   is written ONCE, in `fresh` at :282. There is NO assignment of `alive` to false anywhere in
+***   `scripts/` - the only `alive =` hits in the tree are delve.gd's local `alive = _alive()` and
+***   `alive = []`, plus `_keepalive` in twitch_eventsub.gd. `:1270`'s `"alive": false` builds a NEW
+***   leaderboard row, it does not write a hero. `kill()` (:1124) keeps the hero in `heroes`,
+***   increments `deaths`, wears durability and pushes a `fallen` row with `rose: true`.
+***   **SO YOUR JUDGEMENT WAS RIGHT ON BOTH HALVES**: the six leaves you changed were telling
+***   viewers something false, and leaving the unreachable guard text alone was correct - rewording
+***   a branch that cannot fire WOULD dress up dead code as behaviour, and the ruling leaves
+***   guild-insurance open. **AND I CHECKED THE THING YOU DID NOT CLAIM:** your new `reroll`.cost
+***   `"120 gold"` still satisfies the COMMANDS_DATA PRICE ANCHOR arm at chatcmd.gd:~2033, which
+***   scans for digits immediately before `" gold"` - it reads 120 and matches `Roster.REROLL_COST`.
+***   YOU DID NOT QUIETEN A GUARD. Key sets byte-identical both directions, 36 commands / 36 order,
+***   deep key diff empty in BOTH directions - I parsed both JSONs, I did not diff hunks.
+***   **YOUR NEXT ITEM - YOU ASKED FOR IT AND IT IS YOURS.** Build the `chatcmd.gd` command surface
+***   for the death model's slice 3: `!repair` and durability on `!hero` / `!me`, against the game
+***   build's landed `economy.gd repair()` / `repair_quote()` / `repair_list_cost()`. I have told
+***   the game build that chatcmd.gd is yours and to stay out of it.
+***   **AND YOUR FUTURE-STAMP CATCH IS THE RIGHT HABIT.** You wrote an IDLE stamped 18:52:40 while
+***   the clock read 18:50:34, caught it on your own re-read, fixed the stamp and WITHDREW a false
+***   confession of an overrun that never happened. Re-reading the clock at every write is exactly
+***   the discipline that has bitten four lanes and this seat. Keep doing it.
+***
+*** ===== HUB (:37) - STAND-DOWN ACCEPTED, AND I AM CORRECTING ITS WORDING =====
+***   Accepted and credited: a stand-down written up IS the delivery. ONE PRECISION, because it
+***   touches a web/ claim: you wrote "web/ unchanged" while committing `web/NOTES.md +8`. No
+***   SERVED file changed (no app.js, index.html or style.css), which is what you meant - say it
+***   that way. I RAN NO PUBLISH VERIFICATION THIS HOUR because you claimed no readiness; the
+***   publish gate was not owed and I did not run it.
+***   **YOUR NEXT ITEM - SOMETHING MAY HAVE JUST UNBLOCKED YOU.** You stood down saying S41/37/39/40
+***   hub halves are blocked on unpublished data. The game build landed `snapshot_pub.gd +31` at
+***   S162 THIS HOUR: a hero-sheet `dur_weapon` / `dur_armour` / `deaths` / `repair` block and a
+***   top-level bags skull-marker block. RE-MEASURE YOUR FOUR HALVES AGAINST THE SNAPSHOT AS IT NOW
+***   STANDS before standing down again. If still blocked, name the exact missing key per half.
+***
+*** ===== FOR THE SUPERVISOR =====
+*** (1) **THE HUB PUBLISH DELTA HAS GROWN AND IS NOW SUBSTANTIAL. IT IS YOUR CALL, NOT MINE.**
+***     Published: `8d214d36` ("hub publish 8"), 25 Nov 09:55 CT. Merged and not published:
+***     **73 files / +396 / -10** - `app.js +174/-8`, `icons/beasts/_manifest.json +75` and ~70
+***     `icons/beasts/*.webp`. That is a whole beast-icon set plus a substantial app.js, sitting
+***     unpublished for two days. MY RECOMMENDATION: authorise a publish. If you do, I will run the
+***     full gate battery first (el()-only, no innerHTML on any snapshot value, no snapshot value
+***     as URL/src/href/style, strict CSP incl. the inline-<style> injection refusal, the six state
+***     checks, a hostile-name render, and I will LOOK at a screenshot) and push by the proven
+***     subtree-plumbing method with the four assertions. I have NOT published and will not without
+***     your word.
+*** (2) The death-model ruling leaves **guild insurance** open. The chat bot has now deliberately
+***     left unreachable dead-state guard text in place against the possibility that a dead state
+***     returns. If guild insurance is not coming, that text can be deleted; if it is, it stays.
+***     One line from you settles it. No lane is blocked either way.
+***
+*** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (A FIRING CANNOT WRITE A PROMPT) =====
+*** Land these in the :58 prompt the first time a LIVE turn is available, together:
+***   (a) The hub block: published is `8d214d36` / 25 Nov 09:55 CT, NOT `05ac2679` / 19 Nov 20:06.
+***       Merged-not-published is 73 files / +396 / -10, NOT "3 files / +59 / -1".
+***   (b) The dead-data baseline: corpus is 48 `scripts/*.gd` + `web/app.js` = **49** files (the
+***       prompt says 47+1=48), 2,506,348 chars, **174** top-level keys (the prompt says 146),
+***       `_note_` zero-hit 68. NON-NOTE REMAINS **15** and the 15 are unchanged.
+***   (c) Asset directories with files is now **38**, not 34. Unreferenced still ZERO.
+***   (d) IDs as of 18:58 CT 27 Nov: B208, C-242, S162, U211, art tier-5 dagger. Re-measure.
+
 *** ===== TAKE THIS NEXT - THE 17:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 16:58 FIRING.
 *** Clock read off cruzader with `TZ=America/Chicago date`: 17:58:45 CST at the start of this

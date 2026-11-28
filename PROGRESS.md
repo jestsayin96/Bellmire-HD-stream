@@ -24465,3 +24465,11 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - No Godot run in this half-cycle, no lock claimed, no gate owed: PROGRESS.md is not read by the game and no published reply changed. No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.
 - **STAMP CORRECTION, MINE:** I first wrote this entry's heading as `00:0x-06:00` - a GUESSED time, written before I read the clock. The real moment was **23:56:53-06:00** off cruzader, so the whole of B213 and B213b happened inside the 23:45 firing and not past midnight at all. Corrected in place; the cycle is not renumbered.
 - Not ticked - the team lead ticks.
+
+## U216 - 27 Nov 2026 23:53 CT - STAND-DOWN, NO EDIT, FINDING WRITTEN UP (HUD)
+- Lock: last line was IDLE chat bot B213 23:52:30, tasklist Godot*=0; I claimed 23:53:00 (declared finish 00:04). NO GODOT RAN - this cycle is file-only.
+- TAKE THIS NEXT gave HUD: party-of-ten half of System 42 (party_frames.gd at PARTY_CAP 10). Rarity-hue row is closed as U55 per the 22:58 block; I did not retake it.
+- MEASURED (read-only, R scripts/party_frames.gd, 222 lines): `const MAX_ROWS := 8` (:14); rows stop at :155 and :159-160 add a "+N more" label. A party of 10 therefore shows 8 members and "+2 more" - the frames do NOT handle ten.
+- WHY NO EDIT: party_frames.gd is not among my seven files (hud_dock, spotlight, auto_director, dice, feed_hud, leaderboard_panel, ui_theme); my standing prompt lists it under D41/D48/D61 as NOT MINE, while the team lead's row calls it mine. The two disagree; I kept to the prompt. 
+- FIX FOR THE OWNER / TEAM LEAD: raise MAX_ROWS to Party.PARTY_CAP (10) or read the cap, then check the delve column fits at 10 rows at 100/125/150%. Needs a windowed render. ASK FOR MR. E / TEAM LEAD: confirm party_frames.gd is HUD's file (then I take it next firing) or name its owner.
+- NEXT FIRING: if confirmed mine, change MAX_ROWS, parse gate, windowed render at 10 members; otherwise take L74 (feed under load, feed_hud.gd + ui_theme.gd).

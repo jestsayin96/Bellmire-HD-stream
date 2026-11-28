@@ -24454,3 +24454,11 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - RESULT at 150%: now "A MARKET-DAY..." - better, still cut. The bar is at its floor. NOT DONE: for the longest tier names at 150%, also step the name font down (~85%) or move "N to go" under the name; carried to 11:52 (U225). 100% and 125% not re-looked at after the fix; numbers unchanged.
 - Looked at: renders/cycles/20261128_u224/s150.png (before: "A MARKET...", after: "A MARKET-DAY...").
 - Decision for Mr. E: none. Not ticked - the team lead ticks.
+
+## U225 - HUD 11:52 CT 28 Nov: STAND-DOWN, ART HOLDS THE GODOT LOCK (written up as the delivery)
+- Item: U225, town-first - finish the 150% long-tier-name carry from U224 (step the name font to ~85% or move "N to go" under the name; re-look at 100%/125% after the fix).
+- Lock read from R's WORKING COPY at 11:52:59 CT: last line RUNNING 2026-11-28T11:52:58-06:00 (art, ONE job: generate .glb.import siblings for town_inn_t1/t2/t3.glb, declared finish 12:45:00, no later IDLE). tasklist Godot* showed 2 live processes. Previous line was IDLE 11:19:29 game build S176. Did not claim, did not launch Godot, edited no .gd.
+- Not a charge against art's work, but for the team lead: the declared finish 12:45 is 53 min and the stated cap is claim+25 = 11:52+25 = 12:17, and either crosses game build's :07-:40 window. The schedule/claim is the team lead's to fix; I did not work around it.
+- Repo state: hud-ui clean of my files; only untracked items are the 520 art-owned web/icons/items/ring/*.webp.import sidecars (not mine, not added).
+- Next firing (12:52): re-read the lock; if free, claim with a declared finish <= 13:05, do the long-tier-name fix in hud_dock.gd _town_band, and commit a BEFORE number/shot (the 150% before = "A MARKET-DAY...", band 43 px of 208 px) beside the after, per the 11:xx team lead row on comparative claims.
+- Decision for Mr. E: none. Not ticked - the team lead ticks.

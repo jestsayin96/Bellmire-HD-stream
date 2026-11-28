@@ -1,0 +1,128 @@
+{
+ "cells": {
+  "lm_barracks.glb": {
+   "opaque_px": 44421,
+   "subject_moved_px": 33769,
+   "sat_mean": 0.2403,
+   "dims": [
+    21.952,
+    14.132,
+    16.165
+   ]
+  },
+  "lm_chapel.glb": {
+   "opaque_px": 44654,
+   "subject_moved_px": 30111,
+   "sat_mean": 0.2195,
+   "dims": [
+    9.952,
+    19.591,
+    19.288
+   ]
+  },
+  "lm_granary.glb": {
+   "opaque_px": 53135,
+   "subject_moved_px": 40417,
+   "sat_mean": 0.2685,
+   "dims": [
+    8.25,
+    9.683,
+    8.02
+   ]
+  },
+  "lm_hall.glb": {
+   "opaque_px": 59525,
+   "subject_moved_px": 48388,
+   "sat_mean": 0.2519,
+   "dims": [
+    13.801,
+    15.706,
+    22.411
+   ]
+  },
+  "lm_sawmill.glb": {
+   "opaque_px": 42261,
+   "subject_moved_px": 26897,
+   "sat_mean": 0.223,
+   "dims": [
+    8.25,
+    13.658,
+    8.02
+   ]
+  },
+  "lm_watermill.glb": {
+   "opaque_px": 66700,
+   "subject_moved_px": 54223,
+   "sat_mean": 0.2996,
+   "dims": [
+    8.25,
+    9.683,
+    11.143
+   ]
+  },
+  "lm_windmill.glb": {
+   "opaque_px": 41496,
+   "subject_moved_px": 37714,
+   "sat_mean": 0.2838,
+   "dims": [
+    5.651,
+    5.427,
+    16.165
+   ]
+  },
+  "lm_workshop.glb": {
+   "opaque_px": 53831,
+   "subject_moved_px": 40448,
+   "sat_mean": 0.2647,
+   "dims": [
+    9.952,
+    14.132,
+    12.254
+   ]
+  },
+  "mk_house_a.glb": {
+   "opaque_px": 66458,
+   "subject_moved_px": 53592,
+   "sat_mean": 0.2928,
+   "dims": [
+    8.25,
+    9.683,
+    11.143
+   ]
+  },
+  "mk_house_b.glb": {
+   "opaque_px": 66445,
+   "subject_moved_px": 55915,
+   "sat_mean": 0.3276,
+   "dims": [
+    5.513,
+    7.588,
+    13.094
+   ]
+  },
+  "mk_house_c.glb": {
+   "opaque_px": 68072,
+   "subject_moved_px": 56257,
+   "sat_mean": 0.3026,
+   "dims": [
+    9.952,
+    10.332,
+    12.254
+   ]
+  },
+  "mk_house_d.glb": {
+   "opaque_px": 55959,
+   "subject_moved_px": 42282,
+   "sat_mean": 0.2713,
+   "dims": [
+    8.25,
+    11.852,
+    11.143
+   ]
+  }
+ },
+ "errors": [],
+ "sheet": "renders/art/town/_texfix_sheet.png",
+ "engine": "BLENDER_EEVEE",
+ "verdict": "GREEN"
+}

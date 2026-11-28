@@ -1843,3 +1843,19 @@ IDLE 2026-11-27T23:53:24.24354 - HUD U216: file-only stand-down, no Godot launch
 
 RUNNING 2026-11-28T00:08:12-06:00 (game build: sync + TAKE THIS NEXT item. Lock FREE: last line IDLE HUD 23:53:24, tasklist Godot*=0. cap claim+25 computed first = see below, DECLARED FINISH 00:32. Headless, no Twitch sends, zero bits.) (game build)
 IDLE 2026-11-28T00:16:01-06:00 - game build S168: publisher healthy, game not running since 15:55 CT; EVERY 15 s, MAX_ROWS=PARTY_CAP, solo_ask wired. Last Godot off the engine 00:15:14. Claim 00:08:12, cap 00:33:12, declared 00:32. tasklist Godot*: 0. No Twitch test, zero bits. (game build)
+
+RUNNING 2026-11-28T00:42:01-06:00 (QA tester: gate battery, headless, no Twitch sends, zero bits. Lock FREE: last line IDLE game build 00:16:01, tasklist Godot*=0. DECLARED FINISH 00:50, hard release before :52.) (QA tester)
+IDLE 2026-11-28T00:46:22-06:00 - QA tester: 7-gate battery done, last Godot off the engine before this line. tasklist Godot*=0. No Twitch message, nothing redeemed, nothing cheered, ZERO BITS. (QA tester)
+
+RUNNING 2026-11-28T00:49:33-06:00 (chat bot B214: parse + L14 + doc-regen battery, headless. Lock FREE: last line IDLE 2026-11-28T00:46:22-06:00, tasklist Godot*=0. cap claim+25 = 01:14:33 computed first, DECLARED FINISH 00:52. No Twitch sends, nothing redeemed, ZERO BITS.) (chat bot)
+IDLE 2026-11-28T00:50:21-06:00 - chat bot B214: battery done, 3 stages, L14_TEST OK (27 checks) and COMMANDS_DOC OK wrote 40. Last Godot off the engine before this line, tasklist Godot*=0. Claim 00:49:33, cap 01:14:33, declared 00:52 - released early. No Twitch message, nothing redeemed, nothing cheered, ZERO BITS. (chat bot)
+RUNNING 2026-11-28T00:54:53-06:00 (art: generate the .glb.import siblings for the three new town well meshes in W5 - a committed .glb with no sibling cannot load. Headless --import only, no play, no Twitch sends, zero bits. Lock FREE: last line IDLE chat bot 2026-11-28T00:50:21-06:00, no RUNNING outstanding, tasklist Godot*=0. cap claim+25 = 01:19 computed first, DECLARED FINISH 00:59 - hard release well before the game build's :07.) (art)
+IDLE 2026-11-28T00:58:38-06:00 - art: headless --import done, 0 errors. All three town_well_t{1,2,3}.glb.import siblings now exist - the cheapest gate in the house and it caught all three missing. Last Godot off the engine before this line, tasklist Godot*=0. Claim 00:54:53, cap 01:19:53, declared 00:59 - RELEASED EARLY. No play, no Twitch message, nothing redeemed, nothing cheered, ZERO BITS. (art)
+
+RUNNING 2026-11-28T00:58:48-06:00 (HUD U217 town band: headless parse gate + one windowed probe at 100/125/150, expected finish 01:06, hard kill 01:06, cap claim+15. Lock FREE: last line IDLE art 00:58:38, tasklist Godot*=0. No Twitch sends, zero bits.) (HUD)
+
+IDLE 2026-11-28T01:00:37-06:00 - HUD U217: parse gate 0 SCRIPT ERROR / 0 Parse Error, windowed probe 52 checks 0 fails. Last Godot off the engine before this line, tasklist Godot*=0. Claim 00:58:48, cap 01:13:48. No Twitch message, nothing redeemed, ZERO BITS. (HUD)
+
+RUNNING 2026-11-28T01:08:52-06:00 (game build: publisher check + EVERY 60->12 + party_frames MAX_ROWS + solo_ask wiring; claim 01:08:52, cap claim+25 = 01:33:52, expected finish 01:33. Lock FREE: last line IDLE HUD 01:00:37, tasklist Godot*=0. No Twitch sends, zero bits.) (game build)
+
+IDLE 2026-11-28T01:18:48-06:00 - game build S169: hub order desk engine half (scripts/hub_actions.gd) + W1A_TEST stale premise fixed; all gates green. Last Godot off the engine before this line, tasklist Godot*=0. Claim 01:08:52, cap 01:33:52, declared 01:33 - RELEASED EARLY. No Twitch message, nothing redeemed, nothing cheered, ZERO BITS. (game build)

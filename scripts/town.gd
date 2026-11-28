@@ -364,6 +364,12 @@ func _ready() -> void:
             snap.name = "SnapshotPublisher"
             add_child(snap)
             snap.call_deferred("setup", self)
+            # S169: the hub's order desk (sup-nov27-2340) - polls public.hub_actions and runs each
+            # request through chat_line, so it obeys every chat rule. Same key, same guard.
+            var desk := HubActions.new()
+            desk.name = "HubActions"
+            add_child(desk)
+            desk.call_deferred("setup", self)
         else:
             print("JESTS_NO_TWITCH set - Twitch chat, EventSub and the hub snapshot NOT started")
         var board := LeaderboardPanel.new()

@@ -16959,6 +16959,207 @@
           }
         ]
       }
+    },
+    "_note_c249": "C-249 / town-first: `districts{<district id>:{tiers[3]}}` -> the ordinary houses of each district in bellmire.json (buildings[].district: keep, temple, garrison, mill, craft, market, homes_s, homes_w) - the 61 buildings with no landmark. `roads{tiers[3]}` -> the road network (roads[] in bellmire.json). Same tier shape as landmarks (name, crier, plaque, see); tier_levels (1/5/9) apply. Condition tracks level: tier 1 is patched, tier 3 is prosperous. Dead until wired; content worker never touches code. No line states a dungeon floor count.",
+    "districts": {
+      "keep": {
+        "tiers": [
+          {
+            "name": "Hall Yard",
+            "crier": "A few huts crowd the Hall's door. The clerk lives in one and counts in another.",
+            "plaque": "Wait by the door.",
+            "see": "Small timber huts round the Hall, a worn path, a water barrel."
+          },
+          {
+            "name": "Clerks' Row",
+            "crier": "The Chief's people have houses of their own now, with doors that shut.",
+            "plaque": "Records kept.",
+            "see": "Timber houses with tiled roofs in a tidy row, a notice board."
+          },
+          {
+            "name": "Hall Close",
+            "crier": "The Close is paved, walled and swept. Somebody is paid to sweep it.",
+            "plaque": "Keep to the path.",
+            "see": "Stone-footed houses round a paved court, lamps on posts, a gatekeeper."
+          }
+        ]
+      },
+      "temple": {
+        "tiers": [
+          {
+            "name": "The Graveside",
+            "crier": "Huts along the chapel wall. Those who live there say it is quiet.",
+            "plaque": "Quiet, please.",
+            "see": "Low huts against the chapel wall, a well, a few leaning markers."
+          },
+          {
+            "name": "The Almshouses",
+            "crier": "The chapel keeps almshouses now. A bed and a bowl, and no questions asked.",
+            "plaque": "Bread at dusk.",
+            "see": "Timber almshouses round a small yard, a bread oven, a tended grave row."
+          },
+          {
+            "name": "Lamp Close",
+            "crier": "The Close round the temple has a lamp at every door. They are lit for the ones still below.",
+            "plaque": "A lamp at every door.",
+            "see": "Stone almshouses and priests' houses, a lamp on every step, clipped yews."
+          }
+        ]
+      },
+      "garrison": {
+        "tiers": [
+          {
+            "name": "The Picket Line",
+            "crier": "A line of tents and huts along the wall. The Watch sleeps in turns, and so does the cook.",
+            "plaque": "Boots by the fire.",
+            "see": "Patched tents, a few huts, a cook fire, a spear rack at each end."
+          },
+          {
+            "name": "Watch Row",
+            "crier": "The Watch has houses now, and somebody to go home to.",
+            "plaque": "Home by curfew.",
+            "see": "Timber houses in a row beside the yard, washing on a line, a bell post."
+          },
+          {
+            "name": "The Armoury Close",
+            "crier": "The Watch keeps a proper armoury now, and a proper quartermaster to shout about it.",
+            "plaque": "Sign it out. Sign it in.",
+            "see": "Stone houses, an armoury with barred windows, a gravelled drill ground."
+          }
+        ]
+      },
+      "mill": {
+        "tiers": [
+          {
+            "name": "The Millers' Huts",
+            "crier": "Two huts and a grain pit by the stones. Flour on everything, the cat included.",
+            "plaque": "Keep the sacks dry.",
+            "see": "Low huts, a grain pit under thatch, flour-dusted ground."
+          },
+          {
+            "name": "Millhouse Lane",
+            "crier": "The millers have a lane, a pond and a bridge over it. The ducks were not consulted.",
+            "plaque": "Mind the ducks.",
+            "see": "Timber houses along a lane, a millpond, a plank bridge."
+          },
+          {
+            "name": "The Granary Quarter",
+            "crier": "Granaries stand in rows. The whole quarter smells of bread and nobody minds.",
+            "plaque": "Full barns, full bellies.",
+            "see": "Stone-footed granaries, carts at every door, a tended pond, a stone bridge."
+          }
+        ]
+      },
+      "craft": {
+        "tiers": [
+          {
+            "name": "Smoke Alley",
+            "crier": "A lane of sheds that smoke when they work and smoke when they do not.",
+            "plaque": "Mind your sleeves.",
+            "see": "Lean-to sheds, a few anvils, charcoal heaps, smoke."
+          },
+          {
+            "name": "Craft Lane",
+            "crier": "Every trade has a door and a sign. The coopers and the tanners are not neighbours by choice.",
+            "plaque": "Trade by the sign.",
+            "see": "Timber shops with painted signs, a coopers' yard, drying racks."
+          },
+          {
+            "name": "The Guild Quarter",
+            "crier": "Paved lanes, carved signs, a bell for the end of the shift. Wages come on time.",
+            "plaque": "Marked. Measured. Paid.",
+            "see": "Tall shopfronts, carved guild signs, covered yards, a shift bell."
+          }
+        ]
+      },
+      "market": {
+        "tiers": [
+          {
+            "name": "Stallholders' Huts",
+            "crier": "The traders sleep behind their stalls, and the stalls sleep behind a rope.",
+            "plaque": "No haggling before dawn.",
+            "see": "Small huts and lean-tos at the edge of the green, handcarts."
+          },
+          {
+            "name": "Merchants' Row",
+            "crier": "The better traders have houses with shopfronts. The worse ones still have the rope.",
+            "plaque": "Shutters down, counter up.",
+            "see": "Timber houses whose shutters fold down into counters, painted door-posts."
+          },
+          {
+            "name": "The Counting Houses",
+            "crier": "The market keeps counting houses now, with iron on the doors. The locks are good ones.",
+            "plaque": "Weighed true.",
+            "see": "Stone-and-beam shops, glazed windows, iron-bound doors, a scale house."
+          }
+        ]
+      },
+      "homes_s": {
+        "tiers": [
+          {
+            "name": "South Row",
+            "crier": "Thatch houses on the south road. They lean together for warmth.",
+            "plaque": "A door open to a neighbour.",
+            "see": "Low thatch houses in a crooked row, a dog asleep in the road."
+          },
+          {
+            "name": "The South Lanes",
+            "crier": "Lanes between the houses now, a well at the corner and a chimney on every roof.",
+            "plaque": "Draw water, leave the bucket.",
+            "see": "Timber houses on laid lanes, a corner well, smoke from every chimney."
+          },
+          {
+            "name": "South Gardens",
+            "crier": "The south houses have gardens. Beans, mostly, and one rose nobody will admit to.",
+            "plaque": "Gate shut. Hens about.",
+            "see": "Tiled houses behind fences, bean rows, a rose on one wall, whitewash."
+          }
+        ]
+      },
+      "homes_w": {
+        "tiers": [
+          {
+            "name": "West Huts",
+            "crier": "Huts at the west edge, nearest the mill road. Cold in winter, and everybody says so.",
+            "plaque": "Draught-proof, near enough.",
+            "see": "Low huts at the town edge, a peat stack, a path to the mill road."
+          },
+          {
+            "name": "West Lane",
+            "crier": "The west side has a lane, a pump and neighbours who know your business.",
+            "plaque": "Pump on the left.",
+            "see": "Timber houses on a laid lane, a pump at the bend, curtains in windows."
+          },
+          {
+            "name": "Millside Homes",
+            "crier": "The west homes are tiled and whitewashed now. The wind still finds a way in.",
+            "plaque": "Whitewash dries by noon.",
+            "see": "Whitewashed tiled houses, glazed windows, window boxes, a paved lane to the mill."
+          }
+        ]
+      }
+    },
+    "roads": {
+      "tiers": [
+        {
+          "name": "Cart Tracks",
+          "crier": "Ruts that go somewhere. Mind the puddles.",
+          "plaque": "Keep left.",
+          "see": "Packed earth tracks, wheel ruts, a plank over the worst puddle."
+        },
+        {
+          "name": "The Gravel Road",
+          "crier": "Gravel laid from the gate to the square. The carters notice, and say so.",
+          "plaque": "Gravel by the cartload.",
+          "see": "A gravelled road with a drainage ditch, cart-width, a milestone."
+        },
+        {
+          "name": "The Paved Road",
+          "crier": "Paved from the gate to the square. The carters sing about it.",
+          "plaque": "Walk to the right.",
+          "see": "A flagged road with kerbs and gutters, a lamp at each crossing, worn flags."
+        }
+      ]
     }
   },
   "_note_c248": "C-248 town_buildings: building, landmark and tier flavour text. Zero-hit by design; no lane wires this key."

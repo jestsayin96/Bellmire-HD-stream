@@ -1,4 +1,163 @@
 ================================================================================
+## THE 12:58 CT FIRING, 28 NOV 2026 - TEAM LEAD. SUPERSEDES EVERY ROW BELOW THIS LINE.
+Written 13:0x-13:1x CT, 28 Nov 2026. Clock read with `TZ=America/Chicago date` (13:07:18-0600).
+REACHES THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52).
+THE GAME BUILD FIRED AT 13:07 WHILE I WAS STILL WRITING, SO IT READS THIS AT 14:07.
+
+### 1. SIX LANES SHIPPED, SIX MERGED. FOUR TICKED, TWO HALF DELIVERED.
+`origin/main` was **389f61ff**, it is now **65776ffe**, pushed as a verified fast-forward.
+Order: laptop, content, art, hub, hud-ui, chatbot. Nothing forced, no history rewritten, no branch
+deleted. FIVE conflicts (content, hub x2, hud-ui, chatbot), each one block, resolved keeping BOTH
+sides with a state machine: **PROGRESS.md +84/-0 and docs/art/ASSET_SOURCES.md +61/-0 - ZERO lines
+removed** - and proved by SET MEMBERSHIP: every line each lane added that pre-merge main lacked
+(laptop 11, content 7, hub 5, hud-ui 6, chatbot 49) is in the merged file, **0 missing**. Residual
+markers **0** in all four files, counted with a literal `startswith` over all four exact shapes.
+
+**I NEARLY MIS-READ THREE LANES AND THE INSTRUMENT WAS MINE.** A two-dot `git diff main <branch>`
+showed art "deleting" PROGRESS.md (-5821) and hub "deleting" the inn meshes. That is **main being
+ahead, not the lane deleting** - the same trap the 11:58 seat wrote up. Re-measured every lane with
+a three-dot diff off its own merge-base before I judged a single one.
+
+#### TICKED
+- **GAME BUILD S177 - TICKED. THE TOWN NOW VISIBLY CHANGES.** `WELL_TIER_MESHES := true` at
+  town.gd:139, guard at :1116. I read the verdict LINES off the lane's own logs: `S177_WELL OK`
+  (t1/t2/t3), `S171_TIERS OK changes=151 cried=118`, `TWITCH_PARSE OK (8)`, `OFFFLOOR OK 0/2317`,
+  `TOWNWALK in_solid=0/18816 PASS`, `DELVE_TEST OK`, parse rc=0. **AND I LOOKED AT L1/L3/L6 MYSELF:**
+  plain well-head -> roofed well with a cobbled apron -> tiered stone fountain. The progression
+  reads at a glance and **every surface is fully textured**.
+- **CONTENT C-254 - TICKED.** System 18 quest board: `quest_board` with **48 quests**, 6 categories,
+  11 board_lines, 14 hub_text. `data/lore_lines.json` **re-serialises byte-identical** to what is on
+  disk. I also checked the first half of its row myself: `landmarks` 7/7, `districts` 8/8, `sites`
+  4/4 all carry `tiers` of exactly 3, so the districts work was already whole and the lane was right
+  to move on under the deadline clause.
+- **HUD U226 - TICKED, AND IT CLOSES THE U224/U225 CARRY.** Name font floor 72%, tier-bar floor
+  70 px. **I LOOKED AT s150.png, the tightest frame:** "A MARKET-DAY TOWN" renders whole and
+  untrimmed with the 12-cell bar and "24 to go" both legible. The lane kept its failed 85% attempt
+  (`20261128_u226a_85pct`, "A MARKET-DAY TO...") as the red proof. parse 0 errors, probe 0 fails.
+- **CHAT BOT B225 - TICKED.** Ten commands that pointed nowhere now name their hub tab (rank,
+  inventory, weapon, armour, paths, guild, memorial, deepest, deadliest, richest). **I CHECKED THE
+  FOUR TAB NAMES AGAINST THE HUB'S OWN VISIBLE BUTTON LABELS, NOT ITS SLUGS:** "Guild Roll"
+  (`data-tab="roll"`), "My Room" (`room`), "The Fallen" (`fallen`), "Boards" (`boards`) - **all four
+  real.** The lane caught itself inventing three tab names and fixed them before shipping. Order
+  stays **40**, no command, verb or alias added; COMMANDS_DOC OK 40, L14_TEST OK 27.
+
+#### HALF DELIVERED - NOT TICKED, AND BOTH ARE GOOD WORK
+- **ART, THE BARRACKS LADDER - THE ART HALF IS GREEN, THE LOAD HALF IS MISSING.** I looked at
+  `_tiers_side_by_side.png`: T1 thatch watch hut -> T2 two-storey barracks with a fenced yard,
+  dummies and a flag -> T3 stone garrison with a roof walk, gravelled yard and cart. One pivot, one
+  camera, one ortho scale, hero for scale; T2/T3 same height on purpose and the card says so. **The
+  progression reads at a glance.** BUT: `town_barracks_t1/t2/t3.glb` ship with **ZERO `.glb.import`
+  siblings**, measured by `ls-tree` - hall 3/3, well 3/3, inn 3/3, **barracks 3/0**. No tier can
+  load. This is the same fault art itself found and fixed for the inn at 11:53, and it is HALF
+  DELIVERED only because **my own :40-:45 lock-gap row correctly stopped it claiming at 12:51.**
+  The split is the rule working; finishing it is the next row.
+- **HUB - THE DATABASE HALF OF THE SIGNED-IN ROUND TRIP IS PROVEN, THE BROWSER HALF CANNOT BE DONE
+  UNATTENDED.** In one rolled-back DO block on the live project: own insert ALLOWED; foreign
+  twitch_id DENIED; forged `status='done'` DENIED; A sees 1 row, B sees 0; B's UPDATE DENIED; anon
+  SELECT and INSERT both DENIED; **nothing persisted** (hub_actions 0, auth.users 0 after). That is
+  RLS proved as the authority rather than a client-side check, exactly as order 2 requires. The
+  browser OAuth leg needs a real human sign-in. **No web/ code changed** (web/NOTES.md only), so no
+  publish gate was owed and none was run.
+
+### 2. *** TAKE THIS NEXT - SIX ROWS. THESE SUPERSEDE EVERY ROW BELOW. ***
+
+**GAME BUILD (:07, you read this at 14:07) - THE LANDMARK MESH SWAP FOR HALL AND INN. Priority #1,
+and the well proves the pattern.** `WELL_TIER_MESHES` is live and looked at; do hall and inn the
+same way - flag off, render L1/L3/L6, LOOK at the three side by side, then flip and commit.
+**DO NOT WIRE BARRACKS YET: its three `.glb` have no `.import` siblings and cannot load.** Art has
+that row this hour; wire it only once the siblings are on main.
+ONE LINE, AND IT IS MINE NOT YOURS TO FEAR: three `ERROR: Parameter "material" is null.` lines
+appeared in `_s177_gates.log` under TOWNWALK - **three errors, three well meshes** - and they are
+**0** in `_s112_gates.log`, `_s118_gates.log` and the pre-flip `_s174_battery.log`, so they are new
+with the flip. I believe they are headless-only noise from the dummy renderer
+(`servers/rendering/dummy/storage/material_storage.cpp`), because **the L6 render shows the fountain
+fully textured** - a genuinely missing material cannot paint. Confirm that in one line next cycle;
+do not let it block the hall/inn swap.
+ALSO, ONE THING THE NUMBERS CANNOT SAY: in the L1/L3/L6 shots **the L6 fountain reads SMALLER and
+LOWER than the L3 roofed well.** It is more refined, but it is not bigger. If that is on purpose,
+say so on the card as art does for T2/T3; if not, it is a progression that reads backwards at the
+top. **YOUR OWED `_s174_battery.log` LANDED - that row is closed.**
+
+**CONTENT (:22) - SYSTEM 44, THE DUAL GUILD AND MORALITY WORDS.** Town copy is whole: all 7
+`landmarks`, 8 `districts` and 4 `sites` carry 3 tiers, shops and shop_events are written, and the
+quest board is done. System 44 is the supervisor's own directive (sup-nov27-1856) and is
+word-shaped, so it is yours and it is not invented work. **YOUR `quest_board` READS AS A ZERO-HIT
+KEY IN MY AUDIT THIS HOUR AND THAT IS CORRECT, NOT A FAULT** - `town_buildings` did exactly the same
+and its reader arrived one hour later. Keep writing ahead of your reader. No lane is to wire it to
+silence an audit.
+
+**ART (:34) - FINISH THE BARRACKS: GENERATE THE THREE `.glb.import` SIBLINGS. One job, and it is the
+only thing between your ladder and a tick.** Do it exactly as you did the inn at 11:53 - Godot
+`--headless --import` on W5's OWN project, no game run, no gate, no `.gd` outside `tools/art/`.
+**CLAIM ONLY IN THE :40-:45 GAP** (you fire at :34 inside the game build's :07-:40 window and :52 is
+the HUD's); if it is not done by :45, split and carry. **AND COMPUTE claim+25 FIRST, THEN WRITE THE
+DECLARED FINISH** - your 11:52:58 claim declared 12:45 against a cap of 12:17:58.
+**STANDING, FROM NOW ON: every `.glb` ships with its `.import` sibling IN THE SAME COMMIT.** Three
+families have bitten this now. Then the next family (chapel, windmill, workshop, market_hall).
+**AND WRITE A PROGRESS ENTRY.** You shipped 23 files this hour and logged no cycle; every other lane
+logged one, so the house's only record of your barracks is a commit message.
+
+**HUB (:37) - MERGE MAIN FIRST, THEN THE H37 YOU NAMED YOURSELF. YOU STILL NEVER PUBLISH.**
+(1) Your merge of main aborted on a `docs/art/ASSET_SOURCES.md` conflict. **Resolve it by keeping
+BOTH sides** - it is an append-only licence catalogue and that is how I resolved the same conflict
+on main. Until you do, `hub:web` carries **520 dead `.webp.import` sidecars** that main dropped.
+(2) Then H37, the fault you found and named: the full sheet is tall, so the request form sits far
+below it - pin or collapse it. The browser OAuth leg is NOT yours to force; it is routed up.
+
+**CHAT BOT (:45) - FINISH THE HUB-POINTER PASS, DOC ONLY. Claim by :50, finish inside :52.**
+Your own gate says **27 of 40** commands now carry a hub pointer. Walk the other 13, decide which
+genuinely have a hub home under order 2, and mark those the same way - the hub's REAL visible tab
+labels, which you got right this time. The ones with no hub home stay as they are and you say which
+and why. **No command, verb or alias added; order stays 40.**
+
+**HUD (:52) - LOOK AT 100% AND 125% AFTER THE 72% FLOOR, THEN THE NEXT TOWN-FIRST HALF.** You wrote
+"100%/125% not re-looked; band geometry unchanged, they have more room." The reasoning is sound but
+the font floor changed for every scale, and **LOOK is the acceptance test in this house** - it is
+one cheap probe and it closes U226 whole. Then take the next town-first HUD half.
+**`party_frames.gd` IS STILL NOT YOURS** - it is the game build's, and this seat handed it to you
+twice on 27 Nov in error.
+
+### 3. FOR THE SUPERVISOR
+**ONE DECISION, AND IT IS THE ONLY THING BETWEEN A FINISHED FEATURE AND THE LIVE PAGE.**
+H36 (My Room: the viewer's own sheet and satchel, Wear/Dye pre-fill) is **merged, verified and
+unpublished**, and the action queue behind it now has its RLS proved by the hub's rolled-back test.
+The hub will not claim ready to publish because the **browser OAuth leg cannot be proven by any
+unattended run** - it needs one real human Twitch sign-in on the live page. So the lane is blocked
+on a human, not on work.
+`origin/gh-pages^{tree}` **dd6294a0** vs `origin/main:web` **7ba6faa5** = **6 files**: NOTES.md +43,
+app.js +50/-4, index.html 2/2 (the v=10 / v=12 bust), style.css +5, tools/_room_h33.js.txt +225,
+tools/hub_actions_schema.sql +18/-4.
+**MY RECOMMENDATION: (a) one real sign-in on the live page by whoever may use that account, then I
+publish under the pre-authorisation the same hour.** The alternative, (b) publishing the sign-in
+flow unproven in a browser, puts an untested write path in front of viewers and I do not recommend
+it. **I have published nothing and run no publish gate, because the lane made no ready claim.**
+**THE DEAD TOWN IS CLOSED, NOT PRIORITY ZERO.** Per your answer (d): the publisher is **healthy** -
+`snapshot_pub.gd:21 EVERY := 15.0` is in the tree and a snapshot **did land at 00:45 CT today**. It
+is ~12 h stale because the game is not running, which your own ruling says is not a bug. No lane
+should hunt it.
+
+### 4. *** THE PUBLISH RECIPE'S SOURCE TREE IS CORRECTED. PUBLISH FROM `origin/main:web`. ***
+The proven recipe says `tree = origin/hub:web`. **THAT IS NOW THE DIRTY TREE.** Measured this hour:
+gh-pages vs **main:web** = **6 files, 0 sidecars**; gh-pages vs **hub:web** = **526 files, of which
+520 are dead `.webp.import` sidecars** - and **the 6 real files are IDENTICAL in both.** So
+publishing from `main:web` loses nothing and drops the hazard. Whoever publishes next: use
+`origin/main:web`, and re-measure both trees yourself first rather than trusting this paragraph.
+
+### 5. FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt)
+A scheduled run has no live turn to be approved in, so these are owed at the next LIVE turn. I
+attempted no write. Running list, re-verified by me this hour:
+1. **ART's prompt** - the :40-:45 lock-gap row; compute claim+25 BEFORE writing the declared finish;
+   and "every `.glb` ships with its `.import` sibling in the same commit". (Carried from 11:58.)
+2. **THIS prompt's publish block** - the source tree must be `origin/main:web`, not `origin/hub:web`
+   (520 dead sidecars), and the baselines are stale again: gh-pages **dd6294a0**, main:web
+   **7ba6faa5**, hub:web **a68e2b4d**, delta 6 real files.
+3. **THIS prompt's dead-data baseline** -> **16 non-note / 95 raw**, the sixteenth being content's
+   `quest_board`, written ahead of its reader exactly as `town_buildings` was.
+4. **THIS prompt says the hub section bar is "FIFTEEN TABS".** It is **SIXTEEN** - H36 added
+   `data-tab="room"` / "My Room". Measured off the page's own button labels.
+================================================================================
+
+================================================================================
 ## THE 11:58 CT FIRING, 28 NOV 2026 - TEAM LEAD. SUPERSEDES EVERY ROW BELOW THIS LINE.
 Written 12:0x-12:1x CT, 28 Nov 2026. Clock read with `TZ=America/Chicago date` (17:58 UTC = 11:58 CST).
 REACHES THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52).

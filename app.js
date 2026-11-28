@@ -17,6 +17,9 @@
 
 const URL_SNAPSHOT = "https://paaukwaffaamazgrndbv.supabase.co/rest/v1/snapshot?select=payload,updated_at";
 const KEY = "sb_publishable_q2Kn3weLLeYYXGAiow_4vw_3serNQlc";
+// The auth endpoints (settings, token, authorize) need the legacy anon JWT, not the publishable key.
+// The REST endpoints (snapshot, suggestions, hub_actions) accept either. Both are public/non-secret.
+const AUTH_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhYXVrd2FmZmFhbWF6Z3JuZGJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ0NTEyMjksImV4cCI6MjExMDAyNzIyOX0.LVJczQ48ucqawKmb0y-PjBvZyop9tO9R_9s2RcxZXpI";
 const REFRESH_MS = 60000;      // the game publishes every 60 s
 const STALE_MIN = 5;           // past this, the town has gone quiet (the game is likely off)
 const TIMEOUT_MS = 12000;      // a fetch that hangs is a failed fetch
@@ -5789,7 +5792,7 @@ function finderOpen(r) {
   async function authCall(path, body) {
     const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), TIMEOUT_MS);
     try {
-      const r = await fetch(AUTH + path, { method: "POST", headers: { "Content-Type": "application/json", apikey: KEY }, body: JSON.stringify(body), signal: ctl.signal });
+      const r = await fetch(AUTH + path, { method: "POST", headers: { "Content-Type": "application/json", apikey: AUTH_KEY }, body: JSON.stringify(body), signal: ctl.signal });
       if (!r.ok) throw new Error("sign-in server " + r.status);
       return await r.json();
     } finally { clearTimeout(t); }
@@ -5826,12 +5829,12 @@ function finderOpen(r) {
   }
   async function logout() {
     const t = session && session.access_token; saveSession(null); rows = []; clearInterval(pollT); pollT = 0;
-    if (t) { try { await fetch(AUTH + "/logout", { method: "POST", headers: { apikey: KEY, Authorization: "Bearer " + t } }); } catch (e) {} }
+    if (t) { try { await fetch(AUTH + "/logout", { method: "POST", headers: { apikey: AUTH_KEY, Authorization: "Bearer " + t } }); } catch (e) {} }
     paint();
   }
   async function probeAuth() {
     try {
-      const r = await fetch(AUTH + "/settings", { headers: { apikey: KEY } });
+      const r = await fetch(AUTH + "/settings", { headers: { apikey: AUTH_KEY } });
       const j = r.ok ? await r.json() : null;
       authOn = j && j.external ? !!j.external.twitch : false;
     } catch (e) { authOn = null; }
@@ -5851,7 +5854,7 @@ function finderOpen(r) {
   async function rest(path, opt) {
     const t = await token(); if (!t) throw new Error("signed out");
     const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), TIMEOUT_MS);
-    try { return await fetch(REST + path, Object.assign({ signal: ctl.signal }, opt, { headers: Object.assign({ apikey: KEY, Authorization: "Bearer " + t, "Content-Type": "application/json" }, opt && opt.headers) })); }
+    try { return await fetch(REST + path, Object.assign({ signal: ctl.signal }, opt, { headers: Object.assign({ apikey: AUTH_KEY, Authorization: "Bearer " + t, "Content-Type": "application/json" }, opt && opt.headers) })); }
     finally { clearTimeout(tm); }
   }
   async function pull() {

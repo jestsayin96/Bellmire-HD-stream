@@ -24412,3 +24412,45 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - LOOKED AT: step_3 (level 5, 100%). Plate, name, 12-cell bar and "24 to go" now clear of the roller header with room above; lines start under the rule, no clipping.
 - Not done: L74 line-cap re-measure with the band at 100/125/150 (125/150 not rendered this cycle) - carried to 03:52.
 - Decision for Mr. E: none. Not ticked - the team lead ticks.
+
+## U217 - STAND-DOWN 2026-11-28T04:53:00-06:00 (HUD, no edit, no lock, no Godot, no commit)
+Blender MCP (localhost:9876) refused connection, so the lock file in R, Godot and all git were unreachable. R is not mounted on device_bash (only bellmire-hud), so I could not read docs/RUN_LOCK.txt and did NOT claim the lock. Standing item (town level/progression display in hud_dock.gd + ui_theme.gd) untouched. UNCOMMITTED: this line is the only change (git over device_bash would leave .lock files). Next firing: if the bridge is back, read R lock, take the town-level display item.
+
+## U218 - STAND-DOWN 2026-11-28T05:52:20-06:00 (HUD, no edit, no lock, no Godot, no commit)
+Blender MCP (localhost:9876) refused connection again (second consecutive firing, U217 was 04:53). With it down, R's docs/RUN_LOCK.txt, Godot and all git are unreachable: R is not mounted on device_bash (only bellmire-hud), so I could not read the lock and did NOT claim it. I did not commit from device_bash either - it cannot delete, so git there would leave .lock files that break the next real git call. This note is therefore UNCOMMITTED in W2's working tree; the next firing with a live bridge should commit it with U217.
+- Standing item unchanged: town level and progression display (hud_dock.gd + ui_theme.g) - U219 (03:52 cycle) shipped the band; L74 line-cap re-measure at 125/150% still carried.
+- Next firing: check bridge first; if up, read R lock, claim by process check, re-measure at 125/150, commit U217+U218+gate logs.
+- Decision for Mr. E: the Blender addon/server on cruzader needs restarting (it has been down since about 03:00 per team lead rows). Nothing else.
+
+## U220 - STAND-DOWN 2026-11-28T06:53:30-06:00 (HUD, no edit, no lock, no Godot, no commit)
+Blender MCP (localhost:9876) refused connection a third consecutive firing (U217 04:53, U218 05:52, now 06:53). Lock file in R, Godot and all git are unreachable; R is not mounted on device_bash (only bellmire-hud), so I could not read docs/RUN_LOCK.txt and did NOT claim the lock. device_bash git in W2 fails (worktree gitdir is a Windows path), so U217/U218/U220 notes and U219 gate logs are still UNCOMMITTED in W2's working tree.
+- Standing item unchanged: town level/progression display (U219 shipped band); L74 re-measure at 125/150% still carried.
+- Next firing: check bridge first; if up, read R lock, claim by process check, re-measure at 125/150, commit U217+U218+U220 + gate logs.
+- Decision for Mr. E: restart the Blender MCP addon/server on cruzader (down since about 03:00).
+
+## U221 - STAND-DOWN 2026-11-28T07:54:00-06:00 (HUD, no edit, no lock, no Godot, no commit)
+Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U217 04:53, U218 05:52, U220 06:53, now 07:53). R's docs/RUN_LOCK.txt, Godot and all git are unreachable (R not mounted on device_bash; the worktree's .git pointer is a Windows path). I did NOT claim the lock and did not commit from device_bash (would leave .lock files). This note is uncommitted until the bridge returns.
+- Standing item unchanged: town level/progression display (U219 shipped the band); L74 re-measure at 125/150% still carried.
+- Next firing: check bridge first; if up, read R lock, process-check, claim with declared finish, re-measure at 125/150, commit U217+U218+U220+U221 + gate logs.
+- Decision for Mr. E: restart the Blender MCP addon/server on cruzader (down since about 03:00).
+
+## U222 - STAND-DOWN 2026-11-28T08:53:00-06:00 (HUD)
+- Blender MCP (localhost:9876) refused the connection again, so there is no git, no Godot and no lock check or claim. R is not mounted on device_bash. I claimed nothing and edited no .gd file, since an unvalidated edit could break the parse.
+- Uncommitted in W2: the U217/U218/U220/U221 notes and gate logs, plus this line.
+- Next firing: probe the bridge first. If it is up, read R's lock and check for a Godot process, claim with a declared finish, commit everything above, then re-measure L74 at 125% and 150%.
+- Mr. E decision: restart the Blender MCP addon/server on cruzader. It has been down since about 03:00.
+
+## U223 - STAND-DOWN 2026-11-28T09:53:00-06:00 (HUD)
+- Blender MCP (localhost:9876) still refuses the connection, so there is no git, no Godot, and no lock check or claim. R is not mounted on device_bash. I claimed nothing and edited no .gd file.
+- Uncommitted in W2: the U217/U218/U220/U221/U222 notes and gate logs, plus this line.
+- Next firing: probe the bridge first. If it is up, read R's lock, check for a Godot process, claim with a declared finish, commit everything above, then re-measure L74 at 125% and 150%.
+- Mr. E decision: restart the Blender MCP addon/server on cruzader (down since about 03:00).
+
+## U224 - HUD 10:52 CT 28 Nov: TOWN BAND AT 100/125/150% (L74 carry) + TIER NAME NO LONGER ELIDED EARLY
+- Item: standing town-first item; the 125/150% re-measure carried since U218/U219. Bridge returned (U217-U223 were stand-downs, notes committed with this).
+- Lock: free at 10:53 (chat bot IDLE 10:51:01, tasklist Godot=0). Claimed 10:53:33 (declared 10:56 / 11:01, cap 11:08), relaunch refreshed 10:55:44, IDLE 10:56:42. No crossing into game build's :07.
+- Probe tools/_u224_scale.gd (windowed 1920x1080, renown 90, UiTheme scale 1.0/1.25/1.5): band inside sheet at all three, 0 fails, 0 SCRIPT ERROR, parse gate 0 errors (_u224.log, _u224_parse.log; pre-fix run kept as _u224a.log).
+- FOUND BY LOOKING at the 150% frame (the tightest: band 43 px of a 208 px sheet): "A MARKET-DAY TOWN" was elided to "A MARKET...". Fix in hud_dock.gd _town_band (+6 lines): compute the name's full width first and narrow the tier bar (floor 84 px) before the name is trimmed.
+- RESULT at 150%: now "A MARKET-DAY..." - better, still cut. The bar is at its floor. NOT DONE: for the longest tier names at 150%, also step the name font down (~85%) or move "N to go" under the name; carried to 11:52 (U225). 100% and 125% not re-looked at after the fix; numbers unchanged.
+- Looked at: renders/cycles/20261128_u224/s150.png (before: "A MARKET...", after: "A MARKET-DAY...").
+- Decision for Mr. E: none. Not ticked - the team lead ticks.

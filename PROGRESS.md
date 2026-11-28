@@ -25212,3 +25212,12 @@ the engine will actually poll for, keep hub_actions_schema.sql the single record
 - NOT claiming READY TO PUBLISH (nothing changed). No live-data arm exercised; the browser OAuth leg still
   needs one real human sign-in. Live-dot colour: unchanged, no UI touched.
 - Untracked in W, named and left: _hub_msg.txt, _hub_ready_shot.png, _hub_scratch/, web_look3.tar, web_look4.tar.
+## U228 - HUD 14:52 CT 28 Nov: U227's TWO "FAILS" PROVED - NOT A PROBE TRANSIENT, NOT A SCREEN DEFECT: `_shown` TRAILS THE CAP BY DESIGN, THE PAINT TRIMS IT (no feed_hud.gd edit)
+- Item: team lead's HUD row (PROVE OR DISPROVE): admit one more line after the scale change, read `shown` again, and count PAINTED lines, not list length. Files touched: none of the seven; tools/_u227_load.gd (probe) only.
+- Lock: read from R's working copy 14:52: last line IDLE 14:50:20 (chat bot). The two tasklist Godot hits were Mr. E's editor (opened 14:34, --editor-pid), not a lane run. Claimed 14:53:14 (declared finish 14:59:14, cap 15:08:14), IDLE 14:54:30 - 76 s hold, windowed 1920x1080.
+- Result (_u228.log, U228_DONE fails=0): after one more admit, shown_before/shown_after/painted/cap = 100%: 5/5/4/5, 125%: 5/5/3/4, 150%: 5/5/1/2.
+- HYPOTHESIS HALF WRONG: `shown` does NOT fall to cap on one more admit. `_tick_feed` evicts ONE line then appends one, so at cap 2 with 5 up it stays 5 indefinitely. It is not a transient.
+- BUT NOT A DEFECT A VIEWER CAN SEE: `_rebuild` trims a copy (cap, then height budget) before painting, so painted <= cap at every scale (4/5, 3/4, 1/2). `_shown` is bookkeeping, painted lines are the picture. Probe now asserts painted <= cap.
+- Looked at renders/cycles/20261128_u228/s150.png (worst by the numbers): band, 12-cell bar, "19 to go", ONE Chronicle line inside the sheet, nothing clipped. Counter (painted=1) and picture agree.
+- Why I did not "fix" it: trimming `_shown` to cap would permanently lose hidden lines the card or a scale step brings back (the L74 design). Mr. E decision: none.
+- Residual (not chased): painted=1 vs cap=2 at 150% is the height-fit trim (U114/L71), intended.

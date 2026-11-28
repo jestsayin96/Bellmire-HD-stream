@@ -1,0 +1,590 @@
+{
+ "errors": [],
+ "families": 8,
+ "order": "YXZ",
+ "premise": {
+  "slotX_dot_worlddown": 1.0,
+  "slotY_dot_worldfwd": 0.9885
+ },
+ "register": {
+  "axe": {
+   "axis_dot_longaxis": 1.0,
+   "bases_equal": true,
+   "elongation": 2.335,
+   "engine_mirrored": false,
+   "family": "axe",
+   "held_rot_deg_from_gear_gd": [
+    "0",
+    "0",
+    "0"
+   ],
+   "is_roll_about_long_axis": true,
+   "long_axis": "Z",
+   "mesh_extent_xyz": [
+    0.3814,
+    0.1863,
+    0.8903
+   ],
+   "model": "assets/gear/dungeon/axe_common.glb",
+   "relative_axis_mesh": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "relative_rotation_deg": 0.0,
+   "roll_applied_deg": 0.0,
+   "rule_under_test": "C . R_godot(YXZ) . C^-1",
+   "tier": "common",
+   "verts": 296,
+   "views": {
+    "back": {
+     "added_px_rule": 2855,
+     "added_px_weaponfit": 2855,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94968,
+     "opaque_rule": 97617,
+     "opaque_wf": 97617
+    },
+    "front": {
+     "added_px_rule": 3124,
+     "added_px_weaponfit": 3124,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94208,
+     "opaque_rule": 96858,
+     "opaque_wf": 96858
+    },
+    "side": {
+     "added_px_rule": 1283,
+     "added_px_weaponfit": 1283,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 81266,
+     "opaque_rule": 81266,
+     "opaque_wf": 81266
+    }
+   },
+   "visibly_different": false,
+   "weaponfit_rule": "Matrix.Identity (never calibrated)",
+   "worst_moved_frac_of_weapon": 0.0,
+   "worst_moved_px_AB": 0
+  },
+  "axeDouble": {
+   "axis_dot_longaxis": 1.0,
+   "bases_equal": true,
+   "elongation": 1.626,
+   "engine_mirrored": false,
+   "family": "axeDouble",
+   "held_rot_deg_from_gear_gd": [
+    "0",
+    "0",
+    "0"
+   ],
+   "is_roll_about_long_axis": true,
+   "long_axis": "Z",
+   "mesh_extent_xyz": [
+    0.5477,
+    0.1863,
+    0.8903
+   ],
+   "model": "assets/gear/dungeon/axeDouble_common.glb",
+   "relative_axis_mesh": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "relative_rotation_deg": 0.0,
+   "roll_applied_deg": 0.0,
+   "rule_under_test": "C . R_godot(YXZ) . C^-1",
+   "tier": "common",
+   "verts": 330,
+   "views": {
+    "back": {
+     "added_px_rule": 4179,
+     "added_px_weaponfit": 4179,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94968,
+     "opaque_rule": 98885,
+     "opaque_wf": 98885
+    },
+    "front": {
+     "added_px_rule": 4424,
+     "added_px_weaponfit": 4424,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94208,
+     "opaque_rule": 98118,
+     "opaque_wf": 98118
+    },
+    "side": {
+     "added_px_rule": 1644,
+     "added_px_weaponfit": 1644,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 81266,
+     "opaque_rule": 81266,
+     "opaque_wf": 81266
+    }
+   },
+   "visibly_different": false,
+   "weaponfit_rule": "Matrix.Identity (never calibrated)",
+   "worst_moved_frac_of_weapon": 0.0,
+   "worst_moved_px_AB": 0
+  },
+  "crossbow": {
+   "axis_dot_longaxis": 0.5736,
+   "bases_equal": false,
+   "elongation": 1.067,
+   "engine_mirrored": true,
+   "family": "crossbow",
+   "held_rot_deg_from_gear_gd": [
+    "-90",
+    "35",
+    "90"
+   ],
+   "is_roll_about_long_axis": false,
+   "long_axis": "X",
+   "mesh_extent_xyz": [
+    0.691,
+    0.6478,
+    0.2284
+   ],
+   "model": "assets/gear/dungeon/crossbow_common.glb",
+   "relative_axis_mesh": [
+    -0.5736,
+    0.0,
+    -0.8192
+   ],
+   "relative_rotation_deg": 90.0,
+   "roll_applied_deg": 35.0,
+   "rule_under_test": "C . R_godot(YXZ) . C^-1",
+   "tier": "common",
+   "verts": 745,
+   "views": {
+    "back": {
+     "added_px_rule": 5124,
+     "added_px_weaponfit": 949,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 5469,
+     "opaque_body": 94968,
+     "opaque_rule": 99618,
+     "opaque_wf": 95802
+    },
+    "front": {
+     "added_px_rule": 4823,
+     "added_px_weaponfit": 3250,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 7485,
+     "opaque_body": 94208,
+     "opaque_rule": 98508,
+     "opaque_wf": 95221
+    },
+    "side": {
+     "added_px_rule": 2906,
+     "added_px_weaponfit": 5353,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 8029,
+     "opaque_body": 81266,
+     "opaque_rule": 81315,
+     "opaque_wf": 85290
+    }
+   },
+   "visibly_different": true,
+   "weaponfit_rule": "hand-calibrated SLOT_ROT",
+   "worst_moved_frac_of_weapon": 1.4999,
+   "worst_moved_px_AB": 8029
+  },
+  "dagger": {
+   "axis_dot_longaxis": 1.0,
+   "bases_equal": true,
+   "elongation": 5.958,
+   "engine_mirrored": false,
+   "family": "dagger",
+   "held_rot_deg_from_gear_gd": [
+    "0",
+    "0",
+    "0"
+   ],
+   "is_roll_about_long_axis": true,
+   "long_axis": "Z",
+   "mesh_extent_xyz": [
+    0.1507,
+    0.104,
+    0.8978
+   ],
+   "model": "assets/gear/dungeon/dagger_common.glb",
+   "relative_axis_mesh": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "relative_rotation_deg": 0.0,
+   "roll_applied_deg": 0.0,
+   "rule_under_test": "C . R_godot(YXZ) . C^-1",
+   "tier": "common",
+   "verts": 128,
+   "views": {
+    "back": {
+     "added_px_rule": 1691,
+     "added_px_weaponfit": 1691,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94968,
+     "opaque_rule": 96516,
+     "opaque_wf": 96516
+    },
+    "front": {
+     "added_px_rule": 1750,
+     "added_px_weaponfit": 1750,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94208,
+     "opaque_rule": 95736,
+     "opaque_wf": 95736
+    },
+    "side": {
+     "added_px_rule": 438,
+     "added_px_weaponfit": 438,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 81266,
+     "opaque_rule": 81266,
+     "opaque_wf": 81266
+    }
+   },
+   "visibly_different": false,
+   "weaponfit_rule": "Matrix.Identity (never calibrated)",
+   "worst_moved_frac_of_weapon": 0.0,
+   "worst_moved_px_AB": 0
+  },
+  "hammer": {
+   "axis_dot_longaxis": 1.0,
+   "bases_equal": true,
+   "elongation": 1.631,
+   "engine_mirrored": false,
+   "family": "hammer",
+   "held_rot_deg_from_gear_gd": [
+    "0",
+    "0",
+    "0"
+   ],
+   "is_roll_about_long_axis": true,
+   "long_axis": "Z",
+   "mesh_extent_xyz": [
+    0.5293,
+    0.3274,
+    0.8632
+   ],
+   "model": "assets/gear/dungeon/hammer_common.glb",
+   "relative_axis_mesh": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "relative_rotation_deg": 0.0,
+   "roll_applied_deg": 0.0,
+   "rule_under_test": "C . R_godot(YXZ) . C^-1",
+   "tier": "common",
+   "verts": 384,
+   "views": {
+    "back": {
+     "added_px_rule": 5006,
+     "added_px_weaponfit": 5006,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94968,
+     "opaque_rule": 99668,
+     "opaque_wf": 99668
+    },
+    "front": {
+     "added_px_rule": 5389,
+     "added_px_weaponfit": 5389,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94208,
+     "opaque_rule": 99060,
+     "opaque_wf": 99060
+    },
+    "side": {
+     "added_px_rule": 4153,
+     "added_px_weaponfit": 4153,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 81266,
+     "opaque_rule": 81280,
+     "opaque_wf": 81280
+    }
+   },
+   "visibly_different": false,
+   "weaponfit_rule": "Matrix.Identity (never calibrated)",
+   "worst_moved_frac_of_weapon": 0.0,
+   "worst_moved_px_AB": 0
+  },
+  "shield": {
+   "axis_dot_longaxis": 1.0,
+   "bases_equal": true,
+   "elongation": 1.0,
+   "engine_mirrored": false,
+   "family": "shield",
+   "held_rot_deg_from_gear_gd": [
+    "0",
+    "0",
+    "0"
+   ],
+   "is_roll_about_long_axis": true,
+   "long_axis": "Z",
+   "mesh_extent_xyz": [
+    0.6879,
+    0.13,
+    0.6879
+   ],
+   "model": "assets/gear/dungeon/shield_common.glb",
+   "relative_axis_mesh": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "relative_rotation_deg": 0.0,
+   "roll_applied_deg": 0.0,
+   "rule_under_test": "C . R_godot(YXZ) . C^-1",
+   "tier": "common",
+   "verts": 854,
+   "views": {
+    "back": {
+     "added_px_rule": 2781,
+     "added_px_weaponfit": 2781,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94968,
+     "opaque_rule": 97406,
+     "opaque_wf": 97406
+    },
+    "front": {
+     "added_px_rule": 4924,
+     "added_px_weaponfit": 4924,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94208,
+     "opaque_rule": 96638,
+     "opaque_wf": 96638
+    },
+    "side": {
+     "added_px_rule": 2224,
+     "added_px_weaponfit": 2224,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 81266,
+     "opaque_rule": 81269,
+     "opaque_wf": 81269
+    }
+   },
+   "visibly_different": false,
+   "weaponfit_rule": "Matrix.Identity (never calibrated)",
+   "worst_moved_frac_of_weapon": 0.0,
+   "worst_moved_px_AB": 0
+  },
+  "staff": {
+   "axis_dot_longaxis": 1.0,
+   "bases_equal": true,
+   "elongation": 4.293,
+   "engine_mirrored": true,
+   "family": "staff",
+   "held_rot_deg_from_gear_gd": [
+    "0",
+    "0",
+    "90"
+   ],
+   "is_roll_about_long_axis": true,
+   "long_axis": "Z",
+   "mesh_extent_xyz": [
+    0.2111,
+    0.2062,
+    0.9065
+   ],
+   "model": "assets/gear/dungeon/staff_common.glb",
+   "relative_axis_mesh": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "relative_rotation_deg": 0.0,
+   "roll_applied_deg": 0.0,
+   "rule_under_test": "C . R_godot(YXZ) . C^-1",
+   "tier": "common",
+   "verts": 315,
+   "views": {
+    "back": {
+     "added_px_rule": 5872,
+     "added_px_weaponfit": 5872,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94968,
+     "opaque_rule": 99750,
+     "opaque_wf": 99750
+    },
+    "front": {
+     "added_px_rule": 9533,
+     "added_px_weaponfit": 9533,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94208,
+     "opaque_rule": 98961,
+     "opaque_wf": 98961
+    },
+    "side": {
+     "added_px_rule": 12174,
+     "added_px_weaponfit": 12174,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 81266,
+     "opaque_rule": 81319,
+     "opaque_wf": 81319
+    }
+   },
+   "visibly_different": false,
+   "weaponfit_rule": "hand-calibrated SLOT_ROT",
+   "worst_moved_frac_of_weapon": 0.0,
+   "worst_moved_px_AB": 0
+  },
+  "sword": {
+   "axis_dot_longaxis": 1.0,
+   "bases_equal": true,
+   "elongation": 3.249,
+   "engine_mirrored": false,
+   "family": "sword",
+   "held_rot_deg_from_gear_gd": [
+    "0",
+    "0",
+    "0"
+   ],
+   "is_roll_about_long_axis": true,
+   "long_axis": "Z",
+   "mesh_extent_xyz": [
+    0.3937,
+    0.1267,
+    1.2791
+   ],
+   "model": "assets/gear/dungeon/sword_common.glb",
+   "relative_axis_mesh": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "relative_rotation_deg": 0.0,
+   "roll_applied_deg": 0.0,
+   "rule_under_test": "C . R_godot(YXZ) . C^-1",
+   "tier": "common",
+   "verts": 279,
+   "views": {
+    "back": {
+     "added_px_rule": 5400,
+     "added_px_weaponfit": 5400,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94968,
+     "opaque_rule": 100000,
+     "opaque_wf": 100000
+    },
+    "front": {
+     "added_px_rule": 5657,
+     "added_px_weaponfit": 5657,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 94208,
+     "opaque_rule": 99229,
+     "opaque_wf": 99229
+    },
+    "side": {
+     "added_px_rule": 1709,
+     "added_px_weaponfit": 1709,
+     "border_alpha_rule": 0.0,
+     "border_alpha_wf": 0.0,
+     "frame_outside_rule": 0,
+     "frame_outside_wf": 0,
+     "moved_px_AB": 0,
+     "opaque_body": 81266,
+     "opaque_rule": 81266,
+     "opaque_wf": 81266
+    }
+   },
+   "visibly_different": false,
+   "weaponfit_rule": "Matrix.Identity (never calibrated)",
+   "worst_moved_frac_of_weapon": 0.0,
+   "worst_moved_px_AB": 0
+  }
+ },
+ "sheet": "renders/art/_wf_basis/_sheet_basis_AB.png",
+ "tool": "_wf_basis_audit",
+ "verdict": "DIVERGENCE IS VISIBLE"
+}

@@ -1,0 +1,177 @@
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+01:48:25 | INFO: Data are loaded, start creating Blender stuff
+01:48:25 | INFO: Blender create Mesh node Cube.125
+01:48:25 | INFO: Blender create Mesh node Cube.126
+01:48:25 | INFO: Blender create Mesh node PrototypePete_body.020
+01:48:25 | INFO: Blender create Mesh node PrototypePete_head.001
+01:48:25 | INFO: Blender create Mesh node Cube.128
+01:48:25 | INFO: Blender create Mesh node Cube.127
+01:48:25 | INFO: Blender create Mesh node Cube.003
+01:48:25 | INFO: Blender create Mesh node Cylinder.280
+01:48:25 | INFO: Blender create Mesh node Cylinder.005
+01:48:25 | INFO: Blender create Mesh node Cylinder.010
+01:48:25 | INFO: Blender create Mesh node Cylinder.022
+01:48:25 | INFO: Blender create Mesh node Cube.11839
+01:48:25 | INFO: Blender create Mesh node Cube.12993
+01:48:25 | INFO: Blender create Mesh node Cube.124
+01:48:25 | INFO: Blender create Mesh node Plane.004
+01:48:25 | INFO: glTF import finished in 0.54s
+C:\hd adventure\bellmire-art\tools\art\_wf_basis_audit.py:148: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+01:48:25 | INFO: Data are loaded, start creating Blender stuff
+01:48:25 | INFO: Blender create Mesh node Cube.4512
+01:48:25 | INFO: glTF import finished in 0.00s
+01:48:25 | INFO: Data are loaded, start creating Blender stuff
+01:48:25 | INFO: Blender create Mesh node Cube.4512
+01:48:25 | INFO: glTF import finished in 0.00s
+01:48:25 | INFO: Data are loaded, start creating Blender stuff
+01:48:25 | INFO: Blender create Mesh node Cube.4512
+01:48:25 | INFO: glTF import finished in 0.00s
+00:03.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\sword_front_body.png'
+00:03.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\sword_front_wf.png'
+00:03.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\sword_front_rule.png'
+00:03.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\sword_side_body.png'
+00:04.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\sword_side_wf.png'
+00:04.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\sword_side_rule.png'
+00:04.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\sword_back_body.png'
+00:04.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\sword_back_wf.png'
+00:04.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\sword_back_rule.png'
+AUDIT sword     long=Z elong=3.249 rel=   0.0 deg roll_about_long=True  worst_moved=     0 frac=0.000
+01:48:28 | INFO: Data are loaded, start creating Blender stuff
+01:48:28 | INFO: Blender create Mesh node Cube.4408
+01:48:28 | INFO: glTF import finished in 0.00s
+01:48:28 | INFO: Data are loaded, start creating Blender stuff
+01:48:28 | INFO: Blender create Mesh node Cube.4408
+01:48:28 | INFO: glTF import finished in 0.00s
+01:48:28 | INFO: Data are loaded, start creating Blender stuff
+01:48:28 | INFO: Blender create Mesh node Cube.4408
+01:48:28 | INFO: glTF import finished in 0.00s
+00:05.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axe_front_body.png'
+00:05.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axe_front_wf.png'
+00:05.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axe_front_rule.png'
+00:05.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axe_side_body.png'
+00:05.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axe_side_wf.png'
+00:05.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axe_side_rule.png'
+00:06.031  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axe_back_body.png'
+00:06.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axe_back_wf.png'
+00:06.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axe_back_rule.png'
+AUDIT axe       long=Z elong=2.335 rel=   0.0 deg roll_about_long=True  worst_moved=     0 frac=0.000
+01:48:29 | INFO: Data are loaded, start creating Blender stuff
+01:48:29 | INFO: Blender create Mesh node Cube.4461
+01:48:29 | INFO: glTF import finished in 0.00s
+01:48:29 | INFO: Data are loaded, start creating Blender stuff
+01:48:29 | INFO: Blender create Mesh node Cube.4461
+01:48:29 | INFO: glTF import finished in 0.00s
+01:48:29 | INFO: Data are loaded, start creating Blender stuff
+01:48:29 | INFO: Blender create Mesh node Cube.4461
+01:48:29 | INFO: glTF import finished in 0.00s
+00:06.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\hammer_front_body.png'
+00:06.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\hammer_front_wf.png'
+00:06.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\hammer_front_rule.png'
+00:07.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\hammer_side_body.png'
+00:07.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\hammer_side_wf.png'
+00:07.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\hammer_side_rule.png'
+00:07.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\hammer_back_body.png'
+00:07.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\hammer_back_wf.png'
+00:07.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\hammer_back_rule.png'
+AUDIT hammer    long=Z elong=1.631 rel=   0.0 deg roll_about_long=True  worst_moved=     0 frac=0.000
+01:48:31 | INFO: Data are loaded, start creating Blender stuff
+01:48:31 | INFO: Blender create Mesh node Cube.4450
+01:48:31 | INFO: glTF import finished in 0.00s
+01:48:31 | INFO: Data are loaded, start creating Blender stuff
+01:48:31 | INFO: Blender create Mesh node Cube.4450
+01:48:31 | INFO: glTF import finished in 0.00s
+01:48:31 | INFO: Data are loaded, start creating Blender stuff
+01:48:31 | INFO: Blender create Mesh node Cube.4450
+01:48:31 | INFO: glTF import finished in 0.00s
+00:08.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\dagger_front_body.png'
+00:08.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\dagger_front_wf.png'
+00:08.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\dagger_front_rule.png'
+00:08.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\dagger_side_body.png'
+00:08.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\dagger_side_wf.png'
+00:08.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\dagger_side_rule.png'
+00:09.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\dagger_back_body.png'
+00:09.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\dagger_back_wf.png'
+00:09.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\dagger_back_rule.png'
+AUDIT dagger    long=Z elong=5.958 rel=   0.0 deg roll_about_long=True  worst_moved=     0 frac=0.000
+01:48:33 | INFO: Data are loaded, start creating Blender stuff
+01:48:33 | INFO: Blender create Mesh node Cube.4506
+01:48:33 | INFO: glTF import finished in 0.00s
+01:48:33 | INFO: Data are loaded, start creating Blender stuff
+01:48:33 | INFO: Blender create Mesh node Cube.4506
+01:48:33 | INFO: glTF import finished in 0.00s
+01:48:33 | INFO: Data are loaded, start creating Blender stuff
+01:48:33 | INFO: Blender create Mesh node Cube.4506
+01:48:33 | INFO: glTF import finished in 0.00s
+00:09.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\staff_front_body.png'
+00:09.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\staff_front_wf.png'
+00:10.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\staff_front_rule.png'
+00:10.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\staff_side_body.png'
+00:10.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\staff_side_wf.png'
+00:10.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\staff_side_rule.png'
+00:10.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\staff_back_body.png'
+00:10.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\staff_back_wf.png'
+00:11.031  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\staff_back_rule.png'
+AUDIT staff     long=Z elong=4.293 rel=   0.0 deg roll_about_long=True  worst_moved=     0 frac=0.000
+01:48:34 | INFO: Data are loaded, start creating Blender stuff
+01:48:34 | INFO: Blender create Mesh node Cube.4447
+01:48:34 | INFO: glTF import finished in 0.00s
+01:48:34 | INFO: Data are loaded, start creating Blender stuff
+01:48:34 | INFO: Blender create Mesh node Cube.4447
+01:48:34 | INFO: glTF import finished in 0.00s
+01:48:34 | INFO: Data are loaded, start creating Blender stuff
+01:48:34 | INFO: Blender create Mesh node Cube.4447
+01:48:34 | INFO: glTF import finished in 0.00s
+00:11.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\crossbow_front_body.png'
+00:11.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\crossbow_front_wf.png'
+00:11.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\crossbow_front_rule.png'
+00:11.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\crossbow_side_body.png'
+00:11.906  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\crossbow_side_wf.png'
+00:12.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\crossbow_side_rule.png'
+00:12.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\crossbow_back_body.png'
+00:12.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\crossbow_back_wf.png'
+00:12.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\crossbow_back_rule.png'
+AUDIT crossbow  long=X elong=1.067 rel=  90.0 deg roll_about_long=False worst_moved=  8029 frac=1.500
+01:48:36 | INFO: Data are loaded, start creating Blender stuff
+01:48:36 | INFO: Blender create Mesh node Cube.4405
+01:48:36 | INFO: glTF import finished in 0.00s
+01:48:36 | INFO: Data are loaded, start creating Blender stuff
+01:48:36 | INFO: Blender create Mesh node Cube.4405
+01:48:36 | INFO: glTF import finished in 0.00s
+01:48:36 | INFO: Data are loaded, start creating Blender stuff
+01:48:36 | INFO: Blender create Mesh node Cube.4405
+01:48:36 | INFO: glTF import finished in 0.00s
+00:12.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axeDouble_front_body.png'
+00:12.906  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axeDouble_front_wf.png'
+00:13.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axeDouble_front_rule.png'
+00:13.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axeDouble_side_body.png'
+00:13.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axeDouble_side_wf.png'
+00:13.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axeDouble_side_rule.png'
+00:13.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axeDouble_back_body.png'
+00:13.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axeDouble_back_wf.png'
+00:14.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\axeDouble_back_rule.png'
+AUDIT axeDouble long=Z elong=1.626 rel=   0.0 deg roll_about_long=True  worst_moved=     0 frac=0.000
+01:48:37 | INFO: Data are loaded, start creating Blender stuff
+01:48:37 | INFO: Blender create Mesh node Cylinder.298
+01:48:37 | INFO: glTF import finished in 0.00s
+01:48:37 | INFO: Data are loaded, start creating Blender stuff
+01:48:37 | INFO: Blender create Mesh node Cylinder.298
+01:48:37 | INFO: glTF import finished in 0.00s
+01:48:37 | INFO: Data are loaded, start creating Blender stuff
+01:48:37 | INFO: Blender create Mesh node Cylinder.298
+01:48:37 | INFO: glTF import finished in 0.00s
+00:14.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\shield_front_body.png'
+00:14.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\shield_front_wf.png'
+00:14.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\shield_front_rule.png'
+00:14.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\shield_side_body.png'
+00:15.031  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\shield_side_wf.png'
+00:15.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\shield_side_rule.png'
+00:15.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\shield_back_body.png'
+00:15.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\shield_back_wf.png'
+00:15.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\_wf_basis\_tmp\shield_back_rule.png'
+AUDIT shield    long=Z elong=1.0 rel=   0.0 deg roll_about_long=True  worst_moved=     0 frac=0.000
+AUDIT VERDICT DIVERGENCE IS VISIBLE errors=0
+AUDIT DONE
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit

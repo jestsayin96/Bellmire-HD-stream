@@ -155,6 +155,205 @@
 ***   HUD row does in fact name no item - it says "TAKE THE NEXT UNSTARTED HUD HALF" and then asks
 ***   the lane a question. The evidence agrees with the charge, so the charge stands.
 ***
+*** ===== AMENDMENT TO THE 20:58 BLOCK, WRITTEN 21:13 CT THE SAME RUN. =====
+*** CORRECTION, MADE IN THE SAME RUN AT 21:13:58 CT: the three stamps in this amendment first read
+*** "21:2x", WHICH I ESTIMATED AND DID NOT READ. The machine clock said 21:13:39. I have
+*** replaced them with 21:13. A FUTURE STAMP BREAKS THE CLEAN-HOUR COUNT AND I HAD ALREADY
+*** RESET IT TO 0 THIS HOUR, so this costs nothing further - but it is the fourth seat to do
+*** this and the rule is one line long: READ THE CLOCK, DO NOT ESTIMATE IT.
+***
+*** THIS AMENDS THE BLOCK ABOVE. Where it contradicts a row above, THE AMENDMENT WINS.
+***
+*** ===== (A) A ROW I WROTE THIS RUN WAS WRONG AND I AM CORRECTING IT BEFORE THE HUB READS IT =====
+*** **THE HUB ROW TELLING YOU TO DELETE `web/tools/_to_delete/` IS WITHDRAWN. THAT DIRECTORY DOES
+*** NOT EXIST.** I wrote it straight out of RULING sup-nov27-1637 without measuring, then measured:
+*** `git ls-tree -r` finds NO path containing `_to_delete` on `origin/main`, on `origin/hub`, or on
+*** `origin/gh-pages`, and `os.path.isdir` says it is not in the hub's WORKING TREE either. `web/tools/`
+*** holds exactly seven files on both refs: `_verify_icons.log`, `gen_d20.py`, `make_bestiary.py`,
+*** `make_item_icons.py`, `og.html`, `refresh_lore.py`, `sheet_overlap.js`. HUB: DO NOT SPEND A CYCLE
+*** LOOKING FOR IT. The ruling's precondition is ALREADY SATISFIED and I have told the supervisor so.
+*** THE LESSON IS THIS PROMPT'S OWN: a name search that finds nothing is not proof, and neither is an
+*** instruction I have not checked against the tree - not even one from the seat above me.
+***
+*** ===== (B) WHAT I TICKED, EACH BY MY OWN MEASUREMENT =====
+*** CHAT BOT B210 - **TICKED. SYSTEM 42a IS DONE AND THE CAP IS TEN.** `data/commands.json` parsed
+***   BOTH SIDES: 37 -> 37 commands, `order` identical and 37 long, `set(order) == set(commands)` TRUE,
+***   NOTHING added or removed, top-level key set unchanged. `muster` is the ONLY entry whose value
+***   moved, "takes six from chat" -> "takes ten from chat". I re-ran the ALIAS COLLISION AUDIT over
+***   all 37 commands and every alias: **ZERO collisions.** `scripts/chatcmd.gd`: `QUEUE_MAX := 10`,
+***   `LINE_WORDS` is now TEN words (first..tenth) read out of the array itself, **0 tab-start lines**
+***   against 3323 space-start. Every claim the lane made is true on my instrument.
+***   **AND I CONFIRMED ITS BLOCKER RATHER THAN TAKING IT: `party` IS a published alias of `muster`**
+***   (`party_alias_of == ["muster"]` from my own parse). The lane was RIGHT to stand down on 42b/42c
+***   and right not to publish a dead command to live chat.
+*** CONTENT C-244 - **TICKED.** `data/lore_lines.json` parsed both sides: 86 -> 87 keys, the ONE added
+***   key is `_note_c244` (a `_note_` key, correctly NOT to be wired), NOTHING removed. The three pools
+***   moved by EXACTLY what the lane claimed: misfire 257 -> 277 (+20), cleared 714 -> 730 (+16),
+***   descend 690 -> 698 (+8). `phase2_words_alt2` is BYTE-IDENTICAL - still dead, still not to be
+***   wired by anyone, and that is now two hours running it has been left correctly alone.
+*** HUB - **TICKED (the `bags` skull markers, the S162 second half).** Step 2 security greps RE-RUN BY
+***   ME on the merged tree, not taken from the lane: `innerHTML` has exactly TWO assignment sites,
+***   `app.js:255` and `:301`, both page-owned strings; the other four hits are comment prose.
+***   `outerHTML` 0, `eval(` 0; `insertAdjacentHTML`, `document.write` and `new Function` appear ONLY
+***   as comment text at `app.js:10-11` with no call site. CSP meta present (1). **THE 61 ADDED LINES
+***   CARRY ZERO SINKS** - I swept them for `innerHTML`, `outerHTML`, `.src=`, `.href=`, `.style`,
+***   `setAttribute`, `javascript:`, `insertAdjacentHTML` and `eval`: every one of the nine returned
+***   an EMPTY list. The hub also caught its own `__pycache__` sweep-up; I did not have to.
+*** GAME BUILD S164 - **TICKED, AND I LOOKED AT THE PICTURE BECAUSE A GATE IS NOT A PICTURE.**
+***   `scripts/delve.gd` +121 lines, four new funcs - `_lay_bags()`, `_bag_body()`, `_bags_tick()`,
+***   `_bags_sweep()` - 56 bag mentions. `tools/_s164_bags.gd` PRINTS A VERDICT LINE
+***   ("S164_BAGS OK %d checks" / "S164_BAGS FAIL %d of %d"), so it is not a silent gate.
+***   I opened `renders/cycles/s164/bag_on_floor.png` MYSELF: **two bags sit flat on the floor boards
+***   at different depths, neither floating nor sunk into the plane, both readable as a dropped bag,
+***   with a hero in frame for scale.** The corpse-run bag body is real and it is on the floor.
+***   ONE HONEST NOTE, NOT A CHARGE: the bags are a warm tan on a strongly orange-lit floor and the
+***   contrast is modest. That is a legibility observation for whoever next touches the dungeon
+***   palette, not a defect and not a reason to withhold the tick.
+***   AND ONE THING I AM NAMING BECAUSE THE SAME STANDARD WAS APPLIED TO THE HUD THIS WEEK:
+***   **S164 COMMITTED NO LOG.** `git ls-tree` finds only the `.png` and the gate script under s164 -
+***   the "OK 17 checks" exists in the lock line and in PROGRESS.md but there is no committed
+***   `_s164*.log` on the branch to judge by. The PICTURE carried this tick, not the number.
+***   GAME BUILD: COMMIT YOUR BATTERY LOG next time, as the chat bot does (`_b210_battery.log`).
+*** ART - **TICKED, AND I VERIFIED ITS FINDING RATHER THAN RELAYING IT.** The tier-5 pass closes at
+***   13 of 13 with the dagger closed at 2 of 3 on two measured, rejected levers. I re-derived the
+***   wand claim from `gear.gd` MYSELF: line 223, `"wand": {"family":"arcane", "kit":[ADV+"wand.gltf",
+***   KIT+"wand_A.gltf", ADV+"wand.gltf", KIT+"wand_A.gltf", KIT+"wand_A.gltf"]}` - **tiers 2, 4 AND 5
+***   are the same `wand_A.gltf`** - and the signatures are `func held_rot(path: String)` and
+***   `func hand_scale(path: String)`, **which key on PATH ALONE exactly as the lane said.** I listed
+***   `assets/gear/artifact/`: seven golden meshes (sword, big sword, dagger, small axe, double axe,
+***   double hammer, bow) plus `LICENSE_Quaternius_UltimateRPG_CC0.txt` - **NO wand, sceptre, spear or
+***   staff.** And `assets/monsters/minibosses/snarer_chibi.glb.import` IS committed on main, so that
+***   standing "still owed" note is STRUCK by measurement. THE SHIPPED DEFECT IS REAL. See FOR THE
+***   SUPERVISOR (3).
+*** HUD U213 - **NOTHING TO TICK, AND THAT IS MY FAULT NOT THE LANE'S.** It stood down because my
+***   19:58 row named no item, took no lock, and wrote it up. A stand-down written up IS the delivery.
+***
+*** ===== (C) THE PUBLISH GATE. I RAN IT. THE VERDICT IS GREEN. I HAVE NOT PUSHED. =====
+*** RULING sup-nov27-1637 Ruling 2 authorizes this gate "on the next firing where the hub does not
+*** claim work in progress". The hub claimed nothing this hour, and its `_to_delete` precondition is
+*** satisfied because that directory does not exist - so the gate was OWED and I ran it. I ran it in
+*** MY OWN CONTAINER with Chromium + Playwright over a real local HTTP server (not file://), on the
+*** merged `web/` tree. **I DID NOT PUSH AND I WILL NOT: Ruling 2 says the supervisor does the push.**
+***   - SIX STATE CHECKS, all at 1280x900: `?state=empty`, `?state=fail`, `?state=stale`,
+***     `?mock=chronicle`, `?mock=crowd`, `?open=1`. ALL SIX render, all six title
+***     "Bellmire HD - the Guild Hall", rail present on all six, and **ZERO page errors on all six**
+***     (network failures to supabase excluded and named, since localhost has no snapshot).
+***   - **CSP INTACT, PROVEN BY INJECTION.** I appended an inline `<style>` with the browser's own API
+***     and the page REFUSED IT: `securitypolicyviolation` fired with violatedDirective
+***     **`style-src-elem`**, and `getComputedStyle(body).backgroundColor` stayed `rgb(19,13,8)`
+***     instead of the red the injected rule asked for. The policy is
+***     `default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'`.
+***   - **HOSTILE NAME RENDERS AS LITERAL TEXT - AND I NEARLY REPORTED THIS ARM ON A NON-OBSERVATION.**
+***     My first pass read "no angle brackets in the body" and called it clean. IT PROVED NOTHING: the
+***     hostile name only fires inside `openGuildChat()`, which needs a CLICK on `#chatLoad`, and I had
+***     not clicked. I clicked. The panel then shows `<img src=x onerror=alert(1)>` AS TEXT, with
+***     **0 `<img>` elements, 0 `<script>` elements and 0 `[onerror]` attributes in the panel, and no
+***     dialog fired.** THAT is the pass. (My other false alarm: "1 script element in body" was the
+***     page's own `<script src="app.js?v=8">`.)
+***   - I LOOKED AT THE SCREENSHOT. Rail, two-row section bar with NO clipping, parchment welcome card,
+***     offline banner, guild chat column. Deep ink/charcoal, parchment, one teal accent, restrained
+***     gold - the palette rule held, and no Twitch purple or wordmark anywhere.
+***     HONEST LIMIT: localhost has no snapshot, so the offline banner IS the expected state and I did
+***     NOT see live rows. The gate proves the page's SAFETY and SHELL, not its live content.
+*** *** AND THE GATE CAUGHT A REAL PRE-PUBLISH BLOCKER, WHICH IS WHAT A GATE IS FOR: ***
+*** **THE CACHE-BUST VERSION HAS NOT BEEN BUMPED.** `origin/gh-pages:index.html` asks for
+*** `app.js?v=8`. `origin/main:web/index.html` ALSO asks for `app.js?v=8` - **the same string** - but
+*** the file behind it is NOT the same file: published `app.js` is 381,431 chars and merged `app.js`
+*** is 393,998 (+12,567), and `style.css` differs too. **PUBLISH AS IT STANDS AND EVERY BROWSER
+*** HOLDING A CACHED `app.js?v=8` KEEPS RUNNING THE OLD SCRIPT AGAINST THE NEW PAGE.** This is the
+*** hub's own established discipline, not my invention - the published tip is literally
+*** `8d214d36 "hub publish 8 (cache-bust): app.js?v=8 forces browsers to fetch new suggestion form JS"`.
+*** **HUB: BUMP `index.html` TO `app.js?v=9` (and the stylesheet's `?v=` with it). THAT IS YOUR ROW
+*** THIS HOUR, AND IT REPLACES THE WITHDRAWN `_to_delete` ROW.** The gate is otherwise GREEN and I am
+*** holding the verdict for the supervisor.
+***
+*** ===== (D) THE HUB DELTA, RE-MEASURED BY ME THIS RUN. DO NOT QUOTE IT NEXT HOUR. =====
+*** `origin/gh-pages` tip **8d214d36**, pushed **25 NOV 09:55:03 CT - about 59 HOURS AGO**.
+*** `origin/gh-pages^{tree}` = `1d8bce63`; `origin/main:web` = `origin/hub:web` = **`51935b57`**
+*** (identical - main carries the hub's work exactly). MERGED AND NOT PUBLISHED: **73 files /
+*** +485 / -10**, of which 67 are binary `.webp`. The text bulk: `app.js +245/-8`, `NOTES.md +80`,
+*** `icons/beasts/_manifest.json +75`, `style.css +35/-1`, `tools/make_bestiary.py +48`,
+*** `index.html +2/-1`. The 19:58 block measured +408 and the 18:58 block +396 - IT GROWS EVERY HOUR
+*** THE HUB SHIPS, which is exactly why this figure is counted and never quoted.
+***
+*** ===== (E) THE DEAD-DATA AUDIT, 21:13 CT, MEASURED ON THE MERGED TREE =====
+*** CORPUS: **49 files = 48 `scripts/*.gd` + `web/app.js`** (one level, NOT a recursive glob, so
+***   `web/tools/sheet_overlap.js` is correctly excluded as tools/ test code), **2,522,263 chars**.
+***   DATA: **12 `data/*.json`** at one level, **176 top-level keys**.
+*** UNREFERENCED ASSET DIRECTORIES: not re-walked this hour; the standing measurement is ZERO and
+***   nothing this hour added an asset directory. SAY SO RATHER THAN IMPLYING I RE-RAN IT.
+*** **UNREAD LIVE DATA KEYS: ZERO. THE UNREAD COUNT DID NOT MOVE.**
+*** ZERO-LITERAL-HIT KEYS: **85 = 70 `_note_` + 15 NON-NOTE.** THE NON-NOTE COUNT IS 15, WHICH IS THE
+***   SERIES VALUE IT HAS HELD FOR DAYS, and all fifteen are the accounted-for set, unchanged:
+***     - TWO runtime-built `_alt` pools: `lord_intros_alt`, `unique_intros_alt` - READ at
+***       `delve.gd:4022` via `base + "_alt"`. **DO NOT WIRE THEM.**
+***     - FOUR declared dead: `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+***       `town_levels_for_the_desktop`. **NO LANE IS TO WIRE `phase2_words_alt2`.**
+***     - NINE prose/spec strings, not items: biomes `technique`; bosses `boss_floors`; origins
+***       `chronicle_line`, `word_order`, `casing`; ranks `promotion_line`, `one_roll`; strains
+***       `_gating`; world `canon_silences`.
+*** 2 + 4 + 9 = 15. The raw total rose from 56 to 85 BECAUSE CONTENT KEEPS WRITING `_note_` KEYS -
+***   70 of them now - and that is the behaviour this house ASKED FOR. **DO NOT COMPARE RAW TOTALS
+***   ACROSS HOURS; the non-note count is the only number with signal and it did not move.**
+*** ONE HONEST NOTE ON MY OWN INSTRUMENT: my Guard-2 suffix probe flagged `_gating` as a
+***   "runtime_built_candidate". That is MY regex being loose, not a finding - `_gating` is one of the
+***   nine prose/spec strings and has been for days. I am naming it so the next seat does not chase it.
+***
+*** ===== (F) FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, CARRIED FORWARD =====
+*** A FIRING CANNOT EDIT A SCHEDULED TASK. **I ATTEMPTED NO WRITE THIS RUN** - the gate is on the
+*** CALL, not on a field, and that was settled on 18 Nov; I am not testing it a fifth time. THE FIRST
+*** SEAT WITH A LIVE TURN LANDS ALL OF THESE AT ONCE.
+***   1. HUB PUBLISHED SHA: the prompt says `05ac2679 / 19 Nov 20:06 CT`. MEASURED THIS RUN:
+***      **8d214d36, pushed 25 NOV 09:55:03 CT**. STRUCK AND WRONG.
+***   2. MERGED-NOT-PUBLISHED: the prompt says "3 files / +59 / -1". MEASURED THIS RUN:
+***      **73 files / +485 / -10**. It grows hourly. COUNT IT, never quote it.
+***   3. DEAD-DATA CORPUS: the prompt says 47 `.gd` + app.js = 48 files and 146 keys. MEASURED THIS
+***      RUN: **48 + app.js = 49 files, 2,522,263 chars, 176 top-level keys.** The non-note 15 and the
+***      "UNREAD = ZERO" in the prompt are both STILL CORRECT.
+***   4. MINIBOSS COUNT: the prompt's "44/44/44" and "46 rows / 33" are historical. The roster is
+***      CLOSED AT 70 (DIRECTIVE sup-nov27-1323) and main was measured at 70/70/70 last hour.
+***   5. THE PROMPT SAYS "IF THE SUPERVISOR HAS SAID PUBLISH, YOU MAY DO THE PUSH." **RULING
+***      sup-nov27-1637 OVERRIDES THAT: the supervisor does the push itself.** The prompt should be
+***      corrected to say the team lead runs the gate and HOLDS the verdict. I complied in behaviour
+***      this run and pushed nothing.
+***   6. ID WATERMARKS, as of 21:13 CT: **B210, C-244, S164, U213, art tier-5 pass closed 13/13.**
+***      Re-measure; do not quote these.
+***
+*** ===== (G) FOR THE SUPERVISOR =====
+*** (1) **YOUR 16:37 RULING HAD NOT REACHED THE PLAN AND THAT COST FOUR AND A HALF HOURS ON BOTH ITS
+***     HALVES.** Both are in the plan now. Content has its `drops.json` row; the publish gate is run.
+***     Nothing is owed from you on this - I am reporting the delay as MY fault, not yours.
+*** (2) **THE PUBLISH GATE IS GREEN AND THE VERDICT IS HELD FOR YOU. ONE BLOCKER FIRST.** Six state
+***     checks clean with zero page errors, CSP proven intact by a REFUSED inline-style injection
+***     (`style-src-elem`), hostile name rendering as literal text with zero live elements, `el()`-only
+***     confirmed by my own greps, 61 added lines carrying zero sinks, and I looked at the screenshot.
+***     **DO NOT PUSH YET: `index.html` still asks for `app.js?v=8` while the published `app.js?v=8`
+***     is a DIFFERENT 381 KB file. Cached browsers would run the old script against the new page.**
+***     I have given the hub the `?v=9` bump as its row. MY RECOMMENDATION: **push as soon as the hub
+***     lands the bump** - the delta is 73 files / +485 / -10 and 59 hours stale.
+*** (3) **`web/tools/_to_delete/` DOES NOT EXIST.** Your ruling asked me to row the hub to delete it.
+***     I measured before assigning: no path containing `_to_delete` on main, on hub, or on gh-pages,
+***     and not in the hub's working tree. The precondition is already met. Nothing is needed from you
+***     unless you saw it somewhere I have not looked.
+*** (4) **A SHIPPED DEFECT AGAINST MR. E'S WEAR-IS-A-RECEIPT RULE, found by art and verified by me.**
+***     Tiers 2, 4 and 5 all resolve `wand` to the SAME `wand_A.gltf` at the same scale and rotation -
+***     pixel-identical - so a viewer who spends months of points on a legendary wand is handed the
+***     common one. `assets/gear/artifact/` has seven golden meshes and NO wand, sceptre, spear or
+***     staff: **four kinds have no legendary mesh at all.** I have given art the row to source or
+***     author a tier-5 wand. MY RECOMMENDATION: tell me whether the other three (sceptre, spear,
+***     staff) are in scope now or queue behind the Systems. I have not opened them.
+*** (5) **SYSTEMS 43 AND 44 ARE NOT YET ROUTED TO ANY LANE AND THAT IS DELIBERATE.** 42b/42c went to
+***     the game build this hour with the chat bot's surface conditional behind it at :45. 43 (ranking)
+***     and 44 (morality / dual guild) are very large and almost entirely engine-first; routing them
+***     now would put three lanes on work with no engine to answer to, which is how the 42b blocker
+***     happened. SAY IF YOU WANT 43 OPENED IN PARALLEL and I will route it next hour.
+*** (6) The per-worktree Godot import-cache gaps raised at 19:58 are UNCHANGED and still not any
+***     lane's fault. The chat bot logged the same 3 `character-keeper.glb` ERRORs again this hour and
+***     named them rather than carrying them as green.
+***
+*** ===== (H) NEEDS MR. E =====
+*** nothing.
+***
 *** ===== TAKE THIS NEXT - THE 19:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 18:58 FIRING.
 *** Clock read off cruzader: 19:59:13 CST at the start of this run, 20:0x while writing.

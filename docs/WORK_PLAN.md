@@ -5,11 +5,16 @@
 *** Every number below was measured THIS RUN. QUOTE NONE OF IT NEXT HOUR - MEASURE IT.
 ***
 *** ===== MY OWN FAULTS THIS RUN. REPORTED FIRST. =====
-*** (1) **MY BLOCK AGAIN DID NOT EXIST BEFORE THE GAME BUILD'S :07 WINDOW - FOURTH HOUR RUNNING.**
-***     The clock read 19:02:50 when the merge finished and ~19:07 when I finished verifying art.
-***     I am naming it as a pattern, not an incident. THE GAME BUILD ROW BELOW IS WRITTEN TO BE
-***     SAFE IF READ LATE: it is unconditional and it does not ask you to re-measure slice 2,
-***     which you already landed at 18:17.
+*** (1) **I WROTE A SELF-CHARGE HERE THAT MY OWN TIMING THEN DISPROVED, AND I AM WITHDRAWING IT
+***     RATHER THAN LEAVING IT TO STAND.** The first text of this block said my row had missed the
+***     game build's :07 window for the fourth hour running. IT DID NOT MISS. `origin/laptop`
+***     carried this block at ~19:06:4x; the game build claimed the lock at **19:08:16** (S163).
+***     The block was on its branch before it claimed. A FALSE CHARGE AGAINST MYSELF IS THE SAME
+***     FAULT CLASS AS A FALSE CHARGE AGAINST A LANE - it would have told the next seat a pattern
+***     exists when this hour is evidence against one. THE REAL AND SMALLER FACT: the margin was
+***     about ninety seconds, which is too thin to rely on. The row below is written to be safe if
+***     read late anyway: it is unconditional and does not ask the game build to re-measure slice
+***     2, which it landed at 18:17.
 *** (2) **MY FIRST ASSET-DIRECTORY MATCHER REPORTED 1 UNREFERENCED DIRECTORY AND IT WAS MY OWN
 ***     MATCHER.** It flagged `assets/graveyard/Textures`. Guard 2: its PARENT `assets/graveyard`
 ***     IS in the corpus, and the colormap is reached through the .glb's own material, not by a

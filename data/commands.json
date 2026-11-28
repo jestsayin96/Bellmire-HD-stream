@@ -28,7 +28,7 @@
                   "example": "!delve"},
     "muster":    {"aliases": ["party", "mustered"], "args": "", "cost": "free", "needs_hero": false,
                   "short": "Who is waiting at the dungeon mouth, and where you stand.",
-                  "what": "Who is waiting at the dungeon mouth, in the order their names went in, and where you stand in the line. The muster takes six from chat. A hero sent down by a channel-point errand is counted too, however they were sent.",
+                  "what": "Who is waiting at the dungeon mouth, in the order their names went in, and where you stand in the line. The muster takes ten from chat. A hero sent down by a channel-point errand is counted too, however they were sent.",
                   "example": "!muster"},
     "fish":      {"aliases": [], "args": "", "cost": "free", "needs_hero": true,
                   "what": "Walk to a dock and fish: junk to rare catches.",

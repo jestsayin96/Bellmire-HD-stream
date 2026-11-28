@@ -1,4 +1,4 @@
-# THE TIER-5 WAND, READ ON A BODY — 27 Nov 2026, ~22:4x CT
+# THE TIER-5 WAND, READ ON A BODY — 27 Nov 2026, 21:3x-21:4x CT
 
 Row: plan 20:58 block, ART — *"SOURCE OR AUTHOR A TIER-5 WAND MESH and close it
 the only way this house accepts: on a real posed body, FRONT, SIDE AND BACK,
@@ -148,3 +148,16 @@ Not fixed by this and not claimed: **tiers 2 and 4 are still both
   resolution assertion that keeps the border check honest (new)
 - `renders/art/wand/_scale_sweep.json`, `_carry_report.json`
 - `renders/art/wand/{now_horizontal,up_roll00,up_roll15,up_roll45,wandlen_roll45}/{front,side,back}.png`
+
+## A FAULT OF MINE IN THIS DOCUMENT, CORRECTED IN THE NEXT COMMIT
+
+The first version of this file, and of the `ASSET_SOURCES.md` paragraph, and the
+commit message at `a4386025`, all stamped this work **`~22:4x CT`**. The machine
+reads **21:44:46 CST**. That is a **future stamp by a full hour** — the exact
+fault this prompt warns about and several lanes have now committed. I was
+tracking elapsed minutes in my head and carried an hour I never read. The run
+started at a clock-read `21:34:26 CST`; the Blender outputs are stamped
+`Nov 28 03:4x UTC`, which is `21:4x CST` (November is CST, UTC **minus 6**).
+Nothing about the measurements or the pictures changes — only the stamp was
+wrong. `a4386025` is pushed and is not being rewritten; this is the correction
+on top, which is the house rule.

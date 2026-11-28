@@ -173,6 +173,7 @@ func build_payload() -> Dictionary:
         "shops": [],
         "caravan": _caravan_block(),
         "orders": _orders(),
+        "bags": [],
     }
     # H29.6: the hub reads p.shops at the TOP of the payload (web/app.js renderShops); the
     # town block's copy stays for anything that already reads it there.
@@ -186,6 +187,7 @@ func build_payload() -> Dictionary:
                 "kills": int(f.get("kills", 0)), "killed_by": String(f.get("killed_by", "")),
                 "day": int(f.get("day", 0)), "epitaph": String(f.get("epitaph", ""))})
         out["fallen"] = dead
+        out["bags"] = bags_block(r)
         var sheets: Array = []
         scan_heroes()
         var delv := _delvers()
@@ -196,6 +198,30 @@ func build_payload() -> Dictionary:
         sheets.sort_custom(func(a, b): return int(a["standing"]) > int(b["standing"]))
         out["heroes"] = sheets
     last_build_ms = (Time.get_ticks_usec() - t0) / 1000.0
+    return out
+
+# ---------------------------------------------------------------- S162 the corpse-run bags
+
+const BAGS_MAX := 40
+
+## S162 (additive): System 33's skull markers - every corpse-run bag still on a floor, for the
+## hub's dungeon map (RULING sup-nov27-0209). The owner's LOGIN is never published, only the
+## hero's name. owner_left_s counts down the owner-only hour (0 once it is finders keepers);
+## left_s counts down to the despawn. `open` is true once anyone may take it. Expired bags are
+## left out (roster.take_bags sweeps them). An empty array until a hero falls below.
+static func bags_block(r: Roster, now := -1) -> Array:
+    var t := now if now >= 0 else int(Time.get_unix_time_from_system())
+    var out: Array = []
+    for bag: Dictionary in r.bags:
+        var age := t - int(bag.get("t", t))
+        if age >= Roster.BAG_LIFE_S:
+            continue
+        out.append({"name": clean_name(str(bag.get("name", "?"))), "floor": int(bag.get("floor", 0)),
+            "gold": int(bag.get("gold", 0)), "potions": int(bag.get("potions", 0)), "oil": int(bag.get("oil", 0)),
+            "owner_left_s": maxi(0, Roster.BAG_OWNER_S - age), "left_s": maxi(0, Roster.BAG_LIFE_S - age),
+            "open": age >= Roster.BAG_OWNER_S})
+        if out.size() >= BAGS_MAX:
+            break
     return out
 
 # ---------------------------------------------------------------- T5 the viewer's roll
@@ -613,6 +639,11 @@ func _sheet(r: Roster, h: Dictionary, id := "", delv: Dictionary = {}) -> Dictio
         "potions": int(h.get("potions", 0)), "brews": r.brews_line(h), "oil": int(h.get("oil", 0)),
         "gold": int(h.get("gold", 0)), "worn": r.worn_line(h),
         "kills": int(h.get("kills", 0)), "deepest": int(h.get("deepest", 0)), "delves": int(h.get("delves", 0)),
+        # S162 (additive): the death model's hero-card half (RULING sup-nov27-0209). dur_* are
+        # 0-100 (missing = 100, new), `deaths` is the fall counter - "Fell 47 times. Still here."
+        # repair is the smithy's price to mend both, after the guild's rate; 0 = nothing to mend.
+        "dur_weapon": r.durability(h, "weapon"), "dur_armour": r.durability(h, "armour"),
+        "deaths": int(h.get("deaths", 0)), "repair": int(Economy.repair_quote(r, h)["total"]),
         # D57 (v3, additive): the Satchel. `satchel` is what the hub renders; `sellable`
         # and `sell_prices` are the same rows as parallel arrays for any other client.
         # An older hub ignores all three and draws the sheet exactly as before.

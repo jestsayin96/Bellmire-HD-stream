@@ -972,3 +972,59 @@ func tavern_accept(b: Dictionary, now_ms := -1) -> Dictionary:
             _dice_offers.remove_at(i)
             return tavern_duel(o["a"], b, int(o["amt"]))
     return {"ok": false, "why": "none", "text": "%s has no dare on the table." % String(b.get("name", "A hero"))}
+
+## ---------------------------------------------- S162: the smithy's repair (RULING sup-nov27-0209)
+## The death model's gold sink. A piece's repair cost is the ruling's formula verbatim:
+##   base_cost * rarity_multiplier * (1 - current_durability / 100)
+## REPAIR_BASE is one flat base per piece (not the purchase price - the tier already IS the rarity,
+## and multiplying the price by it again would count the rarity twice). REPAIR_MULT is indexed by
+## tier exactly like RARITY above: 0 none (bare hands / rags - nothing to mend), 1 common .. 5
+## legendary (the found-only scarforged / scarwoven). The ruling says "common = cheap, legendary =
+## expensive" and gives no numbers, so these are the game build's opening figures and are the team
+## lead's / Mr. E's to retune: a broken common piece costs 40g, a broken legendary one 600g.
+## Durability and the threshold maths live in roster.gd (S161) and are NOT re-built here.
+const REPAIR_BASE := 40
+const REPAIR_MULT := [0.0, 1.0, 2.0, 4.0, 8.0, 15.0]
+const REPAIR_SLOTS := ["weapon", "armour"]
+
+## List price (before the guild's rate) to mend one slot back to 100. 0 = nothing to mend.
+static func repair_list_cost(h: Dictionary, slot: String) -> int:
+    var tier := clampi(int(h.get(slot, 0)), 0, REPAIR_MULT.size() - 1)
+    var dur := clampi(int(h.get("dur_" + slot, 100)), 0, 100)
+    if tier <= 0 or dur >= 100:
+        return 0
+    return maxi(1, int(ceil(float(REPAIR_BASE) * float(REPAIR_MULT[tier]) * (1.0 - float(dur) / 100.0))))
+
+## What this hero would pay for every worn slot, after the guild's rate at the forge
+## (Roster.cost_for - the same rate every other smith purchase goes through).
+static func repair_quote(r: Roster, h: Dictionary) -> Dictionary:
+    var out := {"total": 0, "slots": {}}
+    for slot: String in REPAIR_SLOTS:
+        var list := repair_list_cost(h, slot)
+        if list <= 0:
+            continue
+        var c := r.cost_for(h, list)
+        out["slots"][slot] = c
+        out["total"] = int(out["total"]) + c
+    return out
+
+## The ruling's repair: takes the hero id, checks durability on each piece, charges gold,
+## restores durability to 100. All or nothing - a hero who cannot pay for the whole job is
+## told the price and nothing is taken. Returns {ok, cost, fixed:[slots], line}.
+static func repair(r: Roster, user_id: String) -> Dictionary:
+    var h := r.get_hero(user_id)
+    if h.is_empty():
+        return {"ok": false, "cost": 0, "fixed": [], "line": "no hero"}
+    var q := repair_quote(r, h)
+    var total := int(q["total"])
+    if total <= 0:
+        return {"ok": true, "cost": 0, "fixed": [], "line": "%s's gear is whole - the smith has nothing to mend." % h["name"]}
+    if not r.spend(h, total):
+        return {"ok": false, "cost": total, "fixed": [],
+            "line": "%s needs %d gold to have the smith mend their gear - you have %d." % [h["name"], total, int(h.get("gold", 0))]}
+    var fixed: Array = (q["slots"] as Dictionary).keys()
+    for slot: String in fixed:
+        h["dur_" + slot] = 100
+    r.changed.emit(user_id)
+    return {"ok": true, "cost": total, "fixed": fixed,
+        "line": "The smith mends %s's %s for %d gold. Good as new." % [h["name"], " and ".join(fixed), total]}

@@ -24111,3 +24111,12 @@ Number: .sspec 56 px / 3 lines at 320 px worst case. Nothing to fix. NOT claimin
 - SEEN, NOT MINE (again): Director/pane hostile-length viewer name tags are Label3D in HeroBody/Townsfolk.
 - No .gd of my seven changed. Not ticked - team lead ticks.
 - NEXT FIRING (17:52): read R's RUN_LOCK working copy; ONE windowed run at 150% (last scale), then L74 feed+theme under load.
+
+
+## U210 - 2026-11-27T17:55:00-06:00 - VELLUM PROBE AT 150% WITH PANES UP: HOLDS, ALL THREE SCALES NOW MEASURED (HUD)
+- Item: 15:58 plan's HUD row (100% U208, 125% U209, 150% now). Lock: free at 17:52 (chat bot IDLE 17:49:40, tasklist Godot*=0); claimed 17:53:04, released at the IDLE line below (declared 18:01, binding cap 18:07).
+- ONE windowed 1920x1080 run, U207_SCALE=1.5 (_u210_run_1.5.log): U208_SPOT made=true; U206_VELLUM runs=1 mode=grid; U207_MARGIN scale=1.50 min_vellum=23.5 min_panel=27.0 min_bottom=18.0; U202_DONE checks=18 fails=0; 0 SCRIPT ERROR / 0 Parse Error.
+- Tightest vellum margin across scales: 100% 10.1 px (binding), 125% 94.0, 150% 23.5. All positive/inside. Caveat: runs=1 at 150% is a thin sample; 100% stays the worst frame.
+- No .gd of my seven changed; no render viewed this firing (probe-only, margins numeric).
+- NEXT FIRING (18:52): read R's RUN_LOCK working copy; then L74 (feed + theme under load) - a probe flooding feed_hud.gd faster than readable, at 100/125/150%.
+- Not ticked - team lead ticks.

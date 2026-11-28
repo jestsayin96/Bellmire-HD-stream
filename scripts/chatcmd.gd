@@ -493,7 +493,7 @@ func _reroll(user_id: String, display: String) -> String:
 
 func _memorial() -> String:
     if roster.fallen.is_empty():
-        return "Nobody has died yet. Give it time."
+        return "Nobody has fallen yet. Give it time."
     var bits := []
     for f: Dictionary in roster.fallen.slice(0, 5):
         bits.append("%s (lv%d, floor %d)" % [f["name"], int(f["level"]), int(f["deepest"])])

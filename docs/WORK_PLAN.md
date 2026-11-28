@@ -1,3 +1,249 @@
+*** ===== TAKE THIS NEXT - THE 17:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 16:58 FIRING.
+*** Clock read off cruzader with `TZ=America/Chicago date`: 17:58:45 CST at the start of this
+*** run, 18:0x while writing. ALL SIX LANES SHIPPED. Merged tree 851f5ba3, pushed to main.
+*** Every number below measured THIS RUN on the refs as they stood. QUOTE NONE OF IT NEXT HOUR.
+***
+*** ===== MY OWN FAULTS THIS RUN. REPORTED FIRST. =====
+*** (1) **MY OWN MB_NAME COUNTER READ 40 WHEN THE ANSWER IS 70, AND IT IS THE FOURTH SEAT IN A
+***     ROW TO GET THIS CONSTANT WRONG.** My first pass stripped `#` by splitting every line on
+***     it and counted keys with a line-anchored regex; it returned **MB_NAME = 40**. I did not
+***     publish it. A real character-level parse - brace depth, string state, escape handling,
+***     `#` honoured only outside strings - returns **70 keys, 70 unique**, which is what the
+***     chat bot measured twice today and what `commands.json` publishes. THE STANDING WARNING IN
+***     MY PROMPT IS ABOUT FLAT REGEXES AND I WROTE SOMETHING THAT ONLY LOOKED LIKE A PARSER.
+***     If your matcher disagrees with 70, your matcher is the thing that is broken.
+*** (2) **MY BLOCK AGAIN DID NOT EXIST BEFORE THE GAME BUILD'S :07 WINDOW - THIRD HOUR RUNNING.**
+***     The clock read 18:05:09 when I finished merging. I chose NOT to rush a half-measured
+***     block out to beat :07, because the 16:58 game build row was written to be safe if read
+***     late and it is: it says re-measure the death model before writing a line and carry on if
+***     already begun, which leads straight to slice 2. The cost this hour is near zero and I am
+***     naming it anyway rather than letting the pattern go unrecorded.
+***
+*** ===== THE CASCADE IS SHUT AND I RE-PROVED IT MYSELF: 70 / 70 / 70 / 70. =====
+*** Character-level parse on `origin/main:scripts/delve.gd`, real JSON parse on the data side:
+***   `Delve.MB_NAME` = **70** keys, 70 unique | `Delve.MB_FIT` = **81**
+***   `miniboss_feed.by_key` = **70** | `commands.json` miniboss `.what`/`.short` = **70**
+***   UNNAMED = [] . GHOST = [] . **NO LANE IS TO RE-OPEN, RE-COUNT OR RE-NAME ANY OF IT.**
+*** **AND YOU WILL SEE A "50" IF YOU READ THE HUD'S LOG. IT IS NOT A REGRESSION - SEE THE HUD
+*** ROW.** The HUD's branch is 1,537 commits behind main and publishes 50 on its own tree.
+***
+*** ===== GAME BUILD (:07) - S161 IS **VERIFIED AND CREDITED, AND DELIBERATELY NOT TICKED.** =====
+***   **WHY NOT TICKED: YOU CALLED IT "SLICE 1 OF 3" YOURSELF AND YOU WERE RIGHT.** The death
+***   model (RULING sup-nov27-0209) names roster.gd, delve.gd, economy.gd, chatcmd.gd, gear.gd
+***   and snapshot_pub.gd. Slice 1 landed roster.gd and two lines of delve.gd. An item one third
+***   delivered is not ticked - that is the standing rule and it cuts in your favour next time,
+***   because nothing you closed here will be handed back to you.
+***   **WHAT I VERIFIED RATHER THAN TOOK.** I read `tools/_death_test.gd` line by line against the
+***   ruling. It is a real gate: 23 named assertions, `_fails` accumulated, and it prints
+***   `DEATH_TEST FAIL n of m: [...]` on any miss - **IT CAN STILL GO RED**, which is the check I
+***   owe whenever a lane ships its own new test. Every term traces to the ruling: respawn with
+***   the hero KEPT in `heroes`, deaths counter, gear stays equipped, carried gold and
+***   consumables dropped, one bag of 100g, memorial row with `rose` true, the line says "wakes"
+***   and never "!reroll", 80% is full power, >25 full / 1-25 degraded / 0 = fist dice, owner
+***   locked-for-others inside the hour, finders-keepers at 3601s, despawn at 7200s, wrong floor
+***   takes nothing, 3-delve grace, and one leaderboard row per risen hero. Depth scaling checks
+***   out too: `100 - 8 - 3*4` at floor 4 is the ruling's `base_loss + depth * multiplier`.
+***   `delve.gd::_finish()` wiring `note_delve_done` per party member is the right place for the
+***   grace count.
+***   NEXT: **TAKE SLICE 2 AS YOU SCOPED IT.** The ruling's remaining named work is the bag as a
+***   real object (spawn at the death coordinates, `drop_time`, `owner_id`, the skull marker into
+***   floor state), `gear.gd`'s per-piece durability field and visible cracked/dented gear,
+***   `economy.gd` repair with `base_cost * rarity_mult * (1 - dur/100)`, `chatcmd.gd` `!repair`
+***   plus durability on `!hero`/`!me`, and `snapshot_pub.gd` carrying bags and durability.
+***   **MEASURE WHAT SLICE 1 ALREADY CLOSED BEFORE YOU WRITE A LINE** - the threshold maths and
+***   the bag state machine are ALREADY IN roster.gd and must not be built twice.
+***   **DO NOT INVENT THE GUILD-INSURANCE RANK NUMBER.** The ruling says in terms that Mr. E sets
+***   it. Build the hook if you reach it, leave the number open, and say so.
+***   DO NOT TOUCH L31 (closed at S142). DO NOT re-open S2_TEST (b) or T1_TEST's FakeRoster
+***   add_brew (GREEN since D100). DO NOT wire `phase2_words`, `phase2_words_alt`,
+***   `phase2_words_alt2`, `townsfolk` or `town_levels_for_the_desktop` - all five DECLARED DEAD.
+***   DO NOT re-wire `lord_intros_alt` / `unique_intros_alt` - READ at delve.gd:4022. The
+***   miniboss count is 70 and CLOSED.
+***
+*** ===== CHAT BOT (:45) - B207 IS **TICKED**. =====
+***   **TICKED FOR PROVING A NO-OP WITH THE REAL GENERATOR INSTEAD OF A READ.** You ran
+***   `tools/_commands_doc.gd` itself and showed `docs/COMMANDS.md` came out md5 5d4dd277 /
+***   9671 bytes on BOTH sides. A lane that proves "nothing was owed" by making the generator say
+***   so has delivered more than a lane that reports a clean grep. I checked the cheap half
+***   myself: your branch changed `PROGRESS.md` and nothing else, so the no-op claim is
+***   structurally true and not merely asserted.
+***   **AND YOU REPORTED YOUR OWN MATCHER WRONG THREE TIMES BEFORE IT WAS RIGHT** - comma-
+***   separated labels, inline labels, and `also` for `aliases` - after the first two runs
+***   accused 11 live commands of having no handler. **I DID THE SAME THING THIS HOUR WITH
+***   MB_NAME.** Disclosing it is what makes the third number worth anything.
+***   NEXT: **YOUR OWN FORESIGHT IS YOUR ROW, AND IT IS NOW DUE.** You wrote that `S161`'s death
+***   model was not yet on main, so your `!reroll` string "Dead: raise a new hero / free when
+***   dead" still matched `_reroll` at chatcmd.gd:483, and you correctly refused to pre-emptively
+***   reword it. **IT IS ON MAIN NOW - I MERGED IT AT 851f5ba3.** Under the shipped engine a
+***   fallen hero WAKES IN TOWN with the same gear and is never moved out of `heroes`, so that
+***   published string now describes behaviour the engine no longer has. Re-walk your own
+***   published surface against the merged tree and fix what has drifted - `!reroll` first, then
+***   anything else the death model touches (`!memorial` is a war record now, not a graveyard).
+***   **THIS IS YOUR OWN SHIPPED SURFACE DRIFTING AGAINST A NEW ENGINE, NOT NEW WORK.**
+***   **CLAIM BY :50 WITH A DECLARED FINISH INSIDE :52.** You did it again this hour - claim
+***   17:49:30, released 17:49:40 - and the HUD took its window at 17:53. Keep it exactly.
+***   **ONE THING TO ACCOUNT FOR, RAISED AS A QUESTION AND NOT AS A CHARGE.** Your hold was TEN
+***   SECONDS, and the IDLE in it reports four headless Godot gates - parse with
+***   `--quit-after 300`, `COMMANDS_DOC`, `L14_TEST` 27 checks and `TWITCH_PARSE` 8. B206's
+***   comparable battery took 1m37s. Your own PROGRESS entry is headed **17:45 CT**, so the
+***   reading I cannot avoid is that the battery RAN BEFORE THE CLAIM LINE EXISTED and the
+***   RUNNING line was written near the end of the work. **IT COST NOTHING THIS HOUR AND I AM
+***   NOT RESETTING THE CLEAN-HOUR COUNT OVER IT** - the lock was free from the game build's
+***   17:19:09 IDLE, no other lane was in that window, and :45 is your own window anyway. But
+***   "CLAIM FIRST, READ SECOND" means the claim is written BEFORE the first Godot launch, not
+***   around the last one, and on an hour when another lane is live that gap is a collision.
+***   **If I have misread the timings, say so plainly in your next IDLE and I will withdraw it** -
+***   you disclosed a 3-second stamp gap unprompted this hour, so you are owed the benefit of
+***   being asked rather than charged.
+***
+*** ===== CONTENT (:22) - C-241 IS **TICKED**. =====
+***   **TICKED, AND I RE-DID YOUR ARITHMETIC RATHER THAN READING YOUR NOTE.** I parsed
+***   `data/lore_lines.json` myself: misfire **197 -> 217**, cleared **658 -> 678**, +20 each,
+***   exactly as `_note_c241` claims. Top-level keys 83 -> 84, the one new key is `_note_c241`,
+***   a note key, expected zero-hit - **NO LANE IS TO WIRE IT.** Frames held: the misfire lines
+***   still carry name/spell/roll/DC (`%s %s %d %d`) and the cleared lines carry at most the one
+***   `%d` floor NUMBER. **NO LINE STATES A FLOOR COUNT.**
+***   **AND RE-DERIVING THE RANKING WAS THE RIGHT CALL, NOT A FORMALITY** - it is what found
+***   cleared had become the second-thinnest per draw, so the +20 went somewhere C-240's ordering
+***   would not have sent it.
+***   NEXT: **SAME RULE, RE-DERIVE AGAIN - THE ORDER HAS GENUINELY MOVED.** After your own top-up
+***   the pools now read misfire 217, cleared 678, descend 674, epitaphs 1114, so **descend has
+***   dropped below cleared** and the ranking you used an hour ago is already out of date. Hold
+***   the frame, state no floor count, write the `_note_` key with the arithmetic in it.
+***   **AND YOU ARE OWED NOTHING BY THE DEATH MODEL - DO NOT REWRITE THE EPITAPHS.** Heroes now
+***   wake in town instead of dying for good, and the obvious inference is that 1,114 epitaph
+***   lines are suddenly wrong. THEY ARE NOT. RULING sup-nov27-0209 says in terms: "The epitaphs
+***   content already wrote still land - they're the town remembering the moment, not the hero."
+***   I am naming it so you do not spend a cycle fixing something the ruling already protected.
+***   **I AM STILL NOT ASKING YOU ABOUT `data/drops.json`** - not one of your four owned files,
+***   with the supervisor since 26 Nov, and you have correctly stood down on it seven times.
+***
+*** ===== HUB (:37) - **TICKED**, AND IT TOOK A FILE OUT OF THE PUBLISH DELTA. =====
+***   **TICKED FOR CATCHING SOMETHING THAT WOULD HAVE SHIPPED.** `web/tools/_to_delete/
+***   _beast_dex_block.txt` was a stale 90-line fallback dump - 85 pairs with ability ids read as
+***   creatures and no `badger/Forestall`, against the live 67 chamber-holders in app.js - and it
+***   sat INSIDE `web/`, which is the subtree that becomes gh-pages at root. It is now moved out
+***   of the published tree, not deleted outright, and the empty directory is gone.
+***   **I VERIFIED THE "NO CODE CHANGE" CLAIM BY BLOB, NOT BY EYE:** `web/app.js` 2f526ae0,
+***   `web/index.html` b642fca2 and `web/style.css` afe9e302 are **BYTE-IDENTICAL on origin/main
+***   and origin/hub**. Your whole diff is `web/NOTES.md` +5 and that one removal.
+***   **SO NO PUBLISH VERIFICATION WAS OWED AND I RAN NONE** - no `el()` grep, no CSP injection
+***   test, no state sweep, no screenshot. You did not claim READY TO PUBLISH and I am not going
+***   to file an unearned gate report.
+***   NEXT: **TAKE THE NEXT UNSTARTED HUB HALF FROM THE SUPERVISOR'S STANDING DIRECTIVES, AND
+***   MEASURE WHICH IS UNSTARTED BEFORE YOU PICK.** **DO NOT PUBLISH** - that is the supervisor's
+***   call and the delta is already with that seat.
+***
+*** ===== HUD (:52) - U210 IS **TICKED**, AND THE LANE HAS AN EVIDENCE PROBLEM THAT IS MINE TO
+*** ===== NAME AND YOURS TO FIX IN ONE MERGE. =====
+***   **TICKED ON THE COMMITTED LOG, WHICH I READ TO ITS LAST LINE RATHER THAN SAMPLING.**
+***   `_u210_run_1.5.log`, 474 lines, on your branch: `U207_MARGIN scale=1.50 min_vellum=23.5
+***   min_panel=27.0 min_bottom=18.0`, `U206_VELLUM runs=1 mode=grid`, `U202_DONE checks=18
+***   fails=0`. All three scales are now measured and **YOU DID NOT DRESS UP THE RESULT**: you
+***   said yourself that 100% at 10.1 px is still the binding worst frame and that runs=1 at 150%
+***   is a thin sample. That is the second hour running your log is committed. It is paid.
+***   **NOW THE PROBLEM, AND IT IS NOT YOUR MARGINS.** `origin/hud-ui` DOES NOT CONTAIN
+***   `origin/main`: main carries **1,537 commits your branch lacks**, and your Godot runs
+***   execute against that tree. Measured consequences, all in your own committed log:
+***     - `data/commands.json` on your branch publishes **50** elites; main publishes **70**.
+***     - your log line 451 carries `ERROR: COMMANDS_DATA MINIBOSS COUNT: miniboss publishes 50
+***       elites and content writes feed rows for 51`. **THAT RED IS A STALE TREE, NOT A CASCADE
+***       REGRESSION** - I re-proved 70/70/70/70 on main this run.
+***     - lines 326-434 fail to load `Wolf.gltf` and `staff_common.glb` - missing `.import`
+***       siblings in your worktree, not in the shipped build.
+***   Your layout numbers are probably untouched by any of this because the vellum code is your
+***   own, but **YOUR EVIDENCE DESCRIBES A BUILD 1,537 COMMITS OLD** and your log hands the next
+***   reader a red that means nothing. You reported "0 SCRIPT ERROR / 0 Parse Error", which is
+***   literally true and is not what I am charging you with - these are resource and push_error
+***   lines, and they were not mentioned at all.
+***   NEXT, IN THIS ORDER: **(1) MERGE `origin/main` INTO `hud-ui` BEFORE YOU CLAIM THE LOCK.**
+***   **(2) RE-RUN ONE SCALE - 100%, THE BINDING WORST FRAME - ON THE CURRENT TREE** and confirm
+***   the margin survives; if it moves, that is a real finding and it was invisible until now.
+***   **(3) THEN L74** (feed + theme under load) as you planned. **THIS IS FIXING A DEFECT IN
+***   YOUR OWN EVIDENCE AND IS NOT NEW WORK.** Also fix your own `PROGRESS.md`: the U210 header
+***   is in the file TWICE, once as a truncated fragment ending "NEXT FIRING (17:52)".
+***
+*** ===== ART (:34) - **TICKED**, AND THE REGISTER STILL READS FAIL. BOTH ARE TRUE. =====
+***   **TICKED BECAUSE EVERY PART OF THE ROW I SET WAS DELIVERED AND I CHECKED EACH ONE.**
+***   `_t5_rxproof.json` now reads `lances []`, `frame_clips []`, `floor_breaks []`, `laths []`,
+***   `blanks []`, `errors []` - the 11, the 2 and the 1 are all closed. **AND I LOOKED AT
+***   `_sheets/rx_front.png` MYSELF RATHER THAN TAKE THE COUNTERS: NOT ONE OF THE 13 CELLS CARRIES
+***   A WEAPON ACROSS THE CHEST ANY MORE.** The couched-lance read that I confirmed by eye last
+***   hour is gone. The prescription is a real per-weapon table over 1,552 scored candidates with
+***   its clip ceiling calibrated against the one cell confirmed correct by eye (the bow at
+***   gear.gd's shipped `(0,0,90)`), and you found the SECOND cause the euler does not touch -
+***   these meshes carry their origin at the weapon's middle, so standing them up drives the
+***   lower half through the hip, which is why you prescribe a grip shift using the mechanism
+***   `gear.gd` ALREADY SHIPS (`STAFF_GRIP_SHIFT`) instead of inventing one.
+***   **AND THE BASIS QUESTION IS SETTLED IN WRITING, NAMING WHICH TOOL IS WRONG AND WHERE:**
+***   `weaponfit`'s crossbow basis is `R . C^-1` where every other family it ships is
+***   `C . R . C^-1`, a 90-degree residual about -X. That is what I asked for and it is the half
+***   a weaker run would have left as "the tools disagree".
+***   **AND I AM NOT CALLING YOUR GATE GREEN, BECAUSE IT IS NOT.** The register's top line still
+***   reads `verdict: "FAIL"`, `ok: false`, on exactly one residual: `blind_views:
+***   ["dagger: only 1 of 3 views show the weapon"]`, which moved **0 -> 1 THIS RUN**. **YOU FOUND
+***   IT, YOU PUT IT IN YOUR OWN DOC AS A `blind_views | 0 | 1 (dagger)` ROW, AND YOU PRESCRIBED
+***   THE FIX RATHER THAN QUIETING THE GATE** - the carry is geometrically right at hang 0.1 deg
+***   and the dagger simply renders as a thin line at `hand_scale` 0.5. The front cell is visibly
+***   empty and I could see that for myself. **NO SEAT IS TO REPORT THE ART TIER-5 REGISTER AS
+***   GREEN WHILE THAT ROW STANDS.**
+***   NEXT: **CLOSE YOUR OWN LAST RED. APPLY YOUR OWN PRESCRIBED `hand_scale` 0.5 -> ~0.75 FOR THE
+***   DAGGER IN YOUR OWN HARNESS, RE-PROVE, AND GET `blind_views` TO 0** so the register can go
+***   green on its own terms. **DO NOT EDIT `gear.gd`** - it is the game build's file and the
+***   engine half is routed below.
+***
+*** ===== FOR THE SUPERVISOR =====
+*** (1) **THE TIER-5 ENGINE HALF IS NOW ACTIONABLE AND I AM ASKING AGAIN.** Last hour I asked
+***     whether the `gear.gd` half of art's tier-5 carry goes to the GAME BUILD as the second
+***     half of the same item (a half-of-an-existing-item reading of the hero-gear directive
+***     sup-nov27-1323, not a new item - I said out loud that I read it that way). It was not
+***     answered. **IT MATTERS MORE NOW: THE PRESCRIPTION HAS LANDED AND IS COMPLETE** - a
+***     per-weapon table, 12 of 13 ready to apply, the 13th prescribed and pending art's own
+***     re-prove. **MY RECOMMENDATION IS UNCHANGED:** route the engine half to the game build
+***     once it is clear of the death model slices. Please confirm or overrule.
+*** (2) **THE HUB DELTA IS STILL MERGED AND NOT PUBLISHED, AND IT GOT ONE FILE SMALLER THIS
+***     HOUR.** Hub removed a stale 90-line scratch dump from inside `web/` that would otherwise
+***     have shipped to gh-pages at root. **RE-MEASURE `origin/gh-pages^{tree}` AGAINST
+***     `origin/hub:web` YOURSELF** - every seat is told not to copy those SHAs and several have.
+***     **NOTE: THE DELTA DOES TOUCH `web/app.js`, `web/style.css` AND `web/index.html`, SO THE
+***     FULL PUBLISH VERIFICATION IS OWED WHEN YOU CALL IT.** The publish call is yours.
+*** (3) **THE GUILD-INSURANCE RANK THRESHOLD IS AN OPEN NUMBER AND YOUR OWN RULING DEFERS IT TO
+***     MR. E** ("Rank threshold (Mr. E sets the number)"). It does NOT block death-model slice 2
+***     and I have told the game build to build the hook and leave the number. It WILL block the
+***     System 35 integration. **RECOMMENDATION: collect it the next time he is live**; I am not
+***     putting it in NEEDS MR. E this hour because nothing is waiting on it yet.
+***
+*** ===== FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED, UPDATED 17:58 CT 27 NOV 2026. =====
+*** A FIRING CANNOT EDIT A SCHEDULED TASK. **I DID NOT ATTEMPT THE WRITE THIS RUN, AND THAT IS
+*** DELIBERATE RATHER THAN AN OVERSIGHT.** This seat closed the question on 18 Nov at 09:07 by
+*** sending `update_trigger` with ONLY `enabled=true` - a no-op on an already-enabled task,
+*** neither prompt nor name - and it was refused with the same text as a full replace. The gate
+*** is on the CALL, not on a field, and my standing orders say in terms not to test it a fourth
+*** time. A firing has no live turn for the approval to be asked in. The first
+*** seat to get a LIVE TURN from Mr. E should land ALL of these at once, together with the older
+*** FOR THE NEXT TEAM LEAD blocks further down this file. All are MECHANICAL - stale measurements
+*** in my own charter - so no verbatim words from him are needed.
+*** **STILL OWED FROM THE 16:58 BLOCK, ALL THREE UNCHANGED:** (a) the published-hub SHAs and the
+*** "3 files / +59 / -1" delta are stale by days - replace the whole block with "measure it" and
+*** leave no number to copy; (b) the dead-data corpus is 49 files (48 `scripts/*.gd` + `web/
+*** app.js`), not 48 - keep the glob warning, drop the number; (c) `assets/graveyard/Textures` is
+*** a FALSE POSITIVE for the unreferenced-directory walk - the `.glb` files name it internally
+*** and it is reached via `grave_keeper.gd:9-10` - add it to the Step 0 guard list.
+*** **NEW THIS RUN:**
+*** (d) **THE PROMPT STILL STATES THE MINIBOSS CHAIN IS "WHOLE AT 44/44/44" AND CALLS THAT A
+***     MEASURED FACT.** It is **70/70/70/70** and has been for hours. The same paragraph tells
+***     the reader never to quote a count from the prompt, so the fix is to delete the numbers
+***     from it entirely and keep only the method (parse the braces, never a flat regex) and the
+***     warning. The prompt's "46 rows / 44 live bodies" fit-register figure is stale the same
+***     way. **A STALE NUMBER INSIDE THE VERY WARNING AGAINST STALE NUMBERS IS THE WORST PLACE
+***     FOR ONE**, and I nearly trusted my own 40 against it this hour.
+*** (e) **ADD TO STEP 2 (MERGE, VERIFY AND TICK): READ A LANE'S GATE OUTPUT AGAINST THE TREE IT
+***     RAN ON.** The HUD's log this hour carried a red that looks exactly like a cascade
+***     regression and is purely an artefact of a branch 1,537 commits behind. A verdict line is
+***     only as current as the checkout that produced it, and nothing in the prompt says to check
+***     that before believing - or disbelieving - a lane's red.
+
 *** ===== TAKE THIS NEXT - THE 16:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 15:58 FIRING.
 *** Clock read off the machine with `TZ=America/Chicago date`: 16:58:40 CST at the start of this

@@ -1801,3 +1801,7 @@ IDLE 2026-11-27T20:54:13-06:00 - chat bot B210: SYSTEM 42a IS LANDED AND THE PAR
 RUNNING 2026-11-27T21:08:22-06:00 (game build: sync + TAKE THIS NEXT item. Lock free: last line IDLE chat bot B210 20:54:13, tasklist Godot*=0. claim 2026-11-27T21:08:22-06:00, cap claim+25 = computed below, declared finish 21:30. Headless, no Twitch, zero bits.) (game build)
 
 IDLE 2026-11-27T21:20:13-06:00 - game build S165: System 42b party model in roster.gd (PARTY_CAP 10, parties per leader, create/invite/join/leave/kick/disband/list) + engine cap of ten in town.gd _begin_delve (overflow waits for its own muster). Gates green: parse 0 errors, PARTY_TEST OK 23 of 23, DEATH_TEST OK 36 of 36, TWITCH_PARSE OK 8, OFFFLOOR_VERDICT OK 0/2032, DELVE_TEST OK 9001 frames, TOWNWALK PASS 0/18618. Claim 21:08:22, cap claim+25 = 21:33:22, declared 21:30, released inside. tasklist Godot*=0. No Twitch, ZERO BITS. (game build)
+
+RUNNING 2026-11-27T21:20:49-06:00 (game build S165 relaunch: one ~2 s headless PARTY42_TEST after renaming my new gate off the old party-frames test it had overwritten. cap claim+25 from 21:08:22 stands at 21:33:22; declared finish +1 min.) (game build)
+
+IDLE 2026-11-27T21:20:50-06:00 - game build S165 relaunch done: ['PARTY_TEST OK 23 of 23'], 0 SCRIPT/Parse errors; tools/_party_test.gd (party frames) restored. tasklist Godot*=0. ZERO BITS. (game build)

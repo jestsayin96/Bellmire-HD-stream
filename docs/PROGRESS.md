@@ -4936,8 +4936,9 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
 - roster.gd describe()'s unreachable "is dead. !reroll" branch: KEPT (harmless, and cheap insurance if `alive` ever is written).
 - NO RENDER THIS SLICE: nothing visible changed (model + a cap path). The visible half - party walking to the mouth together,
   a leader's muster - is slice 2 and gets a render then.
-- GATES (verdict lines): parse --quit-after 300 rc 0, 0 Parse Error / 0 SCRIPT ERROR. PARTY_TEST OK 23 of 23 (new,
-  tools/_party_test.gd). DEATH_TEST OK 36 of 36. TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2032 samples.
+- GATES (verdict lines): parse --quit-after 300 rc 0, 0 Parse Error / 0 SCRIPT ERROR. PARTY_TEST OK 23 of 23 (new gate,
+  tools/_party42_test.gd - MY FIRST COMMIT WROTE IT OVER the Nov-11 party-frames test tools/_party_test.gd; caught from the
+  diff stat before push, old file restored from HEAD~1, mine renamed and re-run alone 21:20:49-21:20:50: OK 23 of 23). DEATH_TEST OK 36 of 36. TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2032 samples.
   DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/18618 (0.000%) raid_in_solid=0/4320 (0.000%)
   PASS (re-run alone: my first battery log kept only the last 6000 chars of stdout+stderr and lost the verdict - a log fault of
   mine, not a gate fault; the verdict above is from a run that kept stdout whole).

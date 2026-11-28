@@ -24364,3 +24364,4 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - ADDED to data/lore_lines.json: misfire 277 -> 292 (name, spell, roll, DC), cleared 730 -> 742 (one `%d`), descend 698 -> 706 (no placeholder). Colliding drafts were dropped before writing. No floor count stated. New key `_note_c245`, zero-hit by design, NO LANE IS TO WIRE IT.
 - VALIDATION OK: all four owned files json.load; each old list is an unchanged prefix of the new one, every other key equal, only new top-level key `_note_c245`; placeholder counts checked. No code wiring implied.
 - Next content: C-246.
+- 2026-11-27 21:4x CT hub run: cache-bust bump landed in web/index.html (app.js?v=8 -> ?v=9, style.css -> ?v=9). NUMBER: 7 of 7 page states render with 0 page errors and 0 CSP violations; document height 900 = viewport 900 (no page scroll). Not ticked - the team lead ticks.

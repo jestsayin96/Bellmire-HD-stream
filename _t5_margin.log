@@ -1,0 +1,200 @@
+00:00.015  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+02:45:58 | INFO: Data are loaded, start creating Blender stuff
+02:45:58 | INFO: Blender create Mesh node Cube.125
+02:45:58 | INFO: Blender create Mesh node Cube.126
+02:45:58 | INFO: Blender create Mesh node PrototypePete_body.020
+02:45:58 | INFO: Blender create Mesh node PrototypePete_head.001
+02:45:58 | INFO: Blender create Mesh node Cube.128
+02:45:58 | INFO: Blender create Mesh node Cube.127
+02:45:58 | INFO: Blender create Mesh node Cube.003
+02:45:58 | INFO: Blender create Mesh node Cylinder.280
+02:45:58 | INFO: Blender create Mesh node Cylinder.005
+02:45:58 | INFO: Blender create Mesh node Cylinder.010
+02:45:58 | INFO: Blender create Mesh node Cylinder.022
+02:45:58 | INFO: Blender create Mesh node Cube.11839
+02:45:58 | INFO: Blender create Mesh node Cube.12993
+02:45:58 | INFO: Blender create Mesh node Cube.124
+02:45:58 | INFO: Blender create Mesh node Plane.004
+02:45:59 | INFO: glTF import finished in 0.53s
+C:\hd adventure\bellmire-art\tools\art\_t5_margin.py:124: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+MARGIN basis selftest PASSED order=YXZ
+02:45:59 | INFO: Data are loaded, start creating Blender stuff
+02:45:59 | INFO: Blender create Mesh node Cylinder.039
+02:45:59 | INFO: glTF import finished in 0.00s
+00:03.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_body_front.png'
+00:03.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY000_front.png'
+00:03.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:03.781  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_body_side.png'
+00:03.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY000_side.png'
+00:04.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:04.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_body_back.png'
+00:04.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY000_back.png'
+00:04.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM dagger  rollY000         rot=(0.0, 0.0, 90.0) hs=0.60 hang=0.1 clipf=0.346 gx=+0.00 vis=[1598, 567, 1219] proving=2 show=1.066 border=0.000 long=0.83m
+02:46:01 | INFO: Data are loaded, start creating Blender stuff
+02:46:01 | INFO: Blender create Mesh node Cylinder.039
+02:46:01 | INFO: glTF import finished in 0.00s
+00:04.765  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY020_front.png'
+00:04.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:05.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY020_side.png'
+00:05.312  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:05.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY020_back.png'
+00:05.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM dagger  rollY020         rot=(0.0, 20.0, 90.0) hs=0.60 hang=19.9 clipf=0.412 gx=+0.00 vis=[1249, 535, 947] proving=2 show=1.654 border=0.000 long=0.83m
+02:46:02 | INFO: Data are loaded, start creating Blender stuff
+02:46:02 | INFO: Blender create Mesh node Cylinder.039
+02:46:02 | INFO: glTF import finished in 0.01s
+00:05.890  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY035_front.png'
+00:06.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:06.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY035_side.png'
+00:06.437  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:06.640  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY035_back.png'
+00:06.812  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM dagger  rollY035         rot=(0.0, 35.0, 90.0) hs=0.60 hang=34.9 clipf=0.533 gx=+0.00 vis=[749, 505, 803] proving=0 show=2.664 border=0.000 long=0.83m
+02:46:03 | INFO: Data are loaded, start creating Blender stuff
+02:46:03 | INFO: Blender create Mesh node Cylinder.039
+02:46:03 | INFO: glTF import finished in 0.00s
+00:07.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY050_front.png'
+00:07.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:07.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY050_side.png'
+00:07.515  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:07.734  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY050_back.png'
+00:07.890  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM dagger  rollY050         rot=(0.0, 50.0, 90.0) hs=0.60 hang=49.9 clipf=0.541 gx=+0.00 vis=[294, 514, 620] proving=0 show=3.141 border=0.000 long=0.83m
+02:46:04 | INFO: Data are loaded, start creating Blender stuff
+02:46:04 | INFO: Blender create Mesh node Cylinder.039
+02:46:04 | INFO: glTF import finished in 0.01s
+00:08.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY065_front.png'
+00:08.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:08.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY065_side.png'
+00:08.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:08.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_rollY065_back.png'
+00:08.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM dagger  rollY065         rot=(0.0, 65.0, 90.0) hs=0.60 hang=64.9 clipf=0.356 gx=+0.00 vis=[258, 715, 420] proving=0 show=2.187 border=0.000 long=0.83m
+02:46:06 | INFO: Data are loaded, start creating Blender stuff
+02:46:06 | INFO: Blender create Mesh node wand_A
+02:46:06 | INFO: glTF import finished in 0.00s
+00:09.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs062_front.png'
+00:09.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:09.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs062_side.png'
+00:09.765  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:09.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs062_back.png'
+00:10.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM wand    hs062            rot=(0.0, 0.0, 90.0) hs=0.62 hang=0.1 clipf=0.304 gx=+0.00 vis=[1423, 1314, 790] proving=2 show=1.058 border=0.000 long=0.72m
+02:46:07 | INFO: Data are loaded, start creating Blender stuff
+02:46:07 | INFO: Blender create Mesh node wand_A
+02:46:07 | INFO: glTF import finished in 0.00s
+00:10.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_front.png'
+00:10.515  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:10.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_side.png'
+00:10.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:11.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_back.png'
+00:11.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM wand    hs080            rot=(0.0, 0.0, 90.0) hs=0.80 hang=0.1 clipf=0.163 gx=+0.00 vis=[2779, 2476, 1853] proving=3 show=1.054 border=0.000 long=0.93m
+02:46:08 | INFO: Data are loaded, start creating Blender stuff
+02:46:08 | INFO: Blender create Mesh node wand_A
+02:46:08 | INFO: glTF import finished in 0.00s
+00:11.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs100_front.png'
+00:11.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:11.781  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs100_side.png'
+00:11.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:12.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs100_back.png'
+00:12.265  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM wand    hs100            rot=(0.0, 0.0, 90.0) hs=1.00 hang=0.1 clipf=0.206 gx=+0.00 vis=[4149, 4077, 2710] proving=3 show=1.031 border=0.000 long=1.16m
+02:46:09 | INFO: Data are loaded, start creating Blender stuff
+02:46:09 | INFO: Blender create Mesh node wand_A
+02:46:09 | INFO: glTF import finished in 0.00s
+00:12.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs120_front.png'
+00:12.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:12.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs120_side.png'
+00:12.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:13.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs120_back.png'
+00:13.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM wand    hs120            rot=(0.0, 0.0, 90.0) hs=1.20 hang=0.1 clipf=0.244 gx=+0.00 vis=[5703, 6050, 3341] proving=3 show=1.015 border=0.000 long=1.39m
+02:46:10 | INFO: Data are loaded, start creating Blender stuff
+02:46:10 | INFO: Blender create Mesh node wand_A
+02:46:10 | INFO: glTF import finished in 0.00s
+00:13.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_rollY020_front.png'
+00:13.687  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:13.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_rollY020_side.png'
+00:14.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:14.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_rollY020_back.png'
+00:14.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM wand    hs080_rollY020   rot=(0.0, 20.0, 90.0) hs=0.80 hang=19.9 clipf=0.372 gx=+0.00 vis=[2369, 2390, 1636] proving=3 show=2.313 border=0.000 long=0.93m
+02:46:11 | INFO: Data are loaded, start creating Blender stuff
+02:46:11 | INFO: Blender create Mesh node wand_A
+02:46:11 | INFO: glTF import finished in 0.00s
+00:14.515  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_rollY035_front.png'
+00:14.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:14.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_rollY035_side.png'
+00:14.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:15.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_rollY035_back.png'
+00:15.312  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM wand    hs080_rollY035   rot=(0.0, 35.0, 90.0) hs=0.80 hang=34.9 clipf=0.445 gx=+0.00 vis=[1447, 2263, 1653] proving=3 show=3.367 border=0.000 long=0.93m
+02:46:12 | INFO: Data are loaded, start creating Blender stuff
+02:46:12 | INFO: Blender create Mesh node wand_A
+02:46:12 | INFO: glTF import finished in 0.00s
+00:15.515  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_rollY050_front.png'
+00:15.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:15.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_rollY050_side.png'
+00:15.984  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:16.140  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\wand_hs080_rollY050_back.png'
+00:16.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM wand    hs080_rollY050   rot=(0.0, 50.0, 90.0) hs=0.80 hang=49.9 clipf=0.397 gx=+0.00 vis=[844, 2347, 1464] proving=2 show=3.748 border=0.000 long=0.93m
+02:46:13 | INFO: Data are loaded, start creating Blender stuff
+02:46:13 | INFO: Blender create Mesh node Cylinder.039
+02:46:13 | INFO: glTF import finished in 0.00s
+00:16.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx000_front.png'
+00:16.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:16.812  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx000_side.png'
+00:16.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:17.156  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx000_back.png'
+00:17.312  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM dagger  gx000            rot=(0.0, 0.0, 90.0) hs=0.60 hang=0.1 clipf=0.346 gx=+0.00 vis=[1598, 567, 1219] proving=2 show=1.066 border=0.000 long=0.83m
+02:46:14 | INFO: Data are loaded, start creating Blender stuff
+02:46:14 | INFO: Blender create Mesh node Cylinder.039
+02:46:14 | INFO: glTF import finished in 0.01s
+00:17.515  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx010_front.png'
+00:17.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:17.859  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx010_side.png'
+00:18.015  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:18.187  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx010_back.png'
+00:18.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM dagger  gx010            rot=(0.0, 0.0, 90.0) hs=0.60 hang=0.1 clipf=0.469 gx=-0.10 vis=[1601, 470, 1372] proving=2 show=1.066 border=0.000 long=0.83m
+02:46:15 | INFO: Data are loaded, start creating Blender stuff
+02:46:15 | INFO: Blender create Mesh node Cylinder.039
+02:46:15 | INFO: glTF import finished in 0.01s
+00:18.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx020_front.png'
+00:18.640  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:18.812  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx020_side.png'
+00:18.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:19.140  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx020_back.png'
+00:19.265  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM dagger  gx020            rot=(0.0, 0.0, 90.0) hs=0.60 hang=0.1 clipf=0.508 gx=-0.20 vis=[1950, 648, 1475] proving=2 show=1.066 border=0.000 long=0.83m
+02:46:16 | INFO: Data are loaded, start creating Blender stuff
+02:46:16 | INFO: Blender create Mesh node Cylinder.039
+02:46:16 | INFO: glTF import finished in 0.01s
+00:19.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx030_front.png'
+00:19.640  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_front.png'
+00:19.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx030_side.png'
+00:19.937  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_side.png'
+00:20.109  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\cells\dagger_gx030_back.png'
+00:20.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_tmp\_w_back.png'
+  ARM dagger  gx030            rot=(0.0, 0.0, 90.0) hs=0.60 hang=0.1 clipf=0.321 gx=-0.30 vis=[2097, 783, 1548] proving=2 show=1.066 border=0.000 long=0.83m
+  SHEET A_dagger_roll front  left-to-right=rollY000,rollY020,rollY035,rollY050,rollY065
+  SHEET A_dagger_roll side  left-to-right=rollY000,rollY020,rollY035,rollY050,rollY065
+  SHEET A_dagger_roll back  left-to-right=rollY000,rollY020,rollY035,rollY050,rollY065
+  SHEET B_wand_scale front  left-to-right=hs062,hs080,hs100,hs120
+  SHEET B_wand_scale side  left-to-right=hs062,hs080,hs100,hs120
+  SHEET B_wand_scale back  left-to-right=hs062,hs080,hs100,hs120
+  SHEET C_wand_roll front  left-to-right=hs080_rollY020,hs080_rollY035,hs080_rollY050
+  SHEET C_wand_roll side  left-to-right=hs080_rollY020,hs080_rollY035,hs080_rollY050
+  SHEET C_wand_roll back  left-to-right=hs080_rollY020,hs080_rollY035,hs080_rollY050
+  SHEET D_dagger_grip front  left-to-right=gx000,gx010,gx020,gx030
+  SHEET D_dagger_grip side  left-to-right=gx000,gx010,gx020,gx030
+  SHEET D_dagger_grip back  left-to-right=gx000,gx010,gx020,gx030
+MARGIN_DONE C:\hd adventure\bellmire-art\renders\art\gear_t5\_margin\_t5_margin.json verdict=GREEN arms=16 errors=0
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit

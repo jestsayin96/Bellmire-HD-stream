@@ -1,0 +1,1155 @@
+{
+ "verdict": "GREEN",
+ "ok": true,
+ "tool": "_t5_margin",
+ "tier": 5,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "euler_order": "YXZ",
+ "basis_selftest": {
+  "euler_order": "YXZ",
+  "rule": "Rslot = C . R_godot(held_rot) . C^-1  (identity at zero)",
+  "premise_measured": {
+   "slot_x_dot_world_down": 1.0,
+   "slot_y_dot_world_forward": 0.9885
+  },
+  "checked": [
+   "premise@bone",
+   "crossbow@cal",
+   "crossbow@live",
+   "crossbow@cal(divergence recorded)"
+  ],
+  "crossbow_live_held_rot": [
+   "-90",
+   "35",
+   "90"
+  ],
+  "crossbow_live_roll_deg": 35.0,
+  "weaponfit_rule_divergence": {
+   "family": "crossbow",
+   "weaponfit_rule_differs": true,
+   "held_rot_cal": [
+    "-90",
+    "0",
+    "90"
+   ],
+   "residual_angle_deg": 90.0,
+   "residual_axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "shaft_separation_deg": 90.0,
+   "prod_separation_deg": 90.0,
+   "reading": "weaponfit's crossbow basis is R.C^-1 where every other family it ships is C.R.C^-1 (identity at zero). OPEN QUESTION for the crossbow's own pass - NOT resolved here, and no tier-5 path uses it."
+  }
+ },
+ "seen_min": 0.15,
+ "vis_min": 900,
+ "show_min": 0.7,
+ "min_proving": 2,
+ "px_per_m": 200.0,
+ "views": [
+  "front",
+  "side",
+  "back"
+ ],
+ "arms": 16,
+ "sheets": {
+  "A_dagger_roll/front": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\A_dagger_roll_front.png",
+  "A_dagger_roll/side": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\A_dagger_roll_side.png",
+  "A_dagger_roll/back": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\A_dagger_roll_back.png",
+  "B_wand_scale/front": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\B_wand_scale_front.png",
+  "B_wand_scale/side": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\B_wand_scale_side.png",
+  "B_wand_scale/back": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\B_wand_scale_back.png",
+  "C_wand_roll/front": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\C_wand_roll_front.png",
+  "C_wand_roll/side": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\C_wand_roll_side.png",
+  "C_wand_roll/back": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\C_wand_roll_back.png",
+  "D_dagger_grip/front": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\D_dagger_grip_front.png",
+  "D_dagger_grip/side": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\D_dagger_grip_side.png",
+  "D_dagger_grip/back": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_margin\\_sheets\\D_dagger_grip_back.png"
+ },
+ "errors": [],
+ "sweeps": {
+  "A_dagger_roll": {
+   "variable": "held_rot y (roll about the slot's forward axis)",
+   "fixed": {
+    "hand_scale": 0.6,
+    "held_rot_xz": [
+     0.0,
+     90.0
+    ]
+   },
+   "arms": [
+    {
+     "kind": "dagger",
+     "tag": "rollY000",
+     "held_rot": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "hand_scale": 0.6,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "engine_hand_scale": 0.6,
+     "verts": 1141,
+     "checked": 405,
+     "clip": 140,
+     "clip_frac": 0.3457,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 0.1,
+     "world_long_m": 0.834,
+     "frac_of_hero_h": 0.34,
+     "tip_z": 1.288,
+     "reach": 0.648,
+     "minor": {
+      "front": 38,
+      "side": 15,
+      "back": 38
+     },
+     "opaque": {
+      "front": 95257,
+      "side": 81266,
+      "back": 96109
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 1598,
+      "side": 567,
+      "back": 1219
+     },
+     "seen": {
+      "front": 0.5574,
+      "side": 0.4209,
+      "back": 0.4247
+     },
+     "mid_px": 35.7,
+     "best_minor": 38,
+     "show": 1.066,
+     "proving_views": 2,
+     "min_vis": 567,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "dagger",
+     "tag": "rollY020",
+     "held_rot": [
+      0.0,
+      20.0,
+      90.0
+     ],
+     "hand_scale": 0.6,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "engine_hand_scale": 0.6,
+     "verts": 1141,
+     "checked": 405,
+     "clip": 167,
+     "clip_frac": 0.4123,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 19.9,
+     "world_long_m": 0.834,
+     "frac_of_hero_h": 0.34,
+     "tip_z": 1.249,
+     "reach": 0.609,
+     "minor": {
+      "front": 38,
+      "side": 59,
+      "back": 38
+     },
+     "opaque": {
+      "front": 95083,
+      "side": 81266,
+      "back": 95774
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 1249,
+      "side": 535,
+      "back": 947
+     },
+     "seen": {
+      "front": 0.4437,
+      "side": 0.386,
+      "back": 0.3582
+     },
+     "mid_px": 35.7,
+     "best_minor": 59,
+     "show": 1.654,
+     "proving_views": 2,
+     "min_vis": 535,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "dagger",
+     "tag": "rollY035",
+     "held_rot": [
+      0.0,
+      35.0,
+      90.0
+     ],
+     "hand_scale": 0.6,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "engine_hand_scale": 0.6,
+     "verts": 1141,
+     "checked": 405,
+     "clip": 216,
+     "clip_frac": 0.5333,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 34.9,
+     "world_long_m": 0.834,
+     "frac_of_hero_h": 0.34,
+     "tip_z": 1.172,
+     "reach": 0.531,
+     "minor": {
+      "front": 37,
+      "side": 95,
+      "back": 37
+     },
+     "opaque": {
+      "front": 94664,
+      "side": 81266,
+      "back": 95224
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 749,
+      "side": 505,
+      "back": 803
+     },
+     "seen": {
+      "front": 0.2904,
+      "side": 0.367,
+      "back": 0.3528
+     },
+     "mid_px": 35.7,
+     "best_minor": 95,
+     "show": 2.664,
+     "proving_views": 0,
+     "min_vis": 505,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "dagger",
+     "tag": "rollY050",
+     "held_rot": [
+      0.0,
+      50.0,
+      90.0
+     ],
+     "hand_scale": 0.6,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "engine_hand_scale": 0.6,
+     "verts": 1141,
+     "checked": 405,
+     "clip": 219,
+     "clip_frac": 0.5407,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 49.9,
+     "world_long_m": 0.834,
+     "frac_of_hero_h": 0.34,
+     "tip_z": 1.057,
+     "reach": 0.417,
+     "minor": {
+      "front": 40,
+      "side": 112,
+      "back": 40
+     },
+     "opaque": {
+      "front": 94277,
+      "side": 81304,
+      "back": 94995
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 294,
+      "side": 514,
+      "back": 620
+     },
+     "seen": {
+      "front": 0.1336,
+      "side": 0.3752,
+      "back": 0.3489
+     },
+     "mid_px": 35.7,
+     "best_minor": 112,
+     "show": 3.141,
+     "proving_views": 0,
+     "min_vis": 294,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "dagger",
+     "tag": "rollY065",
+     "held_rot": [
+      0.0,
+      65.0,
+      90.0
+     ],
+     "hand_scale": 0.6,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "engine_hand_scale": 0.6,
+     "verts": 1141,
+     "checked": 405,
+     "clip": 144,
+     "clip_frac": 0.3556,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 64.9,
+     "world_long_m": 0.834,
+     "frac_of_hero_h": 0.34,
+     "tip_z": 0.915,
+     "reach": 0.274,
+     "minor": {
+      "front": 42,
+      "side": 78,
+      "back": 42
+     },
+     "opaque": {
+      "front": 94229,
+      "side": 81347,
+      "back": 94968
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 258,
+      "side": 715,
+      "back": 420
+     },
+     "seen": {
+      "front": 0.1548,
+      "side": 0.536,
+      "back": 0.3643
+     },
+     "mid_px": 35.7,
+     "best_minor": 78,
+     "show": 2.187,
+     "proving_views": 0,
+     "min_vis": 258,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    }
+   ]
+  },
+  "B_wand_scale": {
+   "variable": "hand_scale",
+   "fixed": {
+    "held_rot": [
+     0.0,
+     0.0,
+     90.0
+    ]
+   },
+   "rule": "smallest hand_scale with min(vis) >= VIS_MIN and no frame clip, floor break or lath",
+   "chosen": "hs080",
+   "chosen_hand_scale": 0.8,
+   "arms": [
+    {
+     "kind": "wand",
+     "tag": "hs062",
+     "held_rot": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "hand_scale": 0.62,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "engine_hand_scale": 0.62,
+     "verts": 531,
+     "checked": 339,
+     "clip": 103,
+     "clip_frac": 0.3038,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 0.1,
+     "world_long_m": 0.717,
+     "frac_of_hero_h": 0.293,
+     "tip_z": 1.157,
+     "reach": 0.517,
+     "minor": {
+      "front": 27,
+      "side": 28,
+      "back": 27
+     },
+     "opaque": {
+      "front": 94773,
+      "side": 81266,
+      "back": 95641
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 1423,
+      "side": 1314,
+      "back": 790
+     },
+     "seen": {
+      "front": 0.5971,
+      "side": 0.5573,
+      "back": 0.3325
+     },
+     "mid_px": 26.5,
+     "best_minor": 28,
+     "show": 1.058,
+     "proving_views": 2,
+     "min_vis": 790,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "wand",
+     "tag": "hs080",
+     "held_rot": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "hand_scale": 0.8,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "engine_hand_scale": 0.62,
+     "verts": 531,
+     "checked": 355,
+     "clip": 58,
+     "clip_frac": 0.1634,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 0.1,
+     "world_long_m": 0.925,
+     "frac_of_hero_h": 0.378,
+     "tip_z": 1.307,
+     "reach": 0.667,
+     "minor": {
+      "front": 35,
+      "side": 36,
+      "back": 35
+     },
+     "opaque": {
+      "front": 95796,
+      "side": 81272,
+      "back": 96663
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 2779,
+      "side": 2476,
+      "back": 1853
+     },
+     "seen": {
+      "front": 0.719,
+      "side": 0.648,
+      "back": 0.4809
+     },
+     "mid_px": 34.2,
+     "best_minor": 36,
+     "show": 1.054,
+     "proving_views": 3,
+     "min_vis": 1853,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "wand",
+     "tag": "hs100",
+     "held_rot": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "hand_scale": 1.0,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "engine_hand_scale": 0.62,
+     "verts": 531,
+     "checked": 407,
+     "clip": 84,
+     "clip_frac": 0.2064,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 0.1,
+     "world_long_m": 1.156,
+     "frac_of_hero_h": 0.472,
+     "tip_z": 1.474,
+     "reach": 0.834,
+     "minor": {
+      "front": 43,
+      "side": 44,
+      "back": 43
+     },
+     "opaque": {
+      "front": 96596,
+      "side": 81334,
+      "back": 97411
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 4149,
+      "side": 4077,
+      "back": 2710
+     },
+     "seen": {
+      "front": 0.7014,
+      "side": 0.6955,
+      "back": 0.4588
+     },
+     "mid_px": 42.7,
+     "best_minor": 44,
+     "show": 1.031,
+     "proving_views": 3,
+     "min_vis": 2710,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "wand",
+     "tag": "hs120",
+     "held_rot": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "hand_scale": 1.2,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "engine_hand_scale": 0.62,
+     "verts": 531,
+     "checked": 427,
+     "clip": 104,
+     "clip_frac": 0.2436,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 0.1,
+     "world_long_m": 1.388,
+     "frac_of_hero_h": 0.566,
+     "tip_z": 1.641,
+     "reach": 1.0,
+     "minor": {
+      "front": 51,
+      "side": 52,
+      "back": 51
+     },
+     "opaque": {
+      "front": 97322,
+      "side": 81448,
+      "back": 97978
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 5703,
+      "side": 6050,
+      "back": 3341
+     },
+     "seen": {
+      "front": 0.6789,
+      "side": 0.7267,
+      "back": 0.3984
+     },
+     "mid_px": 51.2,
+     "best_minor": 52,
+     "show": 1.015,
+     "proving_views": 3,
+     "min_vis": 3341,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    }
+   ]
+  },
+  "C_wand_roll": {
+   "variable": "held_rot y (roll about the slot's forward axis)",
+   "fixed": {
+    "hand_scale": 0.8,
+    "held_rot_xz": [
+     0.0,
+     90.0
+    ]
+   },
+   "inherited_from": "B_wand_scale",
+   "arms": [
+    {
+     "kind": "wand",
+     "tag": "hs080_rollY020",
+     "held_rot": [
+      0.0,
+      20.0,
+      90.0
+     ],
+     "hand_scale": 0.8,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "engine_hand_scale": 0.62,
+     "verts": 531,
+     "checked": 355,
+     "clip": 132,
+     "clip_frac": 0.3718,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 19.9,
+     "world_long_m": 0.925,
+     "frac_of_hero_h": 0.378,
+     "tip_z": 1.272,
+     "reach": 0.631,
+     "minor": {
+      "front": 37,
+      "side": 79,
+      "back": 37
+     },
+     "opaque": {
+      "front": 95587,
+      "side": 81349,
+      "back": 96267
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 2369,
+      "side": 2390,
+      "back": 1636
+     },
+     "seen": {
+      "front": 0.6242,
+      "side": 0.624,
+      "back": 0.4543
+     },
+     "mid_px": 34.2,
+     "best_minor": 79,
+     "show": 2.313,
+     "proving_views": 3,
+     "min_vis": 1636,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "wand",
+     "tag": "hs080_rollY035",
+     "held_rot": [
+      0.0,
+      35.0,
+      90.0
+     ],
+     "hand_scale": 0.8,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "engine_hand_scale": 0.62,
+     "verts": 531,
+     "checked": 355,
+     "clip": 158,
+     "clip_frac": 0.4451,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 34.9,
+     "world_long_m": 0.925,
+     "frac_of_hero_h": 0.378,
+     "tip_z": 1.197,
+     "reach": 0.556,
+     "minor": {
+      "front": 43,
+      "side": 115,
+      "back": 43
+     },
+     "opaque": {
+      "front": 95136,
+      "side": 81337,
+      "back": 95625
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 1447,
+      "side": 2263,
+      "back": 1653
+     },
+     "seen": {
+      "front": 0.4088,
+      "side": 0.5893,
+      "back": 0.518
+     },
+     "mid_px": 34.2,
+     "best_minor": 115,
+     "show": 3.367,
+     "proving_views": 3,
+     "min_vis": 1447,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "wand",
+     "tag": "hs080_rollY050",
+     "held_rot": [
+      0.0,
+      50.0,
+      90.0
+     ],
+     "hand_scale": 0.8,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "engine_hand_scale": 0.62,
+     "verts": 531,
+     "checked": 355,
+     "clip": 141,
+     "clip_frac": 0.3972,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 49.9,
+     "world_long_m": 0.925,
+     "frac_of_hero_h": 0.378,
+     "tip_z": 1.084,
+     "reach": 0.443,
+     "minor": {
+      "front": 47,
+      "side": 128,
+      "back": 47
+     },
+     "opaque": {
+      "front": 94594,
+      "side": 81647,
+      "back": 95137
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 844,
+      "side": 2347,
+      "back": 1464
+     },
+     "seen": {
+      "front": 0.2722,
+      "side": 0.6115,
+      "back": 0.5564
+     },
+     "mid_px": 34.2,
+     "best_minor": 128,
+     "show": 3.748,
+     "proving_views": 2,
+     "min_vis": 844,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    }
+   ]
+  },
+  "D_dagger_grip": {
+   "variable": "grip x (slot-frame offset; slot +X is world DOWN, so negative RAISES the blade in the fist)",
+   "fixed": {
+    "hand_scale": 0.6,
+    "held_rot": [
+     0.0,
+     0.0,
+     90.0
+    ]
+   },
+   "arms": [
+    {
+     "kind": "dagger",
+     "tag": "gx000",
+     "held_rot": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "hand_scale": 0.6,
+     "grip_x": 0.0,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "engine_hand_scale": 0.6,
+     "verts": 1141,
+     "checked": 405,
+     "clip": 140,
+     "clip_frac": 0.3457,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 0.1,
+     "world_long_m": 0.834,
+     "frac_of_hero_h": 0.34,
+     "tip_z": 1.288,
+     "reach": 0.648,
+     "minor": {
+      "front": 38,
+      "side": 15,
+      "back": 38
+     },
+     "opaque": {
+      "front": 95257,
+      "side": 81266,
+      "back": 96109
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 1598,
+      "side": 567,
+      "back": 1219
+     },
+     "seen": {
+      "front": 0.5574,
+      "side": 0.4209,
+      "back": 0.4247
+     },
+     "mid_px": 35.7,
+     "best_minor": 38,
+     "show": 1.066,
+     "proving_views": 2,
+     "min_vis": 567,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "dagger",
+     "tag": "gx010",
+     "held_rot": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "hand_scale": 0.6,
+     "grip_x": -0.1,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "engine_hand_scale": 0.6,
+     "verts": 1141,
+     "checked": 612,
+     "clip": 287,
+     "clip_frac": 0.469,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 0.1,
+     "world_long_m": 0.834,
+     "frac_of_hero_h": 0.34,
+     "tip_z": 1.388,
+     "reach": 0.748,
+     "minor": {
+      "front": 38,
+      "side": 15,
+      "back": 38
+     },
+     "opaque": {
+      "front": 95463,
+      "side": 81266,
+      "back": 96277
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 1601,
+      "side": 470,
+      "back": 1372
+     },
+     "seen": {
+      "front": 0.5586,
+      "side": 0.3481,
+      "back": 0.4777
+     },
+     "mid_px": 35.7,
+     "best_minor": 38,
+     "show": 1.066,
+     "proving_views": 2,
+     "min_vis": 470,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "dagger",
+     "tag": "gx020",
+     "held_rot": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "hand_scale": 0.6,
+     "grip_x": -0.2,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "engine_hand_scale": 0.6,
+     "verts": 1141,
+     "checked": 876,
+     "clip": 445,
+     "clip_frac": 0.508,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 0.1,
+     "world_long_m": 0.834,
+     "frac_of_hero_h": 0.34,
+     "tip_z": 1.488,
+     "reach": 0.848,
+     "minor": {
+      "front": 38,
+      "side": 15,
+      "back": 38
+     },
+     "opaque": {
+      "front": 95533,
+      "side": 81266,
+      "back": 96345
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 1950,
+      "side": 648,
+      "back": 1475
+     },
+     "seen": {
+      "front": 0.6811,
+      "side": 0.4796,
+      "back": 0.5136
+     },
+     "mid_px": 35.7,
+     "best_minor": 38,
+     "show": 1.066,
+     "proving_views": 2,
+     "min_vis": 648,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    },
+    {
+     "kind": "dagger",
+     "tag": "gx030",
+     "held_rot": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "hand_scale": 0.6,
+     "grip_x": -0.3,
+     "engine_held_rot_deg": [
+      0.0,
+      0.0,
+      90.0
+     ],
+     "engine_hand_scale": 0.6,
+     "verts": 1141,
+     "checked": 1068,
+     "clip": 343,
+     "clip_frac": 0.3212,
+     "ground": 0,
+     "floor_depth": 0.0,
+     "hang_deg_from_vertical": 0.1,
+     "world_long_m": 0.834,
+     "frac_of_hero_h": 0.34,
+     "tip_z": 1.588,
+     "reach": 0.948,
+     "minor": {
+      "front": 38,
+      "side": 15,
+      "back": 38
+     },
+     "opaque": {
+      "front": 95605,
+      "side": 81266,
+      "back": 96390
+     },
+     "border": {
+      "front": 0.0,
+      "side": 0.0,
+      "back": 0.0
+     },
+     "vis": {
+      "front": 2097,
+      "side": 783,
+      "back": 1548
+     },
+     "seen": {
+      "front": 0.7319,
+      "side": 0.5809,
+      "back": 0.5396
+     },
+     "mid_px": 35.7,
+     "best_minor": 38,
+     "show": 1.066,
+     "proving_views": 2,
+     "min_vis": 783,
+     "max_border": 0.0,
+     "frame_clip": false,
+     "floor_break": false,
+     "lath": false,
+     "clean": true
+    }
+   ]
+  }
+ }
+}

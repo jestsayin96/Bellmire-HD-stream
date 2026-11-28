@@ -24561,3 +24561,11 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - No new data file. One `_note_c250` key. VALIDATION OK: json.load passes, every pre-existing key unchanged (diffed), file round-trips byte-exact.
 - WIRING FOR THE GAME BUILD (not done): fire `upgrade_events.districts[<id>].to_N.crier` when a district reaches tier N; `roads.to_N` likewise; read `inn_exterior.stages[tier-1]` for the outside view and `.storage` for the hub's storage panel. All unwired by design.
 - Next content: C-251.
+
+## C-251 (content, 28 Nov 2026, 05:3x CST) - TOWN-FIRST: MOMENT-OF-CHANGE LINES FOR LANDMARKS, SITES AND THE SQUARE (WRITTEN, NOT YET COMMITTED - BLENDER BRIDGE DOWN)
+- TAKE THIS NEXT / standing order 1: C-250 covered districts, roads and the inn exterior; landmarks, sites and the square had no event lines. Taken.
+- Added to `data/lore_lines.json` -> `town_buildings`: `landmark_events` (7 landmarks x to_2/to_3, {crier, plaque}), `site_events` (sawmill, mine, range, farm x to_2/to_3), `square_events` (well to_3/6/9/12, market to_4/8/12). New key `_note_c251`. No new data file. No dungeon floor counts.
+- VALIDATION OK: json.load passes; only new keys are the three blocks and `_note_c251`; every pre-existing key equal to the pre-edit parse.
+- WIRING for the game build (unwired by design): fire `landmark_events.landmarks[id].to_N.crier` at tier_levels[N]; same for `site_events.sites[id]`; `square_events.well.to_<level>` and `.market.to_<level>` when the town reaches that level.
+- COMMIT: NONE YET. execute_blender_code failed twice (localhost:9876 refused), and git does not run from device_bash on this worktree. Edits sit uncommitted in W3 (`data/lore_lines.json`, this entry). NEXT FIRING WITH A LIVE BRIDGE: fetch, merge origin/main, `git add data/lore_lines.json PROGRESS.md`, commit to `content`, push.
+- Next content: C-252.

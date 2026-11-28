@@ -254,6 +254,11 @@ static func held_rot(path: String) -> Vector3:
     ## forearm (s45_side, first run). The staff's +90 about Z stands the limbs UP and turns the belly forward.
     if path == ART + "bow_golden.glb":
         return Vector3(0, 0, 90)
+    ## S163: the tier-5 _Golden dagger read BLIND held plain (blade edge-on to the front camera: 13 px minor). Art's
+    ## prescription (docs/art/THE_DAGGER_READ_BLIND_BECAUSE_OF_FACING_NOT_SIZE_AND_MY_OWN_SEARCH_HID_THE_FIX.md),
+    ## measured on a posed knight: the bow's (0, 0, 90) turns the FACE to the front (38 px minor), with hand_scale 0.60.
+    if path.begins_with(ART + "dagger_"):
+        return Vector3(0, 0, 90)
     ## S20: the pack crossbow is built with its stock along the mesh's +Z (prod at the +Z end), its prod (bow arms)
     ## along +X and its thin axis along +Y. Held plain, the prod stood VERTICAL and the stock pointed ACROSS the
     ## body (s19_side). Art's (0, 0, 90.06) was tried first: it levelled the prod but left the stock across the
@@ -302,8 +307,8 @@ static func hand_scale(path: String) -> float:
         return 1.0
     ## S45: the _Golden set is built along +Y with the grip at the origin, like the pack sword, and BIG - measured off
     ## the .blend bounds: sword 2.30, big sword 2.74, dagger 1.39, axe 1.58, double axe 2.15, double hammer 2.53, bow 2.17.
-    if path.begins_with(ART + "dagger_"):
-        return 0.5
+    if path.begins_with(ART + "dagger_"):   # S163: 0.5 -> 0.60, art's prescribed pair with held_rot (0,0,90); 0.834 m
+        return 0.60
     if path.begins_with(ART + "hammer_"):
         return 0.4
     if path.begins_with(ART):

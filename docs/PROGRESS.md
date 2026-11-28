@@ -4897,3 +4897,24 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
 - STILL CARRIED (in order): delve-side glowing bag body at the death spot + walk-over calling take_bags (needs a render);
   !repair and durability on !hero/!me are the CHAT BOT's (chatcmd.gd) - Economy.repair(r, id)["line"] is ready for it;
   broken-gear look (art + gear.gd); guild insurance hook - RANK NUMBER IS MR. E'S, not invented.
+
+## D-cycle - S163 THE TIER-5 DAGGER HELD FACE-FRONT (art's two values) + slice 3 split acknowledged, 2026-11-27 19:08-19:2x CST (game build)
+- TAKE THIS NEXT (team lead, 18:58 block, read at 19:08) gave game build two things: death-model slice 3 ENGINE SIDE ONLY, and
+  art's fully-specified dagger fix in gear.gd. chatcmd.gd stays the CHAT BOT's: !repair and durability on !hero/!me are its to
+  build against Economy.repair(r, id) / repair_quote (landed S162). I touched no chatcmd.gd and need no string in it.
+- gear.gd (mine): held_rot gains an arm `ART + "dagger_"` -> Vector3(0, 0, 90) (the bow's triple); hand_scale ART dagger 0.5 ->
+  0.60. ART'S VALUES TAKEN AS GIVEN, NOT RE-DERIVED (docs/art/THE_DAGGER_READ_BLIND_...md: front minor 13 -> 38 px, 2 of 3 views
+  prove, clip_frac 0.346 under 0.37). No disagreement with the length (0.834 m).
+- LOOKED AT IT: tools/_s45_artifact.gd re-rendered renders/cycles/s45/. s45_dagger_close: the scarforged dagger stands upright
+  in the fist, violet hilt and pommel below the hand, blade rising past the forearm. s45_front at full-cast distance: it reads as a
+  thin upright line at the knight's hand - present, not blind, but small at that range; art's three-view gate is the judge of that.
+- GATES (verdict lines): parse --quit-after 300 rc 0, 0 Parse Error / 0 SCRIPT ERROR. TWITCH_PARSE OK (8 checks). DEATH_TEST OK
+  36 of 36. S45_ART OK (10 shots, 0 failures) - dagger_golden.glb, hand-in-grip true. OFFFLOOR_VERDICT OK 0 of 2379 samples.
+  DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/15506 (0.000%) raid_in_solid=0/7480 (0.000%) PASS.
+- SLICE 3 ENGINE SIDE CARRIED TO MY NEXT FIRING, SPLIT ON PURPOSE (not started this hour, so nothing half-built is in the tree):
+  the glowing bag body at the death spot + walk-over. Plan: delve.gd death path (:2724, after roster.kill) records the spot
+  relative to dun's origin on the new bag; _next_floor (:124) spawns a bag body (small mesh + OmniLight3D glow) for every
+  roster.bags row on this floor that is not "gone", falling back to a cell near entry when the stored cell is not in this
+  floor's dun.info["cells"]; _process checks each alive member within ~1.2 m and calls roster.take_bags(uid, floor_no),
+  "locked" bags glow but do not open. A new windowed render tool proves it, then DEATH_TEST grows the walk-over checks.
+- NOT TOUCHED: guild insurance (rank number is Mr. E's), broken-gear look (art + gear.gd, later).

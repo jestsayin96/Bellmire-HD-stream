@@ -1,0 +1,121 @@
+{
+ "model": "assets\\gear\\artifact\\spear_golden.glb",
+ "res_path": "res://assets/gear/artifact/spear_golden.glb",
+ "hero_h": 2.45,
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "raw_len_y": 3.5,
+ "engine_carry_read_off_main": {
+  "res_path": "res://assets/gear/artifact/spear_golden.glb",
+  "held_rot_deg": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "held_rot_arm": "default",
+  "held_rot_arm_index": 4,
+  "held_rot_arms": 5,
+  "hand_scale": 0.6,
+  "hand_scale_arm": "begins 'res://assets/gear/artifact/'",
+  "hand_scale_arm_index": 5,
+  "hand_scale_arms": 10,
+  "consts": {
+   "ADV": "res://addons/kaykit_character_pack_adventures/Assets/gltf/",
+   "KIT": "res://assets/gear/",
+   "DUN": "res://assets/gear/dungeon/",
+   "ART": "res://assets/gear/artifact/"
+  }
+ },
+ "control_note": "clip judged against _scale_sweep.json controls: SHIPPED staff_rare clips 22.7%, staff_B 5.8%, so clip==0 is not the bar",
+ "carries": [
+  {
+   "name": "engine_fallback",
+   "held_rot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hand_scale": 0.6,
+   "roll_applied": 0.0,
+   "length_in_hand": 2.1,
+   "reach_above_fist": 0.068,
+   "tip_z": 0.708,
+   "verts": 2374,
+   "checked": 2022,
+   "clip": 1054,
+   "clip_pct": 52.1,
+   "ground": 0,
+   "hard_gates_ok": true,
+   "blanks": [],
+   "blind_views": [],
+   "frame_clipped": [],
+   "views": {
+    "front": {
+     "moved": 3808,
+     "opaque": 95656,
+     "model_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "side": {
+     "moved": 800,
+     "opaque": 79783,
+     "model_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "back": {
+     "moved": 3618,
+     "opaque": 96460,
+     "model_verts_outside_frame": 0,
+     "frame_outside": 0
+    }
+   },
+   "outdir": "renders\\art\\spear\\engine_fallback"
+  },
+  {
+   "name": "up_roll00",
+   "held_rot": [
+    0,
+    0,
+    90
+   ],
+   "hand_scale": 0.6,
+   "roll_applied": 0.0,
+   "length_in_hand": 2.1,
+   "reach_above_fist": 1.407,
+   "tip_z": 2.048,
+   "verts": 2374,
+   "checked": 2022,
+   "clip": 1052,
+   "clip_pct": 52.0,
+   "ground": 30,
+   "hard_gates_ok": false,
+   "blanks": [],
+   "blind_views": [],
+   "frame_clipped": [],
+   "views": {
+    "front": {
+     "moved": 2468,
+     "opaque": 93945,
+     "model_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "side": {
+     "moved": 2581,
+     "opaque": 79914,
+     "model_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "back": {
+     "moved": 1591,
+     "opaque": 94646,
+     "model_verts_outside_frame": 0,
+     "frame_outside": 0
+    }
+   },
+   "outdir": "renders\\art\\spear\\up_roll00"
+  }
+ ]
+}

@@ -1,0 +1,210 @@
+{
+  "quaternius_spear_obj": {
+    "objs": [
+      "Spear_Cylinder.031"
+    ],
+    "n_mesh": 1,
+    "tris": 1202,
+    "mats": [
+      "DarkWood",
+      "LightSteel",
+      "LightWood",
+      "Steel"
+    ],
+    "lo": [
+      -0.2195,
+      -0.1624,
+      -2.1552
+    ],
+    "hi": [
+      0.3106,
+      0.1624,
+      7.5619
+    ],
+    "size": [
+      0.5301,
+      0.3249,
+      9.7171
+    ],
+    "long_axis": "Z",
+    "length": 9.7171,
+    "path": "C:\\hd adventure\\_packs\\quaternius_medieval_weapons_2018_CC0\\Medieval Weapons Pack - Sept 2018\\OBJ\\Spear.obj"
+  },
+  "quaternius_spear_fbx": {
+    "objs": [
+      "Spear"
+    ],
+    "n_mesh": 1,
+    "tris": 1202,
+    "mats": [
+      "DarkWood",
+      "LightSteel",
+      "LightWood",
+      "Steel"
+    ],
+    "lo": [
+      -0.2195,
+      -0.1624,
+      -2.1552
+    ],
+    "hi": [
+      0.3106,
+      0.1624,
+      7.5619
+    ],
+    "size": [
+      0.5301,
+      0.3249,
+      9.7171
+    ],
+    "long_axis": "Z",
+    "length": 9.7171,
+    "path": "C:\\hd adventure\\_packs\\quaternius_medieval_weapons_2018_CC0\\Medieval Weapons Pack - Sept 2018\\FBX\\Spear.fbx"
+  },
+  "medievalpack_spear_obj": {
+    "objs": [
+      "Cylinder"
+    ],
+    "n_mesh": 1,
+    "tris": 196,
+    "mats": [
+      "Material.002"
+    ],
+    "lo": [
+      -0.097,
+      -0.3434,
+      -2.1164
+    ],
+    "hi": [
+      0.1015,
+      0.3323,
+      3.0188
+    ],
+    "size": [
+      0.1985,
+      0.6758,
+      5.1352
+    ],
+    "long_axis": "Z",
+    "length": 5.1352,
+    "path": "C:\\hd adventure\\_packs\\medieval_pack_CC0\\MedievalPack\\OBJ\\Spear.obj"
+  },
+  "SHIPPED_spear_A": {
+    "objs": [
+      "spear_A"
+    ],
+    "n_mesh": 1,
+    "tris": 1216,
+    "mats": [
+      "weapons"
+    ],
+    "lo": [
+      -0.1392,
+      -0.123,
+      -1.0322
+    ],
+    "hi": [
+      0.1392,
+      0.123,
+      2.1066
+    ],
+    "size": [
+      0.2784,
+      0.2459,
+      3.1387
+    ],
+    "long_axis": "Z",
+    "length": 3.1387,
+    "path": "C:\\hd adventure\\jests-hd-medieval-adventure\\assets\\gear\\spear_A.gltf"
+  },
+  "SHIPPED_halberd": {
+    "objs": [
+      "halberd"
+    ],
+    "n_mesh": 1,
+    "tris": 1496,
+    "mats": [
+      "weapons"
+    ],
+    "lo": [
+      -0.7897,
+      -0.1454,
+      -0.9322
+    ],
+    "hi": [
+      0.5031,
+      0.1455,
+      1.8146
+    ],
+    "size": [
+      1.2928,
+      0.291,
+      2.7468
+    ],
+    "long_axis": "Z",
+    "length": 2.7468,
+    "path": "C:\\hd adventure\\jests-hd-medieval-adventure\\assets\\gear\\halberd.gltf"
+  },
+  "SHIPPED_sceptre_golden": {
+    "objs": [
+      "sceptre_golden"
+    ],
+    "n_mesh": 1,
+    "tris": 548,
+    "mats": [
+      "sceptre_gold",
+      "sceptre_grip",
+      "sceptre_stone"
+    ],
+    "lo": [
+      -0.24,
+      -0.2291,
+      -0.2284
+    ],
+    "hi": [
+      0.24,
+      0.2291,
+      1.9042
+    ],
+    "size": [
+      0.48,
+      0.4582,
+      2.1326
+    ],
+    "long_axis": "Z",
+    "length": 2.1326,
+    "path": "C:\\hd adventure\\jests-hd-medieval-adventure\\assets\\gear\\artifact\\sceptre_golden.glb"
+  },
+  "SHIPPED_sword_golden": {
+    "objs": [
+      "Sword_Golden"
+    ],
+    "n_mesh": 1,
+    "tris": 872,
+    "mats": [
+      "DarkSteel",
+      "DarkWood",
+      "Golden",
+      "LightGold",
+      "LightWood"
+    ],
+    "lo": [
+      -0.2672,
+      -0.0611,
+      -0.383
+    ],
+    "hi": [
+      0.2672,
+      0.0611,
+      1.9191
+    ],
+    "size": [
+      0.5344,
+      0.1222,
+      2.3021
+    ],
+    "long_axis": "Z",
+    "length": 2.3021,
+    "path": "C:\\hd adventure\\jests-hd-medieval-adventure\\assets\\gear\\artifact\\sword_golden.glb"
+  }
+}

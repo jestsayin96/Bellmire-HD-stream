@@ -1,3 +1,356 @@
+*** ===== TAKE THIS NEXT - THE 23:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 22:58 FIRING AND ITS ADDENDUM.
+*** Clock read off cruzader: 23:5x CST. Merged to main at 9d97650a and pushed.
+***
+*** ############################################################################
+*** ##  THREE SUPERVISOR ORDERS LANDED AFTER MY 22:58 RUN AND THEY RE-ORDER    ##
+*** ##  THE WHOLE HOUSE. TWO OF MY OWN 22:58 ROWS WERE WRONG WITHIN THE HOUR.  ##
+*** ############################################################################
+***
+*** **1. PRIORITY ORDER - TOWN FIRST** (sup-nov27-2304, Mr. E direct).
+***    The town's footprint, building placement, terrain shape and layout come FIRST - before
+***    ranking, before guilds, before quests, before everything. **"The town is what viewers SEE
+***    on stream 24/7. If the town doesn't change and grow visually, nothing else matters."**
+***    THE ORDER: (1) TOWN VISUAL PROGRESSION - buildings upgrade with town level, footprint
+***    expands, layout evolves; D31 visual half, D93 hand-authored layout, Systems 15-17.
+***    (2) Death model slices 2-3. (3) `!solo` 42c. (4) Ranking 43. (5) Dual guild / morality 44.
+***    (6) Quest board 18. (7) Onramp 14-17. (8) Crafting 26. (9) Inn - EXTERIOR ONLY, storage
+***    mechanic, NO interior rooms to render.
+***
+*** **2. THE HUB IS THE PRIMARY INTERFACE, NOT CHAT** (sup-nov27-2340, Mr. E direct).
+***    Chat is for viewers talking, BellmireBro announcing, and MINIMAL commands only - `!enlist`,
+***    `!hero`, `!help`. **"Chat is NOT for managing gear, inventory, quests, party, or anything
+***    that could be done on the hub."** The hub is where a viewer equips, sells, dyes, stores,
+***    accepts quests, manages party, reads rankings, crafts - via Twitch OAuth into their own
+***    dashboard ("their room at the inn"). Architecture is EXPANDED SUPABASE (Option A): Twitch
+***    OAuth via Supabase Auth, an ACTION QUEUE TABLE the hub writes and the engine polls, snapshot
+***    cadence pushed to 10-15 s, per-viewer tables with RLS. No new infrastructure.
+***    **STANDING DESIGN RULE: if a viewer action can be done on the hub, it SHOULD be. Chat
+***    commands are the fallback, not the primary path.** Existing commands STAY as fallbacks.
+***
+*** **3. DEADLINE - UNDER TWO WEEKS, ~10 DECEMBER 2026** (sup-nov27-2346, Mr. E direct).
+***    **"Every lane should be working at full capacity. No wasted hours. No standing down when
+***    there's work to pick up."** AND THE PART THAT CHANGES HOW YOU READ THIS BLOCK:
+***    **"If your current item is done and nothing is in your TAKE THIS NEXT row, read the
+***    priority list above and take the highest-priority item that fits your lane. Do not stand
+***    down. Do not wait for a row."** THAT IS NOW STANDING. A missing row is no longer a reason
+***    to stop - and that supersedes every "stand down and write it up" instruction below.
+***
+*** ===== MY OWN FAULTS THIS RUN, REPORTED FIRST =====
+*** (0) **TWO OF MY 22:58 ROWS WERE OVERTAKEN WITHIN THE HOUR AND BOTH LANES ACTED ON THEM.**
+***     I sent the GAME BUILD to System 43 (ranking); the 23:04 ruling puts that FOURTH behind
+***     town visual progression. I sent the CHAT BOT to build a full `!party` management surface;
+***     the 23:40 directive says chat is explicitly NOT for party management. **NEITHER LANE IS
+***     CHARGED AND NEITHER BODY OF WORK IS WASTED** - both rows were correct when written, both
+***     rulings post-date them by minutes, and both systems are on Mr. E's own list (43 at #4, and
+***     existing commands stay as fallbacks by the directive's own words). But the rows are mine
+***     and they are corrected below. The lesson is the house's standing one: a supervisor order
+***     that sits outside the plan is an order that does not exist, and three of them landed in
+***     the 48 minutes after I synced.
+*** (1) **I SUSPECTED A DOUBLE-FIRE IN THE `!solo` HANDOFF AND I WAS WRONG.** I read
+***     `chatcmd.gd:562` in isolation and thought wiring `solo_ask = _on_solo` would run the solo
+***     delve once through the callable and again through the signal. **IT WOULD NOT.** `_solo()`
+***     RETURNS in both branches of `if solo_ask.is_valid()` and never reaches
+***     `wants_solo.emit()`. The chat bot's instruction is exactly right as written. I caught this
+***     by reading the whole function before writing the row, which is the only reason it is not
+***     in it. A REGEX IS NOT A PARSER AND NEITHER IS THREE LINES OF A FUNCTION.
+***
+*** ===== WHAT I TICKED =====
+*** **SYSTEM 42b - WHOLE AND TICKED.** Verified on merged main 9d97650a, not on a claim:
+***   `grep '"muster", "party"' scripts/chatcmd.gd` now returns **NOTHING** - the alias is gone -
+***   and `party` has its own dispatch arm at `chatcmd.gd:193` (`"party", "parties":`). Both
+***   halves of the swap landed in ONE commit, which is what I asked for and what stops `party`
+***   meaning nothing in between.
+*** **SYSTEM 42c (`!solo`) - WHOLE AND TICKED, WITH ONE ONE-LINE REFINEMENT OWED (see game build).**
+***   `signal wants_solo(user_id: String)` at `chatcmd.gd:25`, emitted at `:577`; `town.gd:5363`
+***   connects to that exact name and signature. The feature WORKS end to end today.
+*** **SYSTEM 43 (ranking) ENGINE HALF - TICKED.** S167: `roster.gd` +136, `rank_feed` published
+***   through `snapshot_pub.gd` as a `by_key` feed, exactly the shape I asked for. It is now #4 by
+***   the new order, but it is DONE and done work is never un-done.
+*** **ART - THE TIER-5 SPEAR - TICKED, AND ITS LICENCE IS THE BEST IN THE HOUSE.** Quaternius CC0,
+***   already-cleared pack, and `docs/art/ASSET_SOURCES.md` records the derivation so completely it
+***   is reversible from `tools/art/_speargen.py`: the Steel->Golden substitution proven to be
+***   QUATERNIUS' OWN by triangle-count identity material for material, scale and origin numbers
+***   given, and the four langets flagged as procedurally generated and therefore original.
+***   **AND THE LANE CAUGHT ITS OWN GATE PASSING A PICTURE WITH NO SPEAR IN IT.** That is the
+***   second hour running art has red-proved its own instrument. It is the habit I most want kept.
+*** **CONTENT C-247 - TICKED** (lore top-up: misfire, cleared, descend, epitaphs).
+*** **THE HUB LOOKED AT THE LIVE PAGE AND CLOSED MY OWED ITEM - TICKED.** It used the built-in
+***   browser because the cloud shell is proxy-blocked from github.io, which is the same limit I
+***   hit and reported. Publish 9 serves `app.js?v=9` and `style.css?v=9`, CSP meta present, 0
+***   console errors, 67 bestiary imgs, Shops and Bestiary both render. **AND IT CORRECTED ONE OF
+***   MY FIGURES: the section bar is 15 tabs in THREE rows, not two** - no tab clipped, none with
+***   scrollWidth > clientWidth. I have been writing "two-row section bar" for hours; it is three.
+***
+*** ===== WHAT I DID NOT TICK =====
+*** **B212's FIRST BATTERY RAN RED AND I READ ALL THREE BEFORE JUDGING.** `L14_TEST FAIL 1` at
+*** `_b212_battery.log:157` is battery ONE - the lane's own `COMMANDS_DATA NEEDS_HERO` guard
+*** firing on `!party` publishing `needs_hero: true` while routing ungated. It fixed it the honest
+*** way round (the published flag was the true one, so the GATE came to meet the FLAG) and
+*** batteries two and three are green: `L14_TEST OK (27 checks)` at `:348` and `:525`,
+*** COMMANDS_DOC OK 39, TWITCH_PARSE OK 8. **THE LANE COMMITTED THE RED BATTERY RATHER THAN THE
+*** GREEN ONE ALONE, AND THAT IS WHY I CAN TRUST THE GREEN.** Read to the END of a log.
+*** The chat bot also names a gap nobody should lose: **the party surface is proven ROUTED, not
+*** proven BEHAVED** - L14 is a source-harvest symmetry check and never calls the commands.
+***
+*** ===== TAKE THIS NEXT - ONE ROW PER LANE, RE-CUT TO THE NEW PRIORITY ORDER =====
+***
+*** GAME BUILD (:07) - **TOWN VISUAL PROGRESSION. THIS IS PRIORITY #1 IN THE HOUSE.**
+***   D31's visual half (per-tier distinct buildings) and D93 (hand-authored layout to replace the
+***   procedural generator). The layout FORMAT is the blocker for art and content both, so define
+***   it first and say what it is - once the format exists, art can author buildings against it.
+***   **AND TWO ONE-LINERS, BOTH TINY AND BOTH WORTH DOING FIRST:**
+***   (a) `chat.solo_ask = _on_solo` beside the connect at `town.gd:5363`. Until it is set, a
+***       viewer the town REFUSES still reads "Sent word. Watch the feed." and their hero never
+***       goes. `_solo()` returns in both branches so there is NO double-fire - I checked.
+***   (b) `snapshot_pub.gd:21` is `const EVERY := 60.0`. The 23:40 architecture directive asks for
+***       **10-15 s**. One constant.
+***
+*** HUB (:37) - **YOU ARE NOW THE PRIMARY INTERFACE. THIS IS THE BIGGEST SCOPE CHANGE OF THE
+***   NIGHT AND IT IS YOURS** (sup-nov27-2340). Start with the foundation, in this order:
+***   **Twitch OAuth via Supabase Auth** so a viewer logs in and sees their own hero, then the
+***   **personal dashboard shell** ("their room at the inn"), then **action submission** writing to
+***   the action queue table the engine will poll. Keep the UI note the directive asks for:
+***   "Changes take effect in 15-30 seconds in-game." You are no longer blocked on anybody - stop
+***   reporting System 41 as your blocker, it is #8 now and OAuth is #10 but it is FOUNDATION.
+***
+*** ART (:34) - **TOWN BUILDING ASSETS FOR THE PROGRESSION TIERS.** The 23:04 ruling puts hero
+***   gear second to this: "town building assets for the progression tiers are next in line". If
+***   the game build has not yet published the layout/tier format, DO NOT WAIT and DO NOT STAND
+***   DOWN - author the tier-1/2/3 variants of ONE building (the well -> fountain of the town
+***   square is named in Systems 15-17) and prove fit the way you prove gear. Keep `_goldcontrol`.
+***
+*** CONTENT (:22) - **TOWN GROWTH AND BUILDING TEXT - AND IT ALL FITS INSIDE YOUR OWN FOUR FILES.**
+***   Building names, landmark names, tier flavour text, town growth crier lines (the 23:04 ruling
+***   names exactly these). **THIS DELIBERATELY SIDESTEPS THE SYSTEM 41 BLOCKER THAT HAS COST YOU
+***   NINE STAND-DOWNS**: it needs no new file and no charter change, it is the #1 priority's own
+***   content, and `lore_lines.json` already carries the D32 growth lines to extend. If you later
+***   do need `drops.json`, the supervisor's 16:37 ruling still stands that it is yours.
+***
+*** CHAT BOT (:45) - **STOP ADDING COMMAND SURFACE. THE DIRECTIVE HAS CHANGED UNDER YOU AND IT IS
+***   NOT A CRITICISM OF B212** (sup-nov27-2340): chat is now for talking, announcing, and
+***   `!enlist` / `!hero` / `!help` only. **Your `!party` and `!solo` work STAYS - the directive
+***   says existing commands remain as fallbacks** - so nothing is reverted. Your next item is the
+***   directive's own: make `!help` POINT VIEWERS AT THE HUB as the place to manage a hero, and
+***   audit which existing commands are management the hub will own, so the hub lane knows what it
+***   must cover. That audit is read-only, needs no lock, and is worth more than another verb.
+***
+*** HUD (:52) - **THE PARTY-OF-TEN HUD HALF OF SYSTEM 42 in `party_frames.gd`.** Unchanged and
+***   still yours - in-game display is NOT hub management and is untouched by the 23:40 directive.
+***   Stated again as the half-of-an-existing-item judgement. If the frames already handle ten,
+***   CLOSE IT BY DISPROVING IT and that counts fully. **Do not take the rarity hue row - it is
+***   U55, shipped and fed.** After this, town level/progression display is your next-in-line.
+***
+*** ===== FOR THE SUPERVISOR =====
+*** (1) **ALL THREE OF TONIGHT'S ORDERS ARE NOW IN THE PLAN AND ON ALL SEVEN REFS**, with the six
+***     rows re-cut to the town-first order and the deadline's "do not stand down" clause quoted
+***     where every lane reads it. Two of my 22:58 rows contradicted the new rulings and are
+***     corrected; neither lane is charged.
+*** (2) **THE GAME HAS NOT PUBLISHED A SNAPSHOT SINCE ~15:55 CT - EIGHT HOURS.** Found by the hub
+***     on the LIVE page ("Last word from the town 8 hours ago"). I do not read this as a broken
+***     publisher: the snapshot runs inside the live game and the lanes only run headless gates, so
+***     it is consistent with the game simply not running. **But it means the public page has shown
+***     a stale town all evening, and no live-data arm of the hub gate has ever been proven against
+***     real rows.** RECOMMENDATION: worth one line to Mr. E confirming the game is meant to be
+***     down; if it is meant to be up, this is a live outage on the thing viewers see 24/7.
+*** (3) **THE PARTY COMMAND SURFACE IS PROVEN ROUTED, NOT PROVEN BEHAVED** - the chat bot named
+***     this itself. No behavioural gate exists anywhere for it; `tools/` is not the chat bot's and
+***     the freeze bars it from inventing one. RECOMMENDATION: if you want one, it is the game
+***     build's `tools/` and needs your word, not mine.
+***
+*** ===== NEEDS MR. E =====
+*** **Is the game meant to be running right now?** The live page has shown a stale town since
+*** 15:55 CT. Everything else tonight is routed and nothing else is waiting on him.
+
+*** ===== ADDENDUM WRITTEN AT 23:1x CT, 27 NOV 2026, BY THE 22:58 TEAM LEAD. =====
+*** *** THIS IS WRITTEN AFTER :05 SO BY THIS HOUSE'S OWN RULE IT IS THE 23:58 FIRING'S ROW,
+*** *** NOT THIS HOUR'S. The six lane rows above stand unchanged and are what you take now.
+***
+*** (A) **ART - THE TIER-5 GOLDEN SCEPTRE IS TICKED, AND I TICKED IT BY LOOKING, NOT BY READING
+***     THE REGISTER.** I staged `renders/art/sceptre/up_roll15/front.png` and `back.png` into my
+***     own container and opened them. FRONT: the sceptre sits in the right hand, gold shaft, blue
+***     gem head, held upright and clear of both the cape and the pauldron - it reads as a SCEPTRE
+***     and not as a re-tinted staff. BACK: **it is still clearly visible from behind**, held off
+***     the cape with the gem legible against the grey helm. I checked the back ON PURPOSE because
+***     of the Beadle - a body whose fit register said `seen: 1.0` on every view and which had no
+***     facing from behind at all. This one survives that test. Front and back by eye: PASS.
+***     The lane's own self-catch stands as the best work in this hour's traffic: its gate enforced
+***     the wrong axis and its CONTROL render overturned the gate. Keep `_goldcontrol` on every
+***     tier-5 piece.
+***
+*** (B) **THE DEAD-DATA AUDIT, MEASURED THIS RUN ON MERGED TREE 5244f3ef. THE UNREAD COUNT DID NOT
+***     MOVE.** Matcher: literal substring of each top-level key against a corpus of
+***     `scripts/*.gd` + `web/app.js` ONLY (not recursive, no `tools/`), data glob `data/*.json`
+***     one level.
+***       - Corpus: **48 `scripts/*.gd` + `web/app.js` = 49 files, 2,532,315 chars.**
+***         *** THE PROMPT'S BASELINE OF "47 .gd + app.js = 48 files / 2,345,688 chars" IS NOW
+***         *** STALE. `scripts/*.gd` is 48. This is a real move, not the recursive-glob miscount
+***         *** the charter warns about - my glob is one level and excludes `web/tools/`.
+***       - `data/*.json`: 12 files, **178 top-level keys** (the prompt says 146 - also stale).
+***       - **ZERO-HIT NON-NOTE KEYS: 15. UNCHANGED.** That is the number that carries signal and
+***         it has now held at 15 for days. All 15 are the known accounted set: the two runtime-built
+***         `_alt` pools (`lord_intros_alt`, `unique_intros_alt`, READ at `delve.gd:4022` via
+***         `base + "_alt"`), the four declared-dead (`phase2_words`, `phase2_words_alt`,
+***         `phase2_words_alt2`, `town_levels_for_the_desktop`), and the nine prose/spec strings
+***         (`technique`, `boss_floors`, `chronicle_line`, `word_order`, `casing`, `promotion_line`,
+***         `one_roll`, `_gating`, `canon_silences`). **NO LANE IS TO WIRE ANY OF THEM.**
+***       - ZERO-HIT `_note_` keys: **72** (41 at 08:58 on 21 Nov). The raw total rises every time
+***         content writes a note and carries NO signal. Content is not to stop writing them.
+***       - **UNREAD LIVE DATA KEYS: ZERO.**
+***
+*** (C) **MY OWN AUDIT INSTRUMENT THREW A FALSE POSITIVE AND I CAUGHT IT BEFORE PUBLISHING IT.**
+***     The asset walker reported **1 unreferenced directory: `assets/graveyard/Textures`** out of
+***     38 directories with files. **IT IS NOT DEAD.** I ran Guard 1 - confirm every hit by looking
+***     - in reverse: I searched the MODELS rather than the scripts, and every `.glb` in
+***     `assets/graveyard/` embeds the string `Textures/` (character-keeper, gravestone-bevel,
+***     gravestone-cross, gravestone-round, lantern-candle - 1 ref each). The folder is referenced
+***     by the meshes that load it, which is a path no script-corpus grep can ever see.
+***     **THE CORRECT FIGURE IS UNREFERENCED ASSET DIRECTORIES: ZERO**, and the directory count is
+***     38, not the 34 in the prompt. Had I shipped the raw walker output I would have handed art
+***     or the game build a dead-asset row for a texture folder five models depend on. This is the
+***     same fault class as "a name search that finds nothing is not proof the thing is missing".
+***
+*** (D) **WHAT IS STILL ONLY ON DISK (PHASE 2):** Systems 42b and 42c have engine halves on main
+***     and NO command half on any ref - `wants_solo` has no emitter and `chatcmd.gd:173` still
+***     carries `party` as a muster alias. System 41 has no data at all (no recipe JSONs in
+***     `data/`), which is why the hub has been blocked on it twice. Systems 43/44 have no engine
+***     feed yet. Those four are this house's whole open front.
+
+*** ===== TAKE THIS NEXT - THE 22:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 21:58 FIRING AND ITS AMENDMENTS.
+*** Clock read off cruzader with `TZ=America/Chicago date`: 22:58:36 CST at the start of the run.
+*** FIVE OF SIX LANES HAD NEW WORK. Merged to main at 726a1abf and pushed.
+*** Every number below was measured THIS RUN. QUOTE NONE OF IT NEXT HOUR - MEASURE IT.
+***
+*** ===== THE BIG ONE: HUB PUBLISH 9 IS LIVE, AND I VERIFIED THE PUSH MYSELF =====
+*** The SUPERVISOR took the publish at 22:48:37 CST (gh-pages e9ba9826, "hub publish 9: bestiary
+*** icons, spec cards, cache-bust v9, System 40 hub half"). THE CHAIN WORKED END TO END: the hub
+*** claimed READY TO PUBLISH at 21:4x, my 21:58 run ran the gate and held the verdict UP, and the
+*** seat above me pushed. I did not decide it and I did not push it.
+*** MY VERIFICATION, COMPUTED NOT ASSUMED:
+***   - `origin/gh-pages^{tree}` = **23eee62a** and `origin/main:web` = **23eee62a**. EQUAL.
+***   - `git diff --numstat origin/gh-pages origin/main:web` is **EMPTY**. The published site is
+***     byte-for-byte main's `web/`.
+***   - Parent of e9ba9826 is 8d214d36, the previous gh-pages tip, and
+***     `merge-base --is-ancestor 8d214d36 e9ba9826` is TRUE. A clean fast-forward. NOT forced.
+***   - THE CACHE-BUST BLOCKER MY 21:58 RUN FOUND IS NOW SPENT: publish 8 asked for `app.js?v=8`
+***     against changed bytes; publish 9 carries `?v=9` on both app.js and style.css.
+*** WHAT IS MERGED AND NOT PUBLISHED: `origin/hub:web` is c6819eed, and the ONLY delta to the
+*** published tree is **web/NOTES.md +2/-0** - the hub's own 22:4x log entry, written AFTER the
+*** push. It is a notes file, not a served asset. THERE IS NO SITE CHANGE WAITING. Do not route a
+*** publish request on it and do not run a publish gate for it.
+***
+*** ===== MY OWN FAULTS AND LIMITS THIS RUN. REPORTED FIRST. =====
+*** (0) **I DID NOT LOOK AT THE LIVE PAGE THIS RUN AND I AM NOT CLAIMING I DID.** Publish 9 went
+***     up ten minutes before I fired. My container's egress is allowlisted and I did not establish
+***     that it reaches github.io, so the live-page look is OWED and I have put it in the HUB row
+***     where the lane that owns `web/` can do it with the browser it already uses. The last
+***     independent look at the live page remains the 22:58 seat on 17 Nov.
+*** (1) **I AM LATE TO THE GAME BUILD'S :07 READ AND THAT IS MY SCHEDULE, NOT ITS FAULT.** I spent
+***     the window earning the S166 tick by reading `town.gd` rather than taking the log's word. If
+***     the game build read the 21:58 row, that row told it to build System 42c - WHICH IT HAS
+***     ALREADY SHIPPED. If you are the game build and you are reading this after a wasted pass,
+***     the waste is mine. The row below is correct and is yours from this moment.
+*** (2) **MY FIRST ATTEMPT TO STAGE THIS BLOCK WROTE ZERO BYTES** - the device shell refused `/tmp`
+***     and the heredoc died, exactly the empty-temp-file trap this seat's own charter warns about.
+***     THE LENGTH AND LANDMARK ASSERTIONS CAUGHT IT AND THE PLAN WAS NEVER TOUCHED. The guard is
+***     not advice; it is the only reason this block is not a blank insert.
+***
+*** ===== WHAT I TICKED, AND THE ONE THING I WOULD NOT =====
+*** **SYSTEM 42c (!solo) - ENGINE HALF TICKED. THE SYSTEM IS *NOT* WHOLE.** I read the engine half
+*** in the merged file instead of trusting the battery: `town.gd:5617-5693` is real - `solo_refusal`,
+*** `_on_solo`, `_solo_enter`, `solo_delves`, and the delve is put on a NEGATIVE lane
+*** (`_solo_lane -= 1`) so it never touches `chat.delve_queue` or `_at_mouth`. That is the
+*** directive's "skips the queue entirely", in code. Gates re-read off `docs/_s166_battery.log`
+*** by VERDICT LINE: SOLO_TEST OK 16 of 16 (:171), PARTY_TEST OK 23 of 23 (:298), TWITCH_PARSE OK
+*** 8 checks (:313), OFFFLOOR_VERDICT OK 0 of 2427 (:397), DELVE_TEST OK 9001 frames (:443),
+*** TOWNWALK in_solid=0/16765 PASS (:484).
+*** **WHY IT IS HALF AND NOT WHOLE, MEASURED ON MAIN:** `town.gd:5363` connects to a chat signal
+*** named `wants_solo`, and **`wants_solo` OCCURS NOWHERE ON main EXCEPT THOSE TWO CONSUMER LINES.**
+*** `grep -rn wants_solo scripts/` returns town.gd:5363 and :5364 and nothing else. The emitter is
+*** the chat bot's. AND THE SAME IS STILL TRUE OF 42b: `chatcmd.gd:173` reads
+*** `"muster", "party", "mustered":` - **`party` IS STILL A LIVE ALIAS OF `muster` ON MAIN.** The
+*** game build wrote the connect behind `if chat.has_signal(...)`, which is exactly right: it
+*** degrades instead of crashing while the other half is in flight.
+*** **42b AND 42c ARE BOTH ENGINE-COMPLETE AND COMMAND-INCOMPLETE. NEITHER IS DONE.**
+*** B212 was live in the lock file at 22:53 claiming both command halves; it had not pushed when I
+*** merged, so there was nothing on any ref to judge. THAT IS NOT A STAND-DOWN AND THE LANE IS NOT
+*** CHARGED - its own IDLE says the verdicts were read after the line.
+***
+*** ===== TAKE THIS NEXT - ONE ROW PER LANE =====
+***
+*** GAME BUILD (:07) - **SYSTEM 43, THE RANKING LADDER, ENGINE HALF** (DIRECTIVE
+***   sup-nov27-1856). System 42 is yours-complete on both halves; do not re-open 42b or 42c.
+***   Publish the ranking the way you published `miniboss_feed` - a `by_key` feed the HUB and HUD
+***   can read without reaching into your dicts - because the hub has now named Systems 43/44 as
+***   BLOCKED ON THE ENGINE PUBLISHING NOTHING, twice. Your feed IS the unblock for two lanes.
+***   MEASURE THE CONSTANT WITH A BRACE-MATCHED PARSE, NOT A FLAT REGEX, and state the count.
+***
+*** CHAT BOT (:45) - **PUSH B212. IT IS THE ONLY THING STANDING BETWEEN TWO SYSTEMS AND DONE.**
+***   Both engine halves are on `origin/main` as of 726a1abf, so your precondition is MET on main
+***   AND on `origin/laptop` - read either. Two things your surface must do, both measured by me on
+***   main this run: (a) emit a signal named EXACTLY `wants_solo` carrying the uid as a String,
+***   because `town.gd:5363-5364` connects to that name and that signature and will silently do
+***   nothing if it differs by one character; (b) take `party` OFF muster's alias list at
+***   `chatcmd.gd:173` IN THE SAME COMMIT that gives `!party` its own handler - never in two, or
+***   `party` is dead between them. CLAIM THE LOCK BY :50 WITH A FINISH INSIDE :52 - you sat in the
+***   HUD's window again at 22:53:11 on a genuinely free lock and released at 22:57:08; the HUD got
+***   its window at 22:57:24 and lost nothing, so you are NOT charged, but the margin was 16 seconds.
+***
+*** CONTENT (:22) - **THE SYSTEM 41 RECIPE AND ENCYCLOPEDIA JSONs** (DIRECTIVE sup-nov27-0230).
+***   THIS IS THE HIGHEST-VALUE CONTENT ITEM IN THE HOUSE RIGHT NOW because it is the HUB's
+***   declared blocker: the hub has reported for two runs that System 41 has nothing to read
+***   because the recipe JSONs are ABSENT from `data/` on `origin/main`. C-246 verified and merged
+***   (misfire 304, cleared 753, descend 716 after the top-up; `phase2_words_alt2` still 7 keys and
+***   still UNWIRED, correctly). **ON `drops.json` AND NEW FILES: the supervisor's 16:37 ruling is
+***   that drops.json IS CONTENT'S. Your prompt's four-file list is STALE and I cannot edit a
+***   prompt from a firing - this plan row is the override, in writing, and the plan is the
+***   instrument your own charter tells you to obey.** You have stood down eight times on this and
+***   every one of those is mine, not yours.
+***
+*** ART (:34) - **THE NEXT TIER-5 HERO PIECE, CARRIED AND LOOKED AT** (DIRECTIVE sup-nov27-1323,
+***   cap 70 then hero gear). The golden sceptre is merged (`assets/gear/artifact/sceptre_golden.glb`,
+***   38 files, +1028). YOUR OWN SELF-CATCH IS THE BEST THING IN THIS HOUR'S TRAFFIC: your gate
+***   enforced the wrong axis and a CONTROL RENDER overturned it. That is a lane red-proving its own
+***   instrument, which is exactly what the `_no_*.png` ablation pairs are for. Keep the
+***   `_goldcontrol` pattern on every tier-5 piece.
+***
+*** HUB (:37) - **LOOK AT THE LIVE PAGE AND REPORT WHAT PUBLISH 9 ACTUALLY SERVES.** This is not
+***   a publish and it is not a publish gate - the push already happened at 22:48 and it is verified
+***   correct at the tree level by me. What NOBODY has done is open
+***   `https://jestsayin96.github.io/Bellmire-HD-stream/` since it changed. Confirm from the LIVE
+***   page, not a local server: the response actually carries `app.js?v=9` and `style.css?v=9`, the
+***   CSP meta is present, the bestiary icons and spec cards render, and the two-row section bar does
+***   not clip. Your 21:4x gate ran against a local server that could not reach Supabase; the live
+***   page can, so this is the first chance to see real rows. Say plainly if a sandbox limit stops
+***   you. Your `web/NOTES.md +2` is the only unpublished delta and needs no action.
+***
+*** HUD (:52) - **THE PARTY-OF-TEN HUD HALF OF SYSTEM 42: `party_frames.gd` AT PARTY_CAP 10.**
+***   SAYING THIS OUT LOUD AS THE HALF-OF-AN-EXISTING-ITEM JUDGEMENT: System 42 is Mr. E's, the
+***   engine half landed `PARTY_CAP 10` at S165, `party_frames.gd` is YOUR file, and showing ten
+***   members is not a new item - it is the other half of an approved one. Measure what the frames
+***   do at 10 before you change anything; if they already handle ten, CLOSE IT BY DISPROVING IT and
+***   that counts fully, exactly as U124 did. **DO NOT TAKE THE RARITY HUE ROW - IT IS U55 AND IT IS
+***   SHIPPED AND FED** (the 21:58 block proves it line by line). U215 merged: your import-cache
+***   copy made the gate honest (0 SCRIPT / 0 Parse / 0 ERROR lines) and that is real work, but it
+***   is instrument repair and carries no feature, so there is nothing in it for me to tick.
+***
+*** ===== FOR THE SUPERVISOR =====
+*** (1) **PUBLISH 9 IS VERIFIED CORRECT AT THE TREE LEVEL AND NOBODY HAS SEEN IT RENDER.**
+***     gh-pages tree == main:web exactly, clean fast-forward, cache-bust v9 present. The one thing
+***     missing is an eye on the live URL, which I have routed to the hub for :37.
+***     RECOMMENDATION: no action from you; I will report the look next hour.
+*** (2) **SYSTEMS 42b AND 42c ARE EACH ONE COMMIT FROM DONE AND BOTH WAIT ON THE SAME LANE.**
+***     Engine halves are ticked and on main; `wants_solo` has no emitter and `party` is still a
+***     muster alias. B212 was mid-flight at my merge. RECOMMENDATION: none needed - the row is
+***     written and the precondition is now genuinely true. I expect both whole by 23:58.
+*** (3) **THE COSTLIEST OWED PROMPT CORRECTION IS STILL THE CONTENT LANE'S FOUR-FILE LIST** and it
+***     has now cost eight stand-downs. A firing cannot edit a prompt. It is item (1) in FOR THE
+***     NEXT TEAM LEAD and needs a live turn.
+***
+*** ===== NEEDS MR. E =====
+*** nothing.
+
 *** ===== TAKE THIS NEXT - THE 21:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 20:58 FIRING AND ITS AMENDMENT.
 *** Clock read off cruzader with `Get-Date`: 22:03:15 CST at the time of writing.

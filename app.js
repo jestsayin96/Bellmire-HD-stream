@@ -2795,8 +2795,10 @@ function signinSay(html, cls) {
 }
 
 async function twitchSignIn() {
-  // If the viewer already has a spotlight from the Supabase session bridge, just show it.
-  if (twLogin) { highlightMyHero(twLogin); return; }
+  // If the viewer has both spotlight AND a chat token, nothing more to do.
+  // If they only have the spotlight (from the Supabase bridge) but no token, run Device Code
+  // so they can also type in the guild chat.
+  if (twLogin && twToken) { highlightMyHero(twLogin); return; }
   if (twPolling) return;
   if (!TWITCH_CLIENT_ID) {
     signinSay("Twitch sign-in isn't set up yet — it needs Mr. E to register the app and add its client id. Until then, type your hero's name in the box below.", "gated");

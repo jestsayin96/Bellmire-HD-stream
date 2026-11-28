@@ -15,6 +15,14 @@ extends Node
 
 signal say(line: String, colour: Color)
 signal wants_delve(user_id: String)
+## S42c (DIRECTIVE sup-nov27-1844): !solo - one hero goes down ALONE, skipping the muster.
+## town.gd:5363 ALREADY LISTENS FOR THIS, behind `if chat.has_signal("wants_solo")`, and its
+## `_on_solo(uid)` does the work. BUT THE SIGNAL IS NOT THE WHOLE HANDOFF - see `solo_ask`
+## below. `_on_solo` RETURNS the refusal line and its own comment at town.gd:5626 calls that
+## "the chat bot's reply", yet a Godot signal hands nothing back to whoever emitted it, and the
+## connect site is `func(u: String) -> void: _on_solo(u)`. That return is DISCARDED. So this
+## signal starts a lone descent; it cannot tell the viewer why one was refused.
+signal wants_solo(user_id: String)
 signal wants_fish(user_id: String)
 signal wants_shop(user_id: String, kind: String)
 ## T1 contract (supervisor, Nov 12): every answer a viewer's command produces, PLAIN - no "@name ",
@@ -73,6 +81,16 @@ var town_of: Callable
 var spot: Callable
 ## T1: the eventsub hands chat its _do_bits_tier(uid, bits) so !testbits fires town-wide effects
 var bits_tier_fn: Callable
+## S42c: THE ANSWERING HALF OF `wants_solo`, AND IT IS THE GAME BUILD'S ONE LINE TO SET -
+## `chat.solo_ask = _on_solo` beside the existing connect at town.gd:5363. The town hands chat
+## its _on_solo(uid) -> "" when the hero sets off, or the one-line reason a lone descent is
+## refused. ONLY THE TOWN CAN WORD THOSE REFUSALS: "The scar is not open yet", "You are already
+## going down alone" and "You are below with the party already" are read off `_scar_info`,
+## `solo_delves` and `delve`, and chat holds none of the three. Chat holds `delve_queue` and
+## `away`, which is a SUBSET of what the town knows - and the B11/B17 note further down this
+## file is that a subset is never a second source of truth. So while this is unset, !solo
+## emits the signal and says only what is true whichever way the town goes.
+var solo_ask: Callable
 ## L18: when each viewer last used a command (Time ticks, ms) - the director favours
 ## the freshest chatters and their name glows for a few seconds (HeroBody.glow)
 static var last_cmd := {}
@@ -170,8 +188,12 @@ func handle(user_id: String, display: String, msg: String, login := "") -> Strin
         "weapon":   out = _needs(user_id, func(): return _weapon_line(user_id))
         "armour":   out = _needs(user_id, func(): return _armour_line(user_id))
         "delve":    out = _delve(user_id)
-        "muster", "party", "mustered":
+        "muster", "mustered":
                     out = _muster(user_id)
+        "party", "parties":
+                    out = _party(user_id, arg, arg2)
+        "solo", "alone":
+                    out = _solo(user_id)
         "fish":     out = _needs(user_id, func():
                         wants_fish.emit(user_id)
                         return "%s heads for the docks with a rod." % roster.get_hero(user_id)["name"])
@@ -457,6 +479,103 @@ func _muster(user_id: String) -> String:
     else:
         out += " !delve to go with them."
     return out
+
+## ---------------------------------------------- S42b: THE PARTY COMMAND SURFACE (System 42b)
+## THE ENGINE HALF IS THE GAME BUILD'S S165 AND IT IS NINE FUNCTIONS IN scripts/roster.gd:
+## party_of:1234, party_members:1241, party_create:1245, party_invite:1256, party_join:1272,
+## party_leave:1288, party_kick:1298, party_disband:1309 and the printer party_line:1315, with
+## PARTY_CAP := 10 at :1227. (The name is `party_line`. There is no `party_list` in this
+## codebase - the plan cited one at 21:58 and corrected itself in the same run.)
+## EVERY LINE A VIEWER READS HERE IS THE ENGINE'S OWN RETURN. This function routes a subcommand
+## and resolves a name; it words nothing the engine already words. The cap, the refusals and the
+## counts stay on one side of the wall, so `!party` can never promise a seat roster.gd refuses.
+##
+## `party` WAS AN ALIAS OF `muster` UNTIL THIS LANDING. The two are taken apart in the SAME
+## window, which the plan required in those words at 21:58 - "it must happen in the SAME window
+## so `!party` never means two things to a viewer". `muster` keeps `mustered`; !muster is still
+## the open queue at the dungeon mouth, and !party is now the sitting-together party.
+##
+## NAMES, NOT UIDS. roster.party_invite/join/kick each take a UID and check `get_hero(who)`,
+## while their own published lines say "!party invite <name>" and "!party join <name>". A viewer
+## cannot type a uid, so the resolve happens HERE.
+## NO NEW SCANNER: B211 did this research an hour before the engine landed and it was right -
+## `_hero_named(nm)` at :774 is already this file's name scan (the `!dice [stake] [name]`
+## precedent), and `roster.fresh()` writes `"id": user_id` INTO the hero dict at roster.gd:278,
+## so the uid comes straight back out of it. B212 first shipped a second scanner of its own,
+## `_uid_named`, which walked `roster.heroes` a third time for a value the existing helper
+## already carries; it is gone, and this is the one-liner that replaced it. One scanner.
+func _uid_named(who: String) -> String:
+    return String(_hero_named(who).get("id", ""))
+
+## B157 GUARD, AND IT IS WHY THERE IS NO `match` IN THIS FUNCTION. tools/_l14_test.gd harvests
+## the verbs ChatCmd answers by matching lines at EXACTLY eight spaces of indent that look like
+## `"word":` or `"a", "b":`, and it cannot tell a match label from anything else at that depth.
+## A `match sub:` here would put `"list":`, `"start":`, `"kick":` and the rest at eight spaces,
+## and the gate would go RED demanding data/commands.json entries for subcommands no viewer ever
+## types with a `!`. if/elif keeps the subcommand words out of the harvest entirely.
+func _party(user_id: String, sub: String, who: String) -> String:
+    ## THE LIVING-HERO GATE, AND MY OWN COMMANDS_DATA NEEDS_HERO ARM IS WHY IT IS HERE. B212 first
+    ## shipped this function ungated while `party` published `needs_hero: true`, and the guard went
+    ## RED on the load naming the exact disagreement - the arm follows `out = _party(` into this
+    ## body and asks whether it contains `_needs(`. The published flag is the TRUE one: !party is
+    ## your own party, not a bystander's question like !muster, so the flag stays true and the gate
+    ## comes to meet it. A dead viewer is turned away here and !reroll is exempt from this guard for
+    ## exactly that reason; the party outlives the reroll, because `roster.parties` is keyed by UID
+    ## and `fresh()` re-keys the new hero to the same UID, so nobody loses their seat by dying.
+    var gate := _needs(user_id, func(): return "ok")
+    if gate != "ok":
+        return gate
+    if sub == "":
+        # bare !party. roster.party_line's own refusal reads "You are not in a party. !party to
+        # start one." - so bare !party has to BE the thing that starts one, or the published
+        # word sends a viewer to a command that only ever repeats the refusal back at them.
+        if roster.party_of(user_id) != "":
+            return roster.party_line(user_id)
+        return roster.party_create(user_id)
+    if sub in ["list", "who", "members"]:
+        return roster.party_line(user_id)
+    if sub in ["start", "create", "new"]:
+        return roster.party_create(user_id)
+    if sub in ["leave", "quit"]:
+        return roster.party_leave(user_id)
+    if sub in ["disband", "end"]:
+        return roster.party_disband(user_id)
+    if sub in ["invite", "join", "kick", "boot"]:
+        if who == "":
+            return "Name a hero: !party %s <name>." % ("kick" if sub == "boot" else sub)
+        var uid := _uid_named(who)
+        if uid == "":
+            return "No hero named %s." % safe_word(who)      # D70.4: their own word, capped
+        if sub == "invite":
+            return roster.party_invite(user_id, uid)
+        if sub == "join":
+            return roster.party_join(user_id, uid)
+        return roster.party_kick(user_id, uid)
+    return "!party, or !party invite/join/leave/list/kick/disband."
+
+## S42c: !solo - one hero goes down alone, at once, without joining the muster. The two halves
+## of the handoff are documented at `wants_solo` and `solo_ask` at the top of this file.
+func _solo(user_id: String) -> String:
+    var gate := _needs(user_id, func(): return "ok")
+    if gate != "ok":
+        return gate
+    if solo_ask.is_valid():
+        # the town answers for itself: "" when the hero sets off, else the reason it refused
+        var why := String(solo_ask.call(user_id))
+        if why != "":
+            return why
+        return "%s turns for the scar alone." % roster.get_hero(user_id)["name"]
+    # UNWIRED. The signal does the work and hands nothing back, so this says only what holds
+    # whichever way the town goes. The ONE refusal chat can see honestly is checked first: a
+    # name in delve_queue is bound for the scar with the muster, and town.solo_refusal turns
+    # that hero away for exactly that reason. The rest - the scar not open, already down alone,
+    # already below with the party - are the town's to say, and it cannot say them through a
+    # signal. "Sent word" is true in every case; "sets out alone" would not be.
+    if user_id in delve_queue:
+        return "%s is bound for the scar with the muster - not alone as well." \
+            % roster.get_hero(user_id)["name"]
+    wants_solo.emit(user_id)
+    return "Sent word. Watch the feed."
 
 # Oil is the cheapest thing on the board and the one most worth buying. A
 # viewer who keeps three flasks in the satchel will out-live a better-armed

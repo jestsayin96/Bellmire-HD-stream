@@ -13513,46 +13513,66 @@
       "placed": [
         "{name} walks {item} to the {shop} to sell.",
         "{name} takes {item} to the {shop}. A sale is an errand too.",
-        "{name} carries {item} to {shop}, and hopes."
+        "{name} carries {item} to {shop}, and hopes.",
+        "{name} shoulders {item} and sets off for the {shop}.",
+        "{item} goes to the {shop} on {name}'s back. The price is the shop's to name.",
+        "{name} heads for the {shop} with {item}. Nobody is bidding yet."
       ],
       "sold": [
         "{shop} takes {item} for {n}. It will ask more for it.",
-        "{name} sells {item} for {n}. Less than it cost. It always is."
+        "{name} sells {item} for {n}. Less than it cost. It always is.",
+        "{shop} pays {n} for {item}. {name} takes it and does not argue.",
+        "{item} is the shop's now. {name} has {n} gold and room in the pack.",
+        "{name} sells {item} at the {shop}. {n} gold, counted on the counter."
       ],
       "refused_level": [
         "A shop this size cannot buy {item}. It could not pay for it.",
         "Too fine for this counter. {name} takes {item} home again.",
         "The {shop} will not take a piece this good. It is not big enough yet.",
-        "A small shop cannot buy a legendary piece. That is a small town's whole trouble."
+        "A small shop cannot buy a legendary piece. That is a small town's whole trouble.",
+        "The {shop} turns {item} over twice and hands it back. It cannot pay.",
+        "{item} is worth more than this till holds. {name} keeps it."
       ],
       "worn_below": [
         "{name} is below with it on their back. It cannot be sold from under them.",
-        "Worn in the scar. Not for sale until it comes up."
+        "Worn in the scar. Not for sale until it comes up.",
+        "{name} is still down there in it. Nothing is sold while it is worn.",
+        "It is on {name}'s back, in the scar. The shop will wait."
       ]
     },
     "vault": {
       "deposit": [
         "{name} puts {item} in the Guild vault at the {hall}. It weighs nothing there.",
         "In the vault: {item}. {name} can carry on without it.",
-        "{name} walks {item} to the {hall}. The clerk logs it."
+        "{name} walks {item} to the {hall}. The clerk logs it.",
+        "{item} goes on a shelf at the {hall}. {name}'s back is lighter for it.",
+        "The clerk at the {hall} takes {item} and writes it down."
       ],
       "withdraw": [
         "{name} fetches {item} from the vault.",
-        "{item} out of the vault and onto {name}'s back. The weight comes back with it."
+        "{item} out of the vault and onto {name}'s back. The weight comes back with it.",
+        "The clerk at the {hall} hands {item} back to {name}.",
+        "{name} takes {item} off the shelf. The weight is theirs again."
       ],
       "full": [
         "The vault is full. The {hall} has no more room.",
         "No slot free. The {hall} is not big enough yet.",
-        "Every shelf is taken. A bigger Hall would have more."
+        "Every shelf is taken. A bigger Hall would have more.",
+        "The {hall} has no shelf to spare. Something has to come out first.",
+        "The vault is full to the rafters. {name} will have to choose."
       ],
       "raised": [
         "The {hall} grew. The vault has more shelves.",
-        "A new rack in the vault, and {who} paid for it."
+        "A new rack in the vault, and {who} paid for it.",
+        "The {hall} added shelves, and the clerk added a name to the ledger: {who}.",
+        "New racks in the vault. {who} paid for them."
       ],
       "death_kept": [
         "{name} is dead. What they carried is gone. What they stored is kept.",
         "The vault keeps what the dead put in it. The next hero can use it.",
-        "Everything on {name}'s back stayed in the scar. The vault is untouched."
+        "Everything on {name}'s back stayed in the scar. The vault is untouched.",
+        "{name} did not come up. The vault is as {name} left it.",
+        "What {name} put on the shelf is still on the shelf."
       ],
       "inventory": [
         "Pack {n} of {m}. Carrying {w}. The vault holds {v}."
@@ -13562,7 +13582,9 @@
       "bought": [
         "{name} bought a teleportation stone before going down. One stone, one hero.",
         "{name} carries a stone. Panic, in a pouch.",
-        "A stone against the dark, bought before the gamble."
+        "A stone against the dark, bought before the gamble.",
+        "{name} pays for a stone and puts it where the hand finds it.",
+        "A stone in the pouch, paid for in daylight. {name} hopes it stays there."
       ],
       "shatters": [
         "The stone shatters where {name} stands. {name} is gone from the floor and home in a breath.",
@@ -13571,7 +13593,9 @@
       ],
       "one_hero": [
         "One stone, one hero. The rest of the party stays.",
-        "Nobody goes with {name}. The stone takes one."
+        "Nobody goes with {name}. The stone takes one.",
+        "The stone takes {name} and no one else.",
+        "Only {name} goes. The party stays below."
       ],
       "lords_floor": [
         "The stone is dead weight here. A lord holds this floor.",
@@ -13581,7 +13605,9 @@
       ],
       "panic": [
         "One click, right now. That is what the stone is for.",
-        "The stone is the one thing a viewer can do this second."
+        "The stone is the one thing a viewer can do this second.",
+        "The stone is already in the fist. That is the whole plan.",
+        "When the floor goes wrong, the stone is one motion."
       ]
     },
     "upgrade_poll": {
@@ -16174,7 +16200,9 @@
       "placed": [
         "{name} takes {item} to the {shop}. Selling is a walk like any other.",
         "{name} lays {item} on the {shop}'s counter and waits to be told.",
-        "{name} offers {item} at the {shop}. The shop has the last word."
+        "{name} offers {item} at the {shop}. The shop has the last word.",
+        "{name} walks {item} down to the {shop}. It is an errand like the rest.",
+        "{item} under {name}'s arm, the {shop} ahead. The shop will name a price."
       ],
       "sold": [
         "{shop} gives {n} for {item}. {name} takes it.",
@@ -16182,42 +16210,58 @@
         "Sold. {n} gold, and a lighter pack.",
         "{shop} pays {n} for {item}. {name} counts it twice.",
         "{n} gold across the counter, and {item} is the shop's now.",
-        "Sold at the {shop} for {n}. {name} has the coin and a lighter pack."
+        "Sold at the {shop} for {n}. {name} has the coin and a lighter pack.",
+        "{n} gold for {item} at the {shop}. {name} signs and goes.",
+        "{name} leaves {item} at the {shop} and walks out {n} gold richer."
       ],
       "refused_level": [
         "The {shop} cannot afford {item}. Not at this size.",
         "Too good a piece for a shop this small. {name} walks it home.",
         "The {shop} looks at {item}, then at its own till. No.",
-        "A bigger town could take it. This one cannot."
+        "A bigger town could take it. This one cannot.",
+        "The {shop} is too small for {item}. It says so plainly.",
+        "{item} stays with {name}. The {shop} has not the coin for it."
       ],
       "worn_below": [
         "Still on {name}'s back, and {name} is still down there.",
-        "Not sold from under a hero. It waits until they are up."
+        "Not sold from under a hero. It waits until they are up.",
+        "It is worn, and {name} is below. The sale waits.",
+        "{name} cannot sell what is on their back, and their back is in the scar."
       ]
     },
     "vault": {
       "deposit": [
         "{item} goes into the vault at the {hall}. The clerk writes a number.",
         "{name} hands {item} to the clerk at the {hall}. It is stored, and stops being a weight.",
-        "In the vault: {item}. Safe, and not on {name}'s back."
+        "In the vault: {item}. Safe, and not on {name}'s back.",
+        "{name} leaves {item} at the {hall}. The clerk's pen scratches.",
+        "{item} is shelved at the {hall} under {name}'s name."
       ],
       "withdraw": [
         "{name} signs for {item} at the {hall}. It comes up from the vault.",
-        "{item} returns to {name}'s pack. So does the weight."
+        "{item} returns to {name}'s pack. So does the weight.",
+        "{item} comes off the shelf at the {hall}. {name} shoulders it.",
+        "The clerk finds {item} and slides it across to {name}."
       ],
       "full": [
         "The vault has no shelf left. The {hall} says so.",
         "Every slot has a name on it. The {hall} is full.",
-        "The {hall} cannot take more. It wants a bigger vault."
+        "The {hall} cannot take more. It wants a bigger vault.",
+        "There is no shelf free at the {hall}.",
+        "The {hall} turns {item} away. The vault is full."
       ],
       "raised": [
         "More shelves at the {hall}. {who} paid for them.",
-        "The vault is bigger. {who} is thanked in the ledger."
+        "The vault is bigger. {who} is thanked in the ledger.",
+        "The vault got bigger, and {who} is why.",
+        "{who} paid for more shelves at the {hall}."
       ],
       "death_kept": [
         "{name} fell. The vault does not fall with them.",
         "What {name} stored is still stored. What they carried is gone.",
-        "The vault is untouched. The next hero opens it."
+        "The vault is untouched. The next hero opens it.",
+        "The vault does not die with the hero. {name}'s shelf stays.",
+        "{name} is gone. The shelf at the {hall} is not."
       ],
       "inventory": [
         "Carrying {w}, pack {n} of {m}. The vault: {v}.",
@@ -16230,7 +16274,9 @@
       "bought": [
         "{name} bought a stone before going down. It sits in the pouch.",
         "One stone for one hero. {name} carries it close.",
-        "{name} paid for a way out and hopes not to need it."
+        "{name} paid for a way out and hopes not to need it.",
+        "{name} buys a stone and tells no one. It is not a thing to talk about.",
+        "One stone, bought before the stair. {name} checks the pouch twice."
       ],
       "shatters": [
         "The stone breaks where {name} stands. The floor is empty a heartbeat later.",
@@ -16242,7 +16288,9 @@
         "The stone takes {name}. It does not take company.",
         "The stone has room for one. {name} is that one, and knows what it costs the others.",
         "{name} goes. The party stays and holds the stair.",
-        "A stone is not a door. One hero fits through it."
+        "A stone is not a door. One hero fits through it.",
+        "The stone will carry {name}. It will not carry the party.",
+        "One goes home. The rest keep the stair."
       ],
       "lords_floor": [
         "A lord holds this floor. The stone will not break it.",
@@ -16255,7 +16303,9 @@
         "The stone is panic you paid for yesterday.",
         "Stone in the fist, and the floor going wrong. This is what it is for.",
         "One click and the dark is somebody else's.",
-        "Paid for the day before. Used in the second it matters."
+        "Paid for the day before. Used in the second it matters.",
+        "It is the one thing that works in the second it is needed.",
+        "The stone is a decision made yesterday and kept for this."
       ]
     },
     "upgrade_poll": {
@@ -19132,5 +19182,6 @@
       "banished": "Banished. The Hall will have you. Nothing else will."
     }
   },
-  "_note_c255": "C-255: shadow_hall is the System 44 word set (Shadow Hall tiers, town standing, 24 criminal jobs, crime Chronicle, jail, NPC refusals, detection, guild switching, PvP bounty lines, hub text). Nothing reads it yet; the game build wires the engine half and the hub lane reads hub_text. No new data file."
+  "_note_c255": "C-255: shadow_hall is the System 44 word set (Shadow Hall tiers, town standing, 24 criminal jobs, crime Chronicle, jail, NPC refusals, detection, guild switching, PvP bounty lines, hub text). Nothing reads it yet; the game build wires the engine half and the hub lane reads hub_text. No new data file.",
+  "_note_c256": "C-256: thickens the thin phase-2 pools (sell, stone, vault) in phase2_words and phase2_words_alt. Additive; same tokens as the pools they extend. phase2_words_alt2 is untouched and stays dead on purpose."
 }

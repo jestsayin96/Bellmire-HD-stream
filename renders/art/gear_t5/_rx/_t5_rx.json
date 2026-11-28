@@ -1,0 +1,1621 @@
+{
+ "tool": "_t5_rx",
+ "tier": 5,
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "euler_order": "YXZ",
+ "hang_max": 25.0,
+ "clip_frac_max": 0.37,
+ "clip_frac_calibration": "the BOW at gear.gd's shipped (0,0,90): 451 of 1218 checked = 0.370, the one cell confirmed correct by eye",
+ "butt_drop": 0.08,
+ "grip_mechanism": "gear.gd STAFF_GRIP_SHIFT: node.position.x -= v, slot frame, slot +X is world DOWN",
+ "grid": {
+  "x": [
+   0.0,
+   -90.0,
+   90.0,
+   180.0
+  ],
+  "y": [
+   0.0,
+   35.0,
+   -35.0,
+   90.0,
+   -90.0,
+   180.0
+  ],
+  "z": [
+   0.0,
+   90.0,
+   -90.0,
+   180.0
+  ]
+ },
+ "candidates_scored": 1552,
+ "bare_kinds": [
+  "wraps"
+ ],
+ "fails": [],
+ "ok": true,
+ "rx": {
+  "axe": {
+   "kind": "axe",
+   "model": "res://assets/gear/artifact/axe_small_golden.glb",
+   "hand_scale": 0.6,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    0.6236,
+    0.1322,
+    1.5745
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "X",
+   "aspect": 2.53,
+   "candidates": 120,
+   "n_passing": 40,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 90.0,
+    "clip": 150,
+    "checked": 1051,
+    "clip_frac": 0.1427,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.0,
+    "tip_z": 0.684,
+    "over_head": -1.766,
+    "long_axis_world": [
+     -0.989,
+     0.151,
+     -0.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": false,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": false
+   },
+   "launcher": false,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 48,
+    "no_ground": 120,
+    "clip_ok": 91
+   },
+   "prescribed_triple": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "prescribed_grip_x": 0.0,
+   "prescribed_score": {
+    "grip_x": 0.0,
+    "hang": 0.1,
+    "clip": 226,
+    "checked": 1051,
+    "clip_frac": 0.215,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.989,
+    "tip_z": 1.192,
+    "over_head": -1.258,
+    "long_axis_world": [
+     -0.0,
+     -0.001,
+     1.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     90.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": true,
+   "alternatives": [
+    [
+     -90.0,
+     0.0,
+     90.0
+    ],
+    [
+     90.0,
+     0.0,
+     90.0
+    ],
+    [
+     90.0,
+     0.0,
+     -90.0
+    ],
+    [
+     -90.0,
+     90.0,
+     0.0
+    ],
+    [
+     90.0,
+     -90.0,
+     0.0
+    ]
+   ]
+  },
+  "bow": {
+   "kind": "bow",
+   "model": "res://assets/gear/artifact/bow_golden.glb",
+   "hand_scale": 0.6,
+   "current_triple": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    0.6319,
+    0.0973,
+    2.1743
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "X",
+   "aspect": 3.44,
+   "candidates": 120,
+   "n_passing": 60,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 0.1,
+    "clip": 451,
+    "checked": 1218,
+    "clip_frac": 0.3703,
+    "ground": 31,
+    "floor_depth": 0.0117,
+    "proj_minor_ratio": 0.989,
+    "tip_z": 1.293,
+    "over_head": -1.157,
+    "long_axis_world": [
+     -0.0,
+     -0.001,
+     1.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     90.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": true,
+     "no_ground": false,
+     "clip_ok": false
+    },
+    "passes": false
+   },
+   "launcher": true,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 120,
+    "no_ground": 92,
+    "clip_ok": 64
+   },
+   "prescribed_triple": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "prescribed_grip_x": -0.5723,
+   "prescribed_score": {
+    "grip_x": -0.5723,
+    "hang": 0.1,
+    "clip": 224,
+    "checked": 1374,
+    "clip_frac": 0.163,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.989,
+    "tip_z": 1.865,
+    "over_head": -0.585,
+    "long_axis_world": [
+     -0.0,
+     -0.001,
+     1.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     90.0
+    ],
+    "grip_solved": true,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": false,
+   "alternatives": [
+    [
+     -90.0,
+     0.0,
+     0.0
+    ],
+    [
+     90.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     35.0,
+     90.0
+    ],
+    [
+     0.0,
+     -35.0,
+     90.0
+    ],
+    [
+     -90.0,
+     -35.0,
+     0.0
+    ]
+   ]
+  },
+  "crossbow": {
+   "kind": "crossbow",
+   "model": "res://addons/kaykit_character_pack_skeletons/Assets/gltf/Skeleton_Crossbow.gltf",
+   "hand_scale": 1.0,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    1.1113,
+    1.4188,
+    0.5082
+   ],
+   "long_axis_local": "Y",
+   "mid_axis_local": "X",
+   "aspect": 1.28,
+   "candidates": 112,
+   "n_passing": 64,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 89.9,
+    "clip": 108,
+    "checked": 659,
+    "clip_frac": 0.1639,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.0,
+    "tip_z": 1.197,
+    "over_head": -1.253,
+    "long_axis_world": [
+     -0.151,
+     -0.989,
+     -0.001
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "launcher": true,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 112,
+    "no_ground": 98,
+    "clip_ok": 78
+   },
+   "prescribed_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "prescribed_grip_x": 0.0,
+   "prescribed_score": {
+    "grip_x": 0.0,
+    "hang": 89.9,
+    "clip": 108,
+    "checked": 659,
+    "clip_frac": 0.1639,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.0,
+    "tip_z": 1.197,
+    "over_head": -1.253,
+    "long_axis_world": [
+     -0.151,
+     -0.989,
+     -0.001
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": false,
+   "alternatives": [
+    [
+     0.0,
+     -35.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     -90.0
+    ],
+    [
+     0.0,
+     0.0,
+     90.0
+    ],
+    [
+     0.0,
+     -90.0,
+     0.0
+    ],
+    [
+     -90.0,
+     0.0,
+     0.0
+    ]
+   ]
+  },
+  "dagger": {
+   "kind": "dagger",
+   "model": "res://assets/gear/artifact/dagger_golden.glb",
+   "hand_scale": 0.5,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    0.2972,
+    0.1109,
+    1.3892
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "X",
+   "aspect": 4.67,
+   "candidates": 120,
+   "n_passing": 20,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 90.0,
+    "clip": 0,
+    "checked": 318,
+    "clip_frac": 0.0,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.0,
+    "tip_z": 0.716,
+    "over_head": -1.734,
+    "long_axis_world": [
+     -0.989,
+     0.151,
+     -0.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": false,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": false
+   },
+   "launcher": false,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 48,
+    "no_ground": 120,
+    "clip_ok": 56
+   },
+   "prescribed_triple": [
+    -90.0,
+    0.0,
+    90.0
+   ],
+   "prescribed_grip_x": 0.0,
+   "prescribed_score": {
+    "grip_x": 0.0,
+    "hang": 0.1,
+    "clip": 112,
+    "checked": 318,
+    "clip_frac": 0.3522,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.012,
+    "tip_z": 1.18,
+    "over_head": -1.27,
+    "long_axis_world": [
+     -0.0,
+     -0.001,
+     1.0
+    ],
+    "triple": [
+     -90.0,
+     0.0,
+     90.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": true,
+   "alternatives": [
+    [
+     -90.0,
+     90.0,
+     0.0
+    ],
+    [
+     -90.0,
+     -90.0,
+     180.0
+    ],
+    [
+     -90.0,
+     180.0,
+     -90.0
+    ],
+    [
+     0.0,
+     0.0,
+     -90.0
+    ],
+    [
+     90.0,
+     0.0,
+     -90.0
+    ]
+   ]
+  },
+  "greataxe": {
+   "kind": "greataxe",
+   "model": "res://assets/gear/artifact/axe_double_golden.glb",
+   "hand_scale": 0.6,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    0.8712,
+    0.1355,
+    2.1515
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "X",
+   "aspect": 2.47,
+   "candidates": 120,
+   "n_passing": 28,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 90.0,
+    "clip": 82,
+    "checked": 1778,
+    "clip_frac": 0.0461,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.0,
+    "tip_z": 0.894,
+    "over_head": -1.556,
+    "long_axis_world": [
+     -0.989,
+     0.151,
+     -0.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": false,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": false
+   },
+   "launcher": false,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 48,
+    "no_ground": 100,
+    "clip_ok": 100
+   },
+   "prescribed_triple": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "prescribed_grip_x": 0.0,
+   "prescribed_score": {
+    "grip_x": 0.0,
+    "hang": 0.1,
+    "clip": 344,
+    "checked": 1778,
+    "clip_frac": 0.1935,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.989,
+    "tip_z": 1.533,
+    "over_head": -0.917,
+    "long_axis_world": [
+     -0.0,
+     -0.001,
+     1.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     90.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": true,
+   "alternatives": [
+    [
+     -90.0,
+     0.0,
+     90.0
+    ],
+    [
+     90.0,
+     0.0,
+     90.0
+    ],
+    [
+     -90.0,
+     90.0,
+     0.0
+    ],
+    [
+     90.0,
+     -90.0,
+     0.0
+    ],
+    [
+     0.0,
+     180.0,
+     -90.0
+    ]
+   ]
+  },
+  "greatsword": {
+   "kind": "greatsword",
+   "model": "res://assets/gear/artifact/sword_big_golden.glb",
+   "hand_scale": 0.6,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    0.4331,
+    0.1013,
+    2.7346
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "X",
+   "aspect": 6.31,
+   "candidates": 120,
+   "n_passing": 12,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 90.0,
+    "clip": 0,
+    "checked": 780,
+    "clip_frac": 0.0,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.0,
+    "tip_z": 0.77,
+    "over_head": -1.68,
+    "long_axis_world": [
+     -0.989,
+     0.151,
+     -0.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": false,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": false
+   },
+   "launcher": false,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 48,
+    "no_ground": 96,
+    "clip_ok": 48
+   },
+   "prescribed_triple": [
+    0.0,
+    0.0,
+    -90.0
+   ],
+   "prescribed_grip_x": -1.4705,
+   "prescribed_score": {
+    "grip_x": -1.4705,
+    "hang": 0.1,
+    "clip": 136,
+    "checked": 1344,
+    "clip_frac": 0.1012,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.013,
+    "tip_z": 2.201,
+    "over_head": -0.249,
+    "long_axis_world": [
+     0.0,
+     0.001,
+     -1.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     -90.0
+    ],
+    "grip_solved": true,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": true,
+   "alternatives": [
+    [
+     -90.0,
+     0.0,
+     -90.0
+    ],
+    [
+     90.0,
+     0.0,
+     -90.0
+    ],
+    [
+     -90.0,
+     -90.0,
+     0.0
+    ],
+    [
+     90.0,
+     90.0,
+     0.0
+    ],
+    [
+     0.0,
+     180.0,
+     90.0
+    ]
+   ]
+  },
+  "mace": {
+   "kind": "mace",
+   "model": "res://assets/gear/artifact/hammer_double_golden.glb",
+   "hand_scale": 0.4,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    1.1808,
+    0.4291,
+    2.5271
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "X",
+   "aspect": 2.14,
+   "candidates": 120,
+   "n_passing": 24,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 90.0,
+    "clip": 157,
+    "checked": 3321,
+    "clip_frac": 0.0473,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.0,
+    "tip_z": 0.872,
+    "over_head": -1.578,
+    "long_axis_world": [
+     -0.989,
+     0.151,
+     -0.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": false,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": false
+   },
+   "launcher": false,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 48,
+    "no_ground": 104,
+    "clip_ok": 76
+   },
+   "prescribed_triple": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "prescribed_grip_x": 0.0,
+   "prescribed_score": {
+    "grip_x": 0.0,
+    "hang": 0.1,
+    "clip": 512,
+    "checked": 3321,
+    "clip_frac": 0.1542,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.038,
+    "tip_z": 1.321,
+    "over_head": -1.129,
+    "long_axis_world": [
+     -0.0,
+     -0.001,
+     1.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     90.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": true,
+   "alternatives": [
+    [
+     -90.0,
+     0.0,
+     90.0
+    ],
+    [
+     90.0,
+     0.0,
+     90.0
+    ],
+    [
+     -90.0,
+     90.0,
+     0.0
+    ],
+    [
+     90.0,
+     -90.0,
+     0.0
+    ],
+    [
+     0.0,
+     180.0,
+     -90.0
+    ]
+   ]
+  },
+  "quarterstaff": {
+   "kind": "quarterstaff",
+   "model": "res://addons/kaykit_character_pack_skeletons/Assets/gltf/Skeleton_Staff.gltf",
+   "hand_scale": 1.0,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    0.5978,
+    0.7533,
+    2.1018
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "Y",
+   "aspect": 2.79,
+   "candidates": 120,
+   "n_passing": 22,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 90.0,
+    "clip": 414,
+    "checked": 1771,
+    "clip_frac": 0.2338,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.794,
+    "tip_z": 1.098,
+    "over_head": -1.352,
+    "long_axis_world": [
+     -0.989,
+     0.151,
+     -0.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": false,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": false
+   },
+   "launcher": false,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 48,
+    "no_ground": 76,
+    "clip_ok": 107
+   },
+   "prescribed_triple": [
+    0.0,
+    0.0,
+    -90.0
+   ],
+   "prescribed_grip_x": -1.1751,
+   "prescribed_score": {
+    "grip_x": -1.1751,
+    "hang": 0.1,
+    "clip": 160,
+    "checked": 1849,
+    "clip_frac": 0.0865,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.979,
+    "tip_z": 2.662,
+    "over_head": 0.212,
+    "long_axis_world": [
+     0.0,
+     0.001,
+     -1.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     -90.0
+    ],
+    "grip_solved": true,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": true,
+   "alternatives": [
+    [
+     0.0,
+     0.0,
+     90.0
+    ],
+    [
+     90.0,
+     0.0,
+     90.0
+    ],
+    [
+     -90.0,
+     0.0,
+     -90.0
+    ],
+    [
+     -90.0,
+     0.0,
+     90.0
+    ],
+    [
+     90.0,
+     0.0,
+     -90.0
+    ]
+   ]
+  },
+  "sceptre": {
+   "kind": "sceptre",
+   "model": "res://assets/gear/hammer_B.gltf",
+   "hand_scale": 0.62,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    0.6469,
+    0.6801,
+    1.5095
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "Y",
+   "aspect": 2.22,
+   "candidates": 120,
+   "n_passing": 32,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 90.0,
+    "clip": 162,
+    "checked": 490,
+    "clip_frac": 0.3306,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.951,
+    "tip_z": 0.841,
+    "over_head": -1.609,
+    "long_axis_world": [
+     -0.989,
+     0.151,
+     -0.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": false,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": false
+   },
+   "launcher": false,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 48,
+    "no_ground": 120,
+    "clip_ok": 62
+   },
+   "prescribed_triple": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "prescribed_grip_x": 0.0,
+   "prescribed_score": {
+    "grip_x": 0.0,
+    "hang": 0.1,
+    "clip": 169,
+    "checked": 490,
+    "clip_frac": 0.3449,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.989,
+    "tip_z": 1.282,
+    "over_head": -1.168,
+    "long_axis_world": [
+     -0.0,
+     -0.001,
+     1.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     90.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": true,
+   "alternatives": [
+    [
+     -90.0,
+     0.0,
+     90.0
+    ],
+    [
+     -90.0,
+     90.0,
+     0.0
+    ],
+    [
+     0.0,
+     180.0,
+     -90.0
+    ],
+    [
+     180.0,
+     0.0,
+     90.0
+    ],
+    [
+     -90.0,
+     -90.0,
+     180.0
+    ]
+   ]
+  },
+  "spear": {
+   "kind": "spear",
+   "model": "res://assets/gear/halberd.gltf",
+   "hand_scale": 0.62,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    1.2928,
+    0.291,
+    2.7468
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "X",
+   "aspect": 2.12,
+   "candidates": 120,
+   "n_passing": 32,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 90.0,
+    "clip": 536,
+    "checked": 1463,
+    "clip_frac": 0.3664,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.0,
+    "tip_z": 1.13,
+    "over_head": -1.32,
+    "long_axis_world": [
+     -0.989,
+     0.151,
+     -0.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": false,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": false
+   },
+   "launcher": false,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 48,
+    "no_ground": 96,
+    "clip_ok": 104
+   },
+   "prescribed_triple": [
+    90.0,
+    0.0,
+    90.0
+   ],
+   "prescribed_grip_x": 0.0,
+   "prescribed_score": {
+    "grip_x": 0.0,
+    "hang": 0.1,
+    "clip": 438,
+    "checked": 1463,
+    "clip_frac": 0.2994,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.989,
+    "tip_z": 1.766,
+    "over_head": -0.684,
+    "long_axis_world": [
+     -0.0,
+     -0.001,
+     1.0
+    ],
+    "triple": [
+     90.0,
+     0.0,
+     90.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": true,
+   "alternatives": [
+    [
+     -90.0,
+     0.0,
+     90.0
+    ],
+    [
+     90.0,
+     -90.0,
+     0.0
+    ],
+    [
+     -90.0,
+     90.0,
+     0.0
+    ],
+    [
+     0.0,
+     180.0,
+     -90.0
+    ],
+    [
+     180.0,
+     0.0,
+     90.0
+    ]
+   ]
+  },
+  "staff": {
+   "kind": "staff",
+   "model": "res://addons/kaykit_character_pack_skeletons/Assets/gltf/Skeleton_Staff.gltf",
+   "hand_scale": 1.0,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    0.5978,
+    0.7533,
+    2.1018
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "Y",
+   "aspect": 2.79,
+   "candidates": 120,
+   "n_passing": 22,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 90.0,
+    "clip": 414,
+    "checked": 1771,
+    "clip_frac": 0.2338,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.794,
+    "tip_z": 1.098,
+    "over_head": -1.352,
+    "long_axis_world": [
+     -0.989,
+     0.151,
+     -0.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": false,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": false
+   },
+   "launcher": false,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 48,
+    "no_ground": 76,
+    "clip_ok": 107
+   },
+   "prescribed_triple": [
+    0.0,
+    0.0,
+    -90.0
+   ],
+   "prescribed_grip_x": -1.1751,
+   "prescribed_score": {
+    "grip_x": -1.1751,
+    "hang": 0.1,
+    "clip": 160,
+    "checked": 1849,
+    "clip_frac": 0.0865,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.979,
+    "tip_z": 2.662,
+    "over_head": 0.212,
+    "long_axis_world": [
+     0.0,
+     0.001,
+     -1.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     -90.0
+    ],
+    "grip_solved": true,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": true,
+   "alternatives": [
+    [
+     0.0,
+     0.0,
+     90.0
+    ],
+    [
+     90.0,
+     0.0,
+     90.0
+    ],
+    [
+     -90.0,
+     0.0,
+     -90.0
+    ],
+    [
+     -90.0,
+     0.0,
+     90.0
+    ],
+    [
+     90.0,
+     0.0,
+     -90.0
+    ]
+   ]
+  },
+  "sword": {
+   "kind": "sword",
+   "model": "res://assets/gear/artifact/sword_golden.glb",
+   "hand_scale": 0.6,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    0.5344,
+    0.1222,
+    2.3021
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "X",
+   "aspect": 4.31,
+   "candidates": 120,
+   "n_passing": 24,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 90.0,
+    "clip": 93,
+    "checked": 675,
+    "clip_frac": 0.1378,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.0,
+    "tip_z": 0.801,
+    "over_head": -1.649,
+    "long_axis_world": [
+     -0.989,
+     0.151,
+     -0.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": false,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": false
+   },
+   "launcher": false,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 48,
+    "no_ground": 96,
+    "clip_ok": 96
+   },
+   "prescribed_triple": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "prescribed_grip_x": 0.0,
+   "prescribed_score": {
+    "grip_x": 0.0,
+    "hang": 0.1,
+    "clip": 232,
+    "checked": 675,
+    "clip_frac": 0.3437,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 1.006,
+    "tip_z": 1.792,
+    "over_head": -0.658,
+    "long_axis_world": [
+     -0.0,
+     -0.001,
+     1.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     90.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": true,
+   "alternatives": [
+    [
+     90.0,
+     0.0,
+     90.0
+    ],
+    [
+     -90.0,
+     0.0,
+     90.0
+    ],
+    [
+     90.0,
+     -90.0,
+     0.0
+    ],
+    [
+     -90.0,
+     90.0,
+     0.0
+    ],
+    [
+     0.0,
+     180.0,
+     -90.0
+    ]
+   ]
+  },
+  "wand": {
+   "kind": "wand",
+   "model": "res://assets/gear/wand_A.gltf",
+   "hand_scale": 0.62,
+   "current_triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "euler_order": "YXZ",
+   "local_ext": [
+    0.2089,
+    0.2135,
+    1.1563
+   ],
+   "long_axis_local": "Z",
+   "mid_axis_local": "Y",
+   "aspect": 5.42,
+   "candidates": 120,
+   "n_passing": 36,
+   "current_score": {
+    "grip_x": 0.0,
+    "hang": 90.0,
+    "clip": 17,
+    "checked": 339,
+    "clip_frac": 0.0501,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.979,
+    "tip_z": 0.704,
+    "over_head": -1.746,
+    "long_axis_world": [
+     -0.989,
+     0.151,
+     -0.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": false,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": false
+   },
+   "launcher": false,
+   "clip_frac_max": 0.37,
+   "gate_census": {
+    "upright": 48,
+    "no_ground": 120,
+    "clip_ok": 72
+   },
+   "prescribed_triple": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "prescribed_grip_x": 0.0,
+   "prescribed_score": {
+    "grip_x": 0.0,
+    "hang": 0.1,
+    "clip": 103,
+    "checked": 339,
+    "clip_frac": 0.3038,
+    "ground": 0,
+    "floor_depth": 0.0,
+    "proj_minor_ratio": 0.996,
+    "tip_z": 1.157,
+    "over_head": -1.293,
+    "long_axis_world": [
+     -0.0,
+     -0.001,
+     1.0
+    ],
+    "triple": [
+     0.0,
+     0.0,
+     90.0
+    ],
+    "grip_solved": false,
+    "gates": {
+     "upright": true,
+     "no_ground": true,
+     "clip_ok": true
+    },
+    "passes": true
+   },
+   "changed": true,
+   "alternatives": [
+    [
+     90.0,
+     0.0,
+     90.0
+    ],
+    [
+     -90.0,
+     0.0,
+     90.0
+    ],
+    [
+     90.0,
+     -90.0,
+     0.0
+    ],
+    [
+     -90.0,
+     90.0,
+     0.0
+    ],
+    [
+     0.0,
+     180.0,
+     -90.0
+    ]
+   ]
+  }
+ }
+}

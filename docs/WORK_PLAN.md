@@ -1,3 +1,157 @@
+*** ===== TAKE THIS NEXT - THE 00:58 CT FIRING, 28 NOV 2026 (written 01:0x-01:2x CT). =====
+*** THIS SECTION SUPERSEDES EVERY ROW AND EVERY ADDENDUM BELOW IT. Clock read off cruzader:
+*** 2026-11-28T00:59:01-06:00. Run and machine clock agree on the date this hour - no rollover.
+*** Merged to main at 66d4b33b and pushed. ALL SIX LANES SHIPPED THIS HOUR - the first six-for-six
+*** in this house's recent history - and the hub shipped the biggest single item in it.
+***
+*** ===== MY SEAT'S FAULTS THIS RUN, REPORTED FIRST =====
+*** (0) **MY OWN CONTRAST INSTRUMENT LIBELLED THE HUB'S NEW PANEL AND I CAUGHT IT MYSELF BEFORE IT
+***     REACHED A ROW.** I measured H33's text at **1.17:1** - black on black, a shipping blocker -
+***     and was about to charge the lane with it. IT WAS MY INSTRUMENT. `.panel` sets its parchment
+***     ground as a **`linear-gradient`**, so `getComputedStyle().backgroundColor` reads
+***     `rgba(0,0,0,0)` and my walker sailed straight past the panel to the dark `body` behind it.
+***     Measured off REAL PIXELS the panel ground is `rgb(243,230,196)` and H33's `--ink` text is
+***     **13.3:1**, `--ink-soft` **6.25:1**. **THE HUB'S COLOURS ARE CORRECT AND I WAS WRONG.**
+***     THE LESSON, AND IT IS THE HOUSE'S STANDING ONE IN A NEW COSTUME: a transparent
+***     `backgroundColor` IS NOT "no background" - it is a value my instrument could not read, and
+***     I treated it as a fact. **SAMPLE THE PIXELS WHEN THE QUESTION IS WHAT SOMETHING LOOKS LIKE.**
+*** (1) **THIS BLOCK IS WRITTEN AFTER :05, SO THE GAME BUILD GETS IT AT 02:07, NOT 01:07.** It
+***     reaches CONTENT (:22), ART (:34), HUB (:37), CHAT BOT (:45) and HUD (:52) THIS HOUR. The
+***     game build's 01:07 run reads the block below this one, whose row is still broadly right -
+***     but four of its carried items ARE NOW DONE and are struck in the row below.
+***
+*** ===== WHAT LANDED, VERIFIED BY MY OWN READING OF THE BYTES (not by the lanes' claims) =====
+*** **GAME BUILD S168 - FOUR THINGS, AND IT CLOSED SYSTEM 42's LAST CONSTANT.**
+***   `party_frames.gd:14` now reads `const MAX_ROWS := Roster.PARTY_CAP` - **the one remaining
+***   System 42 item named in the 23:58 block IS CLOSED**, a party of ten now shows ten rows.
+***   `snapshot_pub.gd:21 const EVERY := 15.0` (was 60.0) - the hub's "15-30 seconds" promise is
+***   now true. `town.gd:5364 chat.solo_ask = _on_solo`, guarded with `in chat`. And the PUBLISHER
+***   CHECK came back **HEALTHY** - the game simply has not run since 15:55 CT. **By the
+***   supervisor's own words that is NOT A BUG and the question is CLOSED. No lane is to hunt it.**
+***   ONE BLEMISH, COSMETIC, FOR WHOEVER NEXT OPENS THE FILE: the `snapshot_pub.gd` header now
+***   reads "Every EVERY s (15) ONE row" - a mechanical replace ate the sentence. One line.
+*** **HUB H33 - THE ROOM AT THE INN. The hub now SIGNS VIEWERS IN AND WRITES.** Supabase Auth over
+***   Twitch (PKCE, S256, no SDK, no new script origin), a "My Room" tab, and a `hub_actions`
+***   request queue with ten action kinds. This is the first real step of sup-nov27-2340.
+*** **ART - THE FIRST TOWN PROGRESSION BUILDING.** `town_well_t1/t2/t3.glb` with all three
+***   `.glb.import` siblings and a tiers-side-by-side render. Town-first, exactly as ordered.
+*** **CONTENT C-248 - `town_buildings`**: tier levels, landmark names, well->fountain in 5 stages,
+***   market growth in 4. The written half of town visual progression.
+*** **CHAT BOT B214** - `!help` now reads "Manage your hero on the page", serving order 2 directly;
+***   and it corrected the stale `_rank` docblock **I rowed for it last hour**, verifying against
+***   `origin/main` itself rather than trusting my row. 40 commands before, 40 after.
+*** **HUD U216** (file-only) and **U217 in flight** at this writing - town band, claimed 00:58:48.
+***
+*** ===== THE DEAD-DATA AUDIT - THE NON-NOTE COUNT MOVED FOR THE FIRST TIME IN DAYS: 15 -> 16 =====
+*** Measured on merged main 66d4b33b, corpus `scripts/*.gd` + `web/app.js` (49 files, 2,572,313
+*** chars), `data/*.json` (12 files, 181 top-level keys). **90 zero-hit keys = 74 `_note_` + 16
+*** NON-NOTE.** Series, non-note/raw: 15/52, 15/53, 15/56, 15/88, **16/90 now**.
+*** **THE NEW ONE IS `town_buildings`, content's C-248, AND IT IS NOT A FAULT.** Guard 1: zero
+*** literal hits in `scripts/`, `web/` or `tools/`. Guard 2: no `"town_" +` or `+ "_buildings"`
+*** concatenation anywhere, so nothing builds it at runtime. **IT IS CONTENT STAGED AHEAD OF THE
+*** ENGINE HALF, WHICH IS THE CORRECT ORDER FOR TOWN-FIRST - queued work, not dead data.** The
+*** game build wires it when it takes town visual progression. NO LANE IS TO "FIX" IT.
+*** UNREFERENCED ASSET DIRECTORIES: **ZERO** of 38 (Guard 5 held; the graveyard texture folder is
+*** reached from inside five `.glb` binaries and is READ). The other 15 non-note keys are the
+*** known accounted-for set - two runtime-built `_alt` pools, four declared-dead, nine prose/spec.
+***
+*** ===== GAME BUILD (:07) - YOUR 01:07 ROW IS BELOW THIS BLOCK; THIS IS YOUR 02:07 ROW =====
+***   **FOUR CARRIED ITEMS ARE DONE - DO NOT RE-DO THEM:** the publisher check (0) came back
+***   healthy; the snapshot constant (3) is 15.0; (a) `MAX_ROWS` and (b) `solo_ask` are both in.
+***   (1) **FINISH THE CURRENT DEATH MODEL SLICE** - the supervisor's order puts it first.
+***   (2) **ACTION-QUEUE POLLING, AND IT IS NO LONGER ABSTRACT.** The hub shipped the WRITING half
+***       this hour, so the "so the hub isn't building against nothing" reason in the supervisor's
+***       order has arrived: **the hub is now building against nothing, for real.** You have a
+***       concrete contract to build to - **`web/tools/hub_actions_schema.sql`** on main gives you
+***       the exact columns, the ten `kind` values, and the status vocabulary
+***       (`queued|done|refused|expired`). Poll `status='queued'`, execute, write back `status` and
+***       a short `result`. **THE TABLE DOES NOT EXIST YET** - see FOR THE SUPERVISOR below; build
+***       the poller behind a guard so a missing table degrades quietly instead of erroring hourly.
+***   (3) **TOWN VISUAL PROGRESSION FOR THE REST OF THE DEADLINE.** **DEFINE AND WRITE DOWN THE
+***       LAYOUT FORMAT FIRST** - art and content are both now ahead of you and queueing against
+***       it: art has three well tiers on disk and content has `town_buildings` written.
+***   (4) One line if it costs nothing: the `snapshot_pub.gd` header sentence noted above.
+***
+*** ===== CONTENT (:22) - TOWN FIRST, AND YOU ARE AHEAD OF THE ENGINE. STAY THERE. =====
+***   C-248 is merged and ticked. `town_buildings` reads as unwired in the audit and **that is
+***   expected and correct - you are not to change it.** TAKE NEXT: keep filling the town
+***   progression text the engine will need - the remaining landmark districts in
+***   `data/town/bellmire.json`'s id set that C-248 did not cover, same key shape, same `_note`
+***   discipline. Your four-file charter and the `drops.json` ruling are unchanged.
+***
+*** ===== ART (:34) - TOWN BUILDING ASSETS. THE WELL PROVED THE PIPELINE; NOW REPEAT IT. =====
+***   The three well tiers are merged and ticked, import siblings and all. TAKE NEXT: **the next
+***   town progression building, chosen off content's `town_buildings` landmark list** so your
+***   mesh names and its text agree from the start - that is cheaper than reconciling later. Same
+***   gate: three tiers rendered SIDE BY SIDE, the progression must read at a glance, and the
+***   ground is the body for a building. The 70-cap on minibosses stands; this is not that.
+***
+*** ===== HUB (:37) - H33 IS MERGED AND TICKED. KEEP BUILDING THE ROOM. =====
+***   I ran the full gate myself and it is green - see the hub section of my run doc. **YOU STILL
+***   NEVER PUBLISH; that is unchanged and is not a comment on H33.** TAKE NEXT: the next surface
+***   of the room under sup-nov27-2340 - **storage/vault and the quest board**, built the same way
+***   (el() only, RLS the authority, an action is a REQUEST). Build against the schema you wrote.
+***   TWO SMALL THINGS IN H33 ITSELF, FOUND BY MY OWN RENDER, NEITHER A BLOCKER:
+***   (a) if the `/auth/v1/settings` probe FAILS (not returns false - fails), `authOn` stays
+***       `null` and a signed-out viewer reads "Checking whether sign-in is open..." **forever**.
+***       One line: treat a failed probe as "not switched on" once the promise settles.
+***   (b) your CSS comment says the login button is "the page's own teal **watchbtn**"; the code
+***       builds `el("button", "chip on room-login", ...)`. The BUTTON is right and on-palette -
+***       the COMMENT names the wrong class. A sentence beside the code is not evidence of it.
+***
+*** ===== CHAT BOT (:45) - B214 TICKED. YOU ARE NARROWING CORRECTLY; KEEP GOING. =====
+***   `!help` pointing at the hub is exactly order 2. TAKE NEXT: the hub now offers ten actions by
+***   name (`wear, dye, sell, buy, respec, reroll, specialize, party_invite, party_join,
+***   party_leave`). **Audit your own surface against that list and make the chat wording agree
+***   with the hub's** - same verbs, same refusal language - so a viewer who reads one understands
+***   the other. **NOTHING SHIPPED IS REVERTED and no command is removed**: they stay as fallbacks,
+***   per the directive. No new command, no new alias. Keep claiming by :50 inside :52.
+***
+*** ===== HUD (:52) - U217 IS IN FLIGHT AS I WRITE. CARRY IT. =====
+***   Your 00:58:48 claim is live and correct (cap 01:13:48, declared 01:06). Finish U217, then
+***   take the highest town-facing item in YOUR SEVEN FILES. **`party_frames.gd` IS STILL NOT
+***   YOURS and the game build has now closed its MAX_ROWS item** - you were right to refuse it
+***   twice and you are owed no part of it. Your IDLE line last hour was written
+***   `23:53:24.24354` with NO OFFSET and fractional seconds - the only malformed stamp in the
+***   file. One format, every line: `2026-11-28T00:58:48-06:00`.
+***
+*** ===== FOR THE SUPERVISOR - ONE DECISION, AND IT IS THE HUB'S CRITICAL PATH =====
+*** **H33 SHIPPED A PAGE THAT WRITES TO A TABLE THAT DOES NOT EXIST.** The hub lane owns `web/`
+*** only and correctly did not touch the live project; it left the DDL as a PROPOSAL at
+*** `web/tools/hub_actions_schema.sql`. Two things outside `web/` now gate the whole room:
+***   (1) **APPLY THE `hub_actions` SCHEMA to the live Supabase project.** I did NOT do this. My
+***       pre-authorization is **web/-only** and a live DDL change is not web/-only, so it is not
+***       mine to take even though I hold the tools to do it. **MY RECOMMENDATION: authorize the
+***       GAME BUILD lane to apply it** - it already owns the service key (`user://supabase.json`)
+***       and the snapshot table, it is the only lane that will poll it, and it can red-prove the
+***       poller against the real table in the same firing. I have read the DDL: RLS on, select and
+***       insert own-rows-only keyed on the JWT `provider_id`, no update or delete policy, anon
+***       denied, `kind` a CHECK whitelist, `args` size-bounded, 20-row backlog cap. It is sound.
+***   (2) **ENABLING THE TWITCH PROVIDER needs Mr. E** - it takes the Twitch app's client id and
+***       secret plus the redirect URL allow-list, which nobody else can supply. It is in NEEDS
+***       MR. E in my run doc. Until it is done the page shows "Sign-in is not switched on yet"
+***       and nothing breaks, so **(1) is not blocked on (2)** - the poller can be built and the
+***       table filled by hand for a test long before the Twitch door opens.
+*** THE PROMPT BACKLOG IS STILL ZERO. All seven were rewritten in one live pass at 00:1x-00:3x CT
+*** and nothing has been owed since. **ONE NEW CORRECTION IS OWED AS OF THIS RUN** and it goes in
+*** FOR THE NEXT TEAM LEAD below, not to you: THIS prompt says the hub's section bar is "FIFTEEN
+*** tabs in three rows". **H33 ADDED "My Room" AND I MEASURED SIXTEEN** (rows of 7/7/2, none
+*** clipped, none with scrollWidth > clientWidth). A firing cannot write a scheduled task.
+***
+*** ===== FOR THE NEXT TEAM LEAD - CORRECTIONS OWED TO PROMPTS, NOT YET LANDED =====
+*** A scheduled FIRING cannot create, change or delete a scheduled task - it needs a live turn to
+*** be approved in, and a firing is not one. These are owed to THIS seat's prompt
+*** (trig_01AiNVX4tT9xupV9p8b928fB) and must be landed the next time Mr. E is live:
+***   (1) "THE SECTION BAR IS FIFTEEN TABS IN THREE ROWS" -> **SIXTEEN**, measured 01:0x CT 28 Nov
+***       on the real render after H33 added "My Room". Rows 7/7/2, none clipped.
+***   (2) The published-tree figures ("gh-pages^{tree} is 23eee62a and origin/hub:web is e346dc16,
+***       the entire difference is web/NOTES.md +10/-0") are **one hour stale as of this run** -
+***       H33 is merged and the delta is now substantive. The prompt already says to re-measure
+***       both trees every hour, so this is a stale EXAMPLE, not a stale rule.
+***   (3) The dead-data baseline says "UNREAD LIVE DATA KEYS: ZERO" and lists **15** non-note
+***       zero-hit keys. It is **16** as of 01:1x CT 28 Nov; the new one is `town_buildings` and it
+***       is queued content, not a fault. The accounted-for list needs that sixteenth line.
+
 *** ===== ADDENDUM - THREE SUPERVISOR ANSWERS, RELAYED LIVE BY MR. E AT ~00:1x CT, 28 NOV 2026. =====
 *** *** CLOCK READ OFF cruzader BEFORE WRITING THIS. ALL THREE OF MY ESCALATIONS ARE ANSWERED. ***
 *** WHEN THIS TAKES EFFECT: the game build already fired at 00:07 and gets this at its 01:07 run -

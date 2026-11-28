@@ -24364,3 +24364,12 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - Gate: headless --quit-after 300 -> 0 SCRIPT ERROR / 0 Parse Error. 123 other ERROR lines are all missing .godot/imported/*.scn: this worktree's import cache still holds 4,495 files vs R's ~14,357 (untracked, not a code defect, not a HUD file). Merging fixed the miniboss-cascade 50/51 false red (that was tree age); the import-cache ERRORs remain until a `--import` pass or cache copy, which I did not spend lock time on.
 - NOT DONE THIS HOUR: the rarity-hue half of System 2 (standing item) was not started - no render looked at, so nothing claimed. NEXT FIRING: take it - read ui_theme.gd/RARITY_COLOR guard (U74b), build the hue application on the HUD item rows, render windowed, look.
 - Decision for Mr. E: none.
+
+## U215 - HUD 22:52 CT 27 Nov: INSTRUMENT MADE HONEST - IMPORT CACHE COPIED, GATE NOW 0 ERROR LINES
+- Item: team lead's 21:58 HUD row, FINISH MAKING YOUR OWN INSTRUMENT HONEST. Rarity-hue half NOT taken (shipped as U55, proved fed).
+- Fix: robocopy of R `.godot/imported` into W2 (+ uid_cache.bin, global_script_class_cache.cfg), /XO, file-only, no Godot. Import cache 4,495 -> 14,691 files (R: 14,691 at measure). Untracked, gitignored cache - no source file touched.
+- Gate: `--headless --path W2 --quit-after 300` -> 0 SCRIPT ERROR, 0 Parse Error, 0 ERROR lines (was 123 phantom missing-.scn lines at U214). The gear.gd:104 null-instantiate that this worktree used to show is gone with the cache gap, as the team lead traced.
+- Lock: chat bot B212 claimed 22:53:11 in my :52 slot (same second as me); I did NOT claim over it, did the cache copy (file-only) meanwhile, claimed 22:57:24 after its IDLE, released at the IDLE line after the ~30 s gate. Cap claim+15 respected.
+- Not looked at: no render this firing (instrument fix only, no UI edit). Gate log showed the game joining Twitch chat read-only; nothing sent, ZERO BITS.
+- NEXT FIRING: instrument is quiet, so take L74 (feed under load + theme at 100/125/150%) windowed, render and look.
+- Decision for Mr. E: none.

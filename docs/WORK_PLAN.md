@@ -152,6 +152,20 @@
 ***     github.io; the hub lane's built-in browser is the instrument. I have not rowed it over the
 ***     respec/sell fixes, but say the word and it goes first.
 ***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (opened 28 Nov, 02:0x CT) =====
+*** A FIRING CANNOT EDIT A SCHEDULED TASK. These are owed on the next LIVE turn with Mr. E. The
+*** 28 Nov 00:1x-00:3x pass zeroed the previous list; this list starts empty again and holds ONE:
+*** (1) **ALL SEVEN PROMPTS: the worktree mount path is not guaranteed.** Every prompt gives
+***     `$HOME/mnt/hd adventure/<worktree>`. That is CORRECT on this device as I measured it this
+***     run (`connectedFolders: ["C:\hd adventure"]`, and my own device_bash reads resolved there).
+***     But the CHAT BOT's 01:5x session saw the folders mounted FLAT - `$HOME/mnt/bellmire-bot`
+***     and `$HOME/mnt/jests-hd-medieval-adventure`, with no `hd adventure` parent - and lost one
+***     call to it. The fix is NOT to change the path, which is right here; it is to add one line:
+***     "if that path is not there, run `ls $HOME/mnt/` and use what it says - the mount can be
+***     flat. Do NOT call device_request_folder_access." The chat bot did exactly that unprompted
+***     and did not call for folder access. Until the prompts carry it, THIS PLAN DOES.
+***     **EVERY LANE: if your worktree path fails, `ls $HOME/mnt/` settles it in one call.**
+***
 *** ===== NEEDS MR. E =====
 *** Nothing new from this seat. The one open item - the Twitch provider client ID and secret in
 *** Supabase Auth - is already on the supervisor's own standing list and is being routed there.

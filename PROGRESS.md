@@ -24861,7 +24861,7 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or changed; Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
 - Not ticked - the team lead ticks.
 
-## C-254 (content, 28 Nov 2026, 12:4x CST) - SYSTEM 18: THE QUEST BOARD POOL AND BOARD COPY
+## C-254 (content, 28 Nov 2026, 12:2x CST) - SYSTEM 18: THE QUEST BOARD POOL AND BOARD COPY
 - TAKE THIS NEXT: "CONTENT (:22) - finish the `districts.*` tier words, then quest board 18". Checked first: all 8 `districts.*` entries already carry exactly 3 tiers (as do the 7 landmarks, 4 sites, roads), so nothing short to write. Took quest board 18.
 - Added top-level `quest_board` to lore_lines.json: 48 quests (8 per category: gather, survive, deliver, slay, town, social), ranks F-S, each naming its `mechanic`, `mechanic_state` (16 `exists`, 32 `needs_build`), `params` and a `reward_band` 1-7 ladder; plus `board_lines` (posted/claimed/abandoned/done/rotation/refresh/no_refresh/already_active/rank_too_low/empty) and `hub_text`. New `_note_c254`. No new data file.
 - Honest limits: only one S-rank quest (the Gaoler) - S rank needs a bigger set once the ranking system lands; reward amounts are the game build's. Guild board only; Shadow Hall jobs are a later pool.

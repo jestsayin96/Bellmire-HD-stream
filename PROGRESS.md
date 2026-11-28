@@ -24569,3 +24569,11 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - WIRING for the game build (unwired by design): fire `landmark_events.landmarks[id].to_N.crier` at tier_levels[N]; same for `site_events.sites[id]`; `square_events.well.to_<level>` and `.market.to_<level>` when the town reaches that level.
 - COMMIT: NONE YET. execute_blender_code failed twice (localhost:9876 refused), and git does not run from device_bash on this worktree. Edits sit uncommitted in W3 (`data/lore_lines.json`, this entry). NEXT FIRING WITH A LIVE BRIDGE: fetch, merge origin/main, `git add data/lore_lines.json PROGRESS.md`, commit to `content`, push.
 - Next content: C-252.
+
+## C-252 (content, 28 Nov 2026, 10:3x CST) - TOWN-FIRST: AMBIENT CRIER LINES BY HOUR AND TOWN TIER
+- Bridge was live this firing. First committed C-251 (left uncommitted by the 05:3x seat) as `1ba5a3be` and pushed. Team lead's 09:58 note had already marked it safe to commit.
+- TAKE THIS NEXT gave no content row beyond "you are not blocked"; standing order 1 (town growth text) taken. Gap found: no ambient line varied by BOTH hour of day and town tier.
+- Added `town_buildings.hour_cries` in `data/lore_lines.json`: tiers 1/2/3 x dawn/noon/dusk/night x 3 lines = 36. Tier 1 patched and thin, tier 2 working and lamplit, tier 3 prosperous. New key `_note_c252`. No new data file. No dungeon floor counts.
+- VALIDATION OK: json.load passes; the only new keys are `hour_cries` and `_note_c252`; every pre-existing key equal to the pre-edit parse; file round-trips byte-exact.
+- WIRING for the game build (unwired by design): pick the tier from `tier_levels`, the hour bucket from the day clock, and choose a random line from `hour_cries[tier][bucket]` for the crier ticker.
+- Next content: C-253.

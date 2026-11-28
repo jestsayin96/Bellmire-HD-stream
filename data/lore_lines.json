@@ -17436,9 +17436,79 @@
           "plaque": "Open at dawn."
         }
       }
+    },
+    "hour_cries": {
+      "_note": "C-252 / town-first: ambient crier lines by hour of day AND town tier. hour_cries[<tier 1|2|3>][dawn|noon|dusk|night] -> list of 3 short lines. Tier keys match tier_levels (1 at level 1, 2 at level 5, 3 at level 9). Tier 1 is patched and make-do, tier 3 is prosperous: the line should tell a viewer which they are looking at. Dead until wired; content worker never touches code. No line states a dungeon floor count.",
+      "1": {
+        "dawn": [
+          "Cock's up and the fires are not. Blow on them.",
+          "Frost on the thatch. The thatch has seen worse.",
+          "First bucket's drawn. Mind the rope, it's mended twice."
+        ],
+        "noon": [
+          "Sun's overhead and the soup's thin. Both will do.",
+          "Noon bell, such as it is. Somebody hit the pot.",
+          "Dust on the road and bread on the sill. Eat."
+        ],
+        "dusk": [
+          "Light's going. Shutters up, patch the gaps with rag.",
+          "Count the children, count the hens, bar the door.",
+          "The Watch has one lantern. It is walking the long way round."
+        ],
+        "night": [
+          "Dark and quiet. Quiet is all we can afford.",
+          "One lamp lit in the Hall. The Chief is counting again.",
+          "Wind in the thatch. It is only the wind."
+        ]
+      },
+      "2": {
+        "dawn": [
+          "Smoke from every chimney and the baker's already cursing.",
+          "Carts on the lane before the light. Good. Somebody is buying.",
+          "The Watch changes at first light. They are on time, mostly."
+        ],
+        "noon": [
+          "Noon bell, struck properly. The clapper was mended last week.",
+          "Market's full and the lanes are loud. Mind your purse.",
+          "Hot loaf, cold ale, and a queue at the guild post."
+        ],
+        "dusk": [
+          "Lamps going up along the lane. Lit by hand, every one.",
+          "Shutters closed, doors barred, ale poured. Right order.",
+          "Day's trade counted. It came out higher than last month."
+        ],
+        "night": [
+          "The lamps hold and the Watch walks. Sleep.",
+          "Lantern at the gate and a dog at every door.",
+          "A late light at the guild post. Someone is writing names."
+        ]
+      },
+      "3": {
+        "dawn": [
+          "Bells for first light, and every one of them in tune.",
+          "The mill's turning before the sun. Flour by breakfast.",
+          "Whitewash dry on the south lanes. The roses opened overnight."
+        ],
+        "noon": [
+          "Noon bell, and the market hall's doors stand open. Come in.",
+          "Full tables at the inn and not a crumb wasted.",
+          "The square is busy and nobody is hungry. Remember that."
+        ],
+        "dusk": [
+          "Lamps lit on every lane. Nobody walks in the dark here now.",
+          "Evening bell. Gates closing, hearths banked, accounts squared.",
+          "The wall is walked, the water is clear, and the day was good."
+        ],
+        "night": [
+          "Lamps burn all night on the main road. The Watch uses them gladly.",
+          "Stars over a town that does not need to hide. Be glad of it.",
+          "The bell is quiet and the town is not afraid. Sleep well."
+        ]
+      }
     }
   },
   "_note_c248": "C-248 town_buildings: building, landmark and tier flavour text. Zero-hit by design; no lane wires this key.",
   "_note_c250": "C-250 / town-first: town_buildings.upgrade_events (district + road tier-change event lines) and town_buildings.inn_exterior (3 stages incl. storage line). Dead until wired; no new data file.",
-  "_note_c251": "C-251 / town-first: town_buildings.landmark_events (7 landmarks x to_2/to_3), site_events (4 sites x to_2/to_3), square_events (well 4 steps, market 3 steps). {crier, plaque} each. Dead until wired; no new data file."
+  "_note_c251": "C-251 / town-first: town_buildings.landmark_events (7 landmarks x to_2/to_3), site_events (4 sites x to_2/to_3), square_events (well 4 steps, market 3 steps). {crier, plaque} each. Dead until wired; no new data file.",
+  "_note_c252": "C-252 / town-first: town_buildings.hour_cries (3 tiers x 4 hours x 3 lines = 36 crier lines). Dead until wired; no new data file."
 }

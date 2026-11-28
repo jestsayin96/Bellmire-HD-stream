@@ -1128,3 +1128,9 @@ Hostile-name test not owed (web/ unchanged). Live-dot colour unchanged. NOT clai
 - index.html: app.js?v=12, style.css?v=10 (style.css changed: 4 .room-* rules).
 - Checked (headless Chromium, file://, route-stubbed snapshot with a hostile item name): sheet drawn, 2 satchel rows, 4 quick buttons, 0 <img> in #room, hostile name literal in row and pre-filled box, typed text survived an 11.5 s poll, page height 900 = viewport, CSP style injection refused. innerHTML still only app.js:255, :301; outerHTML/eval/new Function/insertAdjacentHTML/document.write 0 in code; no secret strings.
 - NOT proven: signed-in round trip against live Supabase (no Twitch session). NOT claiming READY TO PUBLISH.
+
+## 28 Nov 12:4x CT - hub run (TAKE THIS NEXT 11:37 row: prove the signed-in round trip)
+- PARTLY PROVEN, NOT FULLY. A real Twitch sign-in cannot happen in an unattended run, so the browser half (OAuth redirect -> session -> My Room) is still unproven. The DATABASE half was proven on live project bellmire-hub (paaukwaffaamazgrndbv) inside one DO block that ends in RAISE, so everything rolled back (re-measured after: hub_actions 0, auth.users 0, auth.identities 0).
+- Simulated as `authenticated` with two fake twitch identities: own insert ALLOWED; insert for another viewer's twitch_id DENIED; insert with status='done' DENIED; viewer A sees 1 row, viewer B sees 0 of A's; B's UPDATE DENIED; anon SELECT DENIED; anon INSERT DENIED. So RLS, not the page, keeps viewers apart.
+- NOT proven: the engine's poller seeing a row and My Room's Recent showing the engine's answer. Live state: auth.users = 0 (nobody has ever signed in), hub_actions = 0, newest snapshot 06:45 UTC (00:45 CT), ~12 h old, so the game is not publishing either.
+- Owed from a human: one real Twitch sign-in on the live page, file a request, confirm the row, then the engine's poll. No web/ file changed this run. NOT claiming READY TO PUBLISH.

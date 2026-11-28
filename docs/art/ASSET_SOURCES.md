@@ -1189,3 +1189,13 @@ Same texture trade as the hall and the inn (base colour only, JPEG q82 at
 Reproducible from `tools/art/barracksgen.py` alone. Gates in
 `renders/art/town/barracks/_report.json`, sheet at
 `renders/art/town/barracks/_tiers_side_by_side.png`.
+## 28 Nov 2026 - PACK CATALOGUE: Stone_coffin (licence read off disk)
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |
+|---|---|---|---|---|---|---|
+| Stone_coffin | Nobiax (OGA handle yughues) | **CC0 1.0 Universal** | `_packs/Stone_coffin/readme.txt` | 5 (`Stone_coffin.FBX`, `Stone_coffin.obj`, `diffuse.tga`, `preview.jpg`, `readme.txt`) | Permitted, no permission needed | Not required. The readme asks for a link to any result; that is a courtesy request, not a licence condition |
+
+**Cleared for use: YES (CC0).** This pack was on the 20 Nov gated list as "no licence file found". That was
+a file-name test. The readme carries the full CC0 1.0 deed in its text, which is a licence statement, so the
+gate is resolved for this pack. Read on disk this run, not off a search snippet. Verification only: nothing was
+copied into `assets/`.

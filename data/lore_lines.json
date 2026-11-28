@@ -17505,10 +17505,217 @@
           "The bell is quiet and the town is not afraid. Sleep well."
         ]
       }
+    },
+    "shops": {
+      "blacksmith": {
+        "district": "craft",
+        "tiers": [
+          {
+            "name": "The Forge Shed",
+            "crier": "One anvil under a lean-to. The hammer rings, the roof leaks, the nails come out straight.",
+            "plaque": "Nails, hinges, hoops. Bring your own iron.",
+            "see": "A lean-to over a stone hearth, one anvil, a bellows patched with leather, horseshoes on a nail."
+          },
+          {
+            "name": "The Smithy",
+            "crier": "The smithy has walls now and a chimney that draws. The smith has stopped working in his coat.",
+            "plaque": "Edges ground while you wait.",
+            "see": "A timber smithy with a brick chimney, a quench trough, two anvils, a wall of tools."
+          },
+          {
+            "name": "The Great Forge",
+            "crier": "Two hearths and a wheel-driven bellows. The ring of it carries to the gate, and nobody minds.",
+            "plaque": "Hot fire. True iron. Fair price.",
+            "see": "A stone forge hall with two chimneys, a wheel-driven bellows, racks of finished blades, a slate roof."
+          }
+        ]
+      },
+      "blacksmith_2": {
+        "district": "craft",
+        "note": "the second smithy, b036; same shop kind, its own names so two forges do not read as one",
+        "tiers": [
+          {
+            "name": "The Shoeing Yard",
+            "crier": "Horseshoes and wheel-hoops hammered in the open. The one horse stands very still.",
+            "plaque": "Shoes while you hold the rope.",
+            "see": "A fenced yard, a portable forge, a stump for an anvil, a horse tied to a rail."
+          },
+          {
+            "name": "The Farrier's",
+            "crier": "The farrier has a roof and a second horse. He says he is thinking of a third.",
+            "plaque": "Hooves, hoops, harness rings.",
+            "see": "A timber farrier's shop, a hitching rail, a wheel rack, a shoe-hung beam."
+          },
+          {
+            "name": "The Farrier and Wheelwright",
+            "crier": "The wheelwright has joined the farrier under one slate roof. The carts of the valley roll straighter for it.",
+            "plaque": "Shod and hooped.",
+            "see": "A stone-and-timber yard, a covered shoeing bay, finished cartwheels, a painted sign."
+          }
+        ]
+      },
+      "apothecary": {
+        "district": "temple",
+        "tiers": [
+          {
+            "name": "The Herb Stall",
+            "crier": "Herbs on a string and a pot on the boil. If it smells bad it is probably working.",
+            "plaque": "Ask before you swallow.",
+            "see": "A lean-to by the chapel wall, bundled herbs, a smoking pot, a tray of clay jars."
+          },
+          {
+            "name": "The Apothecary",
+            "crier": "The apothecary has shelves and a door that shuts. The smell stays inside now, mostly.",
+            "plaque": "Labelled. Mostly.",
+            "see": "A timber shop with shelves of labelled jars, a counter with scales, a lit window."
+          },
+          {
+            "name": "The Still-House",
+            "crier": "The apothecary keeps a still and a herb garden behind a wall. The brews come out the colour the label says.",
+            "plaque": "Measured, stoppered, sealed.",
+            "see": "A stone still-house, a walled physic garden, glass bottles in the window, a copper still."
+          }
+        ]
+      },
+      "armorer": {
+        "district": "garrison",
+        "tiers": [
+          {
+            "name": "The Mender's Bench",
+            "crier": "One bench, one stool and a bucket of rivets. Mail comes in torn and goes out mended, if not pretty.",
+            "plaque": "Rivets by the dozen.",
+            "see": "A bench by the barracks wall, a hanging shirt of mail, patched leather, a rivet bucket."
+          },
+          {
+            "name": "The Armoury",
+            "crier": "A proper armoury now, with a rack for every kind of coat. The garrison has stopped borrowing.",
+            "plaque": "Fitted by hand.",
+            "see": "A timber armoury, racks of helms and shields, a fitting block, an iron-bound door."
+          },
+          {
+            "name": "The Armourer's Hall",
+            "crier": "Plate on a stand in the window and a queue at the door. The armourer measures everyone twice.",
+            "plaque": "Measured twice.",
+            "see": "A stone hall with plate on stands, a high window, a flagstone fitting bay, a guild sign."
+          }
+        ]
+      },
+      "store": {
+        "district": "homes_s",
+        "tiers": [
+          {
+            "name": "The Barrow Shop",
+            "crier": "A barrow, a plank and what the cart brought. Ask nicely and she may find it.",
+            "plaque": "Ask. She may have it.",
+            "see": "A handbarrow under a canvas, a plank counter, crates, a chalk board of prices."
+          },
+          {
+            "name": "The General Store",
+            "crier": "The store has a counter and a back room. Rope, candles, salt, boots: all there, none of it new.",
+            "plaque": "Rope. Salt. Candles. Boots.",
+            "see": "A timber shop front, hung lamps and rope, shelves to the rafters, a bell on the door."
+          },
+          {
+            "name": "The Warehouse Store",
+            "crier": "The store takes whole cartloads now, and keeps the good things on a shelf out of reach. The prices are chalked in a firm hand.",
+            "plaque": "Stocked and weighed.",
+            "see": "A stone-and-beam store with a loading door, a hoist, stacked barrels, glazed windows."
+          }
+        ]
+      },
+      "tavern": {
+        "district": "homes_w",
+        "tiers": [
+          {
+            "name": "The Drovers' Tap",
+            "crier": "A barrel on trestles and a roof over it. The drovers say the ale is honest, which is not the same as good.",
+            "plaque": "Pay first. Drink after.",
+            "see": "A low house, a barrel on trestles, a bench, a painted board hung crooked."
+          },
+          {
+            "name": "The Drovers' Arms",
+            "crier": "The Arms has a fire and a second table. Two songs are sung, in turn, and badly.",
+            "plaque": "A fire. A stool. A song.",
+            "see": "A timber tavern with a chimney, a swinging sign, shuttered windows, a mounting block."
+          },
+          {
+            "name": "The Drovers' Hall",
+            "crier": "The Hall seats forty and has a cellar to match. The songs are the same. The ale is better.",
+            "plaque": "Warm. Full. Open late.",
+            "see": "A stone-based tavern hall with a slate roof, a lit sign, a cellar door, a yard with a well."
+          }
+        ]
+      }
+    },
+    "shop_events": {
+      "_note": "C-253 / town-first: the MOMENT OF CHANGE for the shop buildings. shops{<kind>} -> {to_2,to_3}:{crier, plaque}, keyed like shops. Event lines, not state; state text lives in `shops`. Same tier_levels as landmarks. Dead until wired; no floor counts.",
+      "shops": {
+        "blacksmith": {
+          "to_2": {
+            "crier": "The Forge Shed has walls. The hammer rings indoors and the smith wears no coat.",
+            "plaque": "Walls."
+          },
+          "to_3": {
+            "crier": "The new forge is lit. It has two hearths. The first thing it made was a hinge for its own door.",
+            "plaque": "Two hearths."
+          }
+        },
+        "blacksmith_2": {
+          "to_2": {
+            "crier": "The farrier has a roof over the shoeing yard. The horses were consulted and had no view.",
+            "plaque": "Roofed."
+          },
+          "to_3": {
+            "crier": "Farrier and wheelwright share a slate roof. The first cart out was drawn by the farrier's own horse.",
+            "plaque": "Shod and hooped."
+          }
+        },
+        "apothecary": {
+          "to_2": {
+            "crier": "The herb stall has shelves and a door. The jars are labelled in a careful hand.",
+            "plaque": "Labelled."
+          },
+          "to_3": {
+            "crier": "The still is lit and the physic garden is walled. The first bottle was drunk by the apothecary, in front of witnesses.",
+            "plaque": "Walled garden."
+          }
+        },
+        "armorer": {
+          "to_2": {
+            "crier": "The mender's bench has a roof and a rack. The garrison stops borrowing and starts ordering.",
+            "plaque": "Racked."
+          },
+          "to_3": {
+            "crier": "Plate stands in the armourer's window. The Watch came to look and stayed to be measured.",
+            "plaque": "Measured twice."
+          }
+        },
+        "store": {
+          "to_2": {
+            "crier": "The barrow has a shop behind it. The plank is a counter now and the chalk board is slate.",
+            "plaque": "Counter."
+          },
+          "to_3": {
+            "crier": "The store has a loading door and a hoist. The carter says it is the first time he has not had to unload by hand.",
+            "plaque": "Hoisted."
+          }
+        },
+        "tavern": {
+          "to_2": {
+            "crier": "The tap has a fire and a second table. Somebody has sung. Somebody has asked them to stop.",
+            "plaque": "A fire."
+          },
+          "to_3": {
+            "crier": "The Hall is open. It seats forty and the cellar has not been counted. The sign was hung straight, on purpose.",
+            "plaque": "Straight sign."
+          }
+        }
+      }
     }
   },
   "_note_c248": "C-248 town_buildings: building, landmark and tier flavour text. Zero-hit by design; no lane wires this key.",
   "_note_c250": "C-250 / town-first: town_buildings.upgrade_events (district + road tier-change event lines) and town_buildings.inn_exterior (3 stages incl. storage line). Dead until wired; no new data file.",
   "_note_c251": "C-251 / town-first: town_buildings.landmark_events (7 landmarks x to_2/to_3), site_events (4 sites x to_2/to_3), square_events (well 4 steps, market 3 steps). {crier, plaque} each. Dead until wired; no new data file.",
-  "_note_c252": "C-252 / town-first: town_buildings.hour_cries (3 tiers x 4 hours x 3 lines = 36 crier lines). Dead until wired; no new data file."
+  "_note_c252": "C-252 / town-first: town_buildings.hour_cries (3 tiers x 4 hours x 3 lines = 36 crier lines). Dead until wired; no new data file.",
+  "_note_c253": "C-253 / town-first: the SIX SHOP BUILDINGS of bellmire.json (b022 apothecary, b024 armorer, b027 store, b033 and b036 blacksmith, b039 tavern), which until now fell through to their district words. shops{<kind>:{district,tiers[3]}} -> same tier shape as landmarks ({name, crier, plaque, see}); blacksmith_2 is the second smithy (b036) with its own names. Read via the /2 `words` field set to `shops.<kind>` on a building whose `shop` is that kind; tier = tier_levels clock. Plaque is a shop sign, not a price list. Condition tracks level: tier 1 is a bench and a rope, tier 3 is a finished hall. Dead until wired; content worker never touches code. No line states a dungeon floor count."
 }

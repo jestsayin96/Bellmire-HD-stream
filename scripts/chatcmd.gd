@@ -24,7 +24,12 @@ signal wants_shop(user_id: String, kind: String)
 signal twitch_reply(user_login: String, text: String)
 
 const COOLDOWN := 1.5          # seconds per viewer, anti-spam
-const QUEUE_MAX := 6
+## S42a (Mr. E, 27 Nov 18:44 - DIRECTIVE sup-nov27-1844): TEN, not six. This constant is the
+## ONLY cap on how many heroes go down together: town.gd `_begin_delve` takes the WHOLE of
+## `_at_mouth`, and nothing reaches `_at_mouth` that was not first let through the gate below.
+## Raise it and the party grows; the published word in `muster`.what must move with it, and the
+## MUSTER COUNT arm further down this file is what makes that a gate rather than a hope.
+const QUEUE_MAX := 10
 
 ## B104: THE COUNTER SET - every command that puts a viewer in front of a shopkeeper. A hero on
 ## the scar road or below it is refused with where they are instead of being dragged back to a
@@ -416,7 +421,10 @@ func _delve(user_id: String) -> String:
 ## to LEAVE OUT a hero already below. That is an exclusion, not a second source of membership
 ## - no name enters the muster from away, so there is nothing left to reconcile.
 ## Needs no hero of its own: a bystander may ask who is going down.
-const LINE_WORDS := ["first", "second", "third", "fourth", "fifth", "sixth"]
+## S42a: ten place-words for a muster of ten. With six here the seventh viewer through the
+## tenth was told only "Your name is in." and lost their place in the line.
+const LINE_WORDS := ["first", "second", "third", "fourth", "fifth", "sixth",
+                     "seventh", "eighth", "ninth", "tenth"]
 
 ## is this away-state a hero already underground, rather than one waiting to go down?
 static func _below(state: String) -> bool:
@@ -1403,8 +1411,8 @@ static func commands() -> Dictionary:
         #   the two longest hand-written lists in this file. A calling added to roster.gd tomorrow
         #   is EXACTLY how `greataxe` (S20) and `sceptre` (D94b) reached the smithy unpublished.
         #   `muster`.what publishes "takes six from chat", and QUEUE_MAX above is what actually
-        #   turns the seventh viewer away. Change either and nothing else in the house notices.
-        # ALL THREE READ CORRECT TODAY - 15/15, 6/6, six vs 6 - and that is the point: they agree
+        #   turns the eleventh viewer away. Change either and nothing else in the house notices.
+        # ALL THREE READ CORRECT TODAY - 15/15, 6/6, ten vs 10 - and that is the point: they agree
         # by coincidence, not by construction, and this is what makes them stay agreed. Not fatal,
         # the shape every guard above uses: a battery greps COMMANDS_DATA; no line is healthy.
         var ew: String = String(((cmd_d.get("enlist", {}) as Dictionary)).get("what", ""))

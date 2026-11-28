@@ -1199,3 +1199,21 @@ Reproducible from `tools/art/barracksgen.py` alone. Gates in
 a file-name test. The readme carries the full CC0 1.0 deed in its text, which is a licence statement, so the
 gate is resolved for this pack. Read on disk this run, not off a search snippet. Verification only: nothing was
 copied into `assets/`.
+
+---
+
+## PACK CATALOGUE WORKER - 28 Nov 2026 - `low-poly_RPG_item_collection_2`
+
+Scheduled catalogue pass. One pack per firing. The licence was looked for on disk and
+inside the files; nothing was imported, copied into `assets/`, or re-exported.
+
+| Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution | Cleared for use |
+|---|---|---|---|---|---|---|---|
+| low-poly RPG item collection 2 (`_packs/low-poly_RPG_item_collection_2/`) | not named in any file | **NO LICENCE FILE FOUND** | none | 27 (17 PNG, 8 OBJ, 1 BLEND, 1 3DS) | not established | not established | **NO - import gated** |
+
+What was checked, and what was found:
+- The folder holds no `License`, `LICENSE`, `COPYING`, `readme` or other text file. It has no zip sibling either.
+- Text search of the 8 OBJ files and the binary BLEND and 3DS files for licence, copyright, CC, public-domain, attribution, and vendor names: **no hits**. The OBJ header only names the Blender source file (`rpg items 2.blend`, Blender v2.76).
+- The folder name carries no licence term. A name is not a licence.
+
+Rule applied: no model from this pack goes into `assets/` until a licence is read off a file that ships with it. Until then, the row above stands as **NO LICENCE FILE FOUND**.

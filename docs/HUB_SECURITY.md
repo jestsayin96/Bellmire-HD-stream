@@ -744,8 +744,7 @@ The hub now signs viewers in and WRITES. Everything above still holds; this adds
   The sign-in button is shown only when `/auth/v1/settings` reports `external.twitch === true`; otherwise the page says
   sign-in is not switched on. It never offers a button that leads to a Supabase error page.
 - **RLS is the authority** (policy assumed, in `web/tools/hub_actions_schema.sql`, NOT yet applied to the live project):
-  `hub_actions` has RLS on; authenticated users may SELECT only rows whose `twitch_id` equals their own JWT
-  `user_metadata.provider_id`, and INSERT only with that same `twitch_id`, `status='queued'`, `result is null`, under a
+  `hub_actions` has RLS on; authenticated users may SELECT only rows whose `twitch_id` equals their own Twitch id, read from `auth.identities` by a SECURITY DEFINER function `private.my_twitch_id()`, and INSERT only with that same `twitch_id`, `status='queued'`, `result is null`, under a
   20-queued-rows backlog cap; there is NO update or delete policy, and anon has none. `kind` is a CHECK whitelist and `args`
   is size-bounded in the database, so a page that is tampered with still cannot file anything the table forbids. The page
   sends a `viewer_login` for display only; the engine must key on `twitch_id`, never on that string.
@@ -758,3 +757,11 @@ The hub now signs viewers in and WRITES. Everything above still holds; this adds
 - **Login button.** The page's own teal chip reading "Log in with Twitch". No purple, no glyph, no wordmark.
 - **Needs doing outside web/** (not this lane): enable the Twitch provider + redirect URL allow-list in Supabase; apply the
   schema; the game engine polls `status='queued'` with the service key and writes `status`/`result`.
+
+### H33b - RLS identity source corrected (28 Nov 2026, 01:5x CT)
+Self-caught flaw in the H33 proposal: it compared `twitch_id` to `auth.jwt() -> 'user_metadata' ->> 'provider_id'`. `user_metadata`
+is user-writable (`auth.updateUser`), so a signed-in viewer could set it to another viewer's Twitch id and read or file as them.
+`web/tools/hub_actions_schema.sql` now derives the id from `auth.identities` through `private.my_twitch_id()` (SECURITY DEFINER,
+empty search_path, execute granted to `authenticated` only, returns only the caller's own id). `twitch_id` default and both
+policies use it. **Still NOT applied to the live project** (not this lane); whoever applies it must apply THIS version, and should
+test with a second account that `updateUser({data:{provider_id:'x'}})` changes nothing. No web/*.js, CSS or CSP change.

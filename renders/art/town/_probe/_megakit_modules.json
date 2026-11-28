@@ -1,0 +1,523 @@
+[
+ {
+  "name": "Wall_Plaster_Straight",
+  "n_mesh": 1,
+  "n_tri": 86,
+  "dims": [
+   2.0,
+   0.4065,
+   3.1248
+  ],
+  "min": [
+   -1.0,
+   -0.0924,
+   -0.0021
+  ],
+  "mats": [
+   "MI_Plaster",
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_Plaster_BaseColor",
+   "T_Plaster_Normal",
+   "T_Plaster_ORM",
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Wall_Plaster_Door_Round",
+  "n_mesh": 1,
+  "n_tri": 137,
+  "dims": [
+   2.0,
+   0.4065,
+   3.1227
+  ],
+  "min": [
+   -1.0,
+   -0.0924,
+   0.0
+  ],
+  "mats": [
+   "MI_Plaster",
+   "MI_RockTrim",
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_Plaster_BaseColor",
+   "T_Plaster_Normal",
+   "T_Plaster_ORM",
+   "T_RockTrim_BaseColor",
+   "T_RockTrim_Normal",
+   "T_RockTrim_ORM",
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Wall_UnevenBrick_Straight",
+  "n_mesh": 1,
+  "n_tri": 56,
+  "dims": [
+   2.0,
+   0.4065,
+   3.1227
+  ],
+  "min": [
+   -1.0,
+   -0.0924,
+   0.0
+  ],
+  "mats": [
+   "MI_Plaster",
+   "MI_UnevenBrick",
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_Plaster_BaseColor",
+   "T_Plaster_Normal",
+   "T_Plaster_ORM",
+   "T_UnevenBrick_BaseColor",
+   "T_UnevenBrick_Normal",
+   "T_UnevenBrick_Roughness",
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Wall_Plaster_Window_Wide_Round",
+  "n_mesh": 1,
+  "n_tri": 124,
+  "dims": [
+   2.0,
+   0.4065,
+   3.1227
+  ],
+  "min": [
+   -1.0,
+   -0.0924,
+   0.0
+  ],
+  "mats": [
+   "MI_Brick",
+   "MI_Plaster",
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_Brick_BaseColor",
+   "T_Brick_Normal",
+   "T_Brick_Roughness",
+   "T_Plaster_BaseColor",
+   "T_Plaster_Normal",
+   "T_Plaster_ORM",
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Floor_Brick",
+  "n_mesh": 1,
+  "n_tri": 4,
+  "dims": [
+   2.0,
+   2.0,
+   0.02
+  ],
+  "min": [
+   -1.0,
+   -1.0,
+   -0.01
+  ],
+  "mats": [
+   "MI_Brick"
+  ],
+  "images": [
+   "T_Brick_BaseColor",
+   "T_Brick_Normal",
+   "T_Brick_Roughness"
+  ]
+ },
+ {
+  "name": "Floor_WoodDark",
+  "n_mesh": 1,
+  "n_tri": 32,
+  "dims": [
+   2.0,
+   2.0,
+   0.02
+  ],
+  "min": [
+   -1.0,
+   -1.0,
+   -0.01
+  ],
+  "mats": [
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Roof_Wooden_2x1",
+  "n_mesh": 1,
+  "n_tri": 224,
+  "dims": [
+   2.2579,
+   1.5603,
+   1.2484
+  ],
+  "min": [
+   -1.1289,
+   -1.5191,
+   -0.1612
+  ],
+  "mats": [
+   "MI_WoodTrim",
+   "MI_WoodTrim_Wear"
+  ],
+  "images": [
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Roof_RoundTiles_6x8",
+  "n_mesh": 1,
+  "n_tri": 3796,
+  "dims": [
+   8.2498,
+   9.6827,
+   5.6722
+  ],
+  "min": [
+   -4.1249,
+   -4.854,
+   -0.7821
+  ],
+  "mats": [
+   "MI_RoundTiles",
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_RoundTiles_BaseColor",
+   "T_RoundTiles_Normal",
+   "T_RoundTiles_Roughness",
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Roof_RoundTiles_4x6",
+  "n_mesh": 1,
+  "n_tri": 2520,
+  "dims": [
+   5.5131,
+   7.5723,
+   4.2336
+  ],
+  "min": [
+   -2.7565,
+   -3.7862,
+   -0.5157
+  ],
+  "mats": [
+   "MI_RoundTiles",
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_RoundTiles_BaseColor",
+   "T_RoundTiles_Normal",
+   "T_RoundTiles_Roughness",
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Roof_Tower_RoundTiles",
+  "n_mesh": 1,
+  "n_tri": 4024,
+  "dims": [
+   5.6505,
+   5.4271,
+   7.3608
+  ],
+  "min": [
+   -2.8253,
+   -2.7135,
+   -0.572
+  ],
+  "mats": [
+   "MI_MetalOrnaments",
+   "MI_RockTrim",
+   "MI_RoundTiles",
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_MetalOrnaments_BaseColor",
+   "T_MetalOrnaments_Roughness",
+   "T_RockTrim_BaseColor",
+   "T_RockTrim_Normal",
+   "T_RockTrim_ORM",
+   "T_RoundTiles_BaseColor",
+   "T_RoundTiles_Normal",
+   "T_RoundTiles_Roughness",
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Roof_Front_Brick6",
+  "n_mesh": 1,
+  "n_tri": 328,
+  "dims": [
+   6.6944,
+   1.1291,
+   4.5158
+  ],
+  "min": [
+   -3.3465,
+   -0.7941,
+   -0.1318
+  ],
+  "mats": [
+   "MI_Plaster",
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_Plaster_BaseColor",
+   "T_Plaster_Normal",
+   "T_Plaster_ORM",
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Stairs_Exterior_Straight",
+  "n_mesh": 1,
+  "n_tri": 62,
+  "dims": [
+   2.0,
+   2.0779,
+   1.2037
+  ],
+  "min": [
+   -1.0,
+   -1.0007,
+   -0.2037
+  ],
+  "mats": [
+   "MI_Brick",
+   "MI_RockTrim"
+  ],
+  "images": [
+   "T_Brick_BaseColor",
+   "T_Brick_Normal",
+   "T_Brick_Roughness",
+   "T_RockTrim_BaseColor",
+   "T_RockTrim_Normal",
+   "T_RockTrim_ORM"
+  ]
+ },
+ {
+  "name": "Prop_Chimney",
+  "n_mesh": 1,
+  "n_tri": 618,
+  "dims": [
+   0.9458,
+   1.0,
+   3.1779
+  ],
+  "min": [
+   -0.5,
+   -0.5,
+   0.0
+  ],
+  "mats": [
+   "MI_Brick",
+   "MI_RockTrim"
+  ],
+  "images": [
+   "T_Brick_BaseColor",
+   "T_Brick_Normal",
+   "T_Brick_Roughness",
+   "T_RockTrim_BaseColor",
+   "T_RockTrim_Normal",
+   "T_RockTrim_ORM"
+  ]
+ },
+ {
+  "name": "Prop_Support",
+  "n_mesh": 1,
+  "n_tri": 16,
+  "dims": [
+   0.1986,
+   2.0363,
+   1.7086
+  ],
+  "min": [
+   -0.0993,
+   -1.9182,
+   1.2114
+  ],
+  "mats": [
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Corner_Exterior_Brick",
+  "n_mesh": 1,
+  "n_tri": 3102,
+  "dims": [
+   0.5307,
+   0.5758,
+   3.0156
+  ],
+  "min": [
+   -0.3529,
+   -0.3767,
+   -0.0071
+  ],
+  "mats": [
+   "MI_RockTrim"
+  ],
+  "images": [
+   "T_RockTrim_BaseColor",
+   "T_RockTrim_Normal",
+   "T_RockTrim_ORM"
+  ]
+ },
+ {
+  "name": "Door_1_Round",
+  "n_mesh": 1,
+  "n_tri": 470,
+  "dims": [
+   1.12,
+   0.1207,
+   2.3182
+  ],
+  "min": [
+   -0.0463,
+   -0.0631,
+   0.0331
+  ],
+  "mats": [
+   "MI_WindowGlass",
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Window_Wide_Round1",
+  "n_mesh": 1,
+  "n_tri": 354,
+  "dims": [
+   1.3649,
+   0.5296,
+   1.7257
+  ],
+  "min": [
+   -0.6825,
+   -0.2773,
+   1.016
+  ],
+  "mats": [
+   "MI_WindowGlass",
+   "MI_WoodTrim_Wear"
+  ],
+  "images": [
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Prop_WoodenFence_Single",
+  "n_mesh": 1,
+  "n_tri": 40,
+  "dims": [
+   2.0641,
+   0.1198,
+   0.8381
+  ],
+  "min": [
+   -1.0315,
+   -0.0599,
+   -0.0283
+  ],
+  "mats": [
+   "MI_WoodTrim"
+  ],
+  "images": [
+   "T_WoodTrim_BaseColor",
+   "T_WoodTrim_Normal",
+   "T_WoodTrim_Roughness"
+  ]
+ },
+ {
+  "name": "Prop_MetalFence_Ornament",
+  "n_mesh": 1,
+  "n_tri": 3988,
+  "dims": [
+   1.9523,
+   0.1561,
+   2.8524
+  ],
+  "min": [
+   -0.9733,
+   -0.078,
+   -0.0
+  ],
+  "mats": [
+   "MI_MetalOrnaments"
+  ],
+  "images": [
+   "T_MetalOrnaments_BaseColor",
+   "T_MetalOrnaments_Roughness"
+  ]
+ },
+ {
+  "name": "Roof_Modular_RoundTiles",
+  "n_mesh": 1,
+  "n_tri": 136,
+  "dims": [
+   0.6632,
+   2.2517,
+   0.5055
+  ],
+  "min": [
+   -0.3325,
+   -1.0455,
+   0.0064
+  ],
+  "mats": [
+   "MI_RoundTiles"
+  ],
+  "images": [
+   "T_RoundTiles_BaseColor",
+   "T_RoundTiles_Normal",
+   "T_RoundTiles_Roughness"
+  ]
+ }
+]

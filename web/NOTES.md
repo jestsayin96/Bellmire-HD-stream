@@ -1091,3 +1091,10 @@ Opened https://jestsayin96.github.io/Bellmire-HD-stream/ in the built-in browser
 - Live rows: NOT seen. Snapshot says "Last word from the town 8 hours ago (Fri, Nov 27, 03:55 PM)" - the game has not published since ~15:55 CT, so the page shows its honest stale state. Live-data arms (hostile-name, shelves with real stock) still unproven on live data.
 - Browser limit: fetch() from the page is blocked (CSP connect-src), so I could not read response headers.
 Hostile-name test not owed (web/ unchanged). Live-dot colour unchanged. NOT claiming READY TO PUBLISH; no publish gate owed.
+
+## 28 Nov 01:5x CT - hub run: H33 is already whole; RLS identity fixed
+- TAKE THIS NEXT row (OAuth -> dashboard shell -> queue) was stale: all three exist in app.js (H33 room at the inn, H30 satchel).
+  Measured: gh-pages^{tree} = origin/hub:web = dd6294a0 before this commit (delta 0).
+- Real fault found in my own H33 SQL proposal: identity read from user-writable user_metadata. Fixed in
+  web/tools/hub_actions_schema.sql (private.my_twitch_id() from auth.identities). Still unapplied; hub_actions does not exist
+  on the live project (tables: snapshot, suggestions). No app.js/style.css/index.html change.

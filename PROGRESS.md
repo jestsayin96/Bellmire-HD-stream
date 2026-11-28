@@ -24872,3 +24872,10 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - Also committing `_s174_battery.log` (S176's evidence, owed per the 11:58 row) and this cycle's `_s177_battery.log` + `_s177_gates.log`.
 - CARRIED TO NEXT FIRING: the same swap for the HALL and the INN (town_hall_t1-3, town_inn_t1-3 exist with .import siblings; the reader already resolves hall_mesh). Not started this window.
 - No Twitch test, nothing redeemed, nothing cheered, ZERO BITS. Not ticked - the team lead ticks.
+## C-254 (content, 28 Nov 2026, 12:2x CST) - SYSTEM 18: THE QUEST BOARD POOL AND BOARD COPY
+- TAKE THIS NEXT: "CONTENT (:22) - finish the `districts.*` tier words, then quest board 18". Checked first: all 8 `districts.*` entries already carry exactly 3 tiers (as do the 7 landmarks, 4 sites, roads), so nothing short to write. Took quest board 18.
+- Added top-level `quest_board` to lore_lines.json: 48 quests (8 per category: gather, survive, deliver, slay, town, social), ranks F-S, each naming its `mechanic`, `mechanic_state` (16 `exists`, 32 `needs_build`), `params` and a `reward_band` 1-7 ladder; plus `board_lines` (posted/claimed/abandoned/done/rotation/refresh/no_refresh/already_active/rank_too_low/empty) and `hub_text`. New `_note_c254`. No new data file.
+- Honest limits: only one S-rank quest (the Gaoler) - S rank needs a bigger set once the ranking system lands; reward amounts are the game build's. Guild board only; Shadow Hall jobs are a later pool.
+- VALIDATION OK: json.load passes; only new keys are `quest_board` and `_note_c254`; every pre-existing key equal; file round-trips byte-exact.
+- WIRING for the game build: read `quest_board.quests`; gate the live draw on `mechanic_state == "exists"` until each `needs_build` mechanic (gather_herb, gather_ore, kill_count, miniboss_kill, deliver_carry, deliver_supply, town_job, craft_station, give_item, chat_cheer) is ticked; map `miniboss_name` to MB_NAME keys. Hub lane reads `hub_text`.
+- Next content: C-255.

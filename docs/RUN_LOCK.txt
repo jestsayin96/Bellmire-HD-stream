@@ -1938,3 +1938,15 @@ IDLE 2026-11-28T13:54:11-06:00 - HUD U227 L74 probe done, windowed 1920x1080 at 
 RUNNING 2026-11-28T14:08:27-06:00 (game build S179 town tiers T3 + parse/gates, claim 14:08:27, cap claim+25 = 14:33:27, declared finish 14:30:00)
 
 IDLE 2026-11-28T14:20:13-06:00 - game build S179 the inn grows: town_inn_t1/t2/t3 on the market tavern, INN_TIER_MESHES true after the L1/L5/L9 render, S179_INN OK, battery green (parse 0, TWITCH_PARSE OK, OFFFLOOR 0/2316, DEATH 36/36, S171_TIERS OK, DELVE OK, TOWNWALK 0/17193 PASS). Claim 14:08:27, cap claim+25 = 14:33:27, declared 14:30:00, released inside it. tasklist Godot*=0. No Twitch, ZERO BITS. (game build)
+
+RUNNING 2026-11-28T14:50:00-06:00 (chat bot B227: regen docs/COMMANDS.md + _l14_test after a commands.json pointer-truth fix. claim 2026-11-28T14:50:00-06:00, cap claim+25 = 2026-11-28T15:15:00-06:00, DECLARED FINISH 2026-11-28T14:51:45-06:00 - inside :52, no crossing into the HUD window. Lock free: last line IDLE 2026-11-28T14:20:13-06:00 game build.)
+
+IDLE 2026-11-28T14:50:20-06:00 - chat bot B227 pointer-truth fix: COMMANDS_DOC OK wrote 40 commands, L14_TEST OK (27 checks) including both docs/COMMANDS.md symmetry arms (40 rows, unpublished [], stale []). Two Godot runs, 1.8 s + 1.4 s. Claim 14:50:00, cap claim+25 = 15:15:00, declared finish 14:51:45, released 14:50:20 - well inside it, no crossing into the HUD :52 window. No game edit, data and doc only. No Twitch message, nothing redeemed, ZERO BITS. (chat bot)
+
+RUNNING 2026-11-28T14:53:14-06:00 (HUD U228: windowed feed probe, admit-one-more + painted-line count at 100/125/150%. claim 2026-11-28T14:53:14-06:00, cap claim+15 = 2026-11-28T15:08:14-06:00, DECLARED FINISH 2026-11-28T14:59:14-06:00 - inside :07. Lock free: last line IDLE chat bot 14:50:20.)
+
+IDLE 2026-11-28T14:54:30-06:00 - HUD U228: one windowed 1920x1080 probe run, U227_DONE fails=0, no SCRIPT ERROR. Claim 14:53:14, declared finish 14:59:14, cap 15:08:14, released inside it. tasklist Godot (mine)=0. No game edit, probe only; no Twitch, ZERO BITS. (HUD)
+
+RUNNING 2026-11-28T15:08:40-06:00 (game build S180: town visual progression, next D31 tier swap. claim 2026-11-28T15:08:40-06:00, cap claim+25 = 2026-11-28T15:33:40-06:00, DECLARED FINISH 2026-11-28T15:33:00-06:00 - inside :40. Lock free: last line IDLE HUD 14:54:30. NOTE: a Godot EDITOR (pid 33624, opened 14:34) with a play-in-editor of Town.tscn (pid 35932, 15:03) is alive - not a lane tool, not mine; I leave it and project.godot alone and run no --import.)
+
+IDLE 2026-11-28T15:17:08-06:00 - game build S180: barracks tier swap (town_barracks_t1/t2/t3) rendered L1/L5/L9, looked at, flipped on; full battery green. Claim 15:08:40, cap claim+25 = 15:33:40, declared finish 15:33:00, released inside it. My Godot runs all exited; the editor (pid 33624) and its play-in-editor (35932) are a human session, not mine, left running. No Twitch, ZERO BITS. (game build)

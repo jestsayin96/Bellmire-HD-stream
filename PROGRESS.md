@@ -25305,3 +25305,14 @@ at 251**, which I did not touch, and no arm reds.
 - **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or
   changed; Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
 - Not ticked - the team lead ticks.
+
+## S180 - game build, 2026-11-28T15:08:40-06:00 - THE BARRACKS GROWS: town_barracks_t1 -> t2 -> t3 SWAPPED IN BY TIER, ALL THREE FIT THE PLOT
+- Row: the 13:58 block's GAME BUILD row ("THE INN SWAP, THEN BARRACKS"). The inn shipped at S179 (92730be6), so I took the barracks. HALL_T3_FITS untouched (art's row).
+- Lock: last line IDLE 14:54:30 (HUD). A Godot EDITOR (pid 33624, opened 14:34) and a play-in-editor of Town.tscn (pid 35932, 15:03) were alive - a human session, not a lane tool; no lock line named it. I left it and its `project.godot` edit alone and ran no `--import`. Claimed 15:08:40, cap claim+25 = 15:33:40, declared finish 15:33:00.
+- Code (town.gd, the S178 pattern): `BARRACKS_TIER_MESHES` + `barracks_tier_on` (a var so the shot tool can force it), `_show_barracks_tier(lv)` called from `show_level` beside the inn. The tier mesh is a CHILD of the lm_barracks node at its origin (art's one core-centre pivot, door x 0.0/0.0/-0.0122), so growth.gd's visibility still governs; the node's own meshes hide under it. lm_barracks' drill yard (4 dummies, 2 weapon stands, barrel) and its two wall liveries - 11 nodes, captured by child count - stand only while lm_barracks does: they were placed for its 14 m block, and t2/t3 carry their own yard, dummies and flags. The generic Banner_1/2 forecourt flanks every landmark gets are kept. Their colliders stay (as the hall's dressing); townwalk below is green with them.
+- Fit, from art's `_report.json`: t3 17.18 x 12.38 m against the layout's half [10.98, 7.07] (21.96 x 14.14). Inside - unlike hall t3.
+- RENDER, LOOKED AT (`renders/cycles/20261128_s180/`, sheets `_sheet_close.png` / `_sheet_wide.png`): L1 a small thatched guard hut, L5 a timber two-storey barracks with a fenced yard, L9 a stone garrison with a gravelled yard, gallery and flags. Every surface textured, all three on the plot's dirt pad, nothing on the road, no doubled dummies. Then flipped `BARRACKS_TIER_MESHES := true`.
+- VERDICT LINES (final code, flag ON, `_s180g_*.log`): parse rc=0, 0 Parse Error, 0 SCRIPT ERROR in every log; `S180_BARRACKS OK [town_barracks_t1.glb, town_barracks_t2.glb, town_barracks_t3.glb]` (`_s180_shot.log`, flag forced); `OFFFLOOR_VERDICT OK 0 of 2229`; `TWITCH_PARSE OK (8 checks)`; `TOWNWALK in_solid=0/15408 raid_in_solid=0/7034 PASS`, `STUCK_ON_ROUTE_TOTAL 0`; `DELVE_TEST OK ran 9001 frames`; `S171_TIERS OK changes=151 cried=118`.
+- No Twitch test, nothing redeemed or cheered, ZERO BITS.
+- Not ticked - the team lead ticks.
+- FOR THE TEAM LEAD: S179's cycle was written into `docs/PROGRESS.md` (the old newest-at-top file that stopped at S59), not this one. I did not move another seat's text.

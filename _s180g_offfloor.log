@@ -1,0 +1,75 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED A woman at the well filled their flasks and asked for nothing.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 slime, 1 hollowed bog frog, 1 cave bat.
+FEED Somebody swept this floor. Recently.
+FEED Hero2 casts Smite at hollowed bog frog.
+FEED Hero6 casts Frost at hollowed bog frog.
+FEED Hero2 casts Smite at slime.
+FEED Hero6 casts Bolt at slime.
+FEED Hero6 lets frost slip. It goes nowhere (8 vs DC 10).
+FEED The slime divides.
+FEED Hero5 turns on the wounded slimeling to finish it.
+FEED Hero7 turns on the wounded slimeling to finish it.
+FEED Hero1 searches (Investigation 19) and turns up 13 gold on floor 1.
+FEED Clean sweep. Mark it down.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 3 bog frogs, 1 hollowed cave spider.
+FEED Hero7 rolls a 20 for initiative and is moving before anything else.
+FEED Hero2 casts Bolt at bog frog.
+FEED Hero6 casts Frost at bog frog.
+FEED Hero2 casts Smite at hollowed cave spider.
+FEED Hero6's bolt will not take (7 vs DC 11).
+FEED Hero6 casts Frost at bog frog.
+FEED Hero2 casts Smite at bog frog.
+FEED Hero1 casts Bolt at bog frog.
+FEED Hero6 casts Frost at bog frog.
+FEED Hero2 casts Bolt at bog frog.
+FEED Hero4 rolls a 20 - and the bog frog is gone.
+FEED Hero1 searches (Investigation 18) and turns up 26 gold on floor 2.
+FEED Floor 2 is behind them, and the stair is honest again.
+FEED Hero1 finds a vial of The Baker's Pennyworth.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 slimes, 1 cave spider, 1 bone bowman.
+FEED Hero2 reaches the end of bolt and finds nothing there (10 vs DC 11).
+FEED Hero2 casts Smite at bone bowman.
+FEED Hero2 casts Bolt at slime.
+FEED Hero7 spots a fire grate (Perception 12 vs DC 11) and steps round it.
+FEED The slime divides.
+FEED Hero5 is cut off and falls back to the others.
+FEED Hero7 is cut off and falls back to the others.
+FEED Hero2 casts Bolt at slimeling.
+FEED Hero1 searches (Investigation 22) and turns up 43 gold on floor 3.
+FEED Finished, and the floor below has gone very still.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 1; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 2 hollowed cave bats, 1 drowned slime, 2 giant rats.
+FEED The oil is running low.
+FEED Hero0 rolls a 20 for initiative and is moving before anything else.
+FEED Shadows peel off the walls - an ambush! 1 hollowed bone bowman, 1 cave spider surges in.
+FEED Hero6's frost lands short. The floor takes the blame (1 vs DC 12).
+FEED Hero2 tries bolt with cold fingers and it fails (1 vs DC 12).
+FEED Hero0 spots a dart trap (Perception 18 vs DC 12) and steps round it.
+FEED Hero1's chain leaves the hand and goes nowhere (11 vs DC 12).
+FEED The drowned slime divides.
+FEED Hero3 rolls a 20 - and the drowned slimeling is gone.
+FEED Hero1 searches (Investigation 25) and turns up 59 gold on floor 4.
+FEED The gatewarden strikes the hour out of his ledger, neatly.
+FEED Hero1 finds a vial of Quarrymend.
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 141 gold, 6 ore, 4 stone, 4 pieces of salvaged gear and 4 potions. 26 kills between them.
+FEED Hero1 is fitted with Reed-Cloth Robe. (+10 hp)
+FEED Hero2 is fitted with Reed-Cloth Robe. (+10 hp) Haggled 12% off (14).
+FEED Hero4 is fitted with Ford Leathers. (+10 hp) Haggled 18% off (20).
+OFFFLOOR 0 of 2229 samples; INPROP 0; MON_INPROP 0 of 293; floor reached 4 frames 7266 obstacles 37
+OFFFLOOR_VERDICT OK 0 of 2229 samples off the floor (home)
+
+RC=0 SECS=61.6

@@ -167,6 +167,18 @@ var inn_tier_on := INN_TIER_MESHES
 var _inn_plot: Dictionary = {}
 var _inn_mesh: Node3D = null
 var _inn_path := ""
+## S180: the barracks wears art's tier meshes (assets/buildings/town_barracks_t1..t3.glb,
+## barracksgen.py; one shared core-centre pivot, so - as the hall - the tier mesh is a CHILD of the
+## lm_barracks node at its origin and growth.gd's visibility on that node still governs). Tier =
+## tier_of() on the layout's lm_barracks entry. lm_barracks' own drill yard and wall liveries were
+## placed for its 14 m block, and t2/t3 carry their own yard, dummies and flags, so that dressing
+## stands only while lm_barracks does. OFF = lm_barracks.glb, unchanged. A var so a shot tool can force it.
+const BARRACKS_TIER_MESHES := true     # S180: flipped after the L1/L5/L9 render
+var barracks_tier_on := BARRACKS_TIER_MESHES
+var _barracks_node: Node3D = null
+var _barracks_dress: Array = []
+var _barracks_mesh: Node3D = null
+var _barracks_path := ""
 var _scar := Vector3.ZERO      # centre of the wild-magic scar (dungeon mouth beyond it)
 var _north_from := Vector3.ZERO  # where the Delvers' Road leaves the ring
 var _scar_info := {}
@@ -1088,6 +1100,7 @@ func show_level(lv: int, quiet := false) -> void:
     _show_well_tier(lv)               # S173: quiet too, so a save loaded at level 7 shows its well
     _show_hall_tier(lv)               # S178: same rule for the Chief's Hall
     _show_inn_tier(lv)                # S179: and for the inn (the market tavern)
+    _show_barracks_tier(lv)           # S180: and for the barracks
     # S172: content's town_buildings words for every tier that rose. Deferred so the lines land
     # AFTER economy's own level line; founding (quiet) and falling back are never cried.
     if not quiet and lv > _tiers_level:
@@ -1242,6 +1255,38 @@ func _show_inn_tier(lv: int) -> void:
     var hs: Vector3 = house.scale
     _inn_mesh.scale = Vector3(1.0 / hs.x, 1.0 / hs.y, 1.0 / hs.z)
     house.add_child(_inn_mesh)
+
+## S180: swap the barracks to its tier mesh for this level (see BARRACKS_TIER_MESHES).
+func _show_barracks_tier(lv: int) -> void:
+    if not barracks_tier_on or not is_instance_valid(_barracks_node) or not _tiers_ready():
+        return
+    var e: Dictionary = {}
+    for b in tiers.layout.get("buildings", []):
+        if b is Dictionary and String(b.get("landmark", "")) == "lm_barracks":
+            e = b
+            break
+    if e.is_empty():
+        return
+    var path: String = tiers.mesh_for(e, tiers.tier_of(e, lv))
+    if path == _barracks_path:
+        return
+    var ps = load(path) if path != "" else null
+    if path != "" and not (ps is PackedScene):
+        return
+    if _barracks_mesh != null:
+        _barracks_mesh.queue_free()
+        _barracks_mesh = null
+    _barracks_path = path
+    for c in _barracks_node.get_children():
+        if c is Node3D:
+            (c as Node3D).visible = path == ""
+    for nd in _barracks_dress:
+        if is_instance_valid(nd) and nd is Node3D:
+            (nd as Node3D).visible = path == ""
+    if path == "":
+        return
+    _barracks_mesh = (ps as PackedScene).instantiate()
+    _barracks_node.add_child(_barracks_mesh)
 
 ## ---------------------------------------------------------------- dressing
 func _spawn(dir_path: String, name: String, pos: Vector3, yaw: float,
@@ -2187,6 +2232,8 @@ func _dress_landmarks() -> void:
                             _objs.append([gp, 0.8])
                             _grave_spots.append(gp)    # S143 / System 14: the keeper's round
             "lm_barracks":
+                _barracks_node = plot.get("node", null)
+                var bc0 := get_child_count()
                 # drill yard in front: dummies, racks, archery butts
                 var yard := front + f * 5.0
                 for i in range(4):
@@ -2197,6 +2244,8 @@ func _dress_landmarks() -> void:
                 _livery_banner(front + side * 3.2 + f * 0.25, yaw, lv, g + 5.0)
                 _livery_banner(front - side * 3.2 + f * 0.25, yaw, lv, g + 5.0)
                 _objs.append([yard, 7.0])
+                for i in range(bc0, get_child_count()):
+                    _barracks_dress.append(get_child(i))    # S180: hidden under a tier mesh
             "lm_windmill":
                 # hub on the street face of the tower, four sails turning
                 var hub := Node3D.new()

@@ -136,7 +136,7 @@ const TIER_CRIES_PER_LEVEL := 3 # S172: at most this many building lines per lev
 ## S173: the square's well wears art's tier meshes (assets/buildings/town_well_t1..t3.glb,
 ## docs/art/TOWN_WELL_TIERS.md). OFF until a gated seat has rendered it: flip to true only after
 ## LOOKING at the square at levels 1, 3 and 6+ against a hero. Off = the procedural well, unchanged.
-const WELL_TIER_MESHES := false
+const WELL_TIER_MESHES := true    # S177: flipped after the L1/L3/L6 render
 const WELL_TIER_SCALE := 1.0   # art fit the meshes 1:1 to the Knight body; re-check at the render
 var _well_parts: Array = []    # S173: the procedural well's nodes, hidden while a tier mesh stands
 var _well_at := Vector3.ZERO   # S173: the well's ground point (ring on the pivot, per art's contract)

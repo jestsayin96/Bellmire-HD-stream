@@ -1,0 +1,773 @@
+=== import start 11:12:48
+hood.png[39m[0m
+[  39% ] [90m[1mreimport[22m | nailer_hood.png[39m[0m
+[  39% ] [90m[1mreimport[22m | mourner_veil.png[39m[0m
+[  39% ] [90m[1mreimport[22m | mire_hood.png[39m[0m
+[  40% ] [90m[1mreimport[22m | millwright_cap.png[39m[0m
+[  40% ] [90m[1mreimport[22m | miller_cap.png[39m[0m
+[  40% ] [90m[1mreimport[22m | mender_coif.png[39m[0m
+[  40% ] [90m[1mreimport[22m | memorial_veil.png[39m[0m
+[  40% ] [90m[1mreimport[22m | mason_dustcap.png[39m[0m
+[  41% ] [90m[1mreimport[22m | maltster_cap.png[39m[0m
+[  41% ] [90m[1mreimport[22m | lorimer_cap.png[39m[0m
+[  41% ] [90m[1mreimport[22m | longcount_hood.png[39m[0m
+[  41% ] [90m[1mreimport[22m | lockkeep_cap.png[39m[0m
+[  42% ] [90m[1mreimport[22m | limeburner_mask.png[39m[0m
+[  42% ] [90m[1mreimport[22m | lampwright_cap.png[39m[0m
+[  42% ] [90m[1mreimport[22m | kindling_crown.png[39m[0m
+[  42% ] [90m[1mreimport[22m | joiner_cap.png[39m[0m
+[  42% ] [90m[1mreimport[22m | hurdler_cap.png[39m[0m
+[  43% ] [90m[1mreimport[22m | host_coif.png[39m[0m
+[  43% ] [90m[1mreimport[22m | horner_hood.png[39m[0m
+[  43% ] [90m[1mreimport[22m | towpath_hood.png[39m[0m
+[  43% ] [90m[1mreimport[22m | toll_hood.png[39m[0m
+[  43% ] [90m[1mreimport[22m | toll_cap.png[39m[0m
+[  44% ] [90m[1mreimport[22m | tithe_cap.png[39m[0m
+[  44% ] [90m[1mreimport[22m | tiler_hood.png[39m[0m
+[  44% ] [90m[1mreimport[22m | thaw_hood.png[39m[0m
+[  44% ] [90m[1mreimport[22m | thaw_circlet.png[39m[0m
+[  44% ] [90m[1mreimport[22m | thatcher_cap.png[39m[0m
+[  45% ] [90m[1mreimport[22m | taverner_cap.png[39m[0m
+[  45% ] [90m[1mreimport[22m | tanner_cap.png[39m[0m
+[  45% ] [90m[1mreimport[22m | straw_hat.png[39m[0m
+[  45% ] [90m[1mreimport[22m | stairhold_helm.png[39m[0m
+[  45% ] [90m[1mreimport[22m | spurrier_cap.png[39m[0m
+[  46% ] [90m[1mreimport[22m | soaper_wrap.png[39m[0m
+[  46% ] [90m[1mreimport[22m | skep_veil.png[39m[0m
+[  46% ] [90m[1mreimport[22m | shepherd_hood.png[39m[0m
+[  46% ] [90m[1mreimport[22m | sexton_hat.png[39m[0m
+[  46% ] [90m[1mreimport[22m | scarglass_circlet.png[39m[0m
+[  47% ] [90m[1mreimport[22m | saltline_hood.png[39m[0m
+[  47% ] [90m[1mreimport[22m | saltboiler_cap.png[39m[0m
+[  47% ] [90m[1mreimport[22m | saddler_hood.png[39m[0m
+[  47% ] [90m[1mreimport[22m | rot_mask.png[39m[0m
+[  48% ] [90m[1mreimport[22m | ropeburn_cap.png[39m[0m
+[  48% ] [90m[1mreimport[22m | reeve_hat.png[39m[0m
+[  48% ] [90m[1mreimport[22m | reedcutter_hat.png[39m[0m
+[  48% ] [90m[1mreimport[22m | quarry_helm.png[39m[0m
+[  48% ] [90m[1mreimport[22m | quarry_cap.png[39m[0m
+[  49% ] [90m[1mreimport[22m | quarreller_cap.png[39m[0m
+[  49% ] [90m[1mreimport[22m | potter_wrap.png[39m[0m
+[  49% ] [90m[1mreimport[22m | plumed_helm.png[39m[0m
+[  49% ] [90m[1mreimport[22m | pitwalk_hood.png[39m[0m
+[  49% ] [90m[1mreimport[22m | banner_farrier.png[39m[0m
+[  50% ] [90m[1mreimport[22m | banner_falconer.png[39m[0m
+[  50% ] [90m[1mreimport[22m | banner_e3po.png[39m[0m
+[  50% ] [90m[1mreimport[22m | banner_cutler.png[39m[0m
+[  50% ] [90m[1mreimport[22m | banner_crater.png[39m[0m
+[  50% ] [90m[1mreimport[22m | banner_crane.png[39m[0m
+[  51% ] [90m[1mreimport[22m | banner_cordwainer.png[39m[0m
+[  51% ] [90m[1mreimport[22m | banner_cooper.png[39m[0m
+[  51% ] [90m[1mreimport[22m | banner_collier.png[39m[0m
+[  51% ] [90m[1mreimport[22m | banner_coldforge.png[39m[0m
+[  51% ] [90m[1mreimport[22m | banner_clogger.png[39m[0m
+[  52% ] [90m[1mreimport[22m | banner_clapper.png[39m[0m
+[  52% ] [90m[1mreimport[22m | banner_chronicle.png[39m[0m
+[  52% ] [90m[1mreimport[22m | banner_chalk.png[39m[0m
+[  52% ] [90m[1mreimport[22m | banner_chainsmith.png[39m[0m
+[  53% ] [90m[1mreimport[22m | banner_carp.png[39m[0m
+[  53% ] [90m[1mreimport[22m | banner_butcher.png[39m[0m
+[  53% ] [90m[1mreimport[22m | banner_bucketline.png[39m[0m
+[  53% ] [90m[1mreimport[22m | banner_brickmaker.png[39m[0m
+[  53% ] [90m[1mreimport[22m | banner_brewster.png[39m[0m
+[  54% ] [90m[1mreimport[22m | banner_bodger.png[39m[0m
+[  54% ] [90m[1mreimport[22m | banner_blue.png[39m[0m
+[  54% ] [90m[1mreimport[22m | banner_bellfounder.png[39m[0m
+[  54% ] [90m[1mreimport[22m | banner_barracks.png[39m[0m
+[  54% ] [90m[1mreimport[22m | banner_armourer.png[39m[0m
+[  55% ] [90m[1mreimport[22m | banner_architect.png[39m[0m
+[  55% ] [90m[1mreimport[22m | banner_apothecary.png[39m[0m
+[  55% ] [90m[1mreimport[22m | weirkeep_amulet.png[39m[0m
+[  55% ] [90m[1mreimport[22m | weighstone_amulet.png[39m[0m
+[  55% ] [90m[1mreimport[22m | banner_ninthbell.png[39m[0m
+[  56% ] [90m[1mreimport[22m | banner_nightwing.png[39m[0m
+[  56% ] [90m[1mreimport[22m | banner_nailer.png[39m[0m
+[  56% ] [90m[1mreimport[22m | banner_mourncoil.png[39m[0m
+[  56% ] [90m[1mreimport[22m | banner_mill.png[39m[0m
+[  56% ] [90m[1mreimport[22m | banner_mender.png[39m[0m
+[  57% ] [90m[1mreimport[22m | banner_memorial.png[39m[0m
+[  57% ] [90m[1mreimport[22m | banner_marketday.png[39m[0m
+[  57% ] [90m[1mreimport[22m | banner_maltster.png[39m[0m
+[  57% ] [90m[1mreimport[22m | banner_lorimer.png[39m[0m
+[  57% ] [90m[1mreimport[22m | banner_longcount.png[39m[0m
+[  58% ] [90m[1mreimport[22m | banner_lockkeep.png[39m[0m
+[  58% ] [90m[1mreimport[22m | banner_limeburner.png[39m[0m
+[  58% ] [90m[1mreimport[22m | banner_lamplight.png[39m[0m
+[  58% ] [90m[1mreimport[22m | banner_kindling.png[39m[0m
+[  59% ] [90m[1mreimport[22m | banner_keepdoor.png[39m[0m
+[  59% ] [90m[1mreimport[22m | banner_joiner.png[39m[0m
+[  59% ] [90m[1mreimport[22m | banner_hurdler.png[39m[0m
+[  59% ] [90m[1mreimport[22m | banner_horner.png[39m[0m
+[  59% ] [90m[1mreimport[22m | banner_harvest.png[39m[0m
+[  60% ] [90m[1mreimport[22m | banner_guild.png[39m[0m
+[  60% ] [90m[1mreimport[22m | banner_grubmother.png[39m[0m
+[  60% ] [90m[1mreimport[22m | banner_green.png[39m[0m
+[  60% ] [90m[1mreimport[22m | banner_glazier.png[39m[0m
+[  60% ] [90m[1mreimport[22m | banner_garrison.png[39m[0m
+[  61% ] [90m[1mreimport[22m | banner_fuller.png[39m[0m
+[  61% ] [90m[1mreimport[22m | banner_ford.png[39m[0m
+[  61% ] [90m[1mreimport[22m | banner_fogrun.png[39m[0m
+[  61% ] [90m[1mreimport[22m | banner_fletcher.png[39m[0m
+[  61% ] [90m[1mreimport[22m | banner_ferry.png[39m[0m
+[  62% ] [90m[1mreimport[22m | ferrybell_amulet.png[39m[0m
+[  62% ] [90m[1mreimport[22m | farrier_amulet.png[39m[0m
+[  62% ] [90m[1mreimport[22m | falconer_amulet.png[39m[0m
+[  62% ] [90m[1mreimport[22m | doorkeep_amulet.png[39m[0m
+[  62% ] [90m[1mreimport[22m | deeplamp_amulet.png[39m[0m
+[  63% ] [90m[1mreimport[22m | chapman_amulet.png[39m[0m
+[  63% ] [90m[1mreimport[22m | chapel_amulet.png[39m[0m
+[  63% ] [90m[1mreimport[22m | chandler_amulet.png[39m[0m
+[  63% ] [90m[1mreimport[22m | carp_charm.png[39m[0m
+[  63% ] [90m[1mreimport[22m | brewster_amulet.png[39m[0m
+[  64% ] [90m[1mreimport[22m | boatwright_amulet.png[39m[0m
+[  64% ] [90m[1mreimport[22m | blight_charm.png[39m[0m
+[  64% ] [90m[1mreimport[22m | bell_amulet.png[39m[0m
+[  64% ] [90m[1mreimport[22m | barracks_key.png[39m[0m
+[  65% ] [90m[1mreimport[22m | town_hall_t3_T_WoodTrim_BaseColor.jpg[39m[0m
+[  65% ] [90m[1mreimport[22m | town_hall_t3_T_UnevenBrick_BaseColor.jpg[39m[0m
+[  65% ] [90m[1mreimport[22m | town_hall_t3_T_RoundTiles_BaseColor.jpg[39m[0m
+[  65% ] [90m[1mreimport[22m | town_hall_t3_T_RockTrim_BaseColor.jpg[39m[0m
+[  65% ] [90m[1mreimport[22m | town_hall_t3_T_Plaster_BaseColor.jpg[39m[0m
+[  66% ] [90m[1mreimport[22m | town_hall_t3_T_MetalOrnaments_BaseColor.jpg[39m[0m
+[  66% ] [90m[1mreimport[22m | town_hall_t3_T_Brick_BaseColor.jpg[39m[0m
+[  66% ] [90m[1mreimport[22m | town_hall_t2_T_WoodTrim_BaseColor.jpg[39m[0m
+[  66% ] [90m[1mreimport[22m | town_hall_t2_T_UnevenBrick_BaseColor.jpg[39m[0m
+[  66% ] [90m[1mreimport[22m | town_hall_t2_T_RoundTiles_BaseColor.jpg[39m[0m
+[  67% ] [90m[1mreimport[22m | town_hall_t2_T_RockTrim_BaseColor.jpg[39m[0m
+[  67% ] [90m[1mreimport[22m | town_hall_t2_T_Plaster_BaseColor.jpg[39m[0m
+[  67% ] [90m[1mreimport[22m | town_hall_t2_T_Brick_BaseColor.jpg[39m[0m
+[  67% ] [90m[1mreimport[22m | town_hall_t1_T_WoodTrim_BaseColor.jpg[39m[0m
+[  67% ] [90m[1mreimport[22m | town_hall_t1_T_RockTrim_BaseColor.jpg[39m[0m
+[  68% ] [90m[1mreimport[22m | town_hall_t1_T_Plaster_BaseColor.jpg[39m[0m
+[  68% ] [90m[1mreimport[22m | ward_pendant.png[39m[0m
+[  68% ] [90m[1mreimport[22m | votive_amulet.png[39m[0m
+[  68% ] [90m[1mreimport[22m | threshing_amulet.png[39m[0m
+[  68% ] [90m[1mreimport[22m | thawbell_amulet.png[39m[0m
+[  69% ] [90m[1mreimport[22m | taverner_amulet.png[39m[0m
+[  69% ] [90m[1mreimport[22m | sluice_amulet.png[39m[0m
+[  69% ] [90m[1mreimport[22m | skep_amulet.png[39m[0m
+[  69% ] [90m[1mreimport[22m | shepherd_charm.png[39m[0m
+[  69% ] [90m[1mreimport[22m | secondflask_amulet.png[39m[0m
+[  70% ] [90m[1mreimport[22m | scribe_amulet.png[39m[0m
+[  70% ] [90m[1mreimport[22m | sawyer_amulet.png[39m[0m
+[  70% ] [90m[1mreimport[22m | saltline_amulet.png[39m[0m
+[  70% ] [90m[1mreimport[22m | potter_amulet.png[39m[0m
+[  71% ] [90m[1mreimport[22m | ostler_amulet.png[39m[0m
+[  71% ] [90m[1mreimport[22m | ninthbell_amulet.png[39m[0m
+[  71% ] [90m[1mreimport[22m | mourncoil_amulet.png[39m[0m
+[  71% ] [90m[1mreimport[22m | millwright_amulet.png[39m[0m
+[  71% ] [90m[1mreimport[22m | measure_amulet.png[39m[0m
+[  72% ] [90m[1mreimport[22m | lamplight_amulet.png[39m[0m
+[  72% ] [90m[1mreimport[22m | kindling_amulet.png[39m[0m
+[  72% ] [90m[1mreimport[22m | host_amulet.png[39m[0m
+[  72% ] [90m[1mreimport[22m | horner_amulet.png[39m[0m
+[  72% ] [90m[1mreimport[22m | hearth_amulet.png[39m[0m
+[  73% ] [90m[1mreimport[22m | grain_amulet.png[39m[0m
+[  73% ] [90m[1mreimport[22m | grainward_amulet.png[39m[0m
+[  73% ] [90m[1mreimport[22m | gate_whistle.png[39m[0m
+[  73% ] [90m[1mreimport[22m | gaoler_amulet.png[39m[0m
+[  73% ] [90m[1mreimport[22m | fuller_amulet.png[39m[0m
+[  74% ] [90m[1mreimport[22m | flaskcount_amulet.png[39m[0m
+[  74% ] [90m[1mreimport[22m | ferry_locket.png[39m[0m
+[  74% ] [90m[1mreimport[22m | backstair_cloak.png[39m[0m
+[  74% ] [90m[1mreimport[22m | warrener_boots.png[39m[0m
+[  74% ] [90m[1mreimport[22m | towpath_boots.png[39m[0m
+[  75% ] [90m[1mreimport[22m | tollgate_boots.png[39m[0m
+[  75% ] [90m[1mreimport[22m | tinker_boots.png[39m[0m
+[  75% ] [90m[1mreimport[22m | tanyard_boots.png[39m[0m
+[  75% ] [90m[1mreimport[22m | stairhold_boots.png[39m[0m
+[  75% ] [90m[1mreimport[22m | scout_boots.png[39m[0m
+[  76% ] [90m[1mreimport[22m | road_boots.png[39m[0m
+[  76% ] [90m[1mreimport[22m | reedcutter_boots.png[39m[0m
+[  76% ] [90m[1mreimport[22m | quiet_boots.png[39m[0m
+[  76% ] [90m[1mreimport[22m | pitwalk_boots.png[39m[0m
+[  77% ] [90m[1mreimport[22m | pavers_boots.png[39m[0m
+[  77% ] [90m[1mreimport[22m | oarmaker_boots.png[39m[0m
+[  77% ] [90m[1mreimport[22m | nightwing_boots.png[39m[0m
+[  77% ] [90m[1mreimport[22m | mudplank_boots.png[39m[0m
+[  77% ] [90m[1mreimport[22m | millrace_boots.png[39m[0m
+[  78% ] [90m[1mreimport[22m | miller_clogs.png[39m[0m
+[  78% ] [90m[1mreimport[22m | longcount_boots.png[39m[0m
+[  78% ] [90m[1mreimport[22m | lockkeep_waders.png[39m[0m
+[  78% ] [90m[1mreimport[22m | kiln_boots.png[39m[0m
+[  78% ] [90m[1mreimport[22m | kennel_boots.png[39m[0m
+[  79% ] [90m[1mreimport[22m | hive_boots.png[39m[0m
+[  79% ] [90m[1mreimport[22m | hayward_boots.png[39m[0m
+[  79% ] [90m[1mreimport[22m | gravepath_boots.png[39m[0m
+[  79% ] [90m[1mreimport[22m | gate_boots.png[39m[0m
+[  79% ] [90m[1mreimport[22m | ford_boots.png[39m[0m
+[  80% ] [90m[1mreimport[22m | fordwarden_boots.png[39m[0m
+[  80% ] [90m[1mreimport[22m | firstlight_boots.png[39m[0m
+[  80% ] [90m[1mreimport[22m | raftsman_cloak.png[39m[0m
+[  80% ] [90m[1mreimport[22m | pilgrim_cloak.png[39m[0m
+[  80% ] [90m[1mreimport[22m | ossuary_cloak.png[39m[0m
+[  81% ] [90m[1mreimport[22m | osier_cloak.png[39m[0m
+[  81% ] [90m[1mreimport[22m | orchard_cloak.png[39m[0m
+[  81% ] [90m[1mreimport[22m | mourner_cloak.png[39m[0m
+[  81% ] [90m[1mreimport[22m | mire_cloak.png[39m[0m
+[  81% ] [90m[1mreimport[22m | lockkeep_cloak.png[39m[0m
+[  82% ] [90m[1mreimport[22m | limeburner_cloak.png[39m[0m
+[  82% ] [90m[1mreimport[22m | lighterman_cloak.png[39m[0m
+[  82% ] [90m[1mreimport[22m | lamp_cloak.png[39m[0m
+[  82% ] [90m[1mreimport[22m | hurdler_cloak.png[39m[0m
+[  83% ] [90m[1mreimport[22m | hedgeward_cloak.png[39m[0m
+[  83% ] [90m[1mreimport[22m | harl_cloak.png[39m[0m
+[  83% ] [90m[1mreimport[22m | guild_cloak.png[39m[0m
+[  83% ] [90m[1mreimport[22m | gravewyrm_cloak.png[39m[0m
+[  83% ] [90m[1mreimport[22m | fogrun_cloak.png[39m[0m
+[  84% ] [90m[1mreimport[22m | feast_cloak.png[39m[0m
+[  84% ] [90m[1mreimport[22m | deep_cloak.png[39m[0m
+[  84% ] [90m[1mreimport[22m | crier_cloak.png[39m[0m
+[  84% ] [90m[1mreimport[22m | crane_cloak.png[39m[0m
+[  84% ] [90m[1mreimport[22m | constable_cloak.png[39m[0m
+[  85% ] [90m[1mreimport[22m | commander_mantle.png[39m[0m
+[  85% ] [90m[1mreimport[22m | commander_cloak.png[39m[0m
+[  85% ] [90m[1mreimport[22m | chronicle_cloak.png[39m[0m
+[  85% ] [90m[1mreimport[22m | caravan_cloak.png[39m[0m
+[  85% ] [90m[1mreimport[22m | butcher_cloak.png[39m[0m
+[  86% ] [90m[1mreimport[22m | bucketline_cloak.png[39m[0m
+[  86% ] [90m[1mreimport[22m | bowyer_cloak.png[39m[0m
+[  86% ] [90m[1mreimport[22m | barracks_cloak.png[39m[0m
+[  86% ] [90m[1mreimport[22m | banner_thatch.png[39m[0m
+[  86% ] [90m[1mreimport[22m | banner_temple.png[39m[0m
+[  87% ] [90m[1mreimport[22m | banner_taverner.png[39m[0m
+[  87% ] [90m[1mreimport[22m | banner_tavern.png[39m[0m
+[  87% ] [90m[1mreimport[22m | banner_tanner.png[39m[0m
+[  87% ] [90m[1mreimport[22m | banner_stair.png[39m[0m
+[  87% ] [90m[1mreimport[22m | banner_spurrier.png[39m[0m
+[  88% ] [90m[1mreimport[22m | banner_soaper.png[39m[0m
+[  88% ] [90m[1mreimport[22m | banner_skep.png[39m[0m
+[  88% ] [90m[1mreimport[22m | banner_shepherd.png[39m[0m
+[  88% ] [90m[1mreimport[22m | banner_sexton.png[39m[0m
+[  89% ] [90m[1mreimport[22m | banner_scar.png[39m[0m
+[  89% ] [90m[1mreimport[22m | banner_saltline_works.png[39m[0m
+[  89% ] [90m[1mreimport[22m | banner_saltline.png[39m[0m
+[  89% ] [90m[1mreimport[22m | banner_saddler.png[39m[0m
+[  89% ] [90m[1mreimport[22m | banner_ropeworks.png[39m[0m
+[  90% ] [90m[1mreimport[22m | banner_reeve.png[39m[0m
+[  90% ] [90m[1mreimport[22m | banner_reedcutter.png[39m[0m
+[  90% ] [90m[1mreimport[22m | banner_red.png[39m[0m
+[  90% ] [90m[1mreimport[22m | banner_quarryman.png[39m[0m
+[  90% ] [90m[1mreimport[22m | banner_quarry.png[39m[0m
+[  91% ] [90m[1mreimport[22m | banner_quarreller.png[39m[0m
+[  91% ] [90m[1mreimport[22m | banner_potter.png[39m[0m
+[  91% ] [90m[1mreimport[22m | banner_pilgrim.png[39m[0m
+[  91% ] [90m[1mreimport[22m | banner_pieman.png[39m[0m
+[  91% ] [90m[1mreimport[22m | banner_pewterer.png[39m[0m
+[  92% ] [90m[1mreimport[22m | banner_paver.png[39m[0m
+[  92% ] [90m[1mreimport[22m | banner_ossuary.png[39m[0m
+[  92% ] [90m[1mreimport[22m | banner_osier.png[39m[0m
+[  92% ] [90m[1mreimport[22m | banner_orchard.png[39m[0m
+[  92% ] [90m[1mreimport[22m | ferrystep_boots.png[39m[0m
+[  93% ] [90m[1mreimport[22m | fen_boots.png[39m[0m
+[  93% ] [90m[1mreimport[22m | eeler_boots.png[39m[0m
+[  93% ] [90m[1mreimport[22m | drover_spurs.png[39m[0m
+[  93% ] [90m[1mreimport[22m | drover_boots.png[39m[0m
+[  93% ] [90m[1mreimport[22m | dauber_boots.png[39m[0m
+[  94% ] [90m[1mreimport[22m | creeler_boots.png[39m[0m
+[  94% ] [90m[1mreimport[22m | craterglass_boots.png[39m[0m
+[  94% ] [90m[1mreimport[22m | cordwainer_boots.png[39m[0m
+[  94% ] [90m[1mreimport[22m | clogger_boots.png[39m[0m
+[  95% ] [90m[1mreimport[22m | chapel_clogs.png[39m[0m
+[  95% ] [90m[1mreimport[22m | carter_boots.png[39m[0m
+[  95% ] [90m[1mreimport[22m | brickmaker_boots.png[39m[0m
+[  95% ] [90m[1mreimport[22m | bolter_boots.png[39m[0m
+[  95% ] [90m[1mreimport[22m | ashfoot_boots.png[39m[0m
+[  96% ] [90m[1mreimport[22m | banner_thaw.png[39m[0m
+[  96% ] [90m[1mreimport[22m | banner_tiler.png[39m[0m
+[  96% ] [90m[1mreimport[22m | banner_tithe.png[39m[0m
+[  96% ] [90m[1mreimport[22m | banner_toll.png[39m[0m
+[  96% ] [90m[1mreimport[22m | banner_towpath.png[39m[0m
+[  97% ] [90m[1mreimport[22m | banner_turbary.png[39m[0m
+[  97% ] [90m[1mreimport[22m | banner_wakeward.png[39m[0m
+[  97% ] [90m[1mreimport[22m | banner_wall.png[39m[0m
+[  97% ] [90m[1mreimport[22m | banner_watch.png[39m[0m
+[  97% ] [90m[1mreimport[22m | banner_watchfire.png[39m[0m
+[  98% ] [90m[1mreimport[22m | banner_weirkeep.png[39m[0m
+[  98% ] [90m[1mreimport[22m | banner_wellhead.png[39m[0m
+[  98% ] [90m[1mreimport[22m | banner_winterwatch.png[39m[0m
+[  98% ] [90m[1mreimport[22m | banner_woodward.png[39m[0m
+[  98% ] [90m[1mreimport[22m | banner_yellow.png[39m[0m
+[  99% ] [90m[1mreimport[22m | town_hall_t3.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  99% ] [90m[1mreimport[22m | town_hall_t2.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  99% ] [90m[1mreimport[22m | town_hall_t1.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  99% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (482 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | Reopening scenes...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | Loading central editor layout...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | Loading plugin window layout...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | Editor layout ready.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+
+=== import rc=0 33s
+=== parse start 11:13:21
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 636 flora on the grass islands
+VALLEY verges 178
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+SNAPSHOT on: https://paaukwaffaamazgrndbv.supabase.co every 15 s
+HUB ACTIONS on: polling every 5 s
+TWITCH_EVENTSUB bot token valid (bellmirebro), 219 min left
+TWITCH_EVENTSUB seeded subs pane with 4 subscriber(s)
+TWITCH joined #jestsayin96
+TWITCH_EVENTSUB seeded subs pane with 4 subscriber(s)
+TWITCH_EVENTSUB welcome, session AgoQz-EG, keepalive 10 s
+RIG: no clip 'Interact' on OldClassy_Female - playing its idle
+TWITCH_EVENTSUB subscribed 7 of 7
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+
+=== parse rc=0 31s
+=== s171 start 11:13:51
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+S171_TIERS OK changes=151 cried=118 hall_mesh=res://assets/buildings/town_hall_t3.glb
+
+=== s171 rc=0 0s
+=== twitch start 11:13:52
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS 1 command -> chat_line
+PASS 2 ping -> pong
+PASS 3 plain chat ignored
+PASS 4 bot ignored
+PASS 5 cooldown
+PASS 6 split packet
+PASS 7 four per frame
+PASS 7b rest next frame
+TWITCH_PARSE OK (8 checks)
+
+=== twitch rc=0 1s
+=== offfloor start 11:13:53
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Behind us, the stair closes like a mouth.
+FEED They carry 24 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 giant rat, 2 slimes.
+FEED They buried the lamps with them, and the oil is still good.
+FEED Hero2 casts Smite at slime.
+FEED Hero6 casts Frost at slime.
+FEED The slime divides.
+FEED Hero1 casts Bolt at slimeling.
+FEED Hero4 turns on the wounded slimeling to finish it.
+FEED Hero6 turns on the wounded slimeling to finish it.
+FEED Hero7 turns on the wounded slimeling to finish it.
+FEED Hero2 casts Smite at slimeling.
+FEED Hero1 searches (Investigation 16) and turns up 12 gold on floor 1.
+FEED Floor 1 is done. Somebody sits down on the stair.
+FEED Hero1 finds a vial of Draught of Mending.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave bat, 1 giant rat, 1 puglin, 1 cave spider.
+FEED Hero6's bolt is the wrong shape for the moment (9 vs DC 11).
+FEED Hero2 casts Bolt at puglin.
+FEED Hero6 casts Frost at giant rat.
+FEED Hero2 casts Smite at giant rat.
+FEED Hero1 casts Bolt at cave spider.
+FEED Hero6 casts Frost at cave spider.
+FEED Hero1 searches (Investigation 21) and turns up 28 gold on floor 2.
+FEED Floor 2 is cleared, and nobody sang about it.
+FEED Hero1 finds a vial of Cold Slate Cup.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+FEED Hero5 spots a pressure plate (Perception 19 vs DC 11) and disarms it with thieves' tools (17).
+L28C_EMITTERS floor 3 confection: 3 (cap 12), creatures 0; lights 52 (shadowed 1)
+L28D_DECALS floor 3 confection: 18 (cap 24)
+FEED Floor 3 - a tomb, remade as the confection: 2 giant rats, 1 hollowed puglin, 1 bone bowman.
+FEED Hero2 lets bolt go early and it spends itself on the wall (7 vs DC 11).
+FEED Hero0 turns on the wounded giant rat to finish it.
+FEED Hero1 turns on the wounded giant rat to finish it.
+FEED Hero2 turns on the wounded giant rat to finish it.
+FEED Hero3 turns on the wounded giant rat to finish it.
+FEED Hero6 turns on the wounded giant rat to finish it.
+FEED Hero2 casts Smite at hollowed puglin.
+FEED Hero1 casts Chain Bolt at hollowed puglin.
+FEED Hero6 casts Bolt at hollowed puglin.
+FEED Hero1 searches (Investigation 14) and turns up 35 gold on floor 3.
+FEED Floor 3 is finished. Fair work, fairly done.
+FEED 1 skeleton minion, 1 puglin, 1 slime was waiting in the dark, and now it isn't.
+FEED Hero1's bolt goes out like a lamp in a draught (1 vs DC 11).
+FEED The slime divides.
+FEED Hero5 rolls a 20 - and the slimeling is gone.
+FEED Hero4 rolls a 20 - and the slimeling is gone.
+FEED Hero0 and 7 others take a breather, and press on deeper.
+FEED Hero6 steps on a plate - darts! DEX 4 vs DC 11, 11 damage.
+L28C_EMITTERS floor 4 flooded: 2 (cap 12), creatures 2; lights 47 (shadowed 1)
+L28D_DECALS floor 4 flooded: 18 (cap 24)
+FEED Floor 4 - a worked seam, remade as a flooded gallery: 1 cave spider, 1 slime, 2 drowned giant rats, 1 giant rat.
+FEED The oil is running low.
+FEED Hero6 reaches for frost. It is not there (8 vs DC 12).
+FEED Hero2's smite will not take hold (9 vs DC 12).
+FEED The slime divides.
+FEED Hero7 turns on the wounded slimeling to finish it.
+FEED Hero1 searches (Investigation 15) and turns up 47 gold on floor 4.
+FEED Clear. Count the living, then the coin.
+FEED Hero1 searches the chest - Successfully found loot!! 48 gold (Investigation 17 vs DC 12).
+FEED Battered, the party climbs back out from floor 4.
+FEED Hero0 and 7 others come home to Bellmire with 170 gold, 6 ore, 4 stone, 4 pieces of salvaged gear and 4 potions. 27 kills between them.
+FEED Hero1 is fitted with Reed-Cloth Robe. (+10 hp) Haggled 18% off (20).
+FEED Hero4 is fitted with Ford Leathers. (+10 hp) A natural 1 - the smith takes offence and charges a tenth over.
+OFFFLOOR 0 of 2174 samples; INPROP 0; MON_INPROP 0 of 246; floor reached 4 frames 7243 obstacles 37
+OFFFLOOR_VERDICT OK 0 of 2174 samples off the floor (home)
+
+=== offfloor rc=0 62s
+=== death start 11:14:55
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DEATH_TEST OK 36 of 36
+
+=== death rc=0 1s
+=== townwalk start 11:14:56
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+D91F_SQUARE goods moved off a door step: 1
+D27_GREENS placed 636 flora on the grass islands
+VALLEY verges 178
+VALLEY dressed fields=4 crops=1416 fences=133
+VALLEY sites ["the Ford Mill", "the ford", "Coalfoot Steading", "Bramble End", "the Ashwood", "the Old Footing"] made { "houses": 7, "trees": 180, "walls": 9, "stones": 18, "folk": 7, "roads": 14, "crops": 1416, "fences": 133, "fields": 4 }
+D25_SWEEP dropped 1 on-road houses after valley/south roads (road_dropped total 188)
+NAV ready=true bake_ms=939 obstructions=2951 solids=1472 plots=66 road_dropped=188 people=164
+HOUSES_ON_ROAD 0
+DOORS 66 door_off_ground=0 door_leg_through_other_house=0
+RIG: no clip 'Interact' on Worker_Male - playing its idle
+FEED 3 bandits are riding on the west road!
+FEED Initiative: the raiders 4, the watch 5 - the watch is ready for them.
+RAID started raiders=3
+T=10s walking=94 still=0 (posted=0) inside=70 in_solid=0/726 stuck_on_route=0
+RIG: no clip 'Idle_B' on Barbarian - playing its idle
+FEED A building is burning!
+T=20s walking=51 still=27 (posted=17) inside=86 in_solid=0/1566 stuck_on_route=0
+T=30s walking=44 still=26 (posted=17) inside=94 in_solid=0/2187 stuck_on_route=0
+FEED The attack is driven off. The gates hold.
+FEED The townsfolk raise the ruin again.
+T=40s walking=138 still=25 (posted=17) inside=1 in_solid=0/3963 stuck_on_route=0
+T=50s walking=125 still=38 (posted=19) inside=1 in_solid=0/6024 stuck_on_route=0
+T=60s walking=110 still=53 (posted=25) inside=1 in_solid=0/8025 stuck_on_route=0
+T=70s walking=100 still=63 (posted=26) inside=1 in_solid=0/9792 stuck_on_route=0
+RIG: no clip 'Jump_Full_Short' on Worker_Male - playing its idle
+FEED Talen Ashwood settles in Bellmire, looking for work.
+RIG: no clip 'Spellcast_Raise' on Worker_Male - playing its idle
+T=80s walking=91 still=73 (posted=26) inside=1 in_solid=0/11387 stuck_on_route=0
+T=90s walking=87 still=77 (posted=27) inside=1 in_solid=0/12955 stuck_on_route=0
+T=100s walking=87 still=76 (posted=28) inside=2 in_solid=0/14472 stuck_on_route=0
+T=110s walking=86 still=77 (posted=28) inside=2 in_solid=0/15973 stuck_on_route=0
+T=120s walking=97 still=67 (posted=28) inside=1 in_solid=0/17468 stuck_on_route=0
+STUCK_ON_ROUTE_TOTAL 0 over 120 s (raw still-with-a-route-now 1)  watchdog fires=6 close=2 repath=4 nudge=0 giveup=0
+TOWNWALK in_solid=0/17468 (0.000%) raid_in_solid=0/4502 (0.000%) PASS
+BAD []
+STUCK_EX []
+WARNING: res://assets/kit/materials/MI_Brick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Brick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Brick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Brick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_UnevenBrick.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_UnevenBrick_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Plaster.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Plaster_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RockTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RockTrim_ORM.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_RoundTiles.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_RoundTiles_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_BaseColor.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Normal.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_WoodTrim_Wear.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_WoodTrim_Roughness.png
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:3 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_BaseColor.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:4 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Normal.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+WARNING: res://assets/kit/materials/MI_Cobble.tres:5 - ext_resource, invalid UID:  - using text path instead: res://assets/kit/textures/T_Cobble_Roughness.jpg
+   at: load (scene/resources/resource_format_text.cpp:501)
+   GDScript backtrace (most recent call first):
+       [0] _load_materials (res://scripts/town.gd:844)
+       [1] _ready (res://scripts/town.gd:399)
+
+=== townwalk rc=0 113s
+=== delve start 11:16:49
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+FEED Somebody ties a boot that did not need tying.
+FEED They carry 8 flasks of oil between them.
+L28C_EMITTERS floor 1 mess: 2 (cap 12), creatures 0; lights 61 (shadowed 1)
+L28D_DECALS floor 1 mess: 18 (cap 24)
+FEED Floor 1 - a tomb, remade as a mess hall: 1 hollowed giant rat, 1 giant rat, 1 slime.
+FEED The epitaph has been recut, longer than before.
+T10s floor=1 state=fight foes=3 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED DawnCleric casts Smite at giant rat.
+T20s floor=1 state=fight foes=2 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+T30s floor=1 state=fight foes=1 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+T40s floor=1 state=fight foes=1 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED DawnCleric casts Smite at slime.
+FEED MossyMage casts Bolt at slime.
+FEED The slime divides.
+FEED MossyMage searches (Investigation 20) and turns up 14 gold on floor 1.
+FEED Floor 1 is taken back from the dark. It is not much, and it is theirs.
+T50s floor=1 state=search foes=0 ["JestFan 81/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+T60s floor=1 state=search foes=0 ["JestFan 81/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+T70s floor=1 state=search foes=0 ["JestFan 81/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED JestFan and 3 others take a breather, and press on deeper.
+T80s floor=1 state=descend foes=0 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+T90s floor=1 state=descend foes=0 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+T100s floor=1 state=descend foes=0 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+L28C_EMITTERS floor 2 grassland: 2 (cap 12), creatures 0; lights 63 (shadowed 1)
+L28D_DECALS floor 2 grassland: 18 (cap 24)
+FEED Floor 2 - a workshop, remade as a sunken meadow: 1 cave bat, 1 giant rat, 2 bog frogs.
+FEED The oil is running low.
+T110s floor=2 state=fight foes=4 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED DawnCleric's smite thins to nothing in the air (6 vs DC 11).
+T120s floor=2 state=fight foes=3 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+T130s floor=2 state=fight foes=2 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED MossyMage's hand shakes on chain, and the moment is gone (1 vs DC 11).
+T140s floor=2 state=fight foes=2 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+FEED DawnCleric casts Smite at cave bat.
+T150s floor=2 state=fight foes=1 ["JestFan 93/93", "MossyMage 78/78", "DawnCleric 91/91", "BigAxe 119/119"]
+DELVE_TEST OK ran 9001 frames, floor reached 2, state fight (capped at 9001 frames); engine error lines are still read off the log
+
+=== delve rc=0 68s
+=== ALLDONE

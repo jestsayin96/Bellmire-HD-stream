@@ -1,5 +1,6 @@
 # GAME BUILD - COMMIT OWED (update this ONE file in place; newest line on top)
-- 2026-11-28T11:2x-06:00 S176: ALL OWED FILES BELOW ARE NOW COMMITTED on laptop (gates green, flag OFF). Nothing owed. Next owed item is a render, not a commit.
+- 2026-11-28T12:15-06:00 S177: WELL_TIER_MESHES flipped ON and committed with renders + logs. Nothing owed. Next: hall + inn tier swap.
+- 2026-11-28T11:18-06:00 S176 (corrected from a future-looking 11:2x stamp): ALL OWED FILES BELOW ARE NOW COMMITTED on laptop (gates green, flag OFF). Nothing owed. Next owed item is a render, not a commit.
 - 2026-11-28T08:12:24-06:00 S173: edits scripts/town.gd again (well tier swap behind WELL_TIER_MESHES=false; crier shares _tiers_ready). Same stage list as S172. NOT scripts/town.gd.bak_s172 / .bak_s173. Commit with the flag OFF; flip only after a render.
 - 2026-11-28T07:13:23-06:00 S172: ADDS scripts/town.gd (tier crier, words only) and edits scripts/town_tiers.gd + tools/_s171_tiers.gd. Stage: scripts/town_tiers.gd scripts/town.gd tools/_s171_tiers.gd PROGRESS.md _GAMEBUILD_COMMIT_OWED.md. NOT scripts/town.gd.bak_s172. Gate order: parse -> S171_TIERS -> the five standing gates -> a forced level-up, look at the feed.
 - 2026-11-28T06:11:43-06:00 S171: uncommitted in R (laptop): scripts/town_tiers.gd (new), tools/_s171_tiers.gd (new), PROGRESS.md (S171 cycle appended), this file.

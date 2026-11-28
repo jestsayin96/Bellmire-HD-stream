@@ -39,3 +39,6 @@ create policy hub_actions_insert_own on public.hub_actions for insert to authent
               and (select count(*) from public.hub_actions h where h.twitch_id = private.my_twitch_id()
                    and h.status = 'queued') < 20);   -- backlog cap; add a time-window rate limit in an edge function if abused
 -- no update / delete policy for authenticated => denied. anon has no policy => denied.
+-- APPLIED LIVE by the supervisor 28 Nov 05:18 CT (the file was behind; this line records it):
+grant select, insert on public.hub_actions to authenticated;   -- SELECT is live-verified true (05:18); stated here so a fresh apply does not depend on default privileges
+revoke select on public.hub_actions from anon;

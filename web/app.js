@@ -5778,9 +5778,11 @@ function finderOpen(r) {
   const ACTIONS = [
     { kind: "wear",        group: "Gear",     label: "Wear / swap an item",         args: [["item", "Item name"]] },
     { kind: "dye",         group: "Gear",     label: "Dye an item",                 args: [["item", "Item name"], ["colour", "Colour"]] },
-    { kind: "sell",        group: "Gear",     label: "Sell from your satchel",      args: [["item", "Item name"]] },
+    // "sell" is deliberately NOT offered: the engine refuses it in words ("Selling from the inn is not open yet",
+    // hub_actions.gd), so a viewer would only ever be handed a refusal. The schema still allows the kind; restore the
+    // row here when the engine grows a sell verb.
     { kind: "buy",         group: "Shops",    label: "Buy at a counter",            args: [["counter", "Counter (forge, armoury, brew, repair, oil)"], ["item", "Item name"]] },
-    { kind: "respec",      group: "Hero",     label: "Respec",                      args: [] },
+    { kind: "respec",      group: "Hero",     label: "Respec (change calling)",     args: [["calling", "New calling (knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock or bard)"]] },
     { kind: "reroll",      group: "Hero",     label: "Reroll",                      args: [] },
     { kind: "specialize",  group: "Hero",     label: "Specialize (once, for good)", args: [["path", "Path"]], confirm: true },
     { kind: "party_invite",group: "Party",    label: "Invite to your party",        args: [["who", "Viewer name"]] },
@@ -5909,6 +5911,17 @@ function finderOpen(r) {
       a.args.forEach(([k, lab]) => {
         const l = el("label", "sat-lab", lab + " "); const i = el("input", "suggest-input"); i.type = "text"; i.maxLength = 60; i.autocomplete = "off"; i.setAttribute("aria-label", lab);
         inputs[k] = i; l.append(i); slot.append(l);
+        // wear / dye: offer the names from THIS viewer's own satchel as suggestions (a datalist, not a rule -
+        // the engine still decides). Names are snapshot strings, so they go in as option.value (a property), never markup.
+        if (k === "item" && (a.kind === "wear" || a.kind === "dye")) {
+          const h = myHeroRow(), names = [];
+          if (h) for (const r of satchelRows(h)) { const n = clean(r.name, 60); if (n && names.indexOf(n) < 0) names.push(n); }
+          if (names.length) {
+            const dl = el("datalist"); dl.id = "roomItems";
+            names.slice(0, 40).forEach((n) => { const o = el("option"); o.value = n; dl.append(o); });
+            i.setAttribute("list", "roomItems"); l.append(dl);
+          }
+        }
       });
     };
     sel.addEventListener("change", draw); draw();

@@ -1,0 +1,343 @@
+{
+ "hero_h": 2.45,
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "note": "controls are SHIPPED weapons at the carry gearcarry reads out of gear.gd; the wand grid is judged against them, not against clip==0.",
+ "controls": [
+  {
+   "name": "staff_B",
+   "res_path": "res://assets/gear/staff_B.gltf",
+   "held_rot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hand_scale": 0.62,
+   "held_rot_arm": "default",
+   "hand_scale_arm": "begins 'res://assets/gear/'",
+   "roll_applied": 0.0,
+   "checked": 883,
+   "clip": 51,
+   "clip_pct": 5.8,
+   "ground": 0,
+   "tip_z": 0.832,
+   "reach": 0.191,
+   "span_z": 0.383,
+   "verts": 893
+  },
+  {
+   "name": "staff_rare",
+   "res_path": "res://assets/gear/dungeon/staff_rare.glb",
+   "held_rot": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "hand_scale": 1.9,
+   "held_rot_arm": "begins 'res://assets/gear/dungeon/staff_'",
+   "hand_scale_arm": "begins 'res://assets/gear/dungeon/staff_'",
+   "roll_applied": 0.0,
+   "checked": 890,
+   "clip": 202,
+   "clip_pct": 22.7,
+   "ground": 149,
+   "tip_z": 1.996,
+   "reach": 1.355,
+   "span_z": 2.208,
+   "verts": 890
+  }
+ ],
+ "wand_grid": [
+  {
+   "held_rot": [
+    0,
+    0,
+    90
+   ],
+   "hand_scale": 0.35,
+   "roll_applied": 0.0,
+   "length_in_hand": 0.322,
+   "checked": 4609,
+   "clip": 4251,
+   "clip_pct": 92.2,
+   "ground": 0,
+   "tip_z": 0.963,
+   "reach": 0.322,
+   "span_z": 0.322,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    15,
+    90
+   ],
+   "hand_scale": 0.35,
+   "roll_applied": 15.0,
+   "length_in_hand": 0.322,
+   "checked": 4609,
+   "clip": 3640,
+   "clip_pct": 79.0,
+   "ground": 0,
+   "tip_z": 0.952,
+   "reach": 0.311,
+   "span_z": 0.311,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    30,
+    90
+   ],
+   "hand_scale": 0.35,
+   "roll_applied": 30.0,
+   "length_in_hand": 0.322,
+   "checked": 4609,
+   "clip": 1856,
+   "clip_pct": 40.3,
+   "ground": 0,
+   "tip_z": 0.919,
+   "reach": 0.279,
+   "span_z": 0.279,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    45,
+    90
+   ],
+   "hand_scale": 0.35,
+   "roll_applied": 45.0,
+   "length_in_hand": 0.322,
+   "checked": 4609,
+   "clip": 709,
+   "clip_pct": 15.4,
+   "ground": 0,
+   "tip_z": 0.869,
+   "reach": 0.229,
+   "span_z": 0.228,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    0,
+    90
+   ],
+   "hand_scale": 0.45,
+   "roll_applied": 0.0,
+   "length_in_hand": 0.414,
+   "checked": 5146,
+   "clip": 2078,
+   "clip_pct": 40.4,
+   "ground": 0,
+   "tip_z": 1.055,
+   "reach": 0.414,
+   "span_z": 0.414,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    15,
+    90
+   ],
+   "hand_scale": 0.45,
+   "roll_applied": 15.0,
+   "length_in_hand": 0.414,
+   "checked": 5146,
+   "clip": 1390,
+   "clip_pct": 27.0,
+   "ground": 0,
+   "tip_z": 1.041,
+   "reach": 0.4,
+   "span_z": 0.4,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    30,
+    90
+   ],
+   "hand_scale": 0.45,
+   "roll_applied": 30.0,
+   "length_in_hand": 0.414,
+   "checked": 5146,
+   "clip": 914,
+   "clip_pct": 17.8,
+   "ground": 0,
+   "tip_z": 0.999,
+   "reach": 0.359,
+   "span_z": 0.358,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    45,
+    90
+   ],
+   "hand_scale": 0.45,
+   "roll_applied": 45.0,
+   "length_in_hand": 0.414,
+   "checked": 5146,
+   "clip": 477,
+   "clip_pct": 9.3,
+   "ground": 0,
+   "tip_z": 0.935,
+   "reach": 0.294,
+   "span_z": 0.294,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    0,
+    90
+   ],
+   "hand_scale": 0.55,
+   "roll_applied": 0.0,
+   "length_in_hand": 0.507,
+   "checked": 5695,
+   "clip": 1497,
+   "clip_pct": 26.3,
+   "ground": 0,
+   "tip_z": 1.147,
+   "reach": 0.506,
+   "span_z": 0.507,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    15,
+    90
+   ],
+   "hand_scale": 0.55,
+   "roll_applied": 15.0,
+   "length_in_hand": 0.507,
+   "checked": 5695,
+   "clip": 1213,
+   "clip_pct": 21.3,
+   "ground": 0,
+   "tip_z": 1.13,
+   "reach": 0.489,
+   "span_z": 0.489,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    30,
+    90
+   ],
+   "hand_scale": 0.55,
+   "roll_applied": 30.0,
+   "length_in_hand": 0.507,
+   "checked": 5695,
+   "clip": 933,
+   "clip_pct": 16.4,
+   "ground": 0,
+   "tip_z": 1.079,
+   "reach": 0.438,
+   "span_z": 0.438,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    45,
+    90
+   ],
+   "hand_scale": 0.55,
+   "roll_applied": 45.0,
+   "length_in_hand": 0.507,
+   "checked": 5695,
+   "clip": 516,
+   "clip_pct": 9.1,
+   "ground": 0,
+   "tip_z": 1.0,
+   "reach": 0.36,
+   "span_z": 0.359,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    0,
+    90
+   ],
+   "hand_scale": 0.62,
+   "roll_applied": 0.0,
+   "length_in_hand": 0.571,
+   "checked": 5959,
+   "clip": 1370,
+   "clip_pct": 23.0,
+   "ground": 0,
+   "tip_z": 1.211,
+   "reach": 0.571,
+   "span_z": 0.571,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    15,
+    90
+   ],
+   "hand_scale": 0.62,
+   "roll_applied": 15.0,
+   "length_in_hand": 0.571,
+   "checked": 5959,
+   "clip": 1177,
+   "clip_pct": 19.8,
+   "ground": 0,
+   "tip_z": 1.192,
+   "reach": 0.551,
+   "span_z": 0.551,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    30,
+    90
+   ],
+   "hand_scale": 0.62,
+   "roll_applied": 30.0,
+   "length_in_hand": 0.571,
+   "checked": 5959,
+   "clip": 916,
+   "clip_pct": 15.4,
+   "ground": 0,
+   "tip_z": 1.135,
+   "reach": 0.494,
+   "span_z": 0.493,
+   "verts": 7935
+  },
+  {
+   "held_rot": [
+    0,
+    45,
+    90
+   ],
+   "hand_scale": 0.62,
+   "roll_applied": 45.0,
+   "length_in_hand": 0.571,
+   "checked": 5959,
+   "clip": 482,
+   "clip_pct": 8.1,
+   "ground": 0,
+   "tip_z": 1.046,
+   "reach": 0.405,
+   "span_z": 0.404,
+   "verts": 7935
+  }
+ ]
+}

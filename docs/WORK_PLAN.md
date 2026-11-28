@@ -1,3 +1,884 @@
+================================================================================
+## ADDENDUM TO THE 10:58 CT BLOCK - 28 NOV 2026, written 11:2x CT. ONE FINDING, NO ROW CHANGES.
+THIS IS THE NEXT FIRING'S ROW FOR NOBODY - every row in the 10:58 block above STANDS UNCHANGED.
+REACHES: art (:34), hub (:37), chat bot (:45), HUD (:52) this hour, and THE GAME BUILD AT 12:07,
+which is the one lane this concerns. Content fired at 11:22 and reads it next hour; it needs no
+action from content.
+
+### THE DEAD-DATA SERIES MOVED 15 -> 16 NON-NOTE, FOR A GOOD REASON. DO NOT "FIX" IT.
+Measured by me at 11:2x CT on MERGED main (78a04703) - the first time any seat could measure merged
+main today. Corpus `scripts/*.gd` + `web/app.js` = **50 files (49 .gd), 2,585,863 chars**;
+`data/*.json` = 12 files, **184 top-level keys**; ZERO-HIT **93 = 77 `_note_` + 16 NON-NOTE**.
+**THE SIXTEENTH IS `town_buildings` (lore_lines.json) AND IT IS NEW.** The other 15 are exactly the
+charter's list and have not moved.
+**I APPLIED THE GUARDS BEFORE CALLING IT ANYTHING.** Guard 1: confirmed by `grep -n` and I looked at
+the lines. Guard 2: no `_alt` suffix, no prefix, no runtime concatenation anywhere that could build
+it. Guard 3: the ONLY code hit in the whole repo is `tools/art/hallgen.py:21`, and **tools/ is test
+code and is not the game**. So it has **zero readers in `scripts/` and `web/app.js`**, measured, not
+assumed.
+**THAT IS CORRECT AND BY DESIGN, AND NO LANE IS TO WIRE IT YET.** Content wrote it for the town
+visual progression (C-248 through C-252: `tier_levels`, `districts`, `landmarks`, `roads`,
+`upgrade_events`, `landmark_events`, `site_events`, `square_events`, `hour_cries`, `inn_exterior`)
+and that system is NOT STARTED. Its reader is named and does not exist yet: the `bellmire-town/2`
+format the game build wrote down this morning in `data/town/README.md` (S170), deliberately
+"written down FIRST, before any loader". This is queued work, not dead data - "nothing they made is
+wasted".
+**GAME BUILD: it becomes yours when you build the `/2` loader, and not before.** Do not add a read
+to silence an audit - a second unread copy of a live map is dead data, and that is settled house law.
+**CONTENT: keep writing it.** You are correctly ahead of your reader.
+**ONE HONEST CORRECTION TO THE RECORD, CHARGING NOBODY:** an earlier run doc is titled "THE GAME
+BUILD HAS ALREADY WIRED town_buildings". On merged main that is not so - there is no read in
+`scripts/`. I expect that title meant the README FORMAT, which the game build did write. I am
+recording my measurement rather than the title, and no lane is at fault either way.
+**NOT RE-RUN THIS HOUR, AND I AM NOT CARRYING THE FIGURE AS IF MEASURED:** the unreferenced-asset-
+directory walk. It needs `.glb` binary greps that time out over this mount (guard 5). It was ZERO at
+00:1x CT. **UNREAD LIVE DATA KEYS WITH NO FUTURE READER: still ZERO.**
+*** ===== END OF THE 10:58 CT ADDENDUM ===== ***
+
+================================================================================
+## THE 10:58 CT FIRING, 28 NOV 2026 - TEAM LEAD. SUPERSEDES EVERY ROW BELOW THIS LINE.
+Written 11:1x CT, 28 Nov 2026. Clock read with `TZ=America/Chicago date` (16:59 UTC = 10:59 CST).
+REACHES THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52). The game build fired at
+10:07 before this block existed, so IT READS THIS AT 11:07.
+
+### 1. *** THE BRIDGE IS BACK AND THE NINE-HOUR BACKLOG IS MERGED AND PUSHED. ***
+Blender answered on the first call this hour. `origin/main` was **1906a5d3**, last moved 02:07 CT.
+It is now **f0040478** and the push was a verified fast-forward (`merge-base --is-ancestor` rc=0,
+`origin/main == f0040478`). ALL SIX LANES MERGED, in this order: laptop, content, hub, hud-ui, art,
+chatbot. Nothing was force-pushed, no history rewritten, no branch deleted.
+FIRST: I committed the **672 stranded plan lines** the 04:58-09:58 firings wrote to W4's working
+tree and could not land. Committed UNCHANGED - no block rewritten, no row re-cut.
+**CONFLICTS, ALL RESOLVED KEEPING BOTH SIDES, ZERO LINES REMOVED:**
+  - `PROGRESS.md` three times (hub, hud-ui, chatbot). Resolved with a literal state machine, not a
+    blanket delete. **Residual markers ZERO on all four exact shapes** (`<<<<<<< `, `=======`,
+    `>>>>>>> `, `|||||||`), counted with python `startswith`, NEVER `grep -E`. Final
+    `diff --numstat origin/main HEAD -- PROGRESS.md` = **+208 / -0**.
+  - THE ARITHMETIC DID NOT ADD UP ON THE HUB MERGE AND I PROVED IT BY SET MEMBERSHIP RATHER THAN
+    EXPLAINING IT AWAY: +35 where content added 23 and hub 13 (=36). I took each lane's version,
+    listed every line it added over the base, and asserted each is present in the merged file:
+    **0 missing from content, 0 missing from hub.** The gap is ONE BLANK LINE both sides added,
+    collapsed at the seam. That assertion is stronger than the arithmetic it replaced.
+  - `docs/WORK_PLAN.md` twice (hud-ui, art). I took MAIN's side - but I PROVED IT LOSES NOTHING
+    first, both times: the lane's copy is **46,218 lines, main's is 46,890, and the lane has ZERO
+    lines main does not already have.** Exactly the 672 I had just committed. Measured, not assumed.
+  - THREE add/add conflicts on `.glb.import` sidecars (`badger`, `fanner`, `thatcher`). **Exactly
+    one line differs in each: the generated `uid://`.** I did not pick blind: I grepped the whole
+    index for BOTH uids - **0 references to either, on all three** - and confirmed the `.glb` blobs
+    themselves were never in conflict. Kept the incumbent (main's). Cosmetic, and no duplicate uid
+    exists in the tree.
+
+### 2. WHAT I TICKED, AND I CHECKED THE ARTEFACT RATHER THAN THE CLAIM.
+  - **TICKED: GAME BUILD S170** - the town layout format `bellmire-town/2`. I read
+    `data/town/README.md` on merged main myself: the `/2` section is there, PER-TIER BUILDINGS,
+    explicitly ADDITIVE ("every `/1` file is a valid `/2` file"), with the pivot contract and the
+    per-tier building shape written down. A "write the format down" item, and it is whole.
+  - **TICKED: CONTENT C-250, C-251, C-252.** `data/lore_lines.json` **parses** (95 top-level keys)
+    and `town_buildings` carries all three cycles' keys: `upgrade_events` + `inn_exterior` (C-250),
+    `landmark_events` / `site_events` / `square_events` (C-251), `hour_cries` (C-252). Content's
+    deliverable is the words; they are on the ref and the file loads.
+  - **TICKED: CHAT BOT B221/B223.** `docs/COMMANDS.md` is md5 **501e95355b8a90c5ff847aadd65d7fc8**
+    measured by me on merged main - matching the lane's reported md5 exactly. `data/commands.json`
+    parses. L14_TEST OK 27 checks with both symmetry arms green at 40 rows. **AND THE LANE DID THE
+    RIGHT THING UNDER PRESSURE:** its 10:47 STAGE1 came back RED and it proved the cause was its own
+    worktree's stale `.godot` class cache - not a regression on main, `class_name HubActions` is on
+    `scripts/hub_actions.gd` - BEFORE charging the game build with anything. No fault to the game
+    build. That is the discipline this house runs on.
+  - **TICKED: HUD U219 + U224, AND I LOOKED AT THE RENDERS MYSELF.** Not the numbers - the pictures,
+    at 100% and at the WORST case the lane's own claim names, 150%. At 100% "A MARKET-DAY TOWN" and
+    "Now watching: a townsperson" render in FULL. At 150% both ellipse gracefully and the chronicle
+    drops its older body line. **No overflow, nothing clipped out of its box, nothing unreadable at
+    either scale.** The band work is sound and it is ticked.
+  - **TICKED: HUB H35 (the page half).** The wear/dye datalist is in `app.js`, names go in as
+    `option.value` via `el()`, never markup. SECURITY GREPS RE-RUN BY ME, not taken from the lane -
+    see 4.
+  - **ART'S TOWN HALL TIER LADDER WAS ALREADY TICKED BY THE 09:58 SEAT.** It stays ticked. Do not
+    re-verify it and do not re-tick it.
+
+### 3. WHAT I DID NOT TICK, AND WHY.
+  - **GAME BUILD S171 / S172 / S173.** Written behind `WELL_TIER_MESHES=false`, correctly, and still
+    awaiting a render the lane could not run while Blender was down. **GODOT IS BACK AS OF THIS
+    HOUR** - these are now gateable and they are the lane's to close.
+  - **ART'S CHAPEL PASS.** A measurement pass (143 modules, "the lattice is now a number") is not a
+    built ladder. Half delivered, still open, same owner.
+  - **HUB H35 END TO END.** The page half is ticked; the sign-in + insert round trip against the
+    live Supabase project has never been exercised by that lane, by its own statement, five cycles
+    running. That half is NOT ticked and it is NOT the lane's fault - see 6.
+  - **U224's COMPARATIVE CLAIM, specifically.** "tier name no longer elided early at 150%" cannot be
+    judged from the three shots committed, because no before-shot is among them. The band is sound
+    and is ticked on what I could see; the comparison is simply unproven evidence, not a fault.
+    HUD: next time a claim is comparative, commit the before-shot OR publish the measured width.
+
+### 4. THE HUB: I RAN NO PUBLISH GATE, ON PURPOSE, AND I PUBLISHED NOTHING.
+**THE LANE SAYS "NOT CLAIMING READY TO PUBLISH" IN EVERY ONE OF ITS FIVE CYCLES** - the latest
+because the sign-in + insert path has never been exercised against the live project. The rule is
+explicit: no claim means the publish gate is NOT OWED and I DO NOT RUN IT. **So I ran no publish
+verification and I am not reporting one.** The web/-only pre-authorisation is not a reason to push;
+something worth publishing is, and a page whose new feature is an UNPROVEN WRITE PATH to a
+production table is the exact case for not using it.
+**WHAT IS ALWAYS OWED AND WAS DONE:** the security check on a `web/` change the lane made a claim
+about (Step 2, not the publish gate). I RE-RAN THE GREPS MYSELF AND READ THE CODE, NOT THE COMMENTS:
+  - `KEY` is `sb_publishable_...` - a PUBLISHABLE key. No `service_role`, no secret, no JWT-shaped
+    string anywhere in `web/`.
+  - The two legacy `innerHTML` sites (`app.js:255`, `:301`) - I OPENED BOTH. :255 interpolates only
+    `esc(lastError)` and `esc(age)` into a page-owned template; :301 interpolates NOTHING, it is two
+    static literals. The header comment is TRUE, and I say that having read the code beside it.
+  - 0 `outerHTML` / `insertAdjacentHTML` / `document.write` / `eval` / `new Function` in code.
+  - CSP meta intact: `default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none';
+    form-action 'none'`.
+  - The write path posts to `/hub_actions` with **the viewer's own session token**, not `KEY`, and
+    the page frames an action as a REQUEST the engine may refuse. RLS is the authority.
+  - **`style.css?v=9` AGAINST `app.js?v=11` IS CORRECT AND NO BUMP IS OWED.** `style.css` is not in
+    the hub's six-file delta. I nearly wrote this up as a defect; I measured instead. NOBODY IS TO
+    "FIX" IT.
+**THE UNPUBLISHED DELTA, MEASURED BY ME THIS HOUR - DO NOT COPY THESE, RE-MEASURE:**
+`origin/gh-pages^{tree}` = **dd6294a0**, `origin/main^{tree}:web` = **83f134fd**. 525 changed paths,
+but **the only RENDERED files are `app.js` +15/-2 and `index.html` +1/-1, and ZERO `.webp` changed.**
+The remaining **520 are `.webp.import` Godot sidecars** art committed under `web/icons/items/ring/`.
+The earlier "the entire difference is web/NOTES.md" and the 23eee62a / e346dc16 pair are SPENT.
+
+### 5. TAKE THIS NEXT - SIX ROWS. THE BRIDGE IS BACK; THE GODOT LOCK IS REAL AGAIN.
+**EVERY LANE: the no-claim-while-the-bridge-is-down instruction is WITHDRAWN. Godot launches again,
+so the lock protocol is back in full force and a claim must be honest.** Your work is merged and on
+`origin/main` - pull before you start, do not re-do it.
+GAME BUILD: **action-queue polling, per supervisor answer (b), and you can gate it now.** The
+  `hub_actions` INSERT grant was applied live at 05:18 CT, so you are polling a table that exists
+  and is writable - the hub is no longer building against nothing. Your order stands: finish the
+  death model slice -> polling -> snapshot 60s to 10-15s -> town for the rest of the deadline.
+  S171/S172/S173 are yours to render and close now that Godot is up.
+CONTENT: C-253, town-first words. C-250/251/252 are TICKED. Keep writing to the `/2` format now that
+  `data/town/README.md` names the per-tier shape - your words finally have a named reader.
+ART: the next town building down the ladder - the smithy, or the inn EXTERIOR (exterior only,
+  storage mechanic, NO interior rooms, per order 1 item 9). The hall ladder is TICKED; stop
+  re-verifying it. **ONE HOUSEKEEPING ITEM, YOURS BECAUSE IT IS YOUR OWN SHIPPED WORK:** you
+  committed **520 `.webp.import` Godot sidecars into `web/icons/items/ring/`**, which is the
+  PUBLISHED tree. The page loads `.webp` and never reads them, so they are dead weight that a
+  publish would push to gh-pages. Drop them or ignore them; it is not urgent and it breaks nothing.
+HUB: H36. Keep building the primary interface. **YOU NEVER PUBLISH** - that is unchanged and it is
+  not a judgement on this work. **Do NOT burn another cycle trying to prove the sign-in round trip:**
+  you cannot, you have correctly declined to claim it five times, and I have routed it up (6).
+HUD: U225, your call inside your seven files, town-first. U219 and U224 are TICKED. One row: when a
+  claim is COMPARATIVE ("no longer elided early"), commit the before-shot or the measured number -
+  three after-shots cannot carry it.
+CHAT BOT: the minimal-command surface under the hub-is-primary order. B221/B223 are TICKED. Your
+  routed `!help <cmd>` length-arm gap is noted and is still in `tools/`, which is not yours - I am
+  not asking you to take it.
+
+===== FOR THE SUPERVISOR =====
+1. **THE BACKLOG IS CLEARED.** Nine hours, six lanes, 32 commits, merged and pushed to `main` as
+   f0040478 with every conflict resolved keeping both sides and zero lines removed. No action needed;
+   reported because the last four runs escalated the outage and you should know it is over.
+2. **THE SINGLE POINT OF FAILURE IS STILL THERE, AND IT IS STILL NOT A LANE'S TO FIX.** Today cost
+   this house nine hours because every git path runs through one Blender addon on one Windows box.
+   The 09:58 seat found the second path and it is misconfigured: **this scheduled task is scoped to
+   `jestsayin96/music-studio`; the game is `jestsayin96/Bellmire-HD-stream`.** GitHub's own refusal
+   names the remedy and it needs A LIVE CHAT, not a firing. RECOMMENDATION UNCHANGED AND NOW
+   EVIDENCED BY A FULL DAY: have the scheduled tasks re-created from a live chat with
+   `Bellmire-HD-stream` in their authorised repository set. A dead Blender would then cost one Godot
+   lane instead of all seven.
+3. **THE HUB NEEDS ONE SIGNED-IN ROUND TRIP AND NO LANE CAN DO IT.** The page can sign in with
+   Twitch and file an action; nobody has ever run that end to end against the live project, because
+   the hub lane has no Twitch session and correctly will not claim what it has not proven. The
+   rendered delta is 2 files (`app.js` +15/-2, `index.html` +1/-1) and it is sitting unpublished.
+   RECOMMENDATION, pick one: (a) one signed-in round trip by Mr. E or yourself, after which I publish
+   under the pre-authorisation that same hour; or (b) authorise publishing the page with the write
+   path unproven, on the grounds that RLS is the authority and a refused insert is harmless. **I did
+   not take (b) on my own motion.** I am not asking Mr. E; this is yours.
+
+===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
+A LIVE TURN WITH MR. E CLEARS ALL OF THESE IN ONE PASS. The 04:58 list is carried and CORRECTED -
+two of its items changed meaning now the bridge is back, so do not paste it forward unread.
+  (i) ALL SEVEN PROMPTS carry "device_bash CANNOT RUN GIT" unqualified. True in a WORKTREE (its
+      `.git` is a file), FALSE in R and FALSE under `$HOME`, where read-only git including
+      `git ls-remote` works. Add the qualification and add the proven push refusal verbatim
+      ("only git clone, git fetch and plain downloads from GitHub work here, not git push") so
+      nobody re-tests it. STILL OWED.
+  (ii) THIS PROMPT says the Blender bridge is "required for Godot and all git". Qualify: required
+      for GODOT and for every WRITING git command; reads are available without it. STILL OWED.
+  (iii) THIS PROMPT's hub baseline is stale AGAIN and the 04:58 replacement is ALSO stale now.
+      Current, measured 11:0x CT: `gh-pages^{tree}` **dd6294a0**, `main:web` **83f134fd**, rendered
+      delta `app.js` +15/-2 and `index.html` +1/-1 only, zero `.webp`, plus 520 `.webp.import`
+      sidecars. REPLACE the whole paragraph, do not append to it.
+  (iv) THIS PROMPT's dead-data baseline says the corpus is 49 files / 2,549,132 chars. It read 51
+      files / 2,594,929 chars at 10:0x and the tree has grown again since. The NON-NOTE COUNT OF 15
+      IS THE FIGURE THAT MATTERS AND IT HAS NOT MOVED; the raw total never carries signal.
+  (v) The mount path note: `$HOME/mnt/` holds one entry, "hd adventure", so the path is
+      `$HOME/mnt/hd adventure/<worktree>`. The HUB's prompt separately says its mount is
+      `hd adventure/bellmire-hub` while that lane reports the real mount as `$HOME/mnt/bellmire-hub`;
+      the hub lane has now raised this twice. Check it and fix whichever is wrong.
+*** ===== END OF THE 10:58 CT BLOCK ===== ***
+
+================================================================================
+## THE 09:58 CT FIRING, 28 NOV 2026 - TEAM LEAD. SUPERSEDES EVERY ROW BELOW THIS LINE.
+Written 10:0x CT, 28 Nov 2026. Clock read with `TZ=America/Chicago date` (15:59 UTC = 09:59 CST).
+REACHES THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52). The game build
+fired at 10:07 while I was still measuring, so IT READS THIS AT 11:07. Uncommitted by necessity.
+I KEPT THE 08:58 SEAT'S SIX ROWS. They are sound and they already say the right thing. Section 7
+names the ONE addition. Do not re-read the rows as new work.
+
+### 1. NINTH HOUR. CAUSE RE-CONFIRMED FRESH AT 09:59 CT, NOT INHERITED.
+Blender MCP refused again: `Cannot connect to Blender at localhost:9876`. `get_device_info` reports
+the Blender MCP server `state: "announced"` - THAT IS THE STDIO SERVER PROCESS, NOT BLENDER BEING UP.
+DO NOT READ `announced` AS HEALTH. The 08:58 seat's `computer_list_apps` reading (`Blender 5.2,
+isRunning:false`) stands as the positive proof; I did not re-run it, and no seat is to touch the
+`computer_*` route for anything but a read until the supervisor rules (section 8(ii)).
+**NOTHING IS MISCONFIGURED. NO REPO IS BROKEN. NO LANE IS AT FAULT.**
+REFS UNMOVED FOR A NINTH HOUR, read from `refs/heads/*` AND cross-checked against the real remote
+with `git ls-remote` (which WORKS - see 3): `laptop ecad1a37`, `content 85f0709c`, `hub 3fd98e2a`,
+`art 42e8bc08`, `hud-ui a3111b96`, `main 1906a5d3`. Last commit 02:56 CT. Lock free since
+`IDLE HUD 02:56:06`. **BACKLOG = 25 commits** vs local main (laptop 6, hub 5, content 4, hud-ui 4,
+art 3, chatbot 3), plus uncommitted work in five trees.
+
+### 2. *** THE ROOT CAUSE IS NOT BLENDER. IT IS A WRONG REPO ON THIS SEAT'S SCHEDULED TASK. ***
+NEW THIS HOUR AND IT IS THE MOST USEFUL THING FOUND IN NINE HOURS. The reason a dead Blender takes
+the WHOLE HOUSE down is that every git path in this project runs through one Blender addon on one
+Windows box. There is a second path and it has been misconfigured all along:
+**this scheduled task is scoped to `jestsayin96/music-studio`. The game is `jestsayin96/Bellmire-HD-stream`.**
+GitHub's own refusal names the remedy verbatim: *"This is a run of a scheduled task, and a run cannot
+add repositories... The user can fix that in a new chat on claude.ai, by asking Claude there to add
+every repository that the task needs, not only the missing one, and then to replace this scheduled
+task with a new one created in that chat."*
+A FIRING CANNOT DO THIS - it needs a live turn, exactly like a prompt edit. **I PUSHED IT TO MR. E
+THIS HOUR** with both fixes: (1) launch Blender + start the addon server on 9876 now; (2) attach
+`Bellmire-HD-stream` and recreate the task, which would give this seat a git write path that does
+not depend on Blender at all and would end this single point of failure permanently.
+NEXT SEAT: do NOT re-prove the routes. CHECK WHETHER THE REPO IS ATTACHED (`gh api
+repos/jestsayin96/Bellmire-HD-stream`). If it is, you have git and you should merge and sync at once.
+
+### 3. INSTRUMENT CORRECTIONS - THE WALL IS NOT WHERE THE PROMPT SAYS IT IS.
+The team-lead prompt says `device_bash` "CANNOT DELETE" and to go "STRAIGHT TO THE BLENDER BRIDGE FOR
+GIT". Both are true of the MOUNTED folders and WRONG of `$HOME`. Measured myself this hour:
+  (a) **Under `$HOME`, `git init`/`add`/`commit` ALL SUCCEED (rc=0, no leftover `.lock`), and `rm`
+      SUCCEEDS.** The no-delete limit is a property of `C:\hd adventure` being a mounted Windows
+      folder, not of the shell. So a scratch clone under `$HOME` is a fully working git repo.
+  (b) **`git ls-remote` and `git fetch`/`clone` over HTTPS WORK** from `device_bash`. I read the live
+      remote and confirmed every lane SHA matches the local remote-tracking refs - nothing is
+      unfetched.
+  (c) **`git push` IS BLOCKED BY THE PROXY, BY NAME:** *"Cowork blocked this request: only git clone,
+      git fetch and plain downloads from GitHub work here, not git push, other uploads or Git LFS."*
+      HTTP 403. That is the whole wall, and it is a push wall only.
+  (d) Read-only git in **R** is safe (`.git` there is a real DIRECTORY). It is a FILE in the six
+      worktrees, which is why git fails in them. One pre-existing `objects/maintenance.lock` sits in
+      `R/.git`; it is harmless and blocks only `git maintenance`. I added none.
+  (e) A tree-wide `find` over the mount TIMES OUT at 120 s. Narrow to a path or use `git ls-tree`.
+
+### 4. *** TWO TICKS. A TICK IS A PLAN EDIT, NOT A MERGE. ***
+The 08:58 seat wrote "nobody can commit, so nothing is tickable". **I AM CORRECTING THAT, AND IT IS
+MY CALL TO MAKE.** Ticking is this seat's instrument and the plan-on-disk is reaching every lane
+(proven three hours running). A merge is a separate MECHANICAL step. Three consecutive seats have now
+left art's finished, eye-verified work unacknowledged waiting on a bridge - that is precisely the
+queueing fault this seat exists to prevent, and the work is COMMITTED on `refs/heads/art` already.
+  - **TICKED: ART - THE TOWN HALL TIER LADDER** (`town_hall_t1/t2/t3`). Verified by eye by the 07:58
+    seat (all five views, three tiers, monotonic growth against a shared knight). I did NOT re-look
+    and I am not claiming to have; I verified the ARTEFACTS myself on the committed ref: three
+    `.glb` at 712,700 / 1,475,840 / 2,411,360 B - monotonic, consistent with tier growth - each with
+    its `.glb.import` sibling (1,168 B), plus `TOWN_HALL_LADDER.md` (6,698 B),
+    `TOWN_HALL_TIERS_DESIGN.md` (8,394 B) and `docs/art/ASSET_SOURCES.md`. Licence read off disk by
+    the 07:58 seat (`Medieval_Village_MegaKit`, CC0). The lane's own commit message reports three of
+    its design numbers were wrong and it corrected them - that is the discipline we want.
+  - **TICKED: CHAT BOT B215, WHOLE.** The owed real gate (B216, 02:47-02:49 CT) went GREEN - 3
+    stages, STAGE1 rc=0, L14_TEST OK 27 checks, all three of B215's failing arms passing, DYE
+    COLOURS GHOST guard fired 0 times. I checked the ARTEFACT three ways myself rather than taking
+    the claim: `docs/COMMANDS.md` is md5 `501e95355b8a90c5ff847aadd65d7fc8` on W6's disk AND on
+    `refs/heads/chatbot`, matching the lane's reported md5 exactly. Supervisor answer (c) of 28 Nov
+    accepts routed-only coverage on these commands in writing, so no behavioural gate is owed.
+  - **A HYPOTHESIS OF MINE THAT DID NOT HOLD, RECORDED SO NOBODY CHASES IT:** I suspected B216's
+    output was stranded uncommitted. It is not. B215's emulation had already produced those exact
+    bytes, so the real gate CONFIRMED the committed file rather than changing it. No file was
+    stranded. I checked before writing it up.
+  - **NOT TICKED, AND WHY:** game build S171/S172/S173 (written behind `WELL_TIER_MESHES=false`,
+    correctly, and awaiting a render it cannot run); hub H34; HUD U219; content's cycle; chat bot
+    B221. All are PART-delivered or unrenderable - half delivered, still open, inherited by the same
+    owner. Nobody is charged for the bridge.
+
+### 5. BACKLOG REFINEMENT - ONE LANE NEEDS A PUSH, NOT A MERGE.
+`refs/heads/chatbot` is **ef136947** but `refs/remotes/origin/chatbot` is **bbbc7439**. The lane
+merged `origin/main` into its branch locally at 02:46 CT and the push never landed. So chatbot is
+3 ahead of local main but only 2 ahead of the REMOTE. WHEN GIT RETURNS: chatbot needs a **push** as
+well as a merge, or that merge commit is lost. Every other branch is identical local vs remote.
+The 08:58 seat's figures were right and self-consistent (it used `refs/heads` throughout); this is
+the one place the two refs disagree and it is worth knowing before you sync.
+
+### 6. THE DEAD-DATA AUDIT - BACKLOG STILL DRAINED, SERIES INTACT.
+Measured 10:0x CT off **R's working tree (branch `laptop`, 6 commits ahead of main)** - NOT merged
+main, which I cannot build. Say the same when you quote it.
+Corpus `scripts/*.gd` + `web/app.js` = **51 files** (50 `.gd`), 2,594,929 chars. `data/*.json` = 12
+files, **181 top-level keys**. ZERO-HIT = **87 = 74 `_note_` + 13**.
+**THE NON-NOTE COUNT IS 15 ON THE CHARTER'S CONVENTION AND HAS NOT MOVED.** My matcher reads 13
+because guard 2 already excludes the two runtime-built pools (`lord_intros_alt`, `unique_intros_alt`,
+READ at `delve.gd:4022`); the charter's 15 counts them in. 13 + 2 = 15. The 13 are exactly the
+charter's breakdown: 4 declared-dead (`phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+`town_levels_for_the_desktop`) + 9 prose/spec strings (`technique`, `boss_floors`, `chronicle_line`,
+`word_order`, `casing`, `promotion_line`, `one_roll`, `_gating`, `canon_silences`).
+**UNREAD LIVE DATA KEYS: ZERO.** Raw 87 vs the charter's 88 and 181 keys vs 179 = content's new
+`_note_` keys, which carry no signal. NO LANE IS TO WIRE A `_note_` KEY OR ANY OF THE 13.
+**I DID NOT RE-RUN THE UNREFERENCED-ASSET-DIRECTORY WALK** - it needs `.glb` binary greps that time
+out over this mount. I am NOT carrying the figure forward as if measured. It was ZERO at 00:1x CT.
+
+### 7. TAKE THIS NEXT - THE 08:58 SEAT'S SIX ROWS STAND. ONE ADDITION.
+Read section 6 of the 08:58 block below for your row. All six are current: **while the bridge is
+down, DO NOT CLAIM THE GODOT LOCK** - it is free but Godot cannot launch, so a claim would be a lie.
+Write to disk, log the cycle, keep ONE owed-commit file updated in place. That is delivery and it is
+ticked as delivery.
+**THE ONE ADDITION, FOR EVERY LANE:** when git returns, your FIRST act is to commit the named files
+in your owed-commit file (never `-A`) and PUSH. Do not start new work ahead of that - nine hours of
+finished work is sitting in working trees and it is the most fragile thing in the house.
+**ART, ONE EXTRA:** your tier ladder is TICKED (section 4). Stop re-verifying it and carry on down
+the town-first ladder. The housekeeping row in the 08:58 block still stands: fold the per-run
+`_ART_COMMIT_OWED_nov28_<hhmm>.md` copies back to ONE file updated in place.
+
+### 8. FOR THE SUPERVISOR - THREE ITEMS. TWO CARRIED UNANSWERED, ONE NEW.
+  (i) **TOWN-PROGRESSION WIRING** (raised 07:58, 08:58 - still unanswered, now 3 hours). Both halves
+      exist and neither is wired: content's `town_buildings` in `data/lore_lines.json` is complete,
+      art's `town_hall_t1/t2/t3` are built, licence-clean, eye-verified AND NOW TICKED. The key
+      carries an explicit "no lane wires this key" note. The game build has ALREADY WRITTEN the
+      reader (`scripts/town_tiers.gd`, S171-S173, uncommitted, behind an off flag). It needs ONE
+      LINE FROM YOU. RECOMMENDATION: clear the game build to read `town_buildings` as the data
+      source for town visual progression and strike that note. This is priority #1 under your own
+      town-first order and it is blocked on one sentence.
+  (ii) **MAY A SCHEDULED FIRING LAUNCH BLENDER ITSELF?** (raised 06:58 - unanswered, now 4 hours.)
+      The `computer_*` route is present and could have ended this outage nine hours ago. NO SEAT HAS
+      TOUCHED IT. My lean matches my predecessors': NO without Mr. E's own words - a hard rule
+      protects his open Blender scene and unattended desktop control is in no lane's charter. But
+      **a ruling either way, in the prompts**, stops a tenth hour being spent re-asking.
+  (iii) **NEW: THE GITHUB REPO FIX IN SECTION 2 IS THE REAL ANSWER TO (ii).** It needs no desktop
+      control and no new rule - just the right repo on the task. RECOMMENDATION: back it with Mr. E
+      directly. It removes Blender from the git path permanently, which is the actual fault that has
+      cost this house nine hours. I have pushed it to him; a supervisor nudge would carry more.
+
+### 9. FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS: TWO. BOTH NEW THIS HOUR.
+A firing cannot edit a prompt (no live turn to be approved in). These live here until a live turn:
+  1. **THE TEAM-LEAD PROMPT'S `device_bash` RULES ARE WRONG AS WRITTEN.** "IT CANNOT DELETE" and
+     "GO STRAIGHT TO THE BLENDER BRIDGE FOR GIT" are true of the mounts only. Under `$HOME` git
+     commits and `rm` both work, and `fetch`/`ls-remote` work over the network. Only PUSH is walled.
+     Fix: scope both sentences to the mounted folders and record the push refusal verbatim.
+  2. **CARRIED FROM 08:58 - THE DATA-GLOB RULE GOES WRONG THE MOMENT S171-S173 COMMITS.** Every
+     prompt says the data glob is `data/*.json` one level and that `data/town/bellmire.json` is "a
+     tools/ artefact, not live data". `scripts/town_tiers.gd` makes it **live data the engine
+     requires** (`setup()` returns false unless both files load). 110,206 B, 0 hits on main today.
+     The audit will under-count on that commit.
+  (The 07:58 seat's mount-path correction is CLOSED by disproof - the prompt is right as written.
+   Do not carry it.)
+================================================================================
+
+================================================================================
+## THE 08:58 CT FIRING, 28 NOV 2026 - TEAM LEAD. SUPERSEDES EVERY ROW BELOW THIS LINE.
+Written 09:0x CT, 28 Nov 2026. Clock read with `TZ=America/Chicago date` (14:59 UTC = 08:59 CST).
+REACHES THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52). The game build
+reads it at 09:07 if I finished in time, otherwise 10:07 - it is written either way.
+UNCOMMITTED BY NECESSITY. There is still no git write path. See 2 for why that does NOT block you.
+
+### 1. EIGHTH HOUR. THE CAUSE IS RE-CONFIRMED FRESH, NOT INHERITED.
+Blender MCP refused again at 08:59 CT (`Cannot connect to Blender at localhost:9876`).
+I re-measured the cause myself rather than copying it forward: `computer_list_apps` returns
+**`{"displayName":"Blender 5.2","isRunning":false}`** at 08:59 CT. THE APP IS NOT RUNNING.
+`get_device_info` still reports the Blender MCP server `announced` - that means the stdio server
+process started, NOT that Blender is up. DO NOT READ `announced` AS HEALTH.
+**NOTHING IS MISCONFIGURED. NO REPO IS BROKEN. NO LANE IS AT FAULT.** A person must launch Blender
+on cruzader AND start the MCP addon's server on port 9876. Pushed to Mr. E again this hour.
+**REFS UNMOVED FOR AN EIGHTH HOUR**, read from R's live `refs/heads/*` (no fetch, no lock):
+`laptop ecad1a37`, `content 85f0709c`, `hub 3fd98e2a`, `art 42e8bc08`, `hud-ui a3111b96`,
+`chatbot ef136947`, `main 1906a5d3`. **BACKLOG = 25 unmerged commits** (laptop 6, hub 5, content 4,
+hud-ui 4, art 3, chatbot 3) plus this hour's uncommitted work in five trees. Last commit 02:56 CT.
+The four write routes stay proven closed. **DO NOT RE-PROVE THEM** - that is six seats of spent hours.
+
+### 2. A CORRECTION I OWE THE HOUSE: THE PLAN *IS* REACHING YOU. IT IS NOT FROZEN.
+The 07:58 CT team-lead report states "the rows the lanes are reading are the 01:58 firing's" and that
+it "could not write or sync the plan". **THAT IS WRONG, AND IT UNDERSTATES WHAT THIS SEAT CAN DO.**
+The 06:58 seat had already written its block into **all seven working copies directly with
+`device_bash`** at 07:15 CT. I verified it: every one of the seven on-disk `docs/WORK_PLAN.md` files
+is byte-identical to the others (md5 `b19a056c...`) and carries the 06:58 block at line 2.
+**THE DISK-WRITE ROUTE WORKS AND IT IS THE ONE WRITE PATH THIS SEAT HAS.** A lane reads the plan off
+its own worktree's **working copy**, which needs no git at all. So Step 4 is never blocked by the
+bridge, and no seat should report the plan as unwritable again. This block went out the same way.
+TWO THINGS THE NEXT SEAT MUST KNOW ABOUT THIS ROUTE:
+  (a) Write the **identical bytes** to all seven copies. They then match whatever a later
+      `commit-tree` sync pushes, so the checkout stays clean and no lane hits a conflict.
+  (b) Before writing, prove no lane has dirtied the file: compare each worktree's on-disk md5
+      against `git show refs/heads/<branch>:docs/WORK_PLAN.md | md5sum`, run **from R**. All seven
+      matched each other this hour, so nothing of any lane's was overwritten.
+
+### 3. AN INSTRUMENT CORRECTION - `tasklist` DOES NOT EXIST ON THIS SEAT.
+The 07:58 report credits its process count to "`tasklist` WORKS and reports `blender_procs=0`".
+**`tasklist` is NOT reachable from `device_bash`**: I checked `tasklist`, `tasklist.exe`, `cmd.exe`,
+`powershell.exe`, `wmic.exe`, `pwsh.exe`, `/mnt/c` and `/proc/version` - no Windows interop of any
+kind. `device_bash` is a Linux container; the only route to a Windows process list is the Blender
+bridge (which is down) or `computer_list_apps`. **THE FACT WAS RIGHT, THE INSTRUMENT WAS NOT.**
+Cite `computer_list_apps`. And note the trap that produced it: `cmd | head; echo rc=$?` prints
+**`head`'s** rc, not your command's - a failed command reads as a clean rc=0. Capture `$?` off the
+bare command. That is the third time this exact fault has bitten this house.
+
+### 4. CONTENT HAS BEEN SILENT FOR THREE CONSECUTIVE FIRINGS. THIS IS THE LANE-LEVEL FINDING.
+Content's newest file in `Bellmire-content` is `PROGRESS.md` at **05:23 CT**. Nothing at 06:22,
+07:22 or 08:22. Every other lane produced work this hour (5 below). Under the supervisor's deadline
+order - "No wasted hours. No standing down when there's work to pick up" - three lost cycles twelve
+days out is the most expensive thing on this page. **CONTENT: you are not blocked.** Your charter is
+four data files plus `drops.json`; none of them needs Godot, git or the bridge. Write to disk, log
+the cycle in `PROGRESS.md`, and leave a `_CONTENT_COMMIT_OWED.md` naming the exact files to stage,
+exactly as art, the game build and the chat bot are doing. If you believe you are genuinely out of
+work, say so in `PROGRESS.md` in one line so the next seat sees a reason instead of silence.
+
+### 5. WHAT I VERIFIED THIS HOUR - FIVE LANES WORKED, NOTHING IS TICKABLE
+Nobody can commit, so nothing is tickable and no lane is charged for that. Recorded so none is lost:
+- **GAME BUILD S173** (08:12 CT): `scripts/town.gd` well-tier mesh swap written **behind
+  `WELL_TIER_MESHES=false`**, crier shares `_tiers_ready`; owed file names the exact stage list and
+  says commit with the flag OFF, flip only after a render. Correct discipline for blind work.
+- **ART** (08:34-08:44 CT): `WELL_TIER3_MATERIAL_READ.md` (8,046 B), `tools/art/_tiersheet_chroma.py`,
+  `tools/art/_glbbounds.py`, owed file refreshed. Town-first tier work, unbroken for three runs.
+- **CHAT BOT B221** (08:51-08:53 CT): `scripts/chatcmd.gd` edited, `_b221_verify.log` (4,014 B),
+  owed file 11,813 B.
+- **HUB** (08:38 CT) and **HUD** (08:52 CT): cycle notes appended to `PROGRESS.md`; no code this hour.
+- **ART'S TICK IS STILL OWED AND STILL VERIFIED.** The 07:58 seat checked the `town_hall_t1/t2/t3`
+  ladder by eye (all five views, three tiers, monotonic growth against a shared knight) and read the
+  `Medieval_Village_MegaKit` CC0 licence off the file on disk. **TICK IT ON SIGHT when git returns.
+  Do not spend a third cycle re-verifying it.**
+
+### 6. TAKE THIS NEXT - SIX ROWS. WHILE THE BRIDGE IS DOWN, DO NOT CLAIM THE GODOT LOCK.
+The lock's last line is `IDLE HUD 2026-11-28T02:56:06-06:00`. It is free, but Godot cannot launch,
+so a claim would be a lie. Write to disk, log the cycle, leave an owed-commit file. That is delivery.
+- **GAME BUILD** - action-queue polling (supervisor answer (b) puts it before town for YOUR lane
+  only; the `hub_actions` INSERT grant was applied at 05:18). Keep it behind a flag as you did for
+  S173. Then snapshot cadence 60s -> 10-15s. Commit S171+S172+S173 the moment git returns, exact
+  files from your owed file, never `-A`.
+- **CONTENT** - see 4. You have three cycles to make up and nothing blocking you.
+- **ART** - continue the town tier ladder under town-first. **ONE HOUSEKEEPING ROW:** you are now
+  writing a NEW `_ART_COMMIT_OWED_nov28_<hhmm>.md` every run (0334, 0534, 0734, 0834). The 05:58 row
+  asked for **ONE** file updated in place, newest on top - the game build and chat bot both do this.
+  Fold back to one `_ART_COMMIT_OWED.md`; the per-run copies are clutter a human has to reconcile.
+- **HUB** - action-queue write path against the granted INSERT, per order 2 (hub is the primary
+  interface). H34 is sound - the 07:58 seat checked the v=10 cache-bust and the lane was right.
+  You NEVER publish; web/-only pushes are the team lead's under the 28 Nov pre-authorisation.
+- **CHAT BOT** - B221 continues. Hold at minimal commands per order 2; everything shipped stays as a
+  fallback. No Godot, so no gate - say so plainly rather than reporting an unearned one.
+- **HUD** - continue U219 band work. `party_frames.gd` is **NOT YOURS** - it is the game build's
+  under the L31 re-route, and this seat wrongly handed it to you twice on 27 Nov. Refuse it again.
+
+### 7. FOR THE SUPERVISOR - TWO ITEMS, BOTH CARRIED, NEITHER MINE TO TAKE
+  (i) **TOWN-PROGRESSION WIRING** (raised 07:58, unanswered). Both halves now exist and neither is
+      wired: content's `town_buildings` in `data/lore_lines.json` (tier_levels {1:1,2:5,3:9}, landmark
+      and site tier names, crier lines, well->fountain, market_growth) is complete, and art's
+      `town_hall_t1/t2/t3` are built, licence-clean and eye-verified. The key carries an explicit
+      "no lane wires this key" note. RECOMMENDATION: clear the game build to read `town_buildings`
+      as the data source for the town visual progression and strike that one line. I read it as the
+      half-of-an-existing-item judgement (Systems 15-17, already Mr. E's, already priority #1), but
+      the explicit note is a standing instruction and I will not override it on my own authority.
+      **NOTE: the game build has ALREADY built the reader** (`scripts/town_tiers.gd`, S171-S173,
+      uncommitted). It is written and sitting behind a flag awaiting this one line from you.
+  (ii) **MAY A SCHEDULED FIRING LAUNCH BLENDER ITSELF?** (raised 06:58, unanswered.) The
+      `computer_*` route is present and could end an eight-hour outage without waking Mr. E. NO SEAT
+      HAS TOUCHED IT and none is to until you rule. Read-only probes are fine and are how the cause
+      was proved. RECOMMENDATION: ruling either way, in the prompts, so the ninth hour is not spent
+      re-asking. My own lean is NO without Mr. E's own words - a hard rule protects his open Blender
+      scene and unattended desktop control is in no lane's charter.
+
+### 8. FOR THE NEXT TEAM LEAD
+- **TWO BASELINE FACTS CHANGE THE MOMENT S171-S173 COMMITS. I MEASURED BOTH IN THE WORKING TREE.**
+  The game build's uncommitted `scripts/town_tiers.gd` **genuinely loads both files** - `setup()`
+  returns false unless BOTH are non-empty (`_read_json` :26/:28, `layout.get(kind+"s")` :146):
+  (a) `town_buildings` STOPS being zero-hit, so the non-note count goes **16 -> 15**. On committed
+      `main` it is still 0 hits, so this hour's audit is unaffected - but do not be surprised by it.
+  (b) `data/town/bellmire.json` STOPS being a tools artefact and becomes **live data the engine
+      requires**. Every prompt and this plan currently say the data glob is `data/*.json` one level
+      and that `data/town/bellmire.json` is "a tools/ artefact, not live data". **THAT BECOMES WRONG
+      ON THAT COMMIT** and the audit will under-count. It is 110,206 B and 0 hits on main today.
+      A firing cannot edit a prompt, so this is the owed correction: when a live turn is available,
+      fix the data-glob rule in the team-lead prompt. Until then it lives here.
+  I verified the game build's own claim rather than taking it: `const WELL_TIER_MESHES := false`
+  (town.gd:139) and the guard at :1116. The flag IS off. The lane reported this accurately.
+- **OWED PROMPT CORRECTIONS: ZERO.** The 07:58 seat closed the last one by disproving it (the mount
+  path is flat and the prompt is correct as written). Do not carry a list that is empty.
+- **THE DISK-WRITE ROUTE IN 2 IS YOURS AND IT IS PROVEN TWICE.** Never report the plan as unwritable.
+- Everything in 1-5 above was measured this hour. Re-measure before you quote any of it.
+================================================================================
+
+================================================================================
+## THE 06:58 CT FIRING, 28 NOV 2026 - TEAM LEAD. SUPERSEDES EVERY ROW BELOW THIS LINE.
+Written ~07:2x CT. Reaches content (:22), art (:34), hub (:37), chat bot (:45) and HUD (:52) THIS
+hour; the game build reads it at 08:07. Uncommitted by necessity - there is still no write path.
+
+### 1. SIXTH HOUR. THE BRIDGE IS DOWN AND I NOW KNOW WHY, POSITIVELY.
+Blender MCP refused again at 06:59 CT. **NEW THIS HOUR, AND IT IS NOT AN INFERENCE:**
+`get_device_info` reports the Blender MCP server **registered and "announced"** - the config is
+intact - and `computer_list_apps` reports **"Blender 5.2", isRunning: FALSE**. Five seats inferred a
+dead bridge from a refused socket; the device itself now says the application is simply not running.
+**NOTHING IS MISCONFIGURED. NO REPO IS BROKEN. NO LANE IS AT FAULT.** The fix is: launch Blender on
+cruzader and start the MCP addon server on 9876. That is the whole outage.
+
+**REFS UNMOVED FOR A SIXTH HOUR**, by my own `ls-remote` at 07:0x CT - byte-identical to the 04:58
+and 05:58 measurements: `laptop ecad1a37`, `content 85f0709c`, `hub 3fd98e2a`, `hud-ui a3111b96`,
+`art 42e8bc08`, `chatbot bbbc7439`, `main 1906a5d3`, `gh-pages 06dc91f6`. No lane has pushed since
+02:07 CT. **THE BACKLOG IS NOW 24 COMMITS: laptop 6, hub 5, content 4, hud-ui 4, art 3, chatbot 2**,
+plus this hour's uncommitted work in five trees. Nothing merged, ticked, synced or published.
+
+The four write routes stay proven closed (Blender MCP; `git push` refused by the proxy; GitHub MCP
+scoped to `music-studio` only; `gh` 403 with "a run cannot add repositories"). **DO NOT RE-PROVE
+THEM** - that is five seats' worth of spent hours. A fifth route exists and is NOT yours: see 3.
+
+### 2. TWO INSTRUMENT CORRECTIONS I OWE THE HOUSE - BOTH BIT ME THIS RUN
+(a) **GIT READ WORKS IN `R` ONLY. NEVER IN A WORKTREE, ON ANY SEAT.** The 05:58 row said "on a seat
+where the parent `C:\hd adventure` is mounted". That is right for **R** and misleading for your own
+tree: I had the parent mounted and `git -C <worktree> status` still died in all six -
+`fatal: not a git repository: .../mnt/bellmire-art/C:/hd adventure/.../worktrees/...` - because a
+worktree's `.git` is a FILE holding an absolute **Windows** path. So: read refs and history in
+`jests-hd-medieval-adventure` (a real `.git` directory); for a worktree, compare **FILES** (sizes,
+md5, key diffs against `git show origin/<branch>:<path>` run from R). Run `ls "$HOME/mnt/"` first and
+say which shape you got. Do not call `device_request_folder_access` - every prompt forbids it.
+(b) **`echo rc=$?` AFTER A PIPE REPORTS THE PIPE'S LAST COMMAND, NOT YOUR COMMAND.** I ran
+`timeout 35 find ... | sort; echo rc=$?` and got `rc=0` from `sort` while `find` had been **killed by
+the timeout** - so an unwalked tree printed nothing and read exactly like a clean one. It made me
+report the HUD as having done nothing this hour; a direct `stat` disproved it in one call. Redirect
+to a file, capture `$?` on the bare command, then read the file. A command that produces no value is
+RED, NOT EMPTY - and a timed-out walk over this mount is the commonest way to get a false clean.
+A seven-tree `find` times out at 120 s; one tree per call at `-maxdepth 3/4` returns in seconds.
+
+### 3. THE COMPUTER-USE ROUTE EXISTS, AND NO LANE IS TO TOUCH IT
+`mcp__remote-devices__computer_*` is present on this device: it is how I proved Blender is not
+running (read-only, no grant, no prompt). It could in principle **launch** Blender and end the
+outage without Mr. E. **I DID NOT, AND NOBODY IS TO.** Taking control of Mr. E's desktop unattended
+is not in any lane's charter, a grant request would wake him for a prompt either way, and a hard
+rule protects his open Blender scene. **Read-only probes of this route are fine and useful; clicking,
+typing or launching is not.** The question "may a firing start Blender itself?" is the supervisor's
+and is routed up this hour. Until it is answered: do not attempt it.
+
+### 4. WHAT I VERIFIED THIS HOUR - FIVE LANES WORKED, NOTHING IS TICKABLE
+Nobody can commit, so nothing is tickable and no lane is charged for that. Verified so none is lost:
+- **GAME BUILD S171** (06:10-06:11 CT): `scripts/town_tiers.gd` 7,811 B and `tools/_s171_tiers.gd`
+  2,532 B exist uncommitted in R with `_GAMEBUILD_COMMIT_OWED.md`. Town-first reader for
+  `town_buildings`. Python-mirror logic check only, no parse gate - correctly declared as such.
+- **ART** (06:37-06:50 CT): NEW `tools/art/_openinglist.py` + `docs/art/TOWN_OPENING_LIST.md`,
+  `TOWN_TIER_FIT_SPEC.md`, `TOWN_CHAPEL_LADDER_PLAN.md`, `TOWN_LATTICE_AUDIT.md` grown to 32,343 B.
+  **AND IT FOLDED ITS OWED FILES INTO ONE `_ART_COMMIT_OWED.md`** - the 05:58 row obeyed exactly.
+- **HUB** (06:38 CT): `web/app.js`, `web/index.html`, `web/NOTES.md`,
+  `web/tools/hub_actions_schema.sql`, PROGRESS.md. Substantive web/ work.
+- **CHAT BOT B219** (06:48-06:52 CT): `data/commands.json` 27,566 -> 27,867 B, `_b219_verify.log`.
+- **HUD** (06:53 CT): a PROGRESS entry only; no `.gd` and no log changed this hour. A bridge-down
+  write-up is a delivery and I record it as one.
+- **CONTENT**: no file changed in its tree this hour (its 05:23 CT C-251 delta stands and is still
+  safe to commit as is). I have no evidence either way and **I am not charging it with idling.**
+
+### 5. THE `hub_actions_schema.sql` GRANT LINE - I AM RESOLVING AN OWNERSHIP STANDOFF
+Measured by me: the file has **ZERO literal `GRANT`/`REVOKE` statements** (only a comment at line 36
+describing the policy). The supervisor's 05:18 INSERT grant is applied to the live DB and is still
+NOT recorded in the repo. It has now sat a full cycle because **the 05:58 row gave it to the GAME
+BUILD (per the supervisor's own wording) while the game build's 06:07 write-up pointed back at the
+HUB ("it's the hub's web/ file")**. Both readings are defensible and the effect was that nobody did
+it. **I AM ROWING IT TO THE HUB** - the file is in the hub's tree, inside the hub's charter, and the
+hub demonstrably edited it at 06:38 this hour, while the game build cannot even see W without the
+bridge. I SAY OUT LOUD THAT I READ IT THAT WAY, and the authority question is routed to the
+supervisor to confirm or overturn. GAME BUILD: this is off your row; do not also do it.
+
+### 6. HOUSEKEEPING: ONE OWED FILE PER LANE, AND THE NAME MATTERS
+Art complied. The chat bot wrote `_CHATBOT_COMMIT_OWED_nov28_0655.md` - still a **dated** name, so
+the pile grows (`_0308`, `_0445`, `_0545`, `_0655`). The row is: keep exactly
+**`_<LANE>_COMMIT_OWED.md`**, no date in the filename, and update it in place with a dated line at
+the TOP. Do not try to delete the old ones - this shell cannot delete and a half-deleted file is
+worse than a stale one. Not a charge; a one-line fix next time the file is open.
+
+### 7. TAKE THIS NEXT - SIX ROWS. WHILE THE BRIDGE IS DOWN, DO NOT CLAIM THE GODOT LOCK.
+Godot cannot start, so a claim is a false claim. Keep producing in your own files, keep ONE owed
+file, and state plainly in PROGRESS.md that your gates are unrun.
+- **GAME BUILD** - wire `town_tiers.changes()` into `growth.gd`'s level step (town-first, priority
+  #1). Write it; the render and the parse gate wait for the bridge. The schema GRANT line is OFF
+  your row (5). Keep the S171 commit recipe exact.
+- **CONTENT** - continue `town_buildings` prose for the progression tiers against art's
+  `TOWN_TIER_FIT_SPEC.md` (06:48 CT, its tree). C-251 is verified additive and safe; do not rework
+  it. `town_buildings` is NOT dead data - it is the content half of priority #1 awaiting S171.
+- **ART** - continue the tier ladders off `TOWN_TIER_FIT_SPEC.md` and `TOWN_CHAPEL_LADDER_PLAN.md`.
+  **Do NOT edit a shipped `.glb` you cannot render** - your 05:3x call on that was right and I
+  endorse it again. The 88 unbacked openings stay documented, not fixed, until fit can be proven.
+- **HUB** - (i) add the literal `GRANT` line to `web/tools/hub_actions_schema.sql` per (5);
+  (ii) carry on the action-queue write path. You NEVER publish - that is a hard rule and the
+  pre-authorisation is mine, not yours.
+- **CHAT BOT** - B219 stands; fold the owed file to the single name (6). Chat stays MINIMAL per the
+  supervisor's order 2 - no new command that the hub should own.
+- **HUD** - take the highest-priority HUD-shaped item you can advance without Godot and say in
+  PROGRESS.md that its gate is unrun. `party_frames.gd` is STILL NOT YOURS (L31 re-route, your own
+  seven-file charter) - if a row ever hands it to you again, refuse and cite this line.
+
+### 8. NOTIFICATIONS - I SENT THE FIFTH AND IT IS THE LAST
+Art pinged at ~04:3x and ~05:3x, the chat bot at 05:45, and the 05:58 seat deliberately sent none.
+**I sent ONE at ~07:2x CT**, because this hour produced something the earlier pings did not have: the
+ask is no longer "something is wrong with the bridge" but **"Blender is not running - open it and
+start the MCP addon server on 9876"**, which is a five-second action, plus the fact that the cost is
+now 24 commits across six lanes against a ~10 Dec deadline. **NOBODY SENDS A SIXTH.** If a later seat
+finds something genuinely new that only he can act on, ping once and say what is new.
+================================================================================
+
+*** ===== TAKE THIS NEXT - THE 05:58 CT FIRING, 28 NOV 2026 ===== ***
+*** WRITTEN 06:1x CT. It REACHES content (:22), art (:34), hub (:37), chat bot (:45) and HUD (:52)
+*** THIS HOUR; THE GAME BUILD READS IT AT 07:07. THIS BLOCK SUPERSEDES EVERY ROW BELOW IT,
+*** INCLUDING THE 04:58 BLOCK, WHICH WAS SOUND AND WHOSE STANDING INSTRUCTIONS STILL HOLD EXCEPT
+*** WHERE CORRECTED HERE.
+*** STILL UNCOMMITTED, BY NECESSITY - no push path exists on this machine. Written into the
+*** WORK_PLAN.md WORKING COPY of all seven trees. It is the plan you read; it is not on any ref.
+
+=== 1. THE OUTAGE IS IN ITS FIFTH HOUR, AND MR. E HAS ALREADY BEEN PINGED THREE TIMES ===
+Blender MCP refused again at 05:59 CT ("Cannot connect to Blender at localhost:9876"). No lane has
+pushed since 02:07 CT. Measured by ls-remote at 06:0x, every lane ref is BYTE-IDENTICAL to the
+04:58 measurement: laptop ecad1a37, content 85f0709c, hub 3fd98e2a, hud-ui a3111b96, art 42e8bc08,
+chatbot bbbc7439, main 1906a5d3, gh-pages 06dc91f6. Nothing merged, ticked, synced or published for
+five hours. That is a machine fault, NOT a lane fault and NOT a queueing fault.
+*** DO NOT SEND A FOURTH PUSH NOTIFICATION ABOUT IT. *** The art lane pinged him at ~04:3x and
+~05:3x and the chat bot at 05:45. It is ~06:00 on a Saturday and he is most likely asleep. The ask
+is one line and identical from every seat; a fourth and fifth copy of it is noise, not urgency.
+I sent NONE this run and said so in my report. If you find something NEW that only he can act on,
+ping once. Otherwise write it down and get on with the work.
+
+=== 2. CORRECTION I OWE YOU: "GIT READ WORKS FROM device_bash" IS TRUE ONLY ON SOME SEATS ===
+The 04:58 block told you git read works from the Linux shell. **It is conditional and the ART LANE
+AT 05:34 WAS RIGHT TO SAY SO.** A worktree's `.git` is a FILE holding an absolute Windows path that
+points INTO R. So the read only works if the PARENT folder `C:\hd adventure` is mounted on your
+seat. Art's 05:34 seat had ONLY `C:\hd adventure\bellmire-art` mounted and every git command died:
+    fatal: not a git repository: .../mnt/bellmire-art/C:/hd adventure/.../worktrees/bellmire-art
+*** SO: RUN `ls "$HOME/mnt/"` FIRST AND SAY WHICH SHAPE YOU GOT. *** If you see `hd adventure` as a
+single entry, the parent is mounted and git read works in R at
+`$HOME/mnt/hd adventure/jests-hd-medieval-adventure`. If you see only your own worktree, git is
+unavailable to you for a SECOND reason and that is not the bridge - say so and do not retry.
+DO NOT CALL `device_request_folder_access`; it is forbidden by every prompt in this house. And do
+not conclude from another seat's success that git is available on yours. My seat this run HAD the
+parent mounted, which is the only reason anything below was measurable.
+
+=== 3. ALL FOUR WRITE ROUTES ARE NOW PROVEN CLOSED. STOP TESTING THEM. ===
+Two were proven at 04:58; I proved the other two this run, each with the tool's own words:
+  (a) Blender MCP - refusing connections. The only route to Godot and to writing git.
+  (b) device_bash `git push` - proxy: "only git clone, git fetch and plain downloads from GitHub
+      work here, not git push, other uploads or Git LFS."
+  (c) THE GitHub MCP TOOLS (`mcp__github__*`) - NEW THIS RUN: "Access denied: repository
+      jestsayin96/bellmire-hd-stream is not configured for this session. Allowed repositories:
+      jestsayin96/music-studio." And `add_repo` IS NOT AVAILABLE in a scheduled run.
+  (d) THE `gh` CLI - NEW THIS RUN: HTTP 403, "GitHub access to this repository is not enabled for
+      this session. This is a run of a scheduled task, and a run cannot add repositories, so do not
+      retry this request."
+Also unchanged: device_bash CANNOT DELETE in a connected folder, so a writing git command there
+strand a `.lock` in R/.git and break git for every lane. I ran none. READ ONLY. The one safe
+fetch-like command is `git ls-remote origin`, which writes nothing.
+
+=== 4. GOOD NEWS A LANE CANNOT SEE FROM ITS OWN TREE: hub_actions IS NOW FULLY OPERATIONAL ===
+The supervisor applied this on a live turn at 05:18 CT, closing the defect the 03:58 seat found:
+    grant insert on public.hub_actions to authenticated;
+    revoke select on public.hub_actions from anon;
+Verified by it: has_table_privilege('authenticated',...,'INSERT') = true, SELECT = true, and
+anon INSERT = false. **GAME BUILD: STOP REPORTING THE INSERT GRANT AS MISSING - IT IS APPLIED.**
+**HUB: the action queue you are building against is writable now.** The remaining gate is Mr. E
+enabling the Twitch provider in Supabase Auth (client ID + secret) - his, and already recorded.
+ONE REPO EDIT IS OWED FROM THIS: `web/tools/hub_actions_schema.sql` on disk still lacks the grant
+line. The supervisor named the GAME BUILD or the team lead for it. It is rowed to the game build
+below. It needs git, so it is the first thing after the bridge returns.
+
+=== 5. STOP WRITING A NEW "COMMIT OWED" FILE EVERY HOUR. UPDATE THE ONE YOU HAVE. ===
+Art now has `_ART_COMMIT_OWED_nov28_0334.md` AND `_0534.md`; the chat bot has `_0308`, `_0445` and
+`_0545`. The next seat with a bridge has to read five files to learn one recipe, and the risk of it
+committing from the stale one is real. FROM NOW ON: keep ONE file, `_<LANE>_COMMIT_OWED.md`, and
+UPDATE IT IN PLACE with a dated line at the top. Do not delete the old ones - this shell cannot
+delete, and a half-deleted file is worse. Just stop adding to the pile.
+
+=== 6. WHAT IS ON DISK AND AT RISK, VERIFIED BY ME THIS RUN, SO NOTHING IS LOST ===
+- CONTENT (C-251, uncommitted in W3): `data/lore_lines.json` 1,013,971 -> 1,021,433 bytes. By key
+  diff against origin/content it adds exactly ONE top-level key, `_note_c251`, and CHANGES
+  `town_buildings` - and the change is PURELY ADDITIVE: three new sub-pools `landmark_events`,
+  `site_events`, `square_events`, with NOTHING removed and nothing else altered. Town-first, on the
+  supervisor's order. PROGRESS.md also dirty. SAFE TO COMMIT AS IS.
+- CHAT BOT (B216 delta + B218 notes, uncommitted in W6): `data/commands.json` md5 49d119c1,
+  `docs/COMMANDS.md` md5 501e9535, 40/40 commands, none missing `short`, none missing `example`,
+  11 changed lines all additions. Its own third-seat re-measurement matches B216 exactly.
+  THE RECIPE IS `_CHATBOT_COMMIT_OWED_nov28_0308.md` (B216) - two commits, one git op per Blender
+  call, `-F <file>` never `-F -`. DO NOT RE-RUN ITS GATES; L14_TEST and COMMANDS_DOC are green on
+  the real generator.
+- ART (uncommitted in W5, 322 files from 01:0x-04:0x plus the 05:34 instrument): `tools/art/
+  _modcover.py`, four JSONs under `renders/art/town/`, and a CORRECTION to
+  `docs/art/TOWN_LATTICE_AUDIT.md` (382 lines) raising the unbacked-opening count from 61 to 88
+  because the DOORWAYS were missed. **The windows are 160-of-170 FINE and MUST NOT be swept into
+  the fix.** The lane deliberately did NOT edit the shipped `.glb` meshes because a mesh edit it
+  cannot render cannot be proven, and that was the right call with 11 shipped buildings at risk.
+  I agree with it in writing; nobody is to "finish" that fix blind.
+- GAME BUILD / HUB / HUD: no file in their worktrees changed in the last hour. For the game build
+  that is expected - its S170 landed at 02:07 and the bridge took the rest. HUB and HUD: I could
+  not verify any work from this hour and I am NOT charging you with idling, because a bridge-less
+  hour can legitimately produce nothing in your files. But the deadline clause stands and your rows
+  below are specific, so next hour there is no ambiguity.
+
+=== 7. THE SIX ROWS ===
+GAME BUILD (07:07) - If the bridge is UP, you are the house's unblocker and you do these IN ORDER:
+  (1) commit your own tree; (2) add the missing `grant insert on public.hub_actions to
+  authenticated;` line to `web/tools/hub_actions_schema.sql` (section 4 - the live DB already has
+  it, only the file is behind); (3) then back to the supervisor's order for you: finish the death
+  model slice -> action-queue polling (S169 poller is ready and the table is now writable) ->
+  snapshot 60s to 10-15s -> town visual progression. If the bridge is DOWN: the town progression
+  READER for content's `town_buildings` pool is the single highest-value thing you can write
+  without Godot - it is priority #1's engine half and its content half is already on disk.
+CONTENT (06:22) - C-251 is verified and safe; do not re-cut it. Keep going on town-first text
+  against the `bellmire-town/2` format in `data/town/README.md`. Name your uncommitted files.
+ART (06:34) - `ls "$HOME/mnt/"` FIRST and say which mount shape you got (section 2). Do NOT touch
+  the shipped `.glb` meshes while you cannot render. The lattice/doorway fix waits for Godot. Keep
+  to the town building ladder on paper: the chapel/market tier specs and the 88-opening list.
+HUB (06:37) - H34 is VERIFIED IN FULL by the 04:58 seat and by me on `origin/hub:web` and is
+  waiting only for a tick it cannot be given. Do not re-cut it and do not re-run its gates. The
+  action queue is WRITABLE now (section 4) - build the equip/sell/quest write path against it.
+  YOU NEVER PUBLISH; that is a hard rule and the publish is owed to me, not to you.
+CHAT BOT (06:45) - Your delta is verified by three seats. Add nothing. Per directive 2 the command
+  surface stays minimal. Do not take the Godot lock; Godot cannot start.
+HUD (06:52) - U219 is on your branch and verified. Nothing is rowed to you from the engine side
+  while the bridge is down. Take the highest-priority HUD-shaped item in the town-first list: the
+  town band is yours and the progression tiers will need it to read at 100%, 125% and 150%.
+NOBODY TAKES THE GODOT LOCK WHILE THE BRIDGE IS DOWN. A claim you cannot honour is a bad lock line.
+The lock has been FREE since the HUD's IDLE at 02:56:06 CT and no lane has claimed since.
+
+=== 8. FOR THE SUPERVISOR ===
+1. PRIORITY ZERO, UNCHANGED AND NOW FIVE HOURS OLD: there is no write path. Two fixes, and the
+   SECOND ONE IS NOW EXACT, IN THE PROXY'S OWN WORDS: (a) ask Mr. E to bring Blender up with the
+   MCP addon listening on 9876; (b) the scheduled tasks must be RE-CREATED from a live chat on
+   claude.ai that first adds EVERY repository the tasks need - `jestsayin96/Bellmire-HD-stream`
+   above all - "not only the missing one", and then REPLACES each task with a new one created in
+   that chat. A run cannot add a repository itself. Until (b) is done, a dead Blender costs this
+   house all seven lanes instead of one.
+2. A PUBLISH IS OWED AND I COULD NOT MAKE IT. `origin/gh-pages^{tree}` dd6294a0 vs `origin/hub:web`
+   fa26f634, measured by me: `app.js` +4/-2 and `index.html` +1/-1 are RENDERED-FILE changes, so
+   the "only NOTES.md" era is over. web/-only is pre-authorised to me, I ran no publish gate
+   because the hub made no ready-to-publish claim, and there is no push route regardless.
+3. H34 is verified in full and six lanes' work is unmerged. Nothing here needs a ruling; it needs
+   the bridge.
+
+*** ===== TAKE THIS NEXT - THE 04:58 CT FIRING, 28 NOV 2026 ===== ***
+*** WRITTEN 05:09 CT, AFTER :05. Under the house rule these rows are formally the NEXT firing's,
+*** but they REACH content (:22), art (:34), the hub (:37), the chat bot (:45) and the HUD (:52)
+*** THIS HOUR. ONLY THE GAME BUILD WAITS, AND IT READS THEM AT 06:07. THIS BLOCK SUPERSEDES EVERY
+*** ROW BELOW IT.
+*** AND THIS BLOCK IS UNCOMMITTED, BY NECESSITY. There is no push path on the machine this hour
+*** (see below). It is written straight into the WORK_PLAN.md WORKING COPY of all seven trees, the
+*** way the chat bot writes its lock lines. It is the plan you read; it is not yet on any ref.
+
+=== THE BRIDGE IS DOWN FOR THE FOURTH HOUR - AND HALF OF WHAT YOU WERE STANDING DOWN FOR WORKS ===
+The Blender MCP bridge (Windows side) is REFUSING TO CONNECT: "Cannot connect to Blender at
+localhost:9876". That is Godot and that is `git` as this house has always run it. Confirmed again
+at 04:59 CT. The 02:58, 03:58 and 04:07 runs all hit it.
+*** BUT GIT READ WORKS RIGHT NOW, FROM device_bash, AND EVERY SEAT SINCE 03:00 HAS MISSED IT. ***
+The standing rule "device_bash CANNOT RUN GIT" is TRUE OF A WORKTREE ONLY - a worktree's .git is a
+FILE holding a Windows path. R's .git is a REAL DIRECTORY, so in R every read-only git command
+works from the Linux shell:
+    cd "$HOME/mnt/hd adventure/jests-hd-medieval-adventure"
+    git log / git show origin/<branch>:<path> / git diff --numstat origin/main...origin/<branch>
+    git rev-parse / git merge-base / git branch -r      <- all green, measured this run
+*** AND `git ls-remote origin` WORKS THERE TOO, WHICH IS A FETCH WITH NO LOCK RISK. *** Measured
+at 05:0x: every one of laptop, content, hub, hud-ui, art, chatbot, main and gh-pages has the SAME
+sha on GitHub as R's origin/* ref already holds, so the refs in R are CURRENT and nothing is
+hidden from you. Use ls-remote instead of fetch while the bridge is down; it writes nothing.
+    TWO THINGS THAT DO NOT WORK, PROVEN THIS RUN, DO NOT SPEND AN HOUR ON EITHER:
+    - The Linux shell CANNOT DELETE in a connected folder, so any git command that needs to clear
+      a lock (commit, merge, pull, stash, checkout, reset) will strand a .lock file in R/.git and
+      break git for everybody. DO NOT RUN A WRITING GIT COMMAND FROM device_bash. Read only.
+    - PUSH IS BLOCKED ON BOTH ROUTES. From device_bash the proxy answers in words: "only git clone,
+      git fetch and plain downloads from GitHub work here, not git push". From the cloud container
+      the git proxy answers: "jestsayin96/Bellmire-HD-stream is not in this session's authorized
+      repository set" - the scheduled task is scoped to jestsayin96/music-studio, which is the
+      READ-ONLY reference repo, not the game. So nothing can be committed or pushed by anyone
+      until the bridge is back. That is a fact about the machine, not a failure of a lane.
+WHAT THAT MEANS FOR YOU, AND IT IS THE OPPOSITE OF STANDING DOWN:
+  1. KEEP WORKING IN YOUR WORKTREE. Edit files, write your logs, write your PROGRESS entry. Your
+     work is NOT lost - it sits in the working tree and commits the moment the bridge returns.
+     Say in your run doc exactly which files you left uncommitted so the next seat can commit them.
+  2. YOU CAN STILL VERIFY. Read any ref with `git show`, diff any two, and READ A PICTURE: stage a
+     render with device_stage_files and LOOK at it. That is how this seat judged art's hall ladder
+     this hour with no Godot and no Blender.
+  3. DO NOT TAKE THE GODOT LOCK. Godot cannot be started. A claim you cannot honour is a bad lock
+     line. Write no RUNNING line until the bridge answers.
+
+=== WHAT THE SIX LANES SHIPPED SINCE MAIN (main is 1906a5d3, 02:07 CT) - VERIFIED, NOT TICKED ===
+NOTHING WAS MERGED AND NOTHING WAS TICKED THIS HOUR, and the reason is the push block above, not
+the work. Five lanes delivered. The verification below is MINE, done by reading the refs, so the
+next seat with a bridge merges and ticks in one pass instead of re-measuring:
+  GAME BUILD (laptop ecad1a37, +6): S170 writes down the town layout format bellmire-town/2
+      (data/town/README.md, +55) - per-tier buildings and a pivot contract, which is exactly what
+      art's hall ladder needs to be placed. Also removed the unlicenced "19 Low-Poly Fantasy
+      Weapons" from ASSET_SOURCES.md (correct, that is the licence rule working). hub_actions DDL
+      still refused to it - see FOR THE SUPERVISOR.
+  CONTENT (85f0709c, +4): C-250 town upgrade event lines + inn exterior and storage text,
+      data/lore_lines.json +123/-1. Town-first and inn-exterior-only, both on the supervisor's
+      order. VERIFY THE JSON PARSES AND THE KEY COUNT BEFORE TICKING - this seat did not.
+  HUB (3fd98e2a, +5): H34 - VERIFIED IN FULL BY ME, READ LINE BY LINE, TICK IT ON SIGHT.
+      The whole rendered delta is three things: `sell` taken out of ACTIONS with a comment saying
+      why (the engine refuses it in words), `respec` gaining a `calling` argument with the 15
+      roster callings in its label, and app.js?v=9 -> v=10 in index.html while style.css stays v=9
+      because style.css did not change. Security, checked by me on origin/hub:web/app.js and not
+      taken from the lane: exactly TWO innerHTML sites (:255, :301), both page-owned strings - the
+      other four hits are comments; ZERO sites of insertAdjacentHTML, document.write, eval or new
+      Function (the only hits are the comment at :10-11 that DENIES them, and this time the comment
+      is TRUE); CSP intact with default-src 'none'; the only key in the file is
+      `sb_publishable_...`, a PUBLISHABLE key, never a service key. The lane also dropped a .pyc it
+      had committed by accident. It made NO "ready to publish" claim, so I ran no publish gate.
+  HUD (hud-ui a3111b96, +4): U219 town band top padding + larger type at 100% (hud_dock.gd 4/4),
+      parse gate plus a windowed 7-step probe, 0 fails, both logs COMMITTED (_u219.log,
+      _u219_parse.log) - that is the committed-evidence row being obeyed. Released its lock early.
+  ART (42e8bc08, +3): THE HALL TIER LADDER - town_hall_t1/t2/t3.glb with .import siblings, a
+      side-by-side render and a 117-line build doc.
+      *** I LOOKED AT THE PICTURES MYSELF, WHICH THE LANE COULD NOT DO. *** The progression READS
+      AT A GLANCE and meets the three-tier acceptance test: thatched timber shed -> stone-footed
+      tiled hall with a stair -> stone hall with tower, banners, iron fence and a paved court, one
+      camera, one ortho scale, the KayKit knight in frame for scale. AND THE LANE'S OWN FAULT 6 IS
+      REAL: on the side-by-side camera tier 1's side face reads OPEN - you see straight through to
+      the bench - while hall_t1/front.png reads as a proper walled hut with a dark doorway. So the
+      hole is on the side, not the front, and the lane's own fix (move the ground-level vent bay
+      above head height with wall below) is the right one. `_report.json` says verdict GREEN; it is
+      green on geometry and ON THE FRONT ONLY.
+  CHAT BOT (bbbc7439, +2): the plan sync, and nothing else - its :45 window had no bridge. Not a
+      starved lane and not a fault.
+
+===== TAKE THIS NEXT - SIX ROWS =====
+GAME BUILD: Do NOT wait for the bridge. The two things you can do from the Linux shell are (a)
+  finish writing the ACTION-QUEUE POLLING code against the hub_actions schema in
+  web/tools/hub_actions_schema.sql, leaving it uncommitted and saying so, because the supervisor
+  put polling ahead of town for you and the hub is already building against it, and (b) place
+  art's three hall tiers in the bellmire-town/2 format you just wrote down. Do not re-measure the
+  DDL grant - it is with the supervisor this hour.
+CONTENT: C-251, still town-first. Keep inside the five-file charter. Nothing you write needs the
+  bridge; leave it uncommitted and name the files in your doc.
+ART: THE T1 SIDE FACE. Your fault 6 is CONFIRMED BY EYE at the side-by-side camera - I looked, you
+  could not. Move the ground-level vent bay above head height with wall below, and leave the
+  rebuilt t1 uncommitted if Blender is still dead. If Blender is dead you cannot rebuild the mesh:
+  then write the exact edit down in TOWN_HALL_LADDER.md and take the next town building's design
+  (the smithy or the inn EXTERIOR) on paper instead. Do not idle.
+HUB: H35. Keep building the primary interface. You never publish - the 02:4x H34 delta is merged-
+  pending and unpublished and the publish is MINE, blocked this hour by the push block, not by you.
+HUD: U220. Your call inside your seven files, town-first; the band work is the right seam.
+CHAT BOT: nothing is owed to you and the bridge forbids a gate. Take the highest-priority item that
+  is yours: the minimal-command surface under the hub-is-primary order. No Godot lock.
+
+===== FOR THE SUPERVISOR =====
+1. *** PRIORITY ZERO, AND IT IS NOT A LANE'S TO FIX: THE HOUSE HAS NO WRITE PATH TO THE REPO. ***
+   The Blender bridge has been refusing connections for four hours, and with it every commit, every
+   merge, every tick, every plan sync and every hub publish. I proved both fallbacks are closed:
+   device_bash's proxy permits clone and fetch but not push, and the cloud container's git proxy is
+   authorised for jestsayin96/music-studio ONLY - the read-only reference repo - and says in words
+   that a scheduled run cannot add a repository. RECOMMENDATION, two parts: (a) ask Mr. E to bring
+   Blender back up with the MCP addon listening on 9876, which restores everything at once; and
+   (b) independently of that, the scheduled tasks should be re-created from a live chat with
+   jestsayin96/Bellmire-HD-stream in their authorised repository set, so a dead Blender costs this
+   house one Godot lane instead of all seven. Six lanes' work - five of them substantive - is
+   sitting unmerged on their refs, and H34 is verified and waiting for a tick it cannot be given.
+2. THE hub_actions INSERT GRANT. The game build reports the authorised DDL applied but
+   `authenticated` holding no INSERT grant, so the action queue cannot be written and the hub is
+   building against a table it cannot use. I did NOT touch the live database: the 01:52 ruling
+   authorised that DDL to the game build, and a grant on a production table is not mine to issue on
+   my own motion. RECOMMENDATION: authorise the single missing grant explicitly, to whichever seat
+   you want holding it, and say so in the plan so the next run can apply it in one line.
+3. ART'S CAP. The 70-miniboss cap is closed and the lane is on town buildings; the hall ladder is
+   its first and it is one side face from done. No ruling needed, reported for the record.
+
+===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
+A LIVE TURN WITH MR. E CLEARS ALL OF THESE IN ONE PASS. Until then they live here.
+  (i) ALL SEVEN PROMPTS carry "device_bash CANNOT RUN GIT". It is wrong as written and it has cost
+      this house four hours. The true rule is: NOT IN A WORKTREE (its .git is a file), BUT YES IN R,
+      READ-ONLY, INCLUDING `git ls-remote origin` AS A LOCK-FREE FETCH. Add it, and add the two
+      proven push refusals verbatim so nobody re-tests them.
+  (ii) THIS PROMPT says the Blender bridge is "required for Godot and all git". Qualify it: required
+      for GODOT AND FOR EVERY WRITING GIT COMMAND; reads are available without it.
+  (iii) THIS PROMPT's hub baseline is stale again. Measured by me at 05:1x CT: gh-pages^{tree} is
+      dd6294a0, origin/hub:web is fa26f634, and the delta is NOTES.md +18, app.js +4/-2,
+      index.html +1/-1 and two tools text files. The "entire difference is web/NOTES.md" line and
+      the 23eee62a / e346dc16 pair are both spent - a rendered-file delta now exists and a publish
+      is owed as soon as a push is possible.
+  (iv) Carried from the 01:58 block and still owed: the mount path note ($HOME/mnt/ holds one entry,
+      "hd adventure", so the path is "$HOME/mnt/hd adventure/<worktree>" - confirmed again at 05:05).
+*** ===== END OF THE 04:58 CT BLOCK ===== ***
+
 *** ===== TAKE THIS NEXT - THE 01:58 CT FIRING, 28 NOV 2026 (written 02:0x CT). =====
 *** THIS SECTION SUPERSEDES EVERY ROW AND EVERY ADDENDUM BELOW IT. Clock read off cruzader:
 *** 2026-11-28T01:58:41-06:00. Run and machine clock agree on the date - no rollover this hour.

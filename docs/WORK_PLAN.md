@@ -1,3 +1,305 @@
+*** ===== ADDENDUM - THREE SUPERVISOR ANSWERS, RELAYED LIVE BY MR. E AT ~00:1x CT, 28 NOV 2026. =====
+*** *** CLOCK READ OFF cruzader BEFORE WRITING THIS. ALL THREE OF MY ESCALATIONS ARE ANSWERED. ***
+*** WHEN THIS TAKES EFFECT: the game build already fired at 00:07 and gets this at its 01:07 run -
+*** ITS ROW IS THE ONE THAT CHANGED MOST, so read (2) before anything else. CONTENT (:22), ART
+*** (:34), HUB (:37), CHAT BOT (:45) and HUD (:52) all still fire this hour and this reaches them
+*** now. The six rows in the block above STAND except the GAME BUILD row, re-cut below.
+***
+*** **(1) HUB PUBLISHES ARE PRE-AUTHORIZED TO THIS SEAT - web/-ONLY, AND THE LANE STILL NEVER
+*** PUBLISHES.** Supervisor, verbatim: "Any web/-only change that passes the standing gate battery
+*** gets pushed by you without waiting for me. I review after, not before. If I find something
+*** wrong we roll it back. This overrides the 'supervisor pushes' rule for web/-only changes.
+*** Full-repo pushes remain mine."
+***   WHAT THAT CHANGES: I no longer route a web/-only publish up and wait. I run the gate, push,
+***   and report it for review after. WHAT IT DOES NOT CHANGE, AND I AM SAYING SO BECAUSE A
+***   RELAXATION IS THE EASIEST THING IN THIS HOUSE TO OVER-READ: the HUB LANE still never
+***   publishes - that is a HARD RULE from Mr. E and this message does not touch it. A FULL-REPO
+***   push is still the supervisor's. And the gate is still owed in full before any push.
+***   **AND I PUBLISHED NOTHING THIS HOUR, DELIBERATELY, ON MY OWN MEASUREMENT.** `gh-pages^{tree}`
+***   is 23eee62a and `origin/hub:web` is e346dc16, and the ENTIRE difference is
+***   **`web/NOTES.md`, +10/-0** - a notes file. No `app.js`, no `style.css`, no `index.html`.
+***   Publish 9 is already live and already looked at. The hub lane made NO "ready to publish"
+***   claim this hour, so by this house's own rule the publish gate is not owed and I did not run
+***   one. **Pre-authorization is not a reason to push; something worth publishing is.** The next
+***   real web/ change the hub ships, I push myself without asking.
+***
+*** **(2) ACTION-QUEUE POLLING GOES IN FIRST, THEN TOWN OWNS THE LANE.** Supervisor, verbatim:
+*** "Polling is small and bounded - cut it in early so the hub isn't building against nothing.
+*** Game build order: finish current death model slice -> action-queue polling -> snapshot
+*** frequency 60s to 10-15s -> town visual progression for the rest of the deadline."
+***   **ONE THING I WILL NOT CLAIM: the message credits "your recommendation" and I have no record
+***   of this seat making it.** It may be the 22:58 seat's or it may be from the supervisor chat,
+***   which I cannot read. I am carrying out the ORDER and not taking the credit.
+***   THIS PARTLY RE-ORDERS sup-nov27-2304's town-first ruling for the GAME BUILD LANE ONLY, and
+***   it is the same authority revising its own ruling with a stated reason. **TOWN-FIRST STILL
+***   GOVERNS ART, CONTENT AND HUD** - nothing below reorders them.
+***
+*** **(3) ROUTED-ONLY COVERAGE ON THE PARTY COMMANDS IS ACCEPTED. THE ESCALATION IS CLOSED.**
+*** Supervisor, verbatim: "Accept routed-only coverage on party commands. The deadline is 12 days.
+*** The surface is small. Move on." **SO NO BEHAVIOURAL GATE IS OWED BY ANY LANE AND NOBODY IS TO
+*** BUILD ONE.** The chat bot raised this honestly against its own work and was right to; it is
+*** answered, and `FOR THE SUPERVISOR (3)` in the block above is struck as ANSWERED, not dropped.
+***
+*** **(4) THE DEAD TOWN - MY ROW WAS RIGHT AND THE CONDITIONAL IS NOW EXPLICIT.** Supervisor,
+*** verbatim: "The dead town: check it. If the publisher is healthy, the game just isn't running -
+*** not a bug. If the publisher is broken, that's priority zero." That is exactly the shape I
+*** rowed it as, so the check stands - but note what it settles: **a HEALTHY publisher is NOT a
+*** defect and closes the question in one line.** Do not go looking for a bug that is not there.
+***
+*** ===== GAME BUILD (:07) - ROW RE-CUT TO THE SUPERVISOR'S ORDER. TAKE THIS AT 01:07. =====
+***   (0) **THE PUBLISHER CHECK, STILL FIRST, STILL ONE FIRING, AND NOW EXPLICITLY CONDITIONAL.**
+***       Verify `snapshot_pub.gd` end to end: does it run, does it reach Supabase, does a row
+***       land, what is the newest row's timestamp. **IF IT IS HEALTHY, SAY SO IN ONE LINE AND
+***       MOVE ON - that is a complete and successful outcome and the supervisor has said in
+***       writing it is not a bug.** IF IT CANNOT PUBLISH, it is priority zero and everything
+***       below waits.
+***   (1) **FINISH THE CURRENT DEATH MODEL SLICE.**
+***   (2) **ACTION-QUEUE POLLING** (the table the hub writes and the engine polls, sup-nov27-2340's
+***       Option A). Small and bounded, and it is cut in early **so the hub is not building against
+***       nothing** - the hub is the biggest item in the house and this is what unblocks it.
+***   (3) **SNAPSHOT CADENCE: `snapshot_pub.gd:21 const EVERY := 60.0` -> 10-15 s.** One constant.
+***       If you did the publisher check in the same file at (0), do this in the same pass.
+***   (4) **TOWN VISUAL PROGRESSION FOR THE REST OF THE DEADLINE** - D31's visual half, D93's
+***       hand-authored layout. **DEFINE AND WRITE DOWN THE LAYOUT FORMAT FIRST**; it is the
+***       blocker for art and content both.
+***   AND STILL CARRIED, BOTH ONE-LINERS, FIT THEM WHERE THEY COST NOTHING:
+***   (a) `party_frames.gd:14 MAX_ROWS := 8` -> read `Roster.PARTY_CAP` (10). The HUD correctly
+***       refused this file; it is yours by the L31 re-route. Second half of Mr. E's System 42.
+***   (b) `chat.solo_ask = _on_solo` beside the connect at `town.gd:5363`. No double-fire -
+***       `_solo()` returns in both branches. Two seats have read the whole function.
+***
+*** ===== FOR THE SUPERVISOR - ALL THREE ANSWERED, ONE THING LEFT ON YOUR DESK =====
+*** Nothing is waiting on you. (1), (2) and (3) above are answered and in force. **THE ONLY ITEM
+*** I AM STILL HOLDING IS NOT YOURS AND NOT MR. E'S: the seven lane prompts are stale in seven
+*** places and a scheduled firing cannot write a scheduled task.** The list is at the top of this
+*** file. Item (1) of this addendum - the publish pre-authorization - is now EIGHTH on it, because
+*** THIS prompt still tells every future seat that a hub publish must be routed up and waited on.
+*** Until a seat gets a live turn and lands it, the PLAN is the only place that rule is correct.
+***
+*** ===== TAKE THIS NEXT - THE 23:58 CT FIRING, 27 NOV 2026 (written 00:03-00:1x CT, 28 NOV). =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE BLOCK THE 22:58 SEAT CUT FOR THIS
+*** HOUR AND ITS TWO ADDENDA. Clock read off cruzader: 2026-11-28T00:03:02-06:00. The run is the
+*** 23:58 firing of 27 NOV; the machine clock already reads 28 NOV. Both are true.
+*** Merged to main at 166bab3f and pushed. FIVE OF THE SIX ROWS BELOW ARE THE 22:58 SEAT'S, KEPT
+*** DELIBERATELY AND UNCHANGED - they were cut for this hour, they are right, and re-cutting a
+*** sound row to look busy costs a lane its cycle. ONE ROW IS CORRECTED, AND IT IS MY SEAT'S FAULT.
+***
+*** ===== MY SEAT'S FAULTS THIS RUN, REPORTED FIRST =====
+*** (0) **THIS SEAT GAVE THE HUD A FILE THAT IS NOT THE HUD'S, TWICE, AND IT COST THE LANE A
+***     CYCLE.** Rows at lines 185 and 375 below hand `party_frames.gd` to the HUD as "YOUR file".
+***     **THAT IS WRONG AND I AM STRIKING BOTH.** THREE independent sources say otherwise and they
+***     all agree: (a) this plan's own L31 re-route of 16 Nov 18:02 - "its open half lives in
+***     delve.gd, monster.gd, party_frames.gd and boss_bar.gd - none of them HUD's files"; (b) the
+***     HUD's standing prompt, which lists the file under D41/D48/D61 as NOT MINE; (c) the HUD's
+***     own seven-file charter - hud_dock, spotlight, auto_director, dice, feed_hud,
+***     leaderboard_panel, ui_theme. **THE HUD STOOD DOWN AND KEPT TO ITS PROMPT AGAINST A TEAM
+***     LEAD ROW, AND THAT IS EXACTLY THE RIGHT BEHAVIOUR** - it complied in behaviour, changed no
+***     charter, wrote the finding up as U216 and routed the conflict to its owner. It is not
+***     charged with anything and U216 is a full delivery. The row was the fault, the row is mine,
+***     and the file goes to the lane that owns it. SEE THE GAME BUILD ROW.
+*** (1) **MY ASSET WALKER LIBELLED A TEXTURE FOLDER THAT FIVE MODELS DEPEND ON.** Step 0 reported
+***     `assets/graveyard/Textures` as the one unreferenced asset directory. **IT IS READ.** Five
+***     `.glb` binaries - character-keeper, gravestone-bevel, gravestone-cross, gravestone-round,
+***     lantern-candle - carry the literal string `Textures/colormap.png` inside them, which I
+***     confirmed by grepping the binaries themselves. The walker only searches the SCRIPT corpus,
+***     so a directory reached from a MODEL is invisible to it. The 22:58 seat hit this same false
+***     positive on the same folder an hour ago. **GUARD 5, NOW STANDING FOR THIS SEAT: before
+***     calling an asset directory unreferenced, grep the `.glb`/`.gltf` binaries and the
+***     `.import` sidecars for its name. A directory a MESH reaches is read.** The substantive
+***     answer is UNREFERENCED ASSET DIRECTORIES: ZERO.
+*** (2) **A FUTURE STAMP IN THE NEWEST ADDENDUM, CORRECTED NOT DELETED.** The addendum at the top
+***     of this file is headed "MR. E ANSWERED LIVE AT ~00:0x CT, 28 NOV 2026". Its commit landed
+***     at 23:56:xx CT on 27 NOV, so the heading was ~10 minutes and one calendar day ahead of the
+***     clock when it was written. The CONTENT stands as that seat's report; **the STAMP should
+***     read ~23:5x CT, 27 NOV.** I am correcting the stamp and leaving the entry as written.
+***     AND THE LIMIT ON IT, STATED PLAINLY: a relayed live answer is that seat's report, not new
+***     authority. It changes a lane PRIORITY, which is this seat's to set anyway, so I keep it -
+***     and I keep it on its own merits, below. It authorises nothing else, and no prompt moved.
+*** (3) **I FIRST READ THE 23:58-LABELLED BLOCK AS A SECOND FIRING OF MY OWN SLOT.** It is not.
+***     The 22:58 seat ran long, finished at 23:57, and labelled its block for THIS hour by this
+***     house's own after-:05 rule. **THERE WAS NO DOUBLE-FIRE.** I nearly reported one; the
+***     addendum at line 215 saying so in plain words is what stopped me. READ TO THE END.
+***
+*** ===== WHAT I TICKED =====
+*** **SYSTEM 43 (RANKING) IS NOW WHOLE - COMMAND HALF TICKED.** The engine half was ticked last
+***   hour (S167). B213 closes it, VERIFIED ON MY OWN MERGED TREE AND NOT ON THE CLAIM:
+***   `chatcmd.gd:197` dispatches `"rank", "ranked", "ladder"` through `_needs`, and `_rank` at
+***   `:582` is 26 lines that READ `roster.letter_rank/letter_score/letter_next` and compute
+***   nothing. `data/commands.json` went 39 -> 40 commands AND 39 -> 40 in `order`;
+***   `docs/COMMANDS.md` has exactly 40 command rows and its `!rank` row lists `!ranked, !ladder` -
+***   the SAME two aliases as the dispatch arm, so doc and dispatch cannot drift. The lane's
+***   COMMANDS_DOC gate wrote 40 with the md5 unmoved (2ff0464a before and after), which proves
+***   its python emulation against the real generator at 40 rows - that gate was owed and is paid.
+***   **AND I CHECKED THE ONE THING A LANE CANNOT CHECK ABOUT ITSELF:** the `has_method` guard is
+***   right, but its docblock says the ladder "is NOT on `origin/main` as this lands". It WAS -
+***   S167 merged to main at 23:49, five minutes before B213 committed. The GUARD is correct
+***   defensive code and stays; only the COMMENT is stale. Not a row, not a charge: the lane
+***   measured a ref it had fetched before the merge. Fix it the next time the file is open.
+*** **U216 - FULL DELIVERY, TICKED AS A STAND-DOWN WRITTEN UP.** No edit, no lock, no Godot, and
+***   it is worth more than an edit would have been. ITS FINDING REPRODUCES UNDER MY OWN EYE on
+***   merged main: `roster.gd:1229 const PARTY_CAP := 10` against `party_frames.gd:14
+***   const MAX_ROWS := 8`. A party of ten shows eight rows and folds two into "+2 more" at
+***   `:160`. It degrades gracefully, so this is a COSMETIC GAP in one constant, not a break -
+***   and it is the visible half of Mr. E's own System 42 landing short.
+***
+*** ===== TAKE THIS NEXT - ONE ROW PER LANE =====
+***
+*** GAME BUILD (:07) - **TWO THINGS, IN THIS ORDER, AND THE FIRST IS UNCHANGED.**
+***   (1) **THE PUBLISHER CHECK IS STILL PRIORITY ZERO** and the 22:58 addendum's row stands as
+***       written - verify `snapshot_pub.gd` end to end, say whether it can publish AT ALL, and
+***       set `:21 const EVERY := 60.0` to 10-15 s in the same pass. **I AM KEEPING IT AHEAD OF
+***       THE SUPERVISOR'S TOWN-FIRST ORDER AND HERE IS THE REASONING, SO THE SUPERVISOR CAN
+***       OVERRULE IT IN ONE LINE:** sup-nov27-2304 wants town-first *because* "the town is what
+***       viewers SEE on stream 24/7". If the publisher cannot publish, every hour of town
+***       progression is invisible on exactly that page. The check SERVES the ruling rather than
+***       displacing it, it is capped at ONE firing, and the page has shown a dead town since
+***       15:55 CT. If it is healthy, say so in one line and go straight to (3).
+***   (2) **`party_frames.gd:14 MAX_ROWS := 8` -> PARTY_CAP (10). ONE CONSTANT, AND IT IS YOURS.**
+***       Read it off `Roster.PARTY_CAP` rather than hard-coding 10 so the two can never drift.
+***       This is the file the HUD correctly refused; it is in your family by the L31 re-route.
+***       **I READ THIS AS THE SECOND HALF OF MR. E'S OWN SYSTEM 42, NOT AS A NEW ITEM, AND I SAY
+***       SO OUT LOUD** - the engine half capped the party at ten, so the frame that shows it is
+***       the same item's other half. Nothing else in `party_frames.gd` is being opened.
+***   (3) **THEN TOWN VISUAL PROGRESSION - PRIORITY #1 IN THE HOUSE.** D31's visual half and D93's
+***       hand-authored layout. **THE LAYOUT FORMAT IS THE BLOCKER FOR ART AND CONTENT BOTH, SO
+***       DEFINE IT FIRST AND WRITE DOWN WHAT IT IS.** Also still open and still one line:
+***       `chat.solo_ask = _on_solo` beside the connect at `town.gd:5363` - until it is set, a
+***       viewer the town REFUSES still reads "Sent word. Watch the feed." There is NO double-fire;
+***       `_solo()` returns in both branches of `if solo_ask.is_valid()` and never reaches the
+***       emit. Two seats have now read the whole function to be sure of that.
+***
+*** HUB (:37) - **UNCHANGED, AND IT IS THE BIGGEST ITEM IN THE HOUSE** (sup-nov27-2340). You are
+***   the PRIMARY INTERFACE. In order: **Twitch OAuth via Supabase Auth**, then the **per-viewer
+***   dashboard shell** ("their room at the inn"), then **action submission into the action queue
+***   table** the engine polls. Carry the directive's own UI note: "Changes take effect in 15-30
+***   seconds in-game." You are blocked on nobody. **AND THE CHAT BOT HAS DONE YOUR SCOPING FOR
+***   YOU:** B213b is a read-only audit of all 40 commands that names the 13 which are management
+***   the hub must cover outright, against 12 that stay in chat. Read it before you design the
+***   dashboard - it is on main now and it is the closest thing to a spec you have.
+***
+*** ART (:34) - **UNCHANGED. TOWN BUILDING ASSETS FOR THE PROGRESSION TIERS.** The tier-1/2/3
+***   variants of ONE building (the well -> fountain of the town square, named in Systems 15-17),
+***   proven to fit the way you prove gear. **DO NOT WAIT ON THE LAYOUT FORMAT AND DO NOT STAND
+***   DOWN** - the deadline clause forbids it and a building authored against no layout is still a
+***   building. Keep `_goldcontrol`. The tier-5 spear is ticked and its ASSET_SOURCES entry is the
+***   best licence record in the house; keep that habit, and keep red-proving your own gates - you
+***   have caught your own instrument two hours running and it is the habit I most want kept.
+***
+*** CONTENT (:22) - **UNCHANGED. TOWN GROWTH AND BUILDING TEXT, ALL INSIDE YOUR OWN FOUR FILES.**
+***   Building names, landmark names, tier flavour, town growth crier lines - the 23:04 ruling
+***   names exactly these, `lore_lines.json` already carries the D32 growth lines to extend, and
+***   this needs NO new file and NO charter change. **THAT IS DELIBERATE: it sidesteps the System
+***   41 blocker that has cost you nine stand-downs.** The supervisor's 16:37 ruling that
+***   `drops.json` is yours still stands if you later need it. **AND NOTE WHAT YOUR `_note_` KEYS
+***   ARE NOT:** 73 of them now return zero code hits and every one is correct. Keep writing them.
+***
+*** CHAT BOT (:45) - **STOP ADDING COMMAND SURFACE - and B213 was the last one owed, so this is
+***   not a criticism of it** (sup-nov27-2340). `!rank` is ticked, your `!party`/`!solo` work STAYS
+***   as fallbacks by the directive's own words, and NOTHING is reverted. **YOUR B213b AUDIT IS
+***   THE MOST USEFUL THING ANY LANE PRODUCED THIS HOUR** and it is now the hub's spec. Next, in
+***   order: (1) make `!help` POINT VIEWERS AT THE HUB as the place to manage a hero - that is the
+***   directive's own item and the one command surface still worth touching; (2) fix the stale
+***   docblock in your own `_rank` (it says the ladder is not on main; it is, since 23:49) - that
+***   is auditing your own shipped work, explicitly allowed and not a new item. **AND KEEP YOUR
+***   CLAIM AT :50 WITH A FINISH INSIDE :52.** You did that at 23:51 and released at 23:52:30 and
+***   the HUD took its window cleanly. That row is working; it stays.
+***
+*** HUD (:52) - **CORRECTED ROW. `party_frames.gd` IS NOT YOURS AND I SHOULD NEVER HAVE ROWED IT
+***   TO YOU - see fault (0). IT HAS GONE TO THE GAME BUILD.** You lost a cycle to my row and you
+***   lost it doing the right thing. **YOUR ROW IS NOW THE ONE YOU YOURSELF NAMED NEXT-IN-LINE,
+***   AND IT IS ALSO PRIORITY #1: TOWN LEVEL AND PROGRESSION DISPLAY, IN YOUR OWN SEVEN FILES.**
+***   The town is what viewers watch 24/7 and right now nothing on the HUD tells them it is
+***   growing. `hud_dock` and `ui_theme` are yours; show the town's level and its movement toward
+***   the next tier. **Do NOT take the rarity hue row - it is U55, shipped and fed, and eight
+***   seats asked you for it before one of them checked.** If you find the display already exists,
+***   CLOSE IT BY DISPROVING IT and that counts fully - U124 and U216 both did and both were right.
+***
+*** ===== FOR THE SUPERVISOR =====
+*** (1) **THE PUBLISHER CHECK SITS AHEAD OF YOUR TOWN-FIRST ORDER THIS HOUR AND I WANT THAT ON
+***     YOUR DESK.** The public page has read "Last word from the town 8 hours ago" since 15:55 CT.
+***     The 22:58 seat records Mr. E answering "unsure - check it" when asked whether the game is
+***     meant to be down; I cannot verify that exchange from a firing and I am recording it as that
+***     seat's report, not as your word or his. **MY RECOMMENDATION: leave it ahead for one
+***     firing.** It is capped, it is diagnostic rather than feature work, and your own stated
+***     reason for town-first - that the town is what viewers see 24/7 - is the reason the
+***     publisher matters more than any single building. **One line from you reverses it.**
+*** (2) **SYSTEM 43 IS WHOLE AND SYSTEM 42 IS WHOLE EXCEPT ONE CONSTANT** (`MAX_ROWS` 8 vs
+***     `PARTY_CAP` 10, now rowed to its owner). Your 18:44 and 18:56 directives are, between
+***     them, one `const` away from fully delivered.
+*** (3) **THE PARTY COMMAND SURFACE IS STILL PROVEN ROUTED, NOT PROVEN BEHAVED** - the chat bot
+***     named this itself and it is unchanged from the 22:58 escalation. L14 is a source-harvest
+***     symmetry check and never calls the commands. A behavioural gate would live in the game
+***     build's `tools/`, which the freeze bars any lane from inventing. **IT NEEDS YOUR WORD, NOT
+***     MINE.** Carried forward unanswered for one hour.
+*** (4) **THE OWED PROMPT BACKLOG IS NOW SEVEN ITEMS AND GROWING, AND NONE OF IT IS YOURS TO FIX -
+***     I SAY SO ONLY SO YOU ARE NOT SURPRISED BY IT.** The prompts are this seat's exclusively
+***     (Mr. E, 16 Nov 21:20) and a firing cannot write them; the full list is at the top of this
+***     file for the first seat that gets a live turn. The highest-cost item remains the CONTENT
+***     prompt's stale four-file list. Nothing in any of tonight's three orders touches a prompt.
+***
+*** ===== NEEDS MR. E =====
+*** **Nothing new.** The one open question - whether the game is meant to be running - is recorded
+*** as already asked and answered "unsure, check it", and the check is now the game build's
+*** priority zero. Nothing else is waiting on him.
+***
+*** ===== ADDENDUM - MR. E ANSWERED LIVE AT ~23:5x CT, 27 NOV 2026 - STAMP CORRECTED BY THE 23:58 SEAT;
+*** ===== the original heading read "~00:0x CT, 28 NOV 2026" and the commit landed 23:56 CT,
+*** ===== 27 NOV, so it was ~10 min and one calendar day ahead of the clock. CONTENT UNCHANGED. =====
+*** *** THIS IS A LIVE ANSWER FROM MR. E AND IT CHANGES THE GAME BUILD ROW ABOVE. ***
+***
+*** **(A) THE SNAPSHOT SILENCE - MR. E'S ANSWER WAS "UNSURE - CHECK IT".** He did NOT confirm the
+*** game is meant to be down. So the stale town on the public page is NOT yet explained, and it is
+*** no longer something I can write off as "the game simply is not running".
+*** **GAME BUILD: THIS IS YOUR PRIORITY ZERO, BEFORE TOWN VISUAL PROGRESSION, AND IT SHOULD TAKE
+*** ONE FIRING AT MOST.** Verify the publisher END TO END and report whether it can publish AT
+*** ALL: does `snapshot_pub.gd` run, does it reach Supabase, does a row actually land, and what is
+*** the timestamp of the newest row? The public page has read "Last word from the town 8 hours
+*** ago (Fri, Nov 27, 03:55 PM)" since 15:55 CT - that is the thing viewers see 24/7 showing a
+*** dead town all evening. If the publisher is healthy and the silence is only that the game is
+*** not running, SAY SO IN ONE LINE and move straight to town visual progression; that is a
+*** perfectly good outcome and closes the question. If it CANNOT publish, that is the most
+*** important defect in the house and everything else waits.
+*** While you are in that file, `snapshot_pub.gd:21 const EVERY := 60.0` is the 10-15 s change the
+*** 23:40 architecture directive asks for - do it in the same pass.
+***
+*** **(B) THE PROMPTS ARE UNCHANGED THIS TURN, DELIBERATELY.** I offered the owed prompt edits on
+*** Mr. E's live turn; he asked what the supervisor had said about them. **THE ANSWER IS NOTHING -
+*** none of sup-nov27-2304, -2340 or -2346 mentions the prompts at all.** They are this seat's
+*** exclusively (Mr. E, 16 Nov 21:20) and the only gate is that a firing cannot make the write. He
+*** gave no instruction to proceed, so I made none. THE BACKLOG BELOW STANDS FOR THE FIRST SEAT
+*** THAT GETS A LIVE TURN.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, LAND THEM ALL AT ONCE =====
+*** (1) **CONTENT PROMPT - the stale four-file list. NINE STAND-DOWNS AND COUNTING.** Its charter
+***     names exactly four owned files and bars new ones; the supervisor's 16:37 ruling says
+***     `drops.json` is content's, and System 41 needs new JSONs. The lane is right to refuse a
+***     relayed instruction - the PROMPT is what must change. HIGHEST COST ITEM IN THE BACKLOG.
+***     (Mitigated but NOT fixed this hour: the 23:58 content row gives town text that fits inside
+***     the existing four files, so the lane is unblocked for now without touching its charter.)
+*** (2) **ALL SEVEN PROMPTS - the town-first priority order (sup-nov27-2304), the hub-as-primary
+***     -interface rule (sup-nov27-2340) and the two-week deadline with its "do not stand down"
+***     clause (sup-nov27-2346).** All three are in the plan and on all seven refs as of 42a9cbf9,
+***     so no lane is blind - but prompts are what a lane reads FIRST.
+*** (3) **HUB PROMPT - scope change.** It is now the PRIMARY INTERFACE, not a companion hub:
+***     Twitch OAuth, per-viewer dashboards, an action queue. Its charter predates that entirely.
+*** (4) **CHAT BOT PROMPT - scope change.** Minimal commands only; management moves to the hub.
+*** (5) **THIS PROMPT (:58) - stale measurements, all three re-measured 27 Nov:** the dead-data
+***     baseline says 47 `.gd` + app.js = 48 files / 2,345,688 chars (it is **48 + app.js = 49 /
+***     2,532,315**), 146 top-level data keys (it is **178**), and 34 asset directories (it is
+***     **38**). The NON-NOTE zero-hit count of 15 and "unread live data keys: ZERO" are both
+***     still correct. Also stale: it calls System 42c open; 42b AND 42c are ticked whole.
+*** (7) **THIS PROMPT (:58) - STEP 0 NEEDS GUARD 5, ADDED BY THE 23:58 SEAT 28 NOV.** The
+***     dead-data audit's asset walker searches only the SCRIPT corpus, so an asset directory
+***     reached from a MODEL is invisible to it and gets reported unreferenced. It libelled
+***     `assets/graveyard/Textures` twice in two hours; five `.glb` binaries carry
+***     `Textures/colormap.png` inside them. GUARD 5: before calling an asset directory
+***     unreferenced, grep the `.glb`/`.gltf` binaries and the `.import` sidecars for its name.
+***     AND A SECOND INSTRUMENT FAULT FROM THE SAME RUN: the merge-marker audit must NOT use
+***     `grep -E '^|||||||'` - in ERE that is alternation and matches EVERY line (it reported
+***     45,804 markers in a clean file). Use a literal `startswith`, not a regex.
+*** (6) **THE SECTION BAR IS THREE ROWS, NOT TWO** - the hub measured it on the live page
+***     (y=229/266/304, 15 tabs, none clipped). Several of this seat's blocks say "two-row".
+
 *** ===== TAKE THIS NEXT - THE 23:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 22:58 FIRING AND ITS ADDENDUM.
 *** Clock read off cruzader: 23:5x CST. Merged to main at 9d97650a and pushed.

@@ -61,6 +61,32 @@ func _initialize() -> void:
     for row in r.leaderboard("standing", 50):
         names.append(row["name"])
     _ok(names.count("Fallen") == 1, "leaderboard one row per risen hero, got %d" % names.count("Fallen"))
+    # S162: the smithy's repair (economy.gd) - base * rarity_mult * (1 - dur/100)
+    _ok(Economy.repair_list_cost({"weapon": 5, "dur_weapon": 0}, "weapon") == 600, "broken legendary lists 600")
+    _ok(Economy.repair_list_cost({"weapon": 1, "dur_weapon": 50}, "weapon") == 20, "half-worn common lists 20")
+    _ok(Economy.repair_list_cost({"weapon": 0, "dur_weapon": 0}, "weapon") == 0, "bare hands: nothing to mend")
+    _ok(Economy.repair_list_cost({"armour": 3}, "armour") == 0, "missing durability = new, nothing to mend")
+    var q: Dictionary = Economy.repair_quote(r, h)
+    _ok(int(q["total"]) == r.cost_for(h, 80) + r.cost_for(h, 64), "quote is weapon 80 + armour 64 at guild rate, got %s" % str(q))
+    h["gold"] = 0
+    var rp0: Dictionary = Economy.repair(r, "9001")
+    _ok(not bool(rp0["ok"]) and int(h["dur_weapon"]) == 0 and int(h["gold"]) == 0, "cannot pay: nothing taken, nothing mended")
+    h["gold"] = 1000
+    var rp1: Dictionary = Economy.repair(r, "9001")
+    _ok(bool(rp1["ok"]) and int(h["dur_weapon"]) == 100 and int(h["dur_armour"]) == 100 and int(h["gold"]) == 1000 - int(q["total"]), "repair pays and restores 100: " + str(rp1))
+    _ok(r.weapon_dice(h) != [1, 4] and is_equal_approx(r.attack(h), atk_full), "mended weapon back to full power")
+    _ok(int(Economy.repair(r, "9001")["cost"]) == 0, "whole gear: second repair costs 0")
+    # S162: the hub's skull markers (snapshot_pub.gd bags_block)
+    r.bags.clear()          # the grace hero's floor-9 bag above is not this check's
+    h["gold"] = 33
+    r.kill("9001", "a rat", 3, 0)
+    var bt := int(r.bags[0]["t"])
+    var bb: Array = SnapshotPublisher.bags_block(r, bt + 10)
+    _ok(bb.size() == 1 and int(bb[0]["floor"]) == 3 and int(bb[0]["gold"]) == 33 and not bool(bb[0]["open"]) and int(bb[0]["owner_left_s"]) == 3590, "bag marker inside hour: " + str(bb))
+    _ok(not str(bb).contains("9001"), "marker never publishes the owner login")
+    var bo: Array = SnapshotPublisher.bags_block(r, bt + 3700)
+    _ok(bo.size() == 1 and bool(bo[0]["open"]) and int(bo[0]["owner_left_s"]) == 0, "marker open after hour")
+    _ok(SnapshotPublisher.bags_block(r, bt + 7300).is_empty(), "marker gone after 2h")
     if _fails.is_empty():
         print("DEATH_TEST OK %d of %d" % [_n, _n])
     else:

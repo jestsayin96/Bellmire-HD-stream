@@ -4877,3 +4877,23 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
 - data/lore_lines.json misfire 197 -> 217, cleared 658 -> 678 (+40, all unique; 3 first-draft misfire duplicates swapped before writing). Frames held: misfire %s %s %d %d, cleared at most one %d. No floor count stated. `_note_c241` added (zero-hit by design, do not wire).
 - VALIDATION OK: lore_lines parses, 84 top-level keys (83 + note), every pre-existing key and the first 197/658 lines of each list byte-identical, diff is additions only; items/bosses/potions untouched and parse.
 - No miniboss body owed (roster closed at 70). No code wiring implied: both pools already read by _pick_line.
+
+## D-cycle - S162 THE DEATH MODEL, SLICE 2 (part): economy.gd repair + snapshot_pub bags/durability (RULING sup-nov27-0209), 2026-11-27 18:08-18:3x CST (game build)
+- TAKE THIS NEXT (team lead 17:58) gave game build slice 2. MEASURED WHAT S161 CLOSED FIRST: dur_factor / durability / the
+  threshold, drop_bag / bag_state / take_bags and the 3-delve grace are all in roster.gd and were NOT rebuilt. Zero hits for
+  repair in economy.gd; snapshot_pub published no bags, no dur_*, no deaths. Those are this slice.
+- economy.gd (mine): REPAIR_BASE 40, REPAIR_MULT by tier = Economy.RARITY index [none 0, common 1, uncommon 2, rare 4,
+  very rare 8, legendary 15]. repair_list_cost(h, slot) = base * mult * (1 - dur/100), the ruling's formula verbatim, ceil'd,
+  0 for tier 0 or dur 100. repair_quote(r, h) runs each slot through Roster.cost_for (the guild's forge rate, as every smith
+  purchase does). repair(r, user_id): all or nothing - cannot pay = told the price, nothing taken; pays = both slots to 100.
+  THE MULTIPLIER NUMBERS ARE MINE: the ruling says "common = cheap, legendary = expensive" and gives none. Broken common 40g,
+  broken legendary 600g. Flagged for the team lead / Mr. E to retune; they are two consts.
+- snapshot_pub.gd (mine), ADDITIVE: hero sheet gets dur_weapon, dur_armour, deaths, repair (the quote). Top-level `bags` =
+  bags_block(r): {name (hero, never the login), floor, gold, potions, oil, owner_left_s, left_s, open}, expired bags left out,
+  cap 40. That is the skull-marker data System 33's map needs; drawing it is the hub's.
+- DEATH_TEST extended 23 -> 36 checks (repair formula x4, quote at guild rate, cannot-pay takes nothing, pay restores 100 and
+  full power, second repair 0, marker inside hour / no login / open after hour / gone at 2h). Its first run went RED 34/36 on
+  my own test: the grace hero's floor-9 bag was still in `bags` - the code was right, the check counted a bag it did not own.
+- STILL CARRIED (in order): delve-side glowing bag body at the death spot + walk-over calling take_bags (needs a render);
+  !repair and durability on !hero/!me are the CHAT BOT's (chatcmd.gd) - Economy.repair(r, id)["line"] is ready for it;
+  broken-gear look (art + gear.gd); guild insurance hook - RANK NUMBER IS MR. E'S, not invented.

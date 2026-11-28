@@ -1,3 +1,161 @@
+*** ===== TAKE THIS NEXT - THE 01:58 CT FIRING, 28 NOV 2026 (written 02:0x CT). =====
+*** THIS SECTION SUPERSEDES EVERY ROW AND EVERY ADDENDUM BELOW IT. Clock read off cruzader:
+*** 2026-11-28T01:58:41-06:00. Run and machine clock agree on the date - no rollover this hour.
+*** Merged to main at da3b41c8 and pushed. SIX-FOR-SIX AGAIN: every lane shipped.
+***
+*** ===== THE ONE THING THAT MATTERS MOST THIS HOUR - READ IT BEFORE YOUR OWN ROW =====
+*** **THE SUPERVISOR AUTHORISED THE hub_actions DDL AT 01:52 CT (sup-nov28-0152) AND ITS STATED
+*** REASONING DESCRIBES A VERSION OF THE FILE THAT THE HUB HAD ALREADY REPLACED FOURTEEN MINUTES
+*** EARLIER BECAUSE IT WAS UNSAFE.** The ruling's point 3 calls the DDL sound for
+*** "own-rows-only select/insert on JWT `provider_id`". That is the FIRST draft. At 01:38 CT the
+*** HUB LANE SELF-CAUGHT THE FLAW (H33b, merged, on main now): `user_metadata` is WRITABLE BY THE
+*** SIGNED-IN USER through `supabase.auth.updateUser`, so a viewer could set `provider_id` to
+*** someone else's Twitch id and both READ and FILE AS THEM. The file on main now derives identity
+*** from `auth.identities` through `private.my_twitch_id()` (SECURITY DEFINER, `search_path = ''`,
+*** revoked from public/anon, granted to `authenticated` only).
+*** **THE RULING STANDS - APPLY THE DDL. APPLY THE FILE AS IT IS ON MAIN AND NOTHING OLDER.**
+*** I verified the correction by reading the bytes myself: `web/tools/hub_actions_schema.sql` on
+*** main carries `private.my_twitch_id()` in the `twitch_id` DEFAULT and in BOTH policies, and the
+*** hub changed NO `.js`, NO CSS and NO CSP to do it (numstat: only `docs/HUB_SECURITY.md`,
+*** `web/NOTES.md`, `web/tools/hub_actions_schema.sql`). This correction is routed up as well.
+***
+*** ===== WHAT LANDED, VERIFIED BY MY OWN READING - NOT BY THE LANES' CLAIMS =====
+*** **GAME BUILD S169 - THE ENGINE HALF OF THE HUB'S ORDER DESK. Supervisor order (b) item 2,
+***   action-queue polling, DONE.** New `scripts/hub_actions.gd` (225 lines), started in
+***   `town.gd:_ready` beside the SnapshotPublisher under the same JESTS_NO_TWITCH guard. I checked
+***   the load-bearing claim rather than taking it: every accepted row is turned into the chat line
+***   the viewer could have typed and run through `town.chat_line`, which EXISTS at
+***   `town.gd:5383` with the matching `(user_id, display, msg) -> String` signature - so a queued
+***   row cannot bypass a cost, gate or cooldown. `clean()` strips everything outside
+***   `[a-z0-9 -_']`, so no `!` and no newline can be smuggled into a second command; the test's
+***   check 3 proves it (`"!reroll; !delve"` -> `"!wear reroll delve"`). KINDS matches the schema's
+***   `kind` CHECK whitelist exactly, ten for ten. Gates, VERDICT LINES: HUB_ACTIONS_TEST OK 16 of
+***   16, W1A_TEST OK, DEATH_TEST OK 36 of 36, DELVE_TEST OK 9001 frames, TWITCH_PARSE OK,
+***   OFFFLOOR_VERDICT OK 0 of 2114, TOWNWALK in_solid 0/17492 PASS, parse 0 SCRIPT ERROR.
+***   **TICKED.** The remaining half - the table itself - is a Supabase object outside our code and
+***   is now authorised; our half is closed.
+***   ON THE W1A_TEST LOOSENING, CHECKED AS THE RULE REQUIRES: check 3 is not weaker (it now
+***   asserts all three heroes AND the rogue's `deaths == 1` AND the ordering) and can still go red.
+***   Check 10 IS weaker - it round-trips `heroes[1]` against itself instead of a literal name - but
+***   the ordering it used to pin is now pinned by check 3. Accepted, noted, not charged.
+*** **HUB H33b - A PRIVILEGE ESCALATION THE LANE FOUND IN ITS OWN SHIPPED PROPOSAL AND CLOSED THE
+***   SAME HOUR.** See the block above. This is the best kind of delivery there is: nobody asked
+***   for it, nobody would have caught it downstream, and the lane went looking at its own work.
+***   **TICKED.**
+*** **ART - TWELVE TOWN BUILDINGS GO FROM WHITE BOXES TO TEXTURED BUILDINGS.** `towntex.py` relinks
+***   the Megakit materials onto all twelve `assets/buildings/*.glb`. `_texfix.json` VERDICT GREEN,
+***   0 errors, 12 of 12, no unknown materials, `base_linked` 7-8 of 9 with the ONE default-grey
+***   material being `MI_WindowGlass` (glass, correct). **AND I LOOKED AT THE PICTURE, BEFORE AND
+***   AFTER:** `_probe/lm_hall/front.png` is a flat WHITE model; `_probe/lm_hall_tex/front.png` is
+***   stone, timber, shuttered windows and a red tile roof, chibi knight on the ground for scale.
+***   That is the red-proof and it is conclusive. **TICKED.**
+***   TWO HONEST NOTES. (1) **DO NOT READ THE `opaque_px` RISE (220700 -> 270249) AS THE EVIDENCE.**
+***   The before shot has a WHITE background and the after a BLACK one, so the two pixel counts are
+***   not like-for-like. The eye and the GREEN material audit are the evidence; the number is not.
+***   (2) The four-view fit probe was run on the HALL only - and a re-fit of the other eleven is NOT
+***   owed, because `n_tri` and `n_mesh` are IDENTICAL pre and post on all twelve. Nothing moved.
+*** **ART - THE HALL TIER LADDER IS DESIGNED, NOT BUILT.** `docs/art/TOWN_HALL_TIERS_DESIGN.md`,
+***   147 lines, measured. The design is a real delivery and is ticked AS A DESIGN. The ladder
+***   itself is NOT done: the hard rule is three tiers RENDERED SIDE BY SIDE, reading at a glance.
+*** **CONTENT C-249 - the 61 ordinary houses and the roads get their words.** I counted it myself
+***   rather than taking the row: `town_buildings.districts` holds EIGHT districts, each with
+***   EXACTLY 3 tiers, each tier carrying exactly `name / crier / plaque / see` - 24 entries - plus
+***   `roads.tiers` 3 and `tier_levels` 1/5/9. No new data file, same key as C-248. **TICKED.**
+*** **HUD U218 - the Chronicle town band steps LIVE on a level-up.** Windowed 1080p probe, renown
+***   driven 0 -> 200, 7 steps, 0 fails, band rect CONSTANT at (53.96,31.69 / 648x25) at every step,
+***   so a level-up causes no layout shift. The lane found and fixed its own probe bug mid-run (the
+***   frame counter started past its own trigger), and it LOOKED at step_3 and came back with two
+***   real defects of its own making. **TICKED.**
+*** **CHAT BOT B215 - DELIVERED, AND DELIBERATELY NOT TICKED. THE LANE IS RIGHT AND I AM BACKING
+***   ITS JUDGEMENT, NOT OVERRIDING IT.** All ten of the hub's verbs now name the hub in chat (nine
+***   of ten never did); `order` is 40 before and 40 after, no command added or removed. Its OWN
+***   gate then judged it RED - its first wording appended a sentence to `dye`.what, and
+***   `chatcmd.gd:2357` parses that string's TAIL as the colour list, so the guard read the sentence
+***   as two ghost colours. It moved the clause to the FRONT, re-proved its python emulation of the
+***   real doc generator BYTE FOR BYTE against output the real engine had written 60 seconds
+***   earlier (and reported that its FIRST emulation attempt was two bytes short and therefore not
+***   proof), and then said plainly: **"docs/COMMANDS.md IN THIS COMMIT IS EMULATION OUTPUT AWAITING
+***   THE REAL GATE."** It did not start a second Godot run because it would have landed in the
+***   HUD's :52 slot - it SPLIT THE JOB, exactly as the yield rule now says. **B215 IS HALF
+***   DELIVERED: the data is landed and proven key-by-key; the real gate is owed at 02:45.**
+***
+*** ===== MY SEAT'S OWN FAULTS THIS RUN =====
+*** **NONE THAT REACHED A ROW, AND I AM NOT INVENTING ONE.** One near-miss worth recording so the
+*** next seat does not repeat it: my first `git diff --numstat origin/main origin/art` printed
+*** hundreds of DELETED script files and for a moment read like art had deleted half the engine. It
+*** is a TWO-DOT diff against a branch that has not merged main since 25 Nov - it shows main's
+*** files as "missing" from art. `git log origin/main..origin/art` says the truth: two commits.
+*** **USE THE LOG, OR A THREE-DOT DIFF, TO ASK WHAT A LANE ADDED. NEVER A TWO-DOT NUMSTAT.**
+*** Also: `origin/hud-ui` MOVED BETWEEN MY FIRST READ AND MY MERGE (0e3eff58 -> 0474fcf0, U218
+*** landing mid-run). I re-read the ref at merge time and caught it. Re-read every ref you merge.
+***
+*** ===== THE SIX ROWS =====
+*** **GAME BUILD (02:07) - APPLY THE DDL, BUT THE H33b VERSION, AND RED-PROVE THE ESCALATION SHUT.**
+***   sup-nov28-0152 authorises you to apply `web/tools/hub_actions_schema.sql` to Supabase and to
+***   red-prove the poller against the real table. READ THE BLOCK AT THE TOP OF THIS SECTION FIRST:
+***   apply the file AS IT IS ON MAIN (`private.my_twitch_id()` off `auth.identities`), never the
+***   JWT `user_metadata` draft the ruling's reasoning describes. Then red-prove S169 end to end
+***   against the real table: a queued row goes `done`, a second inside the chat cooldown STAYS
+***   `queued`, a row older than 10 min sweeps to `expired`, and a row is only ever decided once
+***   (the `&status=eq.queued` guard). AND PROVE THE HOLE IS SHUT: with a second account,
+***   `updateUser({data:{provider_id:'<another id>'}})` must change NOTHING about what that account
+***   can select or insert. THEN (3) TOWN VISUAL PROGRESSION - write the layout format down FIRST,
+***   as you yourself said. `town_buildings.districts[<district>].tiers[]` and `roads.tiers[]` are
+***   sitting in `data/lore_lines.json` waiting for a reader; they are the ONLY non-note zero-hit
+***   keys in the house that are QUEUED WORK rather than dead.
+*** **CONTENT (02:22) - C-250, STILL TOWN-FIRST.** C-249 closed districts and roads. What the town
+***   progression still has no words for is THE MOMENT OF CHANGE: what the crier says in the hour a
+***   district or a road actually steps 1->2 and 2->3, as an event line rather than a state
+***   description. After that, the INN EXTERIOR (order 1 item 9 - exterior and the storage mechanic
+***   ONLY, no interior rooms). Same key or a sibling key in `lore_lines.json`; NO new data file.
+*** **ART (02:34) - BUILD THE HALL TIER LADDER YOU JUST DESIGNED.** The design is ticked; the
+***   ladder is not. Three tiers, RENDERED SIDE BY SIDE, and the progression must read at a glance -
+***   that is the hard rule and the design doc is no substitute for it. The well (t1/t2/t3) is your
+***   own worked example. When the Hall ladder reads, take the next building by how often a viewer
+***   will see it, and say which you picked and why.
+*** **HUB (02:37) - CLOSE THE TWO GAPS THE ENGINE JUST EXPOSED IN YOUR OWN PAGE.** `hub_actions.gd`
+***   is on main now and it is the thing that will answer your page. (1) Your `respec` action sends
+***   no box, so the engine hands the viewer the town's "No such calling. Try: ..." every time - the
+***   poller ALREADY accepts `args.calling` (or `class`/`path`), so a calling box finishes it. (2)
+***   The engine REFUSES `sell` in words ("Selling from the inn is not open yet"), so a viewer is
+***   today offered a verb that can only ever refuse - either label it plainly on the page or take
+***   it out of `ACTIONS` until the engine has a sell verb. web/-only, both of them.
+*** **CHAT BOT (02:45) - YOUR OWN FIRST ACT, AND I AM MAKING IT THE ROW.** Re-run stages 2 and 3 on
+***   the REAL engine over the FIXED data. B215 is not ticked until `L14_TEST OK` is a verdict line
+***   and `COMMANDS_DOC` has rewritten `docs/COMMANDS.md` to md5 `501e9535` from the real generator.
+***   CLAIM BY :50 AND DECLARE A FINISH INSIDE :52 - that row has held for days, including tonight.
+***   If it comes back green and there is time, the eleven commands with no `short` are a real gap
+***   you found and correctly did not take on your own; it is now rowed, so take it.
+*** **HUD (02:52) - U219, AS YOU SCOPED IT YOURSELF FROM LOOKING AT step_3.** Give the town band
+***   top padding and larger type at 100%, then re-measure L74 (the feed under load) WITH the band
+***   in, and re-state the Chronicle line cap at 100/125/150. LOOK AT THE WORST CASE, not the
+***   prettiest frame - your own log says 100% is the tight one, so judge it at 100%.
+***
+*** ===== FOR THE SUPERVISOR =====
+*** (1) **YOUR 01:52 RULING'S POINT 3 IS STALE AND I HAVE OVERRIDDEN IT IN THE GAME BUILD'S ROW.**
+***     The DDL you reviewed keyed identity on the JWT's `user_metadata.provider_id`; the hub proved
+***     that field is user-writable and replaced it at 01:38 CT, before your ruling was written. The
+***     AUTHORISATION is unaffected and I have rowed it; only the reasoning needs correcting, so
+***     that nobody later applies the version your point 3 describes. RECOMMENDATION: re-issue
+***     point 3 against `private.my_twitch_id()` / `auth.identities`.
+*** (2) **NOTHING WAS PUBLISHED THIS HOUR AND I RAN NO PUBLISH VERIFICATION, DELIBERATELY.** I
+***     measured both trees myself: `origin/gh-pages^{tree}` dd6294a0, `origin/hub:web` e0547014,
+***     and the ENTIRE delta is `NOTES.md` +7/-0 and `tools/hub_actions_schema.sql` +15/-4. The
+***     RENDERED PAGE is byte-identical - no `index.html`, no `app.js`, no `style.css`, no CSP. The
+***     hub made no "ready to publish" claim, so the publish gate is not owed and I did not run one.
+***     ONE THING YOU SHOULD KNOW ANYWAY: the OLD, unsafe DDL is currently served as a static file
+***     at the published site. Nothing executes it, and the game build will apply it from the repo,
+***     so I judged this not worth a push on its own - but if you want the stale copy off the public
+***     site, say so and I will push it under the pre-authorisation next hour.
+*** (3) Publish 10 is live (06dc91f6, 01:11 CT) and the live page was last LOOKED AT by the hub lane
+***     after publish 9. Nobody has looked at publish 10 with eyes yet. My proxy is blocked from
+***     github.io; the hub lane's built-in browser is the instrument. I have not rowed it over the
+***     respec/sell fixes, but say the word and it goes first.
+***
+*** ===== NEEDS MR. E =====
+*** Nothing new from this seat. The one open item - the Twitch provider client ID and secret in
+*** Supabase Auth - is already on the supervisor's own standing list and is being routed there.
+***
 *** ===== TAKE THIS NEXT - THE 00:58 CT FIRING, 28 NOV 2026 (written 01:0x-01:2x CT). =====
 *** THIS SECTION SUPERSEDES EVERY ROW AND EVERY ADDENDUM BELOW IT. Clock read off cruzader:
 *** 2026-11-28T00:59:01-06:00. Run and machine clock agree on the date this hour - no rollover.

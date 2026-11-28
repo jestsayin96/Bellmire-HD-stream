@@ -1195,6 +1195,16 @@ function heroSheet(h, mode) {
   const svTxt = h.saves ? String(h.saves) : "";
   sv.append(kv("Saves", svTxt ? svTxt : el("span", "gapnote", "not published")));
   if (!svTxt) gaps.push("saving throws");
+  // S162 wear and repair: numbers only (pickNum), so nothing here is a snapshot string. 0-100 durability,
+  // the fall counter, and the smithy's price to mend both. Missing keys read as "not published".
+  if (!fallen) {
+    const dw = pickNum(h.dur_weapon), da = pickNum(h.dur_armour), nd = pickNum(h.deaths), rp = pickNum(h.repair);
+    const wear = (v) => v == null ? el("span", "gapnote", "not published") : Math.max(0, Math.min(100, Math.round(v))) + "% sound";
+    sv.append(kv("Weapon wear", wear(dw)), kv("Armour wear", wear(da)));
+    sv.append(kv("Falls", nd == null ? el("span", "gapnote", "not published") : (nd > 0 ? "Fell " + num(nd) + (nd === 1 ? " time" : " times") : "Never fallen")));
+    sv.append(kv("Repair price", rp == null ? el("span", "gapnote", "not published") : (rp > 0 ? num(rp) + " gold at the smithy" : "Nothing to mend")));
+    if (dw == null && da == null) gaps.push("gear wear and repair price");
+  }
   cb.append(sv);
   sheet.append(cb);
 
@@ -5236,7 +5246,7 @@ function withMock(p) {
     else if (MOCK === "satchel2") carry = { weight: 112, cap: 150, band: "heavily encumbered" };
     const me = { name: "mockviewer", class: "knight", species: "human", level: 4, rank: "Delver", standing: 12, ac: 15, hp: 30, gold: 120,
       kills: 3, deepest: 2, delves: 2, xp: 40, to_hit: 4, prof: 2, saves: "STR +4", stats: { str: 14, dex: 12, con: 13, int: 9, wis: 11, cha: 8 },
-      spec: "guardian", spec_name: "Guardian " + bad, satchel: items, carry, where: "walking to The Smithy " + bad,
+      spec: "guardian", spec_name: "Guardian " + bad, dur_weapon: 42, dur_armour: 87.6, deaths: 3, repair: 118, satchel: items, carry, where: "walking to The Smithy " + bad,
       vault: MOCK === "satchel0" ? { slots: 12, items: [] } : { slots: 12, items: [{ name: bad + " Hoard", slot: "gem", weight: 0, sell: 500 }, { name: "Spare boots", slot: "armour", weight: 4, sell: 12 }] } };
     out.heroes = [me].concat(arr(p.heroes));
     out.orders = [{ who: "mockviewer", item: bad + " Helm", shop: "The Smithy", walker: "mockviewer" }, { who: "someone-else", item: "Loaf", shop: "The Provisioner" }];

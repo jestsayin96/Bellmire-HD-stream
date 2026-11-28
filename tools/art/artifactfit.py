@@ -60,6 +60,20 @@ this means a ZERO held_rot is NOT a zero correction - it is C^-1, a real -90
 about the slot's X - because mesh and slot are in different up-axis
 conventions. My first instinct said the opposite, and the bone disagreed.
 
+*** STRUCK 27 NOV 19:5x CT BY MY OWN AUDIT. THE SENTENCE BELOW IS BACKWARDS. ***
+`tools/art/_wf_basis_audit.py` put both rules on the posed body and set them
+beside the game build's OWN Godot captures (renders/cycles/s16, s19). The engine
+ships `C . R_godot . C^-1` - the staff's rule, and the rule the six uncalibrated
+families already get as Identity at held_rot zero. `R . C^-1` points the sword
+straight down the camera. **SO THE CROSSBOW IS THE ODD ONE AND THE STAFF IS
+RIGHT**, which is what the WORK_PLAN said and what this docstring got wrong.
+The consequence for THIS file is not yet discharged: the tier-5 register was
+scored on `R . C^-1` and is 90 degrees yawed from the engine. The dagger
+prescription (held_rot (0,0,90), hand_scale 0.60) was RE-PROVED on the engine's
+basis and STANDS - see docs/art/THE_CARRY_BASIS_DIVERGENCE_IS_CLOSED_AND_THE_
+CROSSBOW_IS_THE_ODD_ONE_NOT_THE_STAFF.md - but the rest of tier 5 needs a
+re-score and this file must not be read as settled until it has one.
+
 WHICH MAKES weaponfit's CROSSBOW RIGHT AND ITS STAFF BASIS THE ODD ONE - AND I
 AM NOT OVERCLAIMING THAT. The two rules differ, for the staff's (0,0,90), ONLY
 by a roll about the staff's own shaft: both land the shaft along slot -X =

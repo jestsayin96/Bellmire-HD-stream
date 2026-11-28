@@ -1,0 +1,148 @@
+{
+ "errors": [
+  "D_artifactfit_rule_hr0_hs05/back: the dagger adds ZERO pixels - this arm proves nothing"
+ ],
+ "model": "assets\\gear\\artifact\\dagger_golden.glb",
+ "order": "YXZ",
+ "register": {
+  "A_artifactfit_rule_hr90_hs060": {
+   "hand_scale": 0.6,
+   "held_rot": [
+    0,
+    0,
+    90
+   ],
+   "rule": "R . C^-1",
+   "views": {
+    "back": {
+     "added_px": 458,
+     "bbox_h": 163,
+     "bbox_w": 10,
+     "fill_frac": 0.281,
+     "major_px": 163,
+     "minor_px": 10
+    },
+    "front": {
+     "added_px": 844,
+     "bbox_h": 170,
+     "bbox_w": 18,
+     "fill_frac": 0.276,
+     "major_px": 170,
+     "minor_px": 18
+    },
+    "side": {
+     "added_px": 1622,
+     "bbox_h": 168,
+     "bbox_w": 27,
+     "fill_frac": 0.358,
+     "major_px": 168,
+     "minor_px": 27
+    }
+   }
+  },
+  "B_engine_rule_hr90_hs060": {
+   "hand_scale": 0.6,
+   "held_rot": [
+    0,
+    0,
+    90
+   ],
+   "rule": "C . R . C^-1",
+   "views": {
+    "back": {
+     "added_px": 1318,
+     "bbox_h": 168,
+     "bbox_w": 28,
+     "fill_frac": 0.28,
+     "major_px": 168,
+     "minor_px": 28
+    },
+    "front": {
+     "added_px": 1695,
+     "bbox_h": 169,
+     "bbox_w": 38,
+     "fill_frac": 0.264,
+     "major_px": 169,
+     "minor_px": 38
+    },
+    "side": {
+     "added_px": 584,
+     "bbox_h": 168,
+     "bbox_w": 11,
+     "fill_frac": 0.316,
+     "major_px": 168,
+     "minor_px": 11
+    }
+   }
+  },
+  "C_engine_rule_shipped_hr0_hs05": {
+   "hand_scale": 0.5,
+   "held_rot": [
+    0,
+    0,
+    0
+   ],
+   "rule": "C . R . C^-1",
+   "views": {
+    "back": {
+     "added_px": 1302,
+     "bbox_h": 24,
+     "bbox_w": 79,
+     "fill_frac": 0.687,
+     "major_px": 79,
+     "minor_px": 24
+    },
+    "front": {
+     "added_px": 1424,
+     "bbox_h": 24,
+     "bbox_w": 137,
+     "fill_frac": 0.433,
+     "major_px": 137,
+     "minor_px": 24
+    },
+    "side": {
+     "added_px": 307,
+     "bbox_h": 23,
+     "bbox_w": 24,
+     "fill_frac": 0.556,
+     "major_px": 24,
+     "minor_px": 23
+    }
+   }
+  },
+  "D_artifactfit_rule_hr0_hs05": {
+   "hand_scale": 0.5,
+   "held_rot": [
+    0,
+    0,
+    0
+   ],
+   "rule": "R . C^-1",
+   "views": {
+    "back": {
+     "added_px": 0,
+     "major_px": 0,
+     "minor_px": 0
+    },
+    "front": {
+     "added_px": 423,
+     "bbox_h": 49,
+     "bbox_w": 55,
+     "fill_frac": 0.157,
+     "major_px": 55,
+     "minor_px": 49
+    },
+    "side": {
+     "added_px": 1621,
+     "bbox_h": 39,
+     "bbox_w": 140,
+     "fill_frac": 0.297,
+     "major_px": 140,
+     "minor_px": 39
+    }
+   }
+  }
+ },
+ "sheet": "renders/art/_wf_basis/_dagger/_sheet_dagger_front.png",
+ "tool": "_t5_dagger_basis_recheck"
+}

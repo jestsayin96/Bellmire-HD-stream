@@ -25182,3 +25182,11 @@ which `_l14_test.gd` excludes by name (**L17: `!test*` are local-only, never doc
 - **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or
   changed; Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
 - Not ticked - the team lead ticks.
+
+## C-256 (content, 28 Nov 2026, 14:3x CST) - PHASE-2 WORDS: THE THIN POOLS GET DEPTH (sell, stone, vault)
+- TAKE THIS NEXT: the 14:07 block has NO content row (C-255 closed the 13:22 one). Town copy is whole (7 landmarks, 8 districts, 4 sites, shops, quest board). Miniboss feed: by_key = 70 = the roster cap, nothing owed. So I took standing backlog item 5, the thinnest pools I could measure.
+- Added 36 lines to `phase2_words` and `phase2_words_alt` (18 each): sell (placed, sold, refused_level, worn_below), stone (bought, one_hero, panic), vault (deposit, withdraw, full, raised, death_kept). Same tokens as the pools they extend. New `_note_c256`. `phase2_words_alt2` untouched, dead on purpose.
+- VALIDATION OK: json.load passes; only new key is `_note_c256`; every pre-existing list is an exact prefix of its new list; file round-trips.
+- No new data file. No wiring: the existing readers already draw from these pools.
+- Left in W3, untracked and not committed: `_c256_old.json` (device shell cannot delete). Safe to remove.
+- Next content: C-257.

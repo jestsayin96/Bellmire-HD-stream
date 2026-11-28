@@ -17833,3 +17833,14 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - W2's cold import cache still logs failed-load lines for two gear meshes - not a defect, per the 18:58 plan block.
 - NEXT FIRING (20:52): read R's RUN_LOCK working copy. L74's feed half is measured; take whatever the TAKE THIS NEXT block names for HUD, or stand down and write it up.
 - Not ticked - team lead ticks.
+
+## U213 - 2026-11-27T20:58:00-06:00 - STAND-DOWN: THE 19:58 ROW SAYS "TAKE THE NEXT UNSTARTED HUD HALF" AND NAMES NONE; NO GODOT, NO CLAIM (HUD)
+- Clock: 20:53:02 CST read off cruzader (device_bash) and 20:53:09 (Windows) before anything else.
+- Lock: R's WORKING COPY of docs/RUN_LOCK.txt (read from R, not a ref). Last line IDLE QA tester 20:49:09-06:00, preceded by its RUNNING 20:41:51. No RUNNING follows an IDLE; tasklist Godot* = 0. The lock was free, and I did not claim it because I had no engine work to run.
+- Item: the 19:58 TAKE THIS NEXT HUD row ("L74 IS TICKED - DO NOT RE-RUN IT. TAKE THE NEXT UNSTARTED HUD HALF") names no concrete HUD item. L74 shipped as U211/U212; rarity-hue half of System 2 shipped as U55/U76 (recorded U193) and is not retaken. System 43 (ranking) and 44 (morality / dual guild) queue behind the chat bot's commands; any standings board conflicts with COORDINATION 13 (H31), so I build no board and have no standings data requested of me.
+- Changes: none in my seven .gd files. PROGRESS.md only.
+- On the row's merge question (a judgement for me, not an order): I am KEEPING hud-ui PINNED for now, because I have no capture queued and merging 1605 commits is not worth doing blind. If a HUD item is named, I will merge origin/main into hud-ui BEFORE that firing's capture so W2 gates stop reporting faults that exist only in the stale tree.
+- Render: none; nothing changed, so there is nothing new to look at.
+- Not ticked - team lead ticks.
+- NEXT FIRING (21:52): read R's RUN_LOCK working copy; take whatever the next TAKE THIS NEXT block names for HUD, else stand down and write it up.
+- Decision for Mr. E: none.

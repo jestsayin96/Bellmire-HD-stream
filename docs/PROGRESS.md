@@ -4918,3 +4918,27 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
   floor's dun.info["cells"]; _process checks each alive member within ~1.2 m and calls roster.take_bags(uid, floor_no),
   "locked" bags glow but do not open. A new windowed render tool proves it, then DEATH_TEST grows the walk-over checks.
 - NOT TOUCHED: guild insurance (rank number is Mr. E's), broken-gear look (art + gear.gd, later).
+
+## D-cycle - S165 SYSTEM 42b PARTY MODEL IN roster.gd + ENGINE CAP OF TEN IN _begin_delve, 2026-11-27 21:08-21:2x CST (game build)
+- TAKE THIS NEXT (team lead, 20:58 block) gave game build System 42b/42c engine half (DIRECTIVE sup-nov27-1844). SPLIT ON PURPOSE
+  to fit one 25-minute claim: slice 1 (this run) = the party data model + the engine's own cap; slice 2 (next) = a leader's
+  !delve taking only their party + "[leader] is mustering" line; slice 3 = !solo.
+- roster.gd (mine): `const PARTY_CAP := 10`, `var parties := {}` keyed by LEADER uid -> {members (leader first, join order),
+  invites}. party_create / party_invite / party_join (needs an invite) / party_leave (leader leaving dissolves) / party_kick /
+  party_disband (leader only) / party_of / party_members / party_line. Every call returns a chat line, so the CHAT BOT can wire
+  !party <sub> straight to them; I touched no chatcmd.gd. A party survives a delve ending (nothing in the delve path touches
+  it). IN MEMORY ONLY, not saved to roster.json - a party is a one-stream thing; Mr. E can say if it should persist.
+- town.gd `_begin_delve` (mine), the chat bot's (b): BELT-AND-BRACES ADDED. `going = _at_mouth.slice(0, PARTY_CAP)`, the rest
+  stay at the mouth and get their own muster (timer from zero) when this delve ends. Everything in the function now reads
+  `going`. THIS ALSO FIXES A LATENT BUG OF MINE: the ended handler used to iterate _at_mouth, so a hero who reached the mouth
+  while a party was below would have been treated as a non-survivor and freed, then _at_mouth.clear() dropped them.
+- The chat bot's (a): THE RACK CARRIES IT. Kit cost stays half a set per hero, so a full ten asks 5 gear; no falloff above six.
+- roster.gd describe()'s unreachable "is dead. !reroll" branch: KEPT (harmless, and cheap insurance if `alive` ever is written).
+- NO RENDER THIS SLICE: nothing visible changed (model + a cap path). The visible half - party walking to the mouth together,
+  a leader's muster - is slice 2 and gets a render then.
+- GATES (verdict lines): parse --quit-after 300 rc 0, 0 Parse Error / 0 SCRIPT ERROR. PARTY_TEST OK 23 of 23 (new gate,
+  tools/_party42_test.gd - MY FIRST COMMIT WROTE IT OVER the Nov-11 party-frames test tools/_party_test.gd; caught from the
+  diff stat before push, old file restored from HEAD~1, mine renamed and re-run alone 21:20:49-21:20:50: OK 23 of 23). DEATH_TEST OK 36 of 36. TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of 2032 samples.
+  DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/18618 (0.000%) raid_in_solid=0/4320 (0.000%)
+  PASS (re-run alone: my first battery log kept only the last 6000 chars of stdout+stderr and lost the verdict - a log fault of
+  mine, not a gate fault; the verdict above is from a run that kept stdout whole).

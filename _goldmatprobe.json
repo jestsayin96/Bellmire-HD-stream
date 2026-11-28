@@ -1,0 +1,310 @@
+{
+  "sword_golden": {
+    "mats": {
+      "DarkSteel": {
+        "name": "DarkSteel",
+        "Base Color": [
+          0.2664,
+          0.2664,
+          0.2232,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.0,
+        "Emission Strength": 0.0
+      },
+      "DarkWood": {
+        "name": "DarkWood",
+        "Base Color": [
+          0.0637,
+          0.0324,
+          0.0516,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.5,
+        "Emission Strength": 0.0
+      },
+      "Golden": {
+        "name": "Golden",
+        "Base Color": [
+          0.4672,
+          0.3365,
+          0.0589,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.5,
+        "Emission Strength": 0.0
+      },
+      "LightGold": {
+        "name": "LightGold",
+        "Base Color": [
+          0.7874,
+          0.6773,
+          0.1896,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.5,
+        "Emission Strength": 0.0
+      },
+      "LightWood": {
+        "name": "LightWood",
+        "Base Color": [
+          0.1574,
+          0.079,
+          0.0849,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.5,
+        "Emission Strength": 0.0
+      }
+    },
+    "tris_per_mat": {
+      "Golden": 224,
+      "LightWood": 240,
+      "DarkWood": 96,
+      "LightGold": 132,
+      "DarkSteel": 180
+    },
+    "path": "C:\\hd adventure\\jests-hd-medieval-adventure\\assets\\gear\\artifact\\sword_golden.glb"
+  },
+  "axe_double_golden": {
+    "mats": {
+      "DarkWood": {
+        "name": "DarkWood",
+        "Base Color": [
+          0.0637,
+          0.0324,
+          0.0516,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.5,
+        "Emission Strength": 0.0
+      },
+      "Golden": {
+        "name": "Golden",
+        "Base Color": [
+          0.4672,
+          0.3365,
+          0.0589,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.5,
+        "Emission Strength": 0.0
+      },
+      "LightGold": {
+        "name": "LightGold",
+        "Base Color": [
+          0.7874,
+          0.6773,
+          0.1896,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.5,
+        "Emission Strength": 0.0
+      },
+      "LightWood": {
+        "name": "LightWood",
+        "Base Color": [
+          0.1574,
+          0.079,
+          0.0849,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.5,
+        "Emission Strength": 0.0
+      }
+    },
+    "tris_per_mat": {
+      "Golden": 770,
+      "LightWood": 496,
+      "DarkWood": 166,
+      "LightGold": 124
+    },
+    "path": "C:\\hd adventure\\jests-hd-medieval-adventure\\assets\\gear\\artifact\\axe_double_golden.glb"
+  },
+  "sceptre_golden": {
+    "mats": {
+      "sceptre_gold": {
+        "name": "sceptre_gold",
+        "Base Color": [
+          0.95,
+          0.76,
+          0.3,
+          1.0
+        ],
+        "Metallic": 0.3,
+        "Roughness": 0.35,
+        "Emission Strength": 0.0
+      },
+      "sceptre_grip": {
+        "name": "sceptre_grip",
+        "Base Color": [
+          0.2,
+          0.14,
+          0.1,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.8,
+        "Emission Strength": 0.0
+      },
+      "sceptre_stone": {
+        "name": "sceptre_stone",
+        "Base Color": [
+          0.3,
+          0.58,
+          1.0,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.1,
+        "Emission Strength": 1.0
+      }
+    },
+    "tris_per_mat": {
+      "sceptre_gold": 388,
+      "sceptre_grip": 140,
+      "sceptre_stone": 20
+    },
+    "path": "C:\\hd adventure\\jests-hd-medieval-adventure\\assets\\gear\\artifact\\sceptre_golden.glb"
+  },
+  "pack_spear": {
+    "mats": {
+      "DarkWood": {
+        "name": "DarkWood",
+        "Base Color": [
+          0.1301,
+          0.0581,
+          0.0291,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.69,
+        "Emission Strength": 1.0
+      },
+      "LightSteel": {
+        "name": "LightSteel",
+        "Base Color": [
+          0.3697,
+          0.3928,
+          0.4316,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.69,
+        "Emission Strength": 1.0
+      },
+      "LightWood": {
+        "name": "LightWood",
+        "Base Color": [
+          0.1907,
+          0.0837,
+          0.041,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.69,
+        "Emission Strength": 1.0
+      },
+      "Steel": {
+        "name": "Steel",
+        "Base Color": [
+          0.301,
+          0.3216,
+          0.3517,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.69,
+        "Emission Strength": 1.0
+      }
+    },
+    "tris_per_mat": {
+      "Steel": 92,
+      "LightWood": 672,
+      "DarkWood": 342,
+      "LightSteel": 96
+    },
+    "path": "C:\\hd adventure\\_packs\\quaternius_medieval_weapons_2018_CC0\\Medieval Weapons Pack - Sept 2018\\OBJ\\Spear.obj"
+  },
+  "pack_sword_plain": {
+    "mats": {
+      "DarkSteel": {
+        "name": "DarkSteel",
+        "Base Color": [
+          0.2131,
+          0.2131,
+          0.1786,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.69,
+        "Emission Strength": 1.0
+      },
+      "DarkWood": {
+        "name": "DarkWood",
+        "Base Color": [
+          0.1301,
+          0.0581,
+          0.0291,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.69,
+        "Emission Strength": 1.0
+      },
+      "LightSteel": {
+        "name": "LightSteel",
+        "Base Color": [
+          0.3697,
+          0.3928,
+          0.4316,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.69,
+        "Emission Strength": 1.0
+      },
+      "LightWood": {
+        "name": "LightWood",
+        "Base Color": [
+          0.1907,
+          0.0837,
+          0.041,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.69,
+        "Emission Strength": 1.0
+      },
+      "Steel": {
+        "name": "Steel",
+        "Base Color": [
+          0.301,
+          0.3216,
+          0.3517,
+          1.0
+        ],
+        "Metallic": 0.0,
+        "Roughness": 0.69,
+        "Emission Strength": 1.0
+      }
+    },
+    "tris_per_mat": {
+      "Steel": 224,
+      "LightWood": 240,
+      "DarkWood": 96,
+      "LightSteel": 132,
+      "DarkSteel": 180
+    },
+    "path": "C:\\hd adventure\\_packs\\quaternius_medieval_weapons_2018_CC0\\Medieval Weapons Pack - Sept 2018\\OBJ\\Sword.obj"
+  }
+}

@@ -950,3 +950,29 @@ Selection note: every real directory in `_packs` already has a catalogue entry (
 - Commercial use: **not established**. Attribution: **not established**.
 - Decision: per the rule, recorded as NO LICENCE FILE FOUND and not guessed. Do not load, convert or ship anything from this pack until a licence is found or the author confirms one.
 - Catalogue note: the pack is not in the tables above. Whether any file in the repo uses it was not checked.
+## System - the tier-5 SPEAR (art lane, 27 Nov 2026, 23:4x CT)
+
+`assets/gear/artifact/spear_golden.glb` is **derived from
+`_packs/quaternius_medieval_weapons_2018_CC0/Medieval Weapons Pack - Sept 2018/OBJ/Spear.obj`**
+(Quaternius, **CC0 1.0**, opengameart.org/content/lowpoly-medieval-weapons - the
+row near the top of this file). That pack carries no licence file inside the
+extracted folder, which is why it appears in the "no licence file on disk" list
+above; it was nevertheless cleared and FIRST USED on 19 Nov for System 8's five
+shields, which shipped with `LICENSE_Quaternius_MedievalWeapons_CC0.txt` written
+beside them. This is a later use of an already-cleared pack, not a new import.
+
+The derivation, all of it reversible from `tools/art/_speargen.py`:
+  1. `Steel -> Golden` and `LightSteel -> LightGold`, which is **Quaternius' own
+     golden-tier substitution** - proven this run by `tools/art/_goldmatprobe.py`,
+     which found the pack's plain `Sword.obj` and the shipped `sword_golden.glb`
+     carry identical triangle counts material for material (Steel 224 / Golden 224,
+     LightSteel 132 / LightGold 132, DarkSteel 180, LightWood 240, DarkWood 96).
+     Material VALUES are taken from the shipped `sword_golden.glb`, so the piece
+     joins the golden family rather than inventing a gold.
+  2. Uniform scale 9.7171 -> 3.500 units, origin moved to 33.0% from the butt
+     (`spear_A`'s own proportion), shaft axis centred on x=y=0.
+  3. Four radial gold langets and a LightGold collar at the socket, generated
+     procedurally by `_speargen.py --langets 1` and therefore **original**.
+
+Geometry otherwise unmodified. Fit proof and the honest fault list:
+`docs/art/THE_TIER5_SPEAR_READ.md` and `renders/art/spear_langets/`.

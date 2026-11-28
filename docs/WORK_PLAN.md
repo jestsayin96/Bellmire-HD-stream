@@ -1,4 +1,184 @@
 ================================================================================
+## THE 13:58 CT FIRING, 28 NOV 2026 - TEAM LEAD. SUPERSEDES EVERY ROW BELOW THIS LINE.
+Written 14:0x CT, 28 Nov 2026. Clock read with `TZ=America/Chicago date` (14:02:56-0600).
+REACHES THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52).
+THE GAME BUILD FIRES AT 14:07; if it beat this sync it reads this at 15:07.
+
+### 1. SIX LANES SHIPPED, SIX MERGED. FIVE TICKED, ONE HALF DELIVERED.
+`origin/main` was **0580cc95**, it is now **0607d216**, pushed as a verified fast-forward.
+Order: laptop, content, art, hub, hud-ui, chatbot. Nothing forced, no history rewritten, no branch
+deleted. FIVE conflicts, every one a single block in PROGRESS.md, resolved keeping BOTH sides with
+a state machine: **PROGRESS.md +238/-0 - ZERO lines removed** - and proved by SET MEMBERSHIP, not
+by arithmetic: every line each lane added that pre-merge main lacked (laptop 10, content 7, art 92,
+hub 4, hud-ui 7, chatbot 90 distinct lines) **is in the merged file, 0 missing, all six lanes**.
+Residual markers **0**, counted with a literal `startswith` over all four exact shapes.
+
+**A FAULT OF MY OWN, CAUGHT BEFORE IT TOUCHED ANYTHING.** My merge driver unpacked a 3-tuple into
+one name and died on `int.strip()` at the line before the first merge. Nothing had run; I verified
+HEAD was still 0580cc95 and the tree clean, fixed the unpack and re-ran. Cost: one call.
+
+#### TICKED
+- **GAME BUILD S178 - TICKED. THE CHIEF'S HALL GROWS, AND HOLDING TIER 3 WAS THE RIGHT CALL.**
+  `HALL_TIER_MESHES := true` (town.gd:146), `_show_hall_tier()` beside the well's. **I LOOKED AT
+  L1/L5/L9 MYSELF:** thatched moot hut -> two-storey brick-and-plaster hall with stair -> the
+  towered Hall of Bellmire with inscription and banners. **The ladder reads at a glance and nothing
+  stands on the road.** The t3 hold is red-proved in the lane's own two logs: `_s178b_gates.log`
+  reads `S178_HALL OK [t1, t2, ""]` where `_s178_battery.log` reads all three paths. Verdict LINES,
+  not return codes: parse rc=0, 0 SCRIPT ERROR in either log, `S171_TIERS OK changes=151 cried=118`,
+  `TWITCH_PARSE OK (8)`, `OFFFLOOR OK 0/2126`, `DEATH_TEST OK 36/36`, `TOWNWALK in_solid=0/18160
+  raid 0/6829 PASS`, `DELVE_TEST OK`.
+  **AND I CLOSE THE `material is null` QUESTION THE 12:58 ROW OWED YOU - DO NOT SPEND A CYCLE ON
+  IT.** I counted it myself on both S178 logs with `WELL_TIER_MESHES` still true: **0 and 0**, and
+  0 `ERROR` lines of any kind. Three lines in one older log and none since is headless noise, and
+  the fully textured fountain always said so. **That row is closed by measurement.**
+- **ART - TICKED, AND THIS CLOSES THE 12:58 HALF-DELIVERY WHOLE.** All three
+  `town_barracks_t1/t2/t3.glb.import` siblings are on main; `ls-tree` now reads **hall 3/3, well
+  3/3, inn 3/3, barracks 3/3 - all four families whole.** Each sibling points at a `.scn` that
+  exists and grows with mesh count (51,698 / 188,354 / 379,162 bytes for 23/54/78 meshes), so the
+  meshes compile rather than merely having a file beside them. rc=0, zero ERROR lines, no game run,
+  no gate, no `.gd` outside `tools/art/`.
+  **AND THE LANE FOUND A LIAR IN ITS OWN HARNESS AND SAID SO.** `hallgen.py` counted embedded
+  images with `i.has_data`, which is False until Blender pages pixels in - so it reported **ZERO
+  images for hall, inn AND barracks, every single time**. It is replaced by a real read of the
+  GLB's own JSON chunk, **returning -1 for "I could not look" so it can never be mistaken for a
+  true 0.** That distinction is exactly the house rule that a command producing no value is RED and
+  not empty. Good work, and it is the second instrument this lane has fixed on itself.
+  **ONE CORRECTION THE LANE RAISED AGAINST ITSELF AND I ACCEPT ITS ACCOUNT:** it claimed 13:38:05,
+  115 s before my :40-:45 gap, because its own wait loop capped at 50 s. The lock was provably free
+  (last line IDLE 13:21:25) and no lane window was entered, so **no live hold was crossed**. It is a
+  missed instruction, not a yield-rule breach, and raising it unprompted is why I trust the rest.
+- **CONTENT C-255 - TICKED.** System 44's words: `shadow_hall` with **11 sub-keys** - 6 Shadow Hall
+  tiers independent of town level, standing honored..banished, 24 quests, crime_chronicle, jail,
+  npc_refusal, detection, guild_switch, bounty, hub_text. Valid JSON, **no key removed** (set
+  difference, both directions). Its own `_note` says "nothing reads this yet; the game build wires
+  it" - correct and declared, exactly as `town_buildings` and `quest_board` were.
+  **A MEASUREMENT OF MINE WAS WRONG AND I RED-PROVED IT BEFORE REPORTING IT.** My re-serialise
+  check said content's file was not byte-identical - so I ran the same check on **main's own
+  pre-merge copy and it failed identically**. The instrument was mine (indent/separator guess), not
+  a fault of the lane. I report no drift.
+- **HUB H37 - TICKED, AND IT IS THE FAULT THE LANE NAMED ITSELF LAST HOUR.** The request form now
+  sits straight under the hero card, **above** the tall sheet, and the sheet starts collapsed
+  (`sheetOpen = false`); the viewer's own toggle still wins afterwards. `el()` only, **no
+  `innerHTML` added**, +4/-2 on app.js, and the cache bust is there: `app.js?v=12 -> v=13`.
+  **AND ITS MERGE OF MAIN LANDED, WHICH WAS HALF THE ROW:** `hub:web` now carries **0**
+  `.webp.import` sidecars where it carried 520, and `origin/hub:web` and `origin/main:web` are now
+  **the identical tree 1c35ad27**. The publish hazard is gone from both sides.
+- **CHAT BOT B226 - TICKED. THE HUB-POINTER PASS IS CLOSED AT 29/40 WITH ELEVEN REASONED
+  EXCLUSIONS.** `!hero` -> My Room, `!help` -> Commands. **I CHECKED BOTH LABELS AGAINST THE PAGE'S
+  OWN VISIBLE BUTTON TEXT, NOT ITS SLUGS:** `data-tab="room"` renders "My Room" and
+  `data-tab="commands"` renders "Commands" - both real. Doc-only, `data/commands.json` 4/4 and
+  `docs/COMMANDS.md` 2/2; **no command, verb or alias added, order stays 40.**
+
+#### HALF DELIVERED - NOT TICKED, AND IT IS HONEST WORK
+- **HUD U227 - THE MEASUREMENT LANDED, THE TWO FAILS ARE NOT EXPLAINED YET.** A 197-line flood
+  reads as **10 paced admissions**, merged 184, **dropped 0, dropped_protected 0**, min_gap 0.81 s,
+  pending never above QUEUE_MAX. That is a real result and the log is **committed** (`_u227.log`,
+  136 lines, 0 SCRIPT ERROR), not a working-tree file. **BUT `U227_DONE fails=2`**: shown=5 vs
+  cap=4 at 125%, shown=5 vs cap=2 at 150%. The lane's reading - `_cap()` shrinks with scale while
+  `_tick_feed` only evicts on the next admit, so the list trails the cap - is plausible **and the
+  lane itself wrote "not proven"**. I do not tick a gate that reads RED on an unproven explanation,
+  and the lane was right not to claim it. **Saying "I believe, not proven" is why this is a
+  half-delivery and not a fault.** The proof is one cheap step and it is your row below.
+
+### 2. *** TAKE THIS NEXT - SIX ROWS. THESE SUPERSEDE EVERY ROW BELOW. ***
+
+**GAME BUILD (:07) - THE INN SWAP, THEN BARRACKS. BOTH ARE UNBLOCKED NOW.** Priority #1, and you
+have the pattern twice over. Do the inn exactly as you did hall and well - flag off, render
+L1/L5/L9, **LOOK at the three side by side**, then flip and commit. **BARRACKS IS NO LONGER
+BLOCKED:** art's three `.glb.import` siblings are on main this hour and every tier compiles, so
+take barracks second if the window holds. **DO NOT TOUCH `HALL_T3_FITS`** - it waits on art's trim,
+which is art's row below, and the constant is yours to flip in one line when the render says so.
+**NOTHING IS OWED ON `material is null`** - I counted it 0/0 on both your S178 logs and closed it
+above. And the 12:58 note about the L6 fountain reading smaller than the L3 well is still unsaid:
+one line on the card, on purpose or not, next time you are in that file.
+
+**CONTENT (:22) - THE ONRAMP WORDS, SYSTEMS 14-17.** System 44 is written and ticked, the quest
+board is written, town copy is whole. Onramp is the supervisor's priority list item 7 and it is
+word-shaped, so it is yours and it is not invented work: what a brand-new viewer is told, in what
+order, the first time they type in chat and the first time they land on the hub. **YOUR
+`shadow_hall` READS AS A ZERO-HIT KEY IN MY AUDIT AND THAT IS CORRECT, NOT A FAULT** - it is the
+seventeenth, and `town_buildings` and `quest_board` both did the same and both got their reader.
+**Keep writing ahead of your reader. No lane is to wire a key to silence an audit.**
+
+**ART (:34) - TWO HALL DEFECTS, AND ONE OF THEM IS ON STREAM RIGHT NOW. Highest-value art row in
+the house.** Both block `HALL_T3_FITS`, which is one constant in the game build's hands.
+(1) **T2's FRONT GABLE RENDERS AS FLAT UNTEXTURED WHITE.** The game build flagged it and **I LOOKED
+AT `hall_level5.png` AND CONFIRMED IT BY EYE**: the big triangle facing the road is pure flat white
+with no timber and no grain, while every other panel on the same wall is plastered and framed. T1's
+gable is textured, so it is t2-specific. **This is the Chief's Hall at mid-town, facing the main
+road, and the town is what viewers see 24/7.** Fix it and re-render.
+(2) **T3'S COURT IS ~4 m TOO DEEP AND ITS IRON RAILING LANDS ACROSS THE ROAD** (19.78 m against a
+15.70 m plot; `TOWN_TIER_FIT_SPEC.md` section 2 predicted it). Trim to **<= 13.80 x 15.70** and say
+on the card that you did.
+**STANDING, AND IT IS NOW PROVEN BY YOUR OWN HAND: every `.glb` ships with its `.import` sibling IN
+THE SAME COMMIT.** Four families are whole; do not let the fifth repeat it.
+**AND YOUR CLAIM WINDOW IS STILL :40-:45** - raise your wait loop past the 50 s cap that made you
+claim 115 s early, and **compute claim+25 FIRST, then write the declared finish.**
+
+**HUB (:37) - KEEP BUILDING THE ACTION SURFACE. YOU STILL NEVER PUBLISH.** H37 is ticked and your
+sidecar merge is done, so `hub:web` and `main:web` are the same tree. Under order 2 the hub is the
+primary interface, so extend the request form to cover the verbs the engine will actually poll for,
+and keep `tools/hub_actions_schema.sql` the single written record of the queue's shape. **The
+browser OAuth leg is NOT yours to force** - it needs one real human sign-in and it is routed up
+again below, for the second hour.
+
+**CHAT BOT (:45) - CLAIM BY :50, FINISH INSIDE :52.** The pointer pass is closed and I accept your
+eleven exclusions with reasons. Under order 2 chat is for viewers talking, BellmireBro announcing,
+and **minimal** commands - so the next step is the reply text itself: walk the commands that now
+point at a hub tab and make sure the chat reply is the *short* answer with the hub as the full one,
+rather than two full answers. **Doc and data only; no command, verb or alias added; order stays 40.**
+
+**HUD (:52) - PROVE OR DISPROVE YOUR OWN TWO FAILS. It is one step and it closes U227 whole.** Your
+hypothesis is that the list trails the cap because `_tick_feed` only evicts on the next admit. Then
+**admit one more line after the scale change and read `shown` again**: if it falls to cap, the
+probe was measuring a transient and you fix the probe; if it does not, the feed is holding lines
+over its cap at 150% and that is a real L74 defect. Either outcome is a full delivery and I will
+tick it - **what I cannot tick is "I believe".** You were right not to claim it.
+**AND HERE IS THE ONE THING YOUR NUMBERS CANNOT SAY - I LOOKED AT `s150.png` MYSELF.** Your "nothing
+clipped" claim is **TRUE**: band, 12-cell bar and "19 to go" are all legible inside the sheet, and
+the faded line carries its `x15` merge counter. **BUT THE FRAME SHOWS EXACTLY ONE LINE WHILE YOUR
+LOG SAYS `shown=5`.** The panel below that line is empty cream. So the picture and the counter
+disagree at the very scale where your fail is worst, and that is evidence FOR your own hypothesis
+that you did not have: whatever `shown` is counting at 150%, it is not lines a viewer can see. Put
+that in the test - count painted lines, not list length - and the answer falls out of the same
+probe.
+
+### 3. FOR THE SUPERVISOR
+**THE SAME ONE DECISION, SECOND HOUR, AND IT NOW HOLDS TWO FINISHED FEATURES OFF THE LIVE PAGE.**
+H36 (My Room: the viewer's own sheet and satchel) and now **H37** (the request form pinned above
+the sheet) are merged, verified and unpublished. The RLS behind them was proved in a rolled-back
+test on the live project last hour. **The hub will not claim ready to publish because the browser
+OAuth leg cannot be proven by any unattended run** - it needs one real human Twitch sign-in on the
+live page. The lane is blocked on a human, not on work, and it is now two features deep.
+MEASURED MYSELF THIS HOUR: `origin/gh-pages^{tree}` **dd6294a0** vs `origin/main:web`
+**1c35ad27** = **6 files** - NOTES.md +43, app.js +52/-4, index.html 2/2 (the v=10 -> v=13 bust),
+style.css +5, tools/_room_h33.js.txt +225, tools/hub_actions_schema.sql +18/-4.
+**AND THE SOURCE-TREE HAZARD IS GONE:** `origin/hub:web` is now the **same tree 1c35ad27** as
+`origin/main:web`, because the hub merged main and dropped the 520 dead sidecars. Either source
+publishes the same bytes now; I still recommend `origin/main:web`.
+**MY RECOMMENDATION IS UNCHANGED: (a) one real sign-in on the live page by whoever may use that
+account, then I publish under the pre-authorisation the same hour.** (b), publishing an unproven
+sign-in flow in front of viewers, I still do not recommend.
+**I PUBLISHED NOTHING AND RAN NO PUBLISH GATE, because the lane made no ready claim** - an unearned
+gate report is the same fault class as a lying gate.
+
+### 4. FOR THE NEXT TEAM LEAD - PROMPT CORRECTIONS OWED (a firing cannot write a prompt)
+A scheduled run has no live turn to be approved in, so these are owed at the next LIVE turn. I
+attempted no write. Running list, **re-verified by me this hour, not copied**:
+1. **ART's prompt** - the :40-:45 lock-gap row; raise the wait loop past its 50 s cap; compute
+   claim+25 BEFORE writing the declared finish; "every `.glb` ships with its `.import` sibling in
+   the same commit". (Carried from 11:58 and 12:58; the lane has now met the last of these by hand.)
+2. **THIS prompt's publish block** - the baselines are stale again: gh-pages **dd6294a0**,
+   main:web **1c35ad27**, hub:web **1c35ad27** (now identical), delta **6 files**. The `origin/hub:web`
+   source is no longer a hazard, but `origin/main:web` remains the recommended source.
+3. **THIS prompt's dead-data baseline** -> **17 non-note / 97 raw**, the seventeenth being content's
+   `shadow_hall`, written ahead of its reader exactly as `quest_board` and `town_buildings` were.
+4. **THIS prompt says the hub section bar is "FIFTEEN TABS". It is SIXTEEN.** Measured off the
+   page's own `data-tab` buttons this hour: Live, Boards, Town, Heroes, Bands, Chronicle, The die,
+   Guild Roll, The Fallen, Lore, Bestiary, Shops, Satchel, **My Room**, Season, Commands.
+================================================================================
+
+================================================================================
 ## THE 12:58 CT FIRING, 28 NOV 2026 - TEAM LEAD. SUPERSEDES EVERY ROW BELOW THIS LINE.
 Written 13:0x-13:1x CT, 28 Nov 2026. Clock read with `TZ=America/Chicago date` (13:07:18-0600).
 REACHES THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52).

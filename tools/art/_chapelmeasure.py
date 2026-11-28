@@ -50,7 +50,21 @@ W5 = r"C:\hd adventure\bellmire-art"
 PACKS = [
     (r"C:\hd adventure\_packs\Medieval_Village_MegaKit"
      r"\Medieval Village MegaKit[Standard]\glTF"),
-    r"C:\hd adventure\_packs\Castle",
+    # CASTLE IS REMOVED, AND NOT BECAUSE OF A PATH BUG.
+    # Its 11 models DO exist, nested one level deeper at
+    # `_packs\Castle\Castle\Castle_Building_Blocks\*.FBX`, and three of them
+    # (Cathedral_Window, Cornice, Pillar_*) are the best chapel vocabulary on
+    # this disk. They are STILL NOT USABLE: `docs/art/ASSET_SOURCES.md` (~line
+    # 643, pack-catalogue firing 24 Nov) records **NO LICENCE FILE FOUND** for
+    # this pack - no licence, readme, terms, credit or URL anywhere in the tree
+    # or the zip, and an empty FBX author field. Status: NOT CLEARED, import
+    # GATED until a licence is supplied by the source or by Mr. E.
+    # Making the scan recursive would have "fixed" the zero-module error by
+    # feeding UNLICENSED geometry into a shipping ladder. Deleted on purpose.
+    # THE CLEARED CHAPEL SOURCE IS `Church1_blend` - Blendswap 75990 "Medieval
+    # Church" by Daniel74, **CC0 1.0**, licence HTML read off disk (entry ~line
+    # 369). It is a monolithic .blend/.dae, not a module kit, so it needs a
+    # Collada/blend path rather than this glTF one.
 ]
 
 # Patterns, NOT a chosen list. Everything that matches is measured and the
@@ -84,7 +98,12 @@ def bounds(objs):
 
 def load(path):
     bpy.ops.wm.read_factory_settings(use_empty=True)
-    bpy.ops.import_scene.gltf(filepath=path)
+    # MEASURED 28 Nov: Castle ships 11 .fbx and ZERO .gltf/.glb, so a gltf-only
+    # importer silently contributes nothing from a pack the plan names as a root.
+    if os.path.splitext(path)[1].lower() == ".fbx":
+        bpy.ops.import_scene.fbx(filepath=path)
+    else:
+        bpy.ops.import_scene.gltf(filepath=path)
     objs = [o for o in bpy.data.objects if o.type == 'MESH']
     if objs:
         bpy.context.view_layer.objects.active = objs[0]
@@ -143,10 +162,23 @@ def main():
         if not os.path.isdir(pk):
             rep["errors"].append("MISSING PACK %s" % pk)
             continue
+        before = len(found)
+        # FIX 28 Nov 10:5x CT: the MegaKit's own directory is
+        # `Medieval Village MegaKit[Standard]`, and `glob` reads `[Standard]` as a
+        # CHARACTER CLASS matching one of {S,t,a,n,d,r}. The pattern therefore
+        # matched no real directory and this pass reported
+        # "NO MODULES MATCHED - patterns or pack paths are wrong" with the paths
+        # perfectly correct. PROVEN before fixing: naive glob 0 hits, escaped 20.
+        # glob.escape() the DIRECTORY only - the pattern itself must stay live.
         for pat in PATTERNS:
-            for ext in ("gltf", "glb"):
-                for p in glob.glob(os.path.join(pk, pat + "." + ext)):
+            for ext in ("gltf", "glb", "fbx"):
+                for p in glob.glob(os.path.join(glob.escape(pk), pat + "." + ext)):
                     found[os.path.splitext(os.path.basename(p))[0]] = p
+        # FIX 3: RED ON EMPTY *PER PACK*. The old check only fired when EVERY pack
+        # came back empty, so one silently-dead pack read as a clean run.
+        if len(found) == before:
+            rep["errors"].append(
+                "PACK CONTRIBUTED ZERO MODULES - %s (patterns, extension or path)" % pk)
     if not found:
         rep["errors"].append("NO MODULES MATCHED - patterns or pack paths are wrong")
 

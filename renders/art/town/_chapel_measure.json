@@ -1,0 +1,4478 @@
+{
+ "packs": [
+  "C:\\hd adventure\\_packs\\Medieval_Village_MegaKit\\Medieval Village MegaKit[Standard]\\glTF",
+  "C:\\hd adventure\\_packs\\Castle"
+ ],
+ "modules": {
+  "Corner_ExteriorWide_Brick": {
+   "dims": [
+    0.7123,
+    0.7564,
+    3.0428
+   ],
+   "min": [
+    -0.4898,
+    -0.5342,
+    -0.0185
+   ],
+   "max": [
+    0.2225,
+    0.2222,
+    3.0243
+   ],
+   "centre": [
+    -0.1337,
+    -0.156,
+    1.5029
+   ],
+   "n_mesh": 1,
+   "n_tri": 2882,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "Corner_ExteriorWide_Wood": {
+   "dims": [
+    0.2905,
+    0.3312,
+    3.0
+   ],
+   "min": [
+    -0.1452,
+    -0.1656,
+    -0.0
+   ],
+   "max": [
+    0.1452,
+    0.1656,
+    3.0
+   ],
+   "centre": [
+    -0.0,
+    -0.0,
+    1.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 36,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Corner_Exterior_Brick": {
+   "dims": [
+    0.5307,
+    0.5758,
+    3.0156
+   ],
+   "min": [
+    -0.3529,
+    -0.3767,
+    -0.0071
+   ],
+   "max": [
+    0.1777,
+    0.1991,
+    3.0085
+   ],
+   "centre": [
+    -0.0876,
+    -0.0888,
+    1.5007
+   ],
+   "n_mesh": 1,
+   "n_tri": 3102,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "Corner_Exterior_TopDown": {
+   "dims": [
+    0.093,
+    0.093,
+    2.4672
+   ],
+   "min": [
+    -0.0924,
+    -0.0924,
+    0.6496
+   ],
+   "max": [
+    0.0005,
+    0.0005,
+    3.1168
+   ],
+   "centre": [
+    -0.046,
+    -0.046,
+    1.8832
+   ],
+   "n_mesh": 1,
+   "n_tri": 16,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Corner_Exterior_TopOnly": {
+   "dims": [
+    0.0928,
+    0.0928,
+    0.2335
+   ],
+   "min": [
+    -0.0922,
+    -0.0922,
+    2.8832
+   ],
+   "max": [
+    0.0005,
+    0.0005,
+    3.1168
+   ],
+   "centre": [
+    -0.0459,
+    -0.0459,
+    3.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 8,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Corner_Exterior_Wood": {
+   "dims": [
+    0.2102,
+    0.2396,
+    3.0
+   ],
+   "min": [
+    -0.1051,
+    -0.1198,
+    -0.0
+   ],
+   "max": [
+    0.1051,
+    0.1198,
+    3.0
+   ],
+   "centre": [
+    -0.0,
+    -0.0,
+    1.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 12,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Corner_Interior_Big": {
+   "dims": [
+    0.3331,
+    0.3681,
+    3.0
+   ],
+   "min": [
+    -0.0093,
+    -0.0442,
+    -0.0
+   ],
+   "max": [
+    0.3239,
+    0.3239,
+    3.0
+   ],
+   "centre": [
+    0.1573,
+    0.1398,
+    1.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 24,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Corner_Interior_Small": {
+   "dims": [
+    0.2102,
+    0.2396,
+    3.0
+   ],
+   "min": [
+    0.1949,
+    0.1802,
+    -0.0
+   ],
+   "max": [
+    0.4051,
+    0.4198,
+    3.0
+   ],
+   "centre": [
+    0.3,
+    0.3,
+    1.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 12,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "DoorFrame_Flat_Brick": {
+   "dims": [
+    1.5746,
+    0.4943,
+    2.3757
+   ],
+   "min": [
+    -0.7882,
+    -0.1992,
+    -0.0017
+   ],
+   "max": [
+    0.7864,
+    0.2951,
+    2.374
+   ],
+   "centre": [
+    -0.0009,
+    0.048,
+    1.1861
+   ],
+   "n_mesh": 1,
+   "n_tri": 1880,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "DoorFrame_Flat_WoodDark": {
+   "dims": [
+    1.574,
+    0.3885,
+    2.3123
+   ],
+   "min": [
+    -0.7862,
+    -0.1452,
+    -0.0085
+   ],
+   "max": [
+    0.7878,
+    0.2433,
+    2.3037
+   ],
+   "centre": [
+    0.0008,
+    0.0491,
+    1.1476
+   ],
+   "n_mesh": 1,
+   "n_tri": 56,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "DoorFrame_Round_Brick": {
+   "dims": [
+    1.6031,
+    0.4772,
+    2.5862
+   ],
+   "min": [
+    -0.8041,
+    -0.182,
+    -0.0017
+   ],
+   "max": [
+    0.799,
+    0.2951,
+    2.5845
+   ],
+   "centre": [
+    -0.0026,
+    0.0565,
+    1.2914
+   ],
+   "n_mesh": 1,
+   "n_tri": 2046,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "DoorFrame_Round_WoodDark": {
+   "dims": [
+    1.407,
+    0.539,
+    2.5634
+   ],
+   "min": [
+    -0.7035,
+    -0.2989,
+    -0.0085
+   ],
+   "max": [
+    0.7035,
+    0.24,
+    2.5548
+   ],
+   "centre": [
+    -0.0,
+    -0.0295,
+    1.2732
+   ],
+   "n_mesh": 1,
+   "n_tri": 320,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Door_1_Flat": {
+   "dims": [
+    1.1179,
+    0.1207,
+    2.0997
+   ],
+   "min": [
+    -0.0463,
+    -0.0631,
+    0.0352
+   ],
+   "max": [
+    1.0716,
+    0.0576,
+    2.1349
+   ],
+   "centre": [
+    0.5127,
+    -0.0028,
+    1.0851
+   ],
+   "n_mesh": 1,
+   "n_tri": 314,
+   "materials": [
+    "MI_WindowGlass",
+    "MI_WoodTrim"
+   ]
+  },
+  "Door_1_Round": {
+   "dims": [
+    1.12,
+    0.1207,
+    2.3182
+   ],
+   "min": [
+    -0.0463,
+    -0.0631,
+    0.0331
+   ],
+   "max": [
+    1.0737,
+    0.0576,
+    2.3513
+   ],
+   "centre": [
+    0.5137,
+    -0.0028,
+    1.1922
+   ],
+   "n_mesh": 1,
+   "n_tri": 470,
+   "materials": [
+    "MI_WindowGlass",
+    "MI_WoodTrim"
+   ]
+  },
+  "Door_2_Flat": {
+   "dims": [
+    1.1138,
+    0.2609,
+    2.1004
+   ],
+   "min": [
+    -0.0427,
+    -0.1272,
+    0.0396
+   ],
+   "max": [
+    1.0712,
+    0.1337,
+    2.1401
+   ],
+   "centre": [
+    0.5142,
+    0.0032,
+    1.0898
+   ],
+   "n_mesh": 1,
+   "n_tri": 6032,
+   "materials": [
+    "MI_MetalOrnaments",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Door_2_Round": {
+   "dims": [
+    1.1154,
+    0.2609,
+    2.3275
+   ],
+   "min": [
+    -0.0427,
+    -0.1272,
+    0.0283
+   ],
+   "max": [
+    1.0728,
+    0.1337,
+    2.3558
+   ],
+   "centre": [
+    0.5151,
+    0.0032,
+    1.1921
+   ],
+   "n_mesh": 1,
+   "n_tri": 6188,
+   "materials": [
+    "MI_MetalOrnaments",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Door_4_Flat": {
+   "dims": [
+    1.1179,
+    0.2093,
+    2.0919
+   ],
+   "min": [
+    -0.0463,
+    -0.0918,
+    0.0352
+   ],
+   "max": [
+    1.0716,
+    0.1176,
+    2.1271
+   ],
+   "centre": [
+    0.5127,
+    0.0129,
+    1.0812
+   ],
+   "n_mesh": 1,
+   "n_tri": 1044,
+   "materials": [
+    "MI_MetalOrnaments",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Door_4_Round": {
+   "dims": [
+    1.1147,
+    0.2093,
+    2.3228
+   ],
+   "min": [
+    -0.0431,
+    -0.0918,
+    0.0331
+   ],
+   "max": [
+    1.0716,
+    0.1176,
+    2.3558
+   ],
+   "centre": [
+    0.5142,
+    0.0129,
+    1.1945
+   ],
+   "n_mesh": 1,
+   "n_tri": 1228,
+   "materials": [
+    "MI_MetalOrnaments",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Door_8_Flat": {
+   "dims": [
+    1.1179,
+    0.1995,
+    2.0993
+   ],
+   "min": [
+    -0.0463,
+    -0.0918,
+    0.0352
+   ],
+   "max": [
+    1.0716,
+    0.1077,
+    2.1345
+   ],
+   "centre": [
+    0.5127,
+    0.008,
+    1.0849
+   ],
+   "n_mesh": 1,
+   "n_tri": 986,
+   "materials": [
+    "MI_MetalOrnaments",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Door_8_Round": {
+   "dims": [
+    1.1516,
+    0.1995,
+    2.324
+   ],
+   "min": [
+    -0.0632,
+    -0.0918,
+    0.0331
+   ],
+   "max": [
+    1.0884,
+    0.1077,
+    2.3571
+   ],
+   "centre": [
+    0.5126,
+    0.008,
+    1.1951
+   ],
+   "n_mesh": 1,
+   "n_tri": 1142,
+   "materials": [
+    "MI_MetalOrnaments",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Floor_Brick": {
+   "dims": [
+    2.0,
+    2.0,
+    0.02
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.01
+   ],
+   "max": [
+    1.0,
+    1.0,
+    0.01
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 4,
+   "materials": [
+    "MI_Brick"
+   ]
+  },
+  "Floor_RedBrick": {
+   "dims": [
+    2.0,
+    2.0,
+    0.02
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.01
+   ],
+   "max": [
+    1.0,
+    1.0,
+    0.01
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 4,
+   "materials": [
+    "MI_RedBrick"
+   ]
+  },
+  "Floor_UnevenBrick": {
+   "dims": [
+    2.0,
+    2.0,
+    0.02
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.01
+   ],
+   "max": [
+    1.0,
+    1.0,
+    0.01
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 4,
+   "materials": [
+    "MI_UnevenBrick"
+   ]
+  },
+  "Floor_WoodDark": {
+   "dims": [
+    2.0,
+    2.0,
+    0.02
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.01
+   ],
+   "max": [
+    1.0,
+    1.0,
+    0.01
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 32,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Floor_WoodDark_Half1": {
+   "dims": [
+    1.0,
+    2.0,
+    0.02
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.01
+   ],
+   "max": [
+    0.0,
+    1.0,
+    0.01
+   ],
+   "centre": [
+    -0.5,
+    0.0,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 32,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Floor_WoodDark_Half2": {
+   "dims": [
+    1.0,
+    2.0,
+    0.02
+   ],
+   "min": [
+    0.0,
+    -1.0,
+    -0.01
+   ],
+   "max": [
+    1.0,
+    1.0,
+    0.01
+   ],
+   "centre": [
+    0.5,
+    0.0,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 32,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Floor_WoodDark_Half3": {
+   "dims": [
+    2.0,
+    1.0,
+    0.02
+   ],
+   "min": [
+    -1.0,
+    -0.0,
+    -0.01
+   ],
+   "max": [
+    1.0,
+    1.0,
+    0.01
+   ],
+   "centre": [
+    0.0,
+    0.5,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 16,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Floor_WoodDark_OverhangCorner": {
+   "dims": [
+    1.0,
+    1.7565,
+    0.02
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.01
+   ],
+   "max": [
+    -0.0,
+    0.7565,
+    0.01
+   ],
+   "centre": [
+    -0.5,
+    -0.1218,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 16,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Floor_WoodDark_OverhangCorner2": {
+   "dims": [
+    0.9566,
+    1.75,
+    0.02
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.01
+   ],
+   "max": [
+    -0.0434,
+    0.75,
+    0.01
+   ],
+   "centre": [
+    -0.5217,
+    -0.125,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 26,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Floor_WoodLight": {
+   "dims": [
+    2.0,
+    2.0,
+    0.02
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.01
+   ],
+   "max": [
+    1.0,
+    1.0,
+    0.01
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 32,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Floor_WoodLight_OverhangCorner": {
+   "dims": [
+    1.0,
+    1.7565,
+    0.02
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.01
+   ],
+   "max": [
+    -0.0,
+    0.7565,
+    0.01
+   ],
+   "centre": [
+    -0.5,
+    -0.1218,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 16,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Floor_WoodLight_OverhangCorner2": {
+   "dims": [
+    0.9566,
+    1.75,
+    0.02
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.01
+   ],
+   "max": [
+    -0.0434,
+    0.75,
+    0.01
+   ],
+   "centre": [
+    -0.5217,
+    -0.125,
+    -0.0
+   ],
+   "n_mesh": 1,
+   "n_tri": 26,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Prop_Brick1": {
+   "dims": [
+    0.3456,
+    0.2502,
+    0.208
+   ],
+   "min": [
+    -0.1679,
+    -0.1247,
+    -0.1104
+   ],
+   "max": [
+    0.1777,
+    0.1254,
+    0.0977
+   ],
+   "centre": [
+    0.0049,
+    0.0003,
+    -0.0064
+   ],
+   "n_mesh": 1,
+   "n_tri": 108,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "Prop_Brick2": {
+   "dims": [
+    0.3954,
+    0.2169,
+    0.2449
+   ],
+   "min": [
+    -0.1903,
+    -0.1085,
+    -0.112
+   ],
+   "max": [
+    0.2051,
+    0.1084,
+    0.1329
+   ],
+   "centre": [
+    0.0074,
+    -0.0001,
+    0.0104
+   ],
+   "n_mesh": 1,
+   "n_tri": 94,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "Prop_Brick3": {
+   "dims": [
+    0.3814,
+    0.2156,
+    0.2497
+   ],
+   "min": [
+    -0.1832,
+    -0.1069,
+    -0.1149
+   ],
+   "max": [
+    0.1982,
+    0.1087,
+    0.1348
+   ],
+   "centre": [
+    0.0075,
+    0.0009,
+    0.01
+   ],
+   "n_mesh": 1,
+   "n_tri": 126,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "Prop_Brick4": {
+   "dims": [
+    0.2567,
+    0.2156,
+    0.2497
+   ],
+   "min": [
+    -0.1283,
+    -0.1026,
+    -0.1149
+   ],
+   "max": [
+    0.1283,
+    0.113,
+    0.1348
+   ],
+   "centre": [
+    -0.0,
+    0.0052,
+    0.01
+   ],
+   "n_mesh": 1,
+   "n_tri": 126,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "Prop_Chimney": {
+   "dims": [
+    0.9458,
+    1.0,
+    3.1779
+   ],
+   "min": [
+    -0.5,
+    -0.5,
+    0.0
+   ],
+   "max": [
+    0.4458,
+    0.5,
+    3.1779
+   ],
+   "centre": [
+    -0.0271,
+    0.0,
+    1.5889
+   ],
+   "n_mesh": 1,
+   "n_tri": 618,
+   "materials": [
+    "MI_Brick",
+    "MI_RockTrim"
+   ]
+  },
+  "Prop_Chimney2": {
+   "dims": [
+    0.9458,
+    0.988,
+    3.0
+   ],
+   "min": [
+    -0.5,
+    -0.494,
+    0.0
+   ],
+   "max": [
+    0.4458,
+    0.494,
+    3.0
+   ],
+   "centre": [
+    -0.0271,
+    -0.0,
+    1.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 130,
+   "materials": [
+    "MI_UnevenBrick"
+   ]
+  },
+  "Prop_Crate": {
+   "dims": [
+    1.0836,
+    1.0836,
+    1.0596
+   ],
+   "min": [
+    -0.5418,
+    -0.5418,
+    0.0034
+   ],
+   "max": [
+    0.5418,
+    0.5418,
+    1.0629
+   ],
+   "centre": [
+    -0.0,
+    -0.0,
+    0.5332
+   ],
+   "n_mesh": 1,
+   "n_tri": 230,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Prop_ExteriorBorder_Corner": {
+   "dims": [
+    0.7,
+    0.7,
+    0.134
+   ],
+   "min": [
+    -0.7,
+    -0.7,
+    0.0
+   ],
+   "max": [
+    0.0,
+    0.0,
+    0.134
+   ],
+   "centre": [
+    -0.35,
+    -0.35,
+    0.067
+   ],
+   "n_mesh": 1,
+   "n_tri": 18,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "Prop_ExteriorBorder_Straight1": {
+   "dims": [
+    2.0,
+    0.7,
+    0.134
+   ],
+   "min": [
+    -1.0,
+    -0.7,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.0,
+    0.134
+   ],
+   "centre": [
+    0.0,
+    -0.35,
+    0.067
+   ],
+   "n_mesh": 1,
+   "n_tri": 16,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "Prop_ExteriorBorder_Straight2": {
+   "dims": [
+    2.0,
+    0.7,
+    0.134
+   ],
+   "min": [
+    -1.0,
+    -0.7,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.0,
+    0.134
+   ],
+   "centre": [
+    0.0,
+    -0.35,
+    0.067
+   ],
+   "n_mesh": 1,
+   "n_tri": 16,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "Prop_MetalFence_Ornament": {
+   "dims": [
+    1.9523,
+    0.1561,
+    2.8524
+   ],
+   "min": [
+    -0.9733,
+    -0.078,
+    -0.0
+   ],
+   "max": [
+    0.979,
+    0.078,
+    2.8524
+   ],
+   "centre": [
+    0.0028,
+    -0.0,
+    1.4262
+   ],
+   "n_mesh": 1,
+   "n_tri": 3988,
+   "materials": [
+    "MI_MetalOrnaments"
+   ]
+  },
+  "Prop_MetalFence_Simple": {
+   "dims": [
+    1.9491,
+    0.1561,
+    2.8684
+   ],
+   "min": [
+    -0.9701,
+    -0.078,
+    -0.0
+   ],
+   "max": [
+    0.979,
+    0.078,
+    2.8684
+   ],
+   "centre": [
+    0.0044,
+    -0.0,
+    1.4342
+   ],
+   "n_mesh": 1,
+   "n_tri": 2744,
+   "materials": [
+    "MI_MetalOrnaments"
+   ]
+  },
+  "Prop_Support": {
+   "dims": [
+    0.1986,
+    2.0363,
+    1.7086
+   ],
+   "min": [
+    -0.0993,
+    -1.9182,
+    1.2114
+   ],
+   "max": [
+    0.0993,
+    0.1181,
+    2.92
+   ],
+   "centre": [
+    -0.0,
+    -0.9,
+    2.0657
+   ],
+   "n_mesh": 1,
+   "n_tri": 16,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Prop_Vine1": {
+   "dims": [
+    1.5358,
+    0.219,
+    2.6026
+   ],
+   "min": [
+    -0.7831,
+    -0.1743,
+    -2.1205
+   ],
+   "max": [
+    0.7526,
+    0.0447,
+    0.482
+   ],
+   "centre": [
+    -0.0153,
+    -0.0648,
+    -0.8192
+   ],
+   "n_mesh": 1,
+   "n_tri": 82,
+   "materials": [
+    "MI_Vine"
+   ]
+  },
+  "Prop_Vine2": {
+   "dims": [
+    1.3861,
+    0.2138,
+    2.6026
+   ],
+   "min": [
+    -0.4941,
+    -0.1691,
+    -2.1205
+   ],
+   "max": [
+    0.8921,
+    0.0447,
+    0.482
+   ],
+   "centre": [
+    0.199,
+    -0.0622,
+    -0.8192
+   ],
+   "n_mesh": 1,
+   "n_tri": 45,
+   "materials": [
+    "MI_Vine"
+   ]
+  },
+  "Prop_Vine4": {
+   "dims": [
+    1.0166,
+    0.15,
+    1.5882
+   ],
+   "min": [
+    -0.7181,
+    -0.1232,
+    -1.0139
+   ],
+   "max": [
+    0.2984,
+    0.0268,
+    0.5743
+   ],
+   "centre": [
+    -0.2098,
+    -0.0482,
+    -0.2198
+   ],
+   "n_mesh": 1,
+   "n_tri": 31,
+   "materials": [
+    "MI_Vine"
+   ]
+  },
+  "Prop_Vine5": {
+   "dims": [
+    2.3011,
+    1.1258,
+    2.9857
+   ],
+   "min": [
+    -1.3184,
+    -0.1017,
+    -1.9548
+   ],
+   "max": [
+    0.9827,
+    1.0242,
+    1.0309
+   ],
+   "centre": [
+    -0.1678,
+    0.4612,
+    -0.462
+   ],
+   "n_mesh": 1,
+   "n_tri": 117,
+   "materials": [
+    "MI_Vine"
+   ]
+  },
+  "Prop_Vine6": {
+   "dims": [
+    4.137,
+    1.4705,
+    2.4683
+   ],
+   "min": [
+    -2.0351,
+    -0.1017,
+    -1.072
+   ],
+   "max": [
+    2.1019,
+    1.3688,
+    1.3963
+   ],
+   "centre": [
+    0.0334,
+    0.6336,
+    0.1622
+   ],
+   "n_mesh": 1,
+   "n_tri": 114,
+   "materials": [
+    "MI_Vine"
+   ]
+  },
+  "Prop_Vine9": {
+   "dims": [
+    4.137,
+    1.4705,
+    1.4672
+   ],
+   "min": [
+    -2.0351,
+    -0.7183,
+    -0.6334
+   ],
+   "max": [
+    2.1019,
+    0.7522,
+    0.8338
+   ],
+   "centre": [
+    0.0334,
+    0.017,
+    0.1002
+   ],
+   "n_mesh": 1,
+   "n_tri": 44,
+   "materials": [
+    "MI_Vine"
+   ]
+  },
+  "Prop_Wagon": {
+   "dims": [
+    1.9514,
+    4.024,
+    1.5292
+   ],
+   "min": [
+    -0.9794,
+    -0.8736,
+    0.0031
+   ],
+   "max": [
+    0.972,
+    3.1504,
+    1.5323
+   ],
+   "centre": [
+    -0.0037,
+    1.1384,
+    0.7677
+   ],
+   "n_mesh": 1,
+   "n_tri": 1672,
+   "materials": [
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Prop_WoodenFence_Extension1": {
+   "dims": [
+    2.045,
+    0.1104,
+    0.8381
+   ],
+   "min": [
+    -1.0124,
+    -0.0552,
+    -0.0283
+   ],
+   "max": [
+    1.0326,
+    0.0552,
+    0.8099
+   ],
+   "centre": [
+    0.0101,
+    0.0,
+    0.3908
+   ],
+   "n_mesh": 1,
+   "n_tri": 32,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Prop_WoodenFence_Extension2": {
+   "dims": [
+    2.027,
+    0.1104,
+    0.8381
+   ],
+   "min": [
+    -0.9944,
+    -0.0552,
+    -0.0283
+   ],
+   "max": [
+    1.0326,
+    0.0552,
+    0.8099
+   ],
+   "centre": [
+    0.0191,
+    0.0,
+    0.3908
+   ],
+   "n_mesh": 1,
+   "n_tri": 28,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Prop_WoodenFence_Single": {
+   "dims": [
+    2.0641,
+    0.1198,
+    0.8381
+   ],
+   "min": [
+    -1.0315,
+    -0.0599,
+    -0.0283
+   ],
+   "max": [
+    1.0326,
+    0.0599,
+    0.8099
+   ],
+   "centre": [
+    0.0006,
+    -0.0,
+    0.3908
+   ],
+   "n_mesh": 1,
+   "n_tri": 40,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_2x4_RoundTile": {
+   "dims": [
+    3.2934,
+    4.2322,
+    2.6657
+   ],
+   "min": [
+    -1.6467,
+    -2.1077,
+    -0.3416
+   ],
+   "max": [
+    1.6467,
+    2.1245,
+    2.3242
+   ],
+   "centre": [
+    0.0,
+    0.0084,
+    0.9913
+   ],
+   "n_mesh": 1,
+   "n_tri": 1112,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Dormer_RoundTile": {
+   "dims": [
+    1.9664,
+    2.4392,
+    2.6731
+   ],
+   "min": [
+    -0.0663,
+    -1.2196,
+    0.0297
+   ],
+   "max": [
+    1.9001,
+    1.2195,
+    2.7028
+   ],
+   "centre": [
+    0.9169,
+    -0.0001,
+    1.3662
+   ],
+   "n_mesh": 1,
+   "n_tri": 904,
+   "materials": [
+    "MI_Plaster",
+    "MI_RoundTiles",
+    "MI_WindowGlass",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_FrontSupports": {
+   "dims": [
+    5.4863,
+    0.6545,
+    0.2312
+   ],
+   "min": [
+    -2.7431,
+    -0.6273,
+    -0.1183
+   ],
+   "max": [
+    2.7431,
+    0.0273,
+    0.1129
+   ],
+   "centre": [
+    -0.0,
+    -0.3,
+    -0.0027
+   ],
+   "n_mesh": 1,
+   "n_tri": 60,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Front_Brick2": {
+   "dims": [
+    2.6071,
+    0.7513,
+    1.7749
+   ],
+   "min": [
+    -1.3322,
+    -0.4163,
+    -0.1331
+   ],
+   "max": [
+    1.2749,
+    0.335,
+    1.6418
+   ],
+   "centre": [
+    -0.0287,
+    -0.0407,
+    0.7543
+   ],
+   "n_mesh": 1,
+   "n_tri": 78,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Front_Brick4": {
+   "dims": [
+    4.3998,
+    1.1291,
+    3.0685
+   ],
+   "min": [
+    -2.1838,
+    -0.7941,
+    -0.1318
+   ],
+   "max": [
+    2.216,
+    0.335,
+    2.9367
+   ],
+   "centre": [
+    0.0161,
+    -0.2296,
+    1.4025
+   ],
+   "n_mesh": 1,
+   "n_tri": 252,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Front_Brick4_Half_L": {
+   "dims": [
+    2.4101,
+    0.4896,
+    3.1967
+   ],
+   "min": [
+    -2.2807,
+    -0.1546,
+    -0.1318
+   ],
+   "max": [
+    0.1294,
+    0.335,
+    3.0649
+   ],
+   "centre": [
+    -1.0757,
+    0.0902,
+    1.4666
+   ],
+   "n_mesh": 1,
+   "n_tri": 140,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Front_Brick4_Half_R": {
+   "dims": [
+    2.4163,
+    0.4896,
+    3.1967
+   ],
+   "min": [
+    -0.1294,
+    -0.1546,
+    -0.1318
+   ],
+   "max": [
+    2.2869,
+    0.335,
+    3.0649
+   ],
+   "centre": [
+    1.0788,
+    0.0902,
+    1.4666
+   ],
+   "n_mesh": 1,
+   "n_tri": 146,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Front_Brick6": {
+   "dims": [
+    6.6944,
+    1.1291,
+    4.5158
+   ],
+   "min": [
+    -3.3465,
+    -0.7941,
+    -0.1318
+   ],
+   "max": [
+    3.3479,
+    0.335,
+    4.384
+   ],
+   "centre": [
+    0.0007,
+    -0.2296,
+    2.1261
+   ],
+   "n_mesh": 1,
+   "n_tri": 328,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Front_Brick6_Half_L": {
+   "dims": [
+    3.4143,
+    0.4896,
+    4.5158
+   ],
+   "min": [
+    -3.3638,
+    -0.1546,
+    -0.1318
+   ],
+   "max": [
+    0.0505,
+    0.335,
+    4.384
+   ],
+   "centre": [
+    -1.6567,
+    0.0902,
+    2.1261
+   ],
+   "n_mesh": 1,
+   "n_tri": 186,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Front_Brick6_Half_R": {
+   "dims": [
+    3.4002,
+    0.4896,
+    4.5158
+   ],
+   "min": [
+    -0.0505,
+    -0.1546,
+    -0.1318
+   ],
+   "max": [
+    3.3497,
+    0.335,
+    4.384
+   ],
+   "centre": [
+    1.6496,
+    0.0902,
+    2.1261
+   ],
+   "n_mesh": 1,
+   "n_tri": 186,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Front_Brick8": {
+   "dims": [
+    8.5108,
+    1.1291,
+    5.4459
+   ],
+   "min": [
+    -4.2547,
+    -0.7941,
+    -0.1318
+   ],
+   "max": [
+    4.2561,
+    0.335,
+    5.3141
+   ],
+   "centre": [
+    0.0007,
+    -0.2296,
+    2.5911
+   ],
+   "n_mesh": 1,
+   "n_tri": 364,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Front_Brick8_Half_L": {
+   "dims": [
+    4.3265,
+    0.4896,
+    5.4459
+   ],
+   "min": [
+    -4.2761,
+    -0.1546,
+    -0.1318
+   ],
+   "max": [
+    0.0505,
+    0.335,
+    5.3141
+   ],
+   "centre": [
+    -2.1128,
+    0.0902,
+    2.5911
+   ],
+   "n_mesh": 1,
+   "n_tri": 204,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Front_Brick8_Half_R": {
+   "dims": [
+    4.3493,
+    0.4896,
+    5.4459
+   ],
+   "min": [
+    -0.0505,
+    -0.1546,
+    -0.1318
+   ],
+   "max": [
+    4.2988,
+    0.335,
+    5.3141
+   ],
+   "centre": [
+    2.1242,
+    0.0902,
+    2.5911
+   ],
+   "n_mesh": 1,
+   "n_tri": 204,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Log": {
+   "dims": [
+    1.1489,
+    10.6958,
+    1.3869
+   ],
+   "min": [
+    -0.5863,
+    -5.3479,
+    3.8487
+   ],
+   "max": [
+    0.5626,
+    5.3479,
+    5.2357
+   ],
+   "centre": [
+    -0.0119,
+    0.0,
+    4.5422
+   ],
+   "n_mesh": 1,
+   "n_tri": 164,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Modular_RoundTiles": {
+   "dims": [
+    0.6632,
+    2.2517,
+    0.5055
+   ],
+   "min": [
+    -0.3325,
+    -1.0455,
+    0.0064
+   ],
+   "max": [
+    0.3308,
+    1.2061,
+    0.5119
+   ],
+   "centre": [
+    -0.0009,
+    0.0803,
+    0.2591
+   ],
+   "n_mesh": 1,
+   "n_tri": 136,
+   "materials": [
+    "MI_RoundTiles"
+   ]
+  },
+  "Roof_RoundTile_2x1": {
+   "dims": [
+    3.297,
+    1.9522,
+    2.6589
+   ],
+   "min": [
+    -1.6485,
+    -1.4833,
+    -0.3416
+   ],
+   "max": [
+    1.6485,
+    0.4689,
+    2.3173
+   ],
+   "centre": [
+    0.0,
+    -0.5072,
+    0.9879
+   ],
+   "n_mesh": 1,
+   "n_tri": 612,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTile_2x1_Long": {
+   "dims": [
+    4.3473,
+    1.9522,
+    3.3254
+   ],
+   "min": [
+    -2.1737,
+    -1.4833,
+    -1.0081
+   ],
+   "max": [
+    2.1737,
+    0.4689,
+    2.3173
+   ],
+   "centre": [
+    -0.0,
+    -0.5072,
+    0.6546
+   ],
+   "n_mesh": 1,
+   "n_tri": 628,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_4x4": {
+   "dims": [
+    5.5131,
+    5.5615,
+    4.2494
+   ],
+   "min": [
+    -2.7565,
+    -2.8216,
+    -0.5157
+   ],
+   "max": [
+    2.7565,
+    2.7399,
+    3.7337
+   ],
+   "centre": [
+    0.0,
+    -0.0408,
+    1.609
+   ],
+   "n_mesh": 1,
+   "n_tri": 1996,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_4x6": {
+   "dims": [
+    5.5131,
+    7.5723,
+    4.2336
+   ],
+   "min": [
+    -2.7565,
+    -3.7862,
+    -0.5157
+   ],
+   "max": [
+    2.7565,
+    3.786,
+    3.7179
+   ],
+   "centre": [
+    0.0,
+    -0.0001,
+    1.6011
+   ],
+   "n_mesh": 1,
+   "n_tri": 2520,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_4x8": {
+   "dims": [
+    5.5131,
+    9.6827,
+    4.2292
+   ],
+   "min": [
+    -2.7565,
+    -4.854,
+    -0.5157
+   ],
+   "max": [
+    2.7565,
+    4.8288,
+    3.7134
+   ],
+   "centre": [
+    0.0,
+    -0.0126,
+    1.5989
+   ],
+   "n_mesh": 1,
+   "n_tri": 3116,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_6x10": {
+   "dims": [
+    8.2498,
+    11.8522,
+    5.6722
+   ],
+   "min": [
+    -4.1249,
+    -5.9546,
+    -0.7821
+   ],
+   "max": [
+    4.1249,
+    5.8976,
+    4.89
+   ],
+   "centre": [
+    0.0,
+    -0.0285,
+    2.054
+   ],
+   "n_mesh": 1,
+   "n_tri": 4300,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_6x12": {
+   "dims": [
+    8.2498,
+    13.6575,
+    5.6722
+   ],
+   "min": [
+    -4.1249,
+    -6.8288,
+    -0.7821
+   ],
+   "max": [
+    4.1249,
+    6.8288,
+    4.89
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    2.054
+   ],
+   "n_mesh": 1,
+   "n_tri": 4752,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_6x14": {
+   "dims": [
+    8.2498,
+    15.7059,
+    5.6722
+   ],
+   "min": [
+    -4.1249,
+    -7.8288,
+    -0.7821
+   ],
+   "max": [
+    4.1249,
+    7.8771,
+    4.89
+   ],
+   "centre": [
+    0.0,
+    0.0242,
+    2.054
+   ],
+   "n_mesh": 1,
+   "n_tri": 5372,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_6x4": {
+   "dims": [
+    8.2498,
+    4.9922,
+    5.6722
+   ],
+   "min": [
+    -4.1249,
+    -4.854,
+    -0.7821
+   ],
+   "max": [
+    4.1249,
+    0.1382,
+    4.89
+   ],
+   "centre": [
+    0.0,
+    -2.3579,
+    2.054
+   ],
+   "n_mesh": 1,
+   "n_tri": 2192,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_6x6": {
+   "dims": [
+    8.2498,
+    8.0322,
+    5.6722
+   ],
+   "min": [
+    -4.1249,
+    -4.094,
+    -0.7821
+   ],
+   "max": [
+    4.1249,
+    3.9382,
+    4.89
+   ],
+   "centre": [
+    0.0,
+    -0.0779,
+    2.054
+   ],
+   "n_mesh": 1,
+   "n_tri": 3244,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_6x8": {
+   "dims": [
+    8.2498,
+    9.6827,
+    5.6722
+   ],
+   "min": [
+    -4.1249,
+    -4.854,
+    -0.7821
+   ],
+   "max": [
+    4.1249,
+    4.8288,
+    4.89
+   ],
+   "centre": [
+    0.0,
+    -0.0126,
+    2.054
+   ],
+   "n_mesh": 1,
+   "n_tri": 3796,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_8x10": {
+   "dims": [
+    9.952,
+    11.8594,
+    6.7813
+   ],
+   "min": [
+    -4.976,
+    -6.0074,
+    -0.78
+   ],
+   "max": [
+    4.976,
+    5.852,
+    6.0014
+   ],
+   "centre": [
+    0.0,
+    -0.0777,
+    2.6107
+   ],
+   "n_mesh": 1,
+   "n_tri": 4480,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_8x12": {
+   "dims": [
+    9.952,
+    14.1322,
+    6.7813
+   ],
+   "min": [
+    -4.976,
+    -7.0151,
+    -0.78
+   ],
+   "max": [
+    4.976,
+    7.1171,
+    6.0014
+   ],
+   "centre": [
+    0.0,
+    0.051,
+    2.6107
+   ],
+   "n_mesh": 1,
+   "n_tri": 6356,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_8x14": {
+   "dims": [
+    9.952,
+    15.7059,
+    6.7813
+   ],
+   "min": [
+    -4.976,
+    -7.8288,
+    -0.78
+   ],
+   "max": [
+    4.976,
+    7.8771,
+    6.0014
+   ],
+   "centre": [
+    0.0,
+    0.0242,
+    2.6107
+   ],
+   "n_mesh": 1,
+   "n_tri": 5484,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_RoundTiles_8x8": {
+   "dims": [
+    9.952,
+    10.3322,
+    6.7813
+   ],
+   "min": [
+    -4.976,
+    -5.2474,
+    -0.78
+   ],
+   "max": [
+    4.976,
+    5.0847,
+    6.0014
+   ],
+   "centre": [
+    0.0,
+    -0.0814,
+    2.6107
+   ],
+   "n_mesh": 1,
+   "n_tri": 3888,
+   "materials": [
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Support2": {
+   "dims": [
+    0.1997,
+    0.7651,
+    0.7429
+   ],
+   "min": [
+    -0.0998,
+    -0.7651,
+    -0.6773
+   ],
+   "max": [
+    0.0999,
+    0.0,
+    0.0657
+   ],
+   "centre": [
+    0.0,
+    -0.3826,
+    -0.3058
+   ],
+   "n_mesh": 1,
+   "n_tri": 84,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Tower_RoundTiles": {
+   "dims": [
+    5.6505,
+    5.4271,
+    7.3608
+   ],
+   "min": [
+    -2.8253,
+    -2.7135,
+    -0.572
+   ],
+   "max": [
+    2.8253,
+    2.7135,
+    6.7888
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    3.1084
+   ],
+   "n_mesh": 1,
+   "n_tri": 4024,
+   "materials": [
+    "MI_MetalOrnaments",
+    "MI_RockTrim",
+    "MI_RoundTiles",
+    "MI_WoodTrim"
+   ]
+  },
+  "Roof_Wooden_2x1": {
+   "dims": [
+    2.2579,
+    1.5603,
+    1.2484
+   ],
+   "min": [
+    -1.1289,
+    -1.5191,
+    -0.1612
+   ],
+   "max": [
+    1.1289,
+    0.0412,
+    1.0872
+   ],
+   "centre": [
+    0.0,
+    -0.739,
+    0.463
+   ],
+   "n_mesh": 1,
+   "n_tri": 224,
+   "materials": [
+    "MI_WoodTrim",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Roof_Wooden_2x1_Center": {
+   "dims": [
+    2.0,
+    1.499,
+    1.2075
+   ],
+   "min": [
+    -1.0,
+    -1.499,
+    -0.1453
+   ],
+   "max": [
+    1.0,
+    0.0,
+    1.0622
+   ],
+   "centre": [
+    0.0,
+    -0.7495,
+    0.4585
+   ],
+   "n_mesh": 1,
+   "n_tri": 52,
+   "materials": [
+    "MI_WoodTrim",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Roof_Wooden_2x1_Center_Mirror": {
+   "dims": [
+    2.0,
+    1.499,
+    1.2075
+   ],
+   "min": [
+    -1.0,
+    -0.0,
+    -0.1453
+   ],
+   "max": [
+    1.0,
+    1.499,
+    1.0622
+   ],
+   "centre": [
+    0.0,
+    0.7495,
+    0.4585
+   ],
+   "n_mesh": 1,
+   "n_tri": 52,
+   "materials": [
+    "MI_WoodTrim",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Roof_Wooden_2x1_Corner": {
+   "dims": [
+    1.5443,
+    1.5569,
+    1.1831
+   ],
+   "min": [
+    -0.1009,
+    -0.1139,
+    -0.1688
+   ],
+   "max": [
+    1.4434,
+    1.443,
+    1.0142
+   ],
+   "centre": [
+    0.6712,
+    0.6645,
+    0.4227
+   ],
+   "n_mesh": 1,
+   "n_tri": 82,
+   "materials": [
+    "MI_WoodTrim",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Roof_Wooden_2x1_L": {
+   "dims": [
+    2.1289,
+    1.5603,
+    1.2484
+   ],
+   "min": [
+    -1.1289,
+    -1.5191,
+    -0.1612
+   ],
+   "max": [
+    1.0,
+    0.0412,
+    1.0872
+   ],
+   "centre": [
+    -0.0645,
+    -0.739,
+    0.463
+   ],
+   "n_mesh": 1,
+   "n_tri": 158,
+   "materials": [
+    "MI_WoodTrim",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Roof_Wooden_2x1_Middle": {
+   "dims": [
+    2.0,
+    2.0,
+    0.1379
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    0.9243
+   ],
+   "max": [
+    1.0,
+    1.0,
+    1.0622
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    0.9933
+   ],
+   "n_mesh": 1,
+   "n_tri": 24,
+   "materials": [
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Roof_Wooden_2x1_R": {
+   "dims": [
+    2.1289,
+    1.5603,
+    1.2484
+   ],
+   "min": [
+    -1.0,
+    -1.5191,
+    -0.1612
+   ],
+   "max": [
+    1.1289,
+    0.0412,
+    1.0872
+   ],
+   "centre": [
+    0.0645,
+    -0.739,
+    0.463
+   ],
+   "n_mesh": 1,
+   "n_tri": 158,
+   "materials": [
+    "MI_WoodTrim",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Stairs_Exterior_NoFirstStep": {
+   "dims": [
+    2.0,
+    2.0772,
+    1.0
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.0
+   ],
+   "max": [
+    1.0,
+    1.0772,
+    1.0
+   ],
+   "centre": [
+    0.0,
+    0.0386,
+    0.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 52,
+   "materials": [
+    "MI_Brick",
+    "MI_RockTrim"
+   ]
+  },
+  "Stairs_Exterior_Platform": {
+   "dims": [
+    2.0,
+    2.0013,
+    1.0
+   ],
+   "min": [
+    -1.0,
+    -1.0007,
+    -0.0
+   ],
+   "max": [
+    1.0,
+    1.0007,
+    1.0
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    0.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 32,
+   "materials": [
+    "MI_Brick",
+    "MI_RockTrim"
+   ]
+  },
+  "Stairs_Exterior_Platform45": {
+   "dims": [
+    2.0007,
+    2.0007,
+    1.0
+   ],
+   "min": [
+    -1.0,
+    -1.0007,
+    -0.0
+   ],
+   "max": [
+    1.0007,
+    1.0,
+    1.0
+   ],
+   "centre": [
+    0.0003,
+    -0.0003,
+    0.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 55,
+   "materials": [
+    "MI_Brick",
+    "MI_RockTrim"
+   ]
+  },
+  "Stairs_Exterior_Platform45Clean": {
+   "dims": [
+    2.0,
+    2.0007,
+    1.0
+   ],
+   "min": [
+    -1.0,
+    -1.0007,
+    -0.0
+   ],
+   "max": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "centre": [
+    -0.0,
+    -0.0003,
+    0.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 45,
+   "materials": [
+    "MI_Brick",
+    "MI_RockTrim"
+   ]
+  },
+  "Stairs_Exterior_PlatformU": {
+   "dims": [
+    2.0,
+    2.0007,
+    1.0
+   ],
+   "min": [
+    -1.0,
+    -1.0007,
+    -0.0
+   ],
+   "max": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "centre": [
+    0.0,
+    -0.0003,
+    0.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 68,
+   "materials": [
+    "MI_Brick",
+    "MI_RockTrim"
+   ]
+  },
+  "Stairs_Exterior_SidePlatform": {
+   "dims": [
+    2.0,
+    2.0013,
+    1.0
+   ],
+   "min": [
+    -1.0,
+    -1.0007,
+    -0.0
+   ],
+   "max": [
+    1.0,
+    1.0007,
+    1.0
+   ],
+   "centre": [
+    -0.0,
+    0.0,
+    0.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 30,
+   "materials": [
+    "MI_Brick",
+    "MI_RockTrim"
+   ]
+  },
+  "Stairs_Exterior_Sides": {
+   "dims": [
+    2.0,
+    2.0,
+    1.0
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.0
+   ],
+   "max": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    0.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 16,
+   "materials": [
+    "MI_Brick"
+   ]
+  },
+  "Stairs_Exterior_Sides45": {
+   "dims": [
+    2.0,
+    2.0,
+    1.0
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.0
+   ],
+   "max": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    0.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 28,
+   "materials": [
+    "MI_Brick"
+   ]
+  },
+  "Stairs_Exterior_SidesU": {
+   "dims": [
+    2.0,
+    2.0,
+    1.0
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    -0.0
+   ],
+   "max": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "centre": [
+    0.0,
+    0.0,
+    0.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 56,
+   "materials": [
+    "MI_Brick"
+   ]
+  },
+  "Stairs_Exterior_SingleSide": {
+   "dims": [
+    0.2,
+    2.0,
+    1.0
+   ],
+   "min": [
+    -1.0,
+    -1.0,
+    0.0
+   ],
+   "max": [
+    -0.8,
+    1.0,
+    1.0
+   ],
+   "centre": [
+    -0.9,
+    0.0,
+    0.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 12,
+   "materials": [
+    "MI_Brick"
+   ]
+  },
+  "Stairs_Exterior_SingleSideThick": {
+   "dims": [
+    0.4,
+    2.0,
+    1.0
+   ],
+   "min": [
+    -0.2,
+    -1.0,
+    0.0
+   ],
+   "max": [
+    0.2,
+    1.0,
+    1.0
+   ],
+   "centre": [
+    -0.0,
+    0.0,
+    0.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 12,
+   "materials": [
+    "MI_Brick"
+   ]
+  },
+  "Stairs_Exterior_Straight": {
+   "dims": [
+    2.0,
+    2.0779,
+    1.2037
+   ],
+   "min": [
+    -1.0,
+    -1.0007,
+    -0.2037
+   ],
+   "max": [
+    1.0,
+    1.0772,
+    1.0
+   ],
+   "centre": [
+    0.0,
+    0.0383,
+    0.3982
+   ],
+   "n_mesh": 1,
+   "n_tri": 62,
+   "materials": [
+    "MI_Brick",
+    "MI_RockTrim"
+   ]
+  },
+  "Stairs_Exterior_Straight_Center": {
+   "dims": [
+    2.0,
+    2.0779,
+    1.0221
+   ],
+   "min": [
+    -1.0,
+    -1.0007,
+    -0.2037
+   ],
+   "max": [
+    1.0,
+    1.0772,
+    0.8184
+   ],
+   "centre": [
+    -0.0,
+    0.0383,
+    0.3074
+   ],
+   "n_mesh": 1,
+   "n_tri": 50,
+   "materials": [
+    "MI_RockTrim"
+   ]
+  },
+  "Stairs_Exterior_Straight_L": {
+   "dims": [
+    2.0,
+    2.0779,
+    1.2037
+   ],
+   "min": [
+    -1.0,
+    -1.0007,
+    -0.2037
+   ],
+   "max": [
+    1.0,
+    1.0772,
+    1.0
+   ],
+   "centre": [
+    0.0,
+    0.0383,
+    0.3982
+   ],
+   "n_mesh": 1,
+   "n_tri": 56,
+   "materials": [
+    "MI_Brick",
+    "MI_RockTrim"
+   ]
+  },
+  "Stairs_Exterior_Straight_R": {
+   "dims": [
+    2.0,
+    2.0779,
+    1.2037
+   ],
+   "min": [
+    -1.0,
+    -1.0007,
+    -0.2037
+   ],
+   "max": [
+    1.0,
+    1.0772,
+    1.0
+   ],
+   "centre": [
+    0.0,
+    0.0383,
+    0.3982
+   ],
+   "n_mesh": 1,
+   "n_tri": 56,
+   "materials": [
+    "MI_Brick",
+    "MI_RockTrim"
+   ]
+  },
+  "Wall_Arch": {
+   "dims": [
+    2.0,
+    0.064,
+    3.0
+   ],
+   "min": [
+    -1.0,
+    -0.064,
+    -0.0
+   ],
+   "max": [
+    1.0,
+    0.0,
+    3.0
+   ],
+   "centre": [
+    0.0,
+    -0.032,
+    1.5
+   ],
+   "n_mesh": 1,
+   "n_tri": 196,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_BottomCover": {
+   "dims": [
+    2.0,
+    0.4316,
+    0.2375
+   ],
+   "min": [
+    -1.0,
+    -0.1176,
+    -0.1168
+   ],
+   "max": [
+    1.0,
+    0.314,
+    0.1208
+   ],
+   "centre": [
+    -0.0,
+    0.0982,
+    0.002
+   ],
+   "n_mesh": 1,
+   "n_tri": 36,
+   "materials": [
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_Door_Flat": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 92,
+   "materials": [
+    "MI_Plaster",
+    "MI_RockTrim",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_Door_Round": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 137,
+   "materials": [
+    "MI_Plaster",
+    "MI_RockTrim",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_Door_RoundInset": {
+   "dims": [
+    2.0,
+    1.0924,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    -0.0
+   ],
+   "max": [
+    1.0,
+    1.0,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.4538,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 180,
+   "materials": [
+    "MI_Plaster",
+    "MI_RockTrim",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_Straight": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1248
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    -0.0021
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5603
+   ],
+   "n_mesh": 1,
+   "n_tri": 86,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_Straight_Base": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 64,
+   "materials": [
+    "MI_Brick",
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_Straight_L": {
+   "dims": [
+    2.0018,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0018,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    0.0009,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 72,
+   "materials": [
+    "MI_Brick",
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_Straight_R": {
+   "dims": [
+    2.0018,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0018,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0009,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 72,
+   "materials": [
+    "MI_Brick",
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_Window_Thin_Round": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 166,
+   "materials": [
+    "MI_Brick",
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_Window_Wide_Flat": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 96,
+   "materials": [
+    "MI_Brick",
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_Window_Wide_Flat2": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1457
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    -0.023
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5498
+   ],
+   "n_mesh": 1,
+   "n_tri": 122,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_Window_Wide_Round": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 124,
+   "materials": [
+    "MI_Brick",
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_Plaster_WoodGrid": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 248,
+   "materials": [
+    "MI_Plaster",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_UnevenBrick_Door_Flat": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 74,
+   "materials": [
+    "MI_Plaster",
+    "MI_UnevenBrick",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_UnevenBrick_Door_Round": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 136,
+   "materials": [
+    "MI_Plaster",
+    "MI_UnevenBrick",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_UnevenBrick_Straight": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 56,
+   "materials": [
+    "MI_Plaster",
+    "MI_UnevenBrick",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_UnevenBrick_Window_Thin_Round": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 158,
+   "materials": [
+    "MI_Plaster",
+    "MI_UnevenBrick",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_UnevenBrick_Window_Wide_Flat": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 88,
+   "materials": [
+    "MI_Plaster",
+    "MI_UnevenBrick",
+    "MI_WoodTrim"
+   ]
+  },
+  "Wall_UnevenBrick_Window_Wide_Round": {
+   "dims": [
+    2.0,
+    0.4065,
+    3.1227
+   ],
+   "min": [
+    -1.0,
+    -0.0924,
+    0.0
+   ],
+   "max": [
+    1.0,
+    0.314,
+    3.1227
+   ],
+   "centre": [
+    -0.0,
+    0.1108,
+    1.5613
+   ],
+   "n_mesh": 1,
+   "n_tri": 116,
+   "materials": [
+    "MI_Plaster",
+    "MI_UnevenBrick",
+    "MI_WoodTrim"
+   ]
+  },
+  "WindowShutters_Thin_Flat_Closed": {
+   "dims": [
+    0.8518,
+    0.1358,
+    1.424
+   ],
+   "min": [
+    -0.4186,
+    -0.3068,
+    1.0932
+   ],
+   "max": [
+    0.4331,
+    -0.171,
+    2.5173
+   ],
+   "centre": [
+    0.0072,
+    -0.2389,
+    1.8053
+   ],
+   "n_mesh": 1,
+   "n_tri": 96,
+   "materials": [
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "WindowShutters_Thin_Flat_Open": {
+   "dims": [
+    1.354,
+    0.3771,
+    1.4242
+   ],
+   "min": [
+    -0.6935,
+    -0.5136,
+    1.0932
+   ],
+   "max": [
+    0.6605,
+    -0.1365,
+    2.5174
+   ],
+   "centre": [
+    -0.0165,
+    -0.3251,
+    1.8053
+   ],
+   "n_mesh": 1,
+   "n_tri": 96,
+   "materials": [
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "WindowShutters_Thin_Round_Closed": {
+   "dims": [
+    0.8674,
+    0.1358,
+    1.5184
+   ],
+   "min": [
+    -0.4287,
+    -0.2882,
+    1.0932
+   ],
+   "max": [
+    0.4387,
+    -0.1525,
+    2.6117
+   ],
+   "centre": [
+    0.005,
+    -0.2203,
+    1.8525
+   ],
+   "n_mesh": 1,
+   "n_tri": 112,
+   "materials": [
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "WindowShutters_Thin_Round_Open": {
+   "dims": [
+    1.6063,
+    0.3765,
+    1.5184
+   ],
+   "min": [
+    -0.8196,
+    -0.4355,
+    1.0932
+   ],
+   "max": [
+    0.7867,
+    -0.059,
+    2.6117
+   ],
+   "centre": [
+    -0.0164,
+    -0.2473,
+    1.8525
+   ],
+   "n_mesh": 1,
+   "n_tri": 112,
+   "materials": [
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "WindowShutters_Wide_Flat_Closed": {
+   "dims": [
+    1.3469,
+    0.1358,
+    1.424
+   ],
+   "min": [
+    -0.6735,
+    -0.2882,
+    1.0932
+   ],
+   "max": [
+    0.6735,
+    -0.1525,
+    2.5173
+   ],
+   "centre": [
+    -0.0,
+    -0.2203,
+    1.8053
+   ],
+   "n_mesh": 1,
+   "n_tri": 120,
+   "materials": [
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "WindowShutters_Wide_Flat_Open": {
+   "dims": [
+    2.4806,
+    0.4565,
+    1.424
+   ],
+   "min": [
+    -1.2387,
+    -0.5932,
+    1.0932
+   ],
+   "max": [
+    1.2419,
+    -0.1367,
+    2.5173
+   ],
+   "centre": [
+    0.0016,
+    -0.3649,
+    1.8053
+   ],
+   "n_mesh": 1,
+   "n_tri": 120,
+   "materials": [
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "WindowShutters_Wide_Round_Closed": {
+   "dims": [
+    1.3469,
+    0.1358,
+    1.6472
+   ],
+   "min": [
+    -0.6735,
+    -0.2882,
+    1.0932
+   ],
+   "max": [
+    0.6735,
+    -0.1525,
+    2.7404
+   ],
+   "centre": [
+    -0.0,
+    -0.2203,
+    1.9168
+   ],
+   "n_mesh": 1,
+   "n_tri": 136,
+   "materials": [
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "WindowShutters_Wide_Round_Open": {
+   "dims": [
+    2.3035,
+    0.4724,
+    1.6472
+   ],
+   "min": [
+    -1.2,
+    -0.5632,
+    1.0932
+   ],
+   "max": [
+    1.1035,
+    -0.0908,
+    2.7404
+   ],
+   "centre": [
+    -0.0482,
+    -0.327,
+    1.9168
+   ],
+   "n_mesh": 1,
+   "n_tri": 136,
+   "materials": [
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Window_Roof_Thin": {
+   "dims": [
+    0.8518,
+    1.1791,
+    1.1773
+   ],
+   "min": [
+    -0.3902,
+    -1.1012,
+    1.3382
+   ],
+   "max": [
+    0.4616,
+    0.0778,
+    2.5155
+   ],
+   "centre": [
+    0.0357,
+    -0.5117,
+    1.9269
+   ],
+   "n_mesh": 1,
+   "n_tri": 46,
+   "materials": [
+    "MI_WoodTrim",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Window_Roof_Wide": {
+   "dims": [
+    1.4165,
+    1.1791,
+    1.1811
+   ],
+   "min": [
+    -0.6608,
+    -1.1012,
+    1.3382
+   ],
+   "max": [
+    0.7557,
+    0.0778,
+    2.5193
+   ],
+   "centre": [
+    0.0475,
+    -0.5117,
+    1.9287
+   ],
+   "n_mesh": 1,
+   "n_tri": 66,
+   "materials": [
+    "MI_WoodTrim",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Window_Thin_Flat1": {
+   "dims": [
+    0.788,
+    0.4357,
+    1.558
+   ],
+   "min": [
+    -0.4051,
+    -0.1692,
+    0.9747
+   ],
+   "max": [
+    0.3829,
+    0.2666,
+    2.5327
+   ],
+   "centre": [
+    -0.0111,
+    0.0487,
+    1.7537
+   ],
+   "n_mesh": 1,
+   "n_tri": 112,
+   "materials": [
+    "MI_WindowGlass",
+    "MI_WoodTrim"
+   ]
+  },
+  "Window_Thin_Round1": {
+   "dims": [
+    0.8876,
+    0.3444,
+    1.6047
+   ],
+   "min": [
+    -0.4438,
+    -0.0924,
+    1.016
+   ],
+   "max": [
+    0.4438,
+    0.252,
+    2.6207
+   ],
+   "centre": [
+    0.0,
+    0.0798,
+    1.8184
+   ],
+   "n_mesh": 1,
+   "n_tri": 418,
+   "materials": [
+    "MI_WindowGlass",
+    "MI_WoodTrim_Wear"
+   ]
+  },
+  "Window_Wide_Flat1": {
+   "dims": [
+    1.6082,
+    0.6834,
+    1.5801
+   ],
+   "min": [
+    -0.8041,
+    -0.4169,
+    0.9442
+   ],
+   "max": [
+    0.8041,
+    0.2666,
+    2.5243
+   ],
+   "centre": [
+    -0.0,
+    -0.0751,
+    1.7342
+   ],
+   "n_mesh": 1,
+   "n_tri": 160,
+   "materials": [
+    "MI_WindowGlass",
+    "MI_WoodTrim"
+   ]
+  },
+  "Window_Wide_Round1": {
+   "dims": [
+    1.3649,
+    0.5296,
+    1.7257
+   ],
+   "min": [
+    -0.6825,
+    -0.2773,
+    1.016
+   ],
+   "max": [
+    0.6825,
+    0.2523,
+    2.7418
+   ],
+   "centre": [
+    0.0,
+    -0.0125,
+    1.8789
+   ],
+   "n_mesh": 1,
+   "n_tri": 354,
+   "materials": [
+    "MI_WindowGlass",
+    "MI_WoodTrim_Wear"
+   ]
+  }
+ },
+ "solidity": {
+  "DoorFrame_Flat_Brick": {
+   "silhouette_px": 158510,
+   "hole_px": 288579,
+   "hole_frac": 0.6455,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_DoorFrame_Flat_Brick.png"
+  },
+  "DoorFrame_Flat_WoodDark": {
+   "silhouette_px": 132485,
+   "hole_px": 303958,
+   "hole_frac": 0.6964,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_DoorFrame_Flat_WoodDark.png"
+  },
+  "DoorFrame_Round_Brick": {
+   "silhouette_px": 135548,
+   "hole_px": 257794,
+   "hole_frac": 0.6554,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_DoorFrame_Round_Brick.png"
+  },
+  "DoorFrame_Round_WoodDark": {
+   "silhouette_px": 102918,
+   "hole_px": 263912,
+   "hole_frac": 0.7194,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_DoorFrame_Round_WoodDark.png"
+  },
+  "Door_1_Flat": {
+   "silhouette_px": 370290,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Door_1_Flat.png"
+  },
+  "Door_1_Round": {
+   "silhouette_px": 325400,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Door_1_Round.png"
+  },
+  "Door_2_Flat": {
+   "silhouette_px": 363241,
+   "hole_px": 7055,
+   "hole_frac": 0.0191,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Door_2_Flat.png"
+  },
+  "Door_2_Round": {
+   "silhouette_px": 317792,
+   "hole_px": 5775,
+   "hole_frac": 0.0178,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Door_2_Round.png"
+  },
+  "Door_4_Flat": {
+   "silhouette_px": 371096,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Door_4_Flat.png"
+  },
+  "Door_4_Round": {
+   "silhouette_px": 324620,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Door_4_Round.png"
+  },
+  "Door_8_Flat": {
+   "silhouette_px": 358611,
+   "hole_px": 11680,
+   "hole_frac": 0.0315,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Door_8_Flat.png"
+  },
+  "Door_8_Round": {
+   "silhouette_px": 319345,
+   "hole_px": 9263,
+   "hole_frac": 0.0282,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Door_8_Round.png"
+  },
+  "Wall_Arch": {
+   "silhouette_px": 136248,
+   "hole_px": 329120,
+   "hole_frac": 0.7072,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Arch.png"
+  },
+  "Wall_BottomCover": {
+   "silhouette_px": 82615,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_BottomCover.png"
+  },
+  "Wall_Plaster_Door_Flat": {
+   "silhouette_px": 249092,
+   "hole_px": 197456,
+   "hole_frac": 0.4422,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_Door_Flat.png"
+  },
+  "Wall_Plaster_Door_Round": {
+   "silhouette_px": 227618,
+   "hole_px": 218930,
+   "hole_frac": 0.4903,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_Door_Round.png"
+  },
+  "Wall_Plaster_Door_RoundInset": {
+   "silhouette_px": 228930,
+   "hole_px": 217618,
+   "hole_frac": 0.4873,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_Door_RoundInset.png"
+  },
+  "Wall_Plaster_Straight": {
+   "silhouette_px": 444884,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_Straight.png"
+  },
+  "Wall_Plaster_Straight_Base": {
+   "silhouette_px": 446548,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_Straight_Base.png"
+  },
+  "Wall_Plaster_Straight_L": {
+   "silhouette_px": 445718,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_Straight_L.png"
+  },
+  "Wall_Plaster_Straight_R": {
+   "silhouette_px": 445717,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_Straight_R.png"
+  },
+  "Wall_Plaster_Window_Thin_Round": {
+   "silhouette_px": 383514,
+   "hole_px": 63034,
+   "hole_frac": 0.1412,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_Window_Thin_Round.png"
+  },
+  "Wall_Plaster_Window_Wide_Flat": {
+   "silhouette_px": 339382,
+   "hole_px": 107166,
+   "hole_frac": 0.24,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_Window_Wide_Flat.png"
+  },
+  "Wall_Plaster_Window_Wide_Flat2": {
+   "silhouette_px": 335083,
+   "hole_px": 105544,
+   "hole_frac": 0.2395,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_Window_Wide_Flat2.png"
+  },
+  "Wall_Plaster_Window_Wide_Round": {
+   "silhouette_px": 317158,
+   "hole_px": 129390,
+   "hole_frac": 0.2898,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_Window_Wide_Round.png"
+  },
+  "Wall_Plaster_WoodGrid": {
+   "silhouette_px": 315134,
+   "hole_px": 131414,
+   "hole_frac": 0.2943,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_Plaster_WoodGrid.png"
+  },
+  "Wall_UnevenBrick_Door_Flat": {
+   "silhouette_px": 248518,
+   "hole_px": 198030,
+   "hole_frac": 0.4435,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_UnevenBrick_Door_Flat.png"
+  },
+  "Wall_UnevenBrick_Door_Round": {
+   "silhouette_px": 227609,
+   "hole_px": 218939,
+   "hole_frac": 0.4903,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_UnevenBrick_Door_Round.png"
+  },
+  "Wall_UnevenBrick_Straight": {
+   "silhouette_px": 446548,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_UnevenBrick_Straight.png"
+  },
+  "Wall_UnevenBrick_Window_Thin_Round": {
+   "silhouette_px": 383165,
+   "hole_px": 63383,
+   "hole_frac": 0.1419,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_UnevenBrick_Window_Thin_Round.png"
+  },
+  "Wall_UnevenBrick_Window_Wide_Flat": {
+   "silhouette_px": 339700,
+   "hole_px": 106848,
+   "hole_frac": 0.2393,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_UnevenBrick_Window_Wide_Flat.png"
+  },
+  "Wall_UnevenBrick_Window_Wide_Round": {
+   "silhouette_px": 317452,
+   "hole_px": 129096,
+   "hole_frac": 0.2891,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Wall_UnevenBrick_Window_Wide_Round.png"
+  },
+  "WindowShutters_Thin_Flat_Closed": {
+   "silhouette_px": 401127,
+   "hole_px": 13272,
+   "hole_frac": 0.032,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_WindowShutters_Thin_Flat_Closed.png"
+  },
+  "WindowShutters_Thin_Flat_Open": {
+   "silhouette_px": 309259,
+   "hole_px": 348779,
+   "hole_frac": 0.53,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_WindowShutters_Thin_Flat_Open.png"
+  },
+  "WindowShutters_Thin_Round_Closed": {
+   "silhouette_px": 357323,
+   "hole_px": 13164,
+   "hole_frac": 0.0355,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_WindowShutters_Thin_Round_Closed.png"
+  },
+  "WindowShutters_Thin_Round_Open": {
+   "silhouette_px": 294485,
+   "hole_px": 362244,
+   "hole_frac": 0.5516,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_WindowShutters_Thin_Round_Open.png"
+  },
+  "WindowShutters_Wide_Flat_Closed": {
+   "silhouette_px": 622657,
+   "hole_px": 19300,
+   "hole_frac": 0.0301,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_WindowShutters_Wide_Flat_Closed.png"
+  },
+  "WindowShutters_Wide_Flat_Open": {
+   "silhouette_px": 196890,
+   "hole_px": 203000,
+   "hole_frac": 0.5076,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_WindowShutters_Wide_Flat_Open.png"
+  },
+  "WindowShutters_Wide_Round_Closed": {
+   "silhouette_px": 503073,
+   "hole_px": 16509,
+   "hole_frac": 0.0318,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_WindowShutters_Wide_Round_Closed.png"
+  },
+  "WindowShutters_Wide_Round_Open": {
+   "silhouette_px": 244182,
+   "hole_px": 253878,
+   "hole_frac": 0.5097,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_WindowShutters_Wide_Round_Open.png"
+  },
+  "Window_Roof_Thin": {
+   "silhouette_px": 223304,
+   "hole_px": 230685,
+   "hole_frac": 0.5081,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Window_Roof_Thin.png"
+  },
+  "Window_Roof_Wide": {
+   "silhouette_px": 255761,
+   "hole_px": 286377,
+   "hole_frac": 0.5282,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Window_Roof_Wide.png"
+  },
+  "Window_Thin_Flat1": {
+   "silhouette_px": 345268,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Window_Thin_Flat1.png"
+  },
+  "Window_Thin_Round1": {
+   "silhouette_px": 348050,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Window_Thin_Round1.png"
+  },
+  "Window_Wide_Flat1": {
+   "silhouette_px": 582696,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Window_Wide_Flat1.png"
+  },
+  "Window_Wide_Round1": {
+   "silhouette_px": 503852,
+   "hole_px": 0,
+   "hole_frac": 0.0,
+   "red_on_empty": false,
+   "png": "renders/art/town/_probe/chapel/_faceon_Window_Wide_Round1.png"
+  }
+ },
+ "errors": [
+  "PACK CONTRIBUTED ZERO MODULES - C:\\hd adventure\\_packs\\Castle (patterns, extension or path)"
+ ],
+ "note": "module choice is NOT made here; it is made off this table",
+ "solidity_sorted": [
+  [
+   "Door_1_Flat",
+   0.0
+  ],
+  [
+   "Door_1_Round",
+   0.0
+  ],
+  [
+   "Door_4_Flat",
+   0.0
+  ],
+  [
+   "Door_4_Round",
+   0.0
+  ],
+  [
+   "Wall_BottomCover",
+   0.0
+  ],
+  [
+   "Wall_Plaster_Straight",
+   0.0
+  ],
+  [
+   "Wall_Plaster_Straight_Base",
+   0.0
+  ],
+  [
+   "Wall_Plaster_Straight_L",
+   0.0
+  ],
+  [
+   "Wall_Plaster_Straight_R",
+   0.0
+  ],
+  [
+   "Wall_UnevenBrick_Straight",
+   0.0
+  ],
+  [
+   "Window_Thin_Flat1",
+   0.0
+  ],
+  [
+   "Window_Thin_Round1",
+   0.0
+  ],
+  [
+   "Window_Wide_Flat1",
+   0.0
+  ],
+  [
+   "Window_Wide_Round1",
+   0.0
+  ],
+  [
+   "Door_2_Round",
+   0.0178
+  ],
+  [
+   "Door_2_Flat",
+   0.0191
+  ],
+  [
+   "Door_8_Round",
+   0.0282
+  ],
+  [
+   "WindowShutters_Wide_Flat_Closed",
+   0.0301
+  ],
+  [
+   "Door_8_Flat",
+   0.0315
+  ],
+  [
+   "WindowShutters_Wide_Round_Closed",
+   0.0318
+  ],
+  [
+   "WindowShutters_Thin_Flat_Closed",
+   0.032
+  ],
+  [
+   "WindowShutters_Thin_Round_Closed",
+   0.0355
+  ],
+  [
+   "Wall_Plaster_Window_Thin_Round",
+   0.1412
+  ],
+  [
+   "Wall_UnevenBrick_Window_Thin_Round",
+   0.1419
+  ],
+  [
+   "Wall_UnevenBrick_Window_Wide_Flat",
+   0.2393
+  ],
+  [
+   "Wall_Plaster_Window_Wide_Flat2",
+   0.2395
+  ],
+  [
+   "Wall_Plaster_Window_Wide_Flat",
+   0.24
+  ],
+  [
+   "Wall_UnevenBrick_Window_Wide_Round",
+   0.2891
+  ],
+  [
+   "Wall_Plaster_Window_Wide_Round",
+   0.2898
+  ],
+  [
+   "Wall_Plaster_WoodGrid",
+   0.2943
+  ],
+  [
+   "Wall_Plaster_Door_Flat",
+   0.4422
+  ],
+  [
+   "Wall_UnevenBrick_Door_Flat",
+   0.4435
+  ],
+  [
+   "Wall_Plaster_Door_RoundInset",
+   0.4873
+  ],
+  [
+   "Wall_Plaster_Door_Round",
+   0.4903
+  ],
+  [
+   "Wall_UnevenBrick_Door_Round",
+   0.4903
+  ],
+  [
+   "WindowShutters_Wide_Flat_Open",
+   0.5076
+  ],
+  [
+   "Window_Roof_Thin",
+   0.5081
+  ],
+  [
+   "WindowShutters_Wide_Round_Open",
+   0.5097
+  ],
+  [
+   "Window_Roof_Wide",
+   0.5282
+  ],
+  [
+   "WindowShutters_Thin_Flat_Open",
+   0.53
+  ],
+  [
+   "WindowShutters_Thin_Round_Open",
+   0.5516
+  ],
+  [
+   "DoorFrame_Flat_Brick",
+   0.6455
+  ],
+  [
+   "DoorFrame_Round_Brick",
+   0.6554
+  ],
+  [
+   "DoorFrame_Flat_WoodDark",
+   0.6964
+  ],
+  [
+   "Wall_Arch",
+   0.7072
+  ],
+  [
+   "DoorFrame_Round_WoodDark",
+   0.7194
+  ]
+ ]
+}

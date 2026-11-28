@@ -1,0 +1,2390 @@
+{
+ "n_meshes": 18,
+ "n_openings": 672,
+ "threshold_unbacked": 0.18,
+ "depth_m": 1.0,
+ "grid": 128,
+ "errors": [],
+ "absent_pairs": 64,
+ "blindness": "NEVER RENDERS. Blind to colour, material, whether a progression reads, assembly faults such as a gable hole, backface culling, and anything deeper than depth_m. NOT a fit proof.",
+ "validation": {
+  "verdict": "GREEN",
+  "lattice_cover_med": 0.6847,
+  "solid_cover_med": 1.0,
+  "margin": 0.3153,
+  "lattice_n": 66,
+  "solid_n": 80,
+  "why": "separates the pair whose truth came from a RENDER: solid 1.0000 vs lattice 0.6847, margin 0.3153 (>= 0.20 required)"
+ },
+ "reproduction": {
+  "verdict": "GREEN",
+  "threshold": 0.18,
+  "per_module": {
+   "Wall_Plaster_WoodGrid": [
+    66,
+    61
+   ],
+   "Wall_UnevenBrick_Door_Round": [
+    17,
+    16
+   ],
+   "Wall_Plaster_Window_Wide_Round": [
+    79,
+    6
+   ],
+   "Wall_UnevenBrick_Window_Wide_Round": [
+    45,
+    4
+   ],
+   "Wall_Plaster_Door_Flat": [
+    1,
+    1
+   ],
+   "Wall_Plaster_Window_Wide_Flat": [
+    46,
+    0
+   ],
+   "Wall_UnevenBrick_Window_Thin_Round": [
+    108,
+    0
+   ],
+   "Wall_Plaster_Straight": [
+    80,
+    0
+   ],
+   "Wall_UnevenBrick_Straight": [
+    230,
+    0
+   ]
+  },
+  "total": [
+   672,
+   88
+  ],
+  "published_total": [
+   672,
+   88
+  ],
+  "disagreements": [],
+  "why": "a list that cannot re-derive the aggregate it came from is wrong somewhere, and which of the two is wrong is then the finding - it is not smoothed over."
+ },
+ "sensitivity": {
+  "unbacked_at": {
+   "0.05": 88,
+   "0.10": 88,
+   "0.18": 88,
+   "0.25": 45
+  },
+  "n_within_0.02_of_thresh": 15,
+  "their_hole_fracs": [
+   0.186,
+   0.186,
+   0.186,
+   0.186,
+   0.187,
+   0.187,
+   0.1926,
+   0.1926,
+   0.1926,
+   0.1926,
+   0.1926,
+   0.1926,
+   0.1926,
+   0.1926,
+   0.1926
+  ],
+  "why": "if many openings sit within a hair of the threshold, the count is a choice and not a fact, and that must be visible."
+ },
+ "n_unbacked": 88,
+ "backed_count": 584,
+ "openings": [
+  {
+   "file": "town_hall_t1.glb",
+   "module": "Wall_Plaster_Door_Flat",
+   "node": 10,
+   "name": "Wall_Plaster_Door_Flat_inst",
+   "hole_frac": 0.4404,
+   "cover_self": 0.5596,
+   "centre": [
+    -1.006,
+    1.571,
+    2.889
+   ],
+   "band_y": [
+    0.01,
+    3.13
+   ],
+   "normal_axis": "z",
+   "normal_centre": 2.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 30,
+   "name": "Wall_UnevenBrick_Door_Round_inst",
+   "hole_frac": 0.3701,
+   "cover_self": 0.5018,
+   "centre": [
+    -0.0,
+    1.765,
+    3.889
+   ],
+   "band_y": [
+    0.2,
+    3.33
+   ],
+   "normal_axis": "z",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_chapel.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 31,
+   "name": "Wall_Plaster_WoodGrid.056",
+   "hole_frac": 0.3153,
+   "cover_self": 0.6847,
+   "centre": [
+    -1.0,
+    4.684,
+    -6.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": -6.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 71,
+   "name": "Wall_Plaster_WoodGrid.056",
+   "hole_frac": 0.3153,
+   "cover_self": 0.6847,
+   "centre": [
+    -3.889,
+    4.684,
+    4.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 75,
+   "name": "Wall_Plaster_WoodGrid.060",
+   "hole_frac": 0.3153,
+   "cover_self": 0.6847,
+   "centre": [
+    3.889,
+    4.684,
+    -2.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 78,
+   "name": "Wall_Plaster_WoodGrid.063",
+   "hole_frac": 0.3153,
+   "cover_self": 0.6847,
+   "centre": [
+    1.0,
+    7.807,
+    -6.889
+   ],
+   "band_y": [
+    6.25,
+    9.37
+   ],
+   "normal_axis": "z",
+   "normal_centre": -6.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_b.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 34,
+   "name": "Wall_Plaster_WoodGrid.004",
+   "hole_frac": 0.3153,
+   "cover_self": 0.6847,
+   "centre": [
+    -1.889,
+    4.684,
+    -0.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -1.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t1.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 19,
+   "name": "Wall_Plaster_WoodGrid_inst",
+   "hole_frac": 0.3153,
+   "cover_self": 0.6847,
+   "centre": [
+    0.994,
+    1.571,
+    -2.889
+   ],
+   "band_y": [
+    0.01,
+    3.13
+   ],
+   "normal_axis": "z",
+   "normal_centre": -2.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 90,
+   "name": "Wall_Plaster_WoodGrid.056",
+   "hole_frac": 0.3153,
+   "cover_self": 0.6847,
+   "centre": [
+    -5.814,
+    4.691,
+    4.024
+   ],
+   "band_y": [
+    3.13,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -5.814,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 94,
+   "name": "Wall_Plaster_WoodGrid.060",
+   "hole_frac": 0.3153,
+   "cover_self": 0.6847,
+   "centre": [
+    1.965,
+    4.691,
+    -1.976
+   ],
+   "band_y": [
+    3.13,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 1.965,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 97,
+   "name": "Wall_Plaster_WoodGrid.063",
+   "hole_frac": 0.3153,
+   "cover_self": 0.6847,
+   "centre": [
+    -0.925,
+    7.814,
+    -6.865
+   ],
+   "band_y": [
+    6.25,
+    9.38
+   ],
+   "normal_axis": "z",
+   "normal_centre": -6.865,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 70,
+   "name": "Wall_Plaster_WoodGrid.055",
+   "hole_frac": 0.297,
+   "cover_self": 0.6847,
+   "centre": [
+    -1.0,
+    4.684,
+    -6.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": -6.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 74,
+   "name": "Wall_Plaster_WoodGrid.059",
+   "hole_frac": 0.297,
+   "cover_self": 0.6847,
+   "centre": [
+    -3.889,
+    4.684,
+    -2.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 89,
+   "name": "Wall_Plaster_WoodGrid.055",
+   "hole_frac": 0.297,
+   "cover_self": 0.6847,
+   "centre": [
+    -2.925,
+    4.691,
+    -6.865
+   ],
+   "band_y": [
+    3.13,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": -6.865,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 93,
+   "name": "Wall_Plaster_WoodGrid.059",
+   "hole_frac": 0.297,
+   "cover_self": 0.6847,
+   "centre": [
+    -5.814,
+    4.691,
+    -1.976
+   ],
+   "band_y": [
+    3.13,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -5.814,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_barracks.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 110,
+   "name": "Wall_Plaster_WoodGrid.056",
+   "hole_frac": 0.2928,
+   "cover_self": 0.6847,
+   "centre": [
+    5.0,
+    4.684,
+    -5.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": -5.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 73,
+   "name": "Wall_Plaster_WoodGrid.058",
+   "hole_frac": 0.2928,
+   "cover_self": 0.6847,
+   "centre": [
+    3.889,
+    4.684,
+    -0.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 92,
+   "name": "Wall_Plaster_WoodGrid.058",
+   "hole_frac": 0.2928,
+   "cover_self": 0.6847,
+   "centre": [
+    1.965,
+    4.691,
+    0.024
+   ],
+   "band_y": [
+    3.13,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 1.965,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "module": "Wall_UnevenBrick_Window_Wide_Round",
+   "node": 40,
+   "name": "Wall_UnevenBrick_Window_Wide_Round_inst",
+   "hole_frac": 0.2906,
+   "cover_self": 0.7094,
+   "centre": [
+    -3.111,
+    1.765,
+    1.0
+   ],
+   "band_y": [
+    0.2,
+    3.33
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.111,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "module": "Wall_UnevenBrick_Window_Wide_Round",
+   "node": 41,
+   "name": "Wall_UnevenBrick_Window_Wide_Round_inst.001",
+   "hole_frac": 0.2906,
+   "cover_self": 0.7094,
+   "centre": [
+    3.111,
+    1.765,
+    1.0
+   ],
+   "band_y": [
+    0.2,
+    3.33
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.111,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "module": "Wall_UnevenBrick_Window_Wide_Round",
+   "node": 42,
+   "name": "Wall_UnevenBrick_Window_Wide_Round_inst.002",
+   "hole_frac": 0.2906,
+   "cover_self": 0.7094,
+   "centre": [
+    -3.111,
+    1.765,
+    -1.0
+   ],
+   "band_y": [
+    0.2,
+    3.33
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.111,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "module": "Wall_UnevenBrick_Window_Wide_Round",
+   "node": 43,
+   "name": "Wall_UnevenBrick_Window_Wide_Round_inst.003",
+   "hole_frac": 0.2906,
+   "cover_self": 0.7094,
+   "centre": [
+    3.111,
+    1.765,
+    -1.0
+   ],
+   "band_y": [
+    0.2,
+    3.33
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.111,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 77,
+   "name": "Wall_Plaster_WoodGrid.062",
+   "hole_frac": 0.2903,
+   "cover_self": 0.6847,
+   "centre": [
+    -3.0,
+    7.807,
+    -6.889
+   ],
+   "band_y": [
+    6.25,
+    9.37
+   ],
+   "normal_axis": "z",
+   "normal_centre": -6.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 79,
+   "name": "Wall_Plaster_WoodGrid.064",
+   "hole_frac": 0.2903,
+   "cover_self": 0.6847,
+   "centre": [
+    3.0,
+    7.807,
+    -6.889
+   ],
+   "band_y": [
+    6.25,
+    9.37
+   ],
+   "normal_axis": "z",
+   "normal_centre": -6.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 96,
+   "name": "Wall_Plaster_WoodGrid.062",
+   "hole_frac": 0.2903,
+   "cover_self": 0.6847,
+   "centre": [
+    -4.925,
+    7.814,
+    -6.865
+   ],
+   "band_y": [
+    6.25,
+    9.38
+   ],
+   "normal_axis": "z",
+   "normal_centre": -6.865,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 98,
+   "name": "Wall_Plaster_WoodGrid.064",
+   "hole_frac": 0.2903,
+   "cover_self": 0.6847,
+   "centre": [
+    1.075,
+    7.814,
+    -6.865
+   ],
+   "band_y": [
+    6.25,
+    9.38
+   ],
+   "normal_axis": "z",
+   "normal_centre": -6.865,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_chapel.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 29,
+   "name": "Wall_Plaster_WoodGrid.054",
+   "hole_frac": 0.2893,
+   "cover_self": 0.6847,
+   "centre": [
+    -3.0,
+    4.684,
+    -6.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": -6.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_b.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 33,
+   "name": "Wall_Plaster_WoodGrid.003",
+   "hole_frac": 0.2893,
+   "cover_self": 0.6847,
+   "centre": [
+    1.0,
+    4.684,
+    -2.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": -2.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 76,
+   "name": "Wall_Plaster_WoodGrid.061",
+   "hole_frac": 0.2886,
+   "cover_self": 0.6847,
+   "centre": [
+    -3.889,
+    4.684,
+    -6.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 95,
+   "name": "Wall_Plaster_WoodGrid.061",
+   "hole_frac": 0.2886,
+   "cover_self": 0.6847,
+   "centre": [
+    -5.814,
+    4.691,
+    -5.976
+   ],
+   "band_y": [
+    3.13,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -5.814,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_b.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 32,
+   "name": "Wall_Plaster_WoodGrid.002",
+   "hole_frac": 0.2884,
+   "cover_self": 0.6847,
+   "centre": [
+    -1.0,
+    4.684,
+    -2.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": -2.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_b.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 35,
+   "name": "Wall_Plaster_WoodGrid.005",
+   "hole_frac": 0.2884,
+   "cover_self": 0.6847,
+   "centre": [
+    -1.889,
+    4.684,
+    -2.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -1.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_a.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 24,
+   "name": "Wall_Plaster_WoodGrid.002",
+   "hole_frac": 0.2876,
+   "cover_self": 0.6847,
+   "centre": [
+    -2.0,
+    4.684,
+    -3.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": -3.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_b.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 36,
+   "name": "Wall_Plaster_WoodGrid.006",
+   "hole_frac": 0.2803,
+   "cover_self": 0.6847,
+   "centre": [
+    -1.889,
+    7.807,
+    -0.0
+   ],
+   "band_y": [
+    6.25,
+    9.37
+   ],
+   "normal_axis": "x",
+   "normal_centre": -1.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "module": "Wall_Plaster_Window_Wide_Round",
+   "node": 24,
+   "name": "Wall_Plaster_Window_Wide_Round_inst",
+   "hole_frac": 0.2802,
+   "cover_self": 0.7094,
+   "centre": [
+    -0.0,
+    4.888,
+    3.889
+   ],
+   "band_y": [
+    3.33,
+    6.45
+   ],
+   "normal_axis": "z",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "module": "Wall_Plaster_Window_Wide_Round",
+   "node": 25,
+   "name": "Wall_Plaster_Window_Wide_Round_inst.001",
+   "hole_frac": 0.2802,
+   "cover_self": 0.7094,
+   "centre": [
+    0.0,
+    4.888,
+    -3.889
+   ],
+   "band_y": [
+    3.33,
+    6.45
+   ],
+   "normal_axis": "z",
+   "normal_centre": -3.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_workshop.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 30,
+   "name": "Wall_Plaster_WoodGrid.056",
+   "hole_frac": 0.271,
+   "cover_self": 0.6847,
+   "centre": [
+    3.0,
+    4.684,
+    -5.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": -5.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_c.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 23,
+   "name": "Wall_Plaster_WoodGrid.001",
+   "hole_frac": 0.2703,
+   "cover_self": 0.6847,
+   "centre": [
+    -1.0,
+    4.684,
+    -2.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": -2.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_c.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 24,
+   "name": "Wall_Plaster_WoodGrid.002",
+   "hole_frac": 0.2668,
+   "cover_self": 0.6847,
+   "centre": [
+    3.0,
+    4.684,
+    -2.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": -2.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 69,
+   "name": "Wall_Plaster_WoodGrid.054",
+   "hole_frac": 0.2666,
+   "cover_self": 0.7334,
+   "centre": [
+    -1.0,
+    4.684,
+    6.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": 6.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 88,
+   "name": "Wall_Plaster_WoodGrid.054",
+   "hole_frac": 0.2666,
+   "cover_self": 0.7334,
+   "centre": [
+    -2.925,
+    4.691,
+    6.913
+   ],
+   "band_y": [
+    3.13,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": 6.913,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "module": "Wall_Plaster_Window_Wide_Round",
+   "node": 26,
+   "name": "Wall_Plaster_Window_Wide_Round_inst.002",
+   "hole_frac": 0.2545,
+   "cover_self": 0.7094,
+   "centre": [
+    -3.111,
+    4.888,
+    1.0
+   ],
+   "band_y": [
+    3.33,
+    6.45
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.111,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "module": "Wall_Plaster_Window_Wide_Round",
+   "node": 27,
+   "name": "Wall_Plaster_Window_Wide_Round_inst.003",
+   "hole_frac": 0.2545,
+   "cover_self": 0.7094,
+   "centre": [
+    3.111,
+    4.888,
+    1.0
+   ],
+   "band_y": [
+    3.33,
+    6.45
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.111,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "module": "Wall_Plaster_Window_Wide_Round",
+   "node": 28,
+   "name": "Wall_Plaster_Window_Wide_Round_inst.004",
+   "hole_frac": 0.2545,
+   "cover_self": 0.7094,
+   "centre": [
+    -3.111,
+    4.888,
+    -1.0
+   ],
+   "band_y": [
+    3.33,
+    6.45
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.111,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "module": "Wall_Plaster_Window_Wide_Round",
+   "node": 29,
+   "name": "Wall_Plaster_Window_Wide_Round_inst.005",
+   "hole_frac": 0.2545,
+   "cover_self": 0.7094,
+   "centre": [
+    3.111,
+    4.888,
+    -1.0
+   ],
+   "band_y": [
+    3.33,
+    6.45
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.111,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_a.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 23,
+   "name": "Wall_Plaster_WoodGrid.001",
+   "hole_frac": 0.245,
+   "cover_self": 0.7334,
+   "centre": [
+    -2.0,
+    4.684,
+    3.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_barracks.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 33,
+   "name": "Wall_Plaster_WoodGrid.055",
+   "hole_frac": 0.2352,
+   "cover_self": 0.6847,
+   "centre": [
+    -9.889,
+    4.684,
+    -1.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -9.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_barracks.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 112,
+   "name": "Wall_Plaster_WoodGrid.058",
+   "hole_frac": 0.2352,
+   "cover_self": 0.6847,
+   "centre": [
+    9.889,
+    4.684,
+    1.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 9.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_chapel.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 33,
+   "name": "Wall_Plaster_WoodGrid.058",
+   "hole_frac": 0.2352,
+   "cover_self": 0.6847,
+   "centre": [
+    3.889,
+    4.684,
+    4.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_chapel.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 35,
+   "name": "Wall_Plaster_WoodGrid.060",
+   "hole_frac": 0.2352,
+   "cover_self": 0.6847,
+   "centre": [
+    -3.889,
+    4.684,
+    -2.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_workshop.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 31,
+   "name": "Wall_Plaster_WoodGrid.057",
+   "hole_frac": 0.2352,
+   "cover_self": 0.6847,
+   "centre": [
+    3.889,
+    4.684,
+    3.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_d.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 28,
+   "name": "Wall_Plaster_WoodGrid.002",
+   "hole_frac": 0.2352,
+   "cover_self": 0.6847,
+   "centre": [
+    -2.889,
+    4.684,
+    2.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -2.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 82,
+   "name": "Wall_Plaster_WoodGrid.067",
+   "hole_frac": 0.2335,
+   "cover_self": 0.6847,
+   "centre": [
+    3.889,
+    7.807,
+    2.0
+   ],
+   "band_y": [
+    6.25,
+    9.37
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 101,
+   "name": "Wall_Plaster_WoodGrid.067",
+   "hole_frac": 0.2335,
+   "cover_self": 0.6847,
+   "centre": [
+    1.965,
+    7.814,
+    2.024
+   ],
+   "band_y": [
+    6.25,
+    9.38
+   ],
+   "normal_axis": "x",
+   "normal_centre": 1.965,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_d.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 29,
+   "name": "Wall_Plaster_WoodGrid.003",
+   "hole_frac": 0.2324,
+   "cover_self": 0.6847,
+   "centre": [
+    2.889,
+    4.684,
+    -4.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 2.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_workshop.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 29,
+   "name": "Wall_Plaster_WoodGrid.055",
+   "hole_frac": 0.2319,
+   "cover_self": 0.7334,
+   "centre": [
+    -3.0,
+    4.684,
+    5.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": 5.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_d.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 27,
+   "name": "Wall_Plaster_WoodGrid.001",
+   "hole_frac": 0.2319,
+   "cover_self": 0.7334,
+   "centre": [
+    -2.0,
+    4.684,
+    4.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": 4.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_barracks.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 32,
+   "name": "Wall_Plaster_WoodGrid.054",
+   "hole_frac": 0.2295,
+   "cover_self": 0.6847,
+   "centre": [
+    -9.889,
+    4.684,
+    5.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -9.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_b.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 31,
+   "name": "Wall_Plaster_WoodGrid.001",
+   "hole_frac": 0.2288,
+   "cover_self": 0.7334,
+   "centre": [
+    -1.0,
+    4.684,
+    2.889
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "z",
+   "normal_centre": 2.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_chapel.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 34,
+   "name": "Wall_Plaster_WoodGrid.059",
+   "hole_frac": 0.2206,
+   "cover_self": 0.6847,
+   "centre": [
+    3.889,
+    4.684,
+    -0.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_a.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 25,
+   "name": "Wall_Plaster_WoodGrid.003",
+   "hole_frac": 0.2206,
+   "cover_self": 0.6847,
+   "centre": [
+    -2.889,
+    4.684,
+    -1.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -2.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_a.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 26,
+   "name": "Wall_Plaster_WoodGrid.004",
+   "hole_frac": 0.2206,
+   "cover_self": 0.6847,
+   "centre": [
+    2.889,
+    4.684,
+    -1.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 2.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_barracks.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 111,
+   "name": "Wall_Plaster_WoodGrid.057",
+   "hole_frac": 0.22,
+   "cover_self": 0.6847,
+   "centre": [
+    2.111,
+    4.684,
+    1.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 2.111,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_barracks.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 113,
+   "name": "Wall_Plaster_WoodGrid.059",
+   "hole_frac": 0.2157,
+   "cover_self": 0.6847,
+   "centre": [
+    9.889,
+    4.684,
+    -3.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 9.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 81,
+   "name": "Wall_Plaster_WoodGrid.066",
+   "hole_frac": 0.2157,
+   "cover_self": 0.6847,
+   "centre": [
+    -3.889,
+    7.807,
+    2.0
+   ],
+   "band_y": [
+    6.25,
+    9.37
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_workshop.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 32,
+   "name": "Wall_Plaster_WoodGrid.058",
+   "hole_frac": 0.2157,
+   "cover_self": 0.6847,
+   "centre": [
+    -3.889,
+    4.684,
+    1.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_workshop.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 33,
+   "name": "Wall_Plaster_WoodGrid.059",
+   "hole_frac": 0.2157,
+   "cover_self": 0.6847,
+   "centre": [
+    -3.889,
+    4.684,
+    -1.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 100,
+   "name": "Wall_Plaster_WoodGrid.066",
+   "hole_frac": 0.2157,
+   "cover_self": 0.6847,
+   "centre": [
+    -5.814,
+    7.814,
+    2.024
+   ],
+   "band_y": [
+    6.25,
+    9.38
+   ],
+   "normal_axis": "x",
+   "normal_centre": -5.814,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_watermill.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 26,
+   "name": "Wall_Plaster_WoodGrid.054",
+   "hole_frac": 0.2144,
+   "cover_self": 0.6847,
+   "centre": [
+    2.889,
+    4.684,
+    -3.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 2.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_chapel.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 32,
+   "name": "Wall_Plaster_WoodGrid.057",
+   "hole_frac": 0.2139,
+   "cover_self": 0.6847,
+   "centre": [
+    3.889,
+    4.684,
+    6.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_c.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 26,
+   "name": "Wall_Plaster_WoodGrid.004",
+   "hole_frac": 0.2139,
+   "cover_self": 0.6847,
+   "centre": [
+    3.889,
+    4.684,
+    2.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_c.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 25,
+   "name": "Wall_Plaster_WoodGrid.003",
+   "hole_frac": 0.2136,
+   "cover_self": 0.6847,
+   "centre": [
+    -3.889,
+    4.684,
+    2.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_c.glb",
+   "module": "Wall_Plaster_WoodGrid",
+   "node": 27,
+   "name": "Wall_Plaster_WoodGrid.005",
+   "hole_frac": 0.2131,
+   "cover_self": 0.6847,
+   "centre": [
+    -3.889,
+    4.684,
+    -2.0
+   ],
+   "band_y": [
+    3.12,
+    6.25
+   ],
+   "normal_axis": "x",
+   "normal_centre": -3.889,
+   "size_inplane": [
+    3.123,
+    2.0
+   ],
+   "axes_inplane": "yz",
+   "by_design_open": false,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_barracks.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 114,
+   "name": "Wall_UnevenBrick_Door_Round.015",
+   "hole_frac": 0.1926,
+   "cover_self": 0.5018,
+   "centre": [
+    3.0,
+    1.561,
+    5.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 5.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_barracks.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 189,
+   "name": "Wall_UnevenBrick_Door_Round.016",
+   "hole_frac": 0.1926,
+   "cover_self": 0.5018,
+   "centre": [
+    -1.0,
+    1.561,
+    5.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 5.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_chapel.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 121,
+   "name": "Wall_UnevenBrick_Door_Round.015",
+   "hole_frac": 0.1926,
+   "cover_self": 0.5018,
+   "centre": [
+    -1.0,
+    1.561,
+    10.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 10.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_granary.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 10,
+   "name": "Wall_UnevenBrick_Door_Round.014",
+   "hole_frac": 0.1926,
+   "cover_self": 0.5018,
+   "centre": [
+    -2.0,
+    1.561,
+    3.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_sawmill.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 9,
+   "name": "Wall_UnevenBrick_Door_Round.015",
+   "hole_frac": 0.1926,
+   "cover_self": 0.5018,
+   "centre": [
+    2.0,
+    1.561,
+    5.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 5.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_workshop.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 34,
+   "name": "Wall_UnevenBrick_Door_Round.015",
+   "hole_frac": 0.1926,
+   "cover_self": 0.5018,
+   "centre": [
+    1.0,
+    1.561,
+    5.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 5.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_a.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 27,
+   "name": "Wall_UnevenBrick_Door_Round.001",
+   "hole_frac": 0.1926,
+   "cover_self": 0.5018,
+   "centre": [
+    -0.0,
+    1.561,
+    3.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_c.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 28,
+   "name": "Wall_UnevenBrick_Door_Round.001",
+   "hole_frac": 0.1926,
+   "cover_self": 0.5018,
+   "centre": [
+    3.0,
+    1.561,
+    2.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 2.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_d.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 30,
+   "name": "Wall_UnevenBrick_Door_Round.001",
+   "hole_frac": 0.1926,
+   "cover_self": 0.5018,
+   "centre": [
+    2.0,
+    1.561,
+    4.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 4.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_watermill.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 27,
+   "name": "Wall_UnevenBrick_Door_Round.014",
+   "hole_frac": 0.187,
+   "cover_self": 0.5018,
+   "centre": [
+    -0.0,
+    1.561,
+    3.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 3.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "mk_house_b.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 37,
+   "name": "Wall_UnevenBrick_Door_Round.001",
+   "hole_frac": 0.187,
+   "cover_self": 0.5018,
+   "centre": [
+    1.0,
+    1.561,
+    2.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 2.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_barracks.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 34,
+   "name": "Wall_UnevenBrick_Door_Round.014",
+   "hole_frac": 0.186,
+   "cover_self": 0.5018,
+   "centre": [
+    -9.0,
+    1.561,
+    5.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 5.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_hall.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 83,
+   "name": "Wall_UnevenBrick_Door_Round.014",
+   "hole_frac": 0.186,
+   "cover_self": 0.5018,
+   "centre": [
+    3.0,
+    1.561,
+    6.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 6.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "lm_windmill.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 15,
+   "name": "Wall_UnevenBrick_Door_Round.014",
+   "hole_frac": 0.186,
+   "cover_self": 0.5018,
+   "centre": [
+    -1.0,
+    1.561,
+    1.889
+   ],
+   "band_y": [
+    0.0,
+    3.12
+   ],
+   "normal_axis": "z",
+   "normal_centre": 1.889,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "module": "Wall_UnevenBrick_Door_Round",
+   "node": 102,
+   "name": "Wall_UnevenBrick_Door_Round.014",
+   "hole_frac": 0.186,
+   "cover_self": 0.5018,
+   "centre": [
+    1.075,
+    1.568,
+    6.913
+   ],
+   "band_y": [
+    0.01,
+    3.13
+   ],
+   "normal_axis": "z",
+   "normal_centre": 6.913,
+   "size_inplane": [
+    2.0,
+    3.123
+   ],
+   "axes_inplane": "xy",
+   "by_design_open": true,
+   "bay_errors": []
+  }
+ ]
+}

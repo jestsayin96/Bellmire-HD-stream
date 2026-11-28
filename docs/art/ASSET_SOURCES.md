@@ -1045,3 +1045,51 @@ dropped, their channel means measured and baked to constants), JPEG q90 at
 
 Full write-up, the per-file table, the gates and the faults still visible:
 `docs/art/TOWN_BUILDING_TEXTURES.md`. Sheet: `renders/art/town/_texfix_sheet.png`.
+
+---
+
+## The Hall tier ladder - `town_hall_t1/t2/t3.glb` (28 Nov 2026, ~02:3x-03:0x CT)
+
+Built by `tools/art/hallgen.py` for the plan's ART row ("BUILD THE HALL TIER
+LADDER YOU JUST DESIGNED"). Three tiers of the `hall` landmark, mesh names
+matched to content's `town_buildings.landmarks.hall` so the art and the text
+agree by construction.
+
+| asset | author | licence | licence file | what was taken |
+|---|---|---|---|---|
+| Medieval Village MegaKit [Standard] | Quaternius | **CC0 1.0 Universal** | `_packs\Medieval_Village_MegaKit\Medieval Village MegaKit[Standard]\License_Standard.txt` (read off disk 24 Nov, entry ~line 703) | 13 modules, used **unmodified** and placed on the kit's own 2 m grid: `Wall_Plaster_{Straight, Door_Flat, WoodGrid, Window_Wide_Round}`, `Wall_UnevenBrick_{Straight, Door_Round, Window_Wide_Round}`, `Corner_Exterior_Wood`, `Corner_ExteriorWide_Brick`, `Roof_RoundTiles_6x8`, `Stairs_Exterior_Straight`, `Prop_Chimney`, `Floor_Brick`, `Prop_MetalFence_Ornament` |
+
+**ORIGINAL, PROCEDURALLY GENERATED HERE, NO PACK SOURCE:** the tier-1 **thatch
+roof** (and its sagging ridge, which is the tier's wear), the **gable boards**
+on tiers 1 and 2, the **bench**, the **lamp** and the **banners**. All are
+bmesh boxes authored in `hallgen.py` and are therefore original work.
+
+**WHY THE THATCH IS AUTHORED AND NOT SOURCED - CHECKED, ALL 49 PACKS.** Every
+extracted pack directory under `_packs\` was walked for
+`thatch|straw|reed|hay`: the only hits are `hay-bale.glb` and
+`hay-bale-bundled.glb` in `kenney_graveyard-kit_5.0`, and none of the
+MegaKit's nine materials is a thatch. **No thatch roof exists on disk to
+derive from.** This matters beyond licence: the kit ships exactly ONE roof,
+`MI_RoundTiles`, and all twelve existing town buildings now wear it, so
+without an authored thatch a tier-1 Bellmire and a tier-12 Bellmire cannot
+have different roofs - and the roof is the single biggest read at stream
+distance.
+
+**TIER 3 IS `lm_hall.glb` RE-CENTRED, NOT REBUILT.** It was already a stone
+hall with a tower. Its own bounds centre is **x = +1.9246**, so reusing it
+as-is would have made the hall jump 1.92 m sideways on upgrade;
+`town_hall_t3.glb` is a re-centred copy under a new name and
+`assets/buildings/lm_hall.glb` is left untouched, so anything already
+referencing it keeps working.
+
+**Deliberate, reversible trade:** base colour only (normal dropped, ORM
+channel means measured and baked to constants), **JPEG q82 at 1024**, and
+image datablocks **de-duplicated by base name** before export - each module is
+a separate `.gltf` import, so eight modules sharing `T_Plaster` produced eight
+copies and embedded all of them. Tier 2 was **16.61 MB** before that and is
+**1.41 MB** after. Pass `--px 2048` to reverse it.
+
+Reproducible from `tools/art/hallgen.py` alone. Measurements in
+`renders/art/town/_hall_measure.json`, gates in
+`renders/art/town/hall/_report.json`, sheet at
+`renders/art/town/hall/_tiers_side_by_side.png`.

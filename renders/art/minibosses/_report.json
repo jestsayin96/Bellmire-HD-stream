@@ -24,9 +24,9 @@
    "gd_sha256_8": "bc3a603f",
    "gd_lid_line": "lid.position = Vector3(0, 10.0, 0)",
    "branch": "art",
-   "head": "b1637cb64f9e5ee89d648bc271075dab9ef1f010",
+   "head": "e18a5f812fcd8b26aef9e3e01706b182b397aab3",
    "ref": "origin/main",
-   "ref_commit": "4e6eee97d19b96163e932e907923b61b488a45f5",
+   "ref_commit": "b87cb3a0d1267b4b5cea8f2fb2249a60ffd71279",
    "ref_gd_sha256_8": "bc3a603f",
    "verified": true,
    "matches_ref": true,
@@ -315,40 +315,26 @@
    "fits": true
   },
   "porter": {
-   "title": "The Porter",
+   "title": "Drudgewall",
    "theme": "keep",
    "idea": "IT BARS THE WAY - it drops a leaf across the door: no retreat, no help",
    "wear": 0.45,
    "feed_line": "A bar has dropped behind you.",
+   "pack_used": null,
    "parts": 4,
    "engine": "BLENDER_EEVEE",
-   "faces": 1094,
+   "faces": 1520,
    "size": [
     3.52,
-    1.69,
+    1.73,
     2.3
    ],
    "footprint_span": 3.52,
-   "corridor": "CORRIDOR-SAFE",
-   "glb": true,
-   "glb_msg": "",
-   "cam": {
-    "radius": 2.267138468910848,
-    "ortho": 2.6596944332122803,
-    "clip": [
-     8.12244987487793,
-     22.35848617553711
-    ]
-   },
-   "views": [
-    "front.png",
-    "three_quarter.png",
-    "side.png"
-   ],
    "height_m": 2.3,
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
-   "corridor_margin_m": 7.48,
+   "corridor": "CORRIDOR-SAFE",
+   "corridor_margin_m": 7.476,
    "lid": "UNDER-LID",
    "lid_clear_m": 7.2,
    "read_from": {
@@ -358,7 +344,22 @@
     "lid_y_m": "scripts\\floorgen.gd:1383",
     "lid_thick_m": "scripts\\floorgen.gd:1378"
    },
-   "fits": true
+   "fits": true,
+   "glb": true,
+   "glb_msg": "",
+   "cam": {
+    "radius": 2.2752551386366178,
+    "ortho": 2.666125774383545,
+    "clip": [
+     8.150857925415039,
+     22.40718650817871
+    ]
+   },
+   "views": [
+    "front.png",
+    "three_quarter.png",
+    "side.png"
+   ]
   },
   "tallyman": {
    "title": "The Tallyman",
@@ -612,7 +613,7 @@
    "corridor_clear_m": 11.0,
    "lid_underside_m": 9.5,
    "corridor": "CORRIDOR-SAFE",
-   "corridor_margin_m": 8.278,
+   "corridor_margin_m": 8.28,
    "lid": "UNDER-LID",
    "lid_clear_m": 6.8,
    "read_from": {
@@ -3827,7 +3828,7 @@
  },
  "errors": [],
  "floorgeom_stale": false,
- "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs 4e6eee97d19b96163e932e907923b61b488a45f5 sha bc3a603f",
+ "floorgeom_stamp": "floorgeom AGREES WITH origin/main: tree C:\\hd adventure\\bellmire-art (branch art) scripts/floorgen.gd sha bc3a603f vs b87cb3a0d1267b4b5cea8f2fb2249a60ffd71279 sha bc3a603f",
  "blank_check": {
   "files": 210,
   "failures": []

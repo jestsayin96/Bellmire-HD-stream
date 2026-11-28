@@ -1,0 +1,74 @@
+{
+ "lm_barracks.glb": [
+  6,
+  6
+ ],
+ "lm_chapel.glb": [
+  7,
+  6
+ ],
+ "lm_granary.glb": [
+  0,
+  0
+ ],
+ "lm_hall.glb": [
+  14,
+  12
+ ],
+ "lm_sawmill.glb": [
+  0,
+  0
+ ],
+ "lm_watermill.glb": [
+  1,
+  1
+ ],
+ "lm_windmill.glb": [
+  0,
+  0
+ ],
+ "lm_workshop.glb": [
+  5,
+  5
+ ],
+ "mk_house_a.glb": [
+  4,
+  4
+ ],
+ "mk_house_b.glb": [
+  6,
+  6
+ ],
+ "mk_house_c.glb": [
+  5,
+  5
+ ],
+ "mk_house_d.glb": [
+  3,
+  3
+ ],
+ "town_hall_t1.glb": [
+  1,
+  1
+ ],
+ "town_hall_t2.glb": [
+  0,
+  0
+ ],
+ "town_hall_t3.glb": [
+  14,
+  12
+ ],
+ "town_well_t1.glb": [
+  0,
+  0
+ ],
+ "town_well_t2.glb": [
+  0,
+  0
+ ],
+ "town_well_t3.glb": [
+  0,
+  0
+ ]
+}

@@ -1,0 +1,547 @@
+[
+ {
+  "file": "town_hall_t1.glb",
+  "target": "Wall_Plaster_WoodGrid",
+  "depth_m": 1.0,
+  "bays": [
+   {
+    "node": 19,
+    "name": "Wall_Plaster_WoodGrid_inst",
+    "band_y": [
+     0.01,
+     3.13
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.6847,
+    "hole_frac": 0.3153,
+    "tris_self": 248,
+    "tris_plane": 329,
+    "errors": []
+   }
+  ],
+  "errors": []
+ },
+ {
+  "file": "town_hall_t2.glb",
+  "target": "Wall_Plaster_WoodGrid",
+  "depth_m": 1.0,
+  "bays": [],
+  "errors": [
+   "RED ON EMPTY: zero instances of 'Wall_Plaster_WoodGrid' in town_hall_t2.glb - a sweep over no bays reads clean and means nothing"
+  ]
+ },
+ {
+  "file": "town_hall_t3.glb",
+  "target": "Wall_Plaster_WoodGrid",
+  "depth_m": 1.0,
+  "bays": [
+   {
+    "node": 88,
+    "name": "Wall_Plaster_WoodGrid.054",
+    "band_y": [
+     3.13,
+     6.25
+    ],
+    "cover_self": 0.7334,
+    "cover_plane": 0.7334,
+    "hole_frac": 0.2666,
+    "tris_self": 248,
+    "tris_plane": 350,
+    "errors": []
+   },
+   {
+    "node": 89,
+    "name": "Wall_Plaster_WoodGrid.055",
+    "band_y": [
+     3.13,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.703,
+    "hole_frac": 0.297,
+    "tris_self": 248,
+    "tris_plane": 396,
+    "errors": []
+   },
+   {
+    "node": 90,
+    "name": "Wall_Plaster_WoodGrid.056",
+    "band_y": [
+     3.13,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.6847,
+    "hole_frac": 0.3153,
+    "tris_self": 248,
+    "tris_plane": 360,
+    "errors": []
+   },
+   {
+    "node": 91,
+    "name": "Wall_Plaster_WoodGrid.057",
+    "band_y": [
+     3.13,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 1.0,
+    "hole_frac": 0.0,
+    "tris_self": 248,
+    "tris_plane": 3558,
+    "errors": []
+   },
+   {
+    "node": 92,
+    "name": "Wall_Plaster_WoodGrid.058",
+    "band_y": [
+     3.13,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7072,
+    "hole_frac": 0.2928,
+    "tris_self": 248,
+    "tris_plane": 374,
+    "errors": []
+   },
+   {
+    "node": 93,
+    "name": "Wall_Plaster_WoodGrid.059",
+    "band_y": [
+     3.13,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.703,
+    "hole_frac": 0.297,
+    "tris_self": 248,
+    "tris_plane": 352,
+    "errors": []
+   },
+   {
+    "node": 94,
+    "name": "Wall_Plaster_WoodGrid.060",
+    "band_y": [
+     3.13,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.6847,
+    "hole_frac": 0.3153,
+    "tris_self": 248,
+    "tris_plane": 325,
+    "errors": []
+   },
+   {
+    "node": 95,
+    "name": "Wall_Plaster_WoodGrid.061",
+    "band_y": [
+     3.13,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7114,
+    "hole_frac": 0.2886,
+    "tris_self": 248,
+    "tris_plane": 475,
+    "errors": []
+   },
+   {
+    "node": 96,
+    "name": "Wall_Plaster_WoodGrid.062",
+    "band_y": [
+     6.25,
+     9.38
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7097,
+    "hole_frac": 0.2903,
+    "tris_self": 248,
+    "tris_plane": 411,
+    "errors": []
+   },
+   {
+    "node": 97,
+    "name": "Wall_Plaster_WoodGrid.063",
+    "band_y": [
+     6.25,
+     9.38
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.6847,
+    "hole_frac": 0.3153,
+    "tris_self": 248,
+    "tris_plane": 335,
+    "errors": []
+   },
+   {
+    "node": 98,
+    "name": "Wall_Plaster_WoodGrid.064",
+    "band_y": [
+     6.25,
+     9.38
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7097,
+    "hole_frac": 0.2903,
+    "tris_self": 248,
+    "tris_plane": 416,
+    "errors": []
+   },
+   {
+    "node": 99,
+    "name": "Wall_Plaster_WoodGrid.065",
+    "band_y": [
+     6.25,
+     9.38
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 1.0,
+    "hole_frac": 0.0,
+    "tris_self": 248,
+    "tris_plane": 3568,
+    "errors": []
+   },
+   {
+    "node": 100,
+    "name": "Wall_Plaster_WoodGrid.066",
+    "band_y": [
+     6.25,
+     9.38
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7843,
+    "hole_frac": 0.2157,
+    "tris_self": 248,
+    "tris_plane": 457,
+    "errors": []
+   },
+   {
+    "node": 101,
+    "name": "Wall_Plaster_WoodGrid.067",
+    "band_y": [
+     6.25,
+     9.38
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7665,
+    "hole_frac": 0.2335,
+    "tris_self": 248,
+    "tris_plane": 1712,
+    "errors": []
+   }
+  ],
+  "errors": []
+ },
+ {
+  "file": "lm_hall.glb",
+  "target": "Wall_Plaster_WoodGrid",
+  "depth_m": 1.0,
+  "bays": [
+   {
+    "node": 69,
+    "name": "Wall_Plaster_WoodGrid.054",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.7334,
+    "cover_plane": 0.7334,
+    "hole_frac": 0.2666,
+    "tris_self": 248,
+    "tris_plane": 350,
+    "errors": []
+   },
+   {
+    "node": 70,
+    "name": "Wall_Plaster_WoodGrid.055",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.703,
+    "hole_frac": 0.297,
+    "tris_self": 248,
+    "tris_plane": 396,
+    "errors": []
+   },
+   {
+    "node": 71,
+    "name": "Wall_Plaster_WoodGrid.056",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.6847,
+    "hole_frac": 0.3153,
+    "tris_self": 248,
+    "tris_plane": 360,
+    "errors": []
+   },
+   {
+    "node": 72,
+    "name": "Wall_Plaster_WoodGrid.057",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 1.0,
+    "hole_frac": 0.0,
+    "tris_self": 248,
+    "tris_plane": 3558,
+    "errors": []
+   },
+   {
+    "node": 73,
+    "name": "Wall_Plaster_WoodGrid.058",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7072,
+    "hole_frac": 0.2928,
+    "tris_self": 248,
+    "tris_plane": 374,
+    "errors": []
+   },
+   {
+    "node": 74,
+    "name": "Wall_Plaster_WoodGrid.059",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.703,
+    "hole_frac": 0.297,
+    "tris_self": 248,
+    "tris_plane": 352,
+    "errors": []
+   },
+   {
+    "node": 75,
+    "name": "Wall_Plaster_WoodGrid.060",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.6847,
+    "hole_frac": 0.3153,
+    "tris_self": 248,
+    "tris_plane": 325,
+    "errors": []
+   },
+   {
+    "node": 76,
+    "name": "Wall_Plaster_WoodGrid.061",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7114,
+    "hole_frac": 0.2886,
+    "tris_self": 248,
+    "tris_plane": 475,
+    "errors": []
+   },
+   {
+    "node": 77,
+    "name": "Wall_Plaster_WoodGrid.062",
+    "band_y": [
+     6.25,
+     9.37
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7097,
+    "hole_frac": 0.2903,
+    "tris_self": 248,
+    "tris_plane": 411,
+    "errors": []
+   },
+   {
+    "node": 78,
+    "name": "Wall_Plaster_WoodGrid.063",
+    "band_y": [
+     6.25,
+     9.37
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.6847,
+    "hole_frac": 0.3153,
+    "tris_self": 248,
+    "tris_plane": 335,
+    "errors": []
+   },
+   {
+    "node": 79,
+    "name": "Wall_Plaster_WoodGrid.064",
+    "band_y": [
+     6.25,
+     9.37
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7097,
+    "hole_frac": 0.2903,
+    "tris_self": 248,
+    "tris_plane": 416,
+    "errors": []
+   },
+   {
+    "node": 80,
+    "name": "Wall_Plaster_WoodGrid.065",
+    "band_y": [
+     6.25,
+     9.37
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 1.0,
+    "hole_frac": 0.0,
+    "tris_self": 248,
+    "tris_plane": 3568,
+    "errors": []
+   },
+   {
+    "node": 81,
+    "name": "Wall_Plaster_WoodGrid.066",
+    "band_y": [
+     6.25,
+     9.37
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7843,
+    "hole_frac": 0.2157,
+    "tris_self": 248,
+    "tris_plane": 457,
+    "errors": []
+   },
+   {
+    "node": 82,
+    "name": "Wall_Plaster_WoodGrid.067",
+    "band_y": [
+     6.25,
+     9.37
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7665,
+    "hole_frac": 0.2335,
+    "tris_self": 248,
+    "tris_plane": 1712,
+    "errors": []
+   }
+  ],
+  "errors": []
+ },
+ {
+  "file": "lm_chapel.glb",
+  "target": "Wall_Plaster_WoodGrid",
+  "depth_m": 1.0,
+  "bays": [
+   {
+    "node": 29,
+    "name": "Wall_Plaster_WoodGrid.054",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7107,
+    "hole_frac": 0.2893,
+    "tris_self": 248,
+    "tris_plane": 504,
+    "errors": []
+   },
+   {
+    "node": 30,
+    "name": "Wall_Plaster_WoodGrid.055",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.7334,
+    "cover_plane": 1.0,
+    "hole_frac": 0.0,
+    "tris_self": 248,
+    "tris_plane": 1982,
+    "errors": []
+   },
+   {
+    "node": 31,
+    "name": "Wall_Plaster_WoodGrid.056",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.6847,
+    "hole_frac": 0.3153,
+    "tris_self": 248,
+    "tris_plane": 336,
+    "errors": []
+   },
+   {
+    "node": 32,
+    "name": "Wall_Plaster_WoodGrid.057",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7861,
+    "hole_frac": 0.2139,
+    "tris_self": 248,
+    "tris_plane": 575,
+    "errors": []
+   },
+   {
+    "node": 33,
+    "name": "Wall_Plaster_WoodGrid.058",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7648,
+    "hole_frac": 0.2352,
+    "tris_self": 248,
+    "tris_plane": 410,
+    "errors": []
+   },
+   {
+    "node": 34,
+    "name": "Wall_Plaster_WoodGrid.059",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7794,
+    "hole_frac": 0.2206,
+    "tris_self": 248,
+    "tris_plane": 425,
+    "errors": []
+   },
+   {
+    "node": 35,
+    "name": "Wall_Plaster_WoodGrid.060",
+    "band_y": [
+     3.12,
+     6.25
+    ],
+    "cover_self": 0.6847,
+    "cover_plane": 0.7648,
+    "hole_frac": 0.2352,
+    "tris_self": 248,
+    "tris_plane": 451,
+    "errors": []
+   }
+  ],
+  "errors": []
+ }
+]

@@ -1,0 +1,3924 @@
+{
+ "tool": "_glbprobe.py",
+ "cannot_see": "no render: blind to lattice-vs-wall, gable holes, colour, readability",
+ "files": [
+  {
+   "file": "town_hall_t1.glb",
+   "bytes": 712700,
+   "errors": [],
+   "warnings": [],
+   "n_nodes": 20,
+   "n_meshes": 10,
+   "n_materials": 13,
+   "bounds_lo": [
+    -2.7396,
+    0.0,
+    -3.13
+   ],
+   "bounds_hi": [
+    2.7396,
+    5.4595,
+    3.76
+   ],
+   "dims_m": [
+    5.4791,
+    5.4595,
+    6.89
+   ],
+   "centre": [
+    0.0,
+    2.7297,
+    0.315
+   ],
+   "bounds_note": "AABB of each primitive's own AABB corners under its world matrix - exact for axis-aligned placement, CONSERVATIVE (never smaller than truth) under rotation.",
+   "tris": 2688,
+   "n_mesh_nodes": 20,
+   "node_census": {
+    "Wall_Plaster_Straight_inst": 8,
+    "Corner_Exterior_Wood_inst": 4,
+    "bench_leg": 2,
+    "gable": 2,
+    "Wall_Plaster_Door_Flat_inst": 1,
+    "Wall_Plaster_WoodGrid_inst": 1,
+    "bench_seat": 1,
+    "hall_t1_thatch": 1
+   },
+   "per_node": [
+    {
+     "node": "hall_t1_thatch",
+     "tris": 1560,
+     "lo": [
+      -2.7396,
+      2.6474,
+      -3.0454
+     ],
+     "hi": [
+      2.7396,
+      5.4595,
+      3.0503
+     ]
+    },
+    {
+     "node": "Wall_Plaster_WoodGrid_inst",
+     "tris": 248,
+     "lo": [
+      -0.0056,
+      0.01,
+      -3.0924
+     ],
+     "hi": [
+      1.9944,
+      3.1327,
+      -2.686
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Door_Flat_inst",
+     "tris": 92,
+     "lo": [
+      -2.0056,
+      0.01,
+      2.686
+     ],
+     "hi": [
+      -0.0056,
+      3.1327,
+      3.0924
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst",
+     "tris": 86,
+     "lo": [
+      -2.0056,
+      0.0079,
+      -3.0924
+     ],
+     "hi": [
+      -0.0056,
+      3.1327,
+      -2.686
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.001",
+     "tris": 86,
+     "lo": [
+      -0.0056,
+      0.0079,
+      2.686
+     ],
+     "hi": [
+      1.9944,
+      3.1327,
+      3.0924
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.002",
+     "tris": 86,
+     "lo": [
+      -2.3196,
+      0.0079,
+      1.0
+     ],
+     "hi": [
+      -1.9132,
+      3.1327,
+      3.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.003",
+     "tris": 86,
+     "lo": [
+      1.902,
+      0.0079,
+      1.0
+     ],
+     "hi": [
+      2.3084,
+      3.1327,
+      3.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.004",
+     "tris": 86,
+     "lo": [
+      -2.3196,
+      0.0079,
+      -1.0
+     ],
+     "hi": [
+      -1.9132,
+      3.1327,
+      1.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.005",
+     "tris": 86,
+     "lo": [
+      1.902,
+      0.0079,
+      -1.0
+     ],
+     "hi": [
+      2.3084,
+      3.1327,
+      1.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.006",
+     "tris": 86,
+     "lo": [
+      -2.3196,
+      0.0079,
+      -3.0
+     ],
+     "hi": [
+      -1.9132,
+      3.1327,
+      -1.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.007",
+     "tris": 86,
+     "lo": [
+      1.902,
+      0.0079,
+      -3.0
+     ],
+     "hi": [
+      2.3084,
+      3.1327,
+      -1.0
+     ]
+    },
+    {
+     "node": "bench_leg",
+     "tris": 12,
+     "lo": [
+      0.5344,
+      0.0,
+      3.36
+     ],
+     "hi": [
+      0.8544,
+      0.42,
+      3.74
+     ]
+    },
+    {
+     "node": "bench_leg.001",
+     "tris": 12,
+     "lo": [
+      1.9344,
+      0.0,
+      3.36
+     ],
+     "hi": [
+      2.2544,
+      0.42,
+      3.74
+     ]
+    },
+    {
+     "node": "bench_seat",
+     "tris": 12,
+     "lo": [
+      0.3944,
+      0.385,
+      3.34
+     ],
+     "hi": [
+      2.3944,
+      0.515,
+      3.76
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Wood_inst",
+     "tris": 12,
+     "lo": [
+      -2.1107,
+      0.01,
+      2.8802
+     ],
+     "hi": [
+      -1.9005,
+      3.01,
+      3.1198
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Wood_inst.001",
+     "tris": 12,
+     "lo": [
+      -2.1107,
+      0.01,
+      -3.1198
+     ],
+     "hi": [
+      -1.9005,
+      3.01,
+      -2.8802
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Wood_inst.002",
+     "tris": 12,
+     "lo": [
+      1.8893,
+      0.01,
+      2.8802
+     ],
+     "hi": [
+      2.0995,
+      3.01,
+      3.1198
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Wood_inst.003",
+     "tris": 12,
+     "lo": [
+      1.8893,
+      0.01,
+      -3.1198
+     ],
+     "hi": [
+      2.0995,
+      3.01,
+      -2.8802
+     ]
+    },
+    {
+     "node": "gable",
+     "tris": 8,
+     "lo": [
+      -2.4656,
+      2.9927,
+      2.87
+     ],
+     "hi": [
+      2.4544,
+      5.1083,
+      3.13
+     ]
+    },
+    {
+     "node": "gable.001",
+     "tris": 8,
+     "lo": [
+      -2.4656,
+      2.9927,
+      -3.13
+     ],
+     "hi": [
+      2.4544,
+      5.1083,
+      -2.87
+     ]
+    }
+   ],
+   "images": [
+    {
+     "i": 0,
+     "name": "T_WoodTrim_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 247567,
+     "sha1": "94450219c623e1e3bfd4d9bcc9993a6af6e81257"
+    },
+    {
+     "i": 1,
+     "name": "T_Plaster_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 153500,
+     "sha1": "9ac6bebe6a8017e4dd65434a0baf0685f1d15f96"
+    },
+    {
+     "i": 2,
+     "name": "T_RockTrim_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 177408,
+     "sha1": "749ab431c0b690e662dcd838b85b466eefca6641"
+    }
+   ],
+   "n_images": 3,
+   "n_images_embedded": 3,
+   "n_images_unique_bytes": 3,
+   "materials": [
+    {
+     "i": 0,
+     "name": "bench_stone",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.3,
+      0.29,
+      0.26,
+      1
+     ]
+    },
+    {
+     "i": 1,
+     "name": "bench_wood",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.33,
+      0.29,
+      0.22,
+      1
+     ]
+    },
+    {
+     "i": 2,
+     "name": "MI_WoodTrim.003",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 3,
+     "name": "gable_board",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.44,
+      0.36,
+      0.26,
+      1
+     ]
+    },
+    {
+     "i": 4,
+     "name": "thatch",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.47,
+      0.36,
+      0.15,
+      1
+     ]
+    },
+    {
+     "i": 5,
+     "name": "thatch2",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.36,
+      0.27,
+      0.11,
+      1
+     ]
+    },
+    {
+     "i": 6,
+     "name": "MI_WoodTrim",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 7,
+     "name": "MI_Plaster",
+     "base_image": "T_Plaster_BaseColor",
+     "base_sha1": "9ac6bebe6a80",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 8,
+     "name": "MI_RockTrim",
+     "base_image": "T_RockTrim_BaseColor",
+     "base_sha1": "749ab431c0b6",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 9,
+     "name": "MI_WoodTrim.001",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 10,
+     "name": "MI_Plaster.001",
+     "base_image": "T_Plaster_BaseColor",
+     "base_sha1": "9ac6bebe6a80",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 11,
+     "name": "MI_WoodTrim.002",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 12,
+     "name": "MI_Plaster.002",
+     "base_image": "T_Plaster_BaseColor",
+     "base_sha1": "9ac6bebe6a80",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    }
+   ]
+  },
+  {
+   "file": "town_hall_t2.glb",
+   "bytes": 1475840,
+   "errors": [],
+   "warnings": [],
+   "n_nodes": 44,
+   "n_meshes": 14,
+   "n_materials": 24,
+   "bounds_lo": [
+    -4.1249,
+    0.0,
+    -4.925
+   ],
+   "bounds_hi": [
+    4.1249,
+    11.3391,
+    6.0507
+   ],
+   "dims_m": [
+    8.2498,
+    11.3391,
+    10.9757
+   ],
+   "centre": [
+    0.0,
+    5.6696,
+    0.5628
+   ],
+   "bounds_note": "AABB of each primitive's own AABB corners under its world matrix - exact for axis-aligned placement, CONSERVATIVE (never smaller than truth) under rotation.",
+   "tris": 30120,
+   "n_mesh_nodes": 44,
+   "node_census": {
+    "Wall_UnevenBrick_Straight_inst": 9,
+    "Corner_ExteriorWide_Brick_inst": 8,
+    "Wall_Plaster_Straight_inst": 8,
+    "Wall_Plaster_Window_Wide_Round_inst": 6,
+    "Wall_UnevenBrick_Window_Wide_Round_inst": 4,
+    "gable": 2,
+    "Prop_Chimney_inst": 1,
+    "Roof_RoundTiles_6x8_inst": 1,
+    "Stairs_Exterior_Straight_inst": 1,
+    "Wall_UnevenBrick_Door_Round_inst": 1,
+    "lamp_box": 1,
+    "lamp_flame": 1,
+    "lamp_post": 1
+   },
+   "per_node": [
+    {
+     "node": "Roof_RoundTiles_6x8_inst",
+     "tris": 3796,
+     "lo": [
+      -4.1249,
+      5.667,
+      -4.8288
+     ],
+     "hi": [
+      4.1249,
+      11.3391,
+      4.854
+     ]
+    },
+    {
+     "node": "Corner_ExteriorWide_Brick_inst",
+     "tris": 2882,
+     "lo": [
+      -3.4898,
+      0.1852,
+      3.7778
+     ],
+     "hi": [
+      -2.7775,
+      3.228,
+      4.5342
+     ]
+    },
+    {
+     "node": "Corner_ExteriorWide_Brick_inst.001",
+     "tris": 2882,
+     "lo": [
+      -3.4898,
+      0.1852,
+      -4.2222
+     ],
+     "hi": [
+      -2.7775,
+      3.228,
+      -3.4658
+     ]
+    },
+    {
+     "node": "Corner_ExteriorWide_Brick_inst.002",
+     "tris": 2882,
+     "lo": [
+      2.5102,
+      0.1852,
+      3.7778
+     ],
+     "hi": [
+      3.2225,
+      3.228,
+      4.5342
+     ]
+    },
+    {
+     "node": "Corner_ExteriorWide_Brick_inst.003",
+     "tris": 2882,
+     "lo": [
+      2.5102,
+      0.1852,
+      -4.2222
+     ],
+     "hi": [
+      3.2225,
+      3.228,
+      -3.4658
+     ]
+    },
+    {
+     "node": "Corner_ExteriorWide_Brick_inst.004",
+     "tris": 2882,
+     "lo": [
+      -3.4898,
+      3.3079,
+      3.7778
+     ],
+     "hi": [
+      -2.7775,
+      6.3507,
+      4.5342
+     ]
+    },
+    {
+     "node": "Corner_ExteriorWide_Brick_inst.005",
+     "tris": 2882,
+     "lo": [
+      -3.4898,
+      3.3079,
+      -4.2222
+     ],
+     "hi": [
+      -2.7775,
+      6.3507,
+      -3.4658
+     ]
+    },
+    {
+     "node": "Corner_ExteriorWide_Brick_inst.006",
+     "tris": 2882,
+     "lo": [
+      2.5102,
+      3.3079,
+      3.7778
+     ],
+     "hi": [
+      3.2225,
+      6.3507,
+      4.5342
+     ]
+    },
+    {
+     "node": "Corner_ExteriorWide_Brick_inst.007",
+     "tris": 2882,
+     "lo": [
+      2.5102,
+      3.3079,
+      -4.2222
+     ],
+     "hi": [
+      3.2225,
+      6.3507,
+      -3.4658
+     ]
+    },
+    {
+     "node": "Prop_Chimney_inst",
+     "tris": 618,
+     "lo": [
+      1.5,
+      6.4491,
+      -3.5
+     ],
+     "hi": [
+      2.4458,
+      9.627,
+      -2.5
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Door_Round_inst",
+     "tris": 136,
+     "lo": [
+      -1.0,
+      0.2037,
+      3.686
+     ],
+     "hi": [
+      1.0,
+      3.3264,
+      4.0924
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Window_Wide_Round_inst",
+     "tris": 124,
+     "lo": [
+      -1.0,
+      3.3264,
+      3.686
+     ],
+     "hi": [
+      1.0,
+      6.4491,
+      4.0924
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Window_Wide_Round_inst.001",
+     "tris": 124,
+     "lo": [
+      -1.0,
+      3.3264,
+      -4.0924
+     ],
+     "hi": [
+      1.0,
+      6.4491,
+      -3.686
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Window_Wide_Round_inst.002",
+     "tris": 124,
+     "lo": [
+      -3.314,
+      3.3264,
+      -0.0
+     ],
+     "hi": [
+      -2.9076,
+      6.4491,
+      2.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Window_Wide_Round_inst.003",
+     "tris": 124,
+     "lo": [
+      2.9076,
+      3.3264,
+      -0.0
+     ],
+     "hi": [
+      3.314,
+      6.4491,
+      2.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Window_Wide_Round_inst.004",
+     "tris": 124,
+     "lo": [
+      -3.314,
+      3.3264,
+      -2.0
+     ],
+     "hi": [
+      -2.9076,
+      6.4491,
+      0.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Window_Wide_Round_inst.005",
+     "tris": 124,
+     "lo": [
+      2.9076,
+      3.3264,
+      -2.0
+     ],
+     "hi": [
+      3.314,
+      6.4491,
+      -0.0
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Window_Wide_Round_inst",
+     "tris": 116,
+     "lo": [
+      -3.314,
+      0.2037,
+      -0.0
+     ],
+     "hi": [
+      -2.9076,
+      3.3264,
+      2.0
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Window_Wide_Round_inst.001",
+     "tris": 116,
+     "lo": [
+      2.9076,
+      0.2037,
+      -0.0
+     ],
+     "hi": [
+      3.314,
+      3.3264,
+      2.0
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Window_Wide_Round_inst.002",
+     "tris": 116,
+     "lo": [
+      -3.314,
+      0.2037,
+      -2.0
+     ],
+     "hi": [
+      -2.9076,
+      3.3264,
+      0.0
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Window_Wide_Round_inst.003",
+     "tris": 116,
+     "lo": [
+      2.9076,
+      0.2037,
+      -2.0
+     ],
+     "hi": [
+      3.314,
+      3.3264,
+      -0.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst",
+     "tris": 86,
+     "lo": [
+      -3.0,
+      3.3243,
+      3.686
+     ],
+     "hi": [
+      -1.0,
+      6.4491,
+      4.0924
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.001",
+     "tris": 86,
+     "lo": [
+      -3.0,
+      3.3243,
+      -4.0924
+     ],
+     "hi": [
+      -1.0,
+      6.4491,
+      -3.686
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.002",
+     "tris": 86,
+     "lo": [
+      1.0,
+      3.3243,
+      3.686
+     ],
+     "hi": [
+      3.0,
+      6.4491,
+      4.0924
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.003",
+     "tris": 86,
+     "lo": [
+      1.0,
+      3.3243,
+      -4.0924
+     ],
+     "hi": [
+      3.0,
+      6.4491,
+      -3.686
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.004",
+     "tris": 86,
+     "lo": [
+      -3.314,
+      3.3243,
+      2.0
+     ],
+     "hi": [
+      -2.9076,
+      6.4491,
+      4.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.005",
+     "tris": 86,
+     "lo": [
+      2.9076,
+      3.3243,
+      2.0
+     ],
+     "hi": [
+      3.314,
+      6.4491,
+      4.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.006",
+     "tris": 86,
+     "lo": [
+      -3.314,
+      3.3243,
+      -4.0
+     ],
+     "hi": [
+      -2.9076,
+      6.4491,
+      -2.0
+     ]
+    },
+    {
+     "node": "Wall_Plaster_Straight_inst.007",
+     "tris": 86,
+     "lo": [
+      2.9076,
+      3.3243,
+      -4.0
+     ],
+     "hi": [
+      3.314,
+      6.4491,
+      -2.0
+     ]
+    },
+    {
+     "node": "Stairs_Exterior_Straight_inst",
+     "tris": 62,
+     "lo": [
+      -1.0,
+      0.0,
+      3.9728
+     ],
+     "hi": [
+      1.0,
+      1.2037,
+      6.0507
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Straight_inst",
+     "tris": 56,
+     "lo": [
+      -3.0,
+      0.2037,
+      3.686
+     ],
+     "hi": [
+      -1.0,
+      3.3264,
+      4.0924
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Straight_inst.001",
+     "tris": 56,
+     "lo": [
+      -3.0,
+      0.2037,
+      -4.0924
+     ],
+     "hi": [
+      -1.0,
+      3.3264,
+      -3.686
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Straight_inst.002",
+     "tris": 56,
+     "lo": [
+      -1.0,
+      0.2037,
+      -4.0924
+     ],
+     "hi": [
+      1.0,
+      3.3264,
+      -3.686
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Straight_inst.003",
+     "tris": 56,
+     "lo": [
+      1.0,
+      0.2037,
+      3.686
+     ],
+     "hi": [
+      3.0,
+      3.3264,
+      4.0924
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Straight_inst.004",
+     "tris": 56,
+     "lo": [
+      1.0,
+      0.2037,
+      -4.0924
+     ],
+     "hi": [
+      3.0,
+      3.3264,
+      -3.686
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Straight_inst.005",
+     "tris": 56,
+     "lo": [
+      -3.314,
+      0.2037,
+      2.0
+     ],
+     "hi": [
+      -2.9076,
+      3.3264,
+      4.0
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Straight_inst.006",
+     "tris": 56,
+     "lo": [
+      2.9076,
+      0.2037,
+      2.0
+     ],
+     "hi": [
+      3.314,
+      3.3264,
+      4.0
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Straight_inst.007",
+     "tris": 56,
+     "lo": [
+      -3.314,
+      0.2037,
+      -4.0
+     ],
+     "hi": [
+      -2.9076,
+      3.3264,
+      -2.0
+     ]
+    },
+    {
+     "node": "Wall_UnevenBrick_Straight_inst.008",
+     "tris": 56,
+     "lo": [
+      2.9076,
+      0.2037,
+      -4.0
+     ],
+     "hi": [
+      3.314,
+      3.3264,
+      -2.0
+     ]
+    },
+    {
+     "node": "lamp_box",
+     "tris": 12,
+     "lo": [
+      1.42,
+      1.2337,
+      4.17
+     ],
+     "hi": [
+      1.68,
+      1.5337,
+      4.43
+     ]
+    }
+   ],
+   "images": [
+    {
+     "i": 0,
+     "name": "T_RockTrim_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 177408,
+     "sha1": "749ab431c0b690e662dcd838b85b466eefca6641"
+    },
+    {
+     "i": 1,
+     "name": "T_Brick_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 178614,
+     "sha1": "d0af8379a9afa8dcbc0a938be577f68cb71f85a5"
+    },
+    {
+     "i": 2,
+     "name": "T_WoodTrim_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 247567,
+     "sha1": "94450219c623e1e3bfd4d9bcc9993a6af6e81257"
+    },
+    {
+     "i": 3,
+     "name": "T_RoundTiles_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 165309,
+     "sha1": "c8aa2250813d702ec18d85abba2e01facd542204"
+    },
+    {
+     "i": 4,
+     "name": "T_Plaster_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 153500,
+     "sha1": "9ac6bebe6a8017e4dd65434a0baf0685f1d15f96"
+    },
+    {
+     "i": 5,
+     "name": "T_UnevenBrick_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 191902,
+     "sha1": "fa9bca85a38bcc09e2a5479d1983c819cff24205"
+    }
+   ],
+   "n_images": 6,
+   "n_images_embedded": 6,
+   "n_images_unique_bytes": 6,
+   "materials": [
+    {
+     "i": 0,
+     "name": "MI_RockTrim",
+     "base_image": "T_RockTrim_BaseColor",
+     "base_sha1": "749ab431c0b6",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 1,
+     "name": "gable_board",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.44,
+      0.36,
+      0.26,
+      1
+     ]
+    },
+    {
+     "i": 2,
+     "name": "lamp_iron",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.14,
+      0.14,
+      0.15,
+      1
+     ]
+    },
+    {
+     "i": 3,
+     "name": "lamp_flame",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0,
+      0,
+      0,
+      1
+     ]
+    },
+    {
+     "i": 4,
+     "name": "MI_RockTrim.001",
+     "base_image": "T_RockTrim_BaseColor",
+     "base_sha1": "749ab431c0b6",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 5,
+     "name": "MI_Brick.001",
+     "base_image": "T_Brick_BaseColor",
+     "base_sha1": "d0af8379a9af",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 6,
+     "name": "MI_WoodTrim.005",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 7,
+     "name": "MI_RoundTiles",
+     "base_image": "T_RoundTiles_BaseColor",
+     "base_sha1": "c8aa2250813d",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 8,
+     "name": "MI_RockTrim.002",
+     "base_image": "T_RockTrim_BaseColor",
+     "base_sha1": "749ab431c0b6",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 9,
+     "name": "MI_Brick.002",
+     "base_image": "T_Brick_BaseColor",
+     "base_sha1": "d0af8379a9af",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 10,
+     "name": "MI_WoodTrim.003",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 11,
+     "name": "MI_Plaster.003",
+     "base_image": "T_Plaster_BaseColor",
+     "base_sha1": "9ac6bebe6a80",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 12,
+     "name": "MI_WoodTrim.004",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 13,
+     "name": "MI_Plaster.004",
+     "base_image": "T_Plaster_BaseColor",
+     "base_sha1": "9ac6bebe6a80",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 14,
+     "name": "MI_Brick",
+     "base_image": "T_Brick_BaseColor",
+     "base_sha1": "d0af8379a9af",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 15,
+     "name": "MI_WoodTrim.001",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 16,
+     "name": "MI_Plaster.001",
+     "base_image": "T_Plaster_BaseColor",
+     "base_sha1": "9ac6bebe6a80",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 17,
+     "name": "MI_UnevenBrick.001",
+     "base_image": "T_UnevenBrick_BaseColor",
+     "base_sha1": "fa9bca85a38b",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 18,
+     "name": "MI_WoodTrim",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 19,
+     "name": "MI_Plaster",
+     "base_image": "T_Plaster_BaseColor",
+     "base_sha1": "9ac6bebe6a80",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 20,
+     "name": "MI_UnevenBrick",
+     "base_image": "T_UnevenBrick_BaseColor",
+     "base_sha1": "fa9bca85a38b",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 21,
+     "name": "MI_WoodTrim.002",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 22,
+     "name": "MI_Plaster.002",
+     "base_image": "T_Plaster_BaseColor",
+     "base_sha1": "9ac6bebe6a80",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 23,
+     "name": "MI_UnevenBrick.002",
+     "base_image": "T_UnevenBrick_BaseColor",
+     "base_sha1": "fa9bca85a38b",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    }
+   ]
+  },
+  {
+   "file": "town_hall_t3.glb",
+   "bytes": 2411360,
+   "errors": [],
+   "warnings": [],
+   "n_nodes": 244,
+   "n_meshes": 31,
+   "n_materials": 15,
+   "bounds_lo": [
+    -6.9006,
+    0.0,
+    -7.8529
+   ],
+   "bounds_hi": [
+    6.9006,
+    22.4109,
+    11.931
+   ],
+   "dims_m": [
+    13.8013,
+    22.4109,
+    19.7839
+   ],
+   "centre": [
+    0.0,
+    11.2055,
+    2.039
+   ],
+   "bounds_note": "AABB of each primitive's own AABB corners under its world matrix - exact for axis-aligned placement, CONSERVATIVE (never smaller than truth) under rotation.",
+   "tris": 139090,
+   "n_mesh_nodes": 244,
+   "node_census": {
+    "Wall_UnevenBrick_Straight": 42,
+    "Corner_Exterior_Brick": 24,
+    "Wall_UnevenBrick_Window_Thin_Round": 18,
+    "Window_Thin_Round1": 18,
+    "Wall_Plaster_WoodGrid": 14,
+    "Window_Wide_Round1": 13,
+    "Wall_Plaster_Window_Wide_Round": 12,
+    "WindowShutters_Wide_Round_Open": 12,
+    "Floor_Brick_inst": 10,
+    "WindowShutters_Thin_Round_Open": 10,
+    "Wall_Plaster_Straight": 9,
+    "Wall_Plaster_Window_Wide_Flat": 9,
+    "Window_Wide_Flat1": 9,
+    "Corner_Exterior_Wood": 8,
+    "WindowShutters_Thin_Round_Closed": 8,
+    "WindowShutters_Wide_Flat_Open": 6,
+    "Prop_MetalFence_Ornament_inst": 5,
+    "WindowShutters_Wide_Flat_Closed": 3,
+    "Roof_Front_Brick8": 2,
+    "banner": 2,
+    "banner_bar": 2,
+    "DoorFrame_Round_Brick": 1,
+    "Door_8_Round": 1,
+    "Prop_Chimney": 1,
+    "Roof_RoundTiles_8x14": 1,
+    "Roof_Tower_RoundTiles": 1,
+    "Wall_UnevenBrick_Door_Round": 1,
+    "Wall_UnevenBrick_Window_Wide_Round": 1,
+    "WindowShutters_Wide_Round_Closed": 1
+   },
+   "per_node": [
+    {
+     "node": "Roof_RoundTiles_8x14.001",
+     "tris": 5484,
+     "lo": [
+      -6.9006,
+      8.5961,
+      -7.8529
+     ],
+     "hi": [
+      3.0514,
+      15.3775,
+      7.8529
+     ]
+    },
+    {
+     "node": "Roof_Tower_RoundTiles.001",
+     "tris": 4024,
+     "lo": [
+      1.2501,
+      15.0501,
+      2.3106
+     ],
+     "hi": [
+      6.9006,
+      22.4109,
+      7.7377
+     ]
+    },
+    {
+     "node": "Prop_MetalFence_Ornament_inst",
+     "tris": 3988,
+     "lo": [
+      -4.8779,
+      0.0071,
+      11.7749
+     ],
+     "hi": [
+      -2.9256,
+      2.8595,
+      11.931
+     ]
+    },
+    {
+     "node": "Prop_MetalFence_Ornament_inst.001",
+     "tris": 3988,
+     "lo": [
+      -2.9256,
+      0.0071,
+      11.7749
+     ],
+     "hi": [
+      -0.9733,
+      2.8595,
+      11.931
+     ]
+    },
+    {
+     "node": "Prop_MetalFence_Ornament_inst.002",
+     "tris": 3988,
+     "lo": [
+      -0.9733,
+      0.0071,
+      11.7749
+     ],
+     "hi": [
+      0.979,
+      2.8595,
+      11.931
+     ]
+    },
+    {
+     "node": "Prop_MetalFence_Ornament_inst.003",
+     "tris": 3988,
+     "lo": [
+      0.979,
+      0.0071,
+      11.7749
+     ],
+     "hi": [
+      2.9313,
+      2.8595,
+      11.931
+     ]
+    },
+    {
+     "node": "Prop_MetalFence_Ornament_inst.004",
+     "tris": 3988,
+     "lo": [
+      2.9313,
+      0.0071,
+      11.7749
+     ],
+     "hi": [
+      4.8836,
+      2.8595,
+      11.931
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.050",
+     "tris": 3102,
+     "lo": [
+      -6.2776,
+      0.0,
+      6.8251
+     ],
+     "hi": [
+      -5.7469,
+      3.0156,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.051",
+     "tris": 3102,
+     "lo": [
+      -6.2776,
+      0.0,
+      -7.1749
+     ],
+     "hi": [
+      -5.7469,
+      3.0156,
+      -6.5991
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.052",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      0.0,
+      6.8251
+     ],
+     "hi": [
+      2.2531,
+      3.0156,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.053",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      0.0,
+      -7.1749
+     ],
+     "hi": [
+      2.2531,
+      3.0156,
+      -6.5991
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.054",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      0.0,
+      6.8251
+     ],
+     "hi": [
+      2.2531,
+      3.0156,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.055",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      0.0,
+      2.8251
+     ],
+     "hi": [
+      2.2531,
+      3.0156,
+      3.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.056",
+     "tris": 3102,
+     "lo": [
+      5.7224,
+      0.0,
+      6.8251
+     ],
+     "hi": [
+      6.2531,
+      3.0156,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.057",
+     "tris": 3102,
+     "lo": [
+      5.7224,
+      0.0,
+      2.8251
+     ],
+     "hi": [
+      6.2531,
+      3.0156,
+      3.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.058",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      3.123,
+      6.8251
+     ],
+     "hi": [
+      2.2531,
+      6.1386,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.059",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      3.123,
+      2.8251
+     ],
+     "hi": [
+      2.2531,
+      6.1386,
+      3.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.060",
+     "tris": 3102,
+     "lo": [
+      5.7224,
+      3.123,
+      6.8251
+     ],
+     "hi": [
+      6.2531,
+      6.1386,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.061",
+     "tris": 3102,
+     "lo": [
+      5.7224,
+      3.123,
+      2.8251
+     ],
+     "hi": [
+      6.2531,
+      6.1386,
+      3.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.062",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      6.246,
+      6.8251
+     ],
+     "hi": [
+      2.2531,
+      9.2616,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.063",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      6.246,
+      2.8251
+     ],
+     "hi": [
+      2.2531,
+      9.2616,
+      3.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.064",
+     "tris": 3102,
+     "lo": [
+      5.7224,
+      6.246,
+      6.8251
+     ],
+     "hi": [
+      6.2531,
+      9.2616,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.065",
+     "tris": 3102,
+     "lo": [
+      5.7224,
+      6.246,
+      2.8251
+     ],
+     "hi": [
+      6.2531,
+      9.2616,
+      3.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.066",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      9.369,
+      6.8251
+     ],
+     "hi": [
+      2.2531,
+      12.3846,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.067",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      9.369,
+      2.8251
+     ],
+     "hi": [
+      2.2531,
+      12.3846,
+      3.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.068",
+     "tris": 3102,
+     "lo": [
+      5.7224,
+      9.369,
+      6.8251
+     ],
+     "hi": [
+      6.2531,
+      12.3846,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.069",
+     "tris": 3102,
+     "lo": [
+      5.7224,
+      9.369,
+      2.8251
+     ],
+     "hi": [
+      6.2531,
+      12.3846,
+      3.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.070",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      12.492,
+      6.8251
+     ],
+     "hi": [
+      2.2531,
+      15.5076,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.071",
+     "tris": 3102,
+     "lo": [
+      1.7224,
+      12.492,
+      2.8251
+     ],
+     "hi": [
+      2.2531,
+      15.5076,
+      3.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.072",
+     "tris": 3102,
+     "lo": [
+      5.7224,
+      12.492,
+      6.8251
+     ],
+     "hi": [
+      6.2531,
+      15.5076,
+      7.4009
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.073",
+     "tris": 3102,
+     "lo": [
+      5.7224,
+      12.492,
+      2.8251
+     ],
+     "hi": [
+      6.2531,
+      15.5076,
+      3.4009
+     ]
+    },
+    {
+     "node": "DoorFrame_Round_Brick.014",
+     "tris": 2046,
+     "lo": [
+      0.2713,
+      0.0054,
+      6.7291
+     ],
+     "hi": [
+      1.8744,
+      2.5916,
+      7.2062
+     ]
+    },
+    {
+     "node": "Door_8_Round.007",
+     "tris": 1142,
+     "lo": [
+      1.0122,
+      0.0402,
+      6.9165
+     ],
+     "hi": [
+      2.1638,
+      2.3642,
+      7.1159
+     ]
+    },
+    {
+     "node": "Prop_Chimney.008",
+     "tris": 618,
+     "lo": [
+      -0.1846,
+      9.3761,
+      -2.9958
+     ],
+     "hi": [
+      0.7611,
+      12.554,
+      -1.9958
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.048",
+     "tris": 418,
+     "lo": [
+      -5.3684,
+      1.0231,
+      6.7722
+     ],
+     "hi": [
+      -4.4808,
+      2.6278,
+      7.1166
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.049",
+     "tris": 418,
+     "lo": [
+      -3.3684,
+      1.0231,
+      -7.0682
+     ],
+     "hi": [
+      -2.4808,
+      2.6278,
+      -6.7238
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.050",
+     "tris": 418,
+     "lo": [
+      -6.017,
+      1.0231,
+      3.5804
+     ],
+     "hi": [
+      -5.6726,
+      2.6278,
+      4.468
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.051",
+     "tris": 418,
+     "lo": [
+      1.8233,
+      1.0231,
+      -4.4196
+     ],
+     "hi": [
+      2.1677,
+      2.6278,
+      -3.532
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.052",
+     "tris": 418,
+     "lo": [
+      -6.017,
+      1.0231,
+      -6.4196
+     ],
+     "hi": [
+      -5.6726,
+      2.6278,
+      -5.532
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.053",
+     "tris": 418,
+     "lo": [
+      1.983,
+      1.0231,
+      5.5804
+     ],
+     "hi": [
+      2.3274,
+      2.6278,
+      6.468
+     ]
+    }
+   ],
+   "images": [
+    {
+     "i": 0,
+     "name": "T_RockTrim_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 177408,
+     "sha1": "749ab431c0b690e662dcd838b85b466eefca6641"
+    },
+    {
+     "i": 1,
+     "name": "T_WoodTrim_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 247567,
+     "sha1": "94450219c623e1e3bfd4d9bcc9993a6af6e81257"
+    },
+    {
+     "i": 2,
+     "name": "T_MetalOrnaments_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 112046,
+     "sha1": "b0e5e0129d1baf82b3df68e8017351706326e483"
+    },
+    {
+     "i": 3,
+     "name": "T_Brick_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 178614,
+     "sha1": "d0af8379a9afa8dcbc0a938be577f68cb71f85a5"
+    },
+    {
+     "i": 4,
+     "name": "T_Plaster_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 153500,
+     "sha1": "9ac6bebe6a8017e4dd65434a0baf0685f1d15f96"
+    },
+    {
+     "i": 5,
+     "name": "T_RoundTiles_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 165309,
+     "sha1": "c8aa2250813d702ec18d85abba2e01facd542204"
+    },
+    {
+     "i": 6,
+     "name": "T_UnevenBrick_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 191902,
+     "sha1": "fa9bca85a38bcc09e2a5479d1983c819cff24205"
+    }
+   ],
+   "n_images": 7,
+   "n_images_embedded": 7,
+   "n_images_unique_bytes": 7,
+   "materials": [
+    {
+     "i": 0,
+     "name": "banner_cloth",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.44,
+      0.12,
+      0.11,
+      1
+     ]
+    },
+    {
+     "i": 1,
+     "name": "banner_cloth.001",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.44,
+      0.12,
+      0.11,
+      1
+     ]
+    },
+    {
+     "i": 2,
+     "name": "banner_bar",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.62,
+      0.5,
+      0.2,
+      1
+     ]
+    },
+    {
+     "i": 3,
+     "name": "banner_bar.001",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.62,
+      0.5,
+      0.2,
+      1
+     ]
+    },
+    {
+     "i": 4,
+     "name": "MI_RockTrim",
+     "base_image": "T_RockTrim_BaseColor",
+     "base_sha1": "749ab431c0b6",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 5,
+     "name": "MI_WoodTrim",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 6,
+     "name": "MI_WoodTrim_Wear",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 7,
+     "name": "MI_MetalOrnaments",
+     "base_image": "T_MetalOrnaments_BaseColor",
+     "base_sha1": "b0e5e0129d1b",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 8,
+     "name": "MI_Brick.001",
+     "base_image": "T_Brick_BaseColor",
+     "base_sha1": "d0af8379a9af",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 9,
+     "name": "MI_Brick",
+     "base_image": "T_Brick_BaseColor",
+     "base_sha1": "d0af8379a9af",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 10,
+     "name": "MI_MetalOrnaments.001",
+     "base_image": "T_MetalOrnaments_BaseColor",
+     "base_sha1": "b0e5e0129d1b",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 11,
+     "name": "MI_Plaster",
+     "base_image": "T_Plaster_BaseColor",
+     "base_sha1": "9ac6bebe6a80",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 12,
+     "name": "MI_RoundTiles",
+     "base_image": "T_RoundTiles_BaseColor",
+     "base_sha1": "c8aa2250813d",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 13,
+     "name": "MI_UnevenBrick",
+     "base_image": "T_UnevenBrick_BaseColor",
+     "base_sha1": "fa9bca85a38b",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 14,
+     "name": "MI_WindowGlass",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.8,
+      0.8,
+      0.8,
+      0.0955
+     ]
+    }
+   ]
+  },
+  {
+   "file": "lm_hall.glb",
+   "bytes": 2242344,
+   "errors": [],
+   "warnings": [],
+   "n_nodes": 225,
+   "n_meshes": 25,
+   "n_materials": 9,
+   "bounds_lo": [
+    -4.976,
+    -0.0071,
+    -7.8771
+   ],
+   "bounds_hi": [
+    8.8253,
+    22.4038,
+    7.8288
+   ],
+   "dims_m": [
+    13.8013,
+    22.4109,
+    15.7059
+   ],
+   "centre": [
+    1.9246,
+    11.1984,
+    -0.0242
+   ],
+   "bounds_note": "AABB of each primitive's own AABB corners under its world matrix - exact for axis-aligned placement, CONSERVATIVE (never smaller than truth) under rotation.",
+   "tris": 119062,
+   "n_mesh_nodes": 225,
+   "node_census": {
+    "Wall_UnevenBrick_Straight": 42,
+    "Corner_Exterior_Brick": 24,
+    "Wall_UnevenBrick_Window_Thin_Round": 18,
+    "Window_Thin_Round1": 18,
+    "Wall_Plaster_WoodGrid": 14,
+    "Window_Wide_Round1": 13,
+    "Wall_Plaster_Window_Wide_Round": 12,
+    "WindowShutters_Wide_Round_Open": 12,
+    "WindowShutters_Thin_Round_Open": 10,
+    "Wall_Plaster_Straight": 9,
+    "Wall_Plaster_Window_Wide_Flat": 9,
+    "Window_Wide_Flat1": 9,
+    "Corner_Exterior_Wood": 8,
+    "WindowShutters_Thin_Round_Closed": 8,
+    "WindowShutters_Wide_Flat_Open": 6,
+    "WindowShutters_Wide_Flat_Closed": 3,
+    "Roof_Front_Brick8": 2,
+    "DoorFrame_Round_Brick": 1,
+    "Door_8_Round": 1,
+    "Prop_Chimney": 1,
+    "Roof_RoundTiles_8x14": 1,
+    "Roof_Tower_RoundTiles": 1,
+    "Wall_UnevenBrick_Door_Round": 1,
+    "Wall_UnevenBrick_Window_Wide_Round": 1,
+    "WindowShutters_Wide_Round_Closed": 1
+   },
+   "per_node": [
+    {
+     "node": "Roof_RoundTiles_8x14.001",
+     "tris": 5484,
+     "lo": [
+      -4.976,
+      8.589,
+      -7.8771
+     ],
+     "hi": [
+      4.976,
+      15.3704,
+      7.8288
+     ]
+    },
+    {
+     "node": "Roof_Tower_RoundTiles.001",
+     "tris": 4024,
+     "lo": [
+      3.1747,
+      15.043,
+      2.2865
+     ],
+     "hi": [
+      8.8253,
+      22.4038,
+      7.7135
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.050",
+     "tris": 3102,
+     "lo": [
+      -4.3529,
+      -0.0071,
+      6.8009
+     ],
+     "hi": [
+      -3.8223,
+      3.0085,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.051",
+     "tris": 3102,
+     "lo": [
+      -4.3529,
+      -0.0071,
+      -7.1991
+     ],
+     "hi": [
+      -3.8223,
+      3.0085,
+      -6.6233
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.052",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      -0.0071,
+      6.8009
+     ],
+     "hi": [
+      4.1777,
+      3.0085,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.053",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      -0.0071,
+      -7.1991
+     ],
+     "hi": [
+      4.1777,
+      3.0085,
+      -6.6233
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.054",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      -0.0071,
+      6.8009
+     ],
+     "hi": [
+      4.1777,
+      3.0085,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.055",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      -0.0071,
+      2.8009
+     ],
+     "hi": [
+      4.1777,
+      3.0085,
+      3.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.056",
+     "tris": 3102,
+     "lo": [
+      7.6471,
+      -0.0071,
+      6.8009
+     ],
+     "hi": [
+      8.1777,
+      3.0085,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.057",
+     "tris": 3102,
+     "lo": [
+      7.6471,
+      -0.0071,
+      2.8009
+     ],
+     "hi": [
+      8.1777,
+      3.0085,
+      3.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.058",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      3.1159,
+      6.8009
+     ],
+     "hi": [
+      4.1777,
+      6.1315,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.059",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      3.1159,
+      2.8009
+     ],
+     "hi": [
+      4.1777,
+      6.1315,
+      3.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.060",
+     "tris": 3102,
+     "lo": [
+      7.6471,
+      3.1159,
+      6.8009
+     ],
+     "hi": [
+      8.1777,
+      6.1315,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.061",
+     "tris": 3102,
+     "lo": [
+      7.6471,
+      3.1159,
+      2.8009
+     ],
+     "hi": [
+      8.1777,
+      6.1315,
+      3.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.062",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      6.2389,
+      6.8009
+     ],
+     "hi": [
+      4.1777,
+      9.2545,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.063",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      6.2389,
+      2.8009
+     ],
+     "hi": [
+      4.1777,
+      9.2545,
+      3.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.064",
+     "tris": 3102,
+     "lo": [
+      7.6471,
+      6.2389,
+      6.8009
+     ],
+     "hi": [
+      8.1777,
+      9.2545,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.065",
+     "tris": 3102,
+     "lo": [
+      7.6471,
+      6.2389,
+      2.8009
+     ],
+     "hi": [
+      8.1777,
+      9.2545,
+      3.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.066",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      9.3619,
+      6.8009
+     ],
+     "hi": [
+      4.1777,
+      12.3775,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.067",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      9.3619,
+      2.8009
+     ],
+     "hi": [
+      4.1777,
+      12.3775,
+      3.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.068",
+     "tris": 3102,
+     "lo": [
+      7.6471,
+      9.3619,
+      6.8009
+     ],
+     "hi": [
+      8.1777,
+      12.3775,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.069",
+     "tris": 3102,
+     "lo": [
+      7.6471,
+      9.3619,
+      2.8009
+     ],
+     "hi": [
+      8.1777,
+      12.3775,
+      3.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.070",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      12.4849,
+      6.8009
+     ],
+     "hi": [
+      4.1777,
+      15.5005,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.071",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      12.4849,
+      2.8009
+     ],
+     "hi": [
+      4.1777,
+      15.5005,
+      3.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.072",
+     "tris": 3102,
+     "lo": [
+      7.6471,
+      12.4849,
+      6.8009
+     ],
+     "hi": [
+      8.1777,
+      15.5005,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.073",
+     "tris": 3102,
+     "lo": [
+      7.6471,
+      12.4849,
+      2.8009
+     ],
+     "hi": [
+      8.1777,
+      15.5005,
+      3.3767
+     ]
+    },
+    {
+     "node": "DoorFrame_Round_Brick.014",
+     "tris": 2046,
+     "lo": [
+      2.1959,
+      -0.0017,
+      6.7049
+     ],
+     "hi": [
+      3.799,
+      2.5845,
+      7.182
+     ]
+    },
+    {
+     "node": "Door_8_Round.007",
+     "tris": 1142,
+     "lo": [
+      2.9368,
+      0.0331,
+      6.8923
+     ],
+     "hi": [
+      4.0884,
+      2.3571,
+      7.0918
+     ]
+    },
+    {
+     "node": "Prop_Chimney.008",
+     "tris": 618,
+     "lo": [
+      1.74,
+      9.369,
+      -3.02
+     ],
+     "hi": [
+      2.6858,
+      12.5469,
+      -2.02
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.048",
+     "tris": 418,
+     "lo": [
+      -3.4438,
+      1.016,
+      6.748
+     ],
+     "hi": [
+      -2.5562,
+      2.6207,
+      7.0924
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.049",
+     "tris": 418,
+     "lo": [
+      -1.4438,
+      1.016,
+      -7.0924
+     ],
+     "hi": [
+      -0.5562,
+      2.6207,
+      -6.748
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.050",
+     "tris": 418,
+     "lo": [
+      -4.0924,
+      1.016,
+      3.5562
+     ],
+     "hi": [
+      -3.748,
+      2.6207,
+      4.4438
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.051",
+     "tris": 418,
+     "lo": [
+      3.748,
+      1.016,
+      -4.4438
+     ],
+     "hi": [
+      4.0924,
+      2.6207,
+      -3.5562
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.052",
+     "tris": 418,
+     "lo": [
+      -4.0924,
+      1.016,
+      -6.4438
+     ],
+     "hi": [
+      -3.748,
+      2.6207,
+      -5.5562
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.053",
+     "tris": 418,
+     "lo": [
+      3.9076,
+      1.016,
+      5.5562
+     ],
+     "hi": [
+      4.252,
+      2.6207,
+      6.4438
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.054",
+     "tris": 418,
+     "lo": [
+      7.748,
+      1.016,
+      5.5562
+     ],
+     "hi": [
+      8.0924,
+      2.6207,
+      6.4438
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.055",
+     "tris": 418,
+     "lo": [
+      3.9076,
+      4.139,
+      5.5562
+     ],
+     "hi": [
+      4.252,
+      5.7437,
+      6.4438
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.056",
+     "tris": 418,
+     "lo": [
+      7.748,
+      4.139,
+      5.5562
+     ],
+     "hi": [
+      8.0924,
+      5.7437,
+      6.4438
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.057",
+     "tris": 418,
+     "lo": [
+      6.5562,
+      4.139,
+      2.9076
+     ],
+     "hi": [
+      7.4438,
+      5.7437,
+      3.252
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.058",
+     "tris": 418,
+     "lo": [
+      3.9076,
+      4.139,
+      3.5562
+     ],
+     "hi": [
+      4.252,
+      5.7437,
+      4.4438
+     ]
+    }
+   ],
+   "images": [
+    {
+     "i": 0,
+     "name": "T_RockTrim_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 177408,
+     "sha1": "749ab431c0b690e662dcd838b85b466eefca6641"
+    },
+    {
+     "i": 1,
+     "name": "T_WoodTrim_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 247567,
+     "sha1": "94450219c623e1e3bfd4d9bcc9993a6af6e81257"
+    },
+    {
+     "i": 2,
+     "name": "T_MetalOrnaments_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 112046,
+     "sha1": "b0e5e0129d1baf82b3df68e8017351706326e483"
+    },
+    {
+     "i": 3,
+     "name": "T_Brick_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 178614,
+     "sha1": "d0af8379a9afa8dcbc0a938be577f68cb71f85a5"
+    },
+    {
+     "i": 4,
+     "name": "T_Plaster_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 153500,
+     "sha1": "9ac6bebe6a8017e4dd65434a0baf0685f1d15f96"
+    },
+    {
+     "i": 5,
+     "name": "T_RoundTiles_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 165309,
+     "sha1": "c8aa2250813d702ec18d85abba2e01facd542204"
+    },
+    {
+     "i": 6,
+     "name": "T_UnevenBrick_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 191902,
+     "sha1": "fa9bca85a38bcc09e2a5479d1983c819cff24205"
+    }
+   ],
+   "n_images": 7,
+   "n_images_embedded": 7,
+   "n_images_unique_bytes": 7,
+   "materials": [
+    {
+     "i": 0,
+     "name": "MI_RockTrim",
+     "base_image": "T_RockTrim_BaseColor",
+     "base_sha1": "749ab431c0b6",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 1,
+     "name": "MI_WoodTrim",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 2,
+     "name": "MI_WoodTrim_Wear",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 3,
+     "name": "MI_MetalOrnaments",
+     "base_image": "T_MetalOrnaments_BaseColor",
+     "base_sha1": "b0e5e0129d1b",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 4,
+     "name": "MI_Brick",
+     "base_image": "T_Brick_BaseColor",
+     "base_sha1": "d0af8379a9af",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 5,
+     "name": "MI_Plaster",
+     "base_image": "T_Plaster_BaseColor",
+     "base_sha1": "9ac6bebe6a80",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 6,
+     "name": "MI_RoundTiles",
+     "base_image": "T_RoundTiles_BaseColor",
+     "base_sha1": "c8aa2250813d",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 7,
+     "name": "MI_UnevenBrick",
+     "base_image": "T_UnevenBrick_BaseColor",
+     "base_sha1": "fa9bca85a38b",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 8,
+     "name": "MI_WindowGlass",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.8,
+      0.8,
+      0.8,
+      0.0955
+     ]
+    }
+   ]
+  },
+  {
+   "file": "lm_chapel.glb",
+   "bytes": 2446712,
+   "errors": [],
+   "warnings": [],
+   "n_nodes": 179,
+   "n_meshes": 25,
+   "n_materials": 9,
+   "bounds_lo": [
+    -4.976,
+    -0.0071,
+    -7.8771
+   ],
+   "bounds_hi": [
+    4.976,
+    19.2808,
+    11.7135
+   ],
+   "dims_m": [
+    9.952,
+    19.2879,
+    19.5907
+   ],
+   "centre": [
+    0.0,
+    9.6369,
+    1.9182
+   ],
+   "bounds_note": "AABB of each primitive's own AABB corners under its world matrix - exact for axis-aligned placement, CONSERVATIVE (never smaller than truth) under rotation.",
+   "tris": 110780,
+   "n_mesh_nodes": 179,
+   "node_census": {
+    "Wall_UnevenBrick_Straight": 27,
+    "Wall_UnevenBrick_Window_Thin_Round": 22,
+    "Window_Thin_Round1": 22,
+    "Corner_Exterior_Brick": 20,
+    "WindowShutters_Thin_Round_Open": 12,
+    "WindowShutters_Thin_Round_Closed": 10,
+    "Window_Wide_Round1": 10,
+    "Wall_Plaster_Window_Wide_Round": 7,
+    "Wall_Plaster_WoodGrid": 7,
+    "WindowShutters_Wide_Round_Open": 6,
+    "Wall_Plaster_Straight": 5,
+    "Corner_Exterior_Wood": 4,
+    "WindowShutters_Wide_Round_Closed": 4,
+    "Wall_Plaster_Window_Wide_Flat": 3,
+    "Wall_UnevenBrick_Window_Wide_Round": 3,
+    "WindowShutters_Wide_Flat_Open": 3,
+    "Window_Wide_Flat1": 3,
+    "DoorFrame_Round_Brick": 2,
+    "Roof_Front_Brick8": 2,
+    "Wall_UnevenBrick_Door_Round": 2,
+    "Door_2_Round": 1,
+    "Door_4_Round": 1,
+    "Prop_Chimney": 1,
+    "Roof_RoundTiles_8x14": 1,
+    "Roof_Tower_RoundTiles": 1
+   },
+   "per_node": [
+    {
+     "node": "Door_2_Round.001",
+     "tris": 6188,
+     "lo": [
+      -1.0427,
+      0.0283,
+      10.8663
+     ],
+     "hi": [
+      0.0728,
+      2.3558,
+      11.1272
+     ]
+    },
+    {
+     "node": "Roof_RoundTiles_8x14.001",
+     "tris": 5484,
+     "lo": [
+      -4.976,
+      5.466,
+      -7.8771
+     ],
+     "hi": [
+      4.976,
+      12.2474,
+      7.8288
+     ]
+    },
+    {
+     "node": "Roof_Tower_RoundTiles.001",
+     "tris": 4024,
+     "lo": [
+      -2.8253,
+      11.92,
+      6.2865
+     ],
+     "hi": [
+      2.8253,
+      19.2808,
+      11.7135
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.050",
+     "tris": 3102,
+     "lo": [
+      -4.3529,
+      -0.0071,
+      6.8009
+     ],
+     "hi": [
+      -3.8223,
+      3.0085,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.051",
+     "tris": 3102,
+     "lo": [
+      -4.3529,
+      -0.0071,
+      -7.1991
+     ],
+     "hi": [
+      -3.8223,
+      3.0085,
+      -6.6233
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.052",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      -0.0071,
+      6.8009
+     ],
+     "hi": [
+      4.1777,
+      3.0085,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.053",
+     "tris": 3102,
+     "lo": [
+      3.6471,
+      -0.0071,
+      -7.1991
+     ],
+     "hi": [
+      4.1777,
+      3.0085,
+      -6.6233
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.054",
+     "tris": 3102,
+     "lo": [
+      -2.3529,
+      -0.0071,
+      10.8009
+     ],
+     "hi": [
+      -1.8223,
+      3.0085,
+      11.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.055",
+     "tris": 3102,
+     "lo": [
+      -2.3529,
+      -0.0071,
+      6.8009
+     ],
+     "hi": [
+      -1.8223,
+      3.0085,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.056",
+     "tris": 3102,
+     "lo": [
+      1.6471,
+      -0.0071,
+      10.8009
+     ],
+     "hi": [
+      2.1777,
+      3.0085,
+      11.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.057",
+     "tris": 3102,
+     "lo": [
+      1.6471,
+      -0.0071,
+      6.8009
+     ],
+     "hi": [
+      2.1777,
+      3.0085,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.058",
+     "tris": 3102,
+     "lo": [
+      -2.3529,
+      3.1159,
+      10.8009
+     ],
+     "hi": [
+      -1.8223,
+      6.1315,
+      11.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.059",
+     "tris": 3102,
+     "lo": [
+      -2.3529,
+      3.1159,
+      6.8009
+     ],
+     "hi": [
+      -1.8223,
+      6.1315,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.060",
+     "tris": 3102,
+     "lo": [
+      1.6471,
+      3.1159,
+      10.8009
+     ],
+     "hi": [
+      2.1777,
+      6.1315,
+      11.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.061",
+     "tris": 3102,
+     "lo": [
+      1.6471,
+      3.1159,
+      6.8009
+     ],
+     "hi": [
+      2.1777,
+      6.1315,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.062",
+     "tris": 3102,
+     "lo": [
+      -2.3529,
+      6.2389,
+      10.8009
+     ],
+     "hi": [
+      -1.8223,
+      9.2545,
+      11.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.063",
+     "tris": 3102,
+     "lo": [
+      -2.3529,
+      6.2389,
+      6.8009
+     ],
+     "hi": [
+      -1.8223,
+      9.2545,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.064",
+     "tris": 3102,
+     "lo": [
+      1.6471,
+      6.2389,
+      10.8009
+     ],
+     "hi": [
+      2.1777,
+      9.2545,
+      11.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.065",
+     "tris": 3102,
+     "lo": [
+      1.6471,
+      6.2389,
+      6.8009
+     ],
+     "hi": [
+      2.1777,
+      9.2545,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.066",
+     "tris": 3102,
+     "lo": [
+      -2.3529,
+      9.3619,
+      10.8009
+     ],
+     "hi": [
+      -1.8223,
+      12.3775,
+      11.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.067",
+     "tris": 3102,
+     "lo": [
+      -2.3529,
+      9.3619,
+      6.8009
+     ],
+     "hi": [
+      -1.8223,
+      12.3775,
+      7.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.068",
+     "tris": 3102,
+     "lo": [
+      1.6471,
+      9.3619,
+      10.8009
+     ],
+     "hi": [
+      2.1777,
+      12.3775,
+      11.3767
+     ]
+    },
+    {
+     "node": "Corner_Exterior_Brick.069",
+     "tris": 3102,
+     "lo": [
+      1.6471,
+      9.3619,
+      6.8009
+     ],
+     "hi": [
+      2.1777,
+      12.3775,
+      7.3767
+     ]
+    },
+    {
+     "node": "DoorFrame_Round_Brick.014",
+     "tris": 2046,
+     "lo": [
+      -1.8041,
+      -0.0017,
+      6.7049
+     ],
+     "hi": [
+      -0.201,
+      2.5845,
+      7.182
+     ]
+    },
+    {
+     "node": "DoorFrame_Round_Brick.015",
+     "tris": 2046,
+     "lo": [
+      -1.8041,
+      -0.0017,
+      10.7049
+     ],
+     "hi": [
+      -0.201,
+      2.5845,
+      11.182
+     ]
+    },
+    {
+     "node": "Door_4_Round.005",
+     "tris": 1228,
+     "lo": [
+      -1.0431,
+      0.0331,
+      6.8824
+     ],
+     "hi": [
+      0.0716,
+      2.3558,
+      7.0918
+     ]
+    },
+    {
+     "node": "Prop_Chimney.008",
+     "tris": 618,
+     "lo": [
+      1.74,
+      6.246,
+      -3.02
+     ],
+     "hi": [
+      2.6858,
+      9.4239,
+      -2.02
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.048",
+     "tris": 418,
+     "lo": [
+      -3.4438,
+      1.016,
+      6.748
+     ],
+     "hi": [
+      -2.5562,
+      2.6207,
+      7.0924
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.049",
+     "tris": 418,
+     "lo": [
+      -3.4438,
+      1.016,
+      -7.0924
+     ],
+     "hi": [
+      -2.5562,
+      2.6207,
+      -6.748
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.050",
+     "tris": 418,
+     "lo": [
+      -1.4438,
+      1.016,
+      -7.0924
+     ],
+     "hi": [
+      -0.5562,
+      2.6207,
+      -6.748
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.051",
+     "tris": 418,
+     "lo": [
+      0.5562,
+      1.016,
+      6.748
+     ],
+     "hi": [
+      1.4438,
+      2.6207,
+      7.0924
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.052",
+     "tris": 418,
+     "lo": [
+      -4.0924,
+      1.016,
+      3.5562
+     ],
+     "hi": [
+      -3.748,
+      2.6207,
+      4.4438
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.053",
+     "tris": 418,
+     "lo": [
+      3.748,
+      1.016,
+      -0.4438
+     ],
+     "hi": [
+      4.0924,
+      2.6207,
+      0.4438
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.054",
+     "tris": 418,
+     "lo": [
+      -4.0924,
+      1.016,
+      -2.4438
+     ],
+     "hi": [
+      -3.748,
+      2.6207,
+      -1.5562
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.055",
+     "tris": 418,
+     "lo": [
+      3.748,
+      1.016,
+      -2.4438
+     ],
+     "hi": [
+      4.0924,
+      2.6207,
+      -1.5562
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.056",
+     "tris": 418,
+     "lo": [
+      3.748,
+      1.016,
+      -4.4438
+     ],
+     "hi": [
+      4.0924,
+      2.6207,
+      -3.5562
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.057",
+     "tris": 418,
+     "lo": [
+      1.748,
+      1.016,
+      9.5562
+     ],
+     "hi": [
+      2.0924,
+      2.6207,
+      10.4438
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.058",
+     "tris": 418,
+     "lo": [
+      -2.0924,
+      1.016,
+      7.5562
+     ],
+     "hi": [
+      -1.748,
+      2.6207,
+      8.4438
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.059",
+     "tris": 418,
+     "lo": [
+      1.748,
+      1.016,
+      7.5562
+     ],
+     "hi": [
+      2.0924,
+      2.6207,
+      8.4438
+     ]
+    },
+    {
+     "node": "Window_Thin_Round1.060",
+     "tris": 418,
+     "lo": [
+      -2.0924,
+      4.139,
+      7.5562
+     ],
+     "hi": [
+      -1.748,
+      5.7437,
+      8.4438
+     ]
+    }
+   ],
+   "images": [
+    {
+     "i": 0,
+     "name": "T_RockTrim_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 177408,
+     "sha1": "749ab431c0b690e662dcd838b85b466eefca6641"
+    },
+    {
+     "i": 1,
+     "name": "T_WoodTrim_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 247567,
+     "sha1": "94450219c623e1e3bfd4d9bcc9993a6af6e81257"
+    },
+    {
+     "i": 2,
+     "name": "T_MetalOrnaments_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 112046,
+     "sha1": "b0e5e0129d1baf82b3df68e8017351706326e483"
+    },
+    {
+     "i": 3,
+     "name": "T_Brick_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 178614,
+     "sha1": "d0af8379a9afa8dcbc0a938be577f68cb71f85a5"
+    },
+    {
+     "i": 4,
+     "name": "T_Plaster_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 153500,
+     "sha1": "9ac6bebe6a8017e4dd65434a0baf0685f1d15f96"
+    },
+    {
+     "i": 5,
+     "name": "T_RoundTiles_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 165309,
+     "sha1": "c8aa2250813d702ec18d85abba2e01facd542204"
+    },
+    {
+     "i": 6,
+     "name": "T_UnevenBrick_BaseColor",
+     "mime": "image/jpeg",
+     "uri": "",
+     "bytes": 191902,
+     "sha1": "fa9bca85a38bcc09e2a5479d1983c819cff24205"
+    }
+   ],
+   "n_images": 7,
+   "n_images_embedded": 7,
+   "n_images_unique_bytes": 7,
+   "materials": [
+    {
+     "i": 0,
+     "name": "MI_RockTrim",
+     "base_image": "T_RockTrim_BaseColor",
+     "base_sha1": "749ab431c0b6",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 1,
+     "name": "MI_WoodTrim",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 2,
+     "name": "MI_WoodTrim_Wear",
+     "base_image": "T_WoodTrim_BaseColor",
+     "base_sha1": "94450219c623",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 3,
+     "name": "MI_MetalOrnaments",
+     "base_image": "T_MetalOrnaments_BaseColor",
+     "base_sha1": "b0e5e0129d1b",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 4,
+     "name": "MI_Brick",
+     "base_image": "T_Brick_BaseColor",
+     "base_sha1": "d0af8379a9af",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 5,
+     "name": "MI_Plaster",
+     "base_image": "T_Plaster_BaseColor",
+     "base_sha1": "9ac6bebe6a80",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 6,
+     "name": "MI_RoundTiles",
+     "base_image": "T_RoundTiles_BaseColor",
+     "base_sha1": "c8aa2250813d",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 7,
+     "name": "MI_UnevenBrick",
+     "base_image": "T_UnevenBrick_BaseColor",
+     "base_sha1": "fa9bca85a38b",
+     "base_color_factor": [
+      1,
+      1,
+      1,
+      1
+     ]
+    },
+    {
+     "i": 8,
+     "name": "MI_WindowGlass",
+     "base_image": null,
+     "base_sha1": null,
+     "base_color_factor": [
+      0.8,
+      0.8,
+      0.8,
+      0.0955
+     ]
+    }
+   ]
+  }
+ ],
+ "n_files": 5,
+ "n_files_with_errors": 0,
+ "verdict": "GREEN"
+}

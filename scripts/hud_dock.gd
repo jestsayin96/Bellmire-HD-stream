@@ -312,6 +312,73 @@ class ChronicleScroll extends Control:
 		if what == NOTIFICATION_RESIZED:
 			queue_redraw()
 
+	## U217: the TOWN BAND - Bellmire's level and its movement toward the next tier, on the Chronicle's own
+	## vellum (COORDINATION 13 item 2, so no seventh overlay). {} = nothing to show, no band, no height.
+	var town := {}
+
+	func set_town(d: Dictionary) -> void:
+		if d.hash() != town.hash():
+			town = d
+			queue_redraw()
+
+	## the band's height in px (0 with no town data): feed_hud takes this off the lines' area
+	func band_h() -> float:
+		return 0.0 if town.is_empty() else float(UiTheme.px(30.0))
+
+	## the band's rect on the open vellum, one source for _draw and any gate
+	func band_rect() -> Rect2:
+		var sr := sheet_rect()
+		var h := band_h()
+		if h <= 0.0:
+			return Rect2()
+		return Rect2(sr.position.x, sr.position.y + _p(3.0), sr.size.x, h - _p(5.0))
+
+	func _town_band() -> void:
+		var r := band_rect()
+		if r.size.x <= 0.0 or r.size.y <= 0.0:
+			return
+		var font := _wordmark_font()
+		var fs := maxi(12, UiTheme.px(17))
+		var lv := int(town.get("level", 1))
+		var tiers := int(town.get("tiers", 12))
+		# the level plate: ink block, gilt numeral
+		var tag := "LV %d" % lv
+		var tsz := font.get_string_size(tag, HORIZONTAL_ALIGNMENT_LEFT, -1, fs)
+		var plate := Rect2(r.position, Vector2(tsz.x + _p(14.0), r.size.y))
+		draw_rect(plate, UiTheme.INK)
+		draw_rect(plate, Color(GOLD.r, GOLD.g, GOLD.b, 0.9), false, maxf(1.0, _p(1.0)))
+		var base := r.position.y + (r.size.y + tsz.y * 0.62) * 0.5
+		draw_string(font, Vector2(plate.position.x + _p(7.0), base), tag, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, UiTheme.WORD_HI)
+		# the right end: the 12-tier bar, then what is still needed
+		var bar_w := clampf(r.size.x * 0.34, _p(120.0), _p(300.0))
+		var bar := Rect2(r.end.x - bar_w, r.position.y + r.size.y * 0.18, bar_w, r.size.y * 0.64)
+		var note := "TOWN FULL" if bool(town.get("maxed", false)) else "%d to go" % int(town.get("to_next", 0))
+		var nfs := maxi(11, UiTheme.px(14))
+		var nsz := font.get_string_size(note, HORIZONTAL_ALIGNMENT_LEFT, -1, nfs)
+		bar.position.x -= nsz.x + _p(10.0)
+		draw_string(font, Vector2(r.end.x - nsz.x, base), note, HORIZONTAL_ALIGNMENT_LEFT, -1, nfs, UiTheme.TEAL_ON_PARCH)
+		# the town's name between plate and bar, trimmed to fit
+		var nm := String(town.get("name", "")).to_upper()
+		var nx := plate.end.x + _p(10.0)
+		var room := bar.position.x - _p(10.0) - nx
+		while nm.length() > 3 and font.get_string_size(nm, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x > room:
+			nm = nm.substr(0, nm.length() - 2).rstrip(" '-") + "…"
+		draw_string(font, Vector2(nx, base), nm, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, UiTheme.INK)
+		# twelve tier cells: earned ones filled, the current one filled by its fraction
+		var gap := maxf(1.0, _p(2.0))
+		var cw := (bar.size.x - gap * float(tiers - 1)) / float(tiers)
+		var frac := float(town.get("frac", 0.0))
+		for i in tiers:
+			var cr := Rect2(bar.position.x + float(i) * (cw + gap), bar.position.y, cw, bar.size.y)
+			draw_rect(cr, Color(UiTheme.INK.r, UiTheme.INK.g, UiTheme.INK.b, 0.22))
+			if i < lv - 1:
+				draw_rect(cr, TEAL)
+			elif i == lv - 1:
+				draw_rect(Rect2(cr.position, Vector2(cr.size.x * (1.0 if bool(town.get("maxed", false)) else frac), cr.size.y)), GOLD)
+			draw_rect(cr, UiTheme.INK, false, maxf(1.0, _p(1.0)))
+		# a rule under the band so the lines start clearly below it
+		draw_line(Vector2(r.position.x, r.end.y + _p(3.0)), Vector2(r.end.x, r.end.y + _p(3.0)), Color(TEAL.r, TEAL.g, TEAL.b, 0.7), maxf(1.0, _p(1.0)))
+
 	func _p(n: float) -> float:
 		return float(UiTheme.px(n))
 
@@ -542,6 +609,7 @@ class ChronicleScroll extends Control:
 		_dowel(g.top_cy, cap, ROD_WORDMARK[0])
 		_dowel(g.bot_cy, cap, ROD_WORDMARK[1])
 		_header(g)
+		_town_band()
 
 ## ---------------------------------------------------------------- U104 the mana strip
 ## One blue bar per hero who draws on a pool (Roster S64: h["mana"] / h["mana_max"]). A hero who

@@ -24506,3 +24506,14 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - Nothing owed from `twitch_eventsub.gd`: `twitch_reply(user_login, text)` is untouched and no new signature is asked of the game build. Still outstanding from two hours ago and still one line: `chat.solo_ask = _on_solo` in `town.gd`.
 - No Twitch message, nothing redeemed, nothing cheered, **ZERO BITS**. No channel state read or changed; Mr. E's account was not touched and bellmirebro sent nothing.
 - Not ticked - the team lead ticks.
+## U217 - HUD 00:52 CT 28 Nov: TOWN LEVEL + PROGRESS TO NEXT TIER NOW ON THE CHRONICLE (standing item, town-first)
+- Item: standing order 1 (sup-nov27-2304). The 23:58 row's party_frames.gd half is not mine (U216 stands); I took the town display.
+- WHERE: inside the Chronicle scroll (COORDINATION 13 item 2) - a "town band" across the top of the vellum, NOT a seventh overlay. Plate "LV n" (gilt on ink), the tier name in Gloock, a 12-cell tier bar (earned cells teal, current cell gold, filled by its fraction), and "N to go" (or "TOWN FULL" at tier 12).
+- Files (all mine): ui_theme.gd `town_progress(levels, score)` (pure, no scene access); hud_dock.gd ChronicleScroll `town`/`set_town`/`band_h`/`band_rect`/`_town_band`; feed_hud.gd `_vellum()` takes the band off the lines' area, `_push_town()` reads `economy.TOWN_LEVELS` off the script (a const is not a property) and `town_score()` twice a second. Reads only; no file outside my seven edited except new probe tools/_u217_town.gd.
+- Gate: headless --quit-after 300 -> 0 SCRIPT ERROR, 0 Parse Error. Windowed probe (U200 scene, lord fight, hostile names, 100/125/150%): 52 checks, 0 fails; band inside the vellum sheet and lines start below it at all three scales. Evidence committed: _u217.log, renders/cycles/20261128_u217.
+- LOOKED AT: host_s100 (band + 5 lines, readable) and tight_s150 (worst margin in my numbers is 150: -6.9 px of slack vs -15.6 at 100 and -8.1 at 125) - band reads, nothing clipped.
+- COST, SAID PLAINLY: the band takes one line of height, so the Chronicle holds 6 / 4 / 3 lines at 100 / 125 / 150% in the hostile-name scene (was one more each). L74 (feed under load) should re-measure with the band in.
+- Lock: art held 00:54:53-00:58:38 in my slot start (declared 00:59, released early); I claimed 00:58:48 and released 01:00:37, inside the cap and well before :07.
+- Not done: full-screen (no panes) Chronicle is a plain PanelContainer and has no band - the stream always runs the grid. Town-name text in the feed said "hamlet" while the band said level 4 "a village" in the probe (scene was force-fed renown 60); live values come from the same economy.
+- NEXT FIRING: L74 with the band in; also check a level-up moment (band should step 5->6 live).
+- Decision for Mr. E: none. Not ticked - the team lead ticks.

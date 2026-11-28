@@ -586,11 +586,17 @@ func _solo(user_id: String) -> String:
 ## this asks the sheet-holder and only words the answer. The directive asks !rank for three things
 ## and this says exactly those three: the letter, the composite score, and what the next letter
 ## still wants.
-## GUARDED BY has_method, DELIBERATELY: the ladder is on `origin/laptop` at a296a7b4 and is NOT on
-## `origin/main` as this lands. On main `roster` answers none of these three calls, and an
-## unguarded call would take the whole handler down for every viewer who typed it. It degrades to
-## one plain line instead - the same shape town.gd:5363 used on me, guarding `wants_solo` with
-## has_signal while the other half was in flight.
+## GUARDED BY has_method, DELIBERATELY - AND THE REASON HAS CHANGED SINCE THIS SHIPPED, SO THE
+## GUARD STAYS AND THIS PARAGRAPH IS CORRECTED (B214, auditing my own work). It used to read that
+## the ladder "is on `origin/laptop` at a296a7b4 and is NOT on `origin/main` as this lands". THAT
+## IS NO LONGER TRUE AND IT WAS TRUE FOR ABOUT FIVE MINUTES: a296a7b4 is reachable from
+## `origin/main`, where `scripts/roster.gd:1392/1408/1412` carry letter_score(), letter_rank() and
+## letter_next(). I verified that by grepping origin/main itself, not by trusting a row.
+## THE GUARD IS NOT REMOVED, because its job was never "main is behind" - it is that this file
+## must not take the whole handler down for every viewer who typed !rank if the sheet-holder ever
+## stops answering those three calls. A one-line degrade is the right failure either way - the
+## same shape town.gd:5363 used on me, guarding `wants_solo` with has_signal while the other half
+## was in flight.
 func _rank(user_id: String) -> String:
     if not roster.has_method("letter_rank"):
         return "The Guild has not posted the ladder yet."
@@ -3863,8 +3869,23 @@ static func help_line(arg := "") -> String:
     var bits: Array = []
     for k in commands().get("order", cs.keys()):
         bits.append("!" + String(k))
+    ## B214 (DIRECTIVE sup-nov27-2340, "the hub is the primary interface, not chat"): this tail
+    ## used to read "All of it:", which named the page without saying what it is FOR. The directive
+    ## is that a viewer EQUIPS, SELLS, DYES, STORES, ACCEPTS QUESTS, MANAGES PARTY and READS THE
+    ## LADDER there, and that chat is the fallback. So the pointer now says MANAGE, which is the
+    ## one word that moves a viewer off chat and onto the page.
+    ## AND IT IS AS LONG AS IT CAN BE, WHICH IS NOT A STYLE CHOICE: measured off the real data at
+    ## B214, the bare list is 409 of REPLY_MAX 440 with 40 commands and only 31 characters spare,
+    ## so every wording that NAMED the verbs ("gear, satchel, quests, party, the ladder") came out
+    ## 459-471 and would have been CUT - and _cut backtracks to a word boundary, so the thing lost
+    ## is the whole 49-char URL and the viewer is left with a pointer to nothing. This wording is
+    ## 428 of 440. THE HEADROOM IS NOW 12 CHARACTERS: ONE more command of average length overflows
+    ## it. The arm at tools/_l14_test.gd:217 turns that into a RED the moment it happens, and the
+    ## real fix when it does is NOT a shorter sentence - it is to stop listing all 40 verbs in the
+    ## most-typed line in the set, which is the directive's own logic. That is a surface decision
+    ## and it is the team lead's to route, not mine to take: reported, not done.
     var tail := hub_url()
-    return "Commands: %s  |  !help <command> for more.%s" % [" ".join(bits), "" if tail == "" else "  All of it: " + tail]
+    return "Commands: %s  |  !help <command> for more.%s" % [" ".join(bits), "" if tail == "" else "  Manage your hero on the page: " + tail]
 
 ## ---- L69: THE BOT CARRIES THE CHAT. A viewer who does not know the commands still
 ## gets an answer: a line with no "!" is flattened to words and matched against the

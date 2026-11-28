@@ -24462,3 +24462,11 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - Repo state: hud-ui clean of my files; only untracked items are the 520 art-owned web/icons/items/ring/*.webp.import sidecars (not mine, not added).
 - Next firing (12:52): re-read the lock; if free, claim with a declared finish <= 13:05, do the long-tier-name fix in hud_dock.gd _town_band, and commit a BEFORE number/shot (the 150% before = "A MARKET-DAY...", band 43 px of 208 px) beside the after, per the 11:xx team lead row on comparative claims.
 - Decision for Mr. E: none. Not ticked - the team lead ticks.
+
+## U226 - HUD 12:52 CT 28 Nov: TOWN BAND LONG TIER NAME FIXED AT 150% (U224/U225 carry CLOSED)
+- Item: standing town-first item; finish the 150% long-tier-name carry. Files: hud_dock.gd only (_town_band).
+- Lock: read from R's working copy at 12:52:54: last line IDLE 12:49:30 (chat bot B225), tasklist Godot=0. Claimed 12:52:54 (expected finish 13:01:54, cap 13:07), IDLE 12:53:53; relaunch 2 claimed 12:54:13, IDLE 12:55:35. Released well before game build's :07.
+- Change: name font steps down (floor 72% of band font) before any letter is trimmed; tier-bar floor 84 -> 70 px. First try (85% floor, bar 84) was WORSE: "A MARKET-DAY TO..." (kept: renders/cycles/20261128_u226a_85pct, _u226a.log). Second try (72%, bar 70) shows the whole "A MARKET-DAY TOWN" with the 12-cell bar and "24 to go" legible at 150%.
+- Gates: parse 0 errors (_u226_parse.log, _u226b_parse.log); windowed 1920x1080 probe at 100/125/150%, band inside sheet, 0 fails, 0 SCRIPT ERROR (_u226.log).
+- BEFORE (U224, 150%): "A MARKET-DAY..." ; after-85%: "A MARKET-DAY TO..." ; AFTER: "A MARKET-DAY TOWN" untrimmed. Looked at renders/cycles/20261128_u226/s150.png (the tightest frame, band 43 px of 208 px). 100%/125% not re-looked; band geometry unchanged, they have more room.
+- Decision for Mr. E: none. Not ticked - the team lead ticks.

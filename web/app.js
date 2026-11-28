@@ -5911,6 +5911,17 @@ function finderOpen(r) {
       a.args.forEach(([k, lab]) => {
         const l = el("label", "sat-lab", lab + " "); const i = el("input", "suggest-input"); i.type = "text"; i.maxLength = 60; i.autocomplete = "off"; i.setAttribute("aria-label", lab);
         inputs[k] = i; l.append(i); slot.append(l);
+        // wear / dye: offer the names from THIS viewer's own satchel as suggestions (a datalist, not a rule -
+        // the engine still decides). Names are snapshot strings, so they go in as option.value (a property), never markup.
+        if (k === "item" && (a.kind === "wear" || a.kind === "dye")) {
+          const h = myHeroRow(), names = [];
+          if (h) for (const r of satchelRows(h)) { const n = clean(r.name, 60); if (n && names.indexOf(n) < 0) names.push(n); }
+          if (names.length) {
+            const dl = el("datalist"); dl.id = "roomItems";
+            names.slice(0, 40).forEach((n) => { const o = el("option"); o.value = n; dl.append(o); });
+            i.setAttribute("list", "roomItems"); l.append(dl);
+          }
+        }
       });
     };
     sel.addEventListener("change", draw); draw();

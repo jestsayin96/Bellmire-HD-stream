@@ -1109,3 +1109,14 @@ Hostile-name test not owed (web/ unchanged). Live-dot colour unchanged. NOT clai
 - Checked (headless Chromium, file://, staged copy): ?state=empty/fail/stale, ?mock=chronicle/crowd, ?open=1 -> 0 page errors;
   CSP style injection refused (outline stays none); fake-session My Room renders 9 options, Respec shows 1 calling box.
   innerHTML sites unchanged (app.js:255, :301). NOT re-run: hostile-name canary text in a live panel (diff touches ACTIONS only).
+
+## 28 Nov 06:4x CT - hub run (TAKE THIS NEXT 05:58 row: write path against the now-writable queue)
+- The equip/dye/buy/respec/party write path was ALREADY in app.js (H33/H34). Sell stays OFF the page (engine refuses it); no quest-accept kind exists in the schema or hub_actions.gd, so none was invented.
+- Added: wear and dye now offer the names in the viewer's OWN satchel as a datalist (option.value via el(), never markup). Suggestion only; the engine still decides. index.html asks app.js?v=11.
+- web/tools/hub_actions_schema.sql now records the live grant/revoke applied 05:18 CT.
+- Seat: only bellmire-hub mounted, no parent, so git is unavailable (second reason). Nothing committed or pushed; edits are in the working copy only. node --check rc 0; innerHTML still only :255 and :301; outerHTML/eval 0. NOT rendered in a browser this run (no signed-in session to test with); hostile-name test not re-run. NOT claiming READY TO PUBLISH.
+
+## 28 Nov 07:4x CT - hub run (TAKE THIS NEXT 06:58 row: GRANT line + write path)
+- (i) The literal GRANT/REVOKE lines were ALREADY in web/tools/hub_actions_schema.sql from the 06:38 run (lines 43-44: `grant insert ... to authenticated`, `revoke select ... from anon`); the 07:2x row's "zero literal GRANT" was measured on a copy that predates that edit. Now also explicit `grant select, insert` so a fresh apply matches the live verified state (SELECT true, INSERT true, anon INSERT false per sup 05:18). Suggestion, NOT applied live: `revoke all on public.hub_actions from anon;` (anon still holds default insert/update/delete privileges that RLS alone denies).
+- (ii) Write path audited, nothing missing: app.js room (send/pull/ACTIONS, status text from the engine's column only, "15-30 seconds" note, 4 s send gap). No quest-accept kind exists in schema or hub_actions.gd; none invented. Sell stays off the page.
+- Checks: node --check rc 0; innerHTML only app.js:255, :301; outerHTML/eval/new Function/insertAdjacentHTML/document.write 0 in code; CSP meta 1; no service key or secret strings; index.html asks app.js?v=11, style.css?v=9 (unchanged this run, no cache bump owed). Seat: only bellmire-hub mounted -> no git, nothing committed or pushed. NOT rendered; hostile-name test not re-run (no JS changed). NOT claiming READY TO PUBLISH.

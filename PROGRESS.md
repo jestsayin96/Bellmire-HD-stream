@@ -24400,3 +24400,10 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - Not looked at: no render this firing (instrument fix only, no UI edit). Gate log showed the game joining Twitch chat read-only; nothing sent, ZERO BITS.
 - NEXT FIRING: instrument is quiet, so take L74 (feed under load + theme at 100/125/150%) windowed, render and look.
 - Decision for Mr. E: none.
+
+## C-247 (content, 27 Nov 2026, 23:3x CST) - drops.json AND THE SYSTEM 41 JSONs STOOD DOWN A TENTH TIME; TOP-UP: misfire +6, cleared +9, descend +7, epitaphs +6
+- TAKE THIS NEXT (22:58 block) CONTENT row: "THE SYSTEM 41 RECIPE AND ENCYCLOPEDIA JSONs", new data files, citing the plan row as an override. My prompt says I own exactly four files and no new data files. A plan row does not amend that; only the content prompt can. NOT written. The hub stays blocked on it until the prompt names the files.
+- Roster: 70 feed keys, closed at 70, no feed row owed.
+- ADDED to data/lore_lines.json: misfire 304 -> 310, cleared 753 -> 762, descend 716 -> 723, epitaphs 1114 -> 1120 (duplicates dropped). New key `_note_c247`, zero-hit by design, NO LANE IS TO WIRE IT. No floor count stated.
+- VALIDATION OK: all four owned files json.load; every pre-existing key equal, old lists unchanged prefixes, only new top-level key `_note_c247`. No code wiring implied.
+- Next content: C-248.

@@ -1198,7 +1198,14 @@
     "The steps are worn smooth by those who went before.",
     "They go down in order, the lamp last.",
     "The air turns stale a few steps in.",
-    "A hand on the wall, a hand on the blade, and down."
+    "A hand on the wall, a hand on the blade, and down.",
+    "The lamp goes first. The rest follow.",
+    "Cold climbs up the stair to meet them.",
+    "Each step is counted, out of habit.",
+    "They leave the daylight at the third turn.",
+    "The rope is paid out behind them.",
+    "Water drips somewhere below. They follow it down.",
+    "The door shuts behind. They do not look back."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1953,7 +1960,16 @@
     "Floor %d is theirs, for as long as the oil lasts.",
     "They bind what needs binding on floor %d.",
     "Floor %d is clear. The stair is next, and no one hurries.",
-    "Floor %d is still. They wait to be sure."
+    "Floor %d is still. They wait to be sure.",
+    "Floor %d holds its breath. Then lets it go.",
+    "The party counts heads on floor %d. All there.",
+    "Floor %d is swept of what moved. They rest.",
+    "They wipe the blades clean on floor %d.",
+    "Nothing stirs on floor %d. They do not trust it yet.",
+    "Floor %d is done. The lamp is trimmed.",
+    "The party shares the water on floor %d, small sips.",
+    "Floor %d is quiet. Someone checks the stair.",
+    "Boots are retied on floor %d. Then the next flight."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4326,7 +4342,13 @@
     "%s's %s frays at the edges and is gone (%d vs DC %d).",
     "%s's %s comes out as smoke and nothing else (%d vs DC %d).",
     "%s's %s takes a bad step and loses its feet (%d vs DC %d).",
-    "%s's %s has no weight behind it today (%d vs DC %d)."
+    "%s's %s has no weight behind it today (%d vs DC %d).",
+    "%s's %s fizzles on the cold air (%d vs DC %d).",
+    "%s's %s was said wrong, and knows it (%d vs DC %d).",
+    "%s's %s leaves the hand and goes nowhere (%d vs DC %d).",
+    "%s reaches for %s and finds a gap (%d vs DC %d).",
+    "%s's %s sputters, then thinks better of it (%d vs DC %d).",
+    "%s's %s lands a pace short (%d vs DC %d)."
   ],
   "epitaphs": [
     "Measured the grain. Counted the flasks. Kept the door.",
@@ -5442,7 +5464,13 @@
     "Wore a borrowed cloak. It was returned, in the end.",
     "Closed the gate quietly so as not to wake the street.",
     "Counted the party at the stair. Counted again at the bottom.",
-    "Went in with a sharp edge and a dry match. Both were enough, once."
+    "Went in with a sharp edge and a dry match. Both were enough, once.",
+    "Carried the water. Never spilled it.",
+    "Mended the boots of three who came back.",
+    "Said little. Was there when it counted.",
+    "Went in first so the others need not.",
+    "Left a loaf on the sill. It was taken.",
+    "Walked the stair twice more than asked."
   ],
   "forge": {
     "1": "Bellmire iron: honest, dull, and better than bare hands.",
@@ -16597,5 +16625,6 @@
   "_note_c243": "C-243 (27 Nov 2026, 19:3x CST): top-up by draw pressure, ranking kept from C-242 (delve.gd _pick_line, one draw per call): misfire 237 (several casters a floor) +20, cleared 698 (once a floor) +16, descend 682 (once a delve) +8. Frames kept: misfire name, spell, roll, DC (%s %s %d %d); cleared one %d floor number; descend no placeholder. No floor count stated. Epitaphs untouched (ruling sup-nov27-0209). Roster closed at 70 bodies, 70 feed keys, no new committed body on origin/art. Expected zero-hit key; no lane is to wire it.",
   "_note_c244": "C-244: draw-pressure top-up of misfire, cleared and descend. Read by delve.gd's existing pools; this note key is zero-hit by design, NO LANE IS TO WIRE IT.",
   "_note_c245": "C-245: draw-pressure top-up of misfire, cleared and descend. Read by delve.gd's existing pools; this note key is zero-hit by design, NO LANE IS TO WIRE IT.",
-  "_note_c246": "C-246 (27 Nov 2026, 22:4x CST): draw-pressure top-up of misfire +12, cleared +11, descend +10. Read by delve.gd's existing pools. Zero-hit key by design, NO LANE IS TO WIRE IT."
+  "_note_c246": "C-246 (27 Nov 2026, 22:4x CST): draw-pressure top-up of misfire +12, cleared +11, descend +10. Read by delve.gd's existing pools. Zero-hit key by design, NO LANE IS TO WIRE IT.",
+  "_note_c247": "C-247 top-up of misfire, cleared, descend, epitaphs. Zero-hit by design; no lane wires this key."
 }

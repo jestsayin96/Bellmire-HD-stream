@@ -24815,3 +24815,10 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - Committed the WORDS half only, flag OFF: scripts/town_tiers.gd, scripts/town.gd, tools/_s171_tiers.gd, PROGRESS.md, _GAMEBUILD_COMMIT_OWED.md, docs/RUN_LOCK.txt. Never the .bak_s172/.bak_s173.
 - NOT DONE THIS HOUR, AND WHY: no forced level-up was watched in the feed and no well render was taken - the five gates took 6 min and a look at L1/L3/L6 does not fit honestly before the cap. WELL_TIER_MESHES stays false.
 - NEXT SEAT: force a level-up and LOOK at the crier lines in the feed -> flip WELL_TIER_MESHES, render the square at L1/L3/L6 against a hero, look -> then the landmark swap for the hall (generalise _show_well_tier; the reader already resolves town_hall_t3).
+## C-253 (content, 28 Nov 2026, 11:3x CST) - TOWN-FIRST: THE SIX SHOP BUILDINGS GET THEIR OWN WORDS
+- TAKE THIS NEXT: "CONTENT: C-253, town-first words ... keep writing to the `/2` format". Taken. Merged origin/main first (fast-forward to 01509ae6); the lead's stale by-disk WORK_PLAN.md edit in W3 was stashed (not discarded) because main already carries those blocks.
+- Gap found: bellmire.json has six `shop` buildings (b022 apothecary, b024 armorer, b027 store, b033 + b036 blacksmith, b039 tavern) that fell through to their district words, so a smithy read like a house row.
+- Added `town_buildings.shops` (apothecary, armorer, store, tavern, blacksmith, blacksmith_2 x tiers[3] of {name, crier, plaque, see}) and `town_buildings.shop_events` (same six x to_2/to_3 {crier, plaque}). Tier 1 is a bench and a rope, tier 3 a finished hall. New top-level key `_note_c253`. No new data file. No dungeon floor counts.
+- VALIDATION OK: json.load passes; only new keys are the two blocks and `_note_c253`; every pre-existing key equal to the pre-edit parse; file round-trips byte-exact.
+- WIRING for the game build (unwired by design, /2 loader D93.4): set `words: "shops.<kind>"` on a building whose `shop` is that kind (b036 -> `shops.blacksmith_2`); fire `shop_events.shops[<kind>].to_N.crier` at tier_levels[N].
+- Next content: C-254.

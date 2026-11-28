@@ -1,0 +1,175 @@
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+00:50:31 | INFO: Data are loaded, start creating Blender stuff
+00:50:31 | INFO: Blender create Mesh node Cube.125
+00:50:31 | INFO: Blender create Mesh node Cube.126
+00:50:31 | INFO: Blender create Mesh node PrototypePete_body.020
+00:50:31 | INFO: Blender create Mesh node PrototypePete_head.001
+00:50:31 | INFO: Blender create Mesh node Cube.128
+00:50:31 | INFO: Blender create Mesh node Cube.127
+00:50:31 | INFO: Blender create Mesh node Cube.003
+00:50:31 | INFO: Blender create Mesh node Cylinder.280
+00:50:31 | INFO: Blender create Mesh node Cylinder.005
+00:50:31 | INFO: Blender create Mesh node Cylinder.010
+00:50:31 | INFO: Blender create Mesh node Cylinder.022
+00:50:31 | INFO: Blender create Mesh node Cube.11839
+00:50:31 | INFO: Blender create Mesh node Cube.12993
+00:50:31 | INFO: Blender create Mesh node Cube.124
+00:50:31 | INFO: Blender create Mesh node Plane.004
+00:50:31 | INFO: glTF import finished in 0.53s
+C:\hd adventure\bellmire-art\tools\art\_t5_rxproof.py:71: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+RXPROOF basis selftest PASSED order=YXZ
+00:50:31 | INFO: Data are loaded, start creating Blender stuff
+00:50:31 | INFO: Blender create Mesh node Cylinder.028
+00:50:31 | INFO: glTF import finished in 0.01s
+00:03.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_body_front.png'
+00:03.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\axe_front.png'
+00:03.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_axe_front.png'
+00:03.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_body_side.png'
+00:03.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\axe_side.png'
+00:03.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_axe_side.png'
+00:04.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_body_back.png'
+00:04.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\axe_back.png'
+00:04.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_axe_back.png'
+  PROOF axe           rot=[0.0, 0.0, 90.0] gx=+0.000 hang=0.1 clip=226/1051 cf=0.215 ground=0 show=1.002 proving=3 border=0.0
+00:50:33 | INFO: Data are loaded, start creating Blender stuff
+00:50:33 | INFO: Blender create Mesh node Cylinder.043
+00:50:33 | INFO: glTF import finished in 0.00s
+00:04.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\bow_front.png'
+00:04.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_bow_front.png'
+00:04.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\bow_side.png'
+00:05.031  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_bow_side.png'
+00:05.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\bow_back.png'
+00:05.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_bow_back.png'
+  PROOF bow           rot=[0.0, 0.0, 90.0] gx=-0.572 hang=0.1 clip=224/1374 cf=0.163 ground=0 show=1.002 proving=3 border=0.0
+00:50:34 | INFO: Data are loaded, start creating Blender stuff
+00:50:34 | INFO: Blender create Mesh node Cube.001
+00:50:34 | INFO: glTF import finished in 0.00s
+00:05.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\crossbow_front.png'
+00:05.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_crossbow_front.png'
+00:05.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\crossbow_side.png'
+00:05.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_crossbow_side.png'
+00:06.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\crossbow_back.png'
+00:06.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_crossbow_back.png'
+  PROOF crossbow      rot=[0.0, 0.0, 0.0] gx=+0.000 hang=89.9 clip=108/659 cf=0.164 ground=0 show=0.999 proving=3 border=0.0
+00:50:35 | INFO: Data are loaded, start creating Blender stuff
+00:50:35 | INFO: Blender create Mesh node Cylinder.039
+00:50:35 | INFO: glTF import finished in 0.01s
+00:06.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\dagger_front.png'
+00:06.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_dagger_front.png'
+00:06.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\dagger_side.png'
+00:06.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_dagger_side.png'
+00:06.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\dagger_back.png'
+00:07.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_dagger_back.png'
+  PROOF dagger        rot=[0.0, 0.0, 90.0] gx=+0.000 hang=0.1 clip=140/405 cf=0.346 ground=0 show=1.066 proving=2 border=0.0
+00:50:36 | INFO: Data are loaded, start creating Blender stuff
+00:50:36 | INFO: Blender create Mesh node Cylinder.023
+00:50:36 | INFO: glTF import finished in 0.01s
+00:07.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\greataxe_front.png'
+00:07.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_greataxe_front.png'
+00:07.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\greataxe_side.png'
+00:07.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_greataxe_side.png'
+00:07.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\greataxe_back.png'
+00:08.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_greataxe_back.png'
+  PROOF greataxe      rot=[0.0, 0.0, 90.0] gx=+0.000 hang=0.1 clip=344/1778 cf=0.194 ground=0 show=1.004 proving=3 border=0.0
+00:50:37 | INFO: Data are loaded, start creating Blender stuff
+00:50:37 | INFO: Blender create Mesh node Cylinder.042
+00:50:37 | INFO: glTF import finished in 0.01s
+00:08.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\greatsword_front.png'
+00:08.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_greatsword_front.png'
+00:08.531  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\greatsword_side.png'
+00:08.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_greatsword_side.png'
+00:08.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\greatsword_back.png'
+00:08.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_greatsword_back.png'
+  PROOF greatsword    rot=[0.0, 0.0, -90.0] gx=-1.470 hang=0.1 clip=136/1344 cf=0.101 ground=0 show=1.039 proving=3 border=0.0
+00:50:38 | INFO: Data are loaded, start creating Blender stuff
+00:50:38 | INFO: Blender create Mesh node Cylinder.040
+00:50:38 | INFO: glTF import finished in 0.01s
+00:09.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\mace_front.png'
+00:09.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_mace_front.png'
+00:09.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\mace_side.png'
+00:09.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_mace_side.png'
+00:09.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\mace_back.png'
+00:09.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_mace_back.png'
+  PROOF mace          rot=[0.0, 0.0, 90.0] gx=+0.000 hang=0.1 clip=512/3321 cf=0.154 ground=0 show=1.059 proving=3 border=0.0
+00:50:39 | INFO: Data are loaded, start creating Blender stuff
+00:50:39 | INFO: Blender create Mesh node Cylinder.004
+00:50:39 | INFO: glTF import finished in 0.01s
+00:10.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\quarterstaff_front.png'
+00:10.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_quarterstaff_front.png'
+00:10.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\quarterstaff_side.png'
+00:10.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_quarterstaff_side.png'
+00:10.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\quarterstaff_back.png'
+00:10.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_quarterstaff_back.png'
+  PROOF quarterstaff  rot=[0.0, 0.0, -90.0] gx=-1.175 hang=0.1 clip=160/1849 cf=0.086 ground=0 show=0.989 proving=3 border=0.0
+00:50:40 | INFO: Data are loaded, start creating Blender stuff
+00:50:40 | INFO: Blender create Mesh node hammer_B
+00:50:40 | INFO: glTF import finished in 0.00s
+00:11.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\sceptre_front.png'
+00:11.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_sceptre_front.png'
+00:11.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\sceptre_side.png'
+00:11.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_sceptre_side.png'
+00:11.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\sceptre_back.png'
+00:11.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_sceptre_back.png'
+  PROOF sceptre       rot=[0.0, 0.0, 90.0] gx=+0.000 hang=0.1 clip=169/490 cf=0.345 ground=0 show=1.008 proving=3 border=0.0
+00:50:41 | INFO: Data are loaded, start creating Blender stuff
+00:50:41 | INFO: Blender create Mesh node halberd
+00:50:41 | INFO: glTF import finished in 0.01s
+00:11.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\spear_front.png'
+00:12.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_spear_front.png'
+00:12.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\spear_side.png'
+00:12.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_spear_side.png'
+00:12.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\spear_back.png'
+00:12.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_spear_back.png'
+  PROOF spear         rot=[90.0, 0.0, 90.0] gx=+0.000 hang=0.1 clip=438/1463 cf=0.299 ground=0 show=0.992 proving=3 border=0.0
+00:50:42 | INFO: Data are loaded, start creating Blender stuff
+00:50:42 | INFO: Blender create Mesh node Cylinder.004
+00:50:42 | INFO: glTF import finished in 0.01s
+00:12.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\staff_front.png'
+00:13.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_staff_front.png'
+00:13.156  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\staff_side.png'
+00:13.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_staff_side.png'
+00:13.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\staff_back.png'
+00:13.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_staff_back.png'
+  PROOF staff         rot=[0.0, 0.0, -90.0] gx=-1.175 hang=0.1 clip=160/1849 cf=0.086 ground=0 show=0.989 proving=3 border=0.0
+00:50:42 | INFO: Data are loaded, start creating Blender stuff
+00:50:42 | INFO: Blender create Mesh node Cylinder.041
+00:50:42 | INFO: glTF import finished in 0.01s
+00:13.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\sword_front.png'
+00:13.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_sword_front.png'
+00:14.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\sword_side.png'
+00:14.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_sword_side.png'
+00:14.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\sword_back.png'
+00:14.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_sword_back.png'
+  PROOF sword         rot=[0.0, 0.0, 90.0] gx=+0.000 hang=0.1 clip=232/675 cf=0.344 ground=0 show=1.029 proving=3 border=0.0
+00:50:43 | INFO: Data are loaded, start creating Blender stuff
+00:50:43 | INFO: Blender create Mesh node wand_A
+00:50:43 | INFO: glTF import finished in 0.00s
+00:14.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\wand_front.png'
+00:14.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_wand_front.png'
+00:14.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\wand_side.png'
+00:15.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_wand_side.png'
+00:15.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\cells\wand_back.png'
+00:15.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_tmp\_w_wand_back.png'
+  PROOF wand          rot=[0.0, 0.0, 90.0] gx=+0.000 hang=0.1 clip=103/339 cf=0.304 ground=0 show=1.058 proving=2 border=0.0
+  SHEET front C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_sheets\rx_front.png  order=axe,bow,crossbow,dagger,greataxe,greatsword,mace,quarterstaff,sceptre,spear,staff,sword,wand
+  SHEET side C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_sheets\rx_side.png  order=axe,bow,crossbow,dagger,greataxe,greatsword,mace,quarterstaff,sceptre,spear,staff,sword,wand
+  SHEET back C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_sheets\rx_back.png  order=axe,bow,crossbow,dagger,greataxe,greatsword,mace,quarterstaff,sceptre,spear,staff,sword,wand
+RXPROOF_DONE C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_t5_rxproof.json verdict=GREEN blanks=0 frameclips=0 blind=0 laths=0 floor=0 lances=0 errors=0
+  ENGINE_DELTA axe: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)
+  ENGINE_DELTA dagger: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)
+  ENGINE_DELTA dagger: gear.gd hand_scale 0.5 -> 0.6
+  ENGINE_DELTA greataxe: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)
+  ENGINE_DELTA greatsword: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, -90.0)
+  ENGINE_DELTA mace: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)
+  ENGINE_DELTA quarterstaff: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, -90.0)
+  ENGINE_DELTA sceptre: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)
+  ENGINE_DELTA spear: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(90.0, 0.0, 90.0)
+  ENGINE_DELTA staff: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, -90.0)
+  ENGINE_DELTA sword: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)
+  ENGINE_DELTA wand: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+EXITCODE 0

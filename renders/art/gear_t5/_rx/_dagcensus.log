@@ -1,0 +1,52 @@
+00:00.015  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+00:45:14 | INFO: Data are loaded, start creating Blender stuff
+00:45:14 | INFO: Blender create Mesh node Cube.125
+00:45:14 | INFO: Blender create Mesh node Cube.126
+00:45:14 | INFO: Blender create Mesh node PrototypePete_body.020
+00:45:14 | INFO: Blender create Mesh node PrototypePete_head.001
+00:45:14 | INFO: Blender create Mesh node Cube.128
+00:45:14 | INFO: Blender create Mesh node Cube.127
+00:45:14 | INFO: Blender create Mesh node Cube.003
+00:45:14 | INFO: Blender create Mesh node Cylinder.280
+00:45:14 | INFO: Blender create Mesh node Cylinder.005
+00:45:14 | INFO: Blender create Mesh node Cylinder.010
+00:45:14 | INFO: Blender create Mesh node Cylinder.022
+00:45:14 | INFO: Blender create Mesh node Cube.11839
+00:45:14 | INFO: Blender create Mesh node Cube.12993
+00:45:14 | INFO: Blender create Mesh node Cube.124
+00:45:14 | INFO: Blender create Mesh node Plane.004
+00:45:15 | INFO: glTF import finished in 0.54s
+00:45:15 | INFO: Data are loaded, start creating Blender stuff
+00:45:15 | INFO: Blender create Mesh node Cylinder.039
+00:45:15 | INFO: glTF import finished in 0.01s
+DAGCENSUS long=Z broad=X hs=0.50
+DAGCENSUS_DONE C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\_t5_dagcensus.json n=64 upright=24 upright_face_X=8 upright_passing=4
+  UP [-90.0, -90.0, 0.0]    face=Y(0.99) hang= 0.1 cf=0.912 ground=0 len=0.695
+  UP [-90.0, -90.0, 180.0]  face=Y(0.99) hang= 0.1 cf=0.352 ground=0 len=0.695
+  UP [-90.0, 0.0, -90.0]    face=Y(0.99) hang= 0.1 cf=0.912 ground=0 len=0.695
+  UP [-90.0, 0.0, 90.0]     face=Y(0.99) hang= 0.1 cf=0.352 ground=0 len=0.695
+  UP [-90.0, 90.0, 0.0]     face=Y(0.99) hang= 0.1 cf=0.352 ground=0 len=0.695
+  UP [-90.0, 90.0, 180.0]   face=Y(0.99) hang= 0.1 cf=0.912 ground=0 len=0.695
+  UP [-90.0, 180.0, -90.0]  face=Y(0.99) hang= 0.1 cf=0.352 ground=0 len=0.695
+  UP [-90.0, 180.0, 90.0]   face=Y(0.99) hang= 0.1 cf=0.912 ground=0 len=0.695
+  UP [0.0, 0.0, -90.0]      face=X(0.99) hang= 0.1 cf=0.827 ground=0 len=0.695
+  UP [0.0, 0.0, 90.0]       face=X(0.99) hang= 0.1 cf=0.384 ground=0 len=0.695
+  UP [0.0, 180.0, -90.0]    face=X(0.99) hang= 0.1 cf=0.516 ground=0 len=0.695
+  UP [0.0, 180.0, 90.0]     face=X(0.99) hang= 0.1 cf=0.469 ground=0 len=0.695
+  UP [90.0, -90.0, 0.0]     face=Y(0.99) hang= 0.1 cf=0.431 ground=0 len=0.695
+  UP [90.0, -90.0, 180.0]   face=Y(0.99) hang= 0.1 cf=0.582 ground=0 len=0.695
+  UP [90.0, 0.0, -90.0]     face=Y(0.99) hang= 0.1 cf=0.582 ground=0 len=0.695
+  UP [90.0, 0.0, 90.0]      face=Y(0.99) hang= 0.1 cf=0.431 ground=0 len=0.695
+  UP [90.0, 90.0, 0.0]      face=Y(0.99) hang= 0.1 cf=0.582 ground=0 len=0.695
+  UP [90.0, 90.0, 180.0]    face=Y(0.99) hang= 0.1 cf=0.431 ground=0 len=0.695
+  UP [90.0, 180.0, -90.0]   face=Y(0.99) hang= 0.1 cf=0.431 ground=0 len=0.695
+  UP [90.0, 180.0, 90.0]    face=Y(0.99) hang= 0.1 cf=0.582 ground=0 len=0.695
+  UP [180.0, 0.0, -90.0]    face=X(0.99) hang= 0.1 cf=0.469 ground=0 len=0.695
+  UP [180.0, 0.0, 90.0]     face=X(0.99) hang= 0.1 cf=0.516 ground=0 len=0.695
+  UP [180.0, 180.0, -90.0]  face=X(0.99) hang= 0.1 cf=0.384 ground=0 len=0.695
+  UP [180.0, 180.0, 90.0]   face=X(0.99) hang= 0.1 cf=0.827 ground=0 len=0.695
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+EXITCODE 0

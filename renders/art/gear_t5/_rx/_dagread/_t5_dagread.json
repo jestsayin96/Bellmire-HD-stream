@@ -1,0 +1,505 @@
+{
+ "tool": "_t5_dagread",
+ "tier": 5,
+ "kind": "dagger",
+ "model": "res://assets/gear/artifact/dagger_golden.glb",
+ "hero": {
+  "h": 2.45,
+  "w": 1.32,
+  "d": 1.253,
+  "posed": true,
+  "parts": [
+   "Knight_ArmLeft",
+   "Knight_ArmRight",
+   "Knight_Body",
+   "Knight_Cape",
+   "Knight_Head",
+   "Knight_Helmet",
+   "Knight_LegLeft",
+   "Knight_LegRight"
+  ]
+ },
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "euler_order": "YXZ",
+ "basis_selftest": {
+  "euler_order": "YXZ",
+  "rule": "Rslot = C . R_godot(held_rot) . C^-1  (identity at zero)",
+  "premise_measured": {
+   "slot_x_dot_world_down": 1.0,
+   "slot_y_dot_world_forward": 0.9885
+  },
+  "checked": [
+   "premise@bone",
+   "crossbow@cal",
+   "crossbow@live",
+   "crossbow@cal(divergence recorded)"
+  ],
+  "crossbow_live_held_rot": [
+   "-90",
+   "35",
+   "90"
+  ],
+  "crossbow_live_roll_deg": 35.0,
+  "weaponfit_rule_divergence": {
+   "family": "crossbow",
+   "weaponfit_rule_differs": true,
+   "held_rot_cal": [
+    "-90",
+    "0",
+    "90"
+   ],
+   "residual_angle_deg": 90.0,
+   "residual_axis": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "shaft_separation_deg": 90.0,
+   "prod_separation_deg": 90.0,
+   "reading": "weaponfit's crossbow basis is R.C^-1 where every other family it ships is C.R.C^-1 (identity at zero). OPEN QUESTION for the crossbow's own pass - NOT resolved here, and no tier-5 path uses it."
+  }
+ },
+ "engine_hand_scale": 0.5,
+ "engine_hand_scale_arm": "begins 'res://assets/gear/artifact/dagger_'",
+ "gates": {
+  "seen_min": 0.15,
+  "vis_min": 900,
+  "show_min": 0.7,
+  "min_proving": 2,
+  "hang_max": 15.0,
+  "clip_frac_max": 0.37,
+  "px_per_m": 200.0
+ },
+ "local_ext": [
+  0.1109,
+  0.2972,
+  1.3892
+ ],
+ "prescribed_triple_before": [
+  -90.0,
+  0.0,
+  90.0
+ ],
+ "candidates": 6,
+ "clean": 4,
+ "recommended": {
+  "minor": {
+   "front": 17,
+   "side": 44,
+   "back": 17
+  },
+  "opaque": {
+   "front": 94676,
+   "side": 81266,
+   "back": 95429
+  },
+  "border": {
+   "front": 0.0,
+   "side": 0.0,
+   "back": 0.0
+  },
+  "vis": {
+   "front": 1011,
+   "side": 2317,
+   "back": 523
+  },
+  "seen": {
+   "front": 0.5722,
+   "side": 0.6064,
+   "back": 0.2995
+  },
+  "cell_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs070_front.png",
+  "cell_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs070_side.png",
+  "cell_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs070_back.png",
+  "proving_views": 2,
+  "blanks": [],
+  "frame_clips": [],
+  "errors": [],
+  "best_minor": 44,
+  "mid_px": 41.6,
+  "show": 1.058,
+  "lath": false,
+  "blind": false,
+  "arm": "A_scale",
+  "triple": [
+   -90.0,
+   0.0,
+   90.0
+  ],
+  "hand_scale": 0.7,
+  "verts": 1141,
+  "checked": 437,
+  "clip": 128,
+  "clip_frac": 0.2929,
+  "ground": 0,
+  "floor_depth": 0.0,
+  "hang_deg_from_vertical": 0.1,
+  "tip_z": 1.396,
+  "drop": 0.217,
+  "world_len_m": 0.9725
+ },
+ "results": [
+  {
+   "minor": {
+    "front": 13,
+    "side": 32,
+    "back": 13
+   },
+   "opaque": {
+    "front": 94355,
+    "side": 81266,
+    "back": 95148
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 403,
+    "side": 957,
+    "back": 190
+   },
+   "seen": {
+    "front": 0.4198,
+    "side": 0.4719,
+    "back": 0.2
+   },
+   "cell_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_t-090-090+180_hs050_front.png",
+   "cell_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_t-090-090+180_hs050_side.png",
+   "cell_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_t-090-090+180_hs050_back.png",
+   "proving_views": 1,
+   "blanks": [],
+   "frame_clips": [],
+   "errors": [],
+   "best_minor": 32,
+   "mid_px": 29.7,
+   "show": 1.077,
+   "lath": false,
+   "blind": true,
+   "arm": "B_face",
+   "triple": [
+    -90.0,
+    -90.0,
+    180.0
+   ],
+   "hand_scale": 0.5,
+   "verts": 1141,
+   "checked": 318,
+   "clip": 112,
+   "clip_frac": 0.3522,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hang_deg_from_vertical": 0.1,
+   "tip_z": 1.18,
+   "drop": 0.155,
+   "world_len_m": 0.6947,
+   "same_geometry_triples": [
+    [
+     -90.0,
+     -90.0,
+     180.0
+    ],
+    [
+     -90.0,
+     0.0,
+     90.0
+    ],
+    [
+     -90.0,
+     90.0,
+     0.0
+    ],
+    [
+     -90.0,
+     180.0,
+     -90.0
+    ]
+   ]
+  },
+  {
+   "minor": {
+    "front": 15,
+    "side": 38,
+    "back": 15
+   },
+   "opaque": {
+    "front": 94516,
+    "side": 81266,
+    "back": 95295
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 702,
+    "side": 1599,
+    "back": 363
+   },
+   "seen": {
+    "front": 0.5326,
+    "side": 0.5591,
+    "back": 0.2784
+   },
+   "cell_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs060_front.png",
+   "cell_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs060_side.png",
+   "cell_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs060_back.png",
+   "proving_views": 1,
+   "blanks": [],
+   "frame_clips": [],
+   "errors": [],
+   "best_minor": 38,
+   "mid_px": 35.7,
+   "show": 1.066,
+   "lath": false,
+   "blind": true,
+   "arm": "A_scale",
+   "triple": [
+    -90.0,
+    0.0,
+    90.0
+   ],
+   "hand_scale": 0.6,
+   "verts": 1141,
+   "checked": 405,
+   "clip": 115,
+   "clip_frac": 0.284,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hang_deg_from_vertical": 0.1,
+   "tip_z": 1.288,
+   "drop": 0.186,
+   "world_len_m": 0.8336
+  },
+  {
+   "minor": {
+    "front": 17,
+    "side": 44,
+    "back": 17
+   },
+   "opaque": {
+    "front": 94676,
+    "side": 81266,
+    "back": 95429
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 1011,
+    "side": 2317,
+    "back": 523
+   },
+   "seen": {
+    "front": 0.5722,
+    "side": 0.6064,
+    "back": 0.2995
+   },
+   "cell_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs070_front.png",
+   "cell_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs070_side.png",
+   "cell_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs070_back.png",
+   "proving_views": 2,
+   "blanks": [],
+   "frame_clips": [],
+   "errors": [],
+   "best_minor": 44,
+   "mid_px": 41.6,
+   "show": 1.058,
+   "lath": false,
+   "blind": false,
+   "arm": "A_scale",
+   "triple": [
+    -90.0,
+    0.0,
+    90.0
+   ],
+   "hand_scale": 0.7,
+   "verts": 1141,
+   "checked": 437,
+   "clip": 128,
+   "clip_frac": 0.2929,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hang_deg_from_vertical": 0.1,
+   "tip_z": 1.396,
+   "drop": 0.217,
+   "world_len_m": 0.9725
+  },
+  {
+   "minor": {
+    "front": 18,
+    "side": 46,
+    "back": 18
+   },
+   "opaque": {
+    "front": 94715,
+    "side": 81269,
+    "back": 95457
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 1159,
+    "side": 2657,
+    "back": 565
+   },
+   "seen": {
+    "front": 0.5842,
+    "side": 0.6084,
+    "back": 0.2884
+   },
+   "cell_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs075_front.png",
+   "cell_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs075_side.png",
+   "cell_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs075_back.png",
+   "proving_views": 2,
+   "blanks": [],
+   "frame_clips": [],
+   "errors": [],
+   "best_minor": 46,
+   "mid_px": 44.6,
+   "show": 1.032,
+   "lath": false,
+   "blind": false,
+   "arm": "A_scale",
+   "triple": [
+    -90.0,
+    0.0,
+    90.0
+   ],
+   "hand_scale": 0.75,
+   "verts": 1141,
+   "checked": 453,
+   "clip": 131,
+   "clip_frac": 0.2892,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hang_deg_from_vertical": 0.1,
+   "tip_z": 1.45,
+   "drop": 0.232,
+   "world_len_m": 1.042
+  },
+  {
+   "minor": {
+    "front": 19,
+    "side": 50,
+    "back": 19
+   },
+   "opaque": {
+    "front": 94783,
+    "side": 81274,
+    "back": 95530
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 1341,
+    "side": 2999,
+    "back": 651
+   },
+   "seen": {
+    "front": 0.5942,
+    "side": 0.6079,
+    "back": 0.2905
+   },
+   "cell_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs080_front.png",
+   "cell_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs080_side.png",
+   "cell_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs080_back.png",
+   "proving_views": 2,
+   "blanks": [],
+   "frame_clips": [],
+   "errors": [],
+   "best_minor": 50,
+   "mid_px": 47.5,
+   "show": 1.052,
+   "lath": false,
+   "blind": false,
+   "arm": "A_scale",
+   "triple": [
+    -90.0,
+    0.0,
+    90.0
+   ],
+   "hand_scale": 0.8,
+   "verts": 1141,
+   "checked": 505,
+   "clip": 142,
+   "clip_frac": 0.2812,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hang_deg_from_vertical": 0.1,
+   "tip_z": 1.504,
+   "drop": 0.248,
+   "world_len_m": 1.1115
+  },
+  {
+   "minor": {
+    "front": 21,
+    "side": 56,
+    "back": 21
+   },
+   "opaque": {
+    "front": 94876,
+    "side": 81286,
+    "back": 95596
+   },
+   "border": {
+    "front": 0.0,
+    "side": 0.0,
+    "back": 0.0
+   },
+   "vis": {
+    "front": 1700,
+    "side": 3720,
+    "back": 734
+   },
+   "seen": {
+    "front": 0.6142,
+    "side": 0.6011,
+    "back": 0.2676
+   },
+   "cell_front": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs090_front.png",
+   "cell_side": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs090_side.png",
+   "cell_back": "C:\\hd adventure\\bellmire-art\\renders\\art\\gear_t5\\_rx\\_dagread\\cells\\dagger_pres_hs090_back.png",
+   "proving_views": 2,
+   "blanks": [],
+   "frame_clips": [],
+   "errors": [],
+   "best_minor": 56,
+   "mid_px": 53.5,
+   "show": 1.047,
+   "lath": false,
+   "blind": false,
+   "arm": "A_scale",
+   "triple": [
+    -90.0,
+    0.0,
+    90.0
+   ],
+   "hand_scale": 0.9,
+   "verts": 1141,
+   "checked": 621,
+   "clip": 202,
+   "clip_frac": 0.3253,
+   "ground": 0,
+   "floor_depth": 0.0,
+   "hang_deg_from_vertical": 0.1,
+   "tip_z": 1.612,
+   "drop": 0.279,
+   "world_len_m": 1.2504
+  }
+ ]
+}

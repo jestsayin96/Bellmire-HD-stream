@@ -1,0 +1,300 @@
+{
+ "when_ct": "28 Nov 2026 11:4x-12:2x CT",
+ "tiers": {
+  "inn_t1": {
+   "footprint_m": [
+    6.0,
+    6.0
+   ],
+   "storeys": 1,
+   "door_xy": [
+    0.0,
+    -3.0
+   ],
+   "core_centre_dx_dy": [
+    0.0,
+    0.0
+   ],
+   "core_dims_m": [
+    7.5852,
+    6.26,
+    6.3064
+   ],
+   "dims_m": [
+    7.5852,
+    7.0699,
+    6.319
+   ],
+   "base_dz_m": 0.0,
+   "centre_dx_dy": [
+    0.0,
+    -0.4049
+   ],
+   "door_xy_after_recentre": [
+    0.0019,
+    -3.0
+   ],
+   "n_obj": 34,
+   "n_tri": 2292,
+   "export_note": "jpeg q82",
+   "n_images_in_file": 0,
+   "glb": "assets/buildings/town_inn_t1.glb",
+   "glb_bytes": 931256,
+   "glb_mb": 0.888,
+   "solidity_front": {
+    "silhouette_px": 105045,
+    "hole_px": 6093,
+    "hole_frac": 0.0548,
+    "red_on_empty": false
+   },
+   "views": {
+    "front": {
+     "opaque_px": 309004,
+     "border_alpha_px": 0,
+     "subject_moved_px": 163806,
+     "hero_moved_px": 8911,
+     "hero_h_px": 164,
+     "hero_w_px": 227
+    },
+    "three_quarter": {
+     "opaque_px": 206417,
+     "border_alpha_px": 0,
+     "subject_moved_px": 98668,
+     "hero_moved_px": 5007,
+     "hero_h_px": 121,
+     "hero_w_px": 107
+    },
+    "side": {
+     "opaque_px": 346191,
+     "border_alpha_px": 0,
+     "subject_moved_px": 185300,
+     "hero_moved_px": 14074,
+     "hero_h_px": 140,
+     "hero_w_px": 346
+    },
+    "back": {
+     "opaque_px": 307704,
+     "border_alpha_px": 0,
+     "subject_moved_px": 148120,
+     "hero_moved_px": 7941,
+     "hero_h_px": 151,
+     "hero_w_px": 115
+    }
+   }
+  },
+  "inn_t2": {
+   "footprint_m": [
+    6.0,
+    8.0
+   ],
+   "storeys": 2,
+   "door_xy": [
+    0.0,
+    -4.0
+   ],
+   "core_centre_dx_dy": [
+    0.0,
+    0.0
+   ],
+   "core_dims_m": [
+    8.2498,
+    9.85,
+    11.1375
+   ],
+   "dims_m": [
+    13.3909,
+    9.85,
+    11.1637
+   ],
+   "base_dz_m": 0.0,
+   "centre_dx_dy": [
+    2.5705,
+    0.0
+   ],
+   "door_xy_after_recentre": [
+    0.0,
+    -4.0
+   ],
+   "n_obj": 101,
+   "n_tri": 9335,
+   "export_note": "jpeg q82",
+   "n_images_in_file": 0,
+   "glb": "assets/buildings/town_inn_t2.glb",
+   "glb_bytes": 1256948,
+   "glb_mb": 1.199,
+   "solidity_front": {
+    "silhouette_px": 95921,
+    "hole_px": 9037,
+    "hole_frac": 0.0861,
+    "red_on_empty": false
+   },
+   "views": {
+    "front": {
+     "opaque_px": 258497,
+     "border_alpha_px": 0,
+     "subject_moved_px": 144528,
+     "hero_moved_px": 4417,
+     "hero_h_px": 106,
+     "hero_w_px": 115
+    },
+    "three_quarter": {
+     "opaque_px": 212707,
+     "border_alpha_px": 0,
+     "subject_moved_px": 106601,
+     "hero_moved_px": 2336,
+     "hero_h_px": 85,
+     "hero_w_px": 73
+    },
+    "side": {
+     "opaque_px": 459409,
+     "border_alpha_px": 0,
+     "subject_moved_px": 273218,
+     "hero_moved_px": 5695,
+     "hero_h_px": 110,
+     "hero_w_px": 259
+    },
+    "back": {
+     "opaque_px": 253164,
+     "border_alpha_px": 0,
+     "subject_moved_px": 131970,
+     "hero_moved_px": 3268,
+     "hero_h_px": 97,
+     "hero_w_px": 114
+    }
+   }
+  },
+  "inn_t3": {
+   "footprint_m": [
+    6.0,
+    10.0
+   ],
+   "storeys": 2,
+   "door_xy": [
+    0.0,
+    -5.0
+   ],
+   "core_centre_dx_dy": [
+    0.0,
+    0.0
+   ],
+   "core_dims_m": [
+    8.2498,
+    12.02,
+    11.154
+   ],
+   "dims_m": [
+    15.3249,
+    12.02,
+    11.1637
+   ],
+   "base_dz_m": 0.0,
+   "centre_dx_dy": [
+    3.5376,
+    0.0
+   ],
+   "door_xy_after_recentre": [
+    0.0,
+    -5.0
+   ],
+   "n_obj": 128,
+   "n_tri": 33528,
+   "export_note": "jpeg q82",
+   "n_images_in_file": 0,
+   "glb": "assets/buildings/town_inn_t3.glb",
+   "glb_bytes": 1610564,
+   "glb_mb": 1.536,
+   "solidity_front": {
+    "silhouette_px": 91764,
+    "hole_px": 4881,
+    "hole_frac": 0.0505,
+    "red_on_empty": false
+   },
+   "views": {
+    "front": {
+     "opaque_px": 254348,
+     "border_alpha_px": 0,
+     "subject_moved_px": 134438,
+     "hero_moved_px": 2860,
+     "hero_h_px": 94,
+     "hero_w_px": 104
+    },
+    "three_quarter": {
+     "opaque_px": 204137,
+     "border_alpha_px": 0,
+     "subject_moved_px": 98142,
+     "hero_moved_px": 1768,
+     "hero_h_px": 74,
+     "hero_w_px": 62
+    },
+    "side": {
+     "opaque_px": 423683,
+     "border_alpha_px": 0,
+     "subject_moved_px": 248541,
+     "hero_moved_px": 4328,
+     "hero_h_px": 93,
+     "hero_w_px": 232
+    },
+    "back": {
+     "opaque_px": 251328,
+     "border_alpha_px": 0,
+     "subject_moved_px": 121592,
+     "hero_moved_px": 2693,
+     "hero_h_px": 89,
+     "hero_w_px": 106
+    }
+   }
+  }
+ },
+ "errors": [],
+ "px": 1024,
+ "maxmb": 9.0,
+ "growth": "free",
+ "why_free": "t2 and t3 are the same height by design - content's t3 line is 'stone below, beam above', two storeys, and both wear the same 8.25 m-span tile roof. The progression is material, length and dressing, so the monotonic gate is NOT carrying this sheet.",
+ "sheet": {
+  "path": "renders/art/town/inn/_tiers_side_by_side.png",
+  "opaque_px": 407436,
+  "subject_moved_px": 309979,
+  "border_alpha_px": 0,
+  "label_px": {
+   "inn_t1": 2420,
+   "inn_t2": 2452,
+   "inn_t3": 2988
+  },
+  "silhouette": {
+   "inn_t1": {
+    "px": 40465,
+    "h_px": 221,
+    "w_px": 273
+   },
+   "inn_t2": {
+    "px": 94945,
+    "h_px": 382,
+    "w_px": 433
+   },
+   "inn_t3": {
+    "px": 114779,
+    "h_px": 401,
+    "w_px": 496
+   }
+  },
+  "spans": [
+   [
+    "inn_t1",
+    0.0,
+    7.585
+   ],
+   [
+    "inn_t2",
+    11.585,
+    24.976
+   ],
+   [
+    "inn_t3",
+    28.976,
+    44.301
+   ]
+  ]
+ },
+ "engine": "BLENDER_EEVEE",
+ "verdict": "GREEN"
+}

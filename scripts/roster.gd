@@ -241,6 +241,7 @@ signal announced(line: String, colour: Color)
 ## kind: "fell" | "rank" | "learned" | "lord" | "rare". text is GAME-generated only (no hero name,
 ## no viewer string).
 signal hero_moment(user_id: String, kind: String, text: String)
+signal letter_changed(user_id: String, was: String, now: String)   # S167 System 43
 ## D70.2 remainder: RARE is a find from the top of the ladder - a runed/dragontooth/scarforged
 ## weapon or plate/warded/scarwoven armour (tier >= RARE_TIER). It is told when the hero COMES HOME
 ## with it (Delve._finish -> came_home), not when it is prised loose - a hero who dies below did not
@@ -803,6 +804,7 @@ func award(user_id: String, gold: int, xp: int, kills := 0, floor_no := 0) -> vo
             % [h["name"], rank_now], Color(0.98, 0.90, 0.52))
         hero_moment.emit(user_id, "rank", "your hero was raised to %s of the Bellmire Guild." % rank_now)
         _e3po("rank_up")       # D37: the Commander of the Guards notes the promotion
+    _letter_check(user_id, h)  # S167: the S-F letter rides every award (kills, gear-bought gold, floors)
     changed.emit(user_id)
 
 ## D70.2: the hero is home from below. If they carried something rare up, tell the owner ONCE.
@@ -1356,6 +1358,140 @@ func rank_row(h: Dictionary) -> Dictionary:
 
 func rank_of(h: Dictionary) -> String:
     return String(rank_row(h)["title"])
+
+# ------------------------------------------------ S167 SYSTEM 43: the S-F ladder
+# DIRECTIVE sup-nov27-1856. A SECOND axis beside the guild roll above, not a rename of it: the
+# roll's titles (Unproven..Grandmaster) still buy the forge rate and the stores; the LETTER is the
+# adventurer's ranking, and it is what quest boards and the open queue gate on. Every new hero is
+# F. The score is a composite and it is computed LIVE off the sheet, never stored - so it CAN go
+# down: a hero who loses gear to a death or to wear drops the gear term at once.
+#   solo_deepest - the deepest floor reached ALONE (!solo). The primary driver: it proves the
+#                  player, not the party, so it carries the heaviest weight.
+#   kills        - every kill, 1 each.
+#   minibosses   - the elites put down while this hero stood in the party.
+#   lords        - the eight lords put down while this hero stood in the party.
+#   gear         - weapon tier + armour tier, as carried right now.
+const LETTER_W := {"solo_deepest": 12, "kills": 1, "minibosses": 15, "lords": 60, "gear": 10}
+const LETTER_RANKS := [
+    {"letter": "F", "at": 0},
+    {"letter": "E", "at": 40},
+    {"letter": "D", "at": 120},
+    {"letter": "C", "at": 280},
+    {"letter": "B", "at": 520},
+    {"letter": "A", "at": 900},
+    {"letter": "S", "at": 1500},
+]
+
+func letter_parts(h: Dictionary) -> Dictionary:
+    return {
+        "solo_deepest": int(h.get("solo_deepest", 0)), "kills": int(h.get("kills", 0)),
+        "minibosses": int(h.get("minibosses", 0)), "lords": int(h.get("lords", 0)),
+        "gear": int(h.get("weapon", 0)) + int(h.get("armour", 0)),
+    }
+
+func letter_score(h: Dictionary) -> int:
+    var parts := letter_parts(h)
+    var sc := 0
+    for k: String in LETTER_W:
+        sc += int(parts[k]) * int(LETTER_W[k])
+    return sc
+
+## 0 = F .. 6 = S
+func letter_index(h: Dictionary) -> int:
+    var sc := letter_score(h)
+    var idx := 0
+    for i in range(LETTER_RANKS.size()):
+        if sc >= int(LETTER_RANKS[i]["at"]):
+            idx = i
+    return idx
+
+func letter_rank(h: Dictionary) -> String:
+    return String(LETTER_RANKS[letter_index(h)]["letter"])
+
+## {} at S; otherwise the next letter, its threshold and the points still owed.
+func letter_next(h: Dictionary) -> Dictionary:
+    var i := letter_index(h)
+    if i >= LETTER_RANKS.size() - 1:
+        return {}
+    var nx: Dictionary = LETTER_RANKS[i + 1]
+    return {"letter": String(nx["letter"]), "at": int(nx["at"]), "need": int(nx["at"]) - letter_score(h)}
+
+## The open queue's band: one letter below, the hero's own, one above (S: A/S, F: E/F).
+func letter_band(h: Dictionary) -> Array:
+    var i := letter_index(h)
+    var out := []
+    for j in range(maxi(0, i - 1), mini(LETTER_RANKS.size() - 1, i + 1) + 1):
+        out.append(String(LETTER_RANKS[j]["letter"]))
+    return out
+
+## Open-queue matching: two heroes may share a PUBLIC delve only within one letter. Private
+## parties bypass this by not asking it.
+func letters_match(a: Dictionary, b: Dictionary) -> bool:
+    return absi(letter_index(a) - letter_index(b)) <= 1
+
+func note_solo_floor(user_id: String, floor_no: int) -> void:
+    var h := get_hero(user_id)
+    if h.is_empty(): return
+    if floor_no > int(h.get("solo_deepest", 0)):
+        h["solo_deepest"] = floor_no
+        _letter_check(user_id, h)
+
+func note_miniboss(user_id: String) -> void:
+    var h := get_hero(user_id)
+    if h.is_empty(): return
+    h["minibosses"] = int(h.get("minibosses", 0)) + 1
+    _letter_check(user_id, h)
+
+func note_lord(user_id: String) -> void:
+    var h := get_hero(user_id)
+    if h.is_empty(): return
+    h["lords"] = int(h.get("lords", 0)) + 1
+    _letter_check(user_id, h)
+
+## The letter is recomputed on every record call (award, a floor alone, an elite, a lord) and
+## said out loud when it moves - up OR down. `letter` on the sheet is only the last one SAID.
+func _letter_check(user_id: String, h: Dictionary) -> void:
+    var now := letter_rank(h)
+    var was := String(h.get("letter", "F"))
+    h["letter"] = now
+    if now == was:
+        return
+    var was_i := 0
+    for i in range(LETTER_RANKS.size()):
+        if String(LETTER_RANKS[i]["letter"]) == was:
+            was_i = i
+    var up := letter_index(h) > was_i
+    if up:
+        announced.emit("%s is ranked %s by the Adventurer's Guild." % [h["name"], now], Color(0.98, 0.90, 0.52))
+        hero_moment.emit(user_id, "rank", "your hero is now %s-rank." % now)
+    else:
+        announced.emit("%s slips to %s-rank." % [h["name"], now], Color(0.85, 0.70, 0.55))
+        hero_moment.emit(user_id, "rank", "your hero slipped to %s-rank." % now)
+    letter_changed.emit(user_id, was, now)
+
+## The by_key feed for the HUB and HUD (published the way miniboss_feed is: read rows, never
+## reach into roster dicts). Keyed by the hero's display name, which the payload already carries.
+func rank_feed() -> Dictionary:
+    var by_key := {}
+    var counts := {}
+    for r: Dictionary in LETTER_RANKS:
+        counts[String(r["letter"])] = 0
+    for id: String in heroes:
+        var h: Dictionary = heroes[id]
+        if not bool(h.get("alive", false)):
+            continue
+        var l := letter_rank(h)
+        counts[l] = int(counts[l]) + 1
+        var nx := letter_next(h)
+        by_key[String(h.get("name", "?"))] = {
+            "letter": l, "score": letter_score(h), "parts": letter_parts(h),
+            "next": String(nx.get("letter", "")), "need": int(nx.get("need", 0)),
+            "band": letter_band(h),
+        }
+    var ladder := []
+    for i in range(LETTER_RANKS.size() - 1, -1, -1):
+        ladder.append({"letter": String(LETTER_RANKS[i]["letter"]), "at": int(LETTER_RANKS[i]["at"])})
+    return {"v": 1, "ladder": ladder, "weights": LETTER_W, "counts": counts, "by_key": by_key}
 
 func leaderboard(kind := "deepest", n := 10) -> Array:
     var rows := []

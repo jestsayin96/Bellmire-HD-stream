@@ -4967,3 +4967,30 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
   SOLO_TEST OK 16 of 16 (new gate tools/_solo42_test.gd, real Town.tscn). PARTY_TEST OK 23 of 23. TWITCH_PARSE OK (8 checks).
   OFFFLOOR_VERDICT OK 0 of 2427 samples off the floor. DELVE_TEST OK ran 9001 frames, floor reached 2. TOWNWALK
   in_solid=0/16765 (0.000%) raid_in_solid=0/6045 (0.000%) PASS. ZERO BITS, no Twitch test.
+
+## D-cycle - S167 SYSTEM 43 THE S-F LADDER, ENGINE HALF (DIRECTIVE sup-nov27-1856), 2026-11-27 23:08-23:2x CST (game build)
+- TAKE THIS NEXT (team lead, 22:58 block) gave game build System 43 engine half. NOTE FOR THE LEAD: the supervisor's
+  23:04 RULING (sup-nov27-2304, Mr. E: TOWN FIRST - town visual progression D31/D93/Systems 15-17 ahead of ranking) landed
+  AFTER the 22:58 block and is NOT in the plan yet. I took the plan's row because it was small, specified, and is the
+  unblock the hub has named twice; the NEXT row for this lane should be the town per that ruling. Please row it.
+- roster.gd (mine): a SECOND axis beside the guild roll, not a rename of it (Unproven..Grandmaster still buy forge rate and
+  stores). `LETTER_RANKS` - 7 rows by a brace-matched parse (F 0, E 40, D 120, C 280, B 520, A 900, S 1500) - and
+  `LETTER_W` (solo_deepest 12, kills 1, minibosses 15, lords 60, gear 10 per weapon+armour tier). `letter_score`,
+  `letter_index`, `letter_rank`, `letter_next` ({letter, at, need}; {} at S), `letter_band` (one below/own/one above; F=E/F,
+  S=A/S), `letters_match(a, b)` (|diff| <= 1), `note_solo_floor`, `note_miniboss`, `note_lord`, `_letter_check` (says a move
+  up OR down out loud, emits new `signal letter_changed(user_id, was, now)`), and `rank_feed()`.
+  THE SCORE IS COMPUTED LIVE OFF THE SHEET, NEVER STORED, so it falls the moment gear is lost; `h.letter` is only the last
+  letter SAID. Every new hero is F. Old saves read missing counters as 0.
+- delve.gd: `var solo := false`; `_next_floor` feeds `note_solo_floor` for a solo delve; `_on_kill` credits a lord or an
+  elite (purse meta or mb_key) to EVERY delver alive when it falls. town.gd `_solo_enter` sets `d.solo = true`.
+- snapshot_pub.gd (additive): each hero sheet gains `letter` + `letter_score`; the payload gains top-level `rank_feed`
+  {v, ladder[S..F with at], weights, counts{letter:n}, by_key{hero name: {letter, score, parts, next, need, band}}} -
+  the by_key shape miniboss_feed uses, so HUB and HUD read rows and never reach into roster dicts.
+- NOT IN THIS SLICE (mine, next ranking slice): the OPEN-QUEUE FILTER itself - `letters_match` exists and is tested but the
+  public muster does not yet call it; quest-board gating waits on System 18. `!rank` is the CHAT BOT's: call
+  roster.letter_rank / letter_score / letter_next(h).need.
+- RENDER: no visual surface in this slice (a feed + Chronicle lines; the badge is the HUD's/hub's). Looked at the feed row
+  instead: RANK_FEED {"band":["F","E"],"letter":"F","need":28,"next":"E","parts":{...,"solo_deepest":1},"score":12}.
+- GATES (log docs/_s167_battery.log, JESTS_NO_TWITCH=1): see the commit body for verdict lines. New gate tools/_s167_rank.gd:
+  RANK_UNIT OK (F start, C at 390, fall to D on gear loss, D/F no match, D/E match, S row, feed) + a real Town.tscn !solo
+  delve RANK_SOLO floor=1 solo=true solo_deepest=1 + payload rank_feed has the hero -> RANK_TEST OK. ZERO BITS, no Twitch.

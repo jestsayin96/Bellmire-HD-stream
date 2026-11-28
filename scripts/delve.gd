@@ -38,6 +38,7 @@ var turn_back_at := 0.35         # mean hp fraction at which the party retreats
 var start_floor := 1
 var npc_party := false           # the town's own band: no viewer gold
 var lane := 0                    # parallel delves sit side by side, 700 m apart
+var solo := false                # S167 System 43: a !solo delve (town._solo_enter sets it) - its floors feed solo_deepest
 
 ## D37: E3PO voice hook. The town-held Notables carries _e3po_say. In a live
 ## delve `town` is the Town node; in a bare test rig it may be a stub without a
@@ -125,6 +126,9 @@ func _next_floor() -> void:
 	_nav_reset()
 	_back_to = ""                  # D83: whatever pulled them back into a fight was on the last floor
 	floor_no += 1
+	if solo and roster and roster.has_method("note_solo_floor"):
+		for m in party:
+			roster.note_solo_floor(String(m["uid"]), floor_no)
 	if dun:
 		dun.queue_free()
 	dun = DungeonHD.new()
@@ -2040,6 +2044,17 @@ func _on_kill(tgt: Monster, by: Dictionary = {}) -> void:
 	# D70.2: the delver whose blow felled a LORD is told so, by login (roster.felled_lord)
 	if not by.is_empty() and dun != null and dun.lord == tgt and roster.has_method("felled_lord"):
 		roster.felled_lord(String(by["uid"]), String(tgt.def.get("name", "a lord")), floor_no)
+	# S167 System 43: the ladder counts a lord or an elite for EVERY delver standing when it falls
+	# (checked before the purse meta is spent below).
+	if roster and roster.has_method("note_lord"):
+		var is_lord := dun != null and dun.lord == tgt
+		var is_mb := tgt.has_meta("l29c_miniboss_purse") or String(tgt.get_meta("mb_key", "")) != ""
+		if is_lord or is_mb:
+			for m in _alive():
+				if is_lord:
+					roster.note_lord(String(m["uid"]))
+				else:
+					roster.note_miniboss(String(m["uid"]))
 	var ways: Dictionary = tgt.def.get("ways", {})
 	if ways.has("splits"):
 		var n := int(ways["splits"])

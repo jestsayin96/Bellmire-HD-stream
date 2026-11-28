@@ -197,6 +197,7 @@ func build_payload() -> Dictionary:
                 sheets.append(_sheet(r, h, id, delv))
         sheets.sort_custom(func(a, b): return int(a["standing"]) > int(b["standing"]))
         out["heroes"] = sheets
+        out["rank_feed"] = r.rank_feed()   # S167 System 43: by_key ladder feed for hub + HUD
     last_build_ms = (Time.get_ticks_usec() - t0) / 1000.0
     return out
 
@@ -632,6 +633,8 @@ func _sheet(r: Roster, h: Dictionary, id := "", delv: Dictionary = {}) -> Dictio
         # straight off Roster.spec_of / spec_row - one source, so an invalid stored spec reads "".
         "spec": Roster.spec_of(h), "spec_name": String(Roster.spec_row(h).get("name", "")),
         "rank": r.rank_of(h), "standing": r.standing(h), "title": r.title_of(h),
+        # S167 (additive): System 43's S-F letter beside the guild-roll title above.
+        "letter": r.letter_rank(h), "letter_score": r.letter_score(h),
         "ac": r.armour_class(h), "hp": int(r.max_hp(h)), "max_hp": int(r.max_hp(h)),
         "xp_next": int(r._xp_needed(int(h.get("level", 1)))), "prof": r.prof(h),
         "to_hit": r.attack_bonus(h), "stats": stats, "saves": r.save_line(h),

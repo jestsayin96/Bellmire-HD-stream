@@ -5678,6 +5678,7 @@ func _solo_enter(uid: String) -> void:
     d.roster = roster
     _solo_lane -= 1
     d.lane = _solo_lane
+    d.solo = true                  # S167 System 43: its floors feed the hero's solo_deepest
     add_child(d)
     solo_delves[uid] = d
     (heroes[uid] as Node3D).visible = false

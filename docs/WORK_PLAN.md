@@ -303,6 +303,139 @@
 *** back. **ART FRAMED THIS AS MR. E'S CALL; I AM ROUTING IT TO YOU FIRST** per my reporting line,
 *** and it sits with my 20:58 question (4) about whether sceptre, spear and staff are in scope at all.
 ***
+*** ===== (E) THE PUBLISH GATE, RE-RUN BY ME AT 22:18 CT. **GREEN, AND THE BLOCKER IS GONE.**
+*** ===== I HAVE NOT PUSHED AND I WILL NOT. NOTHING BELOW CHANGES ANY LANE ROW ABOVE. =====
+*** RULING sup-nov27-1637 Ruling 2 authorizes this gate; the hub claimed no work in progress and
+*** CLEARED the one blocker I named at 20:58, so the gate was OWED and I ran it. I ran it in MY OWN
+*** container with Chromium + Playwright over a real local HTTP server (not file://), on the merged
+*** `web/` tree. **`origin/main:web` and `origin/hub:web` are the SAME TREE `23eee62a`** - main
+*** carries the hub's work exactly, so the thing I gated is the thing that would be published.
+***   - **THE CACHE-BUST IS FIXED IN THE ACTUAL BYTES.** `index.html:61`
+***     `<link rel="stylesheet" href="style.css?v=9">` and `:520` `<script src="app.js?v=9" defer>`.
+***     Published still asks `app.js?v=8` with no version on the stylesheet at all. The files really
+***     do differ - app.js 381,431 -> 393,998 chars, style.css 129,406 -> 132,072 - so the bump was
+***     necessary and is now correct, and the stylesheet is versioned for the first time.
+***   - **SIX STATE CHECKS at 1280x900, ALL GREEN:** `?state=empty`, `?state=fail`, `?state=stale`,
+***     `?mock=chronicle`, `?mock=crowd`, `?open=1`. All six render, all six title "Bellmire HD -
+***     the Guild Hall", rail present on all six, **ZERO page errors on all six.**
+***     HONEST LIMIT, NAMED: the only failed requests were the supabase snapshot (localhost has no
+***     snapshot - expected) and `fonts/gloock-latin-400.woff2`, which failed because **I staged
+***     only index.html, app.js and style.css into my container, not the 608-file tree.** THAT IS MY
+***     STAGING LIMIT, NOT A PAGE FAULT, and the font falls back silently.
+***   - **CSP INTACT, PROVEN BY INJECTION, NOT BY READING THE META.** I appended an inline `<style>`
+***     with the browser's own API and the page REFUSED IT: `securitypolicyviolation` fired with
+***     violatedDirective **`style-src-elem`**, and `getComputedStyle(body).backgroundColor` stayed
+***     **`rgb(19,13,8)`** instead of the red the injected rule demanded. Policy on `index.html:5` is
+***     `default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'`
+***     with `connect-src` limited to supabase + twitch and `img-src 'self' data:`.
+***   - **HOSTILE NAME RENDERS AS LITERAL TEXT - AND MY FIRST ATTEMPT AT THIS ARM WAS A
+***     NON-OBSERVATION, EXACTLY AS THE 20:58 SEAT WARNED.** My first pass clicked `#chatLoad` on
+***     the PLAIN page: the panel said "Chat lost its footing" because nothing can connect from my
+***     sandbox, so I had 0 imgs and 0 scripts **and no hostile name had ever been rendered.** That
+***     proves nothing. I found the real arm in the code - `openGuildChat()` only runs the hostile
+***     fixture when `MOCK === "chat"` (`app.js:2746-2750`) - and re-ran at **`?mock=chat`** with the
+***     click. THE REAL RESULT: the panel shows `<img src=x onerror=alert(1)>` **as text, twice**
+***     (once as the display name, once as the message body), with **0 `<img>`, 0 `<script>`, 0
+***     `[onerror]` elements in the panel, no dialog fired and 0 page errors.** THAT is the pass.
+***   - **SECURITY GREPS RE-RUN BY ME ON THE MERGED TREE, NOT TAKEN FROM THE LANE:** `innerHTML` has
+***     exactly TWO assignment sites, `app.js:255` and `:301`; I READ BOTH - `:255` is a page-owned
+***     template whose only interpolations are `esc(lastError)` and `esc(age)`, `:301` is two fixed
+***     literals with no interpolation at all. The other four `innerHTML` hits are comment prose.
+***     `outerHTML` 0. `eval(` 0 call sites. `insertAdjacentHTML`, `document.write` and `new
+***     Function` appear ONLY as comment text at `app.js:10-11`.
+***     **FOUR URL SINKS EXIST AND I CHECKED EVERY ONE RATHER THAN COUNTING THEM:** `:70`
+***     `setAttribute("href", "#ic-" + key)` is a fixed-literal SVG symbol ref; `:3271`
+***     `img.src = "icons/beasts/" + b.mb + ".webp"` where `b.mb` is a BEAST_DEX constant; `:4007`
+***     `img.src = f` where `f` comes from `ITEM_ICONS.get(...)` - a Map lookup, so a hostile name
+***     can only MISS the map and yield `""`, never become a path; and `:2813` `link.href = uri`,
+***     which is **guarded by `/^https:\/\/(www\.)?twitch\.tv\//`** and falls back to rendering
+***     as plain text otherwise. That last one is defensive beyond what was required.
+***   - **I LOOKED AT THE SCREENSHOT.** Rail ("LIVE IN BELLMIRE"), stage, guild chat column. The
+***     section bar wraps to three rows with **NO clipping** - every pill fully inside its row.
+***     Parchment welcome card, offline banner, teal accent on the Try-again button and headings,
+***     restrained gold wordmark, deep ink/charcoal ground. **NO Twitch purple, wordmark or logo
+***     anywhere.** The palette rule holds.
+***     HONEST LIMIT: localhost has no snapshot, so the offline banner IS the expected state and I
+***     did NOT see live rows. **The gate proves the page's SAFETY and SHELL, not its live content.**
+***
+*** ===== (F) THE HUB DELTA, RE-MEASURED BY ME THIS RUN. DO NOT QUOTE IT NEXT HOUR. =====
+*** `origin/gh-pages` tip **8d214d36**, pushed **25 NOV 09:55:03 CT - about 60 HOURS AGO**.
+*** `origin/gh-pages^{tree}` = `1d8bce63`; `origin/main:web` = `origin/hub:web` = **`23eee62a`**.
+*** MERGED AND NOT PUBLISHED: **73 files / +491 / -12**, of which **67 are binary `.webp`**. Text:
+*** `app.js +245/-8`, `NOTES.md +84`, `icons/beasts/_manifest.json +75`, `style.css +35/-1`,
+*** `tools/make_bestiary.py +48`, `index.html +4/-3`. The 20:58 block measured +485/-10 and the
+*** 19:58 one +408: IT GROWS EVERY HOUR THE HUB SHIPS, which is why it is counted and never quoted.
+***
+*** ===== (G) THE DEAD-DATA AUDIT, 22:18 CT, MEASURED ON THE MERGED TREE =====
+*** CORPUS: **49 files = 48 `scripts/*.gd` + `web/app.js`** (one level, NOT a recursive glob, so
+***   `web/tools/sheet_overlap.js` is correctly excluded as tools/ test code), **2,527,605 chars**.
+***   DATA: **12 `data/*.json`** at one level, **177 top-level keys** (176 last hour; the +1 is
+***   content's `_note_c245`).
+*** **UNREAD LIVE DATA KEYS: ZERO. THE UNREAD COUNT DID NOT MOVE.**
+*** ZERO-LITERAL-HIT KEYS: **86 = 71 `_note_` + 15 NON-NOTE.** **THE NON-NOTE COUNT IS 15**, the
+***   series value it has held for days, and all fifteen are the accounted-for set, unchanged:
+***     - TWO runtime-built `_alt` pools: `lord_intros_alt`, `unique_intros_alt` - READ at
+***       `delve.gd:4022` via `base + "_alt"`. **DO NOT WIRE THEM.**
+***     - FOUR declared dead: `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+***       `town_levels_for_the_desktop`. **NO LANE IS TO WIRE `phase2_words_alt2`** - fourth hour
+***       running every lane has correctly left it alone.
+***     - NINE prose/spec strings, not items: biomes `technique`; bosses `boss_floors`; origins
+***       `chronicle_line`, `word_order`, `casing`; ranks `promotion_line`, `one_roll`; strains
+***       `_gating`; world `canon_silences`.
+***   2 + 4 + 9 = 15. The raw total rose 85 -> 86 ONLY because content wrote one more `_note_` key
+***   (70 -> 71), which is the behaviour this house ASKED FOR. **DO NOT COMPARE RAW TOTALS ACROSS
+***   HOURS; the non-note count is the only number with signal and it did not move.**
+*** UNREFERENCED ASSET DIRECTORIES: **not re-walked this hour** - the standing measurement is ZERO
+***   and nothing this hour added a directory under `assets/`. Art added `renders/art/wand/*`, which
+***   is EVIDENCE OUTPUT and is correctly not walked. I am saying so rather than implying I re-ran it.
+***
+*** ===== (H) FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, CARRIED FORWARD =====
+*** A FIRING CANNOT EDIT A SCHEDULED TASK: the gate is on the CALL, not on a field, settled 18 Nov.
+*** **I ATTEMPTED NO WRITE THIS RUN** and I am not testing it a sixth time. THE FIRST SEAT WITH A
+*** LIVE TURN LANDS ALL OF THESE AT ONCE. The list is carried forward and added to:
+***   1. **THE CONTENT PROMPT'S FOUR-FILE LIST IS NOW THE SINGLE MOST EXPENSIVE STALE LINE IN THE
+***      HOUSE - EIGHT WASTED CONTENT CYCLES.** Content reports it "names exactly four owned files
+***      and bars new ones". RULING sup-nov27-1637 makes `data/drops.json` its FIFTH. **THE PROMPT
+***      MUST SAY FIVE.** Until it does, the plan row is the only instrument and content may keep
+***      reading its prompt as a bar. THIS ONE FIRST, AHEAD OF EVERY OTHER CORRECTION HERE.
+***   2. HUB PUBLISHED SHA: prompt says `05ac2679 / 19 Nov 20:06 CT`. MEASURED: **8d214d36, pushed
+***      25 NOV 09:55:03 CT**. STRUCK AND WRONG.
+***   3. MERGED-NOT-PUBLISHED: prompt says "3 files / +59 / -1". MEASURED: **73 files / +491 / -12**.
+***   4. DEAD-DATA CORPUS: prompt says 47 `.gd` + app.js = 48 files and 146 keys. MEASURED:
+***      **48 + app.js = 49 files, 2,527,605 chars, 177 top-level keys.** The non-note 15 and the
+***      "UNREAD = ZERO" in the prompt are both STILL CORRECT.
+***   5. MINIBOSS COUNT: the prompt's "44/44/44" and "46 rows / 33" are historical. The roster is
+***      CLOSED AT 70 (DIRECTIVE sup-nov27-1323).
+***   6. THE PROMPT SAYS "IF THE SUPERVISOR HAS SAID PUBLISH, YOU MAY DO THE PUSH." **RULING
+***      sup-nov27-1637 OVERRIDES IT: the supervisor does the push itself.** I complied in behaviour
+***      again this run and pushed nothing.
+***   7. ID WATERMARKS as of 22:18 CT: **B211, C-245, S165, U214, art wand pass closed on art's side.**
+***      Re-measure; do not quote these.
+***
+*** ===== (I) FOR THE SUPERVISOR =====
+*** (1) **THE PUBLISH GATE IS GREEN AND THE LAST BLOCKER IS CLEARED. MY RECOMMENDATION: PUSH NOW.**
+***     The `?v=9` cache-bust I asked for at 20:58 landed within the hour, and I re-verified it in
+***     the bytes rather than taking the hub's word. Six states clean with zero page errors, CSP
+***     proven intact by a REFUSED inline-style injection (`style-src-elem`), the hostile name
+***     rendering as literal text with zero live elements **through the real `?mock=chat` fixture**,
+***     all four URL sinks individually checked, and I looked at the screenshot. The delta is
+***     **73 files / +491 / -12** and **60 hours stale**. I HAVE NOT PUSHED - Ruling 2 says the push
+***     is yours, and I am complying in behaviour and not rewriting my own standing order.
+*** (2) **A DECISION ART RAISED, ROUTED NOT TAKEN: IS `wand_crystal.glb` THE TIER-5 WAND OR THE
+***     TIER-5 STAFF?** Full detail in amendment (D). Art measured that at any scale small enough to
+***     read as a wand it cannot clear the torso side-on, so the asset is a SHORT STAFF. Art
+***     recommends shipping it as the tier-5 wand now and so do I: a viewer is TODAY handed a
+***     pixel-identical common wand for a legendary drop, which is Mr. E's wear-is-a-receipt rule
+***     broken in the shipped game, and (a) ends that for one line without foreclosing a purpose-built
+***     wand later. Art framed it as Mr. E's call; I am routing it to you first per my reporting line.
+*** (3) **STILL UNANSWERED FROM 20:58: are sceptre, spear and staff in scope now, or queued behind
+***     the Systems?** `assets/gear/artifact/` has seven golden meshes and none of those three. I
+***     have given art the sceptre and told it to stop after the first if you answer.
+*** (4) **SYSTEMS 43 AND 44 ARE STILL NOT ROUTED, AND THAT IS STILL DELIBERATE.** System 42 is one
+***     function short of whole (42c, `!solo`). I have told the game build that System 43 follows 42c
+***     and told the HUD and the hub NOT to start their 43/44 halves, because the engine publishes
+***     none of those fields yet. Say if you want 43 pulled forward ahead of 42c.
+***
 *** ===== LOCK DISCIPLINE, 21:00-22:00 CT =====
 *** Held: game build S165 21:08:22 -> 21:20:13 (11m51s; cap claim+25 = 21:33:22 COMPUTED BEFORE the
 ***   declaration, declared 21:30 - inside), then a 1-second relaunch 21:20:49 -> 21:20:50 for one

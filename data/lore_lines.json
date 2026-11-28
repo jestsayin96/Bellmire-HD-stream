@@ -19183,5 +19183,367 @@
     }
   },
   "_note_c255": "C-255: shadow_hall is the System 44 word set (Shadow Hall tiers, town standing, 24 criminal jobs, crime Chronicle, jail, NPC refusals, detection, guild switching, PvP bounty lines, hub text). Nothing reads it yet; the game build wires the engine half and the hub lane reads hub_text. No new data file.",
-  "_note_c256": "C-256: thickens the thin phase-2 pools (sell, stone, vault) in phase2_words and phase2_words_alt. Additive; same tokens as the pools they extend. phase2_words_alt2 is untouched and stays dead on purpose."
+  "_note_c256": "C-256: thickens the thin phase-2 pools (sell, stone, vault) in phase2_words and phase2_words_alt. Additive; same tokens as the pools they extend. phase2_words_alt2 is untouched and stays dead on purpose.",
+  "onramp": {
+    "_note": "C-257 / Systems 14-17, the new-player onramp. Words only; nothing reads this yet, the game build wires it. welcome.* is BellmireBro and the first-hub text (chat stays minimal: !enlist, !hero, !help; everything else points at the hub). starter_kit.issued tokens {name} {weapon} {armor} {gold}. town_jobs.jobs is the System 15 pool: 16 errands, none with combat risk, `kind` is carry|message|help, `pay_band` 1-2 is a ladder only (coin amounts are the game build's), `giver_id` matches townsfolk.cast ids; town_jobs.offer/accepted/busy/paid/none_left are generic lines, tokens {name} {job} {giver} {pay}. fishing.* is System 16 (tokens {name} {fish} {pay}). training_ground.* is System 17, floor 0, no permadeath: tokens {name}; the master-at-arms is Godric Fordbright. loop_hints is one line per stage of the new-player loop, for the hub and the crier. Plain voice, no floor counts, no rarity above common in the kit.",
+    "welcome": {
+      "first_chat": [
+        "New face. Welcome to Bellmire. Type !enlist and the town will have you.",
+        "Bellmire does not charge for a bed in the roll book. Type !enlist.",
+        "You have found Bellmire. The gate is open. !enlist, and you are a hero.",
+        "A stranger in chat. Good. !enlist, and we will find you a sword.",
+        "Bellmire keeps a roll of heroes. Yours is not on it yet. !enlist."
+      ],
+      "enlist_done": [
+        "{name} is on the roll. Bellmire has a kit waiting.",
+        "{name} enlisted. The smith has already found a sword, of a kind.",
+        "Welcome, {name}. Your kit is at the gate. Your room is at the inn.",
+        "{name} signs the roll. The ink is still wet. So is the sword, a bit.",
+        "{name} is a hero of Bellmire. Do not do anything heroic yet."
+      ],
+      "first_hub": [
+        "This is your room at the inn. Your kit, your purse, your errands. Nothing here bites.",
+        "Welcome to your room. The bed is yours, the hook is yours, the quarrels are not.",
+        "Everything you own is on this page. It does not take long to read at the start.",
+        "Sit down. The innkeeper will tell you what the town wants. Errands first, the dungeon after.",
+        "Your room. Gear on the hook, coin in the purse, a window onto the square."
+      ],
+      "help_pointer": [
+        "Most things are done at your room at the inn. In chat: !enlist, !hero, !help. That is all.",
+        "Chat is for talking. Your room is for doing. Open it from the link on the stream.",
+        "!hero shows who you are. Your room does the rest. The link is under the stream.",
+        "Gear, errands, the board and the purse live at the inn. Chat only needs three words."
+      ]
+    },
+    "starter_kit": {
+      "issued": [
+        "{name} is handed a {weapon}, a {armor}, and {gold} gold. It is not much. It is enough to start.",
+        "The quartermaster gives {name} a {weapon} and a {armor}. Purse: {gold} gold. Do not lose it on day one.",
+        "{name} leaves the barracks with a {weapon}, a {armor}, and {gold} gold. Plain, but sound.",
+        "Kit for {name}: {weapon}, {armor}, {gold} gold. Patched where it needs patching.",
+        "The old kit chest gives up a {weapon} and a {armor} for {name}. {gold} gold from the purse jar."
+      ],
+      "hub_card": {
+        "title": "Your starter kit",
+        "body": "A plain weapon, plain armour and a small purse. Enough to stand on the first floor. Not enough to be proud of."
+      },
+      "worn_note": [
+        "The straps are mended twice. They hold.",
+        "Plain issue, well kept. Not new, not broken.",
+        "It has been worn before. It will be worn again.",
+        "The kit chest is not choosy. Neither should you be."
+      ],
+      "no_second_kit": [
+        "The kit is issued once. After that, the shop.",
+        "One kit per hero. The quartermaster is firm on it.",
+        "You have your kit. The next one is yours to buy."
+      ]
+    },
+    "town_jobs": {
+      "offer": [
+        "{giver} has work. {job}. Small coin, no risk.",
+        "{giver} needs a hand: {job}. It will not take long.",
+        "There is an errand at {giver}'s: {job}. Pay is plain and sure.",
+        "{job}. Ask {giver}. Nobody will try to kill you.",
+        "Work in town: {job}. {giver} is waiting."
+      ],
+      "accepted": [
+        "{name} takes the job: {job}.",
+        "{name} goes to {giver} about {job}.",
+        "{name} has an errand. {job}. Off they go.",
+        "{name} rolls up a sleeve. {job}.",
+        "{job} is {name}'s for the hour."
+      ],
+      "busy": [
+        "{name} already has an errand. Finish one before taking another.",
+        "One job at a time, {name}. {giver} will wait.",
+        "{name} is still on the last errand. {giver} has not forgotten.",
+        "Hands full, {name}. Come back when they are empty."
+      ],
+      "paid": [
+        "{giver} pays {name} {pay}. Fair and quick.",
+        "{name} is paid {pay} for {job}. The coin is warm from the pocket.",
+        "{pay} from {giver}, and a nod. {name} has earned it.",
+        "{name} counts {pay} into a palm. It is not much. It is honest.",
+        "{giver} hands over {pay}. {name} did the work. The town noticed."
+      ],
+      "none_left": [
+        "No errands just now. Check back when the bell has rung.",
+        "The board of errands is bare. Fish, perhaps.",
+        "Every job is taken. The town works hard.",
+        "{giver} has nothing today. Try the market."
+      ],
+      "leaves_town": [
+        "{name} walked out of town with the job unfinished. {giver} puts it back on the list.",
+        "The errand is dropped. {job} is open again."
+      ],
+      "jobs": [
+        {
+          "id": "j01",
+          "title": "Loaves to the Forge",
+          "giver": "Nell Candlemas",
+          "giver_id": "nell_baker",
+          "kind": "carry",
+          "desc": "Two baskets of loaves, bakery to the smithy. Do not eat the corners.",
+          "offer": "Two baskets, to Tobyn at the smithy. He forgets to eat. Go.",
+          "done": "Tobyn took the baskets. He has not looked up yet. He will.",
+          "pay_band": 1
+        },
+        {
+          "id": "j02",
+          "title": "Fish for the Cask",
+          "giver": "Maud Reedwhistle",
+          "giver_id": "maud_fishwife",
+          "kind": "carry",
+          "desc": "A crate of river fish, the stall to the tavern kitchen. Keep it level.",
+          "offer": "Crate for the Cask. Walk, do not run. Fish do not like running.",
+          "done": "The cook counted them twice and said nothing. That is thanks.",
+          "pay_band": 1
+        },
+        {
+          "id": "j03",
+          "title": "Nails for the Hall",
+          "giver": "Tobyn Ironside",
+          "giver_id": "tobyn_smith",
+          "kind": "carry",
+          "desc": "A bag of nails, the smithy to the chief's hall. Carpenters are waiting.",
+          "offer": "Nails for the Hall. A man there is hammering with his thumb. Hurry.",
+          "done": "The carpenter has nails. His thumb thanks you.",
+          "pay_band": 1
+        },
+        {
+          "id": "j04",
+          "title": "Sweep the Smithy",
+          "giver": "Tobyn Ironside",
+          "giver_id": "tobyn_smith",
+          "kind": "help",
+          "desc": "Sweep the cinders from the forge floor. Mind the hearth.",
+          "offer": "Floor wants sweeping. Cinders, mostly. Do not touch the hearth.",
+          "done": "Floor swept. Tobyn walked on it at once. Some work is like that.",
+          "pay_band": 1
+        },
+        {
+          "id": "j05",
+          "title": "Reeds for Thatch",
+          "giver": "Hob Coldfingers",
+          "giver_id": "hob_reed",
+          "kind": "carry",
+          "desc": "A bundle of cut reeds from the river bank to the roofer in the homes.",
+          "offer": "Bundle of reeds, river to the roofers. They are wet. So will you be.",
+          "done": "Roof has reeds. Roof will leak slightly less.",
+          "pay_band": 1
+        },
+        {
+          "id": "j06",
+          "title": "Message to the Gate",
+          "giver": "Agnes Gatewood",
+          "giver_id": "agnes_innkeeper",
+          "kind": "message",
+          "desc": "Carry a note from the inn to the guard at the gate. Do not read it.",
+          "offer": "Note for the gate. Sealed. Godric will know what it says.",
+          "done": "Godric read it, sighed, and put it in his boot.",
+          "pay_band": 1
+        },
+        {
+          "id": "j07",
+          "title": "Candles for the Chapel",
+          "giver": "Nell Candlemas",
+          "giver_id": "nell_baker",
+          "kind": "carry",
+          "desc": "A box of candle stubs, bakery to the chapel. They were not baked.",
+          "offer": "Candle stubs for Elspeth. Do not ask why the baker has them.",
+          "done": "Elspeth lit one at once. The chapel looks less like a barn.",
+          "pay_band": 1
+        },
+        {
+          "id": "j08",
+          "title": "Scrub the Tables",
+          "giver": "Agnes Gatewood",
+          "giver_id": "agnes_innkeeper",
+          "kind": "help",
+          "desc": "Scrub the common-room tables. All of them. The long one twice.",
+          "offer": "Tables need scrubbing. The long one has a history. Scrub through it.",
+          "done": "Tables clean. The long one is now only a little sticky.",
+          "pay_band": 1
+        },
+        {
+          "id": "j09",
+          "title": "Herbs for the Shelf",
+          "giver": "Sibyl Wickham",
+          "giver_id": "sibyl_apothecary",
+          "kind": "carry",
+          "desc": "Dried herbs from the drying rack to the apothecary shelf, labelled jar by jar.",
+          "offer": "Herbs to the shelf, in the jars with the labels. Not the jars without.",
+          "done": "Every jar is where it should be. Sibyl counted. Twice.",
+          "pay_band": 2
+        },
+        {
+          "id": "j10",
+          "title": "Barrels to the Cellar",
+          "giver": "Bram Barrelbelly",
+          "giver_id": "bram_brewer",
+          "kind": "carry",
+          "desc": "Roll three small barrels from the brew yard to the tavern cellar. Mind the step.",
+          "offer": "Three barrels, yard to cellar. There is a step. Learn it early.",
+          "done": "Three barrels, one step, no breakage. Bram is almost cheerful.",
+          "pay_band": 2
+        },
+        {
+          "id": "j11",
+          "title": "Mend the Fence",
+          "giver": "Hob Coldfingers",
+          "giver_id": "hob_reed",
+          "kind": "help",
+          "desc": "Hold the posts while the reed-cutter ties the fence at the river field.",
+          "offer": "Fence is down again. Hold the post. That is the whole job.",
+          "done": "Fence is up. The cows disagree, but it is up.",
+          "pay_band": 1
+        },
+        {
+          "id": "j12",
+          "title": "Bread for the Guard",
+          "giver": "Nell Candlemas",
+          "giver_id": "nell_baker",
+          "kind": "carry",
+          "desc": "Four loaves, bakery to the barracks. The guard gets hungry at the gate.",
+          "offer": "Four loaves for the barracks. They eat standing up. Be quick.",
+          "done": "The barracks ate before you left. It is the highest praise they have.",
+          "pay_band": 1
+        },
+        {
+          "id": "j13",
+          "title": "Gravedigger's Spade",
+          "giver": "Wat Mudboot",
+          "giver_id": "wat_gravedigger",
+          "kind": "carry",
+          "desc": "Carry a spade from the smithy back to the graveyard. It was sharpened.",
+          "offer": "Spade is sharp. Take it to the yard. Hold it by the handle.",
+          "done": "The spade is home. Wat has said nothing. He nodded, though.",
+          "pay_band": 2
+        },
+        {
+          "id": "j14",
+          "title": "Sacks to the Mill",
+          "giver": "Maud Reedwhistle",
+          "giver_id": "maud_fishwife",
+          "kind": "carry",
+          "desc": "Two empty grain sacks, the stall to the mill. They will come back full.",
+          "offer": "Two sacks, to the mill. They are empty. They are still heavy somehow.",
+          "done": "Mill has the sacks. The miller waved. That counts.",
+          "pay_band": 1
+        },
+        {
+          "id": "j15",
+          "title": "Hang the Sign",
+          "giver": "Agnes Gatewood",
+          "giver_id": "agnes_innkeeper",
+          "kind": "help",
+          "desc": "Hold the ladder while the sign is rehung over the inn door. Do not look up.",
+          "offer": "The sign has come down again. Hold the ladder. Do not look up.",
+          "done": "Sign is up. Ladder held. Nobody looked up. Well done.",
+          "pay_band": 1
+        },
+        {
+          "id": "j16",
+          "title": "Ink for the Hall",
+          "giver": "Elspeth Hartley",
+          "giver_id": "elspeth_chapel",
+          "kind": "message",
+          "desc": "Take a small pot of ink from the chapel to the clerk at the chief's hall.",
+          "offer": "Ink for the clerk. It spills if you hurry. It spills if you do not. Go carefully.",
+          "done": "The clerk wrote one line, blotted it, and thanked you without looking.",
+          "pay_band": 2
+        }
+      ]
+    },
+    "fishing": {
+      "first_catch": [
+        "{name} lands a {fish}. It is a start. It is also dinner.",
+        "First fish for {name}. Small, but it is theirs.",
+        "{name} pulls in a {fish}. The river has noticed.",
+        "A {fish} on {name}'s line. Maud has already glanced over."
+      ],
+      "sold": [
+        "{name} sells the {fish} for {pay}. Maud weighs it with her thumb.",
+        "{pay} for a {fish}. {name} has been paid for patience.",
+        "The market takes {name}'s {fish}. {pay} goes in the purse.",
+        "{name} sells the catch for {pay}. The river pays slow, but it pays."
+      ],
+      "enough_for_kit": [
+        "{name} has enough saved for a proper blade. The smith is waiting.",
+        "{name}'s purse is heavier than it was. The shop is open.",
+        "{name} has fished long enough to buy a breastplate. Go and see."
+      ],
+      "poor_catch": [
+        "{name} gets old boots and weed. Try again.",
+        "Nothing biting. {name} waits.",
+        "{name} lands a wet stick. The river laughs, quietly.",
+        "The water is empty. Not for long."
+      ],
+      "tips": [
+        "Fish at dawn. The river is generous before the town wakes.",
+        "A good lure pays for itself. A bad one pays for the lesson.",
+        "Sell fish to Maud. She is fair, and loud about it.",
+        "Quiet water, better fish. Stand still."
+      ]
+    },
+    "training_ground": {
+      "enter": [
+        "{name} steps down to the practice yard. Straw men and wooden swords. Nobody dies here.",
+        "{name} goes below to the yard. The rule is simple: you cannot fall for good.",
+        "{name} takes the practice stair. Godric Fordbright watches with his arms folded.",
+        "The yard is open. {name} goes in with a wooden stare and a real sword.",
+        "{name} descends to the training floor. Safe as straw."
+      ],
+      "leave": [
+        "{name} climbs out of the yard, sore and wiser.",
+        "{name} leaves the practice floor. The dummies are still standing. Barely.",
+        "{name} is done for the day. Godric nods once.",
+        "{name} walks out of the yard. Nothing was lost but a bit of pride."
+      ],
+      "fall": [
+        "{name} is knocked down in the yard. Nothing lost. Up you get.",
+        "{name} falls to a straw man. Godric does not laugh. Much.",
+        "Down goes {name}. No loss, no mark, no grave. That is the point.",
+        "{name} is beaten by a post. The post will not boast.",
+        "{name} is carried out of the yard. Unhurt. A little embarrassed."
+      ],
+      "dummy_barks": [
+        "The dummy takes it. The dummy takes everything.",
+        "Straw flies. Nobody apologises.",
+        "A wooden creak, a splintered arm. The post stands.",
+        "Practice swing. Real sweat.",
+        "The straw man wobbles and does not fall. Try the knees.",
+        "A blow lands. The dummy has no opinion."
+      ],
+      "loot_small": [
+        "A few coppers in the straw. Small, but real.",
+        "The yard pays a little. Not enough to retire on.",
+        "{name} finds a coin in the sawdust. Godric says it is his. It is not.",
+        "Yard loot is thin on purpose. The real floors pay."
+      ],
+      "graduated": [
+        "{name} has trained enough. Godric says the real floors are open.",
+        "Godric nods. {name} may go down when ready.",
+        "{name} has earned the road. The yard has nothing more to teach.",
+        "The straw is tired of {name}. Time for stone.",
+        "Ready, says Godric. It is the most he has ever said."
+      ],
+      "master_lines": [
+        "Feet first. Sword second. Pride last.",
+        "Stand properly. A dead hero is not a good example.",
+        "Again. And again after that.",
+        "Everyone falls here. Nobody stays down."
+      ]
+    },
+    "loop_hints": {
+      "no_gear": "Get your kit at the barracks. It is waiting.",
+      "no_gold": "Fish, or run an errand. Coin first, floors after.",
+      "has_gold": "Your purse is full enough. The shop has better steel.",
+      "untrained": "Practice in the yard first. Nobody falls for good there.",
+      "ready": "You are kitted, paid and practised. The first floor is open.",
+      "after_death": "You fell. The kit held. Go and get your purse back, slowly."
+    }
+  },
+  "_note_c257": "C-257: onramp is the Systems 14-17 word set (welcome, starter kit, 16 town jobs, fishing bridge, training ground, loop hints). Additive. Nothing reads it yet; the game build wires it."
 }

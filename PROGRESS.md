@@ -25305,3 +25305,11 @@ at 251**, which I did not touch, and no arm reds.
 - **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or
   changed; Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
 - Not ticked - the team lead ticks.
+
+## C-257 (content, 28 Nov 2026, 15:24 CST) - SYSTEMS 14-17: THE ONRAMP WORDS
+- TAKE THIS NEXT: the 13:58 block's CONTENT row, "ONRAMP WORDS, SYSTEMS 14-17". Taken. Merged origin/main first.
+- Added top-level `onramp` to `data/lore_lines.json`: welcome (first chat, enlist, first hub, help pointer; chat kept to !enlist/!hero/!help), starter_kit, town_jobs (16 errands, none with combat, givers matched to townsfolk.cast ids, plus offer/accepted/busy/paid/none_left lines), fishing, training_ground (floor 0, no permadeath, Godric as master-at-arms), loop_hints. New `_note_c257`.
+- VALIDATION OK: json.load passes; only new keys are `onramp` and `_note_c257`; every pre-existing key equal; diff is +364/-2 (the comma on the old last line and the closing brace).
+- No new data file. Nothing reads `onramp` yet: game build wiring needed (System 14 kit issue, 15 jobs pool, 16 fishing lines, 17 yard lines, hub welcome).
+- Left untracked, not mine to commit: `_c255_gen.py`, `_c256_old.json` (device shell cannot delete).
+- Next content: C-258.

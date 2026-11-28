@@ -1,3 +1,50 @@
+*** ===== ADDENDUM - MR. E ANSWERED LIVE AT ~00:0x CT, 28 NOV 2026. =====
+*** *** THIS IS A LIVE ANSWER FROM MR. E AND IT CHANGES THE GAME BUILD ROW ABOVE. ***
+***
+*** **(A) THE SNAPSHOT SILENCE - MR. E'S ANSWER WAS "UNSURE - CHECK IT".** He did NOT confirm the
+*** game is meant to be down. So the stale town on the public page is NOT yet explained, and it is
+*** no longer something I can write off as "the game simply is not running".
+*** **GAME BUILD: THIS IS YOUR PRIORITY ZERO, BEFORE TOWN VISUAL PROGRESSION, AND IT SHOULD TAKE
+*** ONE FIRING AT MOST.** Verify the publisher END TO END and report whether it can publish AT
+*** ALL: does `snapshot_pub.gd` run, does it reach Supabase, does a row actually land, and what is
+*** the timestamp of the newest row? The public page has read "Last word from the town 8 hours
+*** ago (Fri, Nov 27, 03:55 PM)" since 15:55 CT - that is the thing viewers see 24/7 showing a
+*** dead town all evening. If the publisher is healthy and the silence is only that the game is
+*** not running, SAY SO IN ONE LINE and move straight to town visual progression; that is a
+*** perfectly good outcome and closes the question. If it CANNOT publish, that is the most
+*** important defect in the house and everything else waits.
+*** While you are in that file, `snapshot_pub.gd:21 const EVERY := 60.0` is the 10-15 s change the
+*** 23:40 architecture directive asks for - do it in the same pass.
+***
+*** **(B) THE PROMPTS ARE UNCHANGED THIS TURN, DELIBERATELY.** I offered the owed prompt edits on
+*** Mr. E's live turn; he asked what the supervisor had said about them. **THE ANSWER IS NOTHING -
+*** none of sup-nov27-2304, -2340 or -2346 mentions the prompts at all.** They are this seat's
+*** exclusively (Mr. E, 16 Nov 21:20) and the only gate is that a firing cannot make the write. He
+*** gave no instruction to proceed, so I made none. THE BACKLOG BELOW STANDS FOR THE FIRST SEAT
+*** THAT GETS A LIVE TURN.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, LAND THEM ALL AT ONCE =====
+*** (1) **CONTENT PROMPT - the stale four-file list. NINE STAND-DOWNS AND COUNTING.** Its charter
+***     names exactly four owned files and bars new ones; the supervisor's 16:37 ruling says
+***     `drops.json` is content's, and System 41 needs new JSONs. The lane is right to refuse a
+***     relayed instruction - the PROMPT is what must change. HIGHEST COST ITEM IN THE BACKLOG.
+***     (Mitigated but NOT fixed this hour: the 23:58 content row gives town text that fits inside
+***     the existing four files, so the lane is unblocked for now without touching its charter.)
+*** (2) **ALL SEVEN PROMPTS - the town-first priority order (sup-nov27-2304), the hub-as-primary
+***     -interface rule (sup-nov27-2340) and the two-week deadline with its "do not stand down"
+***     clause (sup-nov27-2346).** All three are in the plan and on all seven refs as of 42a9cbf9,
+***     so no lane is blind - but prompts are what a lane reads FIRST.
+*** (3) **HUB PROMPT - scope change.** It is now the PRIMARY INTERFACE, not a companion hub:
+***     Twitch OAuth, per-viewer dashboards, an action queue. Its charter predates that entirely.
+*** (4) **CHAT BOT PROMPT - scope change.** Minimal commands only; management moves to the hub.
+*** (5) **THIS PROMPT (:58) - stale measurements, all three re-measured 27 Nov:** the dead-data
+***     baseline says 47 `.gd` + app.js = 48 files / 2,345,688 chars (it is **48 + app.js = 49 /
+***     2,532,315**), 146 top-level data keys (it is **178**), and 34 asset directories (it is
+***     **38**). The NON-NOTE zero-hit count of 15 and "unread live data keys: ZERO" are both
+***     still correct. Also stale: it calls System 42c open; 42b AND 42c are ticked whole.
+*** (6) **THE SECTION BAR IS THREE ROWS, NOT TWO** - the hub measured it on the live page
+***     (y=229/266/304, 15 tabs, none clipped). Several of this seat's blocks say "two-row".
+
 *** ===== TAKE THIS NEXT - THE 23:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 22:58 FIRING AND ITS ADDENDUM.
 *** Clock read off cruzader: 23:5x CST. Merged to main at 9d97650a and pushed.

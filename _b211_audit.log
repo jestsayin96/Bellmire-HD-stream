@@ -1,0 +1,90 @@
+B211 - chat bot - 2026-11-27T21:50:50-06:00 (clock read off cruzader, Godot*=0)
+NO GODOT LOCK TAKEN THIS HOUR. No engine run, no edit to the three owned files, so no gate was owed.
+The :45 engine window was left free for other lanes. Everything below is a file/ref measurement.
+
+=== 1. THE ROW'S CONDITION, MEASURED ACROSS ALL 18 REFS ===
+Row (team lead 20:58): "IF `origin/main` carries the party dict in `roster.gd` when you fire at :45,
+WRITE THE 42b/42c COMMAND SURFACE ... IF THE DICT IS NOT ON MAIN WHEN YOU READ IT, STAND DOWN."
+
+count of PARTY_CAP in <ref>:scripts/roster.gd, every remote ref:
+  origin/laptop  PARTY_CAP=5     <-- the dict is HERE
+  origin/main    PARTY_CAP=0     <-- the condition's ref
+  origin/art, origin/chatbot, origin/content, origin/hub, origin/hud-ui,
+  origin/gh-pages, origin/b104-wip, origin/chatbot-b200-wip, origin/d91d-wip,
+  origin/gamebuild-s134-wip, origin/gamebuild-s144-wip, origin/s73-wip,
+  origin/s83-wip, origin/s108-wip, artlocal/art            all PARTY_CAP=0
+RE-MEASURED IN MY OWN TREE AFTER SYNC: merged origin/main 357d0369 into `chatbot` (fast-forward
+from 7ae6de80, 0 conflicts, tracked tree clean), then `git grep -c PARTY_CAP -- scripts/roster.gd`
+in the worktree returned rc=1 / no match. THE CONDITION IS UNMET, measured twice by two instruments.
+S165 is real and complete - it is on origin/laptop (1fa344c9 + 47f4946b), one team-lead merge from main.
+
+=== 2. A SECOND BLOCKER THE ROW COULD NOT HAVE KNOWN: 42c HAS NO ENGINE HALF ANYWHERE ===
+The row asks for "!party with invite/join/leave/list/kick/disband, AND !solo".
+case-insensitive "solo" hits in scripts/town.gd, scripts/roster.gd, scripts/delve.gd:
+  origin/main   town.gd=0  roster.gd=0  delve.gd=0
+  origin/laptop town.gd=0  roster.gd=0  delve.gd=0
+`git grep -il solo origin/laptop -- scripts/` returns exactly ONE file: scripts/chatcmd.gd - MY OWN,
+and it is a prose comment at line 3096 ("discovered by a solo delver paying twice what this file
+quoted them"), not a bypass. So the !solo half of the row was unwritable this hour EVEN IF the dict
+had been on main. 42c's engine half does not exist on any ref. Reported so the row can be split.
+
+=== 3. THE ENGINE'S 42b CONTRACT, READ FROM BYTES (origin/laptop:scripts/roster.gd, 91666 bytes) ===
+const PARTY_CAP := 10 ; var parties := {}   # leader uid -> {"members":[uid...], "invites":[uid...]}
+  party_of(uid) -> String        leader uid, or "" when none
+  party_members(uid) -> Array    duplicate() of member uids, [] when none
+  party_create(uid) -> String
+  party_invite(uid, who) -> String
+  party_join(uid, lead) -> String
+  party_leave(uid) -> String
+  party_kick(uid, who) -> String
+  party_disband(uid) -> String
+  party_line(uid) -> String
+EVERY CALL RETURNS THE VIEWER-FACING LINE ITSELF (roster.gd's own comment says so: "Every call
+returns a line for chat; the command surface (chatcmd.gd) is the CHAT BOT's"). So my surface
+FORWARDS, it does not compose - and the register is already right: short declaratives, no theatre,
+"Your party is full - ten is the most the scar takes together." I am not rewriting the engine's words.
+
+=== 4. THE ONE REAL CONTRACT GAP, AND IT CLOSES INSIDE MY OWN FILE ===
+`who` and `lead` are UIDs: party_invite calls get_hero(who) and parties.has(lead) is keyed by
+LEADER UID. But a viewer types a NAME - "!party invite Bob". roster.gd has NO name->uid resolver
+(get_hero is a bare uid-keyed dict lookup: `return heroes.get(user_id, {})`).
+THIS NEEDS NO ENGINE ADDITION. Two facts close it:
+  (a) `_hero_named(nm)` already exists in MY file at chatcmd.gd:657 - the !dice precedent
+      (`!dice [stake] [name]`), iterating roster.heroes and comparing name.to_lower() == nm.
+  (b) roster.fresh() writes `"id": user_id` INTO the hero dict, so the uid is recoverable from
+      _hero_named()'s return value as String(h.get("id","")). No new resolver function is needed.
+And _dice_line is the pattern for the unresolved case: answer "No hero named %s." % safe_word(arg2)
+BEFORE calling the engine, rather than passing a name into a uid parameter and getting the engine's
+"No hero by that name." for the wrong reason.
+=> 42b's command surface is writable ENTIRELY inside scripts/chatcmd.gd + data/commands.json
+   the moment the dict reaches main. ONE WINDOW, no engine dependency beyond the merge.
+
+=== 5. THE ALIAS COLLISION, RE-MEASURED (not quoted from B210) ===
+data/commands.json: 37 commands, 37 order entries, set(order)==set(commands) TRUE,
+top-level keys ['_source','hub_url','cooldown_s','twitch_cooldown_s','order','commands','ask','foreign'].
+alias owner of `party` = ['muster'].  solo/invite/join/leave/list/kick/disband -> None (free).
+`party` must come OFF muster's aliases IN THE SAME WINDOW as the engine dict (authorized by the row).
+It CANNOT go alone: removing it early makes !party an unknown command to viewers who use it today.
+
+=== 6. TWO-WAY DRIFT AUDIT ON MY OWN FILES - CLEAN, AND MY FIRST TWO MATCHERS WERE WRONG ===
+THE REAL TEST - every published command KEY must have a dispatch arm:  KEYS WITH NO ARM = [] (none).
+Reverse - every arm must be published: arms-published = ['testbits','testpoints','testsub'], and
+those three are NOT drift: they live in the SECOND `match verb:` block, inside _test_spot() at
+chatcmd.gd:334, which is the deliberate dev/test hook family and is unpublished on purpose.
+14 published ALIASES have no arm of their own (armor, commands, me, mend, path, reputation, roads,
+sheet, spec, spotlight, standing, stats, steel, watch) and that is CORRECT, not drift: canonical()
+runs BEFORE the match block and folds each to its key. Checked every fold lands on a key that HAS
+an arm: TRUE, 0 broken folds.
+MY OWN INSTRUMENT WAS WRONG TWICE BEFORE IT WAS RIGHT, and I am recording it because a bad matcher
+has libelled live commands in this lane before:
+  matcher 1 required a case label line to END in ':' - the house writes `"hero":  out = ...` with
+    the body on the SAME line, so it saw 49 arms and accused 30 live commands (hero, delve, fish...)
+    of having no handler. Discarded, not reported.
+  matcher 2 read only handle() (lines 125-279) and missed the second match block in _test_spot,
+    so it still showed 14 unanswered names. Discarded, not reported.
+  matcher 3 separates KEYS from ALIASES and checks the canonical() fold - the only honest shape.
+State of B210's landing, re-read rather than remembered: QUEUE_MAX := 10 (chatcmd.gd:32),
+LINE_WORDS 10 place-words (chatcmd.gd:426), muster.what "takes ten from chat". Consistent.
+
+=== 7. TWITCH ===
+No Twitch message sent, nothing redeemed, nothing cheered, ZERO BITS. No stream interaction at all.

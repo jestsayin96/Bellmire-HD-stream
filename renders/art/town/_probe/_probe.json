@@ -1,0 +1,128 @@
+{
+ "when_ct": "28 Nov 2026 ~00:4x CT",
+ "engine": "BLENDER_EEVEE",
+ "pack": "C:\\hd adventure\\_packs\\kenney_fantasy-town-kit_2.0\\Models\\GLB format",
+ "rows": [
+  {
+   "file": "fountain-round.glb",
+   "n_mesh": 2,
+   "n_vert": 1584,
+   "dims_m": [
+    2.0,
+    2.0,
+    0.28
+   ],
+   "base_dz_m": 0.0,
+   "centre_dx_dy_m": [
+    0.0,
+    0.0
+   ],
+   "hero_ratio_height": 0.156
+  },
+  {
+   "file": "fountain-round-detail.glb",
+   "n_mesh": 2,
+   "n_vert": 2592,
+   "dims_m": [
+    2.0,
+    2.0,
+    0.48
+   ],
+   "base_dz_m": -0.0,
+   "centre_dx_dy_m": [
+    0.0,
+    0.0
+   ],
+   "hero_ratio_height": 0.267
+  },
+  {
+   "file": "fountain-center.glb",
+   "n_mesh": 2,
+   "n_vert": 8,
+   "dims_m": [
+    1.0,
+    1.0,
+    0.14
+   ],
+   "base_dz_m": 0.0,
+   "centre_dx_dy_m": [
+    0.0,
+    0.0
+   ],
+   "hero_ratio_height": 0.078
+  },
+  {
+   "file": "fountain-square.glb",
+   "n_mesh": 2,
+   "n_vert": 468,
+   "dims_m": [
+    2.0,
+    2.0,
+    0.4552
+   ],
+   "base_dz_m": 0.0,
+   "centre_dx_dy_m": [
+    0.0,
+    0.0
+   ],
+   "hero_ratio_height": 0.253
+  },
+  {
+   "file": "fountain-edge.glb",
+   "n_mesh": 2,
+   "n_vert": 62,
+   "dims_m": [
+    1.0,
+    1.0,
+    0.28
+   ],
+   "base_dz_m": 0.0,
+   "centre_dx_dy_m": [
+    0.0,
+    0.0
+   ],
+   "hero_ratio_height": 0.156
+  }
+ ],
+ "spans": [
+  [
+   "fountain-round.glb",
+   0.0,
+   2.0
+  ],
+  [
+   "fountain-round-detail.glb",
+   2.6,
+   4.6
+  ],
+  [
+   "fountain-center.glb",
+   5.2,
+   6.2
+  ],
+  [
+   "fountain-square.glb",
+   6.8,
+   8.8
+  ],
+  [
+   "fountain-edge.glb",
+   9.4,
+   10.4
+  ]
+ ],
+ "sheet": "C:\\hd adventure\\bellmire-art\\renders\\art\\town\\_probe\\_kenney_fountain_candidates.png",
+ "opaque_px": 110840,
+ "subject_moved_px": 32866,
+ "label_px": {
+  "fountain-round": 5039,
+  "fountain-round-detail": 6216,
+  "fountain-center": 5208,
+  "fountain-square": 5208,
+  "fountain-edge": 4872,
+  "1.80 M HERO": 3657
+ },
+ "border_alpha_px": 0,
+ "verdict": "GREEN",
+ "errors": []
+}

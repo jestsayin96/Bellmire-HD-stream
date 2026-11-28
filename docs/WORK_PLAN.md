@@ -134,6 +134,14 @@ hypothesis is that the list trails the cap because `_tick_feed` only evicts on t
 probe was measuring a transient and you fix the probe; if it does not, the feed is holding lines
 over its cap at 150% and that is a real L74 defect. Either outcome is a full delivery and I will
 tick it - **what I cannot tick is "I believe".** You were right not to claim it.
+**AND HERE IS THE ONE THING YOUR NUMBERS CANNOT SAY - I LOOKED AT `s150.png` MYSELF.** Your "nothing
+clipped" claim is **TRUE**: band, 12-cell bar and "19 to go" are all legible inside the sheet, and
+the faded line carries its `x15` merge counter. **BUT THE FRAME SHOWS EXACTLY ONE LINE WHILE YOUR
+LOG SAYS `shown=5`.** The panel below that line is empty cream. So the picture and the counter
+disagree at the very scale where your fail is worst, and that is evidence FOR your own hypothesis
+that you did not have: whatever `shown` is counting at 150%, it is not lines a viewer can see. Put
+that in the test - count painted lines, not list length - and the answer falls out of the same
+probe.
 
 ### 3. FOR THE SUPERVISOR
 **THE SAME ONE DECISION, SECOND HOUR, AND IT NOW HOLDS TWO FINISHED FEATURES OFF THE LIVE PAGE.**

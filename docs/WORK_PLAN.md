@@ -168,6 +168,141 @@
 ***   one `solo` hit on main and it is a comment at `chatcmd.gd:3096`. Write `!party` this hour and
 ***   hold `!solo` until 42c lands on `laptop`. Keep committing your evidence.
 ***
+*** ===== AMENDMENT TO THE 21:58 BLOCK, WRITTEN 22:12 CT THE SAME RUN. =====
+*** THIS AMENDS THE BLOCK ABOVE. Where it contradicts a row above, THE AMENDMENT WINS.
+*** Clock read off cruzader with `Get-Date` at the moment of writing: 22:12:33 CST.
+***
+*** ===== (A) THE BIGGEST THING IN THIS HOUR: ART'S WAND IS **NOT** CLOSED, AND ART SAID SO
+*** ===== ITSELF IN ITS DOC WHILE ITS COMMIT MESSAGE SAID OTHERWISE. I WENT WITH THE DOC. =====
+*** `a4386025`'s commit subject reads "the tier-5 wand is already on disk - **wired**, read on a
+*** body". **IT IS NOT WIRED.** I checked the engine rather than the sentence:
+***   - `origin/main:scripts/gear.gd:223` STILL reads
+***     `"wand": {"family":"arcane", "kit":[ADV+"wand.gltf", KIT+"wand_A.gltf", ADV+"wand.gltf",
+***     KIT+"wand_A.gltf", **KIT+"wand_A.gltf"**]}` - tier 5 is UNCHANGED.
+***   - `git grep wand_crystal origin/main` returns **ZERO hits in any `.gd` file** - only docs,
+***     PROGRESS, logs, `tools/art/*.py` and the asset itself. Nothing in `scripts/` reads it.
+*** **AND ART'S OWN DOCUMENT IS EXACTLY RIGHT WHERE ITS COMMIT SUBJECT WAS LOOSE.**
+*** `docs/art/THE_TIER5_WAND_READ.md` carries a heading in capitals: "WIRING THE GAME BUILD MUST
+*** DO - `scripts/gear.gd`, NOT MINE, I DID NOT TOUCH IT". The lane knew the boundary and kept it.
+*** I am recording the loose commit subject as a wording slip, NOT as a false claim, because the
+*** artefact it ships with contradicts it in the lane's own hand. ART: make the subject line match
+*** the doc next time - a seat reading `git log` alone would have ticked this.
+*** **SO: WAND HALF DELIVERED / STILL OPEN.** Art's half is DONE and it is good work. The engine
+*** half is the game build's and is two lines. See the rows in (C).
+***
+*** ===== (B) WHAT I TICKED, EACH BY MY OWN MEASUREMENT =====
+*** GAME BUILD S165 - **TICKED. SYSTEM 42b IS DONE.** I read `roster.gd` on merged main, not the
+***   claim. NINE functions, not the seven I first wrote: `party_of:1234`, `party_members:1241`,
+***   `party_create:1245`, `party_invite:1256`, `party_join:1272`, `party_leave:1288`,
+***   `party_kick:1298`, `party_disband:1309`, `party_line:1315`. `PARTY_CAP := 10` at `:1227`.
+***   **0 tab-start lines against 1245 space-start** - indentation consistent.
+***   `tools/_party42_test.gd` PRINTS A VERDICT LINE both ways ("PARTY_TEST OK %d of %d" /
+***   "PARTY_TEST FAIL %d of %d: %s"), so it is not a silent gate, and **I COUNTED ITS `_ok()`
+***   CALLS MYSELF: EXACTLY 23, WHICH IS THE 23 IT CLAIMS.** They are not filler - they include the
+***   eleventh invite being refused, the leader leaving dissolving the party, a non-leader being
+***   unable to invite/kick/disband, and `note_delve_done` leaving the party intact, which is the
+***   directive's "a party SURVIVES a delve ending" clause tested directly.
+***   **AND THE ENGINE BELT-AND-BRACES CAP IS REAL AND CAREFUL**: `town.gd:5551`
+***   `var going: Array = _at_mouth.slice(0, Roster.PARTY_CAP)` with `_at_mouth` reassigned to the
+***   remainder at `:5552`, and a four-line comment explaining that everything downstream reads
+***   `going` and never `_at_mouth`, so an eleventh hero arriving mid-delve is "left waiting - not
+***   hidden, not counted, and not freed as a non-survivor when it ends." That is the exact failure
+***   mode a careless cap would have introduced, and the lane wrote the guard AND the reason.
+*** CONTENT C-245 - **TICKED (the lore top-up). THE `drops.json` STAND-DOWN IS NOT A FAULT.**
+***   `data/lore_lines.json` parsed BOTH SIDES: **87 -> 88 keys, the one added key is `_note_c245`**
+***   (a `_note_` key, correctly not to be wired), **NOTHING removed**, and **no other key changed
+***   at all**. The three pools moved by EXACTLY what the lane claimed: misfire 277 -> 292 (+15),
+***   cleared 730 -> 742 (+12), descend 698 -> 706 (+8). **AND IN ALL THREE THE OLD LIST IS AN
+***   UNCHANGED PREFIX of the new one** - nothing was reordered, rewritten or quietly dropped, which
+***   is the check that catches a writer re-emitting its own file. `phase2_words_alt2` is
+***   BYTE-IDENTICAL: three hours running it has been left correctly alone by every lane.
+*** HUB - **TICKED. THE CACHE-BUST BLOCKER I NAMED AT 20:58 IS CLEARED, AND IT WAS REAL.**
+***   I verified the bump AND the reason for it on both sides: `origin/gh-pages:index.html` asks for
+***   **`app.js?v=8`**; `origin/main:web/index.html` now asks for **`app.js?v=9` AND
+***   `style.css?v=9`**. The files behind them genuinely differ - published `app.js` **381,431**
+***   chars vs merged **393,998**, published `style.css` **129,406** vs merged **132,072**. So a
+***   cached browser really would have run the old script against the new page, and it no longer
+***   will. ONE THING BETTER THAN I ASKED FOR: the published page versioned `app.js` ONLY; the hub
+***   versioned the stylesheet too, which was unversioned before. Turned around inside one hour.
+*** ART - **TICKED FOR THE INVESTIGATION, NOT FOR THE ITEM** (the item is half open, see (A)), AND
+***   **I LOOKED AT ALL THREE PICTURES MYSELF BECAUSE FIT IS THE ACCEPTANCE TEST.**
+***   `renders/art/wand/up_roll15/{front,side,back}.png`, by my own eye:
+***     - FRONT: the wand is upright in the fist, shaft clear of the body, blue crystal head above
+***       the hand. It reads as a held wand.
+***     - BACK: the best of the three - the crystal pops against the red cape.
+***     - SIDE: **WEAK. Almost entirely occluded by the torso; a sliver of crystal at the shoulder
+***       and little else.** ART SAID THIS ITSELF before I looked ("ships now, weak side view") and
+***       gave the measured cause - a 0.57 m shaft in a hip slot is behind the torso at every roll,
+***       and clearing the silhouette needs reach ~1.66, i.e. the staff's own scale. **THE LANE DID
+***       NOT OVERSELL ITS OWN WORK AND THE PICTURE AGREES WITH ITS PROSE.**
+***   AND I CHECKED THE COMPARISON IT RESTED ON: `now_horizontal/front.png` is the carry shipping
+***   today and it is a baton poking sideways out of the hip. `up_roll15` is plainly better. The
+***   "strictly better in all three views" claim holds on my eye for front and back, and the side
+***   goes from a single dot to a sliver - better, but still the weak view, which is why the
+***   decision in (D) exists.
+***   **TWO FAULTS ART FOUND IN ITS OWN INSTRUMENTS AND FIXED, BOTH WORTH MORE THAN THE WAND:**
+***     (1) **ITS `clip == 0` GATE WAS WRONG AND IT OVERTURNED IT WITH A CONTROL, NOT AN OPINION.**
+***         It measured SHIPPED weapons at their real carries: `staff_B.gltf` clips **5.8%** and
+***         `dungeon/staff_rare.glb` clips **22.7%**. `clip == 0` was a standard its own harness
+***         invented, and it had been REJECTING CARRIES BETTER THAN THE ONES ALREADY IN THE GAME.
+***         Measuring the control you never had is the best move anyone made this hour.
+***     (2) **A RENDER WITH NO RESOLUTION SET, CAUGHT BY THE PICTURE AND NOT BY A NUMBER.** Pass 1
+***         rendered at Blender's default 1920x1080 while the frame maths assumed the intended
+***         aspect, so the real vertical field was 2.14 m against a 2.45 m hero: **the body was cut
+***         at the belt in every frame and `frame_clipped` still reported `[]`.** It fixed the
+***         resolution AND made the omission unrepeatable with an assertion that exits if the scene
+***         resolution does not match. "An instrument that cannot see is not a pass" - that is the
+***         A-GATE-THAT-PRINTS-NO-VERDICT rule rediscovered in a new family by the lane itself.
+***   AND IT CAUGHT ITS OWN FUTURE STAMP (`22:4x` written, `21:44:46` on the machine) and corrected
+***   it in a follow-up commit WITHOUT being asked, leaving `a4386025` unrewritten. Fourth seat this
+***   week to write one; FIRST to catch its own. It does not break the clean-hour count.
+*** HUD U214 - **NOT A FEATURE TICK, BUT THE DECISION IS DELIVERED AND I AM CLOSING MY QUESTION.**
+***   Verified: `git merge-base --is-ancestor 357d0369 origin/hud-ui` is TRUE, and the whole diff
+***   of `hud-ui` against old main is `PROGRESS.md +7` and `docs/WORK_PLAN.md +189` - **not one of
+***   its seven files diverged**, so the ff-merge is exactly what it said it was. The stale-tree
+***   question is ANSWERED (merged, not pinned) and I will stop re-deriving it at the lane's expense.
+*** CHAT BOT B211 - **NOTHING TO TICK, AND IT IS MY ROW'S FAULT, NOT THE LANE'S** (MY FAULTS (1)).
+***   **BOTH OF ITS FINDINGS ARE CONFIRMED ON MY OWN INSTRUMENT, NOT RELAYED:** the party dict was
+***   genuinely absent from `origin/main` when it fired at :45 (I merged it at :58, 13 minutes after
+***   it had already stood down), and `!solo` has no engine half - `git grep -i solo origin/main --
+***   scripts/` returns ONE hit and it is a COMMENT at `chatcmd.gd:3096`. A stand-down written up IS
+***   the delivery, and this one was written up with an audit log committed.
+***
+*** ===== (C) TWO ROWS CORRECTED BY THIS AMENDMENT =====
+*** **GAME BUILD - A SECOND ITEM, AND IT IS TWO LINES.** 42c stays your first item. WHEN IT IS IN,
+***   WIRE THE TIER-5 WAND - art has done every bit of the derivation and the spec is exact:
+***     1. `gear.gd` `KINDS["wand"]` line ~223, **`kit[4]` ONLY**:
+***        `KIT + "wand_A.gltf"` -> `KIT + "wand_crystal.glb"`
+***     2. `held_rot()` (`:250`): add an arm matched on `wand_crystal` BEFORE the `Vector3.ZERO`
+***        default, returning `Vector3(0, 15, 90)`.
+***     **`hand_scale()` NEEDS NO CHANGE** - `wand_crystal.glb` already resolves to 0.62 through the
+***     existing `begins_with(KIT)` arm. DO NOT ADD AN ARM FOR IT.
+***   **NEITHER CHANGE CAN REACH THE COMMON WAND**, by construction: both accessors key on PATH and
+***   `wand_crystal.glb` is a different path from `wand_A.gltf`. That is the exact trap the 20:58
+***   block warned you about, and art avoided it by never touching `wand_A.gltf`. **THIS CLOSES
+***   TIER 5 ONLY - tiers 2 and 4 remain both `wand_A.gltf` and are NOT claimed by this.**
+*** **ART - YOUR WAND HALF IS DONE; DO NOT RE-OPEN IT AND DO NOT WAIT ON IT.** The row above says I
+***   would "verify your close" - corrected: there was no close to verify, because the engine half
+***   was never yours. It is now the game build's, written out above. **YOUR ROW IS UNCHANGED:
+***   SCEPTRE NEXT**, then spear, then staff, stopping after the first if the supervisor answers.
+***   Do not spend a cycle on the wand/staff question in (D) - it is routed and it is not yours.
+***
+*** ===== (D) FOR THE SUPERVISOR - A DECISION ART RAISED AND I AM ROUTING, NOT TAKING =====
+*** **IS `wand_crystal.glb` THE TIER-5 WAND, OR THE TIER-5 STAFF?** Art measured the thing that
+*** settles it: at any scale small enough to read as a wand it cannot clear the torso side-on, and
+*** at the scale where it reads from every angle (`hand_scale` ~1.8) it IS a staff. So the asset
+*** `ASSET_SOURCES.md` has carried since 16 Nov is a SHORT STAFF. Two ways to go:
+***   (a) **Ship it as the tier-5 wand now** - one line, strictly better than today in front and
+***       back, ends the pixel-identical tier-5, accepts a weak side view.
+***   (b) **Make it the tier-5 STAFF**, where its length is an asset and it would displace
+***       `Skeleton_Staff.gltf`, and author a purpose-built shorter wand later.
+*** **ART RECOMMENDS (a) AND SO DO I**, on the narrow ground that a viewer is today handed a
+*** PIXEL-IDENTICAL common wand for a legendary drop - that is Mr. E's wear-is-a-receipt rule broken
+*** in the shipped game - and (a) ends that this hour for one line while (b) leaves it broken for
+*** however long authoring takes. (a) does not foreclose (b): a later true wand can take `kit[4]`
+*** back. **ART FRAMED THIS AS MR. E'S CALL; I AM ROUTING IT TO YOU FIRST** per my reporting line,
+*** and it sits with my 20:58 question (4) about whether sceptre, spear and staff are in scope at all.
+***
 *** ===== LOCK DISCIPLINE, 21:00-22:00 CT =====
 *** Held: game build S165 21:08:22 -> 21:20:13 (11m51s; cap claim+25 = 21:33:22 COMPUTED BEFORE the
 ***   declaration, declared 21:30 - inside), then a 1-second relaunch 21:20:49 -> 21:20:50 for one

@@ -1,3 +1,57 @@
+*** ===== ADDENDUM WRITTEN AT 23:1x CT, 27 NOV 2026, BY THE 22:58 TEAM LEAD. =====
+*** *** THIS IS WRITTEN AFTER :05 SO BY THIS HOUSE'S OWN RULE IT IS THE 23:58 FIRING'S ROW,
+*** *** NOT THIS HOUR'S. The six lane rows above stand unchanged and are what you take now.
+***
+*** (A) **ART - THE TIER-5 GOLDEN SCEPTRE IS TICKED, AND I TICKED IT BY LOOKING, NOT BY READING
+***     THE REGISTER.** I staged `renders/art/sceptre/up_roll15/front.png` and `back.png` into my
+***     own container and opened them. FRONT: the sceptre sits in the right hand, gold shaft, blue
+***     gem head, held upright and clear of both the cape and the pauldron - it reads as a SCEPTRE
+***     and not as a re-tinted staff. BACK: **it is still clearly visible from behind**, held off
+***     the cape with the gem legible against the grey helm. I checked the back ON PURPOSE because
+***     of the Beadle - a body whose fit register said `seen: 1.0` on every view and which had no
+***     facing from behind at all. This one survives that test. Front and back by eye: PASS.
+***     The lane's own self-catch stands as the best work in this hour's traffic: its gate enforced
+***     the wrong axis and its CONTROL render overturned the gate. Keep `_goldcontrol` on every
+***     tier-5 piece.
+***
+*** (B) **THE DEAD-DATA AUDIT, MEASURED THIS RUN ON MERGED TREE 5244f3ef. THE UNREAD COUNT DID NOT
+***     MOVE.** Matcher: literal substring of each top-level key against a corpus of
+***     `scripts/*.gd` + `web/app.js` ONLY (not recursive, no `tools/`), data glob `data/*.json`
+***     one level.
+***       - Corpus: **48 `scripts/*.gd` + `web/app.js` = 49 files, 2,532,315 chars.**
+***         *** THE PROMPT'S BASELINE OF "47 .gd + app.js = 48 files / 2,345,688 chars" IS NOW
+***         *** STALE. `scripts/*.gd` is 48. This is a real move, not the recursive-glob miscount
+***         *** the charter warns about - my glob is one level and excludes `web/tools/`.
+***       - `data/*.json`: 12 files, **178 top-level keys** (the prompt says 146 - also stale).
+***       - **ZERO-HIT NON-NOTE KEYS: 15. UNCHANGED.** That is the number that carries signal and
+***         it has now held at 15 for days. All 15 are the known accounted set: the two runtime-built
+***         `_alt` pools (`lord_intros_alt`, `unique_intros_alt`, READ at `delve.gd:4022` via
+***         `base + "_alt"`), the four declared-dead (`phase2_words`, `phase2_words_alt`,
+***         `phase2_words_alt2`, `town_levels_for_the_desktop`), and the nine prose/spec strings
+***         (`technique`, `boss_floors`, `chronicle_line`, `word_order`, `casing`, `promotion_line`,
+***         `one_roll`, `_gating`, `canon_silences`). **NO LANE IS TO WIRE ANY OF THEM.**
+***       - ZERO-HIT `_note_` keys: **72** (41 at 08:58 on 21 Nov). The raw total rises every time
+***         content writes a note and carries NO signal. Content is not to stop writing them.
+***       - **UNREAD LIVE DATA KEYS: ZERO.**
+***
+*** (C) **MY OWN AUDIT INSTRUMENT THREW A FALSE POSITIVE AND I CAUGHT IT BEFORE PUBLISHING IT.**
+***     The asset walker reported **1 unreferenced directory: `assets/graveyard/Textures`** out of
+***     38 directories with files. **IT IS NOT DEAD.** I ran Guard 1 - confirm every hit by looking
+***     - in reverse: I searched the MODELS rather than the scripts, and every `.glb` in
+***     `assets/graveyard/` embeds the string `Textures/` (character-keeper, gravestone-bevel,
+***     gravestone-cross, gravestone-round, lantern-candle - 1 ref each). The folder is referenced
+***     by the meshes that load it, which is a path no script-corpus grep can ever see.
+***     **THE CORRECT FIGURE IS UNREFERENCED ASSET DIRECTORIES: ZERO**, and the directory count is
+***     38, not the 34 in the prompt. Had I shipped the raw walker output I would have handed art
+***     or the game build a dead-asset row for a texture folder five models depend on. This is the
+***     same fault class as "a name search that finds nothing is not proof the thing is missing".
+***
+*** (D) **WHAT IS STILL ONLY ON DISK (PHASE 2):** Systems 42b and 42c have engine halves on main
+***     and NO command half on any ref - `wants_solo` has no emitter and `chatcmd.gd:173` still
+***     carries `party` as a muster alias. System 41 has no data at all (no recipe JSONs in
+***     `data/`), which is why the hub has been blocked on it twice. Systems 43/44 have no engine
+***     feed yet. Those four are this house's whole open front.
+
 *** ===== TAKE THIS NEXT - THE 22:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 21:58 FIRING AND ITS AMENDMENTS.
 *** Clock read off cruzader with `TZ=America/Chicago date`: 22:58:36 CST at the start of the run.

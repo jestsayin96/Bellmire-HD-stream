@@ -16626,5 +16626,340 @@
   "_note_c244": "C-244: draw-pressure top-up of misfire, cleared and descend. Read by delve.gd's existing pools; this note key is zero-hit by design, NO LANE IS TO WIRE IT.",
   "_note_c245": "C-245: draw-pressure top-up of misfire, cleared and descend. Read by delve.gd's existing pools; this note key is zero-hit by design, NO LANE IS TO WIRE IT.",
   "_note_c246": "C-246 (27 Nov 2026, 22:4x CST): draw-pressure top-up of misfire +12, cleared +11, descend +10. Read by delve.gd's existing pools. Zero-hit key by design, NO LANE IS TO WIRE IT.",
-  "_note_c247": "C-247 top-up of misfire, cleared, descend, epitaphs. Zero-hit by design; no lane wires this key."
+  "_note_c247": "C-247 top-up of misfire, cleared, descend, epitaphs. Zero-hit by design; no lane wires this key.",
+  "town_buildings": {
+    "_note": "C-248 / the 23:04 town-first ruling: building names, landmark names and tier flavour for per-tier distinct buildings (D31 visual half, Systems 15-17). KEY SHAPE: tier_levels{1,2,3} -> the town level each tier unlocks at (1-12 scale, matches growth_tiers); landmarks{<key>:{district,tiers[3]}} -> keys match data/town/bellmire.json landmark ids without the lm_ prefix; each tier = {name, crier (spoken on the upgrade), plaque (short carved text for a sign or tooltip), see (what a viewer should SEE change)}. well_to_fountain{stages[5]} -> the town square centrepiece, same tier shape plus 'level'. market_growth{stages[4]} -> stall counts and character as the market district grows. sites{<key>:{tiers[3]}} -> work sites outside the wall. Condition tracks level: tier 1 is patched, tier 3 is prosperous. Dead until wired; content worker never touches code. No line states a dungeon floor count.",
+    "tier_levels": {
+      "1": 1,
+      "2": 5,
+      "3": 9
+    },
+    "landmarks": {
+      "hall": {
+        "district": "keep",
+        "tiers": [
+          {
+            "name": "The Moot Hall",
+            "crier": "The Hall has a roof that keeps the rain out. Mostly.",
+            "plaque": "MEASURE THE GRAIN. COUNT THE FLASKS. KEEP THE DOOR.",
+            "see": "A timber hall with a thatch roof, one door, a bench outside."
+          },
+          {
+            "name": "The Chief's Hall",
+            "crier": "The Hall has a second storey and a stair to it. The Chief walks it daily.",
+            "plaque": "Sits at noon. Bring it short.",
+            "see": "Stone footings, a tiled roof, a stair to an upper room, a lamp at the door."
+          },
+          {
+            "name": "The Hall of Bellmire",
+            "crier": "The Hall has a tower now, and a bell in it that the whole valley hears.",
+            "plaque": "MEASURE THE GRAIN. COUNT THE FLASKS. KEEP THE DOOR.",
+            "see": "A stone hall with a tower, banners on the gable, a paved court and a guard at the steps."
+          }
+        ]
+      },
+      "chapel": {
+        "district": "temple",
+        "tiers": [
+          {
+            "name": "The Chapel",
+            "crier": "A chapel, one room, one candle. It is enough.",
+            "plaque": "Come in. Wipe your feet.",
+            "see": "A small timber chapel, a single candle in the window, a few graves in the yard."
+          },
+          {
+            "name": "The Chapel and Bell-Tower",
+            "crier": "The chapel has a tower. The bell has no clapper and rings anyway.",
+            "plaque": "The bell is kept.",
+            "see": "A stone chapel with a short tower, a walled yard, rows of markers."
+          },
+          {
+            "name": "The Temple of the Scar",
+            "crier": "The temple stands tall and keeps its lamps burning all night, for those still down below.",
+            "plaque": "Lamps lit for the ones below.",
+            "see": "A tall stone temple, a high tower, lit windows, a long graveyard with a gate."
+          }
+        ]
+      },
+      "barracks": {
+        "district": "garrison",
+        "tiers": [
+          {
+            "name": "The Watch Hut",
+            "crier": "A hut for the Watch, and a rack for their spears.",
+            "plaque": "Boots off at the door.",
+            "see": "A low timber hut, a spear rack, a brazier."
+          },
+          {
+            "name": "The Barracks",
+            "crier": "The Watch has beds now, and a yard to drill in.",
+            "plaque": "Drill at second bell.",
+            "see": "A timber barracks with a fenced yard, straw dummies, a flag."
+          },
+          {
+            "name": "The Garrison",
+            "crier": "The Garrison is raised in stone. Let them come.",
+            "plaque": "The wall is walked. The gate is kept.",
+            "see": "A stone barracks and a gravelled yard, archers on the roof, E3PO's post on the wall."
+          }
+        ]
+      },
+      "windmill": {
+        "district": "mill",
+        "tiers": [
+          {
+            "name": "The Hand Mill",
+            "crier": "Two stones and a mule. The grain gets ground.",
+            "plaque": "Measured, not guessed.",
+            "see": "A hand mill under a lean-to, a mule walking the circle."
+          },
+          {
+            "name": "The Windmill",
+            "crier": "The windmill turns. The first loaf from it was burnt and eaten anyway.",
+            "plaque": "Wind and patience.",
+            "see": "A timber windmill, sails turning slowly, sacks stacked at the door."
+          },
+          {
+            "name": "The Great Mill",
+            "crier": "The Great Mill grinds for three valleys. The bakers have stopped complaining. Mostly.",
+            "plaque": "Grain in, bread out.",
+            "see": "A tall stone-based mill, full sails, a granary beside it and a cart queue."
+          }
+        ]
+      },
+      "workshop": {
+        "district": "craft",
+        "tiers": [
+          {
+            "name": "The Smith's Shed",
+            "crier": "A forge in a shed, and a smith who has opinions about it.",
+            "plaque": "Hot work. Stand back.",
+            "see": "A lean-to forge, an anvil on a stump, a glowing coal bed."
+          },
+          {
+            "name": "Craft Row",
+            "crier": "Craft Row is raised. The smiths and masons have a roof each.",
+            "plaque": "Count the flasks.",
+            "see": "Several workshops trailing smoke, a sign over each door, a stacked wood pile."
+          },
+          {
+            "name": "The Guildhall of Crafts",
+            "crier": "The crafts have a hall. The marks on the walls are theirs, and the marks are good.",
+            "plaque": "Made here. Marked here.",
+            "see": "A big stone workshop hall, chimneys, a shopfront with wares hung out, a covered yard."
+          }
+        ]
+      },
+      "market_hall": {
+        "district": "market",
+        "tiers": [
+          {
+            "name": "The Market Green",
+            "crier": "A green with a rope round it. Call it a market and it will be one.",
+            "plaque": "Stalls by the rope.",
+            "see": "Three or four trestle stalls on grass, a rope fence, a scale."
+          },
+          {
+            "name": "The Market Square",
+            "crier": "Cobbles laid. The traders say the mud was cheaper, and they say it kindly.",
+            "plaque": "Prices on the board.",
+            "see": "A cobbled square, a dozen awnings, a price board, a crier's step."
+          },
+          {
+            "name": "The Covered Market",
+            "crier": "A roof over the market now. Rain no longer closes the shops.",
+            "plaque": "Honest weights. Honest coin.",
+            "see": "A long timber-and-stone market hall, lamps along the beams, shops at both ends."
+          }
+        ]
+      },
+      "inn": {
+        "district": "homes_s",
+        "tiers": [
+          {
+            "name": "The Ale House",
+            "crier": "One room, one barrel, one bench. The barrel is the better of the three.",
+            "plaque": "Pay as you drink.",
+            "see": "A low house with a sign, a bench outside, smoke from the chimney."
+          },
+          {
+            "name": "The Inn",
+            "crier": "The inn has rooms upstairs. The beds are clean. The ale is the same.",
+            "plaque": "A bed and a bowl.",
+            "see": "A two-storey timber inn, a lit window each side, a stable yard."
+          },
+          {
+            "name": "The Inn of the Bell",
+            "crier": "The inn has a hall and a hearth the length of a cart. Folk come from the road just to sit at it.",
+            "plaque": "Sit. Eat. Sleep.",
+            "see": "A large inn of stone and beam, a wide hearth in view, a stable, lamps either side of the door."
+          }
+        ]
+      }
+    },
+    "well_to_fountain": {
+      "_note": "System 15-17 town-square centrepiece. level = the town level it appears at.",
+      "stages": [
+        {
+          "level": 1,
+          "name": "The Well",
+          "crier": "A well, dug by hand. The water is cold and the queue is short.",
+          "plaque": "Dug by hand.",
+          "see": "A ring of stones, a rope, a bucket."
+        },
+        {
+          "level": 3,
+          "name": "The Stone Well",
+          "crier": "The well has a stone rim now, and a roof against the leaves.",
+          "plaque": "Drink and move on.",
+          "see": "A mortared rim, a little roof, a windlass."
+        },
+        {
+          "level": 6,
+          "name": "The Pump Well",
+          "crier": "A pump on the well. Nobody falls in anymore.",
+          "plaque": "Pump twice.",
+          "see": "An iron pump on a stone base, a trough beside it."
+        },
+        {
+          "level": 9,
+          "name": "The Basin",
+          "crier": "The well has a basin around it and the water runs over the lip. Folk stand and watch it run.",
+          "plaque": "For all who come.",
+          "see": "A round stone basin, water spilling over the edge."
+        },
+        {
+          "level": 12,
+          "name": "The Fountain of the Square",
+          "crier": "The square has a fountain. It runs day and night, and the town does not take it for granted.",
+          "plaque": "MEASURE THE GRAIN. COUNT THE FLASKS. KEEP THE DOOR.",
+          "see": "A carved stone fountain, tiered, with water falling and a paved ring of benches."
+        }
+      ]
+    },
+    "market_growth": {
+      "_note": "District growth as the market grows. level = town level.",
+      "stages": [
+        {
+          "level": 1,
+          "name": "Rope and Trestles",
+          "crier": "Three trestles and a rope. That is a market, if you say it loud enough.",
+          "stalls": 3,
+          "see": "A few bare stalls on a green."
+        },
+        {
+          "level": 4,
+          "name": "Awnings",
+          "crier": "The stalls have cloth over them. The fish smell better in the shade.",
+          "stalls": 8,
+          "see": "Cloth awnings in red and ochre, a price board, a scale."
+        },
+        {
+          "level": 8,
+          "name": "The Cobbled Market",
+          "crier": "Cobbles laid, lanes marked. Mind your elbows, but keep your purse closer.",
+          "stalls": 16,
+          "see": "A cobbled square, lanes between rows, a second crier's step."
+        },
+        {
+          "level": 12,
+          "name": "The Market District",
+          "crier": "The market has its own district now, with shops that have doors. Caravans park at the edge and nobody complains.",
+          "stalls": 28,
+          "see": "Shopfronts, a covered hall, stalls in rows and a caravan yard."
+        }
+      ]
+    },
+    "sites": {
+      "sawmill": {
+        "tiers": [
+          {
+            "name": "The Pit Saw",
+            "crier": "A pit, a saw and two men. The planks come out slowly and true.",
+            "plaque": "Two men, one saw.",
+            "see": "A saw pit, a stack of rough boards."
+          },
+          {
+            "name": "The Sawmill",
+            "crier": "The sawmill has a wheel. The planks come out faster. The men are quieter.",
+            "plaque": "Timber by the foot.",
+            "see": "A wheel-driven saw house on the stream, stacked planks."
+          },
+          {
+            "name": "The Lumberworks",
+            "crier": "The lumberworks runs from dawn to dark. Bellmire builds on its own timber now.",
+            "plaque": "Cut here. Raised here.",
+            "see": "A big saw shed with a log pond, wagons loading planks."
+          }
+        ]
+      },
+      "mine": {
+        "tiers": [
+          {
+            "name": "The Dig",
+            "crier": "A hole in the hillside and a basket on a rope.",
+            "plaque": "Mind your head.",
+            "see": "A shallow adit, a hand windlass, a heap of spoil."
+          },
+          {
+            "name": "The Mine",
+            "crier": "The mine has props now, and a bell for the end of shift. Everybody comes out.",
+            "plaque": "Count them in.",
+            "see": "A timbered adit, ore carts on rails, a lamp shed."
+          },
+          {
+            "name": "The Deep Mine",
+            "crier": "The deep mine hauls by wheel and works three shifts. The count is kept, and the count is right.",
+            "plaque": "Counted in. Counted out.",
+            "see": "A stone-faced entrance, a headframe, a smelter yard."
+          }
+        ]
+      },
+      "range": {
+        "tiers": [
+          {
+            "name": "The Butts",
+            "crier": "A bank of earth and a target on a post.",
+            "plaque": "Aim low.",
+            "see": "A turf butt, one straw target."
+          },
+          {
+            "name": "The Range",
+            "crier": "The range has a rail and a rack. Bring your own arrows and your own excuses.",
+            "plaque": "Shoot. Collect. Repeat.",
+            "see": "A fenced range, several targets at distances, a bow rack."
+          },
+          {
+            "name": "The Archers' Yard",
+            "crier": "The Archers' Yard has a roof for the rain and a marker for every winner.",
+            "plaque": "Marks on the board.",
+            "see": "A roofed shooting line, tall targets, a board of names."
+          }
+        ]
+      },
+      "farm": {
+        "tiers": [
+          {
+            "name": "The Plot",
+            "crier": "A plot, a hoe and a scarecrow that has lost its argument with the crows.",
+            "plaque": "Seed. Water. Wait.",
+            "see": "A fenced garden, a scarecrow, a hut."
+          },
+          {
+            "name": "The Farm",
+            "crier": "The farm has a barn and a byre. The milk comes up before the sun.",
+            "plaque": "Fed by the field.",
+            "see": "Fields with rows, a timber barn, a few cows."
+          },
+          {
+            "name": "The Home Farm",
+            "crier": "The home farm feeds the market and keeps a surplus. The barns are full and so are the cellars.",
+            "plaque": "Grain in the barn.",
+            "see": "A large farm, a stone-footed barn, orchards and full fields."
+          }
+        ]
+      }
+    }
+  },
+  "_note_c248": "C-248 town_buildings: building, landmark and tier flavour text. Zero-hit by design; no lane wires this key."
 }

@@ -24473,3 +24473,11 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - WHY NO EDIT: party_frames.gd is not among my seven files (hud_dock, spotlight, auto_director, dice, feed_hud, leaderboard_panel, ui_theme); my standing prompt lists it under D41/D48/D61 as NOT MINE, while the team lead's row calls it mine. The two disagree; I kept to the prompt. 
 - FIX FOR THE OWNER / TEAM LEAD: raise MAX_ROWS to Party.PARTY_CAP (10) or read the cap, then check the delve column fits at 10 rows at 100/125/150%. Needs a windowed render. ASK FOR MR. E / TEAM LEAD: confirm party_frames.gd is HUD's file (then I take it next firing) or name its owner.
 - NEXT FIRING: if confirmed mine, change MAX_ROWS, parse gate, windowed render at 10 members; otherwise take L74 (feed under load, feed_hud.gd + ui_theme.gd).
+
+## C-248 (content, 28 Nov 2026, 00:3x CST) - TOWN BUILDING AND LANDMARK TEXT: new `town_buildings` block
+- TAKE THIS NEXT (23:58 block, 28 Nov) CONTENT row: town growth and building text inside my own four files (no new file, no charter change). Taken.
+- Roster: 70 minibosses in tools/art/minibosses.py, 70 feed keys, nothing owed.
+- ADDED to data/lore_lines.json: `town_buildings` = tier_levels {1,5,9}; landmarks hall, chapel, barracks, windmill, workshop, market_hall, inn (3 tiers each: name, crier, plaque, see); well_to_fountain (5 stages, levels 1/3/6/9/12); market_growth (4 stages, 3/8/16/28 stalls); sites sawmill, mine, range, farm (3 tiers). Landmark keys match bellmire.json ids minus `lm_`. New key `_note_c248`, zero-hit by design, NO LANE IS TO WIRE IT. No floor count stated.
+- VALIDATION OK: all four owned files json.load; every pre-existing key equal; only new top-level keys `town_buildings` and `_note_c248`.
+- CODE WIRING implied (not mine): town.gd could read tier_levels and landmark tiers to pick the building variant and speak `crier` on upgrade; well_to_fountain and market_growth feed the System 15-17 square/market progression. Dead until wired.
+- Next content: C-249.

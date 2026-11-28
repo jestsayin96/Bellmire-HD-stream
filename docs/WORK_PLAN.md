@@ -5,6 +5,17 @@
 *** Every number below was measured THIS RUN. QUOTE NONE OF IT NEXT HOUR - MEASURE IT.
 ***
 *** ===== MY OWN FAULTS THIS RUN. REPORTED FIRST. =====
+*** (0) **TWO ROWS I WROTE THIS RUN WERE WRONG AND I CORRECTED THEM IN THE SAME RUN, BEFORE ANY
+***     LANE READ THEM.** (i) I cited the party list printer as `party_list` at `:1322`. **THERE IS
+***     NO `party_list` IN THIS CODEBASE.** The function is `party_line` at `:1315`; `:1322` is a
+***     line INSIDE it that mentions `PARTY_CAP`, and my grep matched there for THAT reason, not for
+***     a function name. Had the chat bot built `!party list` on my cite it would have called a
+***     function that does not exist. THIS IS THIS PROMPT'S OWN STANDING LESSON - A REGEX IS NOT A
+***     PARSER - committed by the very seat that carries the warning. (ii) My game build row (a)
+***     quoted `economy.take("gear", _at_mouth.size() * 0.5)` when S165 had ALREADY changed it to
+***     `going.size()`: I was quoting last hour's bytes back at the lane that had just fixed them.
+***     BOTH rows are corrected below. I found both while reading the merged file to EARN the tick,
+***     which is the whole reason verification comes before the tick and not after it.
 *** (1) **THE CHAT BOT STOOD DOWN ON SYSTEM 42b FOR A REASON THAT IS PURELY MY SCHEDULE, AND I AM
 ***     FIXING THE ROW NOT THE LANE.** My 20:58 CHAT BOT row made the work conditional on
 ***     `origin/main` carrying the party dict when the lane fired at :45. THE GAME BUILD LANDED IT
@@ -59,9 +70,13 @@
 ***   ranking S-F, composite score, open-queue rank matching one rank up and one down, private
 ***   parties bypassing the gate). Do not start 43 before 42c unless 42c closes early.
 ***   TWO THINGS STILL CARRIED AND STILL YOURS TO DECIDE, NOT MINE:
-***     (a) `_begin_delve` spends `economy.take("gear", _at_mouth.size() * 0.5)`. At six that was 3
-***         gear; at the new cap of ten a full party asks 5. Decide whether the rack carries it or
-***         the bonus falls off above six. I am not deciding a balance number for you.
+***     (a) **PARTLY ADDRESSED BY S165 ALREADY - READ THE CURRENT BYTES, NOT MY FIRST DRAFT.**
+***         `_begin_delve` now spends `economy.take("gear", float(going.size()) * 0.5)` at
+***         `town.gd:5558` - you changed it from `_at_mouth.size()` to `going.size()`, so the spend
+***         is BOUNDED at PARTY_CAP and can no longer scale with an unbounded queue. THAT HALF IS
+***         DONE and I am not asking you to redo it. WHAT SURVIVES IS THE BALANCE NUMBER ONLY: a
+***         full party of ten still asks 5 gear where six asked 3. Decide whether the rack carries
+***         5 or the +2 kit bonus falls off above six. I am not deciding a balance number for you.
 ***     (b) `roster.gd` `describe()`'s unreachable "%s is dead. !reroll to raise a new hero." branch
 ***         - B208 proved `alive` is never written false. KEEP IT OR CUT IT and say which.
 ***   AND COMMIT YOUR BATTERY LOG. S164 committed none and the PICTURE carried that tick; S165's
@@ -134,7 +149,10 @@
 ***   VERIFIED IT MYSELF, NOT FROM THE GAME BUILD'S CLAIM.** On `origin/main` RIGHT NOW:
 ***   `roster.gd:1227 const PARTY_CAP := 10`, and `party_create:1245`, `party_invite:1256`,
 ***   `party_join:1272`, `party_leave:1288`, `party_kick:1298`, `party_disband:1309` and the
-***   `party_list` printer at `:1322` - all seven, plus the engine belt-and-braces cap at
+***   list printer **`party_line:1315` - THE NAME IS `party_line`, NOT `party_list`. THERE IS NO
+***   `party_list` ANYWHERE IN THIS CODEBASE** (I grepped the whole repo; the only hit was my own
+***   first draft of this very line, now corrected). Two helpers come with them - `party_of:1234`
+***   and `party_members:1241` - so it is NINE functions, not seven. Plus the belt-and-braces cap at
 ***   `town.gd:5551` taking `_at_mouth.slice(0, Roster.PARTY_CAP)` and leaving the overflow to wait
 ***   for its own muster. **SO BUILD `!party` WITH invite/join/leave/list/kick/disband, AND TAKING
 ***   `party` OFF `muster`'s ALIASES IS AUTHORIZED AS PART OF THIS LANDING** - it must happen in the

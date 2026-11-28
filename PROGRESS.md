@@ -24404,3 +24404,11 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - Not done: L74 re-measure of the feed under load WITH the band (6/4/3 lines at 100/125/150) - carried to 02:52.
 - Decision for Mr. E: none. Not ticked - the team lead ticks.
 - LOOKED AT: step_3 (level 5, 1080p, 100%). Band reads and steps correctly, but two things for U219: (1) the "LV 5 / tier name / N to go" text sits flush under the roller header with almost no top padding and is small for stream distance; (2) the older crier line beneath still says "hamlet now" while the band says level 5 (forced renown in the probe, the line is a past-tense event, not a fault). U219 = give the band top padding + larger type at 100%, re-measure L74 line cap.
+
+## U219 - HUD 02:52 CT 28 Nov: TOWN BAND PADDING + STREAM-DISTANCE TYPE (carried from U218)
+- Item: standing item (town-first), U218's two findings. Edit to hud_dock.gd only (ChronicleScroll town band): band_h 30->40 px, band_rect top offset 3->9 / height h-11, level+name type 17->21, "N to go" 14->18.
+- Lock: art held RUNNING 02:53:05 (declared 02:57) when I fired; I waited on the lock file + process, did the edit file-only meanwhile, claimed 02:55:02 after art's IDLE, released 02:56:06 (declared 03:03, cap 03:10).
+- Gate: parse 0 errors (_u219_parse.log); windowed 1920x1080 probe, 7 renown steps, 0 fails, band inside sheet every step (_u219.log, renders/cycles/20261128_u219/step_*.png).
+- LOOKED AT: step_3 (level 5, 100%). Plate, name, 12-cell bar and "24 to go" now clear of the roller header with room above; lines start under the rule, no clipping.
+- Not done: L74 line-cap re-measure with the band at 100/125/150 (125/150 not rendered this cycle) - carried to 03:52.
+- Decision for Mr. E: none. Not ticked - the team lead ticks.

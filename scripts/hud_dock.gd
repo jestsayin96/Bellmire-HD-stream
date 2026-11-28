@@ -323,7 +323,7 @@ class ChronicleScroll extends Control:
 
 	## the band's height in px (0 with no town data): feed_hud takes this off the lines' area
 	func band_h() -> float:
-		return 0.0 if town.is_empty() else float(UiTheme.px(30.0))
+		return 0.0 if town.is_empty() else float(UiTheme.px(40.0))
 
 	## the band's rect on the open vellum, one source for _draw and any gate
 	func band_rect() -> Rect2:
@@ -331,14 +331,14 @@ class ChronicleScroll extends Control:
 		var h := band_h()
 		if h <= 0.0:
 			return Rect2()
-		return Rect2(sr.position.x, sr.position.y + _p(3.0), sr.size.x, h - _p(5.0))
+		return Rect2(sr.position.x, sr.position.y + _p(9.0), sr.size.x, h - _p(11.0))
 
 	func _town_band() -> void:
 		var r := band_rect()
 		if r.size.x <= 0.0 or r.size.y <= 0.0:
 			return
 		var font := _wordmark_font()
-		var fs := maxi(12, UiTheme.px(17))
+		var fs := maxi(14, UiTheme.px(21))
 		var lv := int(town.get("level", 1))
 		var tiers := int(town.get("tiers", 12))
 		# the level plate: ink block, gilt numeral
@@ -353,7 +353,7 @@ class ChronicleScroll extends Control:
 		var bar_w := clampf(r.size.x * 0.34, _p(120.0), _p(300.0))
 		var bar := Rect2(r.end.x - bar_w, r.position.y + r.size.y * 0.18, bar_w, r.size.y * 0.64)
 		var note := "TOWN FULL" if bool(town.get("maxed", false)) else "%d to go" % int(town.get("to_next", 0))
-		var nfs := maxi(11, UiTheme.px(14))
+		var nfs := maxi(13, UiTheme.px(18))
 		var nsz := font.get_string_size(note, HORIZONTAL_ALIGNMENT_LEFT, -1, nfs)
 		bar.position.x -= nsz.x + _p(10.0)
 		draw_string(font, Vector2(r.end.x - nsz.x, base), note, HORIZONTAL_ALIGNMENT_LEFT, -1, nfs, UiTheme.TEAL_ON_PARCH)

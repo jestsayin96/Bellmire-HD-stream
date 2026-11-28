@@ -194,11 +194,40 @@ func _place_chrome() -> void:
 ## U40: the open vellum with a breathing gap under the scroll rail and above the lower rail. A full stack
 ## used to start FLUSH under the top rail at 100% grid (a flush line reads as clipped on stream).
 func _vellum() -> Rect2:
-    var sr := (_panel as HudDock.ChronicleScroll).sheet_rect()
+    var cs := _panel as HudDock.ChronicleScroll
+    var sr := cs.sheet_rect()
     var pad := float(UiTheme.px(6))
     if sr.size.y <= pad * 3.0:
         return sr
+    # U217: the town band takes its height off the top of the vellum; the lines start under it
+    var band := cs.band_h()
+    if band > 0.0 and sr.size.y - band > pad * 3.0:
+        return Rect2(sr.position.x, sr.position.y + band + pad, sr.size.x, sr.size.y - band - pad * 1.5)
     return Rect2(sr.position.x, sr.position.y + pad, sr.size.x, sr.size.y - pad * 1.5)
+
+## U217: push the town's level + movement toward the next tier into the Chronicle's town band (2x/second)
+var _town_t := 0.0
+func _push_town(delta: float) -> void:
+    _town_t -= delta
+    if _town_t > 0.0 or not (_panel is HudDock.ChronicleScroll):
+        return
+    _town_t = 0.5
+    var cs := _panel as HudDock.ChronicleScroll
+    var eco: Variant = get_parent().get("economy") if get_parent() != null else null
+    if eco == null or not is_instance_valid(eco):
+        cs.set_town({})
+        return
+    # a script const is not a property: read it off the script (Economy.TOWN_LEVELS)
+    var scr: Variant = (eco as Object).get_script()
+    var lv: Variant = (scr as Script).get_script_constant_map().get("TOWN_LEVELS") if scr is Script else null
+    if not (lv is Array) or (lv as Array).is_empty():
+        cs.set_town({})
+        return
+    var had := cs.band_h()
+    cs.set_town(UiTheme.town_progress(lv as Array, int((eco as Object).call("town_score"))))
+    if absf(cs.band_h() - had) > 0.5:
+        _place_chrome()
+        _rebuild()
 
 ## L36: at full screen the Chronicle is the bottom-left panel and the chat box the bottom-right one;
 ## from 125% up their widths meet. While chat is up and they would share columns, the panel rides
@@ -318,6 +347,7 @@ func _process(delta: float) -> void:
         restyle()
     if _chrome:
         _place_chrome()
+        _push_town(delta)
     else:
         _clear_of_chat()
     # L32b calm pacing, now L67: classify what arrived, merge repeats, admit by priority at

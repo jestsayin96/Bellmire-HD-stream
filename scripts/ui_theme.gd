@@ -261,6 +261,27 @@ const CHIP_RADIUS := 3
 ## spotlight / director subject colours, one per kind
 const KIND := {"bits": Color(0.95, 0.72, 0.18), "subs": Color(0.62, 0.36, 0.92), "points": Color(0.20, 0.72, 0.70), "director": Color(0.16, 0.10, 0.06), "wide": Color(0.38, 0.28, 0.19)}
 
+## U217 (Mr. E / supervisor 27 Nov, TOWN FIRST): the town's level and its movement toward the next tier.
+## PURE: takes Economy.TOWN_LEVELS ([{at,name}...]) and the town score, returns what the Chronicle's town
+## band draws. level is 1-based; frac is 0..1 through the CURRENT tier (1.0 and maxed at the top tier);
+## to_next is the score still needed (0 when maxed). No scene access, so a gate can call it with a table.
+static func town_progress(levels: Array, score: int) -> Dictionary:
+	var n := levels.size()
+	if n == 0:
+		return {}
+	var lv := 1
+	for i in n:
+		if score >= int((levels[i] as Dictionary).get("at", 0)):
+			lv = i + 1
+	var at_cur := int((levels[lv - 1] as Dictionary).get("at", 0))
+	var maxed := lv >= n
+	var at_next := at_cur if maxed else int((levels[lv] as Dictionary).get("at", at_cur))
+	var span := maxi(1, at_next - at_cur)
+	var frac := 1.0 if maxed else clampf(float(score - at_cur) / float(span), 0.0, 1.0)
+	return {"level": lv, "tiers": n, "name": String((levels[lv - 1] as Dictionary).get("name", "")), "score": score,
+		"at_cur": at_cur, "at_next": at_next, "frac": frac, "maxed": maxed,
+		"to_next": 0 if maxed else maxi(0, at_next - score)}
+
 ## L65.2 CHROME: the one panel frame. kind: "parch" (light) or "plate" (dark).
 static func frame(kind := "parch", margin_h := SP_3, margin_v := SP_2) -> StyleBoxFlat:
 	var sb := StyleBoxFlat.new()

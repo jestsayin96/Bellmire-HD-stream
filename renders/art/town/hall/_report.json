@@ -13,62 +13,72 @@
    ],
    "core_dims_m": [
     5.4791,
-    6.26,
+    6.4,
     5.4516
    ],
    "dims_m": [
     5.4791,
-    6.89,
+    6.96,
     5.4595
    ],
    "base_dz_m": 0.0,
    "centre_dx_dy": [
     0.0,
-    -0.315
+    -0.28
    ],
-   "n_obj": 20,
-   "n_tri": 1884,
+   "n_obj": 24,
+   "n_tri": 1908,
+   "plot_budget_m": [
+    13.8,
+    15.7
+   ],
+   "footprint_vs_plot_m": [
+    -8.3209,
+    -8.74
+   ],
+   "fit_gate": "GREEN",
+   "fit_gate_faults": [],
    "export_note": "jpeg q82",
-   "n_images_in_file": 0,
+   "n_images_in_file": 3,
    "glb": "assets/buildings/town_hall_t1.glb",
-   "glb_bytes": 712700,
-   "glb_mb": 0.68,
+   "glb_bytes": 719116,
+   "glb_mb": 0.686,
    "solidity_front": {
-    "silhouette_px": 102502,
+    "silhouette_px": 102562,
     "hole_px": 6637,
     "hole_frac": 0.0608,
     "red_on_empty": false
    },
    "views": {
     "front": {
-     "opaque_px": 363497,
+     "opaque_px": 365580,
      "border_alpha_px": 0,
-     "subject_moved_px": 176013,
-     "hero_moved_px": 13958,
+     "subject_moved_px": 176242,
+     "hero_moved_px": 13956,
      "hero_h_px": 204,
      "hero_w_px": 240
     },
     "three_quarter": {
-     "opaque_px": 209645,
+     "opaque_px": 209356,
      "border_alpha_px": 0,
-     "subject_moved_px": 93392,
-     "hero_moved_px": 6494,
-     "hero_h_px": 138,
-     "hero_w_px": 130
+     "subject_moved_px": 92921,
+     "hero_moved_px": 6454,
+     "hero_h_px": 139,
+     "hero_w_px": 195
     },
     "side": {
-     "opaque_px": 291470,
+     "opaque_px": 291213,
      "border_alpha_px": 0,
-     "subject_moved_px": 152362,
-     "hero_moved_px": 14817,
+     "subject_moved_px": 151204,
+     "hero_moved_px": 14575,
      "hero_h_px": 142,
-     "hero_w_px": 342
+     "hero_w_px": 356
     },
     "back": {
-     "opaque_px": 363648,
+     "opaque_px": 365719,
      "border_alpha_px": 0,
-     "subject_moved_px": 159922,
-     "hero_moved_px": 13236,
+     "subject_moved_px": 160097,
+     "hero_moved_px": 13224,
      "hero_h_px": 188,
      "hero_w_px": 253
     }
@@ -86,62 +96,72 @@
    ],
    "core_dims_m": [
     8.2498,
-    9.85,
+    9.99,
     11.154
    ],
    "dims_m": [
     8.2498,
-    10.9757,
+    11.0457,
     11.3391
    ],
    "base_dz_m": 0.0,
    "centre_dx_dy": [
     0.0,
-    -0.5628
+    -0.5278
    ],
-   "n_obj": 44,
-   "n_tri": 30096,
+   "n_obj": 56,
+   "n_tri": 30168,
+   "plot_budget_m": [
+    13.8,
+    15.7
+   ],
+   "footprint_vs_plot_m": [
+    -5.5502,
+    -4.6543
+   ],
+   "fit_gate": "GREEN",
+   "fit_gate_faults": [],
    "export_note": "jpeg q82",
-   "n_images_in_file": 0,
+   "n_images_in_file": 6,
    "glb": "assets/buildings/town_hall_t2.glb",
-   "glb_bytes": 1475840,
-   "glb_mb": 1.407,
+   "glb_bytes": 1494604,
+   "glb_mb": 1.425,
    "solidity_front": {
-    "silhouette_px": 175375,
-    "hole_px": 2808,
-    "hole_frac": 0.0158,
+    "silhouette_px": 176544,
+    "hole_px": 2779,
+    "hole_frac": 0.0155,
     "red_on_empty": false
    },
    "views": {
     "front": {
-     "opaque_px": 436761,
+     "opaque_px": 439967,
      "border_alpha_px": 0,
-     "subject_moved_px": 280436,
-     "hero_moved_px": 7841,
-     "hero_h_px": 180,
+     "subject_moved_px": 282539,
+     "hero_moved_px": 7829,
+     "hero_h_px": 181,
      "hero_w_px": 201
     },
     "three_quarter": {
-     "opaque_px": 246238,
+     "opaque_px": 246942,
      "border_alpha_px": 0,
-     "subject_moved_px": 143246,
-     "hero_moved_px": 3355,
-     "hero_h_px": 98,
-     "hero_w_px": 84
+     "subject_moved_px": 144084,
+     "hero_moved_px": 3342,
+     "hero_h_px": 97,
+     "hero_w_px": 83
     },
     "side": {
-     "opaque_px": 334646,
+     "opaque_px": 334543,
      "border_alpha_px": 0,
-     "subject_moved_px": 230496,
-     "hero_moved_px": 6208,
-     "hero_h_px": 128,
-     "hero_w_px": 247
+     "subject_moved_px": 230024,
+     "hero_moved_px": 6129,
+     "hero_h_px": 99,
+     "hero_w_px": 243
     },
     "back": {
-     "opaque_px": 434810,
+     "opaque_px": 438377,
      "border_alpha_px": 0,
-     "subject_moved_px": 258576,
-     "hero_moved_px": 7090,
+     "subject_moved_px": 261055,
+     "hero_moved_px": 7096,
      "hero_h_px": 143,
      "hero_w_px": 124
     }
@@ -154,6 +174,24 @@
    ],
    "storeys": "3 + tower",
    "source": "lm_hall.glb re-centred, NOT rebuilt",
+   "court_rect_m": [
+    4.774,
+    -2.329,
+    8.774,
+    7.671
+   ],
+   "court_tiles": 10,
+   "gable_panel": [
+    0.0,
+    4.256,
+    9.237,
+    14.683
+   ],
+   "banner_xz": [
+    0.819,
+    12.995,
+    -7.784
+   ],
    "core_centre_dx_dy": [
     0.0,
     0.0
@@ -165,59 +203,69 @@
    ],
    "dims_m": [
     13.8013,
-    19.7839,
+    15.7059,
     22.4109
    ],
    "base_dz_m": 0.0,
    "centre_dx_dy": [
     0.0,
-    -2.039
+    0.0
    ],
    "n_obj": 244,
    "n_tri": 139066,
+   "plot_budget_m": [
+    13.8,
+    15.7
+   ],
+   "footprint_vs_plot_m": [
+    0.0013,
+    0.0059
+   ],
+   "fit_gate": "GREEN",
+   "fit_gate_faults": [],
    "export_note": "jpeg q82",
-   "n_images_in_file": 0,
+   "n_images_in_file": 7,
    "glb": "assets/buildings/town_hall_t3.glb",
-   "glb_bytes": 2411360,
+   "glb_bytes": 2411832,
    "glb_mb": 2.3,
    "solidity_front": {
-    "silhouette_px": 231271,
-    "hole_px": 10780,
-    "hole_frac": 0.0445,
+    "silhouette_px": 223578,
+    "hole_px": 11760,
+    "hole_frac": 0.05,
     "red_on_empty": false
    },
    "views": {
     "front": {
-     "opaque_px": 487554,
+     "opaque_px": 437614,
      "border_alpha_px": 0,
-     "subject_moved_px": 335557,
-     "hero_moved_px": 3209,
-     "hero_h_px": 94,
-     "hero_w_px": 66
+     "subject_moved_px": 319308,
+     "hero_moved_px": 3272,
+     "hero_h_px": 101,
+     "hero_w_px": 68
     },
     "three_quarter": {
-     "opaque_px": 232264,
+     "opaque_px": 247927,
      "border_alpha_px": 0,
-     "subject_moved_px": 138923,
-     "hero_moved_px": 1265,
-     "hero_h_px": 60,
-     "hero_w_px": 49
+     "subject_moved_px": 161031,
+     "hero_moved_px": 1622,
+     "hero_h_px": 70,
+     "hero_w_px": 67
     },
     "side": {
-     "opaque_px": 299373,
+     "opaque_px": 394087,
      "border_alpha_px": 0,
-     "subject_moved_px": 211244,
-     "hero_moved_px": 1847,
-     "hero_h_px": 62,
-     "hero_w_px": 138
+     "subject_moved_px": 299483,
+     "hero_moved_px": 3579,
+     "hero_h_px": 75,
+     "hero_w_px": 175
     },
     "back": {
-     "opaque_px": 496227,
+     "opaque_px": 446069,
      "border_alpha_px": 0,
-     "subject_moved_px": 318893,
-     "hero_moved_px": 3415,
-     "hero_h_px": 98,
-     "hero_w_px": 115
+     "subject_moved_px": 311392,
+     "hero_moved_px": 3237,
+     "hero_h_px": 96,
+     "hero_w_px": 114
     }
    }
   }
@@ -227,8 +275,8 @@
  "maxmb": 9.0,
  "sheet": {
   "path": "renders/art/town/hall/_tiers_side_by_side.png",
-  "opaque_px": 334973,
-  "subject_moved_px": 285878,
+  "opaque_px": 332566,
+  "subject_moved_px": 288152,
   "border_alpha_px": 0,
   "label_px": {
    "hall_t1": 3600,
@@ -237,19 +285,19 @@
   },
   "silhouette": {
    "hall_t1": {
-    "px": 23314,
+    "px": 23393,
     "h_px": 178,
     "w_px": 195
    },
    "hall_t2": {
-    "px": 67876,
+    "px": 68617,
     "h_px": 343,
     "w_px": 294
    },
    "hall_t3": {
-    "px": 156263,
-    "h_px": 609,
-    "w_px": 405
+    "px": 157502,
+    "h_px": 591,
+    "w_px": 494
    }
   },
   "spans": [

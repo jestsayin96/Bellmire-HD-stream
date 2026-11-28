@@ -1,0 +1,605 @@
+{
+ "objs": [
+  {
+   "name": "Corner_ExteriorWide_Brick_inst",
+   "tris": 2882,
+   "mats": [
+    "MI_RockTrim"
+   ]
+  },
+  {
+   "name": "Corner_ExteriorWide_Brick_inst.001",
+   "tris": 2882,
+   "mats": [
+    "MI_RockTrim"
+   ]
+  },
+  {
+   "name": "Corner_ExteriorWide_Brick_inst.002",
+   "tris": 2882,
+   "mats": [
+    "MI_RockTrim"
+   ]
+  },
+  {
+   "name": "Corner_ExteriorWide_Brick_inst.003",
+   "tris": 2882,
+   "mats": [
+    "MI_RockTrim"
+   ]
+  },
+  {
+   "name": "Corner_ExteriorWide_Brick_inst.004",
+   "tris": 2882,
+   "mats": [
+    "MI_RockTrim"
+   ]
+  },
+  {
+   "name": "Corner_ExteriorWide_Brick_inst.005",
+   "tris": 2882,
+   "mats": [
+    "MI_RockTrim"
+   ]
+  },
+  {
+   "name": "Corner_ExteriorWide_Brick_inst.006",
+   "tris": 2882,
+   "mats": [
+    "MI_RockTrim"
+   ]
+  },
+  {
+   "name": "Corner_ExteriorWide_Brick_inst.007",
+   "tris": 2882,
+   "mats": [
+    "MI_RockTrim"
+   ]
+  },
+  {
+   "name": "gable",
+   "tris": 8,
+   "mats": [
+    "gable_board"
+   ]
+  },
+  {
+   "name": "gable.001",
+   "tris": 8,
+   "mats": [
+    "gable_board"
+   ]
+  },
+  {
+   "name": "lamp_box",
+   "tris": 12,
+   "mats": [
+    "lamp_iron"
+   ]
+  },
+  {
+   "name": "lamp_flame",
+   "tris": 12,
+   "mats": [
+    "lamp_flame"
+   ]
+  },
+  {
+   "name": "lamp_post",
+   "tris": 12,
+   "mats": [
+    "lamp_iron"
+   ]
+  },
+  {
+   "name": "Prop_Chimney_inst",
+   "tris": 618,
+   "mats": [
+    "MI_RockTrim.001",
+    "MI_Brick.001"
+   ]
+  },
+  {
+   "name": "Roof_RoundTiles_6x8_inst",
+   "tris": 3796,
+   "mats": [
+    "MI_WoodTrim.005",
+    "MI_RoundTiles"
+   ]
+  },
+  {
+   "name": "Stairs_Exterior_Straight_inst",
+   "tris": 62,
+   "mats": [
+    "MI_RockTrim.002",
+    "MI_Brick.002"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Straight_inst",
+   "tris": 86,
+   "mats": [
+    "MI_WoodTrim.003",
+    "MI_Plaster.003"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Straight_inst.001",
+   "tris": 86,
+   "mats": [
+    "MI_WoodTrim.003",
+    "MI_Plaster.003"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Straight_inst.002",
+   "tris": 86,
+   "mats": [
+    "MI_WoodTrim.003",
+    "MI_Plaster.003"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Straight_inst.003",
+   "tris": 86,
+   "mats": [
+    "MI_WoodTrim.003",
+    "MI_Plaster.003"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Straight_inst.004",
+   "tris": 86,
+   "mats": [
+    "MI_WoodTrim.003",
+    "MI_Plaster.003"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Straight_inst.005",
+   "tris": 86,
+   "mats": [
+    "MI_WoodTrim.003",
+    "MI_Plaster.003"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Straight_inst.006",
+   "tris": 86,
+   "mats": [
+    "MI_WoodTrim.003",
+    "MI_Plaster.003"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Straight_inst.007",
+   "tris": 86,
+   "mats": [
+    "MI_WoodTrim.003",
+    "MI_Plaster.003"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Window_Wide_Round_inst",
+   "tris": 124,
+   "mats": [
+    "MI_WoodTrim.004",
+    "MI_Plaster.004",
+    "MI_Brick"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Window_Wide_Round_inst.001",
+   "tris": 124,
+   "mats": [
+    "MI_WoodTrim.004",
+    "MI_Plaster.004",
+    "MI_Brick"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Window_Wide_Round_inst.002",
+   "tris": 124,
+   "mats": [
+    "MI_WoodTrim.004",
+    "MI_Plaster.004",
+    "MI_Brick"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Window_Wide_Round_inst.003",
+   "tris": 124,
+   "mats": [
+    "MI_WoodTrim.004",
+    "MI_Plaster.004",
+    "MI_Brick"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Window_Wide_Round_inst.004",
+   "tris": 124,
+   "mats": [
+    "MI_WoodTrim.004",
+    "MI_Plaster.004",
+    "MI_Brick"
+   ]
+  },
+  {
+   "name": "Wall_Plaster_Window_Wide_Round_inst.005",
+   "tris": 124,
+   "mats": [
+    "MI_WoodTrim.004",
+    "MI_Plaster.004",
+    "MI_Brick"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Door_Round_inst",
+   "tris": 136,
+   "mats": [
+    "MI_WoodTrim.001",
+    "MI_Plaster.001",
+    "MI_UnevenBrick.001"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Straight_inst",
+   "tris": 56,
+   "mats": [
+    "MI_WoodTrim",
+    "MI_Plaster",
+    "MI_UnevenBrick"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Straight_inst.001",
+   "tris": 56,
+   "mats": [
+    "MI_WoodTrim",
+    "MI_Plaster",
+    "MI_UnevenBrick"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Straight_inst.002",
+   "tris": 56,
+   "mats": [
+    "MI_WoodTrim",
+    "MI_Plaster",
+    "MI_UnevenBrick"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Straight_inst.003",
+   "tris": 56,
+   "mats": [
+    "MI_WoodTrim",
+    "MI_Plaster",
+    "MI_UnevenBrick"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Straight_inst.004",
+   "tris": 56,
+   "mats": [
+    "MI_WoodTrim",
+    "MI_Plaster",
+    "MI_UnevenBrick"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Straight_inst.005",
+   "tris": 56,
+   "mats": [
+    "MI_WoodTrim",
+    "MI_Plaster",
+    "MI_UnevenBrick"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Straight_inst.006",
+   "tris": 56,
+   "mats": [
+    "MI_WoodTrim",
+    "MI_Plaster",
+    "MI_UnevenBrick"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Straight_inst.007",
+   "tris": 56,
+   "mats": [
+    "MI_WoodTrim",
+    "MI_Plaster",
+    "MI_UnevenBrick"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Straight_inst.008",
+   "tris": 56,
+   "mats": [
+    "MI_WoodTrim",
+    "MI_Plaster",
+    "MI_UnevenBrick"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Window_Wide_Round_inst",
+   "tris": 116,
+   "mats": [
+    "MI_WoodTrim.002",
+    "MI_Plaster.002",
+    "MI_UnevenBrick.002"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Window_Wide_Round_inst.001",
+   "tris": 116,
+   "mats": [
+    "MI_WoodTrim.002",
+    "MI_Plaster.002",
+    "MI_UnevenBrick.002"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Window_Wide_Round_inst.002",
+   "tris": 116,
+   "mats": [
+    "MI_WoodTrim.002",
+    "MI_Plaster.002",
+    "MI_UnevenBrick.002"
+   ]
+  },
+  {
+   "name": "Wall_UnevenBrick_Window_Wide_Round_inst.003",
+   "tris": 116,
+   "mats": [
+    "MI_WoodTrim.002",
+    "MI_Plaster.002",
+    "MI_UnevenBrick.002"
+   ]
+  }
+ ],
+ "mats": {
+  "gable_board": {
+   "base": [
+    0.44,
+    0.36,
+    0.26,
+    1.0
+   ],
+   "linked": false,
+   "img": null
+  },
+  "lamp_flame": {
+   "base": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "linked": false,
+   "img": null
+  },
+  "lamp_iron": {
+   "base": [
+    0.14,
+    0.14,
+    0.15,
+    1.0
+   ],
+   "linked": false,
+   "img": null
+  },
+  "MI_Brick": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_Brick_BaseColor"
+  },
+  "MI_Brick.001": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_Brick_BaseColor"
+  },
+  "MI_Brick.002": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_Brick_BaseColor"
+  },
+  "MI_Plaster": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_Plaster_BaseColor"
+  },
+  "MI_Plaster.001": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_Plaster_BaseColor"
+  },
+  "MI_Plaster.002": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_Plaster_BaseColor"
+  },
+  "MI_Plaster.003": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_Plaster_BaseColor"
+  },
+  "MI_Plaster.004": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_Plaster_BaseColor"
+  },
+  "MI_RockTrim": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_RockTrim_BaseColor"
+  },
+  "MI_RockTrim.001": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_RockTrim_BaseColor"
+  },
+  "MI_RockTrim.002": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_RockTrim_BaseColor"
+  },
+  "MI_RoundTiles": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_RoundTiles_BaseColor"
+  },
+  "MI_UnevenBrick": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_UnevenBrick_BaseColor"
+  },
+  "MI_UnevenBrick.001": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_UnevenBrick_BaseColor"
+  },
+  "MI_UnevenBrick.002": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_UnevenBrick_BaseColor"
+  },
+  "MI_WoodTrim": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_WoodTrim_BaseColor"
+  },
+  "MI_WoodTrim.001": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_WoodTrim_BaseColor"
+  },
+  "MI_WoodTrim.002": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_WoodTrim_BaseColor"
+  },
+  "MI_WoodTrim.003": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_WoodTrim_BaseColor"
+  },
+  "MI_WoodTrim.004": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_WoodTrim_BaseColor"
+  },
+  "MI_WoodTrim.005": {
+   "base": [
+    0.8,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "linked": true,
+   "img": "T_WoodTrim_BaseColor"
+  }
+ }
+}

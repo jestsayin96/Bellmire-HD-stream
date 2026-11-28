@@ -5961,7 +5961,7 @@ function finderOpen(r) {
     box.append(ul);
     return box;
   }
-  let sheetOpen = true;
+  let sheetOpen = false;
   let formNode = null;   // built once per sign-in so the 10 s poll never wipes what the viewer is typing
   function mySheet(h) {
     const box = el("details", "room-sheet"); box.open = sheetOpen;
@@ -6005,8 +6005,10 @@ function finderOpen(r) {
     else card.append(el("span", "note", "No hero under your name on the roll right now. Type !enlist in chat to raise one."));
     root.append(card);
     root.append(el("p", "note", "Changes take effect in 15–30 seconds in-game."));
-    if (h) root.append(mySheet(h), myBag(h));
+    // H37: the request form sits straight under the hero card, ABOVE the tall sheet, so it is never pushed off-screen;
+    // the sheet starts collapsed (the viewer's own toggle still wins afterwards).
     if (desk !== "closed") { if (!formNode) formNode = actionForm(); else formNode.refreshItems(); root.append(formNode); }
+    if (h) root.append(mySheet(h), myBag(h));
     root.append(recent());
   }
   function sync() {

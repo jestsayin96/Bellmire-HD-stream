@@ -24944,3 +24944,8 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or changed;
   Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
 - Not ticked - the team lead ticks.
+
+## HUB 28 Nov 13:5x CT - merged main; H37 request form moved above the tall sheet
+- Row: TAKE THIS NEXT (12:58) "HUB (:37) - MERGE MAIN FIRST, THEN H37". (1) Merge of origin/main into hub went through with NO conflict (ASSET_SOURCES already resolved on main): hub:web == main:web == 7ba6faa5, only 3 .import left under web/ (2 fonts + og.png), so the 520 dead sidecars are gone from hub. (2) H37: in My Room the request form now renders directly under the hero card, ABOVE the character sheet and satchel; the sheet starts collapsed (sheetOpen=false; viewer toggle still wins). Wear/Dye now pre-fill a form already on screen. app.js?v=13.
+- NUMBER: gh-pages^{tree} dd6294a0 vs hub:web 7ba6faa5 (pre-H37) = 6 files / 1130-file diff by stat includes dead-sidecar history; substantive delta is the My Room work (H33/H36) + this H37.
+- Checks: node --check rc 0; innerHTML code sites only app.js:255, :301; service_role/sb_secret grep 0 in app.js+index.html; CSP meta 1. NOT looked at: no screenshot (a signed-in My Room cannot be rendered unattended - no session, no live Twitch sign-in). Layout is an order swap + default-collapsed, no new CSS. Hostile-name canary and ?state=/?mock= passes NOT re-run this run: owed before publish. NOT claiming READY TO PUBLISH (browser OAuth leg still needs one human sign-in). Live-dot colour unchanged. Untracked worktree files unchanged (_hub_msg.txt, _hub_ready_shot.png, _hub_scratch, web_look3/4.tar).

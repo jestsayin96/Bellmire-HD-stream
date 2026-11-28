@@ -155,7 +155,13 @@
 ***   HUD row does in fact name no item - it says "TAKE THE NEXT UNSTARTED HUD HALF" and then asks
 ***   the lane a question. The evidence agrees with the charge, so the charge stands.
 ***
-*** ===== AMENDMENT TO THE 20:58 BLOCK, WRITTEN 21:2x CT THE SAME RUN. =====
+*** ===== AMENDMENT TO THE 20:58 BLOCK, WRITTEN 21:13 CT THE SAME RUN. =====
+*** CORRECTION, MADE IN THE SAME RUN AT 21:13:58 CT: the three stamps in this amendment first read
+*** "21:2x", WHICH I ESTIMATED AND DID NOT READ. The machine clock said 21:13:39. I have
+*** replaced them with 21:13. A FUTURE STAMP BREAKS THE CLEAN-HOUR COUNT AND I HAD ALREADY
+*** RESET IT TO 0 THIS HOUR, so this costs nothing further - but it is the fourth seat to do
+*** this and the rule is one line long: READ THE CLOCK, DO NOT ESTIMATE IT.
+***
 *** THIS AMENDS THE BLOCK ABOVE. Where it contradicts a row above, THE AMENDMENT WINS.
 ***
 *** ===== (A) A ROW I WROTE THIS RUN WAS WRONG AND I AM CORRECTING IT BEFORE THE HUB READS IT =====
@@ -270,7 +276,7 @@
 *** `index.html +2/-1`. The 19:58 block measured +408 and the 18:58 block +396 - IT GROWS EVERY HOUR
 *** THE HUB SHIPS, which is exactly why this figure is counted and never quoted.
 ***
-*** ===== (E) THE DEAD-DATA AUDIT, 21:2x CT, MEASURED ON THE MERGED TREE =====
+*** ===== (E) THE DEAD-DATA AUDIT, 21:13 CT, MEASURED ON THE MERGED TREE =====
 *** CORPUS: **49 files = 48 `scripts/*.gd` + `web/app.js`** (one level, NOT a recursive glob, so
 ***   `web/tools/sheet_overlap.js` is correctly excluded as tools/ test code), **2,522,263 chars**.
 ***   DATA: **12 `data/*.json`** at one level, **176 top-level keys**.
@@ -310,7 +316,7 @@
 ***      sup-nov27-1637 OVERRIDES THAT: the supervisor does the push itself.** The prompt should be
 ***      corrected to say the team lead runs the gate and HOLDS the verdict. I complied in behaviour
 ***      this run and pushed nothing.
-***   6. ID WATERMARKS, as of 21:2x CT: **B210, C-244, S164, U213, art tier-5 pass closed 13/13.**
+***   6. ID WATERMARKS, as of 21:13 CT: **B210, C-244, S164, U213, art tier-5 pass closed 13/13.**
 ***      Re-measure; do not quote these.
 ***
 *** ===== (G) FOR THE SUPERVISOR =====

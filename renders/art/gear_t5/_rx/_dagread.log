@@ -1,0 +1,78 @@
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+00:39:49 | INFO: Data are loaded, start creating Blender stuff
+00:39:49 | INFO: Blender create Mesh node Cube.125
+00:39:49 | INFO: Blender create Mesh node Cube.126
+00:39:49 | INFO: Blender create Mesh node PrototypePete_body.020
+00:39:49 | INFO: Blender create Mesh node PrototypePete_head.001
+00:39:49 | INFO: Blender create Mesh node Cube.128
+00:39:49 | INFO: Blender create Mesh node Cube.127
+00:39:49 | INFO: Blender create Mesh node Cube.003
+00:39:49 | INFO: Blender create Mesh node Cylinder.280
+00:39:49 | INFO: Blender create Mesh node Cylinder.005
+00:39:49 | INFO: Blender create Mesh node Cylinder.010
+00:39:49 | INFO: Blender create Mesh node Cylinder.022
+00:39:49 | INFO: Blender create Mesh node Cube.11839
+00:39:49 | INFO: Blender create Mesh node Cube.12993
+00:39:49 | INFO: Blender create Mesh node Cube.124
+00:39:49 | INFO: Blender create Mesh node Plane.004
+00:39:50 | INFO: glTF import finished in 0.54s
+DAGREAD basis selftest PASSED order=YXZ
+C:\hd adventure\bellmire-art\tools\art\_t5_dagread.py:201: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+00:39:50 | INFO: Data are loaded, start creating Blender stuff
+00:39:50 | INFO: Blender create Mesh node Cylinder.039
+00:39:50 | INFO: glTF import finished in 0.00s
+DAGREAD engine carry hand_scale=0.5 arm=begins 'res://assets/gear/artifact/dagger_' local_ext=[0.1109, 0.2972, 1.3892]
+DAGREAD stage1 4 of 64 triples pass geometry, 1 distinct geometries
+00:03.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_body_front.png'
+00:03.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_t-090-090+180_hs050_front.png'
+00:03.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_t-090-090+180_hs050_front.png'
+00:04.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_body_side.png'
+00:04.281  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_t-090-090+180_hs050_side.png'
+00:04.437  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_t-090-090+180_hs050_side.png'
+00:04.609  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_body_back.png'
+00:04.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_t-090-090+180_hs050_back.png'
+00:04.906  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_t-090-090+180_hs050_back.png'
+  FACE [-90.0, -90.0, 180.0]  hs=0.50 hang= 0.1 len=0.695 cf=0.352 vis={'front': 403, 'side': 957, 'back': 190} proving=1 show=1.077 border=0.000
+00:05.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs060_front.png'
+00:05.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs060_front.png'
+00:05.437  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs060_side.png'
+00:05.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs060_side.png'
+00:05.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs060_back.png'
+00:05.906  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs060_back.png'
+  SCALE hs=0.60 hang= 0.1 len=0.834 cf=0.284 ground=0 vis={'front': 702, 'side': 1599, 'back': 363} proving=1 show=1.066 border=0.000
+00:06.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs070_front.png'
+00:06.234  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs070_front.png'
+00:06.406  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs070_side.png'
+00:06.562  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs070_side.png'
+00:06.734  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs070_back.png'
+00:06.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs070_back.png'
+  SCALE hs=0.70 hang= 0.1 len=0.973 cf=0.293 ground=0 vis={'front': 1011, 'side': 2317, 'back': 523} proving=2 show=1.058 border=0.000
+00:07.062  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs075_front.png'
+00:07.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs075_front.png'
+00:07.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs075_side.png'
+00:07.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs075_side.png'
+00:07.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs075_back.png'
+00:07.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs075_back.png'
+  SCALE hs=0.75 hang= 0.1 len=1.042 cf=0.289 ground=0 vis={'front': 1159, 'side': 2657, 'back': 565} proving=2 show=1.032 border=0.000
+00:08.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs080_front.png'
+00:08.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs080_front.png'
+00:08.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs080_side.png'
+00:08.484  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs080_side.png'
+00:08.656  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs080_back.png'
+00:08.812  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs080_back.png'
+  SCALE hs=0.80 hang= 0.1 len=1.111 cf=0.281 ground=0 vis={'front': 1341, 'side': 2999, 'back': 651} proving=2 show=1.052 border=0.000
+00:09.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs090_front.png'
+00:09.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs090_front.png'
+00:09.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs090_side.png'
+00:09.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs090_side.png'
+00:09.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\dagger_pres_hs090_back.png'
+00:09.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\cells\_alone_pres_hs090_back.png'
+  SCALE hs=0.90 hang= 0.1 len=1.250 cf=0.325 ground=0 vis={'front': 1700, 'side': 3720, 'back': 734} proving=2 show=1.047 border=0.000
+DAGREAD_DONE C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagread\_t5_dagread.json candidates=6 clean=4
+  DAGREAD RECOMMEND arm=A_scale triple=[-90.0, 0.0, 90.0] hand_scale=0.70 len=0.973 m vis={'front': 1011, 'side': 2317, 'back': 523} proving=2 show=1.058
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+EXITCODE 0

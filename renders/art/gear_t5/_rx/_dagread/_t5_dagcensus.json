@@ -1,0 +1,1559 @@
+{
+ "tool": "_t5_dagcensus",
+ "kind": "dagger",
+ "model": "res://assets/gear/artifact/dagger_golden.glb",
+ "hand_scale": 0.5,
+ "euler_order": "YXZ",
+ "long_axis_local": "Z",
+ "broad_axis_local": "X",
+ "gates": {
+  "hang_max": 15.0,
+  "clip_frac_max": 0.37
+ },
+ "n": 64,
+ "n_upright": 24,
+ "n_upright_face_front": 8,
+ "n_upright_passing": 4,
+ "upright_face_front": [
+  {
+   "triple": [
+    0.0,
+    0.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.827,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3836,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    0.0,
+    180.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5157,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    0.0,
+    180.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4686,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    0.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4686,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    0.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5157,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    180.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3836,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    180.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.827,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  }
+ ],
+ "upright": [
+  {
+   "triple": [
+    -90.0,
+    -90.0,
+    0.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.9119,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    -90.0,
+    180.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3522,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    0.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.9119,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    0.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3522,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    90.0,
+    0.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3522,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    90.0,
+    180.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.9119,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    180.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3522,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    180.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.9119,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    0.0,
+    0.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.827,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3836,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    0.0,
+    180.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5157,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    0.0,
+    180.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4686,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    -90.0,
+    0.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4308,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    -90.0,
+    180.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5818,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    0.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5818,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    0.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4308,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    90.0,
+    0.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5818,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    90.0,
+    180.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4308,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    180.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4308,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    180.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5818,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    0.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4686,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    0.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5157,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    180.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3836,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    180.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.827,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  }
+ ],
+ "all": [
+  {
+   "triple": [
+    -90.0,
+    -90.0,
+    -90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.8019,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.688
+  },
+  {
+   "triple": [
+    -90.0,
+    -90.0,
+    0.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.9119,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    -90.0,
+    90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.1855,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.688
+  },
+  {
+   "triple": [
+    -90.0,
+    -90.0,
+    180.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3522,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    0.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.9119,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    0.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.1855,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.688
+  },
+  {
+   "triple": [
+    -90.0,
+    0.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3522,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    0.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.8019,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.688
+  },
+  {
+   "triple": [
+    -90.0,
+    90.0,
+    -90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.1855,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.688
+  },
+  {
+   "triple": [
+    -90.0,
+    90.0,
+    0.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3522,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    90.0,
+    90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.8019,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.688
+  },
+  {
+   "triple": [
+    -90.0,
+    90.0,
+    180.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.9119,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    180.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3522,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    180.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.8019,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.688
+  },
+  {
+   "triple": [
+    -90.0,
+    180.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.9119,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6947
+  },
+  {
+   "triple": [
+    -90.0,
+    180.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.1855,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.688
+  },
+  {
+   "triple": [
+    0.0,
+    -90.0,
+    -90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.8491,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6958
+  },
+  {
+   "triple": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 0.0,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6958
+  },
+  {
+   "triple": [
+    0.0,
+    -90.0,
+    90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.1132,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6958
+  },
+  {
+   "triple": [
+    0.0,
+    -90.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 1.0,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6958
+  },
+  {
+   "triple": [
+    0.0,
+    0.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.827,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 0.0,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    0.0,
+    0.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3836,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    0.0,
+    0.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 1.0,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    0.0,
+    90.0,
+    -90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.2296,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.68
+  },
+  {
+   "triple": [
+    0.0,
+    90.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 0.0,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.68
+  },
+  {
+   "triple": [
+    0.0,
+    90.0,
+    90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.5157,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.68
+  },
+  {
+   "triple": [
+    0.0,
+    90.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 1.0,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.68
+  },
+  {
+   "triple": [
+    0.0,
+    180.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5157,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    0.0,
+    180.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 0.0,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    0.0,
+    180.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4686,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    0.0,
+    180.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 1.0,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    90.0,
+    -90.0,
+    -90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.8176,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    90.0,
+    -90.0,
+    0.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4308,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    -90.0,
+    90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.1289,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    90.0,
+    -90.0,
+    180.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5818,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    0.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5818,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    0.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.8176,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    90.0,
+    0.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4308,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    0.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.1289,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    90.0,
+    90.0,
+    -90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.1289,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    90.0,
+    90.0,
+    0.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5818,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    90.0,
+    90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.8176,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    90.0,
+    90.0,
+    180.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4308,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    180.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4308,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    180.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.1289,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    90.0,
+    180.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5818,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    90.0,
+    180.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.8176,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    180.0,
+    -90.0,
+    -90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.5157,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.68
+  },
+  {
+   "triple": [
+    180.0,
+    -90.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 1.0,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.68
+  },
+  {
+   "triple": [
+    180.0,
+    -90.0,
+    90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.2296,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.68
+  },
+  {
+   "triple": [
+    180.0,
+    -90.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 0.0,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.68
+  },
+  {
+   "triple": [
+    180.0,
+    0.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.4686,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    0.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 1.0,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    180.0,
+    0.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.5157,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    0.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 0.0,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    180.0,
+    90.0,
+    -90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.1132,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6958
+  },
+  {
+   "triple": [
+    180.0,
+    90.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 1.0,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6958
+  },
+  {
+   "triple": [
+    180.0,
+    90.0,
+    90.0
+   ],
+   "upright": false,
+   "hang": 89.9,
+   "clip_frac": 0.8491,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6958
+  },
+  {
+   "triple": [
+    180.0,
+    90.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 0.0,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Y",
+   "face_dot": 0.989,
+   "world_len_m": 0.6958
+  },
+  {
+   "triple": [
+    180.0,
+    180.0,
+    -90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.3836,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    180.0,
+    0.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 1.0,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  },
+  {
+   "triple": [
+    180.0,
+    180.0,
+    90.0
+   ],
+   "upright": true,
+   "hang": 0.1,
+   "clip_frac": 0.827,
+   "ground": 0,
+   "clip_ok": false,
+   "no_ground": true,
+   "face_axis": "X",
+   "face_dot": 0.989,
+   "world_len_m": 0.6946
+  },
+  {
+   "triple": [
+    180.0,
+    180.0,
+    180.0
+   ],
+   "upright": false,
+   "hang": 90.0,
+   "clip_frac": 0.0,
+   "ground": 0,
+   "clip_ok": true,
+   "no_ground": true,
+   "face_axis": "Z",
+   "face_dot": 1.0,
+   "world_len_m": 0.6879
+  }
+ ]
+}

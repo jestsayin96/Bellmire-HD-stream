@@ -1,6 +1,6 @@
 {
- "verdict": "FAIL",
- "ok": false,
+ "verdict": "GREEN",
+ "ok": true,
  "tool": "_t5_rxproof",
  "tier": 5,
  "hero": {
@@ -84,10 +84,22 @@
  "lances": [],
  "blanks": [],
  "frame_clips": [],
- "blind_views": [
-  "dagger: only 1 of 3 views show the weapon"
- ],
+ "blind_views": [],
  "errors": [],
+ "engine_delta": [
+  "axe: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)",
+  "dagger: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)",
+  "dagger: gear.gd hand_scale 0.5 -> 0.6",
+  "greataxe: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)",
+  "greatsword: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, -90.0)",
+  "mace: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)",
+  "quarterstaff: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, -90.0)",
+  "sceptre: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)",
+  "spear: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(90.0, 0.0, 90.0)",
+  "staff: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, -90.0)",
+  "sword: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)",
+  "wand: gear.gd held_rot [0.0, 0.0, 0.0] -> Vector3(0.0, 0.0, 90.0)"
+ ],
  "models": {
   "axe": {
    "kind": "axe",
@@ -99,6 +111,13 @@
    ],
    "grip_x": 0.0,
    "hand_scale": 0.6,
+   "engine_hand_scale": 0.6,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 1652,
    "checked": 1051,
    "clip": 226,
@@ -150,6 +169,13 @@
    ],
    "grip_x": -0.5723,
    "hand_scale": 0.6,
+   "engine_hand_scale": 0.6,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    90.0
+   ],
    "verts": 1526,
    "checked": 1374,
    "clip": 224,
@@ -201,6 +227,13 @@
    ],
    "grip_x": 0.0,
    "hand_scale": 1.0,
+   "engine_hand_scale": 1.0,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 785,
    "checked": 659,
    "clip": 108,
@@ -246,32 +279,39 @@
    "kind": "dagger",
    "model": "res://assets/gear/artifact/dagger_golden.glb",
    "prescribed": [
-    -90.0,
+    0.0,
     0.0,
     90.0
    ],
    "grip_x": 0.0,
-   "hand_scale": 0.5,
+   "hand_scale": 0.6,
+   "engine_hand_scale": 0.5,
+   "hand_scale_prescribed": true,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 1141,
-   "checked": 318,
-   "clip": 112,
-   "clip_frac": 0.3522,
+   "checked": 405,
+   "clip": 140,
+   "clip_frac": 0.3457,
    "ground": 0,
    "floor_depth": 0.0,
    "hang_deg_from_vertical": 0.1,
    "aspect": 4.67,
-   "tip_z": 1.18,
-   "reach": 0.54,
-   "drop": 0.155,
+   "tip_z": 1.288,
+   "reach": 0.648,
+   "drop": 0.186,
    "minor": {
-    "front": 13,
-    "side": 32,
-    "back": 13
+    "front": 38,
+    "side": 15,
+    "back": 38
    },
    "opaque": {
-    "front": 94355,
+    "front": 95257,
     "side": 81266,
-    "back": 95148
+    "back": 96109
    },
    "border": {
     "front": 0.0,
@@ -279,19 +319,19 @@
     "back": 0.0
    },
    "vis": {
-    "front": 403,
-    "side": 957,
-    "back": 190
+    "front": 1598,
+    "side": 567,
+    "back": 1219
    },
    "seen": {
-    "front": 0.4198,
-    "side": 0.4719,
-    "back": 0.2
+    "front": 0.5574,
+    "side": 0.4209,
+    "back": 0.4247
    },
-   "mid_px": 29.7,
-   "best_minor": 32,
-   "show": 1.077,
-   "proving_views": 1
+   "mid_px": 35.7,
+   "best_minor": 38,
+   "show": 1.066,
+   "proving_views": 2
   },
   "greataxe": {
    "kind": "greataxe",
@@ -303,6 +343,13 @@
    ],
    "grip_x": 0.0,
    "hand_scale": 0.6,
+   "engine_hand_scale": 0.6,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 2362,
    "checked": 1778,
    "clip": 344,
@@ -354,6 +401,13 @@
    ],
    "grip_x": -1.4705,
    "hand_scale": 0.6,
+   "engine_hand_scale": 0.6,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 1444,
    "checked": 1344,
    "clip": 136,
@@ -405,6 +459,13 @@
    ],
    "grip_x": 0.0,
    "hand_scale": 0.4,
+   "engine_hand_scale": 0.4,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 3641,
    "checked": 3321,
    "clip": 512,
@@ -456,6 +517,13 @@
    ],
    "grip_x": -1.1751,
    "hand_scale": 1.0,
+   "engine_hand_scale": 1.0,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 1879,
    "checked": 1849,
    "clip": 160,
@@ -507,6 +575,13 @@
    ],
    "grip_x": 0.0,
    "hand_scale": 0.62,
+   "engine_hand_scale": 0.62,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 772,
    "checked": 490,
    "clip": 169,
@@ -558,6 +633,13 @@
    ],
    "grip_x": 0.0,
    "hand_scale": 0.62,
+   "engine_hand_scale": 0.62,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 1723,
    "checked": 1463,
    "clip": 438,
@@ -609,6 +691,13 @@
    ],
    "grip_x": -1.1751,
    "hand_scale": 1.0,
+   "engine_hand_scale": 1.0,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 1879,
    "checked": 1849,
    "clip": 160,
@@ -660,6 +749,13 @@
    ],
    "grip_x": 0.0,
    "hand_scale": 0.6,
+   "engine_hand_scale": 0.6,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 1383,
    "checked": 675,
    "clip": 232,
@@ -711,6 +807,13 @@
    ],
    "grip_x": 0.0,
    "hand_scale": 0.62,
+   "engine_hand_scale": 0.62,
+   "hand_scale_prescribed": false,
+   "engine_held_rot_deg": [
+    0.0,
+    0.0,
+    0.0
+   ],
    "verts": 531,
    "checked": 339,
    "clip": 103,

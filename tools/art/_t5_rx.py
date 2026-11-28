@@ -47,7 +47,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import lordgen as G            # noqa: E402
 import minibossfit as MF       # noqa: E402
 import weaponfit as WF         # noqa: E402
-import gearcarry as GC         # noqa: E402
+import gearcarry as GC
+import _t5_readfix as RF   # noqa: E402         # noqa: E402
 import artifactfit as AF       # noqa: E402
 
 UP = Vector((0, 0, 1))
@@ -375,6 +376,18 @@ def main():
         raise SystemExit("RX FAIL - EMPTY PRESCRIPTION, nothing was searched.")
     if searched == 0:
         raise SystemExit("RX FAIL - zero candidates scored across all kinds.")
+
+    # *** READABILITY OVERRIDE. See _t5_readfix.py for the whole argument. ***
+    # This search varies ROTATION ONLY at the shipped hand_scale, so a cell
+    # that reads as a hairline at every rotation is a cell it cannot fix. The
+    # override is applied here, AFTER the scoring, so the scored result stays
+    # in the record beside it rather than being overwritten silently.
+    for _k in RF.READ_RX:
+        if _k in rx:
+            rx[_k]["scored_triple"] = rx[_k].get("prescribed_triple")
+            rx[_k]["scored_grip_x"] = rx[_k].get("prescribed_grip_x")
+    _rf = RF.apply(rx, log=" ")
+    print("  RX readability override applied to %s" % (_rf or "nothing"))
 
     out = dict(tool="_t5_rx", tier=a.tier, hero=hinfo,
                handslot=[round(v, 4) for v in slot],

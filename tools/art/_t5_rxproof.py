@@ -106,7 +106,13 @@ def main():
                 bpy.data.objects.remove(o, do_unlink=True)
             continue
         cr = GC.carry(a.gear, res_path)
-        hs = cr["hand_scale"]
+        hs_engine = cr["hand_scale"]
+        # A PRESCRIBED hand_scale IS A PRESCRIPTION LIKE THE TRIPLE IS, AND IT
+        # IS NOT WHAT THE ENGINE SHIPS. Both numbers go in the register and the
+        # difference goes in `engine_delta`, so that nobody can read a GREEN
+        # verdict here as "the game carries it this way today". It does not:
+        # this tool proves the PRESCRIPTION, which is its whole stated job.
+        hs = float(rxk.get("prescribed_hand_scale") or hs_engine)
         lv = WF.world_verts(meshes)
         if not lv:
             errors.append("%s: zero vertices - FAIL" % kind)
@@ -136,7 +142,9 @@ def main():
                                                    abs(lw.dot(Vector((0, 0, 1))))))))
         aspect = max(li) / max(1e-6, sorted(li)[1])
         rec = dict(kind=kind, model=res_path, prescribed=deg, grip_x=gx,
-                   hand_scale=hs, verts=len(wv), checked=len(far),
+                   hand_scale=hs, engine_hand_scale=hs_engine,
+                   hand_scale_prescribed=(abs(hs - hs_engine) > 1e-9),
+                   engine_held_rot_deg=cr["held_rot_deg"], verts=len(wv), checked=len(far),
                    clip=n_clip, clip_frac=round(n_clip / float(len(far)), 4),
                    ground=n_ground,
                    floor_depth=round(max(0.0, -min(zs)), 4),
@@ -244,6 +252,19 @@ def main():
         for i, k in enumerate(ks):
             small = d[k][::q, ::q, :]
             r, c = divmod(i, cols)
+            # *** THE ROW ORDER, FOUND BY LOOKING, 27 NOV 19:1x CT. ***
+            # See the correction below: `d[k]` is BOTTOM-UP, and this buffer
+            # goes straight into `im.pixels`, which is also bottom-up. So the
+            # CELLS come out upright - but buffer row 0 is the image's BOTTOM
+            # row, and `divmod` counts rows from the TOP. The sheet therefore
+            # printed `order=axe,bow,...` while showing the LAST row first:
+            # the 13th cell sat where the 1st was named. Every gate number is
+            # computed on the cell arrays and none of them moved, so no
+            # verdict was ever wrong - but the one artefact a human LOOKS at
+            # mapped the wrong weapon to the wrong name, which is worse than a
+            # wrong number because it is the thing that overrules the numbers.
+            # Invert the ROW index only; the cell contents are already right.
+            r = rows - 1 - r
             sh[r * ch:r * ch + small.shape[0],
                c * cw:c * cw + small.shape[1], :] = small[:ch, :cw, :]
         if float(sh[:, :, 3].max()) <= WF.DIFF_EPS:
@@ -251,19 +272,45 @@ def main():
         p = os.path.join(sheetdir, "rx_%s.png" % vname)
         im = bpy.data.images.new("sh_" + vname, sh.shape[1], sh.shape[0],
                                  alpha=True)
-        # *** THE FLIP, FOUND BY LOOKING, 17:52 CT. ***
+        # *** THE FLIP, FOUND BY LOOKING, 17:52 CT - AND THE HALF OF IT I
+        # *** GOT WRONG, CORRECTED 27 NOV 19:1x CT. ***
         # My first sheet wrote `sh[::-1]` and every knight on it came out
         # UPSIDE DOWN, while the cell PNGs Blender saved straight to disk were
-        # upright. WF.render_to already returns a TOP-DOWN array, so the extra
-        # reverse inverted each cell. A contact sheet that turns the figure
-        # over is exactly the instrument that would make a good carry read as
-        # a bad one - the cells are the evidence, the sheet was the suspect.
+        # upright. Dropping the reverse fixed the figures, and I wrote the
+        # reason down as "WF.render_to already returns a TOP-DOWN array".
+        # THAT SENTENCE IS FALSE. `WF.read_png` reads `im.pixels` and reshapes
+        # it with NO flip, and Blender's pixel buffer is BOTTOM-UP, so what
+        # comes back is bottom-up. Dropping the reverse produced upright cells
+        # for the right reason by accident (bottom-up array into a bottom-up
+        # buffer) and silently reversed the ROW ORDER, which I did not look
+        # for because I thought I understood the flip. `_t5_resheet.py` has
+        # the honest idiom: flip each cell to top-down on load, flip the whole
+        # sheet back on write. The row-index inversion above is the equivalent
+        # fix made where the bug is, and the wrong explanation is kept here
+        # struck rather than deleted, because it is the reason the bug lived.
         im.pixels = sh.reshape(-1)
         im.filepath_raw = p
         im.file_format = 'PNG'
         im.save()
         sheets[vname] = p
         print("  SHEET %s %s  order=%s" % (vname, p, ",".join(ks)))
+
+    # WHAT THE ENGINE MUST CHANGE FOR THIS PROVEN CARRY TO BE THE REAL ONE.
+    # gear.gd belongs to the GAME BUILD lane. This list is the handoff, and it
+    # is emitted whether the verdict is GREEN or FAIL, because a green proof of
+    # a carry the engine does not ship is exactly the thing worth stating.
+    engine_delta = []
+    for k in sorted(reg):
+        r = reg[k]
+        if [round(v, 3) for v in r["engine_held_rot_deg"]] != \
+                [round(v, 3) for v in r["prescribed"]]:
+            engine_delta.append(
+                "%s: gear.gd held_rot %s -> Vector3%s"
+                % (k, r["engine_held_rot_deg"], tuple(r["prescribed"])))
+        if r["hand_scale_prescribed"]:
+            engine_delta.append(
+                "%s: gear.gd hand_scale %s -> %s"
+                % (k, r["engine_hand_scale"], r["hand_scale"]))
 
     ok = (not errors and not blanks and not clipped and not blind
           and not laths and not floor_breaks and not lances)
@@ -275,7 +322,8 @@ def main():
                min_proving=WF.MIN_PROVING, px_per_m=WF.PX_PER_M,
                sheets=sheets, laths=laths, floor_breaks=floor_breaks,
                lances=lances, blanks=blanks, frame_clips=clipped,
-               blind_views=blind, errors=errors, models=reg)
+               blind_views=blind, errors=errors,
+               engine_delta=engine_delta, models=reg)
     jp = os.path.join(rxdir, "_t5_rxproof.json")
     with open(jp, "w", encoding="utf-8") as fh:
         json.dump(out, fh, indent=1)
@@ -283,6 +331,8 @@ def main():
           "laths=%d floor=%d lances=%d errors=%d"
           % (jp, out["verdict"], len(blanks), len(clipped), len(blind),
              len(laths), len(floor_breaks), len(lances), len(errors)))
+    for x in engine_delta:
+        print("  ENGINE_DELTA %s" % x)
     for nm, lst in (("ERR", errors), ("BLANK", blanks), ("FRAMECLIP", clipped),
                     ("BLIND", blind), ("LATH", laths),
                     ("FLOOR", floor_breaks), ("LANCE", lances)):

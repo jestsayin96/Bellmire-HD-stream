@@ -474,7 +474,7 @@
     "clip_ok": 56
    },
    "prescribed_triple": [
-    -90.0,
+    0.0,
     0.0,
     90.0
    ],
@@ -535,7 +535,21 @@
      0.0,
      -90.0
     ]
-   ]
+   ],
+   "scored_triple": [
+    -90.0,
+    0.0,
+    90.0
+   ],
+   "scored_grip_x": 0.0,
+   "prescribed_hand_scale": 0.6,
+   "prescribed_by": "_t5_dagface",
+   "prescribed_reason": "the shipped 0.5 renders the blade edge-on to the front and back cameras as a hairline; (0,0,90) turns the face to them and 0.60 carries clip_frac under the ceiling",
+   "prescribed_rejected": {
+    "(-90,0,90) @ 0.75": "clears vis at 1159 px and STILL reads as a hairline - a 1.04 m one. Gate cleared, picture not fixed.",
+    "(0,0,90) @ 0.55": "passes, 0.764 m, but the back view is 929 px against a 900 px floor - 3% of margin",
+    "any yaw at hand_scale <= 0.65": "_t5_dagyaw, 36 candidates, 0 clean: the z term is the STAND-UP term, not a facing term - at z=0 the blade lies flat at hang 89.9"
+   }
   },
   "greataxe": {
    "kind": "greataxe",
@@ -1617,5 +1631,12 @@
     ]
    ]
   }
+ },
+ "readability_override": {
+  "applied": [
+   "dagger"
+  ],
+  "tool": "_t5_readfix",
+  "note": "_t5_rx.py searches ROTATION ONLY at the shipped hand_scale and cannot fix a cell that reads as a hairline at every rotation. The scored result is kept beside the override as scored_triple."
  }
 }

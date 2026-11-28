@@ -5019,3 +5019,30 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
 - Gates: parse rc 0, 0 SCRIPT ERROR / 0 Parse Error. OFFFLOOR_VERDICT OK 0 of 2352. TWITCH_PARSE OK (8 checks). TOWNWALK
   in_solid=0/17356 (0.000%) raid_in_solid=0/5099 (0.000%) PASS. DELVE_TEST OK ran 9001 frames, floor reached 2.
   SOLO_TEST OK 16 of 16. PARTY_TEST OK 23 of 23. No Twitch test, ZERO BITS. Item (3) town progression not started.
+
+## D-cycle - S169 HUB ORDER DESK, ENGINE HALF (action-queue polling, sup-nov27-2340) + W1A_TEST stale premise, 2026-11-28 01:08-01:2x CST (game build)
+- TAKE THIS NEXT: the 00:58 block's game-build row is for 02:07, so this run read the 23:58 row, minus the four items S168
+  closed. ORDER (1) DEATH MODEL: MEASURED, NOT REBUILT - slice 3's engine side (bag body + walk-over) is already on main as
+  S164 c853f79e (delve.gd:2754). What stays open is NOT game-build engine work: !repair / durability text (chat bot,
+  Economy.repair ready), guild insurance (Mr. E's rank number), broken-gear look (art). The one red gate it left was mine:
+  W1A_TEST check 3 asserted "the living two" after r.kill - a PRE-RULING premise; under sup-0209 the rogue rises. Check 3 now
+  asserts all three heroes with the rogue's deaths == 1, check 10 round-trips without assuming order. The publisher was right.
+- ORDER (2) ACTION-QUEUE POLLING - NEW scripts/hub_actions.gd (class HubActions), started in town.gd beside the
+  SnapshotPublisher under the same JESTS_NO_TWITCH guard, same user://supabase.json key (never printed). Built to the hub's
+  web/tools/hub_actions_schema.sql: polls status=queued oldest first, 5 rows per 5 s, PATCHes status+result+updated_at with
+  `&status=eq.queued` so a row is only ever decided once. THE AUTHORITY: every accepted row becomes the chat line the viewer
+  could have typed (!wear / !dye / !forge|!armoury|!brew|!repair|!oil / !respec / !reroll / !specialize / !party invite|join|
+  leave) and runs through town.chat_line - the ONE entry chat uses - so every cost, gate and cooldown holds; nothing posts to
+  Twitch, the town's answer goes into `result` (cap 200). Args are scrubbed to [a-z0-9 -_'] so no "!" can be smuggled.
+  refused = bad id / unknown kind / bad args / no hero / `sell` (the engine has no sell verb; chat's !sell only prints prices).
+  A chat-cooldown hit leaves the row QUEUED; anything queued past 10 min is swept to `expired`. A 404/400 (THE TABLE DOES NOT
+  EXIST YET) closes the desk, prints ONCE, retries every 300 s - no hourly error.
+- FOR THE HUB: H33's respec form sends no box, and chat's !respec needs the new calling - so a hub respec today is answered
+  "No such calling. Try: ...". The poller accepts args.calling (or class/path) the moment the form sends one.
+- NOT RUN LIVE: the table does not exist, and applying the DDL is the supervisor's decision, not mine.
+- snapshot_pub.gd header sentence repaired ("Every EVERY seconds (15) ONE row ...").
+- GATES (verdict lines): --import rc 0; parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error. HUB_ACTIONS_TEST OK 16 of 16
+  (new; offline only). W1A_TEST OK (offline only). DEATH_TEST OK 36 of 36. TWITCH_PARSE OK (8 checks). OFFFLOOR_VERDICT OK 0 of
+  2114. TOWNWALK in_solid=0/17492 (0.000%) raid_in_solid=0/3854 (0.000%) PASS. DELVE_TEST OK ran 9001 frames, floor reached 2,
+  0 SCRIPT ERROR. No render: nothing visual changed. No Twitch test, ZERO BITS.
+- NEXT (3): town visual progression - define and write down the layout format FIRST.

@@ -1,6 +1,6 @@
 class_name SnapshotPublisher
 extends Node
-## W1a: the viewer hub's data. Every EVERY s (15) ONE row of the Supabase table public.snapshot
+## W1a: the viewer hub's data. Every EVERY seconds (15) ONE row of the Supabase table public.snapshot
 ## (id = 1) is overwritten with a jsonb blob: the town, the guild roll, the fallen, every
 ## hero's sheet / inventory / gear and the command list (data/commands.json). One row,
 ## upserted - the table never grows and nothing has to be cleaned up.

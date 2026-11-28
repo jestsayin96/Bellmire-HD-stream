@@ -48,7 +48,13 @@ func _run() -> void:
     # 2 the blob
     var p := off.build_payload()
     _check("2 blob has every part", p.has_all(["v", "generated_at", "town", "guild_roll", "fallen", "heroes", "commands", "chronicle"]))
-    _check("3 heroes = the living two, best standing first", p["heroes"].size() == 2 and p["heroes"][0]["name"] == "W1aTestKnight")
+    # S169: RULING sup-nov27-0209 (S161) - a fall is no longer the end; the rogue RISES and stays a hero
+    # (deaths 1). The pre-ruling "living two" premise was stale, not the publisher.
+    var rogue_rose := false
+    for hs in p["heroes"]:
+        if hs["name"] == "W1aTestRogue":
+            rogue_rose = int(hs.get("deaths", 0)) == 1
+    _check("3 heroes = all three (the rogue rose, deaths 1), best standing first", p["heroes"].size() == 3 and p["heroes"][0]["name"] == "W1aTestKnight" and rogue_rose)
     var s0: Dictionary = p["heroes"][0]
     _check("4 sheet: stats, saves, weapon dice, armour, inventory, gear", s0.has_all(["stats", "saves", "ac", "hp", "to_hit", "weapon", "armour", "potions", "brews", "oil", "gold", "worn", "rank"]) and String(s0["weapon"]["dice"]) != "" and s0["stats"].size() == 6)
     _check("5 fallen = the rogue, with killer + epitaph", p["fallen"].size() == 1 and p["fallen"][0]["name"] == "W1aTestRogue" and p["fallen"][0]["killed_by"] == "a test of the hub")
@@ -58,7 +64,7 @@ func _run() -> void:
     var txt := JSON.stringify(p)
     _check("9 no Twitch ids in the blob", txt.find("9001") < 0 and txt.find("9002") < 0 and txt.find("\"id\"") < 0)
     var back: Variant = JSON.parse_string(txt)
-    _check("10 plain JSON round trip", typeof(back) == TYPE_DICTIONARY and back["heroes"][1]["name"] == "W1aTestMage")
+    _check("10 plain JSON round trip", typeof(back) == TYPE_DICTIONARY and back["heroes"][1]["name"] == p["heroes"][1]["name"] and back["heroes"].size() == 3)
     # the Chronicle: newest first, typed, plain text, capped
     var lines := {
         "Aldric the Younger is killed by skeleton minion.": "death",

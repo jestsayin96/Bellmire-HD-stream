@@ -1218,6 +1218,109 @@ func note_delve_done(user_id: String) -> void:
     if not h.is_empty():
         h["delves_completed"] = int(h.get("delves_completed", 0)) + 1
 
+# ------------------------------------------------------- S165: parties (System 42b, engine half)
+# DIRECTIVE sup-nov27-1844. A party is keyed by its LEADER's uid. It survives a delve ending and
+# lasts until the leader disbands it or leaves (a leader leaving dissolves it). Members are uids in
+# join order, leader first. Invites are uids the leader named; join needs an invite. In memory only:
+# a party is a sitting-together thing for one stream, not a save row (say so if Mr. E wants it kept).
+# Every call returns a line for chat; the command surface (chatcmd.gd) is the CHAT BOT's.
+const PARTY_CAP := 10           # Mr. E 18:44: no more than ten go down together
+var parties := {}               # leader uid -> {"members": [uid...], "invites": [uid...]}
+
+func _pname(uid: String) -> String:
+    var h := get_hero(uid)
+    return String(h.get("name", uid)) if not h.is_empty() else uid
+
+func party_of(uid: String) -> String:
+    ## the leader uid of the party uid is in, or "" when none
+    for lead in parties:
+        if (parties[lead]["members"] as Array).has(uid):
+            return String(lead)
+    return ""
+
+func party_members(uid: String) -> Array:
+    var lead := party_of(uid)
+    return (parties[lead]["members"] as Array).duplicate() if lead != "" else []
+
+func party_create(uid: String) -> String:
+    if get_hero(uid).is_empty():
+        return "You have no hero yet."
+    var lead := party_of(uid)
+    if lead == uid:
+        return "You already lead a party."
+    if lead != "":
+        return "You are already in %s's party. !party leave first." % _pname(lead)
+    parties[uid] = {"members": [uid], "invites": []}
+    return "%s gathers a party. !party invite <name> to bring friends." % _pname(uid)
+
+func party_invite(uid: String, who: String) -> String:
+    if party_of(uid) != uid:
+        return "Only a party's leader can invite. !party to start one."
+    if get_hero(who).is_empty():
+        return "No hero by that name."
+    if who == uid:
+        return "You are already in your own party."
+    var p: Dictionary = parties[uid]
+    if (p["members"] as Array).size() >= PARTY_CAP:
+        return "Your party is full - ten is the most the scar takes together."
+    if party_of(who) != "":
+        return "%s is already in a party." % _pname(who)
+    if not (p["invites"] as Array).has(who):
+        (p["invites"] as Array).append(who)
+    return "%s invites %s. !party join %s to accept." % [_pname(uid), _pname(who), _pname(uid)]
+
+func party_join(uid: String, lead: String) -> String:
+    if get_hero(uid).is_empty():
+        return "You have no hero yet."
+    if not parties.has(lead):
+        return "No party led by that name."
+    if party_of(uid) != "":
+        return "You are already in a party. !party leave first."
+    var p: Dictionary = parties[lead]
+    if not (p["invites"] as Array).has(uid):
+        return "%s has not invited you." % _pname(lead)
+    if (p["members"] as Array).size() >= PARTY_CAP:
+        return "%s's party is full." % _pname(lead)
+    (p["invites"] as Array).erase(uid)
+    (p["members"] as Array).append(uid)
+    return "%s joins %s's party (%d of %d)." % [_pname(uid), _pname(lead), (p["members"] as Array).size(), PARTY_CAP]
+
+func party_leave(uid: String) -> String:
+    var lead := party_of(uid)
+    if lead == "":
+        return "You are not in a party."
+    if lead == uid:
+        parties.erase(uid)
+        return "%s leaves, and the party breaks up." % _pname(uid)
+    (parties[lead]["members"] as Array).erase(uid)
+    return "%s leaves %s's party." % [_pname(uid), _pname(lead)]
+
+func party_kick(uid: String, who: String) -> String:
+    if party_of(uid) != uid:
+        return "Only a party's leader can do that."
+    if who == uid:
+        return "You cannot kick yourself. !party disband ends the party."
+    var m: Array = parties[uid]["members"]
+    if not m.has(who):
+        return "%s is not in your party." % _pname(who)
+    m.erase(who)
+    return "%s is turned out of %s's party." % [_pname(who), _pname(uid)]
+
+func party_disband(uid: String) -> String:
+    if party_of(uid) != uid:
+        return "Only a party's leader can do that."
+    parties.erase(uid)
+    return "%s disbands the party." % _pname(uid)
+
+func party_line(uid: String) -> String:
+    var lead := party_of(uid)
+    if lead == "":
+        return "You are not in a party. !party to start one."
+    var names: Array = []
+    for m in parties[lead]["members"]:
+        names.append(_pname(String(m)))
+    return "%s's party (%d of %d): %s." % [_pname(lead), names.size(), PARTY_CAP, ", ".join(names)]
+
 # --------------------------------------------------------------- leaderboard
 # ------------------------------------------------------- the guild roll
 # The Bellmire Guild keeps a roll, and standing on it is EARNED - how deep a

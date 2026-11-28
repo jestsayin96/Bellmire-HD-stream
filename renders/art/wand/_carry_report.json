@@ -1,0 +1,227 @@
+{
+ "model": "assets\\gear\\wand_crystal.glb",
+ "hero_h": 2.45,
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "control_note": "judged against _scale_sweep.json controls: the SHIPPED staff_rare clips 22.7% at its own carry, so clip==0 is not the bar",
+ "carries": [
+  {
+   "name": "now_horizontal",
+   "held_rot": [
+    0,
+    0,
+    0
+   ],
+   "hand_scale": 0.62,
+   "roll_applied": 0.0,
+   "length_in_hand": 0.571,
+   "verts": 7935,
+   "checked": 5959,
+   "clip": 0,
+   "clip_pct": 0.0,
+   "ground": 0,
+   "reach": 0.046,
+   "tip_z": 0.686,
+   "hard_gates_ok": true,
+   "blanks": [],
+   "blind_views": [],
+   "frame_clipped": [],
+   "views": {
+    "front": {
+     "moved": 878,
+     "opaque": 93457,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "side": {
+     "moved": 457,
+     "opaque": 79783,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "back": {
+     "moved": 871,
+     "opaque": 94264,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    }
+   },
+   "outdir": "renders\\art\\wand\\now_horizontal"
+  },
+  {
+   "name": "up_roll00",
+   "held_rot": [
+    0,
+    0,
+    90
+   ],
+   "hand_scale": 0.62,
+   "roll_applied": 0.0,
+   "length_in_hand": 0.571,
+   "verts": 7935,
+   "checked": 5959,
+   "clip": 1370,
+   "clip_pct": 23.0,
+   "ground": 0,
+   "reach": 0.571,
+   "tip_z": 1.211,
+   "hard_gates_ok": true,
+   "blanks": [],
+   "blind_views": [],
+   "frame_clipped": [],
+   "views": {
+    "front": {
+     "moved": 643,
+     "opaque": 93250,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "side": {
+     "moved": 547,
+     "opaque": 79783,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "back": {
+     "moved": 562,
+     "opaque": 94083,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    }
+   },
+   "outdir": "renders\\art\\wand\\up_roll00"
+  },
+  {
+   "name": "up_roll15",
+   "held_rot": [
+    0,
+    15,
+    90
+   ],
+   "hand_scale": 0.62,
+   "roll_applied": 15.0,
+   "length_in_hand": 0.571,
+   "verts": 7935,
+   "checked": 5959,
+   "clip": 1177,
+   "clip_pct": 19.8,
+   "ground": 0,
+   "reach": 0.551,
+   "tip_z": 1.192,
+   "hard_gates_ok": true,
+   "blanks": [],
+   "blind_views": [],
+   "frame_clipped": [],
+   "views": {
+    "front": {
+     "moved": 758,
+     "opaque": 93314,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "side": {
+     "moved": 583,
+     "opaque": 79783,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "back": {
+     "moved": 650,
+     "opaque": 94133,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    }
+   },
+   "outdir": "renders\\art\\wand\\up_roll15"
+  },
+  {
+   "name": "up_roll45",
+   "held_rot": [
+    0,
+    45,
+    90
+   ],
+   "hand_scale": 0.62,
+   "roll_applied": 45.0,
+   "length_in_hand": 0.571,
+   "verts": 7935,
+   "checked": 5959,
+   "clip": 482,
+   "clip_pct": 8.1,
+   "ground": 0,
+   "reach": 0.405,
+   "tip_z": 1.046,
+   "hard_gates_ok": true,
+   "blanks": [],
+   "blind_views": [],
+   "frame_clipped": [],
+   "views": {
+    "front": {
+     "moved": 857,
+     "opaque": 93426,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "side": {
+     "moved": 635,
+     "opaque": 79783,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "back": {
+     "moved": 783,
+     "opaque": 94216,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    }
+   },
+   "outdir": "renders\\art\\wand\\up_roll45"
+  },
+  {
+   "name": "wandlen_roll45",
+   "held_rot": [
+    0,
+    45,
+    90
+   ],
+   "hand_scale": 0.45,
+   "roll_applied": 45.0,
+   "length_in_hand": 0.414,
+   "verts": 7935,
+   "checked": 5146,
+   "clip": 477,
+   "clip_pct": 9.3,
+   "ground": 0,
+   "reach": 0.294,
+   "tip_z": 0.935,
+   "hard_gates_ok": true,
+   "blanks": [],
+   "blind_views": [],
+   "frame_clipped": [],
+   "views": {
+    "front": {
+     "moved": 452,
+     "opaque": 93112,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "side": {
+     "moved": 366,
+     "opaque": 79783,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "back": {
+     "moved": 389,
+     "opaque": 93910,
+     "wand_verts_outside_frame": 0,
+     "frame_outside": 0
+    }
+   },
+   "outdir": "renders\\art\\wand\\wandlen_roll45"
+  }
+ ]
+}

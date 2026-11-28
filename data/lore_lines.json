@@ -1180,7 +1180,15 @@
     "They leave the daylight on the step and take the stair.",
     "The rope is paid out, knot by knot.",
     "Somebody coughs. The door closes on it.",
-    "They go down in the order they always go."
+    "They go down in the order they always go.",
+    "They check the knots twice and go down.",
+    "Nobody speaks on the stair.",
+    "The lamp is trimmed. The door is shut behind them.",
+    "Boots on stone, one after another.",
+    "They go down with the damp in their sleeves.",
+    "A last look at the sky, and then the stair.",
+    "The cold comes up to meet them.",
+    "They take the steps slowly, counting."
   ],
   "cleared": [
     "Floor %d cleared.",
@@ -1912,7 +1920,19 @@
     "Floor %d is still. The party is not, quite.",
     "A long breath on floor %d, and the quiet holds.",
     "Floor %d is clear. The bread is hard and welcome.",
-    "They set the packs down on floor %d and look at their hands."
+    "They set the packs down on floor %d and look at their hands.",
+    "Floor %d is clear. Somebody counts the lamps.",
+    "Floor %d is quiet. They wipe their blades without a word.",
+    "They sit a while on floor %d and say little.",
+    "Floor %d is done. A strap gets mended.",
+    "The last of floor %d goes still, and they let it.",
+    "Floor %d is clear. The water skin goes round.",
+    "They mark floor %d and check the wounded first.",
+    "Floor %d holds its breath, then lets it out.",
+    "A plain quiet settles on floor %d.",
+    "Floor %d is behind them. Nobody cheers.",
+    "They tally the packs on floor %d and carry on.",
+    "Floor %d is swept. The stair waits."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4258,7 +4278,22 @@
     "%s's %s turns over and will not catch (%d vs DC %d).",
     "%s's %s leaves a smell of scorched cloth and little else (%d vs DC %d).",
     "%s's %s hangs a moment and then drops (%d vs DC %d).",
-    "%s loses the last word of %s (%d vs DC %d)."
+    "%s loses the last word of %s (%d vs DC %d).",
+    "%s's %s sputters and goes out (%d vs DC %d).",
+    "%s's %s catches on nothing (%d vs DC %d).",
+    "%s's %s comes out thin and wrong (%d vs DC %d).",
+    "%s's %s goes wide of the mark (%d vs DC %d).",
+    "%s's %s sags before it is finished (%d vs DC %d).",
+    "%s's %s gutters like a wet wick (%d vs DC %d).",
+    "%s's %s will not take (%d vs DC %d).",
+    "%s's %s trails off into a cough (%d vs DC %d).",
+    "%s's %s slips the grip and falls short (%d vs DC %d).",
+    "%s's %s lands soft and does no harm (%d vs DC %d).",
+    "%s's %s dies on the breath (%d vs DC %d).",
+    "%s's %s comes apart halfway (%d vs DC %d).",
+    "%s's %s is the wrong shape for the moment (%d vs DC %d).",
+    "%s's %s thins to nothing in the air (%d vs DC %d).",
+    "%s's %s is a half-loaf of what it should be (%d vs DC %d)."
   ],
   "epitaphs": [
     "Measured the grain. Counted the flasks. Kept the door.",
@@ -16527,5 +16562,6 @@
   "_note_c241": "C-241 (27 Nov 2026 17:3x CST): top-up by draw pressure, ranking re-derived. delve.gd _pick_line, one draw per call: misfire 197 (once per caster per floor, several casters a floor), cleared 658 (once a floor), descend 674 (once a delve), epitaphs 1114 (once a death). Misfire is still the thinnest per draw even after C-240 and cleared is next; each took +20. Frames kept: misfire name, spell, roll, DC (%s %s %d %d); cleared carries at most one %d, the floor number. No floor count stated. Expected zero-hit key; no lane is to wire it.",
   "_note_c242": "C-242 (27 Nov 2026, 18:2x CST): top-up by draw pressure, ranking re-derived. delve.gd _pick_line, one draw per call: misfire 217 (once per caster per floor, several casters a floor), cleared 678 (once a floor), descend 674 (once a delve, so least pressure despite the smaller-pool reading), epitaphs 1114 (once a death). Misfire thinnest per draw, cleared next: +20 each, descend +8 plain lines. Frames kept: misfire name, spell, roll, DC (%s %s %d %d); cleared one %d floor number; descend lines carry no placeholder. No floor count stated. Epitaphs untouched, protected by ruling sup-nov27-0209. Expected zero-hit key; no lane is to wire it.",
   "_note_c243": "C-243 (27 Nov 2026, 19:3x CST): top-up by draw pressure, ranking kept from C-242 (delve.gd _pick_line, one draw per call): misfire 237 (several casters a floor) +20, cleared 698 (once a floor) +16, descend 682 (once a delve) +8. Frames kept: misfire name, spell, roll, DC (%s %s %d %d); cleared one %d floor number; descend no placeholder. No floor count stated. Epitaphs untouched (ruling sup-nov27-0209). Roster closed at 70 bodies, 70 feed keys, no new committed body on origin/art. Expected zero-hit key; no lane is to wire it.",
-  "_note_c244": "C-244: draw-pressure top-up of misfire, cleared and descend. Read by delve.gd's existing pools; this note key is zero-hit by design, NO LANE IS TO WIRE IT."
+  "_note_c244": "C-244: draw-pressure top-up of misfire, cleared and descend. Read by delve.gd's existing pools; this note key is zero-hit by design, NO LANE IS TO WIRE IT.",
+  "_note_c245": "C-245: draw-pressure top-up of misfire, cleared and descend. Read by delve.gd's existing pools; this note key is zero-hit by design, NO LANE IS TO WIRE IT."
 }

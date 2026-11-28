@@ -130,6 +130,18 @@ var _wall_info := {}
 var wall_parts: Array = []     # wall blocks, merlons, towers, gate arches (D3: palisade -> stone)
 var growth = null              # scripts/growth.gd - what the town level shows (D3)
 var _sound_level := 0          # S1: the last level shown (the fanfare plays only going up)
+var tiers = null               # S172: scripts/town_tiers.gd, the bellmire-town/2 reader (words only, for now)
+var _tiers_level := 1          # S172: the last level the tier crier diffed from
+const TIER_CRIES_PER_LEVEL := 3 # S172: at most this many building lines per level-up, so the feed is not flooded
+## S173: the square's well wears art's tier meshes (assets/buildings/town_well_t1..t3.glb,
+## docs/art/TOWN_WELL_TIERS.md). OFF until a gated seat has rendered it: flip to true only after
+## LOOKING at the square at levels 1, 3 and 6+ against a hero. Off = the procedural well, unchanged.
+const WELL_TIER_MESHES := true    # S177: flipped after the L1/L3/L6 render
+const WELL_TIER_SCALE := 1.0   # art fit the meshes 1:1 to the Knight body; re-check at the render
+var _well_parts: Array = []    # S173: the procedural well's nodes, hidden while a tier mesh stands
+var _well_at := Vector3.ZERO   # S173: the well's ground point (ring on the pivot, per art's contract)
+var _well_mesh: Node3D = null
+var _well_path := ""
 var _scar := Vector3.ZERO      # centre of the wild-magic scar (dungeon mouth beyond it)
 var _north_from := Vector3.ZERO  # where the Delvers' Road leaves the ring
 var _scar_info := {}
@@ -1048,6 +1060,12 @@ func show_level(lv: int, quiet := false) -> void:
     if growth != null:
         growth.show_level(lv, quiet)
     _show_garrison(lv, quiet)
+    _show_well_tier(lv)               # S173: quiet too, so a save loaded at level 7 shows its well
+    # S172: content's town_buildings words for every tier that rose. Deferred so the lines land
+    # AFTER economy's own level line; founding (quiet) and falling back are never cried.
+    if not quiet and lv > _tiers_level:
+        _cry_tiers.call_deferred(_tiers_level, lv)
+    _tiers_level = lv
     # S1: a new level is a fanfare for the whole stream (flat, not in the world):
     # level_up, then quest_complete under the Chronicle line. Only on the way up.
     if not quiet and _sound_level > 0 and lv > _sound_level:
@@ -1055,6 +1073,73 @@ func show_level(lv: int, quiet := false) -> void:
         get_tree().create_timer(1.6, true, false, true).timeout.connect(func() -> void:
             Sfx.play("quest_complete", -4.0))
     _sound_level = lv
+
+## S172: cry what rose between two town levels - landmarks, sites, roads and the well first,
+## then houses, capped at TIER_CRIES_PER_LEVEL per level stepped. Words only: no mesh is swapped
+## here until a gated, rendered session does it.
+func _cry_tiers(a: int, b: int) -> void:
+    if not _tiers_ready():
+        return
+    var rows: Array = tiers.changes(a, b)
+    var first: Array = []
+    var rest: Array = []
+    for r in rows:
+        if String(r.get("crier", "")) == "":
+            continue
+        if String(r.get("kind", "")) == "building" and String(r.get("landmark", "")) == "":
+            rest.append(r)
+        else:
+            first.append(r)
+    var cap: int = TIER_CRIES_PER_LEVEL * maxi(1, b - a)
+    var n := 0
+    for r in first + rest:
+        if n >= cap:
+            break
+        feed.append(String(r["crier"]))
+        n += 1
+
+## S173: lazy reader shared by the crier and the well (one setup, never repeated on failure)
+var _tiers_tried := false
+func _tiers_ready() -> bool:
+    if tiers == null and not _tiers_tried:
+        _tiers_tried = true
+        var t = preload("res://scripts/town_tiers.gd").new()
+        if t.setup():
+            tiers = t
+    return tiers != null
+
+## S173: swap the square's well to the tier mesh for this level - the same stage -> mesh rule as
+## town_tiers.changes() (highest town_well_t<k> that exists, k <= the well_to_fountain stage).
+## Mesh only: never moves the spawn point, never applies a base offset (t1/t2 sink their lining
+## below ground on purpose). No mesh found -> the procedural well stays.
+func _show_well_tier(lv: int) -> void:
+    if not WELL_TIER_MESHES or _well_parts.is_empty() or not _tiers_ready():
+        return
+    var ib: int = tiers.stage_index("well_to_fountain", lv)
+    var path := ""
+    for k in range(mini(ib, 3), 0, -1):
+        var p: String = "res://assets/buildings/town_well_t%d.glb" % k
+        if tiers._has_mesh(p):
+            path = p
+            break
+    if path == _well_path:
+        return
+    var ps = load(path) if path != "" else null
+    if path != "" and not (ps is PackedScene):
+        return                         # unloadable: keep whatever stands now
+    if _well_mesh != null:
+        _well_mesh.queue_free()
+        _well_mesh = null
+    _well_path = path
+    for nd in _well_parts:
+        (nd as Node3D).visible = path == ""
+    if path == "":
+        return
+    _well_mesh = (ps as PackedScene).instantiate()
+    _well_mesh.position = _well_at
+    if WELL_TIER_SCALE != 1.0:
+        _well_mesh.scale = Vector3.ONE * WELL_TIER_SCALE
+    add_child(_well_mesh)
 
 ## ---------------------------------------------------------------- dressing
 func _spawn(dir_path: String, name: String, pos: Vector3, yaw: float,
@@ -1312,6 +1397,8 @@ func _box(size: Vector3, pos: Vector3, mat: Material, yaw: float = 0.0) -> MeshI
 
 func _build_well(c: Vector3) -> void:
     var g := height_at(c.x, c.z)
+    var first_child := get_child_count()     # S173: everything added below is the procedural well
+    _well_at = Vector3(c.x, g, c.z)
     var ring := MeshInstance3D.new()
     var cm := CylinderMesh.new()
     cm.top_radius = 1.45
@@ -1347,6 +1434,8 @@ func _build_well(c: Vector3) -> void:
     roof.material_override = _roof.get("red", wood)
     roof.position = Vector3(c.x, g + 3.4, c.z)
     add_child(roof)
+    for i in range(first_child, get_child_count()):
+        _well_parts.append(get_child(i))
 
 func _dress_streets() -> void:
     ## Props go against the FACADE, never in the carriageway - the same

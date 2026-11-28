@@ -1,0 +1,365 @@
+{
+ "when_ct": "28 Nov 2026 12:4x-13:2x CT",
+ "tiers": {
+  "barracks_t1": {
+   "footprint_m": [
+    6.0,
+    4.0
+   ],
+   "storeys": 1,
+   "door_xy": [
+    0.0,
+    -2.0
+   ],
+   "core_centre_dx_dy": [
+    0.0,
+    0.0
+   ],
+   "core_dims_m": [
+    7.5373,
+    4.26,
+    6.2007
+   ],
+   "dims_m": [
+    7.5373,
+    5.4328,
+    6.2109
+   ],
+   "base_dz_m": 0.0,
+   "centre_dx_dy": [
+    0.0,
+    -0.5864
+   ],
+   "door_xy_after_recentre": [
+    -0.0122,
+    -2.0
+   ],
+   "n_obj": 33,
+   "n_tri": 1887,
+   "n_rack_obj": 10,
+   "n_walk_obj": 0,
+   "export_note": "jpeg q82",
+   "n_images_in_file": 0,
+   "glb": "assets/buildings/town_barracks_t1.glb",
+   "glb_bytes": 1078500,
+   "glb_mb": 1.029,
+   "rack_seen_front": {
+    "px": 7131,
+    "h_px": 124,
+    "w_px": 140,
+    "red_on_empty": false
+   },
+   "solidity_front": {
+    "silhouette_px": 99030,
+    "hole_px": 4623,
+    "hole_frac": 0.0446,
+    "red_on_empty": false
+   },
+   "see_through_cap": 0.18,
+   "views": {
+    "front": {
+     "opaque_px": 273100,
+     "border_alpha_px": 0,
+     "subject_moved_px": 148575,
+     "hero_moved_px": 8997,
+     "hero_h_px": 163,
+     "hero_w_px": 189
+    },
+    "three_quarter": {
+     "opaque_px": 204199,
+     "border_alpha_px": 0,
+     "subject_moved_px": 94831,
+     "hero_moved_px": 5733,
+     "hero_h_px": 130,
+     "hero_w_px": 119
+    },
+    "side": {
+     "opaque_px": 394805,
+     "border_alpha_px": 0,
+     "subject_moved_px": 194605,
+     "hero_moved_px": 19442,
+     "hero_h_px": 168,
+     "hero_w_px": 463
+    },
+    "back": {
+     "opaque_px": 272884,
+     "border_alpha_px": 0,
+     "subject_moved_px": 134877,
+     "hero_moved_px": 8212,
+     "hero_h_px": 157,
+     "hero_w_px": 161
+    }
+   }
+  },
+  "barracks_t2": {
+   "footprint_m": [
+    6.0,
+    8.0
+   ],
+   "storeys": 2,
+   "door_xy": [
+    0.0,
+    -4.0
+   ],
+   "core_centre_dx_dy": [
+    0.0,
+    0.0
+   ],
+   "core_dims_m": [
+    8.2498,
+    9.85,
+    11.1375
+   ],
+   "dims_m": [
+    14.3909,
+    10.045,
+    11.1637
+   ],
+   "base_dz_m": 0.0,
+   "centre_dx_dy": [
+    3.0705,
+    -0.0975
+   ],
+   "door_xy_after_recentre": [
+    0.0,
+    -4.0
+   ],
+   "n_obj": 97,
+   "n_tri": 9408,
+   "n_rack_obj": 16,
+   "n_walk_obj": 0,
+   "export_note": "jpeg q82",
+   "n_images_in_file": 0,
+   "glb": "assets/buildings/town_barracks_t2.glb",
+   "glb_bytes": 1289540,
+   "glb_mb": 1.23,
+   "rack_seen_front": {
+    "px": 4109,
+    "h_px": 75,
+    "w_px": 156,
+    "red_on_empty": false
+   },
+   "solidity_front": {
+    "silhouette_px": 75607,
+    "hole_px": 14948,
+    "hole_frac": 0.1651,
+    "red_on_empty": false
+   },
+   "see_through_cap": 0.18,
+   "views": {
+    "front": {
+     "opaque_px": 239682,
+     "border_alpha_px": 0,
+     "subject_moved_px": 118704,
+     "hero_moved_px": 3343,
+     "hero_h_px": 92,
+     "hero_w_px": 112
+    },
+    "three_quarter": {
+     "opaque_px": 206679,
+     "border_alpha_px": 0,
+     "subject_moved_px": 92918,
+     "hero_moved_px": 1970,
+     "hero_h_px": 76,
+     "hero_w_px": 61
+    },
+    "side": {
+     "opaque_px": 465823,
+     "border_alpha_px": 0,
+     "subject_moved_px": 263200,
+     "hero_moved_px": 5524,
+     "hero_h_px": 107,
+     "hero_w_px": 238
+    },
+    "back": {
+     "opaque_px": 238920,
+     "border_alpha_px": 0,
+     "subject_moved_px": 113233,
+     "hero_moved_px": 3193,
+     "hero_h_px": 94,
+     "hero_w_px": 111
+    }
+   }
+  },
+  "barracks_t3": {
+   "footprint_m": [
+    6.0,
+    10.0
+   ],
+   "storeys": 2,
+   "door_xy": [
+    0.0,
+    -5.0
+   ],
+   "core_centre_dx_dy": [
+    0.0,
+    0.0
+   ],
+   "core_dims_m": [
+    9.3583,
+    12.02,
+    11.154
+   ],
+   "dims_m": [
+    17.1792,
+    12.382,
+    11.3391
+   ],
+   "base_dz_m": 0.0,
+   "centre_dx_dy": [
+    3.9104,
+    -0.181
+   ],
+   "door_xy_after_recentre": [
+    0.0,
+    -5.0
+   ],
+   "n_obj": 152,
+   "n_tri": 36790,
+   "n_rack_obj": 22,
+   "n_walk_obj": 10,
+   "export_note": "jpeg q82",
+   "n_images_in_file": 0,
+   "glb": "assets/buildings/town_barracks_t3.glb",
+   "glb_bytes": 1775092,
+   "glb_mb": 1.693,
+   "rack_seen_front": {
+    "px": 3506,
+    "h_px": 75,
+    "w_px": 173,
+    "red_on_empty": false
+   },
+   "walk_x_m": 3.5749,
+   "roof_eave_x_m": 4.1249,
+   "walk_seen_three_quarter": {
+    "px": 5554,
+    "h_px": 119,
+    "w_px": 310,
+    "red_on_empty": false
+   },
+   "solidity_front": {
+    "silhouette_px": 69904,
+    "hole_px": 11332,
+    "hole_frac": 0.1395,
+    "red_on_empty": false
+   },
+   "see_through_cap": 0.3,
+   "views": {
+    "front": {
+     "opaque_px": 230050,
+     "border_alpha_px": 0,
+     "subject_moved_px": 110624,
+     "hero_moved_px": 2342,
+     "hero_h_px": 85,
+     "hero_w_px": 55
+    },
+    "three_quarter": {
+     "opaque_px": 197658,
+     "border_alpha_px": 0,
+     "subject_moved_px": 88238,
+     "hero_moved_px": 1597,
+     "hero_h_px": 70,
+     "hero_w_px": 68
+    },
+    "side": {
+     "opaque_px": 439479,
+     "border_alpha_px": 0,
+     "subject_moved_px": 252385,
+     "hero_moved_px": 4420,
+     "hero_h_px": 91,
+     "hero_w_px": 255
+    },
+    "back": {
+     "opaque_px": 232879,
+     "border_alpha_px": 0,
+     "subject_moved_px": 110411,
+     "hero_moved_px": 2358,
+     "hero_h_px": 81,
+     "hero_w_px": 87
+    }
+   }
+  }
+ },
+ "errors": [],
+ "px": 1024,
+ "maxmb": 9.0,
+ "growth": "free",
+ "why_free": "t2 and t3 are both two storeys under the same 8.25 m-span tile roof family, so both ridge at wall_top+4.89 and the silhouette height does not grow t2->t3. The progression is material (plaster->uneven brick ALL THE WAY UP, because content's crier is 'raised in stone', not the inn's 'stone below, beam above'), length, yard and dressing. The monotonic gate is NOT carrying this sheet; my eye is.",
+ "see_through_cap": {
+  "barracks_t1": 0.18,
+  "barracks_t2": 0.18,
+  "barracks_t3": 0.3
+ },
+ "not_meshed_on_purpose": [
+  "archers on the roof - an archer is an NPC. t3 carries the railed roof walk they would stand on; the figures are the game build's.",
+  "E3PO's post on the wall - likewise. t3 carries the post; the sentry is not baked into a static landmark .glb.",
+  "smoke from the chimneys - VFX, not geometry."
+ ],
+ "sheet": {
+  "path": "renders/art/town/barracks/_tiers_side_by_side.png",
+  "opaque_px": 394202,
+  "subject_moved_px": 267108,
+  "border_alpha_px": 0,
+  "label_px": {
+   "barracks_t1": 2240,
+   "barracks_t2": 2844,
+   "barracks_t3": 2832
+  },
+  "silhouette": {
+   "barracks_t1": {
+    "px": 30520,
+    "h_px": 196,
+    "w_px": 234
+   },
+   "barracks_t2": {
+    "px": 74842,
+    "h_px": 361,
+    "w_px": 373
+   },
+   "barracks_t3": {
+    "px": 96289,
+    "h_px": 373,
+    "w_px": 486
+   }
+  },
+  "rack_seen": {
+   "barracks_t1": {
+    "px": 1865,
+    "h_px": 66,
+    "w_px": 57,
+    "red_on_empty": false
+   },
+   "barracks_t2": {
+    "px": 2969,
+    "h_px": 67,
+    "w_px": 110,
+    "red_on_empty": false
+   },
+   "barracks_t3": {
+    "px": 3261,
+    "h_px": 75,
+    "w_px": 206,
+    "red_on_empty": false
+   }
+  },
+  "spans": [
+   [
+    "barracks_t1",
+    0.0,
+    7.537
+   ],
+   [
+    "barracks_t2",
+    11.537,
+    25.928
+   ],
+   [
+    "barracks_t3",
+    29.928,
+    47.107
+   ]
+  ]
+ },
+ "engine": "BLENDER_EEVEE",
+ "verdict": "GREEN"
+}

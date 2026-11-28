@@ -1094,6 +1094,101 @@ Reproducible from `tools/art/hallgen.py` alone. Measurements in
 `renders/art/town/hall/_report.json`, sheet at
 `renders/art/town/hall/_tiers_side_by_side.png`.
 
+## THE INN LADDER - `town_inn_t1/t2/t3` (28 Nov 2026, art lane, 11:4x-12:0x CT)
+
+**Row:** the 10:58 CT block, TAKE THIS NEXT, ART - "the next town building down the
+ladder - the smithy, or the inn EXTERIOR (exterior only, storage mechanic, NO
+interior rooms, per order 1 item 9)."
+
+**Why the inn and not the smithy, measured not preferred:**
+`data/lore_lines.json -> town_buildings.landmarks` has seven keys and **`smithy`
+is not one of them** (hall, chapel, barracks, windmill, workshop, market_hall,
+inn). The inn has a complete three-tier brief in two places - `landmarks.inn`
+and the `inn_exterior` node content wrote for C-250, ticked this morning - so
+it has a named reader and a written spec; a smithy would have been authored
+against nothing.
+
+| Piece | Source | Licence | Where recorded |
+|---|---|---|---|
+| Walls, corners, doors, windows, shutters, round-tile roofs, chimneys, floor, fences, crate | Quaternius **Medieval Village MegaKit (Standard)** | **CC0 1.0** | this file, lines ~250 and ~707 - licence read off `License_Standard.txt` on disk 24 Nov |
+| Thatch roof (t1), gable boards, bench, lamp | `tools/art/hallgen.py`, re-used by import | original (procedural) | hall ladder entry above |
+| Painted board, barrel, hook lantern, **bell**, trough, stable | `tools/art/inngen.py` | **original (procedural)** | here |
+
+**The authored half is not a preference, it is a measured absence.** All 176
+MegaKit glTF modules were listed this run: the pack contains **no sign, no
+board, no barrel, no bench, no lantern, no trough and no stable**. Its only
+props are `Prop_Crate`, `Prop_Chimney`, `Prop_Chimney2` and four fence pieces.
+So the inn's entire identity AS AN INN is procedural and the pack carries the
+shell. Nothing in this ladder repaints a Quaternius material.
+
+**Exterior only.** Order 1 item 9 and content's own `_note` both say exterior
+and the storage mechanic, NO interior rooms. No tier has an interior or a
+floor; what the tier-3 storage line buys is shown from outside, by the
+building being stone below, and by nothing else.
+
+**Pivot contract** (`data/town/README.md`, `/2`): all three tiers share one
+origin - footprint centre, on the ground, street side +Z - enforced by a
+re-centre on the CORE (walls + roof, never the yard) and now **gated**, not
+merely recorded: `inngen.build()` fails the run if the core centre is more
+than 1 mm off origin or the base is off the ground. Measured result: core
+centre `[0.0, 0.0]` and base `0.0` on all three.
+
+Same deliberate texture trade as the hall (base colour only, JPEG q82 at 1024,
+image datablocks de-duplicated by base name); `--px 2048` reverses it.
+Reproducible from `tools/art/inngen.py` alone. Gates in
+`renders/art/town/inn/_report.json`, sheet at
+`renders/art/town/inn/_tiers_side_by_side.png`.
+
+## THE BARRACKS LADDER - `town_barracks_t1/t2/t3` (28 Nov 2026, art firing 12:34 CT)
+
+**Shell, fences, gallery, wagon and gravel border: Medieval Village MegaKit
+(Quaternius), CC0 1.0, already cleared in this file at the 24 Nov catalogue
+entry** - `License_Standard.txt` read verbatim there, no attribution required.
+Modules used: `Wall_Plaster_Straight / _Door_Flat / _Door_Round /
+_Window_Wide_Round / _Window_Thin_Round`, `Wall_UnevenBrick_Straight /
+_Door_Round / _Window_Wide_Round / _Window_Thin_Round`,
+`Corner_Exterior_Wood`, `Corner_ExteriorWide_Brick`,
+`WindowShutters_Wide_Round_Open`, `Roof_RoundTiles_6x8`, `Roof_RoundTiles_6x10`,
+`Balcony_Cross_Straight` (the roof walk), `Stairs_Exterior_Straight`,
+`Floor_Brick`, `Prop_ExteriorBorder_Straight1` (the gravel edging),
+`Prop_WoodenFence_Single`, `Prop_Chimney`, `Prop_Chimney2`, `Prop_Crate`,
+`Prop_Wagon`.
+
+**Everything that makes it a BARRACKS is procedurally generated and therefore
+original**: the spear rack and its spears and bill, the brazier, the straw
+dummies, the flags and their poles, the sentry post, and the tier-1 thatch.
+Verified by walking all 176 glTF modules of the pack this run - its entire
+`Prop_*` set is Brick1-4, Chimney, Chimney2, Crate, ExteriorBorder x3,
+MetalFence x2, Support, Vine x6, Wagon, WoodenFence x3. **There is no spear,
+no rack, no brazier, no dummy and no flag in the pack.** Nothing in this
+ladder repaints a Quaternius material.
+
+**Measurements taken off the pack this run, not carried from memory**:
+`Balcony_Cross_Straight` 2.000 x 0.206 x 1.230, min y -1.1043, 132 tri
+(against `Balcony_Simple_Straight`'s 1120 tri for identical bounds - Cross is
+the one used); `Prop_WoodenFence_Single` 2.064 x 0.120 x 0.838;
+`Prop_ExteriorBorder_Straight1` 2.000 x 0.700 x 0.134, MI_RockTrim;
+`Prop_Wagon` 1.951 x 4.024 x 1.529; `Roof_RoundTiles_6x8` min
+[-4.1249, -4.854, -0.7821] dims [8.2498, 9.6827, 5.6722].
+
+**Exterior only**, as with the hall and the inn: no tier has an interior or a
+floor. **Archers and E3PO are NOT meshes** - content's t3 line names both, and
+a landmark `.glb` that baked figures in would carry three men who can never
+look away, die or be absent. t3 carries the railed roof gallery they stand on
+and the sentry post on the yard wall; the figures are the game build's to
+spawn.
+
+**Pivot contract** (`data/town/README.md`, `/2`): one origin for all three
+tiers, enforced by a re-centre on the CORE (walls, roof, chimneys and the
+symmetric roof walk - never the stair, the yard or the dressing) and gated on
+core centre, base z **and now the door**. Measured result: core centre
+`[0.0, 0.0]`, base `0.0`, door x `0.0 / 0.0 / -0.0122` on t3 / t2 / t1.
+
+Same texture trade as the hall and the inn (base colour only, JPEG q82 at
+1024, image datablocks de-duplicated by base name); `--px 2048` reverses it.
+Reproducible from `tools/art/barracksgen.py` alone. Gates in
+`renders/art/town/barracks/_report.json`, sheet at
+`renders/art/town/barracks/_tiers_side_by_side.png`.
 ## 28 Nov 2026 - PACK CATALOGUE: Stone_coffin (licence read off disk)
 
 | Pack | Author | Licence | Licence text on disk | Files | Commercial use | Attribution |

@@ -24762,3 +24762,10 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or changed; Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
 - **I SENT NO PUSH NOTIFICATION ABOUT THE BRIDGE, because the bridge is BACK** - the thing five pings asked for has happened and a sixth would be worse than noise.
 - Not ticked - the team lead ticks.
+
+## HUB H36 - 28 Nov 2026 11:5x CT - My Room: own sheet + satchel Wear/Dye pre-fill; poll no longer wipes the form (HUB)
+- Row: 10:58 block HUB = H36 "keep building the primary interface". Built against the B213b audit's gap (a viewer's own hero/gear was one name line in My Room).
+- NUMBER: typed text survived an 11.5 s poll (kept="typed-by-viewer"); before this change the poll rebuilt the form every 10 s. 2 satchel rows -> 4 quick buttons; 0 imgs in #room with a hostile item name `<img src=x onerror=alert(1)>`.
+- Screenshot looked at (headless Chromium 1440x900, file://, stubbed snapshot): sheet, satchel, form, recent list all render; page does not scroll (900=900); panel scrolls internally. Fault I can see: the full sheet is tall, so the form sits far below it - collapsible, but a pinned-form layout is a possible H37.
+- Live-dot colour unchanged. Hostile-name canary: item name literal in satchel row and pre-filled box. ?state/?mock sweep not re-run beyond default+room (no render path outside #room changed).
+- NOT claiming READY TO PUBLISH (signed-in round trip against live Supabase still unproven). Untracked and named: _hub_msg.txt, _hub_ready_shot.png, _hub_scratch/, web_look3.tar, web_look4.tar. Stash "hub-nov28-1140-prior-plan-sync" holds the older uncommitted plan sync (superseded by merged main).

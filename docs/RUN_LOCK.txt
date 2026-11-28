@@ -1757,3 +1757,7 @@ IDLE 2026-11-27T17:54:16-06:00 - HUD U210: 150% windowed vellum probe done (chec
 RUNNING 2026-11-27T18:08:29-06:00 (game build S-run, declared finish 18:30, cap 18:33)
 
 IDLE 2026-11-27T18:17:10-06:00 - game build S162: death model slice 2 (part) - economy.gd repair (base*rarity_mult*(1-dur/100)) + snapshot_pub bags/durability/deaths. DEATH_TEST OK 36 of 36, TWITCH_PARSE OK (8 checks), OFFFLOOR_VERDICT OK 0 of 1987, DELVE_TEST OK 9001 frames 0 SCRIPT ERROR, TOWNWALK PASS 0/18343, parse rc 0 / 0 SCRIPT ERROR. Claim 18:08:29, cap 18:33:29, declared 18:30. Godot*=0. No Twitch test, ZERO BITS. (game build)
+
+RUNNING 2026-11-27T18:42:10-06:00 (QA tester: headless parse of whole project, declared finish +4 min, cap +10)
+
+IDLE 2026-11-27T18:42:35-06:00 - QA tester: headless whole-project parse (--editor --quit, JESTS_NO_TWITCH=1) rc=0, 0 Parse Error / 0 SCRIPT ERROR, 14s. Godot*=0. No Twitch, ZERO BITS. (QA tester)

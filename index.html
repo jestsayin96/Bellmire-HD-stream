@@ -58,7 +58,7 @@
     ?welcome=1 (force the H22 welcome open, ignoring a past dismissal)
     ?mock=crowd also carries a Satchel (sell prices) with the hostile-name canary (H11)
 -->
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 <a class="skip-link" href="#stageScroll">Skip to the stage</a>
@@ -206,7 +206,6 @@
     <button type="button" role="tab" id="tab-bestiary"  data-tab="bestiary"  aria-controls="bestiary"  aria-selected="false" tabindex="-1">Bestiary</button>
     <button type="button" role="tab" id="tab-shops"     data-tab="shops"     aria-controls="shops"     aria-selected="false" tabindex="-1">Shops</button>
     <button type="button" role="tab" id="tab-satchel"   data-tab="satchel"   aria-controls="satchel"   aria-selected="false" tabindex="-1">Satchel</button>
-    <button type="button" role="tab" id="tab-room"      data-tab="room"      aria-controls="room"      aria-selected="false" tabindex="-1">My Room</button>
     <button type="button" role="tab" id="tab-season"    data-tab="season"    aria-controls="season"    aria-selected="false" tabindex="-1">Season</button>
     <button type="button" role="tab" id="tab-commands"  data-tab="commands"  aria-controls="commands"  aria-selected="false" tabindex="-1">Commands</button>
   </nav>
@@ -440,14 +439,6 @@
       </div>
       <p class="chatstatus" id="satStatus" role="status" aria-live="polite"></p>
       <div id="satBody" role="region" aria-label="Your satchel, vault and orders" tabindex="0"></div>
-    </section>
-
-    <!-- My Room (H33, sup-nov27-2340): the viewer's own dashboard behind Twitch sign-in via Supabase Auth. Built by app.js with el() only. -->
-    <section class="panel" id="room" role="tabpanel" aria-labelledby="tab-room" tabindex="0">
-      <h2 class="title">Your Room at the Inn</h2>
-      <p class="eyebrow">Your hero, your gear and your requests to the town</p>
-      <p class="chatstatus" id="roomStatus" role="status" aria-live="polite"></p>
-      <div id="roomBody" role="region" aria-label="Your room at the inn" tabindex="0"></div>
     </section>
 
     <!-- Season (H31): standings over the season from the snapshot (heroes + fallen). Read-only; every name through el(). -->

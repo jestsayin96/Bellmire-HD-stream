@@ -1894,23 +1894,3 @@ ol.bagmap, ul.bagmarks { list-style: none; margin: 0; padding: 0; }
 .bagbody { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
 .bagbody b { color: var(--parch-hi); }
 .bagloot, .bagstate { font-size: .86rem; color: var(--parch-dim); }
-
-/* H33: My Room. Reuses .panel, .watchbtn, .suggest-input, .note; only the layout bits are new. The login button is the
-   page's own teal watchbtn - no purple, no glyph, no wordmark (it is not Twitch's button). */
-.room-form { display: grid; gap: 10px; max-width: 460px; margin: 12px 0; }
-.room-args { display: grid; gap: 8px; }
-.room-hero { margin: 8px 0; padding: 8px 10px; border: 1px solid var(--line, rgba(90,60,28,.35)); border-radius: 6px; }
-.room-h { font-size: 1rem; margin: 14px 0 4px; }
-.room-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.room-row { padding: 4px 8px; border-left: 3px solid var(--ink-soft); }
-.room-row.room-done { border-left-color: var(--teal-ink); }
-.room-row.room-refused { border-left-color: #8a2a1c; }
-.room-st, .room-res { color: var(--ink-soft); }
-.room-login { margin: 8px 0; }
-#roomStatus { color: var(--ink); font-style: normal; }
-.room-form .chip { justify-self: start; padding: 8px 18px; }
-/* H36: My Room - own sheet + satchel quick buttons */
-.room-sheet { margin: 10px 0; }
-.room-sheet > summary { cursor: pointer; }
-.room-bag .room-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; }
-.room-quick { padding: 4px 8px; min-height: 28px; }

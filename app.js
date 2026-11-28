@@ -2792,30 +2792,13 @@ function signinSay(html, cls) {
 }
 
 async function twitchSignIn() {
-  if (twPolling) return;
-  if (!TWITCH_CLIENT_ID) {
-    // defensive fallback: if the id were ever blanked, explain instead of calling Twitch
-    signinSay("Twitch sign-in isn't set up yet — it needs Mr. E to register the app and add its client id. Until then, type your hero's name in the box below.", "gated");
-    return;
-  }
-  try {
-    signinSay("Asking Twitch for a code…");
-    const body = "client_id=" + encodeURIComponent(TWITCH_CLIENT_ID) + "&scopes=" + encodeURIComponent(TW_SCOPES);
-    const res = await fetch(TW_DEVICE, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body });
-    if (!res.ok) throw new Error("Twitch said " + res.status);
-    const d = await res.json();
-    // show the user code + where to enter it (textContent / createElement only)
-    const strong = el("b", null, String(d.user_code || "").toUpperCase());
-    const uri = String(d.verification_uri || "https://www.twitch.tv/activate");
-    const link = el("a", "signinlink", uri.replace(/^https?:\/\//, ""));
-    // the link href is a Twitch verification URL from Twitch's own response, not snapshot data;
-    // still, only allow the known activate host to be clickable, else show it as text.
-    if (/^https:\/\/(www\.)?twitch\.tv\//.test(uri)) { link.href = uri; link.target = "_blank"; link.rel = "noopener noreferrer"; }
-    signinSay([document.createTextNode("Go to "), link, document.createTextNode(" and enter the code "), strong], "code");
-    pollForToken(String(d.device_code || ""), Math.max(5, n0(d.interval) || 5), Date.now() + (n0(d.expires_in) || 600) * 1000);
-  } catch (e) {
-    signinSay("Couldn't reach Twitch sign-in just now. Try again in a moment.", "bad");
-  }
+  // The original Device Code flow used a Public Twitch client that no longer exists.
+  // Supabase Auth (the Room's sign-in) is now the single Twitch auth path.
+  // If the viewer already has a Supabase session, bridge it into the spotlight.
+  if (twLogin) { highlightMyHero(twLogin); return; }
+  // Otherwise, redirect to the Room tab where the Supabase PKCE sign-in lives.
+  signinSay("Opening the sign-in page…");
+  setActiveTab("room");
 }
 
 async function pollForToken(deviceCode, intervalS, deadline) {
@@ -6017,8 +6000,26 @@ function finderOpen(r) {
     if ((!on || !session) && pollT) { clearInterval(pollT); pollT = 0; }
   }
 
+  // Bridge the Supabase session into the Heroes tab's spotlight (H6) and satchel.
+  // The Room (H33) and Heroes (H6) used separate auth flows; H6's Device Code client
+  // was deleted when the Confidential app replaced it. When the Room has a live session,
+  // expose the viewer's Twitch login to the global twLogin so highlightMyHero() and the
+  // satchel work without a second sign-in. Guild chat still needs a Twitch OAuth token
+  // (twToken) for PRIVMSG, so it stays read-only until a Public app is re-registered.
+  function bridgeLogin() {
+    if (session && !twLogin) {
+      const login = who().toLowerCase();
+      if (login && login !== "viewer") {
+        twLogin = login;
+        highlightMyHero(login);
+      }
+    } else if (!session && twLogin) {
+      twLogin = null;    // signed out of the Room — clear the spotlight too
+    }
+  }
+
   session = loadSession();
   paint();
-  Promise.all([probeAuth(), finishLogin()]).then(() => { paint(); sync(); });
+  Promise.all([probeAuth(), finishLogin()]).then(() => { paint(); sync(); bridgeLogin(); });
   new MutationObserver(sync).observe($("room"), { attributes: true, attributeFilter: ["class"] });
 })();

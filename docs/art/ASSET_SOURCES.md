@@ -37,10 +37,18 @@ Downloaded 2026-11-16 by the supervisor lane for D94 / D95.
 |---|---|---|---|
 | `assets/gear/wand_crystal.glb` | Supplied by Mr. E, 2026-11-16 05:03 | Mr. E's own — no third-party rights | Crystal-headed wand: dark tapered shaft, silver collar, blue faceted crystal. Raw drop was 306,024 tris / 24 MB with two 4096 and one 2048 map. Shipped version is decimated to 8,000 tris with three 1024 maps, 2.38 MB; silhouette, facets and collar all survive — checked on screen before commit. Origin moved to the BASE OF THE GRIP so it hangs off a hand bone. 0.147 x 0.218 x 0.921 units. The untouched original is kept OUT of git at `C:\hd adventure\_packs\_generated\wand_raw.glb`. **24 Nov 2026 04:5x CT - A +30.5 X NODE TRANSLATION WAS BAKED OUT** (`tools/art/_wandbake.py`). The mesh-local origin was always at the base of the grip as described above, but the glTF NODE above it sat thirty metres out on X, so any consumer that respects the node transform - Godot's glTF import does, and a BoneAttachment3D parents the imported scene - would have placed this wand thirty metres from the hand. Found by the first fit render it has ever had (`tools/art/_wandfit.py`). 7,935 verts and 0.147 x 0.218 x 0.921 unchanged to six decimals; only the node offset moved. |
 
-**NOT YET FITTED TO A BODY.** It has not been rendered on a KayKit hero, so by the FIT IS THE
-ACCEPTANCE TEST rule it is not finished. At 0.921 long against a hero whose head sits at y
-1.05-1.22, this reads closer to a short staff than a wand — Mr. E should say which he wants
-before anyone scales it. The game build lane owns the attach (handslot.r) and the gear.gd entry.
+**FITTED AND READ ON A BODY — 27 Nov 2026 ~22:4x CT. THE LINE ABOVE IS STRUCK.** It has now been
+rendered on a posed KayKit hero front, side and back at five carries and looked at; see
+`docs/art/THE_TIER5_WAND_READ.md` and `renders/art/wand/`. The open question this paragraph used
+to carry — wand or short staff — **is answered by measurement, not by asking Mr. E:** it is a
+SHORT STAFF. The slot is at the hip, and a thin 0.57 m shaft held near the body's own plane is
+occluded by the torso from a side camera at EVERY roll in the derivable family; to clear the
+silhouette the tip must pass the head, which needs `hand_scale` ≈ 1.8 — the staff's own scale.
+Recommended carry if it ships as the tier-5 wand anyway (strictly better than the horizontal
+baton the engine gives it today, in all three views): **`held_rot (0, 15, 90)` at the existing
+`hand_scale` 0.62**, clip 19.8% against the SHIPPED `staff_rare`'s 22.7% at its own carry. The
+game build lane owns the attach (handslot.r) and the gear.gd entry; the exact two-line change is
+in the doc. The one decision left for Mr. E is wand-vs-staff, stated there.
 
 ## 2026-11-17 - `assets/gear/` geometry now rides inside a miniboss glb
 

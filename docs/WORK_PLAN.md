@@ -1,3 +1,248 @@
+*** ===== TAKE THIS NEXT - THE 19:58 CT FIRING, 27 NOV 2026. =====
+*** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 18:58 FIRING.
+*** Clock read off cruzader: 19:59:13 CST at the start of this run, 20:0x while writing.
+*** ALL SIX LANES HAD NEW COMMITS. Merged to main at fcd4708f.
+*** Every number below was measured THIS RUN. QUOTE NONE OF IT NEXT HOUR - MEASURE IT.
+***
+*** ===== MY OWN FAULTS THIS RUN. REPORTED FIRST. =====
+*** (1) **I WROTE A SELF-CHARGE INTO THIS BLOCK AND MY OWN COMMIT CLOCK DISPROVED IT, SO I AM
+***     WITHDRAWING IT RATHER THAN LEAVING IT TO STAND.** The first text here charged me with
+***     starving the game build of a current row, because I began the merge at 20:01:28 against a
+***     :07 deadline. IT DID NOT STARVE. `origin/laptop` carried this block at **20:04:25 CT**
+***     (committer date read off the ref) and the game build fires at :07 and claims at ~:08 -
+***     the row was on its branch about three and a half minutes before it could be read.
+***     A FALSE CHARGE AGAINST MYSELF IS THE SAME FAULT CLASS AS A FALSE CHARGE AGAINST A LANE,
+***     and this is the SECOND HOUR RUNNING a seat in this chair has had to withdraw one. Two in
+***     two hours is a pattern in the SEAT, not in the lanes: we are writing the confession before
+***     we read the clock. READ THE CLOCK FIRST.
+***     THE REAL AND SMALLER FACT, WHICH I KEEP: I front-loaded verification ahead of the merge
+***     and left a ~3 minute margin on a deadline the 18:58 seat had already warned in this file
+***     was "too thin to rely on". THE ORDER IS WRONG AND THE FIX IS FOR WHOEVER SITS HERE NEXT:
+***     MERGE AND SYNC `laptop` FIRST, THEN VERIFY. Verification is owed before the TICK, not
+***     before the sync.
+*** (2) **I ALSO WROTE A BLANKET ASSERTION THAT WOULD HAVE HAD ME DELETE HISTORY, AND MY OWN
+***     ASSERTION CAUGHT IT.** Writing these corrections I asserted the string "I AM RESETTING IT
+***     TO 0" no longer appears in the plan. It fired: the phrase occurs TWICE - my line above and
+***     a HISTORICAL one from a past firing at line ~5051 ("The count was 4 after the 21:58
+***     firing"). An un-scoped negative assertion over a years-deep file is the same fault as the
+***     un-dated "already present" check this prompt warns about. I scoped the check to my own
+***     block and left the historical line exactly as written. NOTHING WAS DELETED.
+***
+*** ===== WHAT I VERIFIED BY MY OWN MEASUREMENT, NOT BY READING THE CLAIM =====
+*** CHAT BOT B209/B209b - TICKED. data/commands.json parsed both sides: 36 -> 37 commands,
+***   37 `order` entries, `set(order) == set(commands)` TRUE, `repair` the only key added, NOTHING
+***   removed, no top-level key added or removed. The ONLY pre-existing command whose value moved
+***   is `hero` (the `me` alias and its `what` text) - every other one of the 36 is byte-identical
+***   by parsed deep diff. I ran an ALIAS COLLISION AUDIT across the whole 37-command table
+***   (command names + every alias): ZERO collisions, so the new `me` and `mend` shadow nothing.
+***   AND THE CLAIM I MOST WANTED TO TEST HELD: the lane says it restates no price. I diffed out
+***   its 73 added `chatcmd.gd` lines and swept every numeral in them - `40` and `600` occur
+***   EXACTLY ONCE EACH, both inside a COMMENT that says it does not restate them. The published
+***   40/600 span really is recomputed from `Economy.REPAIR_BASE * REPAIR_MULT[]`. Its own
+***   tab-indent fault is also closed by measurement: 0 tab-start lines among the 73.
+*** HUB - the hero-sheet half TICKED. Step 2 security greps RE-RUN BY ME on `origin/hub:web`, not
+***   taken from the lane: `innerHTML` has exactly TWO assignment sites, app.js:255 and :301, both
+***   page-owned; the other four hits are comment prose. `outerHTML` 0, `eval(` 0,
+***   `insertAdjacentHTML`/`document.write`/`new Function` appear only at app.js:10-11 as comment
+***   text with no call site. CSP meta present (1). THE 11 ADDED LINES CARRY ZERO SINKS - no
+***   innerHTML, no `.src`, no `.href`, no `.style`, no `setAttribute`, no `javascript:`. Every
+***   new value reaches the DOM through `el()`/`kv()` after `pickNum()`, and the wear value is
+***   clamped `Math.max(0, Math.min(100, ...))`. Nothing from the snapshot becomes markup.
+*** CONTENT C-243 - TICKED. data/lore_lines.json parsed both sides: 85 -> 86 keys, the ONE added
+***   key is `_note_c243` (a `_note_` key, correctly NOT to be wired), nothing removed. The three
+***   pools moved by exactly what the lane claimed: misfire 237 -> 257 (+20), cleared 698 -> 714
+***   (+16), descend 682 -> 690 (+8). `phase2_words_alt2` is BYTE-IDENTICAL - still dead, still
+***   not to be wired by anyone.
+*** GAME BUILD S163 - TICKED, AND THE CROSS-LANE CLAIM IS THE PART I CHECKED. The lane says it
+***   applied art's prescription rather than re-deriving it. I read art's own doc
+***   (THE_DAGGER_READ_BLIND...md) off `origin/art`: it prescribes **held_rot (0,0,90) at
+***   hand_scale 0.60**, front `minor` 38 px (the face) against 13 px edge-on, and says 0.55 also
+***   passes but leaves only 3% of back-view margin. `gear.gd` now returns `Vector3(0,0,90)` for
+***   `dagger_` and `0.60`. THE NUMBERS IN THE ENGINE ARE ART'S NUMBERS, unchanged, with art's
+***   reasoning quoted in the comment. Gates read by VERDICT LINE: parse 0 err, TWITCH_PARSE OK 8,
+***   DEATH_TEST OK 36/36, S45_ART OK 10/0, OFFFLOOR OK 0/2379, DELVE_TEST 9001 frames,
+***   TOWNWALK PASS 0/15506.
+*** AND I LOOKED AT THE DAGGER MYSELF, BECAUSE FIT IS THE ACCEPTANCE TEST AND A GATE IS NOT A
+***   PICTURE. FIRST I WAS WRONG: on art's 4-cell sheet I eyeballed the THIRD cell as the most
+***   legible and nearly raised it as "the old config reads better than the fix". I was reading a
+***   2000px downscale and guessing the cell order. THE REGISTER SETTLES IT, and the cell that
+***   matters is **B_engine_rule_hr90_hs060** - the ENGINE's basis at the values now shipped:
+***     B (engine, hr(0,0,90) hs0.60, SHIPPED NOW): front minor **38 px**, front added **1695 px**
+***     C (engine, hr0 hs0.5, THE OLD SHIPPED):     front minor **24 px**, front added  1424 px
+***     A (artifactfit basis, same hr/hs):          front minor  18 px, front added   844 px
+***     D (artifactfit basis, old hr/hs):           back adds **ZERO px** - art flagged this arm
+***       itself in the file's own `errors` as proving nothing, rather than letting it score.
+***   SO THE FIX IS REAL AND MEASURED: front minor 24 -> 38 and the largest front pixel
+***   contribution of any of the four arms. NOTE THE SHAPE OF IT - A and B carry the SAME
+***   held_rot and the SAME hand_scale and differ ONLY by basis, 18 px against 38 px. That is
+***   art's carry-basis finding stated in pixels, and it says the ENGINE is on the right basis
+***   and `artifactfit` was on the wrong one. The dagger reads thin from the SIDE (B side minor
+***   11) - that is the cost art chose for front legibility, deliberately, and I am recording it
+***   so nobody re-opens it as a defect.
+*** ART - TICKED, and this is the hour's best piece of lane conduct. The carry-basis divergence
+***   its own register raised is CLOSED: `weaponfit.SLOT_ROT` has only TWO hand-calibrated bases
+***   (crossbow, staff), the other six take Identity, and seven of eight families follow
+***   `C.R.C^-1` while the CROSSBOW ALONE follows `R.C^-1` - so the crossbow is the odd one and
+***   the lane's own `artifactfit` docstring said the opposite (now corrected, +14 lines).
+***   **IT REPORTED ITS OWN WRONG FIRST ANSWER BEFORE ITS RESULT**, and it overturned three
+***   agreeing ARGUMENTS with a PICTURE. That is this house's rule working without being told.
+*** HUD U211 + U212 - **L74 IS WHOLE AND I AM TICKING IT.** CORRECTION TO MY OWN FIRST TEXT:
+***   this line said "nothing to tick, U212 running as I write". U212 LANDED AT 19:59:47, inside
+***   this run and minutes after I wrote that. The item is two captures and both are in: U211 at
+***   100% rate 4/tick (checks=28 fails=0), U212 at 150% rate 4/tick (U202_DONE checks=18 fails=0)
+***   plus a 100% DISTINCT-TEXT flood (U202_DONE checks=25 fails=0). 71 checks, 0 fails, read off
+***   the VERDICT LINES in the logs - and ALL FIVE LOGS ARE COMMITTED ON `origin/hud-ui`
+***   (`_u211_parse.log`, `_u211_run_1.0.log`, `_u212_parse.log`, `_u212_run_1.5.log`,
+***   `_u212_run_1.0_distinct.log`). The lane closed the uncommitted-log fault it was pulled up
+***   for this week without being asked twice.
+*** AND THE THING ITS SUMMARY DID NOT MENTION, WHICH I FOUND BY READING THE LOG AND NOT THE CLAIM:
+***   `_u212_parse.log` carries **70 `ERROR:` lines**. Its "0 SCRIPT ERROR" is TRUE and narrowly
+***   true - 0 SCRIPT ERROR, 0 Parse Error - but 70 ERRORs is not nothing, so I measured what they
+***   are before charging anyone with anything:
+***     - ONE is a COMMANDS_DATA MINIBOSS COUNT arm: "`miniboss` publishes 50 elites and content
+***       writes feed rows for 51". **THAT IS THE STALE TREE, NOT A CASCADE REGRESSION, AND I
+***       PROVED IT ON MAIN RATHER THAN BELIEVING EITHER NUMBER.** `origin/hud-ui` is **1605
+***       commits behind main**. Measured on main with a BRACE-MATCHED PARSE (never a flat regex -
+***       three seats have been lied to by one on this exact constant): **`Delve.MB_NAME` = 70,
+***       `miniboss_feed.by_key` = 70 (in data/lore_lines.json), published `miniboss`.what and
+***       .short BOTH say 70, and ZERO keys are missing on either side. THE CASCADE IS SHUT AT
+***       70/70/70.** Neither 50 nor 51 exists anywhere on main. NO LANE OWES A BUMP.
+***     - THE OTHER 69 ARE PER-WORKTREE IMPORT-CACHE GAPS: missing `.godot/imported/*.scn` for
+***       Donkey/Alpaca/Bull `.gltf` and `crossbow_common.glb`. The chat bot named the SAME CLASS
+***       of fault in W6 this hour (`character-keeper.glb`, 3 occurrences). TWO LANES, TWO
+***       WORKTREES, ONE SHAPE, and neither is a script fault or either lane's regression.
+***       Both lanes NAMED it rather than carrying it as green, which is the right conduct.
+***       SEE FOR THE SUPERVISOR.
+***
+*** ===== TAKE THIS NEXT - ONE ROW PER LANE =====
+*** GAME BUILD - THE DEATH MODEL'S SLICE 3 ENGINE SIDE: the corpse-run BAG BODY ON THE FLOOR and
+***   the WALK-OVER pickup (RULING sup-nov27-0209, respawn with corpse run). You already carried
+***   this with the plan at S163; the chat bot has taken the COMMAND half and says so in its own
+***   lock line - `!repair` and the `!hero` durability tail are ITS file, chatcmd.gd, NOT yours.
+***   Build against your own `Economy.repair` (S162). This row needs no re-measurement and is
+***   unconditional, so it stands whether you read it at 20:08 or 21:08.
+***   AND ONE SMALL THING THAT IS YOURS TO DECIDE, NOT MINE: the chat bot found that
+***   `roster.gd` `describe()` still answers "%s is dead. !reroll to raise a new hero." on
+***   `not alive`, and B208 PROVED `alive` is never written false anywhere in scripts/ - so that
+***   branch cannot fire. The chat bot deliberately left the matching unreachable text in ITS
+***   file alone, on the grounds that rewording dead code dresses it up as behaviour and the
+***   ruling leaves guild-insurance open. KEEP IT OR CUT IT - say which and why; I am not
+***   charging you with it either way.
+*** CONTENT - the three data JSONs that System 41 (encyclopedia + crafting hub, DIRECTIVE
+***   sup-nov27-0230) and System 26 (recipe book, RULING sup-nov27-0226 - a CONTENT dependency)
+***   need. THE HUB IS BLOCKED ON YOU AND SAID SO IN ITS OWN NOTES THIS HOUR: it will not invent
+***   payload fields or hard-code recipes into app.js, so it cannot start those halves until your
+***   JSONs and the game build's `snapshot_pub.gd` land. Keep writing `_note_` keys - nobody is
+***   to wire them and you are not to stop.
+*** ART - HERO GEAR, per DIRECTIVE sup-nov27-1323 (art cap 70, THEN hero gear). The miniboss
+***   roster is closed at 70 and the tier-5 pass is where the open margin is: 11 of 13 were
+***   confirmed by eye, so take the REMAINING TWO to a real posed body front, side and back and
+***   close them by looking. Measure the live count off tools/art/minibosses.py or the fit
+***   register - do not quote 70 or 13 from any prompt, including mine.
+*** HUB - the `bags` SKULL MARKERS on the dungeon map: the second half of the S162 snapshot read,
+***   which you named yourself as next in web/NOTES.md this hour. The top-level `bags` block is
+***   published and app.js still reads none of it. Numbers through `pickNum` and text through
+***   `el()` only, as you did the hero-sheet half. Do not claim READY TO PUBLISH unless you mean
+***   it - the publish gate is not owed otherwise and I will not run it.
+*** CHAT BOT - the COMMAND SURFACE for System 42 (party system, cap 10, solo mode - DIRECTIVE
+***   sup-nov27-1844). It is the newest directive with no surface at all, you own chatcmd.gd, and
+***   System 43 (ranking) and 44 (morality / dual guild) queue behind it (DIRECTIVE
+***   sup-nov27-1856). Do it the way you did B209: the engine owns the numbers, you own the words,
+***   and the published cost arm recomputes rather than restates. AND COMMIT YOUR EVIDENCE - the
+***   HUD was pulled up this week for leaving its only log uncommitted in a working tree.
+*** HUD - **L74 IS TICKED - DO NOT RE-RUN IT.** (This row replaces the one I first wrote, which
+***   told you to finish L74 and to commit your log; you had already done both by 19:59:47 and the
+***   row was stale on arrival. My fault, corrected in the same run.) TAKE THE NEXT UNSTARTED HUD
+***   HALF. The one thing to carry forward: YOUR WORKTREE IS 1605 COMMITS BEHIND MAIN and its reds
+***   are ITS OWN TREE - when a gate in W2 says the miniboss cascade diverges at 50/51, that is
+***   the stale tree talking; main is 70/70/70, measured this run. CONSIDER MERGING `origin/main`
+***   INTO `hud-ui` BEFORE YOUR NEXT CAPTURE so your gates stop reporting faults that do not exist
+***   on main. THAT IS A JUDGEMENT FOR YOU, NOT AN ORDER FROM ME - if you would rather keep the
+***   tree pinned for capture stability, SAY SO IN YOUR LOCK LINE and I will stop re-deriving it
+***   every hour instead of asking you again.
+***
+*** ===== LOCK DISCIPLINE, 19:00-20:00 CT =====
+*** Held: chat bot B209 19:50:02 -> 19:51:27 (85 s, cap 20:14, declared 19:52:30 - inside);
+***   chat bot B209b 19:53:29 -> 19:54:20 (51 s, declared +3 min - inside); game build S163
+***   19:08:16 -> 19:15:36 (7m20s, cap 19:33, declared 19:30 - inside); HUD U211 18:53:42 ->
+***   18:55:29; HUD U212 claimed 19:56:52 (cap 20:11, declared 20:05, hard release 20:07).
+*** ZERO overruns, ZERO claims over a live hold, ZERO stale locks cleared. Every claim named the
+***   last IDLE line and a clock read before taking the lock.
+*** ONE WINDOW ENCROACHMENT, AND I AM RECORDING IT AT ITS TRUE SIZE: chat bot B209b claimed at
+***   19:53:29, which is inside the HUD's :52 window. The LOCK WAS FREE (its own IDLE 19:51:27)
+***   so THE YIELD RULE WAS NOT BROKEN, and it cost the HUD nothing - the HUD claimed at 19:56:52
+***   and is running. It was a 51-second fix to the lane's OWN fault, caught on a diffstat. The
+***   :50 claim row I wrote for this lane is working: B209 claimed 19:50:02 with a finish inside
+***   :52, exactly as asked. I am not charging the lane and I am not resetting the count for it.
+*** THE GAME BUILD'S OVER-DECLARATION PATTERN REMAINS STOPPED: S163 carried
+***   "cap claim+25 = 19:33" computed before the declaration, as it has since 02:08 on 21 Nov.
+*** CLEAN-HOUR COUNT: **ADVANCES TO 4** (it stood at 3 after the 18:58 firing). I first wrote a
+***   RESET TO 0 here and charged myself with risking the game build's row; the commit clock
+***   disproved it (block on `origin/laptop` at 20:04:25, firing at :07), so THE RESET IS
+***   WITHDRAWN. No lane overran, no lane claimed over a live hold, no stale lock was cleared, no
+***   future stamp reached a lock line, and no lane was starved. I am not keeping a fault I did
+***   not commit - and I am not hiding the thin margin either; it is recorded under MY OWN FAULTS.
+***
+*** ===== THE DEAD-DATA AUDIT, 19:58 CT =====
+*** See the measured numbers written into this block's audit lines below the rows. The number
+***   that carries signal is the NON-NOTE zero-hit count; the raw total rises every time content
+***   writes a `_note_` key and C-243 wrote one this hour, so the raw total MUST move and means
+***   nothing. Do not compare raw totals across hours.
+***
+*** ===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, CARRIED FORWARD =====
+*** A FIRING CANNOT EDIT A SCHEDULED TASK. I attempted nothing this run and the list below is
+*** inherited from the 18:58 firing plus my own. THE FIRST SEAT WITH A LIVE TURN LANDS THEM ALL.
+***   1. HUB PUBLISHED SHA: the prompt says `05ac2679 / 19 Nov 20:06 CT`. The 18:58 seat measured
+***      **8d214d36 ("hub publish 8", app.js?v=8), pushed 25 NOV 09:55 CT**. STRUCK AND WRONG.
+***   2. MERGED-NOT-PUBLISHED: the prompt says "3 files / +59 / -1". **I RE-MEASURED IT MYSELF
+***      THIS RUN: 73 files / +408 / -10** (`origin/gh-pages^{tree}` 1d8bce63 != `origin/hub:web`
+***      ffad81cb; 67 of the 73 are binary `.webp`, and the text bulk is `app.js +184/-8`,
+***      `NOTES.md +78`, `icons/beasts/_manifest.json +75`, `style.css +22/-1`,
+***      `tools/make_bestiary.py +48`). THE 18:58 SEAT MEASURED +396 AND WAS RIGHT THEN - the hub
+***      added 12 insertions this hour, so THE DELTA GROWS EVERY TIME THE HUB SHIPS. This is the
+***      third consecutive block to carry a different figure, which is the point: COUNT IT, never
+***      quote it. Published tip confirmed 8d214d36, pushed 25 Nov 09:55:03 CT.
+***   3. DEAD-DATA CORPUS SIZE: the prompt says 47 `.gd` + app.js = 48 files and 146 top-level
+***      keys. The 18:58 seat measured **48 + app.js = 49 files, 2,506,348 chars, 174 keys**.
+***      Content has since added one key, so 175 is expected next hour - MEASURE IT.
+***   4. MINIBOSS COUNT: the prompt's own warning is right and its figure is stale. The roster is
+***      CLOSED AT 70 (DIRECTIVE sup-nov27-1323); the prompt's "44/44/44" and "46 rows / 33" lines
+***      are historical. Measure off tools/art/minibosses.py or the fit register, never the prompt.
+***   5. ID WATERMARKS move hourly. As of 19:58 CT: B209b, C-243, S163, U212, art carry-basis
+***      pass. L74 IS NOW CLOSED. Re-measure; do not quote these.
+***
+*** ===== FOR THE SUPERVISOR =====
+*** (1) **THE HUB PUBLISH DELTA, AND IT IS GROWING.** `origin/gh-pages` is 8d214d36, pushed
+***     25 NOV 09:55 CT - FIFTY-EIGHT HOURS AGO. Merged and not published is now **73 files /
+***     +408 / -10**, measured by me this run, and it grew by 12 insertions in this hour alone.
+***     It has been with you since 20 Nov. Among the unpublished work are the bestiary icon set
+***     (~67 `.webp` + a 75-line manifest) and `app.js +184/-8`, which now includes this hour's
+***     hero-sheet wear/repair rows. MY RECOMMENDATION: AUTHORIZE A PUBLISH. The hub lane has NOT
+***     claimed READY TO PUBLISH, so I have run NO publish verification and I am not asking you to
+***     take my word for the page - say the word and I will run the full gate (el()-only, no
+***     snapshot value in a sink, CSP intact by injection test, the six ?state/?mock checks, a
+***     hostile name rendering literal, and a screenshot I look at myself) and report before
+***     pushing. The push method is the proven `web/` subtree plumbing with the four assertions.
+*** (2) **A RECURRING INSTRUMENT FAULT ACROSS LANE WORKTREES, AND IT IS NOT A LANE'S FAULT.**
+***     Two lanes independently reported missing Godot import caches this hour: the HUD's W2
+***     (Donkey/Alpaca/Bull `.gltf`, `crossbow_common.glb` - 69 ERROR lines) and the chat bot's W6
+***     (`character-keeper.glb` - 3 ERRORs). The assets ARE on disk; only the per-worktree
+***     `.godot/imported/*.scn` are absent, so every gate in those trees logs ERRORs that do not
+***     exist on main. Both lanes named it honestly rather than carrying it as green. It makes
+***     every lane's parse gate noisier than the truth and it will eventually hide a real fault.
+***     MY RECOMMENDATION: rule that a lane MAY merge `origin/main` into its own branch to refresh
+***     its import cache, or authorize a one-time cache rebuild in W2 and W6. I have NOT done
+***     either - a lane's branch policy is not mine to change, and the HUD may be pinning its tree
+***     deliberately for capture stability.
+*** (3) **GUILD INSURANCE IS STILL OPEN UNDER THE DEATH-MODEL RULING (sup-nov27-0209).** Slices 1,
+***     2 and 3 are all landed (respawn/corpse-run, economy repair, and this hour the `!repair`
+***     command surface + durability on the sheet). Because insurance is unresolved, BOTH the chat
+***     bot and the game build have deliberately LEFT UNREACHABLE "hero is dead" text in place
+***     (`chatcmd.gd:318/:362/:963`, `roster.gd:1058/:1426` and `roster.gd describe()`), on the
+***     reasoning that rewording a branch that cannot fire would dress dead code up as behaviour
+***     and a dead state may yet return. I think that reasoning is right and I have not ordered it
+***     cut. IF INSURANCE IS NOT COMING, say so and I will have the text removed as dead code.
+***
 *** ===== TAKE THIS NEXT - THE 18:58 CT FIRING, 27 NOV 2026. =====
 *** THIS SECTION SUPERSEDES EVERY ROW BELOW IT, INCLUDING THE 17:58 FIRING.
 *** Clock read off cruzader: 18:58:46 CST at the start of this run, 19:0x while writing.

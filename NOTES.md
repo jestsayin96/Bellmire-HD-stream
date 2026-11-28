@@ -1091,3 +1091,46 @@ Opened https://jestsayin96.github.io/Bellmire-HD-stream/ in the built-in browser
 - Live rows: NOT seen. Snapshot says "Last word from the town 8 hours ago (Fri, Nov 27, 03:55 PM)" - the game has not published since ~15:55 CT, so the page shows its honest stale state. Live-data arms (hostile-name, shelves with real stock) still unproven on live data.
 - Browser limit: fetch() from the page is blocked (CSP connect-src), so I could not read response headers.
 Hostile-name test not owed (web/ unchanged). Live-dot colour unchanged. NOT claiming READY TO PUBLISH; no publish gate owed.
+
+## 28 Nov 01:5x CT - hub run: H33 is already whole; RLS identity fixed
+- TAKE THIS NEXT row (OAuth -> dashboard shell -> queue) was stale: all three exist in app.js (H33 room at the inn, H30 satchel).
+  Measured: gh-pages^{tree} = origin/hub:web = dd6294a0 before this commit (delta 0).
+- Real fault found in my own H33 SQL proposal: identity read from user-writable user_metadata. Fixed in
+  web/tools/hub_actions_schema.sql (private.my_twitch_id() from auth.identities). Still unapplied; hub_actions does not exist
+  on the live project (tables: snapshot, suggestions). No app.js/style.css/index.html change.
+
+## H34 (28 Nov 02:4x CT) - close the two gaps hub_actions.gd exposed
+- respec now carries a "New calling" box and files `args.calling` (the engine already reads calling/class/path),
+  so it no longer gets the town's "No such calling. Try: ..." on every press. Callings listed in the box label
+  are roster.gd CLASSES (15).
+- sell is taken OUT of the page's ACTIONS: the engine refuses it in words ("Selling from the inn is not open yet").
+  Schema CHECK still allows the kind; restore the row when the engine has a sell verb.
+- app.js cache-bust v=9 -> v=10 (app.js changed). style.css unchanged, stays v=9.
+- Checked (headless Chromium, file://, staged copy): ?state=empty/fail/stale, ?mock=chronicle/crowd, ?open=1 -> 0 page errors;
+  CSP style injection refused (outline stays none); fake-session My Room renders 9 options, Respec shows 1 calling box.
+  innerHTML sites unchanged (app.js:255, :301). NOT re-run: hostile-name canary text in a live panel (diff touches ACTIONS only).
+
+## 28 Nov 06:4x CT - hub run (TAKE THIS NEXT 05:58 row: write path against the now-writable queue)
+- The equip/dye/buy/respec/party write path was ALREADY in app.js (H33/H34). Sell stays OFF the page (engine refuses it); no quest-accept kind exists in the schema or hub_actions.gd, so none was invented.
+- Added: wear and dye now offer the names in the viewer's OWN satchel as a datalist (option.value via el(), never markup). Suggestion only; the engine still decides. index.html asks app.js?v=11.
+- web/tools/hub_actions_schema.sql now records the live grant/revoke applied 05:18 CT.
+- Seat: only bellmire-hub mounted, no parent, so git is unavailable (second reason). Nothing committed or pushed; edits are in the working copy only. node --check rc 0; innerHTML still only :255 and :301; outerHTML/eval 0. NOT rendered in a browser this run (no signed-in session to test with); hostile-name test not re-run. NOT claiming READY TO PUBLISH.
+
+## 28 Nov 07:4x CT - hub run (TAKE THIS NEXT 06:58 row: GRANT line + write path)
+- (i) The literal GRANT/REVOKE lines were ALREADY in web/tools/hub_actions_schema.sql from the 06:38 run (lines 43-44: `grant insert ... to authenticated`, `revoke select ... from anon`); the 07:2x row's "zero literal GRANT" was measured on a copy that predates that edit. Now also explicit `grant select, insert` so a fresh apply matches the live verified state (SELECT true, INSERT true, anon INSERT false per sup 05:18). Suggestion, NOT applied live: `revoke all on public.hub_actions from anon;` (anon still holds default insert/update/delete privileges that RLS alone denies).
+- (ii) Write path audited, nothing missing: app.js room (send/pull/ACTIONS, status text from the engine's column only, "15-30 seconds" note, 4 s send gap). No quest-accept kind exists in schema or hub_actions.gd; none invented. Sell stays off the page.
+- Checks: node --check rc 0; innerHTML only app.js:255, :301; outerHTML/eval/new Function/insertAdjacentHTML/document.write 0 in code; CSP meta 1; no service key or secret strings; index.html asks app.js?v=11, style.css?v=9 (unchanged this run, no cache bump owed). Seat: only bellmire-hub mounted -> no git, nothing committed or pushed. NOT rendered; hostile-name test not re-run (no JS changed). NOT claiming READY TO PUBLISH.
+
+## H36 (28 Nov 11:5x CT) - My Room becomes the dashboard, not just a form
+- TAKE THIS NEXT 10:58 row: "HUB: H36, keep building the primary interface" (no sign-in round trip attempted, per the row).
+- My Room now draws the viewer's OWN character sheet (reuses heroSheet(h), collapsible, state kept) and "Your satchel": each item has Wear / Dye buttons that PRE-FILL the request form (never send); the viewer still presses File request.
+- Fixed a real UX fault: the 10 s poll called paint() which rebuilt the form, wiping whatever the viewer was typing. The form node is now built once per sign-in and re-attached; its datalist is refreshed in place.
+- index.html: app.js?v=12, style.css?v=10 (style.css changed: 4 .room-* rules).
+- Checked (headless Chromium, file://, route-stubbed snapshot with a hostile item name): sheet drawn, 2 satchel rows, 4 quick buttons, 0 <img> in #room, hostile name literal in row and pre-filled box, typed text survived an 11.5 s poll, page height 900 = viewport, CSP style injection refused. innerHTML still only app.js:255, :301; outerHTML/eval/new Function/insertAdjacentHTML/document.write 0 in code; no secret strings.
+- NOT proven: signed-in round trip against live Supabase (no Twitch session). NOT claiming READY TO PUBLISH.
+
+## 28 Nov 12:4x CT - hub run (TAKE THIS NEXT 11:37 row: prove the signed-in round trip)
+- PARTLY PROVEN, NOT FULLY. A real Twitch sign-in cannot happen in an unattended run, so the browser half (OAuth redirect -> session -> My Room) is still unproven. The DATABASE half was proven on live project bellmire-hub (paaukwaffaamazgrndbv) inside one DO block that ends in RAISE, so everything rolled back (re-measured after: hub_actions 0, auth.users 0, auth.identities 0).
+- Simulated as `authenticated` with two fake twitch identities: own insert ALLOWED; insert for another viewer's twitch_id DENIED; insert with status='done' DENIED; viewer A sees 1 row, viewer B sees 0 of A's; B's UPDATE DENIED; anon SELECT DENIED; anon INSERT DENIED. So RLS, not the page, keeps viewers apart.
+- NOT proven: the engine's poller seeing a row and My Room's Recent showing the engine's answer. Live state: auth.users = 0 (nobody has ever signed in), hub_actions = 0, newest snapshot 06:45 UTC (00:45 CT), ~12 h old, so the game is not publishing either.
+- Owed from a human: one real Twitch sign-in on the live page, file a request, confirm the row, then the engine's poll. No web/ file changed this run. NOT claiming READY TO PUBLISH.

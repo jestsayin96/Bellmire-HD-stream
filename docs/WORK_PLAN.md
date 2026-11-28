@@ -1,4 +1,176 @@
 ================================================================================
+## THE 10:58 CT FIRING, 28 NOV 2026 - TEAM LEAD. SUPERSEDES EVERY ROW BELOW THIS LINE.
+Written 11:1x CT, 28 Nov 2026. Clock read with `TZ=America/Chicago date` (16:59 UTC = 10:59 CST).
+REACHES THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52). The game build fired at
+10:07 before this block existed, so IT READS THIS AT 11:07.
+
+### 1. *** THE BRIDGE IS BACK AND THE NINE-HOUR BACKLOG IS MERGED AND PUSHED. ***
+Blender answered on the first call this hour. `origin/main` was **1906a5d3**, last moved 02:07 CT.
+It is now **f0040478** and the push was a verified fast-forward (`merge-base --is-ancestor` rc=0,
+`origin/main == f0040478`). ALL SIX LANES MERGED, in this order: laptop, content, hub, hud-ui, art,
+chatbot. Nothing was force-pushed, no history rewritten, no branch deleted.
+FIRST: I committed the **672 stranded plan lines** the 04:58-09:58 firings wrote to W4's working
+tree and could not land. Committed UNCHANGED - no block rewritten, no row re-cut.
+**CONFLICTS, ALL RESOLVED KEEPING BOTH SIDES, ZERO LINES REMOVED:**
+  - `PROGRESS.md` three times (hub, hud-ui, chatbot). Resolved with a literal state machine, not a
+    blanket delete. **Residual markers ZERO on all four exact shapes** (`<<<<<<< `, `=======`,
+    `>>>>>>> `, `|||||||`), counted with python `startswith`, NEVER `grep -E`. Final
+    `diff --numstat origin/main HEAD -- PROGRESS.md` = **+208 / -0**.
+  - THE ARITHMETIC DID NOT ADD UP ON THE HUB MERGE AND I PROVED IT BY SET MEMBERSHIP RATHER THAN
+    EXPLAINING IT AWAY: +35 where content added 23 and hub 13 (=36). I took each lane's version,
+    listed every line it added over the base, and asserted each is present in the merged file:
+    **0 missing from content, 0 missing from hub.** The gap is ONE BLANK LINE both sides added,
+    collapsed at the seam. That assertion is stronger than the arithmetic it replaced.
+  - `docs/WORK_PLAN.md` twice (hud-ui, art). I took MAIN's side - but I PROVED IT LOSES NOTHING
+    first, both times: the lane's copy is **46,218 lines, main's is 46,890, and the lane has ZERO
+    lines main does not already have.** Exactly the 672 I had just committed. Measured, not assumed.
+  - THREE add/add conflicts on `.glb.import` sidecars (`badger`, `fanner`, `thatcher`). **Exactly
+    one line differs in each: the generated `uid://`.** I did not pick blind: I grepped the whole
+    index for BOTH uids - **0 references to either, on all three** - and confirmed the `.glb` blobs
+    themselves were never in conflict. Kept the incumbent (main's). Cosmetic, and no duplicate uid
+    exists in the tree.
+
+### 2. WHAT I TICKED, AND I CHECKED THE ARTEFACT RATHER THAN THE CLAIM.
+  - **TICKED: GAME BUILD S170** - the town layout format `bellmire-town/2`. I read
+    `data/town/README.md` on merged main myself: the `/2` section is there, PER-TIER BUILDINGS,
+    explicitly ADDITIVE ("every `/1` file is a valid `/2` file"), with the pivot contract and the
+    per-tier building shape written down. A "write the format down" item, and it is whole.
+  - **TICKED: CONTENT C-250, C-251, C-252.** `data/lore_lines.json` **parses** (95 top-level keys)
+    and `town_buildings` carries all three cycles' keys: `upgrade_events` + `inn_exterior` (C-250),
+    `landmark_events` / `site_events` / `square_events` (C-251), `hour_cries` (C-252). Content's
+    deliverable is the words; they are on the ref and the file loads.
+  - **TICKED: CHAT BOT B221/B223.** `docs/COMMANDS.md` is md5 **501e95355b8a90c5ff847aadd65d7fc8**
+    measured by me on merged main - matching the lane's reported md5 exactly. `data/commands.json`
+    parses. L14_TEST OK 27 checks with both symmetry arms green at 40 rows. **AND THE LANE DID THE
+    RIGHT THING UNDER PRESSURE:** its 10:47 STAGE1 came back RED and it proved the cause was its own
+    worktree's stale `.godot` class cache - not a regression on main, `class_name HubActions` is on
+    `scripts/hub_actions.gd` - BEFORE charging the game build with anything. No fault to the game
+    build. That is the discipline this house runs on.
+  - **TICKED: HUD U219 + U224, AND I LOOKED AT THE RENDERS MYSELF.** Not the numbers - the pictures,
+    at 100% and at the WORST case the lane's own claim names, 150%. At 100% "A MARKET-DAY TOWN" and
+    "Now watching: a townsperson" render in FULL. At 150% both ellipse gracefully and the chronicle
+    drops its older body line. **No overflow, nothing clipped out of its box, nothing unreadable at
+    either scale.** The band work is sound and it is ticked.
+  - **TICKED: HUB H35 (the page half).** The wear/dye datalist is in `app.js`, names go in as
+    `option.value` via `el()`, never markup. SECURITY GREPS RE-RUN BY ME, not taken from the lane -
+    see 4.
+  - **ART'S TOWN HALL TIER LADDER WAS ALREADY TICKED BY THE 09:58 SEAT.** It stays ticked. Do not
+    re-verify it and do not re-tick it.
+
+### 3. WHAT I DID NOT TICK, AND WHY.
+  - **GAME BUILD S171 / S172 / S173.** Written behind `WELL_TIER_MESHES=false`, correctly, and still
+    awaiting a render the lane could not run while Blender was down. **GODOT IS BACK AS OF THIS
+    HOUR** - these are now gateable and they are the lane's to close.
+  - **ART'S CHAPEL PASS.** A measurement pass (143 modules, "the lattice is now a number") is not a
+    built ladder. Half delivered, still open, same owner.
+  - **HUB H35 END TO END.** The page half is ticked; the sign-in + insert round trip against the
+    live Supabase project has never been exercised by that lane, by its own statement, five cycles
+    running. That half is NOT ticked and it is NOT the lane's fault - see 6.
+  - **U224's COMPARATIVE CLAIM, specifically.** "tier name no longer elided early at 150%" cannot be
+    judged from the three shots committed, because no before-shot is among them. The band is sound
+    and is ticked on what I could see; the comparison is simply unproven evidence, not a fault.
+    HUD: next time a claim is comparative, commit the before-shot OR publish the measured width.
+
+### 4. THE HUB: I RAN NO PUBLISH GATE, ON PURPOSE, AND I PUBLISHED NOTHING.
+**THE LANE SAYS "NOT CLAIMING READY TO PUBLISH" IN EVERY ONE OF ITS FIVE CYCLES** - the latest
+because the sign-in + insert path has never been exercised against the live project. The rule is
+explicit: no claim means the publish gate is NOT OWED and I DO NOT RUN IT. **So I ran no publish
+verification and I am not reporting one.** The web/-only pre-authorisation is not a reason to push;
+something worth publishing is, and a page whose new feature is an UNPROVEN WRITE PATH to a
+production table is the exact case for not using it.
+**WHAT IS ALWAYS OWED AND WAS DONE:** the security check on a `web/` change the lane made a claim
+about (Step 2, not the publish gate). I RE-RAN THE GREPS MYSELF AND READ THE CODE, NOT THE COMMENTS:
+  - `KEY` is `sb_publishable_...` - a PUBLISHABLE key. No `service_role`, no secret, no JWT-shaped
+    string anywhere in `web/`.
+  - The two legacy `innerHTML` sites (`app.js:255`, `:301`) - I OPENED BOTH. :255 interpolates only
+    `esc(lastError)` and `esc(age)` into a page-owned template; :301 interpolates NOTHING, it is two
+    static literals. The header comment is TRUE, and I say that having read the code beside it.
+  - 0 `outerHTML` / `insertAdjacentHTML` / `document.write` / `eval` / `new Function` in code.
+  - CSP meta intact: `default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none';
+    form-action 'none'`.
+  - The write path posts to `/hub_actions` with **the viewer's own session token**, not `KEY`, and
+    the page frames an action as a REQUEST the engine may refuse. RLS is the authority.
+  - **`style.css?v=9` AGAINST `app.js?v=11` IS CORRECT AND NO BUMP IS OWED.** `style.css` is not in
+    the hub's six-file delta. I nearly wrote this up as a defect; I measured instead. NOBODY IS TO
+    "FIX" IT.
+**THE UNPUBLISHED DELTA, MEASURED BY ME THIS HOUR - DO NOT COPY THESE, RE-MEASURE:**
+`origin/gh-pages^{tree}` = **dd6294a0**, `origin/main^{tree}:web` = **83f134fd**. 525 changed paths,
+but **the only RENDERED files are `app.js` +15/-2 and `index.html` +1/-1, and ZERO `.webp` changed.**
+The remaining **520 are `.webp.import` Godot sidecars** art committed under `web/icons/items/ring/`.
+The earlier "the entire difference is web/NOTES.md" and the 23eee62a / e346dc16 pair are SPENT.
+
+### 5. TAKE THIS NEXT - SIX ROWS. THE BRIDGE IS BACK; THE GODOT LOCK IS REAL AGAIN.
+**EVERY LANE: the no-claim-while-the-bridge-is-down instruction is WITHDRAWN. Godot launches again,
+so the lock protocol is back in full force and a claim must be honest.** Your work is merged and on
+`origin/main` - pull before you start, do not re-do it.
+GAME BUILD: **action-queue polling, per supervisor answer (b), and you can gate it now.** The
+  `hub_actions` INSERT grant was applied live at 05:18 CT, so you are polling a table that exists
+  and is writable - the hub is no longer building against nothing. Your order stands: finish the
+  death model slice -> polling -> snapshot 60s to 10-15s -> town for the rest of the deadline.
+  S171/S172/S173 are yours to render and close now that Godot is up.
+CONTENT: C-253, town-first words. C-250/251/252 are TICKED. Keep writing to the `/2` format now that
+  `data/town/README.md` names the per-tier shape - your words finally have a named reader.
+ART: the next town building down the ladder - the smithy, or the inn EXTERIOR (exterior only,
+  storage mechanic, NO interior rooms, per order 1 item 9). The hall ladder is TICKED; stop
+  re-verifying it. **ONE HOUSEKEEPING ITEM, YOURS BECAUSE IT IS YOUR OWN SHIPPED WORK:** you
+  committed **520 `.webp.import` Godot sidecars into `web/icons/items/ring/`**, which is the
+  PUBLISHED tree. The page loads `.webp` and never reads them, so they are dead weight that a
+  publish would push to gh-pages. Drop them or ignore them; it is not urgent and it breaks nothing.
+HUB: H36. Keep building the primary interface. **YOU NEVER PUBLISH** - that is unchanged and it is
+  not a judgement on this work. **Do NOT burn another cycle trying to prove the sign-in round trip:**
+  you cannot, you have correctly declined to claim it five times, and I have routed it up (6).
+HUD: U225, your call inside your seven files, town-first. U219 and U224 are TICKED. One row: when a
+  claim is COMPARATIVE ("no longer elided early"), commit the before-shot or the measured number -
+  three after-shots cannot carry it.
+CHAT BOT: the minimal-command surface under the hub-is-primary order. B221/B223 are TICKED. Your
+  routed `!help <cmd>` length-arm gap is noted and is still in `tools/`, which is not yours - I am
+  not asking you to take it.
+
+===== FOR THE SUPERVISOR =====
+1. **THE BACKLOG IS CLEARED.** Nine hours, six lanes, 32 commits, merged and pushed to `main` as
+   f0040478 with every conflict resolved keeping both sides and zero lines removed. No action needed;
+   reported because the last four runs escalated the outage and you should know it is over.
+2. **THE SINGLE POINT OF FAILURE IS STILL THERE, AND IT IS STILL NOT A LANE'S TO FIX.** Today cost
+   this house nine hours because every git path runs through one Blender addon on one Windows box.
+   The 09:58 seat found the second path and it is misconfigured: **this scheduled task is scoped to
+   `jestsayin96/music-studio`; the game is `jestsayin96/Bellmire-HD-stream`.** GitHub's own refusal
+   names the remedy and it needs A LIVE CHAT, not a firing. RECOMMENDATION UNCHANGED AND NOW
+   EVIDENCED BY A FULL DAY: have the scheduled tasks re-created from a live chat with
+   `Bellmire-HD-stream` in their authorised repository set. A dead Blender would then cost one Godot
+   lane instead of all seven.
+3. **THE HUB NEEDS ONE SIGNED-IN ROUND TRIP AND NO LANE CAN DO IT.** The page can sign in with
+   Twitch and file an action; nobody has ever run that end to end against the live project, because
+   the hub lane has no Twitch session and correctly will not claim what it has not proven. The
+   rendered delta is 2 files (`app.js` +15/-2, `index.html` +1/-1) and it is sitting unpublished.
+   RECOMMENDATION, pick one: (a) one signed-in round trip by Mr. E or yourself, after which I publish
+   under the pre-authorisation that same hour; or (b) authorise publishing the page with the write
+   path unproven, on the grounds that RLS is the authority and a refused insert is harmless. **I did
+   not take (b) on my own motion.** I am not asking Mr. E; this is yours.
+
+===== FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS (a firing cannot write a prompt) =====
+A LIVE TURN WITH MR. E CLEARS ALL OF THESE IN ONE PASS. The 04:58 list is carried and CORRECTED -
+two of its items changed meaning now the bridge is back, so do not paste it forward unread.
+  (i) ALL SEVEN PROMPTS carry "device_bash CANNOT RUN GIT" unqualified. True in a WORKTREE (its
+      `.git` is a file), FALSE in R and FALSE under `$HOME`, where read-only git including
+      `git ls-remote` works. Add the qualification and add the proven push refusal verbatim
+      ("only git clone, git fetch and plain downloads from GitHub work here, not git push") so
+      nobody re-tests it. STILL OWED.
+  (ii) THIS PROMPT says the Blender bridge is "required for Godot and all git". Qualify: required
+      for GODOT and for every WRITING git command; reads are available without it. STILL OWED.
+  (iii) THIS PROMPT's hub baseline is stale AGAIN and the 04:58 replacement is ALSO stale now.
+      Current, measured 11:0x CT: `gh-pages^{tree}` **dd6294a0**, `main:web` **83f134fd**, rendered
+      delta `app.js` +15/-2 and `index.html` +1/-1 only, zero `.webp`, plus 520 `.webp.import`
+      sidecars. REPLACE the whole paragraph, do not append to it.
+  (iv) THIS PROMPT's dead-data baseline says the corpus is 49 files / 2,549,132 chars. It read 51
+      files / 2,594,929 chars at 10:0x and the tree has grown again since. The NON-NOTE COUNT OF 15
+      IS THE FIGURE THAT MATTERS AND IT HAS NOT MOVED; the raw total never carries signal.
+  (v) The mount path note: `$HOME/mnt/` holds one entry, "hd adventure", so the path is
+      `$HOME/mnt/hd adventure/<worktree>`. The HUB's prompt separately says its mount is
+      `hd adventure/bellmire-hub` while that lane reports the real mount as `$HOME/mnt/bellmire-hub`;
+      the hub lane has now raised this twice. Check it and fix whichever is wrong.
+*** ===== END OF THE 10:58 CT BLOCK ===== ***
+
+================================================================================
 ## THE 09:58 CT FIRING, 28 NOV 2026 - TEAM LEAD. SUPERSEDES EVERY ROW BELOW THIS LINE.
 Written 10:0x CT, 28 Nov 2026. Clock read with `TZ=America/Chicago date` (15:59 UTC = 09:59 CST).
 REACHES THIS HOUR: content (:22), art (:34), hub (:37), chat bot (:45), HUD (:52). The game build

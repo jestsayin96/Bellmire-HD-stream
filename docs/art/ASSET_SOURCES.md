@@ -876,3 +876,38 @@ The derivation, all of it reversible from `tools/art/_speargen.py`:
 
 Geometry otherwise unmodified. Fit proof and the honest fault list:
 `docs/art/THE_TIER5_SPEAR_READ.md` and `renders/art/spear_langets/`.
+
+## System 15 - the town square WELL -> FOUNTAIN, tiers 1-3 (art lane, 28 Nov 2026, 00:3x-01:2x CT)
+
+**THE THREE MESHES THAT SHIPPED ARE ORIGINAL.** `assets/buildings/town_well_t1.glb`,
+`town_well_t2.glb` and `town_well_t3.glb` are generated procedurally by
+`tools/art/townbuild.py` (bmesh primitives out of `tools/art/lordlib.py`, no
+imported geometry of any kind), so they carry no third-party rights and are
+reproducible from that file alone. Full write-up: `docs/art/TOWN_WELL_TIERS.md`.
+
+**WHY NOTHING WAS DERIVED FROM A PACK, WHICH IS THE PART THAT NEEDED CHECKING.**
+Mr. E's rule 3 is packs before generation, and the plan row says a tier variant
+derived from a cleared pack beats a mesh authored from nothing. So the packs
+were walked first, this run, and not from memory:
+
+| candidate | holds a well? | status | why |
+|---|---|---|---|
+| `low-poly_RPG_item_collection_3` | yes, `well.obj` | **GATED** | Already recorded above: NO LICENCE FILE FOUND, author not named, terms not established. |
+| `modular_village_collection` | yes, 5: `Prop_Well_{1,Cobblestone,Dirt,Grass,Inside}.obj` | **GATED** | In the 20 Nov no-licence list. **Re-checked by walking the folder this run: 147 files, ZERO text files of ANY kind** - no LICENSE, no README, nothing that could carry terms. The "a README can still be a licence" exception cannot apply where there is no text file at all. |
+| `kenney_fantasy-town-kit_2.0` | no well; 10 `fountain-*` | **CLEARED (CC0 1.0)** and **NOT USED - rejected on READ** | Measured off the evaluated depsgraph: `fountain-round` 2.00 x 2.00 x **0.28 m**, `-detail` 0.48 m, `fountain-center` 1.00 x 1.00 x 0.14 m. They are FLOOR TILES for a 2 m grid - ankle to knee on a 1.80 bar. A fountain the stream cannot see cannot carry "the town levelled up". The pack stays cleared and available for roads, walls and stalls. |
+| `Medieval_Village_MegaKit` | no well, no fountain | CLEARED (CC0 1.0) | Nothing in it serves this item. |
+| `Castle` | no well, no fountain | gated anyway | 11 building blocks, none relevant. |
+
+Evidence for the Kenney row: `tools/art/_townwell_probe.py`, sheet
+`renders/art/town/_probe/_kenney_fountain_candidates.png`, numbers
+`renders/art/town/_probe/_probe.json` (verdict GREEN, 0 blanks, border 0,
+subject proven seen at 32,866 px moved under ablation). **Measuring a pack
+copies nothing; nothing was imported, converted or redistributed by this run.**
+
+*** A NOTE ON WHAT THAT PROBE SHEET CANNOT SHOW, SO NOBODY RE-USES IT BLIND. ***
+Its label gate scored every caption above 3,600 px and the captions are still
+unreadable - they overlap in a diagonal pile, because I placed them all at one
+world height and a pixel count cannot see overlap. Two pieces also fell off the
+short floor slab. The per-piece DIMENSIONS in the table above are sound - they
+come off the depsgraph per piece, independently of that sheet - but the sheet
+itself is evidence only for "these things are small".

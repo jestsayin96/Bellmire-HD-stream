@@ -1,0 +1,188 @@
+{
+ "when_ct": "28 Nov 2026 01:0x CT",
+ "tiers": {
+  "well_t1": {
+   "title": "The Well",
+   "tier": 1,
+   "n_parts": 32,
+   "n_vert": 428,
+   "n_mesh_merged": 5,
+   "dims": [
+    1.5377,
+    1.891,
+    1.7163
+   ],
+   "base_dz_m": -0.26,
+   "centre_dx_dy": [
+    -0.0978,
+    -0.0281
+   ],
+   "glb": "assets/buildings/town_well_t1.glb",
+   "glb_bytes": 39440,
+   "views": {
+    "front": {
+     "opaque_px": 154801,
+     "border_alpha_px": 0,
+     "subject_moved_px": 15007,
+     "hero_moved_px": 37351
+    },
+    "three_quarter": {
+     "opaque_px": 101611,
+     "border_alpha_px": 0,
+     "subject_moved_px": 7854,
+     "hero_moved_px": 18983
+    },
+    "side": {
+     "opaque_px": 150727,
+     "border_alpha_px": 0,
+     "subject_moved_px": 10428,
+     "hero_moved_px": 37881
+    },
+    "back": {
+     "opaque_px": 154614,
+     "border_alpha_px": 0,
+     "subject_moved_px": 13613,
+     "hero_moved_px": 37572
+    }
+   }
+  },
+  "well_t2": {
+   "title": "The Well Kept",
+   "tier": 2,
+   "n_parts": 76,
+   "n_vert": 864,
+   "n_mesh_merged": 6,
+   "dims": [
+    2.0869,
+    2.0869,
+    2.415
+   ],
+   "base_dz_m": -0.3,
+   "centre_dx_dy": [
+    0.0,
+    0.0
+   ],
+   "glb": "assets/buildings/town_well_t2.glb",
+   "glb_bytes": 74200,
+   "views": {
+    "front": {
+     "opaque_px": 147547,
+     "border_alpha_px": 0,
+     "subject_moved_px": 21353,
+     "hero_moved_px": 22634
+    },
+    "three_quarter": {
+     "opaque_px": 97868,
+     "border_alpha_px": 0,
+     "subject_moved_px": 10818,
+     "hero_moved_px": 11765
+    },
+    "side": {
+     "opaque_px": 141185,
+     "border_alpha_px": 0,
+     "subject_moved_px": 12513,
+     "hero_moved_px": 22795
+    },
+    "back": {
+     "opaque_px": 147364,
+     "border_alpha_px": 0,
+     "subject_moved_px": 19670,
+     "hero_moved_px": 22982
+    }
+   }
+  },
+  "well_t3": {
+   "title": "The Fountain",
+   "tier": 3,
+   "n_parts": 47,
+   "n_vert": 899,
+   "n_mesh_merged": 4,
+   "dims": [
+    2.52,
+    2.52,
+    1.64
+   ],
+   "base_dz_m": 0.0,
+   "centre_dx_dy": [
+    0.0,
+    0.0
+   ],
+   "glb": "assets/buildings/town_well_t3.glb",
+   "glb_bytes": 79684,
+   "views": {
+    "front": {
+     "opaque_px": 142218,
+     "border_alpha_px": 0,
+     "subject_moved_px": 19210,
+     "hero_moved_px": 20316
+    },
+    "three_quarter": {
+     "opaque_px": 94995,
+     "border_alpha_px": 0,
+     "subject_moved_px": 9714,
+     "hero_moved_px": 10849
+    },
+    "side": {
+     "opaque_px": 138572,
+     "border_alpha_px": 0,
+     "subject_moved_px": 12795,
+     "hero_moved_px": 22294
+    },
+    "back": {
+     "opaque_px": 142128,
+     "border_alpha_px": 0,
+     "subject_moved_px": 18143,
+     "hero_moved_px": 22261
+    }
+   }
+  }
+ },
+ "errors": [],
+ "sheet": {
+  "path": "renders/art/town/_tiers_side_by_side.png",
+  "opaque_px": 314494,
+  "subject_moved_px": 161860,
+  "border_alpha_px": 0,
+  "label_px": {
+   "well_t1": 2736,
+   "well_t2": 3096,
+   "well_t3": 3116
+  },
+  "silhouette": {
+   "well_t1": {
+    "px": 25557,
+    "h_px": 266,
+    "w_px": 255
+   },
+   "well_t2": {
+    "px": 52728,
+    "h_px": 363,
+    "w_px": 304
+   },
+   "well_t3": {
+    "px": 47745,
+    "h_px": 269,
+    "w_px": 367
+   }
+  },
+  "spans": [
+   [
+    "well_t1",
+    0.0,
+    1.538
+   ],
+   [
+    "well_t2",
+    1.988,
+    4.075
+   ],
+   [
+    "well_t3",
+    4.525,
+    7.045
+   ]
+  ]
+ },
+ "engine": "BLENDER_EEVEE",
+ "verdict": "GREEN"
+}

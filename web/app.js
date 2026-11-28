@@ -17,6 +17,9 @@
 
 const URL_SNAPSHOT = "https://paaukwaffaamazgrndbv.supabase.co/rest/v1/snapshot?select=payload,updated_at";
 const KEY = "sb_publishable_q2Kn3weLLeYYXGAiow_4vw_3serNQlc";
+// The auth endpoints (settings, token, authorize) need the legacy anon JWT, not the publishable key.
+// The REST endpoints (snapshot, suggestions, hub_actions) accept either. Both are public/non-secret.
+const AUTH_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBhYXVrd2FmZmFhbWF6Z3JuZGJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ0NTEyMjksImV4cCI6MjExMDAyNzIyOX0.LVJczQ48ucqawKmb0y-PjBvZyop9tO9R_9s2RcxZXpI";
 const REFRESH_MS = 60000;      // the game publishes every 60 s
 const STALE_MIN = 5;           // past this, the town has gone quiet (the game is likely off)
 const TIMEOUT_MS = 12000;      // a fetch that hangs is a failed fetch
@@ -2773,7 +2776,7 @@ function openGuildChat() {
 // baked in as a const and not overridable at runtime. Clicking the button runs the
 // device grant below (per the Twitch docs); nothing contacts Twitch before the click.
 // The empty-id branch in twitchSignIn() is kept as a defensive fallback only.
-const TWITCH_CLIENT_ID = "mpblygfdxvdpnr0dvi3andjlvb4y0r";  // Bellmire Hub Login: PUBLIC client, device-code grant, chat scopes only. Not overridable at runtime.
+const TWITCH_CLIENT_ID = "vycakn50ijzi1qrcbzqo0xc9kh1h8h";  // Bellmire Guild Chat: PUBLIC client, device-code grant, chat scopes only. Not overridable at runtime.
 const TW_DEVICE = "https://id.twitch.tv/oauth2/device";
 const TW_TOKEN = "https://id.twitch.tv/oauth2/token";
 const TW_USERS = "https://api.twitch.tv/helix/users";
@@ -2792,9 +2795,12 @@ function signinSay(html, cls) {
 }
 
 async function twitchSignIn() {
+  // If the viewer has both spotlight AND a chat token, nothing more to do.
+  // If they only have the spotlight (from the Supabase bridge) but no token, run Device Code
+  // so they can also type in the guild chat.
+  if (twLogin && twToken) { highlightMyHero(twLogin); return; }
   if (twPolling) return;
   if (!TWITCH_CLIENT_ID) {
-    // defensive fallback: if the id were ever blanked, explain instead of calling Twitch
     signinSay("Twitch sign-in isn't set up yet — it needs Mr. E to register the app and add its client id. Until then, type your hero's name in the box below.", "gated");
     return;
   }
@@ -2804,12 +2810,9 @@ async function twitchSignIn() {
     const res = await fetch(TW_DEVICE, { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body });
     if (!res.ok) throw new Error("Twitch said " + res.status);
     const d = await res.json();
-    // show the user code + where to enter it (textContent / createElement only)
     const strong = el("b", null, String(d.user_code || "").toUpperCase());
     const uri = String(d.verification_uri || "https://www.twitch.tv/activate");
     const link = el("a", "signinlink", uri.replace(/^https?:\/\//, ""));
-    // the link href is a Twitch verification URL from Twitch's own response, not snapshot data;
-    // still, only allow the known activate host to be clickable, else show it as text.
     if (/^https:\/\/(www\.)?twitch\.tv\//.test(uri)) { link.href = uri; link.target = "_blank"; link.rel = "noopener noreferrer"; }
     signinSay([document.createTextNode("Go to "), link, document.createTextNode(" and enter the code "), strong], "code");
     pollForToken(String(d.device_code || ""), Math.max(5, n0(d.interval) || 5), Date.now() + (n0(d.expires_in) || 600) * 1000);
@@ -5806,7 +5809,7 @@ function finderOpen(r) {
   async function authCall(path, body) {
     const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), TIMEOUT_MS);
     try {
-      const r = await fetch(AUTH + path, { method: "POST", headers: { "Content-Type": "application/json", apikey: KEY }, body: JSON.stringify(body), signal: ctl.signal });
+      const r = await fetch(AUTH + path, { method: "POST", headers: { "Content-Type": "application/json", apikey: AUTH_KEY }, body: JSON.stringify(body), signal: ctl.signal });
       if (!r.ok) throw new Error("sign-in server " + r.status);
       return await r.json();
     } finally { clearTimeout(t); }
@@ -5843,12 +5846,12 @@ function finderOpen(r) {
   }
   async function logout() {
     const t = session && session.access_token; saveSession(null); rows = []; clearInterval(pollT); pollT = 0;
-    if (t) { try { await fetch(AUTH + "/logout", { method: "POST", headers: { apikey: KEY, Authorization: "Bearer " + t } }); } catch (e) {} }
+    if (t) { try { await fetch(AUTH + "/logout", { method: "POST", headers: { apikey: AUTH_KEY, Authorization: "Bearer " + t } }); } catch (e) {} }
     paint();
   }
   async function probeAuth() {
     try {
-      const r = await fetch(AUTH + "/settings", { headers: { apikey: KEY } });
+      const r = await fetch(AUTH + "/settings", { headers: { apikey: AUTH_KEY } });
       const j = r.ok ? await r.json() : null;
       authOn = j && j.external ? !!j.external.twitch : false;
     } catch (e) { authOn = null; }
@@ -5868,7 +5871,7 @@ function finderOpen(r) {
   async function rest(path, opt) {
     const t = await token(); if (!t) throw new Error("signed out");
     const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), TIMEOUT_MS);
-    try { return await fetch(REST + path, Object.assign({ signal: ctl.signal }, opt, { headers: Object.assign({ apikey: KEY, Authorization: "Bearer " + t, "Content-Type": "application/json" }, opt && opt.headers) })); }
+    try { return await fetch(REST + path, Object.assign({ signal: ctl.signal }, opt, { headers: Object.assign({ apikey: AUTH_KEY, Authorization: "Bearer " + t, "Content-Type": "application/json" }, opt && opt.headers) })); }
     finally { clearTimeout(tm); }
   }
   async function pull() {
@@ -6017,8 +6020,26 @@ function finderOpen(r) {
     if ((!on || !session) && pollT) { clearInterval(pollT); pollT = 0; }
   }
 
+  // Bridge the Supabase session into the Heroes tab's spotlight (H6) and satchel.
+  // The Room (H33) and Heroes (H6) used separate auth flows; H6's Device Code client
+  // was deleted when the Confidential app replaced it. When the Room has a live session,
+  // expose the viewer's Twitch login to the global twLogin so highlightMyHero() and the
+  // satchel work without a second sign-in. Guild chat still needs a Twitch OAuth token
+  // (twToken) for PRIVMSG, so it stays read-only until a Public app is re-registered.
+  function bridgeLogin() {
+    if (session && !twLogin) {
+      const login = who().toLowerCase();
+      if (login && login !== "viewer") {
+        twLogin = login;
+        highlightMyHero(login);
+      }
+    } else if (!session && twLogin) {
+      twLogin = null;    // signed out of the Room — clear the spotlight too
+    }
+  }
+
   session = loadSession();
   paint();
-  Promise.all([probeAuth(), finishLogin()]).then(() => { paint(); sync(); });
+  Promise.all([probeAuth(), finishLogin()]).then(() => { paint(); sync(); bridgeLogin(); });
   new MutationObserver(sync).observe($("room"), { attributes: true, attributeFilter: ["class"] });
 })();

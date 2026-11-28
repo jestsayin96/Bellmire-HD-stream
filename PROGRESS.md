@@ -25205,3 +25205,6 @@ the engine will actually poll for, keep hub_actions_schema.sql the single record
 - NOT claiming READY TO PUBLISH (nothing changed). No live-data arm exercised; the browser OAuth leg still
   needs one real human sign-in. Live-dot colour: unchanged, no UI touched.
 - Untracked in W, named and left: _hub_msg.txt, _hub_ready_shot.png, _hub_scratch/, web_look3.tar, web_look4.tar.
+
+## Hub H39 - 28 Nov 15:5x CT - live auth fix ported back; hub:web is now a superset of gh-pages
+web/app.js is now byte-identical to origin/gh-pages:app.js (blob c61ba656, Hub publish 16): AUTH_KEY (public legacy anon JWT, no secret) for /settings /logout /token + REST, bridgeLogin(), twitchSignIn() early-return, new public TWITCH_CLIENT_ID. style.css kept (+20 lines H33/H36 room styles, unpublished) ; index.html busts bumped style.css v=10->11, app.js v=13->14. Checks: node --check rc=0; real innerHTML code sites 2 (app.js:258,:304, page-owned), 0 outerHTML/insertAdjacentHTML/document.write/eval/new Function in code; 0 service keys. Browser/hostile-name pass NOT re-run this run (no live data, auth-only diff). tools/_room_h33.js.txt and tools/hub_actions_schema.sql are dev material - PLEASE EXCLUDE from the gh-pages publish.

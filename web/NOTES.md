@@ -1098,3 +1098,14 @@ Hostile-name test not owed (web/ unchanged). Live-dot colour unchanged. NOT clai
 - Real fault found in my own H33 SQL proposal: identity read from user-writable user_metadata. Fixed in
   web/tools/hub_actions_schema.sql (private.my_twitch_id() from auth.identities). Still unapplied; hub_actions does not exist
   on the live project (tables: snapshot, suggestions). No app.js/style.css/index.html change.
+
+## H34 (28 Nov 02:4x CT) - close the two gaps hub_actions.gd exposed
+- respec now carries a "New calling" box and files `args.calling` (the engine already reads calling/class/path),
+  so it no longer gets the town's "No such calling. Try: ..." on every press. Callings listed in the box label
+  are roster.gd CLASSES (15).
+- sell is taken OUT of the page's ACTIONS: the engine refuses it in words ("Selling from the inn is not open yet").
+  Schema CHECK still allows the kind; restore the row when the engine has a sell verb.
+- app.js cache-bust v=9 -> v=10 (app.js changed). style.css unchanged, stays v=9.
+- Checked (headless Chromium, file://, staged copy): ?state=empty/fail/stale, ?mock=chronicle/crowd, ?open=1 -> 0 page errors;
+  CSP style injection refused (outline stays none); fake-session My Room renders 9 options, Respec shows 1 calling box.
+  innerHTML sites unchanged (app.js:255, :301). NOT re-run: hostile-name canary text in a live panel (diff touches ACTIONS only).

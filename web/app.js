@@ -5778,9 +5778,11 @@ function finderOpen(r) {
   const ACTIONS = [
     { kind: "wear",        group: "Gear",     label: "Wear / swap an item",         args: [["item", "Item name"]] },
     { kind: "dye",         group: "Gear",     label: "Dye an item",                 args: [["item", "Item name"], ["colour", "Colour"]] },
-    { kind: "sell",        group: "Gear",     label: "Sell from your satchel",      args: [["item", "Item name"]] },
+    // "sell" is deliberately NOT offered: the engine refuses it in words ("Selling from the inn is not open yet",
+    // hub_actions.gd), so a viewer would only ever be handed a refusal. The schema still allows the kind; restore the
+    // row here when the engine grows a sell verb.
     { kind: "buy",         group: "Shops",    label: "Buy at a counter",            args: [["counter", "Counter (forge, armoury, brew, repair, oil)"], ["item", "Item name"]] },
-    { kind: "respec",      group: "Hero",     label: "Respec",                      args: [] },
+    { kind: "respec",      group: "Hero",     label: "Respec (change calling)",     args: [["calling", "New calling (knight, warden, barbarian, rogue, duelist, ranger, mage, sage, cleric, paladin, necromancer, monk, druid, warlock or bard)"]] },
     { kind: "reroll",      group: "Hero",     label: "Reroll",                      args: [] },
     { kind: "specialize",  group: "Hero",     label: "Specialize (once, for good)", args: [["path", "Path"]], confirm: true },
     { kind: "party_invite",group: "Party",    label: "Invite to your party",        args: [["who", "Viewer name"]] },

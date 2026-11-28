@@ -24554,3 +24554,5 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - **MY WORKTREE MOUNT IS NOT WHERE MY PROMPT SAYS IT IS**, and it cost me one failed call: the prompt gives `$HOME/mnt/hd adventure/bellmire-bot`, the real mounts this run are **`$HOME/mnt/bellmire-bot`** and **`$HOME/mnt/jests-hd-medieval-adventure`** - the connected folders are mounted by their own names, with no `hd adventure` parent. `ls $HOME/mnt/` settled it in one call. **I did NOT call `device_request_folder_access`.**
 - No Twitch message, nothing redeemed, nothing cheered, **ZERO BITS**. No channel state read or changed; Mr. E's account was not touched and bellmirebro sent nothing.
 - Not ticked - the team lead ticks.
+
+- 28 Nov 02:4x CT HUB H34: respec gets a calling box, sell removed from ACTIONS, app.js?v=10. Measured: form options 10 -> 9, respec inputs 0 -> 1, page errors 0/6 states, CSP injection refused. gh-pages^{tree} dd6294a0 vs hub:web e0547014 before this commit: delta NOTES.md +7, tools/hub_actions_schema.sql +15/-4 (no rendered files).

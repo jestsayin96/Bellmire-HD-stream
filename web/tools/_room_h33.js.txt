@@ -1,0 +1,225 @@
+
+// ===========================================================================
+// H33 - THE ROOM AT THE INN (sup-nov27-2340). The hub is the primary interface:
+// a viewer signs in with Twitch THROUGH SUPABASE AUTH (PKCE, no SDK, no new
+// script origin, no CSP change: the redirect is a navigation and the token
+// exchange goes to the supabase origin connect-src already allows), sees their
+// own hero, and files REQUESTS into the hub_actions queue that the game engine
+// polls. SECURITY, in addition to every invariant at the top of this file:
+//   - only the publishable key and the viewer's OWN session ever reach this file;
+//   - RLS is the authority (docs/HUB_SECURITY.md "H33"): this page never decides
+//     whose rows a viewer may touch, the database policy does;
+//   - an action is a REQUEST. The page shows queued / done / refused ONLY from the
+//     status column the engine writes, and never claims an outcome itself;
+//   - every string from the session, the snapshot or the queue (login, display
+//     name, engine messages, args) reaches the DOM through el() only. The token
+//     is never rendered, logged or put in a URL.
+// ===========================================================================
+(function roomAtTheInn() {
+  const ORIGIN = "https://paaukwaffaamazgrndbv.supabase.co";
+  const AUTH = ORIGIN + "/auth/v1", REST = ORIGIN + "/rest/v1";
+  const SKEY = "bellmire.auth", VKEY = "bellmire.pkce", POLL_MS = 10000, SEND_GAP_MS = 4000;
+  const root = $("roomBody"), stat = $("roomStatus");
+  if (!root) return;
+
+  // The kinds a viewer may file. Page-owned whitelist: the engine validates again and may refuse.
+  // Mirrors the 13 management commands + party named in the chat bot's B213b audit.
+  const ACTIONS = [
+    { kind: "wear",        group: "Gear",     label: "Wear / swap an item",         args: [["item", "Item name"]] },
+    { kind: "dye",         group: "Gear",     label: "Dye an item",                 args: [["item", "Item name"], ["colour", "Colour"]] },
+    { kind: "sell",        group: "Gear",     label: "Sell from your satchel",      args: [["item", "Item name"]] },
+    { kind: "buy",         group: "Shops",    label: "Buy at a counter",            args: [["counter", "Counter (forge, armoury, brew, repair, oil)"], ["item", "Item name"]] },
+    { kind: "respec",      group: "Hero",     label: "Respec",                      args: [] },
+    { kind: "reroll",      group: "Hero",     label: "Reroll",                      args: [] },
+    { kind: "specialize",  group: "Hero",     label: "Specialize (once, for good)", args: [["path", "Path"]], confirm: true },
+    { kind: "party_invite",group: "Party",    label: "Invite to your party",        args: [["who", "Viewer name"]] },
+    { kind: "party_join",  group: "Party",    label: "Join a party",                args: [["who", "Leader's name"]] },
+    { kind: "party_leave", group: "Party",    label: "Leave your party",            args: [] },
+  ];
+  const STATUS_TXT = { queued: "Waiting for the town", done: "Done", refused: "Refused", expired: "Expired" };
+  let session = null, authOn = null, desk = "unknown", pollT = 0, lastSend = 0, rows = [], busy = false;
+
+  const say = (m, bad) => { stat.textContent = m || ""; stat.className = "chatstatus" + (bad ? " bad" : ""); };
+  const clean = (s, n) => ctrlStrip(s).slice(0, n || 60);
+
+  // ---- session store (per-viewer convenience; wrapped, may be unavailable)
+  function loadSession() { try { const s = JSON.parse(localStorage.getItem(SKEY) || "null"); return s && s.access_token && s.refresh_token ? s : null; } catch (e) { return null; } }
+  function saveSession(s) { session = s; try { if (s) localStorage.setItem(SKEY, JSON.stringify(s)); else localStorage.removeItem(SKEY); } catch (e) {} }
+  const nowS = () => Math.floor(Date.now() / 1000);
+  function adopt(j) {
+    if (!j || typeof j.access_token !== "string" || typeof j.refresh_token !== "string") throw new Error("no session");
+    saveSession({ access_token: j.access_token, refresh_token: j.refresh_token, expires_at: nowS() + (+j.expires_in || 3600), user: j.user || (session && session.user) || null });
+  }
+  async function authCall(path, body) {
+    const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), TIMEOUT_MS);
+    try {
+      const r = await fetch(AUTH + path, { method: "POST", headers: { "Content-Type": "application/json", apikey: KEY }, body: JSON.stringify(body), signal: ctl.signal });
+      if (!r.ok) throw new Error("sign-in server " + r.status);
+      return await r.json();
+    } finally { clearTimeout(t); }
+  }
+  async function token() {
+    if (!session) return "";
+    if (session.expires_at - nowS() > 60) return session.access_token;
+    try { adopt(await authCall("/token?grant_type=refresh_token", { refresh_token: session.refresh_token })); return session.access_token; }
+    catch (e) { saveSession(null); return ""; }
+  }
+
+  // ---- PKCE
+  const b64u = (buf) => btoa(String.fromCharCode.apply(null, new Uint8Array(buf))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  async function login() {
+    try {
+      const v = b64u(crypto.getRandomValues(new Uint8Array(48)));
+      const ch = b64u(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(v)));
+      try { sessionStorage.setItem(VKEY, v); } catch (e) { say("This browser will not let the page remember a sign-in step (private window?). Try a normal window.", true); return; }
+      const back = location.origin + location.pathname;
+      location.assign(AUTH + "/authorize?provider=twitch&flow_type=pkce&code_challenge=" + ch + "&code_challenge_method=s256&redirect_to=" + encodeURIComponent(back));
+    } catch (e) { say("Could not start sign-in in this browser.", true); }
+  }
+  async function finishLogin() {
+    const q = new URLSearchParams(location.search), code = q.get("code"), err = q.get("error_description");
+    if (!code && !err) return;
+    for (const k of ["code", "error", "error_code", "error_description"]) q.delete(k);
+    try { history.replaceState(null, "", location.pathname + (q.toString() ? "?" + q.toString() : "") + location.hash); } catch (e) {}
+    setActiveTab("room");
+    if (err) { say("Sign-in was not completed: " + clean(err, 120), true); return; }
+    let v = ""; try { v = sessionStorage.getItem(VKEY) || ""; sessionStorage.removeItem(VKEY); } catch (e) {}
+    if (!v) { say("That sign-in link was not started from this browser. Press the sign-in button again.", true); return; }
+    try { adopt(await authCall("/token?grant_type=pkce", { auth_code: clean(code, 200), code_verifier: v })); say("Signed in."); }
+    catch (e) { say("Sign-in did not finish (" + clean(e.message, 60) + "). Press the button to try again.", true); }
+  }
+  async function logout() {
+    const t = session && session.access_token; saveSession(null); rows = []; clearInterval(pollT); pollT = 0;
+    if (t) { try { await fetch(AUTH + "/logout", { method: "POST", headers: { apikey: KEY, Authorization: "Bearer " + t } }); } catch (e) {} }
+    paint();
+  }
+  async function probeAuth() {
+    try {
+      const r = await fetch(AUTH + "/settings", { headers: { apikey: KEY } });
+      const j = r.ok ? await r.json() : null;
+      authOn = j && j.external ? !!j.external.twitch : false;
+    } catch (e) { authOn = null; }
+  }
+
+  // ---- identity: display only. The engine and RLS key on the verified Twitch id, never this string.
+  function who() {
+    const u = session && session.user, m = (u && u.user_metadata) || {};
+    return clean(m.preferred_username || m.user_name || m.name || m.full_name || "viewer", 40);
+  }
+  const myHeroRow = () => {
+    const w = who().toLowerCase(), hs = arr(last && last.payload && last.payload.heroes);
+    return hs.find((h) => h && nameOf(h).toLowerCase() === w) || null;
+  };
+
+  // ---- the order desk (hub_actions)
+  async function rest(path, opt) {
+    const t = await token(); if (!t) throw new Error("signed out");
+    const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), TIMEOUT_MS);
+    try { return await fetch(REST + path, Object.assign({ signal: ctl.signal }, opt, { headers: Object.assign({ apikey: KEY, Authorization: "Bearer " + t, "Content-Type": "application/json" }, opt && opt.headers) })); }
+    finally { clearTimeout(tm); }
+  }
+  async function pull() {
+    if (!session) return;
+    try {
+      const r = await rest("/hub_actions?select=id,kind,args,status,result,created_at&order=created_at.desc&limit=15");
+      if (r.status === 404 || r.status === 400) { desk = "closed"; rows = []; }
+      else if (r.status === 401) { saveSession(null); }
+      else if (!r.ok) { desk = "error"; }
+      else { const j = await r.json(); rows = Array.isArray(j) ? j : []; desk = "open"; }
+    } catch (e) { if (desk !== "closed") desk = "error"; }
+    paint();
+  }
+  async function send(a, vals) {
+    if (busy) return;
+    if (Date.now() - lastSend < SEND_GAP_MS) { say("One moment between requests.", true); return; }
+    const args = {};
+    for (const [k] of a.args) { const v = clean(vals[k], 60); if (!v) { say("Fill in every box first.", true); return; } args[k] = v; }
+    busy = true; lastSend = Date.now(); say("Sending your request…");
+    try {
+      const r = await rest("/hub_actions", { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify({ kind: a.kind, args, viewer_login: who() }) });
+      if (!r.ok) throw new Error(r.status === 404 ? "closed" : "server " + r.status);
+      say("Request filed. It is a request, not a result: changes take effect in 15–30 seconds in-game, and only if the town accepts it. Watch the list below.");
+      pull();
+    } catch (e) { say(e.message === "closed" ? "The order desk is not open yet." : "Could not file that request (" + clean(e.message, 40) + ").", true); }
+    finally { busy = false; }
+  }
+
+  // ---- painting. Everything below builds nodes with el(); nothing is markup.
+  function actionForm() {
+    const f = el("form", "room-form"); f.setAttribute("aria-label", "File a request with the inn");
+    const sel = el("select", "suggest-input suggest-select"); sel.id = "roomKind"; sel.setAttribute("aria-label", "What do you want done");
+    let g = "", og = null;
+    ACTIONS.forEach((a, i) => { if (a.group !== g) { g = a.group; og = el("optgroup"); og.label = g; sel.append(og); } const o = el("option", "", a.label); o.value = String(i); og.append(o); });
+    const slot = el("div", "room-args");
+    const inputs = {};
+    const draw = () => {
+      slot.replaceChildren(); for (const k in inputs) delete inputs[k];
+      const a = ACTIONS[+sel.value] || ACTIONS[0];
+      a.args.forEach(([k, lab]) => {
+        const l = el("label", "sat-lab", lab + " "); const i = el("input", "suggest-input"); i.type = "text"; i.maxLength = 60; i.autocomplete = "off"; i.setAttribute("aria-label", lab);
+        inputs[k] = i; l.append(i); slot.append(l);
+      });
+    };
+    sel.addEventListener("change", draw); draw();
+    const go = el("button", "watchbtn", "File request"); go.type = "submit";
+    let armed = false;   // a once-and-for-good request needs a second press (no browser dialog)
+    sel.addEventListener("change", () => { armed = false; go.textContent = "File request"; });
+    f.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const a = ACTIONS[+sel.value] || ACTIONS[0], vals = {}; for (const k in inputs) vals[k] = inputs[k].value;
+      if (a.confirm && !armed) { armed = true; go.textContent = "Press again: once and for good"; return; }
+      armed = false; go.textContent = "File request"; send(a, vals);
+    });
+    f.append(sel, slot, go);
+    return f;
+  }
+  function recent() {
+    const box = el("div", "room-recent");
+    box.append(el("h3", "room-h", "Your recent requests"));
+    if (desk === "closed") { box.append(el("p", "note", "The order desk is not open yet. Nothing can be filed until the town opens it.")); return box; }
+    if (desk === "error") box.append(el("p", "note", "Could not read your requests just now. Trying again."));
+    if (!rows.length) { if (desk === "open") box.append(el("p", "note", "Nothing filed yet.")); return box; }
+    const ul = el("ul", "room-list");
+    rows.forEach((r) => {
+      const st = Object.prototype.hasOwnProperty.call(STATUS_TXT, r.status) ? r.status : "unknown";
+      const li = el("li", "room-row room-" + st);
+      const a = r.args && typeof r.args === "object" ? Object.keys(r.args).map((k) => clean(r.args[k], 40)).join(" · ") : "";
+      li.append(el("b", "", clean(r.kind, 20)), document.createTextNode(a ? "  " + a : ""), el("span", "room-st", " — " + (STATUS_TXT[st] || "Unknown")));
+      if (r.result) li.append(el("span", "room-res", " (" + clean(r.result, 120) + ")"));
+      ul.append(li);
+    });
+    box.append(ul);
+    return box;
+  }
+  function paint() {
+    root.replaceChildren();
+    if (authOn === null && !session) { root.append(el("p", "note", "Checking whether sign-in is open…")); return; }
+    if (!session) {
+      root.append(el("p", "", "Sign in with your Twitch account to open your room: your hero, your gear and your requests to the town, all in one place."));
+      if (authOn === false) { root.append(el("p", "note", "Sign-in is not switched on yet. When it is, the button will appear here. Chat commands still work as before.")); return; }
+      const b = el("button", "watchbtn room-login", "Log in with Twitch"); b.type = "button"; b.addEventListener("click", login);
+      root.append(b, el("p", "note quiet", "This page never sees your Twitch password. It learns your Twitch name and nothing else, and you can sign out at any time."));
+      return;
+    }
+    const top = el("p", "mhline"); top.append(el("span", "mhlabel", "Signed in as "), el("b", "mhname", who()));
+    const out = el("button", "linkbtn", "Sign out"); out.type = "button"; out.addEventListener("click", logout);
+    top.append(document.createTextNode("  ·  "), out); root.append(top);
+    const h = myHeroRow(), card = el("div", "room-hero");
+    if (h) { const lv = pickNum(h.level); card.append(el("b", "", nameOf(h)), el("span", "", "  " + ((cap(h.species) + " " + cap(h.class)).trim() || "hero") + (lv ? " · level " + lv : ""))); }
+    else card.append(el("span", "note", "No hero under your name on the roll right now. Type !enlist in chat to raise one."));
+    root.append(card);
+    root.append(el("p", "note", "Changes take effect in 15–30 seconds in-game."));
+    if (desk !== "closed") root.append(actionForm());
+    root.append(recent());
+  }
+  function sync() {
+    const on = $("room") && $("room").classList.contains("active");
+    if (on && session && !pollT) { pull(); pollT = setInterval(pull, POLL_MS); }
+    if ((!on || !session) && pollT) { clearInterval(pollT); pollT = 0; }
+  }
+
+  session = loadSession();
+  paint();
+  Promise.all([probeAuth(), finishLogin()]).then(() => { paint(); sync(); });
+  new MutationObserver(sync).observe($("room"), { attributes: true, attributeFilter: ["class"] });
+})();

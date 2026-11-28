@@ -341,6 +341,7 @@ function render(p) {
   try { renderState(t, p); } catch (e) { /* the new tab must never break the rest of the page */ }
   renderRoll(arr(p.guild_roll));
   renderFallen(arr(p.fallen));
+  try { renderBags(p.bags); } catch (e) { /* the bag map must never break the rest of the page */ }
   renderCommands(p.commands);
   renderRolls(p.rolls);
   renderLore();
@@ -1346,6 +1347,60 @@ function fallenRow(label, value, cls) {
   const row = el("div", "gfact" + (cls ? " " + cls : ""));
   row.append(el("span", "gk", label), el("span", "gv", value));
   return row;
+}
+// S162 / System 33: the corpse-run bags, drawn as skull markers grouped by floor (the hub has no
+// tile map, so the floors ARE the map: shallow to deep). Every number goes through pickNum and is
+// clamped; every string through ctrlStrip + el(). `open` is only ever true when it is the boolean
+// true. Nothing from the snapshot becomes markup, a URL or a style.
+function bagLeft(s) {
+  if (s == null) return "unknown";
+  const m = Math.floor(s / 60);
+  if (m < 1) return "under a minute";
+  return m >= 60 ? Math.floor(m / 60) + "h " + (m % 60) + "m" : m + " min";
+}
+function renderBags(raw) {
+  const box = $("bagsBox");
+  if (!box) return;
+  box.replaceChildren();
+  if (!Array.isArray(raw)) { box.append(el("p", "empty", "Corpse bags: not published yet.")); return; }
+  const rows = [];
+  for (const b of raw.slice(0, 40)) {
+    if (b == null || typeof b !== "object") continue;
+    const nz = (v) => { const x = pickNum(v); return x != null && x >= 0 ? Math.min(Math.round(x), 999999999) : null; };
+    rows.push({ name: ctrlStrip(nameOf(b)).slice(0, 40) || "Someone", floor: nz(b.floor), gold: nz(b.gold), potions: nz(b.potions),
+      oil: nz(b.oil), ownerLeft: nz(b.owner_left_s), left: nz(b.left_s), open: b.open === true });
+  }
+  const head = el("h3", "st-h", "Bags left below ");
+  head.append(el("small", null, rows.length ? rows.length + (rows.length === 1 ? " bag" : " bags") : ""));
+  box.append(head);
+  if (!rows.length) { box.append(el("p", "empty", "No one has left a bag in the dark. The floors are clear.")); return; }
+  const floors = new Map();
+  for (const r of rows) { const k = r.floor == null ? -1 : r.floor; if (!floors.has(k)) floors.set(k, []); floors.get(k).push(r); }
+  const list = el("ol", "bagmap");
+  for (const k of Array.from(floors.keys()).sort((a, b) => a - b)) {
+    const li = el("li", "bagfloor");
+    li.append(el("span", "bagfl", k < 0 ? "Floor ?" : "Floor " + num(k)));
+    const marks = el("ul", "bagmarks");
+    for (const r of floors.get(k)) {
+      const m = el("li", "bagmark" + (r.open ? " open" : ""));
+      m.append(icon("death", "bagskull"));
+      const body = el("span", "bagbody");
+      body.append(el("b", null, r.name + "'s bag"));
+      const loot = [];
+      if (r.gold) loot.push(num(r.gold) + " gold");
+      if (r.potions) loot.push(num(r.potions) + (r.potions === 1 ? " potion" : " potions"));
+      if (r.oil) loot.push(num(r.oil) + " oil");
+      body.append(el("span", "bagloot", loot.length ? loot.join(" · ") : "nothing of note"));
+      body.append(el("span", "bagstate", r.open
+        ? "Open to anyone" + (r.left != null ? " · gone in " + bagLeft(r.left) : "")
+        : "Owner only" + (r.ownerLeft != null ? " · open in " + bagLeft(r.ownerLeft) : "")));
+      m.append(body);
+      marks.append(m);
+    }
+    li.append(marks);
+    list.append(li);
+  }
+  box.append(list);
 }
 function renderFallen(fs) {
   $("nFallen").textContent = fs.length ? fs.length : "";
@@ -5153,6 +5208,12 @@ const MOCK_JOURNAL = [
 function withMock(p) {
   const out = Object.assign({}, p);
   if (MOCK === "chronicle") out.chronicle = MOCK_CHRONICLE;
+  if (MOCK === "bags") {   // S162: corpse-run bags across floors, one open, hostile name on purpose
+    out.bags = [
+      { name: "<img src=x onerror=alert(1)>", floor: 4, gold: 212, potions: 2, oil: 1, owner_left_s: 1800, left_s: 5400, open: false },
+      { name: "Brum the Cooper", floor: 4, gold: 0, potions: 0, oil: 0, owner_left_s: 0, left_s: 900, open: true },
+      { name: "Pip", floor: 2, gold: 31, potions: 1, oil: 0, owner_left_s: 0, left_s: 3700, open: true }];
+  }
   if (MOCK === "bestiary") {         // H19: one met lord with real numbers, rumours, hostile name
     out.chronicle = MOCK_BEAST_CHRON;
     out.bestiary = { hollow_king: { faced: 3, killed: 2, deepest: 7, standing: true },

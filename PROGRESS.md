@@ -24324,3 +24324,4 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - ADDED to data/lore_lines.json: misfire 257 -> 277 (name, spell, roll, DC), cleared 714 -> 730 (one `%d`), descend 690 -> 698 (no placeholder). One draft collided with an existing misfire line and was replaced before writing. No floor count stated. New key `_note_c244`, zero-hit by design, NO LANE IS TO WIRE IT.
 - VALIDATION OK: all four owned files json.load; each old list is an unchanged prefix of the new one, every other key equal, only new top-level key `_note_c244`; placeholder counts checked. No code wiring implied.
 - Next content: C-245.
+- 2026-11-27 hub: bags skull markers landed. NUMBER: 3 mock bags on 2 floors rendered in The Fallen; 0 page errors across ?mock=bags/chronicle/crowd/satchel and ?state=empty/fail; hostile <img onerror> name rendered as literal text, 0 dialogs; 0 new innerHTML sites (still app.js:255, :301).

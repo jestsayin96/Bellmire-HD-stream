@@ -24394,3 +24394,12 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - Not done: full-screen (no panes) Chronicle is a plain PanelContainer and has no band - the stream always runs the grid. Town-name text in the feed said "hamlet" while the band said level 4 "a village" in the probe (scene was force-fed renown 60); live values come from the same economy.
 - NEXT FIRING: L74 with the band in; also check a level-up moment (band should step 5->6 live).
 - Decision for Mr. E: none. Not ticked - the team lead ticks.
+
+## U218 - HUD 01:52 CT 28 Nov: LIVE LEVEL-UP STEP ON THE CHRONICLE TOWN BAND (carried from U217)
+- Item: U217's "NEXT FIRING" check - does the band step live when the town levels up. Standing item (town-first). No edit to any of my seven files; probe only (tools/_u218_levelup.gd).
+- Probe: windowed 1920x1080, Town + RtsCamera, economy.renown forced through 0/40/60/90/120/150/200, 50 frames each, FeedHUD ChronicleScroll.town read back + band_rect inside sheet_rect. 7 steps, 0 fails (log: _u218.log, parse gate _u218_parse.log 0 errors, renders/cycles/20261128_u218/step_*.png).
+- RESULT: band follows live, within the 0.5 s push: level 2 hamlet (frac .65, 19 to go) -> 4 village -> 4 (frac .10 -> .77, 54 -> 14 to go) -> 5 market-day town -> 6 chapel town -> 7 crafters' row -> 8 garrison town. Band rect constant (53.96,31.69 / 648x25) at every step - no layout shift on a level-up.
+- Probe bug found and fixed in-run: first launch never fired (frame counter started at 0 so the 50-frame trigger was already past); relaunched at 01:58. Cost a few minutes, no lock crossing.
+- Lock: claimed 01:53:11 (declared 01:59, cap 02:08), released early; see RUN_LOCK IDLE.
+- Not done: L74 re-measure of the feed under load WITH the band (6/4/3 lines at 100/125/150) - carried to 02:52.
+- Decision for Mr. E: none. Not ticked - the team lead ticks.

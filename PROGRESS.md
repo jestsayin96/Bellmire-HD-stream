@@ -24470,3 +24470,12 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - Gates: parse 0 errors (_u226_parse.log, _u226b_parse.log); windowed 1920x1080 probe at 100/125/150%, band inside sheet, 0 fails, 0 SCRIPT ERROR (_u226.log).
 - BEFORE (U224, 150%): "A MARKET-DAY..." ; after-85%: "A MARKET-DAY TO..." ; AFTER: "A MARKET-DAY TOWN" untrimmed. Looked at renders/cycles/20261128_u226/s150.png (the tightest frame, band 43 px of 208 px). 100%/125% not re-looked; band geometry unchanged, they have more room.
 - Decision for Mr. E: none. Not ticked - the team lead ticks.
+
+## U227 - HUD 13:52 CT 28 Nov: L74 FEED UNDER LOAD MEASURED AT 100/125/150% (no feed_hud.gd edit; probe only)
+- Item: no new HUD row in the 12:58 team lead doc (U226 ticked, carry closed), so I took the standing L74: feed readability when lines arrive faster than they can be read. Files touched: none of the seven; added tools/_u227_load.gd only.
+- Lock: read from R's working copy at 13:53:26: last line IDLE 13:38:58 (art), tasklist Godot=0. Claimed 13:53:26 (declared finish 13:59:26, cap 14:08:26), IDLE 13:54:11 - 45 s hold, windowed 1920x1080.
+- Method: per scale, 60 routine lines in 4 repeating shapes plus a LEVEL UP line every ~15 (seen 67 / 133 / 197 cumulative). Logged shown / cap / pending / stats and a PNG per scale (_u227.log, renders/cycles/20261128_u227/s100,s125,s150.png).
+- Result: seen 197 -> admitted 10, merged 184, dropped 0, dropped_protected 0, pending never above QUEUE_MAX (3-4 of 10), min_gap 0.81 s. A 197-line flood reads as 10 paced admissions; nothing protected was dropped.
+- PROBE FAILS 2 of 3, AND I BELIEVE THE PROBE IS WRONG, NOT THE FEED (not proven): at 125% shown=5 vs cap=4, at 150% shown=5 vs cap=2. _cap() shrinks when UiTheme scale rises, and _tick_feed only evicts when a NEW line is admitted, so the list trails the cap until the next admit. I looked at s150.png (the worst frame by those numbers): the Chronicle shows band + ONE faded line ("Wren sold a loaf 56 x15", the merge counter visible), inside the sheet, nothing clipped. So the picture fits; the list-vs-cap gap is not visible. A LEVEL UP line (pri 2) was not on screen at that instant - it may simply have aged out, which I did not check.
+- Open (next firing): sample shown vs the lines actually drawn after a settle, and check whether a pri-2 line is ever displaced by a newer routine line while still inside its dwell. If _cap() shrinking should evict immediately, that is a feed_hud.gd change (mine).
+- Decision for Mr. E: none. Not ticked - the team lead ticks.

@@ -4994,3 +4994,28 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
 - GATES (log docs/_s167_battery.log, JESTS_NO_TWITCH=1): see the commit body for verdict lines. New gate tools/_s167_rank.gd:
   RANK_UNIT OK (F start, C at 390, fall to D on gear loss, D/F no match, D/E match, S row, feed) + a real Town.tscn !solo
   delve RANK_SOLO floor=1 solo=true solo_deepest=1 + payload rank_feed has the hero -> RANK_TEST OK. ZERO BITS, no Twitch.
+
+
+## D-cycle - S168 PUBLISHER CHECK + PARTY_CAP FRAMES + solo_ask, 2026-11-28 00:08-00:15 CST (game build)
+- TAKE THIS NEXT (team lead 23:58 block, 27 Nov) gave game build (1) publisher check, (2) party_frames MAX_ROWS, (3) town.
+- (1) THE PUBLISHER IS HEALTHY. THE GAME IS NOT RUNNING. Measured, not inferred: the key file is present in the project's
+  user dir (url https, service key set - neither printed); a READ of public.snapshot id=1 with that key returns HTTP 200,
+  so url + key + User-Agent are good; the row's updated_at is 2026-11-27T21:55:43Z = 15:55:43 CT, exactly when the page
+  went dead. tasklist shows NO BellmireHD.exe and NO Godot running. snapshot_pub.gd has no change since 15:55 that touches
+  setup/publish/_on_done (S162/S167 only added payload fields), and this run's parse boot printed "SNAPSHOT on: ... every
+  15 s". So the page is dead because nothing has run the game since 15:55 - NOT a publisher fault. Starting the live game
+  is Mr. E's call (it joins #jestsayin96 and the bot speaks), so I did not start it. NOTE: build/BellmireHD.exe is dated
+  15 Nov 02:42 - a re-export is needed before it carries anything since.
+- EVERY 60 -> 15 s (snapshot_pub.gd:21), inside the hub's "15-30 seconds in-game" promise. Docstring updated.
+- (2) party_frames.gd:14 MAX_ROWS := Roster.PARTY_CAP (10), read off the roster so the two cannot drift. NO RENDER TAKEN AND
+  I SAY WHY: ON_STREAM is false (D46), so the board does not draw on stream; the constant governs the fold only.
+- (3, the one-liner) town.gd beside the wants_solo connect: `chat.solo_ask = _on_solo` (guarded `"solo_ask" in chat`). A
+  refused !solo now reads the town's own reason instead of "Sent word. Watch the feed."
+- A NEAR-MISS OF MY OWN, CAUGHT: I queued tools/_w1a_test.gd WITHOUT `-- --offline`; its live arm overwrites the hub's one
+  row with test heroes. I killed it at engine start (log shows the banner only) and re-read the row: still 21:55:43Z,
+  untouched. Re-ran with --offline.
+- W1A_TEST FAILED 1 - check 3 "heroes = the living two" - AND IT FAILS IDENTICALLY ON HEAD WITHOUT MY EDIT (swapped the file
+  back and re-ran). Pre-existing, likely the S162 respawn death model leaving r.kill's hero alive. Mine to fix next cycle.
+- Gates: parse rc 0, 0 SCRIPT ERROR / 0 Parse Error. OFFFLOOR_VERDICT OK 0 of 2352. TWITCH_PARSE OK (8 checks). TOWNWALK
+  in_solid=0/17356 (0.000%) raid_in_solid=0/5099 (0.000%) PASS. DELVE_TEST OK ran 9001 frames, floor reached 2.
+  SOLO_TEST OK 16 of 16. PARTY_TEST OK 23 of 23. No Twitch test, ZERO BITS. Item (3) town progression not started.

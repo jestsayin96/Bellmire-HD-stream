@@ -1,6 +1,6 @@
 class_name SnapshotPublisher
 extends Node
-## W1a: the viewer hub's data. Every 60 s ONE row of the Supabase table public.snapshot
+## W1a: the viewer hub's data. Every EVERY s (15) ONE row of the Supabase table public.snapshot
 ## (id = 1) is overwritten with a jsonb blob: the town, the guild roll, the fallen, every
 ## hero's sheet / inventory / gear and the command list (data/commands.json). One row,
 ## upserted - the table never grows and nothing has to be cleaned up.
@@ -18,7 +18,7 @@ signal published(code: int)
 
 const KEY_FILE := "user://supabase.json"
 const TABLE_PATH := "/rest/v1/snapshot?on_conflict=id"
-const EVERY := 60.0
+const EVERY := 15.0                 # S168: 60 -> 15 s (team lead 23:58 row) - the hub's 15-30 s promise
 const FIRST := 20.0                 # first beat after start: the roster and town are up
 const TIMEOUT := 20.0
 const USER_AGENT := "BellmireHD/1.0"

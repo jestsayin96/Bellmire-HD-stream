@@ -5362,6 +5362,8 @@ func _start_guild() -> void:
     chat.wants_delve.connect(_on_delve)
     if chat.has_signal("wants_solo"):     # S166: the chat bot's !solo half emits this
         chat.connect("wants_solo", func(u: String) -> void: _on_solo(u))
+    if "solo_ask" in chat:                # S168: the answering half - the town words its own refusals
+        chat.solo_ask = _on_solo
     chat.wants_fish.connect(_on_fish)
     chat.wants_shop.connect(_on_shop)
     chat.catches_of = func(who: String) -> Array:

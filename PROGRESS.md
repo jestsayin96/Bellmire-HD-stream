@@ -24267,3 +24267,8 @@ VALIDATION OK: json.load passes, only misfire/cleared/descend changed, each old 
 - Render looked at: renders/cycles/20261127_u207/busy_tavern_s100_1080.png - Chronicle vellum, 5 lines whole, lord-falls + 2 tavern lines present, nothing clipped.
 - NEXT FIRING (19:52): capture 2 of 2 - U211_RATE=4 at 150% AND a distinct-text flood (unique keys) at 100%; running totals above.
 - Not ticked - team lead ticks.
+
+## C-243 (content, 27 Nov 2026, 19:24 CST) - DRAW-PRESSURE TOP-UP: misfire +20, cleared +16, descend +8 (epitaphs untouched)
+TAKE THIS NEXT (18:58 block) CONTENT row: C-242 ticked; keep the draw-pressure top-up going; add a trailing newline to PROGRESS.md (done, this file now ends with one). Ranking kept from C-242 (delve.gd one draw per call): misfire thinnest per draw, then cleared, then descend. data/lore_lines.json: misfire 237 -> 257, cleared 698 -> 714, descend 682 -> 690. Frames kept: misfire name, spell, roll, DC; cleared one `%d` floor number; descend no placeholder. No floor count stated. Three drafts collided with existing lines and were replaced before writing. Roster check: 70 feed keys, no new committed body on origin/art (remaining roster-pattern hits are chibi variants and non-bodies). New key `_note_c243`, expected zero-hit, no lane to wire it.
+VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new one, all other keys equal, only new top-level key is `_note_c243`. No code wiring implied.
+- Next content: C-244.

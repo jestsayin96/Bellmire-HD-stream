@@ -3861,15 +3861,22 @@ static func canonical(word: String) -> String:
 ## B176, A NULL REPORTED AS A NULL so no lane measures it twice. B173/B174/B175 armed the BARE
 ## !help line because it is the widest thing this lane sends and it grows with every command.
 ## Its sibling - the `!help <command>` DETAIL line built two blocks below - was never measured,
-## and the obvious guess is that the longest of them is close behind. IT IS NOT. Over all 32
-## commands, composed off the real data/commands.json by the same format string: longest 180
-## chars (!help forge), then inventory 168, enlist 152, wear 138, armoury 135, dye 131;
-## shortest 58 (!richest). NONE is over REPLY_MAX and the worst has 260 CHARACTERS OF HEADROOM.
-## The reason it cannot creep up on us the way the bare list does: this line carries ONE
-## command's fields, so adding commands does not lengthen it - only a long `short`, `aliases`
-## or `example` on a SINGLE command can, and that would need to more than double the current
-## worst. No arm is owed here; the bare-list arm at tools/_l14_test.gd:217 is the one that
-## guards the growing side.
+## and the obvious guess is that the longest of them is close behind. IT IS NOT.
+## *** B224, AUDITING MY OWN WORK: EVERY NUMBER BELOW THIS LINE WAS MEASURED AT 32 COMMANDS AND
+## THE SET IS NOW 40. THE VERDICT STILL HOLDS; THE FIGURES DID NOT, AND A LANE THAT TRUSTED THEM
+## WOULD HAVE BEEN 71 CHARACTERS WRONG ABOUT ITS OWN WORST CASE. Re-measured at B224 off the real
+## data/commands.json by the same format string, all 40: longest 251 chars (!help repair), then
+## forge 209, party 180, wear 166, armoury 164, enlist 152; shortest 58 (!richest) - unmoved.
+## NONE is over REPLY_MAX and the worst has 189 CHARACTERS OF HEADROOM (not the 260 written here
+## before). The STRUCTURAL argument is unchanged and is why this is still a null: this line
+## carries ONE command's fields, so adding a command adds a NEW line and never lengthens an
+## existing one - only a long `short`, `aliases` or `example` on a SINGLE command can do that.
+## WHAT MOVED IS THE WORST CASE ITSELF, NOT THE RULE: the old worst (!help forge, 180) was
+## overtaken by !help repair at 251, a command whose `short` this lane wrote. So the old
+## "it would need to more than double" margin is now thinner than it reads - 251 doubled is 502,
+## over the 440 cap - while still leaving 189 spare. Re-measure it; do not quote it.
+## No arm is owed here; the bare-list arm at tools/_l14_test.gd:217 is the one that guards the
+## growing side, and that side is the live hazard: the bare list is 428 of 440 with 12 to spare.
 static func help_line(arg := "") -> String:
     var cs: Dictionary = commands().get("commands", {})
     if arg != "":

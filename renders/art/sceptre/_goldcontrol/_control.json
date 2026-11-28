@@ -1,0 +1,62 @@
+[
+ {
+  "name": "sword_golden",
+  "hand_scale": 0.6,
+  "held_rot": [
+   0,
+   0,
+   0
+  ],
+  "moved_px": 6336,
+  "mean_rgb": [
+   0.283,
+   0.241,
+   0.107
+  ],
+  "p90_luma": 0.385,
+  "mean_luma": 0.24
+ },
+ {
+  "name": "hammer_double_golden",
+  "hand_scale": 0.4,
+  "held_rot": [
+   0,
+   0,
+   0
+  ],
+  "moved_px": 5020,
+  "mean_rgb": [
+   0.292,
+   0.24,
+   0.111
+  ],
+  "p90_luma": 0.421,
+  "mean_luma": 0.242
+ },
+ {
+  "name": "sceptre_golden",
+  "hand_scale": 0.6,
+  "held_rot": [
+   0,
+   15,
+   90
+  ],
+  "moved_px": 6203,
+  "mean_rgb": [
+   0.25,
+   0.23,
+   0.165
+  ],
+  "p90_luma": 0.408,
+  "mean_luma": 0.23
+ },
+ {
+  "name": "_verdict",
+  "p90_floor": 0.385,
+  "p90_mine": 0.408,
+  "px_floor": 5020,
+  "px_mine": 6203,
+  "reads_as_bright_as_shipped": true,
+  "carries_as_much_silhouette": true
+ }
+]

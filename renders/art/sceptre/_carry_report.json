@@ -1,0 +1,207 @@
+{
+ "model": "assets\\gear\\artifact\\sceptre_golden.glb",
+ "res_path": "res://assets/gear/artifact/sceptre_golden.glb",
+ "hero_h": 2.45,
+ "handslot": [
+  -0.491,
+  -0.1069,
+  0.6406
+ ],
+ "raw_len_y": 2.133,
+ "engine_carry_read_off_main": {
+  "res_path": "res://assets/gear/artifact/sceptre_golden.glb",
+  "held_rot_deg": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "held_rot_arm": "default",
+  "held_rot_arm_index": 4,
+  "held_rot_arms": 5,
+  "hand_scale": 0.6,
+  "hand_scale_arm": "begins 'res://assets/gear/artifact/'",
+  "hand_scale_arm_index": 5,
+  "hand_scale_arms": 10,
+  "consts": {
+   "ADV": "res://addons/kaykit_character_pack_adventures/Assets/gltf/",
+   "KIT": "res://assets/gear/",
+   "DUN": "res://assets/gear/dungeon/",
+   "ART": "res://assets/gear/artifact/"
+  }
+ },
+ "control_note": "clip judged against _scale_sweep.json controls: SHIPPED staff_rare clips 22.7%, staff_B 5.8%, so clip==0 is not the bar",
+ "carries": [
+  {
+   "name": "engine_fallback",
+   "held_rot": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "hand_scale": 0.6,
+   "roll_applied": 0.0,
+   "length_in_hand": 1.28,
+   "reach_above_fist": 0.144,
+   "tip_z": 0.785,
+   "verts": 1020,
+   "checked": 696,
+   "clip": 0,
+   "clip_pct": 0.0,
+   "ground": 0,
+   "hard_gates_ok": true,
+   "blanks": [],
+   "blind_views": [],
+   "frame_clipped": [],
+   "views": {
+    "front": {
+     "moved": 5912,
+     "opaque": 97761,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "side": {
+     "moved": 2627,
+     "opaque": 79783,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "back": {
+     "moved": 5691,
+     "opaque": 98572,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    }
+   },
+   "outdir": "renders\\art\\sceptre\\engine_fallback"
+  },
+  {
+   "name": "up_roll00",
+   "held_rot": [
+    0,
+    0,
+    90
+   ],
+   "hand_scale": 0.6,
+   "roll_applied": 0.0,
+   "length_in_hand": 1.28,
+   "reach_above_fist": 1.143,
+   "tip_z": 1.783,
+   "verts": 1020,
+   "checked": 696,
+   "clip": 204,
+   "clip_pct": 29.3,
+   "ground": 0,
+   "hard_gates_ok": true,
+   "blanks": [],
+   "blind_views": [],
+   "frame_clipped": [],
+   "views": {
+    "front": {
+     "moved": 4789,
+     "opaque": 94557,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "side": {
+     "moved": 5377,
+     "opaque": 79783,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "back": {
+     "moved": 2380,
+     "opaque": 95427,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    }
+   },
+   "outdir": "renders\\art\\sceptre\\up_roll00"
+  },
+  {
+   "name": "up_roll15",
+   "held_rot": [
+    0,
+    15,
+    90
+   ],
+   "hand_scale": 0.6,
+   "roll_applied": 15.0,
+   "length_in_hand": 1.28,
+   "reach_above_fist": 1.104,
+   "tip_z": 1.744,
+   "verts": 1020,
+   "checked": 696,
+   "clip": 48,
+   "clip_pct": 6.9,
+   "ground": 0,
+   "hard_gates_ok": true,
+   "blanks": [],
+   "blind_views": [],
+   "frame_clipped": [],
+   "views": {
+    "front": {
+     "moved": 6203,
+     "opaque": 97225,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "side": {
+     "moved": 5517,
+     "opaque": 79783,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "back": {
+     "moved": 5068,
+     "opaque": 98087,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    }
+   },
+   "outdir": "renders\\art\\sceptre\\up_roll15"
+  },
+  {
+   "name": "up_roll15_big",
+   "held_rot": [
+    0,
+    15,
+    90
+   ],
+   "hand_scale": 0.75,
+   "roll_applied": 15.0,
+   "length_in_hand": 1.599,
+   "reach_above_fist": 1.379,
+   "tip_z": 2.02,
+   "verts": 1020,
+   "checked": 725,
+   "clip": 66,
+   "clip_pct": 9.1,
+   "ground": 0,
+   "hard_gates_ok": true,
+   "blanks": [],
+   "blind_views": [],
+   "frame_clipped": [],
+   "views": {
+    "front": {
+     "moved": 10289,
+     "opaque": 100046,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "side": {
+     "moved": 9452,
+     "opaque": 79783,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    },
+    "back": {
+     "moved": 8182,
+     "opaque": 100910,
+     "sceptre_verts_outside_frame": 0,
+     "frame_outside": 0
+    }
+   },
+   "outdir": "renders\\art\\sceptre\\up_roll15_big"
+  }
+ ]
+}

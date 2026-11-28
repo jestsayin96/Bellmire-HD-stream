@@ -915,4 +915,11 @@ def main():
                                              for k, v in rep["tiers"].items()}}))
 
 
-main()
+# GUARDED 28 Nov 11:4x CT by the art lane so `inngen.py` can import this
+# module's PROVEN pack layer (proto/place/wall_box/thatch/gable/bench/lamp)
+# instead of duplicating 250 lines of it. Blender runs a `-P` script with
+# __name__ == '__main__' - verified this run by running a one-line script
+# through `blender -b -P`, which printed NAME_IS='__main__'. So invoking this
+# file as a script is UNCHANGED; importing it no longer renders a hall.
+if __name__ == "__main__":
+    main()

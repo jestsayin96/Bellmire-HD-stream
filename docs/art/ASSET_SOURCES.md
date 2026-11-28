@@ -994,3 +994,48 @@ Reproducible from `tools/art/hallgen.py` alone. Measurements in
 `renders/art/town/_hall_measure.json`, gates in
 `renders/art/town/hall/_report.json`, sheet at
 `renders/art/town/hall/_tiers_side_by_side.png`.
+
+## THE INN LADDER - `town_inn_t1/t2/t3` (28 Nov 2026, art lane, 11:4x-12:0x CT)
+
+**Row:** the 10:58 CT block, TAKE THIS NEXT, ART - "the next town building down the
+ladder - the smithy, or the inn EXTERIOR (exterior only, storage mechanic, NO
+interior rooms, per order 1 item 9)."
+
+**Why the inn and not the smithy, measured not preferred:**
+`data/lore_lines.json -> town_buildings.landmarks` has seven keys and **`smithy`
+is not one of them** (hall, chapel, barracks, windmill, workshop, market_hall,
+inn). The inn has a complete three-tier brief in two places - `landmarks.inn`
+and the `inn_exterior` node content wrote for C-250, ticked this morning - so
+it has a named reader and a written spec; a smithy would have been authored
+against nothing.
+
+| Piece | Source | Licence | Where recorded |
+|---|---|---|---|
+| Walls, corners, doors, windows, shutters, round-tile roofs, chimneys, floor, fences, crate | Quaternius **Medieval Village MegaKit (Standard)** | **CC0 1.0** | this file, lines ~250 and ~707 - licence read off `License_Standard.txt` on disk 24 Nov |
+| Thatch roof (t1), gable boards, bench, lamp | `tools/art/hallgen.py`, re-used by import | original (procedural) | hall ladder entry above |
+| Painted board, barrel, hook lantern, **bell**, trough, stable | `tools/art/inngen.py` | **original (procedural)** | here |
+
+**The authored half is not a preference, it is a measured absence.** All 176
+MegaKit glTF modules were listed this run: the pack contains **no sign, no
+board, no barrel, no bench, no lantern, no trough and no stable**. Its only
+props are `Prop_Crate`, `Prop_Chimney`, `Prop_Chimney2` and four fence pieces.
+So the inn's entire identity AS AN INN is procedural and the pack carries the
+shell. Nothing in this ladder repaints a Quaternius material.
+
+**Exterior only.** Order 1 item 9 and content's own `_note` both say exterior
+and the storage mechanic, NO interior rooms. No tier has an interior or a
+floor; what the tier-3 storage line buys is shown from outside, by the
+building being stone below, and by nothing else.
+
+**Pivot contract** (`data/town/README.md`, `/2`): all three tiers share one
+origin - footprint centre, on the ground, street side +Z - enforced by a
+re-centre on the CORE (walls + roof, never the yard) and now **gated**, not
+merely recorded: `inngen.build()` fails the run if the core centre is more
+than 1 mm off origin or the base is off the ground. Measured result: core
+centre `[0.0, 0.0]` and base `0.0` on all three.
+
+Same deliberate texture trade as the hall (base colour only, JPEG q82 at 1024,
+image datablocks de-duplicated by base name); `--px 2048` reverses it.
+Reproducible from `tools/art/inngen.py` alone. Gates in
+`renders/art/town/inn/_report.json`, sheet at
+`renders/art/town/inn/_tiers_side_by_side.png`.

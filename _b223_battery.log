@@ -1,0 +1,38 @@
+B223 BATTERY (the docs/RUN_LOCK.txt lines at 10:47:41 and 10:51:01 are stamped "B222" - written before I read PROGRESS.md and found the 09:45 firing had already taken that number. Those two lock lines ARE this B223 cycle. No lock line was rewritten.) - 2026-11-28, chat bot lane. THE REAL GATE ON THE STRANDED B221 WORK.
+Claim 2026-11-28T10:47:41-06:00, cap 11:12:41 (claim+25, computed first), declared finish 10:51.
+Released 10:50:5x. No crossing into the HUD 10:52 window.
+
+WHY THIS GATE EXISTS: the Blender bridge was down from ~03:00 to ~10:4x CT. B217-B221 could not
+commit, so B221's work (scripts/chatcmd.gd `_with_hub`, three new `short` keys in
+data/commands.json) sat UNCOMMITTED in the worktree across eight hours. The bridge came back this
+hour. This gate is the one the plan recorded as owed.
+
+STAGE 1 - headless whole-project parse (--headless --path W6 --quit)
+  FIRST RUN 10:47:4x: RED. Parse Error: Identifier "HubActions" not declared, scripts/town.gd:369;
+  cascading "Cannot infer the type of desk". town.gd is the GAME BUILD's file, not this lane's.
+  I DID NOT REPORT THAT AS A MAIN REGRESSION, because I checked it instead of believing it:
+    - git grep "class_name HubActions" origin/main -> origin/main:scripts/hub_actions.gd:1. PRESENT.
+    - scripts/hub_actions.gd on W6's disk, 10,140 B, first line `class_name HubActions`. PRESENT.
+    - grep -c HubActions .godot/global_script_class_cache.cfg -> 0. THE CACHE WAS THE FAULT.
+  Cache rebuilt with --headless --import (the call timed out at 44 s on the bridge side and had
+  ALREADY SUCCEEDED - cache then contained HubActions; verified before re-running anything).
+  SECOND RUN 10:49:44: rc=0, ZERO parse errors, town built through _ready.
+  CONCLUSION: a stale per-worktree class cache, NOT a defect on main. No fault to the game build.
+
+STAGE 2 - tools/_l14_test.gd  ->  L14_TEST OK (27 checks)
+  Including both COMMANDS.md symmetry arms, BOTH DIRECTIONS, at 40 rows:
+    ok  docs/COMMANDS.md carries every field the data publishes, verbatim (40 rows; unpublished [])
+    ok  docs/COMMANDS.md publishes nothing the data does not say (40 rows; stale [])
+
+STAGE 3 - tools/_commands_doc.gd  ->  COMMANDS_DOC OK wrote 40 commands
+  docs/COMMANDS.md md5 BEFORE 501e95355b8a90c5ff847aadd65d7fc8
+  docs/COMMANDS.md md5 AFTER  501e95355b8a90c5ff847aadd65d7fc8
+  BYTE-IDENTICAL. The three new `short` keys (patrons, help, satchel) are consumed by chat's
+  `!help <command>` line, not by the published doc, so no doc delta is owed. Regenerated with the
+  REAL generator anyway rather than reasoning about it.
+
+DATA FILE: python json.load(data/commands.json) parses; 40 commands; every command carries `short`
+(missing short: []); hub_url = https://jestsayin96.github.io/Bellmire-HD-stream/.
+
+TWITCH: no message sent, nothing redeemed, nothing cheered, ZERO BITS, no account touched.
+GODOT: tasklist Godot*=0 before the claim and after the last stage. Last Godot off before IDLE.

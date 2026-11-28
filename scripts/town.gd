@@ -5544,19 +5544,25 @@ func _begin_delve() -> void:
     delve.town = self
     delve.roster = roster
     add_child(delve)
-    for uid in _at_mouth:
+    # S165 (System 42a, engine belt-and-braces): the scar takes the first PARTY_CAP by arrival;
+    # the rest stay at the mouth for the next muster. Everything below reads `going`, never
+    # _at_mouth, so a hero who reaches the mouth while this delve is below is left waiting -
+    # not hidden, not counted, and not freed as a "non-survivor" when it ends.
+    var going: Array = _at_mouth.slice(0, Roster.PARTY_CAP)
+    _at_mouth = _at_mouth.slice(Roster.PARTY_CAP)
+    for uid in going:
         if heroes.has(uid):
             (heroes[uid] as Node3D).visible = false
     # old rule: the party draws half a set of gear each from the rack (+2 to
     # every blow), or goes without and the town notes the want
-    if economy.take("gear", float(_at_mouth.size()) * 0.5):
+    if economy.take("gear", float(going.size()) * 0.5):
         delve.kit_bonus = 2.0
         _stock_piles()
-    for uid in _at_mouth:
+    for uid in going:
         chat.away[uid] = "below, in the scar"
-    delve.start(_at_mouth.duplicate())
+    delve.start(going.duplicate())
     delve.ended.connect(func(survivors: Array) -> void:
-        for uid in _at_mouth:
+        for uid in going:
             chat.away.erase(uid)
             chat.delve_queue.erase(uid)
             if heroes.has(uid):
@@ -5596,9 +5602,14 @@ func _begin_delve() -> void:
                 tag_feed("festival", home_names)
             elif randf() < 0.4:
                 start_festival("hero", home_names)
-        _at_mouth.clear()
         delve.queue_free()
-        delve = null)
+        delve = null
+        # S165: whoever was left at the mouth (over the cap, or arrived while this party was
+        # below) gets their own muster now, timer from zero
+        _at_mouth = _at_mouth.filter(func(u): return heroes.has(u))
+        if not _at_mouth.is_empty():
+            _muster_t = 0.0
+            _since_last = 0.0)
 
 
 func _nearest_road(p: Vector3) -> Vector2i:

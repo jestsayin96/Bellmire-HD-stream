@@ -24892,3 +24892,55 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - Gates: parse 0 errors (_u226_parse.log, _u226b_parse.log); windowed 1920x1080 probe at 100/125/150%, band inside sheet, 0 fails, 0 SCRIPT ERROR (_u226.log).
 - BEFORE (U224, 150%): "A MARKET-DAY..." ; after-85%: "A MARKET-DAY TO..." ; AFTER: "A MARKET-DAY TOWN" untrimmed. Looked at renders/cycles/20261128_u226/s150.png (the tightest frame, band 43 px of 208 px). 100%/125% not re-looked; band geometry unchanged, they have more room.
 - Decision for Mr. E: none. Not ticked - the team lead ticks.
+### B225 - THE AUDIT'S VERDICT IS NOW WRITTEN WHERE A VIEWER READS IT: TEN COMMANDS THAT SENT PEOPLE NOWHERE NOW NAME THEIR HUB TAB, AND I USED THE HUB'S REAL TAB NAMES INSTEAD OF THE THREE THIS LANE HAS BEEN INVENTING (nov28-1245)
+
+**ROW TAKEN: CHAT BOT (:45) from the 12:4x CT TAKE THIS NEXT block - "AUDIT THE 40-COMMAND SURFACE AGAINST SUPERVISOR ORDER 2, DOC ONLY." GATE GREEN. NO NEW SURFACE. ZERO BITS.**
+
+- **THE ROW ASKS FOR A MARKING IN A GENERATED FILE, SO THE MARKING WENT IN THE DATA.** `docs/COMMANDS.md`
+  is written by `tools/_commands_doc.gd` from `data/commands.json` and its header lines are hardcoded in
+  the generator, which is not this lane's file. There is no column to add and no prose block to write.
+  **The only text this lane controls is per-command, so that is where the classification lives** - in the
+  idiom eleven commands already use (`forge`, `armoury`, `brew`, `repair`, `oil`, `wear`, `dye`, `reroll`,
+  `respec`, `specialize`, `party`): one short declarative naming the tab. Put in `short` AND `what`, so the
+  line a viewer TYPES says it, not just the doc a viewer never opens.
+- **TEN OF THE FORTY CARRIED NO HUB POINTER AND SHOULD HAVE.** `!rank` and `!guild` -> **Guild Roll**;
+  `!inventory`, `!weapon`, `!armour`, `!paths` -> **My Room**; `!memorial` -> **The Fallen**; `!deepest`,
+  `!deadliest`, `!richest` -> **Boards**. Order 2 names rankings, gear and inventory explicitly. 27 of 40
+  now carry a pointer, up from 17 by the capitalised-idiom count.
+- **I READ THE HUB'S REAL TAB NAMES OFF `web/index.html` RATHER THAN GUESS, AND THAT TURNED UP A FAULT IN
+  THIS LANE'S OWN SHIPPED TEXT.** The hub's tabs are Live, Boards, Town, Heroes, Bands, Chronicle, The die,
+  **Guild Roll**, The Fallen, Lore, Bestiary, **Shops**, **Satchel**, **My Room**, Season, Commands.
+  **"Hero", "Gear" and "Party" are NOT tabs** - and six pre-existing lines (`wear`, `dye` -> "under Gear";
+  `reroll`, `respec`, `specialize` -> "under Hero"; `party` -> "under Party") send a viewer to a tab that
+  does not exist by that name. Only `Shops` of the established four is real. **I did not rewrite them**:
+  they may be sections inside My Room, which is the hub lane's to say, and churning another lane's nav
+  names off my own guess is how a wrong pointer becomes two. **Reported, not done** - team lead's to route.
+- **TWO COMMANDS ARE DELIBERATELY LEFT UNMARKED BECAUSE I COULD NOT VERIFY A HOME FOR THEM.** `!rep` (the
+  five ledger-keepers) and `!patrons` have no tab I could point at on the live page. Saying "on the hub"
+  about a thing that is not there is worse than saying nothing.
+- **THE MINIMAL SET IS UNTOUCHED, PER THE ORDER'S OWN WORDS.** `!enlist`, `!hero`, `!help` get no pointer
+  pushing viewers off them. The rest - `!delve`, `!muster`, `!solo`, `!fish`, `!dice`, `!festival`,
+  `!look`, `!caravan`, `!hub` - are live stream actions, not management verbs, and stay chat-native.
+- **GATE GREEN, REAL GENERATOR, NOT EMULATED.** STAGE1 headless parse rc=0, 0 parse errors. STAGE2
+  `COMMANDS_DOC OK wrote 40 commands`. STAGE3 `L14_TEST OK (27 checks)`, **0 COMMANDS_DATA guard arms
+  fired**, both symmetry arms green (`unpublished []`, `stale []`). Log committed at `_b225_battery.log`.
+- **I MEASURED THE CUT RATHER THAN TRUSTING THE HEADROOM.** Every `!help <cmd>` reply re-measured against
+  the 440-char first cut: longest 251 (`!help repair`), then forge 209, party 180 - **unmoved from B224's
+  figures, because none of the ten I touched is near the top**. The bare `!help` line is **428 of 440,
+  byte-for-byte unchanged**: it lists names and the tail only, so lengthening a `short` cannot touch it.
+  The 12-character headroom B214 reported is still the standing risk and still not mine to take.
+- **I WROTE A FUTURE STAMP ON MY OWN IDLE LINE AND CORRECTED IT IN THE SAME MINUTE.** I composed
+  `IDLE 2026-11-28T12:50:40` at a real clock time of **12:49:30** - 70 s ahead. Caught on the readback,
+  corrected in place to 12:49:30 before any other lane read the file, and the correction is written into
+  the lock line itself. Claim 12:48:50, cap 13:13:50, declared 12:51:30, released 12:49:30 - **no crossing
+  into the HUD's :52 window.** `tasklist Godot*` = 0 before and after; the lock was free (QA tester IDLE
+  12:46:19 from its own lane).
+- **BOTH ITEMS MY PROMPT STILL CALLS "WHAT IS ACTUALLY NEXT" REMAIN SPENT, CHECKED AGAIN AT SOURCE.**
+  Item 1, `!help` pointing at the hub: shipped at **B214** - `help_line("")` ends
+  `"Manage your hero on the page: " + hub_url()`, read by eye at `chatcmd.gd:3912-3913`. Item 2, the stale
+  `_rank` docblock: corrected at B214. **B224 found the same and no seat should hand this lane either again.**
+- Nothing owed from `twitch_eventsub.gd`: `twitch_reply(user_login, text)` untouched, no new signature
+  asked of the game build. No command, verb or alias added - `order` stays 40.
+- **No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.** No channel state read or changed;
+  Mr. E's account untouched; bellmirebro sent nothing; no subscription of any kind.
+- Not ticked - the team lead ticks.

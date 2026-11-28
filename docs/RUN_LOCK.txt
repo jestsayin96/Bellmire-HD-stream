@@ -1870,3 +1870,29 @@ IDLE 2026-11-28T01:59:39-06:00 - HUD U218: town band level-up probe done, 7 step
 RUNNING 2026-11-28T02:08:51-06:00 (game build: publisher check + snapshot cadence + party_frames/solo_ask one-liners; claim 02:08:51, cap claim+25 = 02:33:51 computed first, DECLARED FINISH 02:33. Lock FREE: last line IDLE HUD 01:59:39. No Twitch sends, ZERO BITS.) (game build)
 
 IDLE 2026-11-28T02:11:59-06:00 - game build S170: hub_actions DDL DENIED by the session permission layer (not applied, not routed around); bellmire-town/2 tier format written into data/town/README.md; parse 0 errors, TWITCH_PARSE OK. Claim 02:08:51, cap 02:33:51, declared 02:33 - RELEASED EARLY. Last Godot off the engine before this line. No Twitch message, ZERO BITS. (game build)
+RUNNING 2026-11-28T02:47:58-06:00 (chat bot B216: THE OWED REAL GATE for B215 - parse + L14_TEST + COMMANDS_DOC over the FIXED dye wording, headless. Lock FREE: last line IDLE game build 2026-11-28T02:11:59-06:00, no RUNNING outstanding, tasklist Godot*=0. cap claim+25 = 03:12:58 computed first, DECLARED FINISH 02:52. No Twitch sends, nothing redeemed, ZERO BITS.) (chat bot)
+IDLE 2026-11-28T02:49:16-06:00 - chat bot B216: THE OWED REAL GATE IS GREEN. 3 stages, STAGE1 rc=0, L14_TEST OK (27 checks) - all three of B215's failing arms now pass and the DYE COLOURS GHOST guard fired 0 times - and COMMANDS_DOC OK wrote 40, rewriting docs/COMMANDS.md to md5 501e9535, BYTE-IDENTICAL to B215's emulation output. B215's emulation is proven by the real engine. Last Godot off the engine before this line, tasklist Godot*=0. Claim 02:47:58, cap 03:12:58, declared 02:52 - RELEASED EARLY, no crossing into the HUD 02:52 window. No Twitch message, nothing redeemed, nothing cheered, ZERO BITS. (chat bot)
+
+RUNNING 2026-11-28T02:53:05-06:00 (art: headless --import on W5 ONLY, to generate the .glb.import siblings for town_hall_t1/t2/t3.glb. No scene run, no play. Lock FREE: last line IDLE chat bot 2026-11-28T02:49:16-06:00, no RUNNING outstanding. cap claim+25 = 03:18:05 computed first, DECLARED FINISH 02:57. No Twitch sends, ZERO BITS.) (art)
+
+IDLE 2026-11-28T02:55:10-06:00 - art: headless --import done on W5. All three .glb.import siblings generated for town_hall_t1/t2/t3.glb, 0 import errors. No scene was run. Claim 02:53:05, cap 03:18:05, declared 02:57 - RELEASED EARLY, no crossing into the HUD 02:52 window. Last Godot off the engine before this line, tasklist Godot*=0. No Twitch message, ZERO BITS. (art)
+
+RUNNING 2026-11-28T02:55:02-06:00 (HUD U219: band padding+type check, parse gate then ONE windowed 2-step probe on W2 only; expected finish 03:03, cap 03:10. Lock FREE: last line IDLE art. ZERO BITS.) (HUD)
+
+IDLE 2026-11-28T02:56:06-06:00 - HUD U219: parse 0 errors, windowed band probe 7 steps 0 fails on W2 only, last Godot off the engine before this line. Claim 02:55:02, declared 03:03 - RELEASED EARLY. ZERO BITS. (HUD)
+
+RUNNING 2026-11-28T10:42:32-06:00 (QA tester: headless whole-project parse only, no scene run. Lock FREE: last line IDLE HUD 02:56:06, tasklist Godot*=0. cap 15min, DECLARED FINISH +6 min, before HUD :52. ZERO BITS, no Twitch sends.) (QA tester)
+
+IDLE 2026-11-28T10:43:48-06:00 - QA tester: headless parse done, rc=0, 0 error lines. Last Godot off the engine before this line. No Twitch message, ZERO BITS. (QA tester)
+
+RUNNING 2026-11-28T10:47:41-06:00 (chat bot B222: THE REAL GATE ON THE STRANDED B221 WORK now the Blender bridge is back - headless parse + L14_TEST + COMMANDS_DOC regen over the B221 _with_hub overflow fix and the three new `short` keys. Lock FREE: last line IDLE QA tester 2026-11-28T10:43:48-06:00, no RUNNING outstanding. cap claim+25 = 11:12:41 computed first, DECLARED FINISH 10:51. No Twitch sends, nothing redeemed, nothing cheered, ZERO BITS.) (chat bot)
+
+IDLE 2026-11-28T10:51:01-06:00 - chat bot B222: THE GATE ON THE STRANDED B221 WORK IS GREEN. STAGE1 parse rc=0 (0 parse errors), L14_TEST OK (27 checks) with both COMMANDS.md symmetry arms green at 40 rows (unpublished [], stale []), COMMANDS_DOC OK wrote 40 - md5 501e9535 BEFORE AND AFTER, the real generator rewrote exactly the committed bytes, so no doc delta is owed for the three new `short` keys. The 10:47 STAGE1 RED was THIS WORKTREE'S STALE .godot CLASS CACHE missing HubActions, NOT a regression on main - scripts/hub_actions.gd carries `class_name HubActions` on origin/main and the parse went rc=0 after a cache rebuild. NO FAULT TO THE GAME BUILD. Claim 10:47:41, cap 11:12:41, declared 10:51 - released 10:50, no crossing into the HUD 10:52 window. Last Godot off the engine before this line, tasklist Godot*=0. No Twitch message, nothing redeemed, nothing cheered, ZERO BITS. (chat bot)
+
+RUNNING 2026-11-28T10:53:33-06:00 (HUD U224 town band at 100/125/150, parse gate + windowed probe, expected finish 11:01, cap 11:08)
+
+RUNNING 2026-11-28T10:55:44-06:00 (HUD U224 relaunch after hud_dock.gd band-name fix, parse + windowed probe, expected finish 10:58, cap 11:08)
+
+IDLE 2026-11-28T10:56:42-06:00 - HUD U224: parse gate rc 0 (0 errors) and windowed 100/125/150 band probe 0 fails after the hud_dock.gd band-name fix. Claim 10:53:33, released inside declared finish, no crossing. tasklist Godot*=0. (HUD)
+
+RUNNING 2026-11-28T11:09:02-06:00 (game build S174 fetch/merge + gates, claim 11:09, cap claim+25 = 11:34, expected finish 11:33)

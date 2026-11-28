@@ -156,6 +156,17 @@ var _hall_node: Node3D = null      # S178: the lm_hall.glb instance (its meshes 
 var _hall_dress: Array = []        # S178: inscription, wall banners, lamps, flagpole sized to lm_hall
 var _hall_mesh: Node3D = null
 var _hall_path := ""
+## S179: the inn wears art's tier meshes (assets/buildings/town_inn_t1..t3.glb, inngen.py; words
+## landmarks.inn). The layout has no inn plot, so the inn is the MARKET TAVERN - the first
+## SHOP_PLAN tavern, which already carries the tables and the seats. The tier mesh stands at that
+## house's own pivot and yaw, as a CHILD with the house's variety scale undone (art is 1:1);
+## the house hides under it. Tier = town_tiers.tier_of on a synthetic {level: 1} entry with
+## family "inn" (the clock 1/5/9). OFF = the house, unchanged. A var so a shot tool can force it.
+const INN_TIER_MESHES := true     # S179: flipped after the L1/L5/L9 render
+var inn_tier_on := INN_TIER_MESHES
+var _inn_plot: Dictionary = {}
+var _inn_mesh: Node3D = null
+var _inn_path := ""
 var _scar := Vector3.ZERO      # centre of the wild-magic scar (dungeon mouth beyond it)
 var _north_from := Vector3.ZERO  # where the Delvers' Road leaves the ring
 var _scar_info := {}
@@ -1076,6 +1087,7 @@ func show_level(lv: int, quiet := false) -> void:
     _show_garrison(lv, quiet)
     _show_well_tier(lv)               # S173: quiet too, so a save loaded at level 7 shows its well
     _show_hall_tier(lv)               # S178: same rule for the Chief's Hall
+    _show_inn_tier(lv)                # S179: and for the inn (the market tavern)
     # S172: content's town_buildings words for every tier that rose. Deferred so the lines land
     # AFTER economy's own level line; founding (quiet) and falling back are never cried.
     if not quiet and lv > _tiers_level:
@@ -1195,6 +1207,41 @@ func _show_hall_tier(lv: int) -> void:
         return
     _hall_mesh = (ps as PackedScene).instantiate()
     _hall_node.add_child(_hall_mesh)
+
+## S179: swap the market tavern's house to the inn tier mesh for this level (see INN_TIER_MESHES).
+func _show_inn_tier(lv: int) -> void:
+    if not inn_tier_on or not _tiers_ready():
+        return
+    if _inn_plot.is_empty():
+        for pl in plots:
+            if String(pl.get("shop", "")) == "tavern" and is_instance_valid(pl.get("node", null)):
+                _inn_plot = pl
+                break
+    if _inn_plot.is_empty():
+        return
+    var house: Node3D = _inn_plot["node"]
+    var e := {"family": "inn", "level": 1}
+    var path: String = tiers.mesh_for(e, tiers.tier_of(e, lv))
+    if path == _inn_path:
+        return
+    var ps = load(path) if path != "" else null
+    if path != "" and not (ps is PackedScene):
+        return
+    if _inn_mesh != null:
+        _inn_mesh.queue_free()
+        _inn_mesh = null
+    _inn_path = path
+    for c in house.get_children():
+        if c is Node3D:
+            (c as Node3D).visible = path == ""
+    if path == "":
+        return
+    _inn_mesh = (ps as PackedScene).instantiate()
+    # a child, so growth.gd's visibility on the house still governs; the house's variety scale
+    # is undone so the inn stands at art's 1:1
+    var hs: Vector3 = house.scale
+    _inn_mesh.scale = Vector3(1.0 / hs.x, 1.0 / hs.y, 1.0 / hs.z)
+    house.add_child(_inn_mesh)
 
 ## ---------------------------------------------------------------- dressing
 func _spawn(dir_path: String, name: String, pos: Vector3, yaw: float,

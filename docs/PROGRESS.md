@@ -5073,3 +5073,33 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
   largest-tier footprint rule; (c) the /2 loader + tier swap in town.gd.
 - GATES (verdict lines, merged tree): parse --quit-after 300 0 SCRIPT ERROR / 0 Parse Error; TWITCH_PARSE OK (8 checks).
   Offfloor/townwalk/delve not re-run: no .gd or data file changed this cycle (README + PROGRESS + RUN_LOCK only). No Twitch test, ZERO BITS.
+
+## D-cycle - S179 THE INN GROWS: town_inn_t1/t2/t3 on the market tavern, 2026-11-28 14:08-14:2x CT (game build)
+- ROW (13:58 TAKE THIS NEXT): "THE INN SWAP, THEN BARRACKS". Inn done; barracks carried to 15:07 (no time to
+  render AND re-gate a second swap inside claim+25).
+- WHERE THE INN STANDS, MEASURED: bellmire.json (/1, the generator export) has NO inn entry - 5 landmarks, none an
+  inn, and content's landmarks.inn says only district "homes_s". The engine already has an inn-in-all-but-name:
+  SHOP_PLAN's first "tavern" (market), the plot with the tables, stools, chairs and seats (tavern_at). So the inn
+  is THAT plot: town.gd _show_inn_tier() finds the first plot with shop == "tavern", resolves the tier with
+  town_tiers.tier_of/mesh_for on {family: "inn", level: 1} (clock 1/5/9 from the data), and hangs the tier mesh
+  as a CHILD of the house node with the house's variety scale undone (art is 1:1), hiding the house's meshes.
+  Child, so growth.gd's visibility on that house still governs. Unloadable / missing -> the house stays.
+  INN_TIER_MESHES := true (flipped after the render); var inn_tier_on mirrors it so a shot tool can force it.
+  D93 NOTE: when the authored /2 layout lands, the inn wants its own entry (family "inn", half = t3's 15.32 x
+  12.02 incl. the stable range) - the tavern plot is a stand-in until then, and I say so here rather than in code.
+- THE GATE CAUGHT A REAL THING FIRST: run 1 read `S179_INN FAIL ["", "", ""]` - R's .godot/imported had no .scn
+  for any town_inn_t* (siblings present, never imported in this worktree), and the null guard held (no crash,
+  the house stayed). --headless --import: 0 ERROR lines, 36 town_inn entries in the cache. Run 2:
+  `S179_INN OK [town_inn_t1, town_inn_t2, town_inn_t3]`.
+- I LOOKED (renders/cycles/20261128_s179/_sheet.png, inn_level1/5/9, wide_level1/5/9): L1 a low thatched ale
+  house beside the tavern tables; L5 two storeys of timber with the stable range; L9 stone below, beam above,
+  chimneys, lit lamps. The ladder reads; the tables and the seats are untouched; nothing on the road.
+  TWO THINGS FOR ART, BOTH SAID PLAINLY: (1) the inn's big GABLE END facing the street renders FLAT UNTEXTURED
+  WHITE at t2 and t3 - the same defect as hall t2's gable, very likely the same cause in hallgen/inngen;
+  (2) t2 -> t3 is a modest step at stream distance (same height, as inngen.py's own header warns). The L5
+  neighbour house growth raises at the inn's right stands close against the stable range but not through it.
+- L6 fountain vs L3 well (13:58 row, owed one line): not re-measured this cycle; carried.
+- GATES (verdict lines, merged tree, inn ON): parse --quit-after 300: 0 SCRIPT ERROR / 0 Parse Error;
+  TWITCH_PARSE OK (8 checks); OFFFLOOR_VERDICT OK 0 of 2316; DEATH_TEST OK 36 of 36; S171_TIERS OK changes=151
+  cried=118; DELVE_TEST OK (9001 frames, 0 SCRIPT ERROR); TOWNWALK in_solid=0/17193 raid_in_solid=0/3785 PASS.
+  0 SCRIPT ERROR in all seven logs (_s179b_*.log, _s179_shot.log). No Twitch test, ZERO BITS.

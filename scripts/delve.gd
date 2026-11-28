@@ -203,6 +203,7 @@ func _next_floor() -> void:
 	_initiative()
 	_lamp_lit = false
 	_light_check()
+	_lay_bags()                       # S164: corpse-run bags left on this floor lie by the way in
 	state = "fight"
 
 ## ---------------------------------------------------------------- L29c: set pieces
@@ -1268,6 +1269,7 @@ func _process(delta: float) -> void:
 		"search":
 			# L49: the floor is clear - someone is going through the chests before they move on
 			_traps_tick()
+			_bags_tick()
 			_setpieces_tick()           # L29c: a seeker walking to a chest can trip an ambush
 			_search_tick(delta)
 		"descend":
@@ -1276,6 +1278,7 @@ func _process(delta: float) -> void:
 			# traps were walked within reach of, but only 2 were ever MET. They are live now
 			# wherever the party is moving.
 			_traps_tick()
+			_bags_tick()                # S164: and so is a corpse-run bag lying on the way
 			_setpieces_tick()           # L29c: ambushes trigger on the walk too, not just mid-fight
 			var ex: Vector3 = dun.info["exit"] + dun.global_position
 			var all_there := true
@@ -1451,6 +1454,7 @@ func _losing(alive: Array, foes: Array) -> bool:
 func _fight(delta: float) -> void:
 	_check_lamp()
 	_traps_tick()
+	_bags_tick()                            # S164: a delver walking over a corpse-run bag
 	_setpieces_tick()                       # L29c: AMBUSH triggers as the party walks past
 	_miniboss_rally_tick()                  # L29c r4: half-hp rally on the mini-boss
 	_blows_tick(delta)
@@ -2723,8 +2727,125 @@ func _hero_hit(m: Dictionary) -> void:
 	b.fallen = true
 	var line := roster.kill(String(m["uid"]), "the dark below", floor_no, 0)
 	_say(line)
+	# S164: what they carried drops where they fell, a body on the floor the rest walk past
+	if roster != null and not roster.bags.is_empty():
+		var nb: Dictionary = roster.bags.back()
+		if String(nb.get("owner", "")) == String(m["uid"]) and int(nb.get("floor", 0)) == floor_no:
+			_bag_body(nb, b.global_position)
 
 var max_floors := 99      # test hook; canon never states one
+
+## ---------------------------------------------------------------- S164: the corpse-run bags
+## RULING sup-nov27-0209, slice 3 engine side. Roster owns the bags (drop_bag / bag_state /
+## take_bags, S161); this is the BODY on the floor and the WALK-OVER. A bag left on a floor by
+## an earlier delve is laid on the walk in from the stairs (floors are remade, so the spot it
+## fell on is gone - the floor NUMBER is what it keeps); a bag dropped mid-floor lies where
+## its owner fell. A delver who comes within BAG_REACH takes every bag on the floor they may
+## (theirs inside the hour, anyone's after it); someone else's inside the hour stays put,
+## seen and said once. Empty bags get no body - there is nothing to fetch.
+const BAG_REACH := 2.2
+const BAG_MODEL := "res://assets/props/Bag.gltf"
+const BAG_SKULL := "res://assets/dungeon/Skull.glb"
+var bag_nodes: Array = []          # [{node, bag}] on the current floor
+var bags_taken: Array = []         # test hook: [{uid, floor, gold, potions, oil, bags}]
+var _bag_seen := {}                # "uid|owner" -> true: a locked bag is said once a floor
+
+static func _bag_worth(bag: Dictionary) -> bool:
+	return int(bag.get("gold", 0)) > 0 or int(bag.get("potions", 0)) > 0 or int(bag.get("oil", 0)) > 0
+
+func _lay_bags() -> void:
+	bag_nodes.clear()
+	_bag_seen.clear()
+	if roster == null or dun == null or dun.info.is_empty():
+		return
+	var e: Vector3 = dun.info["entry"]
+	var x: Vector3 = dun.info["exit"]
+	var dir := Vector3(x.x - e.x, 0, x.z - e.z)
+	var k := 0
+	for bag: Dictionary in roster.bags:
+		if int(bag.get("floor", 0)) != floor_no or roster.bag_state(bag, "") == "gone" or not _bag_worth(bag):
+			continue
+		# a few metres in along the way to the stairs down, nudged to the nearest clear reachable cell
+		var along := minf(6.0 + 1.5 * float(k), dir.length() * 0.4)
+		var at: Vector3 = e + (dir.normalized() * along if dir.length() > 0.1 else Vector3.ZERO)
+		at = dun._out_of_props(at) + Vector3(float(k % 3) - 1.0, 0, 0) * 0.5
+		_bag_body(bag, at + dun.global_position)
+		k += 1
+
+## the body: a sack with a skull beside it, set on the floor (batch_piece seats it on its base)
+func _bag_body(bag: Dictionary, at: Vector3) -> Node3D:
+	if dun == null or not _bag_worth(bag):
+		return null
+	var n := Node3D.new()
+	n.name = "CorpseBag_" + String(bag.get("name", "?")).validate_node_name()
+	var sack := DungeonHD.batch_piece(BAG_MODEL)
+	if sack != null:
+		sack.scale = Vector3.ONE * 0.8
+		n.add_child(sack)
+	var sk := DungeonHD.batch_piece(BAG_SKULL)
+	if sk != null:
+		sk.scale = Vector3.ONE * 0.55
+		sk.position = Vector3(0.45, 0, 0.15)
+		sk.rotation_degrees.y = _rng.randf_range(-40.0, 40.0)
+		n.add_child(sk)
+	dun.add_child(n)
+	n.global_position = Vector3(at.x, dun.global_position.y, at.z)
+	n.rotation_degrees.y = _rng.randf_range(0.0, 360.0)
+	n.set_meta("bag_owner", String(bag.get("owner", "")))
+	bag_nodes.append({"node": n, "bag": bag})
+	return n
+
+func _bags_tick() -> void:
+	if bag_nodes.is_empty() or roster == null:
+		return
+	for m in _alive():
+		var b: Node3D = m["body"]
+		var uid := String(m["uid"])
+		for bn: Dictionary in bag_nodes:
+			var node: Node3D = bn["node"]
+			if not is_instance_valid(node) or _flat(b.global_position, node.global_position) > BAG_REACH:
+				continue
+			var bag: Dictionary = bn["bag"]
+			var st := roster.bag_state(bag, uid)
+			if st == "locked":
+				var key := uid + "|" + String(bag.get("owner", ""))
+				if not _bag_seen.has(key):
+					_bag_seen[key] = true
+					_say("%s passes %s's bag. Not theirs to take - not yet." % [m["h"]["name"], bag.get("name", "someone")])
+				continue
+			if st not in ["owner", "anyone"]:
+				continue
+			var got: Dictionary = roster.take_bags(uid, floor_no)
+			if int(got["bags"]) <= 0:
+				continue
+			var rec := got.duplicate()
+			rec["uid"] = uid
+			rec["floor"] = floor_no
+			bags_taken.append(rec)
+			var own := String(bag.get("owner", "")) == uid
+			var bits := ["%dg" % int(got["gold"])]
+			if int(got["potions"]) > 0:
+				bits.append("%d potion%s" % [int(got["potions"]), "" if int(got["potions"]) == 1 else "s"])
+			if int(got["oil"]) > 0:
+				bits.append("%d flask%s of oil" % [int(got["oil"]), "" if int(got["oil"]) == 1 else "s"])
+			_say(("%s finds their own bag where they fell, and takes back %s." if own else "%s turns over a dead delver's bag. Finders keepers: %s.") % [m["h"]["name"], ", ".join(bits)])
+			_bags_sweep()
+			return
+
+## drop every body whose bag is no longer in the roster (taken, or swept as expired)
+func _bags_sweep() -> void:
+	var keep: Array = []
+	for bn: Dictionary in bag_nodes:
+		var live := false
+		for rb in roster.bags:
+			if is_same(rb, bn["bag"]):
+				live = true
+				break
+		if live and is_instance_valid(bn["node"]):
+			keep.append(bn)
+		elif is_instance_valid(bn["node"]):
+			(bn["node"] as Node3D).queue_free()
+	bag_nodes = keep
 
 func _finish() -> void:
 	for m in party:

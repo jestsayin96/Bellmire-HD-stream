@@ -24403,3 +24403,4 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - Lock: claimed 01:53:11 (declared 01:59, cap 02:08), released early; see RUN_LOCK IDLE.
 - Not done: L74 re-measure of the feed under load WITH the band (6/4/3 lines at 100/125/150) - carried to 02:52.
 - Decision for Mr. E: none. Not ticked - the team lead ticks.
+- LOOKED AT: step_3 (level 5, 1080p, 100%). Band reads and steps correctly, but two things for U219: (1) the "LV 5 / tier name / N to go" text sits flush under the roller header with almost no top padding and is small for stream distance; (2) the older crier line beneath still says "hamlet now" while the band says level 5 (forced renown in the probe, the line is a past-tense event, not a fault). U219 = give the band top padding + larger type at 100%, re-measure L74 line cap.

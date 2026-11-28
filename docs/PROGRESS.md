@@ -4871,3 +4871,9 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
   did not count an rc=0 over no verdict.
 - No render: nothing visual changed in this slice; the bag body is slice 2 and will be rendered there.
 
+## C-241 (27 Nov 2026 17:3x CST) - content: top-up by draw pressure, ranking re-derived (misfire +20, cleared +20)
+- TAKE THIS NEXT gave content: top up the next-thinnest pool by own draw-pressure arithmetic (16:58 block, CONTENT :22 row). No data/drops.json (not owned).
+- Re-derived off delve.gd _pick_line, one draw per call: misfire 197 (once per caster per floor), cleared 658 (once a floor), descend 674 (once a delve), epitaphs 1114 (once a death). Misfire still thinnest per draw after C-240, cleared next.
+- data/lore_lines.json misfire 197 -> 217, cleared 658 -> 678 (+40, all unique; 3 first-draft misfire duplicates swapped before writing). Frames held: misfire %s %s %d %d, cleared at most one %d. No floor count stated. `_note_c241` added (zero-hit by design, do not wire).
+- VALIDATION OK: lore_lines parses, 84 top-level keys (83 + note), every pre-existing key and the first 197/658 lines of each list byte-identical, diff is additions only; items/bosses/potions untouched and parse.
+- No miniboss body owed (roster closed at 70). No code wiring implied: both pools already read by _pick_line.

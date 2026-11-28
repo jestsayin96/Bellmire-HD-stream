@@ -1816,7 +1816,27 @@
     "The floor holds its breath, then lets it go.",
     "Dust settles. Nobody hurries it.",
     "Floor %d is done. The rope is coiled, the next stair looked at.",
-    "Bandages passed hand to hand. Water, then a little bread."
+    "Bandages passed hand to hand. Water, then a little bread.",
+    "Floor %d is clear. Boots are checked before anything else.",
+    "Nothing moves on floor %d. They wait to be sure.",
+    "Floor %d is done. Somebody counts heads twice.",
+    "The last of it falls. Floor %d goes still.",
+    "Floor %d, and the torches burn lower than they did.",
+    "Blades wiped on cloth. Floor %d is theirs, for now.",
+    "No sound from the dark. Floor %d is quiet.",
+    "Floor %d is swept. The stair is next.",
+    "A flask goes round. Nobody says much.",
+    "Floor %d done. The packs are shifted and the straps tightened.",
+    "The party sits a moment on the cold stone.",
+    "Somebody laughs, short and tired. Floor %d is clear.",
+    "Wounds are looked at. Floor %d can wait a minute.",
+    "The dust hangs in the torchlight, then lays itself down.",
+    "Floor %d is held. The stair is where they left it.",
+    "A quiet floor is a good floor. This is floor %d.",
+    "They stack what they found and count it. Floor %d is done.",
+    "The last echo goes out. Floor %d is theirs.",
+    "Floor %d cleared. A knot in someone's shoulders lets go.",
+    "Torches trimmed, rope checked. Floor %d is finished."
   ],
   "lord_intros": {
     "hollow_king": "The braziers in the hall burn blue, and then burn cold.",
@@ -4082,7 +4102,27 @@
     "%s reads %s off the wrong line (%d vs DC %d).",
     "%s's %s dies in the mouth (%d vs DC %d).",
     "%s tries %s and the scar shrugs (%d vs DC %d).",
-    "%s's %s goes out like a wet wick (%d vs DC %d)."
+    "%s's %s goes out like a wet wick (%d vs DC %d).",
+    "%s says %s and the words come out in the wrong order (%d vs DC %d).",
+    "%s's %s fizzles in the hand. Nobody comments (%d vs DC %d).",
+    "%s begins %s and drops the thread (%d vs DC %d).",
+    "%s's %s lands a pace short of anything (%d vs DC %d).",
+    "%s reaches for %s. The scar is not listening (%d vs DC %d).",
+    "%s's %s comes out thin and goes nowhere (%d vs DC %d).",
+    "%s fumbles %s, and the cold takes the rest (%d vs DC %d).",
+    "%s's %s sputters, then nothing (%d vs DC %d).",
+    "%s tries %s again in their head. Too late (%d vs DC %d).",
+    "%s's %s is spent before it is cast (%d vs DC %d).",
+    "%s gets %s half said. The half is not enough (%d vs DC %d).",
+    "%s's %s curdles on the way out (%d vs DC %d).",
+    "%s mouths %s and the air stays still (%d vs DC %d).",
+    "%s's %s unravels at the first knot (%d vs DC %d).",
+    "%s holds %s too long and it sours (%d vs DC %d).",
+    "%s's %s gutters. A hand steadies a shoulder (%d vs DC %d).",
+    "%s calls %s and the dark does not take the call (%d vs DC %d).",
+    "%s's %s goes wide and hits stone (%d vs DC %d).",
+    "%s tries %s. The scar is patient and does not give (%d vs DC %d).",
+    "%s's %s rolls over once and stays down (%d vs DC %d)."
   ],
   "epitaphs": [
     "Measured the grain. Counted the flasks. Kept the door.",
@@ -16347,5 +16387,6 @@
     }
   },
   "_note_c239": "C-239: epitaphs +15, descend +9, cleared +8 (2 cleared lines carry the floor placeholder). Pools already read by the engine; zero-hit by design, no lane is to wire this key. System 41's drops.json NOT written - not one of the four owned files; stood down a sixth time.",
-  "_note_c240": "C-240 (27 Nov 2026 16:23 CST): top-up by draw pressure. Pools read by delve.gd _pick_line, one draw per call: descend 674 (once a delve), cleared 658 (once a floor cleared), epitaphs 1114 (once a death), misfire 167 (once per caster per floor - the Chronicle line, not the bark). Misfire carries the fewest lines against the most draws, so it took the +30. Frame kept: name, spell, roll, DC (%s %s %d %d). No floor count. Expected zero-hit key; no lane is to wire it."
+  "_note_c240": "C-240 (27 Nov 2026 16:23 CST): top-up by draw pressure. Pools read by delve.gd _pick_line, one draw per call: descend 674 (once a delve), cleared 658 (once a floor cleared), epitaphs 1114 (once a death), misfire 167 (once per caster per floor - the Chronicle line, not the bark). Misfire carries the fewest lines against the most draws, so it took the +30. Frame kept: name, spell, roll, DC (%s %s %d %d). No floor count. Expected zero-hit key; no lane is to wire it.",
+  "_note_c241": "C-241 (27 Nov 2026 17:3x CST): top-up by draw pressure, ranking re-derived. delve.gd _pick_line, one draw per call: misfire 197 (once per caster per floor, several casters a floor), cleared 658 (once a floor), descend 674 (once a delve), epitaphs 1114 (once a death). Misfire is still the thinnest per draw even after C-240 and cleared is next; each took +20. Frames kept: misfire name, spell, roll, DC (%s %s %d %d); cleared carries at most one %d, the floor number. No floor count stated. Expected zero-hit key; no lane is to wire it."
 }

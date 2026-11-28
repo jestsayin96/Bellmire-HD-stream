@@ -728,3 +728,33 @@ Added a skip link (constant href "#stageScroll"), three key shortcuts ("[", "]",
 
 ## System 41 section 1 - chamber-holder Bestiary (2026-11-27)
 New surface: <img src="icons/beasts/<key>.webp"> where <key> comes ONLY from the generated BEAST_DEX constant (web/tools/make_bestiary.py); a snapshot value can only select which listed key is drawn (hero.beasts keys are looked up with hasOwnProperty, never concatenated into a path). Snapshot strings (mechanic, drops, counts) reach the DOM through el()/textContent; verified with a hostile mechanic and drop name. Silhouette is CSS only. No new innerHTML, storage key or CSP change (img-src 'self' already allows it). Undiscovered beasts' names are excluded from the finder.
+
+## H33 - the room at the inn: Supabase Auth (Twitch) + the hub_actions queue (28 Nov 2026)
+
+The hub now signs viewers in and WRITES. Everything above still holds; this adds to it.
+
+- **No CSP change.** Sign-in is a top-level navigation to `<supabase>/auth/v1/authorize?provider=twitch&flow_type=pkce...`
+  (navigation is not governed by connect-src) and the code exchange, refresh, logout and settings probe are `fetch` calls to
+  the one Supabase origin connect-src already lists. No SDK, no new script, no new origin. The CSP meta is byte-identical.
+- **Keys.** Only the publishable key and the viewer's own session reach web/. The session ({access_token, refresh_token,
+  expires_at, user}) is kept in `localStorage["bellmire.auth"]` (per-viewer convenience, wrapped in try/catch) and the PKCE
+  verifier in `sessionStorage`. The token is never rendered, logged or put in a URL. Residual risk: an XSS would read it -
+  which is why the strict CSP and the el()-only rule are the wall. No service key, no secret, ever.
+- **Flow.** PKCE (S256), so no token ever appears in the URL; `?code=` is stripped with `history.replaceState` on return.
+  The sign-in button is shown only when `/auth/v1/settings` reports `external.twitch === true`; otherwise the page says
+  sign-in is not switched on. It never offers a button that leads to a Supabase error page.
+- **RLS is the authority** (policy assumed, in `web/tools/hub_actions_schema.sql`, NOT yet applied to the live project):
+  `hub_actions` has RLS on; authenticated users may SELECT only rows whose `twitch_id` equals their own JWT
+  `user_metadata.provider_id`, and INSERT only with that same `twitch_id`, `status='queued'`, `result is null`, under a
+  20-queued-rows backlog cap; there is NO update or delete policy, and anon has none. `kind` is a CHECK whitelist and `args`
+  is size-bounded in the database, so a page that is tampered with still cannot file anything the table forbids. The page
+  sends a `viewer_login` for display only; the engine must key on `twitch_id`, never on that string.
+- **An action is a request.** The page shows queued/done/refused only from the `status` column the engine writes, maps any
+  other value to "Unknown", and says in words that a filed request is not a result. The "15-30 seconds" note is carried.
+- **DOM.** Display name, snapshot hero fields, queue `kind`/`args`/`result` all go through `el()`/textContent; verified with a
+  hostile display name (`<img src=x onerror=alert(1)>`) and a hostile engine `result` string - both render as text, zero
+  injected elements, no dialog. No innerHTML added (the two page-owned sites are unchanged). No browser dialog is used;
+  "specialize" asks for a second press instead.
+- **Login button.** The page's own teal chip reading "Log in with Twitch". No purple, no glyph, no wordmark.
+- **Needs doing outside web/** (not this lane): enable the Twitch provider + redirect URL allow-list in Supabase; apply the
+  schema; the game engine polls `status='queued'` with the service key and writes `status`/`result`.

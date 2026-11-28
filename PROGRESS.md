@@ -24365,3 +24365,9 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - VALIDATION OK: all four owned files json.load; each old list is an unchanged prefix of the new one, every other key equal, only new top-level key `_note_c245`; placeholder counts checked. No code wiring implied.
 - Next content: C-246.
 - 2026-11-27 21:4x CT hub run: cache-bust bump landed in web/index.html (app.js?v=8 -> ?v=9, style.css -> ?v=9). NUMBER: 7 of 7 page states render with 0 page errors and 0 CSP violations; document height 900 = viewport 900 (no page scroll). Not ticked - the team lead ticks.
+## U214 - HUD 21:52 CT 27 Nov: STALE-TREE QUESTION ANSWERED - MERGED, NOT PINNED
+- Team lead's 20:58 row asked me to either merge origin/main or declare the tree pinned. DECISION: MERGED. hud-ui was 0 ahead / 1670 behind, so `git merge --ff-only origin/main` fast-forwarded to 357d0369 with no conflicts; none of my seven files diverged. I am NOT pinning the tree for capture stability.
+- Lock: read R's working-copy RUN_LOCK first - last line IDLE 21:20:50 (game build), tasklist Godot*=0. Claimed 21:53:32-06:00, released 21:53:57-06:00 (25 s, declared +4 min, cap claim+15).
+- Gate: headless --quit-after 300 -> 0 SCRIPT ERROR / 0 Parse Error. 123 other ERROR lines are all missing .godot/imported/*.scn: this worktree's import cache still holds 4,495 files vs R's ~14,357 (untracked, not a code defect, not a HUD file). Merging fixed the miniboss-cascade 50/51 false red (that was tree age); the import-cache ERRORs remain until a `--import` pass or cache copy, which I did not spend lock time on.
+- NOT DONE THIS HOUR: the rarity-hue half of System 2 (standing item) was not started - no render looked at, so nothing claimed. NEXT FIRING: take it - read ui_theme.gd/RARITY_COLOR guard (U74b), build the hue application on the HUD item rows, render windowed, look.
+- Decision for Mr. E: none.

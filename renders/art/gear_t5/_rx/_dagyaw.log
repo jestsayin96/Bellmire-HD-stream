@@ -1,0 +1,286 @@
+00:00.016  color_management | Using OCIO=C:\Program Files\Blender Foundation\Blender 5.2\5.2\datafiles\colormanagement\config.ocio
+00:42:16 | INFO: Data are loaded, start creating Blender stuff
+00:42:16 | INFO: Blender create Mesh node Cube.125
+00:42:16 | INFO: Blender create Mesh node Cube.126
+00:42:16 | INFO: Blender create Mesh node PrototypePete_body.020
+00:42:16 | INFO: Blender create Mesh node PrototypePete_head.001
+00:42:16 | INFO: Blender create Mesh node Cube.128
+00:42:16 | INFO: Blender create Mesh node Cube.127
+00:42:16 | INFO: Blender create Mesh node Cube.003
+00:42:16 | INFO: Blender create Mesh node Cylinder.280
+00:42:16 | INFO: Blender create Mesh node Cylinder.005
+00:42:16 | INFO: Blender create Mesh node Cylinder.010
+00:42:16 | INFO: Blender create Mesh node Cylinder.022
+00:42:16 | INFO: Blender create Mesh node Cube.11839
+00:42:16 | INFO: Blender create Mesh node Cube.12993
+00:42:16 | INFO: Blender create Mesh node Cube.124
+00:42:16 | INFO: Blender create Mesh node Plane.004
+00:42:17 | INFO: glTF import finished in 0.72s
+DAGYAW basis selftest PASSED order=YXZ
+C:\hd adventure\bellmire-art\tools\art\_t5_dagyaw.py:80: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+00:42:17 | INFO: Data are loaded, start creating Blender stuff
+00:42:17 | INFO: Blender create Mesh node Cylinder.039
+00:42:17 | INFO: glTF import finished in 0.01s
+00:04.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_body_front.png'
+00:04.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs050_front.png'
+00:04.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs050_front.png'
+00:04.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_body_side.png'
+00:04.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs050_side.png'
+00:05.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs050_side.png'
+00:05.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_body_back.png'
+00:05.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs050_back.png'
+00:05.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs050_back.png'
+  YAW    0 hs=0.50 hang=89.9 len=0.688 cf=0.185 geom_ok=False minor={'front': 27, 'side': 33, 'back': 27} vis={'front': 273, 'side': 1372, 'back': 0} proving=1 show=1.11 border=0.000
+00:05.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs050_front.png'
+00:05.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs050_front.png'
+00:06.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs050_side.png'
+00:06.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs050_side.png'
+00:06.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs050_back.png'
+00:06.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs050_back.png'
+  YAW   15 hs=0.50 hang=75.1 len=0.653 cf=0.101 geom_ok=False minor={'front': 25, 'side': 47, 'back': 25} vis={'front': 262, 'side': 1391, 'back': 0} proving=1 show=1.582 border=0.000
+00:06.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs050_front.png'
+00:07.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs050_front.png'
+00:07.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs050_side.png'
+00:07.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs050_side.png'
+00:07.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs050_back.png'
+00:07.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs050_back.png'
+  YAW   25 hs=0.50 hang=65.1 len=0.605 cf=0.082 geom_ok=False minor={'front': 24, 'side': 68, 'back': 24} vis={'front': 288, 'side': 1416, 'back': 10} proving=1 show=2.288 border=0.000
+00:08.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs050_front.png'
+00:08.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs050_front.png'
+00:08.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs050_side.png'
+00:08.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs050_side.png'
+00:08.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs050_back.png'
+00:09.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs050_back.png'
+  YAW   35 hs=0.50 hang=55.1 len=0.543 cf=0.050 geom_ok=False minor={'front': 22, 'side': 89, 'back': 22} vis={'front': 341, 'side': 1436, 'back': 57} proving=1 show=2.995 border=0.000
+00:09.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs050_front.png'
+00:09.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs050_front.png'
+00:09.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs050_side.png'
+00:09.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs050_side.png'
+00:09.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs050_back.png'
+00:10.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs050_back.png'
+  YAW   45 hs=0.50 hang=45.1 len=0.534 cf=0.028 geom_ok=False minor={'front': 21, 'side': 95, 'back': 20} vis={'front': 400, 'side': 1419, 'back': 119} proving=1 show=3.197 border=0.000
+00:10.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs050_front.png'
+00:10.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs050_front.png'
+00:10.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs050_side.png'
+00:10.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs050_side.png'
+00:11.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs050_back.png'
+00:11.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs050_back.png'
+  YAW   55 hs=0.50 hang=35.1 len=0.603 cf=0.000 geom_ok=False minor={'front': 18, 'side': 79, 'back': 18} vis={'front': 453, 'side': 1382, 'back': 167} proving=1 show=2.658 border=0.000
+00:11.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs050_front.png'
+00:11.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs050_front.png'
+00:11.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs050_side.png'
+00:12.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs050_side.png'
+00:12.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs050_back.png'
+00:12.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs050_back.png'
+  YAW   65 hs=0.50 hang=25.1 len=0.655 cf=0.075 geom_ok=False minor={'front': 16, 'side': 62, 'back': 16} vis={'front': 492, 'side': 1303, 'back': 195} proving=1 show=2.086 border=0.000
+00:12.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs050_front.png'
+00:12.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs050_front.png'
+00:13.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs050_side.png'
+00:13.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs050_side.png'
+00:13.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs050_back.png'
+00:13.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs050_back.png'
+  YAW   75 hs=0.50 hang=15.1 len=0.686 cf=0.154 geom_ok=False minor={'front': 13, 'side': 45, 'back': 13} vis={'front': 469, 'side': 1218, 'back': 204} proving=1 show=1.514 border=0.000
+00:13.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs050_front.png'
+00:13.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs050_front.png'
+00:14.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs050_side.png'
+00:14.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs050_side.png'
+00:14.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs050_back.png'
+00:14.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs050_back.png'
+  YAW   90 hs=0.50 hang= 0.1 len=0.695 cf=0.352 geom_ok=True minor={'front': 13, 'side': 32, 'back': 13} vis={'front': 403, 'side': 957, 'back': 190} proving=1 show=1.077 border=0.000
+00:14.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs055_front.png'
+00:14.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs055_front.png'
+00:15.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs055_side.png'
+00:15.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs055_side.png'
+00:15.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs055_back.png'
+00:15.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs055_back.png'
+  YAW    0 hs=0.55 hang=89.9 len=0.757 cf=0.196 geom_ok=False minor={'front': 28, 'side': 35, 'back': 28} vis={'front': 365, 'side': 1746, 'back': 0} proving=1 show=1.071 border=0.000
+00:15.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs055_front.png'
+00:15.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs055_front.png'
+00:16.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs055_side.png'
+00:16.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs055_side.png'
+00:16.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs055_back.png'
+00:16.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs055_back.png'
+  YAW   15 hs=0.55 hang=75.1 len=0.718 cf=0.164 geom_ok=False minor={'front': 28, 'side': 51, 'back': 28} vis={'front': 345, 'side': 1757, 'back': 0} proving=1 show=1.56 border=0.000
+00:16.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs055_front.png'
+00:16.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs055_front.png'
+00:16.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs055_side.png'
+00:17.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs055_side.png'
+00:17.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs055_back.png'
+00:17.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs055_back.png'
+  YAW   25 hs=0.55 hang=65.1 len=0.665 cf=0.147 geom_ok=False minor={'front': 26, 'side': 75, 'back': 26} vis={'front': 382, 'side': 1770, 'back': 36} proving=1 show=2.294 border=0.000
+00:17.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs055_front.png'
+00:17.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs055_front.png'
+00:17.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs055_side.png'
+00:17.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs055_side.png'
+00:18.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs055_back.png'
+00:18.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs055_back.png'
+  YAW   35 hs=0.55 hang=55.1 len=0.598 cf=0.123 geom_ok=False minor={'front': 25, 'side': 97, 'back': 25} vis={'front': 450, 'side': 1787, 'back': 110} proving=1 show=2.967 border=0.000
+00:18.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs055_front.png'
+00:18.438  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs055_front.png'
+00:18.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs055_side.png'
+00:18.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs055_side.png'
+00:18.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs055_back.png'
+00:19.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs055_back.png'
+  YAW   45 hs=0.55 hang=45.1 len=0.587 cf=0.110 geom_ok=False minor={'front': 22, 'side': 105, 'back': 22} vis={'front': 529, 'side': 1766, 'back': 180} proving=1 show=3.212 border=0.000
+00:19.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs055_front.png'
+00:19.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs055_front.png'
+00:19.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs055_side.png'
+00:19.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs055_side.png'
+00:19.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs055_back.png'
+00:19.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs055_back.png'
+  YAW   55 hs=0.55 hang=35.1 len=0.664 cf=0.097 geom_ok=False minor={'front': 20, 'side': 87, 'back': 20} vis={'front': 593, 'side': 1696, 'back': 234} proving=1 show=2.661 border=0.000
+00:20.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs055_front.png'
+00:20.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs055_front.png'
+00:20.297  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs055_side.png'
+00:20.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs055_side.png'
+00:20.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs055_back.png'
+00:20.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs055_back.png'
+  YAW   65 hs=0.55 hang=25.1 len=0.720 cf=0.139 geom_ok=False minor={'front': 16, 'side': 67, 'back': 16} vis={'front': 606, 'side': 1624, 'back': 254} proving=1 show=2.05 border=0.000
+00:20.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs055_front.png'
+00:21.032  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs055_front.png'
+00:21.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs055_side.png'
+00:21.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs055_side.png'
+00:21.563  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs055_back.png'
+00:21.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs055_back.png'
+  YAW   75 hs=0.55 hang=15.1 len=0.755 cf=0.228 geom_ok=False minor={'front': 14, 'side': 50, 'back': 14} vis={'front': 604, 'side': 1539, 'back': 269} proving=1 show=1.53 border=0.000
+00:21.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs055_front.png'
+00:22.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs055_front.png'
+00:22.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs055_side.png'
+00:22.485  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs055_side.png'
+00:22.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs055_back.png'
+00:22.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs055_back.png'
+  YAW   90 hs=0.55 hang= 0.1 len=0.764 cf=0.335 geom_ok=True minor={'front': 14, 'side': 34, 'back': 14} vis={'front': 539, 'side': 1249, 'back': 272} proving=1 show=1.04 border=0.000
+00:22.953  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs060_front.png'
+00:23.078  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs060_front.png'
+00:23.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs060_side.png'
+00:23.360  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs060_side.png'
+00:23.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs060_back.png'
+00:23.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs060_back.png'
+  YAW    0 hs=0.60 hang=89.9 len=0.826 cf=0.215 geom_ok=False minor={'front': 31, 'side': 39, 'back': 31} vis={'front': 471, 'side': 2160, 'back': 0} proving=1 show=1.094 border=0.000
+00:23.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs060_front.png'
+00:23.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs060_front.png'
+00:24.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs060_side.png'
+00:24.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs060_side.png'
+00:24.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs060_back.png'
+00:24.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs060_back.png'
+  YAW   15 hs=0.60 hang=75.1 len=0.783 cf=0.193 geom_ok=False minor={'front': 30, 'side': 55, 'back': 30} vis={'front': 448, 'side': 2167, 'back': 2} proving=1 show=1.542 border=0.000
+00:24.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs060_front.png'
+00:24.750  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs060_front.png'
+00:24.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs060_side.png'
+00:25.016  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs060_side.png'
+00:25.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs060_back.png'
+00:25.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs060_back.png'
+  YAW   25 hs=0.60 hang=65.1 len=0.726 cf=0.193 geom_ok=False minor={'front': 29, 'side': 82, 'back': 29} vis={'front': 492, 'side': 2176, 'back': 81} proving=1 show=2.299 border=0.000
+00:25.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs060_front.png'
+00:25.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs060_front.png'
+00:25.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs060_side.png'
+00:25.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs060_side.png'
+00:26.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs060_back.png'
+00:26.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs060_back.png'
+  YAW   35 hs=0.60 hang=55.1 len=0.652 cf=0.175 geom_ok=False minor={'front': 26, 'side': 106, 'back': 26} vis={'front': 588, 'side': 2186, 'back': 164} proving=1 show=2.972 border=0.000
+00:26.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs060_front.png'
+00:26.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs060_front.png'
+00:26.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs060_side.png'
+00:26.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs060_side.png'
+00:27.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs060_back.png'
+00:27.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs060_back.png'
+  YAW   45 hs=0.60 hang=45.1 len=0.640 cf=0.170 geom_ok=False minor={'front': 24, 'side': 114, 'back': 24} vis={'front': 670, 'side': 2147, 'back': 245} proving=1 show=3.197 border=0.000
+00:27.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs060_front.png'
+00:27.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs060_front.png'
+00:27.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs060_side.png'
+00:27.719  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs060_side.png'
+00:27.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs060_back.png'
+00:27.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs060_back.png'
+  YAW   55 hs=0.60 hang=35.1 len=0.724 cf=0.141 geom_ok=False minor={'front': 21, 'side': 94, 'back': 21} vis={'front': 741, 'side': 2082, 'back': 298} proving=1 show=2.636 border=0.000
+00:28.157  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs060_front.png'
+00:28.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs060_front.png'
+00:28.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs060_side.png'
+00:28.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs060_side.png'
+00:28.703  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs060_back.png'
+00:28.828  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs060_back.png'
+  YAW   65 hs=0.60 hang=25.1 len=0.786 cf=0.178 geom_ok=False minor={'front': 18, 'side': 74, 'back': 18} vis={'front': 775, 'side': 2007, 'back': 333} proving=1 show=2.075 border=0.000
+00:28.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs060_front.png'
+00:29.094  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs060_front.png'
+00:29.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs060_side.png'
+00:29.375  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs060_side.png'
+00:29.516  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs060_back.png'
+00:29.641  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs060_back.png'
+  YAW   75 hs=0.60 hang=15.1 len=0.824 cf=0.244 geom_ok=False minor={'front': 15, 'side': 55, 'back': 15} vis={'front': 773, 'side': 1901, 'back': 351} proving=1 show=1.542 border=0.000
+00:29.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs060_front.png'
+00:29.907  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs060_front.png'
+00:30.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs060_side.png'
+00:30.188  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs060_side.png'
+00:30.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs060_back.png'
+00:30.453  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs060_back.png'
+  YAW   90 hs=0.60 hang= 0.1 len=0.834 cf=0.284 geom_ok=True minor={'front': 15, 'side': 38, 'back': 15} vis={'front': 702, 'side': 1599, 'back': 363} proving=1 show=1.066 border=0.000
+00:30.610  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs065_front.png'
+00:30.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs065_front.png'
+00:30.875  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs065_side.png'
+00:31.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs065_side.png'
+00:31.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y000_hs065_back.png'
+00:31.266  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y000_hs065_back.png'
+  YAW    0 hs=0.65 hang=89.9 len=0.894 cf=0.183 geom_ok=False minor={'front': 34, 'side': 41, 'back': 34} vis={'front': 601, 'side': 2617, 'back': 0} proving=1 show=1.061 border=0.000
+00:31.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs065_front.png'
+00:31.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs065_front.png'
+00:31.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs065_side.png'
+00:31.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs065_side.png'
+00:31.938  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y015_hs065_back.png'
+00:32.063  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y015_hs065_back.png'
+  YAW   15 hs=0.65 hang=75.1 len=0.848 cf=0.173 geom_ok=False minor={'front': 33, 'side': 60, 'back': 33} vis={'front': 596, 'side': 2617, 'back': 27} proving=1 show=1.553 border=0.000
+00:32.219  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs065_front.png'
+00:32.344  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs065_front.png'
+00:32.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs065_side.png'
+00:32.625  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs065_side.png'
+00:32.766  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y025_hs065_back.png'
+00:32.891  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y025_hs065_back.png'
+  YAW   25 hs=0.65 hang=65.1 len=0.786 cf=0.173 geom_ok=False minor={'front': 31, 'side': 89, 'back': 31} vis={'front': 617, 'side': 2604, 'back': 126} proving=1 show=2.304 border=0.000
+00:33.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs065_front.png'
+00:33.172  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs065_front.png'
+00:33.313  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs065_side.png'
+00:33.422  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs065_side.png'
+00:33.578  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y035_hs065_back.png'
+00:33.688  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y035_hs065_back.png'
+  YAW   35 hs=0.65 hang=55.1 len=0.706 cf=0.165 geom_ok=False minor={'front': 28, 'side': 114, 'back': 28} vis={'front': 730, 'side': 2618, 'back': 225} proving=1 show=2.951 border=0.000
+00:33.844  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs065_front.png'
+00:33.969  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs065_front.png'
+00:34.110  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs065_side.png'
+00:34.235  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs065_side.png'
+00:34.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y045_hs065_back.png'
+00:34.500  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y045_hs065_back.png'
+  YAW   45 hs=0.65 hang=45.1 len=0.694 cf=0.161 geom_ok=False minor={'front': 26, 'side': 123, 'back': 26} vis={'front': 821, 'side': 2576, 'back': 322} proving=1 show=3.184 border=0.000
+00:34.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs065_front.png'
+00:34.782  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs065_front.png'
+00:34.922  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs065_side.png'
+00:35.047  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs065_side.png'
+00:35.203  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y055_hs065_back.png'
+00:35.328  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y055_hs065_back.png'
+  YAW   55 hs=0.65 hang=35.1 len=0.784 cf=0.151 geom_ok=False minor={'front': 23, 'side': 102, 'back': 23} vis={'front': 900, 'side': 2508, 'back': 385} proving=2 show=2.64 border=0.000
+00:35.469  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs065_front.png'
+00:35.594  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs065_front.png'
+00:35.735  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs065_side.png'
+00:35.860  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs065_side.png'
+00:36.000  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y065_hs065_back.png'
+00:36.125  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y065_hs065_back.png'
+  YAW   65 hs=0.65 hang=25.1 len=0.851 cf=0.175 geom_ok=False minor={'front': 19, 'side': 79, 'back': 19} vis={'front': 947, 'side': 2415, 'back': 429} proving=2 show=2.045 border=0.000
+00:36.282  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs065_front.png'
+00:36.391  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs065_front.png'
+00:36.547  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs065_side.png'
+00:36.657  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs065_side.png'
+00:36.813  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y075_hs065_back.png'
+00:36.985  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y075_hs065_back.png'
+  YAW   75 hs=0.65 hang=15.1 len=0.892 cf=0.212 geom_ok=False minor={'front': 17, 'side': 59, 'back': 17} vis={'front': 943, 'side': 2310, 'back': 423} proving=2 show=1.527 border=0.000
+00:37.141  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs065_front.png'
+00:37.250  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs065_front.png'
+00:37.407  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs065_side.png'
+00:37.532  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs065_side.png'
+00:37.672  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\dagger_y090_hs065_back.png'
+00:37.797  render           | Saved: 'C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\cells\_alone_y090_hs065_back.png'
+  YAW   90 hs=0.65 hang= 0.1 len=0.903 cf=0.279 geom_ok=True minor={'front': 16, 'side': 40, 'back': 16} vis={'front': 891, 'side': 1980, 'back': 468} proving=1 show=1.035 border=0.000
+DAGYAW_DONE C:\hd adventure\bellmire-art\renders\art\gear_t5\_rx\_dagyaw\_t5_dagyaw.json candidates=36 clean=0
+  DAGYAW NO YAW SAVES IT at hand_scale <= 0.65 - the scale arm is the only fix and the dagger gets longer.
+Blender 5.2.3 LTS (hash e13b728c6880 built 2026-10-22 01:37:16)
+
+Blender quit
+
+EXITCODE 0

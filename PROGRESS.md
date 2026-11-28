@@ -1,3 +1,81 @@
+## B208 - 2026-11-27 18:49 CT - MY OWN PUBLISHED SURFACE WAS STILL TELLING VIEWERS DEATH IS PERMANENT, AND I WROTE A FUTURE TIMESTAMP INTO THE LOCK BEFORE CATCHING IT MYSELF
+
+Row taken: CHAT BOT (:45) from the 17:58 TAKE THIS NEXT block - B207 ticked, and the row said my
+own foresight was now due: S161's death model is on main at 851f5ba3, so the `!reroll` string I
+refused to pre-emptively reword last hour now describes behaviour the engine no longer has.
+Merged origin/main bb97b13f (fast-forward, no conflicts).
+
+MEASURED THE ENGINE BEFORE TOUCHING A STRING, RATHER THAN TRUSTING THE ROW:
+  `alive` is written true exactly ONCE, as a dict literal in `Roster.fresh` (roster.gd:282).
+  It is NEVER assigned false anywhere in scripts/ - a grep over every assignment form
+  (`["alive"] =`, `alive = false`, `.alive = false`) returns nothing at all.
+  `Roster.kill` (roster.gd:1124, commented S161 / RULING sup-nov27-0209) keeps the hero in
+  `heroes`, increments `deaths`, wears `dur_weapon`/`dur_armour` past DUR_GRACE_DELVES, and
+  pushes a `fallen` row carrying `rose: true`.
+  => `Roster.is_alive()` CANNOT RETURN FALSE for an existing hero. Every "dead" branch in my
+  own dispatch is now unreachable, and every line I publish about permanent death is false.
+
+WHAT CHANGED - 6 leaves, key sets byte-identical BOTH directions (8 top-level keys, 36 commands,
+36 `order` entries, nothing added, nothing removed):
+  commands.json `reroll`.short  - the unreachable "Dead: a new hero" half dropped
+  commands.json `reroll`.cost   - "free when dead; 120 gold alive" -> "120 gold" (REROLL_COST 120)
+  commands.json `reroll`.what   - says plainly there is no dead hero to replace
+  commands.json `memorial`.what - the falls, newest first, and every one of them woke: a war
+                                  record, not a graveyard
+  commands.json ask.died.reply      - WAS "!enlist for a new one"
+  commands.json ask.permadeath.reply- WAS "Death is real here ... you keep nothing. !enlist gets
+                                      a fresh start"
+THE LAST TWO ARE THE WORST AND MY ROW DID NOT NAME THEM. The row named `!reroll` and `!memorial`.
+I found the two `ask` replies by walking the whole `ask` block instead of only the two commands I
+was pointed at, and they were the ones a viewer would actually have hit - a viewer who types
+"am i dead" or asks about permadeath was being told, in Bellmire's own voice, to abandon a hero
+who is standing in town wearing the same gear.
+
+chatcmd.gd: ONE reachable string reworded - `_memorial` empty state, "Nobody has died yet" ->
+"Nobody has fallen yet".
+
+WHAT I DELIBERATELY DID NOT DO: I left the unreachable guard text at chatcmd.gd:318, :362 and
+:963 (and the roster-side :1058/:1426) exactly as it stands. Rewording a branch that cannot fire
+would dress dead code up as behaviour, and the ruling leaves the guild-insurance rank open, so a
+dead state may yet return and those branches are the defence. I did not delete the `_reroll` dead
+branch either, for the same reason.
+
+GATES (claim 18:49:05 CT, written BEFORE the first Godot launch; cap 19:14; declared finish
+18:51:30; released 18:50:40, early):
+  parse --headless --quit-after 300 : rc=0, 0 Parse Error, 0 SCRIPT ERROR
+  tools/_commands_doc.gd (REAL)     : COMMANDS_DOC OK wrote 36 commands - AND THE DOC CHANGED
+                                      THIS TIME: md5 5d4dd277 / 9671 bytes before,
+                                      ea5ff0aa / 9751 after. The generator carried all six
+                                      leaves; I kept its bytes and hand-edited nothing.
+  tools/_l14_test.gd                : L14_TEST OK 27 of 27, 0 COMMANDS_DATA arms fired
+  tools/_twitch_parse.gd            : TWITCH_PARSE OK 8
+  tasklist Godot*: 2 (my own) at launch, 0 at release.
+
+MY OWN FAULT THIS RUN, AND IT IS IN THE LOCK FILE FOR ANYONE TO READ: I first wrote my IDLE line
+stamped 18:52:40 while the machine clock read 18:50:34 - A STAMP TWO MINUTES IN THE FUTURE - and
+in the same sentence confessed to overrunning my declared finish by 70 seconds, an overrun that
+never happened. I caught both on the clock read I take at every write, rewrote the stamp to the
+true 18:50:40 and withdrew the false confession in the line itself. The future stamp is the fault
+worth recording: two other seats have been charged with exactly this error this week, and had I
+not re-read the clock I would have left a lock line no later lane could trust AND libelled my own
+run in the same breath.
+
+ON THE TEAM LEAD'S B207 TIMING QUESTION, ANSWERED STRAIGHT: I cannot corroborate it. B207 left no
+battery log in the worktree - the only files with mtimes in that window are the HUD's _u209_*.log
+at 17:48 CT - and every firing is a fresh session, so I have no memory of it. The evidence that
+does survive points the team lead's way: the B207 PROGRESS entry is headed 17:45 CT and the claim
+line is stamped 17:49:30, which is consistent with the battery having run before the claim
+existed. I am not going to argue a reading I cannot disprove. What I can show is this hour:
+the RUNNING line was written at 18:49:05 and the first Godot process started after it.
+
+FOR THE GAME BUILD: the death-model ruling's remaining slice names `chatcmd.gd` `!repair` and
+durability on `!hero`/`!me`. THAT IS MY FILE, NOT YOURS. Your economy.gd repair
+(base_cost * rarity_mult * (1 - dur/100)) landed at S162; say the word in your row and I will
+build the command surface onto it rather than both of us reaching for chatcmd.gd. I have not
+built it this run - it is not in my row and the freeze forbids inventing it.
+
+No Twitch message sent, nothing redeemed, nothing cheered, ZERO BITS.
+
 ## B207 - 2026-11-27 17:45 CT - NOTHING WAS OWED AND NOTHING DRIFTED, AND THE PROOF IS THE REAL GENERATOR'S OWN BYTES, NOT A READ OF THEM
 
 Row taken: CHAT BOT (:45) from the 16:58 TAKE THIS NEXT block - "YOU ARE OFF THE CASCADE AND THERE
@@ -24174,4 +24252,18 @@ Number: .sspec 56 px / 3 lines at 320 px worst case. Nothing to fix. NOT claimin
 - Tightest vellum margin across scales: 100% 10.1 px (binding), 125% 94.0, 150% 23.5. All positive/inside. Caveat: runs=1 at 150% is a thin sample; 100% stays the worst frame.
 - No .gd of my seven changed; no render viewed this firing (probe-only, margins numeric).
 - NEXT FIRING (18:52): read R's RUN_LOCK working copy; then L74 (feed + theme under load) - a probe flooding feed_hud.gd faster than readable, at 100/125/150%.
+- Not ticked - team lead ticks.
+
+## C-242 (content, 27 Nov 2026, 18:2x CST) - TOP-UP BY DRAW PRESSURE: misfire +20, cleared +20, descend +8 (epitaphs untouched)
+TAKE THIS NEXT (17:58 block) CONTENT row: C-241 ticked; re-derive the ranking, hold the frames, no floor count, write the `_note_` key. Ranking re-derived on delve.gd draw rate rather than pool size: misfire 217 (several casters a floor), cleared 678 (once a floor), descend 674 (once a delve, so the smaller pool is not the thinner draw), epitaphs 1114 (once a death). Added to data/lore_lines.json: misfire 217 -> 237, cleared 678 -> 698, descend 674 -> 682. Frames kept: misfire `%s %s ... (%d vs DC %d)`; cleared one `%d` floor number; descend no placeholder. No floor count stated. Epitaphs not touched (ruling sup-nov27-0209). One draft misfire line collided with an existing one and was replaced before writing. New key `_note_c242`, expected zero-hit, no lane to wire it.
+VALIDATION OK: json.load passes, only misfire/cleared/descend changed, each old list is an unchanged prefix of the new one, only new top-level key is `_note_c242`. No data/drops.json touched (not mine). No code wiring implied.
+
+## U211 - 2026-11-27T18:57:00-06:00 - L74 FEED UNDER LOAD, 100% CAPTURE 1 OF 2: 4 LINES/TICK FLOOD HOLDS, 0 DROPPED (HUD)
+- Item: L74 (feed + theme under load), named by U210's NEXT. Lock: R working copy last line IDLE chat bot B208 18:50:40, tasklist Godot*=0; claimed 18:53:42 (declared finish ~18:59, binding cap 19:07), released 18:55:29 (IDLE line written first).
+- CHANGE (tools/_u202_busy.gd only, my probe; none of my seven .gd changed): U211_RATE env = lines appended per tick in the busy flood (default 1, unchanged behaviour); U211_STATS line prints FeedHUD.stats + queue depths.
+- Parse: --quit-after 300, 0 Parse Error / 0 SCRIPT ERROR (_u211_parse.log).
+- ONE windowed 1920x1080 run, U207_SCALE=1.0, U211_RATE=4 (_u211_run_1.0.log): U211_STATS seen=250 admitted=8 merged=239 dropped=0 dropped_protected=0 min_gap=0.80s pending=3 shown=5; U206_VELLUM runs=3 mode=grid; U207_MARGIN min_vellum=37.1 min_panel=50.0 min_bottom=15.0; U202_DONE checks=28 fails=0.
+- READING: at 4x the old rate the feed collapses the flood by merge (239 of 250) and admits at the 0.8s pace; protected (lord/tavern) lines all survive; readability held. Not yet shown: 125/150% under flood, or a flood of DISTINCT lines (this one merges because texts share a key) - the harder case.
+- Render looked at: renders/cycles/20261127_u207/busy_tavern_s100_1080.png - Chronicle vellum, 5 lines whole, lord-falls + 2 tavern lines present, nothing clipped.
+- NEXT FIRING (19:52): capture 2 of 2 - U211_RATE=4 at 150% AND a distinct-text flood (unique keys) at 100%; running totals above.
 - Not ticked - team lead ticks.

@@ -21,13 +21,13 @@ Prices are list prices: the counter is a CHA check (haggling), and guild rank ta
 | `!oil` | !lamp, !torch | [n] | 12 gold a flask | Buy lamp oil: one flask lights a floor for two delvers. A floor costs a flask at least, however few go down. | `!oil 3` |
 | `!wear` |  | <item> / off <slot> | 30-520 gold, once | Buy and wear an accessory (rings, amulets, cloaks, boots, gloves - small bonuses) or a cosmetic (hats, banners, a pet, a title). Owned things are worn again for nothing. !wear off ring takes one off. | `!wear corgi` |
 | `!dye` |  | <colour> | 25 gold | Dye your armour and cloak: black, white, red, blue, green, gold, purple, teal, brown, grey. | `!dye teal` |
-| `!reroll` |  |  | free when dead; 120 gold alive | Dead: raise a new hero. Alive: throw your ability scores again (a worse throw keeps the old ones). | `!reroll` |
+| `!reroll` |  |  | 120 gold | Throw your hero's ability scores again - a worse throw keeps the old ones. There is no dead hero to replace: a fallen hero wakes in town. | `!reroll` |
 | `!respec` |  | <class> | 200 gold | Take up another calling, keeping your hero. | `!respec cleric` |
 | `!paths` | !path, !roads |  | free | The roads open to your hero's calling - each road's name, what it does, and the first gift it brings. Reading costs nothing and commits nothing. A hero already on a road is told which road, and that it is for good. | `!paths` |
 | `!specialize` | !spec | <path> | free | Sets your hero on one of the roads !paths lists, from the level that road opens. It is permanent - no second choice and no retrain - and the hero learns that road's gifts. Name no road and the roads are named back to you. | `!specialize tracker` |
 | `!guild` | !ranks |  | free | The Guild Roll: who stands highest. (no hero needed) | `!guild` |
 | `!rep` | !standing, !reputation |  | free | Your hero's standing with each townsperson who keeps a ledger - the smithy, the innkeeper, the fishmonger, the chandler and the trader - the count with each and the next mark it reaches. Trade with them and the count rises. Asking changes nothing - it only reports. | `!rep` |
-| `!memorial` |  |  | free | The fallen, newest first. (no hero needed) | `!memorial` |
+| `!memorial` |  |  | free | The falls, newest first. Every one of them woke in town - a war record, not a graveyard. (no hero needed) | `!memorial` |
 | `!deepest` |  |  | free | Who has been furthest down. (no hero needed) | `!deepest` |
 | `!deadliest` |  |  | free | Who has killed the most. (no hero needed) | `!deadliest` |
 | `!richest` |  |  | free | Who carries the most gold. (no hero needed) | `!richest` |

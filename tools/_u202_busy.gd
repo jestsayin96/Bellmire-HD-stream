@@ -145,7 +145,10 @@ func _process(_dt: float) -> bool:
 				_t.feed.append("The lord falls in the deep and the warband scatters")
 			if k >= 201 and k < 201 + 2 * 60 and k % 2 == 1:
 				var j := (k - 201) / 2
-				_t.feed.append("Peasant%d hums a tune near the well" % j)
+				# U211: U211_RATE lines per tick (default 1) - flood the feed faster than it can be read
+				var rate := maxi(1, OS.get_environment("U211_RATE").to_int())
+				for r in rate:
+					_t.feed.append("Peasant%d_%d hums a tune near the well" % [j, r])
 				if j % 15 == 7 and (j / 15) < AMB.size():
 					_t.feed.append(AMB[j / 15])
 			if k == 330:
@@ -176,6 +179,7 @@ func _process(_dt: float) -> bool:
 								alive += 1
 								minpri = mini(minpri, int(e["pri"]))
 								print("U202_LIVE pri=%d '%s'" % [int(e["pri"]), String(e["text"]).left(50)])
+				print("U211_STATS ", fh.stats, " pending=", fh._pending.size(), " shown=", fh._shown.size(), " rate=", OS.get_environment("U211_RATE"))
 				print("U202_ALIVE alive=%d min_pri=%d (log admitted=%d dropped=%d)" % [alive, minpri, admitted, dropped])
 				_ok(alive + dropped >= 0, "counted")
 				_ok(minpri >= 2 or admitted == AMB.size(), "tavern lines classed at P_TOWN or better")

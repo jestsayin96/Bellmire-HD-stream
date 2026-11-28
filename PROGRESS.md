@@ -24517,3 +24517,10 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - Not done: full-screen (no panes) Chronicle is a plain PanelContainer and has no band - the stream always runs the grid. Town-name text in the feed said "hamlet" while the band said level 4 "a village" in the probe (scene was force-fed renown 60); live values come from the same economy.
 - NEXT FIRING: L74 with the band in; also check a level-up moment (band should step 5->6 live).
 - Decision for Mr. E: none. Not ticked - the team lead ticks.
+
+## C-249 (content, 28 Nov 2026, 01:24 CST) - TOWN-FIRST: DISTRICT HOUSES AND ROADS (extends `town_buildings`)
+- TAKE THIS NEXT (00:58 block, CONTENT :22): fill the town progression text for ids C-248 did not cover. C-248 covered 5 landmarks, inn, 4 sites, well, market growth; the 61 ordinary houses (8 districts) and the roads had no text.
+- Added to `data/lore_lines.json` -> `town_buildings`: `districts{keep,temple,garrison,mill,craft,market,homes_s,homes_w}` each `tiers[3]` {name, crier, plaque, see} (24 entries), `roads.tiers[3]` (3 entries), and `_note_c249`. Tier levels 1/5/9 as `tier_levels`; tier 1 patched, tier 3 prosperous. No floor counts.
+- No new data file. Same key as C-248, so nothing new for the audit beyond one `_note_` key. WIRING FOR THE GAME BUILD (not done here): read `town_buildings.districts[<buildings[].district>].tiers[tier-1]` for unlabelled buildings and `town_buildings.roads.tiers` for road tier text; both unwired by design until town visual progression is taken.
+- Validation: json.load OK, every pre-existing key byte-identical (file prefix before the insertion unchanged), all new tiers carry exactly name/crier/plaque/see.
+- Next content: C-250.

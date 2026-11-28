@@ -24822,3 +24822,9 @@ Blender MCP (localhost:9876) refused connection a fourth consecutive firing (U21
 - VALIDATION OK: json.load passes; only new keys are the two blocks and `_note_c253`; every pre-existing key equal to the pre-edit parse; file round-trips byte-exact.
 - WIRING for the game build (unwired by design, /2 loader D93.4): set `words: "shops.<kind>"` on a building whose `shop` is that kind (b036 -> `shops.blacksmith_2`); fire `shop_events.shops[<kind>].to_N.crier` at tier_levels[N].
 - Next content: C-254.
+## HUB H36 - 28 Nov 2026 11:5x CT - My Room: own sheet + satchel Wear/Dye pre-fill; poll no longer wipes the form (HUB)
+- Row: 10:58 block HUB = H36 "keep building the primary interface". Built against the B213b audit's gap (a viewer's own hero/gear was one name line in My Room).
+- NUMBER: typed text survived an 11.5 s poll (kept="typed-by-viewer"); before this change the poll rebuilt the form every 10 s. 2 satchel rows -> 4 quick buttons; 0 imgs in #room with a hostile item name `<img src=x onerror=alert(1)>`.
+- Screenshot looked at (headless Chromium 1440x900, file://, stubbed snapshot): sheet, satchel, form, recent list all render; page does not scroll (900=900); panel scrolls internally. Fault I can see: the full sheet is tall, so the form sits far below it - collapsible, but a pinned-form layout is a possible H37.
+- Live-dot colour unchanged. Hostile-name canary: item name literal in satchel row and pre-filled box. ?state/?mock sweep not re-run beyond default+room (no render path outside #room changed).
+- NOT claiming READY TO PUBLISH (signed-in round trip against live Supabase still unproven). Untracked and named: _hub_msg.txt, _hub_ready_shot.png, _hub_scratch/, web_look3.tar, web_look4.tar. Stash "hub-nov28-1140-prior-plan-sync" holds the older uncommitted plan sync (superseded by merged main).

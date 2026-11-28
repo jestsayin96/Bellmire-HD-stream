@@ -1,5 +1,13 @@
 # The Hall, tiers 1-3 - the measured design, before any of it is built
 
+> **STATUS, 28 Nov 2026 ~03:0x CT: BUILT.** The ladder shipped as
+> `assets/buildings/town_hall_t1/t2/t3.glb` via `tools/art/hallgen.py`,
+> verdict GREEN. **Three numbers in the design below were wrong and the build
+> corrected them - see `docs/art/TOWN_HALL_LADDER.md` for what the pictures
+> said.** The biggest: `Wall_Plaster_WoodGrid` was chosen off its NAME and is
+> an OPEN TIMBER LATTICE, so the first tier-1 render was a hall you could see
+> straight through.
+
 **28 Nov 2026, ~01:5x CT. Art lane.** This is the design handoff for the
 plan's ART row ("the next town progression building, chosen off content's
 `town_buildings` landmark list"). **Nothing here is built yet.** Every number

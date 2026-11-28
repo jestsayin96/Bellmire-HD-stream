@@ -1,0 +1,227 @@
+{
+ "Corner_Exterior_Brick": {
+  "n": 24,
+  "xmin": -4.353,
+  "xmax": 8.178,
+  "ymin": -7.377,
+  "ymax": 7.199,
+  "zmin": -0.007,
+  "zmax": 15.501
+ },
+ "Corner_Exterior_Wood": {
+  "n": 8,
+  "xmin": -4.105,
+  "xmax": 4.105,
+  "ymin": -7.12,
+  "ymax": 7.12,
+  "zmin": 3.123,
+  "zmax": 9.246
+ },
+ "Door_8_Round": {
+  "n": 1,
+  "xmin": 2.937,
+  "xmax": 4.088,
+  "ymin": -7.092,
+  "ymax": -6.892,
+  "zmin": 0.033,
+  "zmax": 2.357
+ },
+ "DoorFrame_Round_Brick": {
+  "n": 1,
+  "xmin": 2.196,
+  "xmax": 3.799,
+  "ymin": -7.182,
+  "ymax": -6.705,
+  "zmin": -0.002,
+  "zmax": 2.584
+ },
+ "Prop_Chimney": {
+  "n": 1,
+  "xmin": 1.74,
+  "xmax": 2.686,
+  "ymin": 2.02,
+  "ymax": 3.02,
+  "zmin": 9.369,
+  "zmax": 12.547
+ },
+ "Roof_Front_Brick8": {
+  "n": 2,
+  "xmin": -4.256,
+  "xmax": 4.256,
+  "ymin": -7.794,
+  "ymax": 7.794,
+  "zmin": 9.237,
+  "zmax": 14.683
+ },
+ "Roof_RoundTiles_8x14": {
+  "n": 1,
+  "xmin": -4.976,
+  "xmax": 4.976,
+  "ymin": -7.829,
+  "ymax": 7.877,
+  "zmin": 8.589,
+  "zmax": 15.37
+ },
+ "Roof_Tower_RoundTiles": {
+  "n": 1,
+  "xmin": 3.175,
+  "xmax": 8.825,
+  "ymin": -7.714,
+  "ymax": -2.286,
+  "zmin": 15.043,
+  "zmax": 22.404
+ },
+ "Wall_Plaster_Straight": {
+  "n": 9,
+  "xmin": -4.092,
+  "xmax": 4.092,
+  "ymin": -7.0,
+  "ymax": 7.092,
+  "zmin": 3.121,
+  "zmax": 9.369
+ },
+ "Wall_Plaster_Window_Wide_Flat": {
+  "n": 9,
+  "xmin": -4.092,
+  "xmax": 4.092,
+  "ymin": -7.092,
+  "ymax": 7.0,
+  "zmin": 3.123,
+  "zmax": 9.369
+ },
+ "Wall_Plaster_Window_Wide_Round": {
+  "n": 12,
+  "xmin": -4.092,
+  "xmax": 4.092,
+  "ymin": -7.092,
+  "ymax": 7.092,
+  "zmin": 3.123,
+  "zmax": 9.369
+ },
+ "Wall_Plaster_WoodGrid": {
+  "n": 14,
+  "xmin": -4.092,
+  "xmax": 4.092,
+  "ymin": -7.092,
+  "ymax": 7.092,
+  "zmin": 3.123,
+  "zmax": 9.369
+ },
+ "Wall_UnevenBrick_Door_Round": {
+  "n": 1,
+  "xmin": 2.0,
+  "xmax": 4.0,
+  "ymin": -7.092,
+  "ymax": -6.686,
+  "zmin": 0.0,
+  "zmax": 3.123
+ },
+ "Wall_UnevenBrick_Straight": {
+  "n": 42,
+  "xmin": -4.092,
+  "xmax": 8.092,
+  "ymin": -7.092,
+  "ymax": 7.092,
+  "zmin": 0.0,
+  "zmax": 15.615
+ },
+ "Wall_UnevenBrick_Window_Thin_Round": {
+  "n": 18,
+  "xmin": -4.092,
+  "xmax": 8.092,
+  "ymin": -7.092,
+  "ymax": 7.092,
+  "zmin": 0.0,
+  "zmax": 15.615
+ },
+ "Wall_UnevenBrick_Window_Wide_Round": {
+  "n": 1,
+  "xmin": 2.0,
+  "xmax": 4.0,
+  "ymin": 6.686,
+  "ymax": 7.092,
+  "zmin": 0.0,
+  "zmax": 3.123
+ },
+ "Window_Thin_Round1": {
+  "n": 18,
+  "xmin": -4.092,
+  "xmax": 8.092,
+  "ymin": -7.092,
+  "ymax": 7.092,
+  "zmin": 1.016,
+  "zmax": 15.113
+ },
+ "Window_Wide_Flat1": {
+  "n": 9,
+  "xmin": -4.417,
+  "xmax": 4.417,
+  "ymin": -7.417,
+  "ymax": 6.804,
+  "zmin": 4.067,
+  "zmax": 8.77
+ },
+ "Window_Wide_Round1": {
+  "n": 13,
+  "xmin": -4.277,
+  "xmax": 4.277,
+  "ymin": -7.277,
+  "ymax": 7.277,
+  "zmin": 1.016,
+  "zmax": 8.988
+ },
+ "WindowShutters_Thin_Round_Closed": {
+  "n": 8,
+  "xmin": -4.288,
+  "xmax": 8.288,
+  "ymin": -7.288,
+  "ymax": 7.288,
+  "zmin": 1.093,
+  "zmax": 15.104
+ },
+ "WindowShutters_Thin_Round_Open": {
+  "n": 10,
+  "xmin": -4.436,
+  "xmax": 8.436,
+  "ymin": -7.436,
+  "ymax": 4.787,
+  "zmin": 1.093,
+  "zmax": 15.104
+ },
+ "WindowShutters_Wide_Flat_Closed": {
+  "n": 3,
+  "xmin": -4.288,
+  "xmax": 4.288,
+  "ymin": -7.288,
+  "ymax": 6.673,
+  "zmin": 4.216,
+  "zmax": 8.763
+ },
+ "WindowShutters_Wide_Flat_Open": {
+  "n": 6,
+  "xmin": -4.593,
+  "xmax": 4.593,
+  "ymin": -7.593,
+  "ymax": 7.242,
+  "zmin": 4.216,
+  "zmax": 8.763
+ },
+ "WindowShutters_Wide_Round_Closed": {
+  "n": 1,
+  "xmin": -1.673,
+  "xmax": -0.327,
+  "ymin": -7.288,
+  "ymax": -7.152,
+  "zmin": 7.339,
+  "zmax": 8.986
+ },
+ "WindowShutters_Wide_Round_Open": {
+  "n": 12,
+  "xmin": -4.563,
+  "xmax": 4.563,
+  "ymin": -7.563,
+  "ymax": 7.563,
+  "zmin": 1.093,
+  "zmax": 8.986
+ }
+}

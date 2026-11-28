@@ -1,0 +1,98 @@
+{
+ "t1": {
+  "gables": [
+   {
+    "name": "gable",
+    "has_uv": false,
+    "world_area": 13.3751,
+    "uv_area": 0.0,
+    "uv_per_m": 0.0,
+    "mats": [
+     "gable_board"
+    ]
+   },
+   {
+    "name": "gable.001",
+    "has_uv": false,
+    "world_area": 13.3751,
+    "uv_area": 0.0,
+    "uv_per_m": 0.0,
+    "mats": [
+     "gable_board"
+    ]
+   }
+  ],
+  "plaster": [
+   {
+    "name": "Wall_Plaster_Straight_inst",
+    "has_uv": true,
+    "world_area": 17.607,
+    "uv_area": 4.061943,
+    "uv_per_m": 0.48031,
+    "mats": [
+     "MI_WoodTrim.001",
+     "MI_Plaster.001"
+    ]
+   },
+   {
+    "name": "Wall_Plaster_Straight_inst.001",
+    "has_uv": true,
+    "world_area": 17.607,
+    "uv_area": 4.061943,
+    "uv_per_m": 0.48031,
+    "mats": [
+     "MI_WoodTrim.001",
+     "MI_Plaster.001"
+    ]
+   }
+  ]
+ },
+ "t2": {
+  "gables": [
+   {
+    "name": "gable",
+    "has_uv": false,
+    "world_area": 46.1034,
+    "uv_area": 0.0,
+    "uv_per_m": 0.0,
+    "mats": [
+     "gable_board"
+    ]
+   },
+   {
+    "name": "gable.001",
+    "has_uv": false,
+    "world_area": 46.1034,
+    "uv_area": 0.0,
+    "uv_per_m": 0.0,
+    "mats": [
+     "gable_board"
+    ]
+   }
+  ],
+  "plaster": [
+   {
+    "name": "Wall_Plaster_Straight_inst",
+    "has_uv": true,
+    "world_area": 17.607,
+    "uv_area": 4.061943,
+    "uv_per_m": 0.48031,
+    "mats": [
+     "MI_WoodTrim.003",
+     "MI_Plaster.003"
+    ]
+   },
+   {
+    "name": "Wall_Plaster_Straight_inst.001",
+    "has_uv": true,
+    "world_area": 17.607,
+    "uv_area": 4.061943,
+    "uv_per_m": 0.48031,
+    "mats": [
+     "MI_WoodTrim.003",
+     "MI_Plaster.003"
+    ]
+   }
+  ]
+ }
+}

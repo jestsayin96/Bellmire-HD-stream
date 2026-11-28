@@ -116,8 +116,16 @@ THATCH2 = (0.36, 0.27, 0.11)      # the shaded course and the ridge roll
 BENCH = (0.33, 0.29, 0.22)
 IRON = (0.14, 0.14, 0.15)
 FLAME = (1.0, 0.72, 0.32)
-BANNER = (0.44, 0.12, 0.11)
-BANNER_TRIM = (0.62, 0.50, 0.20)
+# *** THESE ARE LINEAR, NOT sRGB, AND THAT HAS BITTEN ONCE ALREADY. ***
+# `mat_solid` writes straight into the Principled Base Color socket, which is
+# LINEAR. A value picked as though it were an sRGB swatch therefore renders
+# about two stops light: the gable board sat at (0.44, 0.36, 0.26) and reached
+# the screen as sRGB 177,162,139 - the "flat untextured white" triangle the
+# game build saw on stream. The thatch and bench values below were tuned by
+# eye against a render, so they are left exactly as they are; only the banner,
+# which nobody had ever looked at close up, is restated as a true deep red.
+BANNER = (0.1500, 0.0120, 0.0100)       # = sRGB 0.42, 0.10, 0.09
+BANNER_TRIM = (0.3400, 0.2100, 0.0330)  # = sRGB 0.62, 0.50, 0.20
 
 DROP_INPUTS = ("Normal",)
 FLATTEN_INPUTS = ("Roughness", "Metallic", "Specular IOR Level")
@@ -446,7 +454,97 @@ def thatch(objs, wall_top, half_w, length, overhang, pitch, sag, seed):
             "pitch": pitch, "length": length}
 
 
-def gable(objs, roof, thick=0.26):
+UV_PER_M = 0.48031   # MEASURED, not chosen: uv_area/world_area off
+                     # `Wall_Plaster_Straight` in both shipped tiers
+                     # (renders/art/town/_probe_uv.json) = one texture tile per
+                     # 2.082 m, which IS the kit's 2 m grid.
+
+
+def pack_mat(prefix, fallback_rgb, rough=0.90, metal=0.0):
+    """The PACK material already in the file, by name prefix.
+
+    The gable wore a flat solid colour on every tier shipped so far because
+    nothing ever handed it one of the kit's. Reusing the datablock the wall
+    modules already imported embeds NO new image - the dedupe pass in
+    trim_materials collapses it with the walls' own copy."""
+    cands = sorted((m for m in bpy.data.materials if m.name.startswith(prefix)),
+                   key=lambda m: m.name)
+    if cands:
+        return cands[0]
+    return L.mat_solid(prefix.lower() + "_fallback", fallback_rgb, rough, metal)
+
+
+def uv_world_project(ob, scale=UV_PER_M):
+    """Box-project WORLD coordinates into UVs at the pack's own density.
+
+    *** THIS IS THE HALF OF THE GABLE FIX THAT IS EASY TO MISS. *** The gable
+    meshes shipped with NO UV LAYER AT ALL - measured, `uv_area` 0.0 on both
+    tiers - so simply assigning them a textured material would have sampled a
+    single texel and left them exactly as flat as the solid colour they
+    replaced. A material swap without this is a change that looks like a fix
+    and is not one."""
+    me = ob.data
+    if not me.uv_layers:
+        me.uv_layers.new(name="UVMap")
+    uv = me.uv_layers.active
+    mw = ob.matrix_world
+    rot = mw.to_3x3()
+    for p in me.polygons:
+        n = rot @ p.normal
+        ax = max(range(3), key=lambda i: abs(n[i]))
+        for li in p.loop_indices:
+            w = mw @ me.vertices[me.loops[li].vertex_index].co
+            if ax == 0:
+                u, v = w.y, w.z
+            elif ax == 1:
+                u, v = w.x, w.z
+            else:
+                u, v = w.x, w.y
+            uv.data[li].uv = (u * scale, v * scale)
+
+
+def _plank(objs, mat, sx, sy, sz, loc, ry=0.0):
+    v, f = L.box(sx, sy, sz)
+    ob = L.make("gable_timber", L.xform(v, loc=loc, rot=(0.0, ry, 0.0)), f, mat)
+    uv_world_project(ob)
+    objs.append(ob)
+    return ob
+
+
+def gable_frame(objs, ex, ez, rz, fy, mat, full):
+    """Plain timber framing on the gable face - a tie, a king post, and on the
+    prosperous tier the two barge boards and a pair of struts.
+
+    WEAR IS THE VARIABLE (art rule 2): tier 1 gets the tie and the post only,
+    because a moot hall is make-do; tier 2 gets the full frame. PLAINNESS IS
+    THE VOICE (art rule 1): straight boards, no carving, no device - the
+    pack's own gable on `lm_hall` is framed exactly this way and it is the
+    reference I matched by eye."""
+    ex_f, ez_f, rz_f = ex - 0.10, ez + 0.10, rz - 0.16
+    th = 0.09
+    tie_z = ez_f + 0.15
+    _plank(objs, mat, 2.0 * ex_f, th, 0.30, (0.0, fy, tie_z))
+    post_h = max(0.2, rz_f - (tie_z + 0.15))
+    _plank(objs, mat, 0.24, th, post_h, (0.0, fy, tie_z + 0.15 + post_h / 2.0))
+    if not full:
+        return
+    run = math.hypot(ex_f, rz_f - ez_f)
+    theta = math.atan2(rz_f - ez_f, ex_f)
+    for side in (-1, 1):
+        # ry = +side*theta, NOT -side*theta. Rotation about Y sends (1,0,0) to
+        # (cos a, 0, -sin a), so the board whose centre is at -ex/2 and whose
+        # far end must reach the ridge needs a = -theta. I shipped the sign
+        # inverted on the first pass and the render showed four timbers
+        # crossing the slope and stabbing a metre out past the tile - no
+        # number caught it, the picture did.
+        _plank(objs, mat, run, th, 0.26,
+               (side * ex_f / 2.0, fy, (ez_f + rz_f) / 2.0), ry=side * theta)
+    for side in (-1, 1):
+        _plank(objs, mat, 0.20, th, post_h * 0.62,
+               (side * ex_f * 0.46, fy, tie_z + 0.15 + post_h * 0.31))
+
+
+def gable(objs, roof, thick=0.26, frame="full"):
     """FILL THE GABLE ENDS. The second thing the picture caught and no gate did.
 
     With the walls fixed, the tier-1 render still showed a dark void under the
@@ -462,14 +560,19 @@ def gable(objs, roof, thick=0.26):
     wall top leaves a thin wedge gap along the eave - which is the same fault
     one notch smaller."""
     ex, ez, rz, ln = roof["eave_x"], roof["eave_z"], roof["ridge_z"], roof["length"]
-    m = L.mat_solid("gable_board", (0.44, 0.36, 0.26), 0.90, 0.0)
+    m = pack_mat("MI_Plaster", (0.26, 0.23, 0.18))
+    mw = pack_mat("MI_WoodTrim", (0.09, 0.055, 0.032))
     for side in (-1, 1):
         y0 = side * (ln / 2.0) - thick / 2.0
         y1 = side * (ln / 2.0) + thick / 2.0
         v = [Vector((-ex, y0, ez)), Vector((ex, y0, ez)), Vector((0.0, y0, rz)),
              Vector((-ex, y1, ez)), Vector((ex, y1, ez)), Vector((0.0, y1, rz))]
         f = [(0, 2, 1), (3, 4, 5), (0, 1, 4, 3), (1, 2, 5, 4), (2, 0, 3, 5)]
-        objs.append(L.make("gable", v, f, m))
+        ob = L.make("gable", v, f, m)
+        uv_world_project(ob)
+        objs.append(ob)
+        gable_frame(objs, ex, ez, rz, side * (ln / 2.0 + thick / 2.0 + 0.025),
+                    mw, full=(frame == "full"))
 
 
 def bench(objs, x, y, rz):
@@ -534,7 +637,7 @@ def hall_t1(objs):
     W, D = wall_box(objs, 2, 3, 1, pick, "Corner_Exterior_Wood")
     roof = thatch(objs, wall_top=STOREY, half_w=W / 2.0, length=D, overhang=0.46,
                   pitch=0.86, sag=0.20, seed="hall_t1")
-    gable(objs, roof)
+    gable(objs, roof, frame="simple")
     core = list(objs)                      # walls + roof + gable; the BUILDING
     bench(objs, x=W / 2.0 - 0.6, y=-D / 2.0 - 0.55, rz=0.0)
     return {"footprint_m": [W, D], "storeys": 1, "core": core}
@@ -584,6 +687,134 @@ def hall_t2(objs):
     return {"footprint_m": [W, D], "storeys": 2, "core": core}
 
 
+def _body_tris(body):
+    dg = bpy.context.evaluated_depsgraph_get()
+    out = []
+    for o in body:
+        if o.type != 'MESH':
+            continue
+        oe = o.evaluated_get(dg)
+        me = oe.to_mesh()
+        mw = o.matrix_world
+        vs = [mw @ v.co for v in me.vertices]
+        me.calc_loop_triangles()
+        for t in me.loop_triangles:
+            out.append(tuple(vs[i] for i in t.vertices))
+        oe.to_mesh_clear()
+    return out
+
+
+def free_ground_rect(body, mn, mx, cell=0.25, zlo=0.02, zhi=1.60, margin=0.0):
+    """The largest EMPTY ground rectangle inside the body's own footprint.
+
+    *** THE INSTRUMENT THAT CAME FIRST WAS WRONG AND I THREW IT AWAY. *** My
+    first pass sampled VERTICES onto the grid, and a flat wall panel has
+    vertices only at its corners, so it reported wide empty bands straight
+    through solid walls. This rasterises TRIANGLE BOUNDING BOXES, which
+    over-marks rather than under-marks - and over-marking is the safe
+    direction when the question is "where may I build".
+    IT MUST ALSO GO RED ON EMPTY: a run that finds no free ground at all
+    returns a zero rectangle and the caller's assert fires, rather than
+    quietly laying nothing and passing.
+    `margin` is 0 ON PURPOSE. The rasterisation already over-marks by one
+    cell on every side, so the rectangle is inset from real geometry by up to
+    0.25 m before anything else is subtracted; adding a second margin on top
+    of that cost a whole 2 m tile column and shrank the court to four tiles.
+    The measured exterior rectangle on `lm_hall` is 4.00 x 10.00 m."""
+    import numpy as np
+    nx = max(1, int((mx.x - mn.x) / cell))
+    ny = max(1, int((mx.y - mn.y) / cell))
+    occ = np.zeros((ny, nx), dtype=bool)
+    for tri in _body_tris(body):
+        zs = [p.z for p in tri]
+        if max(zs) < zlo or min(zs) > zhi:
+            continue
+        c0 = max(0, int((min(p.x for p in tri) - mn.x) / cell) - 1)
+        c1 = min(nx - 1, int((max(p.x for p in tri) - mn.x) / cell) + 1)
+        r0 = max(0, int((min(p.y for p in tri) - mn.y) / cell) - 1)
+        r1 = min(ny - 1, int((max(p.y for p in tri) - mn.y) / cell) + 1)
+        occ[r0:r1 + 1, c0:c1 + 1] = True
+    # *** AND NOW THROW AWAY THE INSIDE OF THE BUILDING. ***
+    # The first version of this routine returned the largest free rectangle
+    # full stop, and on `lm_hall` that is the NAVE INTERIOR - 6.0 x 12.0 m,
+    # bigger than any yard outside - so the run laid eighteen paving tiles
+    # INSIDE THE HALL and both my overhang gate and my tile-count gate called
+    # it GREEN. A court nobody can see is the subject being absent while the
+    # gate reads pass, which is the one failure mode this lane is told to go
+    # looking for. Only ground reachable from OUTSIDE is ground: flood-fill
+    # the free cells from the border and treat anything enclosed as solid.
+    from collections import deque
+    reach = np.zeros_like(occ)
+    dq = deque()
+    for c in range(nx):
+        for r in (0, ny - 1):
+            if not occ[r, c] and not reach[r, c]:
+                reach[r, c] = True
+                dq.append((r, c))
+    for r in range(ny):
+        for c in (0, nx - 1):
+            if not occ[r, c] and not reach[r, c]:
+                reach[r, c] = True
+                dq.append((r, c))
+    while dq:
+        r, c = dq.popleft()
+        for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            r2, c2 = r + dr, c + dc
+            if 0 <= r2 < ny and 0 <= c2 < nx and not occ[r2, c2] and not reach[r2, c2]:
+                reach[r2, c2] = True
+                dq.append((r2, c2))
+    occ = occ | ~reach
+    # largest all-free axis-aligned rectangle, histogram method
+    best = (0, 0, 0, 0, 0)
+    h = np.zeros(nx, dtype=int)
+    for r in range(ny):
+        h = np.where(occ[r], 0, h + 1)
+        stack = []
+        for c in range(nx + 1):
+            cur = h[c] if c < nx else 0
+            start = c
+            while stack and stack[-1][1] >= cur:
+                st, ht = stack.pop()
+                area = ht * (c - st)
+                if area > best[0]:
+                    best = (area, st, r - ht + 1, c - 1, r)
+                start = st
+            stack.append((start, cur))
+    area, c0, r0, c1, r1 = best
+    if area <= 0:
+        return (0.0, 0.0, 0.0, 0.0)
+    x0 = mn.x + c0 * cell + margin
+    y0 = mn.y + r0 * cell + margin
+    x1 = mn.x + (c1 + 1) * cell - margin
+    y1 = mn.y + (r1 + 1) * cell - margin
+    return (x0, y0, x1, y1)
+
+
+def gable_panel(body):
+    """The gable, taken from the pack's OWN named infill panel.
+
+    *** THREE HEURISTICS IN A ROW GOT THIS WRONG AND THE PANEL WAS SITTING
+    *** THERE NAMED THE WHOLE TIME. ***
+    Binning x over a tall band mixed a full-width storey with the narrowing
+    triangle and put the centre at x +1.60; binning over the banner band
+    picked the TOWER, which is the widest thing at that height, and put it at
+    +3.87; and measuring the wall plane at the eave rather than at the banners
+    buried them inside the wall. `lm_hall.glb` carries `Roof_Front_Brick8` -
+    two objects, the south and north gable infills - and measuring it answers
+    all of it at once: x -4.256..4.256, so the centre is EXACTLY 0.0; z
+    9.237..14.683, so the triangle is 5.446 m tall; and the half-width at any
+    height is that centre width scaled by how far up the triangle you are.
+    When a part has a name, measure the part."""
+    sel = [o for o in body
+           if o.type == 'MESH' and o.name.split('.')[0].startswith("Roof_Front")]
+    if not sel:
+        return None
+    pts = [o.matrix_world @ v.co for o in sel for v in o.data.vertices]
+    x0, x1 = min(p.x for p in pts), max(p.x for p in pts)
+    z0, z1 = min(p.z for p in pts), max(p.z for p in pts)
+    return (x0 + x1) / 2.0, (x1 - x0) / 2.0, z0, z1
+
+
 def hall_t3(objs):
     """TIER 3 - THE HALL OF BELLMIRE. Stone and tower, banners, a paved court.
 
@@ -611,25 +842,93 @@ def hall_t3(objs):
     bpy.context.view_layer.update()
     mn, mx, _ = G.world_bounds(body)
     W, D = mx.x - mn.x, mx.y - mn.y
-    # the paved court, on the kit's own 2 m grid, in front of the south face
-    y_front = mn.y
-    for i in range(-2, 3):
-        for j in range(2):
-            place("Floor_Brick", (((mn.x + mx.x) / 2.0) + i * GRID,
-                                  y_front - 1.0 - j * GRID, 0.01), 0.0, objs)
-    # the railing along the court's outer edge
-    for i in (-2, -1, 0, 1, 2):
+
+    # *** THE COURT MOVES INSIDE THE PLOT. THIS IS A DEFECT FIX IN MY OWN
+    # *** SHIPPED WORK, 28 Nov. ***
+    # What shipped: the court was laid in front of the south face and the
+    # railing 4 m beyond it, which made tier 3 measure 19.784 m deep against a
+    # plot that allows 15.70 - a 4.078 m overhang, and the iron railing landed
+    # ACROSS THE ROAD. `TOWN_TIER_FIT_SPEC.md` section 2 predicted it from the
+    # numbers and the game build then saw it on stream.
+    # Why it cannot simply be made shallower: the hall body is 13.801 x 15.706
+    # and the plot allows 13.80 x 15.70, so there is NO ground at all in front
+    # of the south door. Anything laid there overhangs by construction.
+    # So the court goes where there IS free ground inside the plot, and the
+    # free ground is MEASURED, not chosen - `free_ground_rect` rasterises every
+    # triangle of the body between z 0.02 and 1.60 and returns the largest
+    # empty rectangle. On `lm_hall` that is the open strip EAST of the nave and
+    # NORTH of the tower. Widening the plot instead is explicitly forbidden by
+    # the spec: that pushes an art defect into content's authored town.
+    fx0, fy0, fx1, fy1 = free_ground_rect(body, mn, mx)
+    tile = GRID
+    ncx = int((fx1 - fx0) // tile)
+    ncy = int((fy1 - fy0) // tile)
+    cx0 = fx0 + ((fx1 - fx0) - ncx * tile) / 2.0
+    cy0 = fy0 + ((fy1 - fy0) - ncy * tile) / 2.0
+    court = []
+    for i in range(ncx):
+        for j in range(ncy):
+            place("Floor_Brick", (cx0 + (i + 0.5) * tile,
+                                  cy0 + (j + 0.5) * tile, 0.01), 0.0, court)
+    # the railing along the court's OUTER (east) edge, inside the plot
+    rail_x = cx0 + ncx * tile - 0.25
+    span = ncy * tile
+    nrail = max(1, int(span // 1.9523))
+    r0 = cy0 + (span - nrail * 1.9523) / 2.0
+    for i in range(nrail):
         place("Prop_MetalFence_Ornament",
-              (((mn.x + mx.x) / 2.0) + i * 1.9523, y_front - 3.0 - 1.0, 0.0), 0.0, objs)
-    # banners on the gable face, flanking the centre line
-    cx = (mn.x + mx.x) / 2.0
-    for s in (-1, 1):
-        banner(objs, x=cx + s * 2.1, y=y_front - 0.35, z_top=9.6, w=1.15, h=3.4, rz=0.0)
+              (rail_x, r0 + (i + 0.5) * 1.9523, 0.0), math.pi / 2.0, court)
+    objs.extend(court)
+
+    # banners on the gable face. The shipped pair hung off the ASSEMBLY centre
+    # (x +1.92), which put one of them over the tower junction, and 0.35 m
+    # PROUD OF THE BOUNDING BOX - a second overhang nobody had counted. Both
+    # numbers are now measured off the gable itself.
+    gp = gable_panel(body)
+    if gp is None:
+        raise SystemExit("hall_t3: no Roof_Front* gable panel in lm_hall.glb - "
+                         "the banners have nothing measured to hang on")
+    gcx, ghalf, gz0, gz1 = gp
+    bw, bh, frac = 0.80, 2.40, 0.69
+    z_top = gz0 + frac * (gz1 - gz0)
+    avail = ghalf * (1.0 - frac)            # half-width of the triangle there
+    bx = min(1.30, max(0.55, avail - bw / 2.0 - 0.10))
+    # y: the bar is 0.09 deep, so centring it 0.045 inside the body's own
+    # southern limit puts its outer face EXACTLY on that limit and adds not
+    # one millimetre to the footprint - which is the whole point of this run.
+    # It still stands proud of the gable panel, because the roof laps 0.035
+    # past the panel and the banner only has to clear the panel.
+    by = mn.y + 0.045
+    for sgn in (-1, 1):
+        banner(objs, x=gcx + sgn * bx, y=by, z_top=z_top, w=bw, h=bh, rz=0.0)
     return {"footprint_m": [round(W, 3), round(D, 3)], "storeys": "3 + tower",
-            "source": "lm_hall.glb re-centred, NOT rebuilt", "core": core}
+            "source": "lm_hall.glb re-centred, NOT rebuilt",
+            "court_rect_m": [round(v, 3) for v in (cx0, cy0,
+                                                   cx0 + ncx * tile,
+                                                   cy0 + ncy * tile)],
+            "court_tiles": ncx * ncy,
+            "gable_panel": [round(gcx, 3), round(ghalf, 3), round(gz0, 3),
+                            round(gz1, 3)],
+            "banner_xz": [round(bx, 3), round(z_top, 3), round(by, 3)],
+            "core": core}
 
 
 BUILDERS = {"hall_t1": hall_t1, "hall_t2": hall_t2, "hall_t3": hall_t3}
+
+
+def plot_budget(landmark):
+    """The plot the town actually authored, read off `data/town/bellmire.json`.
+
+    Not a constant in this file and not a number remembered from the spec:
+    the budget is content's data and it is the thing a tier must fit inside.
+    `half` is a half-extent, so the budget is twice it."""
+    p = os.path.join(W5, "data", "town", "bellmire.json")
+    d = json.load(open(p, encoding="utf-8"))
+    for b in d.get("buildings", []):
+        if b.get("landmark") == landmark or b.get("shape") == landmark:
+            h = b["half"]
+            return round(2.0 * h[0], 4), round(2.0 * h[1], 4)
+    raise SystemExit("plot_budget: no plot for %s in %s" % (landmark, p))
 
 
 def build(key, px):
@@ -670,6 +969,32 @@ def build(key, px):
         "n_obj": len(objs),
         "n_tri": sum(len(o.data.polygons) for o in objs if o.type == 'MESH'),
     })
+
+    # *** THE GATE THAT WOULD HAVE CAUGHT THE 4.08 m OVERHANG, AND DID NOT
+    # *** EXIST WHEN I SHIPPED IT. ***
+    # The plot IS the body's footprint (spec section 1b: the plots were
+    # authored to the pack buildings' exact footprints, agreeing to 6 mm), so
+    # the budget needs no second source: NO DRESSING MAY PROJECT BEYOND THE
+    # BODY. Tier 3 shipped 4.078 m past it and every existing check passed.
+    # AND IT GOES RED ON EMPTY. Ask what a PASS looks like with the subject
+    # absent: drop the court and the railing altogether and the overhang test
+    # passes perfectly. So the court is counted too, and zero is a failure.
+    bw, bh = plot_budget("lm_hall")
+    fx, fy = round(mx2.x - mn2.x, 4), round(mx2.y - mn2.y, 4)
+    meta["plot_budget_m"] = [bw, bh]
+    meta["footprint_vs_plot_m"] = [round(fx - bw, 4), round(fy - bh, 4)]
+    bad = []
+    if fx > bw + 0.01 or fy > bh + 0.01:
+        bad.append("footprint %.3f x %.3f EXCEEDS plot %.2f x %.2f"
+                   % (fx, fy, bw, bh))
+    if key == "hall_t3" and meta.get("court_tiles", 0) < 6:
+        bad.append("tier 3 has %d court tiles - content's line says a PAVED "
+                   "COURT and an empty plot would pass the overhang test"
+                   % meta.get("court_tiles", 0))
+    meta["fit_gate"] = "GREEN" if not bad else "RED"
+    meta["fit_gate_faults"] = bad
+    if bad:
+        raise SystemExit("FIT GATE RED for %s: %s" % (key, "; ".join(bad)))
     return objs, meta
 
 

@@ -1,0 +1,263 @@
+{
+ "banner": {
+  "n": 2,
+  "zmin": 6.207,
+  "zmax": 9.607,
+  "xmin": -2.999,
+  "xmax": 2.351,
+  "ymin": -7.18,
+  "ymax": -7.13
+ },
+ "banner_bar": {
+  "n": 2,
+  "zmin": 9.552,
+  "zmax": 9.662,
+  "xmin": -3.045,
+  "xmax": 2.397,
+  "ymin": -7.2,
+  "ymax": -7.11
+ },
+ "Corner_Exterior_Brick": {
+  "n": 24,
+  "zmin": 0.0,
+  "zmax": 15.508,
+  "xmin": -6.278,
+  "xmax": 6.253,
+  "ymin": -7.401,
+  "ymax": 7.175
+ },
+ "Corner_Exterior_Wood": {
+  "n": 8,
+  "zmin": 3.13,
+  "zmax": 9.253,
+  "xmin": -6.03,
+  "xmax": 2.18,
+  "ymin": -7.144,
+  "ymax": 7.096
+ },
+ "Door_8_Round": {
+  "n": 1,
+  "zmin": 0.04,
+  "zmax": 2.364,
+  "xmin": 1.012,
+  "xmax": 2.164,
+  "ymin": -7.116,
+  "ymax": -6.916
+ },
+ "DoorFrame_Round_Brick": {
+  "n": 1,
+  "zmin": 0.005,
+  "zmax": 2.592,
+  "xmin": 0.271,
+  "xmax": 1.874,
+  "ymin": -7.206,
+  "ymax": -6.729
+ },
+ "Floor_Brick_inst": {
+  "n": 10,
+  "zmin": 0.007,
+  "zmax": 0.027,
+  "xmin": 2.849,
+  "xmax": 6.849,
+  "ymin": -2.353,
+  "ymax": 7.647
+ },
+ "Prop_Chimney": {
+  "n": 1,
+  "zmin": 9.376,
+  "zmax": 12.554,
+  "xmin": -0.185,
+  "xmax": 0.761,
+  "ymin": 1.996,
+  "ymax": 2.996
+ },
+ "Prop_MetalFence_Ornament_inst": {
+  "n": 5,
+  "zmin": 0.007,
+  "zmax": 2.859,
+  "xmin": 6.521,
+  "xmax": 6.677,
+  "ymin": -2.231,
+  "ymax": 7.531
+ },
+ "Roof_Front_Brick8": {
+  "n": 2,
+  "zmin": 9.244,
+  "zmax": 14.69,
+  "xmin": -6.181,
+  "xmax": 2.331,
+  "ymin": -7.818,
+  "ymax": 7.77
+ },
+ "Roof_RoundTiles_8x14": {
+  "n": 1,
+  "zmin": 8.596,
+  "zmax": 15.377,
+  "xmin": -6.901,
+  "xmax": 3.051,
+  "ymin": -7.853,
+  "ymax": 7.853
+ },
+ "Roof_Tower_RoundTiles": {
+  "n": 1,
+  "zmin": 15.05,
+  "zmax": 22.411,
+  "xmin": 1.25,
+  "xmax": 6.901,
+  "ymin": -7.738,
+  "ymax": -2.311
+ },
+ "Wall_Plaster_Straight": {
+  "n": 9,
+  "zmin": 3.128,
+  "zmax": 9.376,
+  "xmin": -6.017,
+  "xmax": 2.168,
+  "ymin": -7.024,
+  "ymax": 7.068
+ },
+ "Wall_Plaster_Window_Wide_Flat": {
+  "n": 9,
+  "zmin": 3.13,
+  "zmax": 9.376,
+  "xmin": -6.017,
+  "xmax": 2.168,
+  "ymin": -7.117,
+  "ymax": 6.976
+ },
+ "Wall_Plaster_Window_Wide_Round": {
+  "n": 12,
+  "zmin": 3.13,
+  "zmax": 9.376,
+  "xmin": -6.017,
+  "xmax": 2.168,
+  "ymin": -7.117,
+  "ymax": 7.068
+ },
+ "Wall_Plaster_WoodGrid": {
+  "n": 14,
+  "zmin": 3.13,
+  "zmax": 9.376,
+  "xmin": -6.017,
+  "xmax": 2.168,
+  "ymin": -7.117,
+  "ymax": 7.068
+ },
+ "Wall_UnevenBrick_Door_Round": {
+  "n": 1,
+  "zmin": 0.007,
+  "zmax": 3.13,
+  "xmin": 0.075,
+  "xmax": 2.075,
+  "ymin": -7.117,
+  "ymax": -6.71
+ },
+ "Wall_UnevenBrick_Straight": {
+  "n": 42,
+  "zmin": 0.007,
+  "zmax": 15.622,
+  "xmin": -6.017,
+  "xmax": 6.168,
+  "ymin": -7.117,
+  "ymax": 7.068
+ },
+ "Wall_UnevenBrick_Window_Thin_Round": {
+  "n": 18,
+  "zmin": 0.007,
+  "zmax": 15.622,
+  "xmin": -6.017,
+  "xmax": 6.168,
+  "ymin": -7.117,
+  "ymax": 7.068
+ },
+ "Wall_UnevenBrick_Window_Wide_Round": {
+  "n": 1,
+  "zmin": 0.007,
+  "zmax": 3.13,
+  "xmin": 0.075,
+  "xmax": 2.075,
+  "ymin": 6.662,
+  "ymax": 7.068
+ },
+ "Window_Thin_Round1": {
+  "n": 18,
+  "zmin": 1.023,
+  "zmax": 15.12,
+  "xmin": -6.017,
+  "xmax": 6.168,
+  "ymin": -7.117,
+  "ymax": 7.068
+ },
+ "Window_Wide_Flat1": {
+  "n": 9,
+  "zmin": 4.074,
+  "zmax": 8.777,
+  "xmin": -6.341,
+  "xmax": 2.492,
+  "ymin": -7.441,
+  "ymax": 6.78
+ },
+ "Window_Wide_Round1": {
+  "n": 13,
+  "zmin": 1.023,
+  "zmax": 8.995,
+  "xmin": -6.202,
+  "xmax": 2.353,
+  "ymin": -7.301,
+  "ymax": 7.253
+ },
+ "WindowShutters_Thin_Round_Closed": {
+  "n": 8,
+  "zmin": 1.1,
+  "zmax": 15.111,
+  "xmin": -6.213,
+  "xmax": 6.364,
+  "ymin": -7.312,
+  "ymax": 7.264
+ },
+ "WindowShutters_Thin_Round_Open": {
+  "n": 10,
+  "zmin": 1.1,
+  "zmax": 15.111,
+  "xmin": -6.36,
+  "xmax": 6.511,
+  "ymin": -7.46,
+  "ymax": 4.763
+ },
+ "WindowShutters_Wide_Flat_Closed": {
+  "n": 3,
+  "zmin": 4.223,
+  "zmax": 8.77,
+  "xmin": -6.213,
+  "xmax": 2.364,
+  "ymin": -7.312,
+  "ymax": 6.649
+ },
+ "WindowShutters_Wide_Flat_Open": {
+  "n": 6,
+  "zmin": 4.223,
+  "zmax": 8.77,
+  "xmin": -6.518,
+  "xmax": 2.669,
+  "ymin": -7.617,
+  "ymax": 7.218
+ },
+ "WindowShutters_Wide_Round_Closed": {
+  "n": 1,
+  "zmin": 7.346,
+  "zmax": 8.994,
+  "xmin": -3.598,
+  "xmax": -2.251,
+  "ymin": -7.312,
+  "ymax": -7.177
+ },
+ "WindowShutters_Wide_Round_Open": {
+  "n": 12,
+  "zmin": 1.1,
+  "zmax": 8.994,
+  "xmin": -6.488,
+  "xmax": 2.639,
+  "ymin": -7.587,
+  "ymax": 7.539
+ }
+}

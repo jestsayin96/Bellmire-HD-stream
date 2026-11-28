@@ -1881,3 +1881,16 @@ html.watch .suggest-send { background: var(--teal-ink); color: var(--parch); }
 /* S157: specialization line on the hero card and sheet (snapshot text, textContent only) */
 .hspec, .sspec { display: block; font-size: 0.78rem; letter-spacing: 0.04em; color: var(--teal-ink, #0e6a66); font-weight: 600; }
 .hspec { margin-top: 1px; }
+
+/* S162: corpse-run bags as skull markers, grouped by floor. No new colour: --dead for the skull, teal for an open bag. */
+.bagsbox { margin: 0 0 16px; }
+ol.bagmap, ul.bagmarks { list-style: none; margin: 0; padding: 0; }
+.bagfloor { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; border-top: 1px solid rgba(233,214,168,.12); }
+.bagfl { flex: none; min-width: 64px; font-weight: 700; color: var(--parch-dim); }
+.bagmarks { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.bagmark { display: flex; gap: 8px; align-items: flex-start; padding: 6px 10px; border: 1px solid rgba(233,214,168,.14); border-left: 3px solid var(--dead); border-radius: 0 7px 7px 0; background: rgba(233,214,168,.06); min-width: 0; }
+.bagmark.open { border-left-color: var(--teal-br, var(--teal)); }
+.bagskull { flex: none; width: 18px; height: 18px; color: var(--dead); }
+.bagbody { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
+.bagbody b { color: var(--parch-hi); }
+.bagloot, .bagstate { font-size: .86rem; color: var(--parch-dim); }

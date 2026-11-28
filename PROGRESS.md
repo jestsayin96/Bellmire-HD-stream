@@ -24307,3 +24307,4 @@ VALIDATION OK: json.load passes, each old list is an unchanged prefix of the new
 - The 3 parse ERRORs are the same pre-existing `assets/graveyard/character-keeper.glb` worktree import-cache gap named in the 19:51 lock line, 3 occurrences, unchanged by any of this.
 - No Twitch message, nothing redeemed, nothing cheered, ZERO BITS.
 - Not ticked - the team lead ticks.
+- 2026-11-27 hub: bags skull markers landed. NUMBER: 3 mock bags on 2 floors rendered in The Fallen; 0 page errors across ?mock=bags/chronicle/crowd/satchel and ?state=empty/fail; hostile <img onerror> name rendered as literal text, 0 dialogs; 0 new innerHTML sites (still app.js:255, :301).

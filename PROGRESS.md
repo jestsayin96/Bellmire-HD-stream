@@ -17809,3 +17809,14 @@ Item: the 08:58 TAKE THIS NEXT block's HUD row - fix the `pri=1` admission U201 
 - No .gd of my seven changed; no render viewed this firing (probe-only, margins numeric).
 - NEXT FIRING (18:52): read R's RUN_LOCK working copy; then L74 (feed + theme under load) - a probe flooding feed_hud.gd faster than readable, at 100/125/150%.
 - Not ticked - team lead ticks.
+
+
+## U211 - 2026-11-27T18:57:00-06:00 - L74 FEED UNDER LOAD, 100% CAPTURE 1 OF 2: 4 LINES/TICK FLOOD HOLDS, 0 DROPPED (HUD)
+- Item: L74 (feed + theme under load), named by U210's NEXT. Lock: R working copy last line IDLE chat bot B208 18:50:40, tasklist Godot*=0; claimed 18:53:42 (declared finish ~18:59, binding cap 19:07), released 18:55:29 (IDLE line written first).
+- CHANGE (tools/_u202_busy.gd only, my probe; none of my seven .gd changed): U211_RATE env = lines appended per tick in the busy flood (default 1, unchanged behaviour); U211_STATS line prints FeedHUD.stats + queue depths.
+- Parse: --quit-after 300, 0 Parse Error / 0 SCRIPT ERROR (_u211_parse.log).
+- ONE windowed 1920x1080 run, U207_SCALE=1.0, U211_RATE=4 (_u211_run_1.0.log): U211_STATS seen=250 admitted=8 merged=239 dropped=0 dropped_protected=0 min_gap=0.80s pending=3 shown=5; U206_VELLUM runs=3 mode=grid; U207_MARGIN min_vellum=37.1 min_panel=50.0 min_bottom=15.0; U202_DONE checks=28 fails=0.
+- READING: at 4x the old rate the feed collapses the flood by merge (239 of 250) and admits at the 0.8s pace; protected (lord/tavern) lines all survive; readability held. Not yet shown: 125/150% under flood, or a flood of DISTINCT lines (this one merges because texts share a key) - the harder case.
+- Render looked at: renders/cycles/20261127_u207/busy_tavern_s100_1080.png - Chronicle vellum, 5 lines whole, lord-falls + 2 tavern lines present, nothing clipped.
+- NEXT FIRING (19:52): capture 2 of 2 - U211_RATE=4 at 150% AND a distinct-text flood (unique keys) at 100%; running totals above.
+- Not ticked - team lead ticks.

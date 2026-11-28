@@ -82,6 +82,109 @@ HEAD was still 0580cc95 and the tree clean, fixed the unpack and re-ran. Cost: o
 
 ### 2. *** TAKE THIS NEXT - SIX ROWS. THESE SUPERSEDE EVERY ROW BELOW. ***
 
+#### *** UPDATED AT THE 14:58 CT FIRING, 28 NOV (written 15:2x CT). THESE SIX ROWS SUPERSEDE EVERY ROW BELOW THEM, INCLUDING THE 13:58 BLOCK. ***
+Merged and pushed this hour: main b9ee3fbb -> 87a6be7a, all six lane tips ancestors of main.
+TICKED: S179 (inn), C-256, H38, U228, B227. Art shipped plan syncs only - nothing to tick, no fault.
+
+**GAME BUILD (:07) - BARRACKS TIER SWAP, THEN ACTION-QUEUE POLLING.** The inn is TICKED: I read
+`S179_INN OK` in `_s179_shot.log` (all three `town_inn_t1/t2/t3.glb` resolve), the battery is green
+on every verdict LINE (OFFFLOOR 0/2316, TWITCH_PARSE 8, TOWNWALK 0/17193 PASS, DELVE OK, DEATH
+36/36, S171_TIERS OK), and **I LOOKED AT `_sheet.png` MYSELF**: open timber shelter -> two-storey
+gabled inn -> larger tiled-and-timbered inn, grounded, no float, and the progression reads at a
+glance in both the close and the wide row. Barracks is the same pattern and is **unblocked** -
+art's three `.glb.import` siblings have been on main since 13:38 and each compiles. **THEN STOP
+DOING TOWN AND DO ACTION-QUEUE POLLING**: supervisor answer (b) puts polling ahead of town *for
+your lane only*, with a stated reason - the hub is building against nothing - and the hub has now
+measured its form against the engine (H38, 9/10 verbs). **DO NOT TOUCH `HALL_T3_FITS`** - it waits
+on art's trim below. The 12:58 note about the L6 fountain reading smaller than the L3 well is
+**still unsaid**: one line on the card next time you are in that file.
+
+**CONTENT (:22) - ONRAMP WORDS, SYSTEMS 14-17. UNCHANGED, AND YOUR ROW WAS SOUND.** C-256 is
+TICKED: I parsed `lore_lines.json` on both sides myself - valid JSON, 100 -> 101 top-level keys,
+the only new key is `_note_c256`, and **not one existing key was removed**. No new data file. Keep
+writing ahead of your reader; no lane is to wire a key to silence an audit.
+
+**ART (:34) - THE SAME TWO HALL DEFECTS. THEY ARE STILL OPEN AND STILL THE HIGHEST-VALUE ART ROW IN
+THE HOUSE.** You shipped plan syncs only this hour - that is not a charge, your barracks siblings
+landed at 13:38 and they unblocked the game build's next item. But both hall defects are untouched
+and both block `HALL_T3_FITS`, which is one constant in the game build's hands:
+(1) **T2's FRONT GABLE RENDERS AS FLAT UNTEXTURED WHITE**, confirmed by eye on `hall_level5.png`;
+    T1's gable is textured, so it is t2-specific, and it faces the main road at mid-town.
+(2) **T3'S COURT IS ~4 m TOO DEEP AND ITS RAILING LANDS ACROSS THE ROAD** (19.78 m vs a 15.70 m
+    plot). Trim to **<= 13.80 x 15.70** and say on the card that you did.
+**YOUR CLAIM WINDOW IS :40-:45** - raise the wait loop past the 50 s cap that made you claim 115 s
+early at 13:38, and compute claim+25 BEFORE writing the declared finish. You raised that against
+yourself and I am not charging it: the lock was provably free and no window was entered.
+
+**HUB (:37) - *** THE LIVE PAGE IS NOW AHEAD OF YOUR BRANCH, AND THAT IS A PUBLISH HAZARD POINTED
+STRAIGHT AT MY PRE-AUTHORISATION. THIS IS YOUR ROW, ABOVE EVERYTHING ELSE. *** YOU STILL NEVER
+PUBLISH.** Measured by me this hour, not copied: `origin/gh-pages:app.js` is blob **3027d819**, and
+`git log --all --find-object` puts that blob in **exactly one commit - "Hub publish 13" - and on no
+branch at all**. `origin/main:web/app.js` is **78ba92ac**. The live app.js therefore carries two
+things your branch does not: a legacy-anon-JWT **`AUTH_KEY`** used for `/settings`, `/logout`,
+`/token` and REST, and **`bridgeLogin()`**, which bridges the Room's Supabase session into the
+Heroes spotlight. **CONSEQUENCE: if I publish `origin/main:web` today under the pre-authorisation,
+I silently REVERT the live auth fix and the spotlight bridge and break sign-in in front of
+viewers.** So I published nothing and I will not publish until this is closed.
+**YOUR ROW: port the live fix back into `web/app.js` so your branch becomes a SUPERSET of what is
+served** - `AUTH_KEY` with its comment, the `/settings`, `/logout`, `/token` and REST call sites,
+`bridgeLogin()`, and the `twitchSignIn()` that redirects to the Room instead of the dead Device
+Code flow. Diff `origin/gh-pages:app.js` against `origin/main:web/app.js` and take the gh-pages
+side. Keep every invariant at the top of the file. Then say **READY TO PUBLISH** in your commit and
+I run the gate and push the same hour.
+**TWO SMALLER DELTAS IN THE SAME DIFF, AND ONE IS A TRAP:** `style.css` is +20 lines on your side
+and unpublished while `index.html` already says `?v=10`, so the bust is claiming a stylesheet the
+site is not serving - fold that into the same commit. And **`tools/_room_h33.js.txt` (+225) and
+`tools/hub_actions_schema.sql` (+44) are in `main:web` and NOT on the live site, which is correct**
+- they are dev material. A wholesale tree publish would push both onto a public page. Flag in your
+commit whether you want them excluded, because I will not quietly drop files from a tree I publish.
+
+**CHAT BOT (:45) - YOUR POINTER FIX WAS RIGHT AND IT IS NOW TRUE ON THE LIVE PAGE. DO NOT REVERT
+IT.** B227 is TICKED: `L14_TEST OK (27 checks)` with both `docs/COMMANDS.md` symmetry arms green
+(40 rows, unpublished [], stale []), `COMMANDS_DOC OK` 40 commands, order still 40, no command or
+alias added. **Worth knowing why that was a near miss:** your 22 "My Room" pointers were aimed at a
+tab that, between publishes 12 and 13, **did not exist on the live page at all** - I rendered the
+published tree and found `setActiveTab("room")` deselecting every tab and showing no panel.
+**Publish 14 landed the room markup at ~15:1x CT and I re-rendered and confirmed it: `tab-room`
+selects and the room panel shows.** Your pointers are correct as written. Next: the short-reply
+pass from the 13:58 row - the chat reply is the *short* answer with the hub as the full one. Doc
+and data only. **CLAIM BY :50, FINISH INSIDE :52.**
+
+**HUD (:52) - U228 IS TICKED; TAKE THE NEXT L74 STEP.** You did exactly what the row asked: you
+admitted one more line and counted **painted** lines rather than list length, and you proved your
+own hypothesis - `_shown` trails the cap by design, painted <= cap at 100/125/150%. That closes
+U227 as a disproof, which is a full delivery and I have ticked it. The L31 remainder (status-effect
+icons) is **NOT yours** - it lives in `delve.gd`, `monster.gd`, `party_frames.gd` and
+`boss_bar.gd`, none of them in your seven-file charter, and this seat has mis-routed it to you
+before. Take your next own-file item and keep splitting long captures across firings.
+
+##### FOR THE SUPERVISOR - 14:58 CT 28 NOV
+**1. THE LIVE SITE IS AHEAD OF EVERY BRANCH, AND THE PRE-AUTHORISATION IS NOW UNSAFE TO USE UNTIL
+IT IS RECONCILED. This is the one thing I want you to see.** `origin/gh-pages:app.js` is blob
+`3027d819`; `git log --all --find-object=3027d819` returns **one commit, "Hub publish 13", and no
+branch**. `origin/main:web/app.js` is `78ba92ac` and lacks both the `AUTH_KEY` auth fix and
+`bridgeLogin()`. **So the standing instruction "publish `origin/main:web`" would today ROLL THE
+LIVE PAGE BACKWARD and break Twitch sign-in in front of viewers.** I published nothing and ran no
+publish gate (the hub made no ready claim; H38 was `web` delta 0). I have given the hub lane the
+row to port the live fix back into `web/app.js` so the branch becomes a superset, after which I
+publish under the pre-authorisation. **No decision is asked of you - this is mine and the hub's to
+close - but you should know the live tree is currently unreproducible from the repo.**
+**2. SOMEONE PUBLISHED THREE TIMES DURING THIS HOUR (publishes 12, 13 and 14) AND I DO NOT KNOW
+WHO.** Not me. I mention it only because publishes 12 and 13 left the site in a genuinely broken
+state for a while: **publish 12 shipped an `index.html` with the My Room markup removed while the
+app.js kept the whole Room module**, so the Room was inert and clicking Twitch sign-in deselected
+every tab and showed no panel. **I rendered the published tree myself and measured that.**
+**Publish 14 fixed it at ~15:1x CT and I re-rendered and confirmed the fix** - `tab-room` selects,
+the room panel shows, zero page errors. Nothing is owed; the loop closed itself. If that was you or
+Mr. E debugging the live auth leg, the only ask is that the fix lands on the hub branch too, which
+is item 1.
+**3. THE BROWSER OAUTH LEG IS NO LONGER BLOCKING AND THE PREVIOUS TWO HOURS' ESCALATION IS SPENT.**
+The last two blocks routed up "H36/H37 are merged and unpublished, waiting on one real human Twitch
+sign-in". **Both are now LIVE** - publishes 11-14 put the sign-in, the action form and the Room on
+the page. **I am withdrawing that escalation rather than carrying it a third hour.**
+
+
+
 **GAME BUILD (:07) - THE INN SWAP, THEN BARRACKS. BOTH ARE UNBLOCKED NOW.** Priority #1, and you
 have the pattern twice over. Do the inn exactly as you did hall and well - flag off, render
 L1/L5/L9, **LOOK at the three side by side**, then flip and commit. **BARRACKS IS NO LONGER

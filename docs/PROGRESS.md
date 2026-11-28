@@ -4942,3 +4942,28 @@ TAKE THIS NEXT (13:58 block, still the top block at 15:09) GAME BUILD row: "(2) 
   DELVE_TEST OK ran 9001 frames, 0 SCRIPT ERROR. TOWNWALK in_solid=0/18618 (0.000%) raid_in_solid=0/4320 (0.000%)
   PASS (re-run alone: my first battery log kept only the last 6000 chars of stdout+stderr and lost the verdict - a log fault of
   mine, not a gate fault; the verdict above is from a run that kept stdout whole).
+
+## D-cycle - S166 SYSTEM 42c `!solo` ENGINE HALF IN town.gd (DIRECTIVE sup-nov27-1844), 2026-11-27 22:07-22:2x CST (game build)
+- TAKE THIS NEXT (team lead, 21:58 block) gave game build System 42c, the `!solo` engine half. S165's planned "slice 2" (a
+  leader's !delve taking only their party) was NOT routed by the block and is NOT in this commit - still open, mine, next.
+- town.gd (mine): `_on_solo(uid) -> String` ("" = set off, else the one-line refusal for the chat bot to reply with),
+  `solo_refusal(uid)`, `_solo_enter(uid)`, `solo_delves := {}` uid -> Delve. A solo hero NEVER enters chat.delve_queue or
+  _at_mouth; its road state is "on the road to the scar, alone" (not the exact string _viewer_muster counts, so it cannot hold
+  the open muster); at the mouth it goes straight in, in its OWN Delve on a NEGATIVE lane (-1, -2...; adventurers.gd counts
+  the town band's lanes up from 1, the open party is lane 0). town.delve is untouched, so the open muster and any number of
+  solo delves run side by side. Refused: no hero / not on feet / scar not open / already solo / queued, on the road or at
+  the mouth with the muster / below with the party. Kit: half a set from the rack like anyone. Return: same as the party
+  path (survivor walks home, the fallen body is freed).
+- BALANCE CLAUSES: no new numbers. Every share rule in delve.gd divides by the alive party, so a party of one takes every
+  coin and XP unsplit; "harder alone" is structural (no healer, no second sword, no one to pull them up). If Mr. E wants a
+  numeric solo penalty or bonus on top, that is his number.
+- CHAT BOT HOOK: chatcmd.gd is not mine and is untouched. town.gd connects `wants_solo(user_id)` IF chatcmd has that signal
+  (has_signal guard), so the chat bot only has to add `signal wants_solo` + emit it from `!solo` and reply with nothing on
+  success; or call town._on_solo(uid) and reply with its returned line. Either works.
+- RENDER LOOKED AT: renders/s166/solo_lane.png - Lonewolf alone on a floor-1 tomb tile, a giant rat on him, Chronicle reads
+  "sets out for the scar alone" / "goes down into the scar alone"; renders/s166/open_lane0.png - Crowd on the open party's
+  own floor at the same moment. SOLO_SHOT solo_lane=-1 solo_floor=1 open_lane=0.
+- GATES (verdict lines, log committed as docs/_s166_battery.log): parse --quit-after 300 rc 0, 0 Parse Error / 0 SCRIPT ERROR.
+  SOLO_TEST OK 16 of 16 (new gate tools/_solo42_test.gd, real Town.tscn). PARTY_TEST OK 23 of 23. TWITCH_PARSE OK (8 checks).
+  OFFFLOOR_VERDICT OK 0 of 2427 samples off the floor. DELVE_TEST OK ran 9001 frames, floor reached 2. TOWNWALK
+  in_solid=0/16765 (0.000%) raid_in_solid=0/6045 (0.000%) PASS. ZERO BITS, no Twitch test.

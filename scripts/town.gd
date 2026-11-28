@@ -5360,6 +5360,8 @@ func _start_guild() -> void:
         feed.append(line)
         print("FEED ", line))
     chat.wants_delve.connect(_on_delve)
+    if chat.has_signal("wants_solo"):     # S166: the chat bot's !solo half emits this
+        chat.connect("wants_solo", func(u: String) -> void: _on_solo(u))
     chat.wants_fish.connect(_on_fish)
     chat.wants_shop.connect(_on_shop)
     chat.catches_of = func(who: String) -> Array:
@@ -5610,6 +5612,106 @@ func _begin_delve() -> void:
         if not _at_mouth.is_empty():
             _muster_t = 0.0
             _since_last = 0.0)
+
+
+## S166 System 42c (DIRECTIVE sup-nov27-1844): !solo - one hero goes down ALONE and AT ONCE.
+## A solo delve SKIPS THE QUEUE ENTIRELY: it never enters chat.delve_queue or _at_mouth, its
+## road state is not "on the road to the scar" (the string _viewer_muster counts), and it runs
+## in its OWN Delve on its own lane, so it neither waits for the open muster nor blocks it -
+## town.delve (the open party) and any number of solo delves run side by side. Lanes go
+## NEGATIVE (-1, -2, ...) because adventurers.gd counts the town band's lanes up from 1.
+## Balance: nothing is split - every share rule in delve.gd divides by the alive party, and a
+## party of one takes the whole purse and every XP itself; it is harder because there is no
+## healer, no second sword and no one to pull it back up. kit draws half a set like anyone.
+## Returns "" when the hero sets off, or the one-line reason it cannot - the chat bot's reply.
+const SOLO_AWAY := "on the road to the scar, alone"
+var solo_delves := {}          # uid -> Delve (live solo delves)
+var _solo_walking := {}        # uid -> true while walking to the mouth
+var _solo_lane := 0
+
+func solo_refusal(uid: String) -> String:
+    if roster == null or roster.get_hero(uid).is_empty():
+        return "You have no hero yet - !enlist first."
+    if not roster.is_alive(uid):
+        return "Your hero is not on their feet yet."
+    if not _scar_info.has("post"):
+        return "The scar is not open yet."
+    if solo_delves.has(uid) or _solo_walking.has(uid):
+        return "You are already going down alone."
+    if _at_mouth.has(uid) or chat.delve_queue.has(uid) or String(chat.away.get(uid, "")).contains("scar"):
+        return "You are already bound for the scar with the muster - you cannot also go alone."
+    if delve != null and delve.party.any(func(m): return String(m.get("uid", "")) == uid):
+        return "You are below with the party already."
+    return ""
+
+func _on_solo(uid: String) -> String:
+    if not heroes.has(uid) and roster != null and roster.is_alive(uid) and not roster.get_hero(uid).is_empty():
+        _raise(uid)
+    var why := solo_refusal(uid)
+    if why != "" or not heroes.has(uid):
+        return why if why != "" else "Your hero is not in the valley."
+    var b: HeroBody = heroes[uid]
+    _solo_walking[uid] = true
+    chat.away[uid] = SOLO_AWAY
+    var post: Vector3 = _scar_info["post"]
+    var mouth: Vector3 = _scar_info["mouth"]
+    var gate: Vector3 = _scar_info.get("gate", post)
+    var fw: Vector3 = _scar_info["fwd"]
+    feed.append("%s sets out for the scar alone." % b.person_name)
+    tag_feed("delve", [b.person_name])
+    print("FEED ", feed.back())
+    b.go(gate, "delve", func() -> void:
+        b._route = [post - fw * 3.0, mouth + fw * 3.0]
+        b.stay = false
+        b._route_done = func() -> void:
+            _solo_enter(uid))
+    return ""
+
+## the solo hero reaches the mouth and goes straight in - no muster, no wait
+func _solo_enter(uid: String) -> void:
+    _solo_walking.erase(uid)
+    if solo_delves.has(uid) or not heroes.has(uid) or not roster.is_alive(uid):
+        chat.away.erase(uid)
+        return
+    var d := Delve.new()
+    d.town = self
+    d.roster = roster
+    _solo_lane -= 1
+    d.lane = _solo_lane
+    add_child(d)
+    solo_delves[uid] = d
+    (heroes[uid] as Node3D).visible = false
+    if economy.take("gear", 0.5):
+        d.kit_bonus = 2.0
+        _stock_piles()
+    chat.away[uid] = "below, in the scar, alone"
+    feed.append("%s goes down into the scar alone." % (heroes[uid] as HeroBody).person_name)
+    tag_feed("delve", [(heroes[uid] as HeroBody).person_name])
+    print("FEED ", feed.back())
+    d.start([uid])
+    d.ended.connect(func(survivors: Array) -> void:
+        solo_delves.erase(uid)
+        chat.away.erase(uid)
+        if heroes.has(uid):
+            var hb: HeroBody = heroes[uid]
+            if survivors.has(uid):
+                hb.visible = true
+                var mo: Vector3 = _scar_info.get("mouth", _market_pos)
+                var fw: Vector3 = _scar_info.get("fwd", Vector3(0, 0, 1))
+                var p := mo + fw * 2.5
+                p.y = height_at(p.x, p.z)
+                hb.global_position = p
+                hb.rotation.y = atan2(fw.x, fw.z)
+                hb.refresh()
+                var a := randf() * TAU
+                hb.stay = false
+                hb.go(_market_pos + Vector3(cos(a), 0, sin(a)) * 6.0, "home", func() -> void:
+                    hb.stay = true)
+            else:
+                people.erase(hb)
+                hb.queue_free()
+                heroes.erase(uid)
+        d.queue_free())
 
 
 func _nearest_road(p: Vector3) -> Vector2i:

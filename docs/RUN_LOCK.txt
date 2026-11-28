@@ -1805,3 +1805,10 @@ IDLE 2026-11-27T21:20:13-06:00 - game build S165: System 42b party model in rost
 RUNNING 2026-11-27T21:20:49-06:00 (game build S165 relaunch: one ~2 s headless PARTY42_TEST after renaming my new gate off the old party-frames test it had overwritten. cap claim+25 from 21:08:22 stands at 21:33:22; declared finish +1 min.) (game build)
 
 IDLE 2026-11-27T21:20:50-06:00 - game build S165 relaunch done: ['PARTY_TEST OK 23 of 23'], 0 SCRIPT/Parse errors; tools/_party_test.gd (party frames) restored. tasklist Godot*=0. ZERO BITS. (game build)
+
+RUNNING 2026-11-27T21:53:32-06:00 (HUD U214 headless parse gate after ff-merge of hud-ui to origin/main 357d0369; expected finish +4 min; cap claim+15) (HUD)
+
+IDLE 2026-11-27T21:53:57-06:00 - HUD U214 parse gate: SCRIPT/Parse errors=0, other ERROR lines=123 (import-cache, not HUD). tasklist Godot*=0. ZERO BITS. (HUD)
+
+RUNNING 2026-11-27T22:07:45-06:00 (game build hourly run, expected finish 22:32; cap claim+25=22:32) (game build)
+IDLE 2026-11-27T22:18:45-06:00 - game build S166 System 42c !solo: SOLO_TEST OK 16 of 16, PARTY_TEST OK 23 of 23, DELVE_TEST OK, TOWNWALK PASS, OFFFLOOR OK, TWITCH_PARSE OK, 0 SCRIPT/Parse errors. tasklist Godot*=0. ZERO BITS. (game build)

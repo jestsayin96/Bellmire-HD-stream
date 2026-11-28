@@ -5,6 +5,17 @@
 *** Every number below was measured THIS RUN. QUOTE NONE OF IT NEXT HOUR - MEASURE IT.
 ***
 *** ===== MY OWN FAULTS THIS RUN. REPORTED FIRST. =====
+*** (0) **TWO ROWS I WROTE THIS RUN WERE WRONG AND I CORRECTED THEM IN THE SAME RUN, BEFORE ANY
+***     LANE READ THEM.** (i) I cited the party list printer as `party_list` at `:1322`. **THERE IS
+***     NO `party_list` IN THIS CODEBASE.** The function is `party_line` at `:1315`; `:1322` is a
+***     line INSIDE it that mentions `PARTY_CAP`, and my grep matched there for THAT reason, not for
+***     a function name. Had the chat bot built `!party list` on my cite it would have called a
+***     function that does not exist. THIS IS THIS PROMPT'S OWN STANDING LESSON - A REGEX IS NOT A
+***     PARSER - committed by the very seat that carries the warning. (ii) My game build row (a)
+***     quoted `economy.take("gear", _at_mouth.size() * 0.5)` when S165 had ALREADY changed it to
+***     `going.size()`: I was quoting last hour's bytes back at the lane that had just fixed them.
+***     BOTH rows are corrected below. I found both while reading the merged file to EARN the tick,
+***     which is the whole reason verification comes before the tick and not after it.
 *** (1) **THE CHAT BOT STOOD DOWN ON SYSTEM 42b FOR A REASON THAT IS PURELY MY SCHEDULE, AND I AM
 ***     FIXING THE ROW NOT THE LANE.** My 20:58 CHAT BOT row made the work conditional on
 ***     `origin/main` carrying the party dict when the lane fired at :45. THE GAME BUILD LANDED IT
@@ -59,9 +70,13 @@
 ***   ranking S-F, composite score, open-queue rank matching one rank up and one down, private
 ***   parties bypassing the gate). Do not start 43 before 42c unless 42c closes early.
 ***   TWO THINGS STILL CARRIED AND STILL YOURS TO DECIDE, NOT MINE:
-***     (a) `_begin_delve` spends `economy.take("gear", _at_mouth.size() * 0.5)`. At six that was 3
-***         gear; at the new cap of ten a full party asks 5. Decide whether the rack carries it or
-***         the bonus falls off above six. I am not deciding a balance number for you.
+***     (a) **PARTLY ADDRESSED BY S165 ALREADY - READ THE CURRENT BYTES, NOT MY FIRST DRAFT.**
+***         `_begin_delve` now spends `economy.take("gear", float(going.size()) * 0.5)` at
+***         `town.gd:5558` - you changed it from `_at_mouth.size()` to `going.size()`, so the spend
+***         is BOUNDED at PARTY_CAP and can no longer scale with an unbounded queue. THAT HALF IS
+***         DONE and I am not asking you to redo it. WHAT SURVIVES IS THE BALANCE NUMBER ONLY: a
+***         full party of ten still asks 5 gear where six asked 3. Decide whether the rack carries
+***         5 or the +2 kit bonus falls off above six. I am not deciding a balance number for you.
 ***     (b) `roster.gd` `describe()`'s unreachable "%s is dead. !reroll to raise a new hero." branch
 ***         - B208 proved `alive` is never written false. KEEP IT OR CUT IT and say which.
 ***   AND COMMIT YOUR BATTERY LOG. S164 committed none and the PICTURE carried that tick; S165's
@@ -134,7 +149,10 @@
 ***   VERIFIED IT MYSELF, NOT FROM THE GAME BUILD'S CLAIM.** On `origin/main` RIGHT NOW:
 ***   `roster.gd:1227 const PARTY_CAP := 10`, and `party_create:1245`, `party_invite:1256`,
 ***   `party_join:1272`, `party_leave:1288`, `party_kick:1298`, `party_disband:1309` and the
-***   `party_list` printer at `:1322` - all seven, plus the engine belt-and-braces cap at
+***   list printer **`party_line:1315` - THE NAME IS `party_line`, NOT `party_list`. THERE IS NO
+***   `party_list` ANYWHERE IN THIS CODEBASE** (I grepped the whole repo; the only hit was my own
+***   first draft of this very line, now corrected). Two helpers come with them - `party_of:1234`
+***   and `party_members:1241` - so it is NINE functions, not seven. Plus the belt-and-braces cap at
 ***   `town.gd:5551` taking `_at_mouth.slice(0, Roster.PARTY_CAP)` and leaving the overflow to wait
 ***   for its own muster. **SO BUILD `!party` WITH invite/join/leave/list/kick/disband, AND TAKING
 ***   `party` OFF `muster`'s ALIASES IS AUTHORIZED AS PART OF THIS LANDING** - it must happen in the
@@ -149,6 +167,274 @@
 ***   **`!solo` IS STILL CORRECTLY BLOCKED** and your second finding is confirmed on my instrument:
 ***   one `solo` hit on main and it is a comment at `chatcmd.gd:3096`. Write `!party` this hour and
 ***   hold `!solo` until 42c lands on `laptop`. Keep committing your evidence.
+***
+*** ===== AMENDMENT TO THE 21:58 BLOCK, WRITTEN 22:12 CT THE SAME RUN. =====
+*** THIS AMENDS THE BLOCK ABOVE. Where it contradicts a row above, THE AMENDMENT WINS.
+*** Clock read off cruzader with `Get-Date` at the moment of writing: 22:12:33 CST.
+***
+*** ===== (A) THE BIGGEST THING IN THIS HOUR: ART'S WAND IS **NOT** CLOSED, AND ART SAID SO
+*** ===== ITSELF IN ITS DOC WHILE ITS COMMIT MESSAGE SAID OTHERWISE. I WENT WITH THE DOC. =====
+*** `a4386025`'s commit subject reads "the tier-5 wand is already on disk - **wired**, read on a
+*** body". **IT IS NOT WIRED.** I checked the engine rather than the sentence:
+***   - `origin/main:scripts/gear.gd:223` STILL reads
+***     `"wand": {"family":"arcane", "kit":[ADV+"wand.gltf", KIT+"wand_A.gltf", ADV+"wand.gltf",
+***     KIT+"wand_A.gltf", **KIT+"wand_A.gltf"**]}` - tier 5 is UNCHANGED.
+***   - `git grep wand_crystal origin/main` returns **ZERO hits in any `.gd` file** - only docs,
+***     PROGRESS, logs, `tools/art/*.py` and the asset itself. Nothing in `scripts/` reads it.
+*** **AND ART'S OWN DOCUMENT IS EXACTLY RIGHT WHERE ITS COMMIT SUBJECT WAS LOOSE.**
+*** `docs/art/THE_TIER5_WAND_READ.md` carries a heading in capitals: "WIRING THE GAME BUILD MUST
+*** DO - `scripts/gear.gd`, NOT MINE, I DID NOT TOUCH IT". The lane knew the boundary and kept it.
+*** I am recording the loose commit subject as a wording slip, NOT as a false claim, because the
+*** artefact it ships with contradicts it in the lane's own hand. ART: make the subject line match
+*** the doc next time - a seat reading `git log` alone would have ticked this.
+*** **SO: WAND HALF DELIVERED / STILL OPEN.** Art's half is DONE and it is good work. The engine
+*** half is the game build's and is two lines. See the rows in (C).
+***
+*** ===== (B) WHAT I TICKED, EACH BY MY OWN MEASUREMENT =====
+*** GAME BUILD S165 - **TICKED. SYSTEM 42b IS DONE.** I read `roster.gd` on merged main, not the
+***   claim. NINE functions, not the seven I first wrote: `party_of:1234`, `party_members:1241`,
+***   `party_create:1245`, `party_invite:1256`, `party_join:1272`, `party_leave:1288`,
+***   `party_kick:1298`, `party_disband:1309`, `party_line:1315`. `PARTY_CAP := 10` at `:1227`.
+***   **0 tab-start lines against 1245 space-start** - indentation consistent.
+***   `tools/_party42_test.gd` PRINTS A VERDICT LINE both ways ("PARTY_TEST OK %d of %d" /
+***   "PARTY_TEST FAIL %d of %d: %s"), so it is not a silent gate, and **I COUNTED ITS `_ok()`
+***   CALLS MYSELF: EXACTLY 23, WHICH IS THE 23 IT CLAIMS.** They are not filler - they include the
+***   eleventh invite being refused, the leader leaving dissolving the party, a non-leader being
+***   unable to invite/kick/disband, and `note_delve_done` leaving the party intact, which is the
+***   directive's "a party SURVIVES a delve ending" clause tested directly.
+***   **AND THE ENGINE BELT-AND-BRACES CAP IS REAL AND CAREFUL**: `town.gd:5551`
+***   `var going: Array = _at_mouth.slice(0, Roster.PARTY_CAP)` with `_at_mouth` reassigned to the
+***   remainder at `:5552`, and a four-line comment explaining that everything downstream reads
+***   `going` and never `_at_mouth`, so an eleventh hero arriving mid-delve is "left waiting - not
+***   hidden, not counted, and not freed as a non-survivor when it ends." That is the exact failure
+***   mode a careless cap would have introduced, and the lane wrote the guard AND the reason.
+*** CONTENT C-245 - **TICKED (the lore top-up). THE `drops.json` STAND-DOWN IS NOT A FAULT.**
+***   `data/lore_lines.json` parsed BOTH SIDES: **87 -> 88 keys, the one added key is `_note_c245`**
+***   (a `_note_` key, correctly not to be wired), **NOTHING removed**, and **no other key changed
+***   at all**. The three pools moved by EXACTLY what the lane claimed: misfire 277 -> 292 (+15),
+***   cleared 730 -> 742 (+12), descend 698 -> 706 (+8). **AND IN ALL THREE THE OLD LIST IS AN
+***   UNCHANGED PREFIX of the new one** - nothing was reordered, rewritten or quietly dropped, which
+***   is the check that catches a writer re-emitting its own file. `phase2_words_alt2` is
+***   BYTE-IDENTICAL: three hours running it has been left correctly alone by every lane.
+*** HUB - **TICKED. THE CACHE-BUST BLOCKER I NAMED AT 20:58 IS CLEARED, AND IT WAS REAL.**
+***   I verified the bump AND the reason for it on both sides: `origin/gh-pages:index.html` asks for
+***   **`app.js?v=8`**; `origin/main:web/index.html` now asks for **`app.js?v=9` AND
+***   `style.css?v=9`**. The files behind them genuinely differ - published `app.js` **381,431**
+***   chars vs merged **393,998**, published `style.css` **129,406** vs merged **132,072**. So a
+***   cached browser really would have run the old script against the new page, and it no longer
+***   will. ONE THING BETTER THAN I ASKED FOR: the published page versioned `app.js` ONLY; the hub
+***   versioned the stylesheet too, which was unversioned before. Turned around inside one hour.
+*** ART - **TICKED FOR THE INVESTIGATION, NOT FOR THE ITEM** (the item is half open, see (A)), AND
+***   **I LOOKED AT ALL THREE PICTURES MYSELF BECAUSE FIT IS THE ACCEPTANCE TEST.**
+***   `renders/art/wand/up_roll15/{front,side,back}.png`, by my own eye:
+***     - FRONT: the wand is upright in the fist, shaft clear of the body, blue crystal head above
+***       the hand. It reads as a held wand.
+***     - BACK: the best of the three - the crystal pops against the red cape.
+***     - SIDE: **WEAK. Almost entirely occluded by the torso; a sliver of crystal at the shoulder
+***       and little else.** ART SAID THIS ITSELF before I looked ("ships now, weak side view") and
+***       gave the measured cause - a 0.57 m shaft in a hip slot is behind the torso at every roll,
+***       and clearing the silhouette needs reach ~1.66, i.e. the staff's own scale. **THE LANE DID
+***       NOT OVERSELL ITS OWN WORK AND THE PICTURE AGREES WITH ITS PROSE.**
+***   AND I CHECKED THE COMPARISON IT RESTED ON: `now_horizontal/front.png` is the carry shipping
+***   today and it is a baton poking sideways out of the hip. `up_roll15` is plainly better. The
+***   "strictly better in all three views" claim holds on my eye for front and back, and the side
+***   goes from a single dot to a sliver - better, but still the weak view, which is why the
+***   decision in (D) exists.
+***   **TWO FAULTS ART FOUND IN ITS OWN INSTRUMENTS AND FIXED, BOTH WORTH MORE THAN THE WAND:**
+***     (1) **ITS `clip == 0` GATE WAS WRONG AND IT OVERTURNED IT WITH A CONTROL, NOT AN OPINION.**
+***         It measured SHIPPED weapons at their real carries: `staff_B.gltf` clips **5.8%** and
+***         `dungeon/staff_rare.glb` clips **22.7%**. `clip == 0` was a standard its own harness
+***         invented, and it had been REJECTING CARRIES BETTER THAN THE ONES ALREADY IN THE GAME.
+***         Measuring the control you never had is the best move anyone made this hour.
+***     (2) **A RENDER WITH NO RESOLUTION SET, CAUGHT BY THE PICTURE AND NOT BY A NUMBER.** Pass 1
+***         rendered at Blender's default 1920x1080 while the frame maths assumed the intended
+***         aspect, so the real vertical field was 2.14 m against a 2.45 m hero: **the body was cut
+***         at the belt in every frame and `frame_clipped` still reported `[]`.** It fixed the
+***         resolution AND made the omission unrepeatable with an assertion that exits if the scene
+***         resolution does not match. "An instrument that cannot see is not a pass" - that is the
+***         A-GATE-THAT-PRINTS-NO-VERDICT rule rediscovered in a new family by the lane itself.
+***   AND IT CAUGHT ITS OWN FUTURE STAMP (`22:4x` written, `21:44:46` on the machine) and corrected
+***   it in a follow-up commit WITHOUT being asked, leaving `a4386025` unrewritten. Fourth seat this
+***   week to write one; FIRST to catch its own. It does not break the clean-hour count.
+*** HUD U214 - **NOT A FEATURE TICK, BUT THE DECISION IS DELIVERED AND I AM CLOSING MY QUESTION.**
+***   Verified: `git merge-base --is-ancestor 357d0369 origin/hud-ui` is TRUE, and the whole diff
+***   of `hud-ui` against old main is `PROGRESS.md +7` and `docs/WORK_PLAN.md +189` - **not one of
+***   its seven files diverged**, so the ff-merge is exactly what it said it was. The stale-tree
+***   question is ANSWERED (merged, not pinned) and I will stop re-deriving it at the lane's expense.
+*** CHAT BOT B211 - **NOTHING TO TICK, AND IT IS MY ROW'S FAULT, NOT THE LANE'S** (MY FAULTS (1)).
+***   **BOTH OF ITS FINDINGS ARE CONFIRMED ON MY OWN INSTRUMENT, NOT RELAYED:** the party dict was
+***   genuinely absent from `origin/main` when it fired at :45 (I merged it at :58, 13 minutes after
+***   it had already stood down), and `!solo` has no engine half - `git grep -i solo origin/main --
+***   scripts/` returns ONE hit and it is a COMMENT at `chatcmd.gd:3096`. A stand-down written up IS
+***   the delivery, and this one was written up with an audit log committed.
+***
+*** ===== (C) TWO ROWS CORRECTED BY THIS AMENDMENT =====
+*** **GAME BUILD - A SECOND ITEM, AND IT IS TWO LINES.** 42c stays your first item. WHEN IT IS IN,
+***   WIRE THE TIER-5 WAND - art has done every bit of the derivation and the spec is exact:
+***     1. `gear.gd` `KINDS["wand"]` line ~223, **`kit[4]` ONLY**:
+***        `KIT + "wand_A.gltf"` -> `KIT + "wand_crystal.glb"`
+***     2. `held_rot()` (`:250`): add an arm matched on `wand_crystal` BEFORE the `Vector3.ZERO`
+***        default, returning `Vector3(0, 15, 90)`.
+***     **`hand_scale()` NEEDS NO CHANGE** - `wand_crystal.glb` already resolves to 0.62 through the
+***     existing `begins_with(KIT)` arm. DO NOT ADD AN ARM FOR IT.
+***   **NEITHER CHANGE CAN REACH THE COMMON WAND**, by construction: both accessors key on PATH and
+***   `wand_crystal.glb` is a different path from `wand_A.gltf`. That is the exact trap the 20:58
+***   block warned you about, and art avoided it by never touching `wand_A.gltf`. **THIS CLOSES
+***   TIER 5 ONLY - tiers 2 and 4 remain both `wand_A.gltf` and are NOT claimed by this.**
+*** **ART - YOUR WAND HALF IS DONE; DO NOT RE-OPEN IT AND DO NOT WAIT ON IT.** The row above says I
+***   would "verify your close" - corrected: there was no close to verify, because the engine half
+***   was never yours. It is now the game build's, written out above. **YOUR ROW IS UNCHANGED:
+***   SCEPTRE NEXT**, then spear, then staff, stopping after the first if the supervisor answers.
+***   Do not spend a cycle on the wand/staff question in (D) - it is routed and it is not yours.
+***
+*** ===== (D) FOR THE SUPERVISOR - A DECISION ART RAISED AND I AM ROUTING, NOT TAKING =====
+*** **IS `wand_crystal.glb` THE TIER-5 WAND, OR THE TIER-5 STAFF?** Art measured the thing that
+*** settles it: at any scale small enough to read as a wand it cannot clear the torso side-on, and
+*** at the scale where it reads from every angle (`hand_scale` ~1.8) it IS a staff. So the asset
+*** `ASSET_SOURCES.md` has carried since 16 Nov is a SHORT STAFF. Two ways to go:
+***   (a) **Ship it as the tier-5 wand now** - one line, strictly better than today in front and
+***       back, ends the pixel-identical tier-5, accepts a weak side view.
+***   (b) **Make it the tier-5 STAFF**, where its length is an asset and it would displace
+***       `Skeleton_Staff.gltf`, and author a purpose-built shorter wand later.
+*** **ART RECOMMENDS (a) AND SO DO I**, on the narrow ground that a viewer is today handed a
+*** PIXEL-IDENTICAL common wand for a legendary drop - that is Mr. E's wear-is-a-receipt rule broken
+*** in the shipped game - and (a) ends that this hour for one line while (b) leaves it broken for
+*** however long authoring takes. (a) does not foreclose (b): a later true wand can take `kit[4]`
+*** back. **ART FRAMED THIS AS MR. E'S CALL; I AM ROUTING IT TO YOU FIRST** per my reporting line,
+*** and it sits with my 20:58 question (4) about whether sceptre, spear and staff are in scope at all.
+***
+*** ===== (E) THE PUBLISH GATE, RE-RUN BY ME AT 22:18 CT. **GREEN, AND THE BLOCKER IS GONE.**
+*** ===== I HAVE NOT PUSHED AND I WILL NOT. NOTHING BELOW CHANGES ANY LANE ROW ABOVE. =====
+*** RULING sup-nov27-1637 Ruling 2 authorizes this gate; the hub claimed no work in progress and
+*** CLEARED the one blocker I named at 20:58, so the gate was OWED and I ran it. I ran it in MY OWN
+*** container with Chromium + Playwright over a real local HTTP server (not file://), on the merged
+*** `web/` tree. **`origin/main:web` and `origin/hub:web` are the SAME TREE `23eee62a`** - main
+*** carries the hub's work exactly, so the thing I gated is the thing that would be published.
+***   - **THE CACHE-BUST IS FIXED IN THE ACTUAL BYTES.** `index.html:61`
+***     `<link rel="stylesheet" href="style.css?v=9">` and `:520` `<script src="app.js?v=9" defer>`.
+***     Published still asks `app.js?v=8` with no version on the stylesheet at all. The files really
+***     do differ - app.js 381,431 -> 393,998 chars, style.css 129,406 -> 132,072 - so the bump was
+***     necessary and is now correct, and the stylesheet is versioned for the first time.
+***   - **SIX STATE CHECKS at 1280x900, ALL GREEN:** `?state=empty`, `?state=fail`, `?state=stale`,
+***     `?mock=chronicle`, `?mock=crowd`, `?open=1`. All six render, all six title "Bellmire HD -
+***     the Guild Hall", rail present on all six, **ZERO page errors on all six.**
+***     HONEST LIMIT, NAMED: the only failed requests were the supabase snapshot (localhost has no
+***     snapshot - expected) and `fonts/gloock-latin-400.woff2`, which failed because **I staged
+***     only index.html, app.js and style.css into my container, not the 608-file tree.** THAT IS MY
+***     STAGING LIMIT, NOT A PAGE FAULT, and the font falls back silently.
+***   - **CSP INTACT, PROVEN BY INJECTION, NOT BY READING THE META.** I appended an inline `<style>`
+***     with the browser's own API and the page REFUSED IT: `securitypolicyviolation` fired with
+***     violatedDirective **`style-src-elem`**, and `getComputedStyle(body).backgroundColor` stayed
+***     **`rgb(19,13,8)`** instead of the red the injected rule demanded. Policy on `index.html:5` is
+***     `default-src 'none'; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'`
+***     with `connect-src` limited to supabase + twitch and `img-src 'self' data:`.
+***   - **HOSTILE NAME RENDERS AS LITERAL TEXT - AND MY FIRST ATTEMPT AT THIS ARM WAS A
+***     NON-OBSERVATION, EXACTLY AS THE 20:58 SEAT WARNED.** My first pass clicked `#chatLoad` on
+***     the PLAIN page: the panel said "Chat lost its footing" because nothing can connect from my
+***     sandbox, so I had 0 imgs and 0 scripts **and no hostile name had ever been rendered.** That
+***     proves nothing. I found the real arm in the code - `openGuildChat()` only runs the hostile
+***     fixture when `MOCK === "chat"` (`app.js:2746-2750`) - and re-ran at **`?mock=chat`** with the
+***     click. THE REAL RESULT: the panel shows `<img src=x onerror=alert(1)>` **as text, twice**
+***     (once as the display name, once as the message body), with **0 `<img>`, 0 `<script>`, 0
+***     `[onerror]` elements in the panel, no dialog fired and 0 page errors.** THAT is the pass.
+***   - **SECURITY GREPS RE-RUN BY ME ON THE MERGED TREE, NOT TAKEN FROM THE LANE:** `innerHTML` has
+***     exactly TWO assignment sites, `app.js:255` and `:301`; I READ BOTH - `:255` is a page-owned
+***     template whose only interpolations are `esc(lastError)` and `esc(age)`, `:301` is two fixed
+***     literals with no interpolation at all. The other four `innerHTML` hits are comment prose.
+***     `outerHTML` 0. `eval(` 0 call sites. `insertAdjacentHTML`, `document.write` and `new
+***     Function` appear ONLY as comment text at `app.js:10-11`.
+***     **FOUR URL SINKS EXIST AND I CHECKED EVERY ONE RATHER THAN COUNTING THEM:** `:70`
+***     `setAttribute("href", "#ic-" + key)` is a fixed-literal SVG symbol ref; `:3271`
+***     `img.src = "icons/beasts/" + b.mb + ".webp"` where `b.mb` is a BEAST_DEX constant; `:4007`
+***     `img.src = f` where `f` comes from `ITEM_ICONS.get(...)` - a Map lookup, so a hostile name
+***     can only MISS the map and yield `""`, never become a path; and `:2813` `link.href = uri`,
+***     which is **guarded by `/^https:\/\/(www\.)?twitch\.tv\//`** and falls back to rendering
+***     as plain text otherwise. That last one is defensive beyond what was required.
+***   - **I LOOKED AT THE SCREENSHOT.** Rail ("LIVE IN BELLMIRE"), stage, guild chat column. The
+***     section bar wraps to three rows with **NO clipping** - every pill fully inside its row.
+***     Parchment welcome card, offline banner, teal accent on the Try-again button and headings,
+***     restrained gold wordmark, deep ink/charcoal ground. **NO Twitch purple, wordmark or logo
+***     anywhere.** The palette rule holds.
+***     HONEST LIMIT: localhost has no snapshot, so the offline banner IS the expected state and I
+***     did NOT see live rows. **The gate proves the page's SAFETY and SHELL, not its live content.**
+***
+*** ===== (F) THE HUB DELTA, RE-MEASURED BY ME THIS RUN. DO NOT QUOTE IT NEXT HOUR. =====
+*** `origin/gh-pages` tip **8d214d36**, pushed **25 NOV 09:55:03 CT - about 60 HOURS AGO**.
+*** `origin/gh-pages^{tree}` = `1d8bce63`; `origin/main:web` = `origin/hub:web` = **`23eee62a`**.
+*** MERGED AND NOT PUBLISHED: **73 files / +491 / -12**, of which **67 are binary `.webp`**. Text:
+*** `app.js +245/-8`, `NOTES.md +84`, `icons/beasts/_manifest.json +75`, `style.css +35/-1`,
+*** `tools/make_bestiary.py +48`, `index.html +4/-3`. The 20:58 block measured +485/-10 and the
+*** 19:58 one +408: IT GROWS EVERY HOUR THE HUB SHIPS, which is why it is counted and never quoted.
+***
+*** ===== (G) THE DEAD-DATA AUDIT, 22:18 CT, MEASURED ON THE MERGED TREE =====
+*** CORPUS: **49 files = 48 `scripts/*.gd` + `web/app.js`** (one level, NOT a recursive glob, so
+***   `web/tools/sheet_overlap.js` is correctly excluded as tools/ test code), **2,527,605 chars**.
+***   DATA: **12 `data/*.json`** at one level, **177 top-level keys** (176 last hour; the +1 is
+***   content's `_note_c245`).
+*** **UNREAD LIVE DATA KEYS: ZERO. THE UNREAD COUNT DID NOT MOVE.**
+*** ZERO-LITERAL-HIT KEYS: **86 = 71 `_note_` + 15 NON-NOTE.** **THE NON-NOTE COUNT IS 15**, the
+***   series value it has held for days, and all fifteen are the accounted-for set, unchanged:
+***     - TWO runtime-built `_alt` pools: `lord_intros_alt`, `unique_intros_alt` - READ at
+***       `delve.gd:4022` via `base + "_alt"`. **DO NOT WIRE THEM.**
+***     - FOUR declared dead: `phase2_words`, `phase2_words_alt`, `phase2_words_alt2`,
+***       `town_levels_for_the_desktop`. **NO LANE IS TO WIRE `phase2_words_alt2`** - fourth hour
+***       running every lane has correctly left it alone.
+***     - NINE prose/spec strings, not items: biomes `technique`; bosses `boss_floors`; origins
+***       `chronicle_line`, `word_order`, `casing`; ranks `promotion_line`, `one_roll`; strains
+***       `_gating`; world `canon_silences`.
+***   2 + 4 + 9 = 15. The raw total rose 85 -> 86 ONLY because content wrote one more `_note_` key
+***   (70 -> 71), which is the behaviour this house ASKED FOR. **DO NOT COMPARE RAW TOTALS ACROSS
+***   HOURS; the non-note count is the only number with signal and it did not move.**
+*** UNREFERENCED ASSET DIRECTORIES: **not re-walked this hour** - the standing measurement is ZERO
+***   and nothing this hour added a directory under `assets/`. Art added `renders/art/wand/*`, which
+***   is EVIDENCE OUTPUT and is correctly not walked. I am saying so rather than implying I re-ran it.
+***
+*** ===== (H) FOR THE NEXT TEAM LEAD - OWED PROMPT CORRECTIONS, CARRIED FORWARD =====
+*** A FIRING CANNOT EDIT A SCHEDULED TASK: the gate is on the CALL, not on a field, settled 18 Nov.
+*** **I ATTEMPTED NO WRITE THIS RUN** and I am not testing it a sixth time. THE FIRST SEAT WITH A
+*** LIVE TURN LANDS ALL OF THESE AT ONCE. The list is carried forward and added to:
+***   1. **THE CONTENT PROMPT'S FOUR-FILE LIST IS NOW THE SINGLE MOST EXPENSIVE STALE LINE IN THE
+***      HOUSE - EIGHT WASTED CONTENT CYCLES.** Content reports it "names exactly four owned files
+***      and bars new ones". RULING sup-nov27-1637 makes `data/drops.json` its FIFTH. **THE PROMPT
+***      MUST SAY FIVE.** Until it does, the plan row is the only instrument and content may keep
+***      reading its prompt as a bar. THIS ONE FIRST, AHEAD OF EVERY OTHER CORRECTION HERE.
+***   2. HUB PUBLISHED SHA: prompt says `05ac2679 / 19 Nov 20:06 CT`. MEASURED: **8d214d36, pushed
+***      25 NOV 09:55:03 CT**. STRUCK AND WRONG.
+***   3. MERGED-NOT-PUBLISHED: prompt says "3 files / +59 / -1". MEASURED: **73 files / +491 / -12**.
+***   4. DEAD-DATA CORPUS: prompt says 47 `.gd` + app.js = 48 files and 146 keys. MEASURED:
+***      **48 + app.js = 49 files, 2,527,605 chars, 177 top-level keys.** The non-note 15 and the
+***      "UNREAD = ZERO" in the prompt are both STILL CORRECT.
+***   5. MINIBOSS COUNT: the prompt's "44/44/44" and "46 rows / 33" are historical. The roster is
+***      CLOSED AT 70 (DIRECTIVE sup-nov27-1323).
+***   6. THE PROMPT SAYS "IF THE SUPERVISOR HAS SAID PUBLISH, YOU MAY DO THE PUSH." **RULING
+***      sup-nov27-1637 OVERRIDES IT: the supervisor does the push itself.** I complied in behaviour
+***      again this run and pushed nothing.
+***   7. ID WATERMARKS as of 22:18 CT: **B211, C-245, S165, U214, art wand pass closed on art's side.**
+***      Re-measure; do not quote these.
+***
+*** ===== (I) FOR THE SUPERVISOR =====
+*** (1) **THE PUBLISH GATE IS GREEN AND THE LAST BLOCKER IS CLEARED. MY RECOMMENDATION: PUSH NOW.**
+***     The `?v=9` cache-bust I asked for at 20:58 landed within the hour, and I re-verified it in
+***     the bytes rather than taking the hub's word. Six states clean with zero page errors, CSP
+***     proven intact by a REFUSED inline-style injection (`style-src-elem`), the hostile name
+***     rendering as literal text with zero live elements **through the real `?mock=chat` fixture**,
+***     all four URL sinks individually checked, and I looked at the screenshot. The delta is
+***     **73 files / +491 / -12** and **60 hours stale**. I HAVE NOT PUSHED - Ruling 2 says the push
+***     is yours, and I am complying in behaviour and not rewriting my own standing order.
+*** (2) **A DECISION ART RAISED, ROUTED NOT TAKEN: IS `wand_crystal.glb` THE TIER-5 WAND OR THE
+***     TIER-5 STAFF?** Full detail in amendment (D). Art measured that at any scale small enough to
+***     read as a wand it cannot clear the torso side-on, so the asset is a SHORT STAFF. Art
+***     recommends shipping it as the tier-5 wand now and so do I: a viewer is TODAY handed a
+***     pixel-identical common wand for a legendary drop, which is Mr. E's wear-is-a-receipt rule
+***     broken in the shipped game, and (a) ends that for one line without foreclosing a purpose-built
+***     wand later. Art framed it as Mr. E's call; I am routing it to you first per my reporting line.
+*** (3) **STILL UNANSWERED FROM 20:58: are sceptre, spear and staff in scope now, or queued behind
+***     the Systems?** `assets/gear/artifact/` has seven golden meshes and none of those three. I
+***     have given art the sceptre and told it to stop after the first if you answer.
+*** (4) **SYSTEMS 43 AND 44 ARE STILL NOT ROUTED, AND THAT IS STILL DELIBERATE.** System 42 is one
+***     function short of whole (42c, `!solo`). I have told the game build that System 43 follows 42c
+***     and told the HUD and the hub NOT to start their 43/44 halves, because the engine publishes
+***     none of those fields yet. Say if you want 43 pulled forward ahead of 42c.
 ***
 *** ===== LOCK DISCIPLINE, 21:00-22:00 CT =====
 *** Held: game build S165 21:08:22 -> 21:20:13 (11m51s; cap claim+25 = 21:33:22 COMPUTED BEFORE the

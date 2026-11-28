@@ -11,7 +11,7 @@ const StatusIconScript := preload("res://scripts/status_icon.gd")
 const W := 400          # L15: at 1080p; UiTheme.px scales it
 const DEAD := Color(0.45, 0.38, 0.32)
 const ON_STREAM := false      # D46: the multi-member band board no longer draws on stream (hub: Bands below)
-const MAX_ROWS := 8          # per delve; more than that folds into "+N more"
+const MAX_ROWS := Roster.PARTY_CAP   # S168: per delve, read off the party cap (10) so the two never drift; more folds into "+N more"
 
 var town: Node3D
 var _t := 0.0
